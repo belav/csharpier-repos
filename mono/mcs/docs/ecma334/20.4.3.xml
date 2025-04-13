@@ -24,6 +24,8 @@ class TextBox: Control
 
       
 
+      
+
       the Paint method in TextBox hides the Paint method in Control, but it does not alter the mapping of Control.Paint onto IControl.Paint, and calls to Paint through class instances and interface instances will have the following effects <code_example
       >
         <![CDATA[
@@ -37,6 +39,8 @@ ic.Paint();   // invokes Control.Paint();
 it.Paint();   // invokes Control.Paint();  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -66,6 +70,8 @@ class TextBox: Control
 
       
 
+      
+
       the following effects will now be observed <code_example
       >
         <![CDATA[
@@ -79,6 +85,8 @@ ic.Paint();   // invokes Control.Paint();
 it.Paint();   // invokes TextBox.Paint();  
 ]]>
       </code_example>
+
+      
 
       
 

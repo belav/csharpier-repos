@@ -27,6 +27,8 @@
 
         
 
+        
+
         . A value of 0 or -1 is an invalid file handle.</para
       >
     </remarks>
@@ -61,6 +63,8 @@
 
           
 
+          
+
            parameter to control whether the SafeFileHandle will close the descriptor or not.</remarks
         >
         <since version=".NET 2.0" />
@@ -72,6 +76,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -80,8 +86,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -89,6 +99,8 @@
         >
         <param name="ownsHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

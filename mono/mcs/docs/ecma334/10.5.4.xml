@@ -29,6 +29,8 @@ public class B: A {...}
 
       
 
+      
+
       the B class results in a compile-time error because A is not at least as accessible as B. end example]</example
     >
   </paragraph>
@@ -46,6 +48,8 @@ public class B
 }  
 ]]>
       </code_example>
+
+      
 
       
 

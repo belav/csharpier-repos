@@ -22,6 +22,8 @@
 
         
 
+        
+
          constructor. </para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" />
 
         
 
+        
+
          properties of the endpoint address builder. Note that <see
          cref="T:System.ServiceModel.EndpointAddress" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.EndpointAddressBuilder" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
 
             
 
+            
+
              class from an existing endpoint address.</para
           >
         </summary>
@@ -112,8 +124,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -155,6 +171,8 @@
 
             
 
+            
+
              that reads the extensions of the endpoint address.</para
           >
         </returns>
@@ -191,6 +209,8 @@
 
             
 
+            
+
              that reads the metadata associated the endpoint address if there is some; otherwise, null.</para
           >
         </returns>
@@ -219,6 +239,8 @@
           <para
             >Address headers for the endpoints can be set using the <see
              cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" />
+
+            
 
             
 
@@ -289,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -328,8 +354,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -368,6 +398,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 

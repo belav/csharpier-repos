@@ -26,6 +26,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Gets a string array containing all the keys (module names) in the <see
              cref="T:System.Web.HttpModuleCollection" />
+
+            
 
             
 
@@ -77,6 +81,8 @@
 
             
 
+            
+
             , beginning at the specified index of the array.</para
           >
         </summary>
@@ -85,8 +91,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -97,8 +107,12 @@
 
           
 
+          
+
           The index of the destination <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -129,8 +143,12 @@
 
             
 
+            
+
              object with the specified index from the <see
              cref="T:System.Web.HttpModuleCollection" />
+
+            
 
             
 
@@ -145,8 +163,12 @@
 
             
 
+            
+
              member specified by the <paramref
              name="index" />
+
+            
 
             
 
@@ -158,8 +180,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.IHttpModule" />
+
+          
 
           
 
@@ -194,8 +220,12 @@
 
             
 
+            
+
              object with the specified name from the <see
              cref="T:System.Web.HttpModuleCollection" />
+
+            
 
             
 
@@ -210,8 +240,12 @@
 
             
 
+            
+
              member specified by the <paramref
              name="name" />
+
+            
 
             
 
@@ -243,6 +277,8 @@
 
             
 
+            
+
              object at the specified numerical index.</para
           >
         </summary>
@@ -254,8 +290,12 @@
 
             
 
+            
+
              member specified by the <paramref
              name="index" />
+
+            
 
             
 
@@ -264,6 +304,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

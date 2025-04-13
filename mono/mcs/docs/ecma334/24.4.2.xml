@@ -10,11 +10,15 @@
 
         
 
+        
+
         . A compile-time error occurs if the Conditional attribute is specified on an interface method. </list_item
       >
       <list_item
         > The conditional method must have a return type of <keyword
         >void</keyword>
+
+        
 
         
 
@@ -27,6 +31,8 @@
   <paragraph
     >In addition, a compile-time error occurs if a conditional method is used in a <non_terminal
      where="14.5.10.3">delegate-creation-expression</non_terminal>
+
+    
 
     
 
@@ -55,6 +61,8 @@ class Class2
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -100,6 +108,8 @@ class Class3
 // End class3.cs  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -154,6 +164,8 @@ class Class3
     <example
       >Class2 includes a call to the M defined in its base class. This call is omitted because the base method is conditional based on the presence of the symbol DEBUG, which is undefined. Thus, the method writes to the console "Class2.M executed" only. Judicious use of <non_terminal
        where="9.5.3">pp-declaration</non_terminal>
+
+      
 
       
 

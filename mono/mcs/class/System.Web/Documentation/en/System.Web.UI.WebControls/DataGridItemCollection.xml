@@ -29,8 +29,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
          control. To programmatically retrieve <see
          cref="T:System.Web.UI.WebControls.DataGridItem" />
 
         
 
+        
+
          objects from a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -59,6 +69,8 @@
 
             
 
+            
+
              object from the collection, using array notation.</para
           >
         </item>
@@ -69,8 +81,12 @@
 
             
 
+            
+
              method to copy the contents of the collection to a <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -84,8 +100,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -96,6 +116,8 @@
       <para
         >The <see
          cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" />
+
+        
 
         
 
@@ -110,8 +132,12 @@
 
         
 
+        
+
          objects in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -139,6 +165,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -150,6 +178,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -158,8 +188,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -190,8 +224,12 @@
 
             
 
+            
+
              collection into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -204,8 +242,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -221,13 +263,19 @@
 
             
 
+            
+
              collection to the specified <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -239,13 +287,19 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+          
 
           
 
@@ -256,8 +310,12 @@
 
           
 
+          
+
           The first position in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -285,8 +343,12 @@
 
             
 
+            
+
              property to determine the number of <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -295,8 +357,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" />
+
+            
 
             
 
@@ -308,6 +374,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -339,8 +407,12 @@
 
             
 
+            
+
             -implemented object that can be iterated through to get each item in the <see
              cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+            
 
             
 
@@ -352,6 +424,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -360,11 +434,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -377,8 +455,12 @@
 
               
 
+              
+
               -implemented object or use the <see
                cref="M:System.Collections.IEnumerator.Reset" />
+
+              
 
               
 
@@ -387,8 +469,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -404,13 +490,19 @@
 
             
 
+            
+
             -implemented object that contains all the <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+            
 
             
 
@@ -425,13 +517,19 @@
 
             
 
+            
+
             -implemented object that contains all <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+            
 
             
 
@@ -460,6 +558,8 @@
 
             
 
+            
+
              collection can be written to in all cases.</para
           >
         </remarks>
@@ -471,8 +571,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+            
 
             
 
@@ -501,6 +605,8 @@
 
             
 
+            
+
              interface and is overridden to always return false.</para
           >
           <para
@@ -509,13 +615,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -527,6 +639,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+            
 
             
 
@@ -578,6 +692,8 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
@@ -586,13 +702,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -604,6 +726,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+            
 
             
 

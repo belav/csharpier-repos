@@ -40,6 +40,8 @@
 
         
 
+        
+
          component can be used for both reading existing predefined or custom counters and publishing (writing) performance data to custom counters.</para
       >
       <block subset="none" type="note">
@@ -49,8 +51,12 @@
 
           
 
+          
+
            for specific actions. It is strongly recommended that <see
            cref="T:System.Diagnostics.PerformanceCounterPermission" />
+
+          
 
           
 
@@ -64,13 +70,19 @@
 
           
 
+          
+
            object to less-trusted code can create a security issue. Never pass performance counter objects, such as a <see
            cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
           
 
+          
+
            or <see
            cref="T:System.Diagnostics.PerformanceCounter" />
+
+          
 
           
 
@@ -83,12 +95,16 @@
 
         
 
+        
+
         . To learn about the .NET Framework performance counters, see <format
          type="text/html">
           <a href="06a4ae8c-eeb2-4d5a-817e-b1b95c0653e1"
             >Performance Counters in the .NET Framework</a
           >
         </format>
+
+        
 
         
 
@@ -100,8 +116,12 @@
 
         
 
+        
+
          class, set the <see
          cref="P:System.Diagnostics.PerformanceCounter.CategoryName" />
+
+        
 
         
 
@@ -110,8 +130,12 @@
 
         
 
+        
+
         , and, optionally, the <see
          cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+
+        
 
         
 
@@ -120,8 +144,12 @@
 
         
 
+        
+
          properties, and then call the <see
          cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
+
+        
 
         
 
@@ -133,8 +161,12 @@
 
         
 
+        
+
          method, create an instance of the <see
          cref="T:System.Diagnostics.PerformanceCounter" />
+
+        
 
         
 
@@ -143,8 +175,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+        
 
         
 
@@ -153,8 +189,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+
+        
 
         
 
@@ -163,8 +203,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.PerformanceCounter.Increment" />
+
+        
 
         
 
@@ -173,8 +217,12 @@
 
         
 
+        
+
          methods, or set the <see
          cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+
+        
 
         
 
@@ -187,8 +235,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+
+          
 
           
 
@@ -197,8 +249,12 @@
 
           
 
+          
+
            methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
            cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+
+          
 
           
 
@@ -215,6 +271,8 @@
 
         
 
+        
+
          method twice and use the information returned as your application requires.</para
       >
       <block subset="none" type="note">
@@ -223,6 +281,8 @@
            type="text/html">
             <a href="a71f605b-c7d9-4501-a5c3-abcbb964a43f">&lt;performanceCounters&gt; Element</a>
           </format>
+
+          
 
           
 
@@ -259,8 +319,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -269,8 +333,12 @@
 
             
 
+            
+
              properties to empty strings (""), and sets the <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+
+            
 
             
 
@@ -282,8 +350,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -292,13 +364,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
+            
+
              properties before reading any other properties or attempting to read from a counter. To write to a performance counter, set the <see
              cref="P:System.Diagnostics.PerformanceCounter.ReadOnly" />
+
+            
 
             
 
@@ -311,8 +389,12 @@
 
               
 
+              
+
                attribute applied to this member has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -321,8 +403,12 @@
 
               
 
+              
+
                | <see
                cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
+
+              
 
               
 
@@ -331,8 +417,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -345,6 +435,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -354,6 +446,8 @@
           <para
             >Initializes a new, read-only instance of the <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -392,8 +486,12 @@
 
             
 
+            
+
              instance to a category that contains multiple instances, the constructor throws an exception. This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -405,8 +503,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -415,8 +517,12 @@
 
             
 
+            
+
              property to the local computer, ".", and sets the <see
              cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+
+            
 
             
 
@@ -428,8 +534,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -449,6 +559,8 @@
 
             
 
+            
+
              class and associates it with the specified system or custom performance counter on the local computer. This constructor requires that the category have a single instance.</para
           >
         </summary>
@@ -457,10 +569,14 @@
 
           
 
+          
+
           The name of the performance counter category (performance object) with which this performance counter is associated. </param
         >
         <param name="counterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -499,6 +615,8 @@
 
             
 
+            
+
              instance to a category that contains multiple instances, the constructor throws an exception.</para
           >
           <para
@@ -507,8 +625,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -517,13 +639,19 @@
 
             
 
+            
+
              properties to the values you pass in, sets the <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
+            
+
              property to the local computer, ".", and sets the <see
              cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+
+            
 
             
 
@@ -535,8 +663,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -546,6 +678,8 @@
             <para
               >You can use this overload to connect to a system counter, but you cannot write to a system counter. Therefore, setting <paramref
                name="readOnly" />
+
+              
 
               
 
@@ -566,11 +700,15 @@
 
             
 
+            
+
              class and associates it with the specified system or custom performance counter on the local computer. This constructor requires that the category contain a single instance.</para
           >
         </summary>
         <param name="categoryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,10 +719,14 @@
 
           
 
+          
+
           The name of the performance counter. </param
         >
         <param name="readOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,8 +765,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -633,8 +779,12 @@
 
             
 
+            
+
              properties to the values you pass in, and sets the <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+
+            
 
             
 
@@ -646,13 +796,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+
+            
 
             
 
@@ -664,6 +820,8 @@
 
             
 
+            
+
              instance created using this overload cannot write to the counter, even if the counter itself is read/write.</para
           >
           <para
@@ -672,13 +830,19 @@
 
             
 
+            
+
              on the <see
              cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
+            
+
              constructor. If the category instance specified by <paramref
              name="instanceName" />
+
+            
 
             
 
@@ -699,11 +863,15 @@
 
             
 
+            
+
              class and associates it with the specified system or custom performance counter and category instance on the local computer.</para
           >
         </summary>
         <param name="categoryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -714,10 +882,14 @@
 
           
 
+          
+
           The name of the performance counter. </param
         >
         <param name="instanceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -758,8 +930,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -768,8 +944,12 @@
 
             
 
+            
+
              properties to the values you pass in, it and sets the <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+
+            
 
             
 
@@ -781,13 +961,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+
+            
 
             
 
@@ -800,6 +986,8 @@
 
               
 
+              
+
                to false when connecting to a system counter causes the constructor to throw an exception.</para
             >
           </block>
@@ -809,13 +997,19 @@
 
             
 
+            
+
              on the <see
              cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
+            
+
              constructor. If the category instance specified by <paramref
              name="instanceName" />
+
+            
 
             
 
@@ -835,11 +1029,15 @@
 
             
 
+            
+
              class and associates it with the specified system or custom performance counter and category instance on the local computer.</para
           >
         </summary>
         <param name="categoryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -850,6 +1048,8 @@
 
           
 
+          
+
           The name of the performance counter. </param
         >
         <param name="instanceName">
@@ -857,10 +1057,14 @@
 
           
 
+          
+
           The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
         >
         <param name="readOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -900,8 +1104,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -910,8 +1118,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
+
+            
 
             
 
@@ -923,8 +1135,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterName" />
+
+            
 
             
 
@@ -933,13 +1149,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.PerformanceCounter.MachineName" />
 
             
 
+            
+
              properties must point to an existing performance counter. If the performance counter instance you point to is not valid, calling the constructor throws an exception. This overload can access any read-only or read/write counter, but does so in a read-only mode. A <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -952,6 +1174,8 @@
 
               
 
+              
+
                class that connects to a remote computer.</para
             >
           </block>
@@ -961,13 +1185,19 @@
 
             
 
+            
+
              on the <see
              cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
+            
+
              constructor. If the category instance specified by <paramref
              name="instanceName" />
+
+            
 
             
 
@@ -987,6 +1217,8 @@
 
               
 
+              
+
               . </para
             >
             <para />
@@ -1000,11 +1232,15 @@
 
             
 
+            
+
              class and associates it with the specified system or custom performance counter and category instance, on the specified computer.</para
           >
         </summary>
         <param name="categoryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,6 +1251,8 @@
 
           
 
+          
+
           The name of the performance counter. </param
         >
         <param name="instanceName">
@@ -1022,10 +1260,14 @@
 
           
 
+          
+
           The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
         >
         <param name="machineName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1058,13 +1300,19 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
 
             
 
+            
+
              and <see
              cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
+
+            
 
             
 
@@ -1076,6 +1324,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -1121,6 +1371,8 @@
 
             
 
+            
+
              is displayed in the Performance Object field of Performance Counter Manager MMC snap in's Add Counter dialog box.</para
           >
           <para
@@ -1129,11 +1381,15 @@
 
             
 
+            
+
              class, you first indicate the category with which the component will interact, and then you choose a counter from that category.</para
           >
           <para
             >For example, one Windows counter category is the Memory category. System counters within this category track memory data such as the number of bytes available and the number of bytes cached. If you wanted to work with the bytes cached in your application, you would create an instance of the <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -1172,8 +1428,12 @@
 
             
 
+            
+
              instance with a performance counter that resides on the server, the system initializes the instance and allocates memory to contain counter sample information. The <see
              cref="M:System.Diagnostics.PerformanceCounter.Close" />
+
+            
 
             
 
@@ -1246,11 +1506,15 @@
 
             
 
+            
+
              text when a user selects a counter from the counters list and clicks the Explain button.</para
           >
           <para
             >When you create a new counter, use the <see
              cref="P:System.Diagnostics.PerformanceCounter.CounterHelp" />
+
+            
 
             
 
@@ -1263,8 +1527,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -1273,13 +1541,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -1335,6 +1609,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1343,6 +1619,8 @@
           <para
             >Gets or sets the name of the performance counter that is associated with this <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -1384,6 +1662,8 @@
           <para
             >The <see
              cref="T:System.Diagnostics.PerformanceCounterType" />
+
+            
 
             
 
@@ -1465,8 +1745,12 @@
 
             
 
+            
+
              you pass into the <see
              cref="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.Diagnostics.CounterCreationDataCollection)" />
+
+            
 
             
 
@@ -1479,8 +1763,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -1489,13 +1777,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -1541,8 +1835,12 @@
 
               
 
+              
+
               , <see
                cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+
+              
 
               
 
@@ -1551,8 +1849,12 @@
 
               
 
+              
+
                methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
                cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+
+              
 
               
 
@@ -1566,8 +1868,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -1576,13 +1882,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -1675,13 +1987,19 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Diagnostics.PerformanceCounter.BeginInit" />
 
             
 
+            
+
              and <see
              cref="M:System.Diagnostics.PerformanceCounter.EndInit" />
+
+            
 
             
 
@@ -1693,6 +2011,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -1728,8 +2048,12 @@
 
               
 
+              
+
               , <see
                cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+
+              
 
               
 
@@ -1738,8 +2062,12 @@
 
               
 
+              
+
                methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
                cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+
+              
 
               
 
@@ -1753,8 +2081,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -1763,13 +2095,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -1822,8 +2160,12 @@
 
               
 
+              
+
               , <see
                cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+
+              
 
               
 
@@ -1832,8 +2174,12 @@
 
               
 
+              
+
                methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
                cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+
+              
 
               
 
@@ -1847,8 +2193,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -1857,13 +2207,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -1881,6 +2237,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1923,8 +2281,12 @@
 
             
 
+            
+
              must be <see
              cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+            
 
             
 
@@ -1937,8 +2299,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+
+              
 
               
 
@@ -1947,8 +2313,12 @@
 
               
 
+              
+
                value for the performance counter must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -2004,6 +2374,8 @@
 
             
 
+            
+
              instance points to a noncustom category, you can choose from only the existing category instances. You can create new category instances only in custom categories, which allow you to define as many counters and category instances as you need.</para
           >
           <para
@@ -2012,13 +2384,19 @@
 
             
 
+            
+
              on the <see
              cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
+            
+
              constructor. If the category instance specified by <paramref
              name="instanceName" />
+
+            
 
             
 
@@ -2030,6 +2408,8 @@
                type="text/html">
                 <a href="ccd68284-f3a8-47b8-bc3f-92e5fe3a1640">Runtime Profiling</a>
               </format>
+
+              
 
               
 
@@ -2095,13 +2475,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.AppDomain" />
 
             
 
+            
+
              object obtained from the <see
              cref="P:System.AppDomain.CurrentDomain" />
+
+            
 
             
 
@@ -2152,8 +2538,12 @@
 
             
 
+            
+
              property to point to a remote computer, the <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -2196,8 +2586,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -2206,13 +2600,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -2234,6 +2634,8 @@
           <para
             >A <see
              cref="T:System.Diagnostics.CounterSample" />
+
+            
 
             
 
@@ -2265,6 +2667,8 @@
             <para
               >If the calculated value of a counter depends on two counter reads, the first read operation returns 0.0. Resetting the performance counter properties to specify a different counter is equivalent to creating a new performance counter, and the first read operation using the new properties returns 0.0. The recommended delay time between calls to the <see
                cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
+
+              
 
               
 
@@ -2319,6 +2723,8 @@
 
             
 
+            
+
              property rather than a calculated value can produce significantly better performance in scenarios where the raw value is sufficient.</para
           >
           <para
@@ -2327,13 +2733,19 @@
 
             
 
+            
+
              property samples the counter at the time that the property is called. This action is equivalent to making an initial call to the <see
              cref="M:System.Diagnostics.PerformanceCounter.NextSample" />
 
             
 
+            
+
              method. If you subsequently call <see
              cref="M:System.Diagnostics.PerformanceCounter.NextSample" />
+
+            
 
             
 
@@ -2347,8 +2759,12 @@
 
               
 
+              
+
               , <see
                cref="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)" />
+
+              
 
               
 
@@ -2357,8 +2773,12 @@
 
               
 
+              
+
                methods use interlocks to update the counter value. This helps keep the counter value accurate in multithreaded or multiprocess scenarios, but also results in a performance penalty. If you do not need the accuracy that interlocked operations provide, you can update the <see
                cref="P:System.Diagnostics.PerformanceCounter.RawValue" />
+
+              
 
               
 
@@ -2372,8 +2792,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -2382,13 +2806,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -2441,6 +2871,8 @@
 
             
 
+            
+
              should always true. You cannot write to a system counter.</para
           >
         </remarks>
@@ -2449,6 +2881,8 @@
           <para
             >Gets or sets a value indicating whether this <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -2492,8 +2926,12 @@
 
               
 
+              
+
                method be called from the <see
                cref="E:System.AppDomain.DomainUnload" />
+
+              
 
               
 
@@ -2506,13 +2944,19 @@
 
             
 
+            
+
              on the <see
              cref="M:System.Diagnostics.PerformanceCounter.#ctor" />
 
             
 
+            
+
              constructor. If the category instance specified by <paramref
              name="instanceName" />
+
+            
 
             
 
@@ -2525,8 +2969,12 @@
 
               
 
+              
+
                property is <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Process" />
+
+              
 
               
 
@@ -2535,13 +2983,19 @@
 
               
 
+              
+
                is thrown. Performance counter categories created with earlier versions use global shared memory, and the value for <see
                cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
               
 
+              
+
                must be <see
                cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+              
 
               
 
@@ -2557,8 +3011,12 @@
 
             
 
+            
+
              object <see
              cref="P:System.Diagnostics.PerformanceCounter.InstanceName" />
+
+            
 
             
 

@@ -32,6 +32,8 @@
 
         
 
+        
+
          for serialization. This class cannot be inherited.</para
       >
     </summary>
@@ -71,6 +73,8 @@
 
             
 
+            
+
              property is set to Low.</para
           >
           <para
@@ -79,8 +83,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+            
 
             
 
@@ -89,8 +97,12 @@
 
             
 
+            
+
              helps protect against deserialization attacks by deserializing only the types associated with the most basic remoting functionality. The <see
              cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+            
 
             
 
@@ -99,8 +111,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+            
 
             
 
@@ -110,6 +126,8 @@
                 >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -124,8 +142,12 @@
 
             
 
+            
+
              can be deserialized with the <see
              cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
+
+            
 
             
 
@@ -137,8 +159,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -149,8 +175,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" />
+
+          
 
           
 
@@ -189,8 +219,12 @@
 
             
 
+            
+
              array the <see
              cref="M:System.Runtime.Serialization.FormatterServices.GetObjectData(System.Object,System.Reflection.MemberInfo[])" />
+
+            
 
             
 
@@ -199,8 +233,12 @@
 
             
 
+            
+
              object, and returns it. The length of the returned array is the same as the length of the <paramref
              name="members" />
+
+            
 
             
 
@@ -219,13 +257,19 @@
 
             
 
+            
+
              that contains data stored in <paramref
              name="members" />
 
             
 
+            
+
              and associated with <paramref
              name="obj" />
+
+            
 
             
 
@@ -237,10 +281,14 @@
 
           
 
+          
+
           The object to write to the formatter. </param
         >
         <param name="members">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,10 +326,14 @@
 
             
 
+            
+
              should only be used for deserialization when the user intends to immediately populate all fields. It does not create an uninitialized string, since creating an empty instance of an immutable type serves no purpose.</para
           >
           <para>
             <see cref="M:System.Runtime.Serialization.FormatterServices.GetSafeUninitializedObject(System.Type)" />
+
+            
 
             
 
@@ -292,10 +344,14 @@
 
             
 
+            
+
              to <format
              type="text/html">
               <a href="E5283E28-2366-4519-B27D-EF5C1DDC1F48">[&lt;topic://cpconDemands&gt;]</a>
             </format>
+
+            
 
             
 
@@ -304,8 +360,12 @@
 
             
 
+            
+
              to increase the level of security when deserializing from a partially trusted source. For better performance in full trust scenarios, use <see
              cref="M:System.Runtime.Serialization.FormatterServices.GetUninitializedObject(System.Type)" />
+
+            
 
             
 
@@ -322,6 +382,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +421,8 @@
 
             
 
+            
+
              interface or has a serialization surrogate does not have to serialize all these members, or can serialize additional members.</para
           >
         </remarks>
@@ -367,6 +431,8 @@
           <para
             >Gets all the serializable members for a class of the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -381,11 +447,15 @@
 
             
 
+            
+
              of the non-transient, non-static members.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -424,6 +494,8 @@
 
             
 
+            
+
              or has a serialization surrogate does not have to serialize all these members, or can serialize additional members.</para
           >
           <para
@@ -432,13 +504,19 @@
 
             
 
+            
+
              has the <see
              cref="T:System.Runtime.Serialization.StreamingContextStates" />
 
             
 
+            
+
              value <see
              cref="F:System.Runtime.Serialization.StreamingContextStates.Clone" />
+
+            
 
             
 
@@ -453,8 +531,12 @@
 
             
 
+            
+
              and in the provided <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -469,6 +551,8 @@
 
             
 
+            
+
              of the non-transient, non-static members.</para
           >
         </returns>
@@ -477,10 +561,14 @@
 
           
 
+          
+
           The type being serialized or cloned. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -525,6 +613,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -536,8 +626,12 @@
 
             
 
+            
+
              for the specified <paramref
              name="innerSurrogate" />
+
+            
 
             
 
@@ -546,6 +640,8 @@
         </returns>
         <param name="innerSurrogate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -585,8 +681,12 @@
 
             
 
+            
+
              of the specified object in the provided <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -601,6 +701,8 @@
 
             
 
+            
+
              of the named object.</para
           >
         </returns>
@@ -609,10 +711,14 @@
 
           
 
+          
+
           The assembly where you want to look up the object. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -652,8 +758,12 @@
 
               
 
+              
+
                method to create instances of types that derive from the <see
                cref="T:System.ContextBoundObject" />
+
+              
 
               
 
@@ -671,6 +781,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -710,8 +822,12 @@
 
             
 
+            
+
              is null, <see
              cref="M:System.Runtime.Serialization.FormatterServices.PopulateObjectMembers(System.Object,System.Reflection.MemberInfo[],System.Object[])" />
+
+            
 
             
 
@@ -731,6 +847,8 @@
 
           
 
+          
+
           The object to populate. </param
         >
         <param name="members">
@@ -738,8 +856,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -750,8 +872,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 

@@ -18,8 +18,12 @@
 
         
 
+        
+
          is a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.UI.Design.XslUrlEditor" />
+
+            
 
             
 
@@ -87,6 +93,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.XslUrlEditor.Filter" />
+
+            
 
             
 

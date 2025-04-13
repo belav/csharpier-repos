@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -251,6 +253,8 @@
 
             
 
+            
+
              that represents the system.ServiceModel settings in configuration.</para
           >
         </returns>
@@ -259,8 +263,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.Configuration" />
+
+          
 
           
 

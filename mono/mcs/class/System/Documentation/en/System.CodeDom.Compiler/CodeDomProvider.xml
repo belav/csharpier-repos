@@ -39,6 +39,8 @@
 
         
 
+        
+
          can be used to create and retrieve instances of code generators and code compilers. Code generators can be used to generate code in a particular language, and code compilers can be used to compile code into assemblies.</para
       >
       <block subset="none" type="note">
@@ -48,8 +50,12 @@
 
           
 
+          
+
            or <see
            cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
+
+          
 
           
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
          implementation typically provides code generation and/or code compilation interfaces for generating code and managing compilation for a single programming language. Several languages are supported by <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -72,13 +82,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
+        
+
          interfaces and provide a <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          in the machine configuration file (Machine.config) provides a mechanism for developers and compiler vendors to add configuration settings for additional <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          class provides static methods to discover and enumerate the <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -115,8 +139,12 @@
 
         
 
+        
+
          method returns the settings for all <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -125,8 +153,12 @@
 
         
 
+        
+
          method returns the settings for a specific <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -135,8 +167,12 @@
 
         
 
+        
+
          method returns an instance of a <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -152,12 +188,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >This class makes a link demand and an inheritance demand at the class level. A <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -168,10 +208,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -184,6 +228,8 @@
       <para
         >Provides a base class for <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -213,6 +259,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -258,13 +306,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+              
 
               
 
@@ -280,8 +334,12 @@
 
             
 
+            
+
              trees contained in the specified array of <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -296,6 +354,8 @@
 
             
 
+            
+
              object that indicates the results of the compilation.</para
           >
         </returns>
@@ -304,8 +364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -316,8 +380,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -362,13 +430,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+              
 
               
 
@@ -388,6 +462,8 @@
 
             
 
+            
+
              object that indicates the results of compilation.</para
           >
         </returns>
@@ -396,8 +472,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -405,6 +485,8 @@
         >
         <param name="fileNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,13 +531,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+              
 
               
 
@@ -475,6 +563,8 @@
 
             
 
+            
+
              object that indicates the results of compilation.</para
           >
         </returns>
@@ -483,8 +573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -492,6 +586,8 @@
         >
         <param name="sources">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,6 +628,8 @@
 
             
 
+            
+
              methods that are directly available in the code provider.</para
           >
         </remarks>
@@ -547,8 +645,12 @@
 
             
 
+            
+
              that can be used for compilation of <see
              cref="N:System.CodeDom" />
+
+            
 
             
 
@@ -585,8 +687,12 @@
 
             
 
+            
+
              tests whether the identifier conflicts with any reserved or language keywords, and if so, returns an equivalent name with language-specific escape code formatting. This is referred to an escaped identifier. The escaped identifier contains the same <paramref
              name="value" />
+
+            
 
             
 
@@ -595,8 +701,12 @@
 
             
 
+            
+
              with "@" or bracketing the <paramref
              name="value" />
+
+            
 
             
 
@@ -609,13 +719,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -633,6 +749,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,8 +791,12 @@
 
             
 
+            
+
              methods that are directly available in the <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -693,8 +815,12 @@
 
             
 
+            
+
              that can be used to generate <see
              cref="N:System.CodeDom" />
+
+            
 
             
 
@@ -733,6 +859,8 @@
 
             
 
+            
+
              for output. This method supports more optimized code generation that incrementally updates the source code.</para
           >
           <block subset="none" type="note">
@@ -742,13 +870,19 @@
 
               
 
+              
+
                method, which is obsolete in the dnprdnext and results in a <see
                cref="T:System.NotSupportedException" />
 
               
 
+              
+
                if an <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -764,6 +898,8 @@
 
             
 
+            
+
              for output.</para
           >
         </summary>
@@ -775,8 +911,12 @@
 
             
 
+            
+
              that can be used to generate <see
              cref="N:System.CodeDom" />
+
+            
 
             
 
@@ -788,8 +928,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -829,13 +973,19 @@
 
               
 
+              
+
                method, which is obsolete in the dnprdnext and results in a <see
                cref="T:System.NotSupportedException" />
 
               
 
+              
+
                if an <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -855,8 +1005,12 @@
 
             
 
+            
+
              that can be used to generate <see
              cref="N:System.CodeDom" />
+
+            
 
             
 
@@ -865,6 +1019,8 @@
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -910,6 +1066,8 @@
 
             
 
+            
+
              that can be used to parse source code. The base implementation always returns null.</para
           >
         </returns>
@@ -950,8 +1108,12 @@
 
               
 
+              
+
                allows you to specify at run time the code provider you wish to instantiate. If you know at design time which code provider is to be used, you should create an instance of that code provider rather than use the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" />
+
+              
 
               
 
@@ -964,8 +1126,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -974,8 +1140,12 @@
 
             
 
+            
+
              method with the language provider type. Use <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" />
+
+            
 
             
 
@@ -987,6 +1157,8 @@
 
             
 
+            
+
              returns a provider instance for the last matching configuration element.</para
           >
           <para
@@ -995,8 +1167,12 @@
 
             
 
+            
+
              method overload when you want a specific language provider implementation. For example, use the <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" />
+
+            
 
             
 
@@ -1005,13 +1181,19 @@
 
             
 
+            
+
              method overload to get a provider instance specifically for the <see
              cref="T:Microsoft.CSharp.CSharpCodeProvider" />
 
             
 
+            
+
              implementation. You should use the <see
              cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[])" />
+
+            
 
             
 
@@ -1023,8 +1205,12 @@
 
             
 
+            
+
              method checks whether at least one provider implementation supports a specific language. You can validate a language name using <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.IsDefinedLanguage(System.String)" />
+
+            
 
             
 
@@ -1033,13 +1219,19 @@
 
             
 
+            
+
             . If you pass an unsupported language name to <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" />
 
             
 
+            
+
              a <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -1051,8 +1243,12 @@
 
             
 
+            
+
              method can be used to determine all <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -1060,6 +1256,8 @@
              type="text/html">
               <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt;</a>
             </format>
+
+            
 
             
 
@@ -1071,8 +1269,12 @@
 
             
 
+            
+
              method returns an instance of a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -1088,6 +1290,8 @@
 
             
 
+            
+
              instance for the specified language.</para
           >
         </summary>
@@ -1097,6 +1301,8 @@
         </returns>
         <param name="language">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1142,8 +1348,12 @@
 
               
 
+              
+
                enables you to specify at run time the version of the code provider you want to instantiate. If you know at design time which code provider is to be used, you should create an instance of that code provider instead of using the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" />
+
+              
 
               
 
@@ -1156,11 +1366,15 @@
 
             
 
+            
+
              when you want to dynamically find a configured provider implementation for a specific language and options. Language names are case-insensitive. For information about supported provider options, see the specific CodeDOM provider documentation.</para
           >
           <para
             >For information about validating a provider and calling a provider if more than one provider implementation is configured for the language name, see the Remarks section of the <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" />
+
+            
 
             
 
@@ -1172,6 +1386,8 @@
           <para
             >Gets a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -1187,10 +1403,14 @@
 
           
 
+          
+
           The language name.</param
         >
         <param name="providerOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1226,6 +1446,8 @@
 
             
 
+            
+
              tests whether the identifier conflicts with reserved or language keywords, and if so, attempts to return a valid identifier name that does not conflict. Usually the returned identifier is only slightly modified to differentiate the identifier from the keyword; for example, the name might be preceded by the underscore ("_") character.</para
           >
           <block subset="none" type="note">
@@ -1235,13 +1457,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -1259,6 +1487,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1322,13 +1552,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -1345,8 +1581,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -1357,8 +1597,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1369,8 +1613,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+          
 
           
 
@@ -1410,13 +1658,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -1433,8 +1687,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -1445,8 +1703,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1457,8 +1719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+          
 
           
 
@@ -1497,8 +1763,12 @@
 
             
 
+            
+
             . See <see
              cref="M:Microsoft.CSharp.CSharpCodeProvider.GenerateCodeFromMember(System.CodeDom.CodeTypeMember,System.IO.TextWriter,System.CodeDom.Compiler.CodeGeneratorOptions)" />
+
+            
 
             
 
@@ -1514,8 +1784,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -1526,8 +1800,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1538,8 +1816,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+          
 
           
 
@@ -1579,13 +1861,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -1602,8 +1890,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -1614,8 +1906,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1626,8 +1922,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+          
 
           
 
@@ -1667,13 +1967,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -1690,8 +1996,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -1702,8 +2012,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1714,8 +2028,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+          
 
           
 
@@ -1755,13 +2073,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -1778,8 +2102,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -1790,8 +2118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1802,8 +2134,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+          
 
           
 
@@ -1843,6 +2179,8 @@
 
             
 
+            
+
              method to enumerate the language provider settings on a computer. </para
           >
           <block subset="none" type="note">
@@ -1851,6 +2189,8 @@
                type="text/html">
                 <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt;</a>
               </format>
+
+              
 
               
 
@@ -1870,8 +2210,12 @@
 
             
 
+            
+
              representing the settings of all configured <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -1916,8 +2260,12 @@
 
             
 
+            
+
              in the machine configuration file contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -1928,13 +2276,19 @@
 
             
 
+            
+
             . The <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
 
             
 
+            
+
              method searches each provider configuration element for the specified language name. The returned <see
              cref="T:System.CodeDom.Compiler.CompilerInfo" />
+
+            
 
             
 
@@ -1946,8 +2300,12 @@
 
             
 
+            
+
              method checks whether at least one provider implementation supports a specific language. You can validate a language name using <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.IsDefinedLanguage(System.String)" />
+
+            
 
             
 
@@ -1956,8 +2314,12 @@
 
             
 
+            
+
             . This prevents throwing a <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -1966,11 +2328,15 @@
 
             
 
+            
+
              instance for an unsupported language name.</para
           >
           <para
             >If more than one provider implementation is configured for the input language name, <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+
+            
 
             
 
@@ -1990,8 +2356,12 @@
 
             
 
+            
+
              object populated with settings of the configured <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -2000,6 +2370,8 @@
         </returns>
         <param name="language">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2041,6 +2413,8 @@
 
             
 
+            
+
              for the specified data type.</para
           >
         </summary>
@@ -2052,8 +2426,12 @@
 
             
 
+            
+
              for the specified type, or null if a <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -2062,6 +2440,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2105,13 +2485,19 @@
 
             
 
+            
+
              in the machine configuration file (Machine.config) contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
+            
+
              implementation on the computer. The <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetLanguageFromExtension(System.String)" />
+
+            
 
             
 
@@ -2123,8 +2509,12 @@
 
             
 
+            
+
              method checks whether at least one provider implementation supports a specific file name extension. You can validate a file name extension using <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.IsDefinedExtension(System.String)" />
+
+            
 
             
 
@@ -2133,13 +2523,19 @@
 
             
 
+            
+
             . This prevents <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetLanguageFromExtension(System.String)" />
 
             
 
+            
+
              from throwing a <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -2151,8 +2547,12 @@
 
             
 
+            
+
              returns the first language name for that provider. If more than one provider implementation is configured for the input file name extension, <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetLanguageFromExtension(System.String)" />
+
+            
 
             
 
@@ -2168,6 +2568,8 @@
 
             
 
+            
+
              compiler configuration section.</para
           >
         </summary>
@@ -2179,11 +2581,15 @@
 
             
 
+            
+
              compiler configuration settings.</para
           >
         </returns>
         <param name="extension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2221,13 +2627,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -2243,6 +2655,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2254,8 +2668,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2267,8 +2685,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -2312,13 +2734,19 @@
 
             
 
+            
+
              in the machine configuration file (Machine.config) contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
+            
+
              implementation on the computer. The <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.IsDefinedExtension(System.String)" />
+
+            
 
             
 
@@ -2334,6 +2762,8 @@
 
             
 
+            
+
              implementation configured on the computer.</para
           >
         </summary>
@@ -2345,11 +2775,15 @@
 
             
 
+            
+
              implementation is configured for the specified file name extension; otherwise, false.</para
           >
         </returns>
         <param name="extension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2393,13 +2827,19 @@
 
             
 
+            
+
              in the machine configuration file (Machine.config) contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
+            
+
              implementation on the computer. The <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.IsDefinedLanguage(System.String)" />
+
+            
 
             
 
@@ -2415,6 +2855,8 @@
 
             
 
+            
+
              implementation configured on the computer.</para
           >
         </summary>
@@ -2426,11 +2868,15 @@
 
             
 
+            
+
              implementation is configured for the specified language; otherwise, false.</para
           >
         </returns>
         <param name="language">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2467,8 +2913,12 @@
 
             
 
+            
+
              method is provider specific. Identifiers that are valid for one provider might not be valid for other providers. If <paramref
              name="value" />
+
+            
 
             
 
@@ -2481,13 +2931,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 
@@ -2507,11 +2963,15 @@
 
             
 
+            
+
              parameter is a valid identifier; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2576,13 +3036,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateParser" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeParser" />
+
+              
 
               
 
@@ -2598,6 +3064,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2609,6 +3077,8 @@
 
             
 
+            
+
              that contains a representation of the parsed code.</para
           >
         </returns>
@@ -2617,8 +3087,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -2656,6 +3130,8 @@
 
             
 
+            
+
              flags at once to test for a set of capabilities by joining a set of appropriate capability flags together with a binary OR operator (|).</para
           >
           <block subset="none" type="note">
@@ -2665,13 +3141,19 @@
 
               
 
+              
+
                implementation that is returned by the <see
                cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
               
 
+              
+
                method of the provider. In version 2.0, this method can be called directly on the code provider even if it is not overridden by the code provider. If the code provider does not override this method, the <see
                cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+              
 
               
 

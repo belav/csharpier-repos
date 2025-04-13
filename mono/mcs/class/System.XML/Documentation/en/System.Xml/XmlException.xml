@@ -61,6 +61,8 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An XML error has occurred."   This message takes into account the current system culture.</para
           >
           <para
@@ -69,8 +71,12 @@
 
             
 
+            
+
              property is initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -79,8 +85,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlException.LinePosition" />
+
+            
 
             
 
@@ -122,8 +132,12 @@
 
             
 
+            
+
              property of the new instance using <paramref
              name="message" />
+
+            
 
             
 
@@ -132,13 +146,19 @@
 
             
 
+            
+
              parameter is <see
              langword="null" />
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XmlException.Message" />
+
+            
 
             
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              property is initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -160,8 +184,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlException.LinePosition" />
+
+            
 
             
 
@@ -174,6 +202,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -211,8 +241,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -224,10 +258,14 @@
 
           
 
+          
+
           The SerializationInfo object containing all the properties of an XmlException. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,14 +305,20 @@
 
             
 
+            
+
              property
    of the new instance using <paramref
              name="message" />
 
             
 
+            
+
              and the <see
              cref="!:System.Xml.XmlException.InnerException" />
+
+            
 
             
 
@@ -284,8 +328,12 @@
 
             
 
+            
+
             . If the <paramref
              name="message" />
+
+            
 
             
 
@@ -295,8 +343,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XmlException.Message" />
+
+            
 
             
 
@@ -309,8 +361,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlException.LinePosition" />
+
+            
 
             
 
@@ -324,6 +380,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -333,8 +391,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -349,6 +411,8 @@
 
           
 
+          
+
           The description of the error condition. </param
         >
         <param name="innerException">
@@ -356,8 +420,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -400,8 +468,12 @@
 
             
 
+            
+
              property of the new instance using <paramref
              name="message" />
+
+            
 
             
 
@@ -410,8 +482,12 @@
 
             
 
+            
+
              property using <paramref
              name="innerException" />
+
+            
 
             
 
@@ -420,8 +496,12 @@
 
             
 
+            
+
              property using <paramref
              name="lineNumber" />
+
+            
 
             
 
@@ -430,8 +510,12 @@
 
             
 
+            
+
              property using <paramref
              name="linePosition" />
+
+            
 
             
 
@@ -440,13 +524,19 @@
 
             
 
+            
+
              parameter is <see
              langword="null" />
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XmlException.Message" />
+
+            
 
             
 
@@ -456,6 +546,8 @@
             <block subset="none" type="note"
               > For information on inner exceptions, see <see
                cref="P:System.Exception.InnerException" />
+
+              
 
               
 
@@ -472,10 +564,14 @@
 
           
 
+          
+
           The error description. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -486,10 +582,14 @@
 
           
 
+          
+
           The line number indicating where the error occurred. </param
         >
         <param name="linePosition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,8 +630,12 @@
 
             
 
+            
+
              class for the given <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -543,10 +647,14 @@
 
           
 
+          
+
           The SerializationInfo object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -576,6 +684,8 @@
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -615,6 +725,8 @@
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -659,6 +771,8 @@
 
             
 
+            
+
              containing the error message that describes the current exception.</para
           >
         </value>
@@ -670,14 +784,20 @@
 
             
 
+            
+
              property is not equal to zero, the
    string returned by this property includes the values of the <see
              cref="P:System.Xml.XmlException.LineNumber" />
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlException.LinePosition" />
+
+            
 
             
 
@@ -687,6 +807,8 @@
             <block subset="none" type="note"
               >This property overrides <see
                cref="P:System.Exception.Message" />
+
+              
 
               
 

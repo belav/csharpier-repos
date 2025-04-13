@@ -27,13 +27,19 @@
 
         
 
+        
+
          by invoking <see
          cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
 
         
 
+        
+
          to create a specific common dialog box. Inherited classes can optionally override <see
          cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.CommonDialog" />
+
+            
 
             
 
@@ -85,6 +93,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -125,8 +135,12 @@
 
             
 
+            
+
              method for a <see
              cref="T:System.Windows.Forms.CommonDialog" />
+
+            
 
             
 
@@ -140,13 +154,19 @@
 
               
 
+              
+
                to prevent it from being called from untrusted code; only the immediate caller is required to have <see
                cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" />
 
               
 
+              
+
                permission. If your code can be called from partially trusted code, do not pass user input to <see
                cref="T:System.Runtime.InteropServices.Marshal" />
+
+              
 
               
 
@@ -159,12 +179,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >This property also uses the <see
              cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" />
+
+            
 
             
 
@@ -184,10 +208,14 @@
 
           
 
+          
+
           The handle to the dialog box window. </param
         >
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,10 +226,14 @@
 
           
 
+          
+
           Additional information about the message. </param
         >
         <param name="lparam">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,6 +267,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -243,8 +277,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.HelpEventArgs" />
+
+          
 
           
 
@@ -289,10 +327,14 @@
 
           
 
+          
+
           The window handle of the message to send. </param
         >
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,8 +345,12 @@
 
           
 
+          
+
           The <paramref
            name="wparam" />
+
+          
 
           
 
@@ -315,8 +361,12 @@
 
           
 
+          
+
           The <paramref
            name="lparam" />
+
+          
 
           
 
@@ -368,8 +418,12 @@
 
             
 
+            
+
             , and it must be overridden by inherited classes of <see
              cref="T:System.Windows.Forms.CommonDialog" />
+
+            
 
             
 
@@ -386,6 +440,8 @@
         </returns>
         <param name="hwndOwner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,6 +472,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -430,8 +488,12 @@
 
             
 
+            
+
              if the user clicks OK in the dialog box; otherwise, <see
              cref="F:System.Windows.Forms.DialogResult.Cancel" />
+
+            
 
             
 
@@ -465,6 +527,8 @@
 
             
 
+            
+
              method allows you to specify a specific form or control that will own the dialog box that is shown. If you use the version of this method that has no parameters, the dialog box being shown would be owned automatically by the currently active window of your application.</para
           >
         </remarks>
@@ -479,13 +543,19 @@
 
             
 
+            
+
              if the user clicks <ui
             >OK</ui>
 
             
 
+            
+
              in the dialog box; otherwise, <see
              cref="F:System.Windows.Forms.DialogResult.Cancel" />
+
+            
 
             
 
@@ -497,8 +567,12 @@
 
           
 
+          
+
           Any object that implements <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 

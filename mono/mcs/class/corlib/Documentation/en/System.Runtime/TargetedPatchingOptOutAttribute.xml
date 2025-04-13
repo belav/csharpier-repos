@@ -58,6 +58,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -66,8 +68,12 @@
 
           
 
+          
+
           The reason why the method to which the <see
            cref="T:System.Runtime.TargetedPatchingOptOutAttribute" />
+
+          
 
           
 

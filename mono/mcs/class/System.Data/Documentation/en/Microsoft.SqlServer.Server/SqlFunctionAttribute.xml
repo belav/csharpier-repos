@@ -38,8 +38,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.FillRowMethodName" />
+
+            
 
             
 
@@ -48,8 +52,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsPrecise" />
+
+            
 
             
 
@@ -58,13 +66,19 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.SystemDataAccess" />
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.TableDefinition" />
+
+            
 
             
 
@@ -96,8 +110,12 @@
 
             
 
+            
+
             .<see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.DataAccess" />
+
+            
 
             
 
@@ -106,6 +124,8 @@
           <para
             >If a Transact-SQL query is executed from inside a table-valued function (TVF), the <see
              cref="T:Microsoft.SqlServer.Server.DataAccessKind" />
+
+            
 
             
 
@@ -139,6 +159,8 @@
 
             
 
+            
+
              property is also useful for indexing the result of the function in the form of indexed computed columns and indexed views. If this property is not specified, the function is assumed to be non-deterministic.</para
           >
           <para
@@ -147,8 +169,12 @@
 
             
 
+            
+
              and <see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.SystemDataAccess" />
+
+            
 
             
 
@@ -160,8 +186,12 @@
 
             
 
+            
+
              to connect to another SQL Server instance) is available in user-defined functions. However, you must still honor the <see
              cref="P:Microsoft.SqlServer.Server.SqlFunctionAttribute.IsDeterministic" />
+
+            
 
             
 
@@ -219,6 +249,8 @@
           <para
             >The default is <see
              cref="F:Microsoft.SqlServer.Server.SystemDataAccessKind.None" />
+
+            
 
             
 

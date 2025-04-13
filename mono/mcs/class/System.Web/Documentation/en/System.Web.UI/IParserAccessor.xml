@@ -19,8 +19,12 @@
 
         
 
+        
+
          class implements this interface, it is easier to extend that class and override its implementation of the <see
          cref="M:System.Web.UI.IParserAccessor.AddParsedSubObject(System.Object)" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

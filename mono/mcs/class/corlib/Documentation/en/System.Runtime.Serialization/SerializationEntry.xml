@@ -32,6 +32,8 @@
 
         
 
+        
+
         , and name of a serialized object. </para
       >
     </summary>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              type.</para
           >
         </remarks>
@@ -88,6 +92,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

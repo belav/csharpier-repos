@@ -64,6 +64,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -93,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+
+            
 
             
 
@@ -129,11 +133,15 @@
 
             
 
+            
+
              abstract class. </para
           >
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -148,6 +156,8 @@
 
             
 
+            
+
              based on the channel context provided.</para
           >
         </summary>
@@ -159,6 +169,8 @@
 
             
 
+            
+
             . </para
           >
         </returns>
@@ -167,8 +179,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -204,11 +220,15 @@
 
             
 
+            
+
              abstract class. </para
           >
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -223,6 +243,8 @@
 
             
 
+            
+
              based on the channel context provided.</para
           >
         </summary>
@@ -234,6 +256,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -242,8 +266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 

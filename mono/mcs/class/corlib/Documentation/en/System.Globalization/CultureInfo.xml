@@ -51,8 +51,12 @@
 
         
 
+        
+
          class provides culture-specific information, such as the language, sublanguage, country/region, calendar, and conventions associated with a particular culture. This class also provides access to culture-specific instances of the <see
          cref="T:System.Globalization.DateTimeFormatInfo" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Globalization.CompareInfo" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          objects. These objects contain the information required for culture-specific operations, such as casing, formatting dates and numbers, and comparing strings. The <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -81,13 +93,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.DateTime" />
 
         
 
+        
+
         , <see
          cref="T:System.DateTimeOffset" />
+
+        
 
         
 
@@ -102,6 +120,8 @@
 
         
 
+        
+
          class specifies a unique name for each culture, based on RFC 4646. The name is a combination of an ISO 639 two-letter lowercase culture code associated with a language and an ISO 3166 two-letter uppercase subculture code associated with a country or region. </para
       >
       <block subset="none" type="note">
@@ -111,8 +131,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -132,10 +156,14 @@
 
         
 
+        
+
          namespace. Detailed culture information appears in the <see
          cref="http://go.microsoft.com/fwlink/?LinkId=200048"
           >National Language Support (NLS) API Reference</see
         >
+
+        
 
         
 
@@ -144,6 +172,8 @@
       <para
         >Remember that the culture names and identifiers represent only a subset of cultures that can be found on a particular computer. Windows versions or service packs can change the available cultures. Applications add custom cultures using the <see
          cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
+
+        
 
         
 
@@ -177,6 +207,8 @@
 
         
 
+        
+
          defines an instance of the invariant culture. It is associated with the English language but not with any country/region. It is used in almost any method in the Globalization namespace that requires a culture. </para
       >
       <para>A neutral culture is a culture that is associated with a language but not with a country/region. A specific culture is a culture that is associated with a language and a country/region. For example, fr is the neutral name for the French culture, and fr-FR is the name of the specific French (France) culture. Note that Chinese (Simplified) and Chinese (Traditional) are also considered neutral cultures.</para>
@@ -186,13 +218,19 @@
 
         
 
+        
+
          class for a neutral culture is not recommended because the data it contains is arbitrary. To display and sort data, specify both the language and region. Additionally, the <see
          cref="P:System.Globalization.CompareInfo.Name" />
 
         
 
+        
+
          property of a <see
          cref="T:System.Globalization.CompareInfo" />
+
+        
 
         
 
@@ -204,8 +242,12 @@
 
         
 
+        
+
          property contains the neutral culture associated with a specific culture. Custom cultures should define the <see
          cref="P:System.Globalization.CultureInfo.Parent" />
+
+        
 
         
 
@@ -219,11 +261,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The list of locales in the Windows API is slightly different from the list of cultures supported by the .NET Framework. If interoperability with Windows is required, for example, through the p/invoke mechanism, the application should use a specific culture that is defined for the operating system. Use of the specific culture ensures consistency with the equivalent Windows locale, which is identified with a locale identifier that is the same as <see
          cref="P:System.Globalization.CultureInfo.LCID" />
+
+        
 
         
 
@@ -235,8 +281,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Globalization.NumberFormatInfo" />
+
+        
 
         
 
@@ -248,8 +298,12 @@
 
         
 
+        
+
          is the <see
          cref="T:System.Globalization.TaiwanCalendar" />
+
+        
 
         
 
@@ -258,8 +312,12 @@
 
         
 
+        
+
          is not set to zh-TW, then <see
          cref="P:System.Globalization.DateTimeFormatInfo.NativeCalendarName" />
+
+        
 
         
 
@@ -268,8 +326,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Globalization.DateTimeFormatInfo.GetAbbreviatedEraName(System.Int32)" />
+
+        
 
         
 
@@ -287,6 +349,8 @@
 
             
 
+            
+
              object that represents the fj-FJ (or Fijan (Fiji)) culture on a system. </para
           >
         </item>
@@ -300,8 +364,12 @@
 
             
 
+            
+
              application in <ui
             >Control Panel</ui>
+
+            
 
             
 
@@ -316,8 +384,12 @@
 
           
 
+          
+
            class to define, save, and register custom cultures that either supplement or replace existing cultures. The <see
            cref="M:System.Globalization.CultureAndRegionInfoBuilder.Save(System.String)" />
+
+          
 
           
 
@@ -338,6 +410,8 @@
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">custom format string</a>
             </format>
+
+            
 
             
 
@@ -363,8 +437,12 @@
 
         
 
+        
+
          object that represents the application-wide culture to a <see
          cref="T:System.Threading.ParameterizedThreadStart" />
+
+        
 
         
 
@@ -377,6 +455,8 @@
 
         
 
+        
+
          method.</para
       >
       <para
@@ -385,13 +465,19 @@
 
         
 
+        
+
          object that represents that culture to the <see
          cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentCulture" />
 
         
 
+        
+
          and <see
          cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+        
 
         
 
@@ -405,8 +491,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+          
 
           
 
@@ -414,6 +504,8 @@
            type="text/html">
             <a href="#AppDomain">Culture and Application Domains</a>
           </format>
+
+          
 
           
 
@@ -426,8 +518,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+        
 
         
 
@@ -436,8 +532,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+        
 
         
 
@@ -454,8 +554,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+        
 
         
 
@@ -464,8 +568,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.AppDomainInitializer" />
+
+        
 
         
 
@@ -474,13 +582,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
 
         
 
+        
+
          properties return the default <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -495,6 +609,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -506,8 +622,12 @@
 
         
 
+        
+
          object is serialized, all that is actually stored is <see
          cref="P:System.Globalization.CultureInfo.Name" />
+
+        
 
         
 
@@ -516,8 +636,12 @@
 
         
 
+        
+
         . It is successfully de-serialized only in an environment where that <see
          cref="P:System.Globalization.CultureInfo.Name" />
+
+        
 
         
 
@@ -531,8 +655,12 @@
 
             
 
+            
+
              property value is <see
              cref="F:System.Globalization.CultureTypes.WindowsOnlyCultures" />
+
+            
 
             
 
@@ -546,8 +674,12 @@
 
             
 
+            
+
              value is <see
              cref="F:System.Globalization.CultureTypes.UserCustomCulture" />
+
+            
 
             
 
@@ -561,13 +693,19 @@
 
             
 
+            
+
              value is <see
              cref="F:System.Globalization.CultureTypes.ReplacementCultures" />
 
             
 
+            
+
             , and the computer on which it is de-serialized does not have this replacement culture, it de-serializes to the same name, but not all of the same characteristics. For example, if en-US is a replacement culture on computer A, but not on computer B, and if a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -585,8 +723,12 @@
 
         
 
+        
+
          is true and the specified culture matches the current culture of Windows, the <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -595,8 +737,12 @@
 
         
 
+        
+
          instance returned by the <see
          cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+        
 
         
 
@@ -605,8 +751,12 @@
 
         
 
+        
+
          instance returned by the <see
          cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+        
 
         
 
@@ -615,8 +765,12 @@
 
         
 
+        
+
         , for example, if the selected calendar is not one of the <see
          cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+        
 
         
 
@@ -631,8 +785,12 @@
 
         
 
+        
+
          is constructed using the es-ES culture name, the new <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -640,6 +798,8 @@
          type="text/html">
           <a href="A097ACF0-0BBE-46AC-8D54-B6F2BFD3FC6A">Using Alternate Sort Orders</a>
         </format>
+
+        
 
         
 
@@ -674,6 +834,8 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
@@ -682,8 +844,12 @@
 
             
 
+            
+
              parameter is mapped to the corresponding National Language Support (NLS) locale identifier. The value of the <paramref
              name="culture" />
+
+            
 
             
 
@@ -692,8 +858,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -702,6 +872,8 @@
           <para
             >The use of the locale name constructor <see
              cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
+
+            
 
             
 
@@ -714,8 +886,12 @@
 
             
 
+            
+
              that uses those overrides, including user settings for the properties of the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -724,8 +900,12 @@
 
             
 
+            
+
              property, and the properties of the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -734,13 +914,19 @@
 
             
 
+            
+
              property. If the user settings are incompatible with the culture associated with the <see
              cref="T:System.Globalization.CultureInfo" />
 
             
 
+            
+
              (for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -752,11 +938,15 @@
 
             
 
+            
+
              that uses the default values for the specified culture.</para
           >
           <para
             >The <see
              cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+            
 
             
 
@@ -771,13 +961,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.GregorianCalendar" />
 
                 
 
+                
+
                  (which is the user setting) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -791,13 +987,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.ThaiBuddhistCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for th-TH) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -811,8 +1013,12 @@
 
             
 
+            
+
              constructor overload that accepts a <paramref
              name="useUserOverride" />
+
+            
 
             
 
@@ -825,8 +1031,12 @@
 
               
 
+              
+
                parameter of 0x0004 or 0x7c04 will have a <see
                cref="P:System.Globalization.CultureInfo.Name" />
+
+              
 
               
 
@@ -842,6 +1052,8 @@
 
             
 
+            
+
              class based on the culture specified by the culture identifier.</para
           >
         </summary>
@@ -850,8 +1062,12 @@
 
           
 
+          
+
           A predefined <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -860,8 +1076,12 @@
 
           
 
+          
+
            property of an existing <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -895,6 +1115,8 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
@@ -903,13 +1125,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
             , the constructor creates an instance of the invariant culture; this is equivalent to retrieving the value of the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -921,8 +1149,12 @@
 
             
 
+            
+
              matches the culture identifier of the current Windows culture, this constructor creates a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -931,8 +1163,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -941,8 +1177,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -951,8 +1191,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -964,8 +1208,12 @@
 
             
 
+            
+
              does not match the culture identifier of the current Windows culture, this constructor creates a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -974,6 +1222,8 @@
           <para
             >The <see
              cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+            
 
             
 
@@ -988,13 +1238,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.GregorianCalendar" />
 
                 
 
+                
+
                  (which is the user setting) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1008,13 +1264,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.ThaiBuddhistCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for th-TH) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1028,8 +1290,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1041,8 +1307,12 @@
 
             
 
+            
+
              constructor overload that accepts a <paramref
              name="useUserOverride" />
+
+            
 
             
 
@@ -1057,6 +1327,8 @@
 
             
 
+            
+
              class based on the culture specified by name.</para
           >
         </summary>
@@ -1065,8 +1337,12 @@
 
           
 
+          
+
           A predefined <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1075,13 +1351,19 @@
 
           
 
+          
+
            of an existing <see
            cref="T:System.Globalization.CultureInfo" />
 
           
 
+          
+
           , or Windows-only culture name. <paramref
            name="name" />
+
+          
 
           
 
@@ -1119,6 +1401,8 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
@@ -1127,8 +1411,12 @@
 
             
 
+            
+
              parameter is mapped to the corresponding National Language Support (NLS) locale identifier. The value of the <paramref
              name="culture" />
+
+            
 
             
 
@@ -1137,8 +1425,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1147,6 +1439,8 @@
           <para
             >The use of the locale name constructor <see
              cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1161,6 +1455,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1169,8 +1465,12 @@
 
             
 
+            
+
              property is set to true and the specified culture identifier matches the identifier of the current Windows culture, this constructor creates a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1179,8 +1479,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -1189,8 +1493,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -1199,8 +1507,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -1212,6 +1524,8 @@
 
             
 
+            
+
              that uses the default values for the specified culture.</para
           >
           <para
@@ -1220,8 +1534,12 @@
 
             
 
+            
+
              parameter becomes the value of the <see
              cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+            
 
             
 
@@ -1236,13 +1554,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.GregorianCalendar" />
 
                 
 
+                
+
                  (which is the user setting) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1256,13 +1580,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.HijriCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for ar-SA) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1276,13 +1606,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.ThaiBuddhistCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for th-TH) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1296,13 +1632,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.ThaiBuddhistCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for th-TH) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1316,6 +1658,8 @@
 
             
 
+            
+
              parameter to false.</para
           >
           <block subset="none" type="note">
@@ -1325,8 +1669,12 @@
 
               
 
+              
+
                parameter of 0x0004 or 0x7c04 will have a <see
                cref="P:System.Globalization.CultureInfo.Name" />
+
+              
 
               
 
@@ -1342,6 +1690,8 @@
 
             
 
+            
+
              class based on the culture specified by the culture identifier and on the Boolean that specifies whether to use the user-selected culture settings from the system.</para
           >
         </summary>
@@ -1350,8 +1700,12 @@
 
           
 
+          
+
           A predefined <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1360,8 +1714,12 @@
 
           
 
+          
+
            property of an existing <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1369,6 +1727,8 @@
         >
         <param name="useUserOverride">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1406,6 +1766,8 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
@@ -1414,13 +1776,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
             , the constructor creates an instance of the invariant culture; this is equivalent to retrieving the value of the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -1435,6 +1803,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1443,8 +1813,12 @@
 
             
 
+            
+
              property is set to true and the culture identifier associated with the specified culture name matches the culture identifier of the current Windows culture, this constructor creates a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1453,8 +1827,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -1463,8 +1841,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -1473,8 +1855,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -1486,6 +1872,8 @@
 
             
 
+            
+
              that uses the default values for the specified culture.</para
           >
           <para
@@ -1494,8 +1882,12 @@
 
             
 
+            
+
              parameter becomes the value of the <see
              cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+            
 
             
 
@@ -1510,13 +1902,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.GregorianCalendar" />
 
                 
 
+                
+
                  (which is the user setting) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1530,13 +1928,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.HijriCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for ar-SA) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1550,13 +1954,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.ThaiBuddhistCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for th-TH) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1570,13 +1980,19 @@
 
                 
 
+                
+
                  is set to <see
                  cref="T:System.Globalization.ThaiBuddhistCalendar" />
 
                 
 
+                
+
                  (which is the default calendar for th-TH) and <see
                  cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+
+                
 
                 
 
@@ -1590,8 +2006,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1600,6 +2020,8 @@
           <para
             >For cultures that use the euro, the .NET Framework and Windows XP set the default currency as euro. However, older versions of Windows do not do this. Therefore, if the user of an older version of Windows has not changed the currency setting through the regional and language options portion of Control Panel, the currency might be incorrect. To use the .NET Framework default setting for the currency, the application should set the <paramref
              name="useUserOverride" />
+
+            
 
             
 
@@ -1614,6 +2036,8 @@
 
             
 
+            
+
              class based on the culture specified by name and on the Boolean that specifies whether to use the user-selected culture settings from the system.</para
           >
         </summary>
@@ -1622,8 +2046,12 @@
 
           
 
+          
+
           A predefined <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1632,8 +2060,12 @@
 
           
 
+          
+
            of an existing <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1642,10 +2074,14 @@
 
           
 
+          
+
            is not case-sensitive.</param
         >
         <param name="useUserOverride">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1682,8 +2118,12 @@
 
             
 
+            
+
              is true and the specified culture matches the current culture of Windows, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1692,8 +2132,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -1702,8 +2146,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -1712,8 +2160,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -1725,6 +2177,8 @@
 
             
 
+            
+
              is true, the value of this property might be different from the default calendar used by the culture.</para
           >
           <para
@@ -1733,8 +2187,12 @@
 
             
 
+            
+
              by setting the <see
              cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+
+            
 
             
 
@@ -1743,8 +2201,12 @@
 
             
 
+            
+
             , which is an instance of the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -1753,13 +2215,19 @@
 
             
 
+            
+
             . <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
+            
+
              also includes other properties that customize the date and time formatting associated with that <see
              cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+
+            
 
             
 
@@ -1797,8 +2265,12 @@
 
             
 
+            
+
             , for example, when the user modifies the regional and language options portion of Control Panel. However, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1810,8 +2282,12 @@
 
             
 
+            
+
              method clears the cache of <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1820,8 +2296,12 @@
 
             
 
+            
+
              and refreshes the information in the <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -1830,8 +2310,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.RegionInfo.CurrentRegion" />
+
+            
 
             
 
@@ -1843,13 +2327,19 @@
 
             
 
+            
+
              method does not refresh the information in the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
+            
+
              property for existing threads. However, future threads will have any new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1887,6 +2377,8 @@
 
             
 
+            
+
              is read-only. Therefore, the properties of the clone can be modified.</para
           >
           <para>A shallow copy of an object is a copy of the object only. If the object contains references to other objects, the shallow copy does not create copies of the referred objects. It refers to the original objects instead. In contrast, a deep copy of an object creates a copy of the object and a copy of everything directly or indirectly referenced by that object.</para>
@@ -1896,8 +2388,12 @@
 
             
 
+            
+
              method creates an enhanced shallow copy. The objects returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -1906,8 +2402,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.CultureInfo.TextInfo" />
+
+            
 
             
 
@@ -1916,13 +2416,19 @@
 
             
 
+            
+
              properties are also copied. Consequently, the cloned <see
              cref="T:System.Globalization.CultureInfo" />
 
             
 
+            
+
              object can modify its copied properties without affecting the original <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1937,6 +2443,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1945,6 +2453,8 @@
           <para
             >A copy of the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1982,8 +2492,12 @@
 
             
 
+            
+
              is true and the specified culture matches the current culture of Windows, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1992,8 +2506,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -2002,8 +2520,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -2012,8 +2534,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -2025,6 +2551,8 @@
           <para
             >Gets the <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -2065,11 +2593,15 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
             >Cultures are grouped into three sets: the invariant culture, the neutral cultures, and the specific cultures. For more information, see the description of the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2081,8 +2613,12 @@
 
             
 
+            
+
              object that uses the Windows culture overrides. The overrides include user settings for the properties of the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -2091,8 +2627,12 @@
 
             
 
+            
+
              property and the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2101,11 +2641,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >Although the <see
              cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+
+            
 
             
 
@@ -2120,6 +2664,8 @@
 
             
 
+            
+
              that represents the specific culture that is associated with the specified name.</para
           >
         </summary>
@@ -2131,11 +2677,15 @@
 
             
 
+            
+
              object that represents:</para
           >
           <para
             >The invariant culture, if <paramref
              name="name" />
+
+            
 
             
 
@@ -2148,8 +2698,12 @@
 
             
 
+            
+
             , if <paramref
              name="name" />
+
+            
 
             
 
@@ -2162,8 +2716,12 @@
 
             
 
+            
+
             , if <paramref
              name="name" />
+
+            
 
             
 
@@ -2175,8 +2733,12 @@
 
           
 
+          
+
           A predefined <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2185,8 +2747,12 @@
 
           
 
+          
+
            object. <paramref
            name="name" />
+
+          
 
           
 
@@ -2227,6 +2793,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2258,13 +2826,19 @@
 
           
 
+          
+
            is set its value is used otherwise the framework uses <see
            cref="M:System.Globalization.CultureInfo.CreateSpecificCulture" />
 
           
 
+          
+
            method to map system locate to framework culture name. This operation may fail in rare cases when system locale is set to invalid value or to value which cannot be translated to framework culture name. In such case <see
            cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+          
 
           
 
@@ -2275,6 +2849,8 @@
           <para
             >Gets the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2311,6 +2887,8 @@
 
             
 
+            
+
              object returned by the  System.Threading.Thread.CurrentThread.CurrentUICulture property. When a thread is started, its UI culture is initially determined as follows: </para
           >
           <list type="bullet">
@@ -2318,6 +2896,8 @@
               <para
                 >By retrieving the culture that is specified by the <see
                  cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+                
 
                 
 
@@ -2335,12 +2915,16 @@
 
               
 
+              
+
                property is read-only. The current UI culture is determined by the system's regional settings and cannot be changed programmatically. </para
             >
           </block>
           <para
             >To change the user interface culture used by a thread, set the <see
              cref="P:System.Threading.Thread.CurrentUICulture" />
+
+            
 
             
 
@@ -2355,8 +2939,12 @@
 
             
 
+            
+
              property is read-only, you can change its value by explicitly setting the <see
              cref="P:System.Threading.Thread.CurrentUICulture" />
+
+            
 
             
 
@@ -2369,8 +2957,12 @@
 
             
 
+            
+
              object that represents that culture to the thread's <see
              cref="P:System.Threading.Thread.CurrentUICulture" />
+
+            
 
             
 
@@ -2388,6 +2980,8 @@
 
                 
 
+                
+
                  property for the current application domain if the  property value is not null. </para
               >
             </item>
@@ -2402,6 +2996,8 @@
 
             
 
+            
+
              property in the application domain in which the thread is executing.</para
           >
           <format type="text/html">
@@ -2413,8 +3009,12 @@
 
             
 
+            
+
              permission with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+
+            
 
             
 
@@ -2429,6 +3029,8 @@
           <para
             >Gets the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2469,8 +3071,12 @@
 
             
 
+            
+
              is true and the specified culture matches the current culture of Windows, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2479,8 +3085,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -2489,8 +3099,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -2499,8 +3113,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -2512,8 +3130,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -2522,8 +3144,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -2532,8 +3158,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -2545,6 +3175,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -2579,6 +3211,8 @@
 
             
 
+            
+
              property enables an application to define the default culture of all threads in an application domain.</para
           >
           <block subset="none" type="note">
@@ -2588,13 +3222,19 @@
 
               
 
+              
+
                property also changes the culture of these threads. However, if these threads execute in another application domain, their culture is defined by the <see
                cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentCulture" />
 
               
 
+              
+
                property in that application domain or, if no default value is defined, by the default system culture. Because of this, we recommend that you always explicitly set the culture of your main application thread, and not rely on the <see
                cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentCulture" />
+
+              
 
               
 
@@ -2607,11 +3247,15 @@
 
             
 
+            
+
              property is null, and the culture of threads in an application domain that have not been assigned an explicit culture is defined by the default Windows system culture.</para
           >
           <para
             >For more information about cultures, threads, and application domains, see the "Culture and Threads" and "Culture and Application Domains" sections in the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2650,6 +3294,8 @@
 
             
 
+            
+
              property lets you define the default UI culture of all threads in an application domain.</para
           >
           <block subset="none" type="note">
@@ -2659,13 +3305,19 @@
 
               
 
+              
+
                property also changes the culture of these threads. However, if these threads execute in another application domain, their culture is defined by the <see
                cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
 
               
 
+              
+
                property in that application domain or, if no default value is defined, by the default system culture. Because of this, we recommend that you always explicitly set the culture of your main application thread and do not rely on the <see
                cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+              
 
               
 
@@ -2678,11 +3330,15 @@
 
             
 
+            
+
              property is null, and the current culture of all threads in an application domain that have not been assigned an explicit culture is defined by the default Windows system culture.</para
           >
           <para
             >For more information about cultures, threads, and application domains, see the "Culture and Threads" and "Culture and Application Domains" sections in the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2717,6 +3373,8 @@
 
             
 
+            
+
              object. </para
           >
           <para>Culture names may vary due to scripting or formatting conventions. You should use the returned name for display, and not attempt to parse it.</para>
@@ -2726,13 +3384,19 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Globalization.CultureInfo.DisplayName" />
 
             
 
+            
+
              property is initialized to the value of the <see
              cref="P:System.Globalization.CultureInfo.NativeName" />
+
+            
 
             
 
@@ -2764,6 +3428,8 @@
           <para
             >For example, the <see
              cref="P:System.Globalization.CultureInfo.EnglishName" />
+
+            
 
             
 
@@ -2804,6 +3470,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2812,13 +3480,19 @@
 
             
 
+            
+
              objects are considered equal if their <see
              cref="P:System.Globalization.CultureInfo.Name" />
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.CultureInfo.CompareInfo" />
+
+            
 
             
 
@@ -2833,6 +3507,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2844,8 +3520,12 @@
 
             
 
+            
+
              is the same culture as the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -2857,8 +3537,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2899,13 +3583,19 @@
 
             
 
+            
+
              property returns an Arabic culture for an Arabic operating system. Use the <see
              cref="M:System.Globalization.CultureInfo.GetConsoleFallbackUICulture" />
 
             
 
+            
+
              method to retrieve a culture suitable for a console application user interface. After your application retrieves the fallback user interface culture, it should assign the culture to the current user interface culture of the current thread. For more information, see the "Explicitly Setting the Current UI Culture" section of the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -3846,6 +4536,8 @@
 
             
 
+            
+
              to create a replacement for a culture, and that culture can have a console fallback culture of your choosing.</para
           >
         </remarks>
@@ -3889,6 +4581,8 @@
 
             
 
+            
+
             ), because locale names should be used instead of LCIDs. For custom locales, the locale name is required. </para
           >
           <para
@@ -3897,8 +4591,12 @@
 
             
 
+            
+
              is the locale identifier of the current culture, the returned <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -3917,11 +4615,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3961,6 +4663,8 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
@@ -3969,13 +4673,19 @@
 
             
 
+            
+
              method retrieves a cached, read-only <see
              cref="T:System.Globalization.CultureInfo" />
 
             
 
+            
+
              object. It offers better performance than a corresponding call to the <see
              cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
+
+            
 
             
 
@@ -3987,8 +4697,12 @@
 
             
 
+            
+
              is the name of the current culture, the returned <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4000,13 +4714,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
             , the method returns the invariant culture. This is equivalent to retrieving the value of the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -4025,6 +4745,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -4033,8 +4755,12 @@
 
           
 
+          
+
           The name of a culture. <paramref
            name="name" />
+
+          
 
           
 
@@ -4075,6 +4801,8 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
@@ -4083,8 +4811,12 @@
 
             
 
+            
+
              method obtains a cached, read-only <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4093,8 +4825,12 @@
 
             
 
+            
+
              constructor. The method is used to create a culture similar to that specified by the <paramref
              name="name" />
+
+            
 
             
 
@@ -4106,8 +4842,12 @@
 
             
 
+            
+
              or <paramref
              name="altName" />
+
+            
 
             
 
@@ -4116,8 +4856,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4126,13 +4870,19 @@
 
             
 
+            
+
              property. If <paramref
              name="altName" />
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4147,8 +4897,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.CompareInfo" />
+
+            
 
             
 
@@ -4163,6 +4917,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -4171,8 +4927,12 @@
 
           
 
+          
+
           The name of a culture. <paramref
            name="name" />
+
+          
 
           
 
@@ -4183,8 +4943,12 @@
 
           
 
+          
+
           The name of a culture that supplies the <see
            cref="T:System.Globalization.TextInfo" />
+
+          
 
           
 
@@ -4193,13 +4957,19 @@
 
           
 
+          
+
            objects used to initialize <paramref
            name="name" />
 
           
 
+          
+
           . <paramref
            name="altName" />
+
+          
 
           
 
@@ -4237,13 +5007,19 @@
 
               
 
+              
+
                property are deprecated. Instead of using these elements, the application should use a new <see
                cref="T:System.Globalization.CultureInfo" />
 
               
 
+              
+
                object and calls to the <see
                cref="P:System.Globalization.CultureInfo.Name" />
+
+              
 
               
 
@@ -4256,13 +5032,19 @@
 
             
 
+            
+
              property, but does not identify a culture uniquely. Different cultures share the same IETF language tag if those cultures have identical linguistic characteristics. The linguistic characteristics of a culture are contained in the <see
              cref="T:System.Globalization.TextInfo" />
 
             
 
+            
+
              object associated with a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4278,6 +5060,8 @@
 
             
 
+            
+
             .         </para
           >
         </remarks>
@@ -4286,6 +5070,8 @@
           <para
             >Deprecated. Retrieves a read-only <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4300,11 +5086,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4342,8 +5132,12 @@
 
             
 
+            
+
              method is most commonly called with the <paramref
              name="types" />
+
+            
 
             
 
@@ -4356,12 +5150,16 @@
 
                 
 
+                
+
                 , which returns all specific cultures.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.Globalization.CultureTypes.NeutralCultures" />
+
+                
 
                 
 
@@ -4374,6 +5172,8 @@
 
                 
 
+                
+
                 , which returns all neutral and specific cultures, cultures installed in the Windows system, and custom cultures created by the user.</para
               >
             </item>
@@ -4383,8 +5183,12 @@
 
                 
 
+                
+
                 , which returns all custom cultures, such as those registered by the <see
                  cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
+
+                
 
                 
 
@@ -4401,6 +5205,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -4412,11 +5218,15 @@
 
             
 
+            
+
              parameter. The array of cultures is unsorted.</para
           >
         </returns>
         <param name="types">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4450,8 +5260,12 @@
 
             
 
+            
+
              implements <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -4471,8 +5285,12 @@
 
             
 
+            
+
              property, which is a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4481,8 +5299,12 @@
 
             
 
+            
+
             , if <paramref
              name="formatType" />
+
+            
 
             
 
@@ -4491,8 +5313,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4505,8 +5331,12 @@
 
             
 
+            
+
              property, which is a <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -4515,8 +5345,12 @@
 
             
 
+            
+
             , if <paramref
              name="formatType" />
+
+            
 
             
 
@@ -4525,8 +5359,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -4539,6 +5377,8 @@
 
             
 
+            
+
              is any other object.</para
           >
         </returns>
@@ -4547,8 +5387,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4557,8 +5401,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Globalization.DateTimeFormatInfo" />
+
+          
 
           
 
@@ -4591,11 +5439,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method generates the same hash code for two objects that are equal according to the <see
              cref="M:System.Globalization.CultureInfo.Equals(System.Object)" />
+
+            
 
             
 
@@ -4610,6 +5462,8 @@
 
             
 
+            
+
             , suitable for hashing algorithms and data structures, such as a hash table.</para
           >
         </summary>
@@ -4618,6 +5472,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4653,8 +5509,12 @@
 
               
 
+              
+
                method are deprecated. Instead, you should use a the <see
                cref="P:System.Globalization.CultureInfo.Name" />
+
+              
 
               
 
@@ -4667,13 +5527,19 @@
 
             
 
+            
+
              property, but does not identify a culture uniquely. That is, different cultures share the same IETF language tag if those cultures have identical linguistic characteristics. The linguistic characteristics of a culture are contained in the <see
              cref="T:System.Globalization.TextInfo" />
 
             
 
+            
+
              object associated with a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4688,10 +5554,14 @@
 
             
 
+            
+
             . For a list of subtags, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=230877"
               >The IANA Language Subtag Registry</see
             >
+
+            
 
             
 
@@ -4736,6 +5606,8 @@
 
             
 
+            
+
              that represents the culture installed with the operating system.</para
           >
         </summary>
@@ -4769,8 +5641,12 @@
 
             
 
+            
+
              instantiation method. <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -4779,8 +5655,12 @@
 
             
 
+            
+
              namespace that requires a culture. The objects returned by properties such as <see
              cref="P:System.Globalization.CultureInfo.CompareInfo" />
+
+            
 
             
 
@@ -4789,8 +5669,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -4806,8 +5690,12 @@
 
             
 
+            
+
              object to a method that has a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4816,8 +5704,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.String.ToUpper(System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -4832,6 +5724,8 @@
 
             
 
+            
+
              property can be used to persist data in a culture-independent format. This provides a known format that does not change and that can be used to serialize and deserialize data across cultures. After the data is deserialized, it can be formatted appropriately based on the cultural conventions of the current user.</para
           >
           <para
@@ -4840,8 +5734,12 @@
 
             
 
+            
+
              object to the <see
              cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4850,8 +5748,12 @@
 
             
 
+            
+
              method to create the string, and you can pass the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -4860,8 +5762,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.DateTimeOffset.Parse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+
+            
 
             
 
@@ -4870,6 +5776,8 @@
           <para
             >The following example uses the invariant culture to persist a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4885,13 +5793,19 @@
 
             
 
+            
+
              parameter and supplying either <see
              cref="F:System.StringComparison.Ordinal" />
 
             
 
+            
+
              or <see
              cref="F:System.StringComparison.OrdinalIgnoreCase" />
+
+            
 
             
 
@@ -4903,6 +5817,8 @@
           <para
             >Gets the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4937,6 +5853,8 @@
 
             
 
+            
+
              represents a neutral culture.</para
           >
         </summary>
@@ -4964,13 +5882,19 @@
 
             
 
+            
+
              is read-only, the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -4982,6 +5906,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5044,6 +5970,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5071,10 +5999,14 @@
 
             
 
+            
+
              property can return, see the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
+
+            
 
             
 
@@ -5086,8 +6018,12 @@
 
             
 
+            
+
              property follows the naming standards provided in the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5096,8 +6032,12 @@
 
             
 
+            
+
              object by using the string "de-DE_phoneb" to reflect an alternate sort order, the <see
              cref="P:System.Globalization.CultureInfo.Name" />
+
+            
 
             
 
@@ -5109,13 +6049,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.CultureInfo.EnglishName" />
 
             
 
+            
+
             , or <see
              cref="P:System.Globalization.CultureInfo.NativeName" />
+
+            
 
             
 
@@ -5184,8 +6130,12 @@
 
             
 
+            
+
              is true and the specified culture matches the current culture of Windows, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5194,8 +6144,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -5204,8 +6158,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -5214,8 +6172,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -5227,8 +6189,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -5237,8 +6203,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -5247,8 +6217,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -5260,6 +6234,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5296,8 +6272,12 @@
 
             
 
+            
+
              by setting the <see
              cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+
+            
 
             
 
@@ -5306,8 +6286,12 @@
 
             
 
+            
+
             , which is an instance of the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -5316,13 +6300,19 @@
 
             
 
+            
+
             . <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
+            
+
              also includes other properties that customize the date and time formatting associated with that <see
              cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+
+            
 
             
 
@@ -5363,8 +6353,12 @@
 
             
 
+            
+
             , and the parent of the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -5375,6 +6369,8 @@
              type="text/html">
               <a href="B224D7C0-35F8-4E82-A705-DD76795E8D16">Resource Fallback Process</a>
             </format>
+
+            
 
             
 
@@ -5389,8 +6385,12 @@
 
             
 
+            
+
              that represents the parent culture of the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5429,8 +6429,12 @@
 
             
 
+            
+
             , or the objects returned by the <paramref
              name="ci" />
+
+            
 
             
 
@@ -5439,13 +6443,19 @@
 
             
 
+            
+
              and <paramref
              name="ci" />
 
             
 
+            
+
             .<see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -5460,6 +6470,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5471,8 +6483,12 @@
 
             
 
+            
+
              wrapper around <paramref
              name="ci" />
+
+            
 
             
 
@@ -5484,8 +6500,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -5521,13 +6541,19 @@
 
             
 
+            
+
              property provides culture-specific casing information for strings. To perform culture-insensitive casing, the application should use the <see
              cref="P:System.Globalization.CultureInfo.TextInfo" />
 
             
 
+            
+
              property of <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -5539,6 +6565,8 @@
           <para
             >Gets the <see
              cref="T:System.Globalization.TextInfo" />
+
+            
 
             
 
@@ -5577,6 +6605,8 @@
 
               
 
+              
+
               . Using just the language can lose context and data.</para
             >
           </block>
@@ -5586,6 +6616,8 @@
           <para
             >Gets the ISO 639-2 three-letter code for the language of the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5624,6 +6656,8 @@
 
               
 
+              
+
               . Using just the language can lose context and data.</para
             >
           </block>
@@ -5659,8 +6693,12 @@
 
             
 
+            
+
             . It returns a normalized version of the culture name that is passed to the <see
              cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
+
+            
 
             
 
@@ -5669,13 +6707,19 @@
 
             
 
+            
+
              constructor or to the <see
              cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
             
 
+            
+
              or <see
              cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />
+
+            
 
             
 
@@ -5686,6 +6730,8 @@
              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
+
+            
 
             
 
@@ -5700,6 +6746,8 @@
 
             
 
+            
+
              in the format languagecode2-country/regioncode2.</para
           >
         </summary>
@@ -5708,6 +6756,8 @@
           <para
             >A string containing the name of the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5744,12 +6794,16 @@
 
             
 
+            
+
              property value for the invariant culture is "iv". </para
           >
           <block subset="none" type="note">
             <para
               >When communicating between processes or persisting data it is usually better to use the full <see
                cref="P:System.Globalization.CultureInfo.Name" />
+
+              
 
               
 
@@ -5762,6 +6816,8 @@
 
             
 
+            
+
              property returns a string that consists of three or more letters. For more information, see the example.</para
           >
         </remarks>
@@ -5770,6 +6826,8 @@
           <para
             >Gets the ISO 639-1 two-letter code for the language of the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5801,8 +6859,12 @@
 
             
 
+            
+
              is true and the specified culture matches the current culture of Windows, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -5811,8 +6873,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+            
 
             
 
@@ -5821,8 +6887,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+            
 
             
 
@@ -5831,8 +6901,12 @@
 
             
 
+            
+
             , for example, if the selected calendar is not one of the <see
              cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+            
 
             
 
@@ -5844,6 +6918,8 @@
 
             
 
+            
+
              is created.</para
           >
         </remarks>
@@ -5852,6 +6928,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 

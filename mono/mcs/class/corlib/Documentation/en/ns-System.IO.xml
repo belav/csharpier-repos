@@ -11,13 +11,19 @@
 
         
 
+        
+
          class is the abstract base class of all streams, which provide a common mechanism for reading and writing binary data.  <see
          cref="T:System.IO.Stream" />
 
         
 
+        
+
         s support sequential reading or writing or both, and can also support random access.  <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -29,8 +35,12 @@
 
         
 
+        
+
          implementations.  The <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -39,8 +49,12 @@
 
         
 
+        
+
          class provides stream access to a byte array in memory.  The <see
          cref="T:System.IO.BufferedStream" />
+
+        
 
         
 
@@ -49,8 +63,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.BinaryWriter" />
+
+        
 
         
 
@@ -61,8 +79,12 @@
 
         
 
+        
+
          provides a sequential stream of characters or strings, and <see
          cref="T:System.IO.TextWriter" />
+
+        
 
         
 
@@ -71,8 +93,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.StreamWriter" />
+
+        
 
         
 
@@ -81,8 +107,12 @@
 
         
 
+        
+
          using a specified encoding.  The <see
          cref="T:System.IO.StringReader" />
+
+        
 
         
 
@@ -91,13 +121,19 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.IO.StringWriter" />
 
         
 
+        
+
          provides a writer to <see
          cref="T:System.Text.StringBuffer" />
+
+        
 
         
 
@@ -109,8 +145,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -119,8 +159,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.FileInfo" />
+
+        
 
         
 
@@ -129,13 +173,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.File" />
 
         
 
+        
+
         .  The <see
          cref="T:System.IO.Path" />
+
+        
 
         
 

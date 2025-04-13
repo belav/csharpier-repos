@@ -27,8 +27,12 @@
 
         
 
+        
+
          class provides the following static properties: <see
          cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         . The class also provides the following static methods: <see
          cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
             
 
+            
+
              by marking the component with a <see
              cref="T:System.ComponentModel.LicenseProviderAttribute" />
+
+            
 
             
 
@@ -78,8 +94,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+
+            
 
             
 
@@ -88,13 +108,19 @@
 
             
 
+            
+
              throws a <see
              cref="T:System.ComponentModel.LicenseException" />
 
             
 
+            
+
              when it tries to create an instance without a valid license. <see
              cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+
+            
 
             
 
@@ -105,6 +131,8 @@
           <para
             >Call <see
              cref="M:System.ComponentModel.License.Dispose" />
+
+            
 
             
 
@@ -120,6 +148,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -128,6 +158,8 @@
       <para
         >Provides properties and methods to add a license to a component and to manage a <see
          cref="T:System.ComponentModel.LicenseProvider" />
+
+        
 
         
 
@@ -167,8 +199,12 @@
 
             
 
+            
+
              you specify as the <paramref
              name="creationContext" />
+
+            
 
             
 
@@ -177,8 +213,12 @@
 
             
 
+            
+
              for the life of this <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -187,8 +227,12 @@
 
             
 
+            
+
              method blocks all other threads in the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -197,8 +241,12 @@
 
             
 
+            
+
             , allowing <see
              cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+
+            
 
             
 
@@ -218,8 +266,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -230,8 +282,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.LicenseContext" />
+
+          
 
           
 
@@ -271,8 +327,12 @@
 
             
 
+            
+
              you specify as the <paramref
              name="creationContext" />
+
+            
 
             
 
@@ -281,8 +341,12 @@
 
             
 
+            
+
              for the life of this <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -291,13 +355,19 @@
 
             
 
+            
+
              from modifying the <see
              cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
 
             
 
+            
+
             , allowing <see
              cref="M:System.ComponentModel.LicenseManager.CreateWithContext(System.Type,System.ComponentModel.LicenseContext)" />
+
+            
 
             
 
@@ -317,8 +387,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -329,8 +403,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.LicenseContext" />
+
+          
 
           
 
@@ -341,8 +419,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -379,8 +461,12 @@
 
             
 
+            
+
             , the user must give the context in which the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -389,13 +475,19 @@
 
             
 
+            
+
              method. The <see
              cref="T:System.ComponentModel.LicenseContext" />
 
             
 
+            
+
              returned by this property should be passed to all <see
              cref="T:System.ComponentModel.LicenseProvider" />
+
+            
 
             
 
@@ -407,6 +499,8 @@
           <para
             >Gets or sets the current <see
              cref="T:System.ComponentModel.LicenseContext" />
+
+            
 
             
 
@@ -448,8 +542,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -484,6 +582,8 @@
 
             
 
+            
+
              method returns true when the type is either not licensed, or is licensed and the license is valid.</para
           >
           <para
@@ -492,13 +592,19 @@
 
             
 
+            
+
              when it cannot grant a valid <see
              cref="T:System.ComponentModel.License" />
 
             
 
+            
+
             . The <see
              cref="M:System.ComponentModel.LicenseManager.Validate(System.Type)" />
+
+            
 
             
 
@@ -518,13 +624,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
           
 
+          
+
            that represents the type of object that requests the <see
            cref="T:System.ComponentModel.License" />
+
+          
 
           
 
@@ -591,8 +703,12 @@
 
             
 
+            
+
              to get the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -601,8 +717,12 @@
 
             
 
+            
+
             , preventing the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -617,11 +737,15 @@
 
             
 
+            
+
              of the given object.</para
           >
         </summary>
         <param name="contextUser">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,8 +783,12 @@
 
             
 
+            
+
              to get the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -669,8 +797,12 @@
 
             
 
+            
+
             , allowing the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -685,11 +817,15 @@
 
             
 
+            
+
              of the given object.</para
           >
         </summary>
         <param name="contextUser">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -725,8 +861,12 @@
 
             
 
+            
+
              value, it returns <see
              cref="F:System.ComponentModel.LicenseUsageMode.Runtime" />
+
+            
 
             
 
@@ -741,8 +881,12 @@
 
             
 
+            
+
              which specifies when you can use the licensed object for the <see
              cref="P:System.ComponentModel.LicenseManager.CurrentContext" />
+
+            
 
             
 
@@ -778,13 +922,19 @@
 
             
 
+            
+
              when a valid <see
              cref="T:System.ComponentModel.License" />
 
             
 
+            
+
              cannot be granted. The <see
              cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+
+            
 
             
 
@@ -800,8 +950,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -840,13 +994,19 @@
 
             
 
+            
+
              when a valid <see
              cref="T:System.ComponentModel.License" />
 
             
 
+            
+
              cannot be granted. The <see
              cref="M:System.ComponentModel.LicenseManager.IsValid(System.Type)" />
+
+            
 
             
 
@@ -858,8 +1018,12 @@
 
             
 
+            
+
              must dispose of the license by calling the <see
              cref="M:System.ComponentModel.License.Dispose" />
+
+            
 
             
 
@@ -878,6 +1042,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -886,8 +1052,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -898,8 +1068,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 

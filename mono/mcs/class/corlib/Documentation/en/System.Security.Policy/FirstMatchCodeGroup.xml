@@ -36,8 +36,12 @@
 
         
 
+        
+
          only applies when its membership condition matches evidence for an assembly. If there is a match, it tests the membership condition of each child in order, stopping when the first match occurs. The result of <see
          cref="T:System.Security.Policy.FirstMatchCodeGroup" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
       >
       <para>
         <see cref="T:System.Security.Policy.FirstMatchCodeGroup" />
+
+        
 
         
 
@@ -86,6 +92,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -97,6 +105,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -105,10 +115,14 @@
 
           
 
+          
+
           A membership condition that tests evidence to determine whether this code group applies policy. </param
         >
         <param name="policy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,11 +216,15 @@
 
             
 
+            
+
              methods of these child groups work.</para
           >
           <para
             >The .NET Framework security system uses <see
              cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -225,6 +243,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,6 +283,8 @@
 
             
 
+            
+
              methods of these child groups work.</para
           >
         </remarks>
@@ -278,11 +300,15 @@
 
             
 
+            
+
              that is the root of the tree of matching code groups.</para
           >
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

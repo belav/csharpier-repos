@@ -28,6 +28,8 @@
 
         
 
+        
+
          objects.</para
       >
     </remarks>
@@ -65,8 +67,12 @@
 
             
 
+            
+
             . This method takes into account the type information carried in the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -78,6 +84,8 @@
           <para
             >Checks whether the proxy that represents the specified object type can be cast to the type represented by the <see
              cref="T:System.Runtime.Remoting.IRemotingTypeInfo" />
+
+            
 
             
 
@@ -93,10 +101,14 @@
 
           
 
+          
+
           The type to cast to. </param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,6 +137,8 @@
           <para
             >Gets or sets the fully qualified type name of the server object in a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 

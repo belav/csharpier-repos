@@ -27,8 +27,12 @@
 
         
 
+        
+
          class provides data for the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          method in the <see
          cref="T:System.Configuration.ApplicationSettingsBase" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          is derived from <see
          cref="T:System.ComponentModel.CancelEventArgs" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+
+        
 
         
 
@@ -102,8 +116,12 @@
 
             
 
+            
+
              constructor just assigns the values of the parameters to the corresponding properties in the <see
              cref="T:System.Configuration.SettingChangingEventArgs" />
+
+            
 
             
 
@@ -118,6 +136,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -126,8 +146,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -138,8 +162,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -150,8 +178,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -162,8 +194,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -171,6 +207,8 @@
         >
         <param name="cancel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,13 +238,19 @@
 
             
 
+            
+
              property should be compatible with the settings property being set. The latter is available though the <see
              cref="P:System.Configuration.SettingsProperty.PropertyType" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -241,6 +285,8 @@
 
             
 
+            
+
             ; otherwise, one is generated using the name of the settings wrapper class.</para
           >
         </remarks>
@@ -272,6 +318,8 @@
 
             
 
+            
+
             , has an associated settings key, which is a string that helps disambiguate different instances of the same wrapper in a single application. Because each wrapper class defines a set of properties that represent application settings, the settings key can similarly help disambiguate their use.</para
           >
         </remarks>
@@ -300,6 +348,8 @@
           <para
             >Typically the settings wrapper class, derived from <see
              cref="T:System.Configuration.ApplicationSettingsBase" />
+
+            
 
             
 

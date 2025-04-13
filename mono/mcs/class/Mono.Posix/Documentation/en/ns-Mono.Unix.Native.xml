@@ -10,9 +10,13 @@
 
         
 
+        
+
          
         and <see
          cref="T:Mono.Unix.Native.Stdlib" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
 
           
 
+          
+
            thread-safe?  It appears to be under
         glibc, but isn't necessarily under all Unix platforms.  
         <c
@@ -43,8 +49,12 @@
 
           
 
+          
+
            assumes that it is.  Only <i
           >obviously</i>
+
+          
 
           
 
@@ -55,9 +65,13 @@
 
           
 
+          
+
            and 
         <see
            cref="M:Mono.Unix.Native.Stdlib.strerror" />
+
+          
 
           
 

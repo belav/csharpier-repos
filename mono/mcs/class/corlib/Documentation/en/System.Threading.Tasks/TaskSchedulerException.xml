@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -48,11 +50,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.Tasks.TaskSchedulerException" />
+
+            
 
             
 
@@ -99,6 +105,8 @@
 
             
 
+            
+
              class with a system-supplied message that describes the error.</para
           >
         </summary>
@@ -130,11 +138,15 @@
 
             
 
+            
+
              class using the default error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +173,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.Tasks.TaskSchedulerException" />
+
+            
 
             
 
@@ -200,6 +214,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -214,11 +230,15 @@
 
             
 
+            
+
              class with a specified message that describes the error.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,6 +272,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -263,6 +285,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -271,10 +295,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,8 +336,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -318,11 +350,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.Tasks.TaskSchedulerException" />
+
+            
 
             
 
@@ -362,6 +398,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -376,11 +414,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -391,8 +433,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

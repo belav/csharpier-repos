@@ -24,6 +24,8 @@ csc hello.cs
 
     
 
+    
+
     which produces an application named hello.exe. The output produced by this application when it is run is: <code_example
     >
       <![CDATA[
@@ -37,6 +39,8 @@ hello, world
       <list_item
         > The using System; directive references a namespace called System that is provided by the Common Language Infrastructure (CLI) class library. This namespace contains the Console class referred to in the Main method. Namespaces provide a hierarchical means of organizing the elements of one or more programs. A <non_terminal
          where="16.3">using-directive</non_terminal>
+
+        
 
         
 

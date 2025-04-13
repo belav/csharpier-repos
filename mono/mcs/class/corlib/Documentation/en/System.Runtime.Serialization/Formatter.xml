@@ -41,13 +41,19 @@
 
         
 
+        
+
          is the abstract base class for all runtime serialization formatters, and provides some helper methods for implementing the <see
          cref="T:System.Runtime.Serialization.IFormatter" />
 
         
 
+        
+
          interface. The <see
          cref="T:System.Runtime.Serialization.Formatter" />
+
+        
 
         
 
@@ -83,8 +89,12 @@
 
             
 
+            
+
              for objects to serialize and a <see
              cref="T:System.Runtime.Serialization.ObjectIDGenerator" />
+
+            
 
             
 
@@ -96,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Formatter" />
+
+            
 
             
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              performs lookups for types from the type names passed during deserialization. If no <see
              cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+            
 
             
 
@@ -145,6 +161,8 @@
           <para
             >When overridden in a derived class, gets or sets the <see
              cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+            
 
             
 
@@ -181,13 +199,19 @@
 
             
 
+            
+
              is an indication of either the source of the bits being deserialized or the destination of the bits being serialized. It has no impact on default serialization, but is passed as an argument to <see
              cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+
+            
 
             
 
@@ -199,6 +223,8 @@
           <para
             >When overridden in a derived class, gets or sets the <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -240,6 +266,8 @@
         </returns>
         <param name="serializationStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,6 +328,8 @@
 
             
 
+            
+
              maintains a list of the objects that have been identified and the IDs that they were given.</para
           >
         </remarks>
@@ -308,6 +338,8 @@
           <para
             >Contains the <see
              cref="T:System.Runtime.Serialization.ObjectIDGenerator" />
+
+            
 
             
 
@@ -341,6 +373,8 @@
 
             
 
+            
+
              method are pushed on the queue.</para
           >
         </remarks>
@@ -349,6 +383,8 @@
           <para
             >Contains a <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -383,6 +419,8 @@
 
             
 
+            
+
              obtains an ID for the object and puts it on the queue for later serialization if this is a new object ID. The schedule is a work queue of objects to serialize, and is held inside the formatter. If the object is already on the work queue, it will not be added a second time, but an exception will not be thrown either.</para
           >
         </remarks>
@@ -396,6 +434,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,10 +476,14 @@
 
           
 
+          
+
           The stream to which the objects are serialized. </param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,8 +519,12 @@
 
             
 
+            
+
              to look up implementations of <see
              cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+
+            
 
             
 
@@ -488,6 +536,8 @@
 
             
 
+            
+
              interface.</para
           >
         </remarks>
@@ -496,6 +546,8 @@
           <para
             >When overridden in a derived class, gets or sets the <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -538,6 +590,8 @@
 
           
 
+          
+
           The array to write. </param
         >
         <param name="name">
@@ -545,10 +599,14 @@
 
           
 
+          
+
           The name of the array. </param
         >
         <param name="memberType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -589,10 +647,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -633,10 +695,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -677,10 +743,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -720,6 +790,8 @@
 
             
 
+            
+
              value to the stream already attached to the formatter.</para
           >
         </summary>
@@ -728,10 +800,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -771,6 +847,8 @@
 
             
 
+            
+
              value to the stream already attached to the formatter.</para
           >
         </summary>
@@ -779,10 +857,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,10 +905,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -867,10 +953,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -911,10 +1001,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -955,10 +1049,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -997,13 +1095,19 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Runtime.Serialization.Formatter.WriteBoolean(System.Boolean,System.String)" />
 
             
 
+            
+
              method, <see
              cref="M:System.Runtime.Serialization.Formatter.WriteByte(System.Byte,System.String)" />
+
+            
 
             
 
@@ -1019,10 +1123,14 @@
 
           
 
+          
+
           The name of the member to serialize. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1067,6 +1175,8 @@
 
           
 
+          
+
           The object reference to write. </param
         >
         <param name="name">
@@ -1074,10 +1184,14 @@
 
           
 
+          
+
           The name of the member. </param
         >
         <param name="memberType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1123,10 +1237,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1167,10 +1285,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1210,6 +1332,8 @@
 
             
 
+            
+
              value to the stream already attached to the formatter.</para
           >
         </summary>
@@ -1218,10 +1342,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1267,10 +1395,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1316,10 +1448,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1365,10 +1501,14 @@
 
           
 
+          
+
           The value to write. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1410,10 +1550,14 @@
 
           
 
+          
+
           The object representing the value type. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1424,8 +1568,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

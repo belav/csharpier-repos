@@ -23,6 +23,8 @@
 
       
 
+      
+
       .</remarks
     >
     <altmember cref="P:Mono.DocTest.Widget.Item(System.Int32)" />
@@ -48,10 +50,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <c>M:Mono.DocTest.Widget.#ctor</c>
+
+            
 
             
 
@@ -86,12 +92,16 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <para>
             <c>C:Mono.DocTest.Widget(System.Converter{System.String,System.String})</c>
+
+            
 
             
 
@@ -120,6 +130,8 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
@@ -129,10 +141,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <c>M:Mono.DocTest.Widget.#ctor(System.String)</c>
+
+            
 
             
 
@@ -169,6 +185,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -193,6 +211,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -211,6 +231,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.array1</c>
+
+          
 
           
 
@@ -235,6 +257,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -256,6 +280,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.classCtorError</c>
+
+          
 
           
 
@@ -335,6 +361,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.defaultColor</c>
+
+          
 
           
 
@@ -574,10 +602,14 @@
 
           
 
+          
+
            value...</value
         >
         <remarks>
           <c>P:Mono.DocTest.Widget.Height</c>
+
+          
 
           
 
@@ -615,10 +647,14 @@
 
           
 
+          
+
            instance.</value
         >
         <remarks>
           <c>P:Mono.DocTest.Widget.Item(System.Int32)</c>
+
+          
 
           
 
@@ -647,11 +683,15 @@
 
           
 
+          
+
           .</param
         >
         <param name="i"
           >I love <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -664,10 +704,14 @@
 
           
 
+          
+
            instance.</value
         >
         <remarks>
           <c>P:Mono.DocTest.Widget.Item(System.String,System.Int32)</c>
+
+          
 
           
 
@@ -693,6 +737,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M0</c>
+
+          
 
           
 
@@ -756,11 +802,15 @@
 
           
 
+          
+
           .</param
         >
         <param name="f"
           >A <see
            cref="T:System.Single" />
+
+          
 
           
 
@@ -772,11 +822,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>
+
+          
 
           
 
@@ -809,11 +863,15 @@
 
           
 
+          
+
            array.</param
         >
         <param name="x2"
           >A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -825,11 +883,15 @@
 
           
 
+          
+
            array.</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>
+
+          
 
           
 
@@ -864,6 +926,8 @@
 
           
 
+          
+
            array.</param
         >
         <param name="x4"
@@ -872,11 +936,15 @@
 
           
 
+          
+
            array.</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>
+
+          
 
           
 
@@ -911,6 +979,8 @@
 
           
 
+          
+
            pointer.</param
         >
         <param name="ppf"
@@ -919,11 +989,15 @@
 
           
 
+          
+
            pointer.</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M4(System.Char*,Mono.DocTest.Color**)</c>
+
+          
 
           
 
@@ -955,6 +1029,8 @@
 
           
 
+          
+
            pointer.</param
         >
         <param name="pd"
@@ -963,11 +1039,15 @@
 
           
 
+          
+
            array.</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M5(System.Void*,System.Double*[0:,0:][])</c>
+
+          
 
           
 
@@ -1005,6 +1085,8 @@
 
           
 
+          
+
           .</param
         >
         <param name="args"
@@ -1013,11 +1095,15 @@
 
           
 
+          
+
            array.</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.M6(System.Int32,System.Object[])</c>
+
+          
 
           
 
@@ -1052,6 +1138,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -1070,6 +1158,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.message</c>
+
+          
 
           
 
@@ -1094,6 +1184,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.monthlyAverage</c>
+
+          
 
           
 
@@ -1128,11 +1220,15 @@
 
           
 
+          
+
           .</param
         >
         <param name="x2"
           >Yay, <see
            cref="T:Mono.DocTest.Widget" />
+
+          
 
           
 
@@ -1145,10 +1241,14 @@
 
           
 
+          
+
            instance (2).</returns
         >
         <remarks>
           <c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>
+
+          
 
           
 
@@ -1177,10 +1277,14 @@
 
           
 
+          
+
            instance.</returns
         >
         <remarks>
           <c>M:Mono.DocTest.Widget.op_Division</c>
+
+          
 
           
 
@@ -1213,6 +1317,8 @@
 
           
 
+          
+
           s are fun!.</param
         >
         <summary>To be added.</summary>
@@ -1222,10 +1328,14 @@
 
           
 
+          
+
            instance.</returns
         >
         <remarks>
           <c>M:Mono.DocTest.Widget.op_Explicit(Mono.DocTest.Widget)~System.Int32</c>
+
+          
 
           
 
@@ -1258,8 +1368,12 @@
 
           
 
+          
+
           ; <see
            cref="T:Mono.DocTest.Widget" />
+
+          
 
           
 
@@ -1272,10 +1386,14 @@
 
           
 
+          
+
            instance.</returns
         >
         <remarks>
           <c>M:Mono.DocTest.Widget.op_Implicit(Mono.DocTest.Widget)~System.Int64</c>
+
+          
 
           
 
@@ -1309,6 +1427,8 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
@@ -1318,10 +1438,14 @@
 
           
 
+          
+
            instance.</returns
         >
         <remarks>
           <c>M:Mono.DocTest.Widget.op_UnaryPlus(Mono.DocTest.Widget)</c>
+
+          
 
           
 
@@ -1343,6 +1467,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.pCount</c>
+
+          
 
           
 
@@ -1371,6 +1497,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -1389,6 +1517,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>F:Mono.DocTest.Widget.ppValues</c>
+
+          
 
           
 
@@ -1425,10 +1555,14 @@
 
           
 
+          
+
            value...</value
         >
         <remarks>
           <c>P:Mono.DocTest.Widget.Width</c>
+
+          
 
           
 
@@ -1454,10 +1588,14 @@
 
           
 
+          
+
            value...</value
         >
         <remarks>
           <c>P:Mono.DocTest.Widget.X</c>
+
+          
 
           
 
@@ -1483,10 +1621,14 @@
 
           
 
+          
+
            value...</value
         >
         <remarks>
           <c>P:Mono.DocTest.Widget.Y</c>
+
+          
 
           
 

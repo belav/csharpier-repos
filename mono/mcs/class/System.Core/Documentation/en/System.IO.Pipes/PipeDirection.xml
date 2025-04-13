@@ -21,8 +21,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.IO.Pipes.PipeDirection.Out" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          value of <see
          cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+        
 
         
 

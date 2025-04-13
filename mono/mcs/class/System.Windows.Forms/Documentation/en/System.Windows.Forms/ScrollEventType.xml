@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >Specifies the type of action used to raise the <see
          cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
           <para
             >The scroll box was moved to the <see
              cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+
+            
 
             
 
@@ -126,6 +132,8 @@
           <para
             >The scroll box was moved to the <see
              cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+            
 
             
 

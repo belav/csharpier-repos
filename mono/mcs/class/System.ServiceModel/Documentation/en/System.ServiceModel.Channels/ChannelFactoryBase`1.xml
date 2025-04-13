@@ -37,6 +37,8 @@
 
         
 
+        
+
          uses the specified address as the destination for outgoing messages. The ServiceAddress.Uri property is used as the To header in the message. The ServiceReference.Via property is used as the physical destination to send messages to. This is typically the same as the ServiceAddress.Uri value.</para
       >
     </remarks>
@@ -66,6 +68,8 @@
 
             
 
+            
+
              if you want to specify other values for these operation timeouts.</para
           >
         </remarks>
@@ -74,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelFactoryBase`1" />
+
+            
 
             
 
@@ -107,6 +113,8 @@
 
             
 
+            
+
              instead of the default constructor if you want to specify custom values for the open, send, receive, and close operation timeouts instead of using the service model default values.</para
           >
         </remarks>
@@ -118,6 +126,8 @@
 
             
 
+            
+
              class with the default communication timeouts specified.</para
           >
         </summary>
@@ -126,8 +136,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+
+          
 
           
 
@@ -164,11 +178,15 @@
 
             
 
+            
+
              when invoked. This method cannot be overridden by a derived class. </para
           >
           <para
             >This uses <see
              cref="P:System.ServiceModel.EndpointAddress.Uri" />
+
+            
 
             
 
@@ -187,8 +205,12 @@
 
             
 
+            
+
              with the specified <paramref
              name="address" />
+
+            
 
             
 
@@ -227,6 +249,8 @@
 
             
 
+            
+
              when invoked.</para
           >
         </remarks>
@@ -242,6 +266,8 @@
 
             
 
+            
+
              with the specified remote and transport addresses.</para
           >
         </returns>
@@ -250,8 +276,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -279,6 +309,8 @@
           <para
             >This method is called by <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.Abort" />
+
+            
 
             
 
@@ -326,6 +358,8 @@
 
             
 
+            
+
              that references the asynchronous on-close operation. </para
           >
         </returns>
@@ -334,8 +368,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -346,8 +384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -355,6 +397,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,6 +432,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -400,8 +446,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -439,6 +489,8 @@
 
             
 
+            
+
              when invoked.</para
           >
         </remarks>
@@ -454,6 +506,8 @@
 
             
 
+            
+
              with the specified addresses.</para
           >
         </returns>
@@ -462,8 +516,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -501,13 +559,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Channels.ChannelFactoryBase`1.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 

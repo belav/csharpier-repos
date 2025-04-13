@@ -22,13 +22,19 @@
 
         
 
+        
+
          class converts a string of comma-separated values to and from an array of strings. This class provides the <see
          cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -72,8 +82,12 @@
 
               
 
+              
+
                object. For more information, see the examples in <see
                cref="T:System.ComponentModel.TypeConverter" />
+
+              
 
               
 
@@ -86,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+
+            
 
             
 
@@ -120,8 +136,12 @@
 
             
 
+            
+
              method determines whether the <see
              cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+
+            
 
             
 
@@ -130,8 +150,12 @@
 
             
 
+            
+
              to an array of strings. Use this method prior to calling the <see
              cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+
+            
 
             
 
@@ -143,6 +167,8 @@
           <para
             >Determines whether the <see
              cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+
+            
 
             
 
@@ -158,8 +184,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -170,8 +200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -206,8 +240,12 @@
 
             
 
+            
+
              method parses an object that represents a comma-separated string into an array of strings. Prior to calling this method, you can call the <see
              cref="M:System.Web.UI.WebControls.StringArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+
+            
 
             
 
@@ -216,11 +254,15 @@
 
             
 
+            
+
              can be converted to an array of strings.</para
           >
           <para
             >To convert an array of strings into a comma-separated string, use the <see
              cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+
+            
 
             
 
@@ -239,8 +281,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -252,8 +298,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -264,8 +314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -276,8 +330,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -313,11 +371,15 @@
 
             
 
+            
+
              method converts an array of strings into a comma-separated string.</para
           >
           <para
             >To convert a comma-separated string into an array of strings, use the <see
              cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+
+            
 
             
 
@@ -336,8 +398,12 @@
 
             
 
+            
+
              instance that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -349,8 +415,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -361,8 +431,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -373,8 +447,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -385,13 +463,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            to convert <paramref
            name="value" />
+
+          
 
           
 

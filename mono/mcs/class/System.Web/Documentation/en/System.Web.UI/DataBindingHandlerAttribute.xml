@@ -32,6 +32,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -53,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+            
 
             
 
@@ -83,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+            
 
             
 
@@ -117,8 +123,12 @@
 
             
 
+            
+
              class of the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -130,8 +140,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -163,6 +177,8 @@
           <para
             >Defines the default attribute for the <see
              cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+            
 
             
 
@@ -202,8 +218,12 @@
 
             
 
+            
+
              parameter equals the <see
              cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+            
 
             
 
@@ -215,8 +235,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+          
 
           
 

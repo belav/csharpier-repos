@@ -33,6 +33,8 @@
 
         
 
+        
+
          to display drop-down lists of options, such as a color picker.</para
       >
     </remarks>
@@ -44,8 +46,12 @@
 
         
 
+        
+
         . Although <see
          cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+        
 
         
 
@@ -54,13 +60,19 @@
 
         
 
+        
+
          replace and add functionality to the <see
          cref="T:System.Windows.Forms.Menu" />
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.Menu" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -150,6 +164,8 @@
 
             
 
+            
+
              of the form can be adjusted.</para
           >
         </summary>
@@ -213,8 +229,12 @@
 
             
 
+            
+
              that always stays open, set <see
              cref="P:System.Windows.Forms.ToolStripDropDown.AutoClose" />
+
+            
 
             
 
@@ -227,8 +247,12 @@
 
               
 
+              
+
                event instead of setting the <see
                cref="P:System.Windows.Forms.ToolStripDropDown.AutoClose" />
+
+              
 
               
 
@@ -237,8 +261,12 @@
 
               
 
+              
+
                field in your <see
                cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
+
+              
 
               
 
@@ -251,6 +279,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -285,6 +315,8 @@
 
             
 
+            
+
              automatically adjusts its size when the form is resized. </para
           >
         </summary>
@@ -311,6 +343,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -319,6 +353,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Control.BackgroundImage" />
+
+            
 
             
 
@@ -356,6 +392,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -364,6 +402,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Control.BackgroundImage" />
+
+            
 
             
 
@@ -398,6 +438,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -406,6 +448,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStrip.BindingContext" />
+
+            
 
             
 
@@ -453,6 +497,8 @@
 
             
 
+            
+
              can be sent to an overflow menu.</para
           >
         </summary>
@@ -476,6 +522,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -517,6 +565,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -547,8 +597,12 @@
 
             
 
+            
+
              method to close a <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -563,6 +617,8 @@
 
             
 
+            
+
              control for the specified reason.</para
           >
         </summary>
@@ -571,8 +627,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
+
+          
 
           
 
@@ -602,10 +662,14 @@
 
             
 
+            
+
              delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -617,6 +681,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -649,6 +715,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -657,6 +725,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -814,6 +884,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -822,6 +894,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -871,6 +945,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -882,8 +958,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -895,8 +975,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+
+          
 
           
 
@@ -905,8 +989,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow" />
+
+          
 
           
 
@@ -915,13 +1003,19 @@
 
           
 
+          
+
           , <see
            cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
           
 
+          
+
           , and <see
            cref="F:System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow" />
+
+          
 
           
 
@@ -949,8 +1043,12 @@
 
             
 
+            
+
              property to add extra functionality to inheriting classes, but you must first call the <see
              cref="T:System.Windows.Forms.CreateParams" />
+
+            
 
             
 
@@ -1008,8 +1106,12 @@
 
             
 
+            
+
              is displayed relative to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1075,8 +1177,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1085,8 +1191,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1098,8 +1208,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1114,11 +1228,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1212,6 +1330,8 @@
 
             
 
+            
+
              is displayed. </para
           >
         </summary>
@@ -1238,6 +1358,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1246,6 +1368,8 @@
           <para
             >Occurs when the focus enters the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1289,6 +1413,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1315,6 +1441,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1323,6 +1451,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripDropDown.Font" />
+
+            
 
             
 
@@ -1360,6 +1490,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1368,6 +1500,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStrip.ForeColor" />
+
+            
 
             
 
@@ -1578,6 +1712,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1612,6 +1748,8 @@
           <para
             >Occurs when the <see
              cref="E:System.Windows.Forms.ToolStripDropDown.ImeModeChanged" />
+
+            
 
             
 
@@ -1656,6 +1794,8 @@
 
             
 
+            
+
              was automatically generated. </para
           >
         </summary>
@@ -1682,6 +1822,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1690,6 +1832,8 @@
           <para
             >Occurs when a key is pressed and held down while the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1730,6 +1874,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1738,6 +1884,8 @@
           <para
             >Occurs when a key is pressed while the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1778,6 +1926,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1813,6 +1963,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1892,6 +2044,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1921,11 +2075,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnClosed(System.Windows.Forms.ToolStripDropDownClosedEventArgs)" />
+
+            
 
             
 
@@ -1940,6 +2098,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1948,8 +2108,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripDropDownClosedEventArgs" />
+
+          
 
           
 
@@ -1984,11 +2148,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnClosing(System.Windows.Forms.ToolStripDropDownClosingEventArgs)" />
+
+            
 
             
 
@@ -2003,6 +2171,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2011,8 +2181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
+
+          
 
           
 
@@ -2047,11 +2221,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -2066,6 +2244,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2074,8 +2254,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2110,11 +2294,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
+
+            
 
             
 
@@ -2129,6 +2317,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2137,8 +2327,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+
+          
 
           
 
@@ -2173,11 +2367,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -2192,6 +2390,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2200,8 +2400,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -2236,11 +2440,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -2255,6 +2463,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2263,8 +2473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -2296,11 +2510,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnOpened(System.EventArgs)" />
+
+            
 
             
 
@@ -2315,6 +2533,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2323,8 +2543,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2359,11 +2583,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnOpening(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -2378,6 +2606,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2386,8 +2616,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -2422,11 +2656,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnParentChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2441,6 +2679,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2449,8 +2689,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2485,11 +2729,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.OnVisibleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2504,6 +2752,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2512,8 +2762,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2576,10 +2830,14 @@
 
             
 
+            
+
              delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -2591,6 +2849,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -2623,6 +2883,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2631,6 +2893,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -2695,8 +2959,12 @@
 
             
 
+            
+
              that is the owner of this <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -2744,6 +3012,8 @@
 
           
 
+          
+
           The character to process.</param
         >
       </Docs>
@@ -2778,8 +3048,12 @@
 
             
 
+            
+
              method indicates that the control is not processing the key. The <see
              cref="M:System.Windows.Forms.ToolStripDropDown.ProcessDialogKey(System.Windows.Forms.Keys)" />
+
+            
 
             
 
@@ -2788,8 +3062,12 @@
 
             
 
+            
+
              method, or returns false if the control has no parent. The <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -2809,8 +3087,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -2843,6 +3125,8 @@
 
             
 
+            
+
              method to determine whether the given character matches a mnemonic in the control's text.</para
           >
           <para>For example: </para>
@@ -2852,6 +3136,8 @@
           <para
             >This default implementation of the <see
              cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" />
+
+            
 
             
 
@@ -2868,6 +3154,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2893,6 +3181,8 @@
           <para
             >Gets or sets the window region associated with the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -2930,6 +3220,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2938,6 +3230,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripDropDown.Region" />
+
+            
 
             
 
@@ -3011,10 +3305,14 @@
 
           
 
+          
+
           The factor by which the height and width of the control will be scaled.</param
         >
         <param name="specified">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3050,10 +3348,14 @@
 
           
 
+          
+
           The horizontal scaling factor.</param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3129,8 +3431,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Left" />
+
+          
 
           
 
@@ -3141,8 +3447,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Top" />
+
+          
 
           
 
@@ -3153,8 +3463,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Width" />
+
+          
 
           
 
@@ -3165,8 +3479,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Height" />
+
+          
 
           
 
@@ -3177,8 +3495,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -3212,8 +3534,12 @@
 
             
 
+            
+
              to accommodate the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -3222,8 +3548,12 @@
 
             
 
+            
+
              is currently displayed, or clears and resets active <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -3232,8 +3562,12 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3245,8 +3579,12 @@
 
           
 
+          
+
           true if the owner <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -3272,6 +3610,8 @@
           <para
             >Displays the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -3314,11 +3654,15 @@
 
             
 
+            
+
              relative to the specified screen location.</para
           >
         </summary>
         <param name="screenLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3355,11 +3699,15 @@
 
             
 
+            
+
              relative to the specified control location and with the specified direction relative to the parent control.</para
           >
         </summary>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3370,8 +3718,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownDirection" />
+
+          
 
           
 
@@ -3400,6 +3752,8 @@
 
             
 
+            
+
              relative to the specified screen coordinates.</para
           >
         </summary>
@@ -3408,10 +3762,14 @@
 
           
 
+          
+
           The horizontal screen coordinate, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3446,6 +3804,8 @@
 
             
 
+            
+
              relative to the specified control location.</para
           >
         </summary>
@@ -3454,8 +3814,12 @@
 
           
 
+          
+
           The control (typically, a <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+          
 
           
 
@@ -3464,10 +3828,14 @@
 
           
 
+          
+
            position.</param
         >
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3505,6 +3873,8 @@
 
             
 
+            
+
              relative to the specified control at the specified location and with the specified direction relative to the parent control.</para
           >
         </summary>
@@ -3513,13 +3883,19 @@
 
           
 
+          
+
           The control (typically, a <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
+          
+
           ) that is the reference point for the <see
            cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+          
 
           
 
@@ -3530,6 +3906,8 @@
 
           
 
+          
+
           The horizontal and vertical location of the reference control's upper-left corner, in pixels.</param
         >
         <param name="direction">
@@ -3537,8 +3915,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownDirection" />
+
+          
 
           
 
@@ -3571,6 +3953,8 @@
 
             
 
+            
+
              relative to the specified control's horizontal and vertical screen coordinates.</para
           >
         </summary>
@@ -3579,13 +3963,19 @@
 
           
 
+          
+
           The control (typically, a <see
            cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
           
 
+          
+
           ) that is the reference point for the <see
            cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+          
 
           
 
@@ -3596,10 +3986,14 @@
 
           
 
+          
+
           The horizontal screen coordinate of the control, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3658,6 +4052,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3666,6 +4062,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+
+            
 
             
 
@@ -3852,6 +4250,8 @@
 
             
 
+            
+
              is a top-level control.</para
           >
         </summary>
@@ -3885,6 +4285,8 @@
           <para
             >For more information and a code example, see <see
              cref="P:System.Windows.Forms.Form.TopMost" />
+
+            
 
             
 
@@ -3990,6 +4392,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 

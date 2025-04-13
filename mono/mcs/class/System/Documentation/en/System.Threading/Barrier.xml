@@ -31,8 +31,12 @@
 
         
 
+        
+
          in a given phase and implicitly waits for all others to arrive. The same <see
          cref="T:System.Threading.Barrier" />
+
+        
 
         
 
@@ -68,11 +72,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="participantCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -106,6 +114,8 @@
 
             
 
+            
+
              delegate will be executed after all participants have arrived at the barrier in one phase. The participants will not be released to the next phase until the postPhaseAction delegate has completed execution.</para
           >
         </remarks>
@@ -117,11 +127,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="participantCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,8 +146,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Action`1" />
+
+          
 
           
 
@@ -165,6 +183,8 @@
           <para
             >Notifies the <see
              cref="T:System.Threading.Barrier" />
+
+            
 
             
 
@@ -206,6 +226,8 @@
 
             
 
+            
+
              that there will be additional participants.</para
           >
         </summary>
@@ -215,6 +237,8 @@
         </returns>
         <param name="participantCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +288,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.Barrier" />
+
+            
 
             
 
@@ -274,8 +302,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.Barrier" />
+
+            
 
             
 
@@ -289,10 +321,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -305,8 +341,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.Barrier" />
+
+              
 
               
 
@@ -319,6 +359,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.Barrier" />
+
+            
 
             
 
@@ -352,6 +394,8 @@
 
             
 
+            
+
             , Dispose is not thread-safe and may not be used concurrently with other members of this instance.</para
           >
         </remarks>
@@ -363,11 +407,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,6 +493,8 @@
 
             
 
+            
+
              that there will be one less participant.</para
           >
         </summary>
@@ -478,6 +528,8 @@
 
             
 
+            
+
              participants are already waiting on the barrier, this removal fulfills the barrier, the post phase action is executed and all of the participants are woken as if this participant being removed had successfully reached the barrier.</para
           >
         </remarks>
@@ -489,11 +541,15 @@
 
             
 
+            
+
              that there will be fewer participants.</para
           >
         </summary>
         <param name="participantCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,8 +610,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -593,8 +653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -628,6 +692,8 @@
 
             
 
+            
+
              object to measure the time interval.</para
           >
         </summary>
@@ -640,13 +706,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -683,8 +755,12 @@
 
             
 
+            
+
              was canceled before the signal took effect, then an <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -693,8 +769,12 @@
 
             
 
+            
+
              value is not decreased. If the <paramref
              name="cancellationToken" />
+
+            
 
             
 
@@ -703,8 +783,12 @@
 
             
 
+            
+
              is decreased and no <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -724,8 +808,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -736,8 +824,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -775,6 +867,8 @@
 
             
 
+            
+
              object to measure the time interval, while observing a cancellation token.</para
           >
         </summary>
@@ -787,13 +881,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -804,8 +904,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 

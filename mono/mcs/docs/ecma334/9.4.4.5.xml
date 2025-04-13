@@ -5,6 +5,8 @@
 
   
 
+  
+
    quotes, as in "hello, world", and may include both simple escape sequences (such as \t for the tab character), and hexadecimal and Unicode escape sequences. <paragraph
   >A verbatim string literal consists of an @ character followed by a double-quote character, zero or more </paragraph>
   <paragraph
@@ -13,8 +15,12 @@
 
     
 
+    
+
      In a verbatim string literal, the characters between the delimiters are interpreted verbatim, with the only exception being a <non_terminal
      where="9.4.4.5">quote-escape-sequence</non_terminal>
+
+    
 
     
 
@@ -23,6 +29,8 @@
       <name>
         <non_terminal where="9.4.4.5">string-literal</non_terminal>
       </name>
+
+      
 
       
 
@@ -41,6 +49,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <terminal>"</terminal>
@@ -55,8 +65,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -73,6 +87,8 @@
       <name>
         <non_terminal where="9.4.4.5">regular-string-literal-character</non_terminal>
       </name>
+
+      
 
       
 
@@ -97,6 +113,8 @@
 
       
 
+      
+
        :: <rhs
 
         >Any character except " (U+0022), \ (U+005C), and <non_terminal
@@ -107,6 +125,8 @@
       <name>
         <non_terminal where="9.4.4.5">verbatim-string-literal</non_terminal>
       </name>
+
+      
 
       
 
@@ -124,8 +144,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -145,6 +169,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.4.4.5">single-verbatim-string-literal-character</non_terminal>
@@ -160,6 +186,8 @@
 
       
 
+      
+
        :: <rhs
       >Any character except " </rhs>
     </grammar_production>
@@ -167,6 +195,8 @@
       <name>
         <non_terminal where="9.4.4.5">quote-escape-sequence</non_terminal>
       </name>
+
+      
 
       
 
@@ -180,6 +210,8 @@
     <note
       >[Note: A character that follows a backslash character (\) in a <non_terminal
        where="9.4.4.5">regular-string-literal-character</non_terminal>
+
+      
 
       
 
@@ -208,6 +240,8 @@ three";
 
       
 
+      
+
       shows a variety of string literals. The last string literal, j, is a verbatim string literal that spans multiple lines. The characters between the quotation marks, including white space such as new line characters, are preserved verbatim. end example]</example
     >
   </paragraph>
@@ -220,11 +254,15 @@ three";
 
     
 
+    
+
      is string. </paragraph
   >
   <paragraph
     >Each string literal does not necessarily result in a new string instance. When two or more string literals that are equivalent according to the string equality operator (<hyperlink
     >14.9.7</hyperlink>
+
+    
 
     
 
@@ -243,6 +281,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

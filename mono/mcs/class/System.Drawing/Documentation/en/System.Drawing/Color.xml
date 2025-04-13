@@ -30,8 +30,12 @@
 
         
 
+        
+
          structure. For more information about these colors, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Drawing.Color.R" />
+
+        
 
         
 
@@ -53,13 +61,19 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Drawing.Color.B" />
 
         
 
+        
+
          property, respectively. You can create a custom color by using one of the <see
          cref="M:System.Drawing.Color.FromArgb(System.Int32,System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -88,13 +102,19 @@
 
             
 
+            
+
              value of 255 represents an opaque color. An <see
              cref="P:System.Drawing.Color.A" />
 
             
 
+            
+
              value from 1 through 254 represents a semitransparent color. The color becomes more opaque as <see
              cref="P:System.Drawing.Color.A" />
+
+            
 
             
 
@@ -106,6 +126,8 @@
           <para
             >Gets the alpha component value of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -134,6 +156,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -169,6 +193,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -195,6 +221,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -230,6 +258,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -256,6 +286,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -288,6 +320,8 @@
 
             
 
+            
+
              is a value from 0 to 255 with 0 representing no blue and 255 representing fully blue.</para
           >
         </remarks>
@@ -296,6 +330,8 @@
           <para
             >Gets the blue component value of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -321,6 +357,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -353,6 +391,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -379,6 +419,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -414,6 +456,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -440,6 +484,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -475,6 +521,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -501,6 +549,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -536,6 +586,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -565,6 +617,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -600,6 +654,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -632,6 +688,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -658,6 +716,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -693,6 +753,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -719,6 +781,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -751,6 +815,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -777,6 +843,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -809,6 +877,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -835,6 +905,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -870,6 +942,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -896,6 +970,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -931,6 +1007,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -960,6 +1038,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -995,6 +1075,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1024,6 +1106,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1059,6 +1143,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1091,6 +1177,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1117,6 +1205,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1152,6 +1242,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1181,6 +1273,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1216,6 +1310,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1245,6 +1341,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1280,6 +1378,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1312,6 +1412,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1338,6 +1440,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1373,6 +1477,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1399,6 +1505,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1431,6 +1539,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1484,8 +1594,12 @@
 
             
 
+            
+
              structures. To compare colors based solely on their ARGB values, you should use the <see
              cref="M:System.Drawing.Color.ToArgb" />
+
+            
 
             
 
@@ -1494,8 +1608,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Drawing.Color.op_Equality(System.Drawing.Color,System.Drawing.Color)" />
+
+            
 
             
 
@@ -1504,8 +1622,12 @@
 
             
 
+            
+
              and FromArgb(0,0,0) are not considered equal, since <see
              cref="P:System.Drawing.Color.Black" />
+
+            
 
             
 
@@ -1520,8 +1642,12 @@
 
             
 
+            
+
              structure and is equivalent to this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1536,8 +1662,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1546,11 +1676,15 @@
 
             
 
+            
+
              structure; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1578,6 +1712,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1613,6 +1749,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1642,6 +1780,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -1683,6 +1823,8 @@
 
             
 
+            
+
              structure from a 32-bit ARGB value.</para
           >
         </summary>
@@ -1694,11 +1836,15 @@
 
             
 
+            
+
              structure that this method creates.</para
           >
         </returns>
         <param name="argb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1732,8 +1878,12 @@
 
             
 
+            
+
              to 255. To create a semitransparent color, set <paramref
              name="alpha" />
+
+            
 
             
 
@@ -1748,8 +1898,12 @@
 
             
 
+            
+
              structure from the specified <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1764,6 +1918,8 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
@@ -1772,8 +1928,12 @@
 
           
 
+          
+
           The alpha value for the new <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1784,13 +1944,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
           
 
+          
+
            from which to create the new <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1826,6 +1992,8 @@
 
             
 
+            
+
              structure from the specified 8-bit color values (red, green, and blue). The alpha value is implicitly 255 (fully opaque). Although this method allows a 32-bit value to be passed for each color component, the value of each component is limited to 8 bits.</para
           >
         </summary>
@@ -1837,6 +2005,8 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
@@ -1845,8 +2015,12 @@
 
           
 
+          
+
           The red component value for the new <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1857,8 +2031,12 @@
 
           
 
+          
+
           The green component value for the new <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1869,8 +2047,12 @@
 
           
 
+          
+
           The blue component value for the new <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1906,8 +2088,12 @@
 
             
 
+            
+
              to 255. To create a semitransparent color, set <paramref
              name="alpha" />
+
+            
 
             
 
@@ -1922,6 +2108,8 @@
 
             
 
+            
+
              structure from the four ARGB component (alpha, red, green, and blue) values. Although this method allows a 32-bit value to be passed for each component, the value of each component is limited to 8 bits.</para
           >
         </summary>
@@ -1933,11 +2121,15 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
         <param name="alpha">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1948,6 +2140,8 @@
 
           
 
+          
+
           The red component. Valid values are 0 through 255. </param
         >
         <param name="green">
@@ -1955,10 +2149,14 @@
 
           
 
+          
+
           The green component. Valid values are 0 through 255. </param
         >
         <param name="blue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1991,6 +2189,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -1999,6 +2199,8 @@
           <para
             >Creates a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2013,6 +2215,8 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
@@ -2021,8 +2225,12 @@
 
           
 
+          
+
           An element of the <see
            cref="T:System.Drawing.KnownColor" />
+
+          
 
           
 
@@ -2055,8 +2263,12 @@
 
             
 
+            
+
              enumeration. If the <paramref
              name="name" />
+
+            
 
             
 
@@ -2065,8 +2277,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2081,6 +2297,8 @@
 
             
 
+            
+
              structure from the specified name of a predefined color.</para
           >
         </summary>
@@ -2092,6 +2310,8 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
@@ -2100,8 +2320,12 @@
 
           
 
+          
+
           A string that is the name of a predefined color. Valid names are the same as the names of the elements of the <see
            cref="T:System.Drawing.KnownColor" />
+
+          
 
           
 
@@ -2126,6 +2350,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2158,6 +2384,8 @@
 
             
 
+            
+
              is a value from 0 to 255 with 0 representing no green and 255 representing fully green.</para
           >
         </remarks>
@@ -2166,6 +2394,8 @@
           <para
             >Gets the green component value of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2194,6 +2424,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2227,6 +2459,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2235,6 +2469,8 @@
           <para
             >The brightness of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2264,6 +2500,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2272,6 +2510,8 @@
           <para
             >An integer value that specifies the hash code for this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2301,6 +2541,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2309,6 +2551,8 @@
           <para
             >The hue, in degrees, of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2338,6 +2582,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2346,6 +2592,8 @@
           <para
             >The saturation of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2377,6 +2625,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2403,6 +2653,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2438,6 +2690,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2467,6 +2721,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2493,6 +2749,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2528,6 +2786,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2557,6 +2817,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2583,6 +2845,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2618,6 +2882,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2644,6 +2910,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2677,6 +2945,8 @@
 
             
 
+            
+
              structure is uninitialized.</para
           >
         </summary>
@@ -2702,8 +2972,12 @@
 
             
 
+            
+
              property is applied to a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2712,8 +2986,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Drawing.Color.IsKnownColor" />
+
+            
 
             
 
@@ -2728,8 +3006,12 @@
 
             
 
+            
+
              structure is a predefined color. Predefined colors are represented by the elements of the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -2758,8 +3040,12 @@
 
             
 
+            
+
              property is applied to a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2768,8 +3054,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Drawing.Color.IsNamedColor" />
+
+            
 
             
 
@@ -2784,8 +3074,12 @@
 
             
 
+            
+
              structure is a named color or a member of the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -2814,8 +3108,12 @@
 
             
 
+            
+
              property is applied to a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -2824,8 +3122,12 @@
 
             
 
+            
+
              method, <see
              cref="P:System.Drawing.Color.IsSystemColor" />
+
+            
 
             
 
@@ -2840,8 +3142,12 @@
 
             
 
+            
+
              structure is a system color. A system color is a color that is used in a Windows display element. System colors are represented by elements of the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -2867,6 +3173,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2899,6 +3207,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2925,6 +3235,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -2960,6 +3272,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2989,6 +3303,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3024,6 +3340,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3053,6 +3371,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3088,6 +3408,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3117,6 +3439,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3152,6 +3476,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3181,6 +3507,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3216,6 +3544,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3245,6 +3575,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3280,6 +3612,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3309,6 +3643,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3344,6 +3680,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3373,6 +3711,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3408,6 +3748,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3440,6 +3782,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3466,6 +3810,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3501,6 +3847,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3527,6 +3875,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3559,6 +3909,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3585,6 +3937,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3620,6 +3974,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3649,6 +4005,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3684,6 +4042,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3713,6 +4073,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3748,6 +4110,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3777,6 +4141,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3812,6 +4178,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3841,6 +4209,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3876,6 +4246,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3905,6 +4277,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -3940,6 +4314,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3972,6 +4348,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3998,6 +4376,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4034,6 +4414,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4059,6 +4441,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4091,6 +4475,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4117,6 +4503,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4149,6 +4537,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4178,6 +4568,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4216,13 +4608,19 @@
 
             
 
+            
+
              structures. It also does a comparison of some state flags. If you want to compare just the ARGB values of two <see
              cref="T:System.Drawing.Color" />
 
             
 
+            
+
              structures, compare them using the <see
              cref="M:System.Drawing.Color.ToArgb" />
+
+            
 
             
 
@@ -4237,6 +4635,8 @@
 
             
 
+            
+
              structures are equivalent.</para
           >
         </summary>
@@ -4248,6 +4648,8 @@
 
             
 
+            
+
              structures are equal; otherwise, false.</para
           >
         </returns>
@@ -4256,8 +4658,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4268,8 +4674,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4303,13 +4713,19 @@
 
             
 
+            
+
              structures. It also does a comparison of some state flags. If you want to compare just the ARGB values of two <see
              cref="T:System.Drawing.Color" />
 
             
 
+            
+
              structures, use the <see
              cref="M:System.Drawing.Color.ToArgb" />
+
+            
 
             
 
@@ -4324,6 +4740,8 @@
 
             
 
+            
+
              structures are different.</para
           >
         </summary>
@@ -4335,6 +4753,8 @@
 
             
 
+            
+
              structures are different; otherwise, false.</para
           >
         </returns>
@@ -4343,8 +4763,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4355,8 +4779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -4381,6 +4809,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4416,6 +4846,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4442,6 +4874,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4477,6 +4911,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4506,6 +4942,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4541,6 +4979,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4570,6 +5010,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4605,6 +5047,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4637,6 +5081,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4663,6 +5109,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4695,6 +5143,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4721,6 +5171,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4756,6 +5208,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4782,6 +5236,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4814,6 +5270,8 @@
 
             
 
+            
+
              is a value from 0 to 255 with 0 representing no red and 255 representing fully red.</para
           >
         </remarks>
@@ -4822,6 +5280,8 @@
           <para
             >Gets the red component value of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -4847,6 +5307,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4882,6 +5344,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4911,6 +5375,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -4946,6 +5412,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4972,6 +5440,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5007,6 +5477,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5033,6 +5505,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5065,6 +5539,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5091,6 +5567,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5123,6 +5601,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5149,6 +5629,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5184,6 +5666,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5216,6 +5700,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5242,6 +5728,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5277,6 +5765,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5309,6 +5799,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5335,6 +5827,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5367,6 +5861,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5393,6 +5889,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5429,6 +5927,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -5437,6 +5937,8 @@
           <para
             >The 32-bit ARGB value of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -5465,8 +5967,12 @@
 
             
 
+            
+
              enumeration. When the <see
              cref="M:System.Drawing.Color.ToKnownColor" />
+
+            
 
             
 
@@ -5475,8 +5981,12 @@
 
             
 
+            
+
              structure that is created by using the <see
              cref="Overload:System.Drawing.Color.FromArgb" />
+
+            
 
             
 
@@ -5485,8 +5995,12 @@
 
             
 
+            
+
              returns 0, even if the ARGB value matches the ARGB value of a predefined color. <see
              cref="M:System.Drawing.Color.ToKnownColor" />
+
+            
 
             
 
@@ -5495,8 +6009,12 @@
 
             
 
+            
+
              structure that is created by using the <see
              cref="M:System.Drawing.Color.FromName(System.String)" />
+
+            
 
             
 
@@ -5511,8 +6029,12 @@
 
             
 
+            
+
              value of this <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -5527,8 +6049,12 @@
 
             
 
+            
+
              enumeration, if the <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -5537,8 +6063,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor)" />
+
+            
 
             
 
@@ -5564,6 +6094,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5596,8 +6128,12 @@
 
             
 
+            
+
              enumeration. When the <see
              cref="M:System.Drawing.Color.ToString" />
+
+            
 
             
 
@@ -5606,13 +6142,19 @@
 
             
 
+            
+
              structure that is created by using the <see
              cref="Overload:System.Drawing.Color.FromArgb" />
 
             
 
+            
+
              method, <see
              cref="M:System.Drawing.Color.ToString" />
+
+            
 
             
 
@@ -5627,6 +6169,8 @@
 
             
 
+            
+
              structure to a human-readable string.</para
           >
         </summary>
@@ -5638,8 +6182,12 @@
 
             
 
+            
+
             , if the <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -5648,8 +6196,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor)" />
+
+            
 
             
 
@@ -5703,6 +6255,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5729,6 +6283,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5761,6 +6317,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5787,6 +6345,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5822,6 +6382,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5848,6 +6410,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 
@@ -5880,6 +6444,8 @@
           <para
             >For an example of this color, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            
 
             
 

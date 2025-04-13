@@ -19,10 +19,14 @@
 
         
 
+        
+
          class is not used by ASP.NET page or control developers. It provides a data structure used to store cache settings parsed from an <format
          type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.TemplateControlParser" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          object is used with the <see
          cref="M:System.Web.UI.Page.InitOutputCache(System.Web.UI.OutputCacheSettings)" />
+
+        
 
         
 
@@ -56,6 +68,8 @@
          type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
+
+        
 
         
 
@@ -76,6 +90,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.OutputCacheParameters" />
+
+            
 
             
 
@@ -105,6 +121,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -212,8 +230,12 @@
 
             
 
+            
+
              string identifies databases and tables according to the name of a SQL Server cache dependency in your configuration (typically added using the &lt;sqlcachedependency&gt; configuration elements). If you use SQL Server 2005, you can set the <see
              cref="P:System.Web.UI.OutputCacheParameters.SqlDependency" />
+
+            
 
             
 
@@ -248,10 +270,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -297,6 +323,8 @@
           <para
             >If you specify "browser" for this property, the cache entry will be varied by browser type and major version number. If a custom string is entered, you must override the <see
              cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+
+            
 
             
 

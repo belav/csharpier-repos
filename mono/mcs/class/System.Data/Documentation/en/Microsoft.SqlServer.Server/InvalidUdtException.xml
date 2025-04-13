@@ -20,6 +20,8 @@
 
         
 
+        
+
          provider detects an invalid user-defined type (UDT). </para
       >
     </summary>
@@ -48,6 +50,8 @@
 
             
 
+            
+
              class to make the class serializable.</para
           >
         </remarks>
@@ -59,13 +63,19 @@
 
             
 
+            
+
              properties into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              class for the given <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -77,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -89,8 +103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

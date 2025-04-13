@@ -19,8 +19,12 @@
 
         
 
+        
+
          structure wraps messages that Windows sends. You can use this structure to wrap a message and assign it to the window procedure to be dispatched. You can also use this structure to get information about a message the system sends to your application or controls. For more information about Windows messages, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=198815">Messages and Message Queues</see>
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          directly. Instead, use the <see
          cref="M:System.Windows.Forms.Message.Create(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
+
+        
 
         
 
@@ -42,13 +50,19 @@
 
         
 
+        
+
          uses its pool of existing <see
          cref="T:System.Windows.Forms.Message" />
 
         
 
+        
+
         s instead of instantiating a new one, if possible. However, if a <see
          cref="T:System.Windows.Forms.Message" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Windows.Forms.Message" />
+
+            
 
             
 
@@ -101,6 +119,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -112,11 +132,15 @@
 
             
 
+            
+
              that represents the message that was created.</para
           >
         </returns>
         <param name="hWnd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,6 +151,8 @@
 
           
 
+          
+
           The message ID. </param
         >
         <param name="wparam">
@@ -134,8 +160,12 @@
 
           
 
+          
+
           The message <paramref
            name="wparam" />
+
+          
 
           
 
@@ -146,8 +176,12 @@
 
           
 
+          
+
           The message <paramref
            name="lparam" />
+
+          
 
           
 
@@ -180,6 +214,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,8 +262,12 @@
 
             
 
+            
+
              method to retrieve information from the <see
              cref="P:System.Windows.Forms.Message.LParam" />
+
+            
 
             
 
@@ -242,6 +282,8 @@
 
             
 
+            
+
              value and converts the value to an object.</para
           >
         </summary>
@@ -253,8 +295,12 @@
 
             
 
+            
+
              that represents an instance of the class specified by the <paramref
              name="cls" />
+
+            
 
             
 
@@ -263,11 +309,15 @@
 
             
 
+            
+
              field of the message.</para
           >
         </returns>
         <param name="cls">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,8 +364,12 @@
 
             
 
+            
+
              field to get information that is important for handling the message. <see
              cref="P:System.Windows.Forms.Message.LParam" />
+
+            
 
             
 
@@ -324,8 +378,12 @@
 
             
 
+            
+
              method to retrieve and convert information from the <see
              cref="P:System.Windows.Forms.Message.LParam" />
+
+            
 
             
 
@@ -337,6 +395,8 @@
           <para
             >Specifies the <see
              cref="P:System.Windows.Forms.Message.LParam" />
+
+            
 
             
 
@@ -394,6 +454,8 @@
 
             
 
+            
+
              are equal. </para
           >
         </summary>
@@ -405,13 +467,19 @@
 
             
 
+            
+
              and <paramref
              name="b" />
 
             
 
+            
+
              represent the same <see
              cref="T:System.Windows.Forms.Message" />
+
+            
 
             
 
@@ -423,13 +491,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Message" />
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -440,13 +514,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Message" />
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 
@@ -480,6 +560,8 @@
 
             
 
+            
+
              are not equal. </para
           >
         </summary>
@@ -491,13 +573,19 @@
 
             
 
+            
+
              and <paramref
              name="b" />
 
             
 
+            
+
              do not represent the same <see
              cref="T:System.Windows.Forms.Message" />
+
+            
 
             
 
@@ -509,13 +597,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Message" />
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -526,13 +620,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Message" />
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 
@@ -576,8 +676,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.Message" />
+
+            
 
             
 
@@ -592,8 +696,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.Message" />
+
+            
 
             
 
@@ -622,6 +730,8 @@
 
             
 
+            
+
              field to get information that is important to handling the message. This field is typically used to store small pieces of information, such as flags.</para
           >
         </remarks>
@@ -630,6 +740,8 @@
           <para
             >Gets or sets the <see
              cref="P:System.Windows.Forms.Message.WParam" />
+
+            
 
             
 

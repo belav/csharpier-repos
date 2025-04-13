@@ -37,6 +37,8 @@
 
         
 
+        
+
          class contains the address of a computer on an IP network.</para
       >
     </remarks>
@@ -70,13 +72,19 @@
 
             
 
+            
+
              is created with the <see
              cref="P:System.Net.IPAddress.Address" />
 
             
 
+            
+
              property set to <paramref
              name="address" />
+
+            
 
             
 
@@ -88,8 +96,12 @@
 
             
 
+            
+
              is 4, <see
              cref="M:System.Net.IPAddress.#ctor(System.Byte[])" />
+
+            
 
             
 
@@ -98,6 +110,8 @@
           <para
             >The <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
              class with the address specified as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -122,6 +140,8 @@
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,6 +175,8 @@
 
           
 
+          
+
            is less than 0 or greater than 0x00000000FFFFFFFF.</exception
         >
         <remarks>
@@ -165,8 +187,12 @@
 
             
 
+            
+
              instance is created with the <see
              cref="P:System.Net.IPAddress.Address" />
+
+            
 
             
 
@@ -175,11 +201,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -194,8 +224,12 @@
 
             
 
+            
+
              class with the address specified as an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -204,6 +238,8 @@
         </summary>
         <param name="newAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,11 +273,15 @@
 
             
 
+            
+
              identifies a network interface in the case of a link-local address. The scope is valid only for link-local and site-local addresses.</para
           >
           <para
             >The <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -256,8 +296,12 @@
 
             
 
+            
+
              class with the address specified as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -269,10 +313,14 @@
 
           
 
+          
+
           The byte array value of the IP address. </param
         >
         <param name="scopeid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,6 +358,8 @@
 
             
 
+            
+
              containing
    the IP address in host-byte-order.</para
           >
@@ -325,6 +375,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -333,8 +385,12 @@
 
             
 
+            
+
              to dotted-quad notation, use the <see
              cref="M:System.Net.IPAddress.ToString" />
+
+            
 
             
 
@@ -375,6 +431,8 @@
         <value>
           <para>
             <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+
+            
 
             
 
@@ -421,8 +479,12 @@
 
             
 
+            
+
              method uses the <see
              cref="F:System.Net.IPAddress.Any" />
+
+            
 
             
 
@@ -431,11 +493,15 @@
 
             
 
+            
+
              instance must listen for client activity on all network interfaces.</para
           >
           <para
             >The <see
              cref="F:System.Net.IPAddress.Any" />
+
+            
 
             
 
@@ -481,6 +547,8 @@
 
             
 
+            
+
              field is equivalent to 255.255.255.255 in dotted-quad notation.</para
           >
         </remarks>
@@ -522,13 +590,19 @@
 
             
 
+            
+
              method compares the current <see
              cref="T:System.Net.IPAddress" />
 
             
 
+            
+
              instance with the <paramref
              name="comparand" />
+
+            
 
             
 
@@ -548,8 +622,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -584,6 +662,8 @@
 
             
 
+            
+
              as an array of bytes.</para
           >
         </summary>
@@ -592,6 +672,8 @@
           <para
             >A <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -626,6 +708,8 @@
           <para
             >The <see
              cref="M:System.Net.IPAddress.GetHashCode" />
+
+            
 
             
 
@@ -675,6 +759,8 @@
 
             
 
+            
+
              method converts multibyte integer values that are stored on the host system from the byte order used by the host to the byte order used by the network.</para
           >
         </remarks>
@@ -688,6 +774,8 @@
         </returns>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -728,6 +816,8 @@
 
             
 
+            
+
              method converts multibyte integer values that are stored on the host system from the byte order used by the host to the byte order used by the network.</para
           >
         </remarks>
@@ -741,6 +831,8 @@
         </returns>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -781,6 +873,8 @@
 
             
 
+            
+
              method converts multibyte integer values that are stored on the host system from the byte order used by the host to the byte order used by the network.</para
           >
         </remarks>
@@ -794,6 +888,8 @@
         </returns>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,6 +922,8 @@
 
             
 
+            
+
              field is equivalent to 0:0:0:0:0:0:0:0 in colon-hexadecimal notation, or to :: in compact notation.</para
           >
         </remarks>
@@ -837,13 +935,19 @@
 
             
 
+            
+
              method uses the <see
              cref="F:System.Net.IPAddress.IPv6Any" />
 
             
 
+            
+
              field to indicate that a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -876,6 +980,8 @@
           <para
             >The <see
              cref="F:System.Net.IPAddress.IPv6Loopback" />
+
+            
 
             
 
@@ -915,8 +1021,12 @@
 
             
 
+            
+
              method uses the <see
              cref="F:System.Net.IPAddress.IPv6None" />
+
+            
 
             
 
@@ -925,8 +1035,12 @@
 
             
 
+            
+
              must not listen for client activity. The <see
              cref="F:System.Net.IPAddress.IPv6None" />
+
+            
 
             
 
@@ -1055,13 +1169,19 @@
 
             
 
+            
+
              method compares <paramref
              name="address" />
 
             
 
+            
+
              to <see
              cref="F:System.Net.IPAddress.Loopback" />
+
+            
 
             
 
@@ -1073,8 +1193,12 @@
 
             
 
+            
+
              method returns true for any IP address of the form 127.X.Y.Z (where X, Y, and Z are in the range 0-255), not just <see
              cref="F:System.Net.IPAddress.Loopback" />
+
+            
 
             
 
@@ -1093,11 +1217,15 @@
 
             
 
+            
+
              is the loopback address; otherwise, false.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1135,6 +1263,8 @@
           <para
             >The <see
              cref="F:System.Net.IPAddress.Loopback" />
+
+            
 
             
 
@@ -1183,6 +1313,8 @@
 
             
 
+            
+
              method converts multibyte integer values that are stored on the host system from the byte order used by the network to the byte order used by the host.</para
           >
         </remarks>
@@ -1196,6 +1328,8 @@
         </returns>
         <param name="network">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1236,6 +1370,8 @@
 
             
 
+            
+
              method converts multibyte integer values that are stored on the host system from the byte order used by the network to the byte order used by the host.</para
           >
         </remarks>
@@ -1249,6 +1385,8 @@
         </returns>
         <param name="network">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1292,6 +1430,8 @@
 
             
 
+            
+
              method converts multibyte integer values that are stored on the host system from the byte order used by the network to the byte order used by the host.</para
           >
         </remarks>
@@ -1305,6 +1445,8 @@
         </returns>
         <param name="network">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1342,8 +1484,12 @@
 
             
 
+            
+
              method uses the <see
              cref="F:System.Net.IPAddress.None" />
+
+            
 
             
 
@@ -1352,8 +1498,12 @@
 
             
 
+            
+
              must not listen for client activity. The <see
              cref="F:System.Net.IPAddress.None" />
+
+            
 
             
 
@@ -1398,8 +1548,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1407,6 +1561,8 @@
         >
         <exception cref="T:System.FormatException">
           <paramref name="ipString " />
+
+          
 
           
 
@@ -1420,8 +1576,12 @@
 
             
 
+            
+
              method creates an <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -1430,6 +1590,8 @@
           <para
             >The number of parts (each part is separated by a period) in <paramref
              name="ipString" />
+
+            
 
             
 
@@ -1492,6 +1654,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1503,11 +1667,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="ipString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1538,6 +1706,8 @@
 
             
 
+            
+
              changes depending on the context in which it is used.</para
           >
           <list type="bullet">
@@ -1559,6 +1729,8 @@
           <para
             >The notation that is used to specify the <paramref
              name="ScopeId" />
+
+            
 
             
 
@@ -1600,8 +1772,12 @@
 
             
 
+            
+
              method converts the IP address that is stored in the <see
              cref="P:System.Net.IPAddress.Address" />
+
+            
 
             
 

@@ -6,6 +6,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -30,6 +32,8 @@ public class HelpAttribute: Attribute
 
     
 
+    
+
     defines an attribute class named HelpAttribute, or Help for short, that has one positional parameter (string url) and one named parameter (string Topic). Positional parameters are defined by the formal parameters for public instance constructors of the attribute class, and named parameters are defined by public non-static read-write fields and properties of the attribute class. </paragraph
   >
   <paragraph
@@ -44,6 +48,8 @@ public class Class1
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -70,6 +76,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

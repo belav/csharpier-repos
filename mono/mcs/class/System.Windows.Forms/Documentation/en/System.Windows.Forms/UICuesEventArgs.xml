@@ -19,11 +19,15 @@
 
         
 
+        
+
          specifies which user interface feature changed and its new value.</para
       >
       <para
         >The <see
          cref="E:System.Windows.Forms.Control.ChangeUICues" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -45,6 +51,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.ChangeUICues" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Windows.Forms.UICues" />
+
+            
 
             
 
@@ -85,8 +97,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.UICues" />
+
+          
 
           
 
@@ -112,6 +128,8 @@
           <para
             >Gets the bitwise combination of the <see
              cref="T:System.Windows.Forms.UICues" />
+
+            
 
             
 

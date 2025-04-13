@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used by data-bound controls (such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         ) to display the value of a field as text. The <see
          cref="T:System.Web.UI.WebControls.BoundField" />
+
+        
 
         
 
@@ -42,13 +50,19 @@
 
         
 
+        
+
          control displays a <see
          cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
+        
+
          object as a column, while the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -60,8 +74,12 @@
 
         
 
+        
+
          object, set the <see
          cref="P:System.Web.UI.WebControls.BoundField.DataField" />
+
+        
 
         
 
@@ -70,8 +88,12 @@
 
         
 
+        
+
          property to true. You can apply a custom formatting string to the field's value by setting the <see
          cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+
+        
 
         
 
@@ -80,8 +102,12 @@
 
         
 
+        
+
          property is true, the encoded string value of the field is used in the custom format string. By default, the formatting string is applied to field values only when the data-bound control is in read-only mode. To apply the formatting string to values displayed while the data-bound control is in edit mode, set the <see
          cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
+
+        
 
         
 
@@ -90,13 +116,19 @@
 
         
 
+        
+
          property. The <see
          cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
+        
+
          object can also automatically convert empty string ("") field values to null values by setting the <see
          cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
+
+        
 
         
 
@@ -108,8 +140,12 @@
 
         
 
+        
+
          object in a data-bound control by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+
+        
 
         
 
@@ -118,8 +154,12 @@
 
         
 
+        
+
          property to true. In data-bound controls that support inserting records (such as the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -128,8 +168,12 @@
 
         
 
+        
+
          object by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
+
+        
 
         
 
@@ -141,8 +185,12 @@
 
         
 
+        
+
          object. To display a caption in the header or footer sections, set the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+
+        
 
         
 
@@ -151,8 +199,12 @@
 
         
 
+        
+
          properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+
+        
 
         
 
@@ -161,8 +213,12 @@
 
         
 
+        
+
          object by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+        
 
         
 
@@ -175,8 +231,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+          
 
           
 
@@ -186,6 +246,8 @@
       <para
         >You also can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.BoundField" />
+
+        
 
         
 
@@ -215,6 +277,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -229,6 +293,8 @@
             <para
               >The style settings for the footer section of the <see
                cref="T:System.Web.UI.WebControls.BoundField" />
+
+              
 
               
 
@@ -249,6 +315,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -263,6 +331,8 @@
             <para
               >The style settings for the data items in the <see
                cref="T:System.Web.UI.WebControls.BoundField" />
+
+              
 
               
 
@@ -292,6 +362,8 @@
 
             
 
+            
+
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
@@ -300,8 +372,12 @@
 
             
 
+            
+
              object to a data-bound control, create a new <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -310,13 +386,19 @@
 
             
 
+            
+
              control, add the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
+            
+
              object to the <see
              cref="P:System.Web.UI.WebControls.GridView.Columns" />
+
+            
 
             
 
@@ -331,6 +413,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -367,8 +451,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -377,13 +465,19 @@
 
             
 
+            
+
             ) have different display modes that allow the user to read, edit, or insert records. By default, the formatting string specified by the <see
              cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
+            
+
              property is applied to field values only when the data-bound control is in read-only mode. To apply the formatting string to values displayed while the data-bound control is in edit mode, set the <see
              cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
+
+            
 
             
 
@@ -393,6 +487,8 @@
             <para
               >A <see
                cref="T:System.Web.UI.WebControls.BoundField" />
+
+              
 
               
 
@@ -408,8 +504,12 @@
 
             
 
+            
+
              property is applied to field values when the data-bound control that contains the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -446,6 +546,8 @@
 
             
 
+            
+
              property to specify whether an empty string value is automatically converted to null when the data field is updated in the data source.</para
           >
           <block subset="none" type="note">
@@ -455,8 +557,12 @@
 
               
 
+              
+
                object displays null values as empty strings. To display a different value, set the <see
                cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+
+              
 
               
 
@@ -495,8 +601,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -505,8 +615,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -521,8 +635,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -534,13 +652,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
+          
+
            to copy the properties of the current <see
            cref="T:System.Web.UI.WebControls.BoundField" />
+
+          
 
           
 
@@ -571,8 +695,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -581,8 +709,12 @@
 
             
 
+            
+
              object to copy the properties of the current <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -597,6 +729,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -605,6 +739,8 @@
           <para
             >An empty <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -641,8 +777,12 @@
 
             
 
+            
+
              property to specify the name of the data field to bind to the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -651,8 +791,12 @@
 
             
 
+            
+
              object as text. You can optionally format the displayed text by setting the <see
              cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+
+            
 
             
 
@@ -665,6 +809,8 @@
 
               
 
+              
+
                property.</para
             >
           </block>
@@ -674,6 +820,8 @@
           <para
             >Gets or sets the name of the data field to bind to the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -707,13 +855,19 @@
 
             
 
+            
+
              property to specify a custom display format for the values that are displayed in the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
+            
+
              object. If the <see
              cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+
+            
 
             
 
@@ -726,8 +880,12 @@
 
               
 
+              
+
                property to false in order to format fields that are not string data types. Otherwise, the field value is converted to a string by the default conversion method before the format string that is stored in the <see
                cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
+
+              
 
               
 
@@ -740,8 +898,12 @@
 
             
 
+            
+
              object is in read-only mode. To apply the formatting string to field values while in edit mode, set the <see
              cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" />
+
+            
 
             
 
@@ -753,12 +915,16 @@
 
             
 
+            
+
              object. The rest of the formatting string is displayed as literal text. </para
           >
           <para>If the formatting string does not include a placeholder, only the formatting string itself is included in the final display text (the field's value from the data source is not included). If the placeholder is a 0 (zero) enclosed in curly braces as shown in the preceding example, the field value is converted to a string by the default method. You can append to the zero a string that specifies how the field value should be formatted. For example, the placeholder {0:C} for a numeric field specifies that value of the field should be converted to a currency format.</para>
           <para
             >Formatting is applied by using the <see
              cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+
+            
 
             
 
@@ -891,8 +1057,12 @@
 
                   
 
+                  
+
                   , <see
                    cref="T:System.Double" />
+
+                  
 
                   
 
@@ -927,10 +1097,14 @@
 
             
 
+            
+
             . You can also create custom numeric format strings. For more information, see <format
              type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
             </format>
+
+            
 
             
 
@@ -942,8 +1116,12 @@
 
             
 
+            
+
              fields. Most of these formatting specifications result in a different output depending on culture settings. The examples are for a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1070,6 +1248,8 @@
 
                   
 
+                  
+
                   ). </para
                 >
               </description>
@@ -1161,10 +1341,14 @@
 
             
 
+            
+
             . You can also create custom date and time format strings. For more information, see <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1205,13 +1389,19 @@
 
             
 
+            
+
              method is provided as a convenient way to retrieve the values of the fields from the specified <see
              cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
+            
+
              object in a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1226,13 +1416,19 @@
 
             
 
+            
+
              object passed in for the <paramref
              name="dictionary" />
 
             
 
+            
+
              parameter. After the method has been called, iterate through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1245,8 +1441,12 @@
 
               
 
+              
+
                object contains read-only field values, you must pass in true for the <paramref
                name="includeReadOnly" />
+
+              
 
               
 
@@ -1262,8 +1462,12 @@
 
             
 
+            
+
              object with the values from the specified <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -1275,8 +1479,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1287,8 +1495,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -1299,8 +1511,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1308,6 +1524,8 @@
         >
         <param name="includeReadOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1342,13 +1560,19 @@
 
             
 
+            
+
              method is a helper method used to transform a field value to the format specified by the <see
              cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />
 
             
 
+            
+
              property. If a field value is null, the value of the <see
              cref="P:System.Web.UI.WebControls.BoundField.NullDisplayText" />
+
+            
 
             
 
@@ -1366,6 +1590,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1377,11 +1603,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="encode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1409,8 +1639,12 @@
 
             
 
+            
+
              method is a helper method used to determine what value to display for a field when rendering the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1425,6 +1659,8 @@
           <para
             >Retrieves the value used for a field's value when rendering the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1462,13 +1698,19 @@
 
             
 
+            
+
              method is a helper method used to determine the value of a field. If the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
 
             
 
+            
+
              object is being displayed in a designer and the field value cannot be determined at design time, the value returned from the <see
              cref="M:System.Web.UI.WebControls.BoundField.GetDesignTimeValue" />
+
+            
 
             
 
@@ -1486,6 +1728,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1497,11 +1741,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="controlContainer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1529,8 +1777,12 @@
 
             
 
+            
+
              property to identify a field in a data control with a friendly name. The most common application of the <see
              cref="P:System.Web.UI.WebControls.BoundField.HeaderText" />
+
+            
 
             
 
@@ -1539,8 +1791,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -1578,8 +1834,12 @@
 
             
 
+            
+
              property to specify whether field values are HTML-encoded to their respective string representations before they are displayed in a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1594,6 +1854,8 @@
           <para
             >Gets or sets a value indicating whether field values are HTML-encoded before they are displayed in a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1628,8 +1890,12 @@
 
             
 
+            
+
              method is called by the data control with which the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1638,13 +1904,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
+            
+
              call the <see
              cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -1656,8 +1928,12 @@
 
             
 
+            
+
              objects to perform basic initialization for a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1666,13 +1942,19 @@
 
             
 
+            
+
             -derived type requires any object initialization before it populates <see
              cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
+            
+
              objects with data or controls in the <see
              cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+
+            
 
             
 
@@ -1684,6 +1966,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1699,6 +1983,8 @@
 
           
 
+          
+
           true if sorting is supported; otherwise, false.</param
         >
         <param name="control">
@@ -1706,8 +1992,12 @@
 
           
 
+          
+
           The data control that owns the <see
            cref="T:System.Web.UI.WebControls.BoundField" />
+
+          
 
           
 
@@ -1743,8 +2033,12 @@
 
             
 
+            
+
              method is implemented by <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1753,8 +2047,12 @@
 
             
 
+            
+
              object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see
              cref="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+
+            
 
             
 
@@ -1763,8 +2061,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -1776,8 +2078,12 @@
 
             
 
+            
+
              objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1792,6 +2098,8 @@
 
             
 
+            
+
              object to the specified row state.</para
           >
         </summary>
@@ -1800,8 +2108,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -1812,8 +2124,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlCellType" />
+
+          
 
           
 
@@ -1824,8 +2140,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1833,6 +2153,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1866,8 +2188,12 @@
 
             
 
+            
+
              method is a helper method used to initialize a cell in the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1882,6 +2208,8 @@
 
             
 
+            
+
              object to the specified row state.</para
           >
         </summary>
@@ -1890,8 +2218,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -1902,8 +2234,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1936,12 +2272,16 @@
 
             
 
+            
+
              property. If this property is not set, null field values are displayed as empty strings (""). When a record is being updated or inserted in a data-bound control, if the user enters the value specified by this property (other than an empty string) for a field in a data-bound control, that value is automatically converted to null in the data source.</para
           >
           <block subset="none" type="note">
             <para
               >To convert an empty string field value to a null value, set the <see
                cref="P:System.Web.UI.WebControls.BoundField.ConvertEmptyStringToNull" />
+
+              
 
               
 
@@ -1981,8 +2321,12 @@
 
             
 
+            
+
              method is a helper method used to bind the value of a field in the data source to a corresponding cell in the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1997,11 +2341,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2012,8 +2360,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2046,8 +2398,12 @@
 
             
 
+            
+
              property to prevent the values displayed in a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -2060,8 +2416,12 @@
 
               
 
+              
+
                property applies only to edit mode. To prevent fields from showing up in insert mode, use the <see
                cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
+
+              
 
               
 
@@ -2095,8 +2455,12 @@
 
             
 
+            
+
              property is a helper property used by the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -2108,6 +2472,8 @@
           <para
             >Gets a value indicating whether HTML encoding is supported by a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -2132,6 +2498,8 @@
           <para
             >This field is used to indicate that the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -2167,8 +2535,12 @@
 
             
 
+            
+
              method is a helper method used to determine whether the controls contained in a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -2183,6 +2555,8 @@
           <para
             >Determines whether the controls contained in a <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 

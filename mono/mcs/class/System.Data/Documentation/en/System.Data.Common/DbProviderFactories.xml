@@ -20,6 +20,8 @@
 
         
 
+        
+
          classes.</para
       >
     </summary>
@@ -47,13 +49,19 @@
 
             
 
+            
+
              parameter corresponds to the <see
              cref="T:System.Data.DataRow" />
 
             
 
+            
+
              of a table returned by <see
              cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />
+
+            
 
             
 
@@ -68,6 +76,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -79,8 +89,12 @@
 
             
 
+            
+
              for a specified <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -90,6 +104,8 @@
         <param name="providerRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -122,8 +138,12 @@
 
             
 
+            
+
              parameter corresponds to the InvariantName column of a table returned by <see
              cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />
+
+            
 
             
 
@@ -138,6 +158,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -149,11 +171,15 @@
 
             
 
+            
+
              for a specified provider name.</para
           >
         </returns>
         <param name="providerInvariantName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,8 +211,12 @@
 
             
 
+            
+
              that contains information about all installed providers that implement <see
              cref="T:System.Data.Common.DbProviderFactory" />
+
+            
 
             
 
@@ -201,8 +231,12 @@
 
             
 
+            
+
              containing <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 

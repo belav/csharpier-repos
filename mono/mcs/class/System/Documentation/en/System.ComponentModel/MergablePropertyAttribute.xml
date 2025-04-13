@@ -36,8 +36,12 @@
 
         
 
+        
+
          set to true can be combined with properties belonging to other objects in a Properties window. Properties that are marked with the <see
          cref="T:System.ComponentModel.MergablePropertyAttribute" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
           
 
+          
+
            set to true, the value of this attribute is set to the constant member <see
            cref="F:System.ComponentModel.MergablePropertyAttribute.Yes" />
+
+          
 
           
 
@@ -60,8 +68,12 @@
 
           
 
+          
+
            property set to false, the value is <see
            cref="F:System.ComponentModel.MergablePropertyAttribute.No" />
+
+          
 
           
 
@@ -70,8 +82,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.ComponentModel.MergablePropertyAttribute.No" />
+
+          
 
           
 
@@ -83,6 +99,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -121,11 +139,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="allowMerge">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,8 +204,12 @@
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.MergablePropertyAttribute.No" />
+
+            
 
             
 
@@ -195,6 +221,8 @@
           <para
             >Specifies the default value, which is <see
              cref="F:System.ComponentModel.MergablePropertyAttribute.Yes" />
+
+            
 
             
 
@@ -235,11 +263,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,6 +306,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.MergablePropertyAttribute" />
+
+            
 
             
 
@@ -338,13 +372,19 @@
 
             
 
+            
+
              set to false, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.MergablePropertyAttribute.No" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.MergablePropertyAttribute.No" />
+
+            
 
             
 
@@ -386,13 +426,19 @@
 
             
 
+            
+
              set to true, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.MergablePropertyAttribute.Yes" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.MergablePropertyAttribute.Yes" />
+
+            
 
             
 

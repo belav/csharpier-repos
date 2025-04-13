@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -120,8 +122,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
+
+            
 
             
 
@@ -130,8 +136,12 @@
 
             
 
+            
+
              property to a custom validator that inherits from the <see
              cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
+
+            
 
             
 
@@ -144,6 +154,8 @@
                 >How To: Create a Service Employing a Custom Certificate Validator</a
               >
             </format>
+
+            
 
             
 
@@ -214,6 +226,8 @@
 
             
 
+            
+
              property is set to true.</para
           >
           <para>When using the certificate client credential type on bindings, the certificate is not mapped to Windows accounts. You can override this behavior using this property. When this property is set to true, it causes the identity from the client certificate to be mapped to a Windows account. It requires that the service is running in a privileged account and that the domain be configured to support this functionality.</para>
@@ -277,6 +291,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -314,6 +330,8 @@
           <para
             >indigo1 security system validates the client certificate against a <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+
+            
 
             
 

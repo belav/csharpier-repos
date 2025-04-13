@@ -29,6 +29,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -37,13 +39,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
 
         
 
+        
+
          classes. The following table describes the configuration elements contained in the <see
          cref="T:System.Net.Configuration.DefaultProxySection" />
+
+        
 
         
 
@@ -93,6 +101,8 @@
 
               
 
+              
+
                implementation.</para
             >
           </description>
@@ -102,6 +112,8 @@
       <para
         >The <see
          cref="T:System.Net.Configuration.DefaultProxySection" />
+
+        
 
         
 
@@ -134,6 +146,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.DefaultProxySection" />
+
+            
 
             
 
@@ -175,8 +189,12 @@
 
             
 
+            
+
              returned by this property contains one <see
              cref="T:System.Net.Configuration.BypassElement" />
+
+            
 
             
 
@@ -248,8 +266,12 @@
 
             
 
+            
+
              returned by this property identifies the type, assembly, and version of a custom <see
              cref="T:System.Net.IWebProxy" />
+
+            
 
             
 
@@ -345,8 +367,12 @@
 
             
 
+            
+
              returned by this property identifies the Web proxy server to use for resources that are not in the <see
              cref="P:System.Net.Configuration.DefaultProxySection.BypassList" />
+
+            
 
             
 

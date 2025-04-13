@@ -22,8 +22,12 @@
 
         
 
+        
+
          state between the inherently stateless HTTP request and response required to process and serve any Web page. This state is called "view state". The default mechanism used to store view state for a page and its controls is in one or more &lt;hidden&gt; HTML fields included in the page that is served to a client from a Web server. The <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class to do this work. <see
          cref="T:System.Web.UI.HiddenFieldPageStatePersister" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.HiddenFieldPageStatePersister.Load" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
          class so that the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -65,8 +81,12 @@
 
         
 
+        
+
          instance that is requested has an associated <see
          cref="T:System.Web.UI.Adapters.PageAdapter" />
+
+        
 
         
 
@@ -75,8 +95,12 @@
 
         
 
+        
+
          object from this adapter using the <see
          cref="M:System.Web.UI.Adapters.PageAdapter.GetStatePersister" />
+
+        
 
         
 
@@ -85,13 +109,19 @@
 
         
 
+        
+
          method to return a <see
          cref="T:System.Web.UI.PageStatePersister" />
 
         
 
+        
+
          object that stores page and control state in some way that a specific client supports. For example, the <see
          cref="T:System.Web.UI.SessionPageStatePersister" />
+
+        
 
         
 
@@ -103,8 +133,12 @@
 
         
 
+        
+
          property or through the <see
          cref="P:System.Web.Configuration.PagesSection.MaxPageStateFieldLength" />
+
+        
 
         
 
@@ -137,6 +171,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -145,8 +181,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -173,8 +213,12 @@
 
             
 
+            
+
              class implements the <see
              cref="M:System.Web.UI.HiddenFieldPageStatePersister.Load" />
+
+            
 
             
 
@@ -183,8 +227,12 @@
 
             
 
+            
+
              object accessed by the <see
              cref="P:System.Web.UI.PageStatePersister.StateFormatter" />
+
+            
 
             
 
@@ -199,8 +247,12 @@
 
             
 
+            
+
              object when a <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -228,8 +280,12 @@
 
             
 
+            
+
              implements the <see
              cref="M:System.Web.UI.HiddenFieldPageStatePersister.Save" />
+
+            
 
             
 
@@ -238,8 +294,12 @@
 
             
 
+            
+
              object accessed by the <see
              cref="P:System.Web.UI.PageStatePersister.StateFormatter" />
+
+            
 
             
 
@@ -254,8 +314,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.PageStatePersister.ControlState" />
+
+            
 
             
 

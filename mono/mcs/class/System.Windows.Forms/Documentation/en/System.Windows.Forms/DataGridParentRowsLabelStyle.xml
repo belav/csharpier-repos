@@ -21,6 +21,8 @@
 
         
 
+        
+
          property.</para
       >
       <para
@@ -29,8 +31,12 @@
 
         
 
+        
+
          contains at least one <see
          cref="T:System.Data.DataRelation" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
         , and if the <see
          cref="P:System.Windows.Forms.DataGrid.AllowNavigation" />
+
+        
 
         
 
@@ -52,6 +62,8 @@
       <para
         >Specifies how the parent row labels of a <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 

@@ -19,13 +19,19 @@
 
         
 
+        
+
          attribute is applied to controls that are not rendered to the client, such as data source controls and the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
 
         
 
+        
+
          control. During design time, a page developer might decide to hide all non-visual controls. The designer would mark as invisible all of the controls with the <see
          cref="T:System.Web.UI.NonVisualControlAttribute" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          attribute are <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -47,13 +57,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.HiddenField" />
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+
+        
 
         
 
@@ -80,13 +96,19 @@
 
             
 
+            
+
              class is equivalent to the <see
              cref="F:System.Web.UI.NonVisualControlAttribute.NonVisual" />
 
             
 
+            
+
              field, or passing true to the <see
              cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
+
+            
 
             
 
@@ -98,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.NonVisualControlAttribute" />
+
+            
 
             
 
@@ -125,8 +149,12 @@
 
             
 
+            
+
              field, and passing false is equivalent to using the <see
              cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
+
+            
 
             
 
@@ -141,6 +169,8 @@
 
             
 
+            
+
              class, using the specified Boolean value to determine whether the attribute represents a visual or non-visual control. </para
           >
         </summary>
@@ -149,8 +179,12 @@
 
           
 
+          
+
           true to initialize the <see
            cref="T:System.Web.UI.NonVisualControlAttribute" />
+
+          
 
           
 
@@ -180,8 +214,12 @@
 
             
 
+            
+
              class is equivalent to the <see
              cref="F:System.Web.UI.NonVisualControlAttribute.Visual" />
+
+            
 
             
 
@@ -193,6 +231,8 @@
           <para
             >Returns a <see
              cref="T:System.Web.UI.NonVisualControlAttribute" />
+
+            
 
             
 
@@ -259,6 +299,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -267,6 +309,8 @@
           <para
             >true if the current instance is equivalent to a <see
              cref="F:System.Web.UI.NonVisualControlAttribute.Default" />
+
+            
 
             
 
@@ -316,8 +360,12 @@
 
             
 
+            
+
              field is equivalent to creating an instance of the attribute using the <see
              cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
+
+            
 
             
 
@@ -329,6 +377,8 @@
           <para
             >Returns a <see
              cref="T:System.Web.UI.NonVisualControlAttribute" />
+
+            
 
             
 
@@ -359,13 +409,19 @@
 
             
 
+            
+
              field is equivalent to creating an instance of the attribute using the default <see
              cref="M:System.Web.UI.NonVisualControlAttribute.#ctor" />
 
             
 
+            
+
              constructor, or creating an instance of the attribute using the <see
              cref="M:System.Web.UI.NonVisualControlAttribute.#ctor(System.Boolean)" />
+
+            
 
             
 
@@ -377,6 +433,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.NonVisualControlAttribute" />
+
+            
 
             
 

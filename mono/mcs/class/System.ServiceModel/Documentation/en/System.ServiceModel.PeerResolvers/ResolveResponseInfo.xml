@@ -27,13 +27,19 @@
 
         
 
+        
+
          or an implementation of <see
          cref="M:System.ServiceModel.PeerResolvers.IPeerResolverContract.Resolve(System.ServiceModel.PeerResolvers.ResolveInfo)" />
 
         
 
+        
+
          is called, this object is returned to the client. It contains the endpoints registered to the peer specified in a previous corresponding <see
          cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -99,6 +107,8 @@
 
             
 
+            
+
              class with the provided set of peer endpoint addresses.</para
           >
         </summary>
@@ -107,8 +117,12 @@
 
           
 
+          
+
           Array of <see
            cref="T:System.ServiceModel.PeerNodeAddress" />
+
+          
 
           
 

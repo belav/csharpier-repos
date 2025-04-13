@@ -30,6 +30,8 @@
 
         
 
+        
+
          objects. </para
       >
     </summary>
@@ -56,6 +58,8 @@
 
             
 
+            
+
             , starting at the specified index of the target array.</para
           >
         </summary>
@@ -64,8 +68,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -74,8 +82,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -86,8 +98,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -115,10 +131,14 @@
 
             
 
+            
+
              object in the collection represents an <format
              type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
+
+            
 
             
 
@@ -130,6 +150,8 @@
           <para
             >Gets a value indicating the number of <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -161,8 +183,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+
+            
 
             
 
@@ -181,8 +207,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+
+            
 
             
 
@@ -212,6 +242,8 @@
 
             
 
+            
+
              is synchronized (thread safe).</para
           >
         </summary>
@@ -235,6 +267,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+
+            
 
             
 

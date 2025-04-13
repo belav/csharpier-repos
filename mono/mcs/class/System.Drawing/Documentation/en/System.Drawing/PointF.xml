@@ -27,8 +27,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.Drawing.Point" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Drawing.Point.Truncate(System.Drawing.PointF)" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
             
 
+            
+
              class with the specified coordinates.</para
           >
         </summary>
@@ -77,10 +87,14 @@
 
           
 
+          
+
           The horizontal position of the point. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,8 +131,12 @@
 
             
 
+            
+
              method adds the <see
              cref="P:System.Drawing.Size.Width" />
+
+            
 
             
 
@@ -127,13 +145,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Drawing.Size.Height" />
 
             
 
+            
+
              to the y-coordinate of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -148,8 +172,12 @@
 
             
 
+            
+
              by the specified <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -164,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -172,8 +202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -184,13 +218,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
 
           
 
+          
+
            that specifies the numbers to add to the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -223,8 +263,12 @@
 
             
 
+            
+
              method adds the <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -233,13 +277,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Drawing.SizeF.Height" />
 
             
 
+            
+
              to the y-coordinate of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -254,8 +304,12 @@
 
             
 
+            
+
              by a specified <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -270,6 +324,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -278,8 +334,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -290,13 +350,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
 
           
 
+          
+
            that specifies the numbers to add to the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -318,6 +384,8 @@
           <para
             >Represents a new instance of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -349,8 +417,12 @@
 
             
 
+            
+
              contains the same coordinates as the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -365,13 +437,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.PointF" />
 
             
 
+            
+
              and has the same coordinates as this <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -383,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -413,6 +495,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -421,6 +505,8 @@
           <para
             >An integer value that specifies a hash value for this <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -447,6 +533,8 @@
           <para
             >Gets a value indicating whether this <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -487,8 +575,12 @@
 
             
 
+            
+
              by a given <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -503,6 +595,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -511,8 +605,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -523,13 +621,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Size" />
 
           
 
+          
+
            that specifies the pair of numbers to add to the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -566,8 +670,12 @@
 
             
 
+            
+
              operator adds the <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -576,13 +684,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Drawing.SizeF.Height" />
 
             
 
+            
+
              to the y-coordinate of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -597,8 +711,12 @@
 
             
 
+            
+
              by the specified <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -613,6 +731,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -621,8 +741,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -633,13 +757,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
 
           
 
+          
+
            that specifies the numbers to add to the x- and y-coordinates of the <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -670,8 +800,12 @@
 
             
 
+            
+
              structures. The result specifies whether the values of the <see
              cref="P:System.Drawing.PointF.X" />
+
+            
 
             
 
@@ -680,8 +814,12 @@
 
             
 
+            
+
              properties of the two <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -696,13 +834,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.PointF.Y" />
 
             
 
+            
+
              values of the left and right <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -714,8 +858,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -726,8 +874,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -766,8 +918,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.PointF.Y" />
+
+            
 
             
 
@@ -776,8 +932,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -789,8 +949,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -801,8 +965,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -837,8 +1005,12 @@
 
             
 
+            
+
              by the negative of a given <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -853,6 +1025,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -861,8 +1035,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -873,13 +1051,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
 
           
 
+          
+
            that specifies the numbers to subtract from the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -916,8 +1100,12 @@
 
             
 
+            
+
              operator subtracts the <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -926,13 +1114,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Drawing.SizeF.Height" />
 
             
 
+            
+
              from the y-coordinate of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -947,8 +1141,12 @@
 
             
 
+            
+
              by the negative of a specified <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -963,6 +1161,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -971,8 +1171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -983,13 +1187,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
 
           
 
+          
+
            that specifies the numbers to subtract from the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -1022,8 +1232,12 @@
 
             
 
+            
+
              method subtracts the <see
              cref="P:System.Drawing.Size.Width" />
+
+            
 
             
 
@@ -1032,13 +1246,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Drawing.Size.Height" />
 
             
 
+            
+
              from the y-coordinate of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -1053,6 +1273,8 @@
 
             
 
+            
+
              by the negative of a specified size.</para
           >
         </summary>
@@ -1064,6 +1286,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1072,8 +1296,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1084,13 +1312,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
 
           
 
+          
+
            that specifies the numbers to subtract from the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -1123,8 +1357,12 @@
 
             
 
+            
+
              method subtracts the <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -1133,13 +1371,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Drawing.SizeF.Height" />
 
             
 
+            
+
              from the y-coordinate of the <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -1154,6 +1398,8 @@
 
             
 
+            
+
              by the negative of a specified size.</para
           >
         </summary>
@@ -1165,6 +1411,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1173,8 +1421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1185,13 +1437,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
 
           
 
+          
+
            that specifies the numbers to subtract from the coordinates of <paramref
            name="pt" />
+
+          
 
           
 
@@ -1216,6 +1474,8 @@
 
             
 
+            
+
              to a human readable string.</para
           >
         </summary>
@@ -1224,6 +1484,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -1254,6 +1516,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1278,6 +1542,8 @@
           <para
             >Gets or sets the y-coordinate of this <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 

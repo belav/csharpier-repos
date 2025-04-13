@@ -33,6 +33,8 @@
 
         
 
+        
+
         . This class defines groups at the schema level that are referenced from the complex types. It groups a set of element declarations so that they can be incorporated as a group into complex type definitions.</para
       >
     </summary>
@@ -59,6 +61,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaGroup" />
+
+            
 
             
 
@@ -138,13 +142,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaAll" />
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Schema.XmlSchemaSequence" />
+
+            
 
             
 

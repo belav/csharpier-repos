@@ -30,8 +30,12 @@
 
         
 
+        
+
          class. <see
          cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         . Instead, call the <see
          cref="Overload:System.Xml.Serialization.XmlSerializer.Serialize" />
+
+        
 
         
 
@@ -66,6 +78,8 @@
       <para
         >Represents an abstract class used for controlling serialization by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -95,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -136,6 +152,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -144,8 +162,12 @@
 
             
 
+            
+
             . During this process, the .NET Framework generates write methods that implement the <see
              cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+            
 
             
 
@@ -154,6 +176,8 @@
           <para
             >You should not directly create an instance of <see
              cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+            
 
             
 
@@ -169,6 +193,8 @@
 
             
 
+            
+
              delegate and the type it applies to, for a later invocation.</para
           >
         </summary>
@@ -177,8 +203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -189,10 +219,14 @@
 
           
 
+          
+
           The name of the type of objects that are serialized.</param
         >
         <param name="typeNs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,8 +237,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+          
 
           
 
@@ -245,6 +283,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -253,6 +293,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -268,10 +310,14 @@
 
           
 
+          
+
           The name that is not valid.</param
         >
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,10 +328,14 @@
 
           
 
+          
+
           The expected local name of an element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,8 +374,12 @@
 
             
 
+            
+
              that indicates the <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+            
 
             
 
@@ -334,8 +388,12 @@
 
             
 
+            
+
             , or derived from <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -348,6 +406,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,8 +446,12 @@
 
             
 
+            
+
              that indicates the <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+            
 
             
 
@@ -396,8 +460,12 @@
 
             
 
+            
+
             , or derived from <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -413,8 +481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -453,6 +525,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -461,6 +535,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -476,10 +552,14 @@
 
           
 
+          
+
           The type being serialized.</param
         >
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -519,6 +599,8 @@
 
             
 
+            
+
              for an invalid enumeration value.</para
           >
         </summary>
@@ -531,10 +613,14 @@
 
           
 
+          
+
           An object that represents the invalid enumeration.</param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,6 +660,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -582,6 +670,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -597,6 +687,8 @@
 
           
 
+          
+
           The value that is not valid.</param
         >
         <param name="elementName">
@@ -604,10 +696,14 @@
 
           
 
+          
+
           The name of the XML element with an invalid value.</param
         >
         <param name="enumValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -646,6 +742,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -654,6 +752,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -669,10 +769,14 @@
 
           
 
+          
+
           The XML element that cannot be processed.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -710,6 +814,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -718,6 +824,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -730,6 +838,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -767,6 +877,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -775,6 +887,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -787,6 +901,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -816,8 +932,12 @@
 
             
 
+            
+
              method writes valid XML from invalid sources. For example, the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -826,8 +946,12 @@
 
             
 
+            
+
              class can contain spaces, which are invalid as XML. The <see
              cref="M:System.Xml.XmlConvert.DecodeName(System.String)" />
+
+            
 
             
 
@@ -836,13 +960,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
+            
+
              cannot read such encoded XML. In that case, set the <see
              cref="P:System.Xml.Serialization.XmlSerializationWriter.EscapeName" />
+
+            
 
             
 
@@ -854,6 +984,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="M:System.Xml.XmlConvert.EncodeName(System.String)" />
+
+            
 
             
 
@@ -892,11 +1024,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >Rather than return a string as other similar "from" methods, the static <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromByteArrayBase64(System.Byte[])" />
+
+            
 
             
 
@@ -916,8 +1052,12 @@
 
           
 
+          
+
           A base-64 <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -955,11 +1095,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromByteArrayHex(System.Byte[])" />
+
+            
 
             
 
@@ -976,6 +1120,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1010,11 +1156,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromChar(System.Char)" />
+
+            
 
             
 
@@ -1029,6 +1179,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1040,6 +1192,8 @@
 
             
 
+            
+
              value converted to a string.</para
           >
         </returns>
@@ -1048,8 +1202,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -1084,11 +1242,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromDate(System.DateTime)" />
+
+            
 
             
 
@@ -1103,6 +1265,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1114,6 +1278,8 @@
 
             
 
+            
+
              that shows the date but no time.</para
           >
         </returns>
@@ -1122,8 +1288,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1161,11 +1331,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromDateTime(System.DateTime)" />
+
+            
 
             
 
@@ -1180,6 +1354,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1191,6 +1367,8 @@
 
             
 
+            
+
              that shows the date and time.</para
           >
         </returns>
@@ -1199,8 +1377,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1240,11 +1422,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromEnum(System.Int64,System.String[],System.Int64[])" />
+
+            
 
             
 
@@ -1264,6 +1450,8 @@
 
           
 
+          
+
           The enumeration value as a series of bitwise OR operations.</param
         >
         <param name="values">
@@ -1271,10 +1459,14 @@
 
           
 
+          
+
           The enumeration's name values.</param
         >
         <param name="ids">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1315,6 +1507,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1331,10 +1525,14 @@
 
           
 
+          
+
           The enumeration value as a series of bitwise OR operations.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1345,10 +1543,14 @@
 
           
 
+          
+
           The constants of the enumeration.</param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1383,11 +1585,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromTime(System.DateTime)" />
+
+            
 
             
 
@@ -1402,6 +1608,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1413,6 +1621,8 @@
 
             
 
+            
+
              object that shows the time but no date.</para
           >
         </returns>
@@ -1421,8 +1631,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1457,11 +1671,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlName(System.String)" />
+
+            
 
             
 
@@ -1478,6 +1696,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1515,11 +1735,15 @@
 
             
 
+            
+
              class are intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNCName(System.String)" />
+
+            
 
             
 
@@ -1536,6 +1760,8 @@
         </returns>
         <param name="ncName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1573,11 +1799,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNmToken(System.String)" />
+
+            
 
             
 
@@ -1594,6 +1824,8 @@
         </returns>
         <param name="nmToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1631,11 +1863,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNmTokens(System.String)" />
+
+            
 
             
 
@@ -1652,6 +1888,8 @@
         </returns>
         <param name="nmTokens">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1689,6 +1927,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1705,8 +1945,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1752,8 +1996,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1761,6 +2009,8 @@
         >
         <param name="ignoreEmpty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1793,6 +2043,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -1801,8 +2053,12 @@
 
             
 
+            
+
             . During this process, the .NET Framework generates write methods that implement the <see
              cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+            
 
             
 
@@ -1814,11 +2070,15 @@
 
             
 
+            
+
              method is where the temporary derived class creates an instance of and initializes write callback methods.</para
           >
           <para
             >You should not directly create an instance of <see
              cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+            
 
             
 
@@ -1831,6 +2091,8 @@
           <para
             >Initializes an instances of the <see
              cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+            
 
             
 
@@ -1864,6 +2126,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -1906,11 +2170,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.ResolveDynamicAssembly(System.String)" />
+
+            
 
             
 
@@ -1927,6 +2195,8 @@
         </returns>
         <param name="assemblyFullName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1959,11 +2229,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element and to be referenced any number of times by substitute elements. The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.TopLevelElement" />
+
+            
 
             
 
@@ -2008,6 +2282,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2019,6 +2295,8 @@
 
             
 
+            
+
              object to write an XML attribute that has no namespace specified for its name.</para
           >
         </summary>
@@ -2027,10 +2305,14 @@
 
           
 
+          
+
           The local name of the XML attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2069,6 +2351,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2080,6 +2364,8 @@
 
             
 
+            
+
              to write an XML attribute that has no namespace specified for its name.</para
           >
         </summary>
@@ -2088,10 +2374,14 @@
 
           
 
+          
+
           The local name of the XML attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2131,6 +2421,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2142,11 +2434,15 @@
 
             
 
+            
+
              object to write an XML attribute.</para
           >
         </summary>
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2157,10 +2453,14 @@
 
           
 
+          
+
           The namespace of the XML attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2200,6 +2500,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2212,6 +2514,8 @@
 
           
 
+          
+
           The local name of the XML attribute.</param
         >
         <param name="ns">
@@ -2219,10 +2523,14 @@
 
           
 
+          
+
           The namespace of the XML attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2263,6 +2571,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2275,10 +2585,14 @@
 
           
 
+          
+
           The namespace prefix to write.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2289,10 +2603,14 @@
 
           
 
+          
+
           The namespace represented by the prefix.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2334,11 +2652,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteElementEncoded(System.Xml.XmlNode,System.String,System.String,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -2354,10 +2676,14 @@
 
           
 
+          
+
           The XML node to write, possibly a child XML element.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2368,6 +2694,8 @@
 
           
 
+          
+
           The namespace of the parent XML element to write.</param
         >
         <param name="isNullable">
@@ -2375,10 +2703,14 @@
 
           
 
+          
+
           true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param
         >
         <param name="any">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2420,11 +2752,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteElementLiteral(System.Xml.XmlNode,System.String,System.String,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -2439,8 +2775,12 @@
 
             
 
+            
+
              object to write an <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -2452,10 +2792,14 @@
 
           
 
+          
+
           The XML node to write, possibly a child XML element.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2466,6 +2810,8 @@
 
           
 
+          
+
           The namespace of the parent XML element to write.</param
         >
         <param name="isNullable">
@@ -2473,10 +2819,14 @@
 
           
 
+          
+
           true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param
         >
         <param name="any">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2515,6 +2865,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2527,10 +2879,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2570,6 +2926,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2582,6 +2940,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
@@ -2589,10 +2949,14 @@
 
           
 
+          
+
           The namespace of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2632,6 +2996,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2644,6 +3010,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
@@ -2651,10 +3019,14 @@
 
           
 
+          
+
           The name to write, using its prefix if namespace-qualified, in the element text.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2695,6 +3067,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2707,10 +3081,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2721,10 +3099,14 @@
 
           
 
+          
+
           The name to write, using its prefix if namespace-qualified, in the element text.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2763,6 +3145,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2775,10 +3159,14 @@
 
           
 
+          
+
           The local name of the XML element to be written without namespace qualification.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2818,6 +3206,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2830,6 +3220,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
@@ -2837,10 +3229,14 @@
 
           
 
+          
+
           The namespace of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2880,6 +3276,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2892,6 +3290,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
@@ -2899,10 +3299,14 @@
 
           
 
+          
+
           The text value of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2943,6 +3347,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2955,10 +3361,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2969,10 +3379,14 @@
 
           
 
+          
+
           The text value of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3011,6 +3425,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3023,10 +3439,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3065,6 +3485,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3077,10 +3499,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3120,6 +3546,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3132,6 +3560,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
@@ -3139,10 +3569,14 @@
 
           
 
+          
+
           The text value of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3182,6 +3616,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3194,6 +3630,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
@@ -3201,10 +3639,14 @@
 
           
 
+          
+
           The namespace of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3244,6 +3686,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3256,6 +3700,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
@@ -3263,10 +3709,14 @@
 
           
 
+          
+
           The namespace of the XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3306,6 +3756,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3318,6 +3770,8 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="value">
@@ -3325,10 +3779,14 @@
 
           
 
+          
+
           The text value of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3369,6 +3827,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3381,10 +3841,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3395,10 +3859,14 @@
 
           
 
+          
+
           The text value of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3439,6 +3907,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3451,10 +3921,14 @@
 
           
 
+          
+
           The local name of the XML element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3465,10 +3939,14 @@
 
           
 
+          
+
           The text value of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3503,6 +3981,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3512,6 +3992,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3550,6 +4032,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3562,10 +4046,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3595,6 +4083,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -3634,6 +4124,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3643,6 +4135,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3677,6 +4171,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times by href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -3688,6 +4184,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3725,6 +4223,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3734,6 +4234,8 @@
         </summary>
         <param name="xmlns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3774,12 +4276,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableQualifiedNameEncoded(System.String,System.String,System.Xml.XmlQualifiedName,System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -3794,11 +4300,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3809,6 +4319,8 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
@@ -3816,10 +4328,14 @@
 
           
 
+          
+
           The XML qualified name to write in the body of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3859,12 +4375,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableQualifiedNameLiteral(System.String,System.String,System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -3879,11 +4399,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3894,10 +4418,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3938,12 +4466,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncoded(System.String,System.String,System.String,System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -3958,11 +4490,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3973,6 +4509,8 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
@@ -3980,10 +4518,14 @@
 
           
 
+          
+
           The string to write in the body of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4024,12 +4566,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncodedRaw(System.String,System.String,System.Byte[],System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -4044,11 +4590,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4059,6 +4609,8 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
@@ -4066,10 +4618,14 @@
 
           
 
+          
+
           The byte array to write in the body of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4110,12 +4666,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncodedRaw(System.String,System.String,System.String,System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -4130,11 +4690,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4145,6 +4709,8 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
@@ -4152,10 +4718,14 @@
 
           
 
+          
+
           The string to write in the body of the XML element.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4195,12 +4765,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteral(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -4215,11 +4789,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4230,10 +4808,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4273,12 +4855,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteralRaw(System.String,System.String,System.Byte[])" />
+
+            
 
             
 
@@ -4293,11 +4879,15 @@
 
             
 
+            
+
              inserts an xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4308,10 +4898,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4351,12 +4945,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteralRaw(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -4371,11 +4969,15 @@
 
             
 
+            
+
              inserts a xsi:nil='true' attribute if the string's value is null.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4386,10 +4988,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4424,12 +5030,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagEncoded(System.String)" />
+
+            
 
             
 
@@ -4442,6 +5052,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4480,12 +5092,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagEncoded(System.String,System.String)" />
+
+            
 
             
 
@@ -4501,10 +5117,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4539,12 +5159,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagLiteral(System.String)" />
+
+            
 
             
 
@@ -4557,6 +5181,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4595,12 +5221,16 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagLiteral(System.String,System.String)" />
+
+            
 
             
 
@@ -4616,10 +5246,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4659,6 +5293,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a &lt;multiRef&gt; element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -4673,6 +5309,8 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
@@ -4680,10 +5318,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4724,6 +5366,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a &lt;multiRef&gt; element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -4738,10 +5382,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4752,10 +5400,14 @@
 
           
 
+          
+
           The object being serialized either in the current XML element or a multiRef element that referenced by the current element.</param
         >
         <param name="ambientType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4797,6 +5449,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -4811,10 +5465,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4825,6 +5483,8 @@
 
           
 
+          
+
           The object being serialized either in the current XML element or a multiRef element that is referenced by the current element.</param
         >
         <param name="ambientType">
@@ -4832,10 +5492,14 @@
 
           
 
+          
+
           The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param
         >
         <param name="suppressReference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4878,6 +5542,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -4892,10 +5558,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4906,10 +5576,14 @@
 
           
 
+          
+
           The object being serialized either in the current XML element or a multiRef element that referenced by the current element.</param
         >
         <param name="ambientType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4920,10 +5594,14 @@
 
           
 
+          
+
           true to serialize the object directly into the XML element rather than make the element reference another element that contains the data; otherwise, false.</param
         >
         <param name="isNullable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4956,6 +5634,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -4967,8 +5647,12 @@
 
             
 
+            
+
              that is being used by the <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -4999,6 +5683,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -5045,6 +5731,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -5059,6 +5747,8 @@
 
           
 
+          
+
           The local name of the referencing element being written.</param
         >
         <param name="ns">
@@ -5066,10 +5756,14 @@
 
           
 
+          
+
           The namespace of the referencing element being written.</param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5110,6 +5804,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
@@ -5124,10 +5820,14 @@
 
           
 
+          
+
           The local name of the referencing element being written.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5138,10 +5838,14 @@
 
           
 
+          
+
           The object being serialized.</param
         >
         <param name="isNullable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5180,6 +5884,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>The result element is defined in the namespace "http://www.w3.org/2002/12/soap-rpc".</para>
@@ -5193,10 +5899,14 @@
 
           
 
+          
+
           The local name of the result body.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5237,6 +5947,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5249,8 +5961,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+          
 
           
 
@@ -5261,10 +5977,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5275,8 +5995,12 @@
 
           
 
+          
+
           true to write an xsi:nil='true' attribute if the <see
            cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+          
 
           
 
@@ -5319,6 +6043,8 @@
 
             
 
+            
+
              to write an object that uses custom XML formatting as an XML element.</para
           >
         </summary>
@@ -5327,8 +6053,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+          
 
           
 
@@ -5339,10 +6069,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5353,8 +6087,12 @@
 
           
 
+          
+
           true to write an xsi:nil='true' attribute if the <see
            cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+          
 
           
 
@@ -5362,6 +6100,8 @@
         >
         <param name="wrapped">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5391,6 +6131,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -5430,6 +6172,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5439,6 +6183,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5477,6 +6223,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5489,10 +6237,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5532,6 +6284,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5544,6 +6298,8 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
@@ -5551,10 +6307,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="writePrefixed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5594,6 +6354,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5606,6 +6368,8 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
@@ -5613,10 +6377,14 @@
 
           
 
+          
+
           The namespace of the XML element to write.</param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5657,6 +6425,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5669,10 +6439,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5683,10 +6457,14 @@
 
           
 
+          
+
           The object being serialized as an XML element.</param
         >
         <param name="writePrefixed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5730,10 +6508,14 @@
 
           
 
+          
+
           The local name of the XML element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5744,10 +6526,14 @@
 
           
 
+          
+
           The object being serialized as an XML element.</param
         >
         <param name="writePrefixed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5758,8 +6544,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+          
 
           
 
@@ -5800,6 +6590,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>The xsi:type attribute explicitly indicates the XML Schema data type. The prefix xsi refers to the XML Schema instance namespace.</para>
@@ -5813,10 +6605,14 @@
 
           
 
+          
+
           The local name of the element to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5827,10 +6623,14 @@
 
           
 
+          
+
           The object to be serialized in the element body.</param
         >
         <param name="xsiType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5865,6 +6665,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5874,6 +6676,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5908,6 +6712,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -5917,6 +6723,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5954,6 +6762,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para
           >
         </remarks>
@@ -5965,11 +6775,15 @@
 
             
 
+            
+
              as an XML attribute.</para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6008,6 +6822,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para
           >
         </remarks>
@@ -6019,11 +6835,15 @@
 
             
 
+            
+
              object as an XML attribute.</para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6034,8 +6854,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -6074,6 +6898,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>The xsi:type attribute explicitly indicates the XML Schema data type. The prefix xsi refers to the XML Schema instance namespace.</para>
@@ -6087,10 +6913,14 @@
 
           
 
+          
+
           The local name of an XML Schema data type.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

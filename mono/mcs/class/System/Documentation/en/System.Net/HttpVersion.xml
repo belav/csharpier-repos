@@ -34,13 +34,19 @@
 
         
 
+        
+
          class defines the HTTP versions that are supported by the <see
          cref="T:System.Net.HttpWebRequest" />
 
         
 
+        
+
          and <see
          cref="T:System.Net.HttpWebResponse" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.HttpWebResponse" />
+
+        
 
         
 
@@ -87,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.HttpVersion" />
+
+            
 
             
 
@@ -124,14 +136,20 @@
 
             
 
+            
+
              with a <see
              cref="P:System.Version.Major" />
+
+            
 
             
 
              value
  equal to 1, and a <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -143,6 +161,8 @@
           <para
             >Defines a <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -180,14 +200,20 @@
 
             
 
+            
+
              with a <see
              cref="P:System.Version.Major" />
+
+            
 
             
 
              value
  equal to 1, and a <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -199,6 +225,8 @@
           <para
             >Defines a <see
              cref="T:System.Version" />
+
+            
 
             
 

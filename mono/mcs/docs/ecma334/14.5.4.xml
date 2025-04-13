@@ -6,8 +6,12 @@
 
     
 
+    
+
      consists of a <non_terminal
      where="14.5">primary-expression</non_terminal>
+
+    
 
     
 
@@ -16,11 +20,15 @@
 
     
 
+    
+
     , followed by a "." token, followed by an identifier. <grammar_production
     >
       <name>
         <non_terminal where="14.5.4">member-access</non_terminal>
       </name>
+
+      
 
       
 
@@ -40,6 +48,8 @@
       <name>
         <non_terminal where="14.5.4">predefined-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -71,13 +81,19 @@
 
     
 
+    
+
      of the form E.I, where E is a <non_terminal
      where="14.5">primary-expression</non_terminal>
 
     
 
+    
+
      or a <non_terminal
      where="14.5.4">predefined-type</non_terminal>
+
+    
 
     
 
@@ -90,13 +106,19 @@
 
         
 
+        
+
          or a <non_terminal
          where="14.5">primary-expression</non_terminal>
 
         
 
+        
+
          classified as a type, and a member lookup (<hyperlink
         >14.3</hyperlink>
+
+        
 
         
 
@@ -119,8 +141,12 @@
 
             
 
+            
+
              (<hyperlink
             >17.7</hyperlink>
+
+            
 
             
 
@@ -138,12 +164,16 @@
 
         
 
+        
+
         ) of I in T produces a match, then E.I is evaluated and classified as follows: </list_item
       >
       <list>
         <list_item
           > First, if E is a property or indexer access, then the value of the property or indexer access is obtained (<hyperlink
           >14.1.1</hyperlink>
+
+          
 
           
 
@@ -157,6 +187,8 @@
 
           
 
+          
+
            and I identifies an instance field of that class-type: </list_item
         >
         <list>
@@ -167,6 +199,8 @@
         <list_item
           > If T is a <non_terminal
            where="11.1">struct-type</non_terminal>
+
+          
 
           
 
@@ -184,8 +218,12 @@
 
             
 
+            
+
              (<hyperlink
             >17.7</hyperlink>
+
+            
 
             
 

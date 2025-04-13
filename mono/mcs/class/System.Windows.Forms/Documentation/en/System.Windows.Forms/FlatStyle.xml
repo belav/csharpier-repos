@@ -18,13 +18,19 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.GroupBox.FlatStyle" />
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.Label.FlatStyle" />
+
+        
 
         
 
@@ -36,8 +42,12 @@
 
         
 
+        
+
          style button, this enumeration controls some behavior as well as appearance. The <see
          cref="F:System.Windows.Forms.FlatStyle.Popup" />
+
+        
 
         
 
@@ -46,13 +56,19 @@
 
         
 
+        
+
          until the mouse pointer moves over it. When the mouse pointer moves over the <see
          cref="F:System.Windows.Forms.FlatStyle.Popup" />
 
         
 
+        
+
          control, it appears as a <see
          cref="F:System.Windows.Forms.FlatStyle.Standard" />
+
+        
 
         
 
@@ -64,13 +80,19 @@
 
         
 
+        
+
          style is used, the appearance of the control is determined by the user's operating system and the following property values will be ignored: <see
          cref="P:System.Windows.Forms.Control.BackgroundImage" />
 
         
 
+        
+
         , ImageAlign, Image, ImageIndex, ImageList, and TextAlign. In addition, the <see
          cref="P:System.Windows.Forms.Control.BackColor" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Windows.Forms.RadioButton" />
+
+          
 
           
 
@@ -93,8 +119,12 @@
 
           
 
+          
+
            classes is set to <see
            cref="F:System.Windows.Forms.FlatStyle.System" />
+
+          
 
           
 
@@ -103,8 +133,12 @@
 
           
 
+          
+
            property values. The CheckAlign property value is not changed, but the appearance of the control can be affected. The check box is horizontally aligned with either the left or right edge of the control (a left or center alignment appears left aligned, right remains unchanged), and vertically aligned the same as the descriptive text. For example, if you have a <see
            cref="T:System.Windows.Forms.CheckBox" />
+
+          
 
           
 
@@ -113,8 +147,12 @@
 
           
 
+          
+
            and a <see
            cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+
+          
 
           
 
@@ -123,8 +161,12 @@
 
           
 
+          
+
           , and the <see
            cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+
+          
 
           
 
@@ -133,8 +175,12 @@
 
           
 
+          
+
           , the check box alignment will appear to be <see
            cref="F:System.Drawing.ContentAlignment.TopLeft" />
+
+          
 
           
 
@@ -145,6 +191,8 @@
         <para
           >Setting the FlatStyle property to <see
            cref="F:System.Windows.Forms.FlatStyle.System" />
+
+          
 
           
 

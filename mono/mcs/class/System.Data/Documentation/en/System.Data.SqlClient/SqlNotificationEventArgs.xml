@@ -40,12 +40,16 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Data.SqlClient.SqlNotificationType" />
+
+          
 
           
 
@@ -57,11 +61,15 @@
 
           
 
+          
+
            value that indicates the reason for the notification event. This may occur because the data in the store actually changed, or the notification became invalid (for example, it timed out). </param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Data.SqlClient.SqlNotificationSource" />
+
+          
 
           
 

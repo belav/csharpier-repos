@@ -39,12 +39,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >This class makes a link demand and an inheritance demand at the class level. A <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -55,12 +59,16 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
               >[&lt;topic://cpconInheritanceDemands&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -105,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />
+
+            
 
             
 
@@ -139,6 +151,8 @@
 
             
 
+            
+
              class with the renewal time of the sponsored object.</para
           >
         </summary>
@@ -147,8 +161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -179,6 +197,8 @@
           <para
             >Empties the list objects registered with the current <see
              cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />
+
+            
 
             
 
@@ -213,6 +233,8 @@
 
             
 
+            
+
              before the garbage collector reclaims them.</para
           >
         </summary>
@@ -243,6 +265,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -254,6 +278,8 @@
 
             
 
+            
+
             , providing a lease for the current object.</para
           >
         </summary>
@@ -262,6 +288,8 @@
           <para
             >An <see
              cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+
+            
 
             
 
@@ -298,6 +326,8 @@
 
             
 
+            
+
              for sponsorship.</para
           >
         </summary>
@@ -310,8 +340,12 @@
 
           
 
+          
+
           The object to register for sponsorship with the <see
            cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />
+
+          
 
           
 
@@ -349,6 +383,8 @@
 
             
 
+            
+
              method is called by the distributed garbage collector to renew the lease for the specified object.</para
           >
         </remarks>
@@ -362,6 +398,8 @@
         </returns>
         <param name="lease">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,6 +430,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -428,8 +468,12 @@
 
             
 
+            
+
              from the list of objects sponsored by the current <see
              cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />
+
+            
 
             
 
@@ -438,6 +482,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -44,8 +44,12 @@
 
         
 
+        
+
         . If the <see
          cref="T:System.Reflection.DefaultMemberAttribute" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          on any type containing an indexer. In C# it is an error to manually attribute a type with the <see
          cref="T:System.Reflection.DefaultMemberAttribute" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
       <para
         >Defines the member of a type that is the default member used by <see
          cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+
+        
 
         
 
@@ -103,8 +113,12 @@
 
             
 
+            
+
              property using <paramref
              name="memberName" />
+
+            
 
             
 
@@ -120,11 +134,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="memberName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,6 +173,8 @@
           <para
             > A <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -27,10 +27,14 @@
 
         
 
+        
+
          interface enables an inheriting class to implement a Command class, which represents an SQL statement that is executed at a data source. For more information about Command classes, see <format
          type="text/html">
           <a href="40494916-C25A-4CB8-8F7C-FCB8D378464E">[&lt;topic://cpconadonetcommands&gt;]</a>
         </format>
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDbCommand" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IDbCommand" />
+
+        
 
         
 
@@ -65,13 +77,19 @@
 
         
 
+        
+
          method. In turn, the <see
          cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
+        
+
          class inherits this method, and also defines the <see
          cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+
+        
 
         
 
@@ -104,6 +122,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -130,8 +150,12 @@
 
             
 
+            
+
              property is set to StoredProcedure, set the <see
              cref="P:System.Data.IDbCommand.CommandText" />
+
+            
 
             
 
@@ -188,8 +212,12 @@
 
             
 
+            
+
              property to StoredProcedure, you should set the <see
              cref="P:System.Data.IDbCommand.CommandText" />
+
+            
 
             
 
@@ -201,6 +229,8 @@
           <para
             >Indicates or specifies how the <see
              cref="P:System.Data.IDbCommand.CommandText" />
+
+            
 
             
 
@@ -234,8 +264,12 @@
 
             
 
+            
+
              used by this instance of the <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -267,8 +301,12 @@
 
             
 
+            
+
             , a .NET Framework data provider implements a strongly-typed version of <see
              cref="M:System.Data.IDbCommand.CreateParameter" />
+
+            
 
             
 
@@ -280,6 +318,8 @@
           <para
             >Creates a new instance of an <see
              cref="T:System.Data.IDbDataParameter" />
+
+            
 
             
 
@@ -312,8 +352,12 @@
 
             
 
+            
+
              to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database without using a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -322,6 +366,8 @@
           <para
             >Although the <see
              cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
+
+            
 
             
 
@@ -360,13 +406,19 @@
 
             
 
+            
+
              against the <see
              cref="P:System.Data.IDbCommand.Connection" />
 
             
 
+            
+
              and builds an <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -378,6 +430,8 @@
           <para
             >An <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -411,8 +465,12 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Data.IDbCommand.Connection" />
+
+            
 
             
 
@@ -424,13 +482,19 @@
 
             
 
+            
+
              property is set to StoredProcedure, the <see
              cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
+            
+
              property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see
              cref="M:System.Data.IDbCommand.ExecuteReader" />
+
+            
 
             
 
@@ -443,8 +507,12 @@
 
               
 
+              
+
                to retrieve large values and binary data. Otherwise, an <see
                cref="T:System.OutOfMemoryException" />
+
+              
 
               
 
@@ -457,8 +525,12 @@
 
             
 
+            
+
              is in use, the associated <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -467,8 +539,12 @@
 
             
 
+            
+
             . While in this state, no other operations can be performed on the <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -477,8 +553,12 @@
 
             
 
+            
+
              method of the DataReader is called. If the DataReader is created with <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -493,8 +573,12 @@
 
             
 
+            
+
              against the <see
              cref="P:System.Data.IDbCommand.Connection" />
+
+            
 
             
 
@@ -503,8 +587,12 @@
 
             
 
+            
+
              using one of the <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -519,6 +607,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -527,8 +617,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -556,8 +650,12 @@
 
             
 
+            
+
              method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see
              cref="M:System.Data.IDbCommand.ExecuteReader" />
+
+            
 
             
 
@@ -566,11 +664,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >A typical <see
              cref="M:System.Data.IDbCommand.ExecuteScalar" />
+
+            
 
             
 
@@ -614,6 +716,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -639,8 +743,12 @@
 
             
 
+            
+
              property is set to TableDirect, <see
              cref="M:System.Data.IDbCommand.Prepare" />
+
+            
 
             
 
@@ -649,8 +757,12 @@
 
             
 
+            
+
              is set to StoredProcedure, the call to <see
              cref="M:System.Data.IDbCommand.Prepare" />
+
+            
 
             
 
@@ -711,13 +823,19 @@
 
             
 
+            
+
              when used by the <see
              cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
 
             
 
+            
+
              method of a <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 

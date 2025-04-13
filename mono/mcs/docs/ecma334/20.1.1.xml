@@ -6,6 +6,8 @@
 
     
 
+    
+
      may optionally include a sequence of interface modifiers: <grammar_production
     >
       <name>
@@ -13,8 +15,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -31,6 +37,8 @@
       <name>
         <non_terminal where="20.1.1">interface-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -59,11 +67,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >The public, protected, internal, and private modifiers control the accessibility of the interface. Depending on the context in which the interface declaration occurs, only some of these modifiers may be permitted (<hyperlink
     >10.5.1</hyperlink>
+
+    
 
     
 

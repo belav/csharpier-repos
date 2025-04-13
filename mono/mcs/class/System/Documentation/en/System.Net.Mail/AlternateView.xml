@@ -27,6 +27,8 @@
 
         
 
+        
+
          class to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para
       >
       <para
@@ -35,8 +37,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Net.Mail.AlternateView.BaseUri" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          is a collection of <see
          cref="T:System.Net.Mail.LinkedResource" />
+
+        
 
         
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          of each <see
          cref="T:System.Net.Mail.LinkedResource" />
+
+        
 
         
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
          collection, and resolved. <see
          cref="P:System.Net.Mail.AlternateView.BaseUri" />
+
+        
 
         
 
@@ -75,8 +93,12 @@
 
         
 
+        
+
          URLs, in the <see
          cref="P:System.Net.Mail.AlternateView.LinkedResources" />
+
+        
 
         
 
@@ -116,8 +138,12 @@
 
             
 
+            
+
              class call also be initialized by calling one of the <see
              cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" />
+
+            
 
             
 
@@ -132,8 +158,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -142,6 +172,8 @@
         </summary>
         <param name="contentStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,8 +205,12 @@
 
             
 
+            
+
              class call also be initialized by calling one of the <see
              cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" />
+
+            
 
             
 
@@ -189,11 +225,15 @@
 
             
 
+            
+
              with the specified file name.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,8 +269,12 @@
 
             
 
+            
+
              class call also be initialized by calling one of the <see
              cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" />
+
+            
 
             
 
@@ -245,13 +289,19 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
              and <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -263,10 +313,14 @@
 
           
 
+          
+
           A stream that contains the content for this attachment.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,8 +356,12 @@
 
             
 
+            
+
              class call also be initialized by calling one of the <see
              cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" />
+
+            
 
             
 
@@ -318,8 +376,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -331,10 +393,14 @@
 
           
 
+          
+
           A stream that contains the content for this attachment.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -370,8 +436,12 @@
 
             
 
+            
+
              class call also be initialized by calling one of the <see
              cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" />
+
+            
 
             
 
@@ -386,6 +456,8 @@
 
             
 
+            
+
              with the specified file name and content type.</para
           >
         </summary>
@@ -394,10 +466,14 @@
 
           
 
+          
+
           The name of the file that contains the content for this alternate view.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -433,8 +509,12 @@
 
             
 
+            
+
              class call also be initialized by calling one of the <see
              cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" />
+
+            
 
             
 
@@ -449,6 +529,8 @@
 
             
 
+            
+
              with the specified file name and media type.</para
           >
         </summary>
@@ -457,10 +539,14 @@
 
           
 
+          
+
           The name of the file that contains the content for this alternate view.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,6 +574,8 @@
           <para
             >Gets or sets the base URI to use for resolving relative URIs in the <see
              cref="T:System.Net.Mail.AlternateView" />
+
+            
 
             
 
@@ -530,8 +618,12 @@
 
             
 
+            
+
              of an email message using the content specified in a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -546,6 +638,8 @@
 
             
 
+            
+
              object that represents an alternate view of an email message.</para
           >
         </returns>
@@ -554,8 +648,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -595,8 +693,12 @@
 
             
 
+            
+
              of an email message using the content specified in a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -611,6 +713,8 @@
 
             
 
+            
+
              object that represents an alternate view of an email message.</para
           >
         </returns>
@@ -619,8 +723,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -631,13 +739,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mime.ContentType" />
 
           
 
+          
+
            that describes the data in <paramref
            name="string" />
+
+          
 
           
 
@@ -679,8 +793,12 @@
 
             
 
+            
+
              of an email message using the content specified in a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -695,6 +813,8 @@
 
             
 
+            
+
              object that represents an alternate view of an email message.</para
           >
         </returns>
@@ -703,8 +823,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -712,6 +836,8 @@
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -746,8 +872,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -756,8 +886,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -769,8 +903,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Mail.AlternateView" />
+
+            
 
             
 
@@ -785,11 +923,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

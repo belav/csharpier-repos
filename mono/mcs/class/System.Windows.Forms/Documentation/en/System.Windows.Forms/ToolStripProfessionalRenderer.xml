@@ -24,8 +24,12 @@
 
         
 
+        
+
          creates pens and brushes based on a replaceable color table called <see
          cref="T:System.Windows.Forms.ProfessionalColorTable" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >Handles the painting functionality for <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+
+            
 
             
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -99,8 +109,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ProfessionalColorTable" />
+
+          
 
           
 
@@ -487,11 +501,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
+
+            
 
             
 
@@ -506,6 +524,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -514,8 +534,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+
+          
 
           
 
@@ -550,11 +574,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
+
+            
 
             
 
@@ -569,6 +597,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -577,8 +607,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+
+          
 
           
 
@@ -613,11 +647,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -632,6 +670,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -640,8 +680,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 

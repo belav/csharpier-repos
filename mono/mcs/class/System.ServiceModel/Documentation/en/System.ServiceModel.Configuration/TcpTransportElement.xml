@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -82,6 +84,8 @@
 
             
 
+            
+
              to this configuration element.</para
           >
         </summary>
@@ -90,8 +94,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingElement" />
+
+          
 
           
 
@@ -120,6 +128,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -188,6 +198,8 @@
         </summary>
         <param name="from">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,6 +283,8 @@
 
             
 
+            
+
              property limits the duration the client waits to be connected before throwing a connection exception.</para
           >
         </remarks>
@@ -304,6 +318,8 @@
           <para
             >crabout the TCP Listener and how to start it, see <see
              cref="T:System.Net.Sockets.TcpListener" />
+
+            
 
             
 
@@ -363,6 +379,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -371,10 +389,14 @@
 
             
 
+            
+
             . For more information, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96652"
               >Windows Server 2003 Technology Centers</see
             >
+
+            
 
             
 

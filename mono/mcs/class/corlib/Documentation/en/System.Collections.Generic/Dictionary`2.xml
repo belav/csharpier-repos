@@ -72,10 +72,14 @@
 
         
 
+        
+
          object.</para
       >
       <para>
         <see cref="T:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;" />
+
+        
 
         
 
@@ -84,8 +88,12 @@
 
         
 
+        
+
           implements <see
          cref="T:System.IEquatable&lt;TKey&gt;" />
+
+        
 
         
 
@@ -94,8 +102,12 @@
 
         
 
+        
+
         's implementations of <see
          cref="T:System.Object.Equals(Object)" />
+
+        
 
         
 
@@ -104,8 +116,12 @@
 
         
 
+        
+
          are used. In any case, you can specify a <see
          cref="T:System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
+
+        
 
         
 
@@ -117,8 +133,12 @@
 
         
 
+        
+
         , but a value can be, if the value type <see
          langword="TValue" />
+
+        
 
         
 
@@ -131,8 +151,12 @@
 
         
 
+        
+
         . Although <see
          langword="Enumerator" />
+
+        
 
         
 
@@ -141,8 +165,12 @@
 
         
 
+        
+
          is not described here; instead, it is described in its own entry, <see
          langword="Dictionary&lt;TKey,TValue&gt;.Enumerator" />
+
+        
 
         
 
@@ -206,12 +234,16 @@
 
             
 
+            
+
              is thrown; likewise, every key in the source dictionary must also be unique according to the default equality comparer.</para
           >
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentException">
           <paramref name="dictionary" />
+
+          
 
           
 
@@ -223,8 +255,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -259,6 +295,8 @@
           <para>-or-</para>
           <para>
             <see langword="null" />
+
+            
 
             
 
@@ -297,6 +335,8 @@
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="capacity" />
+
+          
 
           
 
@@ -340,6 +380,8 @@
 
             
 
+            
+
              to use the default equality comparer for the type of the key.</para
           >
         </param>
@@ -353,12 +395,16 @@
 
             
 
+            
+
              is thrown; likewise, every key in the source dictionary must also be unique according to the specified equality comparer.</para
           >
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentException">
           <paramref name="dictionary" />
+
+          
 
           
 
@@ -370,8 +416,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -413,6 +463,8 @@
 
             
 
+            
+
              to use the default equality comparer for the type of the key.</para
           >
         </param>
@@ -423,6 +475,8 @@
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="capacity" />
+
+          
 
           
 
@@ -488,15 +542,21 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the <see
              cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
             <see langword="(TKey)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Add" />
             <see langword="(TKey,TValue)" />
+
+            
 
             
 
@@ -508,11 +568,15 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the dictionary is increased.</para
           >
           <para
             >A key cannot be <see
              cref="null" />
+
+            
 
             
 
@@ -529,8 +593,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -567,12 +635,16 @@
 
                 
 
+                
+
                  interface.</para
               >
             </block>
           </para>
           <para>
             <see cref="P:System.Collections.Generic.ICollection&lt;TKey&gt;.Count" />
+
+            
 
             
 
@@ -634,13 +706,19 @@
 
             
 
+            
+
             , if an element whose key is <paramref
              name="key" />
 
             
 
+            
+
              is found in the dictionary; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -657,8 +735,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -695,13 +777,19 @@
 
             
 
+            
+
             , if an element whose value is <paramref
              name="value" />
 
             
 
+            
+
              is found in the dictionary; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -715,8 +803,12 @@
 
             
 
+            
+
             , that type is used. Otherwise, <see
              cref="M:System.Object.Equals" />
+
+            
 
             
 
@@ -728,8 +820,12 @@
 
             
 
+            
+
             . That is, this method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Count" />
+
+            
 
             
 
@@ -797,6 +893,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -859,6 +957,8 @@
 
             
 
+            
+
              is thrown. On a set attempt, if the specified key is not found, a new element using the specified key is created.</para
           >
         </value>
@@ -866,6 +966,8 @@
           <para
             >The default value for value types is zero while that for reference types is <see
              cref="null" />
+
+            
 
             
 
@@ -878,9 +980,13 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the <see
              cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Item" />
             <see langword="(TKey)" />
+
+            
 
             
 
@@ -890,11 +996,15 @@
 
             
 
+            
+
              method does not modify existing elements.</para
           >
           <para
             >A key cannot be <see
              cref="null" />
+
+            
 
             
 
@@ -909,8 +1019,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -921,6 +1035,8 @@
           <para
             >During a get attempt, <paramref
              name="key" />
+
+            
 
             
 
@@ -958,6 +1074,8 @@
           <para
             >The order of the keys in the key collection is unspecified, but it is the same order as the associated values in the value collection returned by the <see
              cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Values" />
+
+            
 
             
 
@@ -1023,8 +1141,12 @@
 
             
 
+            
+
              if the element containing <paramref
              name="key" />
+
+            
 
             
 
@@ -1033,13 +1155,19 @@
 
             
 
+            
+
             . This method also returns <see
              langword="false" />
 
             
 
+            
+
              if <paramref
              name="key" />
+
+            
 
             
 
@@ -1057,8 +1185,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1162,6 +1294,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1191,6 +1325,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.Generics.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
+
+            
 
             
 
@@ -1257,6 +1393,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1287,6 +1425,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;" />
+
+            
 
             
 
@@ -1321,6 +1461,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.Generics.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; " />
+
+            
 
             
 
@@ -1404,6 +1546,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1433,6 +1577,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1466,6 +1612,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1505,6 +1653,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1535,6 +1685,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1572,6 +1724,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1605,6 +1759,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1635,6 +1791,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1675,6 +1833,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1705,6 +1865,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1742,6 +1904,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -1771,6 +1935,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1805,6 +1971,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1875,6 +2043,8 @@
           <para
             >The order of the values in the value collection is unspecified, but it is the same order as the associated values in the key collection returned by the <see
              cref="P:System.Collections.Generic.Dictionary&lt;TKey,TValue&gt;.Keys" />
+
+            
 
             
 

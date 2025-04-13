@@ -48,6 +48,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -74,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.XPathNavigatorException" />
+
+            
 
             
 
@@ -109,6 +113,8 @@
 
             
 
+            
+
              class with data that specifies the source and destination of the stream and the information required to serialize the exception.</para
           >
         </summary>
@@ -117,8 +123,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -129,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -164,6 +178,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.XPathNavigatorException" />
+
+            
 
             
 

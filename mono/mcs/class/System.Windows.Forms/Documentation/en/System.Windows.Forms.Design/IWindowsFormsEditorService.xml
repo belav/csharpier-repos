@@ -19,13 +19,19 @@
 
         
 
+        
+
          is only available through the <see
          cref="M:System.IServiceProvider.GetService(System.Type)" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          method of a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -47,8 +57,12 @@
 
         
 
+        
+
          invokes the <see
          cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+
+        
 
         
 
@@ -57,8 +71,12 @@
 
         
 
+        
+
          to provide a user interface for editing the value of a property, the <see
          cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+
+        
 
         
 
@@ -67,13 +85,19 @@
 
         
 
+        
+
          that can typically provide an instance of the <see
          cref="T:System.Windows.Forms.Design.IWindowsFormsEditorService" />
 
         
 
+        
+
         . The methods of this service can be used to display dialog boxes and forms, or to show a <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -85,6 +109,8 @@
       <para
         >Provides an interface for a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -106,6 +132,8 @@
           <para
             >This method closes the drop down container area for a control that has been shown using the <see
              cref="M:System.Windows.Forms.Design.IWindowsFormsEditorService.DropDownControl(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -143,8 +171,12 @@
 
             
 
+            
+
              method of a <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -161,8 +193,12 @@
 
           
 
+          
+
           The drop down list <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -199,6 +235,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -210,8 +248,12 @@
 
             
 
+            
+
              indicating the result code returned by the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -223,8 +265,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 

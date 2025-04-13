@@ -28,8 +28,12 @@
 
         
 
+        
+
          property of the parent <see
          cref="T:System.Web.Services.Description.Operation" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          and the other an <see
          cref="T:System.Web.Services.Description.OperationOutput" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Services.Description.OperationOutput" />
+
+        
 
         
 
@@ -89,8 +101,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -105,6 +121,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -113,8 +131,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 
@@ -151,8 +173,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -167,8 +193,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -180,8 +210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 
@@ -216,8 +250,12 @@
 
             
 
+            
+
              to a compatible one-dimensional array of type <see
              cref="T:System.Web.Services.Description.OperationMessage" />
+
+            
 
             
 
@@ -229,8 +267,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 
@@ -238,6 +280,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,6 +310,8 @@
           <para
             >Gets the type of transmission supported by the <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -303,6 +349,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -315,8 +363,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 
@@ -345,6 +397,8 @@
           <para
             >Gets the first occurrence of an <see
              cref="T:System.Web.Services.Description.OperationInput" />
+
+            
 
             
 
@@ -383,13 +437,19 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
 
             
 
+            
+
             , the <paramref
              name="operationMessage" />
+
+            
 
             
 
@@ -405,8 +465,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -418,8 +482,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="operationMessage" />
+
+          
 
           
 
@@ -430,8 +498,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 
@@ -573,6 +645,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -606,11 +680,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.OperationMessage" />
+
+            
 
             
 
@@ -625,8 +703,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -638,8 +720,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 

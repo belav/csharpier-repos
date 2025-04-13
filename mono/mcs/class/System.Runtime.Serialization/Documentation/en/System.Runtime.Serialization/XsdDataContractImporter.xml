@@ -25,13 +25,19 @@
 
         
 
+        
+
          if you are creating a Web service that must interoperate with an existing Web service, or to create data contract types from XML schemas. <see
          cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
 
         
 
+        
+
          will transform a set of XML schemas and create the dnprdnshort types that represent the data contract in a selected programming language. To create the code, use the classes in the <see
          cref="N:System.CodeDom" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          class when you have created a Web service that incorporates data represented by CLR types and when you need to export XML schemas for each data type to be consumed by other Web services. That is, <see
          cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+
+        
 
         
 
@@ -61,13 +71,19 @@
 
           
 
+          
+
           . To generated code from XSD files, use the <userInput
           >/dataContractOnly</userInput>
 
           
 
+          
+
            switch of the tool. You can also use the <see
            cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+
+          
 
           
 
@@ -102,6 +118,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -132,6 +150,8 @@
 
             
 
+            
+
              that has already been generated.</para
           >
         </remarks>
@@ -143,8 +163,12 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -156,8 +180,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -194,8 +222,12 @@
 
             
 
+            
+
              can be transformed into a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -211,8 +243,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -253,8 +289,12 @@
 
             
 
+            
+
              can be transformed into CLR types generated into a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -270,8 +310,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -282,13 +326,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
+          
+
            of <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -329,6 +379,8 @@
 
             
 
+            
+
              can be imported.</para
           >
         </summary>
@@ -341,8 +393,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -353,8 +409,12 @@
 
           
 
+          
+
           A specific <see
            cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+          
 
           
 
@@ -395,6 +455,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -406,8 +468,12 @@
 
             
 
+            
+
              can be transformed into a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -423,8 +489,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -435,8 +505,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -445,8 +519,12 @@
 
           
 
+          
+
            that specifies the names of the schema types that need to be imported from the <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -480,8 +558,12 @@
 
             
 
+            
+
              to access the <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -493,6 +575,8 @@
           <para
             >Gets a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -529,8 +613,12 @@
 
             
 
+            
+
              method. The <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -539,8 +627,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -555,8 +647,12 @@
 
             
 
+            
+
              to the CLR type generated for the schema type with the specified <see
              cref="T:System.Xml.XmlQualifiedName" />
+
+            
 
             
 
@@ -571,8 +667,12 @@
 
             
 
+            
+
              reference to the CLR type generated for the schema type with the <paramref
              name="typeName" />
+
+            
 
             
 
@@ -584,8 +684,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -622,6 +726,8 @@
 
             
 
+            
+
             . The element is passed in so that this importer can look up the element-level information and return the correct type reference accordingly. </para
           >
           <para>When importing WSDL, each parameter is imported separately and therefore the parameter elements need to be passed in separately.</para>
@@ -631,6 +737,8 @@
           <para
             >Returns a <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -645,6 +753,8 @@
 
             
 
+            
+
              that represents the type that was generated for the specified schema type.</para
           >
         </returns>
@@ -653,8 +763,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -665,8 +779,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+          
 
           
 
@@ -702,8 +820,12 @@
 
             
 
+            
+
              class. ) However, for the top-level type, there needs to be a way to return the set of known types generated. This method returns the <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -714,6 +836,8 @@
              type="text/html">
               <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
             </format>
+
+            
 
             
 
@@ -728,6 +852,8 @@
 
             
 
+            
+
              objects that represents the known types generated when generating code for the specified schema type.</para
           >
         </summary>
@@ -739,8 +865,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -752,8 +882,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -790,8 +924,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -803,8 +941,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -845,8 +987,12 @@
 
             
 
+            
+
              into CLR types generated into a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -858,8 +1004,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -870,13 +1020,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
+          
+
             (of <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -914,8 +1070,12 @@
 
             
 
+            
+
              and returns an <see
              cref="T:System.Xml.XmlQualifiedName" />
+
+            
 
             
 
@@ -930,6 +1090,8 @@
 
             
 
+            
+
              that represents the specified element.</para
           >
         </returns>
@@ -938,8 +1100,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -950,8 +1116,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+          
 
           
 
@@ -989,8 +1159,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -1002,8 +1176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1014,8 +1192,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1049,6 +1231,8 @@
 
             
 
+            
+
              class to customize how the CLR types are generated during schema import.</para
           >
         </remarks>
@@ -1057,6 +1241,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Runtime.Serialization.ImportOptions" />
+
+            
 
             
 

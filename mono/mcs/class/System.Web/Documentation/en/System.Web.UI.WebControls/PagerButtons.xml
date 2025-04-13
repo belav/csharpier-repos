@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration represents the types of buttons to display for navigating between pages of content in a paginated control. This enumeration is used by the <see
          cref="P:System.Web.UI.WebControls.PagerSettings.Mode" />
+
+        
 
         
 
@@ -28,13 +32,19 @@
 
         
 
+        
+
          class, such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -46,8 +56,12 @@
 
         
 
+        
+
          and <ui
         >Previous</ui>
+
+        
 
         
 
@@ -59,8 +73,12 @@
 
         
 
+        
+
          and <ui
         >Previous</ui>
+
+        
 
         
 
@@ -69,8 +87,12 @@
 
         
 
+        
+
          and <ui
         >Last</ui>
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          and <ui
         >Last</ui>
+
+        
 
         
 
@@ -113,8 +139,12 @@
 
             
 
+            
+
              and <ui
             >Next</ui>
+
+            
 
             
 
@@ -142,8 +172,12 @@
 
             
 
+            
+
             , <ui
             >Next</ui>
+
+            
 
             
 
@@ -152,8 +186,12 @@
 
             
 
+            
+
             , and <ui
             >Last</ui>
+
+            
 
             
 
@@ -198,8 +236,12 @@
 
             
 
+            
+
              and <ui
             >Last</ui>
+
+            
 
             
 

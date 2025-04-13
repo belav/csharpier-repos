@@ -18,8 +18,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Specifies the style of the sizing grip on a <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 

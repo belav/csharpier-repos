@@ -6,8 +6,12 @@
 
     
 
+    
+
      and <symbol
     >#elif</symbol>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="9.5.2">pp-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -32,6 +38,8 @@
       <name>
         <non_terminal where="9.5.2">pp-or-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -56,6 +64,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.2">pp-equality-expression</non_terminal>
@@ -74,6 +84,8 @@
       <name>
         <non_terminal where="9.5.2">pp-equality-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -107,6 +119,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.2">pp-primary-expression</non_terminal>
@@ -122,6 +136,8 @@
       <name>
         <non_terminal where="9.5.2">pp-primary-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -150,6 +166,8 @@
   <paragraph
     >Evaluation of a pre-processing expression always yields a boolean value. The rules of evaluation for a  pre-processing expression are the same as those for a constant expression (<hyperlink
     >14.15</hyperlink>
+
+    
 
     
 

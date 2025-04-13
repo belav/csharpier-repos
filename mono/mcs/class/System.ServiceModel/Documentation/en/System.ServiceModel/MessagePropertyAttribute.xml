@@ -27,6 +27,8 @@
 
         
 
+        
+
          attribute to attach data to the custom message type as it passes through the indigo1 system without serializing the data into a SOAP message.</para
       >
     </remarks>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MessagePropertyAttribute" />
+
+            
 
             
 

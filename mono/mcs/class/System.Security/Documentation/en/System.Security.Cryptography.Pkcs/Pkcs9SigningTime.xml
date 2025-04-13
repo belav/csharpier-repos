@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -40,13 +42,19 @@
 
         
 
+        
+
          class defines the signing date and time of a signature. A <see
          cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
 
         
 
+        
+
          object can  be used as an authenticated attribute of a <see
          cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+
+            
 
             
 
@@ -107,8 +117,12 @@
 
             
 
+            
+
               object, use the <see
              cref="M:System.Security.Cryptography.Pkcs.Pkcs9SigningTime.#ctor(System.DateTime)" />
+
+            
 
             
 
@@ -123,8 +137,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+
+            
 
             
 
@@ -158,8 +176,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+
+            
 
             
 
@@ -168,6 +190,8 @@
         </summary>
         <param name="encodedSigningTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,8 +224,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+
+            
 
             
 
@@ -213,8 +241,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -252,8 +284,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -268,6 +304,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -276,8 +314,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -311,8 +353,12 @@
 
             
 
+            
+
              property retrieves a <see
              cref="T:System.DateTime" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          class permits the elements in the group to appear (or not appear) in any order in the containing element.</para
       >
     </remarks>
@@ -60,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaAll" />
+
+            
 
             
 

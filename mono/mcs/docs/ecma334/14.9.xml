@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.8">shift-expression</non_terminal>
@@ -51,6 +53,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.9">relational-expression</non_terminal>
@@ -73,8 +77,12 @@
 
     
 
+    
+
      and the as operator is described in <hyperlink
     >14.9.10</hyperlink>
+
+    
 
     
 
@@ -86,11 +94,15 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator. </paragraph
   >
   <paragraph
     >The predefined comparison operators are described in the following sections. All predefined comparison operators return a result of type <keyword
     >bool</keyword>
+
+    
 
     
 

@@ -6,11 +6,15 @@
 
     
 
+    
+
      permits a statement to be prefixed by a label. Labeled statements are permitted in blocks, but are not permitted as embedded statements. <grammar_production
     >
       <name>
         <non_terminal where="15.4">labeled-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -26,6 +30,8 @@
   <paragraph
     >A label can be referenced from goto statements (<hyperlink
     >15.9.3</hyperlink>
+
+    
 
     
 
@@ -45,6 +51,8 @@ int F(int x) {
 }  
 ]]>
       </code_example>
+
+      
 
       
 

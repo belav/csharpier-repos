@@ -9,8 +9,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.15</hyperlink>
+
+        
 
         
 
@@ -19,8 +23,12 @@
 
         
 
+        
+
          can be converted to type <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -29,8 +37,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -39,8 +51,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -49,8 +65,12 @@
 
         
 
+        
+
         , provided the value of the <non_terminal
          where="14.15">constant-expression</non_terminal>
+
+        
 
         
 
@@ -62,8 +82,12 @@
 
         
 
+        
+
          of type <keyword
         >long</keyword>
+
+        
 
         
 
@@ -72,8 +96,12 @@
 
         
 
+        
+
         , provided the value of the  <non_terminal
          where="14.15">constant-expression</non_terminal>
+
+        
 
         
 

@@ -19,13 +19,19 @@
 
         
 
+        
+
          to send keystrokes and keystroke combinations to the active application. This class cannot be instantiated. To send a keystroke to a class and immediately continue with the flow of your program, use <see
          cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
 
         
 
+        
+
         . To wait for any processes started by the keystroke, use <see
          cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
         . To specify one of these characters, enclose it within braces ({}). For example, to specify the plus sign, use "{+}". To specify brace characters, use "{{}" and "{}}". Brackets ([ ]) have no special meaning to <see
          cref="T:System.Windows.Forms.SendKeys" />
+
+        
 
         
 
@@ -49,6 +59,8 @@
         <para
           >If your application is intended for international use with a variety of keyboards, the use of <see
            cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
+
+          
 
           
 
@@ -437,6 +449,8 @@
 
           
 
+          
+
            class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
         >
         <para
@@ -445,8 +459,12 @@
 
           
 
+          
+
            class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see
            cref="T:System.Windows.Forms.SendKeys" />
+
+          
 
           
 
@@ -455,13 +473,19 @@
 
           
 
+          
+
            class may behave differently on different operating systems. Additionally, when the <see
            cref="T:System.Windows.Forms.SendKeys" />
 
           
 
+          
+
            class uses the new implementation, the <see
            cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+
+          
 
           
 
@@ -473,6 +497,8 @@
 
           
 
+          
+
            class to use the new implementation by adding the following application setting to your app.config file.</para
         >
         <para>&lt;appSettings&gt;</para>
@@ -481,6 +507,8 @@
         <para
           >To force the <see
            cref="T:System.Windows.Forms.SendKeys" />
+
+          
 
           
 
@@ -510,8 +538,12 @@
 
             
 
+            
+
              to wait for the application to process keystrokes and other operating system messages that are in the message queue. This is equivalent to calling <see
              cref="M:System.Windows.Forms.Application.DoEvents" />
+
+            
 
             
 
@@ -550,8 +582,12 @@
 
             
 
+            
+
             . To specify one of these characters, enclose it within braces ({}). For example, to specify the plus sign, use "{+}". To specify brace characters, use "{{}" and "{}}". Brackets ([ ]) have no special meaning to <see
              cref="T:System.Windows.Forms.SendKeys" />
+
+            
 
             
 
@@ -561,6 +597,8 @@
             <para
               >If your application is intended for international use with a variety of keyboards, the use of <see
                cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
+
+              
 
               
 
@@ -949,6 +987,8 @@
 
               
 
+              
+
                class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
             >
             <para
@@ -957,8 +997,12 @@
 
               
 
+              
+
                class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see
                cref="T:System.Windows.Forms.SendKeys" />
+
+              
 
               
 
@@ -967,8 +1011,12 @@
 
               
 
+              
+
                class may behave differently on different operating systems. Additionally, when the <see
                cref="T:System.Windows.Forms.SendKeys" />
+
+              
 
               
 
@@ -977,11 +1025,15 @@
 
               
 
+              
+
                method will not wait for messages to be processed when they are sent to another process. </para
             >
             <para
               >If your application relies on consistent behavior regardless of the operating system, you can force the <see
                cref="T:System.Windows.Forms.SendKeys" />
+
+              
 
               
 
@@ -996,6 +1048,8 @@
 
               
 
+              
+
                class to use the previous implementation, use the value "JournalHook" instead.</para
             >
           </block>
@@ -1006,6 +1060,8 @@
         </summary>
         <param name="keys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1035,6 +1091,8 @@
 
             
 
+            
+
              to send keystrokes or combinations of keystrokes to the active application and wait for the keystroke messages to be processed. You can use this method to send keystrokes to an application and wait for any processes that are started by the keystrokes to be completed. This can be important if the other application must finish before your application can continue.</para
           >
           <block subset="none" type="note">
@@ -1047,6 +1105,8 @@
 
               
 
+              
+
                class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
             >
             <para
@@ -1055,8 +1115,12 @@
 
               
 
+              
+
                class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see
                cref="T:System.Windows.Forms.SendKeys" />
+
+              
 
               
 
@@ -1065,8 +1129,12 @@
 
               
 
+              
+
                class may behave differently on different operating systems. Additionally, when the <see
                cref="T:System.Windows.Forms.SendKeys" />
+
+              
 
               
 
@@ -1075,11 +1143,15 @@
 
               
 
+              
+
                method will not wait for messages to be processed when they are sent to another process. </para
             >
             <para
               >If your application relies on consistent behavior regardless of the operating system, you can force the <see
                cref="T:System.Windows.Forms.SendKeys" />
+
+              
 
               
 
@@ -1094,6 +1166,8 @@
 
               
 
+              
+
                class to use the previous implementation, use the value "JournalHook" instead.</para
             >
           </block>
@@ -1104,6 +1178,8 @@
         </summary>
         <param name="keys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

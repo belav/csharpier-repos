@@ -30,6 +30,8 @@
 
         
 
+        
+
         , specifically, to allow the addition of types to the collection of known types.</para
       >
       <para
@@ -37,6 +39,8 @@
          type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
         </format>
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >Handles the XML elements used to configure serialization by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -74,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Configuration.DataContractSerializerSection" />
+
+            
 
             
 
@@ -111,6 +119,8 @@
           <para
             >Gets a collection of types added to the <see
              cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" />
+
+            
 
             
 

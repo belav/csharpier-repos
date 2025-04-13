@@ -39,8 +39,12 @@
 
         
 
+        
+
          controls to existing <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          control to divide the display area of a container (such as a <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          panels. When the user passes the mouse pointer over the splitter, the cursor changes to indicate that the controls inside the <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
           
 
+          
+
            control.</para
         >
       </block>
@@ -84,8 +98,12 @@
 
         
 
+        
+
          also eases control placement at design time. For example, to create a window similar to Windows Explorer, add a <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -94,8 +112,12 @@
 
         
 
+        
+
          and set its <see
          cref="P:System.Windows.Forms.Control.Dock" />
+
+        
 
         
 
@@ -104,8 +126,12 @@
 
         
 
+        
+
          control to the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -114,8 +140,12 @@
 
         
 
+        
+
          property to DockStyle.Fill. To complete the layout, add a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -124,8 +154,12 @@
 
         
 
+        
+
          property to DockStyle.Fill to have the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -134,13 +168,19 @@
 
         
 
+        
+
         . At run time, the user can then resize the width of both controls using the splitter. Use the <see
          cref="P:System.Windows.Forms.SplitContainer.FixedPanel" />
 
         
 
+        
+
          property to specify that a control should not be resized along with the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -152,13 +192,19 @@
 
         
 
+        
+
          to specify where the splitter starts on your form. Use <see
          cref="P:System.Windows.Forms.SplitContainer.SplitterIncrement" />
 
         
 
+        
+
          to specify how many pixels the splitter moves at a time. The default for <see
          cref="P:System.Windows.Forms.SplitContainer.SplitterIncrement" />
+
+        
 
         
 
@@ -170,13 +216,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
 
         
 
+        
+
          to specify how close the splitter bar can be moved to the outside edge of a <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -188,8 +240,12 @@
 
         
 
+        
+
          property to specify horizontal orientation. The default orientation of the <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -201,13 +257,19 @@
 
         
 
+        
+
          property to specify the border style of the <see
          cref="T:System.Windows.Forms.SplitContainer" />
 
         
 
+        
+
          and coordinate its border style with the border style of controls that you add to the <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -232,6 +294,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -278,6 +342,8 @@
 
             
 
+            
+
              client area. This property is not relevant to this class.</para
           >
         </summary>
@@ -317,8 +383,12 @@
 
             
 
+            
+
              size is added to the size of any child controls contained in the scrollable control to determine if scroll bars are needed. The <see
              cref="P:System.Windows.Forms.SplitContainer.AutoScrollMargin" />
+
+            
 
             
 
@@ -330,8 +400,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Windows.Forms.SplitContainer.AutoScroll" />
+
+            
 
             
 
@@ -376,6 +450,8 @@
           <para
             >Use the <see
              cref="P:System.Windows.Forms.SplitContainer.AutoScrollMinSize" />
+
+            
 
             
 
@@ -491,8 +567,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -501,8 +581,12 @@
 
             
 
+            
+
             . This operation will maintain the control’s <see
              cref="P:System.Windows.Forms.SplitContainer.Padding" />
+
+            
 
             
 
@@ -514,6 +598,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -551,6 +637,8 @@
 
             
 
+            
+
             . </para
           >
           <para>This event is not relevant to this class.</para>
@@ -560,6 +648,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.SplitContainer.AutoSize" />
+
+            
 
             
 
@@ -593,6 +683,8 @@
 
                 
 
+                
+
                  property to place a graphic image onto a control. </para
               >
             </item>
@@ -602,6 +694,8 @@
             <para
               >This property is not supported on child controls whose <see
                cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+              
 
               
 
@@ -652,6 +746,8 @@
 
             
 
+            
+
              property is changed by either a programmatic modification or user interaction.</para
           >
           <para
@@ -659,6 +755,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -670,6 +768,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" />
+
+            
 
             
 
@@ -743,6 +843,8 @@
 
             
 
+            
+
              property changes. This event is not relevant to this class.</para
           >
         </summary>
@@ -774,8 +876,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -815,13 +921,19 @@
 
             
 
+            
+
              property to coordinate the border of the splitter and the outer edges of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
+            
+
              panels with the border of the control or controls that the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -833,6 +945,8 @@
           <para
             >Gets or sets the style of border for the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -971,6 +1085,8 @@
 
             
 
+            
+
              assigned to the control.</para
           >
         </returns>
@@ -996,13 +1112,19 @@
 
             
 
+            
+
              property in a derived class to specify a default size for <see
              cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
+            
+
             . This is more efficient than setting the size in the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1014,6 +1136,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1045,8 +1169,12 @@
 
             
 
+            
+
              to any edge of its container, or you can dock a <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1055,13 +1183,19 @@
 
             
 
+            
+
              entirely fills the container. For example, set this property to <see
              cref="F:System.Windows.Forms.DockStyle.Left" />
 
             
 
+            
+
              to attach the left edge of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1074,8 +1208,12 @@
 
               
 
+              
+
                property. A control or window at the bottom of the z-order appears underneath all other controls or windows and is referenced by an index of (Controls.Count-1) in the <see
                cref="P:System.Windows.Forms.SplitContainer.Controls" />
+
+              
 
               
 
@@ -1092,6 +1230,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1100,6 +1240,8 @@
           <para
             >Gets or sets which <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1136,6 +1278,8 @@
 
             
 
+            
+
              panel stays the same size when a user resizes the container.</para
           >
         </remarks>
@@ -1144,6 +1288,8 @@
           <para
             >Gets or sets which <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1180,8 +1326,12 @@
 
             
 
+            
+
              property to enable or disable splitter movement. For example, you might programmatically set <see
              cref="P:System.Windows.Forms.SplitContainer.IsSplitterFixed" />
+
+            
 
             
 
@@ -1190,8 +1340,12 @@
 
             
 
+            
+
              must remain constant, and set <see
              cref="P:System.Windows.Forms.SplitContainer.IsSplitterFixed" />
+
+            
 
             
 
@@ -1230,11 +1384,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnGotFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1249,6 +1407,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1257,8 +1417,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1290,13 +1454,19 @@
 
             
 
+            
+
              event handler allows the user to move the splitter down when the DOWN arrow key is pressed. The <see
              cref="M:System.Windows.Forms.SplitContainer.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
             
 
+            
+
              event handler also draws the <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterRectangle" />
+
+            
 
             
 
@@ -1310,11 +1480,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1329,6 +1503,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1337,8 +1513,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1370,13 +1550,19 @@
 
             
 
+            
+
              event handler allows the user to move the splitter up when the UP arrow key is pressed. The <see
              cref="M:System.Windows.Forms.SplitContainer.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
 
             
 
+            
+
              event handler also draws the <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterRectangle" />
+
+            
 
             
 
@@ -1390,11 +1576,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1409,6 +1599,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1417,8 +1609,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1452,11 +1648,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -1471,6 +1671,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1479,8 +1681,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1511,11 +1717,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnLostFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1530,6 +1740,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1538,8 +1750,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1592,8 +1808,12 @@
 
             
 
+            
+
              event handler allows the user to track the splitter position while it is moved down with the mouse. <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1602,13 +1822,19 @@
 
             
 
+            
+
              to show the current position of the splitter while it is moving. The <see
              cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
+            
+
              keeps track of the initial <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterDistance" />
+
+            
 
             
 
@@ -1622,11 +1848,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1641,6 +1871,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1649,8 +1881,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1681,11 +1917,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -1700,6 +1940,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1708,8 +1950,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1746,8 +1992,12 @@
 
             
 
+            
+
              event handler allows the user to track the splitter position while it is moved with the mouse. <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1756,13 +2006,19 @@
 
             
 
+            
+
              to show the current position of the splitter while it is moving. The <see
              cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
+            
+
              keeps track of the initial <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterDistance" />
+
+            
 
             
 
@@ -1776,11 +2032,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1795,6 +2055,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1803,8 +2065,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1836,8 +2102,12 @@
 
             
 
+            
+
              event handler allows the user to track the splitter position while it is moved up with the mouse. <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1846,13 +2116,19 @@
 
             
 
+            
+
              to show the current position of the splitter while it is moving. The <see
              cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
+            
+
              keeps track of the initial <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterDistance" />
+
+            
 
             
 
@@ -1866,11 +2142,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1885,6 +2165,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1893,8 +2175,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1928,11 +2214,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.SplitContainer.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1947,6 +2237,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1955,8 +2247,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1994,6 +2290,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2002,8 +2300,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2033,8 +2335,12 @@
 
             
 
+            
+
              event is raised after the splitter has been moved. When the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2043,8 +2349,12 @@
 
             
 
+            
+
              event and the <see
              cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoving(System.Windows.Forms.SplitterCancelEventArgs)" />
+
+            
 
             
 
@@ -2055,6 +2365,8 @@
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -2069,6 +2381,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2077,8 +2391,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SplitterEventArgs" />
+
+          
 
           
 
@@ -2111,8 +2429,12 @@
 
             
 
+            
+
              event is raised while the splitter is in the process of moving. After the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2121,8 +2443,12 @@
 
             
 
+            
+
              event and the <see
              cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
+
+            
 
             
 
@@ -2133,6 +2459,8 @@
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -2147,6 +2475,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2155,8 +2485,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SplitterEventArgs" />
+
+          
 
           
 
@@ -2195,8 +2529,12 @@
 
             
 
+            
+
              property to change the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2208,6 +2546,8 @@
           <para
             >Gets or sets a value indicating the horizontal or vertical orientation of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2251,6 +2591,8 @@
           <para
             >Gets or sets the interior spacing, in pixels, between the edges of a <see
              cref="T:System.Windows.Forms.SplitterPanel" />
+
+            
 
             
 
@@ -2318,8 +2660,12 @@
 
             
 
+            
+
              property to configure the left panel of a vertical <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2328,8 +2674,12 @@
 
             
 
+            
+
             . For example, you can specify the minimum size of the panel by changing the value of the <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
+
+            
 
             
 
@@ -2338,13 +2688,19 @@
 
             
 
+            
+
              property to Panel1 so that the panel remains the same size when the container is resized, or you can get or set the panel's <see
              cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SplitContainer.BackgroundImageLayout" />
+
+            
 
             
 
@@ -2356,8 +2712,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2370,8 +2730,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+              
 
               
 
@@ -2380,8 +2744,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+              
 
               
 
@@ -2390,8 +2758,12 @@
 
               
 
+              
+
                property of <see
                cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+              
 
               
 
@@ -2400,8 +2772,12 @@
 
               
 
+              
+
                property of <see
                cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+              
 
               
 
@@ -2414,8 +2790,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -2424,8 +2804,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -2434,8 +2818,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -2444,8 +2832,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+            
 
             
 
@@ -2460,8 +2852,12 @@
 
             
 
+            
+
             , depending on <see
              cref="P:System.Windows.Forms.SplitContainer.Orientation" />
+
+            
 
             
 
@@ -2493,6 +2889,8 @@
           <para
             >Gets or sets a value determining whether <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+            
 
             
 
@@ -2532,8 +2930,12 @@
 
             
 
+            
+
              property to prevent the splitter from moving too close to the left or top edge of the container. For example, you might want to prevent some of the display area of a <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2545,8 +2947,12 @@
 
             
 
+            
+
              property is Vertical (the default), <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
+
+            
 
             
 
@@ -2555,8 +2961,12 @@
 
             
 
+            
+
             . If the <see
              cref="P:System.Windows.Forms.SplitContainer.Orientation" />
+
+            
 
             
 
@@ -2565,8 +2975,12 @@
 
             
 
+            
+
              returns the minimum distance in pixels of the splitter from the top edge of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+            
 
             
 
@@ -2578,6 +2992,8 @@
           <para
             >Gets or sets the minimum distance in pixels of the splitter from the left or top edge of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+            
 
             
 
@@ -2617,8 +3033,12 @@
 
             
 
+            
+
              property to configure the right panel of a vertical <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2627,8 +3047,12 @@
 
             
 
+            
+
             . For example, you can specify the minimum size of the panel by changing the value of the <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
+
+            
 
             
 
@@ -2637,13 +3061,19 @@
 
             
 
+            
+
              property to Panel2 so that the panel remains the same size when the container is resized, or you can get or set the panel's <see
              cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SplitContainer.BackgroundImageLayout" />
+
+            
 
             
 
@@ -2655,8 +3085,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -2669,8 +3103,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+              
 
               
 
@@ -2679,8 +3117,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+              
 
               
 
@@ -2689,8 +3131,12 @@
 
               
 
+              
+
                property of <see
                cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+              
 
               
 
@@ -2699,8 +3145,12 @@
 
               
 
+              
+
                property of <see
                cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+              
 
               
 
@@ -2716,8 +3166,12 @@
 
             
 
+            
+
             , depending on <see
              cref="P:System.Windows.Forms.SplitContainer.Orientation" />
+
+            
 
             
 
@@ -2749,6 +3203,8 @@
           <para
             >Gets or sets a value determining whether <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -2788,8 +3244,12 @@
 
             
 
+            
+
              property to prevent the splitter from moving too close to the right or bottom edge of the container. For example, you might want to prevent some of the display area of a <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2801,8 +3261,12 @@
 
             
 
+            
+
              property is Vertical (the default), <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
+
+            
 
             
 
@@ -2811,8 +3275,12 @@
 
             
 
+            
+
             . If the <see
              cref="P:System.Windows.Forms.SplitContainer.Orientation" />
+
+            
 
             
 
@@ -2821,8 +3289,12 @@
 
             
 
+            
+
              returns the minimum distance in pixels that the splitter can be from the bottom edge of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -2834,6 +3306,8 @@
           <para
             >Gets or sets the minimum distance in pixels of the splitter from the right or bottom edge of <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -2869,8 +3343,12 @@
 
             
 
+            
+
              method indicates that the control is not processing the key. The <see
              cref="M:System.Windows.Forms.Control.ProcessDialogKey(System.Windows.Forms.Keys)" />
+
+            
 
             
 
@@ -2879,8 +3357,12 @@
 
             
 
+            
+
              method, or returns false if the control has no parent. The <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -2900,8 +3382,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -2932,6 +3418,8 @@
 
             
 
+            
+
              controls the tab focus order in the following manner: </para
           >
           <list type="bullet">
@@ -2942,8 +3430,12 @@
 
                 
 
+                
+
                  to the first control on <see
                  cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+                
 
                 
 
@@ -2954,6 +3446,8 @@
               <para
                 >All controls on <see
                  cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+                
 
                 
 
@@ -2970,6 +3464,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2977,6 +3473,8 @@
               <para
                 >The second control outside the <see
                  cref="T:System.Windows.Forms.SplitContainer" />
+
+                
 
                 
 
@@ -2998,8 +3496,12 @@
 
           
 
+          
+
           true to cycle forward through the controls in the <see
            cref="T:System.Windows.Forms.ContainerControl" />
+
+          
 
           
 
@@ -3039,6 +3541,8 @@
 
           
 
+          
+
           The factor by which the height and width of the control will be scaled.</param
         >
         <param name="specified">
@@ -3046,8 +3550,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -3082,10 +3590,14 @@
 
           
 
+          
+
           true to specify the direction of the control to select; otherwise, false. </param
         >
         <param name="forward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3150,8 +3662,12 @@
 
             
 
+            
+
              property to determine or specify the distance in pixels of the splitter from the left or top edge of the container. You can both specify an initial distance and change the distance at design time or run time. If <see
              cref="P:System.Windows.Forms.SplitContainer.Orientation" />
+
+            
 
             
 
@@ -3160,8 +3676,12 @@
 
             
 
+            
+
              is calculated in pixels from the top edge of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -3170,13 +3690,19 @@
 
             
 
+            
+
              is Vertical, <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterDistance" />
 
             
 
+            
+
              is calculated in pixels from the left edge of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -3188,6 +3714,8 @@
           <para
             >Gets or sets the location of the splitter, in pixels, from the left or top edge of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -3224,6 +3752,8 @@
 
             
 
+            
+
              property to create a snapping splitter that moves in larger increments than one pixel.</para
           >
         </remarks>
@@ -3257,10 +3787,14 @@
 
             
 
+            
+
             . For more information about handling events, see <format
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3295,6 +3829,8 @@
 
             
 
+            
+
              property value programmatically.</para
           >
           <para
@@ -3302,6 +3838,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3342,8 +3880,12 @@
 
             
 
+            
+
              to get the width and height of the splitter relative to the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -3352,8 +3894,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.SplitContainer.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -3362,8 +3908,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.SplitContainer.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -3372,8 +3922,12 @@
 
             
 
+            
+
              event handlers draw the <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterRectangle" />
+
+            
 
             
 
@@ -3385,8 +3939,12 @@
 
             
 
+            
+
              values vary depending on the <see
              cref="P:System.Windows.Forms.SplitContainer.Orientation" />
+
+            
 
             
 
@@ -3395,8 +3953,12 @@
 
             
 
+            
+
              is in the format {X, Y, Width, Height}. The following table shows the meaning of the <see
              cref="P:System.Windows.Forms.SplitContainer.SplitterRectangle" />
+
+            
 
             
 
@@ -3427,6 +3989,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -3434,6 +3998,8 @@
                 <para
                   >This value is always 0 for a horizontal splitter, indicating that the splitter is flush with the left edge of the <see
                    cref="T:System.Windows.Forms.SplitContainer" />
+
+                  
 
                   
 
@@ -3452,6 +4018,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -3459,6 +4027,8 @@
                 <para
                   >The distance in pixels of the splitter from the top edge of the <see
                    cref="T:System.Windows.Forms.SplitContainer" />
+
+                  
 
                   
 
@@ -3480,6 +4050,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -3492,6 +4064,8 @@
                 <para
                   >The height of the splitter, which is equivalent to the height of the <see
                    cref="T:System.Windows.Forms.SplitContainer" />
+
+                  
 
                   
 
@@ -3509,6 +4083,8 @@
           <para
             >Gets the size and location of the splitter relative to the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -3545,8 +4121,12 @@
 
             
 
+            
+
              property to change the width of the splitter itself, not the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -3587,8 +4167,12 @@
 
             
 
+            
+
              to true to give input focus to a splitter so that it can be moved with the arrow keys as well as with the mouse. Starting in the net_v40_long, setting <see
              cref="P:System.Windows.Forms.SplitContainer.TabStop" />
+
+            
 
             
 
@@ -3597,13 +4181,19 @@
 
             
 
+            
+
              from the collection of controls in the tab order. To enable controls to get focus by using the TAB key, create a control that inherits from <see
              cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
+            
+
             . Create a new property named TabStop and override the <see
              cref="M:System.Windows.Forms.SplitContainer.ProcessTabKey(System.Boolean)" />
+
+            
 
             
 
@@ -3613,6 +4203,8 @@
           <para
             >You can manipulate the tab order by setting the control's <see
              cref="P:System.Windows.Forms.Control.TabIndex" />
+
+            
 
             
 

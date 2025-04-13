@@ -19,13 +19,19 @@
 
         
 
+        
+
          object is used to pass information about a set of Web services to the static <see
          cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
             
 
+            
+
              collection should contain only <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -71,13 +81,19 @@
 
             
 
+            
+
              objects; the <see
              cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
+            
+
              method is unable to interpret <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -92,6 +108,8 @@
 
             
 
+            
+
              class with the given description document collection and proxy code namespace.</para
           >
         </summary>
@@ -100,8 +118,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -112,8 +134,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -149,8 +175,12 @@
 
             
 
+            
+
              collection should contain only <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -159,13 +189,19 @@
 
             
 
+            
+
              objects; the <see
              cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
+            
+
              method is unable to interpret <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -180,6 +216,8 @@
 
             
 
+            
+
              class with the given data.</para
           >
         </summary>
@@ -188,8 +226,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -200,8 +242,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -212,10 +258,14 @@
 
           
 
+          
+
           The URL key of the Web reference.</param
         >
         <param name="appSettingBaseUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,8 +302,12 @@
 
             
 
+            
+
              collection should contain only <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -262,13 +316,19 @@
 
             
 
+            
+
              objects; the <see
              cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
+            
+
              method is unable to interpret <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -283,6 +343,8 @@
 
             
 
+            
+
              class with the given data.</para
           >
         </summary>
@@ -291,8 +353,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -303,8 +369,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -315,6 +385,8 @@
 
           
 
+          
+
           The protocol used by the XML Web service.</param
         >
         <param name="appSettingUrlKey">
@@ -322,10 +394,14 @@
 
           
 
+          
+
           The URL key of the Web reference.</param
         >
         <param name="appSettingBaseUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,8 +470,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -404,8 +484,12 @@
 
             
 
+            
+
              method is unable to interpret <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -435,6 +519,8 @@
           <para
             >Allowed protocol strings include "Soap" (indicating SOAP 1.0) and "Soap12" (indicating SOAP 1.2). The value of this property determines the protocol used by proxy clients when contacting any XML Web service in the <see
              cref="P:System.Web.Services.Description.WebReference.Documents" />
+
+            
 
             
 

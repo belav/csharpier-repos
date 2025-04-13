@@ -33,6 +33,8 @@
 
             
 
+            
+
              attribute if you intend the contents of the array to be used for input only. </para
           >
         </item>
@@ -40,6 +42,8 @@
           <para
             >Apply the <see
              cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" />
+
+            
 
             
 
@@ -55,12 +59,16 @@
 
         
 
+        
+
          in the Windows Dev Center.</para
       >
       <block subset="none" type="note">
         <para
           >Parameters that have the <see
            cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
+
+          
 
           
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Runtime.InteropServices.OutAttribute" />
+
+        
 
         
 
@@ -106,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" />
+
+            
 
             
 

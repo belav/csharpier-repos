@@ -18,8 +18,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          returns <see
          cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
          is set to an extension of the <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 
@@ -48,8 +60,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+        
 
         
 
@@ -61,6 +77,8 @@
       <para
         >Specifies the painting style applied to one <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -85,8 +103,12 @@
 
             
 
+            
+
              is not determined by the <see
              cref="T:System.Windows.Forms.ToolStripManager" />
+
+            
 
             
 
@@ -95,8 +117,12 @@
 
             
 
+            
+
              other than <see
              cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+
+            
 
             
 
@@ -130,8 +156,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
+
+            
 
             
 
@@ -159,6 +189,8 @@
 
             
 
+            
+
              to paint.</para
           >
         </summary>
@@ -180,6 +212,8 @@
           <para
             >Indicates the use of a <see
              cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+            
 
             
 

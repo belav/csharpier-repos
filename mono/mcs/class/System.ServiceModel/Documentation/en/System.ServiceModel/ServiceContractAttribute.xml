@@ -27,8 +27,12 @@
 
         
 
+        
+
          attribute on an interface (or class) to define a service contract. Then use the <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          and an <see
          cref="T:System.ServiceModel.EndpointAddress" />
+
+        
 
         
 
@@ -51,10 +59,14 @@
 
         
 
+        
+
         . For more information about creating service contracts, see <format
          type="text/html">
           <a href="036fae20-7c55-4002-b71d-ac4466e167a3">Defining Service Contracts</a>
         </format>
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          and its interface is loosely related to the Web Services Description Language (WSDL) &lt;portType&gt; element. A service contract is used on the service side to specify what the service’s endpoint exposes to callers. It is also used on the client side to specify the contract of the endpoint with which the client communicates and, in the case of duplex contracts, to specify the callback contract (using the <see
          cref="P:System.ServiceModel.ServiceContractAttribute.CallbackContract" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
           
 
+          
+
            must also have at least one method marked with the <see
            cref="T:System.ServiceModel.OperationContractAttribute" />
+
+          
 
           
 
@@ -91,6 +111,8 @@
       <para
         >Use the <see
          cref="T:System.ServiceModel.ServiceContractAttribute" />
+
+        
 
         
 
@@ -104,6 +126,8 @@
 
             
 
+            
+
              property specifies the name of the service element in the configuration file to use. </para
           >
         </item>
@@ -114,8 +138,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.ServiceContractAttribute.Namespace" />
+
+            
 
             
 
@@ -129,6 +157,8 @@
 
             
 
+            
+
              property specifies whether the contract requires a binding that supports sessions.</para
           >
         </item>
@@ -136,6 +166,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceContractAttribute.CallbackContract" />
+
+            
 
             
 
@@ -149,13 +181,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.ServiceContractAttribute.ProtectionLevel" />
 
             
 
+            
+
              properties indicate whether all messages supporting the contract have a explicit <see
              cref="P:System.ServiceModel.ServiceContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -169,8 +207,12 @@
 
         
 
+        
+
          that has methods marked with <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -179,8 +221,12 @@
 
         
 
+        
+
          and apply the <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -189,8 +235,12 @@
 
         
 
+        
+
         , it cannot be itself marked with <see
          cref="T:System.ServiceModel.ServiceContractAttribute" />
+
+        
 
         
 
@@ -199,8 +249,12 @@
 
         
 
+        
+
          are treated as part of a default service contract specified by the service type itself. For details about service operations, see <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -212,8 +266,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.ServiceContractAttribute.Namespace" />
+
+        
 
         
 
@@ -222,8 +280,12 @@
 
         
 
+        
+
          is <see
          cref="F:System.Net.Security.ProtectionLevel.None" />
+
+        
 
         
 
@@ -231,6 +293,8 @@
          type="text/html">
           <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
         </format>
+
+        
 
         
 
@@ -247,6 +311,8 @@
 
         
 
+        
+
         .  </para
       >
       <para
@@ -255,8 +321,12 @@
 
         
 
+        
+
         ) to create a channel to the service or they use the client objects (which combine the type information of the service contract interface with the <see
          cref="T:System.ServiceModel.ClientBase`1" />
+
+        
 
         
 
@@ -265,10 +335,14 @@
 
         
 
+        
+
          class and <format
          type="text/html">
           <a href="f60d9bc5-8ade-4471-8ecf-5a07a936c82d">WCF Client Overview</a>
         </format>
+
+        
 
         
 
@@ -280,13 +354,19 @@
 
         
 
+        
+
          class or interface to inherit from another <see
          cref="T:System.ServiceModel.ServiceContractAttribute" />
 
         
 
+        
+
          class or interface extends the parent contract. For example, if an IChildContract interface is marked with <see
          cref="T:System.ServiceModel.ServiceContractAttribute" />
+
+        
 
         
 
@@ -298,8 +378,12 @@
 
         
 
+        
+
          and its methods with <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -311,8 +395,12 @@
 
         
 
+        
+
          property to indicate another service contract that, when bound together with the original service contract, define a message exchange that can flow in two ways independently. For details, see <see
          cref="P:System.ServiceModel.ServiceContractAttribute.CallbackContract" />
+
+        
 
         
 
@@ -349,6 +437,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -377,6 +467,8 @@
 
             
 
+            
+
              property that represents the required opposite contract in a two-way (or duplex) message exchange. This enables client applications to listen for inbound operation calls that the server-side service application can send independently of client activity. Callback contracts that have one-way operations represent calls from the service that the client can handle. </para
           >
           <block subset="none" type="note">
@@ -386,8 +478,12 @@
 
               
 
+              
+
                attribute is ignored on callback contracts. To configure runtime behavior of callback objects, use the <see
                cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
+
+              
 
               
 
@@ -421,6 +517,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -447,6 +545,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceContractAttribute.HasProtectionLevel" />
+
+            
 
             
 
@@ -479,8 +579,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ServiceModel.ServiceContractAttribute.Namespace" />
+
+            
 
             
 
@@ -538,6 +642,8 @@
 
             
 
+            
+
              property to specify the degree to which the contract binding requires encryption, digital signatures, or both for endpoints that expose the contract. The value set here is the default value for all operation messages including faults.</para
           >
           <para>It is important to remember that the protection behavior at runtime is the combination of the protection-level values set on the following properties. These properties have a hierarchical structure. Setting the outermost value establishes the default setting for all narrower scopes unless a different value for a narrower scope is explicitly set. In this case, the outer value remains the default for all narrower scopes with the exception of that specifically set. </para>
@@ -547,8 +653,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -557,8 +667,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Net.Security.ProtectionLevel.Sign" />
+
+            
 
             
 
@@ -569,6 +683,8 @@
              type="text/html">
               <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
             </format>
+
+            
 
             
 
@@ -596,8 +712,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ServiceModel.MessageHeaderAttribute" />
+
+            
 
             
 
@@ -609,8 +729,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+
+            
 
             
 
@@ -622,8 +746,12 @@
 
             
 
+            
+
             . If the binding does not support security (such as <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -632,13 +760,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
 
             
 
+            
+
              for the whole contract. The result is that depending upon the endpoint binding, clients can require different message or transport level security protection even when the contract specifies <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
+
+            
 
             
 
@@ -650,6 +784,8 @@
           <para
             >Specifies whether the binding for the contract must support the value of the <see
              cref="P:System.ServiceModel.ServiceContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -684,8 +820,12 @@
 
             
 
+            
+
              property to require bindings that support sessions between endpoints. A session is a way of correlating a set of messages exchanged between two or more endpoints. If your service supports channel sessions, you can then use the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -697,8 +837,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.ServiceModel.SessionMode.Required" />
+
+            
 
             
 
@@ -707,8 +851,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+
+            
 
             
 
@@ -722,12 +870,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                 >Sessions, Instancing, and Concurrency</a
               >
             </format>
+
+            
 
             
 
@@ -744,6 +896,8 @@
 
                 
 
+                
+
                  supports security sessions, in which both ends of communication have agreed upon an encryption and/or digital signature process; all messages are correlated with that specific secure conversation. For more information, see <format
                  type="text/html">
                   <a href="f0ecc6f7-f4b5-42a4-9cb1-b02e28e26620">Securing Services</a>
@@ -751,8 +905,12 @@
 
                 
 
+                
+
                 . For example, the <see
                  cref="T:System.ServiceModel.WSHttpBinding" />
+
+                
 
                 
 
@@ -766,6 +924,8 @@
 
                 
 
+                
+
                  supports the sessions exposed by the TCP/IP connections to ensure that all messages are correlated by the connection session at the socket level. </para
               >
             </item>
@@ -776,10 +936,14 @@
 
                 
 
+                
+
                 , which implements the WS-ReliableMessaging specification, provides support for reliable sessions in which messages are delivered in order and exactly once, enabling confidence even when messages travel across multiple nodes during the conversation. For more information, see <format
                  type="text/html">
                   <a href="143951b3-3aa0-4540-b4b7-d33e77e874a1">Reliable Sessions</a>
                 </format>
+
+                
 
                 
 
@@ -793,12 +957,16 @@
 
                 
 
+                
+
                  provides MSMQ datagram sessions. For more information, see <format
                  type="text/html">
                   <a href="43008409-1bb4-4bd4-85d7-862c8f10ae20"
                     >Queues in Windows Communication Foundation</a
                   >
                 </format>
+
+                
 
                 
 
@@ -809,6 +977,8 @@
           <para
             >Remember that setting the <see
              cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+
+            
 
             
 

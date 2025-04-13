@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Windows.Forms.DockingAttribute" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -41,13 +49,19 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Windows.Forms.DataGridView" />
 
         
 
+        
+
          control is set to <see
          cref="F:System.Windows.Forms.DockingBehavior.Ask" />
+
+        
 
         
 
@@ -93,8 +107,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.DockStyle.Fill" />
+
+            
 
             
 

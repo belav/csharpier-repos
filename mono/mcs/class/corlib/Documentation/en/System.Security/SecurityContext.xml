@@ -28,8 +28,12 @@
 
         
 
+        
+
          object captures all security-related information for a logical thread, including the information contained in the <see
          cref="T:System.Security.Principal.WindowsIdentity" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          objects.  This configuration allows the Windows identity and the security elements on the stack to be propagated automatically when the <see
          cref="T:System.Security.SecurityContext" />
+
+        
 
         
 
@@ -52,12 +60,16 @@
 
           
 
+          
+
            objects can flow across asynchronous points, unless the alwaysFlowImpersonationPolicy element has been set to true (&lt;alwaysFlowImpersonationPolicy enabled="true"/&gt;). Setting the alwaysFlowImpersonationPolicy element to true specifies that the Windows identity always flows across asynchronous points, regardless of how impersonation was performed. For more information about flowing unmanaged impersonation across asynchronous points, see <format
            type="text/html">
             <a href="ee622801-9e46-470b-85ab-88c4b1dd2ee1"
               >&lt;alwaysFlowImpersonationPolicy&gt; Element</a
             >
           </format>
+
+          
 
           
 
@@ -70,13 +82,19 @@
 
         
 
+        
+
          is part of the larger <see
          cref="T:System.Threading.ExecutionContext" />
 
         
 
+        
+
          and flows or migrates when the <see
          cref="T:System.Threading.ExecutionContext" />
+
+        
 
         
 
@@ -117,13 +135,19 @@
 
             
 
+            
+
              consists of the <see
              cref="T:System.Threading.CompressedStack" />
 
             
 
+            
+
              and the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -168,6 +192,8 @@
 
             
 
+            
+
              to multiple threads. </para
           >
         </remarks>
@@ -204,8 +230,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -214,8 +244,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -229,10 +263,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -245,8 +283,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.SecurityContext" />
+
+              
 
               
 
@@ -259,6 +301,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -292,8 +336,12 @@
 
             
 
+            
+
              method is used by infrastructure components to determine whether to transfer the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -338,8 +386,12 @@
 
             
 
+            
+
              method is used by infrastructure components to determine whether to transfer the Windows identity information when the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -381,13 +433,19 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Threading.AsyncFlowControl.Undo" />
 
             
 
+            
+
              method to reverse the effect of a prior <see
              cref="M:System.Security.SecurityContext.SuppressFlow" />
+
+            
 
             
 
@@ -437,6 +495,8 @@
 
           
 
+          
+
           The security context to set.</param
         >
         <param name="callback">
@@ -444,10 +504,14 @@
 
           
 
+          
+
           The delegate that represents the method to run in the specified security context.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,6 +547,8 @@
 
             
 
+            
+
              information on the current thread for asynchronous operations. </para
           >
           <para
@@ -491,8 +557,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Principal.WindowsImpersonationContext" />
+
+            
 
             
 
@@ -504,13 +574,19 @@
 
             
 
+            
+
              method on the returned <see
              cref="T:System.Threading.AsyncFlowControl" />
 
             
 
+            
+
              structure to return the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -522,8 +598,12 @@
 
             
 
+            
+
              for <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.Infrastructure" />
+
+            
 
             
 
@@ -532,8 +612,12 @@
 
             
 
+            
+
              information during asynchronous calls. When the flow is suppressed, the <see
              cref="M:System.Security.SecurityContext.Capture" />
+
+            
 
             
 
@@ -549,6 +633,8 @@
           <para
             >An <see
              cref="T:System.Threading.AsyncFlowControl" />
+
+            
 
             
 
@@ -585,6 +671,8 @@
 
             
 
+            
+
              migrates across asynchronous threads.</para
           >
           <para
@@ -593,13 +681,19 @@
 
             
 
+            
+
              method on the returned <see
              cref="T:System.Threading.AsyncFlowControl" />
 
             
 
+            
+
              structure to return the <see
              cref="T:System.Security.SecurityContext" />
+
+            
 
             
 
@@ -612,12 +706,16 @@
 
               
 
+              
+
                objects can flow across asynchronous points, unless the alwaysFlowImpersonationPolicy element has been set to true (&lt;alwaysFlowImpersonationPolicy enabled="true"/&gt;). Setting the alwaysFlowImpersonationPolicy element to true specifies that the Windows identity always flows across asynchronous points, regardless of how impersonation was performed. For more information about flowing unmanaged impersonation across asynchronous points, see <format
                type="text/html">
                 <a href="ee622801-9e46-470b-85ab-88c4b1dd2ee1"
                   >&lt;alwaysFlowImpersonationPolicy&gt; Element</a
                 >
               </format>
+
+              
 
               
 

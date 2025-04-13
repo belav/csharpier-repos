@@ -19,8 +19,12 @@
 
         
 
+        
+
          class allows controls to emit client-side script that initiates a postback event. The <see
          cref="T:System.Web.UI.PostBackOptions" />
+
+        
 
         
 
@@ -29,13 +33,19 @@
 
         
 
+        
+
          property. The postback event is created based on the options specified in the <see
          cref="T:System.Web.UI.PostBackOptions" />
 
         
 
+        
+
          object passed in to the <see
          cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
 
             
 
+            
+
              class with the specified target control data.</para
           >
         </summary>
@@ -77,8 +89,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -110,6 +126,8 @@
 
             
 
+            
+
              class with the specified target control and argument data.</para
           >
         </summary>
@@ -118,8 +136,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -127,6 +149,8 @@
         >
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              class with the specified values for the instance's properties.</para
           >
         </summary>
@@ -173,8 +199,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -185,10 +215,14 @@
 
           
 
+          
+
           The optional parameter passed during the postback event.</param
         >
         <param name="actionUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,10 +233,14 @@
 
           
 
+          
+
           true to automatically post the form back to the server in response to a user action; otherwise, false.</param
         >
         <param name="requiresJavaScriptProtocol">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,10 +251,14 @@
 
           
 
+          
+
           true if the postback event should return the page to the current scroll position and return focus to the target control; otherwise, false.</param
         >
         <param name="clientSubmit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,6 +269,8 @@
 
           
 
+          
+
           true if client-side validation is required before the postback event occurs; otherwise, false.</param
         >
         <param name="validationGroup">
@@ -234,8 +278,12 @@
 
           
 
+          
+
           The group of controls for which <see
            cref="T:System.Web.UI.PostBackOptions" />
+
+          
 
           
 
@@ -268,13 +316,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.PostBackOptions" />
 
             
 
+            
+
              class specifies the URL for the action attribute of a Web Forms page. The <see
              cref="P:System.Web.UI.PostBackOptions.ActionUrl" />
+
+            
 
             
 
@@ -284,6 +338,8 @@
                 >Cross-Page Posting in an ASP.NET Web Page</a
               >
             </format>
+
+            
 
             
 
@@ -321,6 +377,8 @@
 
             
 
+            
+
              property specifies an optional argument that is transferred in a postback event. This property is used to represent the EVENTARGUMENT parameter of the _doPostBack method of the client-side JavaScript.</para
           >
         </remarks>
@@ -352,6 +410,8 @@
           <para
             >You can use the <see
              cref="P:System.Web.UI.PostBackOptions.AutoPostBack" />
+
+            
 
             
 
@@ -389,13 +449,19 @@
 
             
 
+            
+
              property indicates whether the postback event should occur from client-side script. If you set the <see
              cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
 
             
 
+            
+
              property to false, then no JavaScript is generated. You might assign false to the <see
              cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
+
+            
 
             
 
@@ -433,13 +499,19 @@
 
             
 
+            
+
              property is used to specify whether client-side validation is required before the postback event can occur. When the value of the <see
              cref="P:System.Web.UI.PostBackOptions.PerformValidation" />
 
             
 
+            
+
              property is set to true, you can also use the <see
              cref="P:System.Web.UI.PostBackOptions.ValidationGroup" />
+
+            
 
             
 
@@ -504,8 +576,12 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -543,8 +619,12 @@
 
             
 
+            
+
              property indicates whether the postback event should return the page to the current scroll position and return focus to the <see
              cref="P:System.Web.UI.PostBackOptions.TargetControl" />
+
+            
 
             
 
@@ -582,6 +662,8 @@
 
             
 
+            
+
              property to specify the validation group to validate when a postback event is generated. Only the validation controls in the specified validation group are validated.</para
           >
         </remarks>
@@ -590,6 +672,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.PostBackOptions" />
+
+            
 
             
 

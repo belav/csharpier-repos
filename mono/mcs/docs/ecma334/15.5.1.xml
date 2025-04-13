@@ -6,11 +6,15 @@
 
     
 
+    
+
      declares one or more local variables. <grammar_production
     >
       <name>
         <non_terminal where="15.5.1">local-variable-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -26,8 +30,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -48,6 +56,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -62,6 +72,8 @@
       <name>
         <non_terminal where="15.5.1">local-variable-initializer</non_terminal>
       </name>
+
+      
 
       
 
@@ -80,6 +92,8 @@
 
     
 
+    
+
      specifies the type of the variables introduced by the declaration. </paragraph
   >
   <paragraph
@@ -88,13 +102,19 @@
 
     
 
+    
+
     s, each of which introduces a new variable. A <non_terminal
      where="15.5.1">local-variable-declarator</non_terminal>
 
     
 
+    
+
      consists of an identifier that names the variable, optionally followed by an "=" token and a <non_terminal
      where="15.5.1">local-variable-initializer</non_terminal>
+
+    
 
     
 
@@ -106,8 +126,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -116,8 +140,12 @@
 
     
 
+    
+
     ). A local variable must be definitely assigned (<hyperlink
     >12.3</hyperlink>
+
+    
 
     
 
@@ -129,8 +157,12 @@
 
     
 
+    
+
      is the block in which the declaration occurs. It is an error to refer to a local variable in a textual position that precedes the  <non_terminal
      where="15.5.1">local-variable-declarator</non_terminal>
+
+    
 
     
 
@@ -150,6 +182,8 @@ void F() {
 
       
 
+      
+
       corresponds exactly to <code_example
       >
         <![CDATA[
@@ -160,6 +194,8 @@ void F() {
 }  
 ]]>
       </code_example>
+
+      
 
       
 

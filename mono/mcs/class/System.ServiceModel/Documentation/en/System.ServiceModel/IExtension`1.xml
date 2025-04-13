@@ -30,8 +30,12 @@
 
         
 
+        
+
          objects (the <see
          cref="T:System.ServiceModel.IContextChannel" />
+
+        
 
         
 
@@ -40,13 +44,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.InstanceContext" />
 
         
 
+        
+
         , and <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 

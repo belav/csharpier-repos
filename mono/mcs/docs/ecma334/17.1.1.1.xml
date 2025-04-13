@@ -33,6 +33,8 @@ class C: B
 
       
 
+      
+
       the abstract class A introduces an abstract method F. Class B introduces an additional method G, but since it doesn't provide an implementation of F, B must also be declared abstract. Class C overrides F and provides an actual implementation. Since there are no abstract members in C, C is permitted (but not required) to be non-abstract. end example]</example
     >
   </paragraph>

@@ -23,8 +23,12 @@
 
         
 
+        
+
          to create the user profile and store it in the <see
          cref="P:System.Web.HttpContext.Profile" />
+
+        
 
         
 
@@ -33,11 +37,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
 
             
 
+            
+
              event, to migrate profile settings from an anonymous profile to an authenticated profile when an anonymous user logs in.</para
           >
         </item>
@@ -58,6 +68,8 @@
           <para
             >The <see
              cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+            
 
             
 
@@ -71,8 +83,12 @@
 
             
 
+            
+
              event, to control how the user profile is saved when the <see
              cref="P:System.Web.Profile.ProfileManager.AutomaticSaveEnabled" />
+
+            
 
             
 
@@ -87,6 +103,8 @@
             >&lt;profile&gt; Element for &lt;system.web&gt;</a
           >
         </format>
+
+        
 
         
 
@@ -114,8 +132,12 @@
 
             
 
+            
+
              is created when an ASP.NET application is started. The <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -124,13 +146,19 @@
 
             
 
+            
+
              constructor to create the <see
              cref="T:System.Web.Profile.ProfileModule" />
 
             
 
+            
+
              for the application. The <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -142,6 +170,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -171,8 +201,12 @@
 
             
 
+            
+
              is created when an ASP.NET application is started. The <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -181,13 +215,19 @@
 
             
 
+            
+
              for the application and calls the <see
              cref="M:System.Web.Profile.ProfileModule.Dispose" />
 
             
 
+            
+
              method when the object is released. The <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -199,6 +239,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -230,8 +272,12 @@
 
             
 
+            
+
              is created when an ASP.NET application is started. The <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -240,13 +286,19 @@
 
             
 
+            
+
              method when it creates the <see
              cref="T:System.Web.Profile.ProfileModule" />
 
             
 
+            
+
              for the application. The <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -261,11 +313,15 @@
 
             
 
+            
+
              object is created.</para
           >
         </summary>
         <param name="app">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,8 +351,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -308,6 +368,8 @@
 
             
 
+            
+
              event to copy profile property values from an anonymous profile to an authenticated profile when a user who has been anonymously using your application logs in.</para
           >
           <para
@@ -316,10 +378,14 @@
 
             
 
+            
+
              class. Strongly typed accessors are added to the ProfileCommon class for each property defined in the <format
              type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
+
+            
 
             
 
@@ -354,8 +420,12 @@
 
             
 
+            
+
              event is raised during the <see
              cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+            
 
             
 
@@ -364,8 +434,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -377,8 +451,12 @@
 
             
 
+            
+
              event to specify a custom user profile. If the <see
              cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+
+            
 
             
 
@@ -387,8 +465,12 @@
 
             
 
+            
+
              event handler for the <see
              cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+            
 
             
 
@@ -397,8 +479,12 @@
 
             
 
+            
+
              event ends, then the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -407,13 +493,19 @@
 
             
 
+            
+
              property as the value of the <see
              cref="P:System.Web.HttpContext.Profile" />
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -448,8 +540,12 @@
 
             
 
+            
+
              event is raised at the end of page execution if the <see
              cref="P:System.Web.Profile.ProfileManager.AutomaticSaveEnabled" />
+
+            
 
             
 
@@ -458,8 +554,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -471,8 +571,12 @@
 
             
 
+            
+
              method checks the <see
              cref="P:System.Configuration.SettingsPropertyValue.IsDirty" />
+
+            
 
             
 
@@ -481,8 +585,12 @@
 
             
 
+            
+
              in the user profile to determine whether properties that are made up of primitive types, strings, or <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -491,8 +599,12 @@
 
             
 
+            
+
              method cannot explicitly determine whether a custom class has changed. You can use the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 
@@ -504,13 +616,19 @@
 
             
 
+            
+
              property to false in the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
+            
+
              event; otherwise, set the <see
              cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+
+            
 
             
 
@@ -522,8 +640,12 @@
 
             
 
+            
+
              event. The <see
              cref="T:System.Web.Profile.ProfileModule" />
+
+            
 
             
 
@@ -532,13 +654,19 @@
 
             
 
+            
+
              property is set to. As a result, it is recommended that you explicitly set the <see
              cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
             
 
+            
+
              property in the <see
              cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+
+            
 
             
 

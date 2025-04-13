@@ -39,8 +39,12 @@
 
         
 
+        
+
          to give the user an option, such as true/false or yes/no. The <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.RadioButton" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          controls let the user pick a combination of options. In contrast, <see
          cref="T:System.Windows.Forms.RadioButton" />
+
+        
 
         
 
@@ -74,13 +86,19 @@
 
         
 
+        
+
          property determines whether the <see
          cref="T:System.Windows.Forms.CheckBox" />
 
         
 
+        
+
          appears as a typical <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
          property determines whether the control supports two or three states. Use the <see
          cref="P:System.Windows.Forms.CheckBox.Checked" />
+
+        
 
         
 
@@ -102,13 +124,19 @@
 
         
 
+        
+
          control and use the <see
          cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
         
 
+        
+
          property to get or set the value of a three-state <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -121,8 +149,12 @@
 
           
 
+          
+
            property is set to true, the <see
            cref="P:System.Windows.Forms.CheckBox.Checked" />
+
+          
 
           
 
@@ -135,13 +167,19 @@
 
         
 
+        
+
          property determines the style and appearance of the control. If the <see
          cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
+        
+
          property is set to <see
          cref="F:System.Windows.Forms.FlatStyle.System" />
+
+        
 
         
 
@@ -154,8 +192,12 @@
 
           
 
+          
+
            property is set to <see
            cref="F:System.Windows.Forms.FlatStyle.System" />
+
+          
 
           
 
@@ -164,8 +206,12 @@
 
           
 
+          
+
            property is ignored and the control is displayed using the <see
            cref="F:System.Drawing.ContentAlignment.MiddleLeft" />
+
+          
 
           
 
@@ -174,8 +220,12 @@
 
           
 
+          
+
            alignment. If the <see
            cref="P:System.Windows.Forms.CheckBox.CheckAlign" />
+
+          
 
           
 
@@ -184,8 +234,12 @@
 
           
 
+          
+
            alignment; otherwise, it is displayed using the <see
            cref="F:System.Drawing.ContentAlignment.MiddleLeft" />
+
+          
 
           
 
@@ -198,8 +252,12 @@
 
         
 
+        
+
          that determines if the selected text in a <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 
@@ -208,13 +266,19 @@
 
         
 
+        
+
          to bold the selection. Likewise, when you select some text, the <see
          cref="T:System.Windows.Forms.CheckBox" />
 
         
 
+        
+
          displays whether the selected text is bold. If your selected text contains text that is bold and normal, the <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -226,6 +290,8 @@
       <para
         >Represents a Windows <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -247,8 +313,12 @@
 
             
 
+            
+
              is instantiated, <see
              cref="P:System.Windows.Forms.CheckBox.AutoCheck" />
+
+            
 
             
 
@@ -257,13 +327,19 @@
 
             
 
+            
+
              is set to false, and <see
              cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.Appearance.Normal" />
+
+            
 
             
 
@@ -275,6 +351,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -314,8 +392,12 @@
 
             
 
+            
+
              value is set to <see
              cref="F:System.Windows.Forms.Appearance.Normal" />
+
+            
 
             
 
@@ -324,8 +406,12 @@
 
             
 
+            
+
              has a typical appearance. If the value is set to Button, the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -337,6 +423,8 @@
           <para
             >Gets or sets the value that determines the appearance of a <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -366,6 +454,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -374,6 +464,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.CheckBox.Appearance" />
+
+            
 
             
 
@@ -407,8 +499,12 @@
 
             
 
+            
+
              is set to false, you will need to add code to update the <see
              cref="P:System.Windows.Forms.CheckBox.Checked" />
+
+            
 
             
 
@@ -417,8 +513,12 @@
 
             
 
+            
+
              values in the <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -433,8 +533,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
+
+            
 
             
 
@@ -443,8 +547,12 @@
 
             
 
+            
+
             's appearance are automatically changed when the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -488,6 +596,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -527,13 +637,19 @@
 
             
 
+            
+
              portion of the control displays a check mark. If the <see
              cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
+            
+
              property is set to Button, the control will appear sunken when <see
              cref="P:System.Windows.Forms.CheckBox.Checked" />
+
+            
 
             
 
@@ -545,6 +661,8 @@
           <para
             >Gets or set a value indicating whether the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -574,6 +692,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -582,6 +702,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.CheckBox.Checked" />
+
+            
 
             
 
@@ -624,8 +746,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
+
+            
 
             
 
@@ -637,13 +763,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.CheckBox" />
 
             
 
+            
+
              control in its different states for the Normal and Button style control <see
              cref="P:System.Windows.Forms.CheckBox.Appearance" />
+
+            
 
             
 
@@ -674,6 +806,8 @@
 
                   
 
+                  
+
                    displays a check mark. </para
                 >
               </description>
@@ -689,6 +823,8 @@
                 <para
                   >The <see
                    cref="T:System.Windows.Forms.CheckBox" />
+
+                  
 
                   
 
@@ -710,6 +846,8 @@
 
                   
 
+                  
+
                    displays a check mark and is shaded. </para
                 >
               </description>
@@ -724,6 +862,8 @@
           <para
             >Gets or sets the state of the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -753,6 +893,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -761,6 +903,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
+
+            
 
             
 
@@ -792,8 +936,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -803,6 +951,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -818,6 +968,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -826,6 +978,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.CheckBox.CheckBoxAccessibleObject" />
+
+            
 
             
 
@@ -905,8 +1059,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+
+            
 
             
 
@@ -915,8 +1073,12 @@
 
             
 
+            
+
              control, and the <see
              cref="E:System.Windows.Forms.CheckBox.DoubleClick" />
+
+            
 
             
 
@@ -929,6 +1091,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -970,8 +1134,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+
+            
 
             
 
@@ -980,8 +1148,12 @@
 
             
 
+            
+
              control, and the <see
              cref="E:System.Windows.Forms.CheckBox.MouseDoubleClick" />
+
+            
 
             
 
@@ -994,6 +1166,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -1025,11 +1199,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckBox.OnAppearanceChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1044,6 +1222,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1052,8 +1232,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1088,11 +1272,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckBox.OnCheckedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1107,6 +1295,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1115,8 +1305,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1151,11 +1345,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckBox.OnCheckStateChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1170,6 +1368,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1178,8 +1378,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1209,8 +1413,12 @@
 
             
 
+            
+
              method changes the <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
+
+            
 
             
 
@@ -1219,8 +1427,12 @@
 
             
 
+            
+
              property is set to true, subsequent clicks of the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -1229,8 +1441,12 @@
 
             
 
+            
+
              cycling through all the values of the <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
+
+            
 
             
 
@@ -1239,13 +1455,19 @@
 
             
 
+            
+
              switches between <see
              cref="F:System.Windows.Forms.CheckState.Checked" />
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.CheckState.Unchecked" />
+
+            
 
             
 
@@ -1259,11 +1481,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1278,6 +1504,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1286,8 +1514,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1344,6 +1576,8 @@
 
           
 
+          
+
           Contains data for the event.</param
         >
       </Docs>
@@ -1391,6 +1625,8 @@
 
             
 
+            
+
              method to determine whether the given character matches a mnemonic in the control's text.</para
           >
           <para>For example: </para>
@@ -1400,6 +1636,8 @@
           <para
             >This default implementation of the <see
              cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" />
+
+            
 
             
 
@@ -1416,6 +1654,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1455,6 +1695,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1485,13 +1727,19 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
+            
+
              property value can only be set to the Indeterminate value of <see
              cref="T:System.Windows.Forms.CheckState" />
+
+            
 
             
 
@@ -1503,6 +1751,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.CheckBox" />
+
+            
 
             
 
@@ -1532,6 +1782,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1540,6 +1792,8 @@
           <para
             >A string that states the control type and the state of the <see
              cref="P:System.Windows.Forms.CheckBox.CheckState" />
+
+            
 
             
 

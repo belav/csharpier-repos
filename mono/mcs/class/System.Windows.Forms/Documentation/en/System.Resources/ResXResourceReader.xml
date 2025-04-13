@@ -26,13 +26,19 @@
 
         
 
+        
+
          class provides a default implementation of the <see
          cref="T:System.Resources.IResourceReader" />
 
         
 
+        
+
          interface that reads resource information in an XML format. To read resource information from a binary resource format, use the <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          class to enumerate resources in .resx files by traversing the dictionary enumerator (<see
          cref="T:System.Collections.IDictionaryEnumerator" />
+
+        
 
         
 
@@ -54,8 +64,12 @@
 
         
 
+        
+
          method. You call the methods provided by <see
          cref="T:System.Collections.IDictionaryEnumerator" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
           
 
+          
+
            class provides two enumerators. The <see
            cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
+
+          
 
           
 
@@ -78,13 +96,19 @@
 
           
 
+          
+
            object; we recommend that you use this method to enumerate resources. The <see
            cref="M:System.Resources.ResXResourceReader.System#Collections#IEnumerable#GetEnumerator" />
 
           
 
+          
+
            method is an explicit interface implementation that returns an <see
            cref="T:System.Collections.IEnumerator" />
+
+          
 
           
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
          method to obtain an <see
          cref="T:System.Collections.IDictionaryEnumerator" />
+
+        
 
         
 
@@ -111,8 +139,12 @@
 
         
 
+        
+
          property is true, the value of the <see
          cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+        
 
         
 
@@ -121,13 +153,19 @@
 
         
 
+        
+
          object rather than the resource value. This makes a resource item's comment available from the <see
          cref="P:System.Resources.ResXDataNode.Comment" />
 
         
 
+        
+
          property. The following example sets the <see
          cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
+
+        
 
         
 
@@ -140,8 +178,12 @@
 
         
 
+        
+
          is true, the <see
          cref="T:System.Resources.ResXDataNode" />
+
+        
 
         
 
@@ -155,6 +197,8 @@
 
             
 
+            
+
              property is null. </para
           >
         </item>
@@ -165,13 +209,19 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Resources.ResXFileRef" />
 
             
 
+            
+
              object that provides information about the resource, including its filename. If relative file names are used, you should always set the <see
              cref="P:System.Resources.ResXResourceReader.BasePath" />
+
+            
 
             
 
@@ -185,6 +235,8 @@
 
         
 
+        
+
          object and call its GetString and GetObject methods. </para
       >
       <block subset="none" type="note">
@@ -194,8 +246,12 @@
 
           
 
+          
+
            class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -206,10 +262,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -239,8 +299,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Resources.ResXResourceReader.Close" />
+
+              
 
               
 
@@ -256,11 +320,15 @@
 
             
 
+            
+
              class for the specified stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,8 +359,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -301,6 +373,8 @@
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,11 +402,15 @@
 
             
 
+            
+
              class for the specified resource file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +442,8 @@
 
             
 
+            
+
              class using an input stream and a type resolution service.  </para
           >
         </summary>
@@ -372,10 +452,14 @@
 
           
 
+          
+
           An input stream that contains resources. </param
         >
         <param name="typeResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,11 +494,15 @@
 
             
 
+            
+
              class using a stream and an array of assembly names. </para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,8 +513,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -454,6 +546,8 @@
 
             
 
+            
+
              class using a text stream reader and a type resolution service.  </para
           >
         </summary>
@@ -462,10 +556,14 @@
 
           
 
+          
+
           A text stream reader that contains resources. </param
         >
         <param name="typeResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,8 +598,12 @@
 
             
 
+            
+
              class using a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -513,6 +615,8 @@
 
           
 
+          
+
           An object used to read resources from a stream of text. </param
         >
         <param name="assemblyNames">
@@ -520,8 +624,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -549,6 +657,8 @@
 
             
 
+            
+
              class using a file name and a type resolution service. </para
           >
         </summary>
@@ -557,10 +667,14 @@
 
           
 
+          
+
           The name of an XML resource file that contains resources. </param
         >
         <param name="typeResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,11 +709,15 @@
 
             
 
+            
+
              class using an XML resource file name and an array of assembly names. </para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,8 +728,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -638,8 +760,12 @@
 
             
 
+            
+
              property is used to resolve relative file path references that are assigned to the <see
              cref="P:System.Resources.ResXFileRef.FileName" />
+
+            
 
             
 
@@ -648,13 +774,19 @@
 
             
 
+            
+
              objects.  By default, its value is <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
             , and relative file path references are resolved in relationship to the current directory returned by the <see
              cref="P:System.Environment.CurrentDirectory" />
+
+            
 
             
 
@@ -666,6 +798,8 @@
           <para
             >Gets or sets the base path for the relative file path specified in a <see
              cref="T:System.Resources.ResXFileRef" />
+
+            
 
             
 
@@ -690,13 +824,19 @@
 
             
 
+            
+
              enables the resources used by the <see
              cref="T:System.Resources.ResXResourceReader" />
 
             
 
+            
+
              to be reallocated for other purposes. For more information about <see
              cref="M:System.Resources.ResXResourceReader.Close" />
+
+            
 
             
 
@@ -709,6 +849,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -717,6 +859,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -747,8 +891,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -757,8 +905,12 @@
 
             
 
+            
+
              invokes this method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -767,8 +919,12 @@
 
             
 
+            
+
              invokes this method with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -780,8 +936,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -796,11 +956,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,6 +990,8 @@
           <para
             >This member overrides the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -860,6 +1026,8 @@
 
             
 
+            
+
              object and initializes it to read a string whose contents are in the form of an XML resource file.</para
           >
         </summary>
@@ -871,11 +1039,15 @@
 
             
 
+            
+
              string.</para
           >
         </returns>
         <param name="fileContents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -910,8 +1082,12 @@
 
             
 
+            
+
              object and initializes it to read a string whose contents are in the form of an XML resource file, and to use an <see
              cref="T:System.ComponentModel.Design.ITypeResolutionService" />
+
+            
 
             
 
@@ -926,6 +1102,8 @@
 
             
 
+            
+
              string.</para
           >
         </returns>
@@ -934,10 +1112,14 @@
 
           
 
+          
+
           A string containing XML resource-formatted information. </param
         >
         <param name="typeResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -975,8 +1157,12 @@
 
             
 
+            
+
              object and initializes it to read a string whose contents are in the form of an XML resource file, and to use an array of <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -991,11 +1177,15 @@
 
             
 
+            
+
              string.</para
           >
         </returns>
         <param name="fileContents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1006,8 +1196,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -1034,8 +1228,12 @@
 
             
 
+            
+
              method retrieves the name/value pairs in the XML resource (.resx) stream or string associated with the current <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -1044,13 +1242,19 @@
 
             
 
+            
+
              property is set to true before you call <see
              cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
 
             
 
+            
+
             , the resource items are retrieved as <see
              cref="T:System.Resources.ResXDataNode" />
+
+            
 
             
 
@@ -1065,6 +1269,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1073,6 +1279,8 @@
           <para
             >An enumerator for the current <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -1107,8 +1315,12 @@
 
             
 
+            
+
              method provides an <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -1117,13 +1329,19 @@
 
             
 
+            
+
              object. However, if the <see
              cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
 
             
 
+            
+
              property is set to true before you call <see
              cref="M:System.Resources.ResXResourceReader.GetMetadataEnumerator" />
+
+            
 
             
 
@@ -1163,8 +1381,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1173,8 +1395,12 @@
 
             
 
+            
+
              method, and then call the MoveNext method on the returned <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -1189,8 +1415,12 @@
 
             
 
+            
+
              object. For a description of this member, see the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -1202,6 +1432,8 @@
           <para
             >An enumerator that can iterate through the name/value pairs in the XML resource (.resx) stream or string associated with the current <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -1230,8 +1462,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1246,8 +1482,12 @@
 
             
 
+            
+
              and optionally releases the managed resources. For a description of this member, see the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -1275,6 +1515,8 @@
 
             
 
+            
+
              property before you begin enumerating resources. By default, its value is false. </para
           >
         </remarks>
@@ -1283,6 +1525,8 @@
           <para
             >Gets or sets a value that indicates whether <see
              cref="T:System.Resources.ResXDataNode" />
+
+            
 
             
 

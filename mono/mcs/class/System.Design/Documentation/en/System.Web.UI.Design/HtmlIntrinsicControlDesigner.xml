@@ -25,6 +25,8 @@
 
         
 
+        
+
          namespace.</para
       >
     </remarks>
@@ -45,6 +47,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.UI.Design.HtmlIntrinsicControlDesigner" />
+
+            
 
             
 

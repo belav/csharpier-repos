@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -75,6 +77,8 @@
 
           
 
+          
+
            representing the filename under which the private key will be loaded. </param
         >
         <summary>Create a PrivateKey object from the specified file.</summary>
@@ -84,11 +88,15 @@
 
           
 
+          
+
            object containing the loaded private key.</returns
         >
         <remarks
           >A <see
            cref="T:System.Security.Cryptography.CryptographicException" />
+
+          
 
           
 
@@ -120,6 +128,8 @@
 
           
 
+          
+
            representing the filename under which the private key will be loaded. </param
         >
         <param name="password">the password to decrypt the private key file.</param>
@@ -130,11 +140,15 @@
 
           
 
+          
+
            object containing the loaded and, if required, decrypted private key.</returns
         >
         <remarks
           >A <see
            cref="T:System.Security.Cryptography.CryptographicException" />
+
+          
 
           
 
@@ -178,6 +192,8 @@
 
           
 
+          
+
            indicating the private key intended usage.</value
         >
         <remarks>Default to 2. The utility MakeCert requires the private keys inside PVK files to have a KeyType equals to 2 (signing).</remarks>
@@ -205,6 +221,8 @@
 
           
 
+          
+
            instance containing the private key.</value
         >
         <remarks>To be added</remarks>
@@ -227,6 +245,8 @@
         <param name="filename"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -257,11 +277,15 @@
 
           
 
+          
+
            representing the filename under which the private key will be saved.</param
         >
         <param name="password"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

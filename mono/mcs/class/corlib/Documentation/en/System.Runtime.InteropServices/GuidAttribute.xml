@@ -42,6 +42,8 @@
 
         
 
+        
+
          can apply it for you when it imports a type library.</para
       >
       <para
@@ -50,13 +52,19 @@
 
         
 
+        
+
         . To avoid conflicts with the type <see
          cref="T:System.Guid" />
 
         
 
+        
+
         , use the long name <see
          cref="T:System.Runtime.InteropServices.GuidAttribute" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
       <para
         >Supplies an explicit <see
          cref="T:System.Guid" />
+
+        
 
         
 
@@ -102,6 +112,8 @@
 
             
 
+            
+
              class with the specified GUID.</para
           >
         </summary>
@@ -110,8 +122,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -139,6 +155,8 @@
           <para
             >Gets the <see
              cref="T:System.Guid" />
+
+            
 
             
 

@@ -45,8 +45,12 @@
 
         
 
+        
+
          instance is always modifiable. See <see
          cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.CollectionBase" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
         , the capacity is automatically increased as required through reallocation. The capacity can be decreased by setting the <see
          cref="P:System.Collections.CollectionBase.Capacity" />
+
+        
 
         
 
@@ -105,8 +117,12 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -115,11 +131,15 @@
 
             
 
+            
+
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
             >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -132,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -164,13 +186,19 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.CollectionBase" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -182,6 +210,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -190,13 +220,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -211,11 +247,15 @@
 
             
 
+            
+
              class with the specified capacity.</para
           >
         </summary>
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,8 +289,12 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -259,8 +303,12 @@
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -271,8 +319,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -281,8 +333,12 @@
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.CollectionBase.Capacity" />
+
+            
 
             
 
@@ -294,8 +350,12 @@
 
             
 
+            
+
              property explicitly. When the value of <see
              cref="P:System.Collections.CollectionBase.Capacity" />
+
+            
 
             
 
@@ -307,8 +367,12 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -320,6 +384,8 @@
           <para
             >Gets or sets the number of elements that the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -352,6 +418,8 @@
 
             
 
+            
+
              is set to zero.</para
           >
           <para
@@ -360,13 +428,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -378,8 +452,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.CollectionBase.OnClearComplete" />
+
+            
 
             
 
@@ -391,6 +469,8 @@
           <para
             >Removes all objects from the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -419,6 +499,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -458,8 +540,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -468,8 +554,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -480,8 +570,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -490,13 +584,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -508,8 +608,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -518,8 +622,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -528,8 +636,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -538,8 +650,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -551,8 +667,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -561,8 +681,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -571,8 +695,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -585,8 +713,12 @@
 
             
 
+            
+
              method is not visible to COM clients by default, inheriting the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -602,6 +734,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -613,8 +747,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -651,8 +789,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -667,8 +809,12 @@
 
             
 
+            
+
              containing the list of elements in the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -702,8 +848,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -719,8 +869,12 @@
 
             
 
+            
+
              containing the list of elements in the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -755,8 +909,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -770,6 +928,8 @@
           <para
             >Performs additional custom processes when clearing the contents of the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -804,8 +964,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -818,6 +982,8 @@
           <para
             >Performs additional custom processes after clearing the contents of the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -858,8 +1024,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -876,6 +1046,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -884,8 +1056,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -896,8 +1072,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -937,8 +1117,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -963,6 +1147,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -971,8 +1157,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -983,8 +1173,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -1024,8 +1218,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -1042,6 +1240,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1050,8 +1250,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1062,8 +1266,12 @@
 
           
 
+          
+
           The value of the element to remove from <paramref
            name="index" />
+
+          
 
           
 
@@ -1103,8 +1311,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -1129,6 +1341,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1137,8 +1351,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1149,8 +1367,12 @@
 
           
 
+          
+
           The value of the element to remove from <paramref
            name="index" />
+
+          
 
           
 
@@ -1191,8 +1413,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -1209,6 +1435,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1217,8 +1445,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="oldValue" />
+
+          
 
           
 
@@ -1229,8 +1461,12 @@
 
           
 
+          
+
           The value to replace with <paramref
            name="newValue" />
+
+          
 
           
 
@@ -1241,8 +1477,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -1283,8 +1523,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -1309,6 +1553,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1317,8 +1563,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="oldValue" />
+
+          
 
           
 
@@ -1329,8 +1579,12 @@
 
           
 
+          
+
           The value to replace with <paramref
            name="newValue" />
+
+          
 
           
 
@@ -1341,8 +1595,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -1377,8 +1635,12 @@
 
             
 
+            
+
              is null, and, if so, throws <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -1390,8 +1652,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -1405,6 +1671,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1440,13 +1708,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -1461,11 +1735,15 @@
 
             
 
+            
+
              instance. This method is not overridable.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1502,6 +1780,8 @@
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -1510,13 +1790,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -1531,8 +1817,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1544,8 +1834,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1554,8 +1848,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1566,8 +1864,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1603,13 +1905,19 @@
 
             
 
+            
+
              instance is not synchronized. Derived classes can provide a synchronized version of the <see
              cref="T:System.Collections.CollectionBase" />
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1619,6 +1927,8 @@
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1632,6 +1942,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -1668,8 +1980,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1678,8 +1994,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -1688,8 +2008,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -1699,6 +2023,8 @@
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1712,6 +2038,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -1747,6 +2075,8 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the list is doubled by automatically reallocating the internal array and copying the existing elements to the new array before the new element is added.</para
           >
           <para
@@ -1755,8 +2085,12 @@
 
             
 
+            
+
              is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -1765,8 +2099,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -1781,6 +2119,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1792,8 +2132,12 @@
 
             
 
+            
+
              index at which the <paramref
              name="value" />
+
+            
 
             
 
@@ -1805,13 +2149,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to be added to the end of the <see
            cref="T:System.Collections.CollectionBase" />
+
+          
 
           
 
@@ -1846,13 +2196,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -1864,6 +2220,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1872,8 +2230,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1882,8 +2244,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -1892,13 +2258,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -1913,6 +2285,8 @@
 
             
 
+            
+
              contains a specific element.</para
           >
         </summary>
@@ -1924,8 +2298,12 @@
 
             
 
+            
+
              contains the specified <paramref
              name="value" />
+
+            
 
             
 
@@ -1937,13 +2315,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.CollectionBase" />
+
+          
 
           
 
@@ -1978,13 +2362,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -1996,6 +2386,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2004,8 +2396,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2014,8 +2410,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -2024,13 +2424,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -2045,8 +2451,12 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the entire <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -2061,8 +2471,12 @@
 
             
 
+            
+
              within the entire <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -2074,13 +2488,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.CollectionBase" />
+
+          
 
           
 
@@ -2116,6 +2536,8 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the list is doubled by automatically reallocating the internal array before the new element is inserted.</para
           >
           <para
@@ -2124,8 +2546,12 @@
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -2134,8 +2560,12 @@
 
             
 
+            
+
              is added to the end of <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -2148,13 +2578,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -2169,6 +2605,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -2177,8 +2615,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -2189,8 +2631,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2229,6 +2675,8 @@
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -2262,6 +2710,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -2325,8 +2775,12 @@
 
             
 
+            
+
              does not contain the specified object, the <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -2338,8 +2792,12 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -2348,11 +2806,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method determines equality by calling <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2368,6 +2830,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2376,13 +2840,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.CollectionBase" />
+
+          
 
           
 

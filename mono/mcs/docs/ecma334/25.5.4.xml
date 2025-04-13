@@ -6,8 +6,12 @@
 
     
 
+    
+
      consists of an ampersand (&amp;) followed by a <non_terminal
      where="14.6">unary-expression</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="25.5.4">addressof-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -32,13 +38,19 @@
 
     
 
+    
+
     ), the construct &amp;E computes the address of the variable given by E. The type of the result is T* and is classified as a value. A compile-time error occurs if E is not classified as a variable, if E is classified as a volatile field (<hyperlink
     >17.4.3</hyperlink>
 
     
 
+    
+
     ), or if E denotes a moveable variable. In the last case, a fixed statement (<hyperlink
     >25.6</hyperlink>
+
+    
 
     
 
@@ -67,6 +79,8 @@ class Test
 
       
 
+      
+
       i is considered definitely assigned following the &amp;i operation used to initialize p. The assignment to *p in effect initializes i, but the inclusion of this initialization is the responsibility of the programmer, and no compile-time error would occur if the assignment was removed. end example]</example
     >
   </paragraph>
@@ -77,6 +91,8 @@ class Test
     <note
       >[Note: As stated in <hyperlink
       >14.5.4</hyperlink>
+
+      
 
       
 

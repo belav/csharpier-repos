@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides a programmatic representation of an XML Schema Definition language (XSD) document. Instead of using <see
          cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+
+        
 
         
 
@@ -36,10 +40,14 @@
 
         
 
+        
+
          class or the <format
          type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
+
+        
 
         
 
@@ -51,13 +59,19 @@
 
         
 
+        
+
          class creates <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
+        
+
          objects from classes that are identified as Web services. It uses the <see
          cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+
+        
 
         
 
@@ -77,6 +91,8 @@
 
         
 
+        
+
          class and reflection.</para
       >
     </remarks>
@@ -85,6 +101,8 @@
       <para
         >Populates <see
          cref="T:System.Xml.Schema.XmlSchema" />
+
+        
 
         
 
@@ -121,13 +139,19 @@
 
             
 
+            
+
              class supplies the collection of <see
              cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
+            
+
              objects to which XML schema element declarations are to be added. You do not need to create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+
+            
 
             
 
@@ -142,6 +166,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -150,8 +176,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -187,8 +217,12 @@
 
             
 
+            
+
              creates <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -200,8 +234,12 @@
 
             
 
+            
+
             , with an attribute <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+            
 
             
 
@@ -213,6 +251,8 @@
           <para
             >Exports an &lt;any&gt; element to the <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -228,8 +268,12 @@
 
           
 
+          
+
           The namespace of the XML schema document to which to add an <ui
           >&lt;any&gt;</ui>
+
+          
 
           
 
@@ -268,6 +312,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -280,8 +326,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlMembersMapping" />
+
+          
 
           
 
@@ -319,8 +369,12 @@
 
             
 
+            
+
              method adds an XML schema element declaration to the <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -329,6 +383,8 @@
           <para
             >Use the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 
@@ -343,11 +399,15 @@
 
             
 
+            
+
              for each of the element parts of a literal SOAP message definition. </para
           >
         </summary>
         <param name="xmlMembersMapping">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,6 +447,8 @@
 
             
 
+            
+
              for each of the element parts of a literal SOAP message definition, and specifies whether enclosing elements are included.</para
           >
         </summary>
@@ -395,10 +457,14 @@
 
           
 
+          
+
           The internal mapping between a .NET Framework type and an XML schema element.</param
         >
         <param name="exportEnclosingType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,11 +502,15 @@
 
             
 
+            
+
              that uses the same namespace as the SOAP message part. The literal message definition must contain a single part.</para
           >
           <para
             >Use the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 
@@ -455,6 +525,8 @@
 
             
 
+            
+
              object for a single element part of a literal SOAP message definition.</para
           >
         </summary>
@@ -466,11 +538,15 @@
 
             
 
+            
+
              that represents the qualified XML name of the exported element declaration.</para
           >
         </returns>
         <param name="xmlMembersMapping">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,11 +585,15 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
         <param name="xmlTypeMapping">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

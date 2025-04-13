@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operand is converted to the parameter type of the selected operator, and the type of the result is the return type of the operator. The predefined negation operators are: <list
     >
       <list_item
@@ -25,8 +27,12 @@ long operator -(long x);
 
     
 
+    
+
      or <keyword
     >long</keyword>
+
+    
 
     
 
@@ -35,8 +41,12 @@ long operator -(long x);
 
     
 
+    
+
      or <keyword
     >long</keyword>
+
+    
 
     
 
@@ -45,8 +55,12 @@ long operator -(long x);
 
     
 
+    
+
     , it is converted to type <keyword
     >long</keyword>
+
+    
 
     
 
@@ -55,13 +69,19 @@ long operator -(long x);
 
     
 
+    
+
     . An exception is the rule that permits the <keyword
     >int</keyword>
 
     
 
+    
+
      value <unicode
     >8722</unicode>
+
+    
 
     
 
@@ -70,8 +90,12 @@ long operator -(long x);
 
     
 
+    
+
     2<super
     >31</super>
+
+    
 
     
 
@@ -80,8 +104,12 @@ long operator -(long x);
 
     
 
+    
+
      integer literal (<hyperlink
     >9.4.4.2</hyperlink>
+
+    
 
     
 
@@ -90,8 +118,12 @@ long operator -(long x);
 
     
 
+    
+
     , a compile-time error occurs. An exception is the rule that permits the <keyword
     >long</keyword>
+
+    
 
     
 
@@ -100,8 +132,12 @@ long operator -(long x);
 
     
 
+    
+
     9223372036854775808 (<unicode
     >8722</unicode>
+
+    
 
     
 
@@ -110,13 +146,19 @@ long operator -(long x);
 
     
 
+    
+
     ) to be written as a <keyword
     >decimal</keyword>
 
     
 
+    
+
      integer literal (<hyperlink
     >9.4.4.2</hyperlink>
+
+    
 
     
 

@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -116,6 +118,8 @@
 
             
 
+            
+
              value that specifies the maximum duration the channel allows the other communicating party not to send any messages before faulting the channel.</para
           >
         </summary>
@@ -172,13 +176,19 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

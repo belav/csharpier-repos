@@ -21,8 +21,12 @@
 
         
 
+        
+
          is a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >Provides a user interface for selecting an XML file using a standard <see
          cref="T:System.Windows.Forms.OpenFileDialog" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.XmlFileEditor" />
+
+            
 
             
 
@@ -97,8 +105,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -109,10 +121,14 @@
 
           
 
+          
+
           A service provider object through which editing services may be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,6 +162,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -157,8 +175,12 @@
 
             
 
+            
+
              enumeration value indicating the provided editing style. If the method is not supported in the specified context, this will return the <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -170,8 +192,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

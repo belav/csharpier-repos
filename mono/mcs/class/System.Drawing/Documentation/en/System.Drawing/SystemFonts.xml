@@ -19,8 +19,12 @@
 
         
 
+        
+
          class returns a <see
          cref="T:System.Drawing.Font" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
             
 
+            
+
              that is used to display text in the title bars of windows.</para
           >
         </summary>
@@ -79,6 +85,8 @@
           <para
             >The following table describes the value returned by the <see
              cref="P:System.Drawing.SystemFonts.DefaultFont" />
+
+            
 
             
 
@@ -127,8 +135,12 @@
 
             
 
+            
+
              returns the value of the <see
              cref="P:System.Drawing.FontFamily.GenericSansSerif" />
+
+            
 
             
 
@@ -140,13 +152,19 @@
 
             
 
+            
+
              returned by <see
              cref="P:System.Drawing.SystemFonts.DefaultFont" />
 
             
 
+            
+
              does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see
              cref="P:System.Drawing.SystemFonts.IconTitleFont" />
+
+            
 
             
 
@@ -182,8 +200,12 @@
 
             
 
+            
+
              property returns Tahoma, 8 point. Otherwise, <see
              cref="P:System.Drawing.SystemFonts.DialogFont" />
+
+            
 
             
 
@@ -192,8 +214,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -202,8 +228,12 @@
 
             
 
+            
+
              does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see
              cref="P:System.Drawing.SystemFonts.IconTitleFont" />
+
+            
 
             
 
@@ -241,8 +271,12 @@
 
             
 
+            
+
              method returns null if the specified name does not match a font in the <see
              cref="T:System.Drawing.SystemFonts" />
+
+            
 
             
 
@@ -261,8 +295,12 @@
 
             
 
+            
+
              if the specified name matches a value in <see
              cref="T:System.Drawing.SystemFonts" />
+
+            
 
             
 
@@ -271,6 +309,8 @@
         </returns>
         <param name="systemFontName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,6 +342,8 @@
 
             
 
+            
+
              that is used for icon titles.</para
           >
         </summary>
@@ -325,6 +367,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -357,6 +401,8 @@
 
             
 
+            
+
              that is used for message boxes.</para
           >
         </summary>
@@ -386,6 +432,8 @@
 
             
 
+            
+
              that is used to display text in the title bars of small windows, such as tool windows.</para
           >
         </summary>
@@ -412,6 +460,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          is used with the <see
          cref="T:System.Runtime.InteropServices.TypeLibFuncAttribute" />
+
+        
 
         
 
@@ -142,6 +146,8 @@
           <para
             >The function that is displayed to the user as bindable. <see
              cref="F:System.Runtime.InteropServices.TypeLibFuncFlags.FBindable" />
+
+            
 
             
 

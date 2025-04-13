@@ -38,6 +38,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -73,11 +75,15 @@
 
             
 
+            
+
              class using a value to indicate whether the list is bindable.</para
           >
         </summary>
         <param name="listBindable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,8 +120,12 @@
 
             
 
+            
+
              class using <see
              cref="T:System.ComponentModel.BindableSupport" />
+
+            
 
             
 
@@ -127,8 +137,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.BindableSupport" />
+
+          
 
           
 
@@ -164,6 +178,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -172,6 +188,8 @@
           <para
             >Represents the default value for <see
              cref="T:System.ComponentModel.ListBindableAttribute" />
+
+            
 
             
 
@@ -208,6 +226,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -219,11 +239,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +285,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -292,6 +318,8 @@
 
             
 
+            
+
              is set to the default value.</para
           >
         </summary>
@@ -300,6 +328,8 @@
           <para
             >true if <see
              cref="P:System.ComponentModel.ListBindableAttribute.ListBindable" />
+
+            
 
             
 

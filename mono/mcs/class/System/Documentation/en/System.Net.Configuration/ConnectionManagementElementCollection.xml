@@ -60,6 +60,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -97,8 +99,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.ConnectionManagementElement" />
+
+          
 
           
 
@@ -163,6 +169,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -203,6 +211,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -211,8 +221,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.ConnectionManagementElement" />
+
+          
 
           
 
@@ -255,6 +269,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -263,8 +279,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.ConnectionManagementElement" />
+
+          
 
           
 
@@ -365,8 +385,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.ConnectionManagementElement" />
+
+          
 
           
 
@@ -403,6 +427,8 @@
 
           
 
+          
+
           The key of the element to remove.</param
         >
       </Docs>
@@ -433,6 +459,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

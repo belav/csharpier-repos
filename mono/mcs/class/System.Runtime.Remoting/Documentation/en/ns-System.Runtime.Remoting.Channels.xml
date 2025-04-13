@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes that support and handle channels and channel sinks, which are used as the transport medium when a client calls a method on a remote object.</para
       >
     </summary>
@@ -24,10 +26,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="516AAAB7-5B3D-4C72-83DD-D435C01AF8F6">Sinks and Sink Chains</a>
         </format>
+
+        
 
         
 

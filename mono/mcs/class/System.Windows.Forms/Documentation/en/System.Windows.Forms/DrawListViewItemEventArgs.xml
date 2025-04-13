@@ -18,8 +18,12 @@
 
         
 
+        
+
          event enables you to customize the appearance of a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          event is raised by a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -41,13 +49,19 @@
 
         
 
+        
+
          property is set to true. The <see
          cref="T:System.Windows.Forms.DrawListViewItemEventArgs" />
 
         
 
+        
+
          passed to the event handler contains information about the <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -59,13 +73,19 @@
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Item" />
 
         
 
+        
+
          properties to retrieve information about the item to draw. Use the <see
          cref="P:System.Windows.Forms.DrawListViewItemEventArgs.ItemIndex" />
+
+        
 
         
 
@@ -77,8 +97,12 @@
 
         
 
+        
+
          property to do the actual drawing within the area specified by the <see
          cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Bounds" />
+
+        
 
         
 
@@ -87,8 +111,12 @@
 
         
 
+        
+
          elements that do not need customization, use the <see
          cref="M:System.Windows.Forms.DrawListViewItemEventArgs.DrawBackground" />
+
+        
 
         
 
@@ -97,8 +125,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.DrawListViewItemEventArgs.DrawFocusRectangle" />
+
+        
 
         
 
@@ -111,13 +143,19 @@
 
           
 
+          
+
            control and set the <see
            cref="P:System.Windows.Forms.ListView.DoubleBuffered" />
 
           
 
+          
+
            property to true. This feature is available only on Windows XP and the Windows Server 2003 family when your application calls the <see
            cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+          
 
           
 
@@ -130,6 +168,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.DrawItem" />
+
+        
 
         
 
@@ -164,6 +204,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -172,8 +214,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -184,8 +230,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -196,8 +246,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -208,13 +262,19 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
+          
+
            within the <see
            cref="P:System.Windows.Forms.ListView.Items" />
+
+          
 
           
 
@@ -225,13 +285,19 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.ListViewItemStates" />
 
           
 
+          
+
            values indicating the current state of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -258,6 +324,8 @@
 
             
 
+            
+
              control.</para
           >
           <para
@@ -266,8 +334,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.ListViewItem.GetBounds(System.Windows.Forms.ItemBoundsPortion)" />
+
+            
 
             
 
@@ -279,6 +351,8 @@
           <para
             >Gets the size and location of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -306,8 +380,12 @@
 
             
 
+            
+
              property. The background is drawn to fill the area specified by the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Bounds" />
+
+            
 
             
 
@@ -319,6 +397,8 @@
           <para
             >Draws the background of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -350,8 +430,12 @@
 
             
 
+            
+
              control will use the default drawing for the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -379,8 +463,12 @@
 
             
 
+            
+
              property. If the control is in the details view and the <see
              cref="P:System.Windows.Forms.ListView.FullRowSelect" />
+
+            
 
             
 
@@ -393,6 +481,8 @@
           <para
             >Draws a focus rectangle for the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -420,8 +510,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewItem.Font" />
+
+            
 
             
 
@@ -430,13 +524,19 @@
 
             
 
+            
+
              property. You can also draw the text manually using the <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
              retrieved through the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Graphics" />
+
+            
 
             
 
@@ -448,8 +548,12 @@
 
             
 
+            
+
              method is most useful when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -458,8 +562,12 @@
 
             
 
+            
+
             . In the details view, this method draws the text for the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -468,8 +576,12 @@
 
             
 
+            
+
              text in a handler for the <see
              cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+            
 
             
 
@@ -481,6 +593,8 @@
           <para
             >Draws the text of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -513,8 +627,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewItem.Font" />
+
+            
 
             
 
@@ -523,8 +641,12 @@
 
             
 
+            
+
              values specified in the <paramref
              name="flags" />
+
+            
 
             
 
@@ -533,13 +655,19 @@
 
             
 
+            
+
              property. You can also draw the text manually using the <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
              retrieved through the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Graphics" />
+
+            
 
             
 
@@ -551,8 +679,12 @@
 
             
 
+            
+
              method is most useful when the <see
              cref="P:System.Windows.Forms.ListView.View" />
+
+            
 
             
 
@@ -561,8 +693,12 @@
 
             
 
+            
+
             . In the details view, this method draws the text for the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -571,8 +707,12 @@
 
             
 
+            
+
              text in a handler for the <see
              cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+            
 
             
 
@@ -587,8 +727,12 @@
 
             
 
+            
+
              using its current foreground color and formatting it with the specified <see
              cref="T:System.Windows.Forms.TextFormatFlags" />
+
+            
 
             
 
@@ -600,8 +744,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -628,6 +776,8 @@
 
             
 
+            
+
              class provides properties and methods useful for drawing on the display device.</para
           >
         </remarks>
@@ -639,8 +789,12 @@
 
             
 
+            
+
              used to draw the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -671,8 +825,12 @@
 
             
 
+            
+
              to draw. This is useful when the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.State" />
+
+            
 
             
 
@@ -681,8 +839,12 @@
 
             
 
+            
+
              property provides only basic state information that you can use, for example, to determine whether an item is selected, checked, or focused. The <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Item" />
+
+            
 
             
 
@@ -691,13 +853,19 @@
 
             
 
+            
+
             . You must access the item directly, for example, to draw the <see
              cref="P:System.Windows.Forms.ListViewItem.Text" />
 
             
 
+            
+
              value yourself rather than using the <see
              cref="Overload:System.Windows.Forms.DrawListViewItemEventArgs.DrawText" />
+
+            
 
             
 
@@ -709,6 +877,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -737,13 +907,19 @@
 
             
 
+            
+
              within the <see
              cref="P:System.Windows.Forms.ListView.Items" />
 
             
 
+            
+
              collection of the containing <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -774,8 +950,12 @@
 
             
 
+            
+
              to draw is in a particular state. This property provides only basic state information about the item. You can use this property, for example, to determine whether an item is selected, checked, or focused. If you need to know more, retrieve the item through the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Item" />
+
+            
 
             
 
@@ -787,6 +967,8 @@
           <para
             >Gets the current state of the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 

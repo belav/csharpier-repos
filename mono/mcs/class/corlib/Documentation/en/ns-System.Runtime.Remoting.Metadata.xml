@@ -15,10 +15,14 @@
 
         
 
+        
+
          namespace contains classes and attributes that can be used to customize generation and processing of SOAP for objects and fields. The classes of this namespace can be used to indicate the SOAPAction header field, type output, XML element name, and the method XML namespace URI. This information is used by the SOAP serializer during SOAP generation and the <format
          type="text/html">
           <a href="40f6f8c8-b80c-4e9f-a920-31bcd0cf45c5">Soapsuds Tool (Soapsuds.exe)</a>
         </format>
+
+        
 
         
 
@@ -27,13 +31,19 @@
 
         
 
+        
+
          namespace is <see
          cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
 
         
 
+        
+
          class. The <see
          cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" />
+
+        
 
         
 

@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes that support SQL Server-specific functionality.</para
       >
     </summary>
@@ -22,10 +24,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="0f0ba1a1-3180-4af8-87f7-c795dc8f8f55">Using Query Notifications</a>
         </format>
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
           
 
+          
+
            namespace also contained classes for use with SQL Server common language runtime (CLR) integration. However, those classes have been moved into their own namespace, <see
            cref="N:Microsoft.SqlServer.Server" />
+
+          
 
           
 
@@ -49,6 +59,8 @@
               >Using SQL Server Common Language Runtime Integration</a
             >
           </format>
+
+          
 
           
 

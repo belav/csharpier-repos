@@ -6,6 +6,8 @@
 
     
 
+    
+
     ), the minimal lexical elements of the language. The syntactic grammar defines how tokens can be combined to make valid C# programs. </paragraph
   >
   <paragraph
@@ -14,6 +16,8 @@
       <name>
         <non_terminal where="17.1.1">class-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -43,8 +47,12 @@
 
     
 
+    
+
     defines the <non_terminal
      where="17.1.1">class-modifier</non_terminal>
+
+    
 
     
 
@@ -56,6 +64,8 @@
       <name>
         <non_terminal where="9.4.4.2">decimal-digit</non_terminal>
       </name>
+
+      
 
       
 
@@ -76,11 +86,15 @@
 
     
 
+    
+
     is equivalent to: <grammar_production
     >
       <name>
         <non_terminal where="9.4.4.2">decimal-digit</non_terminal>
       </name>
+
+      
 
       
 
@@ -123,11 +137,15 @@
 
     
 
+    
+
     , is used as shorthand to indicate an optional symbol. The example: <grammar_production
     >
       <name>
         <non_terminal where="15.8.3">for-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -150,11 +168,15 @@
 
     
 
+    
+
     is equivalent to: <grammar_production
     >
       <name>
         <non_terminal where="15.8.3">for-statement</non_terminal>
       </name>
+
+      
 
       
 

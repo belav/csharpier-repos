@@ -29,8 +29,12 @@
 
         
 
+        
+
          and provides support for the correct versions of the <see
          cref="P:System.ServiceModel.WSHttpBinding.Security" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.WSHttpBindingBase.TransactionFlow" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.WS2007HttpBindingElement" />
+
+            
 
             
 

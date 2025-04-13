@@ -42,13 +42,19 @@
 
         
 
+        
+
          is present is similar to using a combination of the <see
          cref="T:System.Diagnostics.DebuggerHiddenAttribute" />
 
         
 
+        
+
          attribute, which hides the code from the debugger, and the <see
          cref="T:System.Diagnostics.DebuggerStepThroughAttribute" />
+
+        
 
         
 
@@ -83,6 +89,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -91,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.DebuggerNonUserCodeAttribute" />
+
+            
 
             
 

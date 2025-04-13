@@ -27,8 +27,12 @@
 
         
 
+        
+
          class manages the list of role groups associated with a particular <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >To find the role group in the collection that a particular user belongs to, you can use the <see
          cref="M:System.Web.UI.WebControls.RoleGroupCollection.GetMatchingRoleGroup(System.Security.Principal.IPrincipal)" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
 
           
 
+          
+
            collection is important because matching is done sequentially based on the first role found.</para
         >
       </block>
@@ -58,10 +66,14 @@
 
         
 
+        
+
          class to manage a list of role groups. For more information, see <format
          type="text/html">
           <a href="a0d2f19d-a2a7-496d-88b6-30133f8ea3d6">Understanding Role Management</a>
         </format>
+
+        
 
         
 
@@ -73,6 +85,8 @@
       <para
         >Contains a sequential list of role groups that the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+
+            
 
             
 
@@ -128,8 +144,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+          
 
           
 
@@ -168,8 +188,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+          
 
           
 
@@ -203,8 +227,12 @@
 
             
 
+            
+
              method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. After the items are in an array, you can use array syntax to access the items in the <see
              cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+
+            
 
             
 
@@ -219,8 +247,12 @@
 
             
 
+            
+
              collection to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+            
 
             
 
@@ -232,8 +264,12 @@
 
           
 
+          
+
           A zero-based array of <see
            cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+          
 
           
 
@@ -241,6 +277,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,6 +311,8 @@
 
             
 
+            
+
              method searches the role group collection and returns the first role group that contains the specified user account. The method searches the collection in the order role groups are added to the collection, and returns only the first matching role group.</para
           >
           <para>If the specified user account is not part of any of the role groups in the collection, null is returned.</para>
@@ -282,10 +322,14 @@
 
             
 
+            
+
              method. For more information, see <format
              type="text/html">
               <a href="a0d2f19d-a2a7-496d-88b6-30133f8ea3d6">Understanding Role Management</a>
             </format>
+
+            
 
             
 
@@ -304,6 +348,8 @@
 
             
 
+            
+
              representing the first role group in the collection that contains the specified user account. If the user is not part of a role group in the collection, it returns null.</para
           >
         </returns>
@@ -312,8 +358,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IPrincipal" />
+
+          
 
           
 
@@ -346,6 +396,8 @@
 
             
 
+            
+
              method performs a linear search; therefore the average execution time depends on the number of members in the collection.</para
           >
         </remarks>
@@ -354,6 +406,8 @@
           <para
             >Searches the collection and returns the zero-based index of the first occurrence of the specified <see
              cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+            
 
             
 
@@ -368,8 +422,12 @@
 
             
 
+            
+
              within the entire <see
              cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
+
+            
 
             
 
@@ -381,8 +439,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+          
 
           
 
@@ -416,8 +478,12 @@
 
             
 
+            
+
              method inserts the specified <see
              cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+            
 
             
 
@@ -432,6 +498,8 @@
 
             
 
+            
+
              to the collection at the specified index.</para
           >
         </summary>
@@ -440,10 +508,14 @@
 
           
 
+          
+
           The zero-based index at which to insert the role group. </param
         >
         <param name="group">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -499,13 +571,19 @@
 
             
 
+            
+
              object is removed from the <see
              cref="T:System.Web.UI.WebControls.RoleGroupCollection" />
 
             
 
+            
+
              collection. Groups that follow the removed group all move up in the index to fill the vacated spot. If there is more than one instance of the specified <see
              cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+            
 
             
 
@@ -521,8 +599,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+          
 
           
 

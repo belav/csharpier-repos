@@ -22,8 +22,12 @@
 
         
 
+        
+
          method overload to specify the <see
          cref="T:System.GCCollectionMode" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
           <para
             >The default setting for this enumeration, which is currently <see
              cref="F:System.GCCollectionMode.Forced" />
+
+            
 
             
 

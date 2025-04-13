@@ -46,6 +46,8 @@
 
           
 
+          
+
           The version of the dnprdnshort to target.</param
         >
       </Docs>
@@ -76,6 +78,8 @@
 
             
 
+            
+
              that contains the dnprdnshort SDK installation path.</para
           >
         </summary>
@@ -87,11 +91,15 @@
 
             
 
+            
+
              that contains the dnprdnshort SDK installation path.</para
           >
         </returns>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,6 +141,8 @@
 
           
 
+          
+
           The version of the dnprdnshort to target.</param
         >
       </Docs>
@@ -165,6 +175,8 @@
         </returns>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,10 +216,14 @@
 
           
 
+          
+
           The file to locate in the dnprdnshort directory.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,6 +262,8 @@
 
           
 
+          
+
           The version of the dnprdnshort to target.</param
         >
       </Docs>
@@ -277,13 +295,19 @@
 
             
 
+            
+
              and <see
              cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToSystemFile(System.String)" />
 
             
 
+            
+
              this method checks for the existence of the file, so that an invalid <paramref
              name="fileName" />
+
+            
 
             
 
@@ -303,10 +327,14 @@
 
           
 
+          
+
           The file to locate in the dnprdnshort SDK.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -345,6 +373,8 @@
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

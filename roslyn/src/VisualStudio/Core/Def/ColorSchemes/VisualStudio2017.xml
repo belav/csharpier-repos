@@ -382,6 +382,8 @@
 
       
 
+      
+
       "
             <Color
        Name="inline hints">
@@ -545,6 +547,8 @@
       <Color Name="namespace name"></Color>
       <Color Name="label name"></Color>
       <Color Name="record name"></Color>
+
+      
 
       
 

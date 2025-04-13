@@ -22,6 +22,8 @@
 
         
 
+        
+
          class, which provides access to application-management functions and application services. </para
       >
     </remarks>
@@ -45,8 +47,12 @@
 
             
 
+            
+
              constructor initializes the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 
@@ -55,8 +61,12 @@
 
             
 
+            
+
              constructor is called only once by the application's <see
              cref="T:System.Web.Hosting.ApplicationManager" />
+
+            
 
             
 
@@ -65,8 +75,12 @@
 
             
 
+            
+
              constructor more than once will cause an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -78,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 
@@ -106,8 +122,12 @@
 
             
 
+            
+
              set to high trust to access the <see
              cref="P:System.Web.Hosting.HostingEnvironment.ApplicationId" />
+
+            
 
             
 
@@ -162,6 +182,8 @@
 
             
 
+            
+
              property always returns "/" as the first character of the returned value. If the application is located in the root of the website, the return value is just "/".</para
           >
         </remarks>
@@ -195,6 +217,8 @@
 
             
 
+            
+
              instance for the current application.</para
           >
         </summary>
@@ -220,8 +244,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 
@@ -234,8 +262,12 @@
 
             
 
+            
+
              method for each call to the <see
              cref="M:System.Web.Hosting.HostingEnvironment.IncrementBusyCount" />
+
+            
 
             
 
@@ -270,6 +302,8 @@
           <para
             >An <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -308,11 +342,15 @@
 
             
 
+            
+
              object that represents the Windows user prior to impersonation; this object can be used to revert to the original user's context.</para
           >
         </returns>
         <param name="token">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,6 +384,8 @@
 
             
 
+            
+
              method impersonates the user that results after applying all <format
              type="text/html">
               <a href="6bff1aa6-d7d5-47a8-8f3b-62b05cf2bdcf">identity</a>
@@ -353,8 +393,12 @@
 
             
 
+            
+
              elements in the configuration settings affecting the specified virtual path. If an identity element is not specified for the virtual path, the <see
              cref="M:System.Web.Hosting.HostingEnvironment.Impersonate(System.IntPtr,System.String)" />
+
+            
 
             
 
@@ -373,6 +417,8 @@
 
             
 
+            
+
              object that represents the Windows user prior to impersonation; this object can be used to revert to the original user's context.</para
           >
         </returns>
@@ -381,10 +427,14 @@
 
           
 
+          
+
           The handle of a Windows account token.</param
         >
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,6 +462,8 @@
 
             
 
+            
+
              object that it is running and to increase the count of busy objects by one.</para
           >
           <para>If the busy count is greater than zero, the hosting application will not time out even if there are no pending requests.</para>
@@ -421,8 +473,12 @@
 
             
 
+            
+
              method for each call to the <see
              cref="M:System.Web.Hosting.HostingEnvironment.IncrementBusyCount" />
+
+            
 
             
 
@@ -459,6 +515,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -484,8 +542,12 @@
 
             
 
+            
+
              method in its base class. It always returns null and prevents a lease from being created that would limit the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 
@@ -497,6 +559,8 @@
           <para
             >Gives the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 
@@ -529,8 +593,12 @@
 
             
 
+            
+
              method to stop a web application domain and remove any objects registered with the <see
              cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+            
 
             
 
@@ -542,10 +610,14 @@
 
             
 
+            
+
              method is called on each registered object with the passed parameter set to false to allow each registered object to shut down asynchronously. After waiting for the amount of time specified in the shutdownTimeout attribute of the <format
              type="text/html">
               <a href="043a75c8-231a-4f8d-9633-501530bd7d40">hostingEnvironment</a>
             </format>
+
+            
 
             
 
@@ -554,11 +626,15 @@
 
             
 
+            
+
              method is called again with the passed parameter set to true for each registered object remaining.</para
           >
           <para
             >Once all registered objects have finished shutting down, the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 
@@ -589,6 +665,8 @@
           <para
             >Gets a value indicating whether the current application domain is being hosted by an <see
              cref="T:System.Web.Hosting.ApplicationManager" />
+
+            
 
             
 
@@ -624,11 +702,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,8 +743,12 @@
 
             
 
+            
+
              class enables methods outside the current application domain to create, manage, and destroy objects inside the current application domain. The <see
              cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+            
 
             
 
@@ -671,8 +757,12 @@
 
             
 
+            
+
              method must implement the <see
              cref="T:System.Web.Hosting.IRegisteredObject" />
+
+            
 
             
 
@@ -687,6 +777,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -694,6 +786,8 @@
               <para
                 >Call a type-specific method to initialize your new object. In the initialization method, call the <see
                  cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+                
 
                 
 
@@ -707,6 +801,8 @@
 
                 
 
+                
+
                  method to return the registered object when required.</para
               >
             </item>
@@ -717,13 +813,19 @@
 
                 
 
+                
+
                  method. The <see
                  cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" />
 
                 
 
+                
+
                  method in turn calls the <see
                  cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
+
+                
 
                 
 
@@ -737,8 +839,12 @@
 
                 
 
+                
+
                  method, have your object call the <see
                  cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+                
 
                 
 
@@ -753,6 +859,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -785,8 +893,12 @@
 
             
 
+            
+
              method adds the specified <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -795,6 +907,8 @@
           <para
             >For more information, see the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -809,6 +923,8 @@
 
             
 
+            
+
              instance with the ASP.NET compilation system.</para
           >
         </summary>
@@ -817,8 +933,12 @@
 
           
 
+          
+
           The new <see
            cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+          
 
           
 
@@ -846,10 +966,14 @@
 
             
 
+            
+
              method sets the current thread to the culture specified in the <format
              type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7">globalization</a>
             </format>
+
+            
 
             
 
@@ -865,6 +989,8 @@
           <para
             >An <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -898,10 +1024,14 @@
 
             
 
+            
+
              method sets the current thread to the culture that results after applying all <format
              type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7">globalization</a>
             </format>
+
+            
 
             
 
@@ -920,11 +1050,15 @@
 
             
 
+            
+
              object that represents the culture prior to changing; this object can be used to revert to the previous culture.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -998,8 +1132,12 @@
 
             
 
+            
+
              class enables methods outside the current application domain to create, manage, and destroy objects inside the current application domain. The <see
              cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+            
 
             
 
@@ -1012,6 +1150,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1042,8 +1182,12 @@
 
             
 
+            
+
              instance is registered, the <see
              cref="T:System.Web.Hosting.HostingEnvironment" />
+
+            
 
             
 

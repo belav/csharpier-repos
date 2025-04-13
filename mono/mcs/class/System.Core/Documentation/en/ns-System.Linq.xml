@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace provides classes and interfaces that support queries that use vbteclinqext.</para
       >
     </summary>
@@ -20,6 +22,8 @@
 
         
 
+        
+
          namespace is in the System.Core assembly (in System.Core.dll).</para
       >
       <para
@@ -28,8 +32,12 @@
 
         
 
+        
+
          class contains vbteclinq standard query operators that operate on objects that implement <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          class contains vbteclinq standard query operators that operate on objects that implement <see
          cref="T:System.Linq.IQueryable`1" />
+
+        
 
         
 
@@ -53,6 +65,8 @@
          type="text/html">
           <a href="73d13345-eece-471a-af40-4cc7a2f11655">LINQ to SQL</a>
         </format>
+
+        
 
         
 

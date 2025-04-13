@@ -16,8 +16,12 @@
 
         
 
+        
+
          that derive from <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
         , provide a UI but do not store user-specified values. In this case, the cell type does not implement <see
          cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
         , do not implement <see
          cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
         . For example, <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -62,8 +78,12 @@
 
         
 
+        
+
          that derives from the <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -72,8 +92,12 @@
 
         
 
+        
+
         . In this case, the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.EditType" />
+
+        
 
         
 
@@ -82,8 +106,12 @@
 
         
 
+        
+
          object representing the editing control type. For information about implementing <see
          cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
+
+        
 
         
 
@@ -93,6 +121,8 @@
             >How to: Host Controls in Windows Forms DataGridView Cells</a
           >
         </format>
+
+        
 
         
 
@@ -126,8 +156,12 @@
 
             
 
+            
+
              method and passing in the <see
              cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Formatting" />
+
+            
 
             
 
@@ -188,6 +222,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -203,6 +239,8 @@
 
             
 
+            
+
              that represents the formatted version of the cell contents.</para
           >
         </returns>
@@ -211,8 +249,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -247,6 +289,8 @@
         </summary>
         <param name="selectAll">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

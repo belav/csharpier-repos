@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used to specify the Web configuration file hierarchy. By default, the configuration system uses the IIS metabase to determine the Web file hierarchy. If IIS is not installed, or if an application targets a version of the .NET Framework that is not the latest version that is installed on the server, the <see
          cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
       <para
         >The <see
          cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+        
 
         
 
@@ -56,6 +62,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+            
 
             
 
@@ -85,6 +93,8 @@
 
             
 
+            
+
              class with the same value as the existing instance.</para
           >
         </summary>
@@ -93,6 +103,8 @@
           <para
             >A new instance of a <see
              cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+            
 
             
 
@@ -121,6 +133,8 @@
           <para
             >The virtual directories of a Web application may not necessarily map to the physical directories on the server. The <see
              cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+            
 
             
 

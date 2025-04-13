@@ -40,8 +40,12 @@
 
         
 
+        
+
          can be used to declaratively demand that users running your code belong to a specified role or have been authenticated. Use of <see
          cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          with <see
          cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          that is used. <see
          cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+
+        
 
         
 
@@ -88,13 +104,19 @@
 
           
 
+          
+
           . By default, the principal policy is set to <see
            cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
 
           
 
+          
+
           . If you do not set the principal policy to <see
            cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+
+          
 
           
 
@@ -107,6 +129,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.PrincipalPermission" />
+
+        
 
         
 
@@ -143,6 +167,8 @@
 
             
 
+            
+
              that have meaning for this attribute. Other actions do not apply to permissions that are not code access permissions.</para
           >
         </remarks>
@@ -154,8 +180,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -167,8 +197,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -230,6 +264,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -238,6 +274,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -265,6 +303,8 @@
           <para
             >If the authentication provider is Windows NT, <see
              cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
+
+            
 
             
 

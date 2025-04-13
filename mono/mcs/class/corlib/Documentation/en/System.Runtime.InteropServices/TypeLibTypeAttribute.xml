@@ -42,6 +42,8 @@
 
         
 
+        
+
          applies this attribute to classes or interfaces.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          evaluate to non-zero. The attribute is designed to be used by tools that need to know how the original <see
          cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
       <para
         >Contains the <see
          cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -105,8 +115,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.InteropServices.TypeLibTypeFlags" />
+
+          
 
           
 
@@ -143,6 +157,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -151,8 +167,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.InteropServices.TypeLibTypeFlags" />
+
+          
 
           
 
@@ -186,6 +206,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.TypeLibTypeFlags" />
+
+            
 
             
 

@@ -19,13 +19,19 @@
 
         
 
+        
+
          object represents an error that is created when an <see
          cref="T:System.Web.HttpParseException" />
 
         
 
+        
+
          exception is thrown. A parser error object can contain error message text, a virtual path to the file where the error occurred, and the subsequent line number of the error in that file. If more than one parser error occurs or you want to store multiple parser errors in a centralized location, use the <see
          cref="T:System.Web.ParserErrorCollection" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
         . For more information on exceptions and how to handle them, go to <see
          cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+        
 
         
 
@@ -63,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -95,13 +107,19 @@
 
             
 
+            
+
              constructor to initialize a <see
              cref="T:System.Web.ParserError" />
 
             
 
+            
+
              object with custom settings. The <see
              cref="M:System.Web.ParserError.#ctor(System.String,System.String,System.Int32)" />
+
+            
 
             
 
@@ -115,6 +133,8 @@
 
                 
 
+                
+
                  property, which is a string containing the error message that is related to the parser error. </para
               >
             </item>
@@ -122,6 +142,8 @@
               <para
                 >The <see
                  cref="P:System.Web.ParserError.VirtualPath" />
+
+                
 
                 
 
@@ -135,8 +157,12 @@
 
                 
 
+                
+
                  property, which is the line number within the file at which this <see
                  cref="T:System.Web.ParserError" />
+
+                
 
                 
 
@@ -153,11 +179,15 @@
 
             
 
+            
+
              class by using the specified error text, virtual path, and source line number.</para
           >
         </summary>
         <param name="errorText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,10 +198,14 @@
 
           
 
+          
+
           The virtual path of the file being parsed when the error occurred.</param
         >
         <param name="line">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,8 +233,12 @@
 
             
 
+            
+
              property to provide a programmer-defined error message for parser errors for display in a <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -212,6 +250,8 @@
           <para
             >Gets or sets a string that represents the error for the <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 
@@ -240,8 +280,12 @@
 
             
 
+            
+
              property is the line number within the file at which this <see
              cref="T:System.Web.ParserError" />
+
+            
 
             
 

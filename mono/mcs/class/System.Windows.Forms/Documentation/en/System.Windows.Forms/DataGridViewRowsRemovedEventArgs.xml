@@ -22,6 +22,8 @@
 
         
 
+        
+
          control, the index numbers of subsequent rows are lowered to compensate.</para
       >
       <para
@@ -29,6 +31,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.RowsRemoved" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -77,10 +85,14 @@
 
           
 
+          
+
           The zero-based index of the row that was deleted, or the first deleted row if multiple rows were deleted. </param
         >
         <param name="rowCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

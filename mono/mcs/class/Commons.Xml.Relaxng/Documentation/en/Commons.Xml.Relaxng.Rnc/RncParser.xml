@@ -11,6 +11,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -42,11 +44,15 @@
 
           
 
+          
+
            that holds the compact syntax source.</param
         >
         <returns
           >The resulting <see
            cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+          
 
           
 
@@ -76,6 +82,8 @@
 
           
 
+          
+
            that holds the compact syntax source.</param
         >
         <param name="nameTable"
@@ -84,11 +92,15 @@
 
           
 
+          
+
            that is passed to the instance constructor.</param
         >
         <returns
           >The resulting <see
            cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+          
 
           
 
@@ -117,6 +129,8 @@
 
           
 
+          
+
            that holds the input compact syntax.</param
         >
         <returns
@@ -141,6 +155,8 @@
         <param name="nameTable"
           >a <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 

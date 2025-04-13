@@ -9,6 +9,8 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
@@ -17,8 +19,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -30,8 +36,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -43,8 +53,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -56,8 +70,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -69,8 +87,12 @@
 
         
 
+        
+
          S with an element type SE to an <non_terminal
          where="19.1">array-type</non_terminal>
+
+        
 
         
 
@@ -84,6 +106,8 @@
 
           
 
+          
+
           s. </list_item
         >
         <list_item> An explicit reference conversion exists from SE to TE. </list_item>
@@ -94,11 +118,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > From System.Delegate and the interfaces it implements, to any <non_terminal
          where="11.2">delegate-type</non_terminal>
+
+        
 
         
 
@@ -112,11 +140,15 @@
 
     
 
+    
+
     s that require run-time checks to ensure they are correct. </paragraph
   >
   <paragraph
     >For an explicit reference conversion to succeed at run-time, the value of the source operand must be null, or the actual type of the object referenced by the source operand must be a type that can be converted to the destination type by an implicit reference conversion (<hyperlink
     >13.1.4</hyperlink>
+
+    
 
     
 

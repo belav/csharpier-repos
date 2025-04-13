@@ -16,6 +16,8 @@ bool operator !=(bool x, bool y);
 
     
 
+    
+
     , the != operator produces the same result as the ^ operator. </paragraph
   >
 </clause>

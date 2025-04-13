@@ -36,13 +36,19 @@
 
         
 
+        
+
          set to true or that do not have a Set method cannot be changed. Members that do not have this attribute or that are marked with the <see
          cref="T:System.ComponentModel.ReadOnlyAttribute" />
 
         
 
+        
+
          set to false are read/write, and they can be changed. The default is <see
          cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
           
 
+          
+
            class enforces the <see
            cref="T:System.ComponentModel.ReadOnlyAttribute" />
+
+          
 
           
 
@@ -65,8 +75,12 @@
 
           
 
+          
+
            set to true, the value of this attribute is set to the constant member <see
            cref="F:System.ComponentModel.ReadOnlyAttribute.Yes" />
+
+          
 
           
 
@@ -75,8 +89,12 @@
 
           
 
+          
+
            set to false, the value is <see
            cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+          
 
           
 
@@ -85,8 +103,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+          
 
           
 
@@ -98,6 +120,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -135,13 +159,19 @@
 
             
 
+            
+
              set to true or that do not have a Set method cannot be changed. Members that do not have this attribute or that are marked with the <see
              cref="T:System.ComponentModel.ReadOnlyAttribute" />
 
             
 
+            
+
              set to false are read/write, and they can be changed. The default is <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+            
 
             
 
@@ -154,8 +184,12 @@
 
               
 
+              
+
                set to true, the value of this attribute is set to the constant member <see
                cref="F:System.ComponentModel.ReadOnlyAttribute.Yes" />
+
+              
 
               
 
@@ -164,8 +198,12 @@
 
               
 
+              
+
                set to false, the value is <see
                cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+              
 
               
 
@@ -174,8 +212,12 @@
 
               
 
+              
+
                or <see
                cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+              
 
               
 
@@ -191,11 +233,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="isReadOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,8 +277,12 @@
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+            
 
             
 
@@ -247,8 +297,12 @@
 
             
 
+            
+
             , which is <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+            
 
             
 
@@ -290,6 +344,8 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
@@ -322,6 +378,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.ReadOnlyAttribute" />
+
+            
 
             
 
@@ -408,13 +466,19 @@
 
             
 
+            
+
              set to false, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.No" />
+
+            
 
             
 
@@ -455,13 +519,19 @@
 
             
 
+            
+
              set to true, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.Yes" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.ReadOnlyAttribute.Yes" />
+
+            
 
             
 

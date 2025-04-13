@@ -28,6 +28,8 @@
 
         
 
+        
+
          when generating code for serialization and deserialization methods. The value specifies whether the schema importer generates write methods for mappings with write access, and read methods for mappings with read access. This minimizes the generation of serialization code.</para
       >
     </remarks>

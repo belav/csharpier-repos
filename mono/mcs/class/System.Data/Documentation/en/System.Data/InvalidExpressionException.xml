@@ -26,6 +26,8 @@
 
         
 
+        
+
          property is use to calculate the value of a column, or create an aggregate column.</para
       >
     </remarks>
@@ -37,13 +39,19 @@
 
         
 
+        
+
          that contains an invalid <see
          cref="P:System.Data.DataColumn.Expression" />
 
         
 
+        
+
          to a <see
          cref="T:System.Data.DataColumnCollection" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.InvalidExpressionException" />
+
+            
 
             
 
@@ -93,11 +103,15 @@
 
             
 
+            
+
              class with the specified string.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,13 +144,19 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and the <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -148,10 +168,14 @@
 
           
 
+          
+
           The data needed to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,11 +211,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

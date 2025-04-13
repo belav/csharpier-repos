@@ -102,13 +102,19 @@ class Test
 
       
 
+      
+
        array and uses Memory.Copy to copy the contents of the memory block into the <keyword
       >byte</keyword>
 
       
 
+      
+
        array. Finally, the memory block is freed using Memory.Free and the contents of the <keyword
       >byte</keyword>
+
+      
 
       
 

@@ -41,6 +41,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -66,11 +68,15 @@
 
             
 
+            
+
              class with the specified template parser.</para
           >
         </summary>
         <param name="parser">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,8 +131,12 @@
 
             
 
+            
+
              method overrides the implementation of this method in <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -146,6 +156,8 @@
 
           
 
+          
+
           The tag name of the child control.</param
         >
         <param name="attribs">
@@ -153,8 +165,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

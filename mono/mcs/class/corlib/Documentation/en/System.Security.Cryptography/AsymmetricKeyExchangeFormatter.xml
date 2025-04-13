@@ -68,8 +68,12 @@
 
             
 
+            
+
              to set the key before calling <see
              cref="M:System.Security.Cryptography.AsymmetricKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />
+
+            
 
             
 
@@ -81,6 +85,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.AsymmetricKeyExchangeFormatter" />
+
+            
 
             
 
@@ -128,6 +134,8 @@
 
           
 
+          
+
           The secret information to be passed in the key exchange. </param
         >
       </Docs>
@@ -172,10 +180,14 @@
 
           
 
+          
+
           The secret information to be passed in the key exchange. </param
         >
         <param name="symAlgType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,6 +246,8 @@
 
             
 
+            
+
              implementation.</para
           >
         </remarks>
@@ -246,8 +260,12 @@
 
           
 
+          
+
           The instance of the implementation of <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+          
 
           
 

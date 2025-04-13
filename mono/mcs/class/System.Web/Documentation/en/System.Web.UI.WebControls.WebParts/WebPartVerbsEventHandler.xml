@@ -33,13 +33,19 @@
 
         
 
+        
+
          class is used to specify the methods that are invoked in response to a <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartZoneBase.CreateVerbs" />
 
         
 
+        
+
          event, which occurs when the Web Parts verbs are created for a zone that derives from the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+        
 
         
 
@@ -51,11 +57,15 @@
 
         
 
+        
+
          property.</para
       >
       <para
         >A <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          base class and overriding the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
+
+        
 
         
 
@@ -77,13 +91,19 @@
 
         
 
+        
+
          base class, you can add a new verb by implementing the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
 
         
 
+        
+
          interface, and then overriding the <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
+
+        
 
         
 
@@ -95,8 +115,12 @@
 
         
 
+        
+
          method allows derived classes to override the event without attaching a delegate to it. A derived class must always call the <see
          cref="M:System.Web.UI.WebControls.WebParts.WebPartZoneBase.OnCreateVerbs(System.Web.UI.WebControls.WebParts.WebPartVerbsEventArgs)" />
+
+        
 
         
 
@@ -108,6 +132,8 @@
       <para
         >Represents the delegate for the <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartZoneBase.CreateVerbs" />
+
+        
 
         
 

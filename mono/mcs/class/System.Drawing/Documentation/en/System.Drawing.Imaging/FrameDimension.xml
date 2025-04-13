@@ -38,6 +38,8 @@
 
             
 
+            
+
              class using the specified Guid structure.</para
           >
         </summary>
@@ -46,8 +48,12 @@
 
           
 
+          
+
           A Guid structure that contains a GUID for this <see
            cref="T:System.Drawing.Imaging.FrameDimension" />
+
+          
 
           
 
@@ -78,8 +84,12 @@
 
             
 
+            
+
              equivalent to this <see
              cref="T:System.Drawing.Imaging.FrameDimension" />
+
+            
 
             
 
@@ -94,8 +104,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.Imaging.FrameDimension" />
+
+            
 
             
 
@@ -104,11 +118,15 @@
 
             
 
+            
+
              object; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +155,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -145,6 +165,8 @@
           <para
             >Returns an int value that is the hash code of this <see
              cref="T:System.Drawing.Imaging.FrameDimension" />
+
+            
 
             
 
@@ -171,6 +193,8 @@
           <para
             >Gets a globally unique identifier (GUID) that represents this <see
              cref="T:System.Drawing.Imaging.FrameDimension" />
+
+            
 
             
 
@@ -266,6 +290,8 @@
 
             
 
+            
+
              object to a human-readable string.</para
           >
         </summary>
@@ -274,6 +300,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Drawing.Imaging.FrameDimension" />
+
+            
 
             
 

@@ -19,8 +19,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Windows.Forms.Design.AxImporter" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          object, which sets options for the importer, such as the filename for the wrapper .dll to generate and the output directory to generate the wrapper to. To generate the ActiveX wrapper, call the appropriate Generate method. To generate from a file, call <see
          cref="M:System.Windows.Forms.Design.AxImporter.GenerateFromFile(System.IO.FileInfo)" />
+
+        
 
         
 
@@ -39,8 +47,12 @@
 
         
 
+        
+
         . The string that is returned will consist of an assembly qualified name (example: "Namespace.Type,Assembly") for the type an ActiveX wrapper was generated for. The wrapper for the ActiveX control will be generated in the .dll file specified in the <see
          cref="F:System.Windows.Forms.Design.AxImporter.Options.outputName" />
+
+        
 
         
 
@@ -49,13 +61,19 @@
 
         
 
+        
+
          passed to the <see
          cref="T:System.Windows.Forms.Design.AxImporter" />
 
         
 
+        
+
          constructor. The type can be loaded or queried using <see
          cref="N:System.Reflection" />
+
+        
 
         
 
@@ -174,8 +192,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileInfo" />
+
+          
 
           
 
@@ -214,8 +236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.UCOMITypeLib" />
+
+          
 
           
 
@@ -255,8 +281,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.UCOMITypeLib" />
+
+          
 
           
 
@@ -267,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Guid" />
+
+          
 
           
 

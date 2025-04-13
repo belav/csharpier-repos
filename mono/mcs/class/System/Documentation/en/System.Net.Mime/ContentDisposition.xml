@@ -24,8 +24,12 @@
 
         
 
+        
+
          class accompanies an e-mail message that contains attachments when the e-mail message is sent to its destination. The information in <see
          cref="T:System.Net.Mime.ContentDisposition" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class. Instances of the <see
          cref="T:System.Net.Mail.Attachment" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          for an attachment, get the instance from the <see
          cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+
+        
 
         
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
         . Content that is not displayed but is attached in a separate file has the disposition type of <see
          cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+
+        
 
         
 
@@ -70,8 +86,12 @@
 
         
 
+        
+
          property to control the disposition type for the attachment associated with an instance of <see
          cref="T:System.Net.Mime.ContentDisposition" />
+
+        
 
         
 
@@ -83,6 +103,8 @@
 
         
 
+        
+
          to set the file size, as well as the date the file was created, last read, and last modified. For all attachments, you can set a recommended file name in the event that the attachment is stored on the receiving computer.</para
       >
       <para
@@ -91,8 +113,12 @@
 
         
 
+        
+
          method returns the Content-Disposition header. The Content-Disposition header is described in RFC 2183 available at <see
          cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+        
 
         
 
@@ -127,8 +153,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+
+            
 
             
 
@@ -143,13 +173,19 @@
 
             
 
+            
+
              class with a <see
              cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
 
             
 
+            
+
              of <see
              cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+
+            
 
             
 
@@ -183,6 +219,8 @@
 
             
 
+            
+
              class with the specified disposition information.</para
           >
         </summary>
@@ -191,8 +229,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mime.DispositionTypeNames" />
+
+          
 
           
 
@@ -225,6 +267,8 @@
 
             
 
+            
+
              property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Creation-Date parameter in the Content-Disposition header sent with the email. </para
           >
           <para
@@ -233,8 +277,12 @@
 
             
 
+            
+
              class is used to compose an e-mail message. The <see
              cref="T:System.Net.Mail.Attachment" />
+
+            
 
             
 
@@ -243,8 +291,12 @@
 
             
 
+            
+
             , get the <see
              cref="T:System.Net.Mime.ContentDisposition" />
+
+            
 
             
 
@@ -253,11 +305,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -292,8 +348,12 @@
 
             
 
+            
+
              property value can be used by software that displays e-mail to determine the correct way to present the e-mail attachments. <see
              cref="F:System.Net.Mime.DispositionTypeNames.Inline" />
+
+            
 
             
 
@@ -302,11 +362,15 @@
 
             
 
+            
+
              attachments are usually not opened until the user performs some action, such as clicking an icon that represents the attachment.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -348,6 +412,8 @@
 
             
 
+            
+
              object is equal to the content-disposition header of this object.</para
           >
         </summary>
@@ -379,12 +445,16 @@
 
             
 
+            
+
              property allows the sender to suggest the name to be used to store an e-mail attachment on the recipient's computer. This name is a suggestion only; the receiving system can ignore it. The name must not include path information; any such information is ignored by the receiving computer. </para
           >
           <para>To remove file name information, you can set this property to null or the empty string ("").</para>
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -423,6 +493,8 @@
 
             
 
+            
+
              object</para
           >
         </summary>
@@ -454,13 +526,19 @@
 
             
 
+            
+
              property sets the disposition type in the Content-Disposition header sent with the e-mail message. The disposition type can be used by software that displays e-mail to determine the correct way to present the e-mail attachments. Attachments with a disposition type of <see
              cref="F:System.Net.Mime.DispositionTypeNames.Inline" />
 
             
 
+            
+
              are usually displayed when the user opens the e-mail. Attachments with a disposition type of <see
              cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+
+            
 
             
 
@@ -472,6 +550,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -480,6 +560,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -513,6 +595,8 @@
 
             
 
+            
+
              property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Modification-Date parameter in the Content-Disposition header sent with the e-mail message. </para
           >
           <para
@@ -521,8 +605,12 @@
 
             
 
+            
+
              class is used to compose an e-mail message. The <see
              cref="T:System.Net.Mail.Attachment" />
+
+            
 
             
 
@@ -531,8 +619,12 @@
 
             
 
+            
+
              property, get the <see
              cref="T:System.Net.Mime.ContentDisposition" />
+
+            
 
             
 
@@ -541,11 +633,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -586,11 +682,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183, available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -628,6 +728,8 @@
 
             
 
+            
+
              property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Read-Date parameter in the Content-Disposition header sent with the e-mail message. </para
           >
           <para
@@ -636,8 +738,12 @@
 
             
 
+            
+
              class is used to compose an e-mail message. The <see
              cref="T:System.Net.Mail.Attachment" />
+
+            
 
             
 
@@ -646,8 +752,12 @@
 
             
 
+            
+
             , get the <see
              cref="T:System.Net.Mime.ContentDisposition" />
+
+            
 
             
 
@@ -656,11 +766,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -695,8 +809,12 @@
 
             
 
+            
+
              property is used to send time stamp information with a file being sent in an e-mail message. The <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -705,11 +823,15 @@
 
             
 
+            
+
              class is used to attach a file to an e-mail message.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -747,11 +869,15 @@
 
             
 
+            
+
              method is the Content-Disposition header.</para
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -766,6 +892,8 @@
 
             
 
+            
+
              representation of this instance.</para
           >
         </summary>
@@ -774,6 +902,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

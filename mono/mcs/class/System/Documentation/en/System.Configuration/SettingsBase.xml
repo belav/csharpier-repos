@@ -24,8 +24,12 @@
 
         
 
+        
+
          base class, the <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -34,13 +38,19 @@
 
         
 
+        
+
          class, the <see
          cref="T:System.Configuration.SettingsContext" />
 
         
 
+        
+
          class, the <see
          cref="T:System.Configuration.SettingsProvider" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -112,11 +124,15 @@
 
             
 
+            
+
              is used by the application to provide contextual information that the provider can use to persist settings.</para
           >
           <para
             >Each settings class derived from <see
              cref="T:System.Configuration.SettingsBase" />
+
+            
 
             
 
@@ -162,11 +178,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,8 +197,12 @@
 
           
 
+          
+
           The settings properties that will be accessible from the <see
            cref="T:System.Configuration.SettingsBase" />
+
+          
 
           
 
@@ -186,6 +210,8 @@
         >
         <param name="providers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,13 +298,19 @@
 
             
 
+            
+
              property returns the collection of <see
              cref="T:System.Configuration.SettingsProperty" />
 
             
 
+            
+
              instances associated with the properties managed by the <see
              cref="T:System.Configuration.SettingsBase" />
+
+            
 
             
 
@@ -290,8 +322,12 @@
 
             
 
+            
+
              class natively recognizes certain characteristics of a setting, such as its name, property type, settings provider, default value, and read-only status and a serialization preference. These characteristics are mirrored as properties in the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -300,8 +336,12 @@
 
             
 
+            
+
              class are just passed through to its associated settings provider as a <see
              cref="T:System.Configuration.SettingsAttributeDictionary" />
+
+            
 
             
 
@@ -393,6 +433,8 @@
 
             
 
+            
+
              instance groups properties based on the provider that is associated with each property. Each provider is then called in sequence and is passed the set of properties that the provider should save.</para
           >
         </remarks>
@@ -432,8 +474,12 @@
 
             
 
+            
+
              property is set to true.  A <see
              cref="T:System.Configuration.SettingsBase" />
+
+            
 
             
 
@@ -442,13 +488,19 @@
 
             
 
+            
+
              passing in a <see
              cref="T:System.Configuration.SettingsBase" />
 
             
 
+            
+
              instance to make the <see
              cref="T:System.Configuration.SettingsBase" />
+
+            
 
             
 
@@ -463,6 +515,8 @@
 
             
 
+            
+
              class that is synchronized (thread safe).</para
           >
         </summary>
@@ -474,11 +528,15 @@
 
             
 
+            
+
              class that is synchronized.</para
           >
         </returns>
         <param name="settingsBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

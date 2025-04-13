@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the different styles for the next and previous month buttons on the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
 
         
 
+        
+
          allows the programmer to specify custom text for the navigation controls.</para
       >
       <para>
@@ -39,10 +45,14 @@
 
         
 
+        
+
          displays a three-letter abbreviation for the month.</para
       >
       <para>
         <see cref="F:System.Web.UI.WebControls.NextPrevFormat.FullMonth" />
+
+        
 
         
 
@@ -54,6 +64,8 @@
       <para
         >Represents the display format for the previous and next month navigation controls within the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
           <para
             >Custom text format for the month navigation controls on the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
             . For example, "January".</para
           >
         </summary>
@@ -128,6 +144,8 @@
           <para
             >Abbreviated month name format for the month navigation controls on the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 

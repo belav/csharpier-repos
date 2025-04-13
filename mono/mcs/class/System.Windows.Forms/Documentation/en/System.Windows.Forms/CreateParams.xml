@@ -19,8 +19,12 @@
 
         
 
+        
+
          can be used to pass information about the initial state and appearance of a control. Most <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          property to pass in the appropriate values or include additional information in the <see
          cref="T:System.Windows.Forms.CreateParams" />
+
+        
 
         
 
@@ -44,13 +52,19 @@
 
           
 
+          
+
           , <see
            cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
           
 
+          
+
           , and <see
            cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+
+          
 
           
 
@@ -75,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.CreateParams" />
+
+            
 
             
 
@@ -122,6 +138,8 @@
 
             
 
+            
+
              control, set this property to "BUTTON".</para
           >
         </remarks>
@@ -151,8 +169,12 @@
 
             
 
+            
+
              property is ignored if the <see
              cref="P:System.Windows.Forms.CreateParams.ClassName" />
+
+            
 
             
 
@@ -166,13 +188,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
               
 
+              
+
               , and <see
                cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+
+              
 
               
 
@@ -206,6 +234,8 @@
 
             
 
+            
+
              property supports extended appearance and initial state values to apply to the control.</para
           >
           <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
@@ -216,13 +246,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
               
 
+              
+
               , and <see
                cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+
+              
 
               
 
@@ -275,6 +311,8 @@
 
             
 
+            
+
              property must reference a CLIENTCREATESTRUCT structure.</para
           >
           <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CLIENTCREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
@@ -324,6 +362,8 @@
 
             
 
+            
+
              property controls the appearance of the control and its initial state.</para
           >
           <para>For more information about creating control parameters, see the CreateWindow and CreateWindowEx functions and the CREATESTRUCT structure documentation in the Windows Platform SDK reference located in the MSDN Library.</para>
@@ -334,13 +374,19 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.CreateParams.ExStyle" />
 
               
 
+              
+
               , and <see
                cref="P:System.Windows.Forms.CreateParams.ClassStyle" />
+
+              
 
               
 

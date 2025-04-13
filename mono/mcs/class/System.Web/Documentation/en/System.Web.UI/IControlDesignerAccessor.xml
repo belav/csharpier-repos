@@ -16,8 +16,12 @@
 
         
 
+        
+
          interface offer a convenient way for the control designer to access a control for passing and retrieving temporary design-time data. The interface is implemented by the <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -26,6 +30,8 @@
       <para
         >Temporary design-time data is not persisted with the control itself. To persist design-time data for a control, you should retrieve the contents of the <see
          cref="P:System.Web.UI.IControlDesignerAccessor.UserData" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

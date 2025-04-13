@@ -49,11 +49,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -64,10 +68,14 @@
 
           
 
+          
+
           The type of message that was received.</param
         >
         <param name="endOfMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,11 +116,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,10 +135,14 @@
 
           
 
+          
+
           The type of message that was received.</param
         >
         <param name="endOfMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,8 +153,12 @@
 
           
 
+          
+
           Indicates the <see
            cref="T:System.Net.WebSockets.WebSocketCloseStatus" />
+
+          
 
           
 
@@ -149,8 +169,12 @@
 
           
 
+          
+
           The description of <paramref
            name="closeStatus" />
+
+          
 
           
 
@@ -225,6 +249,8 @@
 
                 
 
+                
+
                  property is None.</para
               >
             </item>
@@ -232,6 +258,8 @@
               <para
                 >The WebSocket received a close message was received from the remote endpoint. In this case the <see
                  cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" />
+
+                
 
                 
 

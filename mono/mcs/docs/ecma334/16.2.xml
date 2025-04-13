@@ -6,11 +6,15 @@
 
     
 
+    
+
      consists of the keyword namespace, followed by a namespace name and body, optionally followed by a semicolon. <grammar_production
     >
       <name>
         <non_terminal where="16.2">namespace-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -27,6 +31,8 @@
       <name>
         <non_terminal where="16.2">qualified-identifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -47,6 +53,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>{</terminal>
@@ -64,8 +72,12 @@
 
     
 
+    
+
      may occur as a top-level declaration in a <non_terminal
      where="16.1">compilation-unit</non_terminal>
+
+    
 
     
 
@@ -74,8 +86,12 @@
 
     
 
+    
+
     . When a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -84,13 +100,19 @@
 
     
 
+    
+
     , the namespace becomes a member of the global namespace. When a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
 
     
 
+    
+
      occurs within another <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -103,8 +125,12 @@
 
     
 
+    
+
     , the optional <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 
@@ -113,8 +139,12 @@
 
     
 
+    
+
     s contribute members to the declaration space of the namespace. Note that all  <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 
@@ -126,8 +156,12 @@
 
     
 
+    
+
      of a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -143,6 +177,8 @@ namespace N1.N2
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -162,12 +198,16 @@ namespace N1
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
   <paragraph
     >Namespaces are open-ended, and two namespace declarations with the same fully qualified name contribute to the same declaration space (<hyperlink
     >10.3</hyperlink>
+
+    
 
     
 
@@ -186,6 +226,8 @@ namespace N1.N2
 }  
 ]]>
       </code_example>
+
+      
 
       
 

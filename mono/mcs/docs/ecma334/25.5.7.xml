@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) can be applied to values of all pointer types. The pointer comparison operators are: <code_example
     >
       <![CDATA[

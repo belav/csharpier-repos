@@ -26,11 +26,15 @@
 
         
 
+        
+
          interface. </para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Channels.IChannel" />
+
+        
 
         
 
@@ -41,13 +45,19 @@
 
         
 
+        
+
          method to the <see
          cref="T:System.ServiceModel.ICommunicationObject" />
 
         
 
+        
+
          interface. This method provides a mechanism for retrieving properties from the channel stack regardless of where in the stack those properties live. The term "property" in the method name refers to a piece of information that belongs to one of the channels in the stack. The CLR type for that property is determined by <paramref
          name="T" />
+
+        
 
         
 
@@ -61,12 +71,16 @@
 
             
 
+            
+
              for receiving messages.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+            
 
             
 
@@ -79,6 +93,8 @@
 
             
 
+            
+
              for sending a request.</para
           >
         </item>
@@ -88,12 +104,16 @@
 
             
 
+            
+
              for sending a reply. </para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.ServiceModel.Channels.IDuplexChannel" />
+
+            
 
             
 
@@ -146,11 +166,15 @@
 
             
 
+            
+
              requested if it is present or null if it is not.</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

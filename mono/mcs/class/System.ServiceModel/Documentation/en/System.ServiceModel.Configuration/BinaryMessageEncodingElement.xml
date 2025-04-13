@@ -29,6 +29,8 @@
 
         
 
+        
+
          class represents the configuration section that specifies the character encoding and message versioning used for binary-based XML messages. The binary message encoder encodes indigo2 messages in binary on the wire. While this encoding results in very fast transmission of messages, interoperability based on the WS-* standards is lost.</para
       >
       <para
@@ -37,11 +39,15 @@
 
         
 
+        
+
          class represents the configuration section that specifies the character encoding and message versioning used for a message using a Message Transmission Optimization Mechanism (MTOM) encoding. MTOM is an efficient technology for transmitting binary data in indigo2 messages. The MTOM encoder attempts to balance between efficiency and interoperability. The MTOM encoding transmits most XML in textual form, but optimizes large blocks of binary data by transmitting them as-is, without conversion to text.</para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Configuration.TextMessageEncodingElement" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.BinaryMessageEncodingElement" />
+
+            
 
             
 

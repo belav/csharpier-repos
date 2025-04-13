@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is used to work with a collection of <see
          cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Contains a strongly typed collection of <see
          cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Creates a new <see
              cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -105,8 +115,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 
@@ -132,6 +146,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+            
 
             
 
@@ -163,8 +179,12 @@
 
             
 
+            
+
              that indicates whether a <see
              cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+            
 
             
 
@@ -179,6 +199,8 @@
 
             
 
+            
+
              with the specified key; otherwise, false.</para
           >
         </returns>
@@ -187,8 +209,12 @@
 
           
 
+          
+
           The key of the <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 
@@ -224,8 +250,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 
@@ -236,8 +266,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="Array" />
+
+          
 
           
 
@@ -314,6 +348,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </summary>
@@ -325,6 +361,8 @@
 
             
 
+            
+
             , or -1 if the element was not found in the collection.</para
           >
         </returns>
@@ -333,8 +371,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 
@@ -414,6 +456,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -422,8 +466,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 
@@ -455,8 +503,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 
@@ -487,6 +539,8 @@
 
             
 
+            
+
              with the specified key from the collection.</para
           >
         </summary>
@@ -495,8 +549,12 @@
 
           
 
+          
+
           The key of the <see
            cref="T:System.Web.Services.Configuration.ProtocolElement" />
+
+          
 
           
 

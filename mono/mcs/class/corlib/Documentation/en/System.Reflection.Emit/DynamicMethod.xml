@@ -32,8 +32,12 @@
 
         
 
+        
+
          class to generate and execute a method at run time, without having to generate a dynamic assembly and a dynamic type to contain the method. The executable code created by the just-in-time (JIT) compiler is reclaimed when the <see
          cref="T:System.Reflection.Emit.DynamicMethod" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+            
 
             
 
@@ -59,6 +67,8 @@
                 >Walkthrough: Emitting Code in Partial Trust Scenarios</a
               >
             </format>
+
+            
 
             
 
@@ -72,13 +82,19 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
             
 
+            
+
              flag can be satisfied by the call stack that includes your code. If the <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+            
 
             
 
@@ -95,13 +111,19 @@
 
             
 
+            
+
              with both the <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
             
 
+            
+
              and <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+            
 
             
 
@@ -115,8 +137,12 @@
 
         
 
+        
+
          with the <see
          cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+        
 
         
 
@@ -170,8 +196,12 @@
 
           
 
+          
+
            with the <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+          
 
           
 
@@ -180,8 +210,12 @@
 
           
 
+          
+
            attribute and also executes an <see
            cref="M:System.Security.PermissionSet.Assert" />
+
+          
 
           
 
@@ -190,8 +224,12 @@
 
           
 
+          
+
           . Such libraries require careful security review because coding errors could result in security holes. The net_v20SP1_short allows code to be emitted in partial trust scenarios without issuing any security demands, because generating code is not inherently a privileged operation. That is, the generated code has no more permissions than the assembly that emits it. This allows libraries that emit code to be security transparent and removes the need to assert <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+          
 
           
 
@@ -244,6 +282,8 @@
 
         
 
+        
+
          method overload. </para
       >
       <block subset="none" type="note">
@@ -253,8 +293,12 @@
 
           
 
+          
+
            during development to simplify debugging the generated Microsoft intermediate language (MSIL), and then switch to dynamic methods during final deployment, because the <see
            cref="T:System.Reflection.Emit.ILGenerator" />
+
+          
 
           
 
@@ -267,6 +311,8 @@
       <para
         >The following list summarizes the conditions under which dynamic methods can contain unverifiable code. (For example, a dynamic method is unverifiable if its <see
          cref="P:System.Reflection.Emit.DynamicMethod.InitLocals" />
+
+        
 
         
 
@@ -285,6 +331,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -294,6 +342,8 @@
              type="text/html">
               <a href="4d05610a-0da6-4f08-acea-d54c9d6143c0">Security-Transparent Code, Level 2</a>
             </format>
+
+            
 
             
 
@@ -310,8 +360,12 @@
 
         
 
+        
+
          method, a <see
          cref="T:System.Security.VerificationException" />
+
+        
 
         
 
@@ -320,13 +374,19 @@
 
         
 
+        
+
          method, a <see
          cref="T:System.Reflection.TargetInvocationException" />
 
         
 
+        
+
          is thrown with an inner <see
          cref="T:System.Security.VerificationException" />
+
+        
 
         
 
@@ -368,6 +428,8 @@
 
             
 
+            
+
              constructor.</para
           >
           <para>When an anonymously hosted dynamic method is constructed, the call stack of the emitting assembly is included. When the method is invoked, the permissions of the emitting assembly are used instead of the permissions of the actual caller. Thus, the dynamic method cannot execute at a higher level of privilege than that of the assembly that emitted it, even if it is passed to and executed by an assembly that has a higher trust level.</para>
@@ -377,13 +439,19 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
 
             
 
+            
+
             , and the calling convention <see
              cref="F:System.Reflection.CallingConventions.Standard" />
+
+            
 
             
 
@@ -402,6 +470,8 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
         >
         <param name="returnType">
@@ -409,8 +479,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -421,8 +495,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -461,6 +539,8 @@
 
             
 
+            
+
              if your dynamic method has to access types or members that are private, protected, or internal. This gives the dynamic method restricted access to these members. That is, the members can be accessed only if the following conditions are met:</para
           >
           <list type="bullet">
@@ -474,8 +554,12 @@
 
                 
 
+                
+
                  with the <see
                  cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+                
 
                 
 
@@ -485,6 +569,8 @@
                 <para
                   >If the permission has not been granted, a security exception is thrown when <see
                    cref="Overload:System.Reflection.Emit.DynamicMethod.CreateDelegate" />
+
+                  
 
                   
 
@@ -499,11 +585,15 @@
 
             
 
+            
+
              set to true can access a private member of any assembly on the call stack if the call stack has been granted restricted member access. If the dynamic method is created with partially trusted code on the call stack, it cannot access a private member of a type in a dnprdnshort assembly, because such assemblies are fully trusted. </para
           >
           <para
             >If <paramref
              name="restrictedSkipVisibility" />
+
+            
 
             
 
@@ -516,13 +606,19 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
 
             
 
+            
+
             , and the calling convention <see
              cref="F:System.Reflection.CallingConventions.Standard" />
+
+            
 
             
 
@@ -541,6 +637,8 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
         >
         <param name="returnType">
@@ -548,8 +646,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -560,8 +662,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -569,6 +675,8 @@
         >
         <param name="restrictedSkipVisibility">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,8 +714,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
+
+            
 
             
 
@@ -616,11 +728,15 @@
 
             
 
+            
+
             , and does not skip just-in-time (JIT) visibility checks.</para
           >
           <para
             >The dynamic method created with this constructor has access to public and internal (Friend in Visual Basic) members of all the types contained in module <paramref
              name="m" />
+
+            
 
             
 
@@ -633,8 +749,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+              
 
               
 
@@ -643,8 +763,12 @@
 
               
 
+              
+
                is a module other than the calling module, and the demand for <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -653,8 +777,12 @@
 
               
 
+              
+
                flag has failed. If the demand for <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -668,8 +796,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -679,6 +811,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -695,6 +829,8 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
         >
         <param name="returnType">
@@ -702,8 +838,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -714,8 +854,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -726,8 +870,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -765,8 +913,12 @@
 
             
 
+            
+
             , and to public and internal (Friend in Visual Basic) members of all the other types in the module that contains <paramref
              name="owner" />
+
+            
 
             
 
@@ -778,13 +930,19 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
 
             
 
+            
+
             , calling convention <see
              cref="F:System.Reflection.CallingConventions.Standard" />
+
+            
 
             
 
@@ -797,8 +955,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+              
 
               
 
@@ -807,8 +969,12 @@
 
               
 
+              
+
                is in a module other than the calling module, and the demand for <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -817,8 +983,12 @@
 
               
 
+              
+
                flag has failed. If the demand for <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -832,8 +1002,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -843,6 +1017,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -859,6 +1035,8 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
         >
         <param name="returnType">
@@ -866,8 +1044,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -878,8 +1060,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -890,8 +1076,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -930,8 +1120,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
+
+            
 
             
 
@@ -940,11 +1134,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The dynamic method created with this constructor has access to public and internal (Friend in Visual Basic) members of all the types in contained module <paramref
              name="m" />
+
+            
 
             
 
@@ -957,8 +1155,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+              
 
               
 
@@ -967,8 +1169,12 @@
 
               
 
+              
+
                is a module other than the calling module, and the demand for <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -977,8 +1183,12 @@
 
               
 
+              
+
                flag has failed. If the demand for <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -992,8 +1202,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1003,6 +1217,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1019,6 +1235,8 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
         >
         <param name="returnType">
@@ -1026,8 +1244,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1038,8 +1260,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1050,8 +1276,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -1059,6 +1289,8 @@
         >
         <param name="skipVisibility">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1097,8 +1329,12 @@
 
             
 
+            
+
             , and to public and internal (Friend in Visual Basic) members of all the other types in the module that contains <paramref
              name="owner" />
+
+            
 
             
 
@@ -1110,13 +1346,19 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
 
             
 
+            
+
             , and calling convention <see
              cref="F:System.Reflection.CallingConventions.Standard" />
+
+            
 
             
 
@@ -1129,8 +1371,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+              
 
               
 
@@ -1139,8 +1385,12 @@
 
               
 
+              
+
                is in a module other than the calling module, and the demand for <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -1149,8 +1399,12 @@
 
               
 
+              
+
                flag has failed. If the demand for <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -1164,8 +1418,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1175,6 +1433,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1191,6 +1451,8 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
         >
         <param name="returnType">
@@ -1198,8 +1460,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1210,8 +1476,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1222,8 +1492,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1231,6 +1505,8 @@
         >
         <param name="skipVisibility">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1271,6 +1547,8 @@
 
             
 
+            
+
             . </para
           >
           <para>Skipping the JIT compiler's visibility checks allows the dynamic method to access private and protected members of all other types in the module and in all other assemblies as well. This is useful, for example, when writing code to serialize objects.</para>
@@ -1281,8 +1559,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+              
 
               
 
@@ -1291,8 +1573,12 @@
 
               
 
+              
+
                is a module other than the calling module, and the demand for <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -1301,8 +1587,12 @@
 
               
 
+              
+
                flag has failed. If the demand for <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -1316,8 +1606,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1327,6 +1621,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1343,10 +1639,14 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null.</param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1355,13 +1655,19 @@
 
           
 
+          
+
            values that specifies the attributes of the dynamic method. The only combination allowed is <see
            cref="F:System.Reflection.MethodAttributes.Public" />
 
           
 
+          
+
            and <see
            cref="F:System.Reflection.MethodAttributes.Static" />
+
+          
 
           
 
@@ -1372,8 +1678,12 @@
 
           
 
+          
+
           The calling convention for the dynamic method. Must be <see
            cref="F:System.Reflection.CallingConventions.Standard" />
+
+          
 
           
 
@@ -1384,8 +1694,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1396,8 +1710,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1408,8 +1726,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Module" />
+
+          
 
           
 
@@ -1417,6 +1739,8 @@
         >
         <param name="skipVisibility">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1457,8 +1781,12 @@
 
             
 
+            
+
             . It has access to all members of the type <paramref
              name="owner" />
+
+            
 
             
 
@@ -1470,8 +1798,12 @@
 
             
 
+            
+
             , and to public and internal (Friend in Visual Basic) members of all the types contained in the module that contains <paramref
              name="owner" />
+
+            
 
             
 
@@ -1484,8 +1816,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+              
 
               
 
@@ -1494,8 +1830,12 @@
 
               
 
+              
+
                is in a module other than the calling module, and the demand for <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -1504,8 +1844,12 @@
 
               
 
+              
+
                flag has failed. If the demand for <see
                cref="T:System.Security.Permissions.SecurityPermission" />
+
+              
 
               
 
@@ -1519,8 +1863,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1530,6 +1878,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1546,10 +1896,14 @@
 
           
 
+          
+
           The name of the dynamic method. This can be a zero-length string, but it cannot be null.</param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1558,13 +1912,19 @@
 
           
 
+          
+
            values that specifies the attributes of the dynamic method. The only combination allowed is <see
            cref="F:System.Reflection.MethodAttributes.Public" />
 
           
 
+          
+
            and <see
            cref="F:System.Reflection.MethodAttributes.Static" />
+
+          
 
           
 
@@ -1575,8 +1935,12 @@
 
           
 
+          
+
           The calling convention for the dynamic method. Must be <see
            cref="F:System.Reflection.CallingConventions.Standard" />
+
+          
 
           
 
@@ -1587,8 +1951,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1599,8 +1967,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1611,8 +1983,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1620,6 +1996,8 @@
         >
         <param name="skipVisibility">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1655,8 +2033,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodAttributes.Static" />
+
+            
 
             
 
@@ -1694,6 +2076,8 @@
           <para
             >Currently, the calling convention for a dynamic method is always <see
              cref="F:System.Reflection.CallingConventions.Standard" />
+
+            
 
             
 
@@ -1741,8 +2125,12 @@
 
             
 
+            
+
              method or the <see
              cref="Overload:System.Reflection.Emit.DynamicMethod.Invoke" />
+
+            
 
             
 
@@ -1754,8 +2142,12 @@
 
             
 
+            
+
              method to obtain a <see
              cref="T:System.Reflection.Emit.DynamicILInfo" />
+
+            
 
             
 
@@ -1764,8 +2156,12 @@
 
             
 
+            
+
              method to obtain an <see
              cref="T:System.Reflection.Emit.ILGenerator" />
+
+            
 
             
 
@@ -1782,6 +2178,8 @@
         </returns>
         <param name="delegateType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1825,6 +2223,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -1833,8 +2233,12 @@
 
             
 
+            
+
              to be of the same type as the first parameter of the dynamic method, or to be assignable to that type (for example, a derived class).  The signature of <paramref
              name="delegateType" />
+
+            
 
             
 
@@ -1843,8 +2247,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1853,8 +2261,12 @@
 
             
 
+            
+
             , then <paramref
              name="delegateType" />
+
+            
 
             
 
@@ -1863,8 +2275,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1873,8 +2289,12 @@
 
             
 
+            
+
              is of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1886,8 +2306,12 @@
 
             
 
+            
+
              method or the <see
              cref="Overload:System.Reflection.Emit.DynamicMethod.Invoke" />
+
+            
 
             
 
@@ -1899,8 +2323,12 @@
 
             
 
+            
+
              method to obtain a <see
              cref="T:System.Reflection.Emit.DynamicILInfo" />
+
+            
 
             
 
@@ -1909,8 +2337,12 @@
 
             
 
+            
+
              method to obtain an <see
              cref="T:System.Reflection.Emit.ILGenerator" />
+
+            
 
             
 
@@ -1930,10 +2362,14 @@
 
           
 
+          
+
           A delegate type whose signature matches that of the dynamic method, minus the first parameter.</param
         >
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2000,8 +2436,12 @@
 
             
 
+            
+
              is 0, the <see
              cref="M:System.Reflection.Emit.DynamicMethod.DefineParameter(System.Int32,System.Reflection.ParameterAttributes,System.String)" />
+
+            
 
             
 
@@ -2013,13 +2453,19 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Reflection.Emit.DynamicMethod.Invoke" />
 
             
 
+            
+
              method, the <see
              cref="M:System.Reflection.Emit.DynamicMethod.DefineParameter(System.Int32,System.Reflection.ParameterAttributes,System.String)" />
+
+            
 
             
 
@@ -2039,10 +2485,14 @@
 
           
 
+          
+
           The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2051,10 +2501,14 @@
 
           
 
+          
+
            values that specifies the attributes of the parameter. </param
         >
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2142,6 +2596,8 @@
 
             
 
+            
+
              has no effect, because the method is not declared in a type.</para
           >
           <block subset="none" type="note">
@@ -2151,8 +2607,12 @@
 
               
 
+              
+
               ; you can get the method implementation flags more easily using the <see
                cref="M:System.Reflection.Emit.DynamicMethod.GetMethodImplementationFlags" />
+
+              
 
               
 
@@ -2170,6 +2630,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2208,6 +2670,8 @@
 
             
 
+            
+
              has no effect, because the method is not declared in a type.</para
           >
           <block subset="none" type="note">
@@ -2217,8 +2681,12 @@
 
               
 
+              
+
               ; you can get the method implementation flags more easily using the <see
                cref="M:System.Reflection.Emit.DynamicMethod.GetMethodImplementationFlags" />
+
+              
 
               
 
@@ -2238,8 +2706,12 @@
 
             
 
+            
+
              or derive from type <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -2251,8 +2723,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2260,6 +2736,8 @@
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2294,10 +2772,14 @@
 
             
 
+            
+
              class is provided to support unmanaged code generation. For more information, see <format
              type="text/html">
               <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
             </format>
+
+            
 
             
 
@@ -2312,6 +2794,8 @@
 
             
 
+            
+
              object that can be used to generate a method body from metadata tokens, scopes, and Microsoft intermediate language (MSIL) streams.</para
           >
         </summary>
@@ -2320,6 +2804,8 @@
           <para
             >A <see
              cref="T:System.Reflection.Emit.DynamicILInfo" />
+
+            
 
             
 
@@ -2356,8 +2842,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Reflection.Emit.DynamicMethod.Invoke" />
+
+            
 
             
 
@@ -2367,6 +2857,8 @@
             <para
               >There are restrictions on unverifiable code in dynamic methods, even in some full-trust scenarios. See the "Verification" section in Remarks for <see
                cref="T:System.Reflection.Emit.DynamicMethod" />
+
+              
 
               
 
@@ -2383,6 +2875,8 @@
           <para
             >An <see
              cref="T:System.Reflection.Emit.ILGenerator" />
+
+            
 
             
 
@@ -2421,8 +2915,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Reflection.Emit.DynamicMethod.Invoke" />
+
+            
 
             
 
@@ -2432,6 +2930,8 @@
             <para
               >There are restrictions on unverifiable code in dynamic methods, even in some full-trust scenarios. See the "Verification" section in Remarks for <see
                cref="T:System.Reflection.Emit.DynamicMethod" />
+
+              
 
               
 
@@ -2451,11 +2951,15 @@
 
             
 
+            
+
              object for the method, with the specified MSIL stream size.</para
           >
         </returns>
         <param name="streamSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2491,8 +2995,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.MethodImplAttributes.NoInlining" />
+
+            
 
             
 
@@ -2508,6 +3016,8 @@
           <para
             >A bitwise combination of <see
              cref="T:System.Reflection.MethodImplAttributes" />
+
+            
 
             
 
@@ -2544,8 +3054,12 @@
 
             
 
+            
+
              objects returned by this method are for information only. Use the <see
              cref="M:System.Reflection.Emit.DynamicMethod.DefineParameter(System.Int32,System.Reflection.ParameterAttributes,System.String)" />
+
+            
 
             
 
@@ -2561,6 +3075,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -2628,8 +3144,12 @@
 
             
 
+            
+
              method is more efficient than executing it with the <see
              cref="M:System.Reflection.Emit.DynamicMethod.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -2641,8 +3161,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" />
+
+            
 
             
 
@@ -2654,8 +3178,12 @@
 
             
 
+            
+
              parameter is always ignored. To treat a dynamic method as if it were an instance method, use the <see
              cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type,System.Object)" />
+
+            
 
             
 
@@ -2664,6 +3192,8 @@
           <para
             >If the dynamic method has no parameters, the value of <paramref
              name="parameters" />
+
+            
 
             
 
@@ -2676,8 +3206,12 @@
 
               
 
+              
+
                method overload inherited from the <see
                cref="T:System.Reflection.MethodBase" />
+
+              
 
               
 
@@ -2690,8 +3224,12 @@
 
             
 
+            
+
              parameter set to false. On the other hand, if you create a method with <paramref
              name="restrictedSkipVisibility" />
+
+            
 
             
 
@@ -2700,8 +3238,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+            
 
             
 
@@ -2714,8 +3256,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+              
 
               
 
@@ -2735,11 +3281,15 @@
 
             
 
+            
+
              containing the return value of the invoked method.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2750,8 +3300,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -2762,8 +3316,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -2772,13 +3330,19 @@
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
 
           
 
+          
+
            is null, the default binder is used. For more details, see <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -2789,10 +3353,14 @@
 
           
 
+          
+
           An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this parameter should be null. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2801,8 +3369,12 @@
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2811,8 +3383,12 @@
 
           
 
+          
+
            that represents 1000 to a <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -2851,6 +3427,8 @@
 
             
 
+            
+
              has no effect. Dynamic methods have no inheritance chain.</para
           >
           <block subset="none" type="note">
@@ -2870,8 +3448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2879,6 +3461,8 @@
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3048,6 +3632,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3082,6 +3668,8 @@
           <para
             >Custom attributes are not supported on the return type of a dynamic method, so the array of custom attributes returned by the <see
              cref="Overload:System.Reflection.ICustomAttributeProvider.GetCustomAttributes" />
+
+            
 
             
 

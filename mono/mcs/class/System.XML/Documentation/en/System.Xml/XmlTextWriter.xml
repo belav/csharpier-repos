@@ -66,6 +66,8 @@ public class WriteFragment
 
         
 
+        
+
          class.</para
       >
       <block subset="none" type="note">
@@ -75,8 +77,12 @@ public class WriteFragment
 
           
 
+          
+
            instances using the <see
            cref="Overload:System.Xml.XmlWriter.Create" />
+
+          
 
           
 
@@ -85,10 +91,14 @@ public class WriteFragment
 
           
 
+          
+
            class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
            type="text/html">
             <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
           </format>
+
+          
 
           
 
@@ -141,6 +151,8 @@ public class WriteFragment
 
         
 
+        
+
          class to convert data types to string. For example, the following C# code converts the data from Double to String and writes the element &lt;price&gt;19.95&lt;/price&gt;.</para
       >
       <code> Double price = 19.95;
@@ -168,6 +180,8 @@ public class WriteFragment
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -176,6 +190,8 @@ public class WriteFragment
       <para
         >The following items are things to consider when working with the <see
          cref="T:System.Xml.XmlTextWriter" />
+
+        
 
         
 
@@ -189,6 +205,8 @@ public class WriteFragment
 
             
 
+            
+
              can disclose path information that you do not want bubbled up to the application. Your applications must catch exceptions and process them appropriately.</para
           >
         </item>
@@ -199,8 +217,12 @@ public class WriteFragment
 
             
 
+            
+
              to another application the underlying stream is exposed to that application. If you need to pass the <see
              cref="T:System.Xml.XmlTextWriter" />
+
+            
 
             
 
@@ -209,8 +231,12 @@ public class WriteFragment
 
             
 
+            
+
              object created by the <see
              cref="M:System.Xml.XmlWriter.Create(System.Xml.XmlWriter)" />
+
+            
 
             
 
@@ -224,13 +250,19 @@ public class WriteFragment
 
             
 
+            
+
              does not validate any data that is passed to the <see
              cref="M:System.Xml.XmlTextWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Xml.XmlTextWriter.WriteRaw" />
+
+            
 
             
 
@@ -244,6 +276,8 @@ public class WriteFragment
           <para
             >Do not accept supporting components, such as an <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -288,8 +322,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -298,10 +336,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -317,11 +359,15 @@ public class WriteFragment
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -361,6 +407,8 @@ public class WriteFragment
 
             
 
+            
+
              cannot be written to.</para
           >
           <para> -or-</para>
@@ -371,8 +419,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -380,6 +432,8 @@ public class WriteFragment
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,8 +448,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -404,10 +462,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -424,10 +486,14 @@ public class WriteFragment
 
           
 
+          
+
           The stream to which you want to write. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -467,8 +533,12 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -482,8 +552,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -495,10 +569,14 @@ public class WriteFragment
 
           
 
+          
+
            does not exist.</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="filename" />
+
+          
 
           
 
@@ -516,6 +594,8 @@ public class WriteFragment
 
           
 
+          
+
           .</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
@@ -524,10 +604,14 @@ public class WriteFragment
 
           
 
+          
+
           .</permission
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,8 +626,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -552,10 +640,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -571,6 +663,8 @@ public class WriteFragment
 
             
 
+            
+
              class using the specified file.</para
           >
         </summary>
@@ -579,10 +673,14 @@ public class WriteFragment
 
           
 
+          
+
           The filename to write to. If the file exists, it truncates it and overwrites it with the new content. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,8 +717,12 @@ public class WriteFragment
 
             
 
+            
+
             , or <see
              langword="null" />
+
+            
 
             
 
@@ -637,8 +739,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -647,10 +753,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -663,8 +773,12 @@ public class WriteFragment
 
             
 
+            
+
              property. If the writer was constructed using a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -705,8 +819,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -715,10 +833,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -762,13 +884,19 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
+              
+
                method and the <see
                cref="T:System.Xml.XmlWriterSettings" />
+
+              
 
               
 
@@ -779,12 +907,16 @@ public class WriteFragment
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >This is called instead of <see
              cref="M:System.Xml.XmlTextWriter.Close" />
+
+            
 
             
 
@@ -829,8 +961,12 @@ public class WriteFragment
 
             
 
+            
+
              enumeration. The default is <see
              cref="F:System.Xml.Formatting.None" />
+
+            
 
             
 
@@ -847,8 +983,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -857,10 +997,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -873,8 +1017,12 @@ public class WriteFragment
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlTextWriter.IndentChar" />
+
+            
 
             
 
@@ -931,9 +1079,13 @@ public class WriteFragment
 
             
 
+            
+
              specifying the
    number of <see
              cref="P:System.Xml.XmlTextWriter.IndentChar" />
+
+            
 
             
 
@@ -952,8 +1104,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -962,10 +1118,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -991,6 +1151,8 @@ public class WriteFragment
           <para
             >Gets or sets how many IndentChars to write for each level in the hierarchy when <see
              cref="P:System.Xml.XmlTextWriter.Formatting" />
+
+            
 
             
 
@@ -1025,6 +1187,8 @@ public class WriteFragment
 
             
 
+            
+
              specifying the 
    character to use for indenting. The default is space
    (character code 0x20).</para
@@ -1039,8 +1203,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1049,10 +1217,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1065,6 +1237,8 @@ public class WriteFragment
           <para
             >Gets or sets which character to use for indenting when <see
              cref="P:System.Xml.XmlTextWriter.Formatting" />
+
+            
 
             
 
@@ -1102,13 +1276,19 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -1123,8 +1303,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1133,10 +1317,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1154,6 +1342,8 @@ public class WriteFragment
         </returns>
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1187,8 +1377,12 @@ public class WriteFragment
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -1198,8 +1392,12 @@ public class WriteFragment
 
             
 
+            
+
             . The default is <see
              langword="true" />
+
+            
 
             
 
@@ -1212,8 +1410,12 @@ public class WriteFragment
 
           
 
+          
+
            of the current instance is not <see
            cref="F:System.Xml.WriteState.Start" />
+
+          
 
           
 
@@ -1228,8 +1430,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1238,10 +1444,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1282,6 +1492,8 @@ public class WriteFragment
 
             
 
+            
+
              specifying the 
    quotation mark character (" or ') used to enclose the value of an attribute. The
    default is the double quote. </para
@@ -1299,8 +1511,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1309,10 +1525,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1360,8 +1580,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1373,8 +1597,12 @@ public class WriteFragment
 
           
 
+          
+
            is less than <paramref
            name="count" />
+
+          
 
           
 
@@ -1385,8 +1613,12 @@ public class WriteFragment
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -1398,8 +1630,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -1414,8 +1650,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1424,10 +1664,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1444,6 +1688,8 @@ public class WriteFragment
 
           
 
+          
+
           Byte array to encode. </param
         >
         <param name="index">
@@ -1451,10 +1697,14 @@ public class WriteFragment
 
           
 
+          
+
           The position within the buffer indicating the start of the bytes to write. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1496,8 +1746,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1509,8 +1763,12 @@ public class WriteFragment
 
           
 
+          
+
            is less than <paramref
            name="count" />
+
+          
 
           
 
@@ -1521,8 +1779,12 @@ public class WriteFragment
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -1534,8 +1796,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -1550,8 +1816,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1560,10 +1830,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1580,6 +1854,8 @@ public class WriteFragment
 
           
 
+          
+
           Byte array to encode. </param
         >
         <param name="index">
@@ -1587,10 +1863,14 @@ public class WriteFragment
 
           
 
+          
+
           The position in the buffer indicating the start of the bytes to write. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1631,8 +1911,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -1647,8 +1931,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1657,10 +1945,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1673,6 +1965,8 @@ public class WriteFragment
 
             
 
+            
+
              is either null or String.Empty, this method writes an empty CDATA block, for example &lt;![CDATA[]]&gt;.</para
           >
         </remarks>
@@ -1682,6 +1976,8 @@ public class WriteFragment
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1722,8 +2018,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -1738,8 +2038,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1748,10 +2052,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1766,6 +2074,8 @@ public class WriteFragment
         </summary>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1807,8 +2117,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1820,8 +2134,12 @@ public class WriteFragment
 
             
 
+            
+
              or <paramref
              name="count" />
+
+            
 
             
 
@@ -1834,8 +2152,12 @@ public class WriteFragment
 
             
 
+            
+
              is less than <paramref
              name="count" />
+
+            
 
             
 
@@ -1848,8 +2170,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -1864,8 +2190,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1874,10 +2204,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1897,6 +2231,8 @@ public class WriteFragment
 
           
 
+          
+
           Character array containing the text to write. </param
         >
         <param name="index">
@@ -1904,10 +2240,14 @@ public class WriteFragment
 
           
 
+          
+
           The position in the buffer indicating the start of the text to write. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1948,8 +2288,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -1964,8 +2308,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -1974,10 +2322,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -1990,6 +2342,8 @@ public class WriteFragment
 
             
 
+            
+
              is either null or String.Empty, this method writes a Comment with no data content, for example &lt;!----&gt;.</para
           >
         </remarks>
@@ -1999,6 +2353,8 @@ public class WriteFragment
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2042,13 +2398,19 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              langword="null" />
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -2058,6 +2420,8 @@ public class WriteFragment
           <para
             >The value for <paramref
              name="name" />
+
+            
 
             
 
@@ -2076,8 +2440,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2086,10 +2454,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2102,13 +2474,19 @@ public class WriteFragment
 
             
 
+            
+
             , <paramref
              name="sysid" />
 
             
 
+            
+
              or <paramref
              name="subset" />
+
+            
 
             
 
@@ -2121,8 +2499,12 @@ public class WriteFragment
 
               
 
+              
+
                does not validate any data that is passed to the <see
                cref="M:System.Xml.XmlTextWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
+
+              
 
               
 
@@ -2139,10 +2521,14 @@ public class WriteFragment
 
           
 
+          
+
           The name of the DOCTYPE. This must be non-empty. </param
         >
         <param name="pubid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2151,8 +2537,12 @@ public class WriteFragment
 
           
 
+          
+
            and <paramref
            name="sysid" />
+
+          
 
           
 
@@ -2163,8 +2553,12 @@ public class WriteFragment
 
           
 
+          
+
           If <paramref
            name="pubid" />
+
+          
 
           
 
@@ -2173,8 +2567,12 @@ public class WriteFragment
 
           
 
+          
+
            is non-null it writes SYSTEM "sysid" where <paramref
            name="sysid" />
+
+          
 
           
 
@@ -2182,6 +2580,8 @@ public class WriteFragment
         >
         <param name="subset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2217,8 +2617,12 @@ public class WriteFragment
 
           
 
+          
+
            is not<see
            cref="F:System.Xml.WriteState.Attribute" qualify="true" />
+
+          
 
           
 
@@ -2233,8 +2637,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2243,10 +2651,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2260,8 +2672,12 @@ public class WriteFragment
 
             
 
+            
+
             , or calling <see
              cref="M:System.Xml.XmlTextWriter.WriteEndElement" />
+
+            
 
             
 
@@ -2273,6 +2689,8 @@ public class WriteFragment
           <para
             >Closes the previous <see
              cref="M:System.Xml.XmlTextWriter.WriteStartAttribute(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -2309,11 +2727,15 @@ public class WriteFragment
 
           
 
+          
+
           , or the document does not have a root element.</exception
         >
         <exception cref="T:System.InvalidOperationException"
           >The current instance is in the wrong <see
            cref="T:System.Xml.WriteState" qualify="true" />
+
+          
 
           
 
@@ -2328,8 +2750,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2338,10 +2764,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2383,8 +2813,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -2399,8 +2833,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2409,10 +2847,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2457,8 +2899,12 @@ public class WriteFragment
 
           
 
+          
+
            containing the text would result in a non-well formed XML document, or <paramref
            name="name" />
+
+          
 
           
 
@@ -2467,8 +2913,12 @@ public class WriteFragment
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -2480,8 +2930,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -2496,8 +2950,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2506,10 +2964,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2523,6 +2985,8 @@ public class WriteFragment
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2558,8 +3022,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -2574,8 +3042,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2584,10 +3056,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2632,8 +3108,12 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2642,8 +3122,12 @@ public class WriteFragment
 
             
 
+            
+
             ; or <paramref
              name="name" />
+
+            
 
             
 
@@ -2656,8 +3140,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -2672,8 +3160,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2682,10 +3174,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2698,6 +3194,8 @@ public class WriteFragment
 
             
 
+            
+
              is set to true, WriteName also checks that the name is also valid according to the W3C Namespaces in XML recommendation.</para
           >
         </remarks>
@@ -2707,6 +3205,8 @@ public class WriteFragment
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2744,8 +3244,12 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2754,8 +3258,12 @@ public class WriteFragment
 
             
 
+            
+
             ; or <paramref
              name="name" />
+
+            
 
             
 
@@ -2768,8 +3276,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -2784,8 +3296,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -2794,10 +3310,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -2811,6 +3331,8 @@ public class WriteFragment
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2854,13 +3376,19 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              langword="null" />
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -2873,6 +3401,8 @@ public class WriteFragment
 
             
 
+            
+
              has already been called. </para
           >
         </exception>
@@ -2882,8 +3412,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -2891,6 +3425,8 @@ public class WriteFragment
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2905,13 +3441,19 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
+              
+
                method and the <see
                cref="T:System.Xml.XmlWriterSettings" />
+
+              
 
               
 
@@ -2922,12 +3464,16 @@ public class WriteFragment
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >If <paramref
              name="text" />
+
+            
 
             
 
@@ -2943,10 +3489,14 @@ public class WriteFragment
 
           
 
+          
+
           Name of the processing instruction. </param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2988,13 +3538,19 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              langword="null" />
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -3006,8 +3562,12 @@ public class WriteFragment
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -3016,8 +3576,12 @@ public class WriteFragment
 
             
 
+            
+
              is neither <see
              langword="null" />
+
+            
 
             
 
@@ -3026,11 +3590,15 @@ public class WriteFragment
 
             
 
+            
+
              .</para
           >
           <para>-or-</para>
           <para>
             <paramref name="localName" />
+
+            
 
             
 
@@ -3043,8 +3611,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -3055,10 +3627,14 @@ public class WriteFragment
 
           
 
+          
+
            is not a valid XML name.</exception
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3073,8 +3649,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3083,10 +3663,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3115,6 +3699,8 @@ public class WriteFragment
 
             
 
+            
+
              maps to the current default namespace, no prefix is generated.</para
           >
           <para
@@ -3123,8 +3709,12 @@ public class WriteFragment
 
             
 
+            
+
              is not found. When writing element content, it throws an exception if <paramref
              name="ns" />
+
+            
 
             
 
@@ -3133,6 +3723,8 @@ public class WriteFragment
           <para
             >If this writer supports namespaces (<see
              cref="P:System.Xml.XmlTextWriter.Namespaces" />
+
+            
 
             
 
@@ -3148,10 +3740,14 @@ public class WriteFragment
 
           
 
+          
+
           The local name to write. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3189,8 +3785,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -3205,8 +3805,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3215,10 +3819,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3233,8 +3841,12 @@ public class WriteFragment
 
               
 
+              
+
                does not validate any data that is passed to the <see
                cref="M:System.Xml.XmlTextWriter.WriteRaw(System.String)" />
+
+              
 
               
 
@@ -3248,6 +3860,8 @@ public class WriteFragment
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3289,8 +3903,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3302,8 +3920,12 @@ public class WriteFragment
 
             
 
+            
+
              or <paramref
              name="count" />
+
+            
 
             
 
@@ -3316,8 +3938,12 @@ public class WriteFragment
 
             
 
+            
+
              is less than <paramref
              name="count" />
+
+            
 
             
 
@@ -3330,8 +3956,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -3346,8 +3976,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3356,10 +3990,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3374,8 +4012,12 @@ public class WriteFragment
 
               
 
+              
+
                does not validate any data that is passed to the <see
                cref="M:System.Xml.XmlTextWriter.WriteRaw(System.Char[],System.Int32,System.Int32)" />
+
+              
 
               
 
@@ -3392,6 +4034,8 @@ public class WriteFragment
 
           
 
+          
+
           Character array containing the text to write. </param
         >
         <param name="index">
@@ -3399,10 +4043,14 @@ public class WriteFragment
 
           
 
+          
+
           The position within the buffer indicating the start of the text to write. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3444,8 +4092,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="false" />
+
+          
 
           
 
@@ -3454,8 +4106,12 @@ public class WriteFragment
 
           
 
+          
+
            and <paramref
            name="ns" />
+
+          
 
           
 
@@ -3464,8 +4120,12 @@ public class WriteFragment
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -3477,8 +4137,12 @@ public class WriteFragment
 
           
 
+          
+
            is not one of the following: <see
            cref="F:System.Xml.WriteState.Attribute" qualify="true" />
+
+          
 
           
 
@@ -3487,10 +4151,14 @@ public class WriteFragment
 
           
 
+          
+
           .</exception
         >
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3505,8 +4173,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3515,10 +4187,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3531,8 +4207,12 @@ public class WriteFragment
 
             
 
+            
+
              that allows you to write an attribute value using multiple write methods, such as <see
              cref="M:System.Xml.XmlTextWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -3548,6 +4228,8 @@ public class WriteFragment
 
           
 
+          
+
           Namespace prefix of the attribute. </param
         >
         <param name="localName">
@@ -3555,10 +4237,14 @@ public class WriteFragment
 
           
 
+          
+
           LocalName of the attribute. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3594,8 +4280,12 @@ public class WriteFragment
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Start" qualify="true" />
+
+          
 
           
 
@@ -3610,8 +4300,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3620,10 +4314,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3636,12 +4334,16 @@ public class WriteFragment
 
             
 
+            
+
              object is specified in the XmlTextWriter constructor, this determines the value of the encoding attribute. This method does not create a standalone attribute.</para
           >
           <para>When WriteStartDocument is called the writer validates that what you are writing is a well-formed XML document. For example, it checks that the XML declaration is the first node, that one and only one root-level element exists and so on. If this method is not called, the writer assumes an XML fragment is being written and applies no root level rules.</para>
           <para
             >If WriteStartDocument has been called and then the <see
              cref="M:System.Xml.XmlTextWriter.WriteProcessingInstruction(System.String,System.String)" />
+
+            
 
             
 
@@ -3687,8 +4389,12 @@ public class WriteFragment
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Start" qualify="true" />
+
+          
 
           
 
@@ -3703,8 +4409,12 @@ public class WriteFragment
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3713,10 +4423,14 @@ public class WriteFragment
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3729,12 +4443,16 @@ public class WriteFragment
 
             
 
+            
+
              object is specified in the XmlTextWriter constructor, this determines the value of the encoding attribute.</para
           >
           <para>When WriteStartDocument is called the writer validates that what you are writing is a well-formed XML document. For example, it checks that the XML declaration is the first node, that one and only one root-level element exists and so on. If this method is not called, the writer assumes an XML fragment is being written and applies no root level rules.</para>
           <para
             >If WriteStartDocument has been called and then the <see
              cref="M:System.Xml.XmlTextWriter.WriteProcessingInstruction(System.String,System.String)" />
+
+            
 
             
 
@@ -3747,6 +4465,8 @@ public class WriteFragment
         </summary>
         <param name="standalone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3788,8 +4508,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            langword="false" />
+
+          
 
           
 
@@ -3798,13 +4522,19 @@ public class WriteFragment
 
           
 
+          
+
            and <paramref
            name="ns" />
 
           
 
+          
+
            are not both <see
            langword="null" />
+
+          
 
           
 
@@ -3816,8 +4546,12 @@ public class WriteFragment
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -3827,6 +4561,8 @@ public class WriteFragment
           <para
             >This example demonstrates the <see
              cref="M:System.Xml.XmlTextWriter.WriteStartElement(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -3867,6 +4603,8 @@ public class WriteXml
 
           
 
+          
+
           The namespace prefix of the element. </param
         >
         <remarks>
@@ -3878,8 +4616,12 @@ public class WriteXml
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -3888,10 +4630,14 @@ public class WriteXml
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -3904,8 +4650,12 @@ public class WriteXml
 
             
 
+            
+
             , <see
              cref="M:System.Xml.XmlTextWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -3914,8 +4664,12 @@ public class WriteXml
 
             
 
+            
+
              for child elements. You can close the element with <see
              cref="M:System.Xml.XmlTextWriter.WriteEndElement" />
+
+            
 
             
 
@@ -3931,6 +4685,8 @@ public class WriteXml
 
           
 
+          
+
           The namespace prefix of the element. </param
         >
         <param name="localName">
@@ -3938,10 +4694,14 @@ public class WriteXml
 
           
 
+          
+
           The local name of the element. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3981,6 +4741,8 @@ public class WriteXml
 
             
 
+            
+
              enumeration.
    </para
           >
@@ -3994,8 +4756,12 @@ public class WriteXml
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -4004,10 +4770,14 @@ public class WriteXml
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -4051,8 +4821,12 @@ public class WriteXml
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4061,13 +4835,19 @@ public class WriteXml
 
           
 
+          
+
            is neither <see
            langword="null" />
 
           
 
+          
+
            nor <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -4102,8 +4882,12 @@ public class WriteFrag {
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -4112,10 +4896,14 @@ public class WriteFrag {
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -4142,6 +4930,8 @@ public class WriteFrag {
 
             
 
+            
+
              is either null or String.Empty, this method writes a text node with no data content.</para
           >
         </remarks>
@@ -4151,6 +4941,8 @@ public class WriteFrag {
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4195,8 +4987,12 @@ public class WriteFrag {
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4211,8 +5007,12 @@ public class WriteFrag {
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -4221,10 +5021,14 @@ public class WriteFrag {
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -4238,8 +5042,12 @@ public class WriteFrag {
 
             
 
+            
+
              - 0xD800) * 0x400 + (<paramref
              name="lowChar" />
+
+            
 
             
 
@@ -4257,10 +5065,14 @@ public class WriteFrag {
 
           
 
+          
+
           The low surrogate. This must be a value between 0xDC00 and 0xDFFF. </param
         >
         <param name="highChar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4297,13 +5109,19 @@ public class WriteFrag {
 
           
 
+          
+
            is <see
            langword="null" />
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -4315,8 +5133,12 @@ public class WriteFrag {
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4331,8 +5153,12 @@ public class WriteFrag {
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -4341,10 +5167,14 @@ public class WriteFrag {
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -4357,6 +5187,8 @@ public class WriteFrag {
 
             
 
+            
+
              property to have the writer format the output automatically.</para
           >
         </remarks>
@@ -4366,6 +5198,8 @@ public class WriteFrag {
         </summary>
         <param name="ws">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4400,8 +5234,12 @@ public class WriteFrag {
             
 
             
+
+            
 containing the language attribute, or <see
              langword="null" />
+
+            
 
             
 
@@ -4418,8 +5256,12 @@ language attribute is not specified for the element.</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -4428,10 +5270,14 @@ language attribute is not specified for the element.</para
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -4478,8 +5324,12 @@ language attribute is not specified for the element.</para
 
             
 
+            
+
              enumeration, or <see
              cref="F:System.Xml.XmlSpace.None" />
+
+            
 
             
 
@@ -4496,8 +5346,12 @@ language attribute is not specified for the element.</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlWriter.Create" />
+
+              
 
               
 
@@ -4506,10 +5360,14 @@ language attribute is not specified for the element.</para
 
               
 
+              
+
                class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
                type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
+
+              
 
               
 
@@ -4523,6 +5381,8 @@ language attribute is not specified for the element.</para
           <para
             >Gets an <see
              cref="T:System.Xml.XmlSpace" />
+
+            
 
             
 

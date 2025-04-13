@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="17.5">method-header</non_terminal>
@@ -19,6 +21,8 @@
       <name>
         <non_terminal where="17.5">method-header</non_terminal>
       </name>
+
+      
 
       
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -60,6 +68,8 @@
       <name>
         <non_terminal where="17.5">method-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -105,6 +115,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -117,6 +129,8 @@
       <name>
         <non_terminal where="17.6">member-name</non_terminal>
       </name>
+
+      
 
       
 
@@ -137,6 +151,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.2">block</non_terminal>
@@ -152,8 +168,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -162,8 +182,12 @@
 
     
 
+    
+
     ), the new (<hyperlink
     >17.2.2</hyperlink>
+
+    
 
     
 
@@ -172,8 +196,12 @@
 
     
 
+    
+
     ), virtual (<hyperlink
     >17.5.3</hyperlink>
+
+    
 
     
 
@@ -182,8 +210,12 @@
 
     
 
+    
+
     ), sealed (<hyperlink
     >17.5.5</hyperlink>
+
+    
 
     
 
@@ -192,8 +224,12 @@
 
     
 
+    
+
     ), and extern (<hyperlink
     >17.5.7</hyperlink>
+
+    
 
     
 
@@ -205,6 +241,8 @@
       <list_item
         > The declaration includes a valid combination of access modifiers (<hyperlink
         >17.2.3</hyperlink>
+
+        
 
         
 
@@ -224,13 +262,19 @@
 
     
 
+    
+
      of a method declaration specifies the type of the value computed and returned by the method. The <non_terminal
      where="17.5">return-type</non_terminal>
 
     
 
+    
+
      is <keyword
     >void</keyword>
+
+    
 
     
 
@@ -242,8 +286,12 @@
 
     
 
+    
+
      specifies the name of the method. Unless the method is an explicit interface member implementation (<hyperlink
     >20.4.1</hyperlink>
+
+    
 
     
 
@@ -252,13 +300,19 @@
 
     
 
+    
+
      is simply an identifier. For an explicit interface member implementation, the <non_terminal
      where="17.6">member-name</non_terminal>
 
     
 
+    
+
      consists of an <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -270,8 +324,12 @@
 
     
 
+    
+
      specifies the parameters of the method (<hyperlink
     >17.5.1</hyperlink>
+
+    
 
     
 
@@ -283,13 +341,19 @@
 
     
 
+    
+
      and each of the types referenced in the <non_terminal
      where="17.5.1">formal-parameter-list</non_terminal>
 
     
 
+    
+
      of a method must be at least as accessible as the method itself (<hyperlink
     >10.5.4</hyperlink>
+
+    
 
     
 
@@ -301,8 +365,12 @@
 
     
 
+    
+
      consists simply of a semicolon. For all other methods, the <non_terminal
      where="17.5">method-body</non_terminal>
+
+    
 
     
 
@@ -311,6 +379,8 @@
   <paragraph
     >The name and the formal parameter list of a method define the signature (<hyperlink
     >10.6</hyperlink>
+
+    
 
     
 

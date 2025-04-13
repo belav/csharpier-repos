@@ -31,13 +31,19 @@
 
           
 
+          
+
            class may contain sensitive information that should not be exposed in untrusted scenarios. For example, the <see
            cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
 
           
 
+          
+
            property returns the URI path to the schema file that caused the exception. The <see
            cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
+
+          
 
           
 
@@ -74,6 +80,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,11 +112,15 @@
 
             
 
+            
+
              class with the exception message specified.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,10 +159,14 @@
 
           
 
+          
+
           SerializationInfo.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,8 +204,12 @@
 
             
 
+            
+
              class with the exception message and original <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -201,10 +221,14 @@
 
           
 
+          
+
           A string description of the error condition.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,8 +267,12 @@
 
             
 
+            
+
              class with the exception message specified, and the original <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -256,10 +284,14 @@
 
           
 
+          
+
           A string description of the error condition.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,10 +302,14 @@
 
           
 
+          
+
           The line number of the XML that caused this exception.</param
         >
         <param name="linePosition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,10 +350,14 @@
 
           
 
+          
+
           The SerializationInfo. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -441,8 +481,12 @@
 
               
 
+              
+
                property returns the URI path to the schema file that caused the exception. The <see
                cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
+
+              
 
               
 

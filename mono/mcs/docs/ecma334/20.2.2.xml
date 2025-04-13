@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -26,6 +28,8 @@
       <name>
         <non_terminal where="20.2.2">interface-accessors</non_terminal>
       </name>
+
+      
 
       
 
@@ -70,11 +74,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
     >The accessors of an interface property declaration correspond to the accessors of a class property declaration (<hyperlink
     >17.6.2</hyperlink>
+
+    
 
     
 

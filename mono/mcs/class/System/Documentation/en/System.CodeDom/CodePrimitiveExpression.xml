@@ -38,6 +38,8 @@
 
         
 
+        
+
          can be used to represent an expression that indicates a primitive data type value.</para
       >
       <para
@@ -46,11 +48,15 @@
 
         
 
+        
+
          property specifies the primitive data type value to represent.</para
       >
       <para
         >Primitive data types that can be represented using <see
          cref="T:System.CodeDom.CodePrimitiveExpression" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -118,11 +126,15 @@
 
             
 
+            
+
              class using the specified object.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

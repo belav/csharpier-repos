@@ -21,8 +21,12 @@
 
         
 
+        
+
          is incoming to the server and <see
          cref="F:System.ServiceModel.Description.MessageDirection.Output" />
+
+        
 
         
 
@@ -34,11 +38,15 @@
 
         
 
+        
+
          constructor to specify the direction of a message. </para
       >
       <para
         >Retrieve the direction of a message using the <see
          cref="P:System.ServiceModel.Description.MessageDescription.Direction" />
+
+        
 
         
 

@@ -32,6 +32,8 @@
 
         
 
+        
+
         , with the exception that it includes policy-level context. Policy level is needed to resolve references to named permission sets.</para
       >
     </remarks>
@@ -72,8 +74,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+
+            
 
             
 
@@ -89,10 +95,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,8 +141,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+
+            
 
             
 
@@ -149,6 +163,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

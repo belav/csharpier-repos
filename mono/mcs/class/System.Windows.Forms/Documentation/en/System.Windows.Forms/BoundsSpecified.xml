@@ -23,13 +23,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.Control.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)" />
 
         
 
+        
+
          methods of the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.Size" />
+
+            
 
             
 
@@ -137,8 +147,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.Height" />
+
+            
 
             
 

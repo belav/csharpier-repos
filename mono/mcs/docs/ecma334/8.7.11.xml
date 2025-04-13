@@ -15,6 +15,8 @@ class A
 
     
 
+    
+
     shows a class A that implicitly derives from object. The example <code_example
     >
       <![CDATA[
@@ -35,6 +37,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -70,6 +74,8 @@ class Test
 
     
 
+    
+
     shows a class A with a virtual method F, and a class B that overrides F. The overriding method in B contains a call, base.F(), which calls the overridden method in A. </paragraph
   >
   <paragraph
@@ -96,6 +102,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

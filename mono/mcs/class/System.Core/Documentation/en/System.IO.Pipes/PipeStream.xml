@@ -22,8 +22,12 @@
 
         
 
+        
+
          class provides the base class for named and anonymous pipes operations in the .NET Framework. Use the <see
          cref="T:System.IO.Pipes.NamedPipeServerStream" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          classes for named pipe operations. Use the <see
          cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
 
         
 
+        
+
          and <see
          cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+        
 
         
 
@@ -52,12 +62,16 @@
 
         
 
+        
+
         . For an example of anonymous pipes, see <format
          type="text/html">
           <a href="e7773c77-c646-4a01-8a96-a003d59fc4c9"
             >How to: Use Anonymous Pipes to Communicate Between Local Processes</a
           >
         </format>
+
+        
 
         
 
@@ -70,6 +84,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -78,6 +94,8 @@
       <para
         >Exposes a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -112,6 +130,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -123,8 +143,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Pipes.PipeDirection" />
+
+            
 
             
 
@@ -136,8 +160,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeDirection" />
+
+          
 
           
 
@@ -148,8 +176,12 @@
 
           
 
+          
+
           A positive <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -185,13 +217,19 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Pipes.PipeDirection" />
 
             
 
+            
+
             , <see
              cref="T:System.IO.Pipes.PipeTransmissionMode" />
+
+            
 
             
 
@@ -203,8 +241,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeDirection" />
+
+          
 
           
 
@@ -215,8 +257,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeTransmissionMode" />
+
+          
 
           
 
@@ -227,8 +273,12 @@
 
           
 
+          
+
           A positive <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -268,8 +318,12 @@
 
             
 
+            
+
              object to the <see
              cref="M:System.IO.Pipes.PipeStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -278,8 +332,12 @@
 
             
 
+            
+
              must be called once for every call to <see
              cref="M:System.IO.Pipes.PipeStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -288,8 +346,12 @@
 
             
 
+            
+
              or in a callback that is passed to <see
              cref="M:System.IO.Pipes.PipeStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -301,8 +363,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -314,8 +380,12 @@
 
             
 
+            
+
             , the appropriate exceptions are raised immediately. Errors that occur during an asynchronous read request occur on the thread pool thread that is performing the request. The exceptions are raised when the code calls the <see
              cref="M:System.IO.Pipes.PipeStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -334,11 +404,15 @@
 
             
 
+            
+
              object that references the asynchronous read.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +423,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -361,6 +439,8 @@
 
           
 
+          
+
           The maximum number of bytes to read.</param
         >
         <param name="callback">
@@ -368,10 +448,14 @@
 
           
 
+          
+
           The method to call when the asynchronous read operation is completed.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,8 +494,12 @@
 
             
 
+            
+
              must be called once for every call to <see
              cref="M:System.IO.Pipes.PipeStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -420,8 +508,12 @@
 
             
 
+            
+
              or in a callback that is passed to <see
              cref="M:System.IO.Pipes.PipeStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -433,8 +525,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -446,8 +542,12 @@
 
             
 
+            
+
             , the appropriate exceptions are raised immediately. Errors that occur during an asynchronous write request occur on the thread pool thread that is performing the request. The exceptions are raised when the code calls the  <see
              cref="M:System.IO.Pipes.PipeStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -466,11 +566,15 @@
 
             
 
+            
+
              object that references the asynchronous write operation.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -481,8 +585,12 @@
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -493,6 +601,8 @@
 
           
 
+          
+
           The maximum number of bytes to write.</param
         >
         <param name="callback">
@@ -500,10 +610,14 @@
 
           
 
+          
+
           The method to call when the asynchronous write operation is completed.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -528,6 +642,8 @@
           <para
             >If the <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -560,6 +676,8 @@
 
             
 
+            
+
              object is closed, this property returns false.</para
           >
         </remarks>
@@ -586,6 +704,8 @@
           <para
             >If the <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -707,8 +827,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -717,8 +841,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.Pipes.PipeStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -727,8 +855,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -737,8 +869,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -747,8 +883,12 @@
 
             
 
+            
+
              object references. This method invokes the <see
              cref="M:System.IO.Pipes.PipeStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -763,11 +903,15 @@
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -803,6 +947,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -811,8 +957,12 @@
 
             
 
+            
+
              object to the <see
              cref="M:System.IO.Pipes.PipeStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -821,8 +971,12 @@
 
             
 
+            
+
              must be called once for every call to <see
              cref="M:System.IO.Pipes.PipeStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -831,8 +985,12 @@
 
             
 
+            
+
              or in a callback that is passed to <see
              cref="M:System.IO.Pipes.PipeStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -844,8 +1002,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -857,8 +1019,12 @@
 
             
 
+            
+
             , the appropriate exceptions are raised immediately. Errors that occur during an asynchronous read request occur on the thread pool thread that is performing the request. The exceptions are raised when the code calls the <see
              cref="M:System.IO.Pipes.PipeStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -875,6 +1041,8 @@
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -909,8 +1077,12 @@
 
             
 
+            
+
              must be called once for every call to <see
              cref="M:System.IO.Pipes.PipeStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -919,8 +1091,12 @@
 
             
 
+            
+
              or in a callback that is passed to <see
              cref="M:System.IO.Pipes.PipeStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -932,8 +1108,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -945,8 +1125,12 @@
 
             
 
+            
+
             , the appropriate exceptions are raised immediately. Errors that occur during an asynchronous write request occur on the thread pool thread that is performing the request. The exceptions are raised when the code the calls <see
              cref="M:System.IO.Pipes.PipeStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -959,6 +1143,8 @@
         </summary>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -994,8 +1180,12 @@
 
             
 
+            
+
              method is not supported in the <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1036,12 +1226,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How To: Add or Remove Access Control List Entries</a
               >
             </format>
+
+            
 
             
 
@@ -1056,8 +1250,12 @@
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for the pipe described by the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1072,8 +1270,12 @@
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for the pipe described by the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1099,6 +1301,8 @@
           <para
             >If <see
              cref="P:System.IO.Pipes.PipeStream.InBufferSize" />
+
+            
 
             
 
@@ -1141,6 +1345,8 @@
 
             
 
+            
+
              property to true.</para
           >
         </remarks>
@@ -1152,8 +1358,12 @@
 
             
 
+            
+
              object from the specified <see
              cref="T:Microsoft.Win32.SafeHandles.SafePipeHandle" />
+
+            
 
             
 
@@ -1165,8 +1375,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Win32.SafeHandles.SafePipeHandle" />
+
+          
 
           
 
@@ -1177,10 +1391,14 @@
 
           
 
+          
+
           true to expose the handle; otherwise, false.</param
         >
         <param name="isAsync">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1208,6 +1426,8 @@
 
             
 
+            
+
              property correctly.</para
           >
         </remarks>
@@ -1216,6 +1436,8 @@
           <para
             >Gets a value indicating whether a <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1244,8 +1466,12 @@
 
             
 
+            
+
              property returns true only if the <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1257,6 +1483,8 @@
           <para
             >Gets or sets a value indicating whether a <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1285,6 +1513,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -1293,6 +1523,8 @@
           <para
             >Gets a value indicating whether a handle to a <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1326,8 +1558,12 @@
 
             
 
+            
+
              property was set to <see
              cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+
+            
 
             
 
@@ -1336,8 +1572,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Pipes.PipeStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1370,8 +1610,12 @@
 
             
 
+            
+
              class does not support the <see
              cref="P:System.IO.Pipes.PipeStream.Length" />
+
+            
 
             
 
@@ -1409,6 +1653,8 @@
 
             
 
+            
+
              is 0, the buffer size is allocated as needed.</para
           >
         </remarks>
@@ -1438,8 +1684,12 @@
 
             
 
+            
+
              class does not support the <see
              cref="P:System.IO.Pipes.PipeStream.Position" />
+
+            
 
             
 
@@ -1487,8 +1737,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1500,8 +1754,12 @@
 
             
 
+            
+
              method blocks until <paramref
              name="count" />
+
+            
 
             
 
@@ -1510,8 +1768,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Pipes.PipeStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1530,6 +1792,8 @@
 
             
 
+            
+
             . This might be less than the number of bytes requested if that number of bytes is not currently available, or 0 if the end of the stream is reached.</para
           >
         </returns>
@@ -1538,8 +1802,12 @@
 
           
 
+          
+
           When this method returns, contains the specified byte array with the values between <paramref
            name="offset" />
+
+          
 
           
 
@@ -1548,8 +1816,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1560,8 +1832,12 @@
 
           
 
+          
+
           The byte offset in the <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1569,6 +1845,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1604,8 +1882,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1621,6 +1903,8 @@
           <para
             >The byte, cast to <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1655,6 +1939,8 @@
 
             
 
+            
+
              mode message transmission.</para
           >
         </remarks>
@@ -1663,6 +1949,8 @@
           <para
             >Gets or sets the reading mode for a <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1695,6 +1983,8 @@
           <para
             >Gets the safe handle for the local end of the pipe that the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1732,8 +2022,12 @@
 
             
 
+            
+
              method is not supported in pipes and raises a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1753,8 +2047,12 @@
 
           
 
+          
+
           The point, relative to <paramref
            name="origin" />
+
+          
 
           
 
@@ -1765,13 +2063,19 @@
 
           
 
+          
+
           Specifies the beginning, the end, or the current position as a reference point for <paramref
            name="offset" />
 
           
 
+          
+
           , using a value of type <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -1809,12 +2113,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How To: Add or Remove Access Control List Entries</a
               >
             </format>
+
+            
 
             
 
@@ -1829,8 +2137,12 @@
 
             
 
+            
+
              object to the pipe specified by the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -1842,8 +2154,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Pipes.PipeSecurity" />
+
+          
 
           
 
@@ -1876,8 +2192,12 @@
 
             
 
+            
+
              class does not support the <see
              cref="M:System.IO.Pipes.PipeStream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -1890,6 +2210,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1923,6 +2245,8 @@
 
             
 
+            
+
              mode message transmission.</para
           >
         </remarks>
@@ -1952,6 +2276,8 @@
           <para
             >The <see
              cref="M:System.IO.Pipes.PipeStream.WaitForPipeDrain" />
+
+            
 
             
 
@@ -1999,8 +2325,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -2012,8 +2342,12 @@
 
             
 
+            
+
              method blocks until <paramref
              name="count" />
+
+            
 
             
 
@@ -2022,8 +2356,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Pipes.PipeStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2039,10 +2377,14 @@
 
           
 
+          
+
           The buffer that contains data to write to the pipe.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2051,10 +2393,14 @@
 
           
 
+          
+
            at which to begin copying bytes to the current stream.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2092,8 +2438,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -2106,6 +2456,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

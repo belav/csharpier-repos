@@ -34,8 +34,12 @@
 
         
 
+        
+
          object and call the <see
          cref="M:System.Reflection.MethodBase.GetMethodBody" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          property to obtain a list of <see
          cref="T:System.Reflection.ExceptionHandlingClause" />
+
+        
 
         
 
@@ -60,10 +68,14 @@
 
           
 
+          
+
            on MSDN and <see
            cref="http://go.microsoft.com/fwlink/?LinkID=65552"
             >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
           >
+
+          
 
           
 

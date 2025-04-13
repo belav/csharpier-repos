@@ -55,8 +55,12 @@
 
         
 
+        
+
          interface. The size of a List is dynamically increased as required. A List is not guaranteed to be sorted. It is the programmer's responsibility to sort the List prior to performing operations (such as <see
          langword="BinarySearch" />
+
+        
 
         
 
@@ -70,8 +74,12 @@
 
         
 
+        
+
         , <see
          langword="IndexOf" />
+
+        
 
         
 
@@ -80,13 +88,19 @@
 
         
 
+        
+
         , and <see
          langword="Remove" />
 
         
 
+        
+
         , use an equality comparer for the list elements.  The default equality comparer for type T is determined as follows:  If type T implements <see
          cref="T:System.IEquatable&lt;T&gt;" />
+
+        
 
         
 
@@ -96,9 +110,13 @@
 
         
 
+        
+
         ; otherwise the default equality comparer is <see
          cref="M:System.Object.Equals" />
         <see langword="(Object)" />
+
+        
 
         
 
@@ -110,13 +128,19 @@
 
         
 
+        
+
          and <see
          langword="Sort" />
 
         
 
+        
+
         , use a comparer for the list elements.  Some overloads of these methods take an explicit comparer as argument, while others use a default comparer.  The default comparer for type T is determined as follows:  If type T implements <see
          cref="I:System.IComparable&lt;T&gt;" />
+
+        
 
         
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
         ; otherwise, if type T implements <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -137,13 +165,19 @@
 
         
 
+        
+
         .  If type T implements neither <see
          cref="T:System.IComparable&lt;T&gt;" />
 
         
 
+        
+
          nor <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -155,8 +189,12 @@
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.Generic.List&lt;T&gt;" />
+
+        
 
         
 
@@ -165,13 +203,19 @@
 
         
 
+        
+
         , the capacity is automatically increased as required.. The capacity can be decreased by calling <see
          cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
 
         
 
+        
+
          or by setting the <see
          cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+        
 
         
 
@@ -183,8 +227,12 @@
 
         
 
+        
+
          accepts <see
          langword="null" />
+
+        
 
         
 
@@ -196,8 +244,12 @@
 
         
 
+        
+
         . Although <see
          langword="Enumerator" />
+
+        
 
         
 
@@ -206,8 +258,12 @@
 
         
 
+        
+
          is not described here; instead, it is described in its own entry, <see
          langword="List&lt;T&gt;.Enumerator" />
+
+        
 
         
 
@@ -279,8 +335,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -316,6 +376,8 @@
 
           
 
+          
+
            is less than zero.</exception
         >
       </Docs>
@@ -344,8 +406,12 @@
 
           
 
+          
+
            can be <see
            langword="null" />
+
+          
 
           
 
@@ -360,8 +426,12 @@
 
             
 
+            
+
              accepts <see
              cref="null" />
+
+            
 
             
 
@@ -373,8 +443,12 @@
 
             
 
+            
+
              already equals <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+            
 
             
 
@@ -386,13 +460,19 @@
 
             
 
+            
+
              is less than <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
+            
+
             , this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -435,8 +515,12 @@
 
             
 
+            
+
              accepts <see
              langword="null" />
+
+            
 
             
 
@@ -448,6 +532,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -456,13 +542,19 @@
 
             
 
+            
+
              (the current  <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
+            
+
              plus the size of the collection) will be greater than <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+            
 
             
 
@@ -474,8 +566,12 @@
 
             
 
+            
+
             , this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added and m is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -488,8 +584,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -553,8 +653,12 @@
 
           
 
+          
+
            can be <see
            langword="null" />
+
+          
 
           
 
@@ -570,8 +674,12 @@
 
             
 
+            
+
              in the sorted list, if <paramref
              name="item" />
+
+            
 
             
 
@@ -580,8 +688,12 @@
 
             
 
+            
+
              or, if there is no larger element, the bitwise complement of <see
              cref="T:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -595,8 +707,12 @@
 
             
 
+            
+
             .  The default comparer for a given element type T is defined in the Description section of this (class <see
              langword="List&lt;T&gt;" />
+
+            
 
             
 
@@ -609,13 +725,19 @@
 
             
 
+            
+
              with any reference type is allowed and does not generate an exception when using <see
              cref="T:System.IComparable&lt;T&gt;" />
 
             
 
+            
+
             . When sorting, <see
              langword="null" />
+
+            
 
             
 
@@ -633,8 +755,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -671,8 +797,12 @@
 
           
 
+          
+
            can be <see
            langword="null" />
+
+          
 
           
 
@@ -685,11 +815,15 @@
 
             
 
+            
+
               implementation to use when comparing elements.</para
           >
           <para>-or-</para>
           <para>
             <see langword="null" />
+
+            
 
             
 
@@ -706,8 +840,12 @@
 
             
 
+            
+
              in the sorted list, if <paramref
              name="item" />
+
+            
 
             
 
@@ -716,8 +854,12 @@
 
             
 
+            
+
              or, if there is no larger element, the bitwise complement of <see
              cref="T:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -731,8 +873,12 @@
 
             
 
+            
+
             , it is used to determine the order of list elements.  If the given comparer is <see
              langword="null" />
+
+            
 
             
 
@@ -741,8 +887,12 @@
 
             
 
+            
+
             .  The default comparer for a given element type T is defined in the Description section of this (class <see
              langword="List&lt;T&gt;" />
+
+            
 
             
 
@@ -754,8 +904,12 @@
 
             
 
+            
+
             , you can use a <see
              cref="T:System.Collections.CaseInsensitiveComparer" />
+
+            
 
             
 
@@ -768,8 +922,12 @@
 
             
 
+            
+
              with any reference type is allowed and does not generate an exception when using <see
              cref="T:System.IComparable&lt;T&gt;" />
+
+            
 
             
 
@@ -778,11 +936,15 @@
 
             
 
+            
+
              is considered to be less than any other object.</para
           >
           <para
             >If the <see
              cref="T:System.Collections.Generic.List&lt;T&gt;" />
+
+            
 
             
 
@@ -798,8 +960,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -808,8 +974,12 @@
 
             
 
+            
+
              or<see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -850,8 +1020,12 @@
 
           
 
+          
+
            can be <see
            langword="null" />
+
+          
 
           
 
@@ -864,11 +1038,15 @@
 
             
 
+            
+
               implementation to use when comparing elements.</para
           >
           <para>-or-</para>
           <para>
             <see langword="null" />
+
+            
 
             
 
@@ -885,8 +1063,12 @@
 
             
 
+            
+
              in the sorted list, if <paramref
              name="item" />
+
+            
 
             
 
@@ -895,13 +1077,19 @@
 
             
 
+            
+
              or, if there is no larger element, the bitwise complement of <paramref
              name="index" />
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -915,8 +1103,12 @@
 
             
 
+            
+
             , it is used to determine the order of list elements.  If the given comparer is <see
              langword="null" />
+
+            
 
             
 
@@ -925,8 +1117,12 @@
 
             
 
+            
+
             .  The default comparer for a given element type T is defined in the Description section of this (class <see
              langword="List&lt;T&gt;" />
+
+            
 
             
 
@@ -938,8 +1134,12 @@
 
             
 
+            
+
             , you can use a <see
              cref="T:System.Collections.CaseInsensitiveComparer" />
+
+            
 
             
 
@@ -952,8 +1152,12 @@
 
             
 
+            
+
              with any reference type is allowed and does not generate an exception when using <see
              cref="T:System.IComparable&lt;T&gt;" />
+
+            
 
             
 
@@ -962,11 +1166,15 @@
 
             
 
+            
+
              is considered to be less than any other object.</para
           >
           <para
             >If the <see
              cref="T:System.Collections.Generic.List&lt;T&gt;" />
+
+            
 
             
 
@@ -981,13 +1189,19 @@
 
           
 
+          
+
            + <paramref
            name="count" />
 
           
 
+          
+
            is greater than <see
            cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+          
 
           
 
@@ -999,11 +1213,15 @@
 
             
 
+            
+
              is less than zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -1016,8 +1234,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1026,8 +1248,12 @@
 
             
 
+            
+
              or<see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1058,6 +1284,8 @@
 
             
 
+            
+
              containing the number of elements the current instance can contain.</para
           >
         </value>
@@ -1068,8 +1296,12 @@
 
             
 
+            
+
              is the number of elements that the list is capable of storing without needing to be extended. <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -1080,8 +1312,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -1090,8 +1326,12 @@
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+            
 
             
 
@@ -1103,8 +1343,12 @@
 
             
 
+            
+
              or by setting the <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+            
 
             
 
@@ -1115,6 +1359,8 @@
         <exception cref="T:System.ArgumentOutOfRangeException"
           >Attempt to set the capacity to a value less than  <see
            cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+          
 
           
 
@@ -1147,6 +1393,8 @@
 
             
 
+            
+
              gets set to zero, and references to other objects from elements of the collection are also released. The capacity remains unchanged.</para
           >
           <para>
@@ -1157,8 +1405,12 @@
 
                 
 
+                
+
                  or set the <see
                  cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+                
 
                 
 
@@ -1194,8 +1446,12 @@
 
           
 
+          
+
            can be <see
            langword="null" />
+
+          
 
           
 
@@ -1210,13 +1466,19 @@
 
             
 
+            
+
             , if <paramref
              name="item" />
 
             
 
+            
+
              is found in the list; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -1230,11 +1492,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -1307,6 +1573,8 @@
 
             
 
+            
+
             ) in the same order in which the enumerator iterates through the list.</para
           >
         </remarks>
@@ -1314,6 +1582,8 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="array" />
+
+            
 
             
 
@@ -1325,12 +1595,16 @@
 
             
 
+            
+
              does not have zero-based indexing.</para
           >
           <para>-or-</para>
           <para
             >The number of elements in the list is greater than the number of elements that the destination <paramref
              name="array" />
+
+            
 
             
 
@@ -1345,8 +1619,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1383,6 +1661,8 @@
 
           
 
+          
+
            at which copying begins.</param
         >
         <summary>
@@ -1392,6 +1672,8 @@
           <para
             >The elements are copied onto the array (using <see
              cref="M:System.Array.Copy" />
+
+            
 
             
 
@@ -1405,11 +1687,15 @@
 
             
 
+            
+
              is multidimensional.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="array" />
+
+            
 
             
 
@@ -1419,6 +1705,8 @@
           <para
             >The sum of <paramref
              name="arrayIndex" />
+
+            
 
             
 
@@ -1433,8 +1721,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1444,6 +1736,8 @@
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
             <paramref name="arrayIndex" />
+
+            
 
             
 
@@ -1486,6 +1780,8 @@
 
           
 
+          
+
            at which copying begins.</param
         >
         <param name="count">
@@ -1501,6 +1797,8 @@
 
             
 
+            
+
             ) in the same order in which the enumerator iterates through the list.</para
           >
         </remarks>
@@ -1508,6 +1806,8 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="array" />
+
+            
 
             
 
@@ -1519,8 +1819,12 @@
 
             
 
+            
+
              is equal to or greater than the <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -1532,8 +1836,12 @@
 
             
 
+            
+
              is equal to or greater than the length of <paramref
              name="array" />
+
+            
 
             
 
@@ -1546,13 +1854,19 @@
 
             
 
+            
+
             to the end of the source list is greater than the available space from <paramref
              name="arrayIndex" />
 
             
 
+            
+
              to the end of the destination <paramref
              name="array" />
+
+            
 
             
 
@@ -1567,8 +1881,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1581,11 +1899,15 @@
 
             
 
+            
+
              is less than zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="array" />
+
+            
 
             
 
@@ -1597,11 +1919,15 @@
 
             
 
+            
+
              is less than zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -1664,8 +1990,12 @@
 
             
 
+            
+
              if the List contains one or more elements that match the conditions defined by the specified predicate; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -1679,6 +2009,8 @@
 
             
 
+            
+
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the predicate delegate, and processing is stopped when a match is found.</para
           >
         </remarks>
@@ -1689,8 +2021,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1731,6 +2067,8 @@
 
             
 
+            
+
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the predicate delegate, moving forward in the List, starting with the first element and ending with the last element. Processing is stopped when a match is found.</para
           >
         </remarks>
@@ -1741,8 +2079,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1788,6 +2130,8 @@
 
             
 
+            
+
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the Predicate delegate, and the elements that match the conditions are saved in the returned List.</para
           >
         </remarks>
@@ -1798,8 +2142,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1837,6 +2185,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -1845,6 +2195,8 @@
           <para
             >The predicate is a delegate that returns <see
              langword="true" />
+
+            
 
             
 
@@ -1858,8 +2210,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1902,6 +2258,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -1912,11 +2270,15 @@
 
             
 
+            
+
              and ending at the last element.</para
           >
           <para
             >The predicate is a delegate that returns <see
              langword="true" />
+
+            
 
             
 
@@ -1930,8 +2292,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1944,8 +2310,12 @@
 
             
 
+            
+
              is less than 0 or greater than  or equal to <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -1990,6 +2360,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -2000,8 +2372,12 @@
 
             
 
+            
+
              and ending after <paramref
              name="count" />
+
+            
 
             
 
@@ -2010,6 +2386,8 @@
           <para
             >The predicate is a delegate that returns <see
              langword="true" />
+
+            
 
             
 
@@ -2023,8 +2401,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2037,11 +2419,15 @@
 
             
 
+            
+
              is less than 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -2053,13 +2439,19 @@
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2100,6 +2492,8 @@
 
             
 
+            
+
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the predicate delegate, moving backward in the List, starting with the last element and ending with the first element.  Processing is stopped when a match is found.</para
           >
         </remarks>
@@ -2110,8 +2504,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2149,6 +2547,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -2157,6 +2557,8 @@
           <para
             >The predicate is a delegate that returns <see
              langword="true" />
+
+            
 
             
 
@@ -2170,8 +2572,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2214,6 +2620,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -2224,11 +2632,15 @@
 
             
 
+            
+
              and ending at the first element.</para
           >
           <para
             >The predicate is a delegate that returns <see
              langword="true" />
+
+            
 
             
 
@@ -2242,8 +2654,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2256,8 +2672,12 @@
 
             
 
+            
+
              is less than 0 or greater than or equal to <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2302,6 +2722,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -2312,8 +2734,12 @@
 
             
 
+            
+
              and ending after <paramref
              name="count" />
+
+            
 
             
 
@@ -2322,6 +2748,8 @@
           <para
             >The predicate is a delegate that returns <see
              langword="true" />
+
+            
 
             
 
@@ -2335,8 +2763,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2349,8 +2781,12 @@
 
             
 
+            
+
              is less than zero, or greater than or equal to <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2362,6 +2798,8 @@
 
             
 
+            
+
              is less than 0.</para
           >
           <para>-or-</para>
@@ -2370,8 +2808,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="index" />
+
+            
 
             
 
@@ -2409,6 +2851,8 @@
 
             
 
+            
+
             . Execution stops if the action throws an exception.</para
           >
         </remarks>
@@ -2419,8 +2863,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -2459,6 +2907,8 @@
             <block subset="none" type="usage"
               >For a detailed description regarding the use of an enumerator, see <see
                cref="T:System.Collections.Generic.IEnumerator&lt;T&gt;" />
+
+              
 
               
 
@@ -2509,13 +2959,19 @@
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2528,11 +2984,15 @@
 
             
 
+            
+
              is less than 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -2570,6 +3030,8 @@
 
             
 
+            
+
              within the List, if found; otherwise, -1.</para
           >
         </returns>
@@ -2581,6 +3043,8 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
@@ -2589,8 +3053,12 @@
 
             
 
+            
+
             . That is, this method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2631,6 +3099,8 @@
 
             
 
+            
+
              within the range of elements in the list, if found; otherwise, -1.</para
           >
         </returns>
@@ -2638,6 +3108,8 @@
           <para
             >The list is searched forward starting at <paramref
              name="index" />
+
+            
 
             
 
@@ -2649,11 +3121,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is the number of elements from <paramref
              name="index" />
+
+            
 
             
 
@@ -2667,8 +3143,12 @@
 
             
 
+            
+
              is less than zero or greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2710,6 +3190,8 @@
 
             
 
+            
+
              within the specified range of elements in the list, if found; otherwise, -1.</para
           >
         </returns>
@@ -2720,8 +3202,12 @@
 
             
 
+            
+
              and ending at <paramref
              name="index" />
+
+            
 
             
 
@@ -2730,8 +3216,12 @@
 
             
 
+            
+
              - 1, and searching at most <paramref
              name="count" />
+
+            
 
             
 
@@ -2743,11 +3233,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is <paramref
              name="count" />
+
+            
 
             
 
@@ -2761,11 +3255,15 @@
 
             
 
+            
+
              is less than 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -2777,13 +3275,19 @@
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2817,6 +3321,8 @@
 
           
 
+          
+
            is to be inserted.</param
         >
         <param name="item"
@@ -2825,8 +3331,12 @@
 
           
 
+          
+
            can be <see
            langword="null" />
+
+          
 
           
 
@@ -2841,8 +3351,12 @@
 
             
 
+            
+
              accepts <see
              langword="null" />
+
+            
 
             
 
@@ -2854,8 +3368,12 @@
 
             
 
+            
+
              already equals <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+            
 
             
 
@@ -2867,13 +3385,19 @@
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
+            
+
             , <paramref
              name="item" />
+
+            
 
             
 
@@ -2887,6 +3411,8 @@
 
             
 
+            
+
              is less than 0.</para
           >
           <para>-or-</para>
@@ -2895,8 +3421,12 @@
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2936,13 +3466,19 @@
 
           
 
+          
+
            itself cannot be <see
            langword="null" />
 
           
 
+          
+
           , but the collection can contain elements that are <see
            langword="null" />
+
+          
 
           
 
@@ -2957,8 +3493,12 @@
 
             
 
+            
+
              accepts <see
              langword="null" />
+
+            
 
             
 
@@ -2970,8 +3510,12 @@
 
             
 
+            
+
              will be greater than <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+
+            
 
             
 
@@ -2983,8 +3527,12 @@
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -2999,8 +3547,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -3013,6 +3565,8 @@
 
             
 
+            
+
              is less than zero,</para
           >
           <para>-or-</para>
@@ -3021,8 +3575,12 @@
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3063,6 +3621,8 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -3071,8 +3631,12 @@
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.Generics.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3110,6 +3674,8 @@
 
             
 
+            
+
              within the entire list, if found; otherwise, -1.</para
           >
         </returns>
@@ -3121,11 +3687,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3166,6 +3736,8 @@
 
             
 
+            
+
              within the range of elements in the list, if found; otherwise, -1.</para
           >
         </returns>
@@ -3173,6 +3745,8 @@
           <para
             >The list is searched backward starting at <paramref
              name="index" />
+
+            
 
             
 
@@ -3184,11 +3758,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is the number of elements from the beginning of the list to <paramref
              name="index" />
+
+            
 
             
 
@@ -3202,8 +3780,12 @@
 
             
 
+            
+
              is less than zero or greater than or equal to <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3248,13 +3830,19 @@
 
             
 
+            
+
              within the range of elements in the list that contains <paramref
              name="count" />
 
             
 
+            
+
              number of elements and ends at <paramref
              name="index" />
+
+            
 
             
 
@@ -3268,8 +3856,12 @@
 
             
 
+            
+
              and ending after <paramref
              name="count" />
+
+            
 
             
 
@@ -3281,11 +3873,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is <paramref
              name="count" />
+
+            
 
             
 
@@ -3299,8 +3895,12 @@
 
             
 
+            
+
              is less than zero, or greater than or equal to <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3312,6 +3912,8 @@
 
             
 
+            
+
              is less than 0.</para
           >
           <para>-or-</para>
@@ -3320,8 +3922,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="index" />
+
+            
 
             
 
@@ -3358,13 +3964,19 @@
 
             
 
+            
+
              if <paramref
              name="item" />
 
             
 
+            
+
              is successfully removed; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -3378,11 +3990,15 @@
 
             
 
+            
+
             ) specification.</para
           >
           <para
             >This method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3424,11 +4040,15 @@
 
             
 
+            
+
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the predicate delegate, and the elements that match the conditions are removed from the List.</para
           >
           <para
             >This method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3442,8 +4062,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -3482,6 +4106,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3489,6 +4115,8 @@
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
             <paramref name="index" />
+
+            
 
             
 
@@ -3500,8 +4128,12 @@
 
             
 
+            
+
              is equal to or greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3543,6 +4175,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3553,13 +4187,19 @@
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3572,11 +4212,15 @@
 
             
 
+            
+
              is less than zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -3612,11 +4256,15 @@
 
             
 
+            
+
               to reverse the order of the elements.</para
           >
           <para
             >This method is an O(n) operation, where n is <see
              cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3660,6 +4308,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3670,13 +4320,19 @@
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              is greater than <see
              cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+
+            
 
             
 
@@ -3689,11 +4345,15 @@
 
             
 
+            
+
              is less than zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -3728,8 +4388,12 @@
 
             
 
+            
+
             .  The default comparer for a given element type T is defined in the Description section of this (class <see
              langword="List&lt;T&gt;" />
+
+            
 
             
 
@@ -3738,6 +4402,8 @@
           <para
             >At worst, this operation is O(n<sup
             >2</sup>
+
+            
 
             
 
@@ -3752,8 +4418,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -3790,11 +4460,15 @@
 
             
 
+            
+
               implementation to use when comparing elements.</para
           >
           <para>-or-</para>
           <para>
             <see langword="null" />
+
+            
 
             
 
@@ -3811,8 +4485,12 @@
 
             
 
+            
+
             , it is used to determine the order of list elements.  If the given comparer is <see
              langword="null" />
+
+            
 
             
 
@@ -3821,8 +4499,12 @@
 
             
 
+            
+
             .  The default comparer for a given element type T is defined in the Description section of this (class <see
              langword="List&lt;T&gt;" />
+
+            
 
             
 
@@ -3831,6 +4513,8 @@
           <para
             >At worst, this operation is O(n<sup
             >2</sup>
+
+            
 
             
 
@@ -3844,8 +4528,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -3854,8 +4542,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -3895,6 +4587,8 @@
 
             
 
+            
+
             ), where n is the number of elements to sort. On average it's O(n log n).</para
           >
         </remarks>
@@ -3904,8 +4598,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3945,11 +4643,15 @@
 
             
 
+            
+
               implementation to use when comparing elements.</para
           >
           <para>-or-</para>
           <para>
             <see langword="null" />
+
+            
 
             
 
@@ -3966,8 +4668,12 @@
 
             
 
+            
+
             , it is used to determine the order of list elements.  If the given comparer is <see
              langword="null" />
+
+            
 
             
 
@@ -3976,8 +4682,12 @@
 
             
 
+            
+
             .  The default comparer for a given element type T is defined in the Description section of this (class <see
              langword="List&lt;T&gt;" />
+
+            
 
             
 
@@ -3986,6 +4696,8 @@
           <para
             >At worst, this operation is O(n<sup
             >2</sup>
+
+            
 
             
 
@@ -3998,13 +4710,19 @@
 
           
 
+          
+
            + <paramref
            name="count" />
 
           
 
+          
+
            is greater than <see
            cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+
+          
 
           
 
@@ -4016,11 +4734,15 @@
 
             
 
+            
+
              is less than zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -4033,8 +4755,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4043,8 +4769,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -4078,12 +4808,16 @@
 
             
 
+            
+
              interface.</para
           >
           <block subset="none" type="note">
             <para
               >For more information, see <see
                cref="P:System.Collections.Generic.ICollection&lt;T&gt;.IsReadOnly" />
+
+              
 
               
 
@@ -4119,6 +4853,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
+
+            
 
             
 
@@ -4161,6 +4897,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4190,6 +4928,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.ICollection " />
+
+            
 
             
 
@@ -4223,6 +4963,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.ICollection " />
+
+            
 
             
 
@@ -4260,6 +5002,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4291,6 +5035,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4328,6 +5074,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4359,6 +5107,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4398,6 +5148,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4424,6 +5176,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4454,6 +5208,8 @@
           <para
             >This read-only property is implemented to support the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4494,6 +5250,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4525,6 +5283,8 @@
           <para
             >This method is implemented to support the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4564,6 +5324,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4598,8 +5360,12 @@
 
               
 
+              
+
                method before calling <see
                cref="M:System.Collections.Generic.List.TrimExcess" />
+
+              
 
               
 
@@ -4640,8 +5406,12 @@
 
             
 
+            
+
             , if every element in the List matches the conditions defined by the specified predicate; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -4655,6 +5425,8 @@
 
             
 
+            
+
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the predicate delegate. The elements are processed sequentially and on the same thread.</para
           >
         </remarks>
@@ -4665,8 +5437,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 

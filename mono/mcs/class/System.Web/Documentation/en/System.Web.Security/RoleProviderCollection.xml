@@ -22,8 +22,12 @@
 
         
 
+        
+
          by the <see
          cref="P:System.Web.Security.Roles.Providers" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          class. You can access a specific role provider in the collection by name and cast it as the specific provider type, such as <see
          cref="T:System.Web.Security.SqlRoleProvider" />
 
         
 
+        
+
         . This enables you to manage role information from multiple data stores in a single application as well as access custom members of a role provider that are not part of the <see
          cref="T:System.Web.Security.RoleProvider" />
+
+        
 
         
 
@@ -50,6 +60,8 @@
       <para
         >A collection of objects that inherit the <see
          cref="T:System.Web.Security.RoleProvider" />
+
+        
 
         
 
@@ -104,6 +116,8 @@
 
           
 
+          
+
           The role provider to add to the collection.</param
         >
       </Docs>
@@ -134,6 +148,8 @@
 
             
 
+            
+
              to copy role provider objects to the specified array.</para
           >
         </remarks>
@@ -146,13 +162,19 @@
 
           
 
+          
+
           A one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the elements copied from the <see
            cref="T:System.Web.Security.RoleProviderCollection" />
+
+          
 
           
 
@@ -163,8 +185,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 

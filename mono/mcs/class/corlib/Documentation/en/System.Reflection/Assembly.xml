@@ -63,6 +63,8 @@
 
         
 
+        
+
          class to load assemblies, to explore the metadata and constituent parts of assemblies, to discover the types contained in assemblies, and to create instances of those types.</para
       >
       <para
@@ -71,8 +73,12 @@
 
         
 
+        
+
          objects representing the assemblies currently loaded into an application domain (for example, the default application domain of a simple project), use the <see
          cref="M:System.AppDomain.GetAssemblies" />
+
+        
 
         
 
@@ -81,6 +87,8 @@
       <para
         >To load assemblies dynamically, the <see
          cref="T:System.Reflection.Assembly" />
+
+        
 
         
 
@@ -94,10 +102,14 @@
 
             
 
+            
+
              method, which identifies the assembly to be loaded by its display name (for example, "System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"). The search for the assembly follows the rules described in <format
              type="text/html">
               <a href="772ac6f4-64d2-4cfb-92fd-58096dcd6c34">How the Runtime Locates Assemblies</a>
             </format>
+
+            
 
             
 
@@ -111,8 +123,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+
+            
 
             
 
@@ -126,8 +142,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Reflection.Assembly.LoadFrom" />
+
+            
 
             
 
@@ -141,8 +161,12 @@
 
         
 
+        
+
          object for the currently executing assembly, use the <see
          cref="M:System.Reflection.Assembly.GetExecutingAssembly" />
+
+        
 
         
 
@@ -151,6 +175,8 @@
       <para
         >Many members of the <see
          cref="T:System.Reflection.Assembly" />
+
+        
 
         
 
@@ -164,8 +190,12 @@
 
             
 
+            
+
              method returns an <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -179,6 +209,8 @@
 
             
 
+            
+
              method lists the attributes applied to the assembly. </para
           >
         </item>
@@ -186,6 +218,8 @@
           <para
             >The <see
              cref="Overload:System.Reflection.Assembly.GetFiles" />
+
+            
 
             
 
@@ -199,6 +233,8 @@
 
             
 
+            
+
              method provides the names of the resources in the assembly manifest.</para
           >
         </item>
@@ -209,8 +245,12 @@
 
         
 
+        
+
          method lists all the types in the assembly. The <see
          cref="M:System.Reflection.Assembly.GetExportedTypes" />
+
+        
 
         
 
@@ -219,8 +259,12 @@
 
         
 
+        
+
          method can be used to search for a particular type in the assembly. The <see
          cref="Overload:System.Reflection.Assembly.CreateInstance" />
+
+        
 
         
 
@@ -231,6 +275,8 @@
          type="text/html">
           <a href="433b04ae-4ba8-4849-9dbd-79194f240346">Application Domains and Assemblies</a>
         </format>
+
+        
 
         
 
@@ -263,6 +309,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -271,6 +319,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -301,11 +351,15 @@
 
             
 
+            
+
              property instead.</para
           >
           <para
             >If the assembly was loaded as a byte array, using an overload of the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -317,6 +371,8 @@
           <para
             >Gets the location of the assembly as specified originally, for example, in an <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -354,6 +410,8 @@
 
           
 
+          
+
            is the empty string ("") or "\0anything".</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -361,8 +419,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -380,8 +442,12 @@
 
             
 
+            
+
              is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with <see
              cref="T:System.Reflection.BindingFlags" />
+
+            
 
             
 
@@ -393,8 +459,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -439,8 +509,12 @@
 
             
 
+            
+
              is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with <see
              cref="T:System.Reflection.BindingFlags" />
+
+            
 
             
 
@@ -452,8 +526,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -461,6 +539,8 @@
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,10 +584,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -526,6 +610,8 @@
 
             
 
+            
+
              is not found. The supplied arguments are used to resolve the type, and to bind the constructor that is used to create the instance.</para
           >
         </returns>
@@ -534,8 +620,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -546,6 +636,8 @@
 
           
 
+          
+
           true to ignore the case of the type name; otherwise, false. </param
         >
         <param name="bindingAttr">
@@ -553,8 +645,12 @@
 
           
 
+          
+
           A bitmask that affects the way in which the search is conducted. The value is a combination of bit flags from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -565,8 +661,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -577,8 +677,12 @@
 
           
 
+          
+
           An array that contains the arguments to be passed to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to be invoked. If the default constructor is desired, <paramref
            name="args" />
+
+          
 
           
 
@@ -589,10 +693,14 @@
 
           
 
+          
+
           An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (This is necessary to convert a String that represents 1000 to a Double value, for example, since 1000 is represented differently by different cultures.) </param
         >
         <param name="activationAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -601,8 +709,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -643,11 +755,15 @@
 
             
 
+            
+
              for a description of the format of the display name of an assembly.</para
           >
           <para
             >To accommodate changes in versions of the common language runtime, use this method rather than constructing the qualified name yourself.  For information about qualified assembly names, see <see
              cref="P:System.Type.AssemblyQualifiedName" />
+
+            
 
             
 
@@ -667,10 +783,14 @@
 
           
 
+          
+
           The display name of an assembly. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -752,6 +872,8 @@
 
           
 
+          
+
            object for the Entry Point in the assembly if it exists.</value
         >
         <remarks>If there isn't an entry point in the assembly, the object is null.</remarks>
@@ -792,11 +914,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -905,6 +1031,8 @@
 
             
 
+            
+
              containing the full name of the assembly.</para
           >
         </value>
@@ -913,6 +1041,8 @@
             > The following example demonstrates using
       the <see
              cref="P:System.Reflection.Assembly.FullName" />
+
+            
 
             
 
@@ -945,6 +1075,8 @@ public class AssemblyExample {
 
             
 
+            
+
              for a description of the format of the display name of an assembly.</para
           >
           <block subset="none" type="note">
@@ -954,8 +1086,12 @@ public class AssemblyExample {
 
               
 
+              
+
                constructor, which parses it and populates the appropriate fields of the new <see
                cref="T:System.Reflection.AssemblyName" />
+
+              
 
               
 
@@ -968,8 +1104,12 @@ public class AssemblyExample {
 
             
 
+            
+
              property, for compatibility reasons. See <see
              cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+
+            
 
             
 
@@ -1013,6 +1153,8 @@ public class AssemblyExample {
 
             
 
+            
+
              object, which means that the assembly in which the class is defined must already be loaded.</para
           >
         </remarks>
@@ -1026,6 +1168,8 @@ public class AssemblyExample {
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1061,8 +1205,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method is expanded inline by the just-in-time (JIT) compiler, or if its caller is expanded inline, the assembly that is returned by <see
              cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+
+            
 
             
 
@@ -1073,6 +1221,8 @@ public class AssemblyExample {
               <para
                 >Method M1 in assembly A1 calls <see
                  cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+
+                
 
                 
 
@@ -1092,8 +1242,12 @@ public class AssemblyExample {
 
             
 
+            
+
              returns A2. When M1 is inlined, <see
              cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+
+            
 
             
 
@@ -1102,8 +1256,12 @@ public class AssemblyExample {
 
             
 
+            
+
              returns A2. When M2 is inlined, <see
              cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+
+            
 
             
 
@@ -1115,13 +1273,19 @@ public class AssemblyExample {
 
             
 
+            
+
             , by applying the <see
              cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
 
             
 
+            
+
              attribute with the <see
              cref="F:System.Runtime.CompilerServices.MethodImplOptions.NoInlining" />
+
+            
 
             
 
@@ -1133,6 +1297,8 @@ public class AssemblyExample {
           <para
             >Returns the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1175,8 +1341,12 @@ public class AssemblyExample {
 
             
 
+            
+
              interface method. Therefore, the <paramref
              name="inherit" />
+
+            
 
             
 
@@ -1190,6 +1360,8 @@ public class AssemblyExample {
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1384,8 +1556,12 @@ public class AssemblyExample {
 
           
 
+          
+
           This argument is ignored for objects of type <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1424,8 +1600,12 @@ public class AssemblyExample {
 
             
 
+            
+
              interface method. Therefore, the <paramref
              name="inherit" />
+
+            
 
             
 
@@ -1439,6 +1619,8 @@ public class AssemblyExample {
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1632,11 +1814,15 @@ public class AssemblyExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1647,8 +1833,12 @@ public class AssemblyExample {
 
           
 
+          
+
           This argument is ignored for objects of type <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -1682,13 +1872,19 @@ public class AssemblyExample {
 
             
 
+            
+
              and <see
              cref="Overload:System.Reflection.Assembly.GetCustomAttributes" />
 
             
 
+            
+
              cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and for example code, see the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -1703,8 +1899,12 @@ public class AssemblyExample {
 
             
 
+            
+
             , expressed as <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -1716,6 +1916,8 @@ public class AssemblyExample {
           <para
             >A generic list of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -1752,8 +1954,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method can return null when a managed assembly has been loaded from an unmanaged application. For example, if an unmanaged application creates an instance of a COM component written in C#, a call to the <see
              cref="M:System.Reflection.Assembly.GetEntryAssembly" />
+
+            
 
             
 
@@ -1768,6 +1974,8 @@ public class AssemblyExample {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1776,6 +1984,8 @@ public class AssemblyExample {
           <para
             >The assembly that is the process executable in the default application domain, or the first executable that was executed by <see
              cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
+
+            
 
             
 
@@ -1809,6 +2019,8 @@ public class AssemblyExample {
           <para
             >To get the assembly that contains the method that called the currently executing code, use <see
              cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+
+            
 
             
 
@@ -1887,6 +2099,8 @@ public class AssemblyExample {
 
             
 
+            
+
              should not include the path to the file.</para
           >
         </remarks>
@@ -1895,6 +2109,8 @@ public class AssemblyExample {
           <para
             >Gets a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1907,6 +2123,8 @@ public class AssemblyExample {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1937,6 +2155,8 @@ public class AssemblyExample {
           <para
             >This overload is equivalent to calling the <see
              cref="M:System.Reflection.Assembly.GetFiles(System.Boolean)" />
+
+            
 
             
 
@@ -1989,6 +2209,8 @@ public class AssemblyExample {
         </returns>
         <param name="getResourceModules">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2089,6 +2311,8 @@ public class AssemblyExample {
 
           
 
+          
+
           true to include resource modules; otherwise, false. </param
         >
       </Docs>
@@ -2123,6 +2347,8 @@ public class AssemblyExample {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2136,6 +2362,8 @@ public class AssemblyExample {
         </returns>
         <param name="resourceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2165,6 +2393,8 @@ public class AssemblyExample {
           <para
             >Resource information is returned only if the resource is visible to the caller, or the caller has <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 
@@ -2213,11 +2443,15 @@ public class AssemblyExample {
 
             
 
+            
+
              in the MSDN Library.</para
           >
           <para
             >Resource information is returned only if the resource is visible to the caller, or the caller has <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 
@@ -2230,8 +2464,12 @@ public class AssemblyExample {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+              
 
               
 
@@ -2244,8 +2482,12 @@ public class AssemblyExample {
 
             
 
+            
+
              returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2254,13 +2496,19 @@ public class AssemblyExample {
 
             
 
+            
+
              object to the <see
              cref="T:System.Resources.ResourceReader" />
 
             
 
+            
+
              constructor causes an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -2277,6 +2525,8 @@ public class AssemblyExample {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2315,8 +2565,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is "MyNameSpace.MyClasses" and <paramref
              name="name" />
+
+            
 
             
 
@@ -2330,11 +2584,15 @@ public class AssemblyExample {
 
             
 
+            
+
              in the MSDN Library.</para
           >
           <para
             >Resource information is returned only if the resource is visible to the caller, or the caller has <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 
@@ -2347,8 +2605,12 @@ public class AssemblyExample {
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+              
 
               
 
@@ -2361,8 +2623,12 @@ public class AssemblyExample {
 
             
 
+            
+
              returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2371,13 +2637,19 @@ public class AssemblyExample {
 
             
 
+            
+
              object to the <see
              cref="T:System.Resources.ResourceReader" />
 
             
 
+            
+
              constructor causes an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -2397,10 +2669,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The type whose namespace is used to scope the manifest resource name. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2439,6 +2715,8 @@ public class AssemblyExample {
 
             
 
+            
+
              property. Pass the kind of module you want to Assembly.GetModule. For example, if you want the module that contains the assembly manifest, pass the scope name of the module to GetModule. Otherwise, pass the file name of the module. Assemblies loaded by one of the Load methods that have a byte[] parameter have only one module, and that is the manifest module. Always seek these modules using the scope name.</para
           >
           <para
@@ -2447,8 +2725,12 @@ public class AssemblyExample {
 
             
 
+            
+
             . Calling Module.GetType on the module containing the manifest will not initiate a search of the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -2465,6 +2747,8 @@ public class AssemblyExample {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2548,6 +2832,8 @@ public class AssemblyExample {
 
           
 
+          
+
           true to include resource modules; otherwise, false. </param
         >
       </Docs>
@@ -2578,6 +2864,8 @@ public class AssemblyExample {
           <para
             >Gets an <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -2621,8 +2909,12 @@ public class AssemblyExample {
 
             
 
+            
+
              for this assembly, setting the codebase as specified by <paramref
              name="copiedName" />
+
+            
 
             
 
@@ -2638,13 +2930,19 @@ public class AssemblyExample {
 
           
 
+          
+
           true to set the <see
            cref="P:System.Reflection.Assembly.CodeBase" />
 
           
 
+          
+
            to the location of the assembly after it was shadow copied; false to set <see
            cref="P:System.Reflection.Assembly.CodeBase" />
+
+          
 
           
 
@@ -2685,10 +2983,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The object to be populated with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2725,8 +3027,12 @@ public class AssemblyExample {
 
               
 
+              
+
                property of an <see
                cref="T:System.Reflection.AssemblyName" />
+
+              
 
               
 
@@ -2735,8 +3041,12 @@ public class AssemblyExample {
 
               
 
+              
+
                if there is no hash algorithm for the referenced assembly, or if the hash algorithm of the referenced assembly is not identified by the <see
                cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
+
+              
 
               
 
@@ -2745,8 +3055,12 @@ public class AssemblyExample {
 
               
 
+              
+
                property returned <see
                cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
+
+              
 
               
 
@@ -2759,6 +3073,8 @@ public class AssemblyExample {
           <para
             >Gets the <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -2811,6 +3127,8 @@ public class AssemblyExample {
 
           
 
+          
+
           The specified culture. </param
         >
       </Docs>
@@ -2847,11 +3165,15 @@ public class AssemblyExample {
 
             
 
+            
+
              overload to use your current assembly version.</para
           >
           <para
             >If <paramref
              name="version" />
+
+            
 
             
 
@@ -2871,10 +3193,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The specified culture. </param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2926,8 +3252,12 @@ public class AssemblyExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -2938,8 +3268,12 @@ public class AssemblyExample {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2953,8 +3287,12 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see
              cref="M:System.Type.GetType(System.String)" />
+
+            
 
             
 
@@ -2971,6 +3309,8 @@ public class AssemblyExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2983,6 +3323,8 @@ public class AssemblyExample {
 
             
 
+            
+
              object with the specified name in the assembly instance.</para
           >
         </summary>
@@ -2992,6 +3334,8 @@ public class AssemblyExample {
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3031,8 +3375,12 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see
              cref="M:System.Type.GetType(System.String)" />
+
+            
 
             
 
@@ -3049,6 +3397,8 @@ public class AssemblyExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -3058,13 +3408,19 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
              cref="T:System.TypeLoadException" />
 
             
 
+            
+
              can be thrown even if <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -3076,6 +3432,8 @@ public class AssemblyExample {
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -3091,10 +3449,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The full name of the type. </param
         >
         <param name="throwOnError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3134,8 +3496,12 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see
              cref="M:System.Type.GetType(System.String)" />
+
+            
 
             
 
@@ -3152,6 +3518,8 @@ public class AssemblyExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -3161,13 +3529,19 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
              cref="T:System.TypeLoadException" />
 
             
 
+            
+
              can be thrown even if <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -3179,6 +3553,8 @@ public class AssemblyExample {
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -3194,6 +3570,8 @@ public class AssemblyExample {
 
           
 
+          
+
           The full name of the type. </param
         >
         <param name="throwOnError">
@@ -3201,10 +3579,14 @@ public class AssemblyExample {
 
           
 
+          
+
           true to throw an exception if the type is not found; false to return null. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3242,8 +3624,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method is called on an assembly and a type in that assembly is dependent on a type in an assembly that has not been loaded (for example, if it derives from a type in the second assembly), a <see
              cref="T:System.Reflection.ReflectionTypeLoadException" />
+
+            
 
             
 
@@ -3252,8 +3638,12 @@ public class AssemblyExample {
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+
+            
 
             
 
@@ -3262,13 +3652,19 @@ public class AssemblyExample {
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
+            
+
              methods if the second assembly cannot be located when the <see
              cref="M:System.Reflection.Assembly.GetTypes" />
+
+            
 
             
 
@@ -3282,6 +3678,8 @@ public class AssemblyExample {
                   >Type Forwarding in the Common Language Runtime</a
                 >
               </format>
+
+              
 
               
 
@@ -3375,6 +3773,8 @@ public class AssemblyExample {
 
             
 
+            
+
              is set to the version of the CLR used to build the assembly. However, it might have been set to another value at compile time. </para
           >
         </remarks>
@@ -3426,10 +3826,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The type of the attribute to be checked for this assembly. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3457,11 +3861,15 @@ public class AssemblyExample {
 
             
 
+            
+
             .</para
           >
           <para
             >When a dynamic assembly is saved to disk, the saved assembly is not dynamic. If the saved assembly is loaded into another application domain or process, the <see
              cref="P:System.Reflection.Assembly.IsDynamic" />
+
+            
 
             
 
@@ -3523,13 +3931,19 @@ public class AssemblyExample {
 
             
 
+            
+
              method overload. For more information about the use of evidence with overloads of the <see
              cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[])" />
 
             
 
+            
+
              method that take byte arrays, see the <see
              cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -3541,11 +3955,15 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
             >Note that this method overload always creates a new <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -3562,6 +3980,8 @@ public class AssemblyExample {
         </returns>
         <param name="rawAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3598,8 +4018,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is thrown if <paramref
              name="assemblyRef" />
+
+            
 
             
 
@@ -3612,8 +4036,12 @@ public class AssemblyExample {
 
               
 
+              
+
                with only the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -3622,13 +4050,19 @@ public class AssemblyExample {
 
               
 
+              
+
                property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see
                cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
 
               
 
+              
+
                method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see
                cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+              
 
               
 
@@ -3638,6 +4072,8 @@ public class AssemblyExample {
                   >Best Practices for Assembly Loading</a
                 >
               </format>
+
+              
 
               
 
@@ -3653,8 +4089,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -3668,13 +4108,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                
 
                 
 
@@ -3688,12 +4134,16 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method overload with a Byte[] parameter to load a common object file format (COFF) image, evidence is inherited from the calling assembly. This applies to the .NET Framework version 1.1 Service Pack 1 (SP1) and subsequent releases.</para
               >
               <block subset="none" type="note">
                 <para
                   >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
                    cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                  
 
                   
 
@@ -3708,8 +4158,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -3723,6 +4177,8 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <block subset="none" type="note">
@@ -3732,8 +4188,12 @@ public class AssemblyExample {
 
               
 
+              
+
                property and the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -3742,8 +4202,12 @@ public class AssemblyExample {
 
               
 
+              
+
                property). If the file is not found, <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -3752,8 +4216,12 @@ public class AssemblyExample {
 
               
 
+              
+
               , the display name is matched against the assembly. If the match fails, a <see
                cref="T:System.IO.FileLoadException" />
+
+              
 
               
 
@@ -3769,6 +4237,8 @@ public class AssemblyExample {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3778,6 +4248,8 @@ public class AssemblyExample {
         </returns>
         <param name="assemblyRef">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3816,8 +4288,12 @@ public class AssemblyExample {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3828,8 +4304,12 @@ public class AssemblyExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -3841,8 +4321,12 @@ public class AssemblyExample {
 
           
 
+          
+
            identified by <paramref
            name="assemblyString" />
+
+          
 
           
 
@@ -3854,8 +4338,12 @@ public class AssemblyExample {
 
           
 
+          
+
            identified by <paramref
            name="assemblyString" />
+
+          
 
           
 
@@ -3868,8 +4356,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is thrown if <paramref
              name="assemblyString" />
+
+            
 
             
 
@@ -3884,8 +4376,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -3899,13 +4395,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                
 
                 
 
@@ -3919,12 +4421,16 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method overload with a Byte[] parameter to load a common object file format (COFF) image, evidence is inherited from the calling assembly. This applies to the .NET Framework version 1.1 Service Pack 1 (SP1) and subsequent releases.</para
               >
               <block subset="none" type="note">
                 <para
                   >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
                    cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                  
 
                   
 
@@ -3939,8 +4445,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -3954,6 +4464,8 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
@@ -3962,13 +4474,19 @@ public class AssemblyExample {
 
             
 
+            
+
              object and pass it to an appropriate overload of the <see
              cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
+            
+
              method. See <see
              cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+
+            
 
             
 
@@ -3985,6 +4503,8 @@ public class AssemblyExample {
         </returns>
         <param name="assemblyString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4024,13 +4544,19 @@ public class AssemblyExample {
 
             
 
+            
+
              method overload. For more information about the use of evidence with overloads of the <see
              cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[])" />
 
             
 
+            
+
              method that take byte arrays, see the <see
              cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -4042,11 +4568,15 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
             >Note that this method overload always creates a new <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -4066,10 +4596,14 @@ public class AssemblyExample {
 
           
 
+          
+
           A byte array that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4112,8 +4646,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is thrown if <paramref
              name="assemblyRef" />
+
+            
 
             
 
@@ -4126,8 +4664,12 @@ public class AssemblyExample {
 
               
 
+              
+
                with only the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -4136,13 +4678,19 @@ public class AssemblyExample {
 
               
 
+              
+
                property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see
                cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
 
               
 
+              
+
                method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see
                cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+              
 
               
 
@@ -4152,6 +4700,8 @@ public class AssemblyExample {
                   >Best Practices for Assembly Loading</a
                 >
               </format>
+
+              
 
               
 
@@ -4167,8 +4717,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -4182,13 +4736,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                
 
                 
 
@@ -4202,12 +4762,16 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method overload with a Byte[] parameter to load a common object file format (COFF) image, evidence is inherited from the calling assembly. This applies to the .NET Framework version 1.1 Service Pack 1 (SP1) and subsequent releases.</para
               >
               <block subset="none" type="note">
                 <para
                   >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
                    cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                  
 
                   
 
@@ -4222,8 +4786,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -4237,6 +4805,8 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <block subset="none" type="note">
@@ -4246,8 +4816,12 @@ public class AssemblyExample {
 
               
 
+              
+
                property and the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -4256,8 +4830,12 @@ public class AssemblyExample {
 
               
 
+              
+
                property). If the file is not found, <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -4266,8 +4844,12 @@ public class AssemblyExample {
 
               
 
+              
+
               , the display name is matched against the assembly. If the match fails, a <see
                cref="T:System.IO.FileLoadException" />
+
+              
 
               
 
@@ -4280,8 +4862,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 
@@ -4293,6 +4879,8 @@ public class AssemblyExample {
           <para
             >Loads an assembly given its <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -4308,10 +4896,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The object that describes the assembly to be loaded. </param
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4354,8 +4946,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is thrown if <paramref
              name="assemblyString" />
+
+            
 
             
 
@@ -4370,8 +4966,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -4385,13 +4985,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                
 
                 
 
@@ -4405,12 +5011,16 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method overload with a Byte[] parameter to load a common object file format (COFF) image, evidence is inherited from the calling assembly. This applies to the .NET Framework version 1.1 Service Pack 1 (SP1) and subsequent releases.</para
               >
               <block subset="none" type="note">
                 <para
                   >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
                    cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                  
 
                   
 
@@ -4425,8 +5035,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -4440,11 +5054,15 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
             >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 
@@ -4456,13 +5074,19 @@ public class AssemblyExample {
 
             
 
+            
+
              object and pass it to an appropriate overload of the <see
              cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
+            
+
              method. See <see
              cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+
+            
 
             
 
@@ -4482,10 +5106,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The display name of the assembly. </param
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4534,8 +5162,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -4549,13 +5181,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                
 
                 
 
@@ -4569,12 +5207,16 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method overload with a Byte[] parameter to load a COFF image, evidence is inherited from the calling assembly. This applies to the .NET Framework version 1.1 Service Pack 1 (SP1) and subsequent releases. </para
               >
               <block subset="none" type="note">
                 <para
                   >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
                    cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+                  
 
                   
 
@@ -4589,8 +5231,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -4604,6 +5250,8 @@ public class AssemblyExample {
 
             
 
+            
+
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
@@ -4612,8 +5260,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 
@@ -4622,6 +5274,8 @@ public class AssemblyExample {
           <para
             >Note that this method overload always creates a new <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -4641,6 +5295,8 @@ public class AssemblyExample {
 
           
 
+          
+
           A byte array that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
@@ -4648,10 +5304,14 @@ public class AssemblyExample {
 
           
 
+          
+
           A byte array that contains the raw bytes representing the symbols for the assembly. </param
         >
         <param name="securityEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4689,6 +5349,8 @@ public class AssemblyExample {
 
             
 
+            
+
              was specified, the raw bytes that represent the symbols for the assembly are also loaded.</para
           >
         </remarks>
@@ -4705,6 +5367,8 @@ public class AssemblyExample {
 
           
 
+          
+
           A byte array that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
@@ -4712,10 +5376,14 @@ public class AssemblyExample {
 
           
 
+          
+
           A byte array that contains the raw bytes representing the symbols for the assembly. </param
         >
         <param name="securityContextSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4753,8 +5421,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method to load and examine assemblies that have the same identity, but are located in different paths. <see
              cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+
+            
 
             
 
@@ -4763,8 +5435,12 @@ public class AssemblyExample {
 
             
 
+            
+
              context, and does not resolve dependencies using the load path, as the <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -4773,8 +5449,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is useful in this limited scenario because <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -4791,6 +5471,8 @@ public class AssemblyExample {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4834,8 +5516,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method to load and examine assemblies that have the same identity, but are located in different paths. <see
              cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+
+            
 
             
 
@@ -4844,8 +5530,12 @@ public class AssemblyExample {
 
             
 
+            
+
              context, and does not resolve dependencies using the load path, as the <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -4854,8 +5544,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is useful in this limited scenario because <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -4875,10 +5569,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The path of the assembly file. </param
         >
         <param name="securityEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4916,6 +5614,8 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter must refer to a URI without escape characters. This method supplies escape characters for all invalid characters in the URI.</para
           >
           <block subset="none" type="note">
@@ -4925,11 +5625,15 @@ public class AssemblyExample {
 
               
 
+              
+
                is an FTP address, the assembly is not loaded. No exception is thrown.</para
             >
           </block>
           <para>
             <paramref name="assemblyFile" />
+
+            
 
             
 
@@ -4944,13 +5648,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
+                
+
                  of the application domain. Most overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -4964,13 +5674,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
+                
+
                 , and <see
                  cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+                
 
                 
 
@@ -4984,8 +5700,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+
+                
 
                 
 
@@ -4996,6 +5716,8 @@ public class AssemblyExample {
               <para
                 >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5010,8 +5732,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method has the following disadvantages. Consider using <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -5025,6 +5751,8 @@ public class AssemblyExample {
 
                 
 
+                
+
                  returns the loaded assembly even if a different path was specified. </para
               >
             </item>
@@ -5032,6 +5760,8 @@ public class AssemblyExample {
               <para
                 >If an assembly is loaded with <see
                  cref="Overload:System.Reflection.Assembly.LoadFrom" />
+
+                
 
                 
 
@@ -5045,13 +5775,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , and the probing path includes an assembly with the same identity but a different location, an <see
                  cref="T:System.InvalidCastException" />
 
                 
 
+                
+
                 , <see
                  cref="T:System.MissingMethodException" />
+
+                
 
                 
 
@@ -5064,8 +5800,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  demands <see
                  cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+                
 
                 
 
@@ -5074,8 +5814,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , or <see
                  cref="T:System.Net.WebPermission" />
+
+                
 
                 
 
@@ -5086,6 +5830,8 @@ public class AssemblyExample {
               <para
                 >If a native image exists for <paramref
                  name="assemblyFile" />
+
+                
 
                 
 
@@ -5107,6 +5853,8 @@ public class AssemblyExample {
         </returns>
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5150,6 +5898,8 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter must refer to a URI without escape characters. This method supplies escape characters for all invalid characters in the URI.</para
           >
           <block subset="none" type="note">
@@ -5159,11 +5909,15 @@ public class AssemblyExample {
 
               
 
+              
+
                is an FTP address, the assembly is not loaded. No exception is thrown.</para
             >
           </block>
           <para>
             <paramref name="assemblyFile" />
+
+            
 
             
 
@@ -5178,13 +5932,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
+                
+
                  of the application domain. Most overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5198,13 +5958,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
+                
+
                 , and <see
                  cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+                
 
                 
 
@@ -5218,8 +5984,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5230,6 +6000,8 @@ public class AssemblyExample {
               <para
                 >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5244,8 +6016,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method has the following disadvantages. Consider using <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -5259,6 +6035,8 @@ public class AssemblyExample {
 
                 
 
+                
+
                  returns the loaded assembly even if a different path was specified. </para
               >
             </item>
@@ -5266,6 +6044,8 @@ public class AssemblyExample {
               <para
                 >If an assembly is loaded with <see
                  cref="Overload:System.Reflection.Assembly.LoadFrom" />
+
+                
 
                 
 
@@ -5279,13 +6059,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , and the probing path includes an assembly with the same identity but a different location, an <see
                  cref="T:System.InvalidCastException" />
 
                 
 
+                
+
                 , <see
                  cref="T:System.MissingMethodException" />
+
+                
 
                 
 
@@ -5298,8 +6084,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  demands <see
                  cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+                
 
                 
 
@@ -5308,8 +6098,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , or <see
                  cref="T:System.Net.WebPermission" />
+
+                
 
                 
 
@@ -5320,6 +6114,8 @@ public class AssemblyExample {
               <para
                 >If a native image exists for <paramref
                  name="assemblyFile" />
+
+                
 
                 
 
@@ -5339,8 +6135,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -5354,13 +6154,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5374,6 +6180,8 @@ public class AssemblyExample {
 
                 
 
+                
+
                  because the equality and integrity of the different evidence specifications cannot be determined. The evidence that first succeeds is the evidence that is used. </para
               >
             </item>
@@ -5381,6 +6189,8 @@ public class AssemblyExample {
               <para
                 >When you use a <see
                  cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5394,8 +6204,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -5417,10 +6231,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The name or path of the file that contains the manifest of the assembly. </param
         >
         <param name="securityEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5461,6 +6279,8 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter must refer to a URI without escape characters. This method supplies escape characters for all invalid characters in the URI.</para
           >
           <block subset="none" type="note">
@@ -5470,11 +6290,15 @@ public class AssemblyExample {
 
               
 
+              
+
                is an FTP address, the assembly is not loaded. No exception is thrown.</para
             >
           </block>
           <para>
             <paramref name="assemblyFile" />
+
+            
 
             
 
@@ -5489,13 +6313,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
+                
+
                  of the application domain. Most overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5509,13 +6339,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
+                
+
                 , and <see
                  cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+                
 
                 
 
@@ -5529,8 +6365,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5541,6 +6381,8 @@ public class AssemblyExample {
               <para
                 >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5555,8 +6397,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method has the following disadvantages. Consider using <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -5570,6 +6416,8 @@ public class AssemblyExample {
 
                 
 
+                
+
                  returns the loaded assembly even if a different path was specified. </para
               >
             </item>
@@ -5577,6 +6425,8 @@ public class AssemblyExample {
               <para
                 >If an assembly is loaded with <see
                  cref="Overload:System.Reflection.Assembly.LoadFrom" />
+
+                
 
                 
 
@@ -5590,13 +6440,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , and the probing path includes an assembly with the same identity but a different location, an <see
                  cref="T:System.InvalidCastException" />
 
                 
 
+                
+
                 , <see
                  cref="T:System.MissingMethodException" />
+
+                
 
                 
 
@@ -5609,8 +6465,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  demands <see
                  cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+                
 
                 
 
@@ -5619,8 +6479,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , or <see
                  cref="T:System.Net.WebPermission" />
+
+                
 
                 
 
@@ -5631,6 +6495,8 @@ public class AssemblyExample {
               <para
                 >If a native image exists for <paramref
                  name="assemblyFile" />
+
+                
 
                 
 
@@ -5653,6 +6519,8 @@ public class AssemblyExample {
 
           
 
+          
+
           The name or path of the file that contains the manifest of the assembly. </param
         >
         <param name="hashValue">
@@ -5660,10 +6528,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5712,6 +6584,8 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter must refer to a URI without escape characters. This method supplies escape characters for all invalid characters in the URI.</para
           >
           <block subset="none" type="note">
@@ -5721,11 +6595,15 @@ public class AssemblyExample {
 
               
 
+              
+
                is an FTP address, the assembly is not loaded. No exception is thrown.</para
             >
           </block>
           <para>
             <paramref name="assemblyFile" />
+
+            
 
             
 
@@ -5740,13 +6618,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
+                
+
                  of the application domain. Most overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5760,13 +6644,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
+                
+
                 , and <see
                  cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+                
 
                 
 
@@ -5780,8 +6670,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  and <see
                  cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5792,6 +6686,8 @@ public class AssemblyExample {
               <para
                 >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
                  cref="Overload:System.Reflection.Assembly.Load" />
+
+                
 
                 
 
@@ -5806,8 +6702,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method has the following disadvantages. Consider using <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -5821,6 +6721,8 @@ public class AssemblyExample {
 
                 
 
+                
+
                  returns the loaded assembly even if a different path was specified. </para
               >
             </item>
@@ -5828,6 +6730,8 @@ public class AssemblyExample {
               <para
                 >If an assembly is loaded with <see
                  cref="Overload:System.Reflection.Assembly.LoadFrom" />
+
+                
 
                 
 
@@ -5841,13 +6745,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , and the probing path includes an assembly with the same identity but a different location, an <see
                  cref="T:System.InvalidCastException" />
 
                 
 
+                
+
                 , <see
                  cref="T:System.MissingMethodException" />
+
+                
 
                 
 
@@ -5860,8 +6770,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  demands <see
                  cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+                
 
                 
 
@@ -5870,8 +6784,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                 , or <see
                  cref="T:System.Net.WebPermission" />
+
+                
 
                 
 
@@ -5882,6 +6800,8 @@ public class AssemblyExample {
               <para
                 >If a native image exists for <paramref
                  name="assemblyFile" />
+
+                
 
                 
 
@@ -5901,8 +6821,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with no <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -5916,13 +6840,19 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with an <see
                  cref="T:System.Security.Policy.Evidence" />
 
                 
 
+                
+
                  parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                  cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5936,6 +6866,8 @@ public class AssemblyExample {
 
                 
 
+                
+
                  because the equality and integrity of the different evidence specifications cannot be determined. The evidence that first succeeds is the evidence that is used. </para
               >
             </item>
@@ -5943,6 +6875,8 @@ public class AssemblyExample {
               <para
                 >When you use a <see
                  cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+                
 
                 
 
@@ -5956,8 +6890,12 @@ public class AssemblyExample {
 
                 
 
+                
+
                  method with a Byte[] parameter and <see
                  cref="T:System.Security.Policy.Evidence" />
+
+                
 
                 
 
@@ -5979,10 +6917,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The name or path of the file that contains the manifest of the assembly. </param
         >
         <param name="securityEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5993,10 +6935,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6041,10 +6987,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The name of the module. This string must correspond to a file name in this assembly's manifest. </param
         >
         <param name="rawModule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6090,6 +7040,8 @@ public class AssemblyExample {
 
           
 
+          
+
           The name of the module. This string must correspond to a file name in this assembly's manifest. </param
         >
         <param name="rawModule">
@@ -6097,10 +7049,14 @@ public class AssemblyExample {
 
           
 
+          
+
           A byte array that is a COFF-based image containing an emitted module, or a resource. </param
         >
         <param name="rawSymbolStore">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6143,8 +7099,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method overload or the <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -6153,6 +7113,8 @@ public class AssemblyExample {
           <para
             >This method first calls <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -6171,11 +7133,15 @@ public class AssemblyExample {
 
             
 
+            
+
              is not found, this method returns null.</para
           >
         </returns>
         <param name="partialName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6220,8 +7186,12 @@ public class AssemblyExample {
 
             
 
+            
+
              method or the <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -6230,6 +7200,8 @@ public class AssemblyExample {
           <para
             >This method first calls <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -6248,6 +7220,8 @@ public class AssemblyExample {
 
             
 
+            
+
              is not found, this method returns null.</para
           >
         </returns>
@@ -6256,10 +7230,14 @@ public class AssemblyExample {
 
           
 
+          
+
           The display name of the assembly. </param
         >
         <param name="securityEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6286,6 +7264,8 @@ public class AssemblyExample {
           <para
             >To get the location before the file has been shadow-copied, use the <see
              cref="P:System.Reflection.Assembly.CodeBase" />
+
+            
 
             
 
@@ -6409,6 +7389,8 @@ public class AssemblyExample {
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -6420,8 +7402,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -6433,8 +7419,12 @@ public class AssemblyExample {
 
           
 
+          
+
           The assembly to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -6445,8 +7435,12 @@ public class AssemblyExample {
 
           
 
+          
+
           The assembly to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -6484,6 +7478,8 @@ public class AssemblyExample {
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -6495,8 +7491,12 @@ public class AssemblyExample {
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -6508,8 +7508,12 @@ public class AssemblyExample {
 
           
 
+          
+
           The assembly to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -6520,8 +7524,12 @@ public class AssemblyExample {
 
           
 
+          
+
           The assembly to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -6551,6 +7559,8 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -6590,6 +7600,8 @@ public class AssemblyExample {
 
             
 
+            
+
              method, you cannot execute code in the assembly. To execute code, the assembly must be loaded into the execution context.</para
           >
         </remarks>
@@ -6598,6 +7610,8 @@ public class AssemblyExample {
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -6636,6 +7650,8 @@ public class AssemblyExample {
 
             
 
+            
+
              method.</para
           >
           <para>The reflection-only context is no different from other contexts. Assemblies that are loaded into the context can be unloaded only by unloading the application domain. </para>
@@ -6650,6 +7666,8 @@ public class AssemblyExample {
         </returns>
         <param name="rawAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6688,6 +7706,8 @@ public class AssemblyExample {
 
             
 
+            
+
              method.</para
           >
           <para>Whether certain permissions are granted or not granted to an assembly is based on evidence. The rules for assembly and security evidence merging are as follows: </para>
@@ -6695,6 +7715,8 @@ public class AssemblyExample {
             <para
               >Reflecting on executable files compiled in C++ might throw a <see
                cref="T:System.IO.FileLoadException" />
+
+              
 
               
 
@@ -6716,8 +7738,12 @@ public class AssemblyExample {
 
           
 
+          
+
           The display name of the assembly, as returned by the <see
            cref="P:System.Reflection.AssemblyName.FullName" />
+
+          
 
           
 
@@ -6755,11 +7781,15 @@ public class AssemblyExample {
 
             
 
+            
+
              event and load the dependency in the event handler.</para
           >
           <para
             >You cannot execute code from an assembly that has been loaded into the reflection-only context. To execute the code, load the assembly with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -6771,11 +7801,15 @@ public class AssemblyExample {
 
             
 
+            
+
              parameter must refer to a URI without escape characters. This method supplies escape characters for all invalid characters in the URI.</para
           >
           <para
             >The path specified for <paramref
              name="assemblyFile" />
+
+            
 
             
 
@@ -6793,6 +7827,8 @@ public class AssemblyExample {
         </returns>
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6828,10 +7864,14 @@ public class AssemblyExample {
 
             
 
+            
+
              transparency, although you can explicitly make them <format
              type="text/html">
               <a href="5fd8f46d-3961-46a7-84af-2eb1f48e75cf">level 1</a>
             </format>
+
+            
 
             
 
@@ -6844,6 +7884,8 @@ public class AssemblyExample {
                 >Security Changes in the .NET Framework 4</a
               >
             </format>
+
+            
 
             
 
@@ -6884,6 +7926,8 @@ public class AssemblyExample {
 
             
 
+            
+
              type.</para
           >
         </returns>
@@ -6917,6 +7961,8 @@ public class AssemblyExample {
 
             
 
+            
+
              of the
    current assembly.</para
           >
@@ -6929,6 +7975,8 @@ public class AssemblyExample {
               
 
               
+
+              
    .</block
             >
           </para>
@@ -6937,6 +7985,8 @@ public class AssemblyExample {
           <para
             >The following example demonstrates the use of the <see
              cref="M:System.Reflection.Assembly.ToString" qualify="true" />
+
+            
 
             
 
@@ -7005,6 +8055,8 @@ public class AssemblyExample {
 
             
 
+            
+
              in your application configuration file. This causes the common language runtime to revert to the security policy of the net_v35_long.</para
           >
           <block subset="none" type="note">
@@ -7014,12 +8066,16 @@ public class AssemblyExample {
 
               
 
+              
+
                with full trust.</para
             >
           </block>
           <para
             >For a discussion of load contexts, including the load-from context, see the <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -7036,6 +8092,8 @@ public class AssemblyExample {
         </returns>
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

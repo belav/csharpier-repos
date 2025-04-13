@@ -45,6 +45,8 @@
 
         
 
+        
+
          class to unmanaged code.</para
       >
     </summary>
@@ -118,6 +120,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -130,6 +134,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -137,10 +143,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

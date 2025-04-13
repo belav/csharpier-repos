@@ -17,8 +17,12 @@
 
         
 
+        
+
          enumeration can be specified when creating an instance of the <see
          cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
           <para
             >A horizontal snapline typically associated with a primary internal feature of a control; for example, the base of the text string in a <see
              cref="T:System.Windows.Forms.Label" />
+
+            
 
             
 

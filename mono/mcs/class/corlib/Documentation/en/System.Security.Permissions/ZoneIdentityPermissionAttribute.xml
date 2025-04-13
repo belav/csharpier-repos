@@ -41,6 +41,8 @@
 
         
 
+        
+
          that is used.</para
       >
       <block subset="none" type="note">
@@ -54,6 +56,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+        
 
         
 
@@ -91,8 +95,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -104,8 +112,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -146,6 +158,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -154,6 +168,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+            
 
             
 

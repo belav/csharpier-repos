@@ -26,8 +26,12 @@
 
         
 
+        
+
          class are essential to working with unmanaged code. Most methods defined in this class are typically used by developers who want to provide a bridge between the managed and unmanaged programming models. For example, the <see
          cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalAnsi(System.String)" />
+
+        
 
         
 
@@ -41,11 +45,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The Read and Write methods in the <see
          cref="T:System.Runtime.InteropServices.Marshal" />
+
+        
 
         
 
@@ -85,13 +93,19 @@
 
             
 
+            
+
             , you must decrement the reference count by using a method such as <see
              cref="M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr)" />
 
             
 
+            
+
             . Do not rely on the return value of <see
              cref="M:System.Runtime.InteropServices.Marshal.AddRef(System.IntPtr)" />
+
+            
 
             
 
@@ -103,8 +117,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Runtime.InteropServices.Marshal.GetIUnknownForObject(System.Object)" />
+
+            
 
             
 
@@ -113,8 +131,12 @@
 
             
 
+            
+
              to obtain an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -123,8 +145,12 @@
 
             
 
+            
+
              interface pointer. You can also use these methods and the <see
              cref="M:System.Runtime.InteropServices.Marshal.AddRef(System.IntPtr)" />
+
+            
 
             
 
@@ -134,6 +160,8 @@
                 >[&lt;topic://cpconcomcallablewrapper&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -152,11 +180,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="pUnk">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,8 +222,12 @@
 
             
 
+            
+
              is one of two memory allocation API methods in the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -200,8 +236,12 @@
 
             
 
+            
+
              is the other.) The initial memory content returned is undefined, and the allocated memory can be larger than the requested number of bytes. This method exposes the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148626">CoTaskMemAlloc</see>
+
+            
 
             
 
@@ -220,11 +260,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="cb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,8 +307,12 @@
 
             
 
+            
+
              is one of two memory allocation methods in the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -273,8 +321,12 @@
 
             
 
+            
+
              is the other.) This method exposes the Win32 <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148628">LocalAlloc</see>
+
+            
 
             
 
@@ -283,6 +335,8 @@
           <para
             >When <see
              cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.Int32)" />
+
+            
 
             
 
@@ -301,11 +355,15 @@
 
             
 
+            
+
              method.</para
           >
         </returns>
         <param name="cb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,8 +402,12 @@
 
             
 
+            
+
              is one of two memory allocation methods in the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -354,8 +416,12 @@
 
             
 
+            
+
              is the other.) This method exposes the Win32 <see
              cref="http://go.microsoft.com/fwlink/?LinkID=148628">LocalAlloc</see>
+
+            
 
             
 
@@ -364,6 +430,8 @@
           <para
             >When <see
              cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.Int32)" />
+
+            
 
             
 
@@ -382,11 +450,15 @@
 
             
 
+            
+
              method.</para
           >
         </returns>
         <param name="cb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,6 +495,8 @@
 
             
 
+            
+
              exposes the COM BindToMoniker method, which produces an object that you can cast to any COM interface you require. This method provides the same functionality as the GetObject method in Visual Basic 6.0 and vbprvblong.</para
           >
         </remarks>
@@ -438,11 +512,15 @@
 
             
 
+            
+
              parameter. A moniker is a name, and in this case, the moniker is defined by an interface.</para
           >
         </returns>
         <param name="monikerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,6 +558,8 @@
 
             
 
+            
+
              is used for object pooling functionality and should never be called by user code directly.</para
           >
         </remarks>
@@ -493,11 +573,15 @@
 
             
 
+            
+
              (CCW) handle.</para
           >
         </summary>
         <param name="otp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,13 +592,19 @@
 
           
 
+          
+
           true to change the strength of the handle on the <paramref
            name="otp" />
 
           
 
+          
+
            parameter to weak, regardless of its reference count; false to reset the handle strength on <paramref
            name="otp" />
+
+          
 
           
 
@@ -560,10 +650,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from.</param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,10 +668,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,10 +721,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from.</param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -637,10 +739,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -686,10 +792,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from.</param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -700,10 +810,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -749,10 +863,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from.</param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -763,10 +881,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -812,10 +934,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from.</param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,10 +952,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -875,10 +1005,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from.</param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -889,10 +1023,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -933,13 +1071,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -955,10 +1099,14 @@
 
           
 
+          
+
           The memory pointer to copy from.</param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -969,10 +1117,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1013,13 +1165,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -1035,10 +1193,14 @@
 
           
 
+          
+
           The memory pointer to copy from.</param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1049,10 +1211,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1093,13 +1259,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -1115,10 +1287,14 @@
 
           
 
+          
+
           The memory pointer to copy from.</param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1129,10 +1305,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1173,13 +1353,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -1195,10 +1381,14 @@
 
           
 
+          
+
           The memory pointer to copy from.</param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1209,10 +1399,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1253,13 +1447,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -1275,10 +1475,14 @@
 
           
 
+          
+
           The memory pointer to copy from.</param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1289,10 +1493,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1333,13 +1541,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -1355,10 +1569,14 @@
 
           
 
+          
+
           The memory pointer to copy from.</param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1369,10 +1587,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1413,8 +1635,12 @@
 
             
 
+            
+
              and <paramref
              name="length" />
+
+            
 
             
 
@@ -1423,8 +1649,12 @@
 
             
 
+            
+
              parameter populates the managed array regardless of its usefulness. You must initialize the managed array with the appropriate size before calling the <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.IntPtr,System.IntPtr[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1439,11 +1669,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1454,6 +1688,8 @@
 
           
 
+          
+
           The array to copy to.</param
         >
         <param name="startIndex">
@@ -1461,10 +1697,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1505,13 +1745,19 @@
 
             
 
+            
+
              and <paramref
              name="length" />
 
             
 
+            
+
              parameters from being validated. Thus, the unmanaged data corresponding to the <paramref
              name="source" />
+
+            
 
             
 
@@ -1527,10 +1773,14 @@
 
           
 
+          
+
           The memory pointer to copy from. </param
         >
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1541,10 +1791,14 @@
 
           
 
+          
+
           The zero-based index in the destination array where copying should start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1585,6 +1839,8 @@
 
             
 
+            
+
              array to an unmanaged C-style array.</para
           >
         </remarks>
@@ -1596,11 +1852,15 @@
 
             
 
+            
+
              array to an unmanaged memory pointer.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1611,6 +1871,8 @@
 
           
 
+          
+
           The zero-based index in the source array where copying should start.</param
         >
         <param name="destination">
@@ -1618,10 +1880,14 @@
 
           
 
+          
+
           The memory pointer to copy to.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1667,10 +1933,14 @@
 
           
 
+          
+
           The one-dimensional array to copy from. </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1681,10 +1951,14 @@
 
           
 
+          
+
           The memory pointer to copy to. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1723,8 +1997,12 @@
 
             
 
+            
+
              method aggregates the inner managed pointer of a managed object with the specified outer pointer, and then returns an inner <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+            
 
             
 
@@ -1744,10 +2022,14 @@
 
           
 
+          
+
           The outer IUnknown pointer.</param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1817,8 +2099,12 @@
 
             
 
+            
+
              converts one COM class type, typically the generic __ComObject type, to another COM class type. The input COM object, represented by parameter <paramref
              name="o" />
+
+            
 
             
 
@@ -1826,6 +2112,8 @@
              type="text/html">
               <a href="7e542583-1e31-4e10-b523-8cf2f29cb4a4">Runtime Callable Wrapper</a>
             </format>
+
+            
 
             
 
@@ -1837,8 +2125,12 @@
 
             
 
+            
+
              and <paramref
              name="o" />
+
+            
 
             
 
@@ -1847,10 +2139,14 @@
 
             
 
+            
+
             . The <format
              type="text/html">
               <a href="ec0a8d63-11b3-4acd-b398-da1e37e97382">Tlbimp.exe (Type Library Importer)</a>
             </format>
+
+            
 
             
 
@@ -1864,8 +2160,12 @@
 
             
 
+            
+
              as a managed class and an interface. The coclass interface has the same name as the original coclass, and the managed class has the original coclass name appended with "Class". For example, a coclass called MyCoclass becomes a coclass interface called MyCoclass and a managed class called MyCoclassClass. Since <paramref
              name="t" />
+
+            
 
             
 
@@ -1875,6 +2175,8 @@
             <para
               >You lose the identity of the input COM object because a new RCW instance wraps the <see
                cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+              
 
               
 
@@ -1895,10 +2197,14 @@
 
           
 
+          
+
           The object to be wrapped. </param
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1974,6 +2280,8 @@
 
             
 
+            
+
              method uses this method to prevent memory leaks when reusing memory occupied by a structure.</para
           >
           <para>
@@ -1981,8 +2289,12 @@
 
             
 
+            
+
              calls the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148633">SysFreeString</see>
+
+            
 
             
 
@@ -1994,8 +2306,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -2004,8 +2320,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)" />
+
+            
 
             
 
@@ -2021,6 +2341,8 @@
 
           
 
+          
+
           A pointer to an unmanaged block of memory. </param
         >
         <param name="structuretype">
@@ -2028,8 +2350,12 @@
 
           
 
+          
+
           Type of a formatted class. This provides the layout information necessary to delete the buffer in the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -2068,6 +2394,8 @@
 
             
 
+            
+
              method uses this method to prevent memory leaks when reusing memory occupied by a structure.</para
           >
           <para>
@@ -2075,8 +2403,12 @@
 
             
 
+            
+
              calls the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148633">SysFreeString</see>
+
+            
 
             
 
@@ -2093,6 +2425,8 @@
 
           
 
+          
+
           A pointer to an unmanaged block of memory. </param
         >
         <typeparam name="T">
@@ -2100,8 +2434,12 @@
 
           
 
+          
+
           The type of the formatted structure. This provides the layout information necessary to delete the buffer in the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -2136,8 +2474,12 @@
 
             
 
+            
+
              method releases the managed reference to a COM object. Calling this method is equivalent to calling the <see
              cref="M:System.Runtime.InteropServices.Marshal.ReleaseComObject(System.Object)" />
+
+            
 
             
 
@@ -2147,6 +2489,8 @@
           <para
             >The COM object cannot be used after it has been separated from its underlying RCW. If you try to call a method on the RCW after its reference count becomes 0, a <see
              cref="T:System.Runtime.InteropServices.InvalidComObjectException" />
+
+            
 
             
 
@@ -2163,6 +2507,8 @@
 
             
 
+            
+
              (RCW) by setting its reference count to 0.</para
           >
         </summary>
@@ -2175,11 +2521,15 @@
 
             
 
+            
+
             parameter, which is 0 (zero) if the release is successful.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2214,8 +2564,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)" />
+
+            
 
             
 
@@ -2224,8 +2578,12 @@
 
             
 
+            
+
              calls the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkID=148633">SysFreeString</see>
+
+            
 
             
 
@@ -2235,6 +2593,8 @@
                 >[&lt;topic://cpconconsumingunmanageddllfunctions&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -2249,11 +2609,15 @@
 
             
 
+            
+
              function.</para
           >
         </summary>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2288,8 +2652,12 @@
 
             
 
+            
+
              to free any memory allocated by <see
              cref="M:System.Runtime.InteropServices.Marshal.AllocCoTaskMem(System.Int32)" />
+
+            
 
             
 
@@ -2298,8 +2666,12 @@
 
             
 
+            
+
             , or any equivalent unmanaged method. If the <paramref
              name="ptr" />
+
+            
 
             
 
@@ -2310,13 +2682,19 @@
 
             
 
+            
+
              exposes the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148638">CoTaskMemFree</see>
 
             
 
+            
+
              function, which frees all bytes so that you can no longer use the memory that the <paramref
              name="ptr" />
+
+            
 
             
 
@@ -2328,8 +2706,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -2338,8 +2720,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)" />
+
+            
 
             
 
@@ -2352,6 +2738,8 @@
         </summary>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2391,8 +2779,12 @@
 
             
 
+            
+
              to free any memory from the global heap allocated by <see
              cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.IntPtr)" />
+
+            
 
             
 
@@ -2401,13 +2793,19 @@
 
             
 
+            
+
             , or any equivalent unmanaged API method. If the <paramref
              name="hglobal" />
 
             
 
+            
+
              parameter is <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 
@@ -2418,13 +2816,19 @@
 
             
 
+            
+
              exposes the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148640">LocalFree</see>
 
             
 
+            
+
              function from Kernel32.DLL, which frees all bytes so that you can no longer use the memory pointed to by <paramref
              name="hglobal" />
+
+            
 
             
 
@@ -2436,8 +2840,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -2446,8 +2854,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeCoTaskMem(System.IntPtr)" />
+
+            
 
             
 
@@ -2463,8 +2875,12 @@
 
           
 
+          
+
           The handle returned by the original matching call to <see
            cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.IntPtr)" />
+
+          
 
           
 
@@ -2499,8 +2915,12 @@
 
             
 
+            
+
              provides the same functionality as the <see
              cref="P:System.Type.GUID" />
+
+            
 
             
 
@@ -2517,6 +2937,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2563,6 +2985,8 @@
 
           
 
+          
+
           The type to get a ProgID for. </param
         >
       </Docs>
@@ -2596,10 +3020,14 @@
 
             
 
+            
+
              exposes the COM <format
              type="text/html">
               <a href="a276e30c-6a7f-4cde-9639-21a9f5170b62">GetActiveObject</a>
             </format>
+
+            
 
             
 
@@ -2608,8 +3036,12 @@
 
             
 
+            
+
             ) expected by this method. To obtain a running instance of a COM object without a registered <paramref
              name="ProgID" />
+
+            
 
             
 
@@ -2620,12 +3052,16 @@
 
             
 
+            
+
              function. For a description of platform invoke, see <format
              type="text/html">
               <a href="ECA7606E-EBFB-4F47-B8D9-289903FDC045"
                 >[&lt;topic://cpconconsumingunmanageddllfunctions&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -2647,6 +3083,8 @@
         </returns>
         <param name="progID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2685,10 +3123,14 @@
 
             
 
+            
+
              to decrement the reference count once you have finished with the pointer. You must adhere to the rules defined by COM when using raw COM interface pointers.</para
           >
           <para>
             <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type)" />
+
+            
 
             
 
@@ -2697,8 +3139,12 @@
 
             
 
+            
+
              type, or with custom marshaling. Although less common, you can use this method on a managed object to obtain a pointer to the object's COM callable wrapper. For example, you can use <see
              cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type)" />
+
+            
 
             
 
@@ -2707,13 +3153,19 @@
 
             
 
+            
+
             . You cannot obtain a pointer to a class interface since a class interface lacks the corresponding type to pass to the second parameter (<paramref
              name="t" />
 
             
 
+            
+
             ). Instead, use <see
              cref="M:System.Runtime.InteropServices.Marshal.GetIDispatchForObject(System.Object)" />
+
+            
 
             
 
@@ -2725,8 +3177,12 @@
 
             
 
+            
+
              method overload allows query interface customization by default. To specify whether to apply query interface customization, use the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)" />
+
+            
 
             
 
@@ -2740,6 +3196,8 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="7e542583-1e31-4e10-b523-8cf2f29cb4a4">Runtime Callable Wrapper</a>
@@ -2747,10 +3205,14 @@
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="733c0dd2-12e5-46e6-8de1-39d5b25df024">Introducing the Class Interface</a>
             </format>
+
+            
 
             
 
@@ -2762,6 +3224,8 @@
           <para
             >Returns a pointer to an <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+            
 
             
 
@@ -2777,10 +3241,14 @@
 
           
 
+          
+
           The object that provides the interface. </param
         >
         <param name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2851,6 +3319,8 @@
 
             
 
+            
+
              except that it returns null if the caller is not in the same context as the object. It is particularly useful if you have an unmanaged method that expects to be passed an interface pointer.</para
           >
         </remarks>
@@ -2866,6 +3336,8 @@
 
             
 
+            
+
              that represents the interface for the specified object, or null if the caller is not in the same context as the object.</para
           >
         </returns>
@@ -2874,10 +3346,14 @@
 
           
 
+          
+
           The object that provides the interface.</param
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2918,13 +3394,19 @@
 
             
 
+            
+
              have an associated hash table, which <see
              cref="M:System.Runtime.InteropServices.Marshal.GetComObjectData(System.Object,System.Object)" />
 
             
 
+            
+
              retrieves. <see
              cref="M:System.Runtime.InteropServices.Marshal.SetComObjectData(System.Object,System.Object,System.Object)" />
+
+            
 
             
 
@@ -2943,8 +3425,12 @@
 
             
 
+            
+
              parameter in the internal hash table of the <paramref
              name="obj" />
+
+            
 
             
 
@@ -2956,6 +3442,8 @@
 
           
 
+          
+
           The COM object that contains the data that you want.</param
         >
         <param name="key">
@@ -2963,8 +3451,12 @@
 
           
 
+          
+
           The key in the internal hash table of <paramref
            name="obj" />
+
+          
 
           
 
@@ -3002,10 +3494,14 @@
 
             
 
+            
+
              and possibly four <format
              type="text/html">
               <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch</a>
             </format>
+
+            
 
             
 
@@ -3014,8 +3510,12 @@
 
             
 
+            
+
              provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.GetMethodInfoForComSlot(System.Type,System.Int32,System.Runtime.InteropServices.ComMemberType@)" />
+
+            
 
             
 
@@ -3027,8 +3527,12 @@
 
             
 
+            
+
              on a class interface by passing <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -3036,6 +3540,8 @@
              type="text/html">
               <a href="733c0dd2-12e5-46e6-8de1-39d5b25df024">Introducing the Class Interface</a>
             </format>
+
+            
 
             
 
@@ -3050,6 +3556,8 @@
 
             
 
+            
+
              type when that type is exposed to COM.</para
           >
         </summary>
@@ -3061,11 +3569,15 @@
 
             
 
+            
+
              identifier when it is exposed to COM.</para
           >
         </returns>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3105,8 +3617,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(System.Delegate)" />
+
+            
 
             
 
@@ -3115,8 +3631,12 @@
 
             
 
+            
+
             , <paramref
              name="ptr" />
+
+            
 
             
 
@@ -3125,8 +3645,12 @@
 
             
 
+            
+
             . A <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -3135,11 +3659,15 @@
 
             
 
+            
+
              and passed as a parameter; it can then be called from inside the unmanaged method. Note that the parameter marshaler can also marshal function pointers to delegates in the .NET Framework 2.0 and later versions.</para
           >
           <para
             >The <see
              cref="M:System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(System.IntPtr,System.Type)" />
+
+            
 
             
 
@@ -3159,6 +3687,8 @@
               <para
                 >You cannot use this method with function pointers obtained through C++ or from the <see
                  cref="M:System.RuntimeMethodHandle.GetFunctionPointer" />
+
+                
 
                 
 
@@ -3183,10 +3713,14 @@
 
           
 
+          
+
           The unmanaged function pointer to be converted.</param
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3225,8 +3759,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate``1(``0)" />
+
+            
 
             
 
@@ -3235,6 +3773,8 @@
           <para
             >The <see
              cref="M:System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)" />
+
+            
 
             
 
@@ -3251,6 +3791,8 @@
               <para
                 >You cannot use this method with function pointers obtained through C++ or from the <see
                  cref="M:System.RuntimeMethodHandle.GetFunctionPointer" />
+
+                
 
                 
 
@@ -3276,10 +3818,14 @@
 
           
 
+          
+
           The unmanaged function pointer to convert. </param
         >
         <typeparam name="TDelegate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3314,8 +3860,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.GetStartComSlot(System.Type)" />
+
+            
 
             
 
@@ -3324,10 +3874,14 @@
 
             
 
+            
+
              to pass slots within a specified range. For additional information, see <format
              type="text/html">
               <a href="733c0dd2-12e5-46e6-8de1-39d5b25df024">Introducing the Class Interface</a>
             </format>
+
+            
 
             
 
@@ -3346,11 +3900,15 @@
 
             
 
+            
+
              parameter is a class, the returned VTBL slot is the last slot in the interface that is generated from the class.</para
           >
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3379,6 +3937,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.Runtime.InteropServices.Marshal.GetExceptionCode" />
+
+            
 
             
 
@@ -3425,13 +3985,19 @@
 
             
 
+            
+
              method to get an <see
              cref="T:System.Exception" />
 
             
 
+            
+
              based on an HRESULT without having to call the <see
              cref="Overload:System.Runtime.InteropServices.Marshal.ThrowExceptionForHR" />
+
+            
 
             
 
@@ -3445,6 +4011,8 @@
 
             
 
+            
+
              interface is used to construct the exception.</para
           >
           <para
@@ -3452,6 +4020,8 @@
              type="text/html">
               <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
             </format>
+
+            
 
             
 
@@ -3466,6 +4036,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -3475,6 +4047,8 @@
         </returns>
         <param name="errorCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3513,8 +4087,12 @@
 
             
 
+            
+
              method to get an <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -3523,8 +4101,12 @@
 
             
 
+            
+
              method and catch the exception (thus avoiding the corresponding performance overhead). The <paramref
              name="errorInfo" />
+
+            
 
             
 
@@ -3539,6 +4121,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3550,10 +4134,14 @@
 
             
 
+            
+
              object, with additional error information passed in an <format
              type="text/html">
               <a href="4dda6909-2d9a-4727-ae0c-b5f90dcfa447">IErrorInfo</a>
             </format>
+
+            
 
             
 
@@ -3568,6 +4156,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3576,10 +4166,14 @@
 
           
 
+          
+
           The HRESULT to be converted.</param
         >
         <param name="errorInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3616,6 +4210,8 @@
 
             
 
+            
+
              is exposed for compiler support of structured exception handling (SEH) only.</para
           >
         </remarks>
@@ -3628,6 +4224,8 @@
           <para
             >A pointer to an <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148648">EXCEPTION_POINTERS</see>
+
+            
 
             
 
@@ -3666,10 +4264,14 @@
 
             
 
+            
+
              is converted to a function pointer that can be passed to unmanaged code using the <format
              type="text/html">
               <a href="e212594b-1827-4d07-9527-7d412b300df8">__stdcall</a>
             </format>
+
+            
 
             
 
@@ -3687,6 +4289,8 @@
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3762,11 +4366,15 @@
 
             
 
+            
+
             ; or -1 if the module does not have an HINSTANCE.</para
           >
         </returns>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3800,10 +4408,14 @@
 
             
 
+            
+
              also sets up an <format
              type="text/html">
               <a href="4dda6909-2d9a-4727-ae0c-b5f90dcfa447">IErrorInfo</a>
             </format>
+
+            
 
             
 
@@ -3812,8 +4424,12 @@
 
             
 
+            
+
             . Have the attributed method catch all exceptions and use <see
              cref="M:System.Runtime.InteropServices.Marshal.GetHRForException(System.Exception)" />
+
+            
 
             
 
@@ -3825,8 +4441,12 @@
 
             
 
+            
+
              method sets the IErrorInfo of the current thread. This can cause unexpected results for methods like the <see
              cref="Overload:System.Runtime.InteropServices.Marshal.ThrowExceptionForHR" />
+
+            
 
             
 
@@ -3843,6 +4463,8 @@
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3880,6 +4502,8 @@
 
             
 
+            
+
              must be true. The process for setting this flag depends on the source language used: C# and C++ are false by default, but the Declare statement in Visual Basic is true.</para
           >
         </remarks>
@@ -3888,6 +4512,8 @@
           <para
             >Returns the HRESULT corresponding to the last error incurred by Win32 code executed using <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -3930,13 +4556,19 @@
 
             
 
+            
+
              is useful when calling a method that exposes a COM object parameter as an <see
              cref="T:System.IntPtr" />
 
             
 
+            
+
              type, or with custom marshaling. Calling an object with this method causes the reference count to increment on the interface pointer before the pointer is returned. Always use <see
              cref="M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr)" />
+
+            
 
             
 
@@ -3949,6 +4581,8 @@
                 >[&lt;topic://cpconcomcallablewrapper&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -3965,6 +4599,8 @@
 
             
 
+            
+
              interface from a managed object.</para
           >
         </summary>
@@ -3976,11 +4612,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4018,6 +4658,8 @@
 
             
 
+            
+
              except that it returns null if the caller is not in the same context as the object.</para
           >
         </remarks>
@@ -4031,6 +4673,8 @@
 
             
 
+            
+
              interface pointer from a managed object, if the caller is in the same context as that object.</para
           >
         </summary>
@@ -4040,6 +4684,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4074,13 +4720,19 @@
 
             
 
+            
+
              causes the reference count to increment on the interface pointer before the pointer is returned. Always use <see
              cref="M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr)" />
 
             
 
+            
+
              to decrement the reference count once you have finished with the pointer. You can apply the <see
              cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+            
 
             
 
@@ -4095,6 +4747,8 @@
 
             
 
+            
+
              interface from a managed type.</para
           >
         </summary>
@@ -4106,11 +4760,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4148,8 +4806,12 @@
 
             
 
+            
+
              is useful when calling a method that exposes a COM object parameter as an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -4158,8 +4820,12 @@
 
             
 
+            
+
              to decrement the reference count once you have finished with the pointer. This method provides the opposite functionality of the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
+
+            
 
             
 
@@ -4170,6 +4836,8 @@
              type="text/html">
               <a href="d04be3b5-27b9-4f5b-8469-a44149fabf78">COM Callable Wrapper</a>
             </format>
+
+            
 
             
 
@@ -4184,6 +4852,8 @@
 
             
 
+            
+
              interface from a managed object.</para
           >
         </summary>
@@ -4195,11 +4865,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4237,6 +4911,8 @@
 
             
 
+            
+
              except that it returns null if the caller is not in the same context as the object.</para
           >
         </remarks>
@@ -4245,6 +4921,8 @@
           <para
             >Returns an <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+            
 
             
 
@@ -4257,6 +4935,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4293,13 +4973,19 @@
 
             
 
+            
+
              exposes the Win32 <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148657">GetLastError</see>
 
             
 
+            
+
              function from Kernel32.DLL. This method exists because it is not safe to make a direct platform invoke call to GetLastError to obtain this information. If you want to access this error code, you must call <see
              cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
+
+            
 
             
 
@@ -4311,8 +4997,12 @@
 
             
 
+            
+
              to the method signature and set the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.SetLastError" />
+
+            
 
             
 
@@ -4327,6 +5017,8 @@
 
             
 
+            
+
              flag set.</para
           >
         </summary>
@@ -4335,6 +5027,8 @@
           <para
             >The last error code set by a call to the Win32 <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148656">SetLastError</see>
+
+            
 
             
 
@@ -4379,6 +5073,8 @@
 
             
 
+            
+
              is exposed for compiler support only.</para
           >
         </remarks>
@@ -4394,11 +5090,15 @@
 
             
 
+            
+
              parameter to unmanaged code.</para
           >
         </returns>
         <param name="pfnMethodToWrap">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4409,6 +5109,8 @@
 
           
 
+          
+
           A pointer to the method signature.</param
         >
         <param name="cbSignature">
@@ -4416,8 +5118,12 @@
 
           
 
+          
+
           The number of bytes in <paramref
            name="pbSignature" />
+
+          
 
           
 
@@ -4492,6 +5198,8 @@
 
             
 
+            
+
              parameter must point to sufficient memory to store the resulting VARIANT. Also, the implementation of this method calls <format
              type="text/html">
               <a href="96aeb671-5528-4d3c-8e70-313716550b42">VariantInit</a>
@@ -4499,8 +5207,12 @@
 
             
 
+            
+
              on the raw memory that the <paramref
              name="pDstNativeVariant" />
+
+            
 
             
 
@@ -4516,6 +5228,8 @@
 
           
 
+          
+
           The object for which to get a COM VARIANT.</param
         >
         <param name="pDstNativeVariant">
@@ -4523,8 +5237,12 @@
 
           
 
+          
+
           A pointer to receive the VARIANT that corresponds to the <paramref
            name="obj" />
+
+          
 
           
 
@@ -4594,8 +5312,12 @@
 
             
 
+            
+
              parameter represents an IUnknown interface pointer; however, because all COM interfaces derive directly or indirectly from IUnknown, you can pass any COM interface to this method. The object returned by <see
              cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
+
+            
 
             
 
@@ -4606,10 +5328,14 @@
 
             
 
+            
+
             , which the common language runtime manages as it does any other managed object. The type of this wrapper is often a generic System.__ComObject type, which is a hidden type used when the wrapper type is ambiguous. You can still make late-bound calls to such a generic type as long as the COM object implements the <format
              type="text/html">
               <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch</a>
             </format>
+
+            
 
             
 
@@ -4621,6 +5347,8 @@
               <para
                 >Implement the <see
                  cref="http://go.microsoft.com/fwlink/?LinkID=148012">IProvideClassInfo</see>
+
+                
 
                 
 
@@ -4638,6 +5366,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4645,6 +5375,8 @@
           <para
             >Alternatively, you can avoid these requirements and still get an object that is wrapped with a specific managed class type by using the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetTypedObjectForIUnknown(System.IntPtr,System.Type)" />
+
+            
 
             
 
@@ -4659,6 +5391,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4668,6 +5402,8 @@
         </returns>
         <param name="pUnk">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4704,10 +5440,14 @@
 
             
 
+            
+
              returns a managed object that corresponds to a raw pointer to an unmanaged VARIANT type. The interop marshaler performs the identical transformation when exposing a VARIANT type to managed code.</para
           >
           <para>
             <see cref="M:System.Runtime.InteropServices.Marshal.GetObjectForNativeVariant(System.IntPtr)" />
+
+            
 
             
 
@@ -4716,11 +5456,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When the VARIANT type is VT_ERROR, <see
              cref="M:System.Runtime.InteropServices.Marshal.GetObjectForNativeVariant(System.IntPtr)" />
+
+            
 
             
 
@@ -4739,11 +5483,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="pSrcNativeVariant">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4781,8 +5529,12 @@
 
             
 
+            
+
              returns a managed object of type <paramref
              name="T" />
+
+            
 
             
 
@@ -4793,8 +5545,12 @@
 
             
 
+            
+
              provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.GetNativeVariantForObject``1(``0,System.IntPtr)" />
+
+            
 
             
 
@@ -4814,6 +5570,8 @@
 
             
 
+            
+
              parameter. </para
           >
         </returns>
@@ -4822,10 +5580,14 @@
 
           
 
+          
+
           A pointer to a COM VARIANT. </param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4863,8 +5625,12 @@
 
             
 
+            
+
              returns an array of managed objects that corresponds to a raw pointer to a C-style array of unmanaged VARIANT types. The interop marshaler performs the identical transformation when exposing a VARIANT type to managed code. The method returns an empty array when the <paramref
              name="cVars" />
+
+            
 
             
 
@@ -4880,6 +5646,8 @@
 
             
 
+            
+
              to an array of objects. </para
           >
         </summary>
@@ -4891,11 +5659,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="aSrcNativeVariant">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4906,8 +5678,12 @@
 
           
 
+          
+
           The count of COM VARIANTs in <paramref
            name="aSrcNativeVariant" />
+
+          
 
           
 
@@ -4946,13 +5722,19 @@
 
             
 
+            
+
              returns an array of <paramref
              name="T" />
 
             
 
+            
+
              that corresponds to a raw pointer to a C-style array of unmanaged VARIANT types. The interop marshaler performs the identical transformation when exposing a VARIANT type to managed code. The method returns an empty array when the <paramref
              name="cVars" />
+
+            
 
             
 
@@ -4973,8 +5755,12 @@
 
             
 
+            
+
              objects that corresponds to <paramref
              name="aSrcNativeVariant" />
+
+            
 
             
 
@@ -4986,10 +5772,14 @@
 
           
 
+          
+
           A pointer to the first element of an array of COM VARIANTs. </param
         >
         <param name="cVars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4998,10 +5788,14 @@
 
           
 
+          
+
           . </param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5036,8 +5830,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.GetEndComSlot(System.Type)" />
+
+            
 
             
 
@@ -5046,10 +5844,14 @@
 
             
 
+            
+
              to pass slots within a specified range. For additional information, see <format
              type="text/html">
               <a href="733c0dd2-12e5-46e6-8de1-39d5b25df024">Introducing the Class Interface</a>
             </format>
+
+            
 
             
 
@@ -5068,10 +5870,14 @@
 
             
 
+            
+
             , and 7 if the interface is based on <format
              type="text/html">
               <a href="ebbff4bc-36b2-4861-9efa-ffa45e013eb5">IDispatch</a>
             </format>
+
+            
 
             
 
@@ -5080,6 +5886,8 @@
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5126,6 +5934,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -5137,11 +5947,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="cookie">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5180,8 +5994,12 @@
 
             
 
+            
+
              parameter must be either a COM-imported type or a subtype of a COM-imported type. In addition, <paramref
              name="t" />
+
+            
 
             
 
@@ -5189,6 +6007,8 @@
              type="text/html">
               <a href="ec0a8d63-11b3-4acd-b398-da1e37e97382">Tlbimp.exe (Type Library Importer)</a>
             </format>
+
+            
 
             
 
@@ -5201,6 +6021,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -5209,8 +6031,12 @@
 
             
 
+            
+
              parameter, <paramref
              name="t" />
+
+            
 
             
 
@@ -5219,8 +6045,12 @@
 
             
 
+            
+
              represents an <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+            
 
             
 
@@ -5229,10 +6059,14 @@
 
             
 
+            
+
              is a <format
              type="text/html">
               <a href="7e542583-1e31-4e10-b523-8cf2f29cb4a4">Runtime Callable Wrapper</a>
             </format>
+
+            
 
             
 
@@ -5251,6 +6085,8 @@
 
             
 
+            
+
              object that represents the requested unmanaged COM object.</para
           >
         </returns>
@@ -5259,10 +6095,14 @@
 
           
 
+          
+
           A pointer to the IUnknown interface of the unmanaged object.</param
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5299,13 +6139,19 @@
 
             
 
+            
+
              returns a <see
              cref="T:System.Type" />
 
             
 
+            
+
              instance that is based on the original type. You can apply the <see
              cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+            
 
             
 
@@ -5316,13 +6162,19 @@
 
             
 
+            
+
              tool uses the custom marshaler to translate ITypeInfo parameters to <see
              cref="T:System.Type" />
 
             
 
+            
+
              parameters. However, if you obtain an ITypeInfo interface by some means other than Tlbimp.exe, you can use <see
              cref="M:System.Runtime.InteropServices.Marshal.GetTypeForITypeInfo(System.IntPtr)" />
+
+            
 
             
 
@@ -5339,8 +6191,12 @@
 
             
 
+            
+
              object into a managed <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -5353,6 +6209,8 @@
         </returns>
         <param name="piTypeInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5390,6 +6248,8 @@
 
             
 
+            
+
              method and passing -1 for its first parameter.</para
           >
         </remarks>
@@ -5400,6 +6260,8 @@
              type="text/html">
               <a href="f3356463-3373-4279-bae1-953378aa2680">ITypeInfo</a>
             </format>
+
+            
 
             
 
@@ -5414,11 +6276,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="typeInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5461,6 +6327,8 @@
 
             
 
+            
+
              method and passing -1 for its first parameter.</para
           >
         </remarks>
@@ -5471,6 +6339,8 @@
              type="text/html">
               <a href="f3356463-3373-4279-bae1-953378aa2680">ITypeInfo</a>
             </format>
+
+            
 
             
 
@@ -5485,11 +6355,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="pTI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5526,8 +6400,12 @@
 
             
 
+            
+
              extracts the LIBID directly from an existing type library. This action differs from that of the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetTypeLibGuidForAssembly(System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -5538,6 +6416,8 @@
              type="text/html">
               <a href="3fffd8db-240f-4fde-a558-a5bcc01e1a86">Exported Assembly Conversion</a>
             </format>
+
+            
 
             
 
@@ -5554,6 +6434,8 @@
         </returns>
         <param name="typelib">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5595,8 +6477,12 @@
 
             
 
+            
+
              extracts the LIBID directly from an existing type library. This action differs from that of the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetTypeLibGuidForAssembly(System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -5607,6 +6493,8 @@
              type="text/html">
               <a href="3fffd8db-240f-4fde-a558-a5bcc01e1a86">Exported Assembly Conversion</a>
             </format>
+
+            
 
             
 
@@ -5625,11 +6513,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="pTLB">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5667,10 +6559,14 @@
 
             
 
+            
+
              at the assembly level, or it can be generated automatically. The <format
              type="text/html">
               <a href="ec0a8d63-11b3-4acd-b398-da1e37e97382">Tlbimp.exe (Type Library Importer)</a>
             </format>
+
+            
 
             
 
@@ -5679,8 +6575,12 @@
 
             
 
+            
+
              returns the LIBID that is associated with the <see
              cref="T:System.Runtime.InteropServices.GuidAttribute" />
+
+            
 
             
 
@@ -5689,8 +6589,12 @@
 
             
 
+            
+
              returns the calculated value. Alternatively, you can use the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetTypeLibGuid(System.Runtime.InteropServices.UCOMITypeLib)" />
+
+            
 
             
 
@@ -5701,6 +6605,8 @@
              type="text/html">
               <a href="3fffd8db-240f-4fde-a558-a5bcc01e1a86">Exported Assembly Conversion</a>
             </format>
+
+            
 
             
 
@@ -5717,6 +6623,8 @@
         </returns>
         <param name="asm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5759,11 +6667,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="typelib">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5811,11 +6723,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="pTLB">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5854,6 +6770,8 @@
 
             
 
+            
+
              method and passing -1 for its first parameter.</para
           >
         </remarks>
@@ -5869,11 +6787,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="typelib">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5917,6 +6839,8 @@
 
             
 
+            
+
              method and passing -1 for its first parameter.</para
           >
         </remarks>
@@ -5932,11 +6856,15 @@
 
             
 
+            
+
              parameter points to.</para
           >
         </returns>
         <param name="pTLB">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6005,8 +6933,12 @@
 
             
 
+            
+
              method ensures that you receive a unique RCW, because it does not match an IUnknown pointer to an existing object. Use this method when you have to create a unique RCW that is not impacted by other code that calls the <see
              cref="M:System.Runtime.InteropServices.Marshal.ReleaseComObject(System.Object)" />
+
+            
 
             
 
@@ -6023,8 +6955,12 @@
 
             
 
+            
+
              (RCW) object for a given <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148003">IUnknown</see>
+
+            
 
             
 
@@ -6037,6 +6973,8 @@
         </returns>
         <param name="unknown">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6080,6 +7018,8 @@
 
             
 
+            
+
              is exposed for compiler support only.</para
           >
         </remarks>
@@ -6095,11 +7035,15 @@
 
             
 
+            
+
              to managed code.</para
           >
         </returns>
         <param name="pfnMethodToWrap">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6110,6 +7054,8 @@
 
           
 
+          
+
           A pointer to the method signature.</param
         >
         <param name="cbSignature">
@@ -6117,8 +7063,12 @@
 
           
 
+          
+
           The number of bytes in <paramref
            name="pbSignature" />
+
+          
 
           
 
@@ -6152,8 +7102,12 @@
 
             
 
+            
+
              returns true if the class type of the instance is attributed with <see
              cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+            
 
             
 
@@ -6162,10 +7116,14 @@
 
             
 
+            
+
             . The <format
              type="text/html">
               <a href="ec0a8d63-11b3-4acd-b398-da1e37e97382">Tlbimp.exe (Type Library Importer)</a>
             </format>
+
+            
 
             
 
@@ -6177,8 +7135,12 @@
 
             
 
+            
+
              returns true if the class (or interface) is attributed with <see
              cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+            
 
             
 
@@ -6187,8 +7149,12 @@
 
             
 
+            
+
              returns true if the type is attributed with <see
              cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+            
 
             
 
@@ -6207,11 +7173,15 @@
 
             
 
+            
+
              parameter is a COM type; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6245,8 +7215,12 @@
 
             
 
+            
+
              enables you to check for COM visibility in one step. Types that are not visible cannot be used from COM. A type is visible if it is public and not hidden with the <see
              cref="T:System.Runtime.InteropServices.ComVisibleAttribute" />
+
+            
 
             
 
@@ -6263,6 +7237,8 @@
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6300,6 +7276,8 @@
 
             
 
+            
+
              method returns the stack size (in bytes) needed to represent the parameters of a method signature in unmanaged memory.</para
           >
           <para>Note that the return value of this method is platform-dependent. For example, a signature with a single integer parameter returns a value of 4 on 32-bit platforms and a value of 8 on 64-bit platforms.</para>
@@ -6314,6 +7292,8 @@
         </returns>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6351,13 +7331,19 @@
 
             
 
+            
+
              provides the offset in terms of the unmanaged structure layout, which does not necessarily correspond to the offset of the managed structure layout. Marshaling the structure can transform the layout and alter the offset. The <paramref
              name="t" />
 
             
 
+            
+
              parameter can be a value type or a formatted reference type (with either a sequential or explicit layout). You can obtain the size of the entire layout by using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SizeOf(System.Object)" />
+
+            
 
             
 
@@ -6368,12 +7354,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Beginning with the .NET Framework version 2.0, <see
                cref="M:System.Runtime.InteropServices.Marshal.OffsetOf(System.Type,System.String)" />
+
+              
 
               
 
@@ -6393,6 +7383,8 @@
 
             
 
+            
+
              parameter within the specified class that is declared by platform invoke.</para
           >
         </returns>
@@ -6401,8 +7393,12 @@
 
           
 
+          
+
           A value type or formatted reference type that specifies the managed class. You must apply the <see
            cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+
+          
 
           
 
@@ -6413,8 +7409,12 @@
 
           
 
+          
+
           The field within the <paramref
            name="t" />
+
+          
 
           
 
@@ -6452,13 +7452,19 @@
 
             
 
+            
+
              provides the offset in terms of the unmanaged structure layout, which does not necessarily correspond to the offset of the managed structure layout. Marshaling the structure can transform the layout and alter the offset. The <paramref
              name="T" />
 
             
 
+            
+
              generic type parameter can be a value type or a formatted reference type (with either a sequential or explicit layout). You can obtain the size of the entire layout by using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SizeOf``1(``0)" />
+
+            
 
             
 
@@ -6469,12 +7475,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Beginning with the .NET Framework version 2.0, <see
                cref="M:System.Runtime.InteropServices.Marshal.OffsetOf(System.Type,System.String)" />
+
+              
 
               
 
@@ -6495,6 +7505,8 @@
 
             
 
+            
+
              parameter within the specified class that is declared by platform invoke. </para
           >
         </returns>
@@ -6503,8 +7515,12 @@
 
           
 
+          
+
           The name of the field in the <paramref
            name="T" />
+
+          
 
           
 
@@ -6515,8 +7531,12 @@
 
           
 
+          
+
           A managed value type or formatted reference type. You must apply the <see
            cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+
+          
 
           
 
@@ -6569,8 +7589,12 @@
 
             
 
+            
+
              on a method outside of platform invoke has no effect. To execute setup tasks on all platform invoke methods in a type, use <see
              cref="M:System.Runtime.InteropServices.Marshal.PrelinkAll(System.Type)" />
+
+            
 
             
 
@@ -6583,6 +7607,8 @@
         </summary>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6617,8 +7643,12 @@
 
             
 
+            
+
              method invokes <see
              cref="M:System.Runtime.InteropServices.Marshal.Prelink(System.Reflection.MethodInfo)" />
+
+            
 
             
 
@@ -6627,8 +7657,12 @@
 
             
 
+            
+
              executes one-time method setup tasks without calling each method. You can use <see
              cref="M:System.Runtime.InteropServices.Marshal.PrelinkAll(System.Type)" />
+
+            
 
             
 
@@ -6641,6 +7675,8 @@
         </summary>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6674,13 +7710,19 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. This method provides the opposite functionality of the <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToCoTaskMemAnsi(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalAnsi(System.String)" />
+
+            
 
             
 
@@ -6695,6 +7737,8 @@
 
             
 
+            
+
             , and widens each ANSI character to Unicode.</para
           >
         </summary>
@@ -6706,11 +7750,15 @@
 
             
 
+            
+
              is null, the method returns a null string.</para
           >
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6748,13 +7796,19 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. This method provides the opposite functionality of the <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToCoTaskMemAnsi(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalAnsi(System.String)" />
+
+            
 
             
 
@@ -6769,6 +7823,8 @@
 
             
 
+            
+
             , copies a specified number of characters from an unmanaged ANSI string into it, and widens each ANSI character to Unicode.</para
           >
         </summary>
@@ -6780,6 +7836,8 @@
 
             
 
+            
+
              parameter is not null; otherwise, this method returns null.</para
           >
         </returns>
@@ -6788,10 +7846,14 @@
 
           
 
+          
+
           The address of the first character of the unmanaged string.</param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6826,8 +7888,12 @@
 
             
 
+            
+
             . Otherwise, this method calls <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAnsi(System.IntPtr)" />
+
+            
 
             
 
@@ -6838,8 +7904,12 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAuto(System.IntPtr)" />
+
+            
 
             
 
@@ -6848,8 +7918,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalAuto(System.String)" />
+
+            
 
             
 
@@ -6864,6 +7938,8 @@
 
             
 
+            
+
              and copies all characters up to the first null character from a string stored in unmanaged memory into it.</para
           >
         </summary>
@@ -6875,11 +7951,15 @@
 
             
 
+            
+
              parameter is not null; otherwise, this method returns null.</para
           >
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6918,8 +7998,12 @@
 
             
 
+            
+
             ; on ANSI platforms, it calls <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAnsi(System.IntPtr)" />
+
+            
 
             
 
@@ -6930,8 +8014,12 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAuto(System.IntPtr)" />
+
+            
 
             
 
@@ -6940,8 +8028,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalAuto(System.String)" />
+
+            
 
             
 
@@ -6956,6 +8048,8 @@
 
             
 
+            
+
              and copies the specified number of characters from a string stored in unmanaged memory into it.</para
           >
         </summary>
@@ -6967,6 +8061,8 @@
 
             
 
+            
+
              parameter is not null; otherwise, this method returns null.</para
           >
         </returns>
@@ -6975,10 +8071,14 @@
 
           
 
+          
+
           For Unicode platforms, the address of the first Unicode character.</param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7015,10 +8115,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="f98bff39-bc5f-4a81-85d7-d5228e20fbc8">SysAllocStringLen</a>
             </format>
+
+            
 
             
 
@@ -7029,8 +8133,12 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. This method provides the opposite functionality of the <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToBSTR(System.String)" />
+
+            
 
             
 
@@ -7045,10 +8153,14 @@
 
             
 
+            
+
              and copies a <format
              type="text/html">
               <a href="1b2d7d2c-47af-4389-a6b6-b01b7e915228">BSTR</a>
             </format>
+
+            
 
             
 
@@ -7063,11 +8175,15 @@
 
             
 
+            
+
              parameter is not null; otherwise, this method returns null.</para
           >
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7101,13 +8217,19 @@
 
             
 
+            
+
              is useful for custom marshaling or for use when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. This method provides the opposite functionality of the <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToCoTaskMemUni(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalUni(System.String)" />
+
+            
 
             
 
@@ -7122,6 +8244,8 @@
 
             
 
+            
+
              and copies all characters up to the first null character from an unmanaged Unicode string into it.</para
           >
         </summary>
@@ -7133,11 +8257,15 @@
 
             
 
+            
+
              parameter is not null; otherwise, this method returns null.</para
           >
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7175,13 +8303,19 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method creates a copy of the unmanaged string's contents, you must free the original string as appropriate. This method provides the opposite functionality of the <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToCoTaskMemUni(System.String)" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.StringToHGlobalUni(System.String)" />
+
+            
 
             
 
@@ -7196,6 +8330,8 @@
 
             
 
+            
+
              and copies a specified number of characters from an unmanaged Unicode string into it.</para
           >
         </summary>
@@ -7207,6 +8343,8 @@
 
             
 
+            
+
              parameter is not null; otherwise, this method returns null.</para
           >
         </returns>
@@ -7215,10 +8353,14 @@
 
           
 
+          
+
           The address of the first character of the unmanaged string.</param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7261,8 +8403,12 @@
 
             
 
+            
+
              is often necessary in COM interop and platform invoke when structure parameters are represented as an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -7278,10 +8424,14 @@
 
           
 
+          
+
           A pointer to an unmanaged block of memory.</param
         >
         <param name="structure">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7324,8 +8474,12 @@
 
             
 
+            
+
              is often necessary in COM interop and platform invoke when structure parameters are represented as an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -7344,6 +8498,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -7352,10 +8508,14 @@
 
           
 
+          
+
           A pointer to an unmanaged block of memory.</param
         >
         <param name="structureType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7393,8 +8553,12 @@
 
             
 
+            
+
              is often necessary in COM interop and platform invoke when structure parameters are represented as <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -7414,6 +8578,8 @@
 
             
 
+            
+
              parameter points to. </para
           >
         </returns>
@@ -7422,10 +8588,14 @@
 
           
 
+          
+
           A pointer to an unmanaged block of memory. </param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7522,8 +8692,12 @@
 
             
 
+            
+
              has an implied offset of 0. This method enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7541,6 +8715,8 @@
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7575,8 +8751,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7597,6 +8777,8 @@
 
           
 
+          
+
           The base address in unmanaged memory from which to read.</param
         >
         <param name="ofs">
@@ -7604,8 +8786,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -7645,8 +8831,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7667,6 +8857,8 @@
 
           
 
+          
+
           The base address in unmanaged memory of the source object.</param
         >
         <param name="ofs">
@@ -7674,8 +8866,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -7709,8 +8905,12 @@
 
             
 
+            
+
              has an implied offset of 0. This method enables direct interaction with an unmanaged C-style Int16 array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7728,6 +8928,8 @@
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7762,8 +8964,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7784,6 +8990,8 @@
 
           
 
+          
+
           The base address in unmanaged memory from which to read.</param
         >
         <param name="ofs">
@@ -7791,8 +8999,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -7832,8 +9044,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7854,6 +9070,8 @@
 
           
 
+          
+
           The base address in unmanaged memory of the source object.</param
         >
         <param name="ofs">
@@ -7861,8 +9079,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -7901,8 +9123,12 @@
 
             
 
+            
+
              has an implied offset of 0. This method enables direct interaction with an unmanaged C-style Int32 array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7920,6 +9146,8 @@
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7959,8 +9187,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged 32-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -7981,6 +9213,8 @@
 
           
 
+          
+
           The base address in unmanaged memory from which to read.</param
         >
         <param name="ofs">
@@ -7988,8 +9222,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -8032,8 +9270,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged 32-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8054,6 +9296,8 @@
 
           
 
+          
+
           The base address in unmanaged memory of the source object.</param
         >
         <param name="ofs">
@@ -8061,8 +9305,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -8101,8 +9349,12 @@
 
             
 
+            
+
              has an implied offset of 0. This method enables direct interaction with an unmanaged C-style Int64 array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8120,6 +9372,8 @@
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8154,8 +9408,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged 64-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8176,6 +9434,8 @@
 
           
 
+          
+
           The base address in unmanaged memory from which to read.</param
         >
         <param name="ofs">
@@ -8183,8 +9443,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -8227,8 +9491,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged 64-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8249,6 +9517,8 @@
 
           
 
+          
+
           The base address in unmanaged memory of the source object.</param
         >
         <param name="ofs">
@@ -8256,8 +9526,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -8296,8 +9570,12 @@
 
             
 
+            
+
              has an implied offset of 0. This method enables direct interaction with an unmanaged C-style IntPtr array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8315,6 +9593,8 @@
         </returns>
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8357,8 +9637,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style IntPtr array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8379,6 +9663,8 @@
 
           
 
+          
+
           The base address in unmanaged memory from which to read.</param
         >
         <param name="ofs">
@@ -8386,8 +9672,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -8430,8 +9720,12 @@
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style IntPtr array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -8452,6 +9746,8 @@
 
           
 
+          
+
           The base address in unmanaged memory of the source object.</param
         >
         <param name="ofs">
@@ -8459,8 +9755,12 @@
 
           
 
+          
+
           An additional byte offset, which is added to the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -8498,8 +9798,12 @@
 
             
 
+            
+
              is one of two memory reallocation methods in the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -8508,8 +9812,12 @@
 
             
 
+            
+
              is the other.) The beginning of the reallocated memory content is the same as the original content; however, the entire memory block can be in a different location. This method exposes the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148778">CoTaskMemRealloc</see>
+
+            
 
             
 
@@ -8524,6 +9832,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8535,6 +9845,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8543,8 +9855,12 @@
 
           
 
+          
+
           A pointer to memory allocated with <see
            cref="M:System.Runtime.InteropServices.Marshal.AllocCoTaskMem(System.Int32)" />
+
+          
 
           
 
@@ -8552,6 +9868,8 @@
         >
         <param name="cb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8589,8 +9907,12 @@
 
             
 
+            
+
              is one of two memory reallocation API methods in the <see
              cref="T:System.Runtime.InteropServices.Marshal" />
+
+            
 
             
 
@@ -8599,11 +9921,15 @@
 
             
 
+            
+
              is the other.) </para
           >
           <para
             >This method exposes the Win32 <see
              cref="http://go.microsoft.com/fwlink/?LinkId=148780">GlobalReAlloc</see>
+
+            
 
             
 
@@ -8618,6 +9944,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8629,6 +9957,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -8637,8 +9967,12 @@
 
           
 
+          
+
           A pointer to memory allocated with <see
            cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.IntPtr)" />
+
+          
 
           
 
@@ -8649,8 +9983,12 @@
 
           
 
+          
+
           The new size of the allocated block. This is not a pointer; it is the byte count you are requesting, cast to type <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -8690,13 +10028,19 @@
 
             
 
+            
+
              should call <see
              cref="M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr)" />
 
             
 
+            
+
             . Calling <see
              cref="M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr)" />
+
+            
 
             
 
@@ -8708,8 +10052,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Runtime.InteropServices.Marshal.GetIUnknownForObject(System.Object)" />
+
+            
 
             
 
@@ -8718,8 +10066,12 @@
 
             
 
+            
+
              to obtain an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -8728,8 +10080,12 @@
 
             
 
+            
+
              interface pointer to release. You can also use these methods and the <see
              cref="M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr)" />
+
+            
 
             
 
@@ -8737,6 +10093,8 @@
              type="text/html">
               <a href="d04be3b5-27b9-4f5b-8469-a44149fabf78">COM Callable Wrapper</a>
             </format>
+
+            
 
             
 
@@ -8755,11 +10113,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="pUnk">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8796,13 +10158,19 @@
 
             
 
+            
+
              method decrements the reference count of an RCW. When the reference count reaches zero, the runtime releases all its references on the unmanaged COM object, and throws a <see
              cref="T:System.NullReferenceException" />
 
             
 
+            
+
              if you attempt to use the object further. If the same COM interface is passed more than one time from unmanaged to managed code, the reference count on the wrapper is incremented every time, and calling <see
              cref="M:System.Runtime.InteropServices.Marshal.ReleaseComObject(System.Object)" />
+
+            
 
             
 
@@ -8814,6 +10182,8 @@
 
             
 
+            
+
              may cause your application to fail, or may cause an access violation.</para
           >
           <para
@@ -8822,8 +10192,12 @@
 
             
 
+            
+
              method on the RCW, the managed code will be unable to access the RCW and will raise an <see
              cref="T:System.Runtime.InteropServices.InvalidComObjectException" />
+
+            
 
             
 
@@ -8836,8 +10210,12 @@
 
             
 
+            
+
              function, which returns the same interface pointer every time it is called for singleton COM components. Thus, separate and independent pieces of managed code in an application domain can be using the same RCW for a singleton COM component, and if either one calls the <see
              cref="M:System.Runtime.InteropServices.Marshal.ReleaseComObject(System.Object)" />
+
+            
 
             
 
@@ -8849,8 +10227,12 @@
 
             
 
+            
+
              only if it is absolutely required. If you want to call this method to ensure that a COM component is released at a determined time, consider using the <see
              cref="M:System.Runtime.InteropServices.Marshal.FinalReleaseComObject(System.Object)" />
+
+            
 
             
 
@@ -8859,13 +10241,19 @@
 
             
 
+            
+
              will release the underlying COM component regardless of how many times it has re-entered the CLR. The internal reference count of the RCW is incremented by one every time the COM component re-enters the CLR. Therefore, you could call the <see
              cref="M:System.Runtime.InteropServices.Marshal.ReleaseComObject(System.Object)" />
 
             
 
+            
+
              method in a loop until the value returned is zero. This achieves the same result as the <see
              cref="M:System.Runtime.InteropServices.Marshal.FinalReleaseComObject(System.Object)" />
+
+            
 
             
 
@@ -8882,6 +10270,8 @@
 
             
 
+            
+
              (RCW) associated with the specified COM object.</para
           >
         </summary>
@@ -8893,11 +10283,15 @@
 
             
 
+            
+
             . This value is typically zero since the RCW keeps just one reference to the wrapped COM object regardless of the number of managed clients calling it.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8964,8 +10358,12 @@
 
             
 
+            
+
              method is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the BSTR when finished by calling the <see
              cref="M:System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(System.IntPtr)" />
+
+            
 
             
 
@@ -8982,8 +10380,12 @@
 
             
 
+            
+
              and copies the contents of a managed <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -8998,11 +10400,15 @@
 
             
 
+            
+
              parameter was copied to, or 0 if a null object was supplied.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9040,8 +10446,12 @@
 
             
 
+            
+
              method is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.ZeroFreeCoTaskMemAnsi(System.IntPtr)" />
+
+            
 
             
 
@@ -9056,6 +10466,8 @@
 
             
 
+            
+
              object to a block of memory allocated from the unmanaged COM task allocator.</para
           >
         </summary>
@@ -9067,11 +10479,15 @@
 
             
 
+            
+
              parameter was copied to, or 0 if a null object was supplied.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9109,8 +10525,12 @@
 
             
 
+            
+
              method is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling the <see
              cref="M:System.Runtime.InteropServices.Marshal.ZeroFreeCoTaskMemUnicode(System.IntPtr)" />
+
+            
 
             
 
@@ -9125,6 +10545,8 @@
 
             
 
+            
+
              object to a block of memory allocated from the unmanaged COM task allocator.</para
           >
         </summary>
@@ -9136,11 +10558,15 @@
 
             
 
+            
+
              parameter was copied to, or 0 if a null object was supplied.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9178,8 +10604,12 @@
 
             
 
+            
+
              method is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling the <see
              cref="M:System.Runtime.InteropServices.Marshal.ZeroFreeGlobalAllocAnsi(System.IntPtr)" />
+
+            
 
             
 
@@ -9194,6 +10624,8 @@
 
             
 
+            
+
              into unmanaged memory, converting into ANSI format as it copies.</para
           >
         </summary>
@@ -9205,11 +10637,15 @@
 
             
 
+            
+
              parameter was copied, or 0 if a null object was supplied.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9247,8 +10683,12 @@
 
             
 
+            
+
              method is useful for custom marshaling or for use when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling the <see
              cref="M:System.Runtime.InteropServices.Marshal.ZeroFreeGlobalAllocUnicode(System.IntPtr)" />
+
+            
 
             
 
@@ -9263,6 +10703,8 @@
 
             
 
+            
+
              object into unmanaged memory.</para
           >
         </summary>
@@ -9274,8 +10716,12 @@
 
             
 
+            
+
              was copied, or 0 if <paramref
              name="s" />
+
+            
 
             
 
@@ -9284,11 +10730,15 @@
 
             
 
+            
+
              object whose length is 0.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9330,13 +10780,19 @@
 
             
 
+            
+
              (RCW) have an associated hash table, to which <see
              cref="M:System.Runtime.InteropServices.Marshal.SetComObjectData(System.Object,System.Object,System.Object)" />
 
             
 
+            
+
              adds data. <see
              cref="M:System.Runtime.InteropServices.Marshal.GetComObjectData(System.Object,System.Object)" />
+
+            
 
             
 
@@ -9356,6 +10812,8 @@
 
           
 
+          
+
           The COM object in which to store the data.</param
         >
         <param name="key">
@@ -9363,10 +10821,14 @@
 
           
 
+          
+
           The key in the internal hash table of the COM object in which to store the data.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9407,6 +10869,8 @@
 
             
 
+            
+
              value applied to that class.</para
           >
           <para
@@ -9415,13 +10879,19 @@
 
             
 
+            
+
              method to determine how much unmanaged memory to allocate using the <see
              cref="Overload:System.Runtime.InteropServices.Marshal.AllocHGlobal" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.InteropServices.Marshal.AllocCoTaskMem(System.Int32)" />
+
+            
 
             
 
@@ -9438,6 +10908,8 @@
         </returns>
         <param name="structure">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9473,6 +10945,8 @@
 
             
 
+            
+
              value applied to that class.</para
           >
         </remarks>
@@ -9486,6 +10960,8 @@
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9520,6 +10996,8 @@
 
             
 
+            
+
              value applied to that class. </para
           >
         </remarks>
@@ -9536,11 +11014,15 @@
 
             
 
+            
+
              generic type parameter. </para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9601,13 +11083,19 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the BSTR when finished by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeBSTR(System.IntPtr)" />
 
             
 
+            
+
             . This method provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringBSTR(System.IntPtr)" />
+
+            
 
             
 
@@ -9624,8 +11112,12 @@
 
             
 
+            
+
              and copies the contents of a managed <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -9640,11 +11132,15 @@
 
             
 
+            
+
              is null.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9681,13 +11177,19 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeCoTaskMem(System.IntPtr)" />
 
             
 
+            
+
             . This method provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAnsi(System.IntPtr)" />
+
+            
 
             
 
@@ -9702,6 +11204,8 @@
 
             
 
+            
+
              to a block of memory allocated from the unmanaged COM task allocator.</para
           >
         </summary>
@@ -9713,11 +11217,15 @@
 
             
 
+            
+
              is null.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9754,13 +11262,19 @@
 
             
 
+            
+
              is useful for custom marshaling or for use when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeCoTaskMem(System.IntPtr)" />
 
             
 
+            
+
             . This method provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAuto(System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -9776,6 +11290,8 @@
 
             
 
+            
+
              to a block of memory allocated from the unmanaged COM task allocator.</para
           >
         </summary>
@@ -9787,11 +11303,15 @@
 
             
 
+            
+
              is null.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9828,13 +11348,19 @@
 
             
 
+            
+
              is useful for custom marshaling or for use when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeCoTaskMem(System.IntPtr)" />
 
             
 
+            
+
             . This method provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringUni(System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -9849,6 +11375,8 @@
 
             
 
+            
+
              to a block of memory allocated from the unmanaged COM task allocator.</para
           >
         </summary>
@@ -9858,6 +11386,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9891,8 +11421,12 @@
 
             
 
+            
+
              is useful for custom marshaling or when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)" />
+
+            
 
             
 
@@ -9901,8 +11435,12 @@
 
             
 
+            
+
              provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAnsi(System.IntPtr)" />
+
+            
 
             
 
@@ -9918,6 +11456,8 @@
 
             
 
+            
+
              into unmanaged memory, converting into ANSI format as it copies.</para
           >
         </summary>
@@ -9929,8 +11469,12 @@
 
             
 
+            
+
              was copied, or 0 if <paramref
              name="s" />
+
+            
 
             
 
@@ -9939,6 +11483,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9972,13 +11518,19 @@
 
             
 
+            
+
              is useful for custom marshaling or for use when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)" />
 
             
 
+            
+
             . This method provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringAuto(System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -9994,6 +11546,8 @@
 
             
 
+            
+
              into unmanaged memory, converting into ANSI format if required.</para
           >
         </summary>
@@ -10005,11 +11559,15 @@
 
             
 
+            
+
              is null.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10043,13 +11601,19 @@
 
             
 
+            
+
              is useful for custom marshaling or for use when mixing managed and unmanaged code. Because this method allocates the unmanaged memory required for a string, always free the memory by calling <see
              cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)" />
 
             
 
+            
+
             . This method provides the opposite functionality of <see
              cref="M:System.Runtime.InteropServices.Marshal.PtrToStringUni(System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -10065,6 +11629,8 @@
 
             
 
+            
+
              into unmanaged memory.</para
           >
         </summary>
@@ -10076,8 +11642,12 @@
 
             
 
+            
+
              was copied, or 0 if <paramref
              name="s" />
+
+            
 
             
 
@@ -10086,6 +11656,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10133,6 +11705,8 @@
 
             
 
+            
+
              is a value type, it can be boxed or unboxed. If it is boxed, it is unboxed before copying. </para
           >
           <para
@@ -10141,13 +11715,19 @@
 
             
 
+            
+
              attribute, as either <see
              cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
 
             
 
+            
+
              or <see
              cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+
+            
 
             
 
@@ -10158,8 +11738,12 @@
 
             
 
+            
+
              copies the contents of <paramref
              name="structure" />
+
+            
 
             
 
@@ -10168,8 +11752,12 @@
 
             
 
+            
+
              parameter points to. If <paramref
              name="structure" />
+
+            
 
             
 
@@ -10178,8 +11766,12 @@
 
             
 
+            
+
             ), the managed objects are kept alive with reference counts. All other reference types (for example, strings and arrays) are marshaled to copies. To release these managed or unmanaged objects, you must call the <see
              cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" />
+
+            
 
             
 
@@ -10191,8 +11783,12 @@
 
             
 
+            
+
              method to copy a different instance to the memory block at a later time, specify true for <paramref
              name="fDeleteOld" />
+
+            
 
             
 
@@ -10201,6 +11797,8 @@
           <para
             >The overall pattern for using <see
              cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" />
+
+            
 
             
 
@@ -10214,8 +11812,12 @@
 
                 
 
+                
+
                  method after a memory block has been allocated, <paramref
                  name="fDeleteOld" />
+
+                
 
                 
 
@@ -10225,6 +11827,8 @@
                 <para
                   >Specify true for <paramref
                    name="fDeleteOld" />
+
+                  
 
                   
 
@@ -10239,6 +11843,8 @@
 
                 
 
+                
+
                  must be true to free reference types in the old contents. </para
               >
             </item>
@@ -10246,6 +11852,8 @@
               <para
                 >If the object contains reference types, you must call the <see
                  cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" />
+
+                
 
                 
 
@@ -10260,10 +11868,14 @@
 
               
 
+              
+
                type to create a pinned handle for the structure. For details on how to pin, see <format
                type="text/html">
                 <a href="0059F576-E460-4E70-B257-668870E420B8">Copying and Pinning</a>
               </format>
+
+              
 
               
 
@@ -10280,10 +11892,14 @@
 
           
 
+          
+
           A managed object that holds the data to be marshaled. This object must be a structure or an instance of a formatted class. </param
         >
         <param name="ptr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10294,13 +11910,19 @@
 
           
 
+          
+
           true to call the <see
            cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" />
 
           
 
+          
+
            method on the <paramref
            name="ptr" />
+
+          
 
           
 
@@ -10422,6 +12044,8 @@
 
             
 
+            
+
              method returns an exception based on the <format
              type="text/html">
               <a href="4dda6909-2d9a-4727-ae0c-b5f90dcfa447">IErrorInfo</a>
@@ -10429,8 +12053,12 @@
 
             
 
+            
+
              of the current thread if one is set. When this happens, the <paramref
              name="errorCode" />
+
+            
 
             
 
@@ -10442,8 +12070,12 @@
 
             
 
+            
+
              creates an instance of the exception and throws it. Otherwise, it creates an instance of <see
              cref="T:System.Runtime.InteropServices.COMException" />
+
+            
 
             
 
@@ -10452,10 +12084,14 @@
 
             
 
+            
+
              is invoked, it attempts to retrieve extra information regarding the error by using the unmanaged <format
              type="text/html">
               <a href="03317526-8c4f-4173-bc10-110c8112676a">GetErrorInfo</a>
             </format>
+
+            
 
             
 
@@ -10469,11 +12105,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Occasionally, <see
              cref="M:System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(System.Int32)" />
+
+            
 
             
 
@@ -10488,6 +12128,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
         </summary>
         <param name="errorCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10527,8 +12169,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method releases the <paramref
              name="errorInfo" />
+
+            
 
             
 
@@ -10540,6 +12186,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method returns an exception based on the <format
              type="text/html">
               <a href="4dda6909-2d9a-4727-ae0c-b5f90dcfa447">IErrorInfo</a>
@@ -10547,8 +12195,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              interface of the current thread if one is set. When this happens, the <paramref
              name="errorCode" />
+
+            
 
             
 
@@ -10560,13 +12212,19 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              creates an instance of the exception and throws it. Otherwise, it creates an instance of <see
              cref="T:System.Runtime.InteropServices.COMException" />
 
             
 
+            
+
             , initializes the error code field with the HRESULT, and throws that exception. The <paramref
              name="errorInfo" />
+
+            
 
             
 
@@ -10577,6 +12235,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
              type="text/html">
               <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
             </format>
+
+            
 
             
 
@@ -10593,6 +12253,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -10601,10 +12263,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The HRESULT corresponding to the desired exception.</param
         >
         <param name="errorInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10643,6 +12309,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              before it is passed to this method. For maximum performance, this method does not validate the array passed to it; this can result in unexpected behavior.</para
           >
         </remarks>
@@ -10658,8 +12326,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              inside <paramref
              name="arr" />
+
+            
 
             
 
@@ -10671,6 +12343,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The array that contains the desired element.</param
         >
         <param name="index">
@@ -10678,8 +12352,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The index in the <paramref
            name="arr" />
+
+          
 
           
 
@@ -10746,8 +12424,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -10763,10 +12445,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The address in unmanaged memory to write to.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10805,8 +12491,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -10822,10 +12512,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory to write to.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10834,10 +12528,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10881,8 +12579,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -10898,10 +12600,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory of the target object.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10910,10 +12616,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10951,8 +12661,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -10969,10 +12683,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The address in unmanaged memory to write to.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11010,8 +12728,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11028,10 +12750,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The address in unmanaged memory to write to.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11070,8 +12796,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11088,10 +12818,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in the native heap to write to.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11100,10 +12834,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11142,8 +12880,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11160,10 +12902,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory to write to.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11172,10 +12918,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11214,8 +12964,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11232,10 +12986,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory of the target object.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11244,10 +13002,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11291,8 +13053,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 16-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11309,10 +13075,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory of the target object.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11321,10 +13091,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing. </param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11359,8 +13133,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 32-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11377,10 +13155,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The address in unmanaged memory to write to.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11419,8 +13201,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 32-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11437,10 +13223,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory to write to.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11449,10 +13239,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11496,8 +13290,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 32-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11514,10 +13312,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory of the target object.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11526,10 +13328,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11567,8 +13373,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 64-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11585,10 +13395,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The address in unmanaged memory to write to.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11627,8 +13441,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 64-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11645,10 +13463,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory to write.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11657,10 +13479,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11704,8 +13530,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged 64-bit signed array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11722,10 +13552,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory of the target object.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11734,10 +13568,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11775,8 +13613,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style IntPtr array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11793,10 +13635,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The address in unmanaged memory to write to.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11836,8 +13682,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style IntPtr array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11854,10 +13704,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory to write to.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11866,10 +13720,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11908,8 +13766,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              enables direct interaction with an unmanaged C-style byte array, eliminating the expense of copying an entire unmanaged array (using <see
              cref="M:System.Runtime.InteropServices.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -11926,10 +13788,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
           The base address in unmanaged memory of the target object.</param
         >
         <param name="ofs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11938,10 +13804,14 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
           
 
+          
+
            parameter before writing.</param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11976,6 +13846,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method first sets the contents of the BSTR to zero, and then frees the BSTR.</para
           >
         </remarks>
@@ -11989,8 +13861,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              pointer that was allocated using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SecureStringToBSTR(System.Security.SecureString)" />
+
+            
 
             
 
@@ -11999,6 +13875,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12033,8 +13911,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method first zeros out and then frees unmanaged memory that was allocated using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SecureStringToCoTaskMemAnsi(System.Security.SecureString)" />
+
+            
 
             
 
@@ -12049,11 +13931,15 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12091,8 +13977,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method first zeros out and then frees unmanaged memory that was allocated using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SecureStringToCoTaskMemUnicode(System.Security.SecureString)" />
+
+            
 
             
 
@@ -12107,11 +13997,15 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12149,8 +14043,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method first zeros out and then frees unmanaged memory that was allocated using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SecureStringToGlobalAllocAnsi(System.Security.SecureString)" />
+
+            
 
             
 
@@ -12165,11 +14063,15 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12207,8 +14109,12 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method first zeros out and then frees unmanaged memory that was allocated using the <see
              cref="M:System.Runtime.InteropServices.Marshal.SecureStringToGlobalAllocUnicode(System.Security.SecureString)" />
+
+            
 
             
 
@@ -12223,11 +14129,15 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

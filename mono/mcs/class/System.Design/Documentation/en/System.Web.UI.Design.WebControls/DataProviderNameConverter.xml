@@ -25,13 +25,19 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.ComponentModel.TypeConverter" />
 
         
 
+        
+
          object that is typically referenced by the <see
          cref="T:System.ComponentModel.TypeConverterAttribute" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          method are of ADO.NET providers, from the <see
          cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />
+
+        
 
         
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          method gets a value indicating whether the returned provider names are an exclusive list of possible values. The <see
          cref="M:System.Web.UI.Design.WebControls.DataProviderNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
             
 
+            
+
              class when the class is referenced by a <see
              cref="T:System.ComponentModel.TypeConverterAttribute" />
+
+            
 
             
 
@@ -97,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.DataProviderNameConverter" />
+
+            
 
             
 
@@ -130,8 +150,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />
+
+            
 
             
 
@@ -140,13 +164,19 @@
 
             
 
+            
+
              object containing the ADO.NET provider names. It converts this <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
              to a string array, and then converts this array to a <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 
@@ -158,8 +188,12 @@
 
             
 
+            
+
              parameter is not used by the <see
              cref="M:System.Web.UI.Design.WebControls.DataProviderNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -178,6 +212,8 @@
 
             
 
+            
+
              containing the names of the available ADO.NET providers.</para
           >
         </returns>
@@ -186,8 +222,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -220,13 +260,19 @@
 
             
 
+            
+
              class and override the <see
              cref="M:System.Web.UI.Design.WebControls.DataProviderNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
+            
+
              method to return an exclusive list of ADO.NET provider names, also override the <see
              cref="M:System.Web.UI.Design.WebControls.DataProviderNameConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -238,8 +284,12 @@
 
             
 
+            
+
              parameter is not used by the <see
              cref="M:System.Web.UI.Design.WebControls.DataProviderNameConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -259,8 +309,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -293,8 +347,12 @@
 
             
 
+            
+
              parameter is not used by the  <see
              cref="M:System.Web.UI.Design.WebControls.DataProviderNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -314,8 +372,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

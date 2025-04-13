@@ -19,8 +19,12 @@
 
         
 
+        
+
          is used to format and unformat values displayed by a Windows Forms control that is bound to data through a <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          event occurs whenever a control property is bound to a value and the <see
          cref="E:System.Windows.Forms.Binding.Parse" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Binding.Parse" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
         , you can specify that the data should be displayed in the local currency format--by setting the <see
          cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+        
 
         
 
@@ -62,13 +78,19 @@
 
         
 
+        
+
          to the formatted value in the <see
          cref="E:System.Windows.Forms.Binding.Format" />
 
         
 
+        
+
          event. You must consequently unformat the displayed value in the <see
          cref="E:System.Windows.Forms.Binding.Parse" />
+
+        
 
         
 
@@ -79,6 +101,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
+
+        
 
         
 
@@ -93,8 +117,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Binding.Parse" />
+
+        
 
         
 
@@ -123,6 +151,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -131,8 +161,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -143,8 +177,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -169,6 +207,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.ConvertEventArgs.DesiredType" />
+
+            
 
             
 
@@ -201,8 +241,12 @@
 
             
 
+            
+
              property depends on the event in which the <see
              cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+            
 
             
 
@@ -211,13 +255,19 @@
 
             
 
+            
+
              can be returned in either the <see
              cref="E:System.Windows.Forms.Binding.Format" />
 
             
 
+            
+
              event or the <see
              cref="E:System.Windows.Forms.Binding.Parse" />
+
+            
 
             
 
@@ -229,8 +279,12 @@
 
             
 
+            
+
              is returned in the <see
              cref="E:System.Windows.Forms.Binding.Format" />
+
+            
 
             
 
@@ -239,13 +293,19 @@
 
             
 
+            
+
              property contains the unformatted property value of the data source. Within the <see
              cref="E:System.Windows.Forms.Binding.Format" />
 
             
 
+            
+
              event, you can read the property value, format the value, and reset the <see
              cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+            
 
             
 
@@ -257,8 +317,12 @@
 
             
 
+            
+
              is returned in the <see
              cref="E:System.Windows.Forms.Binding.Parse" />
+
+            
 
             
 
@@ -267,13 +331,19 @@
 
             
 
+            
+
              event, you must read the formatted value, parse it, and convert it back to the same data type as the data source. You can then reset the <see
              cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
 
             
 
+            
+
              property to the unformatted value, and thereby set the value of the data source. To determine the type of the data source, examine the <see
              cref="P:System.Windows.Forms.ConvertEventArgs.DesiredType" />
+
+            
 
             
 
@@ -285,6 +355,8 @@
           <para
             >Gets or sets the value of the <see
              cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+            
 
             
 

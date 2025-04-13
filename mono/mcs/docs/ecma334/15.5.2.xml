@@ -6,11 +6,15 @@
 
     
 
+    
+
      declares one or more local constants. <grammar_production
     >
       <name>
         <non_terminal where="15.5.2">local-constant-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -27,8 +31,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -49,6 +57,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -63,8 +73,12 @@
 
     
 
+    
+
      specifies the type of the constants introduced by the declaration. The type is followed by a list of <non_terminal
      where="17.3">constant-declarator</non_terminal>
+
+    
 
     
 
@@ -73,13 +87,19 @@
 
     
 
+    
+
      consists of an identifier that names the constant, followed by an "=" token, followed by a <non_terminal
      where="14.15">constant-expression</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >14.15</hyperlink>
+
+    
 
     
 
@@ -91,8 +111,12 @@
 
     
 
+    
+
      of a local constant declaration must follow the same rules as those of a constant member declaration (<hyperlink
     >17.3</hyperlink>
+
+    
 
     
 
@@ -104,8 +128,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -114,6 +142,8 @@
   <paragraph
     >The scope of a local constant is the block in which the declaration occurs. It is an error to refer to a local constant in a textual position that precedes its <non_terminal
      where="17.3">constant-declarator</non_terminal>
+
+    
 
     
 

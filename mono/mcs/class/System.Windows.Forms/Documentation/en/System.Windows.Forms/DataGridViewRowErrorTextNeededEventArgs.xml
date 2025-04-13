@@ -25,8 +25,12 @@
 
         
 
+        
+
          event occurs only when the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          property is set or its <see
          cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
 
         
 
+        
+
          property is true. Handling the <see
          cref="E:System.Windows.Forms.DataGridView.RowErrorTextNeeded" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          event and specify error text in the handler, an error glyph appears in the row header unless the <see
          cref="P:System.Windows.Forms.DataGridView.ShowRowErrors" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          event also occurs whenever the value of the <see
          cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+        
 
         
 
@@ -79,13 +97,19 @@
 
         
 
+        
+
          property to determine the state or value of a row, and use this information to change or modify the <see
          cref="P:System.Windows.Forms.DataGridViewRowErrorTextNeededEventArgs.ErrorText" />
 
         
 
+        
+
          property. This property is initialized with the value of the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+        
 
         
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
          event when working with large amounts of data to avoid the performance penalties of setting the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+        
 
         
 
@@ -111,6 +139,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -118,6 +148,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -132,8 +164,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -159,11 +195,15 @@
 
             
 
+            
+
              property if it has been set for a row. </para
           >
           <para
             >The <see
              cref="P:System.Windows.Forms.DataGridViewRowErrorTextNeededEventArgs.ErrorText" />
+
+            
 
             
 
@@ -194,6 +234,8 @@
           <para
             >Gets the row that raised the <see
              cref="E:System.Windows.Forms.DataGridView.RowErrorTextNeeded" />
+
+            
 
             
 

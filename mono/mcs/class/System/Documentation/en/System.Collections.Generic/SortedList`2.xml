@@ -60,8 +60,12 @@
 
         
 
+        
+
          generic class is an array of key/value pairs with O(log <paramref
          name="n" />
+
+        
 
         
 
@@ -70,8 +74,12 @@
 
         
 
+        
+
          generic class. The two classes have similar object models, and both have O(log <paramref
          name="n" />
+
+        
 
         
 
@@ -84,8 +92,12 @@
 
             
 
+            
+
              uses less memory than <see
              cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+            
 
             
 
@@ -98,8 +110,12 @@
 
             
 
+            
+
              has faster insertion and removal operations for unsorted data, O(log <paramref
              name="n" />
+
+            
 
             
 
@@ -108,8 +124,12 @@
 
             
 
+            
+
             ) for <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -123,8 +143,12 @@
 
             
 
+            
+
              is faster than <see
              cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+            
 
             
 
@@ -138,8 +162,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.Generic.SortedList`2" />
+
+        
 
         
 
@@ -148,8 +176,12 @@
 
         
 
+        
+
          supports efficient indexed retrieval of keys and values through the collections returned by the <see
          cref="P:System.Collections.Generic.SortedList`2.Keys" />
+
+        
 
         
 
@@ -158,8 +190,12 @@
 
         
 
+        
+
          properties. It is not necessary to regenerate the lists when the properties are accessed, because the lists are just wrappers for the internal arrays of keys and values. The following code shows the use of the <see
          cref="P:System.Collections.Generic.SortedList`2.Values" />
+
+        
 
         
 
@@ -171,8 +207,12 @@
 
         
 
+        
+
          is implemented as an array of key/value pairs, sorted by the key.  Each element can be retrieved as a <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -184,13 +224,19 @@
 
         
 
+        
+
         . Every key in a <see
          cref="T:System.Collections.Generic.SortedList`2" />
 
         
 
+        
+
          must be unique. A key cannot be null, but a value can be, if the type of values in the list, <paramref
          name="TValue" />
+
+        
 
         
 
@@ -201,13 +247,19 @@
 
         
 
+        
+
          requires a comparer implementation to sort and to perform comparisons.  The default comparer <see
          cref="P:System.Collections.Generic.Comparer`1.Default" />
 
         
 
+        
+
          checks whether the key type <paramref
          name="TKey" />
+
+        
 
         
 
@@ -216,8 +268,12 @@
 
         
 
+        
+
          and uses that implementation, if available.  If not, <see
          cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+        
 
         
 
@@ -226,8 +282,12 @@
 
         
 
+        
+
          implements <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -236,13 +296,19 @@
 
         
 
+        
+
          does not implement either interface, you can specify a <see
          cref="T:System.Collections.Generic.IComparer`1" />
 
         
 
+        
+
          implementation in a constructor overload that accepts a <paramref
          name="comparer" />
+
+        
 
         
 
@@ -254,8 +320,12 @@
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.Generic.SortedList`2" />
+
+        
 
         
 
@@ -264,8 +334,12 @@
 
         
 
+        
+
         , the capacity is automatically increased as required by reallocating the internal array. The capacity can be decreased by calling <see
          cref="M:System.Collections.Generic.SortedList`2.TrimExcess" />
+
+        
 
         
 
@@ -274,8 +348,12 @@
 
         
 
+        
+
          property explicitly. Decreasing the capacity reallocates memory and copies all the elements in the <see
          cref="T:System.Collections.Generic.SortedList`2" />
+
+        
 
         
 
@@ -287,10 +365,14 @@
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
+
+        
 
         
 
@@ -302,8 +384,12 @@
 
         
 
+        
+
          are key/value pairs, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -317,6 +403,8 @@
       <para
         >Represents a collection of key/value pairs that are sorted by key based on the associated <see
          cref="T:System.Collections.Generic.IComparer`1" />
+
+        
 
         
 
@@ -347,6 +435,8 @@
 
             
 
+            
+
              must be unique according to the default comparer.</para
           >
           <para
@@ -355,13 +445,19 @@
 
             
 
+            
+
             . To set the initial capacity, use the <see
              cref="M:System.Collections.Generic.SortedList`2.#ctor(System.Int32)" />
 
             
 
+            
+
              constructor. If the final size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -373,8 +469,12 @@
 
             
 
+            
+
             . To specify a comparer, use the <see
              cref="M:System.Collections.Generic.SortedList`2.#ctor(System.Collections.Generic.IComparer{`0})" />
+
+            
 
             
 
@@ -383,8 +483,12 @@
 
             
 
+            
+
              checks whether the key type <paramref
              name="TKey" />
+
+            
 
             
 
@@ -393,8 +497,12 @@
 
             
 
+            
+
              and uses that implementation, if available.  If not, <see
              cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+            
 
             
 
@@ -403,8 +511,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -413,13 +525,19 @@
 
             
 
+            
+
              does not implement either interface, you can specify a <see
              cref="T:System.Collections.Generic.IComparer`1" />
 
             
 
+            
+
              implementation in a constructor overload that accepts a <paramref
              name="comparer" />
+
+            
 
             
 
@@ -435,8 +553,12 @@
 
             
 
+            
+
              class that is empty, has the default initial capacity, and uses the default <see
              cref="T:System.Collections.Generic.IComparer`1" />
+
+            
 
             
 
@@ -520,6 +642,8 @@
 
             
 
+            
+
              must be unique according to the default comparer.</para
           >
           <para
@@ -528,13 +652,19 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Generic.SortedList`2" />
 
             
 
+            
+
              can hold before resizing. As elements are added to a <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -546,6 +676,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -554,13 +686,19 @@
 
             
 
+            
+
              or by setting the <see
              cref="P:System.Collections.Generic.SortedList`2.Capacity" />
 
             
 
+            
+
              property explicitly. Decreasing the capacity reallocates memory and copies all the elements in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -572,8 +710,12 @@
 
             
 
+            
+
             . To specify a comparer, use the <see
              cref="M:System.Collections.Generic.SortedList`2.#ctor(System.Int32,System.Collections.Generic.IComparer{`0})" />
+
+            
 
             
 
@@ -582,8 +724,12 @@
 
             
 
+            
+
              checks whether the key type <paramref
              name="TKey" />
+
+            
 
             
 
@@ -592,8 +738,12 @@
 
             
 
+            
+
              and uses that implementation, if available.  If not, <see
              cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+            
 
             
 
@@ -602,8 +752,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -612,13 +766,19 @@
 
             
 
+            
+
              does not implement either interface, you can specify a <see
              cref="T:System.Collections.Generic.IComparer`1" />
 
             
 
+            
+
              implementation in a constructor overload that accepts a <paramref
              name="comparer" />
+
+            
 
             
 
@@ -630,13 +790,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -651,8 +817,12 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and uses the default <see
              cref="T:System.Collections.Generic.IComparer`1" />
+
+            
 
             
 
@@ -664,8 +834,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Generic.SortedList`2" />
+
+          
 
           
 
@@ -775,8 +949,12 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -785,8 +963,12 @@
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -797,8 +979,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -807,8 +993,12 @@
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.Generic.SortedList`2.Capacity" />
+
+            
 
             
 
@@ -820,13 +1010,19 @@
 
             
 
+            
+
              or by setting the <see
              cref="P:System.Collections.Generic.SortedList`2.Capacity" />
 
             
 
+            
+
              property explicitly. When the value of <see
              cref="P:System.Collections.Generic.SortedList`2.Capacity" />
+
+            
 
             
 
@@ -838,8 +1034,12 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -851,6 +1051,8 @@
           <para
             >Gets or sets the number of elements that the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -883,10 +1085,14 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para>
             <see cref="P:System.Collections.Generic.SortedList`2.Capacity" />
+
+            
 
             
 
@@ -895,8 +1101,12 @@
 
             
 
+            
+
             , call <see
              cref="M:System.Collections.Generic.SortedList`2.TrimExcess" />
+
+            
 
             
 
@@ -905,13 +1115,19 @@
 
             
 
+            
+
              property directly. Trimming an empty <see
              cref="T:System.Collections.Generic.SortedList`2" />
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -923,13 +1139,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -941,6 +1163,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -978,6 +1202,8 @@
           <para
             >Gets the <see
              cref="T:System.Collections.Generic.IComparer`1" />
+
+            
 
             
 
@@ -1057,8 +1283,12 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -1067,8 +1297,12 @@
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -1079,8 +1313,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -1089,8 +1327,12 @@
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.Generic.SortedList`2.Capacity" />
+
+            
 
             
 
@@ -1103,6 +1345,8 @@
           <para
             >Gets the number of key/value pairs contained in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -1142,13 +1386,19 @@
 
             
 
+            
+
              is undefined. Therefore, you must call <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -1159,8 +1409,12 @@
 
             
 
+            
+
              returns the same object until <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1169,8 +1423,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -1182,8 +1440,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1192,8 +1454,12 @@
 
             
 
+            
+
              return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1202,8 +1468,12 @@
 
             
 
+            
+
              is undefined. You cannot set <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -1214,6 +1484,8 @@
           <para
             >Default implementations of collections in <see
              cref="N:System.Collections.Generic" />
+
+            
 
             
 
@@ -1229,6 +1501,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1240,13 +1514,19 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Collections.Generic.KeyValuePair`2" />
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -1355,8 +1635,12 @@
 
             
 
+            
+
              is the same as the order in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -1368,8 +1652,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.Generic.IList`1" />
+
+            
 
             
 
@@ -1378,13 +1666,19 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Generic.SortedList`2" />
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.Generic.IList`1" />
+
+            
 
             
 
@@ -1396,8 +1690,12 @@
 
             
 
+            
+
              property provides an efficient way to retrieve keys by index. It is not necessary to regenerate the list when the property is accessed, because the list is just a wrapper for the internal array of keys. The following code shows the use of the <see
              cref="P:System.Collections.Generic.SortedList`2.Keys" />
+
+            
 
             
 
@@ -1411,6 +1709,8 @@
           <para
             >Gets a collection containing the keys in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -1471,13 +1771,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -1492,11 +1798,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1771,8 +2081,12 @@
 
               
 
+              
+
                cannot be cast automatically to the type of the destination <paramref
                name="array" />
+
+              
 
               
 
@@ -1781,13 +2095,19 @@
 
               
 
+              
+
                throw <see
                cref="T:System.InvalidCastException" />
 
               
 
+              
+
               , whereas the generic implementations throw <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 
@@ -1800,13 +2120,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -1821,13 +2147,19 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1839,8 +2171,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1849,8 +2185,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1861,8 +2201,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1897,6 +2241,8 @@
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure.  To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration.  To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
@@ -1906,8 +2252,12 @@
 
             
 
+            
+
              property returns an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1920,6 +2270,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1955,6 +2307,8 @@
 
             
 
+            
+
              are not synchronized.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration. To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
@@ -1964,13 +2318,19 @@
 
             
 
+            
+
              property returns an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
             . Synchronization is effective only if all threads lock this object before accessing the collection. The following code shows the use of the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1999,6 +2359,8 @@ finally {
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2034,13 +2396,19 @@ finally {
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the dictionary; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the dictionary, setting the <see
              cref="P:System.Collections.IDictionary.Item(System.Object)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -2052,8 +2420,12 @@ finally {
 
             
 
+            
+
             ) operation for unsorted data, where <paramref
              name="n" />
+
+            
 
             
 
@@ -2062,13 +2434,19 @@ finally {
 
             
 
+            
+
             . It is an O(log <paramref
              name="n" />
 
             
 
+            
+
             ) operation if the new element is added at the end of the list. If insertion causes a resize, the operation is O(<paramref
              name="n" />
+
+            
 
             
 
@@ -2083,6 +2461,8 @@ finally {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2091,8 +2471,12 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2103,8 +2487,12 @@ finally {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2138,13 +2526,19 @@ finally {
 
             
 
+            
+
              is of a type that is not assignable to the key type <paramref
              name="TKey" />
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -2156,13 +2550,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -2177,6 +2577,8 @@ finally {
 
             
 
+            
+
              contains an element with the specified key.</para
           >
         </summary>
@@ -2188,6 +2590,8 @@ finally {
 
             
 
+            
+
              contains an element with the key; otherwise, false.</para
           >
         </returns>
@@ -2196,8 +2600,12 @@ finally {
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2234,8 +2642,12 @@ finally {
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+
+            
 
             
 
@@ -2244,8 +2656,12 @@ finally {
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+
+            
 
             
 
@@ -2256,8 +2672,12 @@ finally {
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2266,13 +2686,19 @@ finally {
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+
+            
 
             
 
@@ -2284,8 +2710,12 @@ finally {
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2294,8 +2724,12 @@ finally {
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2304,8 +2738,12 @@ finally {
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+
+            
 
             
 
@@ -2314,8 +2752,12 @@ finally {
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2326,6 +2768,8 @@ finally {
           <para
             >Default implementations of collections in <see
              cref="N:System.Collections.Generic" />
+
+            
 
             
 
@@ -2341,8 +2785,12 @@ finally {
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2357,8 +2805,12 @@ finally {
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2400,6 +2852,8 @@ finally {
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -2435,6 +2889,8 @@ finally {
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2497,8 +2953,12 @@ finally {
 
             
 
+            
+
              is the same as the order in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -2514,8 +2974,12 @@ finally {
 
             
 
+            
+
              containing the keys of the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2550,13 +3014,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -2571,11 +3041,15 @@ finally {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2610,8 +3084,12 @@ finally {
 
             
 
+            
+
              is the same as the order in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -2627,8 +3105,12 @@ finally {
 
             
 
+            
+
              containing the values in the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -2666,8 +3148,12 @@ finally {
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2676,8 +3162,12 @@ finally {
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2688,8 +3178,12 @@ finally {
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2698,13 +3192,19 @@ finally {
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2716,8 +3216,12 @@ finally {
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2726,8 +3230,12 @@ finally {
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2736,8 +3244,12 @@ finally {
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2746,8 +3258,12 @@ finally {
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2758,6 +3274,8 @@ finally {
           <para
             >Default implementations of collections in <see
              cref="N:System.Collections.Generic" />
+
+            
 
             
 
@@ -2774,6 +3292,8 @@ finally {
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -2807,8 +3327,12 @@ finally {
 
             
 
+            
+
              can be considerable, however, so the <see
              cref="M:System.Collections.Generic.SortedList`2.TrimExcess" />
+
+            
 
             
 
@@ -2820,13 +3344,19 @@ finally {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Generic.SortedList`2.Count" />
+
+            
 
             
 
@@ -2838,8 +3368,12 @@ finally {
 
             
 
+            
+
              to its initial state, call the <see
              cref="M:System.Collections.Generic.SortedList`2.Clear" />
+
+            
 
             
 
@@ -2848,13 +3382,19 @@ finally {
 
             
 
+            
+
              method. Trimming an empty <see
              cref="T:System.Collections.Generic.SortedList`2" />
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -2866,6 +3406,8 @@ finally {
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -2874,6 +3416,8 @@ finally {
           <para
             >Sets the capacity to the actual number of elements in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -2940,8 +3484,12 @@ finally {
 
             
 
+            
+
              is the same as the order in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -2953,8 +3501,12 @@ finally {
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.Generic.IList`1" />
+
+            
 
             
 
@@ -2963,13 +3515,19 @@ finally {
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Generic.SortedList`2" />
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.Generic.IList`1" />
+
+            
 
             
 
@@ -2981,8 +3539,12 @@ finally {
 
             
 
+            
+
              property provides an efficient way to retrieve values by index. It is not necessary to regenerate the list when the property is accessed, because the list is just a wrapper for the internal array of values. The following code shows the use of the <see
              cref="P:System.Collections.Generic.SortedList`2.Values" />
+
+            
 
             
 
@@ -2996,6 +3558,8 @@ finally {
           <para
             >Gets a collection containing the values in the <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 

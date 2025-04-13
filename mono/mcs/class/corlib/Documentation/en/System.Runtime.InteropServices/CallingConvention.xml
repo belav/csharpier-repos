@@ -39,8 +39,12 @@
 
         
 
+        
+
          enumeration rather than the <see
          cref="T:System.Runtime.InteropServices.CALLCONV" />
+
+        
 
         
 
@@ -49,13 +53,19 @@
 
         
 
+        
+
          enumeration is used by <see
          cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
         
 
+        
+
          and several classes in <see
          cref="N:System.Reflection.Emit" />
+
+        
 
         
 
@@ -214,8 +224,12 @@
 
             
 
+            
+
              and on Windows CE.NET it is <see
              cref="F:System.Runtime.InteropServices.CallingConvention.Cdecl" />
+
+            
 
             
 

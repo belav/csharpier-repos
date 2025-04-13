@@ -53,11 +53,15 @@
 
           
 
+          
+
           The stream from which to read.</param
         >
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -69,10 +73,14 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,6 +125,8 @@
 
           
 
+          
+
           The buffer from which to read.</param
         >
         <param name="offset">
@@ -124,8 +134,12 @@
 
           
 
+          
+
           Starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -136,8 +150,12 @@
 
           
 
+          
+
           Number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -149,6 +167,8 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="session">
@@ -157,10 +177,14 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

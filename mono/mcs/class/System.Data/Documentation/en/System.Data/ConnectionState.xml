@@ -26,13 +26,19 @@
 
         
 
+        
+
          values are used by the State property of the <see
          cref="T:System.Data.OleDb.OleDbConnection" />
 
         
 
+        
+
          and <see
          cref="T:System.Data.SqlClient.SqlConnection" />
+
+        
 
         
 

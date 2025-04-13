@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operand is converted to the parameter type of the selected operator, and the type of the result is the return type of the operator. The predefined bitwise complement operators are: <code_example
     >
       <![CDATA[

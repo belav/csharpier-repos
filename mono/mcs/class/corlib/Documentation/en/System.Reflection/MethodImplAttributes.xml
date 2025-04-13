@@ -86,6 +86,8 @@
 
           
 
+          
+
            flag, is not recommended for public types, because code other than your own can take locks on public types and instances. This might cause deadlocks or other synchronization problems.</para
         >
       </block>
@@ -357,6 +359,8 @@
 
             
 
+            
+
             ) when debugging possible code generation problems.</para
           >
         </summary>
@@ -462,10 +466,14 @@
 
             
 
+            
+
              or the Visual Basic <format
              type="text/html">
               <a href="14501703-298f-4d43-b139-c4b6366af176">SyncLock statement</a>
             </format>
+
+            
 
             
 

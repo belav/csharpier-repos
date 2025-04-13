@@ -23,8 +23,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Xml.XmlConvert.ToString" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
       <para
         >Specifies how to treat the time value when converting between string and <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Treat as local time. If the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -119,6 +127,8 @@
 
             
 
+            
+
             , convert to a local time if a time zone is specified.</para
           >
         </remarks>
@@ -127,6 +137,8 @@
           <para
             >Treat as a local time if a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -156,6 +168,8 @@
           <para
             >Treat as a UTC. If the <see
              cref="T:System.DateTime" />
+
+            
 
             
 

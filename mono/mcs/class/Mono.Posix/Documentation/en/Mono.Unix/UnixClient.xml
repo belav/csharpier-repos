@@ -62,6 +62,8 @@
 
           
 
+          
+
            to connect to.</param
         >
         <summary
@@ -70,13 +72,19 @@
 
           
 
+          
+
           .  Most of the time users will want to use the <see
            cref="C:Mono.Unix.UnixClient(System.String)" />
 
           
 
+          
+
            constructor instead, unless you already have a <see
            cref="T:Mono.Unix.UnixEndPoint" />
+
+          
 
           
 
@@ -88,8 +96,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -122,8 +134,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -157,11 +173,15 @@
 
           
 
+          
+
            for this UnixClient.</summary
         >
         <value
           >The <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -221,6 +241,8 @@
         <param name="remoteEndPoint"
           >The <see
            cref="T:Mono.Unix.UnixEndPoint" />
+
+          
 
           
 
@@ -356,11 +378,15 @@
 
           
 
+          
+
            for this UnixClient.</summary
         >
         <returns
           >The <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 

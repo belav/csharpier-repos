@@ -35,8 +35,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          objects. If the match is successful, the collection is populated with one <see
          cref="T:System.Text.RegularExpressions.Match" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          objects, and its <see
          cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+
+        
 
         
 
@@ -68,6 +80,8 @@
       <para
         >When applying a regular expression pattern to a particular input string, the regular expression engine uses either of two techniques to build the <see
          cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+        
 
         
 
@@ -82,13 +96,19 @@
 
             
 
+            
+
              object is populated all at once, with all matches resulting from a particular call to the <see
              cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
 
             
 
+            
+
              method. This technique is used when the collection's <see
              cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+
+            
 
             
 
@@ -103,13 +123,19 @@
 
             
 
+            
+
              object is populated as needed on a match-by-match basis. It is equivalent to the regular expression engine calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
 
             
 
+            
+
              method repeatedly and adding each match to the collection. This technique is used when the collection is accessed through its <see
              cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+
+            
 
             
 
@@ -120,6 +146,8 @@
       <para
         >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see
          cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+
+        
 
         
 
@@ -162,6 +190,8 @@
 
               
 
+              
+
                method instead.</para
             >
           </block>
@@ -171,8 +201,12 @@
 
             
 
+            
+
              object is generally populated by using lazy evaluation, trying to copy the collection before it has been fully populated may throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -188,10 +222,14 @@
 
           
 
+          
+
           The array the collection is to be copied into. </param
         >
         <param name="arrayIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,13 +259,19 @@
 
             
 
+            
+
              object by retrieving the value of the collection's <see
              cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
 
             
 
+            
+
              property causes the regular expression engine to populate the collection using direct evaluation. ln contrast, calling the <see
              cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+
+            
 
             
 
@@ -239,8 +283,12 @@
 
             
 
+            
+
              object is generally populated by using lazy evaluation, trying to determine the number of elements in the collection before it has been fully populated may throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -281,8 +329,12 @@
 
             
 
+            
+
              method to retrieve an enumerator that lets you iterate through the <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -294,8 +346,12 @@
 
             
 
+            
+
              object using the <see
              cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" />
+
+            
 
             
 
@@ -304,13 +360,19 @@
 
             
 
+            
+
              method, and then adding the resulting match to the <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
 
             
 
+            
+
              object. In contrast, the regular expression engine uses direct evaluation to populate the collection all at once when the <see
              cref="P:System.Text.RegularExpressions.MatchCollection.Count" />
+
+            
 
             
 
@@ -322,8 +384,12 @@
 
             
 
+            
+
              object is generally populated by using lazy evaluation, trying to navigate to the next member of the collection may throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -342,8 +408,12 @@
 
             
 
+            
+
              objects within the <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -393,6 +463,8 @@
             <para
               >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
                cref="P:System.Text.RegularExpressions.MatchCollection.System#Collections#ICollection#IsSynchronized" />
+
+              
 
               
 
@@ -454,6 +526,8 @@
             <para
               >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
                cref="P:System.Text.RegularExpressions.MatchCollection.System#Collections#ICollection#SyncRoot" />
+
+              
 
               
 

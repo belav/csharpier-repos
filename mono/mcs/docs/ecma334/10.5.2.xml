@@ -6,8 +6,12 @@
 
     
 
+    
+
     , <non_terminal
      where="18.1.3">struct-body</non_terminal>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     , or <non_terminal
      where="21.1">enum-body</non_terminal>
+
+    
 
     
 
@@ -29,8 +37,12 @@
 
     
 
+    
+
     , or <keyword
     >double</keyword>
+
+    
 
     
 
@@ -71,11 +83,15 @@
 
           
 
+          
+
           ). </list_item
         >
         <list_item
           > Otherwise, if M is protected, the access is permitted if it occurs within the class in which M is declared, or if it occurs within a class derived from the class in which M is declared and takes place through the derived class type (<hyperlink
           >10.5.3</hyperlink>
+
+          
 
           
 
@@ -121,6 +137,8 @@ internal class B
 
       
 
+      
+
       the classes and members have the following accessibility domains: <list
       >
         <list_item> The accessibility domain of A and A.X is unlimited. </list_item>
@@ -138,6 +156,8 @@ internal class B
   <paragraph
     >As described in <hyperlink
     >10.4</hyperlink>
+
+    
 
     
 
@@ -164,8 +184,12 @@ class B: A
 
       
 
+      
+
       the B class inherits the private member x from the A class. Because the member is private, it is only accessible within the <non_terminal
        where="17.1.3">class-body</non_terminal>
+
+      
 
       
 

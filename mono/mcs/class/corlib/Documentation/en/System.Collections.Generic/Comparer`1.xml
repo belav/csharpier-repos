@@ -38,13 +38,19 @@
 
         
 
+        
+
          interface for use with collection classes such as the <see
          cref="T:System.Collections.Generic.SortedList`2" />
 
         
 
+        
+
          and <see
          cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          class and implementing the <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
             
 
+            
+
              interface in your class. This ensures that sort operations will use the default comparison code that you provided.</para
           >
         </item>
@@ -78,6 +90,8 @@
           <para
             >To define a comparer to use instead of the default comparer, derive from the <see
              cref="T:System.Collections.Generic.Comparer`1" />
+
+            
 
             
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          property uses the <see
          cref="T:System.IComparable`1" />
+
+        
 
         
 
@@ -101,8 +119,12 @@
 
         
 
+        
+
          does not implement the <see
          cref="T:System.IComparable`1" />
+
+        
 
         
 
@@ -111,13 +133,19 @@
 
         
 
+        
+
          property returns a <see
          cref="T:System.Collections.Generic.Comparer`1" />
 
         
 
+        
+
          that uses the <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -129,6 +157,8 @@
       <para
         >Provides a base class for implementations of the <see
          cref="T:System.Collections.Generic.IComparer`1" />
+
+        
 
         
 
@@ -157,6 +187,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Generic.Comparer`1" />
+
+            
 
             
 
@@ -246,8 +278,12 @@
 
             
 
+            
+
              returned by this property uses the <see
              cref="T:System.IComparable`1" />
+
+            
 
             
 
@@ -256,8 +292,12 @@
 
             
 
+            
+
              does not implement the <see
              cref="T:System.IComparable`1" />
+
+            
 
             
 
@@ -266,8 +306,12 @@
 
             
 
+            
+
              that uses the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -308,8 +352,12 @@
 
             
 
+            
+
              method, so <paramref
              name="obj" />
+
+            
 
             
 
@@ -318,13 +366,19 @@
 
             
 
+            
+
              of the current instance. If it cannot be cast to <paramref
              name="T" />
 
             
 
+            
+
             , an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -344,8 +398,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -372,8 +430,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -391,8 +453,12 @@
 
                   
 
+                  
+
                    equals <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -410,8 +476,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -426,10 +496,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

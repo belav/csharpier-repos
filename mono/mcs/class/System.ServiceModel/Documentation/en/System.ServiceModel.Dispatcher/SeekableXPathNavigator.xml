@@ -29,8 +29,12 @@
 
         
 
+        
+
         , which extends the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
          property. This property allows positions within the XML document to be saved and loaded quickly without having to clone the navigator, an expensive memory allocation that the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
+        
+
          requires for such an operation. The XPath engine must frequently record the position of the cursor in the course of executing queries on XML documents, so the <see
          cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
         
 
+        
+
          property is implementation-specific and may not map to node position or character position. Its value is only meaningful to the <see
          cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+
+        
 
         
 
@@ -89,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+
+            
 
             
 
@@ -133,13 +149,19 @@
 
             
 
+            
+
              values that describes the relation of <paramref
              name="firstPosition" />
 
             
 
+            
+
              to <paramref
              name="secondPosition" />
+
+            
 
             
 
@@ -204,6 +226,8 @@
 
             
 
+            
+
              is returned if the node does not have a local name, for example if the current position references a text node.</para
           >
         </returns>
@@ -235,6 +259,8 @@
 
             
 
+            
+
              and typically includes a namespace prefix.</para
           >
         </remarks>
@@ -250,8 +276,12 @@
 
             
 
+            
+
             . <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -294,8 +324,12 @@
 
             
 
+            
+
             . <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -338,6 +372,8 @@
 
             
 
+            
+
              values that indicate the type of the XML node.</para
           >
         </returns>
@@ -372,6 +408,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -387,8 +425,12 @@
 
             
 
+            
+
             . <see
              cref="F:System.String.Empty" />
+
+            
 
             
 

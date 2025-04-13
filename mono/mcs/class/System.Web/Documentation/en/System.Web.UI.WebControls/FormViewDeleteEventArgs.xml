@@ -22,13 +22,19 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
 
         
 
+        
+
          event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the index of the record being deleted and to indicate that the delete operation should be canceled. To determine the index of a record, use the <see
          cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.RowIndex" />
+
+        
 
         
 
@@ -50,13 +60,19 @@
 
         
 
+        
+
          property to true. You can also access the key fields and non-key fields by using the <see
          cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Keys" />
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Values" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Values" />
+
+          
 
           
 
@@ -85,6 +105,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -93,8 +115,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.FormViewDeleteEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -106,6 +132,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
+
+        
 
         
 
@@ -131,11 +159,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewDeleteEventArgs" />
+
+            
 
             
 
@@ -165,6 +197,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -179,6 +213,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewDeleteEventArgs" />
+
+            
 
             
 
@@ -210,8 +246,12 @@
 
             
 
+            
+
              property contains the values of the key fields listed in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -220,8 +260,12 @@
 
             
 
+            
+
              control. Use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Keys" />
+
+            
 
             
 
@@ -234,6 +278,8 @@
 
               
 
+              
+
                property.</para
             >
           </block>
@@ -243,8 +289,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -253,8 +303,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -263,8 +317,12 @@
 
             
 
+            
+
              objects that represent the key fields. To access the key field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -273,8 +331,12 @@
 
             
 
+            
+
              object. Similarly, you can access the key field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -287,8 +349,12 @@
 
               
 
+              
+
                object to access the key field values. The advantage in using the indexer is that it returns key field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 
@@ -301,13 +367,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Values" />
 
             
 
+            
+
              properties are read-only; however, you can modify the field values of the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -337,6 +409,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.RowIndex" />
+
+            
 
             
 
@@ -372,12 +446,16 @@
 
             
 
+            
+
              property to access the values of the non-key fields for the record to be deleted. For example, you can use these values to verify the record before deleting it, or to keep a log of deleted records.</para
           >
           <block subset="none" type="note">
             <para
               >This property does not contain the key field or fields. To access the name/value pair values for the key field or fields, use the <see
                cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Keys" />
+
+              
 
               
 
@@ -390,8 +468,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -400,8 +482,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -410,8 +496,12 @@
 
             
 
+            
+
              objects that represent the non-key fields. To access the field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -420,8 +510,12 @@
 
             
 
+            
+
              object. Similarly, you can access the field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -434,8 +528,12 @@
 
               
 
+              
+
                object to access the field values. The advantage in using the indexer is that it returns field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 
@@ -448,8 +546,12 @@
 
             
 
+            
+
              collection do not get passed to the data source control. If the data source requires any of these values, you should add these values to the <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Keys" />
+
+            
 
             
 
@@ -461,13 +563,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Values" />
 
             
 
+            
+
              properties are read-only; however, you can modify the field values of the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          class allows full manipulation of Access Control Entries (ACEs). It does not enforce ordering rules for ACEs and does not provide validation logic. Any ACE can be inserted, modified, or removed at any location in the ACL.</para
       >
     </remarks>
@@ -62,11 +64,15 @@
 
             
 
+            
+
              class with the specified revision level.</para
           >
         </summary>
         <param name="revision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -77,8 +83,12 @@
 
           
 
+          
+
           The number of Access Control Entries (ACEs) this <see
            cref="T:System.Security.AccessControl.RawAcl" />
+
+          
 
           
 
@@ -112,11 +122,15 @@
 
             
 
+            
+
              class from the specified binary form.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,8 +141,12 @@
 
           
 
+          
+
           The offset in the <paramref
            name="binaryForm" />
+
+          
 
           
 
@@ -159,8 +177,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl.RawAcl.GetBinaryForm" />
+
+            
 
             
 
@@ -189,6 +211,8 @@
           <para
             >Gets the number of access control entries (ACEs) in the current <see
              cref="T:System.Security.AccessControl.RawAcl" />
+
+            
 
             
 
@@ -229,6 +253,8 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
@@ -237,8 +263,12 @@
 
           
 
+          
+
           The byte array into which the contents of the <see
            cref="T:System.Security.AccessControl.RawAcl" />
+
+          
 
           
 
@@ -246,6 +276,8 @@
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,8 +321,12 @@
 
           
 
+          
+
           The position at which to add the new ACE. Specify the value of the <see
            cref="P:System.Security.AccessControl.RawAcl.Count" />
+
+          
 
           
 
@@ -299,10 +335,14 @@
 
           
 
+          
+
            object.</param
         >
         <param name="ace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -367,6 +407,8 @@
 
           
 
+          
+
           The zero-based index of the ACE to remove.</param
         >
       </Docs>
@@ -391,6 +433,8 @@
           <para
             >Gets the revision level of the <see
              cref="T:System.Security.AccessControl.RawAcl" />
+
+            
 
             
 

@@ -7,8 +7,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -17,8 +21,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -27,8 +35,12 @@
 
     
 
+    
+
      to type <keyword
     >int</keyword>
+
+    
 
     
 
@@ -37,8 +49,12 @@
 
     
 
+    
+
      to type <keyword
     >long</keyword>
+
+    
 
     
 

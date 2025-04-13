@@ -22,8 +22,12 @@
 
         
 
+        
+
          property, which returns a <see
          cref="T:System.ServiceModel.WSDualHttpSecurity" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          property provides a reference to the <see
          cref="T:System.ServiceModel.MessageSecurityOverHttp" />
+
+        
 
         
 
@@ -156,6 +164,8 @@
 
             
 
+            
+
              is configured to perform secure conversation as described in WS-SecurityConversation. </para
           >
         </summary>
@@ -194,8 +204,12 @@
 
             
 
+            
+
              element, or by using the <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -203,6 +217,8 @@
              type="text/html">
               <a href="a4c8f52c-5b30-45c4-a545-63244aba82be">Specifying the Identity</a>
             </format>
+
+            
 
             
 

@@ -17,6 +17,8 @@
 
         
 
+        
+
          namespace is a collection of classes that enable callback methods to be run under the scope of a transaction and that enable work to be posted to separate threads.</para
       >
     </summary>

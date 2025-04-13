@@ -20,13 +20,19 @@
 
         
 
+        
+
          property for a control in the design-time properties grid, the visual designer displays a dialog box to set expressions that provide the value for a control property. You can select the expression type based on a list of expression prefixes. When you select an expression prefix from the list, the visual designer uses the associated <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -48,8 +58,12 @@
 
         
 
+        
+
          implementation that defines properties that are used to form the expression. To associate an expression prefix with an expression builder and an expression editor, apply the <see
          cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+        
 
         
 
@@ -58,8 +72,12 @@
 
         
 
+        
+
          attribute to the custom <see
          cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+        
 
         
 
@@ -71,8 +89,12 @@
 
         
 
+        
+
          method returns a basic editor sheet, which uses a single input string to form the expression. Custom expression editors that are derived from the <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -81,8 +103,12 @@
 
         
 
+        
+
          method to return a custom editor sheet implementation. Typically, a custom editor sheet contains multiple properties that are used to build the expression string. The <see
          cref="M:System.Web.UI.Design.ExpressionEditorSheet.GetExpression" />
+
+        
 
         
 
@@ -94,8 +120,12 @@
 
         
 
+        
+
          class derives from the <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -104,8 +134,12 @@
 
         
 
+        
+
          class is associated with the expression prefix Resources and the <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditor" />
+
+        
 
         
 
@@ -114,8 +148,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditorSheet" />
+
+        
 
         
 
@@ -124,6 +162,8 @@
       <para
         >When you inherit from the <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -137,6 +177,8 @@
 
             
 
+            
+
              method to return a custom editor sheet implementation. </para
           >
         </item>
@@ -144,6 +186,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.ExpressionEditorSheet.#ctor(System.IServiceProvider)" />
+
+            
 
             
 
@@ -177,13 +221,19 @@
 
             
 
+            
+
              class is abstract, you cannot create an instance of an <see
              cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
 
             
 
+            
+
              directly using the <see
              cref="M:System.Web.UI.Design.ExpressionEditorSheet.#ctor(System.IServiceProvider)" />
+
+            
 
             
 
@@ -198,11 +248,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,8 +285,12 @@
 
             
 
+            
+
              method returns an expression string that is built from the current expression properties. The visual designer allows you to set the expression sheet properties, and then calls the <see
              cref="M:System.Web.UI.Design.ExpressionEditorSheet.GetExpression" />
+
+            
 
             
 
@@ -301,8 +359,12 @@
 
             
 
+            
+
              constructor to set the <see
              cref="P:System.Web.UI.Design.ExpressionEditorSheet.ServiceProvider" />
+
+            
 
             
 
@@ -314,13 +376,19 @@
 
             
 
+            
+
              property can be used to access services that are provided by the designer host. For example, call the <see
              cref="M:System.IServiceProvider.GetService(System.Type)" />
 
             
 
+            
+
              method with the <see
              cref="T:System.Web.UI.Design.IWebApplication" />
+
+            
 
             
 

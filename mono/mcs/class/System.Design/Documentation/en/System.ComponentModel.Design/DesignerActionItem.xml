@@ -18,8 +18,12 @@
 
         
 
+        
+
          class serves as an abstract base for classes that represent individual panel items in a smart tag panel, which represents a menu-like user interface (UI) for smart tags. The dnprdnshort supplies derived classes that represent the different common entries in a smart tag panel, including plain text, header text, properties and methods of the associated <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         , which contains a <see
          cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+
+        
 
         
 
@@ -51,8 +63,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ComponentModel.Design.DesignerActionMethodItem" />
+
+        
 
         
 
@@ -62,6 +78,8 @@
         <para
           >Forms and dialog boxes can be displayed by members of the class derived from <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -98,8 +116,12 @@
 
             
 
+            
+
              is an abstract class, the <see
              cref="M:System.ComponentModel.Design.DesignerActionItem.#ctor(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -111,8 +133,12 @@
 
             
 
+            
+
              parameter is used to group items on a panel, see the <see
              cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+            
 
             
 
@@ -127,11 +153,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,8 +172,12 @@
 
           
 
+          
+
           The case-sensitive <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -151,6 +185,8 @@
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,8 +213,12 @@
 
             
 
+            
+
              objects may be combined to form a single smart tag panel, the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+
+            
 
             
 
@@ -190,8 +230,12 @@
 
             
 
+            
+
              property is used in conjunction with the <see
              cref="P:System.ComponentModel.Design.DesignerActionMethodItem.RelatedComponent" />
+
+            
 
             
 
@@ -200,8 +244,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" />
+
+            
 
             
 
@@ -213,8 +261,12 @@
 
             
 
+            
+
              to connect to a data source control like <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -223,8 +275,12 @@
 
             
 
+            
+
              with its own set of <see
              cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+            
 
             
 
@@ -233,8 +289,12 @@
 
             
 
+            
+
              control has items like <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -243,8 +303,12 @@
 
             
 
+            
+
              class has Configure and Refresh Items, which have <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" />
+
+            
 
             
 
@@ -256,8 +320,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -266,8 +334,12 @@
 
             
 
+            
+
              object. All the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -276,13 +348,19 @@
 
             
 
+            
+
              set to true are automatically included in the <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
+            
+
              control's action list. The following table shows how the two lists are merged in the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -364,6 +442,8 @@
 
             
 
+            
+
              property value.</para
           >
         </summary>
@@ -386,6 +466,8 @@
           <para
             >For more information about how items are grouped by category, see the <see
              cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+            
 
             
 
@@ -417,6 +499,8 @@
 
             
 
+            
+
              property is used whenever a plain text description of the item is required (for example, in ToolTips and the status bar).</para
           >
           <para>The value of this property is set in the constructor for this class. </para>
@@ -443,6 +527,8 @@
           <para
             >The value of the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.DisplayName" />
+
+            
 
             
 
@@ -477,8 +563,12 @@
 
             
 
+            
+
              property allows the programmer to store arbitrary data within an item. The standard properties for this class, such as <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+
+            
 
             
 
@@ -487,11 +577,15 @@
 
             
 
+            
+
             , are not stored in this collection.</para
           >
           <para
             >The type of this property is actually <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 

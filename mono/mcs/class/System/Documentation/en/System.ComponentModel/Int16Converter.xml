@@ -31,6 +31,8 @@
 
         
 
+        
+
          value type represents signed integers with values ranging from negative 32768 through positive 32767.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          method uses the <see
          cref="M:System.Int16.Parse(System.String)" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          with the integer value of <see
          cref="T:System.Globalization.NumberStyles" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
 
         
 
+        
+
          method uses the general ("G") format for the string returned.</para
       >
       <para
@@ -70,10 +82,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -86,8 +102,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -96,8 +116,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -132,6 +156,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Int16Converter" />
+
+            
 
             
 

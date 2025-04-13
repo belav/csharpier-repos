@@ -26,13 +26,19 @@
 
         
 
+        
+
          enumeration is returned by the <see
          cref="P:System.Data.DataRow.RowState" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -44,6 +50,8 @@
       <para
         >Gets the state of a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 
@@ -100,8 +112,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -131,8 +147,12 @@
 
             
 
+            
+
             . A <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -162,6 +182,8 @@
 
             
 
+            
+
              has not been called.</para
           >
         </summary>
@@ -185,6 +207,8 @@
           <para
             >The row has not changed since <see
              cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          values with the <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
             
 
+            
+
              values define validation options used by a schema validating <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -52,13 +60,19 @@
 
             
 
+            
+
              values for a validating <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              are specified using the <see
              cref="P:System.Xml.XmlReaderSettings.ValidationFlags" />
+
+            
 
             
 
@@ -69,6 +83,8 @@
       <para
         >The following are notes to consider when using the <see
          cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+        
 
         
 
@@ -85,6 +101,8 @@
 
                 
 
+                
+
                  is set to true (default) and the instance document contains Xml attributes, the validation engine will load a snapshot of the default Xml namespace schema and use it for validation. If Xml attributes used in the instance document are not found in the default schema, the document will not validate.</para
               >
             </item>
@@ -92,6 +110,8 @@
               <para
                 >If <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+                
 
                 
 
@@ -110,6 +130,8 @@
 
                 
 
+                
+
                  is set to true (default) and the instance document contains Xml attributes, the validation engine will use the default Xml namespace schema for validation. If Xml attributes used in the instance document are not found in the default schema, the document will not validate. </para
               >
             </item>
@@ -120,6 +142,8 @@
 
                 
 
+                
+
                  is set to false and the instance document contains Xml attributes that are not explicitly allowed by the schema, the validation engine will report an error.</para
               >
             </item>
@@ -127,6 +151,8 @@
               <para
                 >If <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+                
 
                 
 
@@ -145,6 +171,8 @@
 
                 
 
+                
+
                  is set to true (default) and the instance document contains Xml attributes, the validation engine will use the custom Xml namespace schema for validation. If Xml attributes used in the instance document are not found in the specified schema, the document will not validate.</para
               >
             </item>
@@ -155,6 +183,8 @@
 
                 
 
+                
+
                  is set to false and the instance document contains Xml attributes that are not explicitly allowed by the schema, the validation engine will report an error.</para
               >
             </item>
@@ -162,6 +192,8 @@
               <para
                 >If <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+                
 
                 
 
@@ -180,6 +212,8 @@
 
                 
 
+                
+
                  is set to true and false. Required xml:* attributes should be treated as other attributes and validated using the specified Xml namespace schema.</para
               >
             </item>
@@ -192,6 +226,8 @@
               <para
                 >The following applies when <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+                
 
                 
 
@@ -210,6 +246,8 @@
 
                 
 
+                
+
                 . If no Xml namespace schema is specified, the validation engine will behave as follows.</para
               >
             </item>
@@ -220,6 +258,8 @@
 
                 
 
+                
+
                  is set to true, the validation engine will use the default Xml namespace schema to perform validation.</para
               >
             </item>
@@ -227,6 +267,8 @@
               <para
                 >If <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+                
 
                 
 
@@ -243,6 +285,8 @@
 
                 
 
+                
+
                 . If no Xml namespace schema is specified, the validation engine will behave as follows.</para
               >
             </item>
@@ -253,6 +297,8 @@
 
                 
 
+                
+
                  is set to true, the validation engine will use the default Xml namespace schema to perform validation.</para
               >
             </item>
@@ -260,6 +306,8 @@
               <para
                 >If <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" />
+
+                
 
                 
 
@@ -278,6 +326,8 @@
 
                 
 
+                
+
                  is set to true (default), Xml attributes will be allowed on elements of simple types.</para
               >
             </item>
@@ -293,8 +343,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 

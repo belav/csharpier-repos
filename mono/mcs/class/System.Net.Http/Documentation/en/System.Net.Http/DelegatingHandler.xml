@@ -26,6 +26,8 @@
 
         
 
+        
+
          property may be a delegating handler too. This approach allows the creation of handler stacks to process the HTTP response messages.</para
       >
     </remarks>
@@ -55,6 +57,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -63,6 +67,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Net.Http.DelegatingHandler" />
+
+            
 
             
 
@@ -97,11 +103,15 @@
 
             
 
+            
+
              class with a specific inner handler.</para
           >
         </summary>
         <param name="innerHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,11 +145,15 @@
 
             
 
+            
+
             , and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,8 +187,12 @@
 
             
 
+            
+
              property can only be set before the class is used (the <see
              cref="M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -183,6 +201,8 @@
           <para
             >Note that <see
              cref="P:System.Net.Http.DelegatingHandler.InnerHandler" />
+
+            
 
             
 
@@ -224,6 +244,8 @@
 
             
 
+            
+
              method forwards the HTTP request to the inner handler to send to the server as an asynchronous operation.</para
           >
           <para
@@ -232,8 +254,12 @@
 
             
 
+            
+
              method is mainly used by the system and not by applications. When this method is called, it calls the <see
              cref="M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -252,6 +278,8 @@
 
             
 
+            
+
             . </para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -261,10 +289,14 @@
 
           
 
+          
+
           The HTTP request message to send to the server.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

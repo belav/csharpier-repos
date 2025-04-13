@@ -39,6 +39,8 @@
 
         
 
+        
+
          delegate. The infrastructure does so for SOAP-encoded arrays whose data types map to .NET Framework reference types. Then, as necessary, a fix-up method is called to fill in the objects in the array.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          class. During this process, the infrastructure generates <see
          cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
       <para
         >Do not directly create an instance of the <see
          cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
       <para
         >Delegate used by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

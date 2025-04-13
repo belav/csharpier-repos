@@ -23,8 +23,12 @@
 
         
 
+        
+
          event to detect and respond to errors when communicating data through a <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.IO.Ports.SerialErrorReceivedEventArgs" />
+
+        
 
         
 
@@ -43,8 +51,12 @@
 
         
 
+        
+
          property contains one of the values from the <see
          cref="T:System.IO.Ports.SerialError" />
+
+        
 
         
 
@@ -56,6 +68,8 @@
       <para
         >Specifies errors that occur on the <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 

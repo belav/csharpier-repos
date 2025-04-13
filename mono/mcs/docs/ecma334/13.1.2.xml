@@ -9,8 +9,12 @@
 
         
 
+        
+
          to <keyword
         >short</keyword>
+
+        
 
         
 
@@ -19,8 +23,12 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -29,13 +37,19 @@
 
         
 
+        
+
         , <keyword
         >double</keyword>
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -47,8 +61,12 @@
 
         
 
+        
+
          to <keyword
         >short</keyword>
+
+        
 
         
 
@@ -57,8 +75,12 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
+
+        
 
         
 
@@ -67,8 +89,12 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -77,8 +103,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -87,8 +117,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -100,8 +134,12 @@
 
         
 
+        
+
          to <keyword
         >int</keyword>
+
+        
 
         
 
@@ -110,8 +148,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -120,8 +162,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -133,8 +179,12 @@
 
         
 
+        
+
          to <keyword
         >int</keyword>
+
+        
 
         
 
@@ -143,8 +193,12 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -153,8 +207,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -163,8 +221,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -176,8 +238,12 @@
 
         
 
+        
+
          to <keyword
         >long</keyword>
+
+        
 
         
 
@@ -186,13 +252,19 @@
 
         
 
+        
+
         , <keyword
         >double</keyword>
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -204,8 +276,12 @@
 
         
 
+        
+
          to <keyword
         >long</keyword>
+
+        
 
         
 
@@ -214,8 +290,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -224,8 +304,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -237,8 +321,12 @@
 
         
 
+        
+
          to <keyword
         >float</keyword>
+
+        
 
         
 
@@ -247,8 +335,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -260,8 +352,12 @@
 
         
 
+        
+
          to <keyword
         >float</keyword>
+
+        
 
         
 
@@ -270,8 +366,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -283,8 +383,12 @@
 
         
 
+        
+
          to <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -293,8 +397,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -303,8 +411,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -313,13 +425,19 @@
 
         
 
+        
+
         , <keyword
         >double</keyword>
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -331,8 +449,12 @@
 
         
 
+        
+
          to <keyword
         >double</keyword>
+
+        
 
         
 
@@ -346,8 +468,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -356,8 +482,12 @@
 
     
 
+    
+
      to <keyword
     >float</keyword>
+
+    
 
     
 
@@ -366,8 +496,12 @@
 
     
 
+    
+
      to <keyword
     >double</keyword>
+
+    
 
     
 
@@ -379,8 +513,12 @@
 
     
 
+    
+
      type, so values of the other integral types do not automatically convert to the <keyword
     >char</keyword>
+
+    
 
     
 

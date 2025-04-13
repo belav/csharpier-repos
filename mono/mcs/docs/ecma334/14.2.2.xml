@@ -6,6 +6,8 @@
 
     
 
+    
+
     ). User-defined operator implementations always take precedence over predefined operator implementations: Only when no applicable user-defined operator implementations exist will the predefined operator implementations be considered. </paragraph
   >
   <paragraph
@@ -23,13 +25,19 @@
 
       
 
+      
+
       ) and expressions involving the conditional (<hyperlink
       >14.12</hyperlink>
 
       
 
+      
+
       ), and conditional logical operators (<hyperlink
       >14.11</hyperlink>
+
+      
 
       
 
@@ -51,11 +59,15 @@
 
     
 
+    
+
     . Note that the assignment operator itself (=) cannot be overloaded. An assignment always performs a simple bit-wise copy of a value into a variable. </paragraph
   >
   <paragraph
     >Cast operations, such as (T)x, are overloaded by providing user-defined conversions (<hyperlink
     >13.4</hyperlink>
+
+    
 
     
 
@@ -67,6 +79,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -74,6 +88,8 @@
 
       >[Note: For an example of overloading the ++ and  --operators see <hyperlink
       >17.9.1</hyperlink>
+
+      
 
       
 
@@ -96,6 +112,8 @@
 
       
 
+      
+
       , and is always left-associative. end example]</example
     >
   </paragraph>
@@ -109,6 +127,8 @@
 
       
 
+      
+
        result. end note]</note
     >
   </paragraph>
@@ -118,8 +138,12 @@
 
     
 
+    
+
      through <hyperlink
     >14.13</hyperlink>
+
+    
 
     
 

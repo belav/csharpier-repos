@@ -15,6 +15,8 @@
 
           
 
+          
+
           ). </list_item
         >
         <list_item
@@ -23,8 +25,12 @@
 
           
 
+          
+
           , a run-time check is performed to ensure that the value computed for y is compatible with the array instance of which x is an element. The check succeeds if y is null, or if an implicit reference conversion (<hyperlink
           >13.1.4</hyperlink>
+
+          
 
           
 
@@ -41,6 +47,8 @@
 
           
 
+          
+
           ). </list_item
         >
         <list_item> The set accessor of x is invoked with the value computed for y as its value argument. </list_item>
@@ -54,8 +62,12 @@
 
       
 
+      
+
       ) permit a value of an array type A[] to be a reference to an instance of an array type B[], provided an implicit reference conversion exists from B to A. Because of these rules, assignment to an array element of a <non_terminal
        where="11.2">reference-type</non_terminal>
+
+      
 
       
 
@@ -72,6 +84,8 @@ oa[2] = new ArrayList();  // ArrayTypeMismatchException
 
       
 
+      
+
       the last assignment causes a System.ArrayTypeMismatchException to be thrown because an instance of ArrayList cannot be stored in an element of a string[]. end note]</note
     >
   </paragraph>
@@ -81,10 +95,14 @@ oa[2] = new ArrayList();  // ArrayTypeMismatchException
 
     
 
+    
+
      is the target of an assignment, the instance expression associated with the property or indexer access must be classified as a variable. If the instance expression is classified as a value, a compile-time error occurs. <note
 
       >[Note: Because of <hyperlink
       >14.5.4</hyperlink>
+
+      
 
       
 
@@ -133,6 +151,8 @@ struct Rectangle
 
       
 
+      
+
       in the example <code_example
       >
         <![CDATA[
@@ -147,6 +167,8 @@ r.B = p;
 
       
 
+      
+
       the assignments to p.X, p.Y, r.A, and r.B are permitted because p and r are variables. However, in the example <code_example
       >
         <![CDATA[
@@ -157,6 +179,8 @@ r.B.X = 100;
 r.B.Y = 100;  
 ]]>
       </code_example>
+
+      
 
       
 

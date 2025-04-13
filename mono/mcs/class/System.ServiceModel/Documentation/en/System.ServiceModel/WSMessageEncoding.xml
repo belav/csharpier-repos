@@ -21,13 +21,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.WsDualHttpBinding" />
 
         
 
+        
+
         , and <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
+
+        
 
         
 
@@ -40,6 +46,8 @@
          type="text/html">
           <a href="2c243746-45ce-4588-995e-c17126a579a6">System-Provided Bindings</a>
         </format>
+
+        
 
         
 

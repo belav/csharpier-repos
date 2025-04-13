@@ -30,13 +30,19 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+        
 
         
 
@@ -55,13 +65,19 @@
 
         
 
+        
+
          in the Global.asax file for your ASP.NET application. The <see
          cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
         
 
+        
+
          event is raised during the <see
          cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+        
 
         
 
@@ -73,8 +89,12 @@
 
         
 
+        
+
          constructs a <see
          cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -83,8 +103,12 @@
 
         
 
+        
+
          and passes it to the <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -96,8 +120,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -106,8 +134,12 @@
 
         
 
+        
+
          event to set the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -116,8 +148,12 @@
 
         
 
+        
+
          to a custom <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -126,8 +162,12 @@
 
         
 
+        
+
          property during the <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -136,13 +176,19 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
 
         
 
+        
+
          object is set to the identity returned by the <see
          cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+        
 
         
 
@@ -154,8 +200,12 @@
 
         
 
+        
+
          event is only raised when the authentication <see
          cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+
+        
 
         
 
@@ -164,8 +214,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+        
 
         
 
@@ -180,8 +234,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+        
 
         
 

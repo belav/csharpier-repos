@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>using</keyword>
@@ -22,6 +24,8 @@
       <name>
         <non_terminal where="15.13">resource-acquisition</non_terminal>
       </name>
+
+      
 
       
 
@@ -41,8 +45,12 @@
 
     
 
+    
+
      is <non_terminal
      where="15.5.1">local-variable-declaration</non_terminal>
+
+    
 
     
 
@@ -51,8 +59,12 @@
 
     
 
+    
+
      must be System.IDisposable or a type that can be implicitly converted to System.IDisposable. If the form of <non_terminal
      where="15.13">resource-acquisition</non_terminal>
+
+    
 
     
 
@@ -61,6 +73,8 @@
   <paragraph
     >Local variables declared in a <non_terminal
      where="15.13">resource-acquisition</non_terminal>
+
+    
 
     
 
@@ -76,6 +90,8 @@ using (R r1 = new R()) {
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -98,6 +114,8 @@ finally {
 
     
 
+    
+
      may acquire multiple resources of a given type. This is equivalent to nested using statements. A using statement of the form <code_example
     >
       <![CDATA[
@@ -107,6 +125,8 @@ using (R r1 = new R(), r2 = new R()) {
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -120,6 +140,8 @@ using (R r2 = new R()) {
 }  
 ]]>
     </code_example>
+
+    
 
     
 

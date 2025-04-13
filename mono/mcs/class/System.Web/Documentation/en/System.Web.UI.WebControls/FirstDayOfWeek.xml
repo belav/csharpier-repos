@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the values that specify which day to display as the first day of the week on the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -33,6 +37,8 @@
       <para
         >Specifies the day to display as the first day of the week on the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 

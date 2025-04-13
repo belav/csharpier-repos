@@ -57,11 +57,15 @@
 
           
 
+          
+
           .</param
         >
         <param name="height"
           > the current height of <paramref
            name="drawable" />
+
+          
 
           
 
@@ -78,8 +82,12 @@
 
             
 
+            
+
              is a Window, then the function <see
              cref="M:Cairo.XlibSurface.SetSize()" />
+
+            
 
             
 

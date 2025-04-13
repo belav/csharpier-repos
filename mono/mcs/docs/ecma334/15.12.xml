@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>lock</keyword>
@@ -25,13 +27,19 @@
 
     
 
+    
+
     . No implicit boxing conversion (<hyperlink
     >13.1.5</hyperlink>
 
     
 
+    
+
     ) is ever performed for the expression of a lock statement, and thus it is a compile-time error for the expression to denote a value of a <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 
@@ -47,8 +55,12 @@ lock (x) ...
 
     
 
+    
+
     where x is an expression of a <non_terminal
      where="11.2">reference-type</non_terminal>
+
+    
 
     
 
@@ -64,6 +76,8 @@ finally {
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -89,6 +103,8 @@ class Cache
 }  
 ]]>
       </code_example>
+
+      
 
       
 

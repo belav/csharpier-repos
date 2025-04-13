@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -87,12 +89,16 @@
 
             
 
+            
+
              class with the supplied peer client ID, registration ID, peer mesh ID, and peer endpoint address.</para
           >
         </summary>
         <param name="registrationId">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Guid" />
+
+          
 
           
 
@@ -104,6 +110,8 @@
 
           
 
+          
+
            that specifies the unique ID of the peer client that submitted the updated registration entry information.</param
         >
         <param name="meshId">
@@ -112,11 +120,15 @@
 
           
 
+          
+
            that contains the mesh ID of the entry.</param
         >
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerNodeAddress" />
+
+          
 
           
 

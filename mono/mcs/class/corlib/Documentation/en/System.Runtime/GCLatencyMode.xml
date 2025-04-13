@@ -22,6 +22,8 @@
 
         
 
+        
+
          property to one of the enumeration values. </para
       >
       <para
@@ -29,6 +31,8 @@
          type="text/html">
           <a href="96278bb7-6eab-4612-8594-ceebfc887d81">Latency Modes</a>
         </format>
+
+        
 
         
 
@@ -67,6 +71,8 @@
 
             
 
+            
+
              runtime configuration setting. If <format
              type="text/html">
               <a href="503f55ba-26ed-45ac-a2ea-caf994da04cd">&lt;gcConcurrent&gt;</a>
@@ -74,8 +80,12 @@
 
             
 
+            
+
              is enabled, switching to <see
              cref="F:System.Runtime.GCLatencyMode.Batch" />
+
+            
 
             
 
@@ -112,6 +122,8 @@
           <para
             >Enables garbage collection concurrency and reclaims objects while the application is running. This is the default mode for garbage collection on a workstation and is less intrusive than <see
              cref="F:System.Runtime.GCLatencyMode.Batch" />
+
+            
 
             
 

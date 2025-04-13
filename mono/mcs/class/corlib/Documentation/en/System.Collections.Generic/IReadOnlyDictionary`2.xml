@@ -38,11 +38,15 @@
 
         
 
+        
+
          object.</para
       >
       <para
         >Each pair must have a unique key. Implementations can vary in whether they allow you to specify a key that is null. The value can be null and does not have to be unique. The <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          interface is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -139,6 +147,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -199,6 +209,8 @@
           <para
             >The order of the values in the enumerable collection is unspecified, but the implementation must guarantee that the values are in the same order as the corresponding keys in the enumerable collection that is returned by the <see
              cref="P:System.Collections.Generic.IReadOnlyDictionary`2.Keys" />
+
+            
 
             
 

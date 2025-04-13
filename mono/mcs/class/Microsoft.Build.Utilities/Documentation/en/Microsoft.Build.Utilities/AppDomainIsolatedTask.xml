@@ -32,8 +32,12 @@
 
         
 
+        
+
         , but also derives from <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
+
+            
 
             
 
@@ -85,8 +91,12 @@
 
             
 
+            
+
              class and allows derived <see
              cref="T:Microsoft.Build.Utilities.Task" />
+
+            
 
             
 
@@ -95,6 +105,8 @@
         </summary>
         <param name="taskResources">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -136,8 +150,12 @@
 
             
 
+            
+
              class and allows derived <see
              cref="T:Microsoft.Build.Utilities.Task" />
+
+            
 
             
 
@@ -149,10 +167,14 @@
 
           
 
+          
+
           The task resources.</param
         >
         <param name="helpKeywordPrefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,6 +253,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -264,6 +288,8 @@
           <para
             >Gets or sets a host object instance that is associated with the derived <see
              cref="T:Microsoft.Build.Utilities.Task" />
+
+            
 
             
 
@@ -343,6 +369,8 @@
           <para
             >Gets or sets culture-specific resources of the derived <see
              cref="T:Microsoft.Build.Utilities.Task" />
+
+            
 
             
 

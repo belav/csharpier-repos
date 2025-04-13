@@ -38,8 +38,12 @@
 
         
 
+        
+
          can be used to represent a return value statement. The <see
          cref="P:System.CodeDom.CodeMethodReturnStatement.Expression" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeMethodReturnStatement" />
+
+            
 
             
 
@@ -110,6 +116,8 @@
 
             
 
+            
+
              class using the specified expression.</para
           >
         </summary>
@@ -118,8 +126,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

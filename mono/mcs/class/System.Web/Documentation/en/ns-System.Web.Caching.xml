@@ -14,6 +14,8 @@
 
         
 
+        
+
          namespace provides classes for caching frequently used data on the server. </para
       >
     </summary>
@@ -25,8 +27,12 @@
 
         
 
+        
+
          class, a dictionary that enables you to store data objects such as hash tables and data sets. It also provides expiration functionality for those objects, and methods that enable you to add and remove the objects. You can add the objects to the cache with a dependency on other files or cache entries. In that case, the <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          (and classes derived from it) to build the security channel. These settings are local to the client and are not determined from the service's security policy.</para
       >
     </remarks>
@@ -52,6 +54,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -107,6 +111,8 @@
           <para
             >A new instance of <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -188,6 +194,8 @@
 
             
 
+            
+
              that the channel is targeted for.</para
           >
         </remarks>
@@ -221,6 +229,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -228,6 +238,8 @@
              type="text/html">
               <a href="491d1705-eb29-43c2-a44c-c0cf996f74eb">How To: Set a Max Clock Skew</a>
             </format>
+
+            
 
             
 
@@ -310,11 +322,15 @@
 
             
 
+            
+
              is a "number used once", often a random number used in an authentication protocol to ensure that old communications cannot be used in an attack by using replays.</para
           >
           <para
             >If the nonce count is exceeded, the incoming message is rejected and a <see
              cref="T:System.ServiceModel.Security.MessageSecurityException" />
+
+            
 
             
 
@@ -347,6 +363,8 @@
           <para
             >A <newTerm
             >nonce</newTerm>
+
+            
 
             
 
@@ -388,8 +406,12 @@
 
                 
 
+                
+
                  and <see
                  cref="T:System.ServiceModel.NetTcpBinding" />
+
+                
 
                 
 
@@ -405,6 +427,8 @@
 
                 
 
+                
+
                  is enabled.</para
               >
             </item>
@@ -417,8 +441,12 @@
 
                 
 
+                
+
                  is not enabled, on <see
                  cref="T:System.ServiceModel.WSHttpBinding" />
+
+                
 
                 
 
@@ -427,8 +455,12 @@
 
                 
 
+                
+
                  = true or <see
                  cref="P:System.ServiceModel.Description.ClientCredentials.Windows" />
+
+                
 
                 
 
@@ -445,6 +477,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -452,6 +486,8 @@
               <para
                 >For <see
                  cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+                
 
                 
 
@@ -467,8 +503,12 @@
 
                 
 
+                
+
                  is not enabled, on <see
                  cref="T:System.ServiceModel.WSHttpBinding" />
+
+                
 
                 
 
@@ -477,8 +517,12 @@
 
                 
 
+                
+
                  = true or with none of the <see
                  cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+                
 
                 
 
@@ -523,8 +567,12 @@
 
                 
 
+                
+
                  and <see
                  cref="T:System.ServiceModel.NetTcpBinding" />
+
+                
 
                 
 
@@ -540,6 +588,8 @@
 
                 
 
+                
+
                  is enabled.</para
               >
             </item>
@@ -552,8 +602,12 @@
 
                 
 
+                
+
                  is not enabled, on <see
                  cref="T:System.ServiceModel.WSHttpBinding" />
+
+                
 
                 
 
@@ -562,8 +616,12 @@
 
                 
 
+                
+
                  = true or  <see
                  cref="P:System.ServiceModel.Description.ClientCredentials.windows" />
+
+                
 
                 
 
@@ -580,6 +638,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -587,6 +647,8 @@
               <para
                 >For <see
                  cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+                
 
                 
 
@@ -602,8 +664,12 @@
 
                 
 
+                
+
                  is not enabled, on <see
                  cref="T:System.ServiceModel.WSHttpBinding" />
+
+                
 
                 
 
@@ -612,8 +678,12 @@
 
                 
 
+                
+
                  = true or with none of the <see
                  cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+                
 
                 
 

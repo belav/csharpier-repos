@@ -31,6 +31,8 @@
 
         
 
+        
+
          value type represents a single-precision 32-bit number with values ranging from negative 3.402823e38 to positive 3.402823e38.</para
       >
       <block subset="none" type="note">
@@ -40,8 +42,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -50,8 +56,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -59,6 +69,8 @@
            type="text/html">
             <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
           </format>
+
+          
 
           
 
@@ -93,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.SingleConverter" />
+
+            
 
             
 

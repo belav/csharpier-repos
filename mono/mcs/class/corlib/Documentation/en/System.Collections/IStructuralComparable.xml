@@ -19,8 +19,12 @@
 
         
 
+        
+
          interface enables you to implement customized comparisons for collection members. That is, you can define precisely what it means for one collection object to precede, follow, or occur in the same position in the sort order as a second collection object. You can then specify that this definition be used with a collection type that accepts the <see
          cref="T:System.Collections.IStructuralComparable" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         , which determines whether the current collection object is less than, equal to, or greater than a second object in the sort order. The actual comparison of the members or elements in the current instance with those in a second object is performed by an <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -46,8 +54,12 @@
 
           
 
+          
+
            interface supports only structural comparisons for sorting or ordering. The <see
            cref="T:System.Collections.IStructuralEquatable" />
+
+          
 
           
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
          property; the other is returned by the <see
          cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+        
 
         
 
@@ -73,8 +89,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Tuple`2" />
+
+        
 
         
 
@@ -83,8 +103,12 @@
 
         
 
+        
+
         , and so on) and the <see
          cref="T:System.Array" />
+
+        
 
         
 
@@ -93,8 +117,12 @@
 
         
 
+        
+
          interface. By casting (in C#) or converting (in Visual Basic) the current instance of an array or tuple to an <see
          cref="T:System.Collections.IStructuralComparable" />
+
+        
 
         
 
@@ -103,8 +131,12 @@
 
         
 
+        
+
          implementation as an argument to the <see
          cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+
+        
 
         
 
@@ -113,8 +145,12 @@
 
         
 
+        
+
          method directly in most cases. Instead, the <see
          cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+
+        
 
         
 
@@ -123,13 +159,19 @@
 
         
 
+        
+
         . In this case, you define your <see
          cref="T:System.Collections.IComparer" />
 
         
 
+        
+
          implementation and pass it as an argument to a sorting method or collection object's class constructor. The <see
          cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+
+        
 
         
 
@@ -171,8 +213,12 @@
 
             
 
+            
+
              method supports custom structural comparison and sorting of array and tuple objects. The <see
              cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+
+            
 
             
 
@@ -181,8 +227,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+
+            
 
             
 
@@ -191,8 +241,12 @@
 
             
 
+            
+
              end and the <see
              cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+
+            
 
             
 
@@ -206,6 +260,8 @@
 
                 
 
+                
+
                  method returns -1.</para
               >
             </item>
@@ -216,6 +272,8 @@
 
                 
 
+                
+
                  method returns 1.</para
               >
             </item>
@@ -223,6 +281,8 @@
               <para
                 >The <see
                  cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+
+                
 
                 
 
@@ -240,6 +300,8 @@
           <para
             >An integer that indicates the relationship of the current collection object to <paramref
              name="other" />
+
+            
 
             
 
@@ -267,6 +329,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -279,6 +343,8 @@
                 <para
                   >The current instance and <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -297,6 +363,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -308,6 +376,8 @@
 
           
 
+          
+
           The object to compare with the current instance.</param
         >
         <param name="comparer">
@@ -315,8 +385,12 @@
 
           
 
+          
+
           An object that compares members of the current collection object with the corresponding members of <paramref
            name="other" />
+
+          
 
           
 

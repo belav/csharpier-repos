@@ -29,8 +29,12 @@
 
         
 
+        
+
          object that is to be called by the <see
          cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" />
+
+        
 
         
 

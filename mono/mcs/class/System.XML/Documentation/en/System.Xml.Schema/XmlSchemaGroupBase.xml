@@ -31,13 +31,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Xml.Schema.XmlSchemaChoice" />
 
         
 
+        
+
         , or <see
          cref="T:System.Xml.Schema.XmlSchemaSequence" />
+
+        
 
         
 
@@ -67,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaGroupBase" />
+
+            
 
             
 

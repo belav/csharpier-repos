@@ -42,13 +42,19 @@
 
         
 
+        
+
          derived classes. If you need to serialize a <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
         
 
+        
+
          instance, use the <see
          cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
       <para
         >A class that serializes <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -86,6 +94,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter`1" />
+
+            
 
             
 
@@ -167,6 +177,8 @@
 
             
 
+            
+
              derived class. </para
           >
         </summary>
@@ -175,6 +187,8 @@
           <para
             >A new instance of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 

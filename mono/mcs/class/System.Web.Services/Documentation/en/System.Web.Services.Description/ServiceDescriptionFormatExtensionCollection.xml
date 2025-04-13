@@ -28,8 +28,12 @@
 
         
 
+        
+
         , or instances of the <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -38,13 +42,19 @@
 
         
 
+        
+
          class allows users to define extensibility elements in addition to those defined in the Web Services Description Language (WSDL) specification. Use these in your <see
          cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
         
 
+        
+
          if you know in advance the type of extensibility element you want to make. Use an <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -76,8 +86,12 @@
 
             
 
+            
+
              namespace expose an Extensions property representing a <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -92,11 +106,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,8 +145,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -143,6 +165,8 @@
 
             
 
+            
+
              has been added.</para
           >
         </returns>
@@ -151,13 +175,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
+          
+
           , passed by reference, to add to the <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+          
 
           
 
@@ -188,8 +218,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -204,6 +238,8 @@
 
             
 
+            
+
              is a member of the collection; otherwise, false.</para
           >
         </returns>
@@ -212,8 +248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+          
 
           
 
@@ -245,8 +285,12 @@
 
             
 
+            
+
              into a one-dimensional array of type <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 
@@ -258,8 +302,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+          
 
           
 
@@ -267,6 +315,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,8 +350,12 @@
 
             
 
+            
+
              and returns the first element of the specified derived <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -316,6 +370,8 @@
 
             
 
+            
+
             ; otherwise, null.</para
           >
         </returns>
@@ -324,8 +380,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -359,6 +419,8 @@
 
             
 
+            
+
              that meets the criteria of the two parameters.</para
           >
         </remarks>
@@ -367,6 +429,8 @@
           <para
             >Searches the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -381,6 +445,8 @@
 
             
 
+            
+
             ; otherwise, null.</para
           >
         </returns>
@@ -389,8 +455,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -401,8 +471,12 @@
 
           
 
+          
+
           The XML namespace URI of the <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -438,8 +512,12 @@
 
             
 
+            
+
              and returns an array of all elements of the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -454,6 +532,8 @@
 
             
 
+            
+
              instances representing all collection members of the specified type.</para
           >
         </returns>
@@ -462,8 +542,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -503,6 +587,8 @@
 
             
 
+            
+
              and returns an array of all members with the specified name and namespace URI.</para
           >
         </summary>
@@ -514,6 +600,8 @@
 
             
 
+            
+
              instances.</para
           >
         </returns>
@@ -522,8 +610,12 @@
 
           
 
+          
+
           The XML name attribute of the <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -534,8 +626,12 @@
 
           
 
+          
+
           The XML namespace URI attribute of the <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -566,6 +662,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first instance with the collection.</para
           >
         </summary>
@@ -577,6 +675,8 @@
 
             
 
+            
+
             , or -1 if the element was not found in the collection.</para
           >
         </returns>
@@ -585,8 +685,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+          
 
           
 
@@ -618,8 +722,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -628,8 +736,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -645,8 +757,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -658,8 +774,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="extension" />
+
+          
 
           
 
@@ -670,8 +790,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+          
 
           
 
@@ -701,13 +825,19 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Xml.XmlElement" />
 
             
 
+            
+
              or a <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 
@@ -726,6 +856,8 @@
 
             
 
+            
+
              parameter is used; otherwise, false.</para
           >
         </returns>
@@ -734,13 +866,19 @@
 
           
 
+          
+
           An object, either of type <see
            cref="T:System.Xml.XmlElement" />
 
           
 
+          
+
            or <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+          
 
           
 
@@ -775,6 +913,8 @@
 
             
 
+            
+
              parameter is required; otherwise, false.</para
           >
         </returns>
@@ -783,13 +923,19 @@
 
           
 
+          
+
           An object, either of type <see
            cref="T:System.Xml.XmlElement" />
 
           
 
+          
+
            or <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+          
 
           
 
@@ -862,8 +1008,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+            
 
             
 
@@ -875,13 +1025,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+          
 
           
 

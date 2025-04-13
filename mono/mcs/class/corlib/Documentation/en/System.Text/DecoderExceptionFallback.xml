@@ -27,11 +27,15 @@
 
         
 
+        
+
          class. Specifically, the encoding type's GetBytes method encodes a character to a byte sequence, and the GetChars method decodes a byte sequence to a character. </para
       >
       <para
         >A decoding operation can fail if the input byte sequence cannot be mapped by the encoding. For example, an <see
          cref="T:System.Text.ASCIIEncoding" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Text.DecoderFallbackBuffer" />
+
+        
 
         
 
@@ -56,13 +64,19 @@
 
         
 
+        
+
          class substitutes a string provided in place of any input byte sequence that cannot be converted. After the substitute string is emitted, the decoding operation continues converting the remainder of the input. In contrast, the <see
          cref="T:System.Text.DecoderExceptionFallback" />
 
         
 
+        
+
          class throws a <see
          cref="T:System.Text.DecoderFallbackException" />
+
+        
 
         
 
@@ -74,6 +88,8 @@
       <para
         >Throws <see
          cref="T:System.Text.DecoderFallbackException" />
+
+        
 
         
 
@@ -102,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderExceptionFallback" />
+
+            
 
             
 
@@ -139,6 +157,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -147,6 +167,8 @@
           <para
             >A <see
              cref="T:System.Text.DecoderFallbackBuffer" />
+
+            
 
             
 
@@ -183,6 +205,8 @@
 
             
 
+            
+
              object and a specified object are equal.</para
           >
         </summary>
@@ -194,8 +218,12 @@
 
             
 
+            
+
              is not null and is a <see
              cref="T:System.Text.DecoderExceptionFallback" />
+
+            
 
             
 
@@ -207,8 +235,12 @@
 
           
 
+          
+
           An object that derives from the <see
            cref="T:System.Text.DecoderExceptionFallback" />
+
+          
 
           
 
@@ -241,8 +273,12 @@
 
             
 
+            
+
              method always returns the same value, the application should not use this value to distinguish one <see
              cref="T:System.Text.DecoderExceptionFallback" />
+
+            
 
             
 

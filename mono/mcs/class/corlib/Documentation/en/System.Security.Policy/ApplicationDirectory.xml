@@ -70,11 +70,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,6 +112,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -116,6 +122,8 @@
           <para
             >A new, identical copy of the <see
              cref="T:System.Security.Policy.ApplicationDirectory" />
+
+            
 
             
 
@@ -178,6 +186,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -329,6 +339,8 @@
 
             
 
+            
+
              evidence object.</para
           >
         </summary>
@@ -337,6 +349,8 @@
           <para
             >A representation of the state of the <see
              cref="T:System.Security.Policy.ApplicationDirectory" />
+
+            
 
             
 

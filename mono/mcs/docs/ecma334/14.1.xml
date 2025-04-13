@@ -11,8 +11,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -24,8 +28,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -34,13 +42,19 @@
 
         
 
+        
+
         ), the is operator (<hyperlink
         >14.9.9</hyperlink>
 
         
 
+        
+
         ), or the typeof operator (<hyperlink
         >14.5.11</hyperlink>
+
+        
 
         
 
@@ -52,8 +66,12 @@
 
         
 
+        
+
         ). A method group may have an associated instance expression. When an instance method is invoked, the result of evaluating the instance expression becomes the instance represented by this (<hyperlink
         >14.5.7</hyperlink>
+
+        
 
         
 
@@ -62,8 +80,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.5</hyperlink>
+
+        
 
         
 
@@ -72,8 +94,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.10.3</hyperlink>
+
+        
 
         
 
@@ -85,11 +111,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > An event access. Every event access has an associated type, namely the type of the event. Furthermore, an event access may have an associated instance expression. An event access may appear as the left-hand operand of the += and -= operators (<hyperlink
         >14.13.3</hyperlink>
+
+        
 
         
 
@@ -101,6 +131,8 @@
 
         
 
+        
+
         ), and the result of evaluating the argument list becomes the parameter list of the invocation. </list_item
       >
       <list_item
@@ -109,13 +141,19 @@
 
         
 
+        
+
         . An expression classified as nothing is only valid in the context of a <non_terminal
          where="15.6">statement-expression</non_terminal>
 
         
 
+        
+
          (<hyperlink
         >15.6</hyperlink>
+
+        
 
         
 
@@ -130,8 +168,12 @@
 
     
 
+    
+
     ). Otherwise, the get-accessor is invoked to obtain the current value (<hyperlink
     >14.1.1</hyperlink>
+
+    
 
     
 

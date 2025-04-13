@@ -36,8 +36,12 @@
 
             
 
+            
+
              - Returns <see
              cref="T:System.Xml.XmlAttributeCollection" />
+
+            
 
             
 
@@ -50,8 +54,12 @@
 
             
 
+            
+
              - Returns an XmlNamedNodeMap containing <see
              cref="T:System.Xml.XmlEntity" />
+
+            
 
             
 
@@ -64,8 +72,12 @@
 
             
 
+            
+
              - Returns an XmlNamedNodeMap containing <see
              cref="T:System.Xml.XmlNotation" />
+
+            
 
             
 
@@ -163,6 +175,8 @@
 
             
 
+            
+
              specified by name.</para
           >
         </summary>
@@ -175,8 +189,12 @@
 
           
 
+          
+
           The qualified name of the node to retrieve. It is matched against the <see
            cref="P:System.Xml.XmlNode.Name" />
+
+          
 
           
 
@@ -216,8 +234,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -232,6 +254,8 @@
 
             
 
+            
+
              with the matching local name and namespace URI or null if a matching node was not found.</para
           >
         </returns>
@@ -240,10 +264,14 @@
 
           
 
+          
+
           The local name of the node to retrieve.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,13 +311,19 @@
 
             
 
+            
+
              at the specified index. If <paramref
              name="index" />
 
             
 
+            
+
              is less than 0 or greater than or equal to the <see
              cref="P:System.Xml.XmlNamedNodeMap.Count" />
+
+            
 
             
 
@@ -301,8 +335,12 @@
 
           
 
+          
+
           The index position of the node to retrieve from the XmlNamedNodeMap. The index is zero-based; therefore, the index of the first node is 0 and the index of the last node is <see
            cref="P:System.Xml.XmlNamedNodeMap.Count" />
+
+          
 
           
 
@@ -346,8 +384,12 @@
 
           
 
+          
+
           The qualified name of the node to remove. The name is matched against the <see
            cref="P:System.Xml.XmlNode.Name" />
+
+          
 
           
 
@@ -387,8 +429,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -403,6 +449,8 @@
 
             
 
+            
+
              removed or null if a matching node was not found.</para
           >
         </returns>
@@ -411,10 +459,14 @@
 
           
 
+          
+
           The local name of the node to remove.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,8 +505,12 @@
 
             
 
+            
+
              using its <see
              cref="P:System.Xml.XmlNode.Name" />
+
+            
 
             
 
@@ -469,11 +525,15 @@
 
             
 
+            
+
              replaces an existing node with the same name, the old node is returned; otherwise, null is returned.</para
           >
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

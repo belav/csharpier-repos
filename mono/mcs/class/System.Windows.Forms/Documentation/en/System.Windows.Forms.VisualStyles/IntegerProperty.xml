@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration represents a set of integer properties that describe visual style elements. The <see
          cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          method to specify which property value to retrieve for the element that the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 
@@ -126,6 +134,8 @@
 
             
 
+            
+
               to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
           >
         </summary>
@@ -147,6 +157,8 @@
           <para
             >The amount of <see
              cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor2" />
+
+            
 
             
 
@@ -174,6 +186,8 @@
 
             
 
+            
+
               to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
           >
         </summary>
@@ -198,6 +212,8 @@
 
             
 
+            
+
               to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
           >
         </summary>
@@ -219,6 +235,8 @@
           <para
             >The amount of <see
              cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor5" />
+
+            
 
             
 
@@ -280,6 +298,8 @@
 
             
 
+            
+
              was designed for.</para
           >
         </summary>
@@ -301,6 +321,8 @@
           <para
             >The minimum DPI that <see
              cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile2" />
+
+            
 
             
 
@@ -328,6 +350,8 @@
 
             
 
+            
+
              was designed for.</para
           >
         </summary>
@@ -352,6 +376,8 @@
 
             
 
+            
+
              was designed for.</para
           >
         </summary>
@@ -373,6 +399,8 @@
           <para
             >The minimum DPI that <see
              cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile5" />
+
+            
 
             
 

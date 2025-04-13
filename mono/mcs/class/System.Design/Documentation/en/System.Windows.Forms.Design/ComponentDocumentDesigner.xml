@@ -37,8 +37,12 @@
 
         
 
+        
+
          provides a base class for designers of root design documents that support nested components. In addition to the methods and functionality inherited from the <see
          cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+        
 
         
 
@@ -61,13 +69,19 @@
 
           
 
+          
+
            or <see
            cref="T:System.Windows.Forms.Control" />
 
           
 
+          
+
            is typically provided by a built-in root designer. A custom <see
            cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+          
 
           
 
@@ -80,10 +94,14 @@
 
         
 
+        
+
         . For an overview of customizing design time behavior, see <format
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -107,6 +125,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+
+            
 
             
 
@@ -156,8 +176,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -166,8 +190,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -179,8 +207,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+
+            
 
             
 
@@ -195,11 +227,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,8 +277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -277,8 +317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -311,6 +355,8 @@
 
             
 
+            
+
              interface method override adds a non-browsable, design-time only boolean property named "TrayLargeIcon" to this designer's component at design time. This property is used by the component tray.</para
           >
         </remarks>
@@ -322,6 +368,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -330,8 +378,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -368,8 +420,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -381,6 +437,8 @@
           <para
             >For a description of this member, see <see
              cref="T:System.ComponentModel.Design.ViewTechnology" />
+
+            
 
             
 
@@ -396,8 +454,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ViewTechnology" />
+
+          
 
           
 
@@ -428,8 +490,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -441,6 +507,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
+
+            
 
             
 
@@ -475,8 +543,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+
+            
 
             
 
@@ -488,6 +560,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterAttributes(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -503,10 +577,14 @@
 
           
 
+          
+
           The component to filter the attributes of.</param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -540,8 +618,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+
+            
 
             
 
@@ -553,6 +635,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterEvents(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -568,10 +652,14 @@
 
           
 
+          
+
           The component to filter events for.</param
         >
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -605,8 +693,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+
+            
 
             
 
@@ -618,6 +710,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterProperties(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -633,10 +727,14 @@
 
           
 
+          
+
           The component to filter properties for.</param
         >
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -669,8 +767,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Drawing.Design.IToolboxUser" />
+
+            
 
             
 
@@ -682,6 +784,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
+
+            
 
             
 
@@ -697,8 +801,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -731,8 +839,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Drawing.Design.IToolboxUser" />
+
+            
 
             
 
@@ -747,6 +859,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -755,8 +869,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 

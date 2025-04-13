@@ -61,6 +61,8 @@
 
             
 
+            
+
              object is created contains null for its discretionary access control list (DACL), a single access control entry (ACE) that allows everyone full access (AEFA) is added to the DACL. If an application modifies the DACL of a security descriptor to which an AEFA ACE has been added, the AEFA ACE is persisted with the DACL when that DACL is persisted.</para
           >
           <para>This can result in an application unintentionally allowing access to principals. Because of this, an application should check for the existence of an AEFA ACE and remove it before modifying any security descriptor.</para>
@@ -73,8 +75,12 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+
+            
 
             
 
@@ -86,10 +92,14 @@
 
           
 
+          
+
           true if the new security descriptor is associated with a container object.</param
         >
         <param name="isDS">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -100,13 +110,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
+          
+
            object from which to create the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -143,6 +159,8 @@
 
             
 
+            
+
              object is created contains null for its discretionary access control list (DACL), a single access control entry (ACE) that allows everyone full access (AEFA) is added to the DACL. If an application modifies the DACL of a security descriptor to which an AEFA ACE has been added, the AEFA ACE is persisted with the DACL when that DACL is persisted.</para
           >
           <para>This can result in an application unintentionally allowing access to principals. Because of this, an application should check for the existence of an AEFA ACE and remove it before modifying any security descriptor.</para>
@@ -155,11 +173,15 @@
 
             
 
+            
+
              class from the specified Security Descriptor Definition Language (SDDL) string.</para
           >
         </summary>
         <param name="isContainer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,6 +192,8 @@
 
           
 
+          
+
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="sddlForm">
@@ -177,8 +201,12 @@
 
           
 
+          
+
           The SDDL string from which to create the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -216,6 +244,8 @@
 
             
 
+            
+
              object is created contains null for its discretionary access control list (DACL),a single access control entry (ACE) that allows everyone full access (AEFA) is added to the DACL. If an application modifies the DACL of a security descriptor to which an AEFA ACE has been added, the AEFA ACE is persisted with the DACL when that DACL is persisted.</para
           >
           <para>This can result in an application unintentionally allowing access to principals. Because of this, an application should check for the existence of an AEFA ACE and remove it before modifying any security descriptor.</para>
@@ -228,11 +258,15 @@
 
             
 
+            
+
              class from the specified array of byte values.</para
           >
         </summary>
         <param name="isContainer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +277,8 @@
 
           
 
+          
+
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="binaryForm">
@@ -250,8 +286,12 @@
 
           
 
+          
+
           The array of byte values from which to create the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -262,8 +302,12 @@
 
           
 
+          
+
           The offset in the <paramref
            name="binaryForm" />
+
+          
 
           
 
@@ -304,6 +348,8 @@
 
             
 
+            
+
              object is created contains null for its discretionary access control list (DACL), a single access control entry (ACE) that allows everyone full access (AEFA) is added to the DACL. If an application modifies the DACL of a security descriptor to which an AEFA ACE has been added, the AEFA ACE is persisted with the DACL when that DACL is persisted.</para
           >
           <para>This can result in an application unintentionally allowing access to principals. Because of this, an application should check for the existence of an AEFA ACE and remove it before modifying any security descriptor.</para>
@@ -316,11 +362,15 @@
 
             
 
+            
+
              class from the specified information.</para
           >
         </summary>
         <param name="isContainer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,6 +381,8 @@
 
           
 
+          
+
           true if the new security descriptor is associated with a directory object.</param
         >
         <param name="flags">
@@ -338,8 +390,12 @@
 
           
 
+          
+
           Flags that specify behavior of the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -350,8 +406,12 @@
 
           
 
+          
+
           The owner for the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -362,8 +422,12 @@
 
           
 
+          
+
           The primary group for the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -374,8 +438,12 @@
 
           
 
+          
+
           The System Access Control List (SACL) for the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -386,8 +454,12 @@
 
           
 
+          
+
           The Discretionary Access Control List (DACL) for the new <see
            cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+          
 
           
 
@@ -421,6 +493,8 @@
           <para
             >Gets values that specify behavior of the <see
              cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+            
 
             
 
@@ -462,6 +536,8 @@
 
             
 
+            
+
              object. The DACL contains access rules.</para
           >
         </summary>
@@ -496,6 +572,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -521,6 +599,8 @@
           <para
             >Gets a Boolean value that specifies whether the object associated with this <see
              cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+            
 
             
 
@@ -555,6 +635,8 @@
 
             
 
+            
+
              object is in canonical order.</para
           >
         </summary>
@@ -583,6 +665,8 @@
 
             
 
+            
+
              object is a directory object.</para
           >
         </summary>
@@ -608,6 +692,8 @@
           <para
             >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see
              cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+            
 
             
 
@@ -642,6 +728,8 @@
           <para
             >Gets or sets the owner of the object associated with this <see
              cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+            
 
             
 
@@ -684,11 +772,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="sid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -727,11 +819,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="sid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -771,6 +867,8 @@
 
             
 
+            
+
              object. DACLs that are protected do not inherit access rules from parent containers.</para
           >
         </summary>
@@ -779,10 +877,14 @@
 
           
 
+          
+
           true to protect the DACL from inheritance.</param
         >
         <param name="preserveInheritance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,6 +924,8 @@
 
             
 
+            
+
              object. SACLs that are protected do not inherit audit rules from parent containers.</para
           >
         </summary>
@@ -830,10 +934,14 @@
 
           
 
+          
+
           true to protect the SACL from inheritance.</param
         >
         <param name="preserveInheritance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -867,6 +975,8 @@
           <para
             >Gets or sets the System Access Control List (SACL) for this <see
              cref="T:System.Security.AccessControl.CommonSecurityDescriptor" />
+
+            
 
             
 

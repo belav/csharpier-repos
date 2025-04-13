@@ -35,8 +35,12 @@
 
         
 
+        
+
          member specifies the addressing scheme that a <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          indicates that an IP version 4 address is expected when a <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
       <para
         >Specifies the addressing scheme that an instance of the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 

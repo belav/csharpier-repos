@@ -39,6 +39,8 @@
 
         
 
+        
+
          creates server formatter sinks for the server channel through which remoting messages flow.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          interface instead of <see
          cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+        
 
         
 
@@ -61,12 +67,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="DC2D1E62-9AF7-4CA1-99FD-98B93BB4DB9E"
             >[&lt;topic://gnconremotingsettingsschema&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 

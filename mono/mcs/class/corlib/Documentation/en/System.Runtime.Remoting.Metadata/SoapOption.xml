@@ -33,6 +33,8 @@
 
         
 
+        
+
          enumeration is used to specify instructions to the .NET Framework on how it will generate the SOAP.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Specifies the SOAP configuration options for use with the <see
          cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+        
 
         
 

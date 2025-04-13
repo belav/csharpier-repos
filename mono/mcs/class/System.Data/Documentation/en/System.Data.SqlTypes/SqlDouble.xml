@@ -52,13 +52,19 @@
 
             
 
+            
+
              structure using the supplied double parameter to set the new <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
+            
+
              structure's <see
              cref="P:System.Data.SqlTypes.SqlDouble.Value" />
+
+            
 
             
 
@@ -70,8 +76,12 @@
 
           
 
+          
+
           A double whose value will be used for the new <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -106,6 +116,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -117,6 +129,8 @@
 
             
 
+            
+
              operands.</para
           >
         </returns>
@@ -125,8 +139,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -137,8 +155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -175,8 +197,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -230,8 +256,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -258,8 +288,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -313,8 +347,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -349,6 +387,8 @@
 
             
 
+            
+
              operand by the second.</para
           >
         </summary>
@@ -360,6 +400,8 @@
 
             
 
+            
+
              structure that contains the results of the division operation.</para
           >
         </returns>
@@ -368,8 +410,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -380,8 +426,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -412,8 +462,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -426,6 +480,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,6 +516,8 @@
 
             
 
+            
+
              to determine whether they are equal.</para
           >
         </summary>
@@ -472,8 +530,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -484,8 +546,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -511,6 +577,8 @@
           <para
             >Returns the hash code for this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -552,6 +620,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -563,6 +633,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -571,8 +643,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -603,6 +679,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -614,8 +692,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -624,8 +706,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -634,13 +720,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -652,8 +744,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -664,8 +760,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -700,6 +800,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -711,8 +813,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -721,8 +827,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -731,13 +841,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -749,8 +865,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -761,8 +881,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -792,6 +916,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -800,6 +926,8 @@
           <para
             >Returns a Boolean value that indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -835,6 +963,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -846,8 +976,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -856,8 +990,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -866,13 +1004,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -884,8 +1028,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -896,8 +1044,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -932,6 +1084,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -943,8 +1097,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -953,8 +1111,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -963,13 +1125,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -981,8 +1149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -993,8 +1165,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1026,6 +1202,8 @@
           <para
             >A constant representing the maximum value for a <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -1061,6 +1239,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1093,6 +1273,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1104,6 +1286,8 @@
 
             
 
+            
+
              operands.</para
           >
         </returns>
@@ -1112,8 +1296,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1124,8 +1312,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1160,6 +1352,8 @@
 
             
 
+            
+
              to determine whether they are notequal.</para
           >
         </summary>
@@ -1171,8 +1365,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1181,8 +1379,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -1191,13 +1393,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1209,8 +1417,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1221,8 +1433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1253,10 +1469,14 @@
 
             
 
+            
+
              structure. For more information, see <format
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1271,8 +1491,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -1312,6 +1536,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1323,6 +1549,8 @@
 
             
 
+            
+
              operands.</para
           >
         </returns>
@@ -1331,8 +1559,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1343,8 +1575,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1379,6 +1615,8 @@
 
             
 
+            
+
              operand by the second.</para
           >
         </summary>
@@ -1390,6 +1628,8 @@
 
             
 
+            
+
              structure that contains the results of the division operation.</para
           >
         </returns>
@@ -1398,8 +1638,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1410,8 +1654,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1446,6 +1694,8 @@
 
             
 
+            
+
              to determine whether they are equal.</para
           >
         </summary>
@@ -1458,8 +1708,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1470,8 +1724,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1575,6 +1833,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1586,8 +1846,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1596,8 +1860,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -1606,13 +1874,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1624,8 +1898,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1636,8 +1914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1672,6 +1954,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -1683,8 +1967,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1693,8 +1981,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -1703,13 +1995,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1721,8 +2019,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1733,8 +2035,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -1953,6 +2259,8 @@
 
             
 
+            
+
              to determine whether they are not equal.</para
           >
         </summary>
@@ -1964,8 +2272,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1974,8 +2286,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -1984,13 +2300,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2002,8 +2324,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2014,8 +2340,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2050,6 +2380,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2061,8 +2393,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2071,8 +2407,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2081,13 +2421,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2099,8 +2445,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2111,8 +2461,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2147,6 +2501,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2158,8 +2514,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2168,8 +2528,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2178,13 +2542,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2196,8 +2566,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2208,8 +2582,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2244,6 +2622,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -2255,6 +2635,8 @@
 
             
 
+            
+
              operands.</para
           >
         </returns>
@@ -2263,8 +2645,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2275,8 +2661,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2311,6 +2701,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </summary>
@@ -2323,8 +2715,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2335,8 +2731,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2370,6 +2770,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2381,6 +2783,8 @@
 
             
 
+            
+
              structure that contains the negated value.</para
           >
         </returns>
@@ -2389,8 +2793,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2420,6 +2828,8 @@
 
             
 
+            
+
              representation of a number to its double-precision floating point number equivalent.</para
           >
         </summary>
@@ -2431,11 +2841,15 @@
 
             
 
+            
+
              that contains the value represented by the String.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2470,6 +2884,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </summary>
@@ -2482,8 +2898,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2494,8 +2914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDouble" />
+
+          
 
           
 
@@ -2558,8 +2982,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2593,8 +3021,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2622,8 +3054,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2638,13 +3074,19 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
+            
+
              if the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2653,13 +3095,19 @@
 
             
 
+            
+
              is non-zero, <see
              cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
+            
+
              if the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2668,13 +3116,19 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
+            
+
              structure is <see
              cref="F:System.Data.SqlTypes.SqlDouble.Null" />
+
+            
 
             
 
@@ -2704,8 +3158,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2717,6 +3175,8 @@
           <para
             >A SqlByte structure whose Value equals the Value of this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2749,8 +3209,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2784,8 +3248,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2800,8 +3268,12 @@
 
             
 
+            
+
              structure whose Value equals the integer part of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2831,8 +3303,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -2847,8 +3323,12 @@
 
             
 
+            
+
              structure whose Value equals the integer part of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2878,8 +3358,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2894,8 +3378,12 @@
 
             
 
+            
+
              structure whose Value equals the integer part of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2925,8 +3413,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -2941,8 +3433,12 @@
 
             
 
+            
+
              is equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2975,8 +3471,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2991,13 +3491,19 @@
 
             
 
+            
+
              is equal to the <see
              cref="P:System.Data.SqlTypes.SqlDouble.Value" />
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3030,8 +3536,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3046,8 +3556,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3077,6 +3591,8 @@
 
             
 
+            
+
              structure to a string.</para
           >
         </summary>
@@ -3088,8 +3604,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3116,6 +3636,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3147,6 +3669,8 @@
 
             
 
+            
+
              structure.</para
           >
         </remarks>
@@ -3158,8 +3682,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 

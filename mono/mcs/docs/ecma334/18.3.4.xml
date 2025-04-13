@@ -6,6 +6,8 @@
 
     
 
+    
+
     , several kinds of variables are automatically initialized to their default value when they are created. For variables of class types and other reference types, this default value is null. However, since structs are value types that cannot be null, the default value of a struct is the value produced by setting all value type fields to their default value and all reference type fields to null. </paragraph
   >
   <paragraph>
@@ -19,12 +21,16 @@ Point[] a = new Point[100];
 
       
 
+      
+
       initializes each Point in the array to the value produced by setting the x and y fields to zero. end example]</example
     >
   </paragraph>
   <paragraph
     >The default value of a struct corresponds to the value returned by the default constructor of the struct (<hyperlink
     >11.1.1</hyperlink>
+
+    
 
     
 
@@ -48,6 +54,8 @@ struct KeyValuePair
 }  
 ]]>
       </code_example>
+
+      
 
       
 

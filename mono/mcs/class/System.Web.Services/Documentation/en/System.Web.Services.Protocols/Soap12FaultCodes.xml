@@ -19,8 +19,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.Services.Protocols.Soap12FaultCodes.SenderFaultCode" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.Services.Protocols.Soap12FaultCodes.MustUnderstandFaultCode" />
+
+        
 
         
 
@@ -39,8 +47,12 @@
 
         
 
+        
+
          fields. The Subcode element allows the sender of the SOAP fault to provide an application-specific error code. ASP.NET defines two such codes that are represented by the <see
          cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcProcedureNotPresentFaultCode" />
+
+        
 
         
 
@@ -49,13 +61,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingMissingIDFaultCode" />
 
         
 
+        
+
         , and <see
          cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingUntypedValueFaultCode" />
+
+        
 
         
 
@@ -67,13 +85,19 @@
 
         
 
+        
+
          property, which represents the Code element, when a new instance of the <see
          cref="T:System.Web.Services.Protocols.SoapException" />
 
         
 
+        
+
          or <see
          cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+
+        
 
         
 
@@ -82,8 +106,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+
+        
 
         
 
@@ -115,13 +143,19 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.DataEncodingUnknownFaultCode" />
+
+            
 
             
 
@@ -177,13 +211,19 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingUntypedValueFaultCode" />
+
+            
 
             
 
@@ -195,8 +235,12 @@
 
             
 
+            
+
              class has a <see
              cref="P:System.Web.Services.Protocols.SoapException.Subcode" />
+
+            
 
             
 
@@ -205,8 +249,12 @@
 
             
 
+            
+
              that represents the SOAP fault subcode. The <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+
+            
 
             
 
@@ -215,8 +263,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingUntypedValueFaultCode" />
+
+            
 
             
 
@@ -225,8 +277,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.SenderFaultCode" />
+
+            
 
             
 
@@ -261,8 +317,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+            
 
             
 
@@ -271,13 +331,19 @@
 
             
 
+            
+
             . If the SOAP request resided within a SOAP 1.1 request, the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Services.Protocols.SoapException.MustUnderstandFaultCode" />
+
+            
 
             
 
@@ -289,13 +355,19 @@
 
             
 
+            
+
             . The two fields map to different qualified names, but you can check whether the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property is either one of the fault codes by calling the <see
              cref="M:System.Web.Services.Protocols.SoapException.IsMustUnderstandFaultCode(System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -330,13 +402,19 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.ReceiverFaultCode" />
+
+            
 
             
 
@@ -348,13 +426,19 @@
 
             
 
+            
+
              field, but the Server fault code is used when the SOAP request is sent using SOAP 1.1. To check whether the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property is either the Receiver or Server SOAP fault codes, call the <see
              cref="M:System.Web.Services.Protocols.SoapException.IsServerFaultCode(System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -389,13 +473,19 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcBadArgumentsFaultCode" />
+
+            
 
             
 
@@ -407,8 +497,12 @@
 
             
 
+            
+
              class has a <see
              cref="P:System.Web.Services.Protocols.SoapException.Subcode" />
+
+            
 
             
 
@@ -417,8 +511,12 @@
 
             
 
+            
+
              that represents the SOAP fault subcode. The <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+
+            
 
             
 
@@ -427,8 +525,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcBadArgumentsFaultCode" />
+
+            
 
             
 
@@ -437,8 +539,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.SenderFaultCode" />
+
+            
 
             
 
@@ -473,13 +579,19 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcProcedureNotPresentFaultCode" />
+
+            
 
             
 
@@ -491,8 +603,12 @@
 
             
 
+            
+
              class has a <see
              cref="P:System.Web.Services.Protocols.SoapException.Subcode" />
+
+            
 
             
 
@@ -501,8 +617,12 @@
 
             
 
+            
+
              that represents the SOAP fault subcode. The <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+
+            
 
             
 
@@ -511,8 +631,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcProcedureNotPresentFaultCode" />
+
+            
 
             
 
@@ -521,8 +645,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.SenderFaultCode" />
+
+            
 
             
 
@@ -557,13 +685,19 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.SenderFaultCode" />
+
+            
 
             
 
@@ -575,13 +709,19 @@
 
             
 
+            
+
              field, but the Client fault code is used when the SOAP request is sent using SOAP 1.1. To check whether the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property is either the Sender or Client SOAP fault codes, call the <see
              cref="M:System.Web.Services.Protocols.SoapException.IsClientFaultCode(System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -616,8 +756,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+            
 
             
 
@@ -626,8 +770,12 @@
 
             
 
+            
+
              when an XML Web service is configured to only accept SOAP 1.2 requests and it receives a SOAP 1.1 message. Likewise, if an XML Web service is configured to accept only SOAP 1.1 messages and it receives a SOAP 1.2 message, a <see
              cref="T:System.Web.Services.Protocols.SoapException" />
+
+            
 
             
 
@@ -636,8 +784,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.Services.Protocols.SoapException.VersionMismatchFaultCode" />
+
+            
 
             
 
@@ -650,6 +802,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -658,13 +812,19 @@
 
             
 
+            
+
             . The two fields map to different qualified names, but you can check whether the <see
              cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
             
 
+            
+
              property is either one of the fault codes by calling the <see
              cref="M:System.Web.Services.Protocols.SoapException.IsVersionMismatchFaultCode(System.Xml.XmlQualifiedName)" />
+
+            
 
             
 

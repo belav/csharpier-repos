@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelecting(System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs)" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnInserting(System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs)" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          methods to provide access to input parameters that are passed to the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.ObjectDataSource.Delete" />
+
+        
 
         
 
@@ -65,8 +81,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -75,8 +95,12 @@
 
         
 
+        
+
          property. By adding a delegate to handle the <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
+
+        
 
         
 
@@ -85,8 +109,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Inserting" />
+
+        
 
         
 
@@ -95,8 +123,12 @@
 
         
 
+        
+
          event, you can examine and manipulate the values of the parameters and perform any additional preprocessing that is required. Any changes to the parameters in this dictionary will affect which method overload is called for the operation. When the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSource.DataObjectTypeName" />
+
+        
 
         
 
@@ -105,8 +137,12 @@
 
         
 
+        
+
          control is set, you can only modify the data object properties for the items in this dictionary; you cannot add or remove parameters. For more information, see <see
          cref="M:System.Web.UI.WebControls.ObjectDataSource.Delete" />
+
+        
 
         
 
@@ -118,8 +154,12 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying business object at various times in its life cycle. The following table lists the events and associated <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -146,6 +186,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs immediately before the instance of the business object is created.</para>
@@ -165,6 +207,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
+
+              
 
               
 
@@ -190,6 +234,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs before the data is retrieved.</para>
@@ -212,13 +258,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+
+              
 
               
 
@@ -244,6 +296,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs after the data is retrieved.</para>
@@ -266,13 +320,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+              
 
               
 
@@ -295,6 +355,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+              
 
               
 
@@ -323,8 +385,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
+
+        
 
         
 
@@ -333,8 +399,12 @@
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -366,6 +436,8 @@
 
             
 
+            
+
              class using the specified input parameters collection.</para
           >
         </summary>
@@ -374,13 +446,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
           
 
+          
+
            of <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -411,8 +489,12 @@
 
             
 
+            
+
              object to handle the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Selecting" />
+
+            
 
             
 
@@ -421,8 +503,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Inserting" />
+
+            
 
             
 
@@ -431,8 +517,12 @@
 
             
 
+            
+
              events, you can access and manipulate these parameters using the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs.InputParameters" />
+
+            
 
             
 
@@ -441,13 +531,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
+            
+
              control is set, you can modify only the data object properties for the items in this dictionary; you cannot add or remove parameters. For more information, see <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.Delete" />
+
+            
 
             
 
@@ -459,8 +555,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 

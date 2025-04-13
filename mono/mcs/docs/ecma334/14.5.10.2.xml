@@ -6,8 +6,12 @@
 
     
 
+    
+
      is used to create a new instance of an <non_terminal
      where="19.1">array-type</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="14.5.10.2">array-creation-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -44,8 +50,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -54,8 +64,12 @@
 
     
 
+    
+
     , or <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -64,6 +78,8 @@
   <paragraph
     >Except in an unsafe context (<hyperlink
     >25.1</hyperlink>
+
+    
 
     
 
@@ -80,6 +96,8 @@ new int[,] {{0, 1}, {2, 3}, {4, 5}}
 
     
 
+    
+
     exactly corresponds to <code_example
     >
       <![CDATA[
@@ -90,6 +108,8 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
   <paragraph
     >Array initializers are described further in <hyperlink
     >19.6</hyperlink>
+
+    
 
     
 
@@ -104,8 +124,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
          are evaluated in order, from left to right. Following evaluation of each expression, an implicit conversion (<hyperlink
         >13.1</hyperlink>
+
+        
 
         
 
@@ -114,8 +138,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -124,8 +152,12 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -136,6 +168,8 @@ new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
       <list_item
         > All elements of the new array instance are initialized to their default values (<hyperlink
         >12.2</hyperlink>
+
+        
 
         
 
@@ -156,8 +190,12 @@ int[][] a = new int[100][];
 
       
 
+      
+
       creates a single-dimensional array with 100 elements of type int[]. The initial value of each element is null. end example]</example
     >
+
+    
 
     
 
@@ -167,6 +205,8 @@ int[][] a = new int[100][];
 int[][] a = new int[100][5];    // Error  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -185,6 +225,8 @@ for (int i = 0; i < 100; i++) a[i] = new int[5];
 int[,] = new int[100, 5];  
 ]]>
     </code_example>
+
+    
 
     
 

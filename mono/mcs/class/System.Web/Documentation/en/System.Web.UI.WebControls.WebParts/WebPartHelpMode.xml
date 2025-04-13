@@ -18,8 +18,12 @@
 
         
 
+        
+
          property is used to determine how a browser will display Help content for a control. The <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartHelpMode" />
+
+        
 
         
 
@@ -28,13 +32,19 @@
 
         
 
+        
+
          property. The default value for the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpMode" />
 
         
 
+        
+
          property is <see
          cref="F:System.Web.UI.WebControls.WebParts.WebPartHelpMode.Modal" />
+
+        
 
         
 
@@ -46,6 +56,8 @@
       <para
         >Specifies the available types of user interfaces (UIs) for displaying Help content for a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 

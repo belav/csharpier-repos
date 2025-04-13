@@ -32,8 +32,12 @@
 
         
 
+        
+
          either programmatically or by using an application configuration file. You can also attach your custom object to the internal <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+        
 
         
 
@@ -46,11 +50,15 @@
 
         
 
+        
+
          using an application configuration file.</para
       >
       <para
         >Use the <see
          cref="M:System.ServiceModel.Channels.StandardBindingImporter.System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
+
+        
 
         
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StandardBindingImporter" />
+
+            
 
             
 

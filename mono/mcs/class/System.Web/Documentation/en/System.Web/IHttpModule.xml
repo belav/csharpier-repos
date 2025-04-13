@@ -24,6 +24,8 @@
 
         
 
+        
+
          method.
 </para
       >
@@ -50,6 +52,8 @@
 
             
 
+            
+
              method performs any final cleanup work prior to removal of the module from the execution pipeline.</para
           >
         </remarks>
@@ -58,6 +62,8 @@
           <para
             >Disposes of the resources (other than memory) used by the module that implements <see
              cref="T:System.Web.IHttpModule" />
+
+            
 
             
 
@@ -91,6 +97,8 @@
 
             
 
+            
+
              method to register event handling methods with specific events.</para
           >
         </remarks>
@@ -103,8 +111,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpApplication" />
+
+          
 
           
 

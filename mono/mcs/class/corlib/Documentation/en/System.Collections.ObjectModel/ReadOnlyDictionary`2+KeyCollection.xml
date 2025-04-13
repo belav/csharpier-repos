@@ -119,6 +119,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -263,8 +265,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -280,6 +286,8 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the dictionary. The array must have zero-based indexing. </param
         >
         <param name="index">
@@ -287,8 +295,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -322,8 +334,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -362,8 +378,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -402,8 +422,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 

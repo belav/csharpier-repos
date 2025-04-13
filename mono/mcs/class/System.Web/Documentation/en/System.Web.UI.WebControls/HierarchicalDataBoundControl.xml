@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is the base class used for ASP.NET controls that retrieve data from an ASP.NET hierarchical data source control and bind user-interface elements of the control to that data for display. The <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          classes derive from <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
 
         
 
+        
+
          class directly; instead, they use controls that derive from this class. </para
       >
       <para
@@ -61,8 +71,12 @@
 
         
 
+        
+
          interface and classes that derive from the <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -71,8 +85,12 @@
 
         
 
+        
+
          classes. When deriving a class from the <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -81,13 +99,19 @@
 
         
 
+        
+
          method to bind the user-interface elements of your control to data retrieved by the <see
          cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" />
 
         
 
+        
+
          method. In most cases, the <see
          cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" />
+
+        
 
         
 
@@ -99,8 +123,12 @@
 
         
 
+        
+
          method is the equivalent of the <see
          cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+        
 
         
 
@@ -109,13 +137,19 @@
 
         
 
+        
+
          method calls the <see
          cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" />
+
+        
 
         
 
@@ -140,6 +174,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+            
 
             
 
@@ -194,13 +230,19 @@
 
             
 
+            
+
              method retrieves a <see
              cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
             
 
+            
+
              object from the associated data source control by calling the <see
              cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetDataSource" />
+
+            
 
             
 
@@ -215,6 +257,8 @@
 
             
 
+            
+
              object that the data-bound control uses to perform data operations.</para
           >
         </summary>
@@ -226,11 +270,15 @@
 
             
 
+            
+
              object that the data-bound control uses to perform data operations. </para
           >
         </returns>
         <param name="viewPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,8 +309,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetDataSource" />
+
+            
 
             
 
@@ -277,6 +329,8 @@
 
             
 
+            
+
              that the data-bound control is associated with, if any.</para
           >
         </summary>
@@ -288,8 +342,12 @@
 
             
 
+            
+
              instance that represents the data source identified by the <see
              cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -333,6 +391,8 @@
 
             
 
+            
+
              method sets the value to true.</para
           >
         </remarks>
@@ -362,8 +422,12 @@
 
             
 
+            
+
              method is called when the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 
@@ -372,8 +436,12 @@
 
             
 
+            
+
              is changed any time after the page's <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -412,13 +480,19 @@
 
             
 
+            
+
              class handles the <see
              cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" />
 
             
 
+            
+
              event to set the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -433,8 +507,12 @@
 
             
 
+            
+
              instance that the data-bound control works with raises the <see
              cref="E:System.Web.UI.IDataSource.DataSourceChanged" />
+
+            
 
             
 
@@ -446,8 +524,12 @@
 
           
 
+          
+
           The source of the event, the <see
            cref="T:System.Web.UI.IHierarchicalDataSource" />
+
+          
 
           
 
@@ -458,8 +540,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -491,8 +577,12 @@
 
             
 
+            
+
              handles the Load event to set the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -507,6 +597,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -515,8 +607,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -547,8 +643,12 @@
 
             
 
+            
+
              sets the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -557,8 +657,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -574,8 +678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -586,8 +694,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -617,8 +729,12 @@
 
             
 
+            
+
              method when you derive a data-bound control from the <see
              cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+            
 
             
 
@@ -627,13 +743,19 @@
 
             
 
+            
+
              keeps the <see
              cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" />
+
+            
 
             
 
@@ -645,8 +767,12 @@
 
             
 
+            
+
              class provides no specific implementation for this method, the <see
              cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" />
+
+            
 
             
 
@@ -655,8 +781,12 @@
 
             
 
+            
+
              method to bind the values of any user interface controls to the data that is retrieved by the <see
              cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" />
+
+            
 
             
 
@@ -683,6 +813,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" />
+
+            
 
             
 
@@ -720,8 +852,12 @@
 
             
 
+            
+
              method is called only in the <see
              cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
+
+            
 
             
 
@@ -730,8 +866,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+            
 
             
 
@@ -740,13 +880,19 @@
 
             
 
+            
+
              property to ensure that it is an instance of the <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.IHierarchicalDataSource" />
+
+            
 
             
 
@@ -762,8 +908,12 @@
 
           
 
+          
+
           An object set to the <see
            cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+          
 
           
 

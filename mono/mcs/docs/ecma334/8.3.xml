@@ -11,6 +11,8 @@ int b = 1;
 
     
 
+    
+
     but it is also possible for a local variable declaration to include multiple declarators. The declarations of a and b can be rewritten as: <code_example
     >
       <![CDATA[
@@ -36,8 +38,12 @@ class Test
 
     
 
+    
+
     results in a compile-time error because it attempts to use the variable a before it is assigned a value. The rules governing definite assignment are defined in <hyperlink
     >12.3</hyperlink>
+
+    
 
     
 
@@ -46,6 +52,8 @@ class Test
   <paragraph
     >A field (<hyperlink
     >17.4</hyperlink>
+
+    
 
     
 
@@ -62,6 +70,8 @@ class Employee
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -90,6 +100,8 @@ class Test {
 
     
 
+    
+
     shows a method F that has a value parameter named p. The example produces the output: <code_example
     >
       <![CDATA[
@@ -98,6 +110,8 @@ p = 1
 post: a = 1  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -125,6 +139,8 @@ class Test {
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -161,6 +177,8 @@ class Test {
 
     
 
+    
+
     shows a Divide method that includes two output parameters-one for the result of the division and another for the remainder. </paragraph
   >
   <paragraph>For value, reference, and output parameters, there is a one-to-one correspondence between caller-provided arguments and the parameters used to represent them. A parameter array enables a many-to-one relationship: many arguments can be represented by a single parameter array. In other words, parameter arrays enable variable length argument lists. </paragraph>
@@ -189,8 +207,12 @@ class Test
 
     
 
+    
+
     shows a method F that takes a variable number of <keyword
     >int</keyword>
+
+    
 
     
 
@@ -223,6 +245,8 @@ int a = 1, b = 2;
 Console.WriteLine("a = {0}, b = {1}", a, b);  
 ]]>
     </code_example>
+
+    
 
     
 

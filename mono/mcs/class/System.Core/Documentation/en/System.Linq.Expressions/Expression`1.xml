@@ -33,6 +33,8 @@
 
         
 
+        
+
         , the compiler emits instructions to build an expression tree.</para
       >
       <block subset="none" type="note">
@@ -42,13 +44,19 @@
 
           
 
+          
+
            (<unmanagedCodeEntityReference
           >Expression(Of D)</unmanagedCodeEntityReference>
 
           
 
+          
+
            in Visual Basic) exists if a conversion from the lambda expression to a delegate of type <unmanagedCodeEntityReference
           >D</unmanagedCodeEntityReference>
+
+          
 
           
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          class have one or more parameters of type <see
          cref="T:System.Linq.Expressions.Expression`1" />
+
+        
 
         
 
@@ -76,13 +88,19 @@
 
         
 
+        
+
          of an <see
          cref="T:System.Linq.Expressions.Expression`1" />
 
         
 
+        
+
          is <see
          cref="F:System.Linq.Expressions.ExpressionType.Lambda" />
+
+        
 
         
 
@@ -94,13 +112,19 @@
 
         
 
+        
+
          or <see
          cref="M:System.Linq.Expressions.Expression.Lambda``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" />
 
         
 
+        
+
          method to create an <see
          cref="T:System.Linq.Expressions.Expression`1" />
+
+        
 
         
 
@@ -163,13 +187,19 @@
 
             
 
+            
+
              method produces a delegate of type <paramref
              name="TDelegate" />
 
             
 
+            
+
              at runtime. When that delegate is executed, it has the behavior described by the semantics of the <see
              cref="T:System.Linq.Expressions.Expression`1" />
+
+            
 
             
 
@@ -181,13 +211,19 @@
 
             
 
+            
+
              method can be used to obtain the value of any expression tree. First, create a lambda expression that has the expression as its body by using the <see
              cref="M:System.Linq.Expressions.Expression.Lambda(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" />
 
             
 
+            
+
              method. Then call <see
              cref="M:System.Linq.Expressions.Expression`1.Compile" />
+
+            
 
             
 
@@ -207,8 +243,12 @@
 
             
 
+            
+
              that represents the compiled lambda expression described by the <see
              cref="T:System.Linq.Expressions.Expression`1" />
+
+            
 
             
 
@@ -254,6 +294,8 @@
 
           
 
+          
+
           Debugging information generator used by the compiler to mark sequence points and annotate local variables.</param
         >
       </Docs>
@@ -296,8 +338,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LambdaExpression.Body" />
+
+          
 
           
 
@@ -308,8 +354,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LambdaExpression.Parameters" />
+
+          
 
           
 

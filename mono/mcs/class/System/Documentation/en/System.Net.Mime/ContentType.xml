@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used to describe the data contained in an e-mail message in such a way that software that displays e-mail can present the content in an appropriate manner. <see
          cref="T:System.Net.Mime.ContentType" />
+
+        
 
         
 
@@ -34,11 +38,15 @@
 
         
 
+        
+
          class to specify the type of content in the attachment.</para
       >
       <para
         >The syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information about MIME media types and their parameters. These RFCs are available at <see
          cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+        
 
         
 
@@ -73,6 +81,8 @@
 
             
 
+            
+
              property to "application/octet-stream".</para
           >
         </remarks>
@@ -81,6 +91,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -113,8 +125,12 @@
 
             
 
+            
+
              string is described in RFC 2045 Section 5.1 available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -129,6 +145,8 @@
 
             
 
+            
+
              class using the specified string. </para
           >
         </summary>
@@ -137,8 +155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -168,6 +190,8 @@
 
             
 
+            
+
              parameter is "-----boundary---0".</para
           >
           <para>content-type: multipart/mixed; boundary=-----boundary---0</para>
@@ -177,11 +201,15 @@
 
             
 
+            
+
              to remove the boundary information from the header.</para
           >
           <para
             >The syntax of the Content-Type header is described in RFC 2045 Section 5.1. An in-depth discussion of the boundary parameter is contained in RFC 2046 Section 5.1.1. These RFCs are available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -216,6 +244,8 @@
 
             
 
+            
+
              property is "us-ascii".</para
           >
           <para>content-type: application/x-myType; charset=us-ascii</para>
@@ -225,11 +255,15 @@
 
             
 
+            
+
              to remove the charset information from the header.</para
           >
           <para
             >A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1. An in-depth discussion of the charset parameter is contained in RFC 2046 Section 4.1.2. These RFCs are available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -271,6 +305,8 @@
 
             
 
+            
+
              object is equal to the content-type header of this object.</para
           >
         </summary>
@@ -306,6 +342,8 @@
 
             
 
+            
+
              object</para
           >
         </summary>
@@ -337,6 +375,8 @@
 
             
 
+            
+
              property is "application/x-myType".</para
           >
           <para>content-type: application/x-myType; name=data.xyz</para>
@@ -346,11 +386,15 @@
 
             
 
+            
+
              to remove the name information from the header.</para
           >
           <para
             >The syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information on MIME media types. These RFCs are available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -385,12 +429,16 @@
 
             
 
+            
+
              property is "data.xyz".</para
           >
           <para>content-type: application/x-myType; name=data.xyz</para>
           <para
             >A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1, available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -402,8 +450,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -412,8 +464,12 @@
 
             
 
+            
+
             , you can use <see
              cref="P:System.Net.Mime.ContentType.Name" />
+
+            
 
             
 
@@ -454,13 +510,19 @@
 
             
 
+            
+
              object or you can add parameters to the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Net.Mime.ContentType.Parameters" />
+
+            
 
             
 
@@ -470,6 +532,8 @@
           <para
             >A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information on MIME media types and their associated parameters. These RFCs are available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -507,8 +571,12 @@
 
             
 
+            
+
              method contains the string used to create this <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -517,8 +585,12 @@
 
             
 
+            
+
              was created, the value of <see
              cref="M:System.Net.Mime.ContentType.ToString" />
+
+            
 
             
 
@@ -527,6 +599,8 @@
           <para
             >The syntax of the Content-Type header is described in RFC 2045 Section 5.1, available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -541,6 +615,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -552,8 +628,12 @@
 
             
 
+            
+
              that contains the current settings for this <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 

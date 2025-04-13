@@ -21,8 +21,12 @@
 
         
 
+        
+
          values are used when retrieving the value found in a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          or the <see
          cref="M:System.Data.DataRow.GetChildRows(System.String)" />
 
         
 
+        
+
          of the <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          informs you what version of a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -64,8 +78,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataRow.BeginEdit" />
+
+            
 
             
 
@@ -79,8 +97,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataRow.CancelEdit" />
+
+            
 
             
 
@@ -94,8 +116,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataRow.EndEdit" />
+
+            
 
             
 
@@ -109,8 +135,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 
@@ -124,8 +154,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -139,8 +173,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataRow.RejectChanges" />
+
+            
 
             
 
@@ -154,6 +192,8 @@
       <para
         >Describes the version of a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -198,8 +238,12 @@
 
             
 
+            
+
             . For a DataRowState value of Added, Modified or Deleted, the default version is Current. For a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 

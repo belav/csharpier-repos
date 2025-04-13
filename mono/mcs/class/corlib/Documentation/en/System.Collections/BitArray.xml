@@ -42,13 +42,19 @@
 
         
 
+        
+
          is controlled by the client; indexing past the end of the <see
          cref="T:System.Collections.BitArray" />
 
         
 
+        
+
          throws an <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -87,13 +93,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in <paramref
              name="values" />
+
+            
 
             
 
@@ -108,11 +120,15 @@
 
             
 
+            
+
              class that contains bit values copied from the specified array of Booleans.</para
           >
         </summary>
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,13 +161,19 @@
 
             
 
+            
+
              [0] &amp; 1" represents bit 0, " <paramref
              name="bytes" />
 
             
 
+            
+
              [0] &amp; 2" represents bit 1, " <paramref
              name="bytes" />
+
+            
 
             
 
@@ -163,13 +185,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in <paramref
              name="bytes" />
+
+            
 
             
 
@@ -184,11 +212,15 @@
 
             
 
+            
+
              class that contains bit values copied from the specified array of bytes.</para
           >
         </summary>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,13 +253,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in <paramref
              name="bits" />
+
+            
 
             
 
@@ -242,8 +280,12 @@
 
             
 
+            
+
              class that contains bit values copied from the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -255,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.BitArray" />
+
+          
 
           
 
@@ -289,13 +335,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="length" />
+
+            
 
             
 
@@ -310,6 +362,8 @@
 
             
 
+            
+
              class that can hold the specified number of bit values, which are initially set to false.</para
           >
         </summary>
@@ -318,8 +372,12 @@
 
           
 
+          
+
           The number of bit values in the new <see
            cref="T:System.Collections.BitArray" />
+
+          
 
           
 
@@ -352,8 +410,12 @@
 
             
 
+            
+
              array element represents bits 0 through 31, the second number in the array represents bits 32 through 63, and so on. The Least Significant Bit of each integer represents the lowest index value: " <paramref
              name="values" />
+
+            
 
             
 
@@ -362,8 +424,12 @@
 
             
 
+            
+
              [0] &amp; 2" represents bit 1, " <paramref
              name="values" />
+
+            
 
             
 
@@ -375,13 +441,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in <paramref
              name="values" />
+
+            
 
             
 
@@ -396,11 +468,15 @@
 
             
 
+            
+
              class that contains bit values copied from the specified array of 32-bit integers.</para
           >
         </summary>
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,13 +510,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="length" />
+
+            
 
             
 
@@ -455,6 +537,8 @@
 
             
 
+            
+
              class that can hold the specified number of bit values, which are initially set to the specified value.</para
           >
         </summary>
@@ -463,8 +547,12 @@
 
           
 
+          
+
           The number of bit values in the new <see
            cref="T:System.Collections.BitArray" />
+
+          
 
           
 
@@ -472,6 +560,8 @@
         >
         <param name="defaultValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,13 +600,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -531,8 +627,12 @@
 
             
 
+            
+
              against the corresponding elements in the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -547,8 +647,12 @@
 
             
 
+            
+
              against the corresponding elements in the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -560,8 +664,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.BitArray" />
+
+          
 
           
 
@@ -596,13 +704,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -617,6 +731,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -625,6 +741,8 @@
           <para
             >A shallow copy of the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -662,6 +780,8 @@
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -670,13 +790,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -691,8 +817,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -704,8 +834,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -714,8 +848,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -726,8 +864,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -755,6 +897,8 @@
 
             
 
+            
+
              that specifies the number of elements contained in the current
    instance.</para
           >
@@ -766,8 +910,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -776,8 +924,12 @@
 
             
 
+            
+
              can be set to a specific value, but <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -790,6 +942,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -829,6 +983,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -840,11 +996,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -882,8 +1042,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -892,8 +1056,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -904,8 +1072,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -914,13 +1086,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -932,8 +1110,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -942,8 +1124,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -952,8 +1138,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -962,8 +1152,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -981,6 +1175,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -992,8 +1188,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1023,6 +1223,8 @@ The value of this property is always <c
 
             
 
+            
+
             .
 </para
           >
@@ -1034,13 +1236,19 @@ The value of this property is always <c
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.BitArray.IsReadOnly" />
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1055,6 +1263,8 @@ The value of this property is always <c
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1084,6 +1294,8 @@ The value of this property is always <c
 
             
 
+            
+
             .
 </para
           >
@@ -1095,13 +1307,19 @@ The value of this property is always <c
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.BitArray.IsSynchronized" />
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1114,6 +1332,8 @@ The value of this property is always <c
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1144,8 +1364,12 @@ The value of this property is always <c
 
           
 
+          
+
            that specifies the zero-based index of the element in the current instance to get or set. This value must be greater than or equal to 0, and less than the <see
            cref="P:System.Collections.BitArray.Count" />
+
+          
 
           
 
@@ -1181,6 +1405,8 @@ The value of this property is always <c
 
             
 
+            
+
              that specifies the number of elements contained in the current
    instance.</para
           >
@@ -1192,8 +1418,12 @@ The value of this property is always <c
 
             
 
+            
+
              and <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1202,8 +1432,12 @@ The value of this property is always <c
 
             
 
+            
+
              can be set to a specific value, but <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1215,8 +1449,12 @@ The value of this property is always <c
 
             
 
+            
+
              is set to a value that is less than <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1225,8 +1463,12 @@ The value of this property is always <c
 
             
 
+            
+
              is truncated and the elements after the index <paramref
              name="value" />
+
+            
 
             
 
@@ -1238,8 +1480,12 @@ The value of this property is always <c
 
             
 
+            
+
              is set to a value that is greater than <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1251,6 +1497,8 @@ The value of this property is always <c
 
             
 
+            
+
             ) operation.</para
           >
         </remarks>
@@ -1259,6 +1507,8 @@ The value of this property is always <c
           <para
             >Gets or sets the number of elements in the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1292,13 +1542,19 @@ The value of this property is always <c
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1310,6 +1566,8 @@ The value of this property is always <c
           <para
             >Inverts all the bit values in the current <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1353,13 +1611,19 @@ The value of this property is always <c
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1374,8 +1638,12 @@ The value of this property is always <c
 
             
 
+            
+
              against the corresponding elements in the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1390,8 +1658,12 @@ The value of this property is always <c
 
             
 
+            
+
              against the corresponding elements in the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1403,8 +1675,12 @@ The value of this property is always <c
 
           
 
+          
+
           The <see
            cref="T:System.Collections.BitArray" />
+
+          
 
           
 
@@ -1444,6 +1720,8 @@ The value of this property is always <c
 
             
 
+            
+
              to the specified value.</para
           >
         </summary>
@@ -1452,10 +1730,14 @@ The value of this property is always <c
 
           
 
+          
+
           The zero-based index of the bit to set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1490,13 +1772,19 @@ The value of this property is always <c
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1511,11 +1799,15 @@ The value of this property is always <c
 
             
 
+            
+
              to the specified value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1543,6 +1835,8 @@ The value of this property is always <c
 
             
 
+            
+
              that can be used to synchronize access to the
    current instance.</para
           >
@@ -1555,8 +1849,12 @@ The value of this property is always <c
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.BitArray.SyncRoot" />
+
+            
 
             
 
@@ -1565,8 +1863,12 @@ The value of this property is always <c
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1575,8 +1877,12 @@ The value of this property is always <c
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1589,6 +1895,8 @@ The value of this property is always <c
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1628,13 +1936,19 @@ The value of this property is always <c
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.BitArray.Count" />
+
+            
 
             
 
@@ -1649,8 +1963,12 @@ The value of this property is always <c
 
             
 
+            
+
              against the corresponding elements in the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1665,8 +1983,12 @@ The value of this property is always <c
 
             
 
+            
+
              against the corresponding elements in the specified <see
              cref="T:System.Collections.BitArray" />
+
+            
 
             
 
@@ -1678,8 +2000,12 @@ The value of this property is always <c
 
           
 
+          
+
           The <see
            cref="T:System.Collections.BitArray" />
+
+          
 
           
 

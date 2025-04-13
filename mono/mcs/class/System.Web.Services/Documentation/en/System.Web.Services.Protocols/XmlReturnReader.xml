@@ -24,13 +24,19 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
 
         
 
+        
+
          namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard. The <see
          cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          directly. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -52,8 +62,12 @@
 
         
 
+        
+
          property to <see
          cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+
+        
 
         
 
@@ -78,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+
+            
 
             
 
@@ -111,8 +127,12 @@
 
             
 
+            
+
              class, the initializer is an <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -124,13 +144,19 @@
 
             
 
+            
+
              method is invoked during service initialization. Later, at the time a response is processed, the initializer object is passed to the <see
              cref="M:System.Web.Services.Protocols.XmlReturnReader.Initialize(System.Object)" />
 
             
 
+            
+
              method of another <see
              cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+
+            
 
             
 
@@ -150,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -184,8 +214,12 @@
 
             
 
+            
+
              class, the initializer is an <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -197,13 +231,19 @@
 
             
 
+            
+
              method is invoked during service initialization. Later, at the time a response is processed, the initializer object for each Web method is passed to the <see
              cref="M:System.Web.Services.Protocols.XmlReturnReader.Initialize(System.Object)" />
 
             
 
+            
+
              method of another <see
              cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+
+            
 
             
 
@@ -223,8 +263,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -254,13 +298,19 @@
 
             
 
+            
+
              method supplies the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
+            
+
              object used by the <see
              cref="M:System.Web.Services.Protocols.XmlReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+
+            
 
             
 
@@ -272,8 +322,12 @@
 
             
 
+            
+
              method is invoked at the time a request is processed. The input parameter, <paramref
              name="o" />
+
+            
 
             
 
@@ -282,8 +336,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.Services.Protocols.XmlReturnReader.GetInitializers(System.Web.Services.Protocols.LogicalMethodInfo[])" />
+
+            
 
             
 
@@ -299,8 +357,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -334,8 +396,12 @@
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.Services.Protocols.XmlReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+
+            
 
             
 
@@ -344,8 +410,12 @@
 
             
 
+            
+
              object passed as an argument to the <see
              cref="M:System.Web.Services.Protocols.XmlReturnReader.Initialize(System.Object)" />
+
+            
 
             
 
@@ -365,8 +435,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 
@@ -377,13 +451,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            whose content is the body of the HTTP response represented by the <paramref
            name="response" />
+
+          
 
           
 

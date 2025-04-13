@@ -31,6 +31,8 @@
 
         
 
+        
+
          object to and from a string.</para
       >
       <para
@@ -39,10 +41,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
           
 
+          
+
            class. Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -65,8 +75,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -79,6 +93,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -108,6 +124,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.CultureInfoConverter" />
+
+            
 
             
 
@@ -147,11 +165,15 @@
 
             
 
+            
+
              object to and from a string.</para
           >
           <para
             >The <paramref
              name="context" />
+
+            
 
             
 
@@ -163,6 +185,8 @@
           <para
             >Gets a value indicating whether this converter can convert an object in the given source type to a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -178,8 +202,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -190,8 +218,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -230,6 +262,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -246,8 +280,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -258,8 +296,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -299,11 +341,15 @@
 
             
 
+            
+
              object to and from a string.</para
           >
           <para
             >The <paramref
              name="context" />
+
+            
 
             
 
@@ -318,6 +364,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -329,6 +377,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -337,8 +387,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -349,8 +403,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -361,8 +419,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -403,11 +465,15 @@
 
             
 
+            
+
              object to and from a string.</para
           >
           <para
             >The <paramref
              name="context" />
+
+            
 
             
 
@@ -426,8 +492,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -439,8 +509,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -451,8 +525,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -463,8 +541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -475,8 +557,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -518,8 +604,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -557,6 +647,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -565,6 +657,8 @@
           <para
             >Gets a collection of standard values for a <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -579,6 +673,8 @@
 
             
 
+            
+
              containing a standard set of valid values, or null if the data type does not support a standard set of values.</para
           >
         </returns>
@@ -587,8 +683,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -626,11 +726,15 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para
             >When the list is not exhaustive, then there are other valid values besides the list of standard values that <see
              cref="M:System.ComponentModel.CultureInfoConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -645,6 +749,8 @@
 
             
 
+            
+
              is an exhaustive list.</para
           >
         </summary>
@@ -656,8 +762,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.ComponentModel.CultureInfoConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -669,8 +779,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -708,6 +822,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -723,6 +839,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports. This method never returns false.</para
           >
         </returns>
@@ -731,8 +849,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

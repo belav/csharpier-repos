@@ -25,6 +25,8 @@
 
         
 
+        
+
          class is used to create an object that represents the authentication ticket that is used by forms authentication to identify an authenticated user. The properties and values of a forms-authentication ticket are converted to and from an encrypted string that is stored in a cookie or in the URL.</para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          class provides an <see
          cref="M:System.Web.Security.FormsAuthentication.Encrypt(System.Web.Security.FormsAuthenticationTicket)" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Web.Security.FormsAuthentication" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          method to create a <see
          cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          for the current authenticated user can be accessed using the <see
          cref="P:System.Web.Security.FormsIdentity.Ticket" />
+
+        
 
         
 
@@ -76,8 +94,12 @@
 
         
 
+        
+
          class. You can access the current <see
          cref="T:System.Web.Security.FormsIdentity" />
+
+        
 
         
 
@@ -86,13 +108,19 @@
 
         
 
+        
+
          property of the current <see
          cref="P:System.Web.HttpContext.User" />
 
         
 
+        
+
          as type <see
          cref="T:System.Web.Security.FormsIdentity" />
+
+        
 
         
 
@@ -126,8 +154,12 @@
 
             
 
+            
+
              object created by this constructor will have a <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
+
+            
 
             
 
@@ -136,8 +168,12 @@
 
             
 
+            
+
              property, a <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Version" />
+
+            
 
             
 
@@ -146,8 +182,12 @@
 
             
 
+            
+
              value of the current local date and time, a <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+
+            
 
             
 
@@ -156,8 +196,12 @@
 
             
 
+            
+
              value that is set to the current local date and time plus the value of the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -172,11 +216,15 @@
 
             
 
+            
+
              class using a cookie name and expiration information.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,10 +235,14 @@
 
           
 
+          
+
           true if the ticket will be stored in a persistent cookie (saved across browser sessions); otherwise, false. If the ticket is stored in the URL, this value is ignored.</param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,13 +278,19 @@
 
             
 
+            
+
              object created by this constructor will have a <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.CookiePath" />
 
             
 
+            
+
              value set to the value of the <see
              cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
+
+            
 
             
 
@@ -242,6 +300,8 @@
             <para
               >The <paramref
                name="userData" />
+
+              
 
               
 
@@ -257,11 +317,15 @@
 
             
 
+            
+
              class with cookie name, version, expiration date, issue date, persistence, and user-specific data. The cookie path is set to the default value established in the application's configuration file.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,10 +336,14 @@
 
           
 
+          
+
           The user name associated with the ticket.</param
         >
         <param name="issueDate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,6 +354,8 @@
 
           
 
+          
+
           The local date and time at which the ticket expires.</param
         >
         <param name="isPersistent">
@@ -293,10 +363,14 @@
 
           
 
+          
+
           true if the ticket will be stored in a persistent cookie (saved across browser sessions); otherwise, false. If the ticket is stored in the URL, this value is ignored.</param
         >
         <param name="userData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,6 +408,8 @@
 
               
 
+              
+
                parameter cannot be null. </para
             >
           </block>
@@ -346,11 +422,15 @@
 
             
 
+            
+
              class with cookie name, version, directory path, issue date, expiration date, persistence, and user-defined data.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -361,10 +441,14 @@
 
           
 
+          
+
           The user name associated with the ticket. </param
         >
         <param name="issueDate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,10 +459,14 @@
 
           
 
+          
+
           The local date and time at which the ticket expires. </param
         >
         <param name="isPersistent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -389,10 +477,14 @@
 
           
 
+          
+
           The user-specific data to be stored with the ticket. </param
         >
         <param name="cookiePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +512,12 @@
 
             
 
+            
+
              is created using a constructor that does not supply a <paramref
              name="cookiePath" />
+
+            
 
             
 
@@ -430,13 +526,19 @@
 
             
 
+            
+
              property returns the value of the <see
              cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
 
             
 
+            
+
              property; otherwise, the version property returns the value supplied to the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -469,8 +571,12 @@
 
             
 
+            
+
              is created using the <see
              cref="M:System.Web.Security.FormsAuthenticationTicket.#ctor(System.String,System.Boolean,System.Int32)" />
+
+            
 
             
 
@@ -479,8 +585,12 @@
 
             
 
+            
+
              property returns a value based on the current local date and time plus the value of the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -492,8 +602,12 @@
 
             
 
+            
+
              was created using a constructor that takes an <paramref
              name="expiration" />
+
+            
 
             
 
@@ -502,8 +616,12 @@
 
             
 
+            
+
              property returns the value supplied to the <paramref
              name="expiration" />
+
+            
 
             
 
@@ -536,13 +654,19 @@
 
             
 
+            
+
              property returns true if the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
+            
+
              date and time is less than the current local date and time; otherwise, the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Expired" />
+
+            
 
             
 
@@ -594,8 +718,12 @@
 
             
 
+            
+
              property represents the local date and time when the forms-authentication ticket was issued. The <see
              cref="M:System.Web.Security.FormsAuthentication.RenewTicketIfOld(System.Web.Security.FormsAuthenticationTicket)" />
+
+            
 
             
 
@@ -604,8 +732,12 @@
 
             
 
+            
+
              property value to determine whether the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+
+            
 
             
 
@@ -614,13 +746,19 @@
 
             
 
+            
+
              property value to determine the new <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
 
             
 
+            
+
              date and time. When a ticket is renewed, the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+
+            
 
             
 
@@ -672,8 +810,12 @@
 
             
 
+            
+
              is created using a constructor that does not supply a <paramref
              name="userData" />
+
+            
 
             
 
@@ -682,8 +824,12 @@
 
             
 
+            
+
              property returns an empty string (""); otherwise, the version property returns the value supplied to the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -695,13 +841,19 @@
 
             
 
+            
+
              property to store additional user information with the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
             
 
+            
+
              that is not maintained by the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -714,8 +866,12 @@
 
               
 
+              
+
                property. You must ensure that the size of the <see
                cref="P:System.Web.Security.FormsAuthenticationTicket.UserData" />
+
+              
 
               
 
@@ -749,8 +905,12 @@
 
             
 
+            
+
              is created using a constructor that does not supply a <paramref
              name="version" />
+
+            
 
             
 
@@ -759,8 +919,12 @@
 
             
 
+            
+
              property returns 2; otherwise, the version property returns the value supplied to the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 

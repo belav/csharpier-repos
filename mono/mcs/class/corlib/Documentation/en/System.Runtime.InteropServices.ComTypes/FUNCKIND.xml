@@ -26,6 +26,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -144,6 +146,8 @@
           <para
             >The function is accessed in the same way as <see
              cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_PUREVIRTUAL" />
+
+            
 
             
 

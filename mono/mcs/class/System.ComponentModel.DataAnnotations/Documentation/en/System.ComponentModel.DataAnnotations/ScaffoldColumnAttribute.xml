@@ -30,6 +30,8 @@
 
         
 
+        
+
          property to enable scaffolding in a Dynamic Data Web Site. </para
       >
       <para>Scaffolding enhances ASP.NET page framework by dynamically displaying pages based on the data model with no physical pages required.</para>
@@ -81,13 +83,19 @@
 
             
 
+            
+
              to true for the entire data model to expose all data columns in the database for CRUD (Create, Read, Update and Delete) operations by setting <paramref
              name="scaffold" />
 
             
 
+            
+
              to true in the Global.asax file or expose individual data columns in a data table to CRUD operations by setting <paramref
              name="scaffold" />
+
+            
 
             
 
@@ -102,8 +110,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" />
+
+            
 
             
 
@@ -112,6 +124,8 @@
         </summary>
         <param name="scaffold">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

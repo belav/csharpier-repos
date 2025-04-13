@@ -29,6 +29,8 @@
 
         
 
+        
+
          generates a run-time communication stack by default, which uses transport security, TCP for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for communicating over an Intranet.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          is faster than the configuration provided by the <see
          cref="T:System.ServiceModel.WSHttpBinding" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          parameter in the constructor. The use of WS-ReliableMessaging is configurable using the optional <paramref
          name="reliableSessionEnabled" />
+
+        
 
         
 
@@ -57,13 +67,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
+        
+
          are configured to turn things on by default, whereas the <see
          cref="T:System.ServiceModel.NetTcpBinding" />
+
+        
 
         
 
@@ -73,6 +89,8 @@
         <para
           >The <see
            cref="T:System.ServiceModel.NetTcpBinding" />
+
+          
 
           
 
@@ -106,13 +124,19 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.SecurityMode.Transport" />
 
             
 
+            
+
             ) and reliable sessions are disabled (that is <see
              cref="P:System.ServiceModel.OptionalReliableSession.Enabled" />
+
+            
 
             
 
@@ -124,6 +148,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.NetTcpBinding" />
+
+            
 
             
 
@@ -157,6 +183,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -168,6 +196,8 @@
 
             
 
+            
+
              class with the type of security used specified.</para
           >
         </summary>
@@ -176,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.SecurityMode" />
+
+          
 
           
 
@@ -211,6 +245,8 @@
 
             
 
+            
+
              class with a specified configuration name.</para
           >
         </summary>
@@ -219,8 +255,12 @@
 
           
 
+          
+
           The binding configuration name for the <see
            cref="T:System.ServiceModel.NetTcpBinding" />
+
+          
 
           
 
@@ -258,6 +298,8 @@
 
             
 
+            
+
              class with the type of security used specified and with a value that indicates whether reliable sessions are explicitly enabled.</para
           >
         </summary>
@@ -266,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.SecurityMode" />
+
+          
 
           
 
@@ -275,6 +321,8 @@
         >
         <param name="reliableSessionEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +361,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -392,6 +444,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.ListenBacklog" />
+
+            
 
             
 
@@ -510,6 +564,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -547,12 +603,16 @@
 
                 
 
+                
+
                  = 32</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" />
+
+                
 
                 
 
@@ -565,6 +625,8 @@
 
                 
 
+                
+
                  = 16384</para
               >
             </item>
@@ -574,12 +636,16 @@
 
                 
 
+                
+
                  = 4096</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" />
+
+                
 
                 
 
@@ -667,8 +733,12 @@
 
             
 
+            
+
              provides the types of security and settings available to the <see
              cref="T:System.ServiceModel.NetTcpBinding" />
+
+            
 
             
 
@@ -706,6 +776,8 @@
              type="text/html">
               <a href="cc070387-3d11-4b02-a952-bc08ad2df05a">&lt;synchronousReceive&gt; element</a>
             </format>
+
+            
 
             
 

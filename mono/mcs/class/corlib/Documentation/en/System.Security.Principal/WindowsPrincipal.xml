@@ -39,8 +39,12 @@
 
         
 
+        
+
          class is primarily used to check the role of a Windows user. The <see
          cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" />
+
+        
 
         
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              class by using the specified <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -95,8 +103,12 @@
 
           
 
+          
+
           The object from which to construct the new instance of <see
            cref="T:System.Security.Principal.WindowsPrincipal" />
+
+          
 
           
 
@@ -127,6 +139,8 @@
         <remarks
           >The returned identity will always be a <see
            cref="T:System.Security.Principal.WindowsIdentity" />
+
+          
 
           
 
@@ -165,11 +179,15 @@
 
             
 
+            
+
              test to return false. This method is not supported on Windows 98 or Windows Millennium Edition.</para
           >
           <para
             >For performance reasons, the <see
              cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.Security.Principal.SecurityIdentifier)" />
+
+            
 
             
 
@@ -182,6 +200,8 @@
 
               
 
+              
+
                method does not display the Consent dialog box. The code returns false if you are in the standard user role, even if you are in the Built-in Administrators group. You can elevate your privileges before you execute the code by right-clicking the application icon and indicating that you want to run as an administrator.</para
             >
           </block>
@@ -189,6 +209,8 @@
           <para
             >For example, the RID for the BUILTIN\Administrators role is 0x220. Using 0x220 as the input parameter for the <see
              cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.Security.Principal.SecurityIdentifier)" />
+
+            
 
             
 
@@ -349,6 +371,8 @@
 
           
 
+          
+
           The RID of the Windows user group in which to check for the principal’s membership status. </param
         >
       </Docs>
@@ -388,8 +412,12 @@
 
             
 
+            
+
              uniquely identifies a user or group on Windows 2000, Windows Server, and Windows XP implementations. When testing for newly created role information, such as a new user or a new group, it is important to log out and log in to force the propagation of role information within the domain. Not doing so can cause the <see
              cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" />
+
+            
 
             
 
@@ -399,6 +427,8 @@
             <para
               >In Windows Vista, User Account Control (UAC) determines the privileges of a user. If you are a member of the Built-in Administrators group, you are assigned two run-time access tokens: a standard user access token and an administrator access token. By default, you are in the standard user role. When you attempt to perform a task that requires administrative privileges, you can dynamically elevate your role by using the Consent dialog box. The code that executes the <see
                cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" />
+
+              
 
               
 
@@ -420,8 +450,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -459,11 +493,15 @@
 
             
 
+            
+
              test to return false. This method is not supported on Windows 98 or Windows Millennium Edition.</para
           >
           <para
             >For performance reasons, the <see
              cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.Security.Principal.SecurityIdentifier)" />
+
+            
 
             
 
@@ -473,6 +511,8 @@
             <para
               >In Windows Vista, User Account Control (UAC) determines the privileges of a user. If you are a member of the Built-in Administrators group, you are assigned two run-time access tokens: a standard user access token and an administrator access token. By default, you are in the standard user role. When you attempt to perform a task that requires administrative privileges, you can dynamically elevate your role by using the Consent dialog box. The code that executes the <see
                cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" />
+
+              
 
               
 
@@ -488,6 +528,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -500,8 +542,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Principal.WindowsBuiltInRole" />
+
+          
 
           
 
@@ -536,11 +582,15 @@
 
             
 
+            
+
              test to return false. This method is not supported on Windows 98 or Windows Millennium Edition.</para
           >
           <para
             >For performance reasons, the <see
              cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.Security.Principal.SecurityIdentifier)" />
+
+            
 
             
 
@@ -553,6 +603,8 @@
 
               
 
+              
+
                method does not display the Consent dialog box. The code returns false if you are in the standard user role, even if you are in the Built-in Administrators group. You can elevate your privileges before you execute the code by right-clicking the application icon and indicating that you want to run as an administrator.</para
             >
           </block>
@@ -562,12 +614,16 @@
 
             
 
+            
+
              string should be in the form "BUILTIN\RoleNameHere". For example, to test for membership in the Windows administrator role, the string representing the role should be "BUILTIN\Administrators". Note that the backslash might need to be escaped. The following table lists the built-in roles.</para
           >
           <block subset="none" type="note">
             <para
               >The spelling for the BUILTIN roles in string format differs from the spelling used in the <see
                cref="T:System.Security.Principal.WindowsBuiltInRole" />
+
+              
 
               
 
@@ -629,11 +685,15 @@
 
             
 
+            
+
              string should be in the form "MachineName\RoleNameHere".</para
           >
           <para
             >For domain-specific roles, the <paramref
              name="role" />
+
+            
 
             
 
@@ -646,8 +706,12 @@
 
               
 
+              
+
                parameter is case-sensitive. In the .NET Framework version 1.1 and later, the <paramref
                name="role" />
+
+              
 
               
 
@@ -665,6 +729,8 @@
         </returns>
         <param name="role">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

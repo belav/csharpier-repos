@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes that extend design-time user interface (UI) logic and drawing. </para
       >
     </summary>
@@ -19,6 +21,8 @@
         <para
           >Classes within the <see
            cref="N:System.Drawing.Design" />
+
+          
 
           
 

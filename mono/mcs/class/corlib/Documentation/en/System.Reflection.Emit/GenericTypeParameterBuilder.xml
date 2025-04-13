@@ -35,8 +35,12 @@
 
         
 
+        
+
          objects by using the <see
          cref="M:System.Reflection.Emit.TypeBuilder.DefineGenericParameters(System.String[])" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          method to add type parameters to a dynamic method. Use the <see
          cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
 
             
 
+            
+
              method. </para
           >
         </item>
@@ -67,6 +77,8 @@
           <para
             >An interface constraint specifies that any type assigned to the generic type parameter must implement a particular interface. Set the interface constraints by using the <see
              cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetInterfaceConstraints(System.Type[])" />
+
+            
 
             
 
@@ -80,6 +92,8 @@
 
             
 
+            
+
              method. </para
           >
         </item>
@@ -90,8 +104,12 @@
 
         
 
+        
+
          class. Once you have created the generic type that contains the type parameters, you can use its <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -100,13 +118,19 @@
 
         
 
+        
+
          method to get the type parameters, and for each type parameter use the <see
          cref="M:System.Type.GetGenericParameterConstraints" />
 
         
 
+        
+
          method to get the base type constraint and interface constraints, and the <see
          cref="P:System.Type.GenericParameterAttributes" />
+
+        
 
         
 
@@ -145,6 +169,8 @@
           <para
             >Gets an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -202,6 +228,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -236,8 +264,12 @@
 
             
 
+            
+
              object always represents a generic type parameter. The value of the <see
              cref="P:System.Reflection.Emit.GenericTypeParameterBuilder.ContainsGenericParameters" />
+
+            
 
             
 
@@ -278,6 +310,8 @@
 
             
 
+            
+
              property is not null, then the declaring method is a generic method definition and DeclaringMethod.IsGenericMethodDefinition is true.</para
           >
         </remarks>
@@ -289,8 +323,12 @@
 
             
 
+            
+
              that represents the declaring method, if the current <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -357,11 +395,15 @@
 
             
 
+            
+
              is an instance of EventToken and equals the current instance; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,6 +588,8 @@
 
           
 
+          
+
           Not supported.</param
         >
       </Docs>
@@ -586,6 +630,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -633,10 +679,14 @@
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -669,6 +719,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -677,6 +729,8 @@
           <para
             >Throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -729,10 +783,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -812,6 +870,8 @@
 
           
 
+          
+
           Not supported.</param
         >
       </Docs>
@@ -856,10 +916,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -903,6 +967,8 @@
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1064,10 +1130,14 @@
 
           
 
+          
+
           The name of the interface.</param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1118,8 +1188,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1198,6 +1272,8 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="type">
@@ -1205,10 +1281,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1252,6 +1332,8 @@
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1336,6 +1418,8 @@
 
           
 
+          
+
           Not supported.</param
         >
       </Docs>
@@ -1380,10 +1464,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1430,6 +1518,8 @@
 
           
 
+          
+
           Not supported.</param
         >
       </Docs>
@@ -1470,6 +1560,8 @@
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1607,10 +1699,14 @@
 
           
 
+          
+
           Not supported. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1621,10 +1717,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1635,10 +1735,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1649,10 +1753,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="namedParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1712,6 +1820,8 @@
 
             
 
+            
+
              exception in all cases.</para
           >
         </summary>
@@ -1723,11 +1833,15 @@
 
             
 
+            
+
              exception in all cases.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1819,10 +1933,14 @@
 
           
 
+          
+
           Not supported.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2009,6 +2127,8 @@
 
           
 
+          
+
           Not supported.</param
         >
       </Docs>
@@ -2059,6 +2179,8 @@
 
             
 
+            
+
              method provides a way to generate array types for parameter lists. </para
           >
         </remarks>
@@ -2071,6 +2193,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2105,6 +2229,8 @@
 
             
 
+            
+
              method provides a way to generate array types for parameter lists.</para
           >
         </remarks>
@@ -2120,11 +2246,15 @@
 
             
 
+            
+
              object that represents the type of an array whose element type is the generic type parameter, with the specified number of dimensions.</para
           >
         </returns>
         <param name="rank">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2156,6 +2286,8 @@
 
             
 
+            
+
              method provides a way to generate ref types (ByRef in Visual Basic) for parameter lists.</para
           >
         </remarks>
@@ -2167,6 +2299,8 @@
 
             
 
+            
+
              object that represents the current generic type parameter when passed as a reference parameter.</para
           >
         </summary>
@@ -2175,6 +2309,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2224,6 +2360,8 @@
 
           
 
+          
+
           An array of type arguments.</param
         >
       </Docs>
@@ -2252,6 +2390,8 @@
 
             
 
+            
+
              method provides a way to generate pointer types for parameter lists.</para
           >
         </remarks>
@@ -2263,6 +2403,8 @@
 
             
 
+            
+
              object that represents a pointer to the current generic type parameter.</para
           >
         </summary>
@@ -2271,6 +2413,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2374,8 +2518,12 @@
 
             
 
+            
+
              object that was used to obtain the <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -2414,6 +2562,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -2422,8 +2572,12 @@
 
             
 
+            
+
              object to reflect the type parameter and their constraints. To get the type parameters of a completed generic type, use the <see
              cref="M:System.Type.GetGenericArguments" />
+
+            
 
             
 
@@ -2432,8 +2586,12 @@
 
             
 
+            
+
              method, and get the special constraints by using the <see
              cref="P:System.Type.GenericParameterAttributes" />
+
+            
 
             
 
@@ -2449,8 +2607,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2490,6 +2652,8 @@
 
           
 
+          
+
           An instance of a helper class that defines the custom attribute.</param
         >
       </Docs>
@@ -2525,6 +2689,8 @@
 
               
 
+              
+
               , see the documentation for Partition II: Metadata Definition and Semantics. The documentation is available online; see <see
                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
@@ -2532,10 +2698,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2552,10 +2722,14 @@
 
           
 
+          
+
           The constructor for the custom attribute.</param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2597,8 +2771,12 @@
 
             
 
+            
+
              class. Once you have created the generic type that contains the type parameter, you can use its <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2607,8 +2785,12 @@
 
             
 
+            
+
              method. To get the special constraints for each type parameter, use the <see
              cref="P:System.Type.GenericParameterAttributes" />
+
+            
 
             
 
@@ -2617,6 +2799,8 @@
           <para
             >The <see
              cref="T:System.Reflection.GenericParameterAttributes" />
+
+            
 
             
 
@@ -2632,8 +2816,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.GenericParameterAttributes" />
+
+          
 
           
 
@@ -2682,8 +2870,12 @@
 
             
 
+            
+
              class. Once you have created the generic type that contains the type parameter, you can use its <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2692,8 +2884,12 @@
 
             
 
+            
+
              method. For each type parameter, get the base type constraint and interface constraints by using the <see
              cref="M:System.Type.GetGenericParameterConstraints" />
+
+            
 
             
 
@@ -2709,8 +2905,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 

@@ -56,6 +56,8 @@
 
             
 
+            
+
              array beginning at the specified destination index.</para
           >
         </summary>
@@ -64,10 +66,14 @@
 
           
 
+          
+
           The array to copy collection members to.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -92,6 +98,8 @@
           <para
             >Gets the total number of design surfaces in the <see
              cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />
+
+            
 
             
 
@@ -123,6 +131,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -134,8 +144,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />
+
+            
 
             
 
@@ -188,8 +202,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -204,6 +222,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -212,13 +232,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />
+
+          
 
           
 
@@ -229,8 +255,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -257,8 +287,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -270,6 +304,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.ICollection.Count" />
+
+            
 
             
 
@@ -300,8 +336,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -313,6 +353,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -343,8 +385,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -356,6 +402,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -386,8 +434,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -402,6 +454,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -413,8 +467,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />
+
+            
 
             
 

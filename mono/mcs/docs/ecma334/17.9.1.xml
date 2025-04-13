@@ -11,6 +11,8 @@
 
         
 
+        
+
         . </list_item
       >
     </list>
@@ -19,6 +21,8 @@
   <paragraph
     >The true and false unary operators require pair-wise declaration. A compile-time error occurs if a class declares one of these operators without also declaring the other. The true and false operators are described further in <hyperlink
     >14.16</hyperlink>
+
+    
 
     
 
@@ -61,8 +65,12 @@ class Test
 
       
 
+      
+
       ), and the prefix increment and decrement operators (<hyperlink
       >14.6.5</hyperlink>
+
+      
 
       
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          output. </para
       >
     </summary>
@@ -53,8 +55,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Xml.XmlOutputMethod.Html" />
+
+            
 
             
 

@@ -6,6 +6,8 @@
 
     
 
+    
+
      may optionally include a sequence of class modifiers: <grammar_production
     >
       <name>
@@ -13,8 +15,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -31,6 +37,8 @@
       <name>
         <non_terminal where="17.1.1">class-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -65,11 +73,15 @@
 
     
 
+    
+
     . It is a compile-time error for the new modifier to appear on a class declaration that is not a nested class declaration. </paragraph
   >
   <paragraph
     >The public, protected, internal, and private modifiers control the accessibility of the class. Depending on the context in which the class declaration occurs, some of these modifiers may not be permitted (<hyperlink
     >10.5.1</hyperlink>
+
+    
 
     
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -281,6 +283,8 @@
           <para
             >The types used in the interface are fully compatible with Automation, including VTBL binding support. Setting dual on an interface sets this flag in addition to <see
              cref="F:System.Runtime.InteropServices.TYPEFLAGS.TYPEFLAG_FDUAL" />
+
+            
 
             
 

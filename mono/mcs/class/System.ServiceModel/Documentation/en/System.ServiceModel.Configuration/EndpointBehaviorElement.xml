@@ -53,6 +53,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -81,11 +83,15 @@
 
             
 
+            
+
              class with the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,8 +132,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+
+          
 
           
 
@@ -172,8 +182,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+
+          
 
           
 

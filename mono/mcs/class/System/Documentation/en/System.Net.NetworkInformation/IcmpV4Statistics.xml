@@ -25,6 +25,8 @@
 
         
 
+        
+
          method to return ICMPv4 traffic information.</para
       >
     </remarks>
@@ -56,6 +58,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -64,6 +68,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+
+            
 
             
 

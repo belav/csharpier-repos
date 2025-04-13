@@ -21,13 +21,19 @@
 
         
 
+        
+
         , set the <see
          cref="P:System.Drawing.Pen.DashPattern" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
       <para
         >Specifies the style of dashed lines drawn with a <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 

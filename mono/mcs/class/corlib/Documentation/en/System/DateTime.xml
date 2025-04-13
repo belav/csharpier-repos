@@ -53,6 +53,8 @@
 
         
 
+        
+
          value type represents dates and times with values ranging from 00:00:00 (midnight), January 1, 0001 Anno Domini (Common Era) through 11:59:59 P.M., December 31, 9999 A.D. (C.E.) in the Gregorian calendar. </para
       >
       <para
@@ -61,8 +63,12 @@
 
         
 
+        
+
          calendar (excluding ticks that would be added by leap seconds). For example, a ticks value of 31241376000000000L represents the date, Friday, January 01, 0100 12:00:00 midnight. A <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -75,8 +81,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.TimeSpan.TicksPerHour" />
+
+          
 
           
 
@@ -85,8 +95,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.TimeSpan.TicksPerSecond" />
+
+          
 
           
 
@@ -95,13 +109,19 @@
 
           
 
+          
+
            constant to perform the conversion. For example, to add the number of seconds represented by a specified number of ticks to the <see
            cref="P:System.DateTime.Second" />
 
           
 
+          
+
            component of a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -154,6 +174,8 @@
 
         
 
+        
+
          value in any of the following ways:</para
       >
       <list type="bullet">
@@ -164,8 +186,12 @@
 
             
 
+            
+
              constructor that allow you to specify specific elements of the date and time value (such as the year, month, and day, or the number of ticks). The following statement illustrates a call to one of the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -180,6 +206,8 @@
 
             
 
+            
+
              value.</para
           >
           <para>code reference: System.DateTime.Instantiation#2</para>
@@ -191,8 +219,12 @@
 
             
 
+            
+
              object a date and time value returned by a property or method. The following example assigns the current date and time, the current Coordinated Universal Time (UTC) date and time, and the current date to three new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -207,8 +239,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.DateTime.ParseExact" />
+
+            
 
             
 
@@ -217,8 +253,12 @@
 
             
 
+            
+
             , and <see
              cref="Overload:System.DateTime.TryParseExact" />
+
+            
 
             
 
@@ -227,8 +267,12 @@
 
             
 
+            
+
              method to parse a string and convert it to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -241,13 +285,19 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.DateTime.TryParseExact" />
 
             
 
+            
+
              methods indicate whether a particular string contains a valid representation of a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -261,10 +311,14 @@
 
             
 
+            
+
              structure's implicit default constructor. (For details on the implicit default constructor of a value type, see <format
              type="text/html">
               <a href="471eb994-2958-49d5-a6be-19b4313f80a3">Value Types (C# Reference)</a>
             </format>
+
+            
 
             
 
@@ -273,13 +327,19 @@
 
             
 
+            
+
               value without explicitly assigning a date and time to it. The following example illustrates a call to the <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              implicit default constructor in C# and Visual Basic, as well as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -300,13 +360,19 @@
 
         
 
+        
+
          values are represented as the number of ticks (the number of 100-nanosecond intervals) that have elapsed since 12:00:00 midnight, January 1, 0001. The actual <see
          cref="T:System.DateTime" />
 
         
 
+        
+
          value is independent of the way in which that value appears when displayed in a user interface element or when written to a file. The appearance of a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -318,8 +384,12 @@
 
         
 
+        
+
          structure offers a great deal of flexibility in formatting date and time values through the overloads of its <see
          cref="Overload:System.DateTime.ToString" />
+
+        
 
         
 
@@ -328,8 +398,12 @@
 
         
 
+        
+
          method returns the string representation of a date and time value using the current culture's short date and long time pattern. The following example uses the default <see
          cref="M:System.DateTime.ToString" />
+
+        
 
         
 
@@ -342,8 +416,12 @@
 
         
 
+        
+
          method returns the string representation of a date and time value using the short date and long time pattern of a specific culture. The following example uses the <see
          cref="M:System.DateTime.ToString(System.IFormatProvider)" />
+
+        
 
         
 
@@ -356,8 +434,12 @@
 
         
 
+        
+
          method returns the string representation of the date and time in a format defined by a standard or custom format specifier and using the formatting conventions of the current culture. The following example uses the <see
          cref="M:System.DateTime.ToString(System.String)" />
+
+        
 
         
 
@@ -370,8 +452,12 @@
 
         
 
+        
+
          method returns the string representation of the date and time in a format defined by a specific format specifier and using the formatting conventions of a specific culture. The following example uses the <see
          cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+
+        
 
         
 
@@ -384,6 +470,8 @@
 
         
 
+        
+
          values, see <format
          type="text/html">
           <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard Date and Time Format Strings</a>
@@ -391,10 +479,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
         </format>
+
+        
 
         
 
@@ -409,6 +501,8 @@
       <para
         >Parsing involves converting the string representation of a date and time to a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -428,8 +522,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+
+        
 
         
 
@@ -438,8 +536,12 @@
 
         
 
+        
+
          value. The following example shows how you can use <see
          cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+
+        
 
         
 
@@ -448,13 +550,19 @@
 
         
 
+        
+
          value. It changes the current culture to English (Great Britain) and calls the <see
          cref="M:System.DateTime.GetDateTimeFormats" />
 
         
 
+        
+
          method to generate an array of date and time strings. It then passes each element in the array to the <see
          cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+
+        
 
         
 
@@ -467,13 +575,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.DateTime.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" />
 
         
 
+        
+
          methods to convert a date and time string that must match a particular format or formats to a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -484,10 +598,14 @@
 
         
 
+        
+
          or <format
          type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">custom</a>
         </format>
+
+        
 
         
 
@@ -496,8 +614,12 @@
 
         
 
+        
+
          method to convert strings that must be either in a "yyyyMMdd" format or a "HHmmss" format to <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -510,8 +632,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
+
+        
 
         
 
@@ -520,8 +646,12 @@
 
         
 
+        
+
          value cannot be parsed. The <see
          cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+
+        
 
         
 
@@ -530,13 +660,19 @@
 
         
 
+        
+
          methods return a Boolean value that indicates whether the conversion succeeded or failed. Because the parsing operation for date and time strings, particularly if strings are input by users, tends to have a high failure rate, and because exception handling is expensive, you should use the <see
          cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
 
         
 
+        
+
          or <see
          cref="M:System.DateTime.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)" />
+
+        
 
         
 
@@ -547,6 +683,8 @@
          type="text/html">
           <a href="43bae51e-9b1d-41a6-a187-772c0d096d90">Parsing Date and Time Strings</a>
         </format>
+
+        
 
         
 
@@ -564,8 +702,12 @@
 
         
 
+        
+
          structure contains a 64-bit field composed of an unused 2-bit field concatenated with a private Ticks field, which is a 62-bit unsigned field that contains the number of ticks that represent the date and time. The value of the Ticks field can be obtained with the <see
          cref="P:System.DateTime.Ticks" />
+
+        
 
         
 
@@ -577,13 +719,19 @@
 
         
 
+        
+
          structure contains a 64-bit field composed of a private Kind field concatenated with the Ticks field. The Kind field is a 2-bit field that indicates whether the <see
          cref="T:System.DateTime" />
 
         
 
+        
+
          structure represents a local time, a Coordinated Universal Time (UTC), or the time in an unspecified time zone. The Kind field is used when performing time conversions between time zones, but not for time comparisons or arithmetic. The value of the Kind field can be obtained with the <see
          cref="P:System.DateTime.Kind" />
+
+        
 
         
 
@@ -596,8 +744,12 @@
 
           
 
+          
+
            structure for working with date and time values in particular time zones is the <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -606,8 +758,12 @@
 
           
 
+          
+
            structure stores date and time information in a private <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -616,8 +772,12 @@
 
           
 
+          
+
            field. This makes it possible for a <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -626,13 +786,19 @@
 
           
 
+          
+
            value can unambiguously reflect only UTC and the local time zone's time. For a discussion about when to use the <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            structure or the <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -642,6 +808,8 @@
               >Choosing Between DateTime, DateTimeOffset, and TimeZoneInfo</a
             >
           </format>
+
+          
 
           
 
@@ -661,6 +829,8 @@
 
         
 
+        
+
          type are often expressed using the Coordinated Universal Time (UTC) standard, which is the internationally recognized name for Greenwich Mean Time (GMT). Coordinated Universal Time is the time as measured at zero degrees longitude, the UTC origin point. Daylight saving time is not applicable to UTC.</para
       >
       <para>Local time is relative to a particular time zone. A time zone is associated with a time zone offset, which is the displacement of the time zone measured in hours from the UTC origin point. In addition, local time is optionally affected by daylight saving time, which adds or subtracts an hour from the length of a day. Consequently, local time is calculated by adding the time zone offset to UTC and adjusting for daylight saving time if necessary. The time zone offset at the UTC origin point is zero.</para>
@@ -671,13 +841,19 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.DateTime" />
 
         
 
+        
+
          object is <see
          cref="F:System.DateTimeKind.Unspecified" />
+
+        
 
         
 
@@ -695,8 +871,12 @@
 
         
 
+        
+
          structure, such as <see
          cref="M:System.DateTime.Add(System.TimeSpan)" />
+
+        
 
         
 
@@ -705,8 +885,12 @@
 
         
 
+        
+
         , does not modify the value of the structure. Instead, the calculation returns a new <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -719,8 +903,12 @@
 
         
 
+        
+
          structure itself offers limited support for converting from one time zone to another. You can use the <see
          cref="M:System.DateTime.ToLocalTime" />
+
+        
 
         
 
@@ -729,8 +917,12 @@
 
         
 
+        
+
          method to convert from local time to UTC. However, a full set of time zone conversion methods is available in the <see
          cref="T:System.TimeZoneInfo" />
+
+        
 
         
 
@@ -742,8 +934,12 @@
 
         
 
+        
+
          objects are meaningful only if the objects represent times in the same time zone. You can use a <see
          cref="T:System.TimeZoneInfo" />
+
+        
 
         
 
@@ -752,8 +948,12 @@
 
         
 
+        
+
          value's time zone, although the two are loosely coupled. (That is, a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -762,8 +962,12 @@
 
         
 
+        
+
          property.) For this reason, in a time zone-aware application, you must rely on some external mechanism to determine the time zone in which a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -772,8 +976,12 @@
 
         
 
+        
+
          value and the <see
          cref="T:System.TimeZoneInfo" />
+
+        
 
         
 
@@ -782,8 +990,12 @@
 
         
 
+        
+
          value's time zone. For details on using UTC in calculations and comparisons with <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -796,6 +1008,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -804,13 +1018,19 @@
 
         
 
+        
+
          member implicitly uses the Gregorian calendar to perform its operation, with the exception of constructors that specify a calendar, and methods with a parameter derived from <see
          cref="T:System.IFormatProvider" />
 
         
 
+        
+
         , such as <see
          cref="T:System.Globalization.DateTimeFormatInfo" />
+
+        
 
         
 
@@ -822,6 +1042,8 @@
 
         
 
+        
+
          type take into account details such as leap years and the number of days in a month.</para
       >
       <para
@@ -830,8 +1052,12 @@
 
         
 
+        
+
          values involve converting a date and time value to or from its string representation. The process of converting a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -842,8 +1068,12 @@
 
         
 
+        
+
         . The process of converting the string representation of a date and time to a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -851,6 +1081,8 @@
          type="text/html">
           <a href="#parsing">Converting strings to DateTime values</a>
         </format>
+
+        
 
         
 
@@ -868,8 +1100,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -878,8 +1114,12 @@
 
         
 
+        
+
          represents an instant in time whereas a <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -888,8 +1128,12 @@
 
         
 
+        
+
          from another to obtain a <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -898,13 +1142,19 @@
 
         
 
+        
+
          to the current <see
          cref="T:System.DateTime" />
 
         
 
+        
+
          to obtain a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -916,8 +1166,12 @@
 
         
 
+        
+
          object. Time intervals can be negative or positive, can be expressed in units such as ticks or seconds, or can be expressed as a <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -935,8 +1189,12 @@
 
         
 
+        
+
          value that is transferred to a COM application, then is transferred back to a managed application, is said to round-trip. However, a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -950,8 +1208,12 @@
 
         
 
+        
+
          that only specifies a time, your application must remember to modify or ignore the erroneous date from the final <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -991,13 +1253,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -1011,8 +1279,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -1021,6 +1293,8 @@
           <para
             >For applications in which portability of date and time data or a limited degree of time zone awareness is important, you can use the corresponding <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -1035,11 +1309,15 @@
 
             
 
+            
+
              structure to a specified number of ticks.</para
           >
         </summary>
         <param name="ticks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1073,6 +1351,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </remarks>
@@ -1084,11 +1364,15 @@
 
             
 
+            
+
              structure to a specified number of ticks and to Coordinated Universal Time (UTC) or local time.</para
           >
         </summary>
         <param name="ticks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1099,8 +1383,12 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether <paramref
            name="ticks" />
+
+          
 
           
 
@@ -1137,6 +1425,8 @@
 
             
 
+            
+
              is less than 1 or greater than 9999</para
           >
           <para>-or-</para>
@@ -1145,11 +1435,15 @@
 
             
 
+            
+
              is less than 1 or greater than 12</para
           >
           <para>-or-</para>
           <para>
             <paramref name="day" />
+
+            
 
             
 
@@ -1165,8 +1459,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -1175,13 +1473,19 @@
 
             
 
+            
+
              as a year, month, and day in the Gregorian calendar. To instantiate a <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              value by using the year, month, and day in another calendar, call the <see
              cref="M:System.DateTime.#ctor(System.Int32,System.Int32,System.Int32,System.Globalization.Calendar)" />
+
+            
 
             
 
@@ -1193,13 +1497,19 @@
 
             
 
+            
+
              is midnight (00:00:00). The <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -1214,11 +1524,15 @@
 
             
 
+            
+
              structure to the specified year, month, and day.</para
           >
         </summary>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1229,6 +1543,8 @@
 
           
 
+          
+
           The month (1 through 12). </param
         >
         <param name="day">
@@ -1236,8 +1552,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -1276,13 +1596,19 @@
 
             
 
+            
+
              is midnight (00:00:00). The <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -1294,8 +1620,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -1304,13 +1634,19 @@
 
             
 
+            
+
              depend on <paramref
              name="calendar" />
 
             
 
+            
+
             . An exception is thrown if the specified date and time cannot be expressed using <paramref
              name="calendar" />
+
+            
 
             
 
@@ -1322,13 +1658,19 @@
 
             
 
+            
+
              namespace provides several calendars including <see
              cref="T:System.Globalization.GregorianCalendar" />
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.JulianCalendar" />
+
+            
 
             
 
@@ -1343,6 +1685,8 @@
 
             
 
+            
+
              structure to the specified year, month, and day for the specified calendar.</para
           >
         </summary>
@@ -1351,8 +1695,12 @@
 
           
 
+          
+
           The year (1 through the number of years in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -1363,8 +1711,12 @@
 
           
 
+          
+
           The month (1 through the number of months in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -1375,8 +1727,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -1387,8 +1743,12 @@
 
           
 
+          
+
           The calendar that is used to interpret <paramref
            name="year" />
+
+          
 
           
 
@@ -1397,8 +1757,12 @@
 
           
 
+          
+
           , and <paramref
            name="day" />
+
+          
 
           
 
@@ -1440,10 +1804,14 @@
 
           
 
+          
+
           is less than 1 or greater than 9999 <para
           >-or-</para>
           <para>
             <paramref name="month" />
+
+            
 
             
 
@@ -1452,6 +1820,8 @@
           <para>-or-</para>
           <para>
             <paramref name="day" />
+
+            
 
             
 
@@ -1464,6 +1834,8 @@
 
             
 
+            
+
              is less than 0 or greater than 23</para
           >
           <para>-or-</para>
@@ -1472,11 +1844,15 @@
 
             
 
+            
+
              is less than 0 or greater than 59</para
           >
           <para>-or-</para>
           <para>
             <paramref name="second " />
+
+            
 
             
 
@@ -1491,8 +1867,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -1504,8 +1884,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -1514,8 +1898,12 @@
 
             
 
+            
+
              as a year, month, and day in the Gregorian calendar. To instantiate a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1524,11 +1912,15 @@
 
             
 
+            
+
              constructor.</para
           >
           <para
             >For applications in which portability of date and time data or a limited degree of time zone awareness is important, you can use the corresponding <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -1543,11 +1935,15 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, and second.</para
           >
         </summary>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1558,6 +1954,8 @@
 
           
 
+          
+
           The month (1 through 12). </param
         >
         <param name="day">
@@ -1565,8 +1963,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -1577,6 +1979,8 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
@@ -1584,10 +1988,14 @@
 
           
 
+          
+
           The minutes (0 through 59). </param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1629,8 +2037,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -1639,8 +2051,12 @@
 
             
 
+            
+
              as a year, month, and day in the Gregorian calendar. To instantiate a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1649,11 +2065,15 @@
 
             
 
+            
+
              constructor.</para
           >
           <para
             >For applications in which portability of date and time data or a limited degree of time zone awareness is important, you can use the corresponding <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -1668,11 +2088,15 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, second, and Coordinated Universal Time (UTC) or local time.</para
           >
         </summary>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1683,6 +2107,8 @@
 
           
 
+          
+
           The month (1 through 12). </param
         >
         <param name="day">
@@ -1690,8 +2116,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -1702,10 +2132,14 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1716,10 +2150,14 @@
 
           
 
+          
+
           The seconds (0 through 59). </param
         >
         <param name="kind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1728,8 +2166,12 @@
 
           
 
+          
+
           , <paramref
            name="month" />
+
+          
 
           
 
@@ -1738,8 +2180,12 @@
 
           
 
+          
+
           , <paramref
            name="hour" />
+
+          
 
           
 
@@ -1748,8 +2194,12 @@
 
           
 
+          
+
            and <paramref
            name="second" />
+
+          
 
           
 
@@ -1790,8 +2240,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -1803,8 +2257,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -1813,13 +2271,19 @@
 
             
 
+            
+
              depend on <paramref
              name="calendar" />
 
             
 
+            
+
             . An exception is thrown if the specified date and time cannot be expressed using <paramref
              name="calendar" />
+
+            
 
             
 
@@ -1831,13 +2295,19 @@
 
             
 
+            
+
              namespace provides several calendars including <see
              cref="T:System.Globalization.GregorianCalendar" />
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.JulianCalendar" />
+
+            
 
             
 
@@ -1852,6 +2322,8 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, and second for the specified calendar.</para
           >
         </summary>
@@ -1860,8 +2332,12 @@
 
           
 
+          
+
           The year (1 through the number of years in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -1872,8 +2348,12 @@
 
           
 
+          
+
           The month (1 through the number of months in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -1884,8 +2364,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -1896,10 +2380,14 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1910,10 +2398,14 @@
 
           
 
+          
+
           The seconds (0 through 59). </param
         >
         <param name="calendar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1922,13 +2414,19 @@
 
           
 
+          
+
           , <paramref
            name="month" />
 
           
 
+          
+
           , and <paramref
            name="day" />
+
+          
 
           
 
@@ -1971,10 +2469,14 @@
 
           
 
+          
+
           is less than 1 or greater than 9999 <para
           >-or-</para>
           <para>
             <paramref name="month" />
+
+            
 
             
 
@@ -1983,6 +2485,8 @@
           <para>-or-</para>
           <para>
             <paramref name="day" />
+
+            
 
             
 
@@ -1995,11 +2499,15 @@
 
             
 
+            
+
             is less than 0 or greater than 23</para
           >
           <para>-or-</para>
           <para>
             <paramref name="minute " />
+
+            
 
             
 
@@ -2011,11 +2519,15 @@
 
             
 
+            
+
             is less than 0 or greater than 59</para
           >
           <para> -or-</para>
           <para>
             <paramref name="millisecond" />
+
+            
 
             
 
@@ -2028,8 +2540,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -2043,8 +2559,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -2053,13 +2573,19 @@
 
             
 
+            
+
              as a year, month, and day in the Gregorian calendar. To instantiate a <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              value by using the year, month, and day in another calendar, call the <see
              cref="M:System.DateTime.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Globalization.Calendar)" />
+
+            
 
             
 
@@ -2071,8 +2597,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -2081,6 +2611,8 @@
           <para
             >For applications in which portability of date and time data or a limited degree of time zone awareness is important, you can use the corresponding <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -2095,11 +2627,15 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, second, and millisecond.</para
           >
         </summary>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2110,6 +2646,8 @@
 
           
 
+          
+
           The month (1 through 12). </param
         >
         <param name="day">
@@ -2117,8 +2655,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -2129,10 +2671,14 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2143,10 +2689,14 @@
 
           
 
+          
+
           The seconds (0 through 59). </param
         >
         <param name="millisecond">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2189,8 +2739,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -2199,8 +2753,12 @@
 
             
 
+            
+
              as a year, month, and day in the Gregorian calendar. To instantiate a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -2209,11 +2767,15 @@
 
             
 
+            
+
              constructor.</para
           >
           <para
             >For applications in which portability of date and time data or a limited degree of time zone awareness is important, you can use the corresponding <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -2228,11 +2790,15 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, second, millisecond, and Coordinated Universal Time (UTC) or local time.</para
           >
         </summary>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2243,6 +2809,8 @@
 
           
 
+          
+
           The month (1 through 12). </param
         >
         <param name="day">
@@ -2250,8 +2818,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -2262,10 +2834,14 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2276,10 +2852,14 @@
 
           
 
+          
+
           The seconds (0 through 59). </param
         >
         <param name="millisecond">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2290,8 +2870,12 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether <paramref
            name="year" />
+
+          
 
           
 
@@ -2300,8 +2884,12 @@
 
           
 
+          
+
           , <paramref
            name="day" />
+
+          
 
           
 
@@ -2310,8 +2898,12 @@
 
           
 
+          
+
           , <paramref
            name="minute" />
+
+          
 
           
 
@@ -2320,8 +2912,12 @@
 
           
 
+          
+
           , and <paramref
            name="millisecond" />
+
+          
 
           
 
@@ -2363,8 +2959,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -2376,8 +2976,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -2386,13 +2990,19 @@
 
             
 
+            
+
              depend on <paramref
              name="calendar" />
 
             
 
+            
+
             . An exception is thrown if the specified date and time cannot be expressed using <paramref
              name="calendar" />
+
+            
 
             
 
@@ -2404,6 +3014,8 @@
 
             
 
+            
+
              constructor.</para
           >
           <para
@@ -2412,13 +3024,19 @@
 
             
 
+            
+
              namespace provides several calendars including <see
              cref="T:System.Globalization.GregorianCalendar" />
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.JulianCalendar" />
+
+            
 
             
 
@@ -2433,6 +3051,8 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, second, and millisecond for the specified calendar.</para
           >
         </summary>
@@ -2441,8 +3061,12 @@
 
           
 
+          
+
           The year (1 through the number of years in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -2453,8 +3077,12 @@
 
           
 
+          
+
           The month (1 through the number of months in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -2465,8 +3093,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -2477,10 +3109,14 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2491,10 +3127,14 @@
 
           
 
+          
+
           The seconds (0 through 59). </param
         >
         <param name="millisecond">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2505,8 +3145,12 @@
 
           
 
+          
+
           The calendar that is used to interpret <paramref
            name="year" />
+
+          
 
           
 
@@ -2515,8 +3159,12 @@
 
           
 
+          
+
           , and <paramref
            name="day" />
+
+          
 
           
 
@@ -2559,8 +3207,12 @@
 
             
 
+            
+
             , <paramref
              name="month" />
+
+            
 
             
 
@@ -2569,13 +3221,19 @@
 
             
 
+            
+
              parameters depend on the <paramref
              name="calendar" />
 
             
 
+            
+
              parameter. An exception is thrown if the specified date and time cannot be expressed using <paramref
              name="calendar" />
+
+            
 
             
 
@@ -2587,6 +3245,8 @@
 
             
 
+            
+
              constructor.</para
           >
           <para
@@ -2595,13 +3255,19 @@
 
             
 
+            
+
              namespace provides several calendars including <see
              cref="T:System.Globalization.GregorianCalendar" />
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.JulianCalendar" />
+
+            
 
             
 
@@ -2616,6 +3282,8 @@
 
             
 
+            
+
              structure to the specified year, month, day, hour, minute, second, millisecond, and Coordinated Universal Time (UTC) or local time for the specified calendar.</para
           >
         </summary>
@@ -2624,8 +3292,12 @@
 
           
 
+          
+
           The year (1 through the number of years in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -2636,8 +3308,12 @@
 
           
 
+          
+
           The month (1 through the number of months in <paramref
            name="calendar" />
+
+          
 
           
 
@@ -2648,8 +3324,12 @@
 
           
 
+          
+
           The day (1 through the number of days in <paramref
            name="month" />
+
+          
 
           
 
@@ -2660,10 +3340,14 @@
 
           
 
+          
+
           The hours (0 through 23). </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2674,10 +3358,14 @@
 
           
 
+          
+
           The seconds (0 through 59). </param
         >
         <param name="millisecond">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2688,8 +3376,12 @@
 
           
 
+          
+
           The calendar that is used to interpret <paramref
            name="year" />
+
+          
 
           
 
@@ -2698,8 +3390,12 @@
 
           
 
+          
+
           , and <paramref
            name="day" />
+
+          
 
           
 
@@ -2710,8 +3406,12 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether <paramref
            name="year" />
+
+          
 
           
 
@@ -2720,8 +3420,12 @@
 
           
 
+          
+
           , <paramref
            name="day" />
+
+          
 
           
 
@@ -2730,8 +3434,12 @@
 
           
 
+          
+
           , <paramref
            name="minute" />
+
+          
 
           
 
@@ -2740,8 +3448,12 @@
 
           
 
+          
+
           , and <paramref
            name="millisecond" />
+
+          
 
           
 
@@ -2778,13 +3490,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -2798,8 +3516,12 @@
 
             
 
+            
+
              method to add more than one kind of time interval (days, hours, minutes, seconds, or milliseconds) in a single operation. This method's behavior is identical to that of the addition operator. The <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -2808,13 +3530,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.DateTime.AddHours(System.Double)" />
 
             
 
+            
+
             , and <see
              cref="M:System.DateTime.AddMinutes(System.Double)" />
+
+            
 
             
 
@@ -2826,6 +3554,8 @@
 
             
 
+            
+
              method takes into account leap years and the number of days in a month when performing date arithmetic. </para
           >
           <para
@@ -2834,8 +3564,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -2844,8 +3578,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -2860,8 +3598,12 @@
 
             
 
+            
+
              that adds the value of the specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2876,11 +3618,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2918,13 +3664,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -2938,8 +3690,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -2951,11 +3707,15 @@
 
             
 
+            
+
              is the fractional part of a day. For example, 4.5 is equivalent to 4 days, 12 hours, 0 minutes, 0 seconds, 0 milliseconds, and 0 ticks.</para
           >
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -2970,6 +3730,8 @@
 
             
 
+            
+
              that adds the specified number of days to the value of this instance.</para
           >
         </summary>
@@ -2981,6 +3743,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2989,8 +3753,12 @@
 
           
 
+          
+
           A number of whole and fractional days. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3029,13 +3797,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -3049,8 +3823,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3059,13 +3837,19 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              object is the same as that of <paramref
              name="value" />
+
+            
 
             
 
@@ -3077,6 +3861,8 @@
 
             
 
+            
+
              is the fractional part of an hour. For example, 4.5 is equivalent to 4 hours, 30 minutes, 0 seconds, 0 milliseconds, and 0 ticks.</para
           >
           <para
@@ -3085,11 +3871,15 @@
 
             
 
+            
+
              parameter is rounded to the nearest millisecond.</para
           >
           <para
             >Converting time intervals of less than an hour to a fraction can involve a loss of precision if the result is a non-terminating repeating decimal. (For example, one minute is 0.016667 of an hour.) If this is problematic, you can use the <see
              cref="M:System.DateTime.Add(System.TimeSpan)" />
+
+            
 
             
 
@@ -3104,6 +3894,8 @@
 
             
 
+            
+
              that adds the specified number of hours to the value of this instance.</para
           >
         </summary>
@@ -3115,6 +3907,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3123,8 +3917,12 @@
 
           
 
+          
+
           A number of whole and fractional hours. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3163,13 +3961,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -3183,8 +3987,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3196,11 +4004,15 @@
 
             
 
+            
+
              is the fractional part of a millisecond. For example, 4.5 is equivalent to 4 milliseconds and 5000 ticks, where one millisecond = 10000 ticks.</para
           >
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -3215,6 +4027,8 @@
 
             
 
+            
+
              that adds the specified number of milliseconds to the value of this instance.</para
           >
         </summary>
@@ -3226,6 +4040,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3234,8 +4050,12 @@
 
           
 
+          
+
           A number of whole and fractional milliseconds. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3274,13 +4094,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -3294,8 +4120,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3307,11 +4137,15 @@
 
             
 
+            
+
              is the fractional part of a minute. For example, 4.5 is equivalent to 4 minutes, 30 seconds, 0 milliseconds, and 0 ticks.</para
           >
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -3326,6 +4160,8 @@
 
             
 
+            
+
              that adds the specified number of minutes to the value of this instance.</para
           >
         </summary>
@@ -3337,6 +4173,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3345,8 +4183,12 @@
 
           
 
+          
+
           A number of whole and fractional minutes. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3386,13 +4228,19 @@
 
             
 
+            
+
              is less than <see
              cref="F:System.DateTime.MinValue" />
 
             
 
+            
+
              or greater than <see
              cref="F:System.DateTime.MaxValue" />
+
+            
 
             
 
@@ -3402,6 +4250,8 @@
           <para
             >The <paramref
              name="months" />
+
+            
 
             
 
@@ -3416,8 +4266,12 @@
 
             
 
+            
+
              object. Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3429,13 +4283,19 @@
 
             
 
+            
+
              method calculates the resulting month and year, taking into account leap years and the number of days in a month, then adjusts the day part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              object. If the resulting day is not a valid day in the resulting month, the last valid day of the resulting month is used. For example, March 31st + 1 month = April 30th. The time-of-day part of the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3450,6 +4310,8 @@
 
             
 
+            
+
              that adds the specified number of months to the value of this instance.</para
           >
         </summary>
@@ -3461,6 +4323,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3469,8 +4333,12 @@
 
           
 
+          
+
           A number of months. The <paramref
            name="months" />
+
+          
 
           
 
@@ -3508,13 +4376,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -3528,8 +4402,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3541,11 +4419,15 @@
 
             
 
+            
+
              is the fractional part of a second. For example, 4.5 is equivalent to 4 seconds, 500 milliseconds, and 0 ticks.</para
           >
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -3560,6 +4442,8 @@
 
             
 
+            
+
              that adds the specified number of seconds to the value of this instance.</para
           >
         </summary>
@@ -3571,6 +4455,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3579,8 +4465,12 @@
 
           
 
+          
+
           A number of whole and fractional seconds. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3619,13 +4509,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -3639,8 +4535,12 @@
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3655,6 +4555,8 @@
 
             
 
+            
+
              that adds the specified number of ticks to the value of this instance.</para
           >
         </summary>
@@ -3666,6 +4568,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3674,8 +4578,12 @@
 
           
 
+          
+
           A number of 100-nanosecond ticks. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3713,13 +4621,19 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.DateTime.MinValue" />
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -3733,8 +4647,12 @@
 
             
 
+            
+
              object. Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3746,8 +4664,12 @@
 
             
 
+            
+
              method calculates the resulting year taking into account leap years. The month and time-of-day part of the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3762,8 +4684,12 @@
 
                 
 
+                
+
                  + <see
                  cref="P:System.DateTime.Year" />
+
+                
 
                 
 
@@ -3777,8 +4703,12 @@
 
                 
 
+                
+
                  + <see
                  cref="P:System.DateTime.Year" />
+
+                
 
                 
 
@@ -3792,8 +4722,12 @@
 
             
 
+            
+
              method with a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3809,6 +4743,8 @@
 
             
 
+            
+
              that adds the specified number of years to the value of this instance.</para
           >
         </summary>
@@ -3820,6 +4756,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3828,8 +4766,12 @@
 
           
 
+          
+
           A number of years. The <paramref
            name="value" />
+
+          
 
           
 
@@ -3873,6 +4815,8 @@
 
             
 
+            
+
              objects, ensure that the objects represent times in the same time zone.</para
           >
         </remarks>
@@ -3881,6 +4825,8 @@
           <para
             >Compares two instances of <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3895,8 +4841,12 @@
 
             
 
+            
+
              and <paramref
              name="t2" />
+
+            
 
             
 
@@ -3923,8 +4873,12 @@
 
                   
 
+                  
+
                    is earlier than <paramref
                    name="t2" />
+
+                  
 
                   
 
@@ -3942,8 +4896,12 @@
 
                   
 
+                  
+
                    is the same as <paramref
                    name="t2" />
+
+                  
 
                   
 
@@ -3961,8 +4919,12 @@
 
                   
 
+                  
+
                    is later than <paramref
                    name="t2" />
+
+                  
 
                   
 
@@ -3977,10 +4939,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4016,13 +4982,19 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.DateTime.CompareTo(System.Object)" />
 
             
 
+            
+
              method overload because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -4034,8 +5006,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -4050,8 +5026,12 @@
 
             
 
+            
+
              value and returns an integer that indicates whether this instance is earlier than, the same as, or later than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4063,6 +5043,8 @@
           <para
             >A signed number indicating the relative values of this instance and the <paramref
              name="value" />
+
+            
 
             
 
@@ -4090,6 +5072,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -4102,6 +5086,8 @@
                 <para
                   >This instance is the same as <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -4120,6 +5106,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -4128,6 +5116,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4163,8 +5153,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -4178,8 +5172,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -4188,6 +5186,8 @@
           <para
             >Any instance of <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4202,8 +5202,12 @@
 
             
 
+            
+
              value, and returns an integer that indicates whether this instance is earlier than, the same as, or later than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4215,6 +5219,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -4242,6 +5248,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -4254,6 +5262,8 @@
                 <para
                   >This instance is the same as <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -4272,8 +5282,12 @@
 
                   
 
+                  
+
                   , or <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -4285,6 +5299,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4318,6 +5334,8 @@
 
             
 
+            
+
              instance with the same date as the current instance,
  and the time value set to midnight (00:00:00).</para
           >
@@ -4330,8 +5348,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4343,13 +5365,19 @@
 
             
 
+            
+
              type represents both dates and times in a single type, it is important to avoid misinterpreting a date returned by the <see
              cref="P:System.DateTime.Date" />
 
             
 
+            
+
              property as a date and time. For more information, see "Saving and Restoring DateTime Values" in the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4388,6 +5416,8 @@
 
             
 
+            
+
              between 1 and 31 set to the day of the month component of the current instance.</para
           >
         </value>
@@ -4399,8 +5429,12 @@
 
             
 
+            
+
              property always returns the day of the month in the Gregorian calendar, even if the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4409,8 +5443,12 @@
 
             
 
+            
+
              method. The following example uses both the <see
              cref="P:System.DateTime.Day" />
+
+            
 
             
 
@@ -4419,8 +5457,12 @@
 
             
 
+            
+
              method to retrieve the day of the month for a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4433,8 +5475,12 @@
 
             
 
+            
+
              property and the <see
              cref="M:System.Globalization.HijriCalendar.GetDayOfMonth(System.DateTime)" />
+
+            
 
             
 
@@ -4474,8 +5520,12 @@
 
             
 
+            
+
              enumeration ranges from <see
              cref="F:System.DayOfWeek.Sunday" />
+
+            
 
             
 
@@ -4484,13 +5534,19 @@
 
             
 
+            
+
             . If cast to an integer, its value ranges from zero (which indicates <see
              cref="F:System.DayOfWeek.Sunday" />
 
             
 
+            
+
             ) to six (which indicates <see
              cref="F:System.DayOfWeek.Saturday" />
+
+            
 
             
 
@@ -4502,13 +5558,19 @@
 
             
 
+            
+
              property returns an enumerated constant; it does not reflect a system's regional and language settings. To retrieve a string representing a localized weekday name for a particular date, call one of the overloads of the <see
              cref="Overload:System.DateTime.ToString" />
 
             
 
+            
+
              method that includes a <paramref
              name="format" />
+
+            
 
             
 
@@ -4518,6 +5580,8 @@
                 >How to: Extract the Day of the Week from a Specific Date</a
               >
             </format>
+
+            
 
             
 
@@ -4555,6 +5619,8 @@
 
             
 
+            
+
              between 1 and 366 set to the day of the year component of the current instance.</para
           >
         </value>
@@ -4566,8 +5632,12 @@
 
             
 
+            
+
              property takes leap years into account when it calculates the day of the year. The property value always reflects the day of the year in the Gregorian calendar, regardless of the current thread culture's current calendar. To retrieve the day of the year in a different calendar, call the <see
              cref="M:System.Globalization.Calendar.GetDayOfYear(System.DateTime)" />
+
+            
 
             
 
@@ -4610,6 +5680,8 @@
 
           
 
+          
+
            is less than 1 or greater than 12.</exception
         >
         <remarks>
@@ -4620,8 +5692,12 @@
 
             
 
+            
+
              method always interprets <paramref
              name="month" />
+
+            
 
             
 
@@ -4630,8 +5706,12 @@
 
             
 
+            
+
              as the month and year of the Gregorian calendar even if the Gregorian calendar is not the current culture's current calendar. To get the number of days in a specified month of a particular calendar, call that calendar's <see
              cref="M:System.Globalization.Calendar.GetDaysInMonth(System.Int32,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4650,8 +5730,12 @@
 
             
 
+            
+
              for the specified <paramref
              name="year" />
+
+            
 
             
 
@@ -4663,8 +5747,12 @@
 
             
 
+            
+
              equals 2 for February, the return value is 28 or 29 depending upon whether <paramref
              name="year" />
+
+            
 
             
 
@@ -4676,10 +5764,14 @@
 
           
 
+          
+
           The year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4715,13 +5807,19 @@
 
             
 
+            
+
              are equal if their <see
              cref="P:System.DateTime.Ticks" />
 
             
 
+            
+
              property values are equal. Their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -4733,13 +5831,19 @@
 
             
 
+            
+
              interface, and performs slightly better than the <see
              cref="M:System.DateTime.Equals(System.Object)" />
 
             
 
+            
+
              method because the <paramref
              name="value" />
+
+            
 
             
 
@@ -4754,6 +5858,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -4765,11 +5871,15 @@
 
             
 
+            
+
              parameter equals the value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4808,13 +5918,19 @@
 
             
 
+            
+
              are equal if their <see
              cref="P:System.DateTime.Ticks" />
 
             
 
+            
+
              property values are equal. Their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -4833,8 +5949,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4843,6 +5963,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4885,8 +6007,12 @@
 
             
 
+            
+
              and <paramref
              name="t2" />
+
+            
 
             
 
@@ -4895,8 +6021,12 @@
 
             
 
+            
+
              property values are equal. Their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -4908,6 +6038,8 @@
           <para
             >Returns a value indicating whether two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4923,10 +6055,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4962,8 +6098,12 @@
 
             
 
+            
+
              method to convert the value of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4972,8 +6112,12 @@
 
             
 
+            
+
              method to recreate the original <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -4986,8 +6130,12 @@
 
               
 
+              
+
                value returned by the <see
                cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+              
 
               
 
@@ -4996,8 +6144,12 @@
 
               
 
+              
+
                value supplied to the <see
                cref="M:System.DateTime.ToBinary" />
+
+              
 
               
 
@@ -5013,8 +6165,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -5023,8 +6179,12 @@
 
             
 
+            
+
             . When restoring a local <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -5033,8 +6193,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+            
 
             
 
@@ -5048,8 +6212,12 @@
 
                 
 
+                
+
                  object is serialized in one time zone by the <see
                  cref="M:System.DateTime.ToBinary" />
+
+                
 
                 
 
@@ -5058,8 +6226,12 @@
 
                 
 
+                
+
                  method, the local time represented by the resulting <see
                  cref="T:System.DateTime" />
+
+                
 
                 
 
@@ -5071,8 +6243,12 @@
 
                 
 
+                
+
                  object that represents a local time of 3 P.M. An application that is executing in the U.S. Pacific Time zone uses the <see
                  cref="M:System.DateTime.ToBinary" />
+
+                
 
                 
 
@@ -5081,8 +6257,12 @@
 
                 
 
+                
+
                  object to a binary value. Another application that is executing in the U.S. Eastern Time zone then uses the <see
                  cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+                
 
                 
 
@@ -5091,8 +6271,12 @@
 
                 
 
+                
+
                  object. The value of the new <see
                  cref="T:System.DateTime" />
+
+                
 
                 
 
@@ -5106,8 +6290,12 @@
 
                 
 
+                
+
                  value represents an invalid time in the local time zone of the system on which <see
                  cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+                
 
                 
 
@@ -5119,13 +6307,19 @@
 
                 
 
+                
+
                  method and is then restored by the <see
                  cref="M:System.DateTime.FromBinary(System.Int64)" />
 
                 
 
+                
+
                  method, the original value is adjusted to become a valid time. You can determine whether a particular date and time value may be subject to modification by passing it to the <see
                  cref="M:System.TimeZoneInfo.IsInvalidTime(System.DateTime)" />
+
+                
 
                 
 
@@ -5143,13 +6337,19 @@
 
             
 
+            
+
              structure consists of a private Kind field, which indicates whether the specified time is local time, Coordinated Universal Time (UTC), or neither, concatenated to a private Ticks field, which contains the number of 100-nanosecond ticks that specify a date and time. The number of ticks can be accessed with the <see
              cref="P:System.DateTime.Ticks" />
 
             
 
+            
+
              property and the Kind field can be accessed with the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -5161,13 +6361,19 @@
 
             
 
+            
+
              object manually instead of using a serialization interface such as <see
              cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
+            
+
             , you needed to serialize only the Ticks data in the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -5182,6 +6388,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -5193,8 +6401,12 @@
 
             
 
+            
+
              object that was serialized by the <see
              cref="M:System.DateTime.ToBinary" />
+
+            
 
             
 
@@ -5206,13 +6418,19 @@
 
           
 
+          
+
           A 64-bit signed integer that encodes the <see
            cref="P:System.DateTime.Kind" />
 
           
 
+          
+
            property in a 2-bit field and the <see
            cref="P:System.DateTime.Ticks" />
+
+          
 
           
 
@@ -5248,6 +6466,8 @@
 
             
 
+            
+
              parameter specifies a file time expressed in 100-nanosecond ticks.</para
           >
           <para
@@ -5256,13 +6476,19 @@
 
             
 
+            
+
              whose <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -5281,11 +6507,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="fileTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5324,6 +6554,8 @@
 
             
 
+            
+
              parameter specifies a file time expressed in 100-nanosecond ticks.</para
           >
           <para
@@ -5332,13 +6564,19 @@
 
             
 
+            
+
              whose <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -5357,11 +6595,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="fileTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5396,8 +6638,12 @@
 
             
 
+            
+
              parameter is a double-precision floating-point number that represents a date as the number of days before or after the base date, midnight, 30 December 1899. The sign and integral part of <paramref
              name="d" />
+
+            
 
             
 
@@ -5406,8 +6652,12 @@
 
             
 
+            
+
              encodes the time of day as a fraction of a day displacement from midnight. <paramref
              name="d" />
+
+            
 
             
 
@@ -5417,6 +6667,8 @@
           <para
             >See <see
              cref="M:System.DateTime.ToOADate" />
+
+            
 
             
 
@@ -5431,6 +6683,8 @@
 
             
 
+            
+
              equivalent to the specified OLE Automation Date.</para
           >
         </summary>
@@ -5442,11 +6696,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5479,8 +6737,12 @@
 
             
 
+            
+
              method is equivalent to combining the string arrays returned by separate calls to the <see
              cref="M:System.DateTime.GetDateTimeFormats(System.Char)" />
+
+            
 
             
 
@@ -5493,11 +6755,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Each element of the return value is formatted using information from the current culture. For more information about culture-specific formatting information for the current culture, see <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -5544,6 +6810,8 @@
 
             
 
+            
+
              parameter can be any of the standard date and time format specifiers. These include d, D, f, F, g, G, M (or m), O (or o), R (or r), s, t, T, u, U, and Y (or y). For more information, see <format
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
@@ -5553,11 +6821,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Each element of the return value is formatted using information from the current culture. For more information about culture-specific formatting information for the current culture, see <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -5579,11 +6851,15 @@
 
             
 
+            
+
              standard date and time format specifier.</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5621,8 +6897,12 @@
 
             
 
+            
+
              method is equivalent to combining the string arrays returned by separate calls to the <see
              cref="M:System.DateTime.GetDateTimeFormats(System.Char,System.IFormatProvider)" />
+
+            
 
             
 
@@ -5635,11 +6915,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Each element of the return value is formatted using culture-specific information supplied by <paramref
              name="provider" />
+
+            
 
             
 
@@ -5652,8 +6936,12 @@
 
               
 
+              
+
                is a <see
                cref="T:System.Globalization.CultureInfo" />
+
+              
 
               
 
@@ -5662,8 +6950,12 @@
 
               
 
+              
+
                or if an update occurs to the system's cultural data for <paramref
                name="provider" />
+
+              
 
               
 
@@ -5681,6 +6973,8 @@
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5723,11 +7017,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Each element of the return value is formatted using culture-specific information supplied by <paramref
              name="provider" />
+
+            
 
             
 
@@ -5740,8 +7038,12 @@
 
               
 
+              
+
                is a <see
                cref="T:System.Globalization.CultureInfo" />
+
+              
 
               
 
@@ -5750,8 +7052,12 @@
 
               
 
+              
+
                or if an update occurs to the system's cultural data for <paramref
                name="provider" />
+
+              
 
               
 
@@ -5772,10 +7078,14 @@
 
           
 
+          
+
           A date and time format string (see Remarks). </param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5812,6 +7122,8 @@
               > This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -5856,8 +7168,12 @@
 
             
 
+            
+
              for value type <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -5869,6 +7185,8 @@
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.DateTime" />
+
+            
 
             
 
@@ -5902,6 +7220,8 @@
 
             
 
+            
+
              between 0 and 23 set to the hour component
    of the current instance.</para
           >
@@ -5914,13 +7234,19 @@
 
             
 
+            
+
              property is always expressed using a 24-hour clock. To retrieve a string that represents the hour of a date and time using a 12-hour clock, call the <see
              cref="M:System.DateTime.ToString(System.String)" />
 
             
 
+            
+
              or <see
              cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -5960,8 +7286,12 @@
 
             
 
+            
+
              value falls within the daylight saving time range of the local time zone, which is returned by the <see
              cref="P:System.TimeZoneInfo.Local" />
+
+            
 
             
 
@@ -5970,13 +7300,19 @@
 
             
 
+            
+
              property. For time zones that observe daylight saving time, you can determine when the transition to and from daylight saving time occurs by retrieving the <see
              cref="T:System.TimeZoneInfo.AdjustmentRule" />
 
             
 
+            
+
              array returned by the time zone's <see
              cref="M:System.TimeZoneInfo.GetAdjustmentRules" />
+
+            
 
             
 
@@ -5988,11 +7324,15 @@
 
             
 
+            
+
              value represents either an ambiguous or an invalid time in the local time zone, the method returns false. </para
           >
           <para
             >On winxp systems, the <see
              cref="M:System.DateTime.IsDaylightSavingTime" />
+
+            
 
             
 
@@ -6007,6 +7347,8 @@
 
             
 
+            
+
              is within the daylight saving time range for the current time zone.</para
           >
         </summary>
@@ -6018,8 +7360,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -6028,8 +7374,12 @@
 
             
 
+            
+
              and the value of this instance of <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6038,8 +7388,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -6078,10 +7432,14 @@
 
             
 
+            
+
              is specified as a 4-digit base 10 number; for example, 1996.</para
           >
           <para>
             <paramref name="year" />
+
+            
 
             
 
@@ -6100,11 +7458,15 @@
 
             
 
+            
+
              is a leap year; otherwise, false.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6138,8 +7500,12 @@
 
             
 
+            
+
              property of a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6148,8 +7514,12 @@
 
             
 
+            
+
              value by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -6161,13 +7531,19 @@
 
             
 
+            
+
              property allows a <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              value to clearly reflect either Coordinated Universal Time (UTC) or the local time. In contrast, the <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -6211,8 +7587,12 @@
 
             
 
+            
+
             , support an upper date range that is earlier than <see
              cref="F:System.DateTime.MaxValue" />
+
+            
 
             
 
@@ -6221,13 +7601,19 @@
 
             
 
+            
+
              in variable assignments or formatting and parsing operations can throw an <see
              cref="T:System.ArgumentOutOfRangeException" />
 
             
 
+            
+
             . Rather than retrieving the value of <see
              cref="F:System.DateTime.MaxValue" />
+
+            
 
             
 
@@ -6239,6 +7625,8 @@
           <para
             >Represents the largest possible value of <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6273,6 +7661,8 @@
 
             
 
+            
+
              between 0 and 999 set to the milliseconds component of
    the current instance.</para
           >
@@ -6285,6 +7675,8 @@
 
             
 
+            
+
              property by using the "fff" format specifier. For example, the following code displays a string that contains the number of milliseconds in a date and time to the console.</para
           >
           <para>code reference: System.DateTime.Millisecond#1</para>
@@ -6293,6 +7685,8 @@
           <para
             >However, the "o" format specifier is intended less for displaying than for round-tripping or storing a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6329,6 +7723,8 @@
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6376,8 +7772,12 @@
 
             
 
+            
+
              defines the date and time that is assigned to an uninitialized <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6390,13 +7790,19 @@
 
             
 
+            
+
              and <see
              cref="F:System.DateTime.MaxValue" />
 
             
 
+            
+
              properties can be used to ensure that a value lies within the supported range before passing it to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6408,6 +7814,8 @@
           <para
             >Represents the smallest possible value of <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6439,6 +7847,8 @@
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6512,8 +7922,12 @@
 
             
 
+            
+
              property is frequently used to measure performance. However, because of its low resolution, it is not suitable for use as a benchmarking tool. A better alternative is to use the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -6525,13 +7939,19 @@
 
             
 
+            
+
              whose <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property returns <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -6544,6 +7964,8 @@
 
               
 
+              
+
                property to retrieve the current local date and time. It allows a local time to be expressed unambiguously as a single point in time, which in turn makes that time value portable across computers. </para
             >
           </block>
@@ -6553,6 +7975,8 @@
           <para
             >Gets a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6597,13 +8021,19 @@
 
             
 
+            
+
             ( <paramref
              name="d" />
 
             
 
+            
+
             .Ticks + <paramref
              name="t" />
+
+            
 
             
 
@@ -6617,8 +8047,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -6636,8 +8070,12 @@
 
             
 
+            
+
              and <paramref
              name="t" />
+
+            
 
             
 
@@ -6649,10 +8087,14 @@
 
           
 
+          
+
           The date and time value to add. </param
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6697,8 +8139,12 @@
 
             
 
+            
+
              operator determines whether two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6707,8 +8153,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -6723,6 +8173,8 @@
 
             
 
+            
+
              are equal.</para
           >
         </summary>
@@ -6734,8 +8186,12 @@
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -6747,10 +8203,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6795,8 +8255,12 @@
 
             
 
+            
+
              operator determines the relationship between two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6805,8 +8269,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -6821,8 +8289,12 @@
 
             
 
+            
+
              is later than another specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6837,8 +8309,12 @@
 
             
 
+            
+
              is later than <paramref
              name="t2" />
+
+            
 
             
 
@@ -6850,10 +8326,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6897,8 +8377,12 @@
 
             
 
+            
+
              operator determines the relationship between two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6907,8 +8391,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -6923,8 +8411,12 @@
 
             
 
+            
+
              represents a date and time that is the same as or later than another specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -6939,8 +8431,12 @@
 
             
 
+            
+
              is the same as or later than <paramref
              name="t2" />
+
+            
 
             
 
@@ -6952,10 +8448,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6999,8 +8499,12 @@
 
             
 
+            
+
              operator determines whether two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7009,8 +8513,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -7025,6 +8533,8 @@
 
             
 
+            
+
              are not equal.</para
           >
         </summary>
@@ -7036,8 +8546,12 @@
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -7049,10 +8563,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7097,8 +8615,12 @@
 
             
 
+            
+
              operator determines the relationship between two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7107,8 +8629,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -7123,8 +8649,12 @@
 
             
 
+            
+
              is earlier than another specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7139,8 +8669,12 @@
 
             
 
+            
+
              is earlier than <paramref
              name="t2" />
+
+            
 
             
 
@@ -7152,10 +8686,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7200,8 +8738,12 @@
 
             
 
+            
+
              operator determines the relationship between two <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7210,8 +8752,12 @@
 
             
 
+            
+
              objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -7226,8 +8772,12 @@
 
             
 
+            
+
              represents a date and time that is the same as or earlier than another specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7242,8 +8792,12 @@
 
             
 
+            
+
              is the same as or later than <paramref
              name="t2" />
+
+            
 
             
 
@@ -7255,10 +8809,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7300,8 +8858,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -7315,8 +8877,12 @@
 
             
 
+            
+
              method does not consider the value of the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -7325,8 +8891,12 @@
 
             
 
+            
+
              values when performing the subtraction. Before subtracting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7336,6 +8906,8 @@
             <para
               >The <see
                cref="M:System.DateTimeOffset.op_Subtraction(System.DateTimeOffset,System.DateTimeOffset)" />
+
+              
 
               
 
@@ -7355,8 +8927,12 @@
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -7365,8 +8941,12 @@
 
             
 
+            
+
              minus <paramref
              name="d2" />
+
+            
 
             
 
@@ -7378,10 +8958,14 @@
 
           
 
+          
+
           The date and time value to subtract from (the minuend). </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7423,8 +9007,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -7438,8 +9026,12 @@
 
             
 
+            
+
              from the ticks value of <paramref
              name="d" />
+
+            
 
             
 
@@ -7458,8 +9050,12 @@
 
             
 
+            
+
              minus the value of <paramref
              name="t" />
+
+            
 
             
 
@@ -7471,10 +9067,14 @@
 
           
 
+          
+
           The date and time value to subtract from. </param
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7511,10 +9111,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -7526,6 +9130,8 @@
             <para
               >For examples and comprehensive usage information about this and other overloads of the Parse method, see the <see
                cref="Overload:System.DateTime.Parse" />
+
+              
 
               
 
@@ -7541,6 +9147,8 @@
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -7552,11 +9160,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7597,10 +9209,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -7612,6 +9228,8 @@
             <para
               >For examples and comprehensive usage information about this and other overloads of the Parse method, see the <see
                cref="Overload:System.DateTime.Parse" />
+
+              
 
               
 
@@ -7627,6 +9245,8 @@
 
             
 
+            
+
              equivalent by using culture-specific format information.</para
           >
         </summary>
@@ -7638,8 +9258,12 @@
 
             
 
+            
+
              as specified by <paramref
              name="provider" />
+
+            
 
             
 
@@ -7651,6 +9275,8 @@
 
           
 
+          
+
           A string that contains a date and time to convert. </param
         >
         <param name="provider">
@@ -7658,8 +9284,12 @@
 
           
 
+          
+
           An object that supplies culture-specific format information about <paramref
            name="s" />
+
+          
 
           
 
@@ -7701,10 +9331,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -7715,13 +9349,19 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
           
 
+          
+
            for the parse operation to succeed, and that defines how to interpret the parsed date in relation to the current time zone or the current date. A typical value to specify is <see
            cref="F:System.Globalization.DateTimeStyles.None" />
+
+          
 
           
 
@@ -7733,6 +9373,8 @@
             <para
               >For examples and comprehensive usage information about this and other overloads of the Parse method, see the <see
                cref="Overload:System.DateTime.Parse" />
+
+              
 
               
 
@@ -7748,6 +9390,8 @@
 
             
 
+            
+
              equivalent by using culture-specific format information and formatting style.</para
           >
         </summary>
@@ -7759,13 +9403,19 @@
 
             
 
+            
+
             , as specified by <paramref
              name="provider" />
 
             
 
+            
+
              and <paramref
              name="styles" />
+
+            
 
             
 
@@ -7777,6 +9427,8 @@
 
           
 
+          
+
           A string that contains a date and time to convert. </param
         >
         <param name="provider">
@@ -7784,8 +9436,12 @@
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -7796,13 +9452,19 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
           
 
+          
+
            for the parse operation to succeed, and that defines how to interpret the parsed date in relation to the current time zone or the current date. A typical value to specify is <see
            cref="F:System.Globalization.DateTimeStyles.None" />
+
+          
 
           
 
@@ -7844,8 +9506,12 @@
 
           
 
+          
+
           or <paramref
            name="format" />
+
+          
 
           
 
@@ -7857,8 +9523,12 @@
 
             
 
+            
+
              or <paramref
              name="format" />
+
+            
 
             
 
@@ -7870,8 +9540,12 @@
 
             
 
+            
+
              does not contain a date and time that were recognized as the pattern specified in <paramref
              name="format" />
+
+            
 
             
 
@@ -7882,6 +9556,8 @@
           <para
             >This example demonstrates the <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -7915,8 +9591,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method parses the string representation of a date, which must be in the format defined by the <paramref
              name="format" />
+
+            
 
             
 
@@ -7925,8 +9605,12 @@ public class DateTimeTest {
 
             
 
+            
+
             , and that <paramref
              name="s" />
+
+            
 
             
 
@@ -7935,8 +9619,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -7945,13 +9633,19 @@ public class DateTimeTest {
 
             
 
+            
+
              value has a time of midnight (00:00:00). If <paramref
              name="format" />
 
             
 
+            
+
              defines a time with no date element and the parse operation succeeds, the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7963,13 +9657,19 @@ public class DateTimeTest {
 
             
 
+            
+
              does not represent a time in a particular time zone and the parse operation succeeds, the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7978,8 +9678,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . If <paramref
              name="s" />
+
+            
 
             
 
@@ -7988,8 +9692,12 @@ public class DateTimeTest {
 
             
 
+            
+
              allows time zone information to be present (for example, if <paramref
              name="format" />
+
+            
 
             
 
@@ -7998,13 +9706,19 @@ public class DateTimeTest {
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              value is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -8016,8 +9730,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter is a string that contains either a single standard format specifier, or one or more custom format specifiers that define the required format of <paramref
              name="s" />
+
+            
 
             
 
@@ -8028,10 +9746,14 @@ public class DateTimeTest {
 
             
 
+            
+
              or <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -8044,8 +9766,12 @@ public class DateTimeTest {
 
               
 
+              
+
                is a custom format pattern that does not include date or time separators (such as "yyyyMMdd HHmm"), use the invariant culture for the <paramref
                name="provider" />
+
+              
 
               
 
@@ -8058,8 +9784,12 @@ public class DateTimeTest {
 
             
 
+            
+
              are defined by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -8068,13 +9798,19 @@ public class DateTimeTest {
 
             
 
+            
+
              if <paramref
              name="format" />
 
             
 
+            
+
              is a standard format specifier string. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -8088,8 +9824,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that represents the culture used to interpret <paramref
                  name="s" />
+
+                
 
                 
 
@@ -8098,13 +9838,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object returned by its <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
                 
 
+                
+
                  property defines the symbols and formatting in <paramref
                  name="s" />
+
+                
 
                 
 
@@ -8118,6 +9864,8 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that defines the format of date and time data.</para
               >
             </item>
@@ -8128,8 +9876,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  implementation whose <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -8138,8 +9890,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object or the <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -8153,8 +9909,12 @@ public class DateTimeTest {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -8169,6 +9929,8 @@ public class DateTimeTest {
 
             
 
+            
+
              equivalent using the specified format and culture-specific format information. The format of the string representation must match the specified format exactly.</para
           >
         </summary>
@@ -8180,13 +9942,19 @@ public class DateTimeTest {
 
             
 
+            
+
             , as specified by <paramref
              name="format" />
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -8198,6 +9966,8 @@ public class DateTimeTest {
 
           
 
+          
+
           A string that contains a date and time to convert. </param
         >
         <param name="format">
@@ -8205,8 +9975,12 @@ public class DateTimeTest {
 
           
 
+          
+
           A format specifier that defines the required format of <paramref
            name="s" />
+
+          
 
           
 
@@ -8217,8 +9991,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that supplies culture-specific format information about <paramref
            name="s" />
+
+          
 
           
 
@@ -8261,8 +10039,12 @@ public class DateTimeTest {
 
           
 
+          
+
           or <paramref
            name="format" />
+
+          
 
           
 
@@ -8274,11 +10056,15 @@ public class DateTimeTest {
 
             
 
+            
+
              or format is an empty string.</para
           >
           <para> -or-</para>
           <para>
             <paramref name="s" />
+
+            
 
             
 
@@ -8290,6 +10076,8 @@ public class DateTimeTest {
           <para
             >This example demonstrates the <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -8323,8 +10111,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method parses the string representation of a date, which must be in a format defined by the <paramref
              name="format" />
+
+            
 
             
 
@@ -8333,8 +10125,12 @@ public class DateTimeTest {
 
             
 
+            
+
              appear in the order specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -8343,8 +10139,12 @@ public class DateTimeTest {
 
             
 
+            
+
              does not match the pattern of the <paramref
              name="format" />
+
+            
 
             
 
@@ -8353,8 +10153,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -8363,8 +10167,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method parses the string representation of a date in any one of the formats recognized by the format provider's <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -8373,8 +10181,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method also allows the date and time elements in <paramref
              name="s" />
+
+            
 
             
 
@@ -8386,8 +10198,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter contains only a time and no date, the current date is used unless the <paramref
              name="style" />
+
+            
 
             
 
@@ -8396,8 +10212,12 @@ public class DateTimeTest {
 
             
 
+            
+
              flag, in which case the default date (DateTime.Date.MinValue) is used. If the <paramref
              name="s" />
+
+            
 
             
 
@@ -8406,8 +10226,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter also determines whether the <paramref
              name="s" />
+
+            
 
             
 
@@ -8419,13 +10243,19 @@ public class DateTimeTest {
 
             
 
+            
+
              contains no time zone information, the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -8434,8 +10264,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . This behavior can be changed by using the <see
              cref="F:System.Globalization.DateTimeStyles.AssumeLocal" />
+
+            
 
             
 
@@ -8444,13 +10278,19 @@ public class DateTimeTest {
 
             
 
+            
+
              value whose <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -8459,8 +10299,12 @@ public class DateTimeTest {
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+            
 
             
 
@@ -8469,8 +10313,12 @@ public class DateTimeTest {
 
             
 
+            
+
              value whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -8479,8 +10327,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . If <paramref
              name="s" />
+
+            
 
             
 
@@ -8489,8 +10341,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -8499,8 +10355,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . This behavior can be changed by using the <see
              cref="F:System.Globalization.DateTimeStyles.RoundtripKind" />
+
+            
 
             
 
@@ -8509,8 +10369,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property to <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -8522,8 +10386,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter defines the required pattern of the <paramref
              name="s" />
+
+            
 
             
 
@@ -8534,10 +10402,14 @@ public class DateTimeTest {
 
             
 
+            
+
              table, or a single standard format specifier, which identifies a predefined pattern, from the <format
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -8546,6 +10418,8 @@ public class DateTimeTest {
           <para
             >If you do not use date or time separators in a custom format pattern, use the invariant culture for the <paramref
              name="provider" />
+
+            
 
             
 
@@ -8558,8 +10432,12 @@ public class DateTimeTest {
 
               
 
+              
+
                conform to a single format for the parse operation to succeed, you can call the <see
                cref="M:System.DateTime.ParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+
+              
 
               
 
@@ -8572,8 +10450,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter includes one or more members of the <see
              cref="T:System.Globalization.DateTimeStyles" />
+
+            
 
             
 
@@ -8582,8 +10464,12 @@ public class DateTimeTest {
 
             
 
+            
+
              can appear in <paramref
              name="s" />
+
+            
 
             
 
@@ -8592,8 +10478,12 @@ public class DateTimeTest {
 
             
 
+            
+
              enumeration affects the operation of the <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+
+            
 
             
 
@@ -8623,8 +10513,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    and, if necessary, converts it to UTC. If <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8633,8 +10527,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    contains no time zone information but <paramref
                    name="styles" />
+
+                  
 
                   
 
@@ -8643,8 +10541,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    flag, the method parses the string, calls <see
                    cref="M:System.DateTime.ToUniversalTime" />
+
+                  
 
                   
 
@@ -8653,13 +10555,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value to UTC, and sets the <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property to <see
                    cref="F:System.DateTimeKind.Utc" />
+
+                  
 
                   
 
@@ -8668,8 +10576,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    indicates that it represents UTC, or if <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8678,8 +10590,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.DateTimeStyles.AssumeUniversal" />
+
+                  
 
                   
 
@@ -8688,13 +10604,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value, and sets the <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property to <see
                    cref="F:System.DateTimeKind.Utc" />
+
+                  
 
                   
 
@@ -8715,6 +10637,8 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    can appear between any individual date or time element.</para
                 >
               </description>
@@ -8732,8 +10656,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    can appear at the beginning of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8754,8 +10682,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8776,8 +10708,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    may contain leading, inner, and trailing white spaces not defined by <paramref
                    name="format" />
+
+                  
 
                   
 
@@ -8798,8 +10734,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    lacks any time zone information, it is assumed to represent a local time. Unless the <see
                    cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+                  
 
                   
 
@@ -8808,13 +10748,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    property of the returned <see
                    cref="T:System.DateTime" />
 
                   
 
+                  
+
                    value is set to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -8835,8 +10781,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    lacks any time zone information, it is assumed to represent UTC. Unless the <see
                    cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+                  
 
                   
 
@@ -8845,13 +10795,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value from UTC to local time and sets its <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -8872,6 +10828,8 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    contains time without date information, the date of the return value is set to DateTime.MinValue.Date.</para
                 >
               </description>
@@ -8889,8 +10847,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    parameter is parsed using default values. No white space other than that present in <paramref
                    name="format" />
+
+                  
 
                   
 
@@ -8899,8 +10861,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    lacks a date component, the date of the returned <see
                    cref="T:System.DateTime" />
+
+                  
 
                   
 
@@ -8909,13 +10875,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    contains no time zone information, the <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property of the returned <see
                    cref="T:System.DateTime" />
+
+                  
 
                   
 
@@ -8924,8 +10896,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                   . If time zone information is present in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8934,13 +10910,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    property of the returned <see
                    cref="T:System.DateTime" />
 
                   
 
+                  
+
                    object is set to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -8961,13 +10943,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value date and time with its <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property set to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -8982,8 +10970,12 @@ public class DateTimeTest {
 
             
 
+            
+
              are defined by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -8992,13 +10984,19 @@ public class DateTimeTest {
 
             
 
+            
+
              if <paramref
              name="format" />
 
             
 
+            
+
              is a standard format specifier string. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -9012,8 +11010,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that represents the culture used to interpret <paramref
                  name="s" />
+
+                
 
                 
 
@@ -9022,13 +11024,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object returned by its <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
                 
 
+                
+
                  property defines the symbols and formatting in <paramref
                  name="s" />
+
+                
 
                 
 
@@ -9042,6 +11050,8 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that defines the format of date and time data.</para
               >
             </item>
@@ -9052,8 +11062,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  implementation whose <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -9062,8 +11076,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object or the <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -9077,8 +11095,12 @@ public class DateTimeTest {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -9093,6 +11115,8 @@ public class DateTimeTest {
 
             
 
+            
+
              equivalent using the specified format, culture-specific format information, and style. The format of the string representation must match the specified format exactly or an exception is thrown.</para
           >
         </summary>
@@ -9104,8 +11128,12 @@ public class DateTimeTest {
 
             
 
+            
+
             , as specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -9114,8 +11142,12 @@ public class DateTimeTest {
 
             
 
+            
+
             , and <paramref
              name="style" />
+
+            
 
             
 
@@ -9127,6 +11159,8 @@ public class DateTimeTest {
 
           
 
+          
+
           A string containing a date and time to convert. </param
         >
         <param name="format">
@@ -9134,8 +11168,12 @@ public class DateTimeTest {
 
           
 
+          
+
           A format specifier that defines the required format of <paramref
            name="s" />
+
+          
 
           
 
@@ -9146,8 +11184,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -9158,8 +11200,12 @@ public class DateTimeTest {
 
           
 
+          
+
           A bitwise combination of the enumeration values that provides additional information about <paramref
            name="s" />
+
+          
 
           
 
@@ -9168,8 +11214,12 @@ public class DateTimeTest {
 
           
 
+          
+
           , or about the conversion from <paramref
            name="s" />
+
+          
 
           
 
@@ -9178,8 +11228,12 @@ public class DateTimeTest {
 
           
 
+          
+
            value. A typical value to specify is <see
            cref="F:System.Globalization.DateTimeStyles.None" />
+
+          
 
           
 
@@ -9222,8 +11276,12 @@ public class DateTimeTest {
 
           
 
+          
+
           or <paramref
            name="formats" />
+
+          
 
           
 
@@ -9235,8 +11293,12 @@ public class DateTimeTest {
 
             
 
+            
+
              or <paramref
              name="format" />
+
+            
 
             
 
@@ -9248,6 +11310,8 @@ public class DateTimeTest {
 
             
 
+            
+
              does not contain a date and time that were recognized as the pattern specified in <paramref
              name="format" />
           </para>
@@ -9256,6 +11320,8 @@ public class DateTimeTest {
           <para
             >This example demonstrates the <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -9290,8 +11356,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method parses the string representation of a date that matches any one of the patterns assigned to the <paramref
              name="formats" />
+
+            
 
             
 
@@ -9300,8 +11370,12 @@ public class DateTimeTest {
 
             
 
+            
+
              does not match any one of these patterns with any of the variations defined by the <paramref
              name="styles" />
+
+            
 
             
 
@@ -9310,13 +11384,19 @@ public class DateTimeTest {
 
             
 
+            
+
             . Aside from comparing <paramref
              name="s" />
 
             
 
+            
+
              to multiple formatting patterns, rather than to a single formatting pattern, this overload behaves identically to the <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+
+            
 
             
 
@@ -9328,8 +11408,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter contains the date and time to parse. If the <paramref
              name="s" />
+
+            
 
             
 
@@ -9338,8 +11422,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter includes the <see
              cref="F:System.Globalization.DateTimeStyles.NoCurrentDateDefault" />
+
+            
 
             
 
@@ -9348,8 +11436,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter contains only a date and no time, midnight (00:00:00) is used. The <paramref
              name="style" />
+
+            
 
             
 
@@ -9358,8 +11450,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter can contain leading, inner, or trailing white space characters other than those permitted by one of the format strings in <paramref
              name="formats" />
+
+            
 
             
 
@@ -9371,13 +11467,19 @@ public class DateTimeTest {
 
             
 
+            
+
              contains no time zone information, the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -9386,8 +11488,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . This behavior can be changed by using the <see
              cref="F:System.Globalization.DateTimeStyles.AssumeLocal" />
+
+            
 
             
 
@@ -9396,13 +11502,19 @@ public class DateTimeTest {
 
             
 
+            
+
              value whose <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -9411,8 +11523,12 @@ public class DateTimeTest {
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+            
 
             
 
@@ -9421,8 +11537,12 @@ public class DateTimeTest {
 
             
 
+            
+
              value whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -9431,8 +11551,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . If <paramref
              name="s" />
+
+            
 
             
 
@@ -9441,8 +11565,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -9451,8 +11579,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . This behavior can be changed by using the <see
              cref="F:System.Globalization.DateTimeStyles.RoundtripKind" />
+
+            
 
             
 
@@ -9461,8 +11593,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property to <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -9474,13 +11610,19 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter contains an array of patterns, one of which <paramref
              name="s" />
 
             
 
+            
+
              must match exactly if the parse operation is to succeed. The patterns in the <paramref
              name="formats" />
+
+            
 
             
 
@@ -9491,10 +11633,14 @@ public class DateTimeTest {
 
             
 
+            
+
              table, or a single standard format specifier, which identifies a predefined pattern, from the <format
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -9506,6 +11652,8 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter and the widest form of each custom format specifier. For example, if you want to specify hours in the pattern, specify the wider form, "HH", instead of the narrower form, "H".</para
           >
           <para
@@ -9514,8 +11662,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter includes one or more members of the <see
              cref="T:System.Globalization.DateTimeStyles" />
+
+            
 
             
 
@@ -9524,8 +11676,12 @@ public class DateTimeTest {
 
             
 
+            
+
              can appear in <paramref
              name="s" />
+
+            
 
             
 
@@ -9534,8 +11690,12 @@ public class DateTimeTest {
 
             
 
+            
+
              enumeration affects the operation of the <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)" />
+
+            
 
             
 
@@ -9565,8 +11725,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    and, if necessary, converts it to UTC. If <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9575,8 +11739,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    contains no time zone information but <paramref
                    name="styles" />
+
+                  
 
                   
 
@@ -9585,8 +11753,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    flag, the method parses the string, calls <see
                    cref="M:System.DateTime.ToUniversalTime" />
+
+                  
 
                   
 
@@ -9595,13 +11767,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value to UTC, and sets the <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property to <see
                    cref="F:System.DateTimeKind.Utc" />
+
+                  
 
                   
 
@@ -9610,8 +11788,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    indicates that it represents UTC, or if <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9620,8 +11802,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.DateTimeStyles.AssumeUniversal" />
+
+                  
 
                   
 
@@ -9630,13 +11816,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value, and sets the <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property to <see
                    cref="F:System.DateTimeKind.Utc" />
+
+                  
 
                   
 
@@ -9657,6 +11849,8 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    can appear between any individual date or time element.</para
                 >
               </description>
@@ -9674,8 +11868,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    can appear at the beginning of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9696,8 +11894,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9718,8 +11920,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    may contain leading, inner, and trailing white spaces not defined by <paramref
                    name="format" />
+
+                  
 
                   
 
@@ -9740,8 +11946,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    lacks any time zone information, it is assumed to represent a local time. Unless the <see
                    cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+                  
 
                   
 
@@ -9750,13 +11960,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    property of the returned <see
                    cref="T:System.DateTime" />
 
                   
 
+                  
+
                    value is set to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -9777,8 +11993,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    lacks any time zone information, it is assumed to represent UTC. Unless the <see
                    cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+                  
 
                   
 
@@ -9787,13 +12007,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    value from UTC to local time and sets its <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -9814,6 +12040,8 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    contains time without date information, the date of the return value is set to DateTime.MinValue.Date.</para
                 >
               </description>
@@ -9831,8 +12059,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    parameter is parsed using default values. No white space other than that present in <paramref
                    name="format" />
+
+                  
 
                   
 
@@ -9841,8 +12073,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    lacks a date component, the date of the returned <see
                    cref="T:System.DateTime" />
+
+                  
 
                   
 
@@ -9851,13 +12087,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    contains no time zone information, the <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    property of the returned <see
                    cref="T:System.DateTime" />
+
+                  
 
                   
 
@@ -9866,8 +12108,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                   . If time zone information is present in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9876,13 +12122,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    property of the returned <see
                    cref="T:System.DateTime" />
 
                   
 
+                  
+
                    object is set to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -9903,8 +12155,12 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    property set to <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -9919,8 +12175,12 @@ public class DateTimeTest {
 
             
 
+            
+
              are defined by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -9929,13 +12189,19 @@ public class DateTimeTest {
 
             
 
+            
+
              if <paramref
              name="format" />
 
             
 
+            
+
              is a standard format specifier string. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -9949,8 +12215,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that represents the culture used to interpret <paramref
                  name="s" />
+
+                
 
                 
 
@@ -9959,13 +12229,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object returned by its <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
                 
 
+                
+
                  property defines the symbols and formatting in <paramref
                  name="s" />
+
+                
 
                 
 
@@ -9979,6 +12255,8 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that defines the format of date and time data.</para
               >
             </item>
@@ -9989,8 +12267,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  implementation whose <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -9999,8 +12281,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object or the <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -10014,8 +12300,12 @@ public class DateTimeTest {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -10030,6 +12320,8 @@ public class DateTimeTest {
 
             
 
+            
+
              equivalent using the specified array of formats, culture-specific format information, and style. The format of the string representation must match at least one of the specified formats exactly or an exception is thrown.</para
           >
         </summary>
@@ -10041,8 +12333,12 @@ public class DateTimeTest {
 
             
 
+            
+
             , as specified by <paramref
              name="formats" />
+
+            
 
             
 
@@ -10051,8 +12347,12 @@ public class DateTimeTest {
 
             
 
+            
+
             , and <paramref
              name="style" />
+
+            
 
             
 
@@ -10064,6 +12364,8 @@ public class DateTimeTest {
 
           
 
+          
+
           A string that contains a date and time to convert. </param
         >
         <param name="formats">
@@ -10071,8 +12373,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An array of allowable formats of <paramref
            name="s" />
+
+          
 
           
 
@@ -10083,8 +12389,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that supplies culture-specific format information about <paramref
            name="s" />
+
+          
 
           
 
@@ -10095,13 +12405,19 @@ public class DateTimeTest {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the permitted format of <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.DateTimeStyles.None" />
+
+          
 
           
 
@@ -10132,6 +12448,8 @@ public class DateTimeTest {
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -10179,8 +12497,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object consists of a Kind field that indicates whether the time value is based on local time, Coordinated Universal Time (UTC), or neither, and a Ticks field that contains a time value measured in 100-nanosecond ticks. The <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -10189,8 +12511,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object using the specified <paramref
              name="kind" />
+
+            
 
             
 
@@ -10203,8 +12529,12 @@ public class DateTimeTest {
 
               
 
+              
+
                value does not represent the same instant in time as the <paramref
                name="value" />
+
+              
 
               
 
@@ -10213,8 +12543,12 @@ public class DateTimeTest {
 
               
 
+              
+
                is not a time zone conversion method. Instead, it leaves the time specified by the <paramref
                name="value" />
+
+              
 
               
 
@@ -10223,8 +12557,12 @@ public class DateTimeTest {
 
               
 
+              
+
                property to <paramref
                name="kind" />
+
+              
 
               
 
@@ -10237,6 +12575,8 @@ public class DateTimeTest {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -10246,8 +12586,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method is useful in interoperability scenarios where you receive a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -10262,13 +12606,19 @@ public class DateTimeTest {
 
             
 
+            
+
              object that has the same number of ticks as the specified <see
              cref="T:System.DateTime" />
 
             
 
+            
+
             , but is designated as either local time, Coordinated Universal Time (UTC), or neither, as indicated by the specified <see
              cref="T:System.DateTimeKind" />
+
+            
 
             
 
@@ -10283,13 +12633,19 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter and the <see
              cref="T:System.DateTimeKind" />
 
             
 
+            
+
              value specified by the <paramref
              name="kind" />
+
+            
 
             
 
@@ -10301,10 +12657,14 @@ public class DateTimeTest {
 
           
 
+          
+
           A date and time. </param
         >
         <param name="kind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10343,8 +12703,12 @@ public class DateTimeTest {
 
             
 
+            
+
             , the method returns a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -10353,8 +12717,12 @@ public class DateTimeTest {
 
             
 
+            
+
              or <see
              cref="P:System.TimeSpan.Ticks" />
+
+            
 
             
 
@@ -10366,8 +12734,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method does not consider the value of the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -10376,8 +12748,12 @@ public class DateTimeTest {
 
             
 
+            
+
              values when performing the subtraction. Before subtracting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -10387,6 +12763,8 @@ public class DateTimeTest {
             <para
               >The <see
                cref="M:System.DateTimeOffset.Subtract(System.DateTimeOffset)" />
+
+              
 
               
 
@@ -10406,11 +12784,15 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10448,8 +12830,12 @@ public class DateTimeTest {
 
           
 
+          
+
            or greater than <see
            cref="F:System.DateTime.MaxValue" />
+
+          
 
           
 
@@ -10463,8 +12849,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . Instead, it returns a new <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -10476,8 +12866,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method subtracts a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -10486,8 +12880,12 @@ public class DateTimeTest {
 
             
 
+            
+
              value that is earlier than the date and time of the current instance. However, if the <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -10496,8 +12894,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method returns a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -10509,8 +12911,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method allows you to subtract a time interval that consists of more than one unit of time (such as a given number of hours and a given number of minutes). To subtract a single unit of time (such as years, months, or days) from the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -10523,12 +12929,16 @@ public class DateTimeTest {
 
                 
 
+                
+
                 , to subtract a specific number of years from the current date and time instance.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.DateTime.AddMonths(System.Int32)" />
+
+                
 
                 
 
@@ -10541,12 +12951,16 @@ public class DateTimeTest {
 
                 
 
+                
+
                 , to subtract a specific number of days from the current date and time instance.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.DateTime.AddHours(System.Double)" />
+
+                
 
                 
 
@@ -10559,12 +12973,16 @@ public class DateTimeTest {
 
                 
 
+                
+
                 , to subtract a specific number of minutes from the current date and time instance.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.DateTime.AddSeconds(System.Double)" />
+
+                
 
                 
 
@@ -10577,12 +12995,16 @@ public class DateTimeTest {
 
                 
 
+                
+
                 , to subtract a specific number of milliseconds from the current date and time instance.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.DateTime.AddTicks(System.Int64)" />
+
+                
 
                 
 
@@ -10603,11 +13025,15 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10647,6 +13073,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10659,8 +13087,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -10696,6 +13128,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10708,8 +13142,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -10745,6 +13183,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10757,8 +13197,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -10797,6 +13241,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -10809,8 +13255,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -10849,6 +13299,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10861,8 +13313,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -10901,6 +13357,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10913,8 +13371,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -10953,6 +13415,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10965,8 +13429,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11002,6 +13470,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11014,8 +13484,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11054,6 +13528,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11066,8 +13542,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11106,6 +13586,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11118,8 +13600,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11158,6 +13644,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11170,8 +13658,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11212,6 +13704,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to an object of a specified type.</para
           >
         </summary>
@@ -11223,8 +13717,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter, with a value equivalent to the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11236,8 +13734,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11276,6 +13778,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11288,8 +13792,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11328,6 +13836,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11340,8 +13850,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11380,6 +13894,8 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11392,8 +13908,12 @@ public class DateTimeTest {
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11431,13 +13951,19 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter with the <see
              cref="P:System.DateTime.Ticks" />
 
             
 
+            
+
              and <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -11452,8 +13978,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object with the data needed to serialize the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11465,10 +13995,14 @@ public class DateTimeTest {
 
           
 
+          
+
           The object to populate with data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11501,6 +14035,8 @@ public class DateTimeTest {
 
             
 
+            
+
              set to the number of ticks that represent the date and
    time of the current instance.</para
           >
@@ -11511,6 +14047,8 @@ public class DateTimeTest {
           <para
             >The value of this property represents the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight, January 1, 0001, which represents <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -11552,6 +14090,8 @@ public class DateTimeTest {
 
             
 
+            
+
              instance set to the
    time component of the current instance.</para
           >
@@ -11564,8 +14104,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property. which returns a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11574,13 +14118,19 @@ public class DateTimeTest {
 
             
 
+            
+
              property returns a <see
              cref="T:System.TimeSpan" />
 
             
 
+            
+
              value that represents a  <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11592,8 +14142,12 @@ public class DateTimeTest {
 
             
 
+            
+
              value, you can instead call an overload of the <see
              cref="M:System.DateTime.ToString(System.String)" />
+
+            
 
             
 
@@ -11602,10 +14156,14 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter or use the <format
              type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting</a>
             </format>
+
+            
 
             
 
@@ -11644,8 +14202,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method to convert the value of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11654,8 +14216,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method to recreate the original <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11668,8 +14234,12 @@ public class DateTimeTest {
 
               
 
+              
+
                value returned by the <see
                cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+              
 
               
 
@@ -11678,8 +14248,12 @@ public class DateTimeTest {
 
               
 
+              
+
                value supplied to the <see
                cref="M:System.DateTime.ToBinary" />
+
+              
 
               
 
@@ -11695,8 +14269,12 @@ public class DateTimeTest {
 
             
 
+            
+
              structure whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -11705,8 +14283,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . When restoring a local <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11715,8 +14297,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method, the <see
              cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+            
 
             
 
@@ -11730,8 +14316,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object is serialized in one time zone by the <see
                  cref="M:System.DateTime.ToBinary" />
+
+                
 
                 
 
@@ -11740,8 +14330,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  method, the local time represented by the resulting <see
                  cref="T:System.DateTime" />
+
+                
 
                 
 
@@ -11753,8 +14347,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that represents a local time of 3 P.M. An application that is executing in the U.S. Pacific Time zone uses the <see
                  cref="M:System.DateTime.ToBinary" />
+
+                
 
                 
 
@@ -11763,8 +14361,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object to a binary value. Another application that is executing in the U.S. Eastern Time zone uses the <see
                  cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+                
 
                 
 
@@ -11773,8 +14375,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object. The value of the new <see
                  cref="T:System.DateTime" />
+
+                
 
                 
 
@@ -11788,8 +14394,12 @@ public class DateTimeTest {
 
                 
 
+                
+
                  value represents an invalid time in the local time zone of the system on which <see
                  cref="M:System.DateTime.FromBinary(System.Int64)" />
+
+                
 
                 
 
@@ -11801,13 +14411,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  method and is then restored by the <see
                  cref="M:System.DateTime.FromBinary(System.Int64)" />
 
                 
 
+                
+
                  method, the original value is adjusted to become a valid time. You can determine whether a particular date and time value may be subject to modification by passing it to the <see
                  cref="M:System.TimeZoneInfo.IsInvalidTime(System.DateTime)" />
+
+                
 
                 
 
@@ -11825,13 +14441,19 @@ public class DateTimeTest {
 
             
 
+            
+
              structure consists of a private Kind field, which indicates whether the specified time value is based on local time, Coordinated Universal Time (UTC), or neither, and a private Ticks field, which contains the number of 100-nanosecond ticks that specify a date and time. The Ticks field can be accessed with the <see
              cref="P:System.DateTime.Ticks" />
 
             
 
+            
+
              property and the Kind field can be accessed with the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -11843,13 +14465,19 @@ public class DateTimeTest {
 
             
 
+            
+
              object manually instead of using a serialization interface such as <see
              cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
+            
+
             , you only needed to serialize the Ticks data in the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11864,8 +14492,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object to a 64-bit binary value that subsequently can be used to recreate the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11880,8 +14512,12 @@ public class DateTimeTest {
 
             
 
+            
+
              and <see
              cref="P:System.DateTime.Ticks" />
+
+            
 
             
 
@@ -11915,6 +14551,8 @@ public class DateTimeTest {
 
             
 
+            
+
              instance set to the date of the current instance, with the time set to
  00:00:00.</para
           >
@@ -11927,8 +14565,12 @@ public class DateTimeTest {
 
             
 
+            
+
              whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -11937,11 +14579,15 @@ public class DateTimeTest {
 
             
 
+            
+
             .</para
           >
           <para
             >Because it returns the current date without the current time, the <see
              cref="P:System.DateTime.Today" />
+
+            
 
             
 
@@ -11954,13 +14600,19 @@ public class DateTimeTest {
 
             
 
+            
+
             . In contrast, the <see
              cref="P:System.DateTime.TimeOfDay" />
 
             
 
+            
+
              property returns the current time without the current date, and the <see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 
@@ -12000,13 +14652,19 @@ public class DateTimeTest {
 
             
 
+            
+
              method uses the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12021,6 +14679,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to a Windows file time.</para
           >
         </summary>
@@ -12029,6 +14689,8 @@ public class DateTimeTest {
           <para
             >The value of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12063,13 +14725,19 @@ public class DateTimeTest {
 
             
 
+            
+
              method uses the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12084,6 +14752,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to a Windows file time.</para
           >
         </summary>
@@ -12092,6 +14762,8 @@ public class DateTimeTest {
           <para
             >The value of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12129,8 +14801,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . The conversion also takes into account the daylight saving time rule that applies to the time represented by the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12143,6 +14819,8 @@ public class DateTimeTest {
 
               
 
+              
+
                method recognizes only the current adjustment rule when converting from UTC to local time. As a result, conversions for periods before the current adjustment rule came into effect may not accurately reflect the difference between UTC and local time.  </para
             >
           </block>
@@ -12152,13 +14830,19 @@ public class DateTimeTest {
 
             
 
+            
+
              method is determined by the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12185,6 +14869,8 @@ public class DateTimeTest {
                 <para
                   >This instance of <see
                    cref="T:System.DateTime" />
+
+                  
 
                   
 
@@ -12215,13 +14901,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    is assumed to be a UTC time, and the conversion is performed as if <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    were <see
                    cref="F:System.DateTimeKind.Utc" />
+
+                  
 
                   
 
@@ -12237,13 +14929,19 @@ public class DateTimeTest {
 
               
 
+              
+
                method converts a <see
                cref="T:System.DateTime" />
 
               
 
+              
+
                value from UTC to local time. To convert the time in any designated time zone to local time, use the <see
                cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)" />
+
+              
 
               
 
@@ -12256,8 +14954,12 @@ public class DateTimeTest {
 
             
 
+            
+
              whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -12266,13 +14968,19 @@ public class DateTimeTest {
 
             
 
+            
+
             . Consequently, a valid result is returned even if <see
              cref="M:System.DateTime.ToLocalTime" />
 
             
 
+            
+
              is applied repeatedly to the same <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12287,6 +14995,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to local time.</para
           >
         </summary>
@@ -12298,8 +15008,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -12308,8 +15022,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object, or <see
              cref="F:System.DateTime.MaxValue" />
+
+            
 
             
 
@@ -12318,13 +15036,19 @@ public class DateTimeTest {
 
             
 
+            
+
              object, or <see
              cref="F:System.DateTime.MinValue" />
 
             
 
+            
+
              if the converted value is too small to be represented as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12363,8 +15087,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object is formatted using the pattern defined by the <see
              cref="P:System.Globalization.DateTimeFormatInfo.LongDatePattern" />
+
+            
 
             
 
@@ -12375,8 +15103,12 @@ public class DateTimeTest {
 
             
 
+            
+
              with the <see
              cref="M:System.DateTime.ToString(System.String)" />
+
+            
 
             
 
@@ -12389,8 +15121,12 @@ public class DateTimeTest {
 
               
 
+              
+
                method is culture-sensitive. It reflects the pattern defined by the current culture's <see
                cref="T:System.Globalization.DateTimeFormatInfo" />
+
+              
 
               
 
@@ -12403,6 +15139,8 @@ public class DateTimeTest {
 
             
 
+            
+
              property. For more information about format characters, format patterns, and the output they produce, see the <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
@@ -12410,8 +15148,12 @@ public class DateTimeTest {
 
             
 
+            
+
              topic. For more information about changing the format pattern associated with a format character, see the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -12426,6 +15168,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent long date string representation.</para
           >
         </summary>
@@ -12434,6 +15178,8 @@ public class DateTimeTest {
           <para
             >A string that contains the long date string representation of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12472,8 +15218,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object is formatted using the pattern defined by the <see
              cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
+
+            
 
             
 
@@ -12486,8 +15236,12 @@ public class DateTimeTest {
 
             
 
+            
+
              with the <see
              cref="M:System.DateTime.ToString(System.String)" />
+
+            
 
             
 
@@ -12500,13 +15254,19 @@ public class DateTimeTest {
 
               
 
+              
+
                method is culture-sensitive. It reflects the pattern defined by the <see
                cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
 
               
 
+              
+
                property of the current culture's <see
                cref="T:System.Globalization.DateTimeFormatInfo" />
+
+              
 
               
 
@@ -12519,6 +15279,8 @@ public class DateTimeTest {
 
             
 
+            
+
              property. For more information about format characters, format patterns, and the output they produce, see the <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
@@ -12526,8 +15288,12 @@ public class DateTimeTest {
 
             
 
+            
+
              topic. For more information about changing the format pattern associated with a format character, see the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -12542,6 +15308,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent long time string representation.</para
           >
         </summary>
@@ -12550,6 +15318,8 @@ public class DateTimeTest {
           <para
             >A string that contains the long time string representation of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12585,6 +15355,8 @@ public class DateTimeTest {
 
             
 
+            
+
             , the last moment of 31 December 9999.</para
           >
           <para
@@ -12593,8 +15365,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method throws an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -12603,8 +15379,12 @@ public class DateTimeTest {
 
             
 
+            
+
              and earlier than midnight on January1, 0100. However, if the value of the current instance is <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -12613,6 +15393,8 @@ public class DateTimeTest {
           <para
             >For more information about OLE Automation, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+            
 
             
 
@@ -12658,8 +15440,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object is formatted using the pattern defined by the <see
              cref="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern" />
+
+            
 
             
 
@@ -12670,8 +15456,12 @@ public class DateTimeTest {
 
             
 
+            
+
              with the <see
              cref="M:System.DateTime.ToString(System.String)" />
+
+            
 
             
 
@@ -12684,8 +15474,12 @@ public class DateTimeTest {
 
               
 
+              
+
                method is culture-sensitive. It reflects the pattern defined by the current culture's <see
                cref="T:System.Globalization.DateTimeFormatInfo" />
+
+              
 
               
 
@@ -12698,6 +15492,8 @@ public class DateTimeTest {
 
             
 
+            
+
              property. For more information about format characters, format patterns, and the output they produce, see the <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
@@ -12705,8 +15501,12 @@ public class DateTimeTest {
 
             
 
+            
+
              topic. For more information about changing the format pattern associated with a format character, see the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -12721,6 +15521,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent short date string representation.</para
           >
         </summary>
@@ -12729,6 +15531,8 @@ public class DateTimeTest {
           <para
             >A string that contains the short date string representation of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12767,8 +15571,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object is formatted using the pattern defined by the <see
              cref="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern" />
+
+            
 
             
 
@@ -12779,8 +15587,12 @@ public class DateTimeTest {
 
             
 
+            
+
              with the <see
              cref="M:System.DateTime.ToString(System.String)" />
+
+            
 
             
 
@@ -12793,8 +15605,12 @@ public class DateTimeTest {
 
               
 
+              
+
                method is culture-sensitive. It reflects the pattern defined by the current culture's <see
                cref="T:System.Globalization.DateTimeFormatInfo" />
+
+              
 
               
 
@@ -12807,6 +15623,8 @@ public class DateTimeTest {
 
             
 
+            
+
              property. For more information about format characters, format patterns, and the output they produce, see the <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
@@ -12814,8 +15632,12 @@ public class DateTimeTest {
 
             
 
+            
+
              topic. For more information about changing the format pattern associated with a format character, see the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -12830,6 +15652,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent short time string representation.</para
           >
         </summary>
@@ -12838,6 +15662,8 @@ public class DateTimeTest {
           <para
             >A string that contains the short time string representation of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12876,8 +15702,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object is formatted using the general date and time format specifier ('G'). To format it using a specific date and time format specifier, call the <see
              cref="M:System.DateTime.ToString(System.String)" />
+
+            
 
             
 
@@ -12886,8 +15716,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method. To format it using a specific date and time format specifier and the conventions of a specific culture, call the <see
              cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -12899,8 +15733,12 @@ public class DateTimeTest {
 
             
 
+            
+
              and <see
              cref="P:System.Globalization.DateTimeFormatInfo.LongTimePattern" />
+
+            
 
             
 
@@ -12909,8 +15747,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object returned by the Thread.CurrentThread.CurrentCulture.DateTimeFormat property. For more information, see <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -12919,8 +15761,12 @@ public class DateTimeTest {
 
             
 
+            
+
              method enable you to specify the culture whose formatting to use and to define the output pattern of the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12935,6 +15781,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent string representation.</para
           >
         </summary>
@@ -12943,6 +15791,8 @@ public class DateTimeTest {
           <para
             >A string representation of the value of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -12983,6 +15833,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object is formatted using the general date and time format specifier ('G'), which formats output using the short date pattern and the long time pattern. </para
           >
           <para
@@ -12991,8 +15843,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -13006,13 +15862,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -13026,6 +15888,8 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that defines the format of date and time data.</para
               >
             </item>
@@ -13036,13 +15900,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -13056,13 +15926,19 @@ public class DateTimeTest {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
+            
+
              object associated with the current culture is used. For more information, see <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -13077,6 +15953,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent string representation using the specified culture-specific format information.</para
           >
         </summary>
@@ -13088,8 +15966,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object as specified by <paramref
              name="provider" />
+
+            
 
             
 
@@ -13098,6 +15980,8 @@ public class DateTimeTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13136,8 +16020,12 @@ public class DateTimeTest {
 
             
 
+            
+
              string is 1, and it is not one of the format specifier characters defined for <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -13147,6 +16035,8 @@ public class DateTimeTest {
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -13161,12 +16051,16 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter should contain either a single format specifier character (see <format
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                 >Standard Date and Time Format Strings</a
               >
             </format>
+
+            
 
             
 
@@ -13177,8 +16071,12 @@ public class DateTimeTest {
 
             
 
+            
+
             ) that defines the format of the returned string. If <paramref
              name="format" />
+
+            
 
             
 
@@ -13187,6 +16085,8 @@ public class DateTimeTest {
           <para
             >This method uses formatting information derived from the current culture. For more information, see <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -13201,6 +16101,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent string representation using the specified format.</para
           >
         </summary>
@@ -13212,8 +16114,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object as specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -13222,6 +16128,8 @@ public class DateTimeTest {
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13264,8 +16172,12 @@ public class DateTimeTest {
 
             
 
+            
+
              string is 1, and it is not one of the format specifier characters defined for <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -13275,6 +16187,8 @@ public class DateTimeTest {
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -13289,10 +16203,14 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter can contain either a single format specifier character (see <format
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -13303,8 +16221,12 @@ public class DateTimeTest {
 
             
 
+            
+
             ). If <paramref
              name="format" />
+
+            
 
             
 
@@ -13316,8 +16238,12 @@ public class DateTimeTest {
 
             
 
+            
+
              parameter defines the pattern that corresponds to the standard format specifiers, as well as the symbols and names of date and time components. The <paramref
              name="provider" />
+
+            
 
             
 
@@ -13331,13 +16257,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -13351,6 +16283,8 @@ public class DateTimeTest {
 
                 
 
+                
+
                  object that defines the format of date and time data.</para
               >
             </item>
@@ -13361,13 +16295,19 @@ public class DateTimeTest {
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -13381,13 +16321,19 @@ public class DateTimeTest {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
+            
+
              associated with the current culture is used. For more information, see <see
              cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+            
 
             
 
@@ -13402,6 +16348,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to its equivalent string representation using the specified format and culture-specific format information.</para
           >
         </summary>
@@ -13413,13 +16361,19 @@ public class DateTimeTest {
 
             
 
+            
+
              object as specified by <paramref
              name="format" />
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -13431,10 +16385,14 @@ public class DateTimeTest {
 
           
 
+          
+
           A standard or custom date and time format string. </param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13472,8 +16430,12 @@ public class DateTimeTest {
 
             
 
+            
+
             . The conversion also takes into account the daylight saving time rule that applies to the time represented by the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -13486,6 +16448,8 @@ public class DateTimeTest {
 
               
 
+              
+
                method recognizes only the current adjustment rule when converting from local time to UTC. As a result, conversions for periods before the current adjustment rule came into effect may not accurately reflect the difference between local time and UTC. </para
             >
           </block>
@@ -13495,13 +16459,19 @@ public class DateTimeTest {
 
             
 
+            
+
              method is determined by the <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property of the current <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -13541,6 +16511,8 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    object is converted to UTC.</para
                 >
               </description>
@@ -13558,13 +16530,19 @@ public class DateTimeTest {
 
                   
 
+                  
+
                    object is assumed to be a local time, and the conversion is performed as if <see
                    cref="P:System.DateTime.Kind" />
 
                   
 
+                  
+
                    were <see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -13580,8 +16558,12 @@ public class DateTimeTest {
 
               
 
+              
+
                method converts a <see
                cref="T:System.DateTime" />
+
+              
 
               
 
@@ -13590,8 +16572,12 @@ public class DateTimeTest {
 
               
 
+              
+
                method. To convert a time whose offset from UTC is known, use the <see
                cref="M:System.DateTimeOffset.ToUniversalTime" />
+
+              
 
               
 
@@ -13608,6 +16594,8 @@ public class DateTimeTest {
 
             
 
+            
+
              object to Coordinated Universal Time (UTC).</para
           >
         </summary>
@@ -13619,8 +16607,12 @@ public class DateTimeTest {
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -13629,8 +16621,12 @@ public class DateTimeTest {
 
             
 
+            
+
              object, or <see
              cref="F:System.DateTime.MaxValue" />
+
+            
 
             
 
@@ -13639,13 +16635,19 @@ public class DateTimeTest {
 
             
 
+            
+
              object, or <see
              cref="F:System.DateTime.MinValue" />
 
             
 
+            
+
              if the converted value is too small to be represented by a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -13816,6 +16818,8 @@ public class DateTimeTest {
 
             
 
+            
+
              instance set to the current date and time in coordinated universal time (UTC). </para
           >
         </value>
@@ -13856,13 +16860,19 @@ public class DateTimeTest {
 
             
 
+            
+
              whose <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property returns <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -13874,8 +16884,12 @@ public class DateTimeTest {
 
             
 
+            
+
              is <see
              cref="P:System.DateTimeOffset.UtcNow" />
+
+            
 
             
 
@@ -13884,13 +16898,19 @@ public class DateTimeTest {
 
             
 
+            
+
              to its <see
              cref="P:System.DateTime.Kind" />
 
             
 
+            
+
              property, the latter assigns the date and time value the UTC time's offset (equal to <see
              cref="F:System.TimeSpan.Zero" />
+
+            
 
             
 
@@ -13902,6 +16922,8 @@ public class DateTimeTest {
           <para
             >Gets a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -13936,6 +16958,8 @@ public class DateTimeTest {
 
             
 
+            
+
              between 1 and 9999 set to the year component of the current instance.</para
           >
         </value>
@@ -13944,6 +16968,8 @@ public class DateTimeTest {
           <para
             >The <see
              cref="P:System.DateTime.Year" />
+
+            
 
             
 

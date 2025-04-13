@@ -8,6 +8,8 @@
 
     
 
+    
+
     ) with the delegate's type. This makes delegates perfectly suited for "anonymous" invocation. This is a powerful capability. </paragraph
   >
   <paragraph
@@ -17,6 +19,8 @@
 delegate void SimpleDelegate();  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -41,6 +45,8 @@ class Test
 
     
 
+    
+
     creates a SimpleDelegate instance and then immediately calls it. </paragraph
   >
   <paragraph
@@ -57,8 +63,12 @@ void MultiCall(SimpleDelegate d, int count) {
 
     
 
+    
+
     shows a MultiCall method that repeatedly calls a SimpleDelegate. The MultiCall method doesn't know or care about the type of the target method for the SimpleDelegate, what accessibility that method has, or whether or not that method is static. All that matters is that the target method is compatible (<hyperlink
     >22.1</hyperlink>
+
+    
 
     
 

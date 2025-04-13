@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration represents a set of enumerated properties that describe visual style elements. The <see
          cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          method to specify which property value to retrieve for the element that the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
             
 
+            
+
              values that specifies how the element's background is drawn. </para
           >
         </summary>
@@ -79,6 +89,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.BorderType" />
+
+            
 
             
 
@@ -106,6 +118,8 @@
 
             
 
+            
+
              values that specifies how text is aligned in a window caption.</para
           >
         </summary>
@@ -127,6 +141,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.FillType" />
+
+            
 
             
 
@@ -154,6 +170,8 @@
 
             
 
+            
+
              values that specifies when the visual style selects a different glyph font size.</para
           >
         </summary>
@@ -175,6 +193,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.GlyphType" />
+
+            
 
             
 
@@ -202,6 +222,8 @@
 
             
 
+            
+
              values that specifies the horizontal alignment for elements with a fixed size.</para
           >
         </summary>
@@ -223,6 +245,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.IconEffect" />
+
+            
 
             
 
@@ -250,6 +274,8 @@
 
             
 
+            
+
              values that specifies how multiple images are arranged in a single image file.</para
           >
         </summary>
@@ -271,6 +297,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.ImageSelectType" />
+
+            
 
             
 
@@ -298,6 +326,8 @@
 
             
 
+            
+
              values that specifies where an offset is applied to a window element.</para
           >
         </summary>
@@ -319,6 +349,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.SizingType" />
+
+            
 
             
 
@@ -346,6 +378,8 @@
 
             
 
+            
+
              values that specifies the type of shadow to add to text.</para
           >
         </summary>
@@ -370,6 +404,8 @@
 
             
 
+            
+
              values that specifies when the visual style rescales an element with a fixed size. </para
           >
         </summary>
@@ -391,6 +427,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.VisualStyles.VerticalAlignment" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the <see
          cref="T:System.Web.Configuration.Compiler" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.Compiler" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.CompilerCollection" />
+
+            
 
             
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
              objects contained in the collection.</para
           >
         </remarks>
@@ -96,6 +106,8 @@
           <para
             >Gets all the keys of the <see
              cref="T:System.Web.Configuration.CompilerCollection" />
+
+            
 
             
 
@@ -188,6 +200,8 @@
 
             
 
+            
+
              collection element at the specified index.</para
           >
         </summary>
@@ -199,6 +213,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -207,13 +223,19 @@
 
           
 
+          
+
           An integer value specifying a <see
            cref="T:System.Web.Configuration.Compiler" />
 
           
 
+          
+
            within the <see
            cref="T:System.Web.Configuration.CompilerCollection" />
+
+          
 
           
 
@@ -247,6 +269,8 @@
 
             
 
+            
+
              collection element for the specified language.</para
           >
         </summary>
@@ -258,6 +282,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -266,8 +292,12 @@
 
           
 
+          
+
           The language for the <see
            cref="T:System.Web.Configuration.Compiler" />
+
+          
 
           
 
@@ -321,6 +351,8 @@
 
             
 
+            
+
              key name at the specified index.</para
           >
         </summary>
@@ -332,6 +364,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -340,13 +374,19 @@
 
           
 
+          
+
           An integer value specifying a <see
            cref="T:System.Web.Configuration.Compiler" />
 
           
 
+          
+
            within the <see
            cref="T:System.Web.Configuration.CompilerCollection" />
+
+          
 
           
 

@@ -19,6 +19,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -46,11 +48,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="surface">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

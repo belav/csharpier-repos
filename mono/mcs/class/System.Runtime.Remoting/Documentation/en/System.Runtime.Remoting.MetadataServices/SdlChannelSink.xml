@@ -30,6 +30,8 @@
 
         
 
+        
+
          is used to create WSDL in situations where the URL ends with the string "?wsdl".</para
       >
       <para>The following table shows the channel configuration properties that can be specified for this channel sink. The first two properties combine to control the WSDL publication of objects published by the application domain. If false is specified for the first property, no WSDL is returned, regardless of the second property. (The default is true.) Otherwise, the second controls whether the global metadata object URI is permitted to respond. (The default is false.) </para>
@@ -93,6 +95,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -132,10 +136,14 @@
 
           
 
+          
+
           A stack of sinks that lead back to the server transport sink. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,6 +154,8 @@
 
           
 
+          
+
           The response message. </param
         >
         <param name="headers">
@@ -153,10 +163,14 @@
 
           
 
+          
+
           The headers to add to the return message heading to the client. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,6 +213,8 @@
 
             
 
+            
+
              onto which the provided response message is to be serialized.</para
           >
         </summary>
@@ -210,11 +226,15 @@
 
             
 
+            
+
              onto which the provided response message is to be serialized.</para
           >
         </returns>
         <param name="sinkStack">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,6 +245,8 @@
 
           
 
+          
+
           Information associated with the current sink, generated on the request side, and needed on the response side. </param
         >
         <param name="msg">
@@ -232,10 +254,14 @@
 
           
 
+          
+
           The response message to serialize. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,6 +290,8 @@
           <para
             >Gets the next <see
              cref="T:System.Runtime.Remoting.Channels.IServerChannelSink" />
+
+            
 
             
 
@@ -359,6 +387,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -368,6 +398,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

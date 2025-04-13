@@ -35,8 +35,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.IssuerName" />
+
+        
 
         
 
@@ -135,8 +139,12 @@
 
             
 
+            
+
              class inherits from the <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -151,11 +159,15 @@
 
             
 
+            
+
              class using information from the specified byte array.</para
           >
         </summary>
         <param name="encodedDistinguishedName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,8 +205,12 @@
 
             
 
+            
+
              class inherits from the <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -209,8 +225,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -222,8 +242,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -261,13 +285,19 @@
 
             
 
+            
+
              object. The <see
              cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
+            
+
              class inherits from the <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -282,8 +312,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+
+            
 
             
 
@@ -295,8 +329,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+
+          
 
           
 
@@ -331,8 +369,12 @@
 
             
 
+            
+
              class inherits from the <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -347,11 +389,15 @@
 
             
 
+            
+
              class using information from the specified string.</para
           >
         </summary>
         <param name="distinguishedName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -390,8 +436,12 @@
 
             
 
+            
+
              class inherits from the <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -406,8 +456,12 @@
 
             
 
+            
+
              class using the specified string and <see
              cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags" />
+
+            
 
             
 
@@ -419,10 +473,14 @@
 
           
 
+          
+
           A string that represents the distinguished name.</param
         >
         <param name="flag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -467,6 +525,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -476,6 +536,8 @@
         </returns>
         <param name="flag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,6 +572,8 @@
 
             
 
+            
+
              parameter to control the layout of the output.</para
           >
         </remarks>
@@ -523,6 +587,8 @@
         </returns>
         <param name="multiLine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

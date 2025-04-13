@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -25,6 +27,8 @@
   <paragraph
     >The attributes, type, and identifier of an interface event declaration have the same meaning as those of an event declaration in a class (<hyperlink
     >17.7</hyperlink>
+
+    
 
     
 

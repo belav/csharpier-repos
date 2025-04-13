@@ -33,8 +33,12 @@
 
         
 
+        
+
          is the base interface for all non-generic collections that can be enumerated. For the generic version of this interface see <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          contains a single method, <see
          cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         . <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -63,13 +75,19 @@
 
         
 
+        
+
          property and <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
+        
+
          and <see
          cref="M:System.Collections.IEnumerator.Reset" />
+
+        
 
         
 
@@ -81,8 +99,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -91,8 +113,12 @@
 
         
 
+        
+
          is not required. If your collection does not implement <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -101,13 +127,19 @@
 
         
 
+        
+
          implementation, which is returned by GetEnumerator. When developing with C# you must provide a class that contains a Current property, and MoveNext and Reset methods as described by <see
          cref="T:System.Collections.IEnumerator" />
 
         
 
+        
+
         , but the class does not have to implement <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -159,8 +191,12 @@
 
             
 
+            
+
              method also brings the enumerator back to this position.  At this position, the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -169,8 +205,12 @@
 
             
 
+            
+
              method to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -181,8 +221,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -191,13 +235,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -209,8 +259,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -219,8 +273,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -229,8 +287,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -239,8 +301,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -258,6 +324,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

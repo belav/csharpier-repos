@@ -30,8 +30,12 @@
 
         
 
+        
+
          class allows a <see
          cref="T:System.Web.Compilation.ResourceProviderFactory" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          command on the <ui
         >Tools</ui>
+
+        
 
         
 
@@ -83,8 +95,12 @@
 
             
 
+            
+
              attribute is set to <paramref
              name="factoryTypeName" />
+
+            
 
             
 
@@ -99,11 +115,15 @@
 
             
 
+            
+
              class with the attribute set to the specified factory type name. </para
           >
         </summary>
         <param name="factoryTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,13 +153,19 @@
 
             
 
+            
+
              property is set to the <see
              cref="P:System.Type.AssemblyQualifiedName" />
 
             
 
+            
+
              property value of the <paramref
              name="factoryType" />
+
+            
 
             
 
@@ -154,11 +180,15 @@
 
             
 
+            
+
              class with the attribute set to the qualified name of the specified factory type. </para
           >
         </summary>
         <param name="factoryType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,6 +237,8 @@
           <para
             >true if <see
              cref="P:System.Web.Compilation.DesignTimeResourceProviderFactoryAttribute.FactoryTypeName" />
+
+            
 
             
 

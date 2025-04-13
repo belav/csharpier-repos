@@ -6,6 +6,8 @@
 
     
 
+    
+
      may optionally include a sequence of struct modifiers: <grammar_production
     >
       <name>
@@ -13,8 +15,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -31,6 +37,8 @@
       <name>
         <non_terminal where="18.1.1">struct-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -56,6 +64,8 @@
   <paragraph
     >The modifiers of a struct declaration have the same meaning as those of a class declaration (<hyperlink
     >17.1.1</hyperlink>
+
+    
 
     
 

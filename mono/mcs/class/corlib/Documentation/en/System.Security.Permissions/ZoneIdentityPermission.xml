@@ -92,8 +92,12 @@
 
               
 
+              
+
                permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
                cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+              
 
               
 
@@ -110,8 +114,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -123,8 +131,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -161,11 +173,15 @@
 
             
 
+            
+
              class to represent the specified zone identity.</para
           >
         </summary>
         <param name="zone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,6 +252,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -271,6 +289,8 @@
 
             
 
+            
+
              objects is the same permission. Any other combination results in a permission that is null.</para
           >
         </remarks>
@@ -284,6 +304,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -321,6 +343,8 @@
 
             
 
+            
+
              security zone.</para
           >
         </remarks>
@@ -334,6 +358,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -367,6 +393,8 @@
           <para
             >Gets or sets the zone represented by the current <see
              cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+            
 
             
 
@@ -458,13 +486,19 @@
 
             
 
+            
+
              is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see
              cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
+            
+
              objects is the same permission. The union of a null permission and a <see
              cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+            
 
             
 
@@ -476,8 +510,12 @@
 
             
 
+            
+
              object representing a <see
              cref="F:System.Security.SecurityZone.NoZone" />
+
+            
 
             
 
@@ -486,8 +524,12 @@
 
             
 
+            
+
              object representing the <see
              cref="F:System.Security.SecurityZone.NoZone" />
+
+            
 
             
 
@@ -496,8 +538,12 @@
 
             
 
+            
+
              exception being thrown when neither of the two permissions represents the <see
              cref="F:System.Security.SecurityZone.NoZone" />
+
+            
 
             
 
@@ -514,6 +560,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

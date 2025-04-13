@@ -37,6 +37,8 @@
 
         
 
+        
+
          prior to the creation of any channel. See the example section for a code sample.</para
       >
       <para
@@ -44,6 +46,8 @@
          type="text/html">
           <a href="f9714a64-d0ae-4a98-bca0-5d370fdbd631">Middle-Tier Client Applications</a>
         </format>
+
+        
 
         
 
@@ -74,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ChannelFactory`1" />
+
+            
 
             
 
@@ -111,6 +117,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -119,8 +127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -157,6 +169,8 @@
 
             
 
+            
+
              class that produces channels with a specified endpoint.</para
           >
         </summary>
@@ -165,8 +179,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -203,11 +221,15 @@
 
             
 
+            
+
              class with a specified endpoint configuration name.</para
           >
         </summary>
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,6 +260,8 @@
 
             
 
+            
+
              parameter must be an interface.</para
           >
         </remarks>
@@ -246,6 +270,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ChannelFactory`1" />
+
+            
 
             
 
@@ -284,6 +310,8 @@
 
             
 
+            
+
              class with a specified binding and endpoint address.</para
           >
         </summary>
@@ -292,8 +320,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -304,8 +336,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -343,6 +379,8 @@
 
             
 
+            
+
              class with a specified binding and remote address.</para
           >
         </summary>
@@ -351,8 +389,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -360,6 +402,8 @@
         >
         <param name="remoteAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,11 +438,15 @@
 
             
 
+            
+
              class associated with a specified name for the endpoint configuration and remote address.</para
           >
         </summary>
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -441,6 +493,8 @@
 
             
 
+            
+
             , the generic parameter for the class.</para
           >
         </remarks>
@@ -456,8 +510,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -499,8 +557,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -512,8 +574,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -554,8 +620,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -564,6 +634,8 @@
         </returns>
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,8 +678,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -619,8 +695,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -662,8 +742,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -675,8 +759,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -687,8 +775,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -732,8 +824,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -745,8 +841,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -757,8 +857,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -794,6 +898,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 

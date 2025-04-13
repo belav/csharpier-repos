@@ -33,6 +33,8 @@
 
         
 
+        
+
          have borders.</para
       >
     </summary>
@@ -51,6 +53,8 @@
           <para
             >All sides of the <see
              cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+            
 
             
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              has borders.</para
           >
         </summary>
@@ -99,6 +105,8 @@
           <para
             >Only the left side of the <see
              cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+            
 
             
 
@@ -126,6 +134,8 @@
 
             
 
+            
+
              has no borders.</para
           >
         </summary>
@@ -150,6 +160,8 @@
 
             
 
+            
+
              has borders.</para
           >
         </summary>
@@ -171,6 +183,8 @@
           <para
             >Only the top side of the <see
              cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+            
 
             
 

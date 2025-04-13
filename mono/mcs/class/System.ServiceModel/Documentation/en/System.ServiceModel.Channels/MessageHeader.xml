@@ -25,6 +25,8 @@
 
         
 
+        
+
          class.  </para
       >
       <para
@@ -33,13 +35,19 @@
 
         
 
+        
+
          can have zero or more headers that are used as an extension mechanism to pass information in messages that are application-specific. You can use <see
          cref="P:System.ServiceModel.Channels.Message.Headers" />
 
         
 
+        
+
          to add message headers to a message by calling the <see
          cref="M:System.ServiceModel.Channels.MessageHeaders.Add(System.ServiceModel.Channels.MessageHeader)" />
+
+        
 
         
 
@@ -150,6 +158,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -212,11 +222,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,10 +241,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,11 +293,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,10 +312,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,11 +364,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,10 +383,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,11 +436,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,6 +455,8 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
@@ -424,10 +464,14 @@
 
           
 
+          
+
           The content of the header to be created.</param
         >
         <param name="actor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,11 +518,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,10 +537,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -539,11 +591,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,10 +610,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -568,10 +628,14 @@
 
           
 
+          
+
           The targeted recipient of the message header.</param
         >
         <param name="relay">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,11 +683,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,6 +702,8 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
@@ -641,10 +711,14 @@
 
           
 
+          
+
           The content of the header to be created.</param
         >
         <param name="actor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -693,11 +767,15 @@
 
             
 
+            
+
              object with the specified data.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -708,10 +786,14 @@
 
           
 
+          
+
           The namespace URI of the header XML element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -722,10 +804,14 @@
 
           
 
+          
+
           The targeted recipient of the message header.</param
         >
         <param name="relay">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -782,6 +868,8 @@
           <para
             >A reference parameter corresponds to the &lt;ReferenceParameters&gt; element described in the in the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=96163">WS-Addressing specification</see>
+
+            
 
             
 
@@ -848,8 +936,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -889,8 +981,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -978,8 +1074,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1019,8 +1119,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1060,8 +1164,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1101,8 +1209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1142,8 +1254,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 

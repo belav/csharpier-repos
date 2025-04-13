@@ -34,8 +34,12 @@
 
         
 
+        
+
          class is a collection of service principal names that represent a configuration element for an <see
          cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -101,8 +107,12 @@
 
             
 
+            
+
              method ignores a duplicate name provided in the <paramref
              name="element" />
+
+            
 
             
 
@@ -114,8 +124,12 @@
 
             
 
+            
+
              class is a collection of Service Principal Names (SPNs) that represent a configuration element for an <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -130,13 +144,19 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
+            
+
              instance to this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -148,13 +168,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
+          
+
            instance to add to this <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+          
 
           
 
@@ -186,8 +212,12 @@
 
             
 
+            
+
              method removes all configuration element objects from this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -277,8 +307,12 @@
 
             
 
+            
+
              method retrieves the index of the specified configuration element in this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -293,8 +327,12 @@
 
             
 
+            
+
              in this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -306,13 +344,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
+          
+
            instance to retrieve the index of in this <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+          
 
           
 
@@ -404,13 +448,19 @@
 
             
 
+            
+
              method removes a <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
+            
+
              instance from this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -422,13 +472,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
+          
+
            instance to remove from this <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+          
 
           
 
@@ -462,8 +518,12 @@
 
             
 
+            
+
              method removes a <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+
+            
 
             
 
@@ -472,8 +532,12 @@
 
             
 
+            
+
              based on the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -485,13 +549,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that represents the <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+
+          
 
           
 
@@ -526,13 +596,19 @@
 
             
 
+            
+
              method removes a <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
+            
+
              instance from this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -544,13 +620,19 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
+          
+
            instance to remove from this <see
            cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+          
 
           
 

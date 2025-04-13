@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used to include references to files in an XML resource (.resx) file. A <see
          cref="T:System.Resources.ResXFileRef" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          object to a .resx file by calling the <see
          cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
         , and the value is the path location on disk. When the resource manager deserializes the object, the <see
          cref="T:System.Resources.ResXFileRef" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          object to a .resx file programmatically, you call the <see
          cref="M:System.Resources.ResXDataNode.#ctor(System.String,System.Resources.ResXFileRef)" />
+
+        
 
         
 
@@ -79,13 +95,19 @@
 
         
 
+        
+
          object. You then pass this <see
          cref="T:System.Resources.ResXDataNode" />
 
         
 
+        
+
          object to the <see
          cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
+
+        
 
         
 
@@ -96,6 +118,8 @@
          type="text/html">
           <a href="8ef159de-b660-4bec-9213-c3fbc4d1c6f4">Resgen.exe (Resource File Generator)</a>
         </format>
+
+        
 
         
 
@@ -127,8 +151,12 @@
 
             
 
+            
+
              parameter must support a public constructor that accepts a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -143,6 +171,8 @@
 
             
 
+            
+
              class that references the specified file.</para
           >
         </summary>
@@ -151,10 +181,14 @@
 
           
 
+          
+
           The file to reference. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,8 +223,12 @@
 
             
 
+            
+
              parameter must support a public constructor that accepts a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -205,11 +243,15 @@
 
             
 
+            
+
              class that references the specified file. </para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,10 +262,14 @@
 
           
 
+          
+
           The type name of the resource that is referenced. </param
         >
         <param name="textFileEncoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,6 +294,8 @@
           <para
             >Gets the file name specified in the current <see
              cref="Overload:System.Resources.ResXFileRef.#ctor" />
+
+            
 
             
 
@@ -279,6 +327,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </summary>
@@ -301,6 +351,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -309,6 +361,8 @@
           <para
             >A string that consists of the concatenated text representations of the parameters specified in the current <see
              cref="Overload:System.Resources.ResXFileRef.#ctor" />
+
+            
 
             
 
@@ -338,6 +392,8 @@
           <para
             >Gets the type name specified in the current <see
              cref="Overload:System.Resources.ResXFileRef.#ctor" />
+
+            
 
             
 

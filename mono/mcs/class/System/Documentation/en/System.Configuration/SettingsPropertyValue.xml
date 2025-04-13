@@ -24,8 +24,12 @@
 
         
 
+        
+
          instance describes a value stored within an instance of a <see
          cref="T:System.Configuration.SettingsPropertyValue" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >Contains the value of a settings property that can be loaded and stored by an instance of <see
          cref="T:System.Configuration.SettingsBase" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -84,8 +92,12 @@
 
             
 
+            
+
              object describes information about the value stored by the <see
              cref="T:System.Configuration.SettingsPropertyValue" />
+
+            
 
             
 
@@ -100,6 +112,8 @@
 
             
 
+            
+
              class, based on supplied parameters.</para
           >
         </summary>
@@ -108,8 +122,12 @@
 
           
 
+          
+
           Specifies a <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -143,6 +161,8 @@
 
             
 
+            
+
              object has been deserialized. </para
           >
         </summary>
@@ -170,8 +190,12 @@
 
             
 
+            
+
              property indicates that the value stored by this class has changed. The default is false. The <see
              cref="P:System.Configuration.SettingsPropertyValue.IsDirty" />
+
+            
 
             
 
@@ -185,6 +209,8 @@
 
                 
 
+                
+
                  object is changed.</para
               >
             </item>
@@ -195,8 +221,12 @@
 
                 
 
+                
+
                  object is accessed, and the value is not a string or a primitive type such as int, float, real, or DateTime. When the value managed by a <see
                  cref="T:System.Configuration.SettingsPropertyValue" />
+
+                
 
                 
 
@@ -205,8 +235,12 @@
 
                 
 
+                
+
                 ), there is no way for a <see
                  cref="T:System.Configuration.SettingsPropertyValue" />
+
+                
 
                 
 
@@ -215,8 +249,12 @@
 
                 
 
+                
+
                  object pessimistically assumes that a complex type is dirty once it has been accessed from the <see
                  cref="P:System.Configuration.SettingsPropertyValue.PropertyValue" />
+
+                
 
                 
 
@@ -230,6 +268,8 @@
           <para
             >Gets or sets whether the value of a <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -258,6 +298,8 @@
           <para
             >Gets the name of the property from the associated <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -295,6 +337,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -320,6 +364,8 @@
           <para
             >Gets or sets the value of the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -350,8 +396,12 @@
 
             
 
+            
+
              instance detects that the <see
              cref="P:System.Configuration.SettingsPropertyValue.PropertyValue" />
+
+            
 
             
 
@@ -360,8 +410,12 @@
 
             
 
+            
+
              property was called, it will cause <see
              cref="P:System.Configuration.SettingsPropertyValue.PropertyValue" />
+
+            
 
             
 
@@ -370,8 +424,12 @@
 
             
 
+            
+
              property on the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -380,8 +438,12 @@
 
             
 
+            
+
              instance. The current supported serialization options are to convert the object to a string using a string type converter, serialize using the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -396,13 +458,19 @@
 
             
 
+            
+
              permission (one of the permissions available as part of <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
+            
+
             ) to call either the getter or setter for this property.  This permission is enforced with a <see
              cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+
+            
 
             
 
@@ -414,6 +482,8 @@
           <para
             >Gets or sets the serialized value of the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -445,13 +515,19 @@
 
             
 
+            
+
              object is the default value as defined by the <see
              cref="P:System.Configuration.SettingsProperty.DefaultValue" />
 
             
 
+            
+
              property value on the associated <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 

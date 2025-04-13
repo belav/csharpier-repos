@@ -30,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.OperatingSystem.Platform" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          enumeration for the currently executing operating system or development platform. Use the <see
          cref="T:System.PlatformID" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          enumeration member, as shown in the table, as the <paramref
          name="PlatformId" />
+
+        
 
         
 
@@ -62,6 +74,8 @@
          type="text/html">
           <a href="0c25ff6c-bff3-422e-b017-146a3ee86cb9">SignTool.exe (Sign Tool)</a>
         </format>
+
+        
 
         
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          is used by the serialization process to match a name to an object instance.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ResolveName" />
+
+        
 
         
 
@@ -75,11 +79,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

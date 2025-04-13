@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -88,6 +90,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -139,6 +143,8 @@
 
             
 
+            
+
              requested if it is present or null if it is not.</para
           >
         </returns>
@@ -147,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -156,6 +166,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -206,8 +222,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

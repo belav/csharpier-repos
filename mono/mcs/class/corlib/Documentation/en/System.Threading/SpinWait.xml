@@ -21,10 +21,14 @@
 
         
 
+        
+
          encapsulates common spinning logic. On single-processor machines, yields are always used instead of busy waits, and on computers with Intel processors employing Hyper-Threading technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of spinning and true yielding. </para
       >
       <para>
         <see cref="T:System.Threading.SpinWait" />
+
+        
 
         
 
@@ -33,13 +37,19 @@
 
         
 
+        
+
         . For most purposes where spin waiting is required, however, the <see
          cref="T:System.Threading.SpinWait" />
 
         
 
+        
+
          type should be preferred over the <see
          cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
 
             
 
+            
+
              has been called on this instance.</para
           >
         </summary>
@@ -98,8 +110,12 @@
 
             
 
+            
+
              always yields the processor. On machines with multiple CPUs, <see
              cref="M:System.Threading.SpinWait.SpinOnce" />
+
+            
 
             
 
@@ -111,6 +127,8 @@
           <para
             >Gets whether the next call to <see
              cref="M:System.Threading.SpinWait.SpinOnce" />
+
+            
 
             
 
@@ -142,8 +160,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Threading.SpinWait.NextSpinWillYield" />
+
+            
 
             
 
@@ -152,8 +174,12 @@
 
             
 
+            
+
              had been issued on this instance. If a <see
              cref="T:System.Threading.SpinWait" />
+
+            
 
             
 
@@ -189,8 +215,12 @@
 
             
 
+            
+
              has been called thus far on this instance. Each spin results in the <see
              cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+
+            
 
             
 
@@ -199,8 +229,12 @@
 
             
 
+            
+
              is called, and after a threshold count is reached, the <see
              cref="M:System.Threading.Thread.Yield" />
+
+            
 
             
 
@@ -243,6 +277,8 @@
 
           
 
+          
+
           A delegate to be executed over and over until it returns true.</param
         >
       </Docs>
@@ -282,6 +318,8 @@
 
           
 
+          
+
           A delegate to be executed over and over until it returns true.</param
         >
         <param name="millisecondsTimeout">
@@ -289,8 +327,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -333,6 +375,8 @@
 
           
 
+          
+
           A delegate to be executed over and over until it returns true.</param
         >
         <param name="timeout">
@@ -340,8 +384,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 

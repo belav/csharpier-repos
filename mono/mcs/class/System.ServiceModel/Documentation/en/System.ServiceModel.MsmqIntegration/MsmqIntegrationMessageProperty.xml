@@ -25,6 +25,8 @@
 
         
 
+        
+
          class exposes all of the Message Queuing message properties that you can set when you send a message or read a message that has been received using the integration channel.</para
       >
       <para
@@ -33,11 +35,15 @@
 
         
 
+        
+
          class also enables you to set Message Queuing message properties, and is the recommended way to set Message Queuing message properties.</para
       >
       <para
         >When you use the channels and messages infrastructure to create a message and send it over an integration channel, you can use the <see
          cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationMessageProperty" />
+
+            
 
             
 
@@ -124,6 +132,8 @@
           <para
             >Possible values that this property can be set to are defined by <see
              cref="T:System.Messaging.Acknowledgment" />
+
+            
 
             
 
@@ -376,6 +386,8 @@
 
             
 
+            
+
              for a given message.</para
           >
         </summary>
@@ -387,11 +399,15 @@
 
             
 
+            
+
              object that contains the Message Queuing integration properties for the specified message.</para
           >
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -620,6 +636,8 @@
           <para
             >If the interval specified by the <see
              cref="P:System.Messaging.Message.TimeToReachQueue" />
+
+            
 
             
 

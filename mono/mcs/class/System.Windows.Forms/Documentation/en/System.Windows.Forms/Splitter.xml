@@ -36,8 +36,12 @@
 
         
 
+        
+
          control enables the user to resize controls that are docked to the edges of the <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          control, the cursor changes to indicate that the controls docked to the <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          control enables the user to resize the docked control that is immediately before it in the docking order. Therefore, to enable the user to resize a docked control, dock the control you want the user to be able to resize to an edge of a container, and then dock a splitter to the same side of that container. For example, to create a window similar to Windows Explorer, add a <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          property to DockStyle.Left. Add a <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
          property to DockStyle.Left as well. To complete the form layout, add a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -86,8 +106,12 @@
 
         
 
+        
+
          property to DockStyle.Fill to have the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -96,13 +120,19 @@
 
         
 
+        
+
          control (as well as the <see
          cref="T:System.Windows.Forms.ListView" />
 
         
 
+        
+
          control) by moving the <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -114,13 +144,19 @@
 
         
 
+        
+
          control does not resize controls docked to a size that is too small to be useful to the user, you use the <see
          cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Splitter.MinSize" />
+
+        
 
         
 
@@ -129,8 +165,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Splitter.MinSize" />
+
+        
 
         
 
@@ -139,13 +179,19 @@
 
         
 
+        
+
          control) can be sized to. If the other controls on your form that the <see
          cref="T:System.Windows.Forms.Splitter" />
 
         
 
+        
+
          control is docked to display a specific style of border, you can use the <see
          cref="P:System.Windows.Forms.Splitter.BorderStyle" />
+
+        
 
         
 
@@ -157,8 +203,12 @@
 
         
 
+        
+
          control is docked to. The <see
          cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+        
 
         
 
@@ -167,8 +217,12 @@
 
         
 
+        
+
          events enable you to determine when the user is resizing a docked control. You can use the <see
          cref="P:System.Windows.Forms.Splitter.SplitPosition" />
+
+        
 
         
 
@@ -177,8 +231,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
+
+        
 
         
 
@@ -187,13 +245,19 @@
 
         
 
+        
+
          control is docked to and set the <see
          cref="P:System.Windows.Forms.Splitter.SplitPosition" />
 
         
 
+        
+
          property to a different value to limit the docked control's width to a specified maximum width (or height if a horizontally aligned <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -206,8 +270,12 @@
 
           
 
+          
+
            control can only be done using the mouse. It is not possible to access the <see
            cref="T:System.Windows.Forms.Splitter" />
+
+          
 
           
 
@@ -223,8 +291,12 @@
 
         
 
+        
+
          has been replaced by <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -246,13 +318,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Splitter.MinExtra" />
 
             
 
+            
+
              properties are set to 25. The <see
              cref="P:System.Windows.Forms.Control.Dock" />
+
+            
 
             
 
@@ -267,13 +345,19 @@
 
             
 
+            
+
              class. <see
              cref="T:System.Windows.Forms.Splitter" />
 
             
 
+            
+
              has been replaced by <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -504,8 +588,12 @@
 
             
 
+            
+
              control is docked to are displayed with a specific border style and you want the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -514,8 +602,12 @@
 
             
 
+            
+
              and a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -524,8 +616,12 @@
 
             
 
+            
+
              control will be docked to that you want to display without any borders, you can set the <see
              cref="P:System.Windows.Forms.Splitter.BorderStyle" />
+
+            
 
             
 
@@ -540,8 +636,12 @@
 
             
 
+            
+
              has been replaced by <see
              cref="P:System.Windows.Forms.SplitContainer.BorderStyle" />
+
+            
 
             
 
@@ -671,8 +771,12 @@
 
             
 
+            
+
              property to define how a control is automatically resized as its parent control is resized. You can only set the <see
              cref="P:System.Windows.Forms.Splitter.Dock" />
+
+            
 
             
 
@@ -681,8 +785,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.DockStyle.Bottom" />
+
+            
 
             
 
@@ -691,8 +799,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.DockStyle.Right" />
+
+            
 
             
 
@@ -701,13 +813,19 @@
 
             
 
+            
+
              control enables the user to resize the docked control that is immediately before it in the docking order. Therefore, to enable the user to resize a docked control, dock the control to an edge of a container, and then dock a <see
              cref="T:System.Windows.Forms.Splitter" />
 
             
 
+            
+
              control to the same side of that container. For more information, see the example in the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -722,8 +840,12 @@
 
             
 
+            
+
              borders are docked to its parent control and determines how a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1100,8 +1222,12 @@
 
             
 
+            
+
              control (a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1110,8 +1236,12 @@
 
             
 
+            
+
              control. For a vertical <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1120,8 +1250,12 @@
 
             
 
+            
+
              control docked to the left or right of a container), the minimum width of the area of the container reserved for undocked controls is this value minus the width of the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1131,6 +1265,8 @@
             <para
               >If the <see
                cref="P:System.Windows.Forms.Splitter.MinExtra" />
+
+              
 
               
 
@@ -1146,8 +1282,12 @@
 
             
 
+            
+
              has been replaced by similar properties in <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -1184,8 +1324,12 @@
 
             
 
+            
+
              control (a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1194,8 +1338,12 @@
 
             
 
+            
+
              control (a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1205,6 +1353,8 @@
             <para
               >If the <see
                cref="P:System.Windows.Forms.Splitter.MinSize" />
+
+              
 
               
 
@@ -1220,13 +1370,19 @@
 
             
 
+            
+
              has been replaced by <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
+
+            
 
             
 
@@ -1265,8 +1421,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1299,6 +1459,8 @@
 
             
 
+            
+
              method begins dragging the Splitter control to resize the docked control that is immediately before Splitter in the docking order.</para
           >
         </remarks>
@@ -1310,6 +1472,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1318,8 +1482,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1352,13 +1520,19 @@
 
             
 
+            
+
              method moves the <see
              cref="T:System.Windows.Forms.Splitter" />
 
             
 
+            
+
              control to resize the docked control that is immediately before <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1373,6 +1547,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1381,8 +1557,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1415,6 +1595,8 @@
 
             
 
+            
+
              method resizes the docked control that is immediately before Splitter in the docking order.</para
           >
         </remarks>
@@ -1426,6 +1608,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1434,8 +1618,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1470,11 +1658,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Splitter.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
+
+            
 
             
 
@@ -1489,13 +1681,19 @@
 
             
 
+            
+
              event. <see
              cref="M:System.Windows.Forms.Splitter.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
+            
+
              has been replaced by <see
              cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoved(System.Windows.Forms.SplitterEventArgs)" />
+
+            
 
             
 
@@ -1507,8 +1705,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SplitterEventArgs" />
+
+          
 
           
 
@@ -1543,11 +1745,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Splitter.OnSplitterMoving(System.Windows.Forms.SplitterEventArgs)" />
+
+            
 
             
 
@@ -1562,13 +1768,19 @@
 
             
 
+            
+
              event. <see
              cref="M:System.Windows.Forms.Splitter.OnSplitterMoving(System.Windows.Forms.SplitterEventArgs)" />
 
             
 
+            
+
              has been replaced by <see
              cref="M:System.Windows.Forms.SplitContainer.OnSplitterMoving(System.Windows.Forms.SplitterCancelEventArgs)" />
+
+            
 
             
 
@@ -1580,8 +1792,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SplitterEventArgs" />
+
+          
 
           
 
@@ -1669,8 +1885,12 @@
 
             
 
+            
+
              control (a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1679,8 +1899,12 @@
 
             
 
+            
+
              control (a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1689,8 +1913,12 @@
 
             
 
+            
+
              property in an event handler for the <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+            
 
             
 
@@ -1699,13 +1927,19 @@
 
             
 
+            
+
              events to determine the size of the control that the <see
              cref="T:System.Windows.Forms.Splitter" />
 
             
 
+            
+
              control is docked to and limit its width to a specified maximum width (or height if a horizontally docked <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1720,13 +1954,19 @@
 
             
 
+            
+
              has been replaced by <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1MinSize" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2MinSize" />
+
+            
 
             
 
@@ -1757,8 +1997,12 @@
 
             
 
+            
+
              event to perform resize validation in your application. For example, if a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1767,8 +2011,12 @@
 
             
 
+            
+
              control and a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1777,13 +2025,19 @@
 
             
 
+            
+
              event to determine if the minimum and/or maximum size for the <see
              cref="T:System.Windows.Forms.TreeView" />
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1794,6 +2048,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1808,8 +2064,12 @@
 
             
 
+            
+
              has been replaced by <see
              cref="E:System.Windows.Forms.SplitContainer.SplitterMoved" />
+
+            
 
             
 
@@ -1840,8 +2100,12 @@
 
             
 
+            
+
              event to perform resize validation in your application. For example, if a <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -1850,8 +2114,12 @@
 
             
 
+            
+
              control and a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1860,13 +2128,19 @@
 
             
 
+            
+
              event to determine if the minimum and/or maximum size for the <see
              cref="T:System.Windows.Forms.TreeView" />
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1877,6 +2151,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1891,8 +2167,12 @@
 
             
 
+            
+
              has been replaced by <see
              cref="E:System.Windows.Forms.SplitContainer.SplitterMoving" />
+
+            
 
             
 
@@ -2045,13 +2325,19 @@
 
             
 
+            
+
              method returns a string that includes the type and the values for the <see
              cref="P:System.Windows.Forms.Splitter.MinSize" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Splitter.MinExtra" />
+
+            
 
             
 
@@ -2066,6 +2352,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2074,6 +2362,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 

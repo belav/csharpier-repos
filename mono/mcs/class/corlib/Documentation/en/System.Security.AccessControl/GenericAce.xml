@@ -54,6 +54,8 @@
 
             
 
+            
+
              object contains flags that specify information about the inheritance, inheritance propagation, and auditing conditions for an Access Control Entry (ACE).</para
           >
         </remarks>
@@ -65,8 +67,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Security.AccessControl.GenericAce" />
+
+            
 
             
 
@@ -152,8 +158,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl.GenericAce.GetBinaryForm" />
+
+            
 
             
 
@@ -195,6 +205,8 @@
 
             
 
+            
+
              object that this method creates.</para
           >
         </returns>
@@ -232,6 +244,8 @@
 
             
 
+            
+
              object from the specified binary data.</para
           >
         </summary>
@@ -243,6 +257,8 @@
 
             
 
+            
+
              object this method creates.</para
           >
         </returns>
@@ -251,8 +267,12 @@
 
           
 
+          
+
           The binary data from which to create the new <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 
@@ -260,6 +280,8 @@
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,8 +317,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.AccessControl.GenericAce" />
+
+            
 
             
 
@@ -311,8 +337,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.AccessControl.GenericAce" />
+
+            
 
             
 
@@ -324,13 +354,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
+          
+
            object to compare to the current <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 
@@ -370,6 +406,8 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
@@ -378,8 +416,12 @@
 
           
 
+          
+
           The byte array into which the contents of the <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 
@@ -387,6 +429,8 @@
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +464,12 @@
 
             
 
+            
+
              class. The  <see
              cref="M:System.Security.AccessControl.GenericAce.GetHashCode" />
+
+            
 
             
 
@@ -433,6 +481,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.AccessControl.GenericAce" />
+
+            
 
             
 
@@ -521,6 +571,8 @@
 
             
 
+            
+
              objects are considered equal.</para
           >
         </summary>
@@ -532,6 +584,8 @@
 
             
 
+            
+
              objects are equal; otherwise, false.</para
           >
         </returns>
@@ -540,8 +594,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 
@@ -552,8 +610,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 
@@ -593,6 +655,8 @@
 
             
 
+            
+
              objects are considered unequal.</para
           >
         </summary>
@@ -604,6 +668,8 @@
 
             
 
+            
+
              objects are unequal; otherwise, false.</para
           >
         </returns>
@@ -612,8 +678,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 
@@ -624,8 +694,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Security.AccessControl.GenericAce" />
+
+          
 
           
 

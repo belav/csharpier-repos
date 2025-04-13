@@ -23,6 +23,8 @@
 
         
 
+        
+
          namespace overview.</para
       >
     </remarks>
@@ -52,6 +54,8 @@
           <para
             >The following table shows the <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -110,8 +114,12 @@
 
             
 
+            
+
              type to another <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -126,6 +134,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -134,8 +144,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -146,10 +160,14 @@
 
           
 
+          
+
           The unit to convert from. </param
         >
         <param name="toUnit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,6 +202,8 @@
 
             
 
+            
+
              values.</para
           >
           <list type="table">
@@ -239,13 +259,19 @@
 
             
 
+            
+
              from one <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
 
             
 
+            
+
              type to another <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -260,8 +286,12 @@
 
             
 
+            
+
              that represents the converted <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -273,8 +303,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -285,10 +319,14 @@
 
           
 
+          
+
           The unit to convert from. </param
         >
         <param name="toUnit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,6 +361,8 @@
 
             
 
+            
+
              values.</para
           >
           <list type="table">
@@ -378,13 +418,19 @@
 
             
 
+            
+
              from one <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
 
             
 
+            
+
              type to another <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -399,8 +445,12 @@
 
             
 
+            
+
              that represents the converted <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -412,8 +462,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Printing.Margins" />
+
+          
 
           
 
@@ -424,10 +478,14 @@
 
           
 
+          
+
           The unit to convert from. </param
         >
         <param name="toUnit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,6 +520,8 @@
 
             
 
+            
+
              values.</para
           >
           <list type="table">
@@ -517,13 +577,19 @@
 
             
 
+            
+
              from one <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
 
             
 
+            
+
              type to another <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -538,8 +604,12 @@
 
             
 
+            
+
              that represents the converted <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -551,8 +621,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -563,10 +637,14 @@
 
           
 
+          
+
           The unit to convert from. </param
         >
         <param name="toUnit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -601,6 +679,8 @@
 
             
 
+            
+
              values.</para
           >
           <list type="table">
@@ -656,13 +736,19 @@
 
             
 
+            
+
              from one <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
 
             
 
+            
+
              type to another <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -677,8 +763,12 @@
 
             
 
+            
+
              that represents the converted <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -690,8 +780,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
+
+          
 
           
 
@@ -702,10 +796,14 @@
 
           
 
+          
+
           The unit to convert from. </param
         >
         <param name="toUnit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,6 +835,8 @@
           <para
             >The following table shows the <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -795,8 +895,12 @@
 
             
 
+            
+
              type to another <see
              cref="T:System.Drawing.Printing.PrinterUnit" />
+
+            
 
             
 
@@ -811,11 +915,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,10 +934,14 @@
 
           
 
+          
+
           The unit to convert from. </param
         >
         <param name="toUnit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

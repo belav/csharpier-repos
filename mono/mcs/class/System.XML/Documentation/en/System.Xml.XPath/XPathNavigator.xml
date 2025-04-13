@@ -40,8 +40,12 @@
 
         
 
+        
+
          class in the <see
          cref="N:System.Xml.XPath" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          object is created from a class that implements the <see
          cref="T:System.Xml.XPath.IXPathNavigable" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          objects created by <see
          cref="T:System.Xml.XPath.XPathDocument" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          objects created by <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -93,13 +113,19 @@
 
         
 
+        
+
          object's read-only or editable status is determined using the <see
          cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -115,6 +141,8 @@
 
         
 
+        
+
          topic.</para
       >
       <block subset="none" type="note">
@@ -124,8 +152,12 @@
 
           
 
+          
+
            class, such as the <see
            cref="T:System.Xml.XPath.XPathException" />
+
+          
 
           
 
@@ -166,6 +198,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -197,6 +231,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -207,8 +243,12 @@
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -222,8 +262,12 @@
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -237,8 +281,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -256,6 +304,8 @@
 
             
 
+            
+
              object used to create one or more new child nodes at the end of the list of child nodes of the current node. </para
           >
         </summary>
@@ -264,6 +314,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -301,6 +353,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -311,8 +365,12 @@
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -326,8 +384,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -342,6 +404,8 @@
         </summary>
         <param name="newChild">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -380,6 +444,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -387,6 +453,8 @@
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -400,8 +468,12 @@
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -415,8 +487,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -433,6 +509,8 @@
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -441,8 +519,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -481,6 +563,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -488,6 +572,8 @@
               <para
                 >If the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -501,8 +587,12 @@
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -516,8 +606,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -534,6 +628,8 @@
 
             
 
+            
+
              specified.</para
           >
         </summary>
@@ -542,8 +638,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -585,8 +685,12 @@
 
             
 
+            
+
              method or the  <see
              cref="M:System.Xml.XPath.XPathNavigator.LookupNamespace(System.String)" />
+
+            
 
             
 
@@ -600,6 +704,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -607,6 +713,8 @@
               <para
                 >If the namespace prefix specified is null or <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -620,8 +728,12 @@
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -635,8 +747,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -654,10 +770,14 @@
 
           
 
+          
+
           The namespace prefix of the new child element node (if any).</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,8 +788,12 @@
 
           
 
+          
+
           The namespace URI of the new child element node (if any). <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -680,8 +804,12 @@
 
           
 
+          
+
           The value of the new child element node. If <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -711,11 +839,15 @@
 
             
 
+            
+
              property tells you where these nodes originate from.</para
           >
           <para
             >For example, if the XML data is loaded from http://server/mydata.xml, the <see
              cref="P:System.Xml.XPath.XPathNavigator.BaseURI" />
+
+            
 
             
 
@@ -728,13 +860,19 @@
 
               
 
+              
+
                class have the same <see
                cref="P:System.Xml.XPath.XPathNavigator.BaseURI" />
 
               
 
+              
+
                as the XML document the <see
                cref="T:System.Xml.XPath.XPathNavigator" />
+
+              
 
               
 
@@ -770,8 +908,12 @@
 
             
 
+            
+
              property has different values based on the three different implementations of the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -780,8 +922,12 @@
 
             
 
+            
+
              values for <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -796,12 +942,16 @@
 
                     
 
+                    
+
                      Implementation</para
                   >
                 </term>
                 <description>
                   <para>
                     <see cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
+
+                    
 
                     
 
@@ -837,6 +987,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -878,13 +1030,19 @@
 
                 
 
+                
+
                  method verifies that the XML data contained in the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
 
                 
 
+                
+
                  conforms to a global type or declaration in the schema or schemas provided in the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -895,6 +1053,8 @@
               <para
                 >The <see
                  cref="M:System.Xml.XPath.XPathNavigator.CheckValidity(System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)" />
+
+                
 
                 
 
@@ -911,6 +1071,8 @@
 
                 
 
+                
+
                  is positioned on a document node, the validation process includes checking of uniqueness and reference constraints (xs:ID, xs:IDREF, xs:key, xs:keyref, and xs:unique). Otherwise, these checks are omitted.</para
               >
             </item>
@@ -921,8 +1083,12 @@
 
                 
 
+                
+
                  passed as a parameter is null and the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -931,8 +1097,12 @@
 
                 
 
+                
+
                  property's <see
                  cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaType" />
+
+                
 
                 
 
@@ -941,8 +1111,12 @@
 
                 
 
+                
+
                  passed as a parameter is null and the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -951,8 +1125,12 @@
 
                 
 
+                
+
                  property of the document element (that is, the element child of the root node) is used. In both cases if the <see
                  cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaType" />
+
+                
 
                 
 
@@ -961,13 +1139,19 @@
 
                 
 
+                
+
                  property is null and the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
+                
+
                  passed as a parameter is null, an <see
                  cref="T:System.InvalidOperationException" />
+
+                
 
                 
 
@@ -984,6 +1168,8 @@
 
             
 
+            
+
              conforms to the XML Schema definition language (XSD) schema provided.</para
           >
         </summary>
@@ -996,13 +1182,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
+          
+
            containing the schemas used to validate the XML data contained in the <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -1013,8 +1205,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -1050,8 +1246,12 @@
 
             
 
+            
+
              method is especially useful in conjunction with the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -1060,8 +1260,12 @@
 
             
 
+            
+
              is used to iterate over a selected node set, and contains a <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -1070,8 +1274,12 @@
 
             
 
+            
+
              positioned on the context node of the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -1080,13 +1288,19 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
+            
+
              property cannot be used to move away from the node set. Instead, you clone the returned <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1098,8 +1312,12 @@
 
             
 
+            
+
              is not affected by subsequent changes to the original <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1114,8 +1332,12 @@
 
             
 
+            
+
              positioned at the same node as this <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1130,8 +1352,12 @@
 
             
 
+            
+
              positioned at the same node as this <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1170,6 +1396,8 @@
 
             
 
+            
+
              enumeration.</para
           >
           <list type="table">
@@ -1196,8 +1424,12 @@
 
                   
 
+                  
+
                    is before the current node of the supplied <see
                    cref="T:System.Xml.XPath.XPathNavigator" />
+
+                  
 
                   
 
@@ -1218,8 +1450,12 @@
 
                   
 
+                  
+
                    is after the current node of the supplied <see
                    cref="T:System.Xml.XPath.XPathNavigator" />
+
+                  
 
                   
 
@@ -1240,6 +1476,8 @@
 
                   
 
+                  
+
                    objects are positioned on the same node.</para
                 >
               </description>
@@ -1257,6 +1495,8 @@
 
                   
 
+                  
+
                    parameter. This could occur if the two nodes reside in different trees.</para
                 >
               </description>
@@ -1268,13 +1508,19 @@
 
             
 
+            
+
              method's behavior is dependent on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
 
             
 
+            
+
              the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1287,6 +1533,8 @@
 
                 
 
+                
+
                  nodes: These nodes are returned in document order from the source document.</para
               >
             </item>
@@ -1296,8 +1544,12 @@
 
                 
 
+                
+
                  nodes: These nodes may be returned in document order and are always before the <see
                  cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
+
+                
 
                 
 
@@ -1310,8 +1562,12 @@
 
                 
 
+                
+
                  nodes: These nodes may be returned in document order. They always come after the <see
                  cref="F:System.Xml.XPath.XPathNodeType.Namespace" />
+
+                
 
                 
 
@@ -1328,6 +1584,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1337,8 +1595,12 @@
 
               
 
+              
+
                method rather than the <see
                cref="M:System.Xml.XPath.XPathNavigator.ComparePosition(System.Xml.XPath.XPathNavigator)" />
+
+              
 
               
 
@@ -1354,8 +1616,12 @@
 
             
 
+            
+
              with the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1370,8 +1636,12 @@
 
             
 
+            
+
              value representing the comparative position of the two <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1383,8 +1653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -1437,8 +1711,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Xml.XPath.XPathNavigator.Evaluate(System.Xml.XPath.XPathExpression)" />
+
+            
 
             
 
@@ -1447,8 +1725,12 @@
 
             
 
+            
+
              method. The rules on valid expressions for the <see
              cref="M:System.Xml.XPath.XPathNavigator.Matches(System.Xml.XPath.XPathExpression)" />
+
+            
 
             
 
@@ -1463,6 +1745,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1474,11 +1758,15 @@
 
             
 
+            
+
              object representing the XPath expression.</para
           >
         </returns>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1519,8 +1807,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Xml.XPath.XPathNavigator.LookupNamespace(System.String)" />
+
+            
 
             
 
@@ -1534,6 +1826,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1544,13 +1838,19 @@
 
                 
 
+                
+
                  or null, the prefix for the namespace URI of the new attribute is obtained from the current namespaces in-scope. If there is no namespace prefix assigned to the specified namespace URI at the current scope, a namespace prefix is automatically generated. For example to create a new attribute on an element in the default namespace of the contosoBooks.xml file, (xmlns="http://www.contoso.com/books"), you specify null or <see
                  cref="F:System.String.Empty" />
 
                 
 
+                
+
                  for both the namespace prefix and namespace URI parameters. Specifying http://www.contoso.com/books as the namespace URI parameter will cause the <see
                  cref="M:System.Xml.XPath.XPathNavigator.CreateAttribute(System.String,System.String,System.String,System.String)" />
+
+                
 
                 
 
@@ -1567,8 +1867,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -1586,6 +1890,8 @@
 
           
 
+          
+
           The namespace prefix of the new attribute node (if any).</param
         >
         <param name="localName">
@@ -1593,8 +1899,12 @@
 
           
 
+          
+
           The local name of the new attribute node which cannot <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -1605,6 +1915,8 @@
 
           
 
+          
+
           The namespace URI for the new attribute node (if any).</param
         >
         <param name="value">
@@ -1612,8 +1924,12 @@
 
           
 
+          
+
           The value of the new attribute node. If <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -1649,6 +1965,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1659,8 +1977,12 @@
 
                 
 
+                
+
                  is positioned on an element, the new attributes created by the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -1674,8 +1996,12 @@
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -1689,13 +2015,19 @@
 
                 
 
+                
+
                  or null, the prefix for the namespace URI of the new attribute is obtained from the current namespaces in-scope. If there is no namespace prefix assigned to the specified namespace URI at the current scope, a namespace prefix is automatically generated. For example to create a new attribute on an element in the default namespace of the contosoBooks.xml file, (xmlns="http://www.contoso.com/books"), you specify null or <see
                  cref="F:System.String.Empty" />
 
                 
 
+                
+
                  for both the namespace prefix and namespace URI parameters. Specifying http://www.contoso.com/books as the namespace URI parameter will cause the <see
                  cref="M:System.Xml.XPath.XPathNavigator.CreateAttribute(System.String,System.String,System.String,System.String)" />
+
+                
 
                 
 
@@ -1712,8 +2044,12 @@
 
                 
 
+                
+
                  object returned may only be used to create attributes. Calling other <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -1727,8 +2063,12 @@
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -1745,6 +2085,8 @@
 
             
 
+            
+
              object used to create new attributes on the current element.</para
           >
         </summary>
@@ -1753,6 +2095,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1789,6 +2133,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1797,6 +2143,8 @@
           <para
             >Returns a copy of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1811,8 +2159,12 @@
 
             
 
+            
+
              copy of this <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1851,8 +2203,12 @@
 
             
 
+            
+
              method deletes a range of sibling nodes from the current node the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1861,8 +2217,12 @@
 
             
 
+            
+
              parameter (inclusive). The <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1878,8 +2238,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -1914,6 +2278,8 @@
 
                 
 
+                
+
                  is positioned on the deleted node's parent node on successful deletion.</para
               >
             </item>
@@ -1924,8 +2290,12 @@
 
                 
 
+                
+
                 , <see
                  cref="P:System.Xml.XPath.XPathNavigator.ValueType" />
+
+                
 
                 
 
@@ -1934,13 +2304,19 @@
 
                 
 
+                
+
                  properties have the values null, <see
                  cref="T:System.String" />
 
                 
 
+                
+
                  and <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -1954,8 +2330,12 @@
 
                 
 
+                
+
                  objects positioned over them prior to deletion. However methods that attempt to move away from the deleted sub-tree fail. For example, the <see
                  cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+                
 
                 
 
@@ -1964,8 +2344,12 @@
 
                 
 
+                
+
                  methods always fail when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -1974,8 +2358,12 @@
 
                 
 
+                
+
                  method always fails if the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -2020,12 +2408,16 @@
 
               
 
+              
+
                as an argument; otherwise, position() and last() return 0.</para
             >
           </block>
           <para
             >This method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2044,8 +2436,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2054,8 +2450,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -2064,6 +2464,8 @@
         </returns>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2105,12 +2507,16 @@ nav.Evaluate(expr);</code>
 
               
 
+              
+
                as an argument; otherwise, position() and last() return 0.</para
             >
           </block>
           <para
             >This method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2125,6 +2531,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              and returns the typed result.</para
           >
         </summary>
@@ -2136,8 +2544,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2146,8 +2558,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -2159,8 +2575,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -2203,12 +2623,16 @@ nav.Evaluate(expr);</code>
 
               
 
+              
+
                as an argument; otherwise, position() and last() return 0.</para
             >
           </block>
           <para
             >This method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2223,6 +2647,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified to resolve namespace prefixes in the XPath expression.</para
           >
         </summary>
@@ -2234,8 +2660,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2244,8 +2674,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -2257,6 +2691,8 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           A string representing an XPath expression that can be evaluated.</param
         >
         <param name="resolver">
@@ -2264,8 +2700,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -2304,8 +2744,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              node of the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -2314,8 +2758,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is null, the node on which the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2330,6 +2778,8 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  argument is null.</para
               >
             </item>
@@ -2339,8 +2789,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  has not been called on the <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -2354,8 +2808,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              property to move away from the selected node set. This could invalidate the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2364,6 +2822,8 @@ nav.Evaluate(expr);</code>
           <para
             >This method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2378,6 +2838,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and returns the typed result.</para
           >
         </summary>
@@ -2389,8 +2851,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2399,8 +2865,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -2412,8 +2882,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -2424,8 +2898,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+          
 
           
 
@@ -2464,8 +2942,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              must be positioned on an element node before calling the <see
              cref="M:System.Xml.XPath.XPathNavigator.GetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -2474,6 +2956,8 @@ nav.Evaluate(expr);</code>
           <para
             >This method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2492,13 +2976,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              that contains the value of the specified attribute; <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
              if a matching attribute is not found, or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2510,10 +3000,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2548,13 +3042,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="name" />
 
             
 
+            
+
              parameter, the <see
              cref="M:System.Xml.XPath.XPathNavigator.GetNamespace(System.String)" />
+
+            
 
             
 
@@ -2564,6 +3064,8 @@ nav.Evaluate(expr);</code>
           <para
             >This method does not affect the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -2582,8 +3084,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              that contains the value of the namespace node; <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2592,11 +3098,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not positioned on an element node.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2631,6 +3141,8 @@ nav.Evaluate(expr);</code>
           <para
             >The namespaces returned depends on the <see
              cref="T:System.Xml.XmlNamespaceScope" />
+
+            
 
             
 
@@ -2691,6 +3203,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              collection of namespace names keyed by prefix.</para
           >
         </returns>
@@ -2699,8 +3213,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceScope" />
+
+          
 
           
 
@@ -2752,8 +3270,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a node that cannot have child nodes, the <see
              cref="P:System.Xml.XPath.XPathNavigator.HasChildren" />
+
+            
 
             
 
@@ -2765,8 +3287,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              nodes allowed for each <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -2795,13 +3321,19 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.Comment" />
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -2813,13 +3345,19 @@ nav.Evaluate(expr);</code>
 
                     
 
+                    
+
                      is equivalent to <see
                      cref="F:System.Xml.XPath.XPathNodeType.Root" />
 
                     
 
+                    
+
                      when using the <see
                      cref="T:System.Xml.XmlDocument" />
+
+                    
 
                     
 
@@ -2840,8 +3378,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -2850,8 +3392,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -2860,8 +3406,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Xml.XPath.XPathNodeType.SignificantWhitespace" />
+
+                  
 
                   
 
@@ -2874,6 +3424,8 @@ nav.Evaluate(expr);</code>
                 <para
                   >All other <see
                    cref="T:System.Xml.XPath.XPathNodeType" />
+
+                  
 
                   
 
@@ -2915,13 +3467,19 @@ nav.Evaluate(expr);</code>
 
               
 
+              
+
                and <see
                cref="P:System.Xml.XPath.XPathNavigator.OuterXml" />
 
               
 
+              
+
                properties are not very efficient. If performance is a priority, it is more efficient to use the node navigation methods of the <see
                cref="T:System.Xml.XPath.XPathNavigator" />
+
+              
 
               
 
@@ -2960,6 +3518,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -2970,8 +3530,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -2985,8 +3549,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3000,8 +3568,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3018,6 +3590,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object used to create a new sibling node after the currently selected node.</para
           >
         </summary>
@@ -3026,6 +3600,8 @@ nav.Evaluate(expr);</code>
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3062,6 +3638,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3072,8 +3650,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3087,8 +3669,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3103,6 +3689,8 @@ nav.Evaluate(expr);</code>
         </summary>
         <param name="newSibling">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3140,6 +3728,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3147,6 +3737,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -3160,8 +3752,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3175,8 +3771,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3193,6 +3793,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -3201,8 +3803,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -3240,6 +3846,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3247,6 +3855,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -3260,8 +3870,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3275,8 +3889,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3293,6 +3911,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -3301,8 +3921,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -3335,6 +3959,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3345,8 +3971,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -3360,8 +3990,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3375,8 +4009,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3393,6 +4031,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object used to create a new sibling node before the currently selected node.</para
           >
         </summary>
@@ -3401,6 +4041,8 @@ nav.Evaluate(expr);</code>
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3440,6 +4082,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3450,8 +4094,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3465,8 +4113,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3481,6 +4133,8 @@ nav.Evaluate(expr);</code>
         </summary>
         <param name="newSibling">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3518,6 +4172,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3525,6 +4181,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -3538,8 +4196,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3553,8 +4215,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3571,6 +4237,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -3579,8 +4247,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -3618,6 +4290,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3625,6 +4299,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3638,8 +4314,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3653,8 +4333,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3671,6 +4355,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              specified.</para
           >
         </summary>
@@ -3679,8 +4365,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -3721,8 +4411,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              or <see
              cref="M:System.Xml.XPath.XPathNavigator.LookupNamespace(System.String)" />
+
+            
 
             
 
@@ -3736,6 +4430,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3743,6 +4439,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the namespace prefix specified is null or <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -3756,8 +4454,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3771,8 +4473,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3790,10 +4496,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace prefix of the new child element (if any).</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3804,8 +4514,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace URI of the new child element (if any). <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -3816,8 +4530,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The value of the new child element. If <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -3858,8 +4576,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              or <see
              cref="M:System.Xml.XPath.XPathNavigator.LookupNamespace(System.String)" />
+
+            
 
             
 
@@ -3873,6 +4595,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -3880,6 +4604,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the namespace prefix specified is null or <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -3893,8 +4619,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3908,8 +4638,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -3927,10 +4661,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace prefix of the new child element (if any).</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3941,8 +4679,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace URI of the new child element (if any). <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -3953,8 +4695,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The value of the new child element. If <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -3992,13 +4738,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is a descendant of the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              if it is positioned on a descendant node of the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4011,13 +4763,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on the item node, and the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              specified is positioned on the name node, <see
              cref="M:System.Xml.XPath.XPathNavigator.IsDescendant(System.Xml.XPath.XPathNavigator)" />
+
+            
 
             
 
@@ -4032,6 +4790,8 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  specified shares the same implementation but points at a different document instance than the current navigator.</para
               >
             </item>
@@ -4039,6 +4799,8 @@ nav.Evaluate(expr);</code>
               <para
                 >The <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -4055,8 +4817,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is a descendant of the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4071,8 +4837,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is a descendant of the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4084,13 +4854,19 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
 
           
 
+          
+
            to compare to this <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -4209,13 +4985,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method assumes that the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              specified shares the same implementation and is points at the same document instance as the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4230,8 +5012,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  specified shares the same implementation but points at a different document instance than the current <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -4245,8 +5031,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  has a different implementation than the current <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -4263,8 +5053,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is at the same position as the specified <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4279,6 +5073,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              objects have the same position; otherwise, false.</para
           >
         </returns>
@@ -4287,13 +5083,19 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
 
           
 
+          
+
            to compare to this <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -4323,6 +5125,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the current node. For example, the local name for the &lt;bk:book&gt; element is book.</para
           >
           <para
@@ -4331,8 +5135,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              property, based on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -4397,12 +5205,16 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    nodes</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -4417,6 +5229,8 @@ nav.Evaluate(expr);</code>
           <para
             >When overridden in a derived class, gets the <see
              cref="P:System.Xml.XPath.XPathNavigator.Name" />
+
+            
 
             
 
@@ -4455,8 +5269,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="prefix" />
+
+            
 
             
 
@@ -4465,13 +5283,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="prefix" />
 
             
 
+            
+
              parameter, the blank prefix is associated with elements that are not in any namespace, and <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4481,6 +5305,8 @@ nav.Evaluate(expr);</code>
             <para
               >The prefix to namespace URI mappings can change from node to node in an XML document. As a result, the value of the <see
                cref="M:System.Xml.XPath.XPathNavigator.LookupNamespace(System.String)" />
+
+              
 
               
 
@@ -4500,8 +5326,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              that contains the namespace URI assigned to the namespace prefix specified; null if no namespace URI is assigned to the prefix specified. The <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4513,8 +5343,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The prefix whose namespace URI you want to resolve. To match the default namespace, pass <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -4552,12 +5386,16 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method returns the first prefix that matches the namespace URI specified. Multiple prefixes referring to the same namespace URI are not ordered in any particular way, so a particular prefix may not be returned each time when more than one is assigned.</para
           >
           <block subset="none" type="note">
             <para
               >Namespace URI to prefix mappings can change from node to node in an XML document. As a result, the value of the <see
                cref="M:System.Xml.XPath.XPathNavigator.LookupPrefix(System.String)" />
+
+              
 
               
 
@@ -4577,8 +5415,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              that contains the namespace prefix assigned to the namespace URI specified; otherwise, <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4587,11 +5429,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              returned is atomized.</para
           >
         </returns>
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4626,6 +5472,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4639,6 +5487,8 @@ nav.Evaluate(expr);</code>
         </returns>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4676,8 +5526,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             . This method is identical to the <see
              cref="M:System.Xml.XPath.XPathNavigator.Matches(System.String)" />
+
+            
 
             
 
@@ -4686,8 +5540,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object containing the compiled XPath expression is specified, rather than an XPath expression <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4702,6 +5560,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4713,6 +5573,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -4721,8 +5583,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -4760,13 +5626,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              specified is an <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              that shares the same implementation and points at the same document instance as the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4778,13 +5650,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              specified is an <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              that has a different implementation than the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4799,8 +5677,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the same position as the specified <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4815,13 +5697,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the same position as the specified <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
             ; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4833,8 +5721,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -4873,6 +5765,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not currently positioned on an element, this method returns false.</para
           >
           <para
@@ -4881,8 +5775,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XPath.XPathNavigator.LocalName" />
+
+            
 
             
 
@@ -4891,8 +5789,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XPath.XPathNavigator.Prefix" />
+
+            
 
             
 
@@ -4901,8 +5803,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an attribute, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -4911,8 +5817,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
+
+            
 
             
 
@@ -4921,11 +5831,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to move to the next attribute node.</para
           >
           <para
             >Once positioned on an attribute, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -4940,6 +5854,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the attribute with the matching local name and namespace URI.</para
           >
         </summary>
@@ -4951,8 +5867,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the attribute; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -4964,10 +5884,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5005,8 +5929,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method depends on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -5015,11 +5943,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the child node to move to. </para
           >
           <para
             >The following table shows the different <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -5048,8 +5980,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -5058,8 +5994,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -5079,8 +6019,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -5089,8 +6033,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -5103,6 +6051,8 @@ nav.Evaluate(expr);</code>
                 <para
                   >All other <see
                    cref="T:System.Xml.XPath.XPathNodeType" />
+
+                  
 
                   
 
@@ -5123,8 +6073,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the child node of the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -5139,8 +6093,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the child node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5152,8 +6110,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -5193,6 +6155,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the child node with the local name and namespace URI specified.</para
           >
         </summary>
@@ -5204,8 +6168,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the child node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5217,10 +6185,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The local name of the child node to move to.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5254,6 +6226,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the first sibling node of the current node.</para
           >
         </summary>
@@ -5265,8 +6239,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the first sibling node of the current node; false if there is no first sibling, or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5275,8 +6253,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is already positioned on the first sibling, <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5288,13 +6270,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              returns false because there is no first sibling, or if <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is currently positioned on an attribute, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5328,8 +6316,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not currently positioned on an element, this method returns false and the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5341,8 +6333,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XPath.XPathNavigator.LocalName" />
+
+            
 
             
 
@@ -5351,8 +6347,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XPath.XPathNavigator.Prefix" />
+
+            
 
             
 
@@ -5361,8 +6361,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an attribute, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -5371,8 +6375,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
+
+            
 
             
 
@@ -5381,8 +6389,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             . Rather, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNextAttribute" />
+
+            
 
             
 
@@ -5394,8 +6406,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an attribute, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -5410,6 +6426,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the first attribute of the current node.</para
           >
         </summary>
@@ -5421,8 +6439,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the first attribute of the current node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5455,8 +6477,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              and <see
              cref="F:System.Xml.XPath.XPathNodeType.Element" />
+
+            
 
             
 
@@ -5465,8 +6491,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              values that can have children. This property always returns false for all other <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -5481,6 +6511,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the first child node of the current node.</para
           >
         </summary>
@@ -5492,8 +6524,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the first child node of the current node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5527,8 +6563,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              class returns namespace nodes in reverse document order. Therefore, <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirstNamespace" />
+
+            
 
             
 
@@ -5540,8 +6580,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              has been moved to the namespace node, the <see
              cref="P:System.Xml.XPath.XPathNavigator.Name" />
+
+            
 
             
 
@@ -5553,8 +6597,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a namespace node, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -5563,8 +6611,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
+
+            
 
             
 
@@ -5573,8 +6625,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             . Rather, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNextNamespace" />
+
+            
 
             
 
@@ -5586,8 +6642,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an namespace node, call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -5603,6 +6663,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to first namespace node of the current node.</para
           >
         </summary>
@@ -5614,8 +6676,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the first namespace node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5654,8 +6720,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              class returns namespace nodes in reverse document order. Therefore, <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirstNamespace(System.Xml.XPath.XPathNamespaceScope)" />
+
+            
 
             
 
@@ -5667,8 +6737,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on the data node, <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirstNamespace(System.Xml.XPath.XPathNamespaceScope)" />
+
+            
 
             
 
@@ -5696,8 +6770,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not currently positioned on an element, this method returns false and the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5706,8 +6784,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              has been moved to the namespace node, the <see
              cref="P:System.Xml.XPath.XPathNavigator.Name" />
+
+            
 
             
 
@@ -5719,8 +6801,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a namespace node, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -5729,8 +6815,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
+
+            
 
             
 
@@ -5739,8 +6829,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             . Rather, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNextNamespace" />
+
+            
 
             
 
@@ -5752,8 +6846,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an namespace node, call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -5769,8 +6867,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the first namespace node that matches the <see
              cref="T:System.Xml.XPath.XPathNamespaceScope" />
+
+            
 
             
 
@@ -5785,8 +6887,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the first namespace node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5798,8 +6904,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNamespaceScope" />
+
+          
 
           
 
@@ -5839,8 +6949,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not move to attribute or namespace nodes. If the <see
                  cref="T:System.Xml.XPath.XPathNodeType" />
+
+                
 
                 
 
@@ -5849,8 +6963,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  or <see
                  cref="F:System.Xml.XPath.XPathNodeType.Namespace" />
+
+                
 
                 
 
@@ -5859,8 +6977,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method returns false and the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -5874,8 +6996,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method returns false, the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -5892,8 +7018,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the following element of the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -5908,6 +7038,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              moved successfully; otherwise false.</para
           >
         </returns>
@@ -5916,8 +7048,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -5926,13 +7062,19 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
            cannot be <see
            cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
 
           
 
+          
+
            or <see
            cref="F:System.Xml.XPath.XPathNodeType.Namespace" />
+
+          
 
           
 
@@ -5971,8 +7113,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method returns false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -5987,6 +7133,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the element with the local name and namespace URI specified in document order.</para
           >
         </summary>
@@ -5998,6 +7146,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              moved successfully; otherwise false.</para
           >
         </returns>
@@ -6006,10 +7156,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6050,8 +7204,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not move to attribute or namespace nodes. If the <see
                  cref="T:System.Xml.XPath.XPathNodeType" />
+
+                
 
                 
 
@@ -6060,8 +7218,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  or <see
                  cref="F:System.Xml.XPath.XPathNodeType.Namespace" />
+
+                
 
                 
 
@@ -6070,8 +7232,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method returns false and the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6085,8 +7251,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  boundary passed as a parameter is not positioned after the position of the current <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6100,8 +7270,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  boundary passed as a parameter is null the next following node with the specified <see
                  cref="T:System.Xml.XPath.XPathNodeType" />
+
+                
 
                 
 
@@ -6115,8 +7289,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  methods cannot be used to move to attribute or namespace nodes. If the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6125,8 +7303,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  boundary parameter having been positioned on the first child node of its parent element. This ensures that the parent element of the attribute or namespace node that the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6140,8 +7322,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method returns false, the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6158,8 +7344,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the following element of the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -6174,6 +7364,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              moved successfully; otherwise false.</para
           >
         </returns>
@@ -6182,8 +7374,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -6192,13 +7388,19 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
            cannot be <see
            cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
 
           
 
+          
+
            or <see
            cref="F:System.Xml.XPath.XPathNodeType.Namespace" />
+
+          
 
           
 
@@ -6209,13 +7411,19 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
 
           
 
+          
+
            object positioned on the element boundary which the current <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -6257,8 +7465,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  boundary passed as a parameter is not positioned after the position of the current <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6272,6 +7484,8 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  boundary parameter is null, the following element with the local name and namespace URI specified is located in document order.</para
               >
             </item>
@@ -6282,8 +7496,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  methods cannot be used to move to attribute or namespace nodes. If the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6292,8 +7510,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  boundary parameter having been positioned on the first child node of its parent element. This ensures that the parent element of the attribute or namespace node that the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6307,8 +7529,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method returns false, the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -6325,6 +7551,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the element with the local name and namespace URI specified, to the boundary specified, in document order.</para
           >
         </summary>
@@ -6336,11 +7564,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              moved successfully; otherwise false.</para
           >
         </returns>
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6351,10 +7583,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace URI of the element.</param
         >
         <param name="end">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6363,8 +7599,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
            object positioned on the element boundary which the current <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -6401,8 +7641,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              was positioned somewhere in the XML data, calling MoveToId("a1") positions the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -6417,6 +7661,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6428,6 +7674,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving; otherwise, false. If false, the position of the navigator is unchanged.</para
           >
         </returns>
@@ -6436,8 +7684,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -6472,8 +7724,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              has been moved to the namespace node, the <see
              cref="P:System.Xml.XPath.XPathNavigator.Name" />
+
+            
 
             
 
@@ -6485,8 +7741,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a namespace node, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -6495,8 +7755,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
+
+            
 
             
 
@@ -6505,8 +7769,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             . Rather, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNextNamespace" />
+
+            
 
             
 
@@ -6518,8 +7786,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a namespace node, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -6535,6 +7807,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the namespace node with the specified namespace prefix.</para
           >
         </summary>
@@ -6546,8 +7820,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the specified namespace; false if a matching namespace node was not found, or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -6556,11 +7834,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is unchanged.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6594,6 +7876,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the next sibling node of the current node.</para
           >
         </summary>
@@ -6605,13 +7889,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the next sibling node; otherwise, false if there are no more siblings or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is currently positioned on an attribute node. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -6650,8 +7940,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method depends on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -6660,11 +7954,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the next sibling node to move to. </para
           >
           <para
             >The following table shows the different <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -6693,8 +7991,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -6703,8 +8005,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -6724,8 +8030,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -6734,8 +8044,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -6755,8 +8069,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -6765,8 +8083,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -6786,8 +8108,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , <see
                    cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />
+
+                  
 
                   
 
@@ -6796,8 +8122,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   , or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -6810,6 +8140,8 @@ nav.Evaluate(expr);</code>
                 <para
                   >All other <see
                    cref="T:System.Xml.XPath.XPathNodeType" />
+
+                  
 
                   
 
@@ -6830,8 +8162,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the next sibling node of the current node that matches the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -6846,13 +8182,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the next sibling node; otherwise, false if there are no more siblings or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is currently positioned on an attribute node. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -6864,8 +8206,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -6905,6 +8251,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the next sibling node with the local name and namespace URI specified.</para
           >
         </summary>
@@ -6916,13 +8264,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the next sibling node; false if there are no more siblings, or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is currently positioned on an attribute node. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -6934,10 +8288,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The local name of the next sibling node to move to.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6970,8 +8328,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not currently positioned on an attribute, this method returns false and the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -6983,8 +8345,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an attribute, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -6993,13 +8359,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
 
             
 
+            
+
              methods are not applicable. These methods always return false and do not change the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7011,8 +8383,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an attribute, you can call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -7027,6 +8403,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the next attribute.</para
           >
         </summary>
@@ -7038,8 +8416,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the next attribute; false if there are no more attributes. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7073,8 +8455,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              class returns namespace nodes in reverse document order. Therefore, <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNextNamespace" />
+
+            
 
             
 
@@ -7086,8 +8472,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not currently positioned on a namespace node, this method returns false and the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7099,8 +8489,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a namespace node, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -7109,13 +8503,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
 
             
 
+            
+
              are not applicable. These methods always return false and do not change the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7127,8 +8527,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an namespace node, call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -7144,6 +8548,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the next namespace node.</para
           >
         </summary>
@@ -7155,8 +8561,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the next namespace node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7195,6 +8605,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              class returns namespace nodes in reverse document order. </para
           >
           <para
@@ -7203,8 +8615,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not currently positioned on a namespace node, this method returns false and the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7216,8 +8632,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on a namespace node, the methods <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToNext" />
+
+            
 
             
 
@@ -7226,13 +8646,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToFirst" />
 
             
 
+            
+
              are not applicable. These methods always return false and do not change the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7244,8 +8670,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on an namespace node, call <see
              cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" />
+
+            
 
             
 
@@ -7261,8 +8691,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the next namespace node matching the <see
              cref="T:System.Xml.XPath.XPathNamespaceScope" />
+
+            
 
             
 
@@ -7277,8 +8711,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the next namespace node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7290,8 +8728,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNamespaceScope" />
+
+          
 
           
 
@@ -7324,8 +8766,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method depends on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -7334,11 +8780,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the parent node to move to. </para
           >
           <para
             >The following table shows the different <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -7367,6 +8817,8 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    nodes do not have parents. </para
                 >
               </description>
@@ -7383,8 +8835,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Root" />
+
+                  
 
                   
 
@@ -7404,6 +8860,8 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    node. </para
                 >
               </description>
@@ -7417,6 +8875,8 @@ nav.Evaluate(expr);</code>
               <description>
                 <para>
                   <see cref="F:System.Xml.XPath.XPathNodeType.Element" />
+
+                  
 
                   
 
@@ -7436,6 +8896,8 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    node. </para
                 >
               </description>
@@ -7452,8 +8914,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Root" />
+
+                  
 
                   
 
@@ -7473,8 +8939,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Root" />
+
+                  
 
                   
 
@@ -7494,8 +8964,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Root" />
+
+                  
 
                   
 
@@ -7515,8 +8989,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Xml.XPath.XPathNodeType.Root" />
+
+                  
 
                   
 
@@ -7534,6 +9012,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the parent node of the current node.</para
           >
         </summary>
@@ -7545,8 +9025,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the parent node of the current node; otherwise, false. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7581,6 +9065,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the previous sibling node of the current node.</para
           >
         </summary>
@@ -7592,13 +9078,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is successful moving to the previous sibling node; otherwise, false if there is no previous sibling node or if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is currently positioned on an attribute node. If false, the position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7636,6 +9128,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              to the root node that the current node belongs to.</para
           >
         </summary>
@@ -7663,8 +9157,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              returned depends on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -7676,8 +9174,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              property, based on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -7707,6 +9209,8 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   . In the following example, &lt;bk:book&gt;, the name of the element node is bk:book.</para
                 >
               </description>
@@ -7724,8 +9228,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   . In the following example, &lt;book bk:genre='novel'&gt;, the name of the <see
                    cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
+
+                  
 
                   
 
@@ -7746,6 +9254,8 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    property returns bk.</para
                 >
               </description>
@@ -7763,8 +9273,12 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                   . In the following example, &lt;?xml-stylesheet type='text/xsl' href= 'books.xsl'?&gt;, the <see
                    cref="P:System.Xml.XPath.XPathNavigator.Name" />
+
+                  
 
                   
 
@@ -7780,12 +9294,16 @@ nav.Evaluate(expr);</code>
 
                   
 
+                  
+
                    nodes</para
                 >
               </term>
               <description>
                 <para>
                   <see cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -7823,11 +9341,15 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the current node.</para
           >
           <para
             >The <see
              cref="P:System.Xml.XPath.XPathNavigator.NamespaceURI" />
+
+            
 
             
 
@@ -7839,9 +9361,13 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              and <see
              cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
             <see cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -7879,6 +9405,8 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
            instance for this instance.</value
         >
         <remarks>
@@ -7889,8 +9417,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              stores atomized strings of any local name, namespace URI, and prefix used by the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7899,13 +9431,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is returned multiple times (like "book"), the same <see
              cref="T:System.String" />
 
             
 
+            
+
              object is returned for that <see
              cref="P:System.Xml.XPath.XPathNavigator.Name" />
+
+            
 
             
 
@@ -7920,8 +9458,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7958,8 +9500,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              property allows <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7968,8 +9514,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              and <see
              cref="Overload:System.Object.Equals" />
+
+            
 
             
 
@@ -7978,8 +9528,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              objects passed as parameters. The <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -7994,8 +9548,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              used for equality comparison of <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -8029,11 +9587,15 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
            value that indicates the node type of the current node.</value
         >
         <remarks
           >The initial value of this property depends on the each XPathNavigator implementation (that is, it depends on <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -8045,6 +9607,8 @@ nav.Evaluate(expr);</code>
           <para
             >When overridden in a derived class, gets the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -8076,13 +9640,19 @@ nav.Evaluate(expr);</code>
 
               
 
+              
+
                and <see
                cref="P:System.Xml.XPath.XPathNavigator.OuterXml" />
 
               
 
+              
+
                properties are not very efficient. If performance is a priority, it is more efficient to use the node navigation methods of the <see
                cref="T:System.Xml.XPath.XPathNavigator" />
+
+              
 
               
 
@@ -8118,8 +9688,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              property gets the namespace prefix associated with the current node. For example, the <see
              cref="P:System.Xml.XPath.XPathNavigator.Prefix" />
+
+            
 
             
 
@@ -8128,8 +9702,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              of the current node is not <see
              cref="F:System.Xml.XPath.XPathNodeType.Element" />
+
+            
 
             
 
@@ -8138,13 +9716,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XPath.XPathNavigator.Prefix" />
 
             
 
+            
+
              property returns <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -8183,6 +9767,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -8193,8 +9779,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -8208,8 +9798,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8223,8 +9817,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8241,6 +9839,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object used to create a new child node at the beginning of the list of child nodes of the current node.</para
           >
         </summary>
@@ -8249,6 +9849,8 @@ nav.Evaluate(expr);</code>
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -8286,6 +9888,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -8296,8 +9900,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8311,8 +9919,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8327,6 +9939,8 @@ nav.Evaluate(expr);</code>
         </summary>
         <param name="newChild">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8365,6 +9979,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -8372,6 +9988,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -8385,8 +10003,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8400,8 +10022,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8418,6 +10044,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -8426,8 +10054,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -8466,6 +10098,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -8473,6 +10107,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8486,8 +10122,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8501,8 +10141,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8519,6 +10163,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -8527,8 +10173,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -8570,8 +10220,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              or <see
              cref="M:System.Xml.XPath.XPathNavigator.LookupNamespace(System.String)" />
+
+            
 
             
 
@@ -8585,6 +10239,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -8592,6 +10248,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the namespace prefix specified is null or <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -8605,8 +10263,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8620,8 +10282,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method does not affect the position of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -8639,10 +10305,14 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace prefix of the new child element (if any).</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8653,8 +10323,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The namespace URI of the new child element (if any). <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -8665,8 +10339,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           The value of the new child element. If <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -8699,13 +10377,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object is created with the current node and its child nodes, the <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              object's <see
              cref="P:System.Xml.XmlReader.ReadState" />
+
+            
 
             
 
@@ -8714,13 +10398,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             . When the <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              object's <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -8729,8 +10419,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is moved to the current node of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -8739,8 +10433,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object continues to read until the end of the XML tree is reached. At this point, the <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -8749,13 +10447,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object's <see
              cref="P:System.Xml.XmlReader.ReadState" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.Xml.ReadState.EndOfFile" />
+
+            
 
             
 
@@ -8768,8 +10472,12 @@ nav.Evaluate(expr);</code>
 
               
 
+              
+
                object does not affect the position of the <see
                cref="T:System.Xml.XPath.XPathNavigator" />
+
+              
 
               
 
@@ -8782,12 +10490,16 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object.</para
           >
           <block subset="none" type="note">
             <para
               >This behavior differs from the <see
                cref="M:System.Xml.XPath.XPathNavigator.WriteSubtree(System.Xml.XmlWriter)" />
+
+              
 
               
 
@@ -8800,8 +10512,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object with specific reader settings, and the module that uses this method has no control over those settings. For example, the reader returned by this method prohibits processing Data Type Definitions (DTDs). If the reader attempts to read a file that uses a DTD, it will throw an error, <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 
@@ -8813,13 +10529,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              that returns an <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              with the desired <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -8834,6 +10556,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object that contains the current node and its child nodes.</para
           >
         </summary>
@@ -8842,6 +10566,8 @@ nav.Evaluate(expr);</code>
           <para
             >An <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -8880,13 +10606,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method replaces a range of sibling nodes from the current node the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is positioned on (inclusive) to the node specified by the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -8899,8 +10631,12 @@ nav.Evaluate(expr);</code>
 
               
 
+              
+
                method of the <see
                cref="T:System.Xml.XmlWriter" />
+
+              
 
               
 
@@ -8920,6 +10656,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object used to specify the replacement range.</para
           >
         </returns>
@@ -8928,8 +10666,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -8964,8 +10706,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on the new node on completion of the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" />
+
+            
 
             
 
@@ -8974,8 +10720,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not positioned on the new node after completion of the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" />
+
+            
 
             
 
@@ -8984,13 +10734,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              in which case the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" />
+
+            
 
             
 
@@ -9004,8 +10760,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9019,6 +10779,8 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  on the current node.</para
               >
             </item>
@@ -9026,6 +10788,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the XML string contains multiple nodes, all nodes are added and the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9039,8 +10803,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is not equivalent to the <see
                  cref="M:System.Xml.XPath.XPathNavigator.DeleteSelf" />
+
+                
 
                 
 
@@ -9055,6 +10823,8 @@ nav.Evaluate(expr);</code>
         </summary>
         <param name="newNode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9092,8 +10862,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on the new node on completion of the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -9102,8 +10876,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not positioned on the new node after completion of the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -9112,13 +10890,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              in which case the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -9132,8 +10916,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9147,6 +10935,8 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  on the current node.</para
               >
             </item>
@@ -9154,6 +10944,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the XML string contains multiple nodes, all nodes are added and the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9167,8 +10959,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is not equivalent to the <see
                  cref="M:System.Xml.XPath.XPathNavigator.DeleteSelf" />
+
+                
 
                 
 
@@ -9185,6 +10981,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -9193,8 +10991,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -9232,8 +11034,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is positioned on the new node on completion of the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" />
+
+            
 
             
 
@@ -9242,8 +11048,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              is not positioned on the new node after completion of the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" />
+
+            
 
             
 
@@ -9252,13 +11062,19 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              in which case the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see
              cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" />
+
+            
 
             
 
@@ -9272,8 +11088,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is valid only when the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9287,6 +11107,8 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  on the current node.</para
               >
             </item>
@@ -9294,6 +11116,8 @@ nav.Evaluate(expr);</code>
               <para
                 >If the XML string contains multiple nodes, all nodes are added and the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9307,8 +11131,12 @@ nav.Evaluate(expr);</code>
 
                 
 
+                
+
                  method is not equivalent to the <see
                  cref="M:System.Xml.XPath.XPathNavigator.DeleteSelf" />
+
+                
 
                 
 
@@ -9325,6 +11153,8 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -9333,8 +11163,12 @@ nav.Evaluate(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -9370,8 +11204,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
             , <see
              cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
+
+            
 
             
 
@@ -9380,8 +11218,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              nodes with a non-null <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueType" />
+
+            
 
             
 
@@ -9390,8 +11232,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              instance does not report schema information, the <see
              cref="P:System.Xml.XPath.XPathNavigator.SchemaInfo" />
+
+            
 
             
 
@@ -9434,8 +11280,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              when this method is called. After calling this method, the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -9444,8 +11294,12 @@ nav.Evaluate(expr);</code>
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -9463,6 +11317,8 @@ while (iterator.MoveNext())
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -9473,8 +11329,12 @@ while (iterator.MoveNext())
 
                 
 
+                
+
                  object's navigation methods to move within the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9483,8 +11343,12 @@ while (iterator.MoveNext())
 
                 
 
+                
+
                  navigation methods are independent of the selected nodes in the <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -9498,8 +11362,12 @@ while (iterator.MoveNext())
 
                 
 
+                
+
                  method return a new <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -9508,8 +11376,12 @@ while (iterator.MoveNext())
 
                 
 
+                
+
                  call. The two <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -9523,8 +11395,12 @@ while (iterator.MoveNext())
 
                 
 
+                
+
                  overload, which takes an <see
                  cref="T:System.Xml.XPath.XPathExpression" />
+
+                
 
                 
 
@@ -9535,6 +11411,8 @@ while (iterator.MoveNext())
               <para
                 >This method has no effect on the state of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9555,6 +11433,8 @@ while (iterator.MoveNext())
 
             
 
+            
+
              pointing to the selected node set.</para
           >
         </returns>
@@ -9563,8 +11443,12 @@ while (iterator.MoveNext())
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -9602,8 +11486,12 @@ while (iterator.MoveNext())
 
             
 
+            
+
              when you called this method. After you call this method, the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -9612,8 +11500,12 @@ while (iterator.MoveNext())
 
             
 
+            
+
              on the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -9631,6 +11523,8 @@ while (ni.MoveNext())
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -9641,8 +11535,12 @@ while (ni.MoveNext())
 
                 
 
+                
+
                  object's navigation methods to move within the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -9651,8 +11549,12 @@ while (ni.MoveNext())
 
                 
 
+                
+
                  navigation methods are independent of the selected nodes in the <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -9666,8 +11568,12 @@ while (ni.MoveNext())
 
                 
 
+                
+
                  method return a new <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -9676,8 +11582,12 @@ while (ni.MoveNext())
 
                 
 
+                
+
                  call. The two <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -9691,8 +11601,12 @@ while (ni.MoveNext())
 
                 
 
+                
+
                  requires namespace resolution, the prefix and namespace URI pair must be added to an <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -9701,8 +11615,12 @@ while (ni.MoveNext())
 
                 
 
+                
+
                  method must be called to specify the <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -9729,13 +11647,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
               
 
+              
+
                does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see
                cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
               
 
+              
+
                method and provide an <see
                cref="T:System.Xml.XmlNamespaceManager" />
+
+              
 
               
 
@@ -9761,6 +11685,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9769,6 +11695,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Selects a node set using the specified <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -9783,6 +11711,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that points to the selected node set.</para
           >
         </returns>
@@ -9791,8 +11721,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -9832,6 +11766,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object specified to resolve namespace prefixes.</para
           >
         </summary>
@@ -9843,6 +11779,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that points to the selected node set.</para
           >
         </returns>
@@ -9851,8 +11789,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -9863,8 +11805,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -9903,8 +11849,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -9919,6 +11869,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -9930,6 +11882,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that contains the selected nodes. The returned nodes are in reverse document order.</para
           >
         </returns>
@@ -9938,8 +11892,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -9947,6 +11905,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         >
         <param name="matchSelf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9986,8 +11946,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="name" />
+
+            
 
             
 
@@ -9996,13 +11960,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="namespaceURI" />
 
             
 
+            
+
              parameter, all ancestor nodes with the specified local name that belong to no namespace are selected. If <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -10014,8 +11984,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10034,11 +12008,15 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that contains the selected nodes. The returned nodes are in reverse document order.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10049,10 +12027,14 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The namespace URI of the ancestor nodes.</param
         >
         <param name="matchSelf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10090,8 +12072,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10106,6 +12092,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10117,6 +12105,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that contains the selected nodes.</para
           >
         </returns>
@@ -10125,8 +12115,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -10165,8 +12159,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="name" />
+
+            
 
             
 
@@ -10175,13 +12173,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="namespaceURI" />
 
             
 
+            
+
              parameter, all child nodes with the specified local name that belong to no namespace are selected. If both the local name and namespace URI parameters are <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -10193,8 +12197,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10213,6 +12221,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that contains the selected nodes.</para
           >
         </returns>
@@ -10221,10 +12231,14 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The local name of the child nodes. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10263,8 +12277,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10279,6 +12297,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10290,6 +12310,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that contains the selected nodes.</para
           >
         </returns>
@@ -10298,8 +12320,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNodeType" />
+
+          
 
           
 
@@ -10307,6 +12333,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         >
         <param name="matchSelf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10346,8 +12374,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="name" />
+
+            
 
             
 
@@ -10356,13 +12388,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is specified as the <paramref
              name="namespaceURI" />
 
             
 
+            
+
              parameter, all descendant nodes with the specified local name that belong to no namespace are selected. If both the local name and namespace URI parameters are <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -10375,8 +12413,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10395,11 +12437,15 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              that contains the selected nodes.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10410,10 +12456,14 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The namespace URI of the descendant nodes. </param
         >
         <param name="matchSelf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10451,8 +12501,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method selects the first node that matches the XPath query in the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10467,6 +12521,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              using the specified XPath query.</para
           >
         </summary>
@@ -10478,6 +12534,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object that contains the first matching node for the XPath query specified; otherwise, null if there are no query results.</para
           >
         </returns>
@@ -10486,8 +12544,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -10525,13 +12587,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method selects the first node that matches the compiled XPath query contained in the <see
              cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10546,8 +12614,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -10562,6 +12634,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object that contains the first matching node for the XPath query specified; otherwise null if there are no query results.</para
           >
         </returns>
@@ -10570,8 +12644,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -10610,13 +12688,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method selects the first node that matches the XPath query specified. The <see
              cref="M:System.Xml.XPath.XPathNavigator.SelectSingleNode(System.String,System.Xml.IXmlNamespaceResolver)" />
 
             
 
+            
+
              method uses the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -10626,6 +12710,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
             <para
               >In XPath all namespaces must be prefixed in a query. If an XML document uses a default namespace, you must still add a namespace prefix to the <see
                cref="T:System.Xml.IXmlNamespaceResolver" />
+
+              
 
               
 
@@ -10641,8 +12727,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object using the specified XPath query with the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -10657,6 +12747,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object that contains the first matching node for the XPath query specified; otherwise null if there are no query results.</para
           >
         </returns>
@@ -10665,8 +12757,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -10677,8 +12773,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -10716,8 +12816,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object is created as the result of a schema validating <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -10726,8 +12830,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method is verified against the XML Schema Definition Language (XSD) schema for the XML document. If the value specified is invalid according to the schema for the XML document, an <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -10739,8 +12847,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method is valid only when the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10753,6 +12865,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         </summary>
         <param name="typedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10789,8 +12903,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  is positioned on an element node with complex content (child elements), calling the <see
                  cref="M:System.Xml.XPath.XPathNavigator.SetValue(System.String)" />
+
+                
 
                 
 
@@ -10801,6 +12919,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
               <para
                 >The <see
                  cref="M:System.Xml.XPath.XPathNavigator.SetValue(System.String)" />
+
+                
 
                 
 
@@ -10815,6 +12935,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10847,8 +12969,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -10857,6 +12983,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Xml.XPath.XPathNavigator.Clone" />
+
+            
 
             
 
@@ -10871,6 +12999,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -10879,6 +13009,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >A new copy of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -10912,8 +13044,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method depends on the <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -10943,6 +13079,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    of the root node.</para
                 >
               </description>
@@ -10957,6 +13095,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
                 <para
                   >The <see
                    cref="P:System.Xml.XmlNode.InnerText" />
+
+                  
 
                   
 
@@ -11058,8 +13198,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              property returns a boxed <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -11068,13 +13212,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             . If the element or attribute's content is a list type, the <see
              cref="P:System.Xml.XPath.XPathNavigator.TypedValue" />
 
             
 
+            
+
              property returns an array of objects of the most appropriate .NET Framework <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -11086,8 +13236,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              returned by each <see
              cref="T:System.Xml.XPath.XPathNodeType" />
+
+            
 
             
 
@@ -11117,8 +13271,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    object containing all <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -11127,8 +13285,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    node children, <see
                    cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -11150,8 +13312,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    that represents the typed value of the <see
                    cref="F:System.Xml.XPath.XPathNodeType.Element" />
+
+                  
 
                   
 
@@ -11163,8 +13329,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    is defined as an XML Schema list data type, then the node value is exposed as an array of objects. Each <see
                    cref="T:System.Object" />
+
+                  
 
                   
 
@@ -11186,8 +13356,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    object containing all <see
                    cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+                  
 
                   
 
@@ -11196,8 +13370,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    (including string representations of typed values), concatenated and separated by white space. If the <see
                    cref="F:System.Xml.XPath.XPathNodeType.Element" />
+
+                  
 
                   
 
@@ -11206,8 +13384,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    node children, <see
                    cref="F:System.String.Empty" />
+
+                  
 
                   
 
@@ -11229,8 +13411,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    that represents the typed value of the <see
                    cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
+
+                  
 
                   
 
@@ -11239,8 +13425,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    is boxed as a .NET Framework <see
                    cref="T:System.Type" />
+
+                  
 
                   
 
@@ -11252,13 +13442,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    is defined as an XML Schema list data type, the node value is exposed as an array of objects. Each <see
                    cref="T:System.Object" />
 
                   
 
+                  
+
                    in the array contains the typed value of a child of the <see
                    cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
+
+                  
 
                   
 
@@ -11279,6 +13475,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    object containing the text.</para
                 >
               </description>
@@ -11293,6 +13491,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
                 <para
                   >A <see
                    cref="T:System.String" />
+
+                  
 
                   
 
@@ -11313,6 +13513,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    object containing the content of the processing instruction, excluding the target and surrounding &lt;? and ?&gt;.</para
                 >
               </description>
@@ -11327,6 +13529,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
                 <para
                   >A <see
                    cref="T:System.String" />
+
+                  
 
                   
 
@@ -11347,6 +13551,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                   
 
+                  
+
                    object containing the text of the node.</para
                 >
               </description>
@@ -11361,6 +13567,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
                 <para
                   >A <see
                    cref="T:System.String" />
+
+                  
 
                   
 
@@ -11398,8 +13606,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              property can be used by <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -11408,13 +13620,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object is used to provide a virtual XML view over a Common Language Runtime (CLR) object graph, you may wish to perform XPath queries using the <see
              cref="Overload:System.Xml.XPath.XPathNavigator.Select" />
 
             
 
+            
+
              method and then access the CLR objects underlying the selected nodes. The <see
              cref="P:System.Xml.XPath.XPathNavigator.UnderlyingObject" />
+
+            
 
             
 
@@ -11426,6 +13644,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              property will always be implementation specific. </para
           >
           <para
@@ -11434,8 +13654,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              property should preserve object identity and should only be used to return objects that have a one-to-one correspondence to their respective overlaid items. A user should always get the same object on successive visits to the same node using the same <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -11448,8 +13672,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
               
 
+              
+
                property of an <see
                cref="T:System.Xml.XPath.XPathNavigator" />
+
+              
 
               
 
@@ -11458,8 +13686,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
               
 
+              
+
                object returns the corresponding <see
                cref="T:System.Xml.XmlNode" />
+
+              
 
               
 
@@ -11472,6 +13704,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Used by <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -11495,13 +13729,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              and <see
              cref="F:System.Xml.XPath.XPathNodeType.Element" />
 
             
 
+            
+
              nodes, 2) namespace URI for <see
              cref="F:System.Xml.XPath.XPathNodeType.Namespace" />
+
+            
 
             
 
@@ -11514,8 +13754,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             , the sequential <see
              cref="T:System.Xml.XmlCharacterData" />
+
+            
 
             
 
@@ -11524,8 +13768,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              nodes) are regarded as one text or node (strictly to say, <see
              cref="F:System.Xml.XPath.XPathNodeType.Text" />
+
+            
 
             
 
@@ -11534,8 +13782,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              or <see
              cref="F:System.Xml.XPath.XPathNodeType.Whitespace" />
+
+            
 
             
 
@@ -11584,11 +13836,15 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method attempts to convert the value of the current node to the .NET Framework type, specified according to the XPath 2.0 rules for casting the current node's type.</para
           >
           <para
             >The <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -11603,8 +13859,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              specified, using the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -11619,6 +13879,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              requested.</para
           >
         </returns>
@@ -11627,8 +13889,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -11639,8 +13905,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -11670,8 +13940,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              has schema or type information (for example, from an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -11680,13 +13954,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             ), and if the current node is defined as an XML Schema xs:boolean type, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsBoolean" />
 
             
 
+            
+
              property returns the current node's value as an unboxed <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -11698,13 +13978,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              does not have any schema or type information, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsBoolean" />
 
             
 
+            
+
              property attempts to convert the string value of the current node to a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -11716,6 +14002,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the current node's value as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -11749,8 +14037,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              has schema or type information (for example, from an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -11759,13 +14051,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             ), and if the current node is defined as an XML Schema xs:datetime type, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsDateTime" />
 
             
 
+            
+
              property returns the current node's value as an unboxed <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11777,13 +14075,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              does not have any schema or type information, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsDateTime" />
 
             
 
+            
+
              property attempts to convert the string value of the current node to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11795,6 +14099,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the current node's value as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -11825,8 +14131,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              has schema or type information (for example, from an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -11835,13 +14145,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             ), and if the current node is defined as an XML Schema xs:double type, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsDouble" />
 
             
 
+            
+
              property returns the current node's value as an unboxed <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -11853,13 +14169,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              does not have any schema or type information, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsDouble" />
 
             
 
+            
+
              property attempts to convert the string value of the current node to a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -11871,6 +14193,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the current node's value as a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -11901,8 +14225,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              has schema or type information (for example, from an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -11911,13 +14239,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             ), and if the current node is defined as an XML Schema xs:integer type, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsInt" />
 
             
 
+            
+
              property returns the current node's value as an unboxed <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -11929,13 +14263,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              does not have any schema or type information, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsInt" />
 
             
 
+            
+
              property attempts to convert the string value of the current node to a <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -11947,6 +14287,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the current node's value as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -11977,8 +14319,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              has schema or type information (for example, from an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -11987,13 +14333,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             ), and if the current node is defined as an XML Schema xs:integer type, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsLong" />
 
             
 
+            
+
              property returns the current node's value as an unboxed <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -12005,13 +14357,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              does not have any schema or type information, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueAsLong" />
 
             
 
+            
+
              property attempts to convert the string value of the current node to a <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -12023,6 +14381,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the current node's value as an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -12053,8 +14413,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              property gets the .NET Framework <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -12066,8 +14430,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              of <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -12076,8 +14444,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              could be any one of the valid types that can be mapped to xs:int such as <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -12086,11 +14458,15 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             .</para
           >
           <para
             >If a node has no type, this is equivalent to the type annotation on the node being xdt:untypedAtomic. In this case, the <see
              cref="P:System.Xml.XPath.XPathNavigator.ValueType" />
+
+            
 
             
 
@@ -12103,6 +14479,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -12111,6 +14489,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the .NET Framework <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -12149,6 +14529,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object specified. </para
           >
           <para
@@ -12157,8 +14539,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              method is called on the first book element of the books.xml file, the http://www.contoso.com/books namespace declaration made at the top of the XML document will appear in the XML streamed to the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -12168,6 +14554,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
             >&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;book genre="autobiography" publicationdate="1981" ISBN="1-861003-11-0" <codeFeaturedElement
             >xmlns="http://www.contoso.com/books"</codeFeaturedElement>
+
+            
 
             
 
@@ -12187,8 +14575,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
               
 
+              
+
                method does not affect the position of the <see
                cref="T:System.Xml.XPath.XPathNavigator" />
+
+              
 
               
 
@@ -12204,6 +14596,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              object specified.</para
           >
         </summary>
@@ -12212,8 +14606,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -12243,8 +14641,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              is positioned on the name element, the <see
              cref="P:System.Xml.XPath.XPathNavigator.XmlLang" />
+
+            
 
             
 
@@ -12288,6 +14690,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
             
 
+            
+
              property.</para
           >
           <list type="bullet">
@@ -12298,8 +14702,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  property is null, unless the <see
                  cref="P:System.Xml.Schema.IXmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -12308,13 +14716,19 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
+
+                
 
                 
 
@@ -12328,8 +14742,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  property is the same as the <see
                  cref="P:System.Xml.Schema.IXmlSchemaInfo.SchemaType" />
+
+                
 
                 
 
@@ -12338,8 +14756,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -12353,8 +14775,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  property is the same as the <see
                  cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
+
+                
 
                 
 
@@ -12363,8 +14789,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
 
                 
 
+                
+
                  property of this <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
+
+                
 
                 
 
@@ -12378,6 +14808,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
           <para
             >Gets the <see
              cref="T:System.Xml.Schema.XmlSchemaType" />
+
+            
 
             
 

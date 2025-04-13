@@ -60,6 +60,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -102,10 +104,14 @@
 
           
 
+          
+
           The type of the license key. </param
         >
         <param name="resourceAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,10 +155,14 @@
 
           
 
+          
+
           The type of the license key. </param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

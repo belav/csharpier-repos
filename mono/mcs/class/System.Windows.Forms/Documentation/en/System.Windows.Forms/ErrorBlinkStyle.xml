@@ -18,6 +18,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -26,6 +28,8 @@
       <para
         >Specifies constants indicating when the error icon, supplied by an <see
          cref="T:System.Windows.Forms.ErrorProvider" />
+
+        
 
         
 

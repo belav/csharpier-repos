@@ -46,8 +46,12 @@
 
             
 
+            
+
              return value changes, even if the return value implements <see
              cref="T:System.Collections.Specialized.INotifyCollectionChanged" />
+
+            
 
             
 
@@ -88,6 +92,8 @@
 
             
 
+            
+
              that can change as asynchronous validation rules finish processing. This enables the binding engine to automatically update the user interface validation feedback when errors are added, removed, or modified. </para
           >
           <para
@@ -96,8 +102,12 @@
 
             
 
+            
+
             , or it can reuse a previously returned <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -106,8 +116,12 @@
 
             
 
+            
+
              event, even if the return value implements <see
              cref="T:System.Collections.Specialized.INotifyCollectionChanged" />
+
+            
 
             
 
@@ -127,8 +141,12 @@
 
           
 
+          
+
           The name of the property to retrieve validation errors for; or null or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -153,6 +171,8 @@
           <para
             >This property returns false if there are no known entity-level or property-level validation errors for the entity at the time it is accessed. However, some validation rules may still be running asynchronously as described for the <see
              cref="M:System.ComponentModel.INotifyDataErrorInfo.GetErrors(System.String)" />
+
+            
 
             
 

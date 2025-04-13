@@ -36,6 +36,8 @@
 
         
 
+        
+
          to be applied to code using declarative security. This class cannot be inherited.</para
       >
     </summary>
@@ -69,6 +71,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -77,8 +81,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -115,8 +123,12 @@
 
             
 
+            
+
              with the permission level previously set by the <see
              cref="P:System.Web.AspNetHostingPermissionAttribute.Level" />
+
+            
 
             
 
@@ -131,8 +143,12 @@
 
             
 
+            
+
              that is the new <see
              cref="T:System.Web.AspNetHostingPermission" />
+
+            
 
             
 

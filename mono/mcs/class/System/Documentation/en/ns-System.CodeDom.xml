@@ -9,8 +9,12 @@
 
         
 
+        
+
          namespace contains classes that can be used to represent the elements and structure of a source code document. The classes in this namespace can be used to model the structure of a source code document that can be output as source code in a supported language using the functionality provided by the <see
          cref="N:System.CodeDom.Compiler" />
+
+        
 
         
 
@@ -29,6 +33,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -36,6 +42,8 @@
          type="text/html">
           <a href="C77B8BFD-0A32-4E36-B59A-4F687F32C524">CodeDOM Quick Reference</a>
         </format>
+
+        
 
         
 

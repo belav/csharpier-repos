@@ -23,8 +23,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlWriterSettings" />
+
+        
 
         
 
@@ -41,10 +45,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="f84d078c-bcc3-460b-8763-ebb889794ca7">Data Conformance and the XmlWriter</a>
         </format>
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -93,8 +105,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -103,8 +119,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 

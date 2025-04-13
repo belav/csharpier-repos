@@ -22,8 +22,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class can optionally implement <see
          cref="T:System.ServiceModel.Channels.IBindingRuntimePreferences" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
         , the indigo1 Service Model Runtime layer defaults to using the asynchronous versions of the Receive and Request methods. If a binding does implement <see
          cref="T:System.ServiceModel.Channels.IBindingRuntimePreferences" />
+
+        
 
         
 
@@ -55,13 +67,19 @@
 
         
 
+        
+
          and uses that to determine whether to call the synchronous versions of the these methods (<see
          cref="Overload:System.ServiceModel.Channels.IInputChannel.Receive" />
 
         
 
+        
+
          or <see
          cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />
+
+        
 
         
 
@@ -70,8 +88,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Channels.IInputChannel.EndReceive(System.IAsyncResult)" />
+
+        
 
         
 
@@ -80,8 +102,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Channels.IRequestChannel.EndRequest(System.IAsyncResult)" />
+
+        
 
         
 
@@ -90,8 +116,12 @@
 
         
 
+        
+
          is implemented by the binding and returns true from the <see
          cref="P:System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously" />
+
+        
 
         
 
@@ -100,8 +130,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />
+
+        
 
         
 
@@ -110,8 +144,12 @@
 
         
 
+        
+
          or returns false from the <see
          cref="P:System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously" />
+
+        
 
         
 
@@ -120,8 +158,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Channels.IInputChannel.EndReceive(System.IAsyncResult)" />
+
+        
 
         
 
@@ -130,8 +172,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Channels.IRequestChannel.EndRequest(System.IAsyncResult)" />
+
+        
 
         
 
@@ -143,10 +189,14 @@
 
         
 
+        
+
          property, all bindings must still provide valid implementations of both the synchronous and asynchronous versions of the Receive methods for the specific channel types implemented. For more information about implementing custom channels, see <format
          type="text/html">
           <a href="0513af9f-a0c2-457b-9a50-5b6bfee48513">Developing Channels</a>
         </format>
+
+        
 
         
 

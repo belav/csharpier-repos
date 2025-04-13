@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -47,6 +49,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlTypes.SqlTypeException" />
+
+            
 
             
 
@@ -72,11 +76,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -110,6 +118,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -121,6 +131,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -129,10 +141,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="sc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,11 +184,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,8 +203,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -218,6 +242,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -229,6 +255,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object. </para
           >
         </summary>
@@ -237,10 +265,14 @@
 
           
 
+          
+
           The SerializationInfo to populate with the data needed to serialize the target object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

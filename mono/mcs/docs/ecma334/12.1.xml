@@ -20,6 +20,8 @@ class A
 
       
 
+      
+
       x is a static variable, y is an instance variable, v[0] is an array element, a is a value parameter, b is a reference parameter, c is an output parameter, and i is a local variable. end example]</example
     >
   </paragraph>

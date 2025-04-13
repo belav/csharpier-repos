@@ -24,6 +24,8 @@ public class HelpAttribute: Attribute
 
       
 
+      
+
       defines an attribute class named HelpAttribute that has one positional parameter (string url) and one named parameter (string Topic). Although it is non-static and public, the property Url does not define a named parameter, since it is not read-write. </example
     >
   </paragraph>
@@ -40,6 +42,8 @@ class Class2 {
 }  
 ]]>
       </code_example>
+
+      
 
       
 

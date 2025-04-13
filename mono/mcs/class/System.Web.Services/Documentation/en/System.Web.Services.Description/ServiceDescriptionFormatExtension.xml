@@ -28,8 +28,12 @@
 
         
 
+        
+
          at any of several levels within the class hierarchy. Thus many classes derived from the <see
          cref="T:System.Web.Services.Description.DocumentableItem" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class) have an Extensions property, which returns a <see
          cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 
@@ -93,13 +103,19 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Web.Services.Description.ServiceDescriptionImporter.Import(System.CodeDom.CodeNamespace,System.CodeDom.CodeCompileUnit)" />
 
             
 
+            
+
              method (which is used by the wsdl.exe tool). You can also use a custom class derived from the <see
              cref="T:System.Web.Services.Description.SoapExtensionImporter" />
+
+            
 
             
 
@@ -111,6 +127,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 
@@ -144,8 +162,12 @@
 
             
 
+            
+
              namespace rather than the base <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -157,6 +179,8 @@
           <para
             >Gets the parent of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 
@@ -184,6 +208,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 

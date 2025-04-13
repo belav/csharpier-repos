@@ -28,8 +28,12 @@
 
         
 
+        
+
         . If a class needs to control its serialization process, it can implement the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          calls the <see
          cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          with all the data required to represent the object. The <see
          cref="T:System.Runtime.Serialization.Formatter" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          with the type of the object in the graph. Objects that need to send proxies for themselves can use the <see
          cref="P:System.Runtime.Serialization.SerializationInfo.FullTypeName" />
+
+        
 
         
 
@@ -68,8 +84,12 @@
 
         
 
+        
+
          methods on <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -81,13 +101,19 @@
 
         
 
+        
+
         . In this case, the derived class should call the base class implementation of <see
          cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
         
 
+        
+
          inside its implementation of <see
          cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+        
 
         
 
@@ -99,8 +125,12 @@
 
         
 
+        
+
          interface implies a constructor with the signature constructor (<see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -109,8 +139,12 @@
 
         
 
+        
+
          context). At deserialization time, the current constructor is called only after the data in the <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -123,8 +157,12 @@
 
         
 
+        
+
          the same as types that extend <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -133,8 +171,12 @@
 
         
 
+        
+
          and implement the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -146,13 +188,19 @@
 
         
 
+        
+
         , the remoting infrastructure provides a surrogate that preempts typical serialization and instead serializes a proxy to the <see
          cref="T:System.MarshalByRefObject" />
 
         
 
+        
+
         . A surrogate is a helper that knows how to serialize and deserialize objects of a particular type. The proxy, invisible to the user in most cases, will be of type <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -164,8 +212,12 @@
 
         
 
+        
+
         . Developers should think carefully about the possible serialization and remoting scenarios when combining these two characteristics. One example where this might be applicable is with a <see
          cref="T:System.IO.MemoryStream" />
+
+        
 
         
 
@@ -174,8 +226,12 @@
 
         
 
+        
+
          (<see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -184,8 +240,12 @@
 
         
 
+        
+
         , it is possible to capture the state of a <see
          cref="T:System.IO.MemoryStream" />
+
+        
 
         
 
@@ -197,13 +257,19 @@
 
         
 
+        
+
         , see <see
          cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
 
         
 
+        
+
         . For more information about implementing <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -213,6 +279,8 @@
             >[&lt;topic://cpconCustomSerialization&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -256,6 +324,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
           <para
@@ -264,13 +334,19 @@
 
             
 
+            
+
              requires the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
+            
+
              for providing serialization services. Associated enumeration: <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 
@@ -288,6 +364,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -296,8 +374,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -308,8 +390,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

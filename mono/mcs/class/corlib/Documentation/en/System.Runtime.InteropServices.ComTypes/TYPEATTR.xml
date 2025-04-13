@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -324,8 +326,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" />
+
+            
 
             
 
@@ -359,6 +365,8 @@
 
             
 
+            
+
              if none.</para
           >
         </summary>
@@ -386,6 +394,8 @@
           <para
             >ID of destructor, or <see
              cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+
+            
 
             
 
@@ -425,8 +435,12 @@
 
             
 
+            
+
              == <see
              cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />
+
+            
 
             
 
@@ -463,6 +477,8 @@
           <para
             >A <see
              cref="T:System.Runtime.InteropServices.TYPEKIND" />
+
+            
 
             
 
@@ -545,6 +561,8 @@
           <para
             >A <see
              cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+
+            
 
             
 

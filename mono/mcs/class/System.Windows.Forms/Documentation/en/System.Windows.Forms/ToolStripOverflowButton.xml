@@ -28,6 +28,8 @@
 
         
 
+        
+
          to manage this situation.</para
       >
     </remarks>
@@ -39,8 +41,12 @@
 
         
 
+        
+
          that displays items that overflow the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -71,8 +77,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -82,6 +92,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -98,6 +110,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -129,6 +143,8 @@
 
             
 
+            
+
              that can be dropped down and to which events can be attached.</para
           >
         </summary>
@@ -137,6 +153,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -195,11 +213,15 @@
 
             
 
+            
+
              representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="constrainingSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,8 +249,12 @@
 
             
 
+            
+
              has items that overflow the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -263,11 +289,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripOverflowButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -282,6 +312,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -290,8 +322,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -356,6 +392,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -364,13 +402,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            representing the size and location of the <see
            cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+
+          
 
           
 

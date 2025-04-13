@@ -25,6 +25,8 @@
 
         
 
+        
+
          class to import metadata as well as convert that information into various classes that represent contract and endpoint information.</para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          type uses the custom policy importers (<see
          cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+        
 
         
 
@@ -53,10 +63,14 @@
 
         
 
+        
+
          implementations) to handle custom WSDL elements. For details, see <format
          type="text/html">
           <a href="8c6b3b00-61b8-4589-8fa5-546cc33719bf">Extending the Metadata System</a>
         </format>
+
+        
 
         
 
@@ -68,6 +82,8 @@
 
         
 
+        
+
          type will try up to 32 combinations of policy alternatives attached to the different WSDL policy subjects.  If no combination imports cleanly, the first combination is used to construct a partial custom binding. </para
       >
       <para
@@ -76,8 +92,12 @@
 
         
 
+        
+
          also implements methods that support importing binding information and properties that provide access to any policy documents, WSDL documents, WSDL extensions, and XML schema documents. For information about extending <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+        
 
         
 
@@ -86,11 +106,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Typically the <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+        
 
         
 
@@ -104,8 +128,12 @@
 
             
 
+            
+
              object and pass a <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -122,6 +150,8 @@
 
             
 
+            
+
              property to determine whether there are any import errors.</para
           >
         </item>
@@ -130,6 +160,8 @@
         <para
           >When importing WSDL port types, if the QName of the port type matches an entry in the <see
            cref="P:System.ServiceModel.Description.MetadataImporter.KnownContracts" />
+
+          
 
           
 
@@ -142,8 +174,12 @@
 
         
 
+        
+
          properties until one of the import methods is called. Custom <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+        
 
         
 
@@ -152,10 +188,14 @@
 
         
 
+        
+
          programmatically or using the client configuration <format
          type="text/html">
           <a href="270c7f93-eab7-47b6-8b94-ac3f5b7f17e4">&lt;wsdlImporters&gt;</a>
         </format>
+
+        
 
         
 
@@ -167,8 +207,12 @@
 
         
 
+        
+
          object using <see
          cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />
+
+        
 
         
 
@@ -207,8 +251,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+            
 
             
 
@@ -220,6 +268,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+            
 
             
 
@@ -271,6 +321,8 @@
 
             
 
+            
+
              object from the specified metadata, custom policy importers, and custom WSDL importers.</para
           >
         </summary>
@@ -302,8 +354,12 @@
 
             
 
+            
+
              method to import all binding information from the metadata documents and return them as <see
              cref="T:System.ServiceModel.Channels.Binding" />
+
+            
 
             
 
@@ -312,11 +368,15 @@
 
             
 
+            
+
              property to determine whether there are any import errors before using the returned objects.</para
           >
           <para
             >To import a specific WSDL binding, see the <see
              cref="M:System.ServiceModel.Description.WsdlImporter.ImportBinding(System.Web.Services.Description.Binding)" />
+
+            
 
             
 
@@ -331,6 +391,8 @@
 
             
 
+            
+
              objects imported from the metadata documents.</para
           >
         </summary>
@@ -339,6 +401,8 @@
           <para
             >A set of <see
              cref="T:System.ServiceModel.Channels.Binding" />
+
+            
 
             
 
@@ -373,8 +437,12 @@
 
             
 
+            
+
              method to import all WSDL port type information from the metadata documents and return them as <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -383,11 +451,15 @@
 
             
 
+            
+
              property to determine whether there are any import errors before using the returned objects.</para
           >
           <para
             >To import only one port type, see the <see
              cref="M:System.ServiceModel.Description.WsdlImporter.ImportContract(System.Web.Services.Description.PortType)" />
+
+            
 
             
 
@@ -402,6 +474,8 @@
 
             
 
+            
+
              objects that represent port type information in the metadata documents.</para
           >
         </summary>
@@ -410,6 +484,8 @@
           <para
             >A set of <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -444,8 +520,12 @@
 
             
 
+            
+
              method to import all endpoint information from the metadata documents and return them as a collection of <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -454,11 +534,15 @@
 
             
 
+            
+
              property to determine whether there are any import errors before using the returned objects.</para
           >
           <para
             >To import only a specific WSDL port, see the <see
              cref="M:System.ServiceModel.Description.WsdlImporter.ImportEndpoint(System.Web.Services.Description.Port)" />
+
+            
 
             
 
@@ -473,6 +557,8 @@
 
             
 
+            
+
              that represents the endpoints in WSDL documents.</para
           >
         </summary>
@@ -481,6 +567,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Description.ServiceEndpointCollection" />
+
+            
 
             
 
@@ -518,8 +606,12 @@
 
             
 
+            
+
              method to use a <see
              cref="T:System.Web.Services.Description.Binding" />
+
+            
 
             
 
@@ -528,8 +620,12 @@
 
             
 
+            
+
              object. Check the <see
              cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
+
+            
 
             
 
@@ -544,6 +640,8 @@
 
             
 
+            
+
              object that represents binding information from a set of metadata documents.</para
           >
         </summary>
@@ -552,6 +650,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.Binding" />
+
+            
 
             
 
@@ -589,8 +689,12 @@
 
             
 
+            
+
              method to use a <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -599,8 +703,12 @@
 
             
 
+            
+
              object. Check the <see
              cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
+
+            
 
             
 
@@ -615,6 +723,8 @@
 
             
 
+            
+
              object that represents metadata located by the specified port type information.</para
           >
         </summary>
@@ -623,6 +733,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -660,8 +772,12 @@
 
             
 
+            
+
              method to use a <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 
@@ -670,8 +786,12 @@
 
             
 
+            
+
              object. Check the <see
              cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
+
+            
 
             
 
@@ -686,8 +806,12 @@
 
             
 
+            
+
              from a set of metadata documents that uses information from the specified <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 
@@ -699,6 +823,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -736,6 +862,8 @@
 
             
 
+            
+
              property to determine whether there are any import errors before using the returned object.</para
           >
         </remarks>
@@ -747,8 +875,12 @@
 
             
 
+            
+
              that represents all WSDL port types using the specified <see
              cref="T:System.Web.Services.Description.Binding" />
+
+            
 
             
 
@@ -763,8 +895,12 @@
 
             
 
+            
+
              that represents all WSDL port types using the specified <see
              cref="T:System.Web.Services.Description.Binding" />
+
+            
 
             
 
@@ -802,6 +938,8 @@
 
             
 
+            
+
              property to determine whether there are any import errors before using the returned object.</para
           >
         </remarks>
@@ -813,8 +951,12 @@
 
             
 
+            
+
              that represents all WSDL port types associated with the specified <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -829,8 +971,12 @@
 
             
 
+            
+
              that represents all WSDL port types associated with the specified <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -868,6 +1014,8 @@
 
             
 
+            
+
              property to determine whether there are any import errors before using the returned object.</para
           >
         </remarks>
@@ -879,8 +1027,12 @@
 
             
 
+            
+
              that represents all WSDL port types within the specified <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -895,8 +1047,12 @@
 
             
 
+            
+
              that represents all WSDL port types within the specified <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -931,6 +1087,8 @@
 
             
 
+            
+
              property is not populated until an import method is called.</para
           >
         </remarks>
@@ -939,6 +1097,8 @@
           <para
             >Gets a set of <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -973,6 +1133,8 @@
 
             
 
+            
+
              property to add or remove custom WSDL importers.</para
           >
         </remarks>
@@ -981,6 +1143,8 @@
           <para
             >Gets a set of <see
              cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+            
 
             
 
@@ -1016,6 +1180,8 @@
           <para
             >Gets a set of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 

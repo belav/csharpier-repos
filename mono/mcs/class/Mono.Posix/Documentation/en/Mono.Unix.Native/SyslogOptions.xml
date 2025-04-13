@@ -30,6 +30,8 @@
 
       
 
+      
+
        values.</remarks
     >
     <altmember cref="M:Mono.Unix.Native.Syscall.openlog" />
@@ -58,8 +60,12 @@
           
 
           
+
+          
         cannot pass the message to <c
           >syslogd</c>
+
+          
 
           
 
@@ -87,6 +93,8 @@
         <summary
           >Open the connection to <c
           >syslogd</c>
+
+          
 
           
 
@@ -135,6 +143,8 @@
         <summary
           >Open the connection to <c
           >syslogd</c>
+
+          
 
           
 

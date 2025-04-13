@@ -25,6 +25,8 @@
 
         
 
+        
+
          interface contains the method call parameter types used during deserialization of a method call.</para
       >
       <para
@@ -33,13 +35,19 @@
 
         
 
+        
+
          interface and do not use the <see
          cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
 
         
 
+        
+
          functionality, set the <see
          cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
+
+        
 
         
 
@@ -183,6 +191,8 @@
           <para
             >Gets or sets the XML namespace of the SOAP RPC (Remote Procedure Call) <see
              cref="P:System.Runtime.Serialization.Formatters.ISoapMessage.MethodName" />
+
+            
 
             
 

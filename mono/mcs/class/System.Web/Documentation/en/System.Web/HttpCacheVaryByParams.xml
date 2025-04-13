@@ -25,6 +25,8 @@
 
         
 
+        
+
          property identifies which HTTP Get or Post parameters ASP.NET uses to uniquely identify a variation of the response when there are multiple cached responses for a resource. This is useful when a response depends on a set of client inputs, such as headers or parameters. </para
       >
       <para
@@ -33,10 +35,14 @@
 
         
 
+        
+
          is not directly related to HTTP cache-control headers, but helps ensure that a client or proxy varies by the specified parameters. For more information about VaryByParams, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
          cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web</see
         >
+
+        
 
         
 
@@ -48,6 +54,8 @@
       <para
         >Provides a type-safe way to set the <see
          cref="P:System.Web.HttpCachePolicy.VaryByParams" />
+
+        
 
         
 
@@ -73,10 +81,14 @@
 
             
 
+            
+
              property to true is equivalent to setting the <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
+
+            
 
             
 

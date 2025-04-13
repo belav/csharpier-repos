@@ -42,8 +42,12 @@
 
         
 
+        
+
          instance does not affect any existing <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
         , when the <see
          cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence)" />
+
+        
 
         
 
@@ -62,11 +70,15 @@
 
         
 
+        
+
          instance as a parameter.</para
       >
       <para
         >This class implements the <see
          cref="T:System.IAppDomainSetup" />
+
+        
 
         
 
@@ -79,6 +91,8 @@
 
           
 
+          
+
            property is false. This setting is unsafe for services. To help prevent services from downloading partially trusted code, set this property to true</para
         >
       </block>
@@ -88,6 +102,8 @@
       <para
         >Represents assembly binding information that can be added to an instance of <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -117,6 +133,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -152,8 +170,12 @@
 
             
 
+            
+
              object specified for <paramref
              name="activationContext" />
+
+            
 
             
 
@@ -162,13 +184,19 @@
 
             
 
+            
+
              object containing information required to activate a new application domain. This <see
              cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
+            
+
              object can be accessed by using the <see
              cref="P:System.AppDomainSetup.ActivationArguments" />
+
+            
 
             
 
@@ -183,11 +211,15 @@
 
             
 
+            
+
              class with the specified activation context to use for manifest-based activation of an application domain.</para
           >
         </summary>
         <param name="activationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +254,12 @@
 
             
 
+            
+
              can be accessed by using the <see
              cref="P:System.AppDomainSetup.ActivationArguments" />
+
+            
 
             
 
@@ -238,11 +274,15 @@
 
             
 
+            
+
              class with the specified activation arguments required for manifest-based activation of an application domain.</para
           >
         </summary>
         <param name="activationArguments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,6 +316,8 @@
           <para
             >The information provided by the <see
              cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+            
 
             
 
@@ -315,8 +357,12 @@
 
             
 
+            
+
              property. The array is passed to the callback method each time an <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -329,6 +375,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.AppDomainInitializer" />
+
+            
 
             
 
@@ -364,13 +412,19 @@
 
             
 
+            
+
              property to specify a callback method that is invoked during <see
              cref="T:System.AppDomain" />
 
             
 
+            
+
              initialization. If the <see
              cref="P:System.AppDomainSetup.AppDomainInitializer" />
+
+            
 
             
 
@@ -383,6 +437,8 @@
           <para
             >Gets or sets the arguments passed to the callback method represented by the <see
              cref="T:System.AppDomainInitializer" />
+
+            
 
             
 
@@ -415,8 +471,12 @@
 
             
 
+            
+
              property can influence which permissions are granted to an application domain. For example, an application domain originating from the local computer normally receives full trust based on its location of origin. However, if the <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -425,8 +485,12 @@
 
             
 
+            
+
              is set to the full name of an intranet directory, the <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -488,6 +552,8 @@
 
             
 
+            
+
              is created. Once changed, it cannot be reset to a null reference.</para
           >
         </remarks>
@@ -520,13 +586,19 @@
 
             
 
+            
+
              property must also be set. If the <see
              cref="P:System.AppDomainSetup.ApplicationName" />
 
             
 
+            
+
              property is not set, the <see
              cref="P:System.AppDomainSetup.CachePath" />
+
+            
 
             
 
@@ -537,6 +609,8 @@
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -602,13 +676,19 @@
 
             
 
+            
+
              property is true, the value of the <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
+            
+
              property is ignored. That is, no assemblies are probed for in the directories specified by the <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -620,8 +700,12 @@
 
             
 
+            
+
              property is true, the values of the <see
              cref="P:System.AppDomainSetup.PrivateBinPath" />
+
+            
 
             
 
@@ -630,8 +714,12 @@
 
             
 
+            
+
              property are ignored. No assemblies are probed for in the directories specified by the <see
              cref="P:System.AppDomainSetup.PrivateBinPath" />
+
+            
 
             
 
@@ -643,8 +731,12 @@
 
             
 
+            
+
              property provides an additional layer of control over the loading process. In the normal assembly loading sequence, the application base is probed before the <see
              cref="E:System.AppDomain.AssemblyResolve" />
+
+            
 
             
 
@@ -653,13 +745,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.AppDomainSetup.PrivateBinPath" />
 
             
 
+            
+
              properties. Such applications can use the <see
              cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" />
+
+            
 
             
 
@@ -694,6 +792,8 @@
 
             
 
+            
+
              property is designed to be used by services and server applications where assembly binding redirection is not part of the application scenario.</para
           >
         </remarks>
@@ -725,12 +825,16 @@
 
             
 
+            
+
              property is designed to be used by services and server applications where downloading code from an intranet or the Internet is not part of the application scenario.</para
           >
           <block subset="none" type="note">
             <para
               >The default value for the <see
                cref="P:System.AppDomainSetup.DisallowCodeDownload" />
+
+              
 
               
 
@@ -767,6 +871,8 @@
 
             
 
+            
+
              property specifically applies to a Web application that is loaded locally. Use this property to help prevent a malicious attempt to execute an unsafe Web application in safe mode.</para
           >
           <para
@@ -777,12 +883,16 @@
 
             
 
+            
+
              topic. For more information about safe mode, see the <format
              type="text/html">
               <a href="04ce6178-9199-400c-8d28-245a1a01803d"
                 >Step 1: Examining the Configuration Files</a
               >
             </format>
+
+            
 
             
 
@@ -796,6 +906,8 @@
              type="text/html">
               <a href="4613407e-d0a8-4ef2-9f81-a6acb9fdc7d4">&lt;publisherPolicy&gt;</a>
             </format>
+
+            
 
             
 
@@ -827,6 +939,8 @@
 
             
 
+            
+
              property. Dynamic assemblies that will be loaded and executed by the new application domain can be placed there.</para
           >
           <para
@@ -835,8 +949,12 @@
 
             
 
+            
+
              property, an additional subdirectory is added; the name of this subdirectory is the hash code of the value assigned to the <see
              cref="P:System.AppDomainSetup.ApplicationName" />
+
+            
 
             
 
@@ -851,8 +969,12 @@
 
             
 
+            
+
             . Its simple name is the value returned by the <see
              cref="P:System.AppDomainSetup.ApplicationName" />
+
+            
 
             
 
@@ -889,8 +1011,12 @@
 
             
 
+            
+
              method provides a way to override the configuration information of an application that creates a new application domain. The configuration file information in <paramref
              name="value" />
+
+            
 
             
 
@@ -903,13 +1029,19 @@
 
               
 
+              
+
                method. The runtime does not enforce this. To ensure that all configuration file information is overridden in a new application domain, use the <see
                cref="P:System.AppDomainSetup.ConfigurationFile" />
 
               
 
+              
+
                property to specify a configuration file. The <see
                cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+
+              
 
               
 
@@ -922,8 +1054,12 @@
 
             
 
+            
+
              is the same as the XML in a normal configuration file, except that it is stored as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -935,13 +1071,19 @@
 
             
 
+            
+
              property to get the <see
              cref="T:System.AppDomainSetup" />
 
             
 
+            
+
              object for the application domain, then use the <see
              cref="M:System.AppDomainSetup.GetConfigurationBytes" />
+
+            
 
             
 
@@ -956,6 +1098,8 @@
 
             
 
+            
+
              method, which overrides the application's XML configuration information.</para
           >
         </summary>
@@ -967,8 +1111,12 @@
 
             
 
+            
+
              method, or null if the <see
              cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+
+            
 
             
 
@@ -1050,8 +1198,12 @@
 
             
 
+            
+
              are not under <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -1087,13 +1239,19 @@
 
             
 
+            
+
              (""), to exclude the application directory path — that is, <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
 
             
 
+            
+
              — from the search path for the application, and to search for assemblies only in <see
              cref="P:System.AppDomainSetup.PrivateBinPath" />
+
+            
 
             
 
@@ -1108,8 +1266,12 @@
 
             
 
+            
+
              from the search path for the application, and searches only <see
              cref="P:System.AppDomainSetup.PrivateBinPath" />
+
+            
 
             
 
@@ -1149,11 +1311,15 @@
 
             
 
+            
+
              method to specify that one or more of these breaking changes should be rolled back for the application domain, to make the behavior compatible with the previous version of the .NET Framework.</para
           >
           <para
             >Each time you call this method, it replaces the existing switch settings. To erase the settings, specify null for the <paramref
              name="switches" />
+
+            
 
             
 
@@ -1165,8 +1331,12 @@
 
             
 
+            
+
              can be a simple string array, because arrays implement the <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1196,6 +1366,8 @@
                       >&lt;NetFx40_LegacySecurityPolicy&gt; Element</a
                     >
                   </format>
+
+                  
 
                   
 
@@ -1229,6 +1401,8 @@
 
                   
 
+                  
+
                    formatting behavior for the net_v35_short is enabled in this application domain.</para
                 >
               </description>
@@ -1241,6 +1415,8 @@
         </summary>
         <param name="switches">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1274,8 +1450,12 @@
 
             
 
+            
+
              method provides a way to replace the configuration information of an application that creates a new application domain. The configuration file information in <paramref
              name="value" />
+
+            
 
             
 
@@ -1288,13 +1468,19 @@
 
               
 
+              
+
                method. The runtime does not enforce this. To ensure that all configuration file information is replaced in a new application domain, use the <see
                cref="P:System.AppDomainSetup.ConfigurationFile" />
 
               
 
+              
+
                property to specify a configuration file. The <see
                cref="M:System.AppDomainSetup.SetConfigurationBytes(System.Byte[])" />
+
+              
 
               
 
@@ -1307,8 +1493,12 @@
 
             
 
+            
+
              is the same as the XML in a normal configuration file, except that it is stored as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1321,6 +1511,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1351,8 +1543,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -1361,8 +1557,12 @@
 
             
 
+            
+
              property restricts the shadow copy to the assemblies in the directories specified by <see
              cref="P:System.AppDomainSetup.ShadowCopyDirectories" />
+
+            
 
             
 
@@ -1376,6 +1576,8 @@
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -1410,6 +1612,8 @@
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 

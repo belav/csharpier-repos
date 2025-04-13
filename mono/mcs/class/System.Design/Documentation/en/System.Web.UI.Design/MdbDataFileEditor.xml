@@ -21,8 +21,12 @@
 
         
 
+        
+
          object is used at design time to select and edit a URL for a Microsoft Access database file (.mdb), and then assign the URL to a control property. For example, the <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          class at design time to set the value of the <see
          cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          attribute to associate the <see
          cref="T:System.Web.UI.Design.MdbDataFileEditor" />
+
+        
 
         
 
@@ -54,8 +66,12 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+        
 
         
 
@@ -64,8 +80,12 @@
 
         
 
+        
+
          method, which in turn displays a user interface for selecting the URL, and then returns the URL that is selected by the user. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
+
+        
 
         
 
@@ -77,8 +97,12 @@
 
         
 
+        
+
          to define a custom editor for an Access database URL property. For example, a derived class can override the <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+        
 
         
 
@@ -87,13 +111,19 @@
 
         
 
+        
+
          method with a custom <see
          cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
 
         
 
+        
+
          or <see
          cref="P:System.Web.UI.Design.MdbDataFileEditor.Caption" />
+
+        
 
         
 
@@ -123,6 +153,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -147,13 +179,19 @@
 
             
 
+            
+
              string is used by the <see
              cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
             
 
+            
+
              method when calling the <see
              cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+
+            
 
             
 
@@ -185,13 +223,19 @@
 
             
 
+            
+
              property is used by the <see
              cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
             
 
+            
+
              method when calling the <see
              cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+
+            
 
             
 
@@ -203,6 +247,8 @@
 
             
 
+            
+
              property default value indicates two URL filters for the dialog box: one for Microsoft Access database files (*.mdb) and another for all files (*.*).</para
           >
           <para
@@ -211,8 +257,12 @@
 
             
 
+            
+
              class and override the <see
              cref="P:System.Web.UI.Design.MdbDataFileEditor.Filter" />
+
+            
 
             
 

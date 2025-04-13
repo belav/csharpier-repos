@@ -59,8 +59,12 @@
 
             
 
+            
+
              is false, AddContext throws a <see
              cref="T:System.ServiceModel.QuotaExceededException" />
+
+            
 
             
 
@@ -72,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityTokenResolver" />
+
+            
 
             
 

@@ -43,8 +43,12 @@
 
         
 
+        
+
          maintains a collection of references to controls associated with it. To associate a Help file with the <see
          cref="T:System.Windows.Forms.HelpProvider" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          property. You specify the type of Help provided by calling the <see
          cref="M:System.Windows.Forms.HelpProvider.SetHelpNavigator(System.Windows.Forms.Control,System.Windows.Forms.HelpNavigator)" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          value for the specified control. You provide the keyword or topic for the Help by calling the <see
          cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
         
 
+        
+
          method. The string that you associate with a control using this method is displayed in a pop-up window when the user presses the F1 key while the control has focus.</para
       >
       <para
@@ -84,8 +98,12 @@
 
         
 
+        
+
          property has not been set, you must use the <see
          cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
+
+        
 
         
 
@@ -94,8 +112,12 @@
 
         
 
+        
+
          and the Help string, Help based on the <see
          cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
          calls methods on the <see
          cref="T:System.Windows.Forms.Help" />
+
+        
 
         
 
@@ -133,8 +159,12 @@
 
             
 
+            
+
              class, use the <see
              cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
+
+            
 
             
 
@@ -143,8 +173,12 @@
 
             
 
+            
+
              method, and <see
              cref="M:System.Windows.Forms.HelpProvider.SetHelpNavigator(System.Windows.Forms.Control,System.Windows.Forms.HelpNavigator)" />
+
+            
 
             
 
@@ -156,6 +190,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.HelpProvider" />
+
+            
 
             
 
@@ -189,6 +225,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,6 +264,8 @@
 
             
 
+            
+
              is currently configured to display the entire Help file or is configured to provide a Help string.</para
           >
         </returns>
@@ -234,8 +274,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -277,6 +321,8 @@
 
             
 
+            
+
              setting for the specified control.</para
           >
         </summary>
@@ -288,8 +334,12 @@
 
             
 
+            
+
              setting for the specified control. The default is <see
              cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
+
+            
 
             
 
@@ -301,8 +351,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -352,8 +406,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -394,13 +452,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HelpProvider.SetHelpString(System.Windows.Forms.Control,System.String)" />
 
             
 
+            
+
              method to associate a keyword or prompt with a specified control, calling this method automatically returns true. You can override this behavior by passing false to the <see
              cref="M:System.Windows.Forms.HelpProvider.SetShowHelp(System.Windows.Forms.Control,System.Boolean)" />
+
+            
 
             
 
@@ -420,8 +484,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -469,6 +537,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -504,6 +574,8 @@
 
           
 
+          
+
           The control to remove Help from.</param
         >
       </Docs>
@@ -534,13 +606,19 @@
 
             
 
+            
+
              property. To open Help to a specific topic, the keyword should be passed in the form topicName.htm. To clear the keyword, call the <see
              cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
 
             
 
+            
+
              method with a <paramref
              name="keyword" />
+
+            
 
             
 
@@ -556,8 +634,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -565,6 +647,8 @@
         >
         <param name="keyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -600,8 +684,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -612,8 +700,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.HelpNavigator" />
+
+          
 
           
 
@@ -647,6 +739,8 @@
 
             
 
+            
+
              parameter is displayed in a pop-up window when the user presses the F1 key while the specified control has focus.</para
           >
         </remarks>
@@ -659,8 +753,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -668,6 +766,8 @@
         >
         <param name="helpString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -701,8 +801,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HelpProvider.SetHelpKeyword(System.Windows.Forms.Control,System.String)" />
+
+            
 
             
 
@@ -711,8 +815,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="T:System.Windows.Forms.HelpProvider" />
+
+            
 
             
 
@@ -721,8 +829,12 @@
 
             
 
+            
+
              method, specifying false in the <paramref
              name="value" />
+
+            
 
             
 
@@ -738,8 +850,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -747,6 +863,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -792,6 +910,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -813,13 +933,19 @@
 
             
 
+            
+
              method returns a string that includes the type and the <see
              cref="P:System.Windows.Forms.HelpProvider.HelpNamespace" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.HelpProvider" />
+
+            
 
             
 
@@ -834,6 +960,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -842,6 +970,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.HelpProvider" />
+
+            
 
             
 

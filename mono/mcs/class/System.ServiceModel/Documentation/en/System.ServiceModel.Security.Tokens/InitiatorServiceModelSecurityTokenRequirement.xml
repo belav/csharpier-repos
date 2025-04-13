@@ -53,8 +53,12 @@
 
             
 
+            
+
              is set to false. <see
              cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.IsInitiatorProperty" />
+
+            
 
             
 
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.InitiatorServiceModelSecurityTokenRequirement" />
+
+            
 
             
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              from the data source item.</para
           >
         </remarks>
@@ -63,6 +67,8 @@
 
             
 
+            
+
              class with the specified object, type, and list item.</para
           >
         </summary>
@@ -71,8 +77,12 @@
 
           
 
+          
+
           The value displayed in the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 
@@ -83,8 +93,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -95,8 +109,12 @@
 
           
 
+          
+
           The data source item to be displayed in the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 

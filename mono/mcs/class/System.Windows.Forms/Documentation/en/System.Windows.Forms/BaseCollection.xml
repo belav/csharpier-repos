@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is not intended for use by application developers. Application developers should use <see
          cref="T:System.Collections.CollectionBase" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
       <para
         >Classes that derive from the <see
          cref="T:System.Windows.Forms.BaseCollection" />
+
+        
 
         
 
@@ -80,6 +90,8 @@
 
         
 
+        
+
          namespace.</para
       >
     </summary>
@@ -96,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.BaseCollection" />
+
+            
 
             
 
@@ -128,13 +142,19 @@
 
             
 
+            
+
              to the specified one-dimensional <see
              cref="T:System.Array" />
 
             
 
+            
+
              starting at the specified destination <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -146,8 +166,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -158,8 +182,12 @@
 
           
 
+          
+
           The zero-based relative index in <paramref
            name="ar" />
+
+          
 
           
 
@@ -222,6 +250,8 @@
 
             
 
+            
+
              interface.</para
           >
         </returns>
@@ -252,6 +282,8 @@
           <para
             >The collections that derive from the <see
              cref="T:System.Windows.Forms.BaseCollection" />
+
+            
 
             
 
@@ -292,6 +324,8 @@
 
             
 
+            
+
              property returns true, and the programmer does not have to do anything to keep the collection thread safe.</para
           >
           <para
@@ -300,8 +334,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.BaseCollection.IsSynchronized" />
+
+            
 
             
 
@@ -310,8 +348,12 @@
 
             
 
+            
+
              property returns an object that can be used with the C# lock keyword. Use the static <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -320,8 +362,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -333,6 +379,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -362,6 +410,8 @@
           <para
             >Gets the list of elements contained in the <see
              cref="T:System.Windows.Forms.BaseCollection" />
+
+            
 
             
 
@@ -398,13 +448,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.BaseCollection.IsSynchronized" />
 
             
 
+            
+
              property returns false, then the <see
              cref="P:System.Windows.Forms.BaseCollection.SyncRoot" />
+
+            
 
             
 
@@ -416,6 +472,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Windows.Forms.BaseCollection" />
+
+            
 
             
 

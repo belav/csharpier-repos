@@ -37,8 +37,12 @@
 
         
 
+        
+
          class. During this process, the .NET Framework generates read methods that implement the <see
          cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
       <para
         >Do not directly create instances of the <see
          cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
       <para
         >Delegate used by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          object represents a unique connection to a data source created by using a connection string or ODBC data source name (DSN). With a client/server database system, it is equivalent to a network connection to the server. Depending on the functionality supported by the native ODBC driver, some methods or properties of an <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object uses native resources such as ODBC environment and connection handles. You should always explicitly close any open <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          or Dispose before the <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -70,13 +82,19 @@
 
         
 
+        
+
          class causes a fatal <see
          cref="T:System.Data.Odbc.OdbcException" />
 
         
 
+        
+
          (for example, a SQL Server severity level of 20 or greater), the <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -88,8 +106,12 @@
 
         
 
+        
+
          object can require all direct and indirect callers to have sufficient permission to the code by setting declarative or imperative security demands. <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -98,8 +120,12 @@
 
         
 
+        
+
          object. Users can verify that their code has sufficient permissions by using the <see
          cref="T:System.Data.Odbc.OdbcPermissionAttribute" />
+
+        
 
         
 
@@ -110,6 +136,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -117,6 +145,8 @@
          type="text/html">
           <a href="5a29de74-acfc-4134-8616-829dd7ce0710">Working with Connection Events</a>
         </format>
+
+        
 
         
 
@@ -142,8 +172,12 @@
 
             
 
+            
+
              is created, the write-only and read-only properties are set to the following initial values unless they are specifically set using their associated keywords in the <see
              cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+            
 
             
 
@@ -197,6 +231,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -205,6 +241,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -232,8 +270,12 @@
 
             
 
+            
+
              is created, the write-only and read-only properties are set to the following initial values unless they are specifically set using their associated keywords in the <see
              cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+            
 
             
 
@@ -289,6 +331,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -300,11 +344,15 @@
 
             
 
+            
+
              class with the specified connection string.</para
           >
         </summary>
         <param name="connectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,8 +406,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Odbc.OdbcTransaction.Rollback" />
+
+            
 
             
 
@@ -373,8 +425,12 @@
 
               
 
+              
+
                method, use the overload that takes the <paramref
                name="isolevel" />
+
+              
 
               
 
@@ -417,8 +473,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Odbc.OdbcTransaction.Rollback" />
+
+            
 
             
 
@@ -434,6 +494,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -443,6 +505,8 @@
         </returns>
         <param name="isolevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -472,6 +536,8 @@
 
             
 
+            
+
              parameter must contain a valid database name, and cannot contain a null value, an empty string (""), or a string with only blank characters.</para
           >
         </remarks>
@@ -483,11 +549,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -515,8 +585,12 @@
 
             
 
+            
+
              method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled. If <see
              cref="M:System.Data.Odbc.OdbcConnection.Close" />
+
+            
 
             
 
@@ -525,8 +599,12 @@
 
             
 
+            
+
              event, no additional <see
              cref="E:System.Data.Common.DbConnection.StateChange" />
+
+            
 
             
 
@@ -535,6 +613,8 @@
           <para
             >An application can call <see
              cref="M:System.Data.Odbc.OdbcConnection.Close" />
+
+            
 
             
 
@@ -550,10 +630,14 @@
 
               
 
+              
+
                or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
                type="text/html">
                 <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
               </format>
+
+              
 
               
 
@@ -604,8 +688,12 @@
 
             
 
+            
+
              property is designed to match ODBC connection string format as closely as possible. The <see
              cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+            
 
             
 
@@ -614,11 +702,15 @@
 
             
 
+            
+
              must exactly match what the Driver Manager and underlying driver support.</para
           >
           <para
             >You can use the <see
              cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+            
 
             
 
@@ -642,8 +734,12 @@
 
               
 
+              
+
                property behaves as if Persist Security Info were set to false. This means that you cannot retrieve the password from the <see
                cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+              
 
               
 
@@ -652,13 +748,19 @@
 
               
 
+              
+
                property is read from an <see
                cref="T:System.Data.Odbc.OdbcConnection" />
 
               
 
+              
+
                object that has been opened, the connection string is returned minus the password. You cannot change this behavior; therefore, if the application requires the password, store it separately before calling <see
                cref="M:System.Data.Odbc.OdbcConnection.Open" />
+
+              
 
               
 
@@ -671,8 +773,12 @@
 
             
 
+            
+
              property). These properties are updated after the connection is opened, except when an error is detected. In this case, none of the properties are updated. <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -681,8 +787,12 @@
 
             
 
+            
+
             ) return only default settings or those settings specified in the <see
              cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+            
 
             
 
@@ -694,8 +804,12 @@
 
             
 
+            
+
              method. It is the responsibility of the underlying ODBC driver to validate the connection string. If the connection string contains invalid or unsupported properties, the driver may raise an <see
              cref="T:System.Data.Odbc.OdbcException" />
+
+            
 
             
 
@@ -707,8 +821,12 @@
 
             
 
+            
+
              property. At that time, the data provider verifies that the connection string meets the "keyword=value;..." format, but it does not verify whether keywords or values are valid. The remaining verification is performed by the underlying ODBC driver when the application calls the <see
              cref="M:System.Data.Odbc.OdbcConnection.Open" />
+
+            
 
             
 
@@ -728,8 +846,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              has zero or more characters; <paramref
              name="identifier" />
+
+            
 
             
 
@@ -738,8 +860,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              is not case sensitive; <paramref
              name="attribute-value" />
+
+            
 
             
 
@@ -789,8 +915,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              property before calling <see
              cref="M:System.Data.Odbc.OdbcConnection.Open" />
+
+            
 
             
 
@@ -827,8 +957,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              object associated with the <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -840,6 +974,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >An <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -893,8 +1029,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              property is set in the connection string. The <see
              cref="P:System.Data.Odbc.OdbcConnection.Database" />
+
+            
 
             
 
@@ -903,8 +1043,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              method. If you change the current database using an SQL statement or the <see
              cref="M:System.Data.Odbc.OdbcConnection.ChangeDatabase(System.String)" />
+
+            
 
             
 
@@ -916,8 +1060,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              property is equivalent to calling the ODBC function SQLGetInfo with the <paramref
              name="Attribute" />
+
+            
 
             
 
@@ -958,8 +1106,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              property is equivalent to calling the ODBC function SQLGetInfo with the <paramref
              name="InfoType" />
+
+            
 
             
 
@@ -1020,8 +1172,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              property is equivalent to calling the ODBC function SQLGetInfo with the <paramref
              name="InfoType" />
+
+            
 
             
 
@@ -1059,13 +1215,19 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              method to enlist in a distributed transaction. Because it enlists a connection in a <see
              cref="T:System.Transactions.Transaction" />
 
             
 
+            
+
              instance, EnlistTransaction takes advantage of functionality available in the <see
              cref="N:System.Transactions" />
+
+            
 
             
 
@@ -1078,11 +1240,15 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
             .</para
           >
           <para
             >You can continue to enlist in an existing distributed transaction using the <see
              cref="M:System.Data.OdbcClient.OdbcConnection.EnlistDistributedTransaction" />
+
+            
 
             
 
@@ -1095,10 +1261,14 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.Data.Odbc.OdbcConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
+
+            
 
             
 
@@ -1107,8 +1277,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              has already started a transaction using <see
              cref="M:System.Data.OdbcClient.OdbcConnection.BeginTransaction" />
+
+            
 
             
 
@@ -1117,13 +1291,19 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              object), <see
              cref="M:System.Data.Odbc.OdbcConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
 
             
 
+            
+
              rolls back the local transaction and enlists in the existing distributed transaction as requested. You will not receive notice that the local transaction was rolled back, and are responsible for managing any local transactions not started using <see
              cref="M:System.Data.OdbcClient.OdbcConnection.BeginTransaction" />
+
+            
 
             
 
@@ -1139,8 +1319,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
           
 
+          
+
           A reference to an existing <see
            cref="T:System.EnterpriseServices.ITransaction" />
+
+          
 
           
 
@@ -1176,13 +1360,19 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              method to enlist in a distributed transaction. Because it enlists a connection in a <see
              cref="T:System.Transactions.Transaction" />
 
             
 
+            
+
              instance, EnlistTransaction takes advantage of functionality available in the <see
              cref="N:System.Transactions" />
+
+            
 
             
 
@@ -1192,6 +1382,8 @@ driver-defined-attribute-keyword ::= identifier</code>
                 >Performing a Distributed Transaction</a
               >
             </format>
+
+            
 
             
 
@@ -1207,8 +1399,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
           
 
+          
+
           A reference to an existing <see
            cref="T:System.Transactions.Transaction" />
+
+          
 
           
 
@@ -1236,6 +1432,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1244,6 +1442,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1276,8 +1476,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              is null, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1295,6 +1499,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              using the specified name for the schema name.</para
           >
         </summary>
@@ -1306,11 +1512,15 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              that contains schema information.</para
           >
         </returns>
         <param name="collectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1343,8 +1553,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              is specified as null, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1353,6 +1567,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >The <paramref
              name="restrictionValues" />
+
+            
 
             
 
@@ -1371,6 +1587,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              using the specified string for the schema name and the specified string array for the restriction values.</para
           >
         </summary>
@@ -1382,6 +1600,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              that contains schema information.</para
           >
         </returns>
@@ -1390,10 +1610,14 @@ driver-defined-attribute-keyword ::= identifier</code>
 
           
 
+          
+
           Specifies the name of the schema to return.</param
         >
         <param name="restrictionValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1417,6 +1641,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >Clients that want to process warnings or informational messages sent by the server should create an <see
              cref="T:System.Data.Odbc.OdbcInfoMessageEventHandler" />
+
+            
 
             
 
@@ -1449,6 +1675,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              draws an open connection from the connection pool if one is available. Otherwise, it establishes a new connection to the data source.</para
           >
           <block subset="none" type="note">
@@ -1458,8 +1686,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
               
 
+              
+
                goes out of scope, the connection it represents does not close automatically. Therefore, you must explicitly close the connection by calling <see
                cref="M:System.Data.Odbc.OdbcConnection.Close" />
+
+              
 
               
 
@@ -1473,6 +1705,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >Opens a connection to a data source with the property settings specified by the <see
              cref="P:System.Data.Odbc.OdbcConnection.ConnectionString" />
+
+            
 
             
 
@@ -1505,8 +1739,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
                 
 
+                
+
                  to release the <see
                  cref="T:System.Data.Odbc.OdbcConnection" />
+
+                
 
                 
 
@@ -1523,6 +1761,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1536,8 +1776,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              on all active connections, and invoke garbage collection, but do not call <see
              cref="M:System.Data.Odbc.OdbcConnection.ReleaseObjectPool" />
+
+            
 
             
 
@@ -1546,6 +1790,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >After an environment handle is released, a request for a new <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -1586,11 +1832,15 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              is not supported by the underlying ODBC driver, an empty string ("") is returned.</para
           >
           <para
             >The <see
              cref="P:System.Data.Odbc.OdbcConnection.ServerVersion" />
+
+            
 
             
 
@@ -1637,6 +1887,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -1644,6 +1896,8 @@ driver-defined-attribute-keyword ::= identifier</code>
               <para
                 >From Open to Closed, using either the <see
                  cref="M:System.Data.Odbc.OdbcConnection.Close" />
+
+                
 
                 
 
@@ -1655,6 +1909,8 @@ driver-defined-attribute-keyword ::= identifier</code>
             <para
               >Calling the <see
                cref="P:System.Data.Odbc.OdbcConnection.State" />
+
+              
 
               
 
@@ -1769,8 +2025,12 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -1785,6 +2045,8 @@ driver-defined-attribute-keyword ::= identifier</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1793,6 +2055,8 @@ driver-defined-attribute-keyword ::= identifier</code>
           <para
             >A new <see
              cref="T:System.Object" />
+
+            
 
             
 

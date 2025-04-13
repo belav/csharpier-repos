@@ -29,6 +29,8 @@
 
         
 
+        
+
          class is the starting point for creating a custom binding that implements the TCP transport protocol. This transport is optimized for indigo2-to-indigo2 communication.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Channels.TcpConnectionPoolSettings.LeaseTimeout" />
+
+        
 
         
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
         , such as <see
          cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxBufferSize" />
+
+        
 
         
 
@@ -73,13 +87,19 @@
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.ConnectionBufferSize" />
 
         
 
+        
+
         . For a complete list of properties, see <see
          cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />
+
+        
 
         
 
@@ -91,8 +111,12 @@
 
         
 
+        
+
         , such as <see
          cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />
+
+        
 
         
 
@@ -101,8 +125,12 @@
 
         
 
+        
+
         . For a complete list of properties, see <see
          cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        
 
         
 
@@ -133,6 +161,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+            
 
             
 
@@ -167,6 +197,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -175,6 +207,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+            
 
             
 
@@ -224,10 +258,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,10 +319,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,6 +423,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -389,6 +433,8 @@
           <para
             >Gets a specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -403,6 +449,8 @@
 
             
 
+            
+
             , or null if the object is not found.</para
           >
         </returns>
@@ -411,8 +459,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -420,6 +472,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -443,6 +497,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.ListenBacklog" />
+
+            
 
             
 
@@ -475,6 +531,8 @@
              type="text/html">
               <a href="f13692ee-a179-4439-ae72-50db9534eded">Net.TCP Port Sharing</a>
             </format>
+
+            
 
             
 
@@ -529,6 +587,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -537,10 +597,14 @@
 
             
 
+            
+
             . For more information about Microsoft IPv6 stack installation, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96650"
               >Windows Server 2003 Technology Centers</see
             >
+
+            
 
             
 

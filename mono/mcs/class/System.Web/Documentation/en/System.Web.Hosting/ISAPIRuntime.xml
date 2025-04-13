@@ -33,6 +33,8 @@
 
         
 
+        
+
          objects in the .NET Framework. This class cannot be inherited.</para
       >
     </summary>
@@ -50,6 +52,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Hosting.ISAPIRuntime" />
+
+            
 
             
 
@@ -101,6 +105,8 @@
 
             
 
+            
+
              object an infinite lifetime by preventing a lease from being created. </para
           >
         </summary>
@@ -130,6 +136,8 @@
 
             
 
+            
+
              object to process the current request.</para
           >
         </summary>
@@ -141,6 +149,8 @@
 
             
 
+            
+
              was created successfully; otherwise, 1.</para
           >
         </returns>
@@ -149,10 +159,14 @@
 
           
 
+          
+
           An ISAPI extension control block.</param
         >
         <param name="iWRType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,6 +236,8 @@
         </summary>
         <param name="immediate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

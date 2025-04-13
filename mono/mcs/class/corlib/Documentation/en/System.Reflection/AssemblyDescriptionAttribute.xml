@@ -38,13 +38,19 @@
 
         
 
+        
+
          for the project from the <ui
         >File</ui>
 
         
 
+        
+
          menu, and then by clicking <ui
         >Assembly Information</ui>
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          value on the <ui
         >Version</ui>
+
+        
 
         
 
@@ -99,11 +109,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -10,6 +10,8 @@
 
         
 
+        
+
         s, the default value is the value produced by a bit pattern of all zeros: </list_item
       >
       <list>
@@ -19,8 +21,12 @@
 
           
 
+          
+
           , <keyword
           >byte</keyword>
+
+          
 
           
 
@@ -29,8 +35,12 @@
 
           
 
+          
+
           , <keyword
           >ushort</keyword>
+
+          
 
           
 
@@ -39,8 +49,12 @@
 
           
 
+          
+
           , <keyword
           >uint</keyword>
+
+          
 
           
 
@@ -49,8 +63,12 @@
 
           
 
+          
+
           , and <keyword
           >ulong</keyword>
+
+          
 
           
 
@@ -62,11 +80,15 @@
 
           
 
+          
+
           , the default value is '\x0000'. </list_item
         >
         <list_item
           > For <keyword
           >float</keyword>
+
+          
 
           
 
@@ -78,6 +100,8 @@
 
           
 
+          
+
           , the default value is 0.0d. </list_item
         >
         <list_item
@@ -86,11 +110,15 @@
 
           
 
+          
+
           , the default value is 0.0m. </list_item
         >
         <list_item
           > For <keyword
           >bool</keyword>
+
+          
 
           
 
@@ -103,11 +131,15 @@
 
         
 
+        
+
          E, the default value is 0. </list_item
       >
       <list_item
         > For a <non_terminal
          where="11.1">struct-type</non_terminal>
+
+        
 
         
 
@@ -118,6 +150,8 @@
   <paragraph
     >Like any other instance constructor, the default constructor of a value type is invoked using the new operator. <note
     >[Note: For efficiency reasons, this requirement is not intended to actually have the implementation generate a constructor call. end note]</note>
+
+    
 
     
 
@@ -137,6 +171,8 @@ class A
   <paragraph
     >Because every value type implicitly has a public parameterless instance constructor, it is not possible for a struct type to contain an explicit declaration of a parameterless constructor. A struct type is however permitted to declare parameterized instance constructors (<hyperlink
     >18.3.8</hyperlink>
+
+    
 
     
 

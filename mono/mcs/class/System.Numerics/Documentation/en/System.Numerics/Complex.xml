@@ -32,8 +32,12 @@
 
         
 
+        
+
          is usually written in the form <math
         >z = x + yi</math>
+
+        
 
         
 
@@ -42,11 +46,15 @@
 
         
 
+        
+
          = -1. The real part of the complex number is represented by x, and the imaginary part of the complex number is represented by y.</para
       >
       <para
         >The <see
          cref="T:System.Numerics.Complex" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
 
             
 
+            
+
              values to its constructor. The first value represents the real part of the complex number, and the second value represents its imaginary part. These values represent the position of the complex number in the two-dimensional Cartesian coordinate system.</para
           >
         </item>
@@ -80,6 +90,8 @@
           <para
             >By calling the static (Shared in Visual Basic) <see
              cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+
+            
 
             
 
@@ -93,8 +105,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.SByte" />
+
+            
 
             
 
@@ -103,8 +119,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -113,8 +133,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt32" />
+
+            
 
             
 
@@ -123,8 +147,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -133,13 +161,19 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Double" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -153,13 +187,19 @@
 
             
 
+            
+
              or <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -173,13 +213,19 @@
 
             
 
+            
+
              object. For example, <see
              cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
 
             
 
+            
+
              is a static method that returns a complex number that is the sum of two complex numbers, and the <see
              cref="M:System.Numerics.Complex.op_Addition(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -198,6 +244,8 @@
 
         
 
+        
+
          structure in the .NET Framework includes members that provide the following functionality:</para
       >
       <list type="bullet">
@@ -208,6 +256,8 @@
           <para
             >Operators to perform arithmetic operations on complex numbers. <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -230,13 +280,19 @@
 
         
 
+        
+
          values, like double-precision floating-point values, can lose precision as a result of numerical operations. This means that strict comparisons for equality of two <see
          cref="T:System.Numerics.Complex" />
 
         
 
+        
+
          values may fail, even if the difference between the two values is due to a loss of precision. For more information, see <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -247,6 +303,8 @@
       <para
         >Similarly, the following example, which calculates the square root of a <see
          cref="T:System.Numerics.Complex" />
+
+        
 
         
 
@@ -262,8 +320,12 @@
 
         
 
+        
+
          values. In addition to ranging from <see
          cref="F:System.Double.MinValue" />
+
+        
 
         
 
@@ -272,13 +334,19 @@
 
         
 
+        
+
         , the real or imaginary part of a complex number can have a value of <see
          cref="F:System.Double.PositiveInfinity" />
 
         
 
+        
+
         , <see
          cref="F:System.Double.NegativeInfinity" />
+
+        
 
         
 
@@ -287,8 +355,12 @@
 
         
 
+        
+
         . <see
          cref="F:System.Double.PositiveInfinity" />
+
+        
 
         
 
@@ -297,8 +369,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Double.NaN" />
+
+        
 
         
 
@@ -310,8 +386,12 @@
 
         
 
+        
+
          produces a complex number whose real and imaginary parts are both <see
          cref="F:System.Double.NaN" />
+
+        
 
         
 
@@ -320,8 +400,12 @@
 
         
 
+        
+
         . Similarly, performing a multiplication that overflows the range of the <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -330,8 +414,12 @@
 
         
 
+        
+
          and whose imaginary part is <see
          cref="F:System.Double.PositiveInfinity" />
+
+        
 
         
 
@@ -340,8 +428,12 @@
 
         
 
+        
+
          and whose imaginary part is <see
          cref="F:System.Double.PositiveInfinity" />
+
+        
 
         
 
@@ -354,8 +446,12 @@
 
         
 
+        
+
          data type do not throw an exception. Instead, they return a <see
          cref="F:System.Double.PositiveInfinity" />
+
+        
 
         
 
@@ -364,8 +460,12 @@
 
         
 
+        
+
         , or <see
          cref="F:System.Double.NaN" />
+
+        
 
         
 
@@ -379,6 +479,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -389,8 +491,12 @@
 
             
 
+            
+
              data type returns <see
              cref="F:System.Double.PositiveInfinity" />
+
+            
 
             
 
@@ -404,6 +510,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -414,8 +522,12 @@
 
             
 
+            
+
              data type returns <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -429,6 +541,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -439,13 +553,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Double.NegativeInfinity" />
 
             
 
+            
+
             , or <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -454,13 +574,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Double.NegativeInfinity" />
 
             
 
+            
+
             , or <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -474,8 +600,12 @@
 
         
 
+        
+
         . The calculation of the real component that results from the multiplication evaluates the expression <math
         >9e308 * 2.5 - 9e308 * 3.5</math>
+
+        
 
         
 
@@ -484,8 +614,12 @@
 
         
 
+        
+
         , and the attempt to subtract <see
          cref="F:System.Double.PositiveInfinity" />
+
+        
 
         
 
@@ -494,8 +628,12 @@
 
         
 
+        
+
          returns <see
          cref="F:System.Double.NaN" />
+
+        
 
         
 
@@ -510,13 +648,19 @@
 
         
 
+        
+
          values that form the complex number's real and imaginary components. Some overloads of the <see
          cref="Overload:System.Numerics.Complex.ToString" />
 
         
 
+        
+
          method allow customization of the string representations of these <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -527,10 +671,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
         </format>
+
+        
 
         
 
@@ -542,8 +690,12 @@
 
         
 
+        
+
         , where <math
         >a</math>
+
+        
 
         
 
@@ -552,8 +704,12 @@
 
         
 
+        
+
          is the complex number's imaginary component. In electrical engineering, a complex number is most commonly expressed as <math
         >a + bj</math>
+
+        
 
         
 
@@ -562,13 +718,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.IFormatProvider" />
 
         
 
+        
+
          interfaces, and then call the <see
          cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+
+        
 
         
 
@@ -580,8 +742,12 @@
 
         
 
+        
+
          or <math
         >a + bj</math>
+
+        
 
         
 
@@ -620,13 +786,19 @@
 
             
 
+            
+
              or <paramref
              name="imaginary" />
 
             
 
+            
+
              arguments may lose precision if they are data types that require an explicit cast to <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -641,6 +813,8 @@
 
             
 
+            
+
              structure using the specified real and imaginary values.</para
           >
         </summary>
@@ -649,10 +823,14 @@
 
           
 
+          
+
           The real part of the complex number.</param
         >
         <param name="imaginary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -688,8 +866,12 @@
 
             
 
+            
+
              property. The absolute value of a real number <math
             >a + bi</math>
+
+            
 
             
 
@@ -703,6 +885,8 @@
 
                 
 
+                
+
                 , the result is 0.</para
               >
             </item>
@@ -710,6 +894,8 @@
               <para
                 >If <math
                 >a &gt; b</math>
+
+                
 
                 
 
@@ -724,6 +910,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -731,6 +919,8 @@
               <para
                 >If <math
                 >b &gt; a</math>
+
+                
 
                 
 
@@ -745,6 +935,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -755,8 +947,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -765,8 +961,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Numerics.Complex.Imaginary" />
+
+            
 
             
 
@@ -775,8 +975,12 @@
 
             
 
+            
+
              and the other property is neither <see
              cref="F:System.Double.PositiveInfinity" />
+
+            
 
             
 
@@ -785,8 +989,12 @@
 
             
 
+            
+
             , the method returns <see
              cref="F:System.Double.NaN" />
+
+            
 
             
 
@@ -805,11 +1013,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,8 +1057,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Acos(System.Double)" />
+
+            
 
             
 
@@ -855,6 +1071,8 @@
           <para
             >The <see
              cref="M:System.Numerics.Complex.Acos(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -892,11 +1110,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -933,8 +1155,12 @@
 
             
 
+            
+
             , and a second complex number, <math
             >c + di</math>
+
+            
 
             
 
@@ -949,8 +1175,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -959,6 +1189,8 @@
           <para
             >Languages that do not support custom operators can use the <see
              cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -977,8 +1209,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -990,10 +1226,14 @@
 
           
 
+          
+
           The first complex number to add.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1029,8 +1269,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Asin(System.Double)" />
+
+            
 
             
 
@@ -1039,6 +1283,8 @@
           <para
             >The <see
              cref="M:System.Numerics.Complex.Asin(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -1070,11 +1316,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1110,8 +1360,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Atan(System.Double)" />
+
+            
 
             
 
@@ -1120,6 +1374,8 @@
           <para
             >The <see
              cref="M:System.Numerics.Complex.Atan(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -1152,11 +1408,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1192,8 +1452,12 @@
 
             
 
+            
+
              is a complex number, its conjugate is <math
             >a - bi</math>
+
+            
 
             
 
@@ -1212,11 +1476,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1252,8 +1520,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Cos(System.Double)" />
+
+            
 
             
 
@@ -1265,8 +1537,12 @@
 
             
 
+            
+
              method uses the following formula to calculate the cosine of the complex number <math
             >a + bi</math>
+
+            
 
             
 
@@ -1296,11 +1572,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1336,8 +1616,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Cosh(System.Double)" />
+
+            
 
             
 
@@ -1349,8 +1633,12 @@
 
             
 
+            
+
              method uses the following formula to calculate the hyperbolic cosine of the complex number <math
             >a + bi</math>
+
+            
 
             
 
@@ -1362,8 +1650,12 @@
 
             
 
+            
+
             (a) * <see
              cref="M:System.Math.Cos(System.Double)" />
+
+            
 
             
 
@@ -1372,8 +1664,12 @@
 
             
 
+            
+
             (a) * <see
              cref="M:System.Math.Sin(System.Double)" />
+
+            
 
             
 
@@ -1392,11 +1688,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1433,8 +1733,12 @@
 
             
 
+            
+
             , by a second complex number, number, <math
             >c + di</math>
+
+            
 
             
 
@@ -1457,8 +1761,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -1467,6 +1775,8 @@
           <para
             >The <see
              cref="M:System.Numerics.Complex.Divide(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -1486,10 +1796,14 @@
 
           
 
+          
+
           The complex number to be divided.</param
         >
         <param name="divisor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1522,8 +1836,12 @@
 
             
 
+            
+
              method provides the <see
              cref="T:System.IEquatable`1" />
+
+            
 
             
 
@@ -1532,8 +1850,12 @@
 
             
 
+            
+
              structure. It performs slightly better than <see
              cref="M:System.Numerics.Complex.Equals(System.Object)" />
+
+            
 
             
 
@@ -1542,6 +1864,8 @@
           <para
             >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see
              cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -1561,11 +1885,15 @@
 
             
 
+            
+
              have the same value; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1598,6 +1926,8 @@
 
             
 
+            
+
              method is equivalent to the following expression:</para
           >
           <para>code reference: System.Numerics.Complex.Equals#2</para>
@@ -1607,8 +1937,12 @@
 
             
 
+            
+
              parameter is not a <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -1617,8 +1951,12 @@
 
             
 
+            
+
              method converts <paramref
              name="obj" />
+
+            
 
             
 
@@ -1627,8 +1965,12 @@
 
             
 
+            
+
              object whose real part is equal to the value of <paramref
              name="obj" />
+
+            
 
             
 
@@ -1648,8 +1990,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -1658,8 +2004,12 @@
 
             
 
+            
+
              object, and its value is equal to the current <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -1668,6 +2018,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1703,6 +2055,8 @@
 
             
 
+            
+
              method to calculate the powers of other bases.</para
           >
           <para
@@ -1711,8 +2065,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Exp(System.Double)" />
+
+            
 
             
 
@@ -1721,8 +2079,12 @@
 
             
 
+            
+
              is the inverse of <see
              cref="Overload:System.Numerics.Complex.Log" />
+
+            
 
             
 
@@ -1741,11 +2103,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1782,6 +2148,8 @@
 
             
 
+            
+
              method instantiates a complex number based on its polar coordinates. </para
           >
           <para
@@ -1790,8 +2158,12 @@
 
             
 
+            
+
              method is normalized. The magnitude is normalized to a positive number, and the phase is normalized to a value in the range of -<see
              cref="F:System.Math.PI" />
+
+            
 
             
 
@@ -1800,8 +2172,12 @@
 
             
 
+            
+
             . As a result, the values of the <see
              cref="P:System.Numerics.Complex.Phase" />
+
+            
 
             
 
@@ -1810,13 +2186,19 @@
 
             
 
+            
+
              properties of the resulting complex number may not equal the original values of the <paramref
              name="magnitude" />
 
             
 
+            
+
              and <paramref
              name="phase" />
+
+            
 
             
 
@@ -1828,8 +2210,12 @@
 
             
 
+            
+
              parameter, multiply it by <see
              cref="F:System.Math.PI" />
+
+            
 
             
 
@@ -1849,10 +2235,14 @@
 
           
 
+          
+
           The magnitude, which is the distance from the origin (the intersection of the x-axis and the y-axis) to the number.</param
         >
         <param name="phase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1881,6 +2271,8 @@
           <para
             >Returns the hash code for the current <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -1913,13 +2305,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Numerics.Complex.Imaginary" />
 
             
 
+            
+
              property returns the value of <math
             >b</math>
+
+            
 
             
 
@@ -1931,6 +2329,8 @@
           <para
             >Gets the imaginary component of the current <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -1962,6 +2362,8 @@
           <para
             >Returns a new <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -1998,8 +2400,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Log(System.Double)" />
+
+            
 
             
 
@@ -2018,11 +2424,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2059,8 +2469,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Log(System.Double,System.Double)" />
+
+            
 
             
 
@@ -2079,8 +2493,12 @@
 
             
 
+            
+
              in base <paramref
              name="baseValue" />
+
+            
 
             
 
@@ -2092,10 +2510,14 @@
 
           
 
+          
+
           A complex number.</param
         >
         <param name="baseValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2131,8 +2553,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Log10(System.Double)" />
+
+            
 
             
 
@@ -2151,11 +2577,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2183,6 +2613,8 @@
 
             
 
+            
+
              property is equivalent to the absolute value of a complex number. It specifies the distance from the origin (the intersection of the x-axis and the y-axis in the Cartesian coordinate system) to the two-dimensional point represented by a complex number. The absolute value is calculated as follows:</para
           >
           <para>
@@ -2196,8 +2628,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2209,8 +2645,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Numerics.Complex.Phase" />
+
+            
 
             
 
@@ -2219,6 +2659,8 @@
           <para
             >You can instantiate a complex number based on its polar coordinates instead of its Cartesian coordinates by calling the <see
              cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" />
+
+            
 
             
 
@@ -2260,8 +2702,12 @@
 
             
 
+            
+
             , and a second complex number, <math
             >c + di</math>
+
+            
 
             
 
@@ -2276,8 +2722,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2286,6 +2736,8 @@
           <para
             >The <see
              cref="M:System.Numerics.Complex.Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -2304,8 +2756,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2317,10 +2773,14 @@
 
           
 
+          
+
           The first complex number to multiply.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2356,6 +2816,8 @@
 
             
 
+            
+
              when it is added to the original complex number. This method returns a complex number in which the real and imaginary components of the original complex number are multiplied by -1.</para
           >
           <para
@@ -2364,8 +2826,12 @@
 
             
 
+            
+
              method is implemented for languages that do not support custom operators. Its behavior is identical to negation using the unary negation operator, <see
              cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -2384,8 +2850,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Numerics.Complex.Imaginary" />
+
+            
 
             
 
@@ -2394,11 +2864,15 @@
 
             
 
+            
+
              parameter multiplied by -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2426,6 +2900,8 @@
           <para
             >Returns a new <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -2463,6 +2939,8 @@
 
             
 
+            
+
              method defines the addition operation for complex numbers. It enables code such as the following:</para
           >
           <para>code reference: System.Numerics.Complex.Add#3</para>
@@ -2472,8 +2950,12 @@
 
             
 
+            
+
             , and a second complex number, <math
             >c + di</math>
+
+            
 
             
 
@@ -2488,8 +2970,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2498,6 +2984,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.Complex.Add(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -2516,8 +3004,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2529,10 +3021,14 @@
 
           
 
+          
+
           The first value to add.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2569,6 +3065,8 @@
 
             
 
+            
+
              method defines the division operation for complex numbers. It enables code such as the following:</para
           >
           <para>code reference: System.Numerics.Complex.Divide#2</para>
@@ -2578,8 +3076,12 @@
 
             
 
+            
+
             , and a second complex number, <math
             >c + di</math>
+
+            
 
             
 
@@ -2602,8 +3104,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -2612,6 +3118,8 @@
           <para
             >Languages that do not support custom operators and operator overloading can call the <see
              cref="M:System.Numerics.Complex.Divide(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -2630,8 +3138,12 @@
 
             
 
+            
+
              by <paramref
              name="right" />
+
+            
 
             
 
@@ -2643,10 +3155,14 @@
 
           
 
+          
+
           The value to be divided.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2683,8 +3199,12 @@
 
             
 
+            
+
              method defines the operation of the equality operator for <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -2697,11 +3217,15 @@
 
             
 
+            
+
              method instead.</para
           >
           <para
             >Two complex numbers are equal if their real parts are equal and their imaginary parts are equal. The <see
              cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -2711,6 +3235,8 @@
           <para
             >Note that, because of differences in precision, two complex numbers that are apparently equivalent can be considered unequal. For more information and a possible workaround, see the <see
              cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -2729,8 +3255,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2742,10 +3272,14 @@
 
           
 
+          
+
           The first complex number to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3114,6 +3648,8 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for complex numbers. It enables code such as the following: </para
           >
           <para>code reference: System.Numerics.Complex.Inequality#1</para>
@@ -3123,11 +3659,15 @@
 
             
 
+            
+
              method and reversing its value.</para
           >
           <para
             >Note that, because of differences in precision, two complex numbers that are apparently equivalent can be considered unequal. One possible workaround is to implement a comparison method that returns true only if the difference between the two real and imaginary parts of the complex numbers exceeds a certain threshold (such as .01% of the value of the real or imaginary component of one of the complex numbers). For more information, see the <see
              cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -3146,8 +3686,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -3159,10 +3703,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3199,6 +3747,8 @@
 
             
 
+            
+
              method defines the operation of the multiplication operator for complex numbers. It enables code such as the following:</para
           >
           <para>code reference: System.Numerics.Complex.Multiply#2</para>
@@ -3208,8 +3758,12 @@
 
             
 
+            
+
             , and a second complex number, <math
             >c + di</math>
+
+            
 
             
 
@@ -3224,8 +3778,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -3234,6 +3792,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.Complex.Multiply(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -3252,8 +3812,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -3265,10 +3829,14 @@
 
           
 
+          
+
           The first value to multiply.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3305,6 +3873,8 @@
 
             
 
+            
+
              method defines the operation of the subtraction operator for complex numbers. It enables code such as the following:</para
           >
           <para>code reference: System.Numerics.Complex.Subtract#2</para>
@@ -3314,8 +3884,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -3327,8 +3901,12 @@
 
             
 
+            
+
             , from another complex number, <math
             >a + bi</math>
+
+            
 
             
 
@@ -3340,6 +3918,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.Complex.Subtract(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -3358,8 +3938,12 @@
 
             
 
+            
+
              from <paramref
              name="left" />
+
+            
 
             
 
@@ -3371,10 +3955,14 @@
 
           
 
+          
+
           The value to subtract from (the minuend).</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3410,6 +3998,8 @@
 
             
 
+            
+
              method defines the operation of the unary negation (additive inverse) operator for complex numbers. It enables code such as the following: </para
           >
           <para>code reference: System.Numerics.Complex.Negate#2</para>
@@ -3419,8 +4009,12 @@
 
             
 
+            
+
              0 (zero) when it is added to the original complex number. Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.Complex.Negate(System.Numerics.Complex)" />
+
+            
 
             
 
@@ -3439,8 +4033,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Numerics.Complex.Imaginary" />
+
+            
 
             
 
@@ -3449,11 +4047,15 @@
 
             
 
+            
+
              parameter multiplied by -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3481,9 +4083,13 @@
 
             
 
+            
+
             , the phase is computed as <see
              cref="M:System.Math.Atan2(System.Double,System.Double)" />
             <math>(b, a)</math>
+
+            
 
             
 
@@ -3495,6 +4101,8 @@
 
             
 
+            
+
              property) is the distance from the point of origin to the point that is represented by the complex number. </para
           >
           <para
@@ -3503,11 +4111,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >To convert the phase from radians to degrees, multiply it by 180/<see
              cref="F:System.Math.PI" />
+
+            
 
             
 
@@ -3549,8 +4161,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Numerics.Complex.Zero" />
+
+            
 
             
 
@@ -3559,8 +4175,12 @@
 
             
 
+            
+
             . For other values, if <paramref
              name="power" />
+
+            
 
             
 
@@ -3569,8 +4189,12 @@
 
             
 
+            
+
             , and if <paramref
              name="power" />
+
+            
 
             
 
@@ -3579,11 +4203,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >This method corresponds to the <see
              cref="M:System.Math.Pow(System.Double,System.Double)" />
+
+            
 
             
 
@@ -3602,8 +4230,12 @@
 
             
 
+            
+
              raised to the power <paramref
              name="power" />
+
+            
 
             
 
@@ -3615,10 +4247,14 @@
 
           
 
+          
+
           A complex number to be raised to a power.</param
         >
         <param name="power">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3660,8 +4296,12 @@
 
             
 
+            
+
              raised to the power <paramref
              name="power" />
+
+            
 
             
 
@@ -3673,10 +4313,14 @@
 
           
 
+          
+
           A complex number to be raised to a power.</param
         >
         <param name="power">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3704,13 +4348,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Numerics.Complex.Real" />
 
             
 
+            
+
              property returns the value of <math
             >a</math>
+
+            
 
             
 
@@ -3722,6 +4372,8 @@
           <para
             >Gets the real component of the current <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -3758,8 +4410,12 @@
 
             
 
+            
+
              when the two numbers are multiplied. If a complex number is represented by <math
             >a +bi</math>
+
+            
 
             
 
@@ -3776,6 +4432,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3784,8 +4442,12 @@
 
             
 
+            
+
             , the method returns <see
              cref="F:System.Numerics.Complex.Zero" />
+
+            
 
             
 
@@ -3794,8 +4456,12 @@
 
             
 
+            
+
             /<paramref
              name="value" />
+
+            
 
             
 
@@ -3814,11 +4480,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3854,8 +4524,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Sin(System.Double)" />
+
+            
 
             
 
@@ -3867,8 +4541,12 @@
 
             
 
+            
+
              method uses the following formula to calculate the sine of the complex number <math
             >a + bi</math>
+
+            
 
             
 
@@ -3898,11 +4576,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3938,8 +4620,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Sinh(System.Double)" />
+
+            
 
             
 
@@ -3951,8 +4637,12 @@
 
             
 
+            
+
              method uses the following formula to calculate the hyperbolic sine of the complex number <math
             >a + bi</math>
+
+            
 
             
 
@@ -3982,11 +4672,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4022,6 +4716,8 @@
 
             
 
+            
+
              is calculated by using the following formula:</para
           >
           <para>
@@ -4044,8 +4740,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Sqrt(System.Double)" />
+
+            
 
             
 
@@ -4064,11 +4764,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4105,8 +4809,12 @@
 
             
 
+            
+
             , from another complex number, <math
             >a + bi</math>
+
+            
 
             
 
@@ -4121,8 +4829,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -4131,6 +4843,8 @@
           <para
             >Languages that do not support custom operators can use the <see
              cref="M:System.Numerics.Complex.Subtract(System.Numerics.Complex,System.Numerics.Complex)" />
+
+            
 
             
 
@@ -4149,8 +4863,12 @@
 
             
 
+            
+
              from <paramref
              name="left" />
+
+            
 
             
 
@@ -4162,10 +4880,14 @@
 
           
 
+          
+
           The value to subtract from (the minuend).</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4201,8 +4923,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Tan(System.Double)" />
+
+            
 
             
 
@@ -4214,8 +4940,12 @@
 
             
 
+            
+
              method uses the following formula to calculate the tangent of the complex number <paramref
              name="value" />
+
+            
 
             
 
@@ -4244,11 +4974,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4284,8 +5018,12 @@
 
             
 
+            
+
              method for complex numbers corresponds to the <see
              cref="M:System.Math.Tanh(System.Double)" />
+
+            
 
             
 
@@ -4297,8 +5035,12 @@
 
             
 
+            
+
              method uses the following formula to calculate the hyperbolic tangent of the complex number <paramref
              name="value" />
+
+            
 
             
 
@@ -4327,11 +5069,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4393,6 +5139,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -4401,8 +5149,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4411,8 +5163,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4421,8 +5177,12 @@
 
             
 
+            
+
              is null, the returned string is formatted using the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4431,6 +5191,8 @@
           <para
             >The <paramref
              name="provider" />
+
+            
 
             
 
@@ -4444,6 +5206,8 @@
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information </para
               >
             </item>
@@ -4451,6 +5215,8 @@
               <para
                 >The <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4464,13 +5230,19 @@
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4491,11 +5263,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4528,8 +5304,12 @@
 
             
 
+            
+
             . The <paramref
              name="format" />
+
+            
 
             
 
@@ -4538,8 +5318,12 @@
 
             
 
+            
+
              is equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4548,8 +5332,12 @@
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -4566,10 +5354,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4585,6 +5377,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4595,13 +5389,19 @@
 
             
 
+            
+
              object for the current culture. Depending on the <paramref
              name="format" />
 
             
 
+            
+
              parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
              cref="M:System.Numerics.Complex.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4618,6 +5418,8 @@
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4654,8 +5456,12 @@
 
             
 
+            
+
             . The <paramref
              name="format" />
+
+            
 
             
 
@@ -4664,8 +5470,12 @@
 
             
 
+            
+
              is equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4674,8 +5484,12 @@
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -4692,10 +5506,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4711,6 +5529,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4721,8 +5541,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4731,8 +5555,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4741,8 +5569,12 @@
 
             
 
+            
+
              parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -4751,11 +5583,15 @@
 
             
 
+            
+
              object of the current culture.</para
           >
           <para
             >The <paramref
              name="provider" />
+
+            
 
             
 
@@ -4769,6 +5605,8 @@
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information </para
               >
             </item>
@@ -4776,6 +5614,8 @@
               <para
                 >The <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4789,13 +5629,19 @@
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4816,8 +5662,12 @@
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -4829,10 +5679,14 @@
 
           
 
+          
+
           A standard or custom numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4862,8 +5716,12 @@
 
             
 
+            
+
              property is most frequently used to compare a <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 
@@ -4875,6 +5733,8 @@
           <para
             >Returns a new <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 

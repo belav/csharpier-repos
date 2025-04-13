@@ -23,6 +23,8 @@
 
         
 
+        
+
          structures. This class cannot be inherited.</para
       >
     </summary>
@@ -49,6 +51,8 @@
 
             
 
+            
+
              structure.</para
           >
         </remarks>
@@ -57,6 +61,8 @@
           <para
             >Translates an HTML color representation to a GDI+ <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -71,8 +77,12 @@
 
             
 
+            
+
              structure that represents the translated HTML color or <see
              cref="F:System.Drawing.Color.Empty" />
+
+            
 
             
 
@@ -81,11 +91,15 @@
 
             
 
+            
+
              is null.</para
           >
         </returns>
         <param name="htmlColor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -119,6 +133,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -130,11 +146,15 @@
 
             
 
+            
+
              structure that represents the translated OLE color.</para
           >
         </returns>
         <param name="oleColor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,6 +188,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -179,11 +201,15 @@
 
             
 
+            
+
              structure that represents the translated Windows color.</para
           >
         </returns>
         <param name="win32Color">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,6 +242,8 @@
 
             
 
+            
+
              structure to a string representation of an HTML color. This is the commonly used name of a color, such as "Red", "Blue", or "Green", and not string representation of a numeric color value, such as "FF33AA".</para
           >
         </remarks>
@@ -224,6 +252,8 @@
           <para
             >Translates the specified <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -239,8 +269,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -271,6 +305,8 @@
 
             
 
+            
+
              structure to an OLE color.</para
           >
         </summary>
@@ -283,8 +319,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -315,6 +355,8 @@
 
             
 
+            
+
              structure to a Windows color.</para
           >
         </summary>
@@ -327,8 +369,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 

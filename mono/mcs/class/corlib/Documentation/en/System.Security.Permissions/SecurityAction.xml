@@ -41,8 +41,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
+
+          
 
           
 
@@ -51,8 +55,12 @@
 
           
 
+          
+
           , and <see
            cref="F:System.Security.Permissions.SecurityAction.RequestRefuse" />
+
+          
 
           
 
@@ -65,6 +73,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -74,13 +84,19 @@
 
         
 
+        
+
          in the net_v40_short. Instead, use the <see
          cref="T:System.Security.SecurityCriticalAttribute" />
 
         
 
+        
+
          to restrict usage to fully trusted applications, or use <see
          cref="F:System.Security.Permissions.SecurityAction.Demand" />
+
+        
 
         
 
@@ -206,6 +222,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -248,6 +266,8 @@
 
             
 
+            
+
             ). </para
           >
         </summary>
@@ -286,6 +306,8 @@
                 >[&lt;topic://cpconmakingsecuritydemands&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -333,6 +355,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -369,6 +393,8 @@
              type="text/html">
               <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
             </format>
+
+            
 
             
 
@@ -409,8 +435,12 @@
 
             
 
+            
+
              instead; for partial trust, use <see
              cref="F:System.Security.Permissions.SecurityAction.Demand" />
+
+            
 
             
 
@@ -450,6 +480,8 @@
              type="text/html">
               <a href="8C7BDB7F-882F-45B7-908C-6CBAA1767649">[&lt;topic://cpconpermitonly&gt;]</a>
             </format>
+
+            
 
             
 

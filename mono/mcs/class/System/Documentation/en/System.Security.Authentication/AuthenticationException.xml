@@ -27,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          is thrown instead of the <see
          cref="T:System.Security.Authentication.AuthenticationException" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
 
             
 
+            
+
              class with no message.</para
           >
         </summary>
@@ -106,13 +116,19 @@
 
             
 
+            
+
              property with the text in the <paramref
              name="message" />
 
             
 
+            
+
              parameter. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -127,6 +143,8 @@
 
             
 
+            
+
              class with the specified message.</para
           >
         </summary>
@@ -135,8 +153,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -173,13 +195,19 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -191,13 +219,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            instance that contains the information required to deserialize the new <see
            cref="T:System.Security.Authentication.AuthenticationException" />
+
+          
 
           
 
@@ -208,8 +242,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -245,8 +283,12 @@
 
             
 
+            
+
              property with the text in the <paramref
              name="message" />
+
+            
 
             
 
@@ -255,8 +297,12 @@
 
             
 
+            
+
              property with the <paramref
              name="innerException" />
+
+            
 
             
 
@@ -271,6 +317,8 @@
 
             
 
+            
+
              class with the specified message and inner exception.</para
           >
         </summary>
@@ -279,8 +327,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -291,8 +343,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 

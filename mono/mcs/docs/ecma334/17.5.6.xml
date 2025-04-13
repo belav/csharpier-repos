@@ -7,11 +7,15 @@
 
     
 
+    
+
      of an abstract method simply consists of a semicolon. </paragraph
   >
   <paragraph
     >Abstract method declarations are only permitted in abstract classes (<hyperlink
     >17.1.1.1</hyperlink>
+
+    
 
     
 
@@ -43,6 +47,8 @@ public class Box: Shape
 
       
 
+      
+
       the Shape class defines the abstract notion of a geometrical shape object that can paint itself. The Paint method is abstract because there is no meaningful default implementation. The Ellipse and Box classes are concrete Shape implementations. Because these classes are non-abstract, they are required to override the Paint method and provide an actual implementation. end example]</example
     >
   </paragraph>
@@ -52,8 +58,12 @@ public class Box: Shape
 
     
 
+    
+
      (<hyperlink
     >14.5.8</hyperlink>
+
+    
 
     
 
@@ -74,6 +84,8 @@ class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -105,6 +117,8 @@ class C: B
 }  
 ]]>
       </code_example>
+
+      
 
       
 

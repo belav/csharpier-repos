@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -59,6 +61,8 @@
           <para
             >An <see
              cref="M:System.Runtime.InteropServices.ComTypes.IAdviseSink.OnClose" />
+
+            
 
             
 
@@ -142,6 +146,8 @@
 
           
 
+          
+
           A pointer to the IMoniker interface on the new full moniker of the object.</param
         >
       </Docs>
@@ -204,8 +210,12 @@
 
           
 
+          
+
           The aspect, or view, of the object. Contains a value taken from the <see
            cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" />
+
+          
 
           
 
@@ -213,6 +223,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

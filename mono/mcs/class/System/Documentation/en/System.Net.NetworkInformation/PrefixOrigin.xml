@@ -24,13 +24,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
 
         
 
+        
+
          classes. Instances of this class are returned when you retrieve the address information for a <see
          cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+        
 
         
 

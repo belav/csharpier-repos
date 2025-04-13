@@ -22,8 +22,12 @@
 
         
 
+        
+
          for the service endpoint (for example, a DNS identity). This <see
          cref="T:System.ServiceModel.EndpointIdentity" />
+
+        
 
         
 
@@ -67,8 +71,12 @@
 
             
 
+            
+
              parameter contains the binding information of the endpoint, which is typically used in determining the <see
              cref="T:System.ServiceModel.EndpointIdentity" />
+
+            
 
             
 
@@ -87,6 +95,8 @@
 
             
 
+            
+
              of the current endpoint.</para
           >
         </returns>
@@ -95,8 +105,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+          
 
           
 

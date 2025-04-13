@@ -25,8 +25,12 @@
 
         
 
+        
+
          object passed to the <see
          cref="M:System.ServiceModel.Description.IServiceContractGenerationExtension.GenerateContract(System.ServiceModel.Description.ServiceContractGenerationContext)" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          interface is implemented on a custom <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
+        
+
          implementation that is used to import custom WSDL elements or otherwise modify the code at the service or operation level. To modify the code at the operation level, see <see
          cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
+
+        
 
         
 
@@ -53,6 +63,8 @@
       <para
         >Passed to the <see
          cref="M:System.ServiceModel.Description.IServiceContractGenerationExtension.GenerateContract(System.ServiceModel.Description.ServiceContractGenerationContext)" />
+
+        
 
         
 
@@ -92,11 +104,15 @@
 
             
 
+            
+
              class using the specified contract generator, contract description, and contract code type declaration. </para
           >
         </summary>
         <param name="serviceContractGenerator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -107,6 +123,8 @@
 
           
 
+          
+
           The contract description for the contract to be generated.</param
         >
         <param name="contractType">
@@ -114,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -155,11 +177,15 @@
 
             
 
+            
+
              class using the specified contract generator, contract description, and contract code type declaration. </para
           >
         </summary>
         <param name="serviceContractGenerator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,6 +196,8 @@
 
           
 
+          
+
           The contract description for the contract to be generated.</param
         >
         <param name="contractType">
@@ -177,8 +205,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -189,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -224,8 +260,12 @@
 
             
 
+            
+
              property to examine the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -237,6 +277,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -271,8 +313,12 @@
 
             
 
+            
+
              property to examine or modify the <see
              cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+            
 
             
 
@@ -284,6 +330,8 @@
           <para
             >Gets the <see
              cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+            
 
             
 
@@ -318,8 +366,12 @@
 
             
 
+            
+
              property to examine or modify the <see
              cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+            
 
             
 
@@ -331,6 +383,8 @@
           <para
             >Gets the <see
              cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+            
 
             
 
@@ -365,8 +419,12 @@
 
             
 
+            
+
              property to examine or modify the <see
              cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+
+            
 
             
 
@@ -378,6 +436,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+
+            
 
             
 
@@ -412,6 +472,8 @@
 
             
 
+            
+
              property to examine or modify the code generator that is to create the contract code.</para
           >
         </remarks>
@@ -420,6 +482,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+            
 
             
 

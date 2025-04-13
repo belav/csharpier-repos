@@ -28,13 +28,19 @@
 
         
 
+        
+
          enumeration with the <see
          cref="P:System.Security.Cryptography.CspKeyContainerInfo.KeyNumber" />
 
         
 
+        
+
          property to inspect a key type or with the <see
          cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+
+        
 
         
 

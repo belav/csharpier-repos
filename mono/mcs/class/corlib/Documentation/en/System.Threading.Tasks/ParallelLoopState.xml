@@ -28,6 +28,8 @@
 
         
 
+        
+
          loops to interact with other iterations. An instance of this class is provided by the Parallel class to each loop; you can not create instances in your user code.</para
       >
     </summary>
@@ -55,8 +57,12 @@
 
             
 
+            
+
              may be used to communicate to the loop that no other iterations after the current iteration need be run. For example, if <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -68,8 +74,12 @@
 
             
 
+            
+
              causes <see
              cref="P:System.Threading.Tasks.ParallelLoopState.LowestBreakIteration" />
+
+            
 
             
 
@@ -78,10 +88,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -94,6 +108,8 @@
           <para
             >Communicates that the <see
              cref="T:System.Threading.Tasks.Parallel" />
+
+            
 
             
 
@@ -142,6 +158,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -173,6 +191,8 @@
 
             
 
+            
+
             , this property will return null.</para
           >
         </remarks>
@@ -181,6 +201,8 @@
           <para
             >Gets the lowest iteration of the loop from which <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -212,13 +234,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
 
             
 
+            
+
             , or when one throws an exception, or when the loop is canceled, the <see
              cref="T:System.Threading.Tasks.Parallel" />
+
+            
 
             
 
@@ -228,6 +256,8 @@
           <para
             > It may also be the case that a long-running iteration has already begun execution. In such cases, iterations may explicitly check the <see
              cref="P:System.Threading.Tasks.ParallelLoopState.ShouldExitCurrentIteration" />
+
+            
 
             
 
@@ -262,6 +292,8 @@
 
             
 
+            
+
              may be used to communicate to the loop that no other iterations need be run.</para
           >
           <para
@@ -270,8 +302,12 @@
 
             
 
+            
+
              causes <see
              cref="P:System.Threading.Tasks.ParallelLoopState.IsStopped" />
+
+            
 
             
 
@@ -280,10 +316,14 @@
 
             
 
+            
+
              and exit early if it's observed to be true.</para
           >
           <para>
             <see cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
+
+            
 
             
 
@@ -296,6 +336,8 @@
           <para
             >Communicates that the <see
              cref="T:System.Threading.Tasks.Parallel" />
+
+            
 
             
 

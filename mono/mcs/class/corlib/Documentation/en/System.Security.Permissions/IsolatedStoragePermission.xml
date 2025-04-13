@@ -76,6 +76,8 @@
 
             
 
+            
+
              class with either restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -84,8 +86,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -122,6 +128,8 @@
         </summary>
         <param name="esd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

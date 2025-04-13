@@ -38,8 +38,12 @@
 
         
 
+        
+
          provides an abstract base class for code statements within the <see
          cref="N:System.CodeDom" />
+
+        
 
         
 
@@ -76,6 +80,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -106,6 +112,8 @@
           <para
             >Gets a <see
              cref="T:System.CodeDom.CodeDirectiveCollection" />
+
+            
 
             
 
@@ -170,6 +178,8 @@
           <para
             >Gets a <see
              cref="T:System.CodeDom.CodeDirectiveCollection" />
+
+            
 
             
 

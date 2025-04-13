@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -86,6 +88,8 @@
 
             
 
+            
+
              class based on supplied parameters.</para
           >
         </summary>
@@ -94,8 +98,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.SettingElement" />
+
+          
 
           
 
@@ -106,8 +114,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsSerializeAs" />
+
+          
 
           
 
@@ -144,6 +156,8 @@
 
             
 
+            
+
              instance to the specified object.</para
           >
         </summary>
@@ -152,6 +166,8 @@
           <para
             >true if the <see
              cref="T:System.Configuration.SettingElement" />
+
+            
 
             
 
@@ -186,6 +202,8 @@
 
             
 
+            
+
              current instance.</para
           >
         </summary>
@@ -194,6 +212,8 @@
           <para
             >A unique value representing the <see
              cref="T:System.Configuration.SettingElement" />
+
+            
 
             
 
@@ -227,6 +247,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Configuration.SettingElement" />
+
+            
 
             
 
@@ -292,6 +314,8 @@
 
             
 
+            
+
              object is an enumeration used as the serialization scheme to store configuration settings.</para
           >
         </remarks>
@@ -300,6 +324,8 @@
           <para
             >Gets or sets the serialization mechanism used to persist the values of the <see
              cref="T:System.Configuration.SettingElement" />
+
+            
 
             
 
@@ -342,8 +368,12 @@
 
             
 
+            
+
              object by using a <see
              cref="T:System.Configuration.SettingValueElement" />
+
+            
 
             
 

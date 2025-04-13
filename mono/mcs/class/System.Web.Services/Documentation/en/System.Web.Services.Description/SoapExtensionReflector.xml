@@ -28,8 +28,12 @@
 
         
 
+        
+
          class exposes an abstract method, <see
          cref="M:System.Web.Services.Description.SoapExtensionReflector.ReflectMethod" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          object. The method itself is not an input. The descriptions get added for all Web methods belonging to a specified binding that produces a <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          to generate a Web Services Description Language (WSDL) document via the <see
          cref="Overload:System.Web.Services.Description.ServiceDescription.Write" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
          class and related classes can also use a <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
          class in conjunction with a class derived from the abstract <see
          cref="T:System.Web.Services.Protocols.SoapExtension" />
+
+        
 
         
 
@@ -87,10 +107,14 @@
 
         
 
+        
+
          in a configuration file via the <format
          type="text/html">
           <a href="6950609a-c9a3-4f6f-a5fc-a05d6d204d5c">&lt;soapExtensionReflectorTypes&gt;</a>
         </format>
+
+        
 
         
 
@@ -102,6 +126,8 @@
       <para
         >Provides a common interface and functionality for classes to add SOAP extension information to a <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -122,6 +148,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.Services.Description.SoapExtensionReflector" />
+
+            
 
             
 
@@ -154,6 +182,8 @@
 
             
 
+            
+
              object corresponding to a binding.</para
           >
         </summary>
@@ -179,8 +209,12 @@
 
             
 
+            
+
              abstract class, you do not need to implement a class that is derived from <see
              cref="T:System.Web.Services.Description.ProtocolReflector" />
+
+            
 
             
 
@@ -189,8 +223,12 @@
 
             
 
+            
+
              method or to set the <see
              cref="P:System.Web.Services.Description.SoapExtensionReflector.ReflectionContext" />
+
+            
 
             
 
@@ -205,8 +243,12 @@
 
             
 
+            
+
              class that invokes the <see
              cref="M:System.Web.Services.Description.SoapExtensionReflector.ReflectMethod" />
+
+            
 
             
 
@@ -235,13 +277,19 @@
 
             
 
+            
+
              method is called for each Web method that belongs to a binding that the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
+            
+
              represents. The <see
              cref="M:System.Web.Services.Description.SoapExtensionReflector.ReflectMethod" />
+
+            
 
             
 
@@ -253,6 +301,8 @@
 
             
 
+            
+
              can generate information like operation binding, abstract operation, and messages.</para
           >
         </remarks>
@@ -261,6 +311,8 @@
           <para
             >Abstract method that a derived class must implement to add SOAP extension information to a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 

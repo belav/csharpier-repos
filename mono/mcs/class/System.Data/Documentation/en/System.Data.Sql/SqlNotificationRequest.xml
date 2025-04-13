@@ -19,8 +19,12 @@
 
         
 
+        
+
          class provides a simpler way of using query notifications. However, if you need fine control over when notifications occur, or you need to customize the message data returned as part of a notification, the <see
          cref="T:System.Data.Sql.SqlNotificationRequest" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
             
 
+            
+
              object, that instance must have its <see
              cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
+
+            
 
             
 
@@ -57,8 +65,12 @@
 
             
 
+            
+
              properties initialized before assigning the object to a <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -67,8 +79,12 @@
 
             
 
+            
+
              property. The default values used by the constructor are NULL (Nothing in Visual Basic) for the <see
              cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
+
+            
 
             
 
@@ -77,8 +93,12 @@
 
             
 
+            
+
             , and zero for the <see
              cref="P:System.Data.Sql.SqlNotificationRequest.Timeout" />
+
+            
 
             
 
@@ -90,6 +110,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Data.Sql.SqlNotificationRequest" />
+
+            
 
             
 
@@ -122,6 +144,8 @@
 
             
 
+            
+
              instance, providing your own identifier, the SQL Server 2005 Service Broker service name, and a time-out value. </para
           >
         </remarks>
@@ -133,11 +157,15 @@
 
             
 
+            
+
              class with a user-defined string that identifies a particular notification request, the name of a predefined SQL Server 2005 Service Broker service name, and the time-out period, measured in seconds.</para
           >
         </summary>
         <param name="userData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,10 +176,14 @@
 
           
 
+          
+
           A string that contains the Service Broker service name where notification messages are posted, and it must include a database name or a Service Broker instance GUID that restricts the scope of the service name lookup to a particular database.</param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,6 +208,8 @@
           <para
             >The value of the <see
              cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
+
+            
 
             
 
@@ -212,6 +246,8 @@
 
             
 
+            
+
              property defaults to the value set on the server.</para
           >
         </remarks>
@@ -238,6 +274,8 @@
           <para
             >This value is not used by the notifications infrastructure. Instead, it is a mechanism that allows an application to associate notifications with application state. The value specified in the <see
              cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
+
+            
 
             
 

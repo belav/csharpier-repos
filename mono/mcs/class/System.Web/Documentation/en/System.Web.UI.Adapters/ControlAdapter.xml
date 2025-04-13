@@ -19,8 +19,12 @@
 
         
 
+        
+
          class methods and events in its execution lifecycle to allow browser or markup-specific handling. The .NET Framework maps a single derived control adapter to a <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class. Therefore, it is likely that a single adapter can be used for a number of browser class behaviors or that inclusion of the adaptability in the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -45,11 +53,15 @@
 
         
 
+        
+
          class can be used for all Validator objects. </para
       >
       <para
         >Adapters typically do not inherit directly from the <see
          cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          property uses the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -76,13 +92,19 @@
 
         
 
+        
+
          method. If overridden, <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
+        
+
          potentially should not call the base class implementation because that performs a call back on the <see
          cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -94,8 +116,12 @@
 
         
 
+        
+
          base method calls back on the <see
          cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -104,8 +130,12 @@
 
         
 
+        
+
         , you should not call the base class implementation unless the rendering you implement is in addition to that provided by <see
          cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -117,13 +147,19 @@
 
         
 
+        
+
          base method, which calls the <see
          cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
 
         
 
+        
+
          method of the control, from your <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -135,8 +171,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -145,13 +185,19 @@
 
         
 
+        
+
          method. If pre- and post-rendering are the only browser-specific processing tasks required, using <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -160,8 +206,12 @@
 
         
 
+        
+
         . The default behavior of the <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -170,8 +220,12 @@
 
         
 
+        
+
          methods is to call the corresponding methods of the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -183,8 +237,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+
+        
 
         
 
@@ -193,8 +251,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+
+        
 
         
 
@@ -203,8 +265,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+
+        
 
         
 
@@ -213,8 +279,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+
+        
 
         
 
@@ -226,8 +296,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
+
+        
 
         
 
@@ -236,8 +310,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
+
+        
 
         
 
@@ -246,13 +324,19 @@
 
         
 
+        
+
          class methods. Thus, any of these <see
          cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
         
 
+        
+
          methods that are overridden must call their base methods; otherwise, the event associated with the <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -264,8 +348,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.IPostBackEventHandler" />
+
+        
 
         
 
@@ -274,13 +362,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+
+        
 
         
 
@@ -307,6 +401,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -315,6 +411,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+            
 
             
 
@@ -351,8 +449,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -364,8 +466,12 @@
 
             
 
+            
+
              method in combination with the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.EndRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -398,8 +504,12 @@
 
             
 
+            
+
              object determines the client browser capabilities from the <see
              cref="T:System.Web.HttpBrowserCapabilities" />
+
+            
 
             
 
@@ -408,13 +518,19 @@
 
             
 
+            
+
              property. This enables the <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
+            
+
              object to render browser-specific markup or otherwise modify the behavior of the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -482,8 +598,12 @@
 
             
 
+            
+
              object and the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.CreateChildControls" />
+
+            
 
             
 
@@ -492,8 +612,12 @@
 
             
 
+            
+
              method. Thus, <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.CreateChildControls" />
+
+            
 
             
 
@@ -504,6 +628,8 @@
              type="text/html">
               <a href="fb174677-d845-467c-8bf3-cc096b2490b0">Composite Controls</a>
             </format>
+
+            
 
             
 
@@ -541,8 +667,12 @@
 
             
 
+            
+
              method is called just after the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -554,8 +684,12 @@
 
             
 
+            
+
              method in combination with the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.BeginRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -592,8 +726,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterControlState" />
+
+            
 
             
 
@@ -605,6 +743,8 @@
 
             
 
+            
+
              controls might render as a single view on desktop computer browsers. On other browsers, it might split its rendering—one view for the textual display and the other for the radio button group. The adapter would need to maintain its own target-specific information about the currently active view.</para
           >
           <para
@@ -613,8 +753,12 @@
 
             
 
+            
+
              method is called immediately after the <see
              cref="M:System.Web.UI.Control.LoadControlState(System.Object)" />
+
+            
 
             
 
@@ -629,6 +773,8 @@
 
             
 
+            
+
              during a previous request to the page where the control associated with this control adapter resides.</para
           >
         </summary>
@@ -637,13 +783,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that contains the adapter's control state information as a <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -675,8 +827,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.SaveAdapterViewState" />
+
+            
 
             
 
@@ -689,8 +845,12 @@
 
             
 
+            
+
              method is called immediately before the <see
              cref="M:System.Web.UI.Control.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -705,6 +865,8 @@
 
             
 
+            
+
              during a previous request to the page where the control associated with this control adapter resides.</para
           >
         </summary>
@@ -713,13 +875,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that contains the adapter view state information as a <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -748,8 +916,12 @@
 
             
 
+            
+
              object and the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -758,11 +930,15 @@
 
             
 
+            
+
              method. </para
           >
           <para
             >Override <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -777,6 +953,8 @@
 
             
 
+            
+
              method for the associated control.</para
           >
         </summary>
@@ -785,8 +963,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -815,8 +997,12 @@
 
             
 
+            
+
              object and the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -825,11 +1011,15 @@
 
             
 
+            
+
              method. </para
           >
           <para
             >Override the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -844,6 +1034,8 @@
 
             
 
+            
+
              method for the associated control.</para
           >
         </summary>
@@ -852,8 +1044,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -882,8 +1078,12 @@
 
             
 
+            
+
              object and the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -892,11 +1092,15 @@
 
             
 
+            
+
              method. </para
           >
           <para
             >Override the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -911,6 +1115,8 @@
 
             
 
+            
+
              method for the associated control.</para
           >
         </summary>
@@ -919,8 +1125,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -949,8 +1159,12 @@
 
             
 
+            
+
              object and the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
+
+            
 
             
 
@@ -959,11 +1173,15 @@
 
             
 
+            
+
              method. </para
           >
           <para
             >Override the <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.OnUnload(System.EventArgs)" />
+
+            
 
             
 
@@ -978,6 +1196,8 @@
 
             
 
+            
+
              method for the associated control.</para
           >
         </summary>
@@ -986,8 +1206,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1020,8 +1244,12 @@
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -1065,8 +1293,12 @@
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Web.UI.Adapters.PageAdapter" />
+
+            
 
             
 
@@ -1075,8 +1307,12 @@
 
             
 
+            
+
              object where the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1085,11 +1321,15 @@
 
             
 
+            
+
              object is situated. </para
           >
           <para
             >The <see
              cref="P:System.Web.UI.Adapters.ControlAdapter.PageAdapter" />
+
+            
 
             
 
@@ -1130,8 +1370,12 @@
 
             
 
+            
+
              method to generate target-specific markup to send to the client browser. The <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1140,13 +1384,19 @@
 
             
 
+            
+
              method if a <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
 
             
 
+            
+
              object is attached to a <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1184,6 +1434,8 @@
 
             
 
+            
+
              method when it is necessary to generate target-specific markup for the child control set of a composite control, in addition to the markup for the individual child controls.</para
           >
         </remarks>
@@ -1212,8 +1464,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterControlState(System.Object)" />
+
+            
 
             
 
@@ -1225,6 +1481,8 @@
 
             
 
+            
+
              controls might render as a single view on desktop computer browsers. On other browsers, it might split its rendering—one view for the textual display and the other for the radio button group. The adapter would need to maintain its own target-specific information about the currently active view.</para
           >
           <para
@@ -1233,8 +1491,12 @@
 
             
 
+            
+
              method is called immediately after the <see
              cref="M:System.Web.UI.Control.SaveControlState" />
+
+            
 
             
 
@@ -1253,8 +1515,12 @@
 
             
 
+            
+
              that contains the adapter's control state information as a <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1282,8 +1548,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.ControlAdapter.LoadAdapterViewState(System.Object)" />
+
+            
 
             
 
@@ -1296,8 +1566,12 @@
 
             
 
+            
+
              method is called immediately before the <see
              cref="M:System.Web.UI.Control.SaveViewState" />
+
+            
 
             
 
@@ -1316,8 +1590,12 @@
 
             
 
+            
+
              that contains the adapter view state information as a <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 

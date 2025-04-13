@@ -6,13 +6,19 @@
 
     
 
+    
+
     , <keyword
     >int</keyword>
 
     
 
+    
+
     , and <keyword
     >float</keyword>
+
+    
 
     
 
@@ -46,6 +52,8 @@ class Test
 
     
 
+    
+
     shows this difference. The output produced is <code_example
     >
       <![CDATA[
@@ -60,6 +68,8 @@ Refs: 123, 123
 
     
 
+    
+
     ) and each local variable of a value type has its own storage. In contrast, the assignment ref2.Value = 123; affects the object that both ref1 and ref2 reference. </paragraph
   >
   <paragraph
@@ -70,6 +80,8 @@ Console.WriteLine("Values: {0}, {1}", val1, val2);
 Console.WriteLine("Refs: {0}, {1}", ref1.Value, ref2.Value);  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -117,6 +129,8 @@ public class B: A, IDerived
 public delegate void EmptyDelegate();  
 ]]>
     </code_example>
+
+    
 
     
 

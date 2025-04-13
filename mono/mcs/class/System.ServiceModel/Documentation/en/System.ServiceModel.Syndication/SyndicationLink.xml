@@ -28,8 +28,12 @@
 
         
 
+        
+
          can be added to a <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         . When serialized to Atom 1.0 a <see
          cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          properties written out as attributes of the &lt;link&gt; element. When serialized to RSS 2.0, the first <see
          cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -115,6 +129,8 @@
 
             
 
+            
+
              class with the specified instance.</para
           >
         </summary>
@@ -144,8 +160,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -209,8 +229,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -244,8 +268,12 @@
 
             
 
+            
+
              allows you to add custom attributes to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -304,6 +332,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -312,6 +342,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -350,8 +382,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -363,6 +399,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -403,8 +441,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -416,6 +458,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -457,8 +501,12 @@
 
             
 
+            
+
              object and sets <see
              cref="P:System.ServiceModel.Syndication.SyndicationLink.RelationshipType" />
+
+            
 
             
 
@@ -474,6 +522,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -512,6 +562,8 @@
 
             
 
+            
+
              with the specified URI and relationship type set to self.</para
           >
         </summary>
@@ -520,6 +572,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -560,6 +614,8 @@
 
             
 
+            
+
              with the specified URI, media type, and relationship type set to self.</para
           >
         </summary>
@@ -568,6 +624,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -606,6 +664,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -635,6 +695,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -646,8 +708,12 @@
 
             
 
+            
+
              instance that contains the absolute URI of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -673,6 +739,8 @@
           <para
             >When serialized to Atom 1.0 the <see
              cref="P:System.ServiceModel.Syndication.SyndicationLink.Length" />
+
+            
 
             
 
@@ -806,6 +874,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -847,6 +917,8 @@
           <para
             >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, you must derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -917,6 +989,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -925,6 +999,8 @@
           <para
             >Writes the attribute extensions to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -964,6 +1040,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized element extensions.</para
           >
         </remarks>
@@ -972,6 +1050,8 @@
           <para
             >Writes the element extensions to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 

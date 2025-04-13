@@ -19,6 +19,8 @@
 
         
 
+        
+
          method starts a user interface for selecting a color value.</para
       >
       <para
@@ -27,8 +29,12 @@
 
         
 
+        
+
          class is not intended for use outside of the design time environment. <see
          cref="T:System.Web.UI.Design.ColorBuilder" />
+
+        
 
         
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
         , which is typically available within a Web Forms project at design time. If you want to build HTML color strings, you may want to implement a method that converts the RGB values of a <see
          cref="T:System.Drawing.Color" />
+
+        
 
         
 
@@ -47,13 +57,19 @@
 
         
 
+        
+
          control which allows you to edit <see
          cref="T:System.Drawing.Color" />
 
         
 
+        
+
          properties with the default <see
          cref="T:System.Drawing.Design.ColorEditor" />
+
+        
 
         
 
@@ -98,8 +114,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -110,8 +130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -119,6 +143,8 @@
         >
         <param name="initialColor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

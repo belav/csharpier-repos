@@ -143,6 +143,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -179,6 +181,8 @@
         </summary>
         <param name="exception">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,6 +239,8 @@
         </summary>
         <param name="stateMachine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -26,13 +26,19 @@
 
         
 
+        
+
         , you must call the <see
          cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Data.SqlClient.SqlCommand" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          is being used, the associated <see
          cref="T:System.Data.SqlClient.SqlConnection" />
+
+        
 
         
 
@@ -54,8 +64,12 @@
 
         
 
+        
+
         , and no other operations can be performed on the <see
          cref="T:System.Data.SqlClient.SqlConnection" />
+
+        
 
         
 
@@ -64,13 +78,19 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
+        
+
          is called. For example, you cannot retrieve output parameters until after you call <see
          cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+
+        
 
         
 
@@ -82,8 +102,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+
+        
 
         
 
@@ -92,8 +116,12 @@
 
         
 
+        
+
          is closed. Although the <see
          cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+
+        
 
         
 
@@ -102,13 +130,19 @@
 
         
 
+        
+
          exists, always call <see
          cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
         
 
+        
+
          before returning the value of <see
          cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
+
+        
 
         
 
@@ -120,13 +154,19 @@
 
         
 
+        
+
         ), an <see
          cref="T:System.InvalidOperationException" />
 
         
 
+        
+
          will be raised if the <see
          cref="T:System.Data.SqlClient.SqlDataReader" />
+
+        
 
         
 
@@ -139,13 +179,19 @@
 
           
 
+          
+
            avoids creating unnecessary objects or making unnecessary copies of data. Therefore, multiple calls to methods such as <see
            cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
 
           
 
+          
+
            return a reference to the same object. Use caution if you are modifying the underlying value of the objects returned by methods such as <see
            cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+
+          
 
           
 
@@ -175,13 +221,19 @@
 
             
 
+            
+
              method when you are through using the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
+            
+
              to use the associated <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -193,8 +245,12 @@
 
             
 
+            
+
              method of the associated <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -209,6 +265,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -218,6 +276,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -253,8 +313,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -301,13 +365,19 @@
 
             
 
+            
+
              to 0. However. this should not be confused with a query that returns 0 rows (such as SELECT * FROM table WHERE 1 = 2) in which case <see
              cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" />
 
             
 
+            
+
              returns the number of columns in the table, including hidden fields. Use <see
              cref="P:System.Data.SqlClient.SqlDataReader.VisibleFieldCount" />
+
+            
 
             
 
@@ -343,6 +413,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -356,6 +428,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,6 +460,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -399,6 +475,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,8 +512,12 @@
 
             
 
+            
+
              returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, if the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -444,11 +526,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you pass a buffer that is null, <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -469,10 +555,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,10 +573,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,10 +589,14 @@
 
           
 
+          
+
            where the write operation is to start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -528,6 +626,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -541,6 +641,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,8 +683,12 @@
 
             
 
+            
+
              returns the number of available characters in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, if the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -591,11 +697,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The actual number of characters read can be less than the requested length, if the end of the field is reached. If you pass a buffer that is null, <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -609,8 +719,12 @@
 
               
 
+              
+
                method returns 0 when <paramref
                name="dataIndex" />
+
+              
 
               
 
@@ -631,10 +745,14 @@
 
           
 
+          
+
           The zero-based column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -645,10 +763,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -657,10 +779,14 @@
 
           
 
+          
+
            where the write operation is to start. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,6 +817,8 @@
 
             
 
+            
+
              for the specified column ordinal.</para
           >
         </summary>
@@ -702,11 +830,15 @@
 
             
 
+            
+
              instance for the specified column ordinal.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -750,6 +882,8 @@
 
           
 
+          
+
           The zero-based ordinal position of the column to find.</param
         >
       </Docs>
@@ -776,11 +910,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Call <see
              cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -795,6 +933,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -804,6 +944,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,11 +975,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Call <see
              cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -852,6 +998,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -861,6 +1009,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -891,6 +1041,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -904,6 +1056,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -941,8 +1095,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -957,8 +1115,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -986,6 +1148,8 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </summary>
@@ -997,11 +1161,15 @@
 
             
 
+            
+
              that is the data type of the object. If the type does not exist on the client, in the case of a User-Defined Type (UDT) returned from the database, GetFieldType returns null.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1032,6 +1200,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -1045,6 +1215,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,6 +1247,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -1088,6 +1262,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1118,6 +1294,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -1131,6 +1309,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1161,6 +1341,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -1174,6 +1356,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1204,6 +1388,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -1217,6 +1403,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1249,6 +1437,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1289,6 +1479,8 @@
 
           
 
+          
+
           The name of the column. </param
         >
       </Docs>
@@ -1326,6 +1518,8 @@
 
             
 
+            
+
              that is a representation of the underlying provider-specific field type.</para
           >
         </returns>
@@ -1334,8 +1528,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1372,6 +1570,8 @@
 
             
 
+            
+
              that is a representation of the underlying provider specific value.</para
           >
         </returns>
@@ -1380,8 +1580,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1419,8 +1623,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1444,6 +1652,8 @@
           <para
             >For the <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetSchemaTable" />
+
+            
 
             
 
@@ -1500,6 +1710,8 @@
                 <para
                   >The name of the instance of Microsoft SQL Server used by the <see
                    cref="T:System.Data.SqlClient.SqlDataReader" />
+
+                  
 
                   
 
@@ -1656,6 +1868,8 @@
 
                   
 
+                  
+
                    enumeration.</para
                 >
               </description>
@@ -1703,6 +1917,8 @@
 
                   
 
+                  
+
                   . If the column is not a UDT, this is null.</para
                 >
               </description>
@@ -1739,8 +1955,12 @@
 
               
 
+              
+
                with the <paramref
                name="behavior" />
+
+              
 
               
 
@@ -1756,8 +1976,12 @@
 
             
 
+            
+
              that describes the column metadata of the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -1769,6 +1993,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1806,6 +2032,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1817,11 +2045,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1858,6 +2090,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1867,6 +2101,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1903,6 +2139,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1914,11 +2152,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1955,6 +2197,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1966,11 +2210,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2003,6 +2251,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2014,11 +2264,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2055,6 +2309,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2066,11 +2322,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2107,6 +2367,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2118,11 +2380,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2159,6 +2425,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2170,11 +2438,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2211,6 +2483,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2222,11 +2496,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2263,6 +2541,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2274,11 +2554,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2315,6 +2599,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2326,11 +2612,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2367,6 +2657,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2378,11 +2670,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2419,6 +2715,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2430,11 +2728,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2471,6 +2773,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2482,11 +2786,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2515,8 +2823,12 @@
 
             
 
+            
+
              returns data using the native SQL Server types. To retrieve data using the .NET Framework types, see <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+
+            
 
             
 
@@ -2535,11 +2847,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2569,8 +2885,12 @@
 
             
 
+            
+
              array does not need to match the number of columns in the record. You can pass an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2579,8 +2899,12 @@
 
             
 
+            
+
              array holds is copied to the array, starting at the column with ordinal 0. You can also pass an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2592,6 +2916,8 @@
           <para
             >Fills an array of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2607,8 +2933,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2645,6 +2975,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -2660,11 +2992,15 @@
 
             
 
+            
+
              value that contains the XML stored within the corresponding field. </para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2691,6 +3027,8 @@
 
             
 
+            
+
              to check for null values before calling this method.</para
           >
         </remarks>
@@ -2704,6 +3042,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2732,6 +3072,8 @@
 
             
 
+            
+
              returns data using the .NET Framework types.</para
           >
         </remarks>
@@ -2747,11 +3089,15 @@
 
             
 
+            
+
              for null database columns.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2782,8 +3128,12 @@
 
             
 
+            
+
              array that contains fewer than the number of columns contained in the resulting row. Only the amount of data the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2792,11 +3142,15 @@
 
             
 
+            
+
              array whose length is more than the number of columns contained in the resulting row.</para
           >
           <para
             >This method returns <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -2815,6 +3169,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -2823,8 +3179,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2857,6 +3217,8 @@
 
             
 
+            
+
              contains one or more rows.</para
           >
         </summary>
@@ -2878,6 +3240,8 @@
 
             
 
+            
+
              instance that is closed.</para
           >
         </remarks>
@@ -2886,6 +3250,8 @@
           <para
             >Retrieves a Boolean value that indicates whether the specified <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -2926,8 +3292,12 @@
 
             
 
+            
+
              matches that of the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -2942,6 +3312,8 @@
 
             
 
+            
+
              is true, false otherwise.</para
           >
         </returns>
@@ -2950,8 +3322,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -2977,8 +3353,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -2998,11 +3378,15 @@
 
             
 
+            
+
             ; otherwise false.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3097,8 +3481,12 @@
 
             
 
+            
+
              is before the first record. Therefore, you must call <see
              cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+
+            
 
             
 
@@ -3110,8 +3498,12 @@
 
             
 
+            
+
              may be open at a time, and any attempt to open another will fail until the first one is closed. Similarly, while the SqlDataReader is being used, the associated SqlConnection is busy serving it until you call <see
              cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+
+            
 
             
 
@@ -3123,6 +3515,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -3155,8 +3549,12 @@
 
             
 
+            
+
              property is not set until all rows are read and you close the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -3168,13 +3566,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" />
 
             
 
+            
+
              are the only properties that you can call after the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -3253,6 +3657,8 @@
 
             
 
+            
+
              are visible. For example, a SELECT on a partial primary key returns the remaining parts of the key as hidden fields. The hidden fields are always appended behind the visible fields.</para
           >
         </remarks>
@@ -3261,6 +3667,8 @@
           <para
             >Gets the number of fields in the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 

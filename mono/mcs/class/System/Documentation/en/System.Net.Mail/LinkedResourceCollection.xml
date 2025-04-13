@@ -34,8 +34,12 @@
 
         
 
+        
+
          class is returned by the <see
          cref="P:System.Net.Mail.AlternateView.LinkedResources" />
+
+        
 
         
 
@@ -93,8 +97,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.Mail.LinkedResourceCollection" />
+
+            
 
             
 
@@ -103,8 +111,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.Mail.LinkedResourceCollection" />
+
+            
 
             
 
@@ -113,13 +125,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.Mail.LinkedResourceCollection" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.Mail.LinkedResourceCollection" />
+
+            
 
             
 
@@ -130,10 +148,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -145,8 +167,12 @@
 
             
 
+            
+
              on all views in this collection. This method is called by the <see
              cref="M:System.Net.Mail.MailMessage.Dispose" />
+
+            
 
             
 
@@ -159,13 +185,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.Mail.LinkedResourceCollection" />
 
               
 
+              
+
               . Otherwise, the resources it is using are not freed until the garbage collector calls the <see
                cref="T:System.Net.Mail.LinkedResourceCollection" />
+
+              
 
               
 
@@ -178,6 +210,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.Mail.LinkedResourceCollection" />
+
+            
 
             
 
@@ -217,6 +251,8 @@
 
             
 
+            
+
              object into this collection, at the specified location.</para
           >
         </summary>
@@ -225,8 +261,12 @@
 
           
 
+          
+
           The index of the location at which to insert the <see
            cref="T:System.Mail.LinkedResource" />
+
+          
 
           
 
@@ -237,8 +277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Mail.LinkedResource" />
+
+          
 
           
 
@@ -302,8 +346,12 @@
 
             
 
+            
+
              element at the specified location in the collection with the new <see
              cref="T:System.Net.Mail.LinkedResource" />
+
+            
 
             
 

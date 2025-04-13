@@ -32,6 +32,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -69,11 +71,15 @@
 
             
 
+            
+
              is an instance of Label and is equal to this object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -112,6 +118,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -123,6 +131,8 @@
 
             
 
+            
+
              is equal to the value of the current instance; otherwise, false.</para
           >
         </returns>
@@ -131,8 +141,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.Label" />
+
+          
 
           
 
@@ -200,6 +214,8 @@
 
             
 
+            
+
              structures are equal.</para
           >
         </summary>
@@ -211,8 +227,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -224,13 +244,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.Label" />
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -241,13 +267,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.Label" />
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 
@@ -287,6 +319,8 @@
 
             
 
+            
+
              structures are not equal.</para
           >
         </summary>
@@ -298,8 +332,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -311,13 +349,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.Label" />
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -328,13 +372,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.Label" />
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 

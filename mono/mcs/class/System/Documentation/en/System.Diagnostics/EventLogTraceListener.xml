@@ -31,8 +31,12 @@
 
         
 
+        
+
          can be added to the <see
          cref="P:System.Diagnostics.Debug.Listeners" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Diagnostics.TraceSource.Listeners" />
+
+        
 
         
 
@@ -51,13 +59,19 @@
 
         
 
+        
+
         . You can add the instance in your code or specify it in the application configuration file. To add an <see
          cref="T:System.Diagnostics.EventLogTraceListener" />
 
         
 
+        
+
          using an application configuration file, edit the file that corresponds to the name of your application or the app.config file in a vsprvslong project. In this file, insert an element for a <see
          cref="T:System.Diagnostics.EventLogTraceListener" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          object named myListener to the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -79,8 +97,12 @@
 
         
 
+        
+
          parameter specifies the name of the event log source that is to be passed to the <see
          cref="M:System.Diagnostics.EventLogTraceListener.#ctor(System.String)" />
+
+        
 
         
 
@@ -105,12 +127,16 @@
 
         
 
+        
+
          or <format
          type="text/html">
           <a href="a2991f43-b4d3-4614-a8e7-da392de9697f"
             >&lt;listeners&gt; element for &lt;source&gt;</a
           >
         </format>
+
+        
 
         
 
@@ -123,8 +149,12 @@
 
           
 
+          
+
            for the event log that is associated with the <see
            cref="T:System.Diagnostics.EventLogTraceListener" />
+
+          
 
           
 
@@ -133,6 +163,8 @@
         <para
           >The reason for this requirement is that all event logs, including security, must be searched to determine whether the event source is unique. In Windows Vista, users do not have permission to access the security log; therefore, a <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -146,13 +178,19 @@
 
         
 
+        
+
          property to get or set the event log that receives the tracing or debugging output, and the <see
          cref="P:System.Diagnostics.EventLogTraceListener.Name" />
 
         
 
+        
+
          property to hold the name of the <see
          cref="T:System.Diagnostics.EventLogTraceListener" />
+
+        
 
         
 
@@ -164,13 +202,19 @@
 
         
 
+        
+
          method closes the event log so it no longer receives tracing or debugging output. The <see
          cref="M:System.Diagnostics.EventLogTraceListener.Write(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Diagnostics.EventLogTraceListener.WriteLine(System.String)" />
+
+        
 
         
 
@@ -183,8 +227,12 @@
 
           
 
+          
+
            does not output the optional trace data specified by the <see
            cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+          
 
           
 
@@ -197,6 +245,8 @@
       <para
         >Provides a simple listener that directs tracing or debugging output to an <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -226,6 +276,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.EventLogTraceListener" />
+
+            
 
             
 
@@ -263,11 +315,15 @@
 
             
 
+            
+
              class using the specified event log.</para
           >
         </summary>
         <param name="eventLog">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,11 +357,15 @@
 
             
 
+            
+
              class using the specified source.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,6 +476,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -461,8 +523,12 @@
 
               
 
+              
+
                methods are not intended to be called by application code. They are called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -471,8 +537,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -485,8 +555,12 @@
 
             
 
+            
+
              method, like the <see
              cref="Overload:System.Diagnostics.EventLogTraceListener.TraceEvent" />
+
+            
 
             
 
@@ -498,8 +572,12 @@
 
             
 
+            
+
              and <paramref
              name="source" />
+
+            
 
             
 
@@ -508,8 +586,12 @@
 
             
 
+            
+
              is used to create an <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -518,8 +600,12 @@
 
             
 
+            
+
               is equated to an <see
              cref="T:System.Diagnostics.EventLogEntryType" />
+
+            
 
             
 
@@ -528,8 +614,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -538,8 +628,12 @@
 
             
 
+            
+
              object, formatted as a string, using the <see
              cref="M:System.Diagnostics.EventLog.WriteEvent(System.Diagnostics.EventInstance,System.Object[])" />
+
+            
 
             
 
@@ -552,8 +646,12 @@
 
               
 
+              
+
                parameter is 65,535. If the <paramref
                name="id" />
+
+              
 
               
 
@@ -570,10 +668,14 @@
 
           
 
+          
+
           An object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,8 +686,12 @@
 
           
 
+          
+
           A numeric identifier for the event. The combination of <paramref
            name="source" />
+
+          
 
           
 
@@ -594,10 +700,14 @@
 
           
 
+          
+
            uniquely identifies an event.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -651,8 +761,12 @@
 
               
 
+              
+
                methods are not intended to be called by application code. They are called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -661,8 +775,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -675,8 +793,12 @@
 
             
 
+            
+
              method, like the <see
              cref="Overload:System.Diagnostics.EventLogTraceListener.TraceEvent" />
+
+            
 
             
 
@@ -688,13 +810,19 @@
 
             
 
+            
+
              and <paramref
              name="id" />
 
             
 
+            
+
              parameter data is used to create an <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -706,8 +834,12 @@
 
             
 
+            
+
              and <paramref
              name="source" />
+
+            
 
             
 
@@ -716,8 +848,12 @@
 
             
 
+            
+
              is used to create an <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -726,8 +862,12 @@
 
             
 
+            
+
               is equated to an <see
              cref="T:System.Diagnostics.EventLogEntryType" />
+
+            
 
             
 
@@ -736,8 +876,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -746,8 +890,12 @@
 
             
 
+            
+
              object array, formatted as a string array, using the <see
              cref="M:System.Diagnostics.EventLog.WriteEvent(System.Diagnostics.EventInstance,System.Object[])" />
+
+            
 
             
 
@@ -760,8 +908,12 @@
 
               
 
+              
+
                parameter is 65,535. If the <paramref
                name="id" />
+
+              
 
               
 
@@ -778,10 +930,14 @@
 
           
 
+          
+
           An object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -792,8 +948,12 @@
 
           
 
+          
+
           A numeric identifier for the event. The combination of <paramref
            name="source" />
+
+          
 
           
 
@@ -802,10 +962,14 @@
 
           
 
+          
+
            uniquely identifies an event.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -853,8 +1017,12 @@
 
               
 
+              
+
                methods are not intended to be called by application code. These methods are called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -863,8 +1031,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -877,6 +1049,8 @@
 
             
 
+            
+
              method is intended to trace events that can be processed automatically by tools. For example a monitoring tool can notify an administrator if a specific event is traced by a specific source.</para
           >
           <para
@@ -885,8 +1059,12 @@
 
             
 
+            
+
              and <paramref
              name="source" />
+
+            
 
             
 
@@ -895,8 +1073,12 @@
 
             
 
+            
+
              is used to create an <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -905,8 +1087,12 @@
 
             
 
+            
+
               is equated to an <see
              cref="T:System.Diagnostics.EventLogEntryType" />
+
+            
 
             
 
@@ -915,8 +1101,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -925,8 +1115,12 @@
 
             
 
+            
+
              data using the <see
              cref="M:System.Diagnostics.EventLog.WriteEvent(System.Diagnostics.EventInstance,System.Object[])" />
+
+            
 
             
 
@@ -939,8 +1133,12 @@
 
               
 
+              
+
                parameter is 65,535. If the <paramref
                name="id" />
+
+              
 
               
 
@@ -957,10 +1155,14 @@
 
           
 
+          
+
           An object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -971,8 +1173,12 @@
 
           
 
+          
+
           A numeric identifier for the event. The combination of <paramref
            name="source" />
+
+          
 
           
 
@@ -981,10 +1187,14 @@
 
           
 
+          
+
            uniquely identifies an event.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,8 +1249,12 @@
 
               
 
+              
+
                methods are not intended to be called by application code. These methods are called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -1049,8 +1263,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -1063,6 +1281,8 @@
 
             
 
+            
+
              method is intended to trace events that can be processed automatically by tools. For example a monitoring tool can notify an administrator if a specific event is traced by a specific source.</para
           >
           <para
@@ -1071,8 +1291,12 @@
 
             
 
+            
+
              and <paramref
              name="source" />
+
+            
 
             
 
@@ -1081,8 +1305,12 @@
 
             
 
+            
+
              is used to create an <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -1091,8 +1319,12 @@
 
             
 
+            
+
               is equated to an <see
              cref="T:System.Diagnostics.EventLogEntryType" />
+
+            
 
             
 
@@ -1101,8 +1333,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -1111,8 +1347,12 @@
 
             
 
+            
+
              method, with the message obtained from the <paramref
              name="format" />
+
+            
 
             
 
@@ -1121,8 +1361,12 @@
 
             
 
+            
+
              parameters. The <paramref
              name="args" />
+
+            
 
             
 
@@ -1131,13 +1375,19 @@
 
             
 
+            
+
              method, passing the <paramref
              name="format" />
 
             
 
+            
+
              string and <paramref
              name="args" />
+
+            
 
             
 
@@ -1150,8 +1400,12 @@
 
               
 
+              
+
                parameter is 65,535. If the <paramref
                name="id" />
+
+              
 
               
 
@@ -1168,10 +1422,14 @@
 
           
 
+          
+
           An object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1182,13 +1440,19 @@
 
           
 
+          
+
           A numeric identifier for the event. The combination of <paramref
            name="source" />
 
           
 
+          
+
            and <paramref
            name="id" />
+
+          
 
           
 
@@ -1199,8 +1463,12 @@
 
           
 
+          
+
           A format string that contains zero or more format items that correspond to objects in the <paramref
            name="args" />
+
+          
 
           
 
@@ -1208,6 +1476,8 @@
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1244,6 +1514,8 @@
 
           
 
+          
+
           The message to write. </param
         >
       </Docs>
@@ -1274,6 +1546,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

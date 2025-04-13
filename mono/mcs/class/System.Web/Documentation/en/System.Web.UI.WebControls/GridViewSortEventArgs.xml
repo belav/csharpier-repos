@@ -22,13 +22,19 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.GridView.Sorting" />
 
         
 
+        
+
          event when a Sort button (a button with its CommandName property set to "Sort") is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -41,13 +47,19 @@
 
           
 
+          
+
            control with its CommandName property set to "Sort" will raise the <see
            cref="E:System.Web.UI.WebControls.GridView.Sorting" />
 
           
 
+          
+
            event, Sort buttons typically appear in the header row of a <see
            cref="T:System.Web.UI.WebControls.GridView" />
+
+          
 
           
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to specify or determine the sort expression and sort direction in which to sort the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -70,13 +86,19 @@
 
         
 
+        
+
          property. To determine the sort direction, use the <see
          cref="P:System.Web.UI.WebControls.GridViewSortEventArgs.SortDirection" />
 
         
 
+        
+
          property. You can also cancel a sorting operation by setting the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -90,6 +112,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -98,8 +122,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewSelectEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -111,6 +139,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.GridView.Sorting" />
+
+        
 
         
 
@@ -140,11 +170,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewSortEventArgs" />
+
+            
 
             
 
@@ -174,6 +208,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -188,6 +224,8 @@
                 <para
                   >The value of the <paramref
                    name="sortExpression" />
+
+                  
 
                   
 
@@ -208,6 +246,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -216,8 +256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SortDirection" />
+
+          
 
           
 
@@ -248,8 +292,12 @@
 
             
 
+            
+
              event is raised, you can use the <see
              cref="P:System.Web.UI.WebControls.GridViewSortEventArgs.SortDirection" />
+
+            
 
             
 
@@ -258,13 +306,19 @@
 
             
 
+            
+
              control will sort its items (based on the sort expression) when the sort operation is performed. Because the <see
              cref="E:System.Web.UI.WebControls.GridView.Sorting" />
 
             
 
+            
+
              event occurs before the sort operation, you can also use the <see
              cref="P:System.Web.UI.WebControls.GridViewSortEventArgs.SortDirection" />
+
+            
 
             
 
@@ -276,6 +330,8 @@
           <para
             >Gets or sets the direction in which to sort the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -304,8 +360,12 @@
 
             
 
+            
+
              event is raised, you can use the <see
              cref="P:System.Web.UI.WebControls.GridViewSortEventArgs.SortExpression" />
+
+            
 
             
 
@@ -314,8 +374,12 @@
 
             
 
+            
+
              control when sort operation is performed. By default, the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -327,6 +391,8 @@
           <para
             >Gets or sets the expression used to sort the items in the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 

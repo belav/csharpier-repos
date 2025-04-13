@@ -37,8 +37,12 @@
 
         
 
+        
+
          is not serializable nor is it tied to a particular version of the WS-Addressing specification. indigo1 supplies a class that provides a serializable type, <see
          cref="T:System.ServiceModel.EndpointAddress10" />
+
+        
 
         
 
@@ -50,13 +54,19 @@
 
         
 
+        
+
          that is serializable and bound to a particular wire format for legacy purposes. The <see
          cref="M:System.ServiceModel.EndpointAddressAugust2004.FromEndpointAddress(System.ServiceModel.EndpointAddress)" />
 
         
 
+        
+
          method does the wrapping and the <see
          cref="M:System.ServiceModel.EndpointAddressAugust2004.ToEndpointAddress" />
+
+        
 
         
 
@@ -97,6 +107,8 @@
 
             
 
+            
+
              is not tied to a particular version of the WS-Addressing specification or bound to a particular wire format.</para
           >
         </remarks>
@@ -105,6 +117,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.EndpointAddress10" />
+
+            
 
             
 
@@ -119,6 +133,8 @@
 
             
 
+            
+
              class that contains the specified endpoint address.</para
           >
         </returns>
@@ -127,8 +143,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -172,6 +192,8 @@
 
             
 
+            
+
              that describes the XML representation of the endpoint address.</para
           >
         </returns>
@@ -180,8 +202,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -248,8 +274,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -287,8 +317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -327,8 +361,12 @@
 
             
 
+            
+
              that contains a version-neutral endpoint address of this <see
              cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+
+            
 
             
 

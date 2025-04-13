@@ -26,6 +26,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -43,6 +45,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Framework.BuildWarningEventArgs" />
+
+            
 
             
 
@@ -83,8 +87,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="P:Microsoft.Build.Framework.BuildWarningEventArgs.SubCategory" />
+
+            
 
             
 
@@ -93,8 +101,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.Build.Framework.BuildWarningEventArgs.File" />
+
+            
 
             
 
@@ -103,8 +115,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.Build.Framework.BuildWarningEventArgs.ColumnNumber" />
+
+            
 
             
 
@@ -113,8 +129,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.Build.Framework.BuildWarningEventArgs.EndColumnNumber" />
+
+            
 
             
 
@@ -123,13 +143,19 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.Build.Framework.BuildEventArgs.SenderName" />
+
+            
 
             
 
@@ -141,10 +167,14 @@
 
           
 
+          
+
           The custom subcategory of the event.</param
         >
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,10 +185,14 @@
 
           
 
+          
+
           The name of the file associated with the event.</param
         >
         <param name="lineNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,10 +203,14 @@
 
           
 
+          
+
           The column number that corresponds to the beginning of the section of code that raised the event.</param
         >
         <param name="endLineNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,10 +221,14 @@
 
           
 
+          
+
           The column number that corresponds to the end of the section of code that raised the event.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,10 +239,14 @@
 
           
 
+          
+
           The Help keyword associated with the event.</param
         >
         <param name="senderName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
         . </para
       >
       <para>The upgrade process has the following steps:</para>
@@ -36,6 +38,8 @@
           <para
             >Implement a class that derives from <see
              cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+
+            
 
             
 
@@ -52,6 +56,8 @@
 
             
 
+            
+
             , which at run time initiates a request to the other end of its connection to upgrade the channel transport layer.</para
           >
         </item>
@@ -62,6 +68,8 @@
 
             
 
+            
+
             , which at run time receives the upgrade request from the preceding step, and if possible, accepts the upgrade, and returns the upgraded stream to the other side of its connection.</para
           >
         </item>
@@ -69,6 +77,8 @@
       <para
         >The security upgrade request can be one of many similar requests. If so, the requests are processed in a definite order. For more information, see <see
          cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+        
 
         
 
@@ -99,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+
+            
 
             
 
@@ -134,6 +146,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+
+            
 
             
 

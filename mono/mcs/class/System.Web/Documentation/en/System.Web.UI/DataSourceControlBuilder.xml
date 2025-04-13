@@ -22,8 +22,12 @@
 
         
 
+        
+
          class extends <see
          cref="T:System.Web.UI.ControlBuilder" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          method to return false. <see
          cref="T:System.Web.UI.DataSourceControlBuilder" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DataSourceControlBuilder" />
+
+            
 
             
 

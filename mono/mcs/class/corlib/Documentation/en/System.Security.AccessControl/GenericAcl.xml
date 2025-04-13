@@ -32,8 +32,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.AccessControl.SystemAcl" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.GenericAcl" />
+
+            
 
             
 
@@ -105,6 +115,8 @@
 
             
 
+            
+
              class has been created.</para
           >
         </remarks>
@@ -116,8 +128,12 @@
 
             
 
+            
+
             . This value is returned by the <see
              cref="P:System.Security.AccessControl.GenericAcl.Revision" />
+
+            
 
             
 
@@ -152,8 +168,12 @@
 
             
 
+            
+
             . This value is returned by the <see
              cref="P:System.Security.AccessControl.GenericAcl.Revision" />
+
+            
 
             
 
@@ -185,8 +205,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl.GenericAcl.GetBinaryForm" />
+
+            
 
             
 
@@ -227,8 +251,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.Security.AccessControl.GenericAcl" />
+
+            
 
             
 
@@ -240,13 +268,19 @@
 
           
 
+          
+
           The array into which copies of the <see
            cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
+          
+
            objects contained by the current <see
            cref="T:System.Security.AccessControl.GenericAcl" />
+
+          
 
           
 
@@ -257,8 +291,12 @@
 
           
 
+          
+
           The zero-based index of <paramref
            name="array" />
+
+          
 
           
 
@@ -286,6 +324,8 @@
           <para
             >Gets the number of access control entries (ACEs) in the current <see
              cref="T:System.Security.AccessControl.GenericAcl" />
+
+            
 
             
 
@@ -326,6 +366,8 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
@@ -334,8 +376,12 @@
 
           
 
+          
+
           The byte array into which the contents of the <see
            cref="T:System.Security.AccessControl.GenericAcl" />
+
+          
 
           
 
@@ -343,6 +389,8 @@
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +427,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -387,6 +437,8 @@
           <para
             >The <see
              cref="T:Security.AccessControl.AceEnumerator" />
+
+            
 
             
 
@@ -415,6 +467,8 @@
           <para
             >This property is always set to false. It is implemented only because it is required for the implementation of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -477,6 +531,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -505,6 +561,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -530,6 +588,8 @@
           <para
             >This property always returns null. It is implemented only because it is required for the implementation of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -567,8 +627,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.Security.AccessControl.GenericAcl" />
+
+            
 
             
 
@@ -580,13 +644,19 @@
 
           
 
+          
+
           The array into which copies of the <see
            cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
+          
+
            objects contained by the current <see
            cref="T:System.Security.AccessControl.GenericAcl" />
+
+          
 
           
 
@@ -597,8 +667,12 @@
 
           
 
+          
+
           The zero-based index of <paramref
            name="array" />
+
+          
 
           
 
@@ -635,8 +709,12 @@
 
             
 
+            
+
              class cast as an instance of the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -651,8 +729,12 @@
 
             
 
+            
+
              object, cast as an instance of the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

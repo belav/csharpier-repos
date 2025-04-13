@@ -21,6 +21,8 @@ class A
 
       
 
+      
+
       class B is a nested type because it is declared within class A, and class A is a non-nested type because it is declared within a compilation unit. end example]</example
     >
   </paragraph>

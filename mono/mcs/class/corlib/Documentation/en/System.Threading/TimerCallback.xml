@@ -43,8 +43,12 @@
 
       
 
+      
+
        containing application-specific information relevant to the methods invoked by instances of this delegate, or <see
        langword="null" />
+
+      
 
       
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
         . This method does not execute in the thread that created the timer; it executes in a separate thread pool thread that is provided by the system. The TimerCallback delegate invokes the method once after the start time elapses, and continues to invoke it once per timer interval until the <see
          cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          method is called with the interval value <see
          cref="F:System.Threading.Timeout.Infinite" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
           
 
+          
+
            method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see
            cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" />
+
+          
 
           
 
@@ -96,13 +112,19 @@
 
         
 
+        
+
          parameter of the Timer constructors, and the period is passed in the <paramref
          name="period" />
 
         
 
+        
+
          parameter. For an example that demonstrates creating and using a TimerCallback delegate, see <see
          cref="T:System.Threading.Timer" />
+
+        
 
         
 
@@ -114,6 +136,8 @@
       <para
         >Represents the method that handles calls from a <see
          cref="T:System.Threading.Timer" />
+
+        
 
         
 

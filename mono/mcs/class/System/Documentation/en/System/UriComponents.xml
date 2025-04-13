@@ -28,8 +28,12 @@
 
         
 
+        
+
         . This enumeration is used with the <see
          cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
       <para
         >Specifies the parts of a <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -73,8 +79,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.UserInfo" />
+
+            
 
             
 
@@ -83,8 +93,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.Port" />
+
+            
 
             
 
@@ -93,13 +107,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.Query" />
 
             
 
+            
+
             , and <see
              cref="P:System.Uri.Fragment" />
+
+            
 
             
 
@@ -132,6 +152,8 @@
 
             
 
+            
+
              data.</para
           >
         </summary>
@@ -158,6 +180,8 @@
           <para
             >The <see
              cref="P:System.Uri.Host" />
+
+            
 
             
 
@@ -190,13 +214,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Uri.Port" />
 
             
 
+            
+
              data. If no port data is in the Uri and a default port has been assigned to the <see
              cref="P:System.Uri.Scheme" />
+
+            
 
             
 
@@ -229,8 +259,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.Host" />
+
+            
 
             
 
@@ -239,13 +273,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.LocalPath" />
 
             
 
+            
+
             , and <see
              cref="P:System.Uri.Query" />
+
+            
 
             
 
@@ -298,6 +338,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -324,6 +366,8 @@
           <para
             >The <see
              cref="P:System.Uri.LocalPath" />
+
+            
 
             
 
@@ -356,13 +400,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Uri.Query" />
 
             
 
+            
+
              data. Also see <see
              cref="P:System.Uri.PathAndQuery" />
+
+            
 
             
 
@@ -395,6 +445,8 @@
 
             
 
+            
+
              data.</para
           >
         </summary>
@@ -421,6 +473,8 @@
           <para
             >The <see
              cref="P:System.Uri.Query" />
+
+            
 
             
 
@@ -453,6 +507,8 @@
 
             
 
+            
+
              data.</para
           >
         </summary>
@@ -482,13 +538,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.Host" />
 
             
 
+            
+
             , and <see
              cref="P:System.Uri.Port" />
+
+            
 
             
 
@@ -521,6 +583,8 @@
 
             
 
+            
+
              context that is needed for Uri Serializers. The context includes the IPv6 scope.</para
           >
         </summary>
@@ -550,8 +614,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.Host" />
+
+            
 
             
 
@@ -560,13 +628,19 @@
 
             
 
+            
+
              data. If no port data is in the <see
              cref="T:System.Uri" />
 
             
 
+            
+
              and a default port has been assigned to the <see
              cref="P:System.Uri.Scheme" />
+
+            
 
             
 
@@ -599,13 +673,19 @@
 
             
 
+            
+
              data. If no port data is in the <see
              cref="T:System.Uri" />
 
             
 
+            
+
              and a default port has been assigned to the <see
              cref="P:System.Uri.Scheme" />
+
+            
 
             
 
@@ -635,6 +715,8 @@
           <para
             >The <see
              cref="P:System.Uri.UserInfo" />
+
+            
 
             
 

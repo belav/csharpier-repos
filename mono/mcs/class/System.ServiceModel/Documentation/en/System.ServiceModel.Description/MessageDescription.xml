@@ -27,8 +27,12 @@
 
         
 
+        
+
          contains the <see
          cref="P:System.ServiceModel.Description.MessageDescription.Headers" />
+
+        
 
         
 
@@ -37,13 +41,19 @@
 
         
 
+        
+
          properties to provide get access to these parts of the message. Whether the message is incoming or outgoing is indicated by the <see
          cref="P:System.ServiceModel.Description.MessageDescription.Direction" />
 
         
 
+        
+
          property. It also provides an <see
          cref="P:System.ServiceModel.Description.MessageDescription.Action" />
+
+        
 
         
 
@@ -82,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MessageDescription" />
+
+            
 
             
 
@@ -169,8 +181,12 @@
 
             
 
+            
+
              direction. Outgoing means the message is coming from the server to the client. This is the <see
              cref="F:System.ServiceModel.Description.MessageDirection.Output" />
+
+            
 
             
 
@@ -179,8 +195,12 @@
 
             
 
+            
+
              are actually being sent and the messages marked as <see
              cref="F:System.ServiceModel.Description.MessageDirection.Output" />
+
+            
 
             
 
@@ -211,6 +231,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="P:System.ServiceModel.Description.MessageDescription.ProtectionLevel" />
+
+            
 
             
 

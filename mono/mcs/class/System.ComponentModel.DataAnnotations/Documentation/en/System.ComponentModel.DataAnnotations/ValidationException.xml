@@ -25,6 +25,8 @@
 
         
 
+        
+
          value, a validation exception occurs. </para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          class to customize validations. A <see
          cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+        
 
         
 
@@ -43,13 +49,19 @@
 
         
 
+        
+
          method is called. All the exceptions that are thrown during validation are contained in the <see
          cref="P:System.Web.DynamicData.IDynamicValidatorException.InnerExceptions" />
 
         
 
+        
+
          collection. You can retrieve each validation exception by iterating through the <see
          cref="P:System.Web.DynamicData.IDynamicValidatorException.InnerExceptions" />
+
+        
 
         
 
@@ -61,6 +73,8 @@
       <para
         >Represents the exception that occurs during validation of a data field when the <see
          cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+        
 
         
 
@@ -89,6 +103,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -97,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+            
 
             
 
@@ -131,6 +149,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -142,11 +162,15 @@
 
             
 
+            
+
              class using a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,6 +208,8 @@
 
             
 
+            
+
              class using serialized data.</para
           >
         </summary>
@@ -192,10 +218,14 @@
 
           
 
+          
+
           The object that holds the serialized data.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,8 +259,12 @@
 
             
 
+            
+
              property, not <paramref
              name="innerException" />
+
+            
 
             
 
@@ -245,6 +279,8 @@
 
             
 
+            
+
              class using a specified error message and a collection of inner exception instances.</para
           >
         </summary>
@@ -253,10 +289,14 @@
 
           
 
+          
+
           The error message. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,11 +338,15 @@
 
             
 
+            
+
              class by using a validation result, a validation attribute, and the value of the current exception.</para
           >
         </summary>
         <param name="validationResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,10 +357,14 @@
 
           
 
+          
+
           The attribute that caused the current exception.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,11 +406,15 @@
 
             
 
+            
+
              class using a specified error message, a validation attribute, and the value of the current exception.</para
           >
         </summary>
         <param name="errorMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -373,10 +425,14 @@
 
           
 
+          
+
           The attribute that caused the current exception.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,8 +466,12 @@
 
             
 
+            
+
              class triggers a <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+            
 
             
 
@@ -427,6 +487,8 @@
           <para
             >Gets the instance of the <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+            
 
             
 
@@ -462,6 +524,8 @@
 
             
 
+            
+
              instance that describes the validation error.</para
           >
         </summary>
@@ -485,6 +549,8 @@
           <para
             >Gets the value of the object that causes the <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+            
 
             
 

@@ -35,8 +35,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          constructor. Use the <see
          cref="M:System.Net.WebRequest.Create(System.String)" />
+
+        
 
         
 
@@ -58,13 +66,19 @@
 
         
 
+        
+
          class. If the URI scheme is file://, the <see
          cref="M:System.Net.WebRequest.Create(System.String)" />
 
         
 
+        
+
          method returns a <see
          cref="T:System.Net.FileWebRequest" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          method makes a synchronous request for the file specified in the <see
          cref="P:System.Net.FileWebRequest.RequestUri" />
+
+        
 
         
 
@@ -86,13 +104,19 @@
 
         
 
+        
+
          object that contains the response. You can make an asynchronous request for the file using the <see
          cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
 
         
 
+        
+
          and <see
          cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+        
 
         
 
@@ -104,8 +128,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -114,8 +142,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+        
 
         
 
@@ -127,8 +159,12 @@
 
         
 
+        
+
          class relies on the <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -140,6 +176,8 @@
       <para
         >Provides a file system implementation of the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -182,8 +220,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -198,13 +240,19 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -216,13 +264,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            object that contains the information that is required to serialize the new <see
            cref="T:System.Net.FileWebRequest" />
+
+          
 
           
 
@@ -233,13 +287,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            object that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.Net.FileWebRequest" />
+
+          
 
           
 
@@ -276,8 +336,12 @@
 
             
 
+            
+
              method cancels a request to a resource. After a request is canceled, calling the <see
              cref="M:System.Net.FileWebRequest.GetResponse" />
+
+            
 
             
 
@@ -286,8 +350,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -296,8 +364,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -306,8 +378,12 @@
 
             
 
+            
+
              method causes a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -316,8 +392,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.WebExceptionStatus.RequestCanceled" />
+
+            
 
             
 
@@ -330,6 +410,8 @@
                 >[&lt;topic://conUsingNetworkTracing&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -373,13 +455,19 @@
 
             
 
+            
+
              method starts an asynchronous request for a stream used to send data to a file system resource. The callback method that implements the <see
              cref="T:System.AsyncCallback" />
 
             
 
+            
+
              delegate uses the <see
              cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -394,6 +482,8 @@
 
             
 
+            
+
              object to use to write data.</para
           >
         </summary>
@@ -405,6 +495,8 @@
 
             
 
+            
+
              that references the asynchronous request.</para
           >
         </returns>
@@ -413,8 +505,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -422,6 +518,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,13 +558,19 @@
 
             
 
+            
+
              delegate uses the <see
              cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />
 
             
 
+            
+
              method to return the actual <see
              cref="T:System.Net.FileWebResponse" />
+
+            
 
             
 
@@ -485,6 +589,8 @@
 
             
 
+            
+
              that references the asynchronous request.</para
           >
         </returns>
@@ -493,8 +599,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -502,6 +612,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -535,8 +647,12 @@
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -594,13 +710,19 @@
 
             
 
+            
+
              property contains the media type of the data being sent. This is typically the MIME encoding of the content. The <see
              cref="P:System.Net.FileWebRequest.ContentType" />
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -642,13 +764,19 @@
 
             
 
+            
+
              class does not authenticate requests for files from the local file system, it ignores the contents, if any, of the <see
              cref="P:System.Net.FileWebRequest.Credentials" />
 
             
 
+            
+
              property. Authentication for <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -691,8 +819,12 @@
 
             
 
+            
+
              method completes an asynchronous stream request that was started by the <see
              cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -705,13 +837,19 @@
 
               
 
+              
+
                method on the stream returned by the <see
                cref="M:System.Net.FileWebResponse.GetResponseStream" />
 
               
 
+              
+
                method after calling the <see
                cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+              
 
               
 
@@ -727,6 +865,8 @@
 
             
 
+            
+
              instance that the application uses to write data.</para
           >
         </summary>
@@ -738,6 +878,8 @@
 
             
 
+            
+
              object that the application uses to write data.</para
           >
         </returns>
@@ -746,8 +888,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -785,8 +931,12 @@
 
             
 
+            
+
              method completes an asynchronous request for a file system resource that was started with the <see
              cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -805,6 +955,8 @@
 
             
 
+            
+
              that contains the response from the file system resource.</para
           >
         </returns>
@@ -813,8 +965,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -852,6 +1008,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -863,6 +1021,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -871,8 +1031,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -883,8 +1047,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -920,8 +1088,12 @@
 
             
 
+            
+
              method provides synchronous access to the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -930,8 +1102,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -946,6 +1122,8 @@
 
             
 
+            
+
              object for writing data to the file system resource.</para
           >
         </summary>
@@ -954,6 +1132,8 @@
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -990,8 +1170,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1003,8 +1187,12 @@
 
             
 
+            
+
              method provides synchronous access to the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1013,8 +1201,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1030,6 +1222,8 @@
           <para
             >A <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1066,8 +1260,12 @@
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1103,8 +1301,12 @@
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1140,8 +1342,12 @@
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1183,8 +1389,12 @@
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1250,8 +1460,12 @@
 
             
 
+            
+
              object with the required data to serialize the <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1263,13 +1477,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that holds the serialized data for the <see
            cref="T:System.Net.FileWebRequest" />
+
+          
 
           
 
@@ -1280,13 +1500,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the destination of the serialized stream that is associated with the new <see
            cref="T:System.Net.FileWebRequest" />
+
+          
 
           
 
@@ -1317,8 +1543,12 @@
 
             
 
+            
+
              to a value less than 15 seconds, it may take 15 seconds or more before a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -1355,8 +1585,12 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1365,8 +1599,12 @@
 
             
 
+            
+
              classes. There is no reason to use <see
              cref="P:System.Net.FileWebRequest.UseDefaultCredentials" />
+
+            
 
             
 
@@ -1378,6 +1616,8 @@
           <para
             >Always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          class provides
         information about a file system entry and permits file system entry
         manipulation such as:
@@ -37,6 +39,8 @@
             >Determining the full file name with 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -60,10 +64,14 @@
 
             
 
+            
+
             ),
             the file system inode
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.Inode" />
+
+            
 
             
 
@@ -74,10 +82,14 @@
 
             
 
+            
+
             ),
             file type
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.FileType" />
+
+            
 
             
 
@@ -88,10 +100,14 @@
 
             
 
+            
+
             ),
             group information
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" />
+
+            
 
             
 
@@ -102,10 +118,14 @@
 
             
 
+            
+
             ),
             various times maintained by the operating system
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.LastAccessTime" />
+
+            
 
             
 
@@ -115,9 +135,13 @@
 
             
 
+            
+
             ,
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.LastStatusChangeTime" />
+
+            
 
             
 
@@ -134,6 +158,8 @@
 
             
 
+            
+
             .
           </term
           >
@@ -143,6 +169,8 @@
             >Creating symbolic links with
             <see
              cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+
+            
 
             
 
@@ -158,6 +186,8 @@
 
             
 
+            
+
             .
           </term
           >
@@ -167,6 +197,8 @@
             >Setting file system owner and group information with
             <see
              cref="M:Mono.Unix.UnixFileSystemInfo.SetOwner" />
+
+            
 
             
 
@@ -188,15 +220,21 @@
 
         
 
+        
+
          valid
         at some point in time, <i
         >or</i>
 
         
 
+        
+
          an 
         <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -211,6 +249,8 @@
 
           
 
+          
+
            is found, 
           it won't be checked for again until a call to
           <see
@@ -218,9 +258,13 @@
 
           
 
+          
+
           .
           <c
           >FullName</c>
+
+          
 
           
 
@@ -231,10 +275,14 @@
 
           
 
+          
+
            will let you
           know if the file currently exists and does an implicit 
           <c
           >Refresh</c>
+
+          
 
           
 
@@ -243,9 +291,13 @@
 
           
 
+          
+
            doesn't exist when the
           <c
           >UnixFileSystemInfo</c>
+
+          
 
           
 
@@ -257,9 +309,13 @@
 
           
 
+          
+
            and
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.Length" />
+
+          
 
           
 
@@ -299,12 +355,16 @@
 
           
 
+          
+
            containing the
         name of the file system object to query.</param
         >
         <summary
           >Creates a <see
            cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+          
 
           
 
@@ -316,6 +376,8 @@
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -331,6 +393,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -341,8 +405,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -355,6 +423,8 @@
 
             
 
+            
+
              is a zero-length string.</para
           >
           <para>-or-</para>
@@ -363,9 +433,13 @@
 
             
 
+            
+
              contains an invalid character.
             See <see
              cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+
+            
 
             
 
@@ -396,12 +470,16 @@
 
           
 
+          
+
            containing the number of file
           system blocks used by this file system entry.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -432,12 +510,16 @@
 
           
 
+          
+
            containing the preferred block 
           size for file system I/O on this file system entry.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -482,6 +564,8 @@
           
 
           
+
+          
           specifying what kind of access the process would like.
         </param
         >
@@ -489,6 +573,8 @@
           >Determines whether or not the process can access
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -502,10 +588,14 @@
 
           
 
+          
+
            specifying whether or not
           the process can access
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -519,6 +609,8 @@
             just because you can access 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -560,9 +652,13 @@
 
           
 
+          
+
            and 
           <paramref
            name="path" />
+
+          
 
           
 
@@ -574,9 +670,13 @@
 
           
 
+          
+
            instance which
           represents <paramref
            name="path" />
+
+          
 
           
 
@@ -586,6 +686,8 @@
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -601,6 +703,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -610,6 +714,8 @@
             After creating the link, the link count 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.LinkCount" />
+
+            
 
             
 
@@ -628,10 +734,14 @@
 
             
 
+            
+
              
             does not support hard links.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -646,6 +756,8 @@
 
             
 
+            
+
              
             is a directory or is flagged immutable or append-only
             (see <see
@@ -653,9 +765,13 @@
 
             
 
+            
+
             ).
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -671,15 +787,21 @@
 
             
 
+            
+
              or
             <paramref
              name="path" />
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -692,10 +814,14 @@
 
             
 
+            
+
              requires writing in a directory with a
             mode that denies write permissions.
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -711,9 +837,13 @@
 
           
 
+          
+
            
           or <paramref
            name="path" />
+
+          
 
           
 
@@ -721,6 +851,8 @@
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -736,6 +868,8 @@
 
             
 
+            
+
              
             or <paramref
              name="path" />
@@ -743,9 +877,13 @@
             
 
             
+
+            
             that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -761,10 +899,14 @@
 
             
 
+            
+
              
             does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -779,9 +921,13 @@
             
 
             
+
+            
             resides on a read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -795,10 +941,14 @@
 
             
 
+            
+
              cannot be extended 
             because there is no space left.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -813,12 +963,16 @@
 
             
 
+            
+
             ]
           </para
           >
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -829,9 +983,13 @@
           
 
           
+
+          
           was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -846,6 +1004,8 @@
 
             
 
+            
+
              or
             <paramref
              name="path" />
@@ -853,8 +1013,12 @@
             
 
             
+
+            
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -867,11 +1031,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -885,9 +1053,13 @@
             
 
             
+
+            
             would exceed its limit.  Use 
             <see
              cref="M:Mono.Unix.UnixFileSystemInfo.GetConfigurationValue" />
+
+            
 
             
 
@@ -896,10 +1068,14 @@
 
             
 
+            
+
             ) 
             to determine the maximum link value.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -912,9 +1088,13 @@
 
             
 
+            
+
              already exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -927,15 +1107,21 @@
 
             
 
+            
+
              and
             <paramref
              name="path" />
 
             
 
+            
+
              are on different file systems.
             [<see
              cref="F:Mono.Unix.Native.Errno.EXDEV" />
+
+            
 
             
 
@@ -974,6 +1160,8 @@
 
           
 
+          
+
            containing the name
         of the symbolic link to create.</param
         >
@@ -983,9 +1171,13 @@
 
           
 
+          
+
            
           "points to" <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -998,6 +1190,8 @@
 
           
 
+          
+
            instance
           containing information about the created symbolic link.</returns
         >
@@ -1005,6 +1199,8 @@
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -1020,6 +1216,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -1032,6 +1230,8 @@
 
             
 
+            
+
             .  
             If this is undesirable (for instance, you want the created
             symbolic link to contain relative path information), use
@@ -1041,8 +1241,12 @@
             
 
             
+
+            
             instead.  <c
             >UnixSymbolicLinkInfo.CreateSymbolicLinkTo</c>
+
+            
 
             
 
@@ -1050,6 +1254,8 @@
             uses the exact path provided to the 
             <see
              cref="T:Mono.Unix.UnixSymbolicLinkInfo" />
+
+            
 
             
 
@@ -1065,6 +1271,8 @@
 
               
 
+              
+
               (1) command:</para
             >
             <code lang="sh">ln -s target symlink</code>
@@ -1075,10 +1283,14 @@
 
               
 
+              
+
                in two ways.
               First, it can be created using 
               <see
                cref="M:Mono.Unix.UnixFileSystemInfo.CreateSymbolicLink" />
+
+              
 
               
 
@@ -1094,6 +1306,8 @@ f.CreateSymbolicLink ("symlink.ufi");</code
               Second, it can be created using 
               <see
                cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+
+              
 
               
 
@@ -1115,9 +1329,13 @@ s.CreateSymbolicLinkTo ("target.usli");</code
               
 
               
+
+              
               is the full path name of the target, while 
               <see
                cref="M:Mono.Unix.UnixSymbolicLinkInfo.CreateSymbolicLinkTo" />
+
+              
 
               
 
@@ -1141,15 +1359,21 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              or 
           <paramref
              name="path" />
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -1165,10 +1389,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -1182,10 +1410,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -1197,9 +1429,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -1212,9 +1448,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -1229,10 +1469,14 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -1248,6 +1492,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -1257,6 +1503,8 @@ symlink.usli -&gt; target.usli
           allocating the inode.
             [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -1272,9 +1520,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -1289,9 +1541,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1305,11 +1561,15 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1319,6 +1579,8 @@ symlink.usli -&gt; target.usli
           <para>-or-</para>
           <para>
             <paramref name="path" />
+
+            
 
             
 
@@ -1352,6 +1614,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           .</summary
         >
         <remarks></remarks>
@@ -1360,6 +1624,8 @@ symlink.usli -&gt; target.usli
             >The filesystem containing 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1374,9 +1640,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              
           has the <see
              cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+
+            
 
             
 
@@ -1384,6 +1654,8 @@ symlink.usli -&gt; target.usli
           set and the process's 
           <see
              cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+
+            
 
             
 
@@ -1400,10 +1672,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              was not
           allowed for the processe's effective user id 
           <see
              cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />
+
+            
 
             
 
@@ -1414,6 +1690,8 @@ symlink.usli -&gt; target.usli
             >One of the directories in 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1429,12 +1707,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
         </exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1448,14 +1730,20 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              contains 
           files other than '<c
             >.</c>
 
             
 
+            
+
             ' and '<c
             >..</c>
+
+            
 
             
 
@@ -1473,6 +1761,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
         </exception
         >
@@ -1481,6 +1771,8 @@ symlink.usli -&gt; target.usli
             >Too many symbolic links were encountered in translating 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1512,12 +1804,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the device ID that
           this file system entry resides on.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1548,12 +1844,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the type of this
           inode.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1583,12 +1883,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether
         the specified file system object exists.</summary
         >
         <value>
           <para>
             <see langword="true" />
+
+            
 
             
 
@@ -1599,9 +1903,13 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             contains the name of an existing file or directory; otherwise, 
             <see
              langword="false" />
+
+            
 
             
 
@@ -1611,15 +1919,21 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is
             <see
              langword="null" />
 
             
 
+            
+
              or a zero-length string,
             returns <see
              langword="false" />
+
+            
 
             
 
@@ -1636,6 +1950,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             , no
           exception is thrown and the method returns <see
              langword="false" />
@@ -1643,9 +1959,13 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
           regardless of the existence of 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1680,6 +2000,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            value which
           controls access to the file system entry.</value
         >
@@ -1692,6 +2014,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             )
             is controlled by the file system access permissions, 
             <see
@@ -1699,9 +2023,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             <see
              cref="T:Mono.Unix.FileAccessPermissions" />
+
+            
 
             
 
@@ -1722,14 +2050,20 @@ symlink.usli -&gt; target.usli
               
 
               
+
+              
             &amp; 
             <see
                cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -1750,14 +2084,20 @@ symlink.usli -&gt; target.usli
               
 
               
+
+              
             &amp; 
             <see
                cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -1769,8 +2109,12 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .<see
              cref="M:Mono.Unix.UnixGroupInfo.GetMembers" />
+
+            
 
             
 
@@ -1790,14 +2134,20 @@ symlink.usli -&gt; target.usli
               
 
               
+
+              
             &amp; 
             <see
                cref="F:Mono.Unix.FileAccessPermissions.OtherReadWriteExecute" />
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -1807,6 +2157,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1841,6 +2193,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            value which
           contains the file special attributes to use.</value
         >
@@ -1852,12 +2206,16 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             user) to change the file special attributes.
           </para
           >
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1889,12 +2247,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            value specifying the type
           of this file system entry.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1920,6 +2282,8 @@ symlink.usli -&gt; target.usli
         <value
           >A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1950,6 +2314,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the fully qualified
           path name.</value
         >
@@ -1958,6 +2324,8 @@ symlink.usli -&gt; target.usli
             >
             If <paramref
              name="value" />
+
+            
 
             
 
@@ -1973,9 +2341,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is set but
             not <see
              cref="P:Mono.Unix.UnixFileSystemInfo.OriginalPath" />
+
+            
 
             
 
@@ -1985,9 +2357,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              but use
             <c
             >FullPath</c>
+
+            
 
             
 
@@ -1997,9 +2373,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              do use
             <c
             >OriginalPath</c>
+
+            
 
             
 
@@ -2008,9 +2388,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is set then
             <c
             >OriginalPath</c>
+
+            
 
             
 
@@ -2024,8 +2408,12 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2038,6 +2426,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is a zero-length string.</para
           >
           <para>-or-</para>
@@ -2046,9 +2436,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              contains an invalid character.
             See <see
              cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+
+            
 
             
 
@@ -2092,6 +2486,8 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
           value specifying which configuration value to retreive.</param
         >
         <summary
@@ -2099,6 +2495,8 @@ symlink.usli -&gt; target.usli
           associated with 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2111,9 +2509,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the value
           of the configuration variable <paramref
            name="name" />
+
+          
 
           
 
@@ -2124,8 +2526,12 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           , then <c
           >-1</c>
+
+          
 
           
 
@@ -2141,9 +2547,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            with 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2158,9 +2568,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -2176,10 +2590,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2193,10 +2611,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -2208,9 +2630,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -2231,9 +2657,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -2273,6 +2703,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the path
           to retrieve information about</param
         >
@@ -2282,9 +2714,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            which will
           contain information about <paramref
            name="path" />
+
+          
 
           
 
@@ -2297,14 +2733,20 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            specifying whether 
           <paramref
            name="stat" />
 
           
 
+          
+
            was filled.  If <see
            langword="true" />
+
+          
 
           
 
@@ -2314,8 +2756,12 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            exists and <paramref
            name="stat" />
+
+          
 
           
 
@@ -2325,9 +2771,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is assumed to
           not exist and <paramref
            name="stat" />
+
+          
 
           
 
@@ -2386,12 +2836,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the inode of this
           file system entry.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2422,9 +2876,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.BlockDevice" />
+
+          
 
           
 
@@ -2437,15 +2895,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.BlockDevice" />
+
+          
 
           
 
@@ -2460,9 +2924,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.BlockDevice" />
+
+            
 
             
 
@@ -2472,6 +2940,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2500,9 +2970,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.CharacterDevice" />
+
+          
 
           
 
@@ -2515,15 +2989,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.CharacterDevice" />
+
+          
 
           
 
@@ -2538,9 +3018,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.CharacterDevice" />
+
+            
 
             
 
@@ -2550,6 +3034,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2578,9 +3064,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.Directory" />
+
+          
 
           
 
@@ -2593,15 +3083,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.Directory" />
+
+          
 
           
 
@@ -2616,9 +3112,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.Directory" />
+
+            
 
             
 
@@ -2628,6 +3128,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2656,9 +3158,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.Fifo" />
+
+          
 
           
 
@@ -2671,15 +3177,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.Fifo" />
+
+          
 
           
 
@@ -2694,9 +3206,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.Fifo" />
+
+            
 
             
 
@@ -2706,6 +3222,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2734,9 +3252,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.RegularFile" />
+
+          
 
           
 
@@ -2749,15 +3271,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.RegularFile" />
+
+          
 
           
 
@@ -2772,9 +3300,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.RegularFile" />
+
+            
 
             
 
@@ -2784,6 +3316,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2812,9 +3346,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            include
           <see
            cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+          
 
           
 
@@ -2827,15 +3365,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
+          
+
            includes
           <see
            cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+          
 
           
 
@@ -2850,9 +3394,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              with
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -2862,6 +3410,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2890,9 +3440,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            include
           <see
            cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+
+          
 
           
 
@@ -2905,15 +3459,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
+          
+
            includes
           <see
            cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+
+          
 
           
 
@@ -2928,9 +3488,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              with
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+
+            
 
             
 
@@ -2940,6 +3504,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2968,9 +3534,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.Socket" />
+
+          
 
           
 
@@ -2983,15 +3553,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.Socket" />
+
+          
 
           
 
@@ -3006,9 +3582,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.Socket" />
+
+            
 
             
 
@@ -3018,6 +3598,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3046,9 +3628,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            include
           <see
            cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+
+          
 
           
 
@@ -3061,15 +3647,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
 
           
 
+          
+
            includes
           <see
            cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+
+          
 
           
 
@@ -3084,9 +3676,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              with
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+
+            
 
             
 
@@ -3096,6 +3692,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3124,9 +3722,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            a 
           <see
            cref="F:Mono.Unix.FileTypes.SymbolicLink" />
+
+          
 
           
 
@@ -3139,15 +3741,21 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            indicating whether or not 
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
            is a 
           <see
            cref="F:Mono.Unix.FileTypes.SymbolicLink" />
+
+          
 
           
 
@@ -3162,9 +3770,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              to 
             <see
              cref="F:Mono.Unix.FileTypes.SymbolicLink" />
+
+            
 
             
 
@@ -3174,6 +3786,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3208,11 +3822,15 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
         expressed in the local time.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3249,11 +3867,15 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
         expressed in coordinated universal time (UTC).</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3290,11 +3912,15 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
         expressed in the local time.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3331,11 +3957,15 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
         expressed in coordinated universal time (UTC).</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3372,11 +4002,15 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
         expressed in the local time.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3413,11 +4047,15 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
         expressed in coordinated universal time (UTC).</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3448,12 +4086,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the size of this file
           system entry, in bytes.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3484,6 +4126,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing link count of this
           file system entry.</value
         >
@@ -3492,6 +4136,8 @@ symlink.usli -&gt; target.usli
             >A link count is the number of file system entries that share
             this <see
              cref="P:Mono.Unix.UnixFileSystemInfo.Inode" />
+
+            
 
             
 
@@ -3506,8 +4152,12 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             (<see
              cref="M:Mono.Unix.Native.PathconfName._PC_LINK_MAX" />
+
+            
 
             
 
@@ -3518,6 +4168,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3546,6 +4198,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the file system
           entry name.  
         </value
@@ -3556,6 +4210,8 @@ symlink.usli -&gt; target.usli
             This will generally be 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -3589,6 +4245,8 @@ symlink.usli -&gt; target.usli
           
 
           
+
+          
           constructor.</summary
         >
         <value
@@ -3597,10 +4255,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing 
           the original string passed to the 
           <see
            cref="C:Mono.Unix.UnixFileSystemInfo(System.String)" />
+
+          
 
           
 
@@ -3620,6 +4282,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ).
           </para
           >
@@ -3630,9 +4294,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is set but
             not <see
              cref="P:Mono.Unix.UnixFileSystemInfo.OriginalPath" />
+
+            
 
             
 
@@ -3642,9 +4310,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              but use
             <c
             >FullPath</c>
+
+            
 
             
 
@@ -3654,9 +4326,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              do use
             <c
             >OriginalPath</c>
+
+            
 
             
 
@@ -3665,9 +4341,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is set then
             <c
             >OriginalPath</c>
+
+            
 
             
 
@@ -3701,6 +4381,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            instance containing
           information about the owner group.</value
         >
@@ -3711,8 +4393,12 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />
+
+            
 
             
 
@@ -3722,6 +4408,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3752,11 +4440,15 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the owner group id.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3790,6 +4482,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing information
           about the owner user.</value
         >
@@ -3800,8 +4494,12 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />
+
+            
 
             
 
@@ -3811,6 +4509,8 @@ symlink.usli -&gt; target.usli
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3842,12 +4542,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the owner user id.
         </value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3889,12 +4593,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            value
           containing the file system entry protection.</value
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3933,9 +4641,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              if 
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -3946,9 +4658,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              returns
             <see
              langword="false" />
+
+            
 
             
 
@@ -3960,9 +4676,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is checked
             during <see
              cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+            
 
             
 
@@ -3971,6 +4691,8 @@ symlink.usli -&gt; target.usli
             file will not be checked for until 
             <see
              cref="M:Mono.Unix.UnixFileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -3985,10 +4707,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              or
             another process or some other means) or changed
             (written to, <c
             >touch(1)</c>
+
+            
 
             
 
@@ -4027,6 +4753,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the 
           desired file size for 
           <see
@@ -4039,9 +4767,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            to be
           <paramref
            name="length" />
+
+          
 
           
 
@@ -4055,9 +4787,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is
             less than <paramref
              name="length" />
+
+            
 
             
 
@@ -4071,9 +4807,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is
             greater than <paramref
              name="length" />
+
+            
 
             
 
@@ -4090,9 +4830,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -4102,6 +4846,8 @@ symlink.usli -&gt; target.usli
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -4112,6 +4858,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -4121,10 +4869,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -4140,10 +4892,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -4157,10 +4913,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -4173,10 +4933,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -4192,6 +4956,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -4201,9 +4967,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -4218,9 +4988,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -4233,6 +5007,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -4240,10 +5016,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -4279,6 +5059,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing 
           information about the new owner user and owner group.
         </param
@@ -4287,6 +5069,8 @@ symlink.usli -&gt; target.usli
           >Set the owner user and owner group of
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -4302,15 +5086,21 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             user), then the 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -4326,12 +5116,16 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             can change this method to operate on a different file.  This
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+
+            
 
             
 
@@ -4347,14 +5141,20 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             (<paramref
              name="owner" />
+
+            
 
             
 
             .UserId, 
             <paramref
              name="group" />
+
+            
 
             
 
@@ -4369,14 +5169,20 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             (<paramref
              name="owner" />
+
+            
 
             
 
             .UserId, 
             <paramref
              name="owner" />
+
+            
 
             
 
@@ -4393,6 +5199,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           ]
         </exception
         >
@@ -4404,9 +5212,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -4422,10 +5234,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -4439,10 +5255,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -4455,10 +5275,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -4474,6 +5298,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -4483,9 +5309,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -4500,9 +5330,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -4515,6 +5349,8 @@ symlink.usli -&gt; target.usli
             executable.
             [<see
              cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+
+            
 
             
 
@@ -4550,6 +5386,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the
           user name to use for the new user-id and group-id.</param
         >
@@ -4557,6 +5395,8 @@ symlink.usli -&gt; target.usli
           >Set the owner user ID and owner group ID of
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -4570,10 +5410,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              is looked up in the local 
             password database and the resulting 
             <see
              cref="P:Mono.Unix.UnixUserInfo.UserId" />
+
+            
 
             
 
@@ -4583,10 +5427,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              are used as the new
             owner user id and owner group id for
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -4601,15 +5449,21 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             user), then the 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -4625,12 +5479,16 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             can change this method to operate on a different file.  This
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+
+            
 
             
 
@@ -4648,6 +5506,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           ]
         </exception
         >
@@ -4659,9 +5519,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -4677,10 +5541,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -4694,10 +5562,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -4710,10 +5582,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -4729,6 +5605,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -4738,9 +5616,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -4755,9 +5637,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -4770,6 +5656,8 @@ symlink.usli -&gt; target.usli
             executable.
             [<see
              cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+
+            
 
             
 
@@ -4810,9 +5698,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing 
           information about the new owner user.  If <see
            langword="null" />
+
+          
 
           
 
@@ -4825,9 +5717,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing 
           information about the new owner group.  If <see
            langword="null" />
+
+          
 
           
 
@@ -4838,6 +5734,8 @@ symlink.usli -&gt; target.usli
           >Set the owner user and owner group of
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -4853,15 +5751,21 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             user), then the 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -4877,12 +5781,16 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             can change this method to operate on a different file.  This
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+
+            
 
             
 
@@ -4898,14 +5806,20 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             (<paramref
              name="owner" />
+
+            
 
             
 
             .UserId, 
             <paramref
              name="group" />
+
+            
 
             
 
@@ -4922,6 +5836,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           ]
         </exception
         >
@@ -4933,9 +5849,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -4951,10 +5871,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -4968,10 +5892,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -4984,10 +5912,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -5003,6 +5935,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -5012,9 +5946,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -5029,9 +5967,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -5044,6 +5986,8 @@ symlink.usli -&gt; target.usli
             executable.
             [<see
              cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+
+            
 
             
 
@@ -5083,9 +6027,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the user
           id of the new owner user.  If <c
           >-1</c>
+
+          
 
           
 
@@ -5098,9 +6046,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the
           group id of the new owner group.  If <c
           >-1</c>
+
+          
 
           
 
@@ -5111,6 +6063,8 @@ symlink.usli -&gt; target.usli
           >Set the owner user ID and owner group ID of
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -5126,15 +6080,21 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             user), then the 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -5150,12 +6110,16 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             can change this method to operate on a different file.  This
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+
+            
 
             
 
@@ -5173,6 +6137,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           ]
         </exception
         >
@@ -5184,9 +6150,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -5202,10 +6172,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -5219,10 +6193,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -5235,10 +6213,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -5254,6 +6236,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -5263,9 +6247,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -5280,9 +6268,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -5295,6 +6287,8 @@ symlink.usli -&gt; target.usli
             executable.
             [<see
              cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+
+            
 
             
 
@@ -5331,12 +6325,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            containing the 
           user name of the owner user id to use.</param
         >
         <param name="group"
           >A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -5347,6 +6345,8 @@ symlink.usli -&gt; target.usli
           >Set the owner user ID and owner group ID of
           <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -5362,15 +6362,21 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             user), then the 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -5386,12 +6392,16 @@ symlink.usli -&gt; target.usli
             
 
             
+
+            
             can change this method to operate on a different file.  This
             default version will follow symbolic links, changing the
             permissions of the symbolic link target instead of the symbolic
             link itself.
             <see
              cref="M:Mono.Unix.UnixSymbolicLinkInfo.SetOwner" />
+
+            
 
             
 
@@ -5409,6 +6419,8 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           ]
         </exception
         >
@@ -5420,9 +6432,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -5438,10 +6454,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -5455,10 +6475,14 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -5471,10 +6495,14 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -5490,6 +6518,8 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             ]
           </para
           >
@@ -5499,9 +6529,13 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -5516,9 +6550,13 @@ symlink.usli -&gt; target.usli
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -5531,6 +6569,8 @@ symlink.usli -&gt; target.usli
             executable.
             [<see
              cref="F:Mono.Unix.Native.Errno.EFTYPE" />
+
+            
 
             
 
@@ -5567,11 +6607,15 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
            intance.</summary
         >
         <returns
           >A <see
            cref="T:Mono.Unix.Native.Stat" />
+
+          
 
           
 
@@ -5581,12 +6625,16 @@ symlink.usli -&gt; target.usli
 
           
 
+          
+
           .
         </returns
         >
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 

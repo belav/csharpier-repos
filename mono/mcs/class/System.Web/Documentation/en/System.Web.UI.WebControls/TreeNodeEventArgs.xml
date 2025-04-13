@@ -19,6 +19,8 @@
 
         
 
+        
+
          class is used to store the event data that is passed to an event-handling method.</para
       >
       <para
@@ -27,8 +29,12 @@
 
         
 
+        
+
          class, see <see
          cref="M:System.Web.UI.WebControls.TreeNodeEventArgs.#ctor(System.Web.UI.WebControls.TreeNode)" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCollapsed" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+
+        
 
         
 
@@ -73,8 +89,12 @@
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -102,8 +122,12 @@
 
             
 
+            
+
              constructor to create and initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+            
 
             
 
@@ -116,12 +140,16 @@
 
               
 
+              
+
                constructor is used primarily by control developers when raising events.</para
             >
           </block>
           <para
             >The following table shows the initial property value for an instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+            
 
             
 
@@ -151,8 +179,12 @@
 
                   
 
+                  
+
                    contained in <paramref
                    name="node" />
+
+                  
 
                   
 
@@ -170,8 +202,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -183,8 +219,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -215,13 +255,19 @@
 
             
 
+            
+
              property to access the properties of the node that raised the event. The <see
              cref="P:System.Web.UI.WebControls.TreeNodeEventArgs.Node" />
 
             
 
+            
+
              property returns a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 

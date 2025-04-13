@@ -60,8 +60,12 @@
 
               
 
+              
+
                control, consider using the <see
                cref="T:System.Web.UI.WebControls.GridView" />
+
+              
 
               
 
@@ -70,8 +74,12 @@
 
               
 
+              
+
                control, which was introduced in the .NET Framework version 2.0, is the successor to the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -92,13 +100,19 @@
 
         
 
+        
+
          control to display the fields of a data source as columns in a table. Each row in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
+        
+
          control represents a record in the data source. The <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -112,6 +126,8 @@
               >[&lt;topic://cpconASPNETSyntaxForValidationControls&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -140,6 +156,8 @@
             <para
               >Displays a column bound to a field in a data source. It displays each item in the field as text. This is the default column type of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -194,13 +212,19 @@
 
         
 
+        
+
          property is set to true, which creates a <see
          cref="T:System.Web.UI.WebControls.BoundColumn" />
 
         
 
+        
+
          object for each field in the data source. Each field is then rendered as a column in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -212,8 +236,12 @@
 
         
 
+        
+
          control by setting the <see
          cref="P:System.Web.UI.WebControls.DataGrid.AutoGenerateColumns" />
+
+        
 
         
 
@@ -222,8 +250,12 @@
 
         
 
+        
+
          collection in the order listed. This allows you to programmatically control the columns in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -236,13 +268,19 @@
 
           
 
+          
+
            control is controlled by the order that the columns appear in the <see
            cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
           
 
+          
+
            collection. Although you can programmatically change the order of the columns by manipulating the <see
            cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+          
 
           
 
@@ -257,12 +295,16 @@
 
           
 
+          
+
            collection.</para
         >
       </block>
       <para
         >The appearance of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -292,6 +334,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -306,6 +350,8 @@
             <para
               >Specifies the style for the item being edited in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -326,6 +372,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -340,6 +388,8 @@
             <para
               >Specifies the style for the header section in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -360,6 +410,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -377,6 +429,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -391,6 +445,8 @@
             <para
               >Specifies the style for the selected item in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -424,6 +480,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -441,6 +499,8 @@
 
               
 
+              
+
                control. </para
             >
           </description>
@@ -452,13 +512,19 @@
 
         
 
+        
+
          control by programmatically adding attributes to the &lt;td&gt; and &lt;tr&gt; tags rendered by the control on the browser. Attributes can be programmatically added by providing code in the event handler for the <see
          cref="M:System.Web.UI.WebControls.DataGrid.OnItemCreated(System.Web.UI.WebControls.DataGridItemEventArgs)" />
 
         
 
+        
+
          or <see
          cref="M:System.Web.UI.WebControls.DataGrid.OnItemDataBound(System.Web.UI.WebControls.DataGridItemEventArgs)" />
+
+        
 
         
 
@@ -470,8 +536,12 @@
 
         
 
+        
+
          object that represents the cell in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -480,8 +550,12 @@
 
         
 
+        
+
          collection for the <see
          cref="P:System.Web.UI.WebControls.DataGridItemEventArgs.Item" />
+
+        
 
         
 
@@ -490,8 +564,12 @@
 
         
 
+        
+
          object passed into the event handler can be used to get the desired <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -500,13 +578,19 @@
 
         
 
+        
+
          method of the <see
          cref="P:System.Web.UI.WebControls.WebControl.Attributes" />
 
         
 
+        
+
          collection for the <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -518,8 +602,12 @@
 
         
 
+        
+
          object that represents the row in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -528,8 +616,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+
+        
 
         
 
@@ -538,8 +630,12 @@
 
         
 
+        
+
          object. You can then use the <see
          cref="M:System.Web.UI.AttributeCollection.Add(System.String,System.String)" />
+
+        
 
         
 
@@ -548,8 +644,12 @@
 
         
 
+        
+
          collection for the <see
          cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+        
 
         
 
@@ -571,10 +671,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -594,9 +698,13 @@
 
         
 
+        
+
         "
     AllowPaging="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -606,9 +714,13 @@
 
         
 
+        
+
         "
     AutoGenerateColumns="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -621,12 +733,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     Caption="string"
     CaptionAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -644,9 +760,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -656,9 +776,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -668,10 +792,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -683,9 +811,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -696,10 +828,14 @@
 
         
 
+        
+
         |Horizontal|Vertical|Both"
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -729,9 +865,13 @@
 
         
 
+        
+
         "
     ShowHeader="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -745,9 +885,13 @@
 
         
 
+        
+
         "
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -767,10 +911,14 @@
 
         
 
+        
+
         "
                     SortExpression="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -786,9 +934,13 @@
 
         
 
+        
+
         |PushButton"
                     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -807,6 +959,8 @@
 
         
 
+        
+
         |False"
 &gt;
                         &lt;FooterStyle /&gt;
@@ -819,10 +973,14 @@
 
         
 
+        
+
         |PushButton"
                     CancelText="string"
                     CausesValidation="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -836,6 +994,8 @@
                     ValidationGroup="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -860,10 +1020,14 @@
 
         
 
+        
+
         "
                     Text="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -880,6 +1044,8 @@
                     SortExpression="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -914,6 +1080,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -923,9 +1091,13 @@
 
         
 
+        
+
         "
             Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -933,6 +1105,8 @@
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -944,9 +1118,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -958,9 +1136,13 @@
 
         
 
+        
+
         |Left|Center|Right|Justify"
             Mode="<codeFeaturedElement
         >NextPrev</codeFeaturedElement>
+
+        
 
         
 
@@ -973,10 +1155,14 @@
 
         
 
+        
+
         |Top|TopAndBottom"
             PrevPageText="string"
             VerticalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -986,10 +1172,14 @@
 
         
 
+        
+
         |False"
             Width="size"
             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1004,6 +1194,8 @@
       <para
         >A data bound list control that displays the items from data source in a table. The <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -1026,6 +1218,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1034,6 +1228,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1063,8 +1259,12 @@
 
             
 
+            
+
              control in page segments. The number of items on a page is determined by the <see
              cref="P:System.Web.UI.WebControls.DataGrid.PageSize" />
+
+            
 
             
 
@@ -1073,8 +1273,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1086,8 +1290,12 @@
 
             
 
+            
+
              control is loaded every time the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1099,13 +1307,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
 
             
 
+            
+
              properties to true. Next, provide code to handle the <see
              cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" />
+
+            
 
             
 
@@ -1117,8 +1331,12 @@
 
             
 
+            
+
              event handler is to first set the <see
              cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" />
+
+            
 
             
 
@@ -1131,13 +1349,19 @@
 
               
 
+              
+
                object as a parameter. You can use the <see
                cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.NewPageIndex" />
 
               
 
+              
+
                property of this parameter to determine the index of the page selected by the user from the page selection elements of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -1150,8 +1374,12 @@
 
             
 
+            
+
              method to bind the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1164,8 +1392,12 @@
 
               
 
+              
+
                property to the total number of items in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -1174,8 +1406,12 @@
 
               
 
+              
+
                control. This property is normally programmatically set once the total number of items in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -1188,8 +1424,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1198,13 +1438,19 @@
 
             
 
+            
+
              control calculates the indexes of the items on the displayed page based on the page index, specified by the <see
              cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" />
 
             
 
+            
+
              property, and the number of items on a page, specified by the <see
              cref="P:System.Web.UI.WebControls.DataGrid.PageSize" />
+
+            
 
             
 
@@ -1216,8 +1462,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1226,8 +1476,12 @@
 
             
 
+            
+
              property. All items up to the number of items specified by the <see
              cref="P:System.Web.UI.WebControls.DataGrid.PageSize" />
+
+            
 
             
 
@@ -1266,8 +1520,12 @@
 
             
 
+            
+
              control in page segments. The number of items on a page is determined by the <see
              cref="P:System.Web.UI.WebControls.DataGrid.PageSize" />
+
+            
 
             
 
@@ -1276,8 +1534,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1289,6 +1551,8 @@
 
             
 
+            
+
              event.</para
           >
           <para
@@ -1297,8 +1561,12 @@
 
             
 
+            
+
              event is to set the <see
              cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" />
+
+            
 
             
 
@@ -1307,8 +1575,12 @@
 
             
 
+            
+
              method to bind the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1321,13 +1593,19 @@
 
               
 
+              
+
                object as a parameter. You can use the <see
                cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.NewPageIndex" />
 
               
 
+              
+
                property of this parameter to determine the index of the page selected by the user from the page selection elements of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -1340,8 +1618,12 @@
 
             
 
+            
+
              control assumes that the data source contains all the items to be displayed. The <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1350,8 +1632,12 @@
 
             
 
+            
+
              property, and the number of items of items on a page, specified by the <see
              cref="P:System.Web.UI.WebControls.DataGrid.PageSize" />
+
+            
 
             
 
@@ -1363,8 +1649,12 @@
 
             
 
+            
+
              control is paged. This can consume a lot of resources when the data source is very large. Custom paging allows you to load just the segment of data needed to display a single page. For additional information on custom paging, see the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
+
+            
 
             
 
@@ -1403,8 +1693,12 @@
 
             
 
+            
+
              controls are rendered in the heading section of each column where the <see
              cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+
+            
 
             
 
@@ -1413,8 +1707,12 @@
 
             
 
+            
+
              controls allow you to sort the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1423,8 +1721,12 @@
 
             
 
+            
+
              column type with the <see
              cref="P:System.Web.UI.WebControls.TemplateColumn.HeaderTemplate" />
+
+            
 
             
 
@@ -1433,8 +1735,12 @@
 
             
 
+            
+
              control in the <see
              cref="P:System.Web.UI.WebControls.TemplateColumn.HeaderTemplate" />
+
+            
 
             
 
@@ -1446,13 +1752,19 @@
 
             
 
+            
+
              event is raised when one of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 
+            
+
              controls is clicked. It is up to you to provide code for the event handler. The typical logic for the handler is to sort the list, and then rebind the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1493,13 +1805,19 @@
 
             
 
+            
+
              property to provide a custom style for the alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1511,8 +1829,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -1521,13 +1843,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -1601,6 +1929,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;AlternatingItemStyle&gt; tag.</para
           >
         </remarks>
@@ -1609,6 +1939,8 @@
           <para
             >Gets the style properties for alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1652,8 +1984,12 @@
 
             
 
+            
+
              object for each field in the data source. Each field is then rendered as a column in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1662,6 +1998,8 @@
           <para
             >Not all data types can be bound to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1689,8 +2027,12 @@
 
                   
 
+                  
+
                   , <see
                    cref="T:System.Char" />
+
+                  
 
                   
 
@@ -1699,8 +2041,12 @@
 
                   
 
+                  
+
                   , and so on. For a complete list, see <see
                    cref="P:System.Type.IsPrimitive" />
+
+                  
 
                   
 
@@ -1719,6 +2065,8 @@
 
                   
 
+                  
+
                    object. </para
                 >
               </description>
@@ -1731,6 +2079,8 @@
                 <para
                   >A <see
                    cref="T:System.DateTime" />
+
+                  
 
                   
 
@@ -1749,6 +2099,8 @@
 
                   
 
+                  
+
                    object. </para
                 >
               </description>
@@ -1758,6 +2110,8 @@
             <para
               >Explicitly declared columns may be used in conjunction with auto-generated columns. When using both, explicitly declared columns will be rendered first, followed by the auto-generated columns. Auto-generated columns are not added to the <see
                cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+              
 
               
 
@@ -1773,8 +2127,12 @@
 
             
 
+            
+
              objects are automatically created and displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1809,8 +2167,12 @@
 
             
 
+            
+
              property to specify an image to display in the background of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1823,6 +2185,8 @@
 
               
 
+              
+
                control, the image will tile to fill in the background of the control.</para
             >
           </block>
@@ -1832,6 +2196,8 @@
           <para
             >Gets or sets the URL of an image to display in the background of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1874,8 +2240,12 @@
 
             
 
+            
+
              event is raised when the Cancel button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1887,13 +2257,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item) and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1903,6 +2279,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -1919,6 +2297,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1927,6 +2307,8 @@
           <para
             >Occurs when the Cancel button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1952,6 +2334,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.CancelCommandName" />
+
+            
 
             
 
@@ -1987,13 +2371,19 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
+            
+
              collection contains explicitly declared columns that get rendered in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2006,6 +2396,8 @@
 
               
 
+              
+
                collection.</para
             >
           </block>
@@ -2015,8 +2407,12 @@
 
             
 
+            
+
              control is controlled by the order that the columns appear in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -2028,8 +2424,12 @@
 
             
 
+            
+
              class and can be used in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -2056,6 +2456,8 @@
                 <para
                   >Displays a column bound to a field in a data source. It displays each item in the field as text. This is the default column type of the <see
                    cref="T:System.Web.UI.WebControls.DataGrid" />
+
+                  
 
                   
 
@@ -2111,8 +2513,12 @@
 
               
 
+              
+
                collection, it is easier to list the columns statically and then use the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+
+              
 
               
 
@@ -2125,6 +2531,8 @@
           <para
             >Gets a collection of objects that represent the columns of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2174,8 +2582,12 @@
 
             
 
+            
+
              is true, the columns are created to match the data source and are appended to the set of columns defined in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+
+            
 
             
 
@@ -2190,6 +2602,8 @@
 
             
 
+            
+
              containing the effective set of columns in the right order.</para
           >
         </returns>
@@ -2198,10 +2612,14 @@
 
           
 
+          
+
           The data source being used to create the control hierarchy </param
         >
         <param name="useDataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2238,11 +2656,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="useDataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2278,6 +2700,8 @@
 
             
 
+            
+
              the represents the new style.</para
           >
         </returns>
@@ -2310,13 +2734,19 @@
 
             
 
+            
+
              is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              class to create its <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -2334,6 +2764,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2345,6 +2777,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -2353,8 +2787,12 @@
 
           
 
+          
+
           The index for the <see
            cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+          
 
           
 
@@ -2365,6 +2803,8 @@
 
           
 
+          
+
           The index of the data item from the data source.</param
         >
         <param name="itemType">
@@ -2372,8 +2812,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -2402,11 +2846,15 @@
 
             
 
+            
+
              control when paging is enabled. This property is also used to programmatically control which page is displayed.</para
           >
           <para
             >You can also hide the built in paging controls and create custom controls. To display a specific page, set this property to the page index you want to display and then rebind the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2450,8 +2898,12 @@
 
             
 
+            
+
              event is raised when the Delete button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2463,8 +2915,12 @@
 
             
 
+            
+
              event removes the selected item from the data source and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2480,6 +2936,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2488,6 +2946,8 @@
           <para
             >Occurs when the Delete button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2513,6 +2973,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.DeleteCommandName" />
+
+            
 
             
 
@@ -2548,8 +3010,12 @@
 
             
 
+            
+
              event is raised when the Edit button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2561,13 +3027,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
             
 
+            
+
              property to the selected row and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2577,6 +3049,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -2593,6 +3067,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2601,6 +3077,8 @@
           <para
             >Occurs when the Edit button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2626,6 +3104,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.EditCommandName" />
+
+            
 
             
 
@@ -2659,8 +3139,12 @@
 
             
 
+            
+
              property when the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2669,8 +3153,12 @@
 
             
 
+            
+
              to determine the index of the item selected in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2682,8 +3170,12 @@
 
             
 
+            
+
              control will enable editing controls for that item in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -2693,6 +3185,8 @@
             <para
               >The <see
                cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
+
+              
 
               
 
@@ -2707,6 +3201,8 @@
 
               
 
+              
+
                control. This makes it possible to embed script within HTML tags in the text. If the values for the control come from user input, be sure to validate the values to reduce security vulnerabilities.</para
             >
           </block>
@@ -2716,6 +3212,8 @@
           <para
             >Gets or sets the index of an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2752,13 +3250,19 @@
 
             
 
+            
+
              property to provide a custom style for the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2770,8 +3274,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -2780,13 +3288,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -2860,6 +3374,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;EditItemStyle&gt; tag.</para
           >
         </remarks>
@@ -2868,6 +3384,8 @@
           <para
             >Gets the style properties of the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2910,8 +3428,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2923,8 +3445,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2933,8 +3459,12 @@
 
             
 
+            
+
              property. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -2943,8 +3473,12 @@
 
             
 
+            
+
              property will also have a red font. This allows you to provide a common appearance for the control by setting a single style property. You can override the inherited style settings by setting the <see
              cref="P:System.Web.UI.WebControls.DataGrid.FooterStyle" />
+
+            
 
             
 
@@ -2953,8 +3487,12 @@
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -2963,6 +3501,8 @@
           <para
             >To specify a custom style for the footer section, place the &lt;FooterStyle&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -2975,6 +3515,8 @@
 
               
 
+              
+
                property must be set to true for this property to be visible.</para
             >
           </block>
@@ -2984,6 +3526,8 @@
           <para
             >Gets the style properties of the footer section in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3029,8 +3573,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3042,8 +3590,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3052,8 +3604,12 @@
 
             
 
+            
+
              property. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -3062,8 +3618,12 @@
 
             
 
+            
+
              property will also have a red font. This allows you to provide a common appearance for the control by setting a single style property. You can override the inherited style settings by setting the <see
              cref="P:System.Web.UI.WebControls.DataGrid.HeaderStyle" />
+
+            
 
             
 
@@ -3072,8 +3632,12 @@
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.WebControl.ControlStyle" />
+
+            
 
             
 
@@ -3082,6 +3646,8 @@
           <para
             >To specify a custom style for the heading section, place the &lt;HeaderStyle&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3094,6 +3660,8 @@
 
               
 
+              
+
                property must be set to true for this property to be visible.</para
             >
           </block>
@@ -3103,6 +3671,8 @@
           <para
             >Gets the style properties of the heading section in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3151,13 +3721,19 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              class to initialize the specified <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -3175,6 +3751,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -3183,8 +3761,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+          
 
           
 
@@ -3195,13 +3777,19 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
+          
+
            objects that contains the columns in this <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -3236,8 +3824,12 @@
 
             
 
+            
+
              that spans across all columns of a <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3246,8 +3838,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3265,6 +3861,8 @@
 
             
 
+            
+
              object that contains the paging UI.</para
           >
         </summary>
@@ -3273,8 +3871,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+          
 
           
 
@@ -3285,6 +3887,8 @@
 
           
 
+          
+
           The number of columns to span the pager.</param
         >
         <param name="pagedDataSource">
@@ -3292,8 +3896,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.PagedDataSource" />
+
+          
 
           
 
@@ -3324,13 +3932,19 @@
 
             
 
+            
+
              event is raised when any button is clicked in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. This event is commonly used to handle buttons controls with a custom CommandName value, such as Add, in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3346,6 +3960,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3354,6 +3970,8 @@
           <para
             >Occurs when any button is clicked in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3385,8 +4003,12 @@
 
             
 
+            
+
              event is raised when an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3398,8 +4020,12 @@
 
             
 
+            
+
              event is commonly used to control the content and appearance of a row in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3415,6 +4041,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3423,6 +4051,8 @@
           <para
             >Occurs on the server when an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3454,8 +4084,12 @@
 
             
 
+            
+
              event is raised after an item is data bound to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3471,6 +4105,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3479,6 +4115,8 @@
           <para
             >Occurs after an item is data bound to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3510,8 +4148,12 @@
 
             
 
+            
+
              collection to programmatically control the items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3520,8 +4162,12 @@
 
             
 
+            
+
              collection does not provide any methods to add or remove items to the collection. However, you can control the contents of an item by providing a handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />
+
+            
 
             
 
@@ -3531,6 +4177,8 @@
             <para
               >Only items bound to the data source are contained in the <see
                cref="P:System.Web.UI.WebControls.DataGrid.Items" />
+
+              
 
               
 
@@ -3546,8 +4194,12 @@
 
             
 
+            
+
              objects that represent the individual items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3587,8 +4239,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3600,8 +4256,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -3610,13 +4270,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -3690,8 +4356,12 @@
 
             
 
+            
+
              control, place the &lt;ItemStyle&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3703,8 +4373,12 @@
 
             
 
+            
+
              property to provide a different appearance for the alternating items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3716,6 +4390,8 @@
           <para
             >Gets the style properties of the items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3761,6 +4437,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3769,8 +4447,12 @@
 
           
 
+          
+
           A saved state of the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -3795,6 +4477,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.NextPageCommandArgument" />
+
+            
 
             
 
@@ -3833,6 +4517,8 @@
 
             
 
+            
+
              method to pass an event raised by a control within the container up the page's UI server control hierarchy.</para
           >
           <block subset="none" type="note">
@@ -3852,6 +4538,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -3859,8 +4547,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3893,8 +4585,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />
+
+            
 
             
 
@@ -3906,8 +4602,12 @@
 
             
 
+            
+
              event is raised when the Cancel button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3919,13 +4619,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item) and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -3935,6 +4641,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -3951,6 +4659,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3962,6 +4672,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -3970,8 +4682,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+          
 
           
 
@@ -4004,8 +4720,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />
+
+            
 
             
 
@@ -4017,8 +4737,12 @@
 
             
 
+            
+
              event is raised when the Delete button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4030,8 +4754,12 @@
 
             
 
+            
+
              event removes the selected item from the data source and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4047,6 +4775,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4058,6 +4788,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4066,8 +4798,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+          
 
           
 
@@ -4100,8 +4836,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />
+
+            
 
             
 
@@ -4113,8 +4853,12 @@
 
             
 
+            
+
              event is raised when the Edit button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4126,13 +4870,19 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
             
 
+            
+
              property to the selected row and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4148,12 +4898,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -4169,6 +4923,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4177,8 +4933,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+          
 
           
 
@@ -4211,8 +4971,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />
+
+            
 
             
 
@@ -4224,13 +4988,19 @@
 
             
 
+            
+
              event is raised when any button is clicked in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. This event is commonly used to handle buttons controls with a custom CommandName value, such as Add, in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4246,6 +5016,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4257,6 +5029,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4265,8 +5039,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+          
 
           
 
@@ -4299,8 +5077,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />
+
+            
 
             
 
@@ -4312,8 +5094,12 @@
 
             
 
+            
+
              event is raised when an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4325,8 +5111,12 @@
 
             
 
+            
+
              event is commonly used to control the content and appearance of a row in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4342,6 +5132,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4353,6 +5145,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4361,8 +5155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+
+          
 
           
 
@@ -4395,8 +5193,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />
+
+            
 
             
 
@@ -4408,8 +5210,12 @@
 
             
 
+            
+
              event is raised after an item is data bound to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4425,6 +5231,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4436,6 +5244,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4444,8 +5254,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" />
+
+          
 
           
 
@@ -4478,8 +5292,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" />
+
+            
 
             
 
@@ -4491,6 +5309,8 @@
 
             
 
+            
+
              event is raised when one of the page selection elements is clicked.</para
           >
           <para
@@ -4499,8 +5319,12 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" />
+
+            
 
             
 
@@ -4509,8 +5333,12 @@
 
             
 
+            
+
              method to bind the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4523,13 +5351,19 @@
 
               
 
+              
+
                object as a parameter. You can use the <see
                cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.NewPageIndex" />
 
               
 
+              
+
                property of this parameter to determine the index of the page selected by the user from the page selection elements of the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -4546,6 +5380,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4557,6 +5393,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4565,8 +5403,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" />
+
+          
 
           
 
@@ -4599,8 +5441,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+
+            
 
             
 
@@ -4612,6 +5458,8 @@
 
             
 
+            
+
              event is raised when a column is sorted.</para
           >
           <para
@@ -4620,8 +5468,12 @@
 
             
 
+            
+
              event sorts the list, and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4637,6 +5489,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4648,6 +5502,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4656,8 +5512,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+
+          
 
           
 
@@ -4690,8 +5550,12 @@
 
             
 
+            
+
              method to provide a custom handler for the <see
              cref="E:System.Web.UI.WebControls.DataGrid.UpdateCommand" />
+
+            
 
             
 
@@ -4703,6 +5567,8 @@
 
             
 
+            
+
              event is raised when the Update button for an item is clicked.</para
           >
           <para
@@ -4711,13 +5577,19 @@
 
             
 
+            
+
              event updates the data, sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item), and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4727,6 +5599,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -4743,11 +5617,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.DataGrid.OnUpdateCommand(System.Web.UI.WebControls.DataGridCommandEventArgs)" />
+
+            
 
             
 
@@ -4762,6 +5640,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -4770,8 +5650,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+          
 
           
 
@@ -4796,6 +5680,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.PageCommandName" />
+
+            
 
             
 
@@ -4828,8 +5714,12 @@
 
             
 
+            
+
              control. This property is only used when the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AllowPaging" />
+
+            
 
             
 
@@ -4841,6 +5731,8 @@
           <para
             >Gets the total number of pages required to display the items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4880,6 +5772,8 @@
 
             
 
+            
+
              event is raised when one of the page selection elements is clicked.</para
           >
           <para
@@ -4888,8 +5782,12 @@
 
             
 
+            
+
              event sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" />
+
+            
 
             
 
@@ -4898,8 +5796,12 @@
 
             
 
+            
+
              method to bind the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4912,6 +5814,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -4947,8 +5851,12 @@
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -4960,6 +5868,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;PagerStyle&gt; tag.</para
           >
         </remarks>
@@ -4968,6 +5878,8 @@
           <para
             >Gets the style properties of the paging section of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5008,8 +5920,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.DataGrid.AllowPaging" />
+
+            
 
             
 
@@ -5021,6 +5937,8 @@
           <para
             >Gets or sets the number of items to display on a single page of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5054,13 +5972,19 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control to set up the control hierarchy in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5072,6 +5996,8 @@
           <para
             >Sets up the control hierarchy for this <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5097,6 +6023,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.PrevPageCommandArgument" />
+
+            
 
             
 
@@ -5130,6 +6058,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5138,6 +6068,8 @@
           <para
             >The saved state of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5163,6 +6095,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.SelectCommandName" />
+
+            
 
             
 
@@ -5196,13 +6130,19 @@
 
             
 
+            
+
              property to determine the index of the item selected by the user in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. You can also use this property to programmatically specify which item is selected in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5214,6 +6154,8 @@
 
             
 
+            
+
              control, set this property to -1.</para
           >
         </remarks>
@@ -5222,6 +6164,8 @@
           <para
             >Gets or sets the index of the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5261,13 +6205,19 @@
 
             
 
+            
+
              property to get a <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
+            
+
              object that represents the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5282,8 +6232,12 @@
 
             
 
+            
+
              object that represents the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5323,13 +6277,19 @@
 
             
 
+            
+
              property to provide a custom style for the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. Common style attributes that can be adjusted include forecolor, backcolor, font, and content alignment within the cell. Providing a different style enhances the appearance of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5341,8 +6301,12 @@
 
             
 
+            
+
              control are inherited from one item style property to another through a hierarchy. Item style properties set lower in the hierarchy are inherited by item style properties higher in the hierarchy. For example, if you specify a red font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -5351,13 +6315,19 @@
 
             
 
+            
+
              control will also have a red font. This allows you to provide a common appearance for the control by setting a single item style property. You can override the inherited style settings for an item style property that is higher in the hierarchy by setting its style properties. For example, you can specify a blue font for the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AlternatingItemStyle" />
 
             
 
+            
+
              property, overriding the red font specified in the <see
              cref="P:System.Web.UI.WebControls.DataGrid.ItemStyle" />
+
+            
 
             
 
@@ -5431,6 +6401,8 @@
 
             
 
+            
+
              control. You can then list the style attributes within the opening &lt;SelectedItemStyle&gt; tag.</para
           >
         </remarks>
@@ -5439,6 +6411,8 @@
           <para
             >Gets the style properties of the currently selected item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5479,8 +6453,12 @@
 
             
 
+            
+
              control. The appearance of the footer is controlled by using the <see
              cref="P:System.Web.UI.WebControls.DataGrid.FooterStyle" />
+
+            
 
             
 
@@ -5492,6 +6470,8 @@
           <para
             >Gets or sets a value that indicates whether the footer is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5526,8 +6506,12 @@
 
             
 
+            
+
             . The appearance of the header is controlled by using the <see
              cref="P:System.Web.UI.WebControls.DataGrid.HeaderStyle" />
+
+            
 
             
 
@@ -5539,6 +6523,8 @@
           <para
             >Gets or sets a value that indicates whether the header is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5575,6 +6561,8 @@
 
             
 
+            
+
              event is raised when a column is sorted.</para
           >
           <para
@@ -5583,8 +6571,12 @@
 
             
 
+            
+
              event sorts the list, and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5597,6 +6589,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -5626,6 +6620,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.SortCommandName" />
+
+            
 
             
 
@@ -5665,8 +6661,12 @@
 
             
 
+            
+
              property allows the output stream to write the appropriate HTML markup for the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5681,8 +6681,12 @@
 
             
 
+            
+
              value for the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5729,6 +6733,8 @@
 
             
 
+            
+
              event is raised when the Update button for an item is clicked.</para
           >
           <para
@@ -5737,13 +6743,19 @@
 
             
 
+            
+
              event updates the data, sets the <see
              cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
             
 
+            
+
              property to -1 (to deselect the item), and then rebinds the data to the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5753,6 +6765,8 @@
             <para
               >Text is not HTML encoded before it is displayed in the <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -5769,6 +6783,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5777,6 +6793,8 @@
           <para
             >Occurs when the Update button is clicked for an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5802,6 +6820,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.DataGrid.UpdateCommandName" />
+
+            
 
             
 
@@ -5835,8 +6855,12 @@
 
             
 
+            
+
              control when custom paging is used. This property is only used when the <see
              cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
+
+            
 
             
 
@@ -5848,8 +6872,12 @@
 
             
 
+            
+
              property is set to true, the number of pages required to display every item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -5858,8 +6886,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.DataGrid.VirtualItemCount" />
+
+            
 
             
 
@@ -5871,13 +6903,19 @@
 
             
 
+            
+
              property is set to false, the number of pages displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control is calculated based on the values of the <see
              cref="P:System.Web.UI.WebControls.DataGrid.PageSize" />
+
+            
 
             
 
@@ -5889,6 +6927,8 @@
           <para
             >Gets or sets the virtual number of items in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

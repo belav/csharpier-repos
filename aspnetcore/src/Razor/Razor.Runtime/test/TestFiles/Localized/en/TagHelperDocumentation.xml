@@ -12,6 +12,8 @@
 
         
 
+        
+
         .
       </summary
       >
@@ -19,6 +21,8 @@
         >
         en: Inherits from <see
          cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          is of type <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          may be <c
         >null</c>
+
+        
 
         
 
@@ -65,6 +77,8 @@
         >
         en: This is a complex <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 

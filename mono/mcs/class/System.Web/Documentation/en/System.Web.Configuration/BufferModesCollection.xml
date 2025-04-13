@@ -27,8 +27,12 @@
 
         
 
+        
+
          object is used to define roles for event providers such as Critical, Notification, Analysis, and Logging. Each role sets buffer mode events differently. For example, a Critical role keeps the <see
          cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" />
+
+        
 
         
 
@@ -50,6 +58,8 @@
       <para
         >A collection of <see
          cref="T:System.Web.Configuration.BufferModeSettings" />
+
+        
 
         
 
@@ -72,13 +82,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
+            
+
              class always contains an instance of the <see
              cref="T:System.Web.Configuration.BufferModesCollection" />
+
+            
 
             
 
@@ -90,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.BufferModesCollection" />
+
+            
 
             
 
@@ -123,6 +141,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -134,6 +154,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -142,8 +164,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.BufferModeSettings" />
+
+          
 
           
 
@@ -175,6 +201,8 @@
 
             
 
+            
+
              objects from the collection.</para
           >
         </summary>
@@ -202,6 +230,8 @@
           <para
             >Creates a new <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -238,8 +268,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -317,8 +351,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -353,6 +391,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -361,8 +401,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.BufferModeSettings" />
+
+          
 
           
 

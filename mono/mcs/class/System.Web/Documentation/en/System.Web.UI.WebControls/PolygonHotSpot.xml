@@ -22,13 +22,19 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
 
         
 
+        
+
          is useful for defining irregularly shaped hot spot regions in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -40,13 +46,19 @@
 
         
 
+        
+
         , set the <see
          cref="P:System.Web.UI.WebControls.PolygonHotSpot.Coordinates" />
 
         
 
+        
+
          property to a string that specifies the coordinates of each vertex of the <see
          cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          object is clicked, the page navigates to a URL, generates a post back to the server, or does nothing. The <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -68,8 +84,12 @@
 
         
 
+        
+
          property to HotSpotMode.Navigate, and use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+        
 
         
 
@@ -78,8 +98,12 @@
 
         
 
+        
+
          property to HotSpotMode.PostBack, and use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+
+        
 
         
 
@@ -88,8 +112,12 @@
 
         
 
+        
+
          object. This name will be passed in the <see
          cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+        
 
         
 
@@ -98,13 +126,19 @@
 
         
 
+        
+
          is clicked. If you want the <see
          cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
 
         
 
+        
+
          object to have no behavior, set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -116,6 +150,8 @@
       <para
         >Defines a polygon-shaped hot spot region in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -138,6 +174,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -146,6 +184,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -179,8 +219,12 @@
 
             
 
+            
+
              property to specify the coordinates of the vertexes of a <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -192,6 +236,8 @@
           <para
             >A string of coordinates that represents the vertexes of a <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -220,13 +266,19 @@
 
             
 
+            
+
              method returns a string that represents the coordinates of the vertexes of a <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
 
             
 
+            
+
              object. The string this method returns is the current value of the <see
              cref="P:System.Web.UI.WebControls.PolygonHotSpot.Coordinates" />
+
+            
 
             
 
@@ -238,8 +290,12 @@
 
             
 
+            
+
              method is used internally by ASP.NET to get the text to use for the coordinates of a <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -254,6 +310,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -262,6 +320,8 @@
           <para
             >A string that represents the coordinates of the vertexes of a <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -292,8 +352,12 @@
 
             
 
+            
+
              property is used internally by ASP.NET to get the markup-language string representation for the shape of the <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 
@@ -305,6 +369,8 @@
           <para
             >Gets the string representation for the <see
              cref="T:System.Web.UI.WebControls.PolygonHotSpot" />
+
+            
 
             
 

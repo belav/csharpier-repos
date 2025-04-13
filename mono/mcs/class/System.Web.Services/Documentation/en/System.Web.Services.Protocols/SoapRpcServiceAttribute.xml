@@ -33,8 +33,12 @@
 
         
 
+        
+
          allows you to set the default encoding style for XML Web service methods within an XML Web service to RPC method encoding and <see
          cref="F:System.Web.Services.Description.SoapBindingUse.Encoded" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
 
         
 
+        
+
          to the class implementing the XML Web service.</para
       >
       <para
@@ -56,6 +62,8 @@
             >[&lt;topic://cpconCustomizingSOAPInASPNETWebServicesWebServiceClients&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapRpcServiceAttribute" />
+
+            
 
             
 
@@ -140,6 +150,8 @@
           <para
             >The default value of this property is <see
              cref="F:System.Web.Services.Description.SoapBindingUse.Default" />
+
+            
 
             
 

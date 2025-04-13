@@ -35,8 +35,12 @@
 
         
 
+        
+
         . This allows a component creator to ship the visualizer in a DLL to be called only at debug time. The <see
          cref="P:System.Diagnostics.DebuggerVisualizerAttribute.Description" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
          type="text/html">
           <a href="c24c006f-f2ac-429f-89db-677fc0c6e1ea">Visualizers</a>
         </format>
+
+        
 
         
 
@@ -55,6 +61,8 @@
            type="text/html">
             <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
           </format>
+
+          
 
           
 
@@ -95,10 +103,14 @@
 
             
 
+            
+
              can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -113,11 +125,15 @@
 
             
 
+            
+
              class, specifying the type name of the visualizer.</para
           >
         </summary>
         <param name="visualizerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -152,10 +168,14 @@
 
             
 
+            
+
              can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -170,11 +190,15 @@
 
             
 
+            
+
              class, specifying the type of the visualizer.</para
           >
         </summary>
         <param name="visualizer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,10 +234,14 @@
 
             
 
+            
+
              can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -228,6 +256,8 @@
 
             
 
+            
+
              class, specifying the type name of the visualizer and the type name of the visualizer object source.</para
           >
         </summary>
@@ -236,10 +266,14 @@
 
           
 
+          
+
           The fully qualified type name of the visualizer.</param
         >
         <param name="visualizerObjectSourceTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,10 +309,14 @@
 
             
 
+            
+
              can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -293,6 +331,8 @@
 
             
 
+            
+
              class, specifying the type name of the visualizer and the type of the visualizer object source.</para
           >
         </summary>
@@ -301,10 +341,14 @@
 
           
 
+          
+
           The fully qualified type name of the visualizer.</param
         >
         <param name="visualizerObjectSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,10 +384,14 @@
 
             
 
+            
+
              can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -358,6 +406,8 @@
 
             
 
+            
+
              class, specifying the type of the visualizer and the type name of the visualizer object source.</para
           >
         </summary>
@@ -366,10 +416,14 @@
 
           
 
+          
+
           The type of the visualizer.</param
         >
         <param name="visualizerObjectSourceTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -405,10 +459,14 @@
 
             
 
+            
+
              can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -423,6 +481,8 @@
 
             
 
+            
+
              class, specifying the type of the visualizer and the type of the visualizer object source.</para
           >
         </summary>
@@ -431,10 +491,14 @@
 
           
 
+          
+
           The type of the visualizer.</param
         >
         <param name="visualizerObjectSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -506,6 +570,8 @@
 
             
 
+            
+
              property of the target type.</para
           >
         </remarks>
@@ -543,6 +609,8 @@
 
             
 
+            
+
              property of the visualizer object source type.</para
           >
           <para
@@ -551,10 +619,14 @@
 
             
 
+            
+
              class. For information on creating a visualizer, see <format
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 
@@ -589,6 +661,8 @@
 
             
 
+            
+
              property for the visualizer type.</para
           >
           <para
@@ -596,6 +670,8 @@
              type="text/html">
               <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
             </format>
+
+            
 
             
 

@@ -20,6 +20,8 @@
 
         
 
+        
+
          class represents a SOAP header mapping.</para
       >
     </summary>
@@ -40,6 +42,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -72,6 +76,8 @@
 
             
 
+            
+
              value that indicates the direction of the SOAP header mapping.</para
           >
         </summary>
@@ -95,6 +101,8 @@
           <para
             >Gets a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -127,6 +135,8 @@
 
             
 
+            
+
              associated with the SOAP header mapping.</para
           >
         </summary>
@@ -150,6 +160,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

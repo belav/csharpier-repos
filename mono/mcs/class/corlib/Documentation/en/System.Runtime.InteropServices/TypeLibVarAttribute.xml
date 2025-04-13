@@ -42,6 +42,8 @@
 
         
 
+        
+
          applies this attribute to fields.</para
       >
       <para>This attribute is applied when a type library is imported and should never be changed. It is only applied when the method's VARFLAGS evaluate to non-zero. The attribute is designed to be used by tools that need to know how the original VARFLAGS were set. The common language runtime does not use this attribute.</para>
@@ -51,6 +53,8 @@
       <para
         >Contains the <see
          cref="T:System.Runtime.InteropServices.VARFLAGS" />
+
+        
 
         
 
@@ -85,8 +89,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.TypeLibVarFlags" />
+
+            
 
             
 
@@ -98,8 +106,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.InteropServices.TypeLibVarFlags" />
+
+          
 
           
 
@@ -136,8 +148,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.TypeLibVarFlags" />
+
+            
 
             
 
@@ -149,8 +165,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.InteropServices.TypeLibVarFlags" />
+
+          
 
           
 
@@ -184,6 +204,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.TypeLibVarFlags" />
+
+            
 
             
 

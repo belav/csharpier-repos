@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is used to assign a <see
          cref="T:System.Web.Security.RolePrincipal" />
+
+        
 
         
 
@@ -36,9 +40,13 @@
 
         
 
+        
+
          property of the <see
          cref="P:System.Web.HttpContext.Current" />
         <see cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          refreshes the roles cookie that contains cached role information. If the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
         , and that <see
          cref="T:System.Web.Security.RolePrincipal" />
+
+        
 
         
 
@@ -70,8 +86,12 @@
 
         
 
+        
+
          property to true, the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -84,6 +104,8 @@
       <para
         >Manages a <see
          cref="T:System.Web.Security.RolePrincipal" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
             
 
+            
+
              class is used to place a <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -116,9 +142,13 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Web.HttpContext.Current" />
             <see cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -130,6 +160,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -158,8 +190,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -168,8 +204,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -178,8 +218,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -215,8 +259,12 @@
 
             
 
+            
+
              event is raised before the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -225,8 +273,12 @@
 
             
 
+            
+
              object and assigns it to the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -236,13 +288,19 @@
 
             
 
+            
+
             . You can use this event to audit when role information is applied or to replace the creation of a <see
              cref="T:System.Web.Security.RolePrincipal" />
 
             
 
+            
+
              by the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -254,8 +312,12 @@
 
             
 
+            
+
              by setting the <see
              cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
+
+            
 
             
 
@@ -264,8 +326,12 @@
 
             
 
+            
+
              to true in the <see
              cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+
+            
 
             
 
@@ -277,8 +343,12 @@
 
             
 
+            
+
              to true in your <see
              cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+
+            
 
             
 
@@ -287,8 +357,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -297,8 +371,12 @@
 
             
 
+            
+
              object by the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -313,8 +391,12 @@
 
             
 
+            
+
              is ready to create a <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 
@@ -345,13 +427,19 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
+            
+
              methods of the specified <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -367,13 +455,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpApplication" />
 
           
 
+          
+
            to associate the <see
            cref="T:System.Web.Security.RoleManagerModule" />
+
+          
 
           
 

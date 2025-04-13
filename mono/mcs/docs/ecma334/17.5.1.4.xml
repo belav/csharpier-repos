@@ -6,6 +6,8 @@
 
     
 
+    
+
      It is not possible to combine the params modifier with the modifiers ref and out. </paragraph
   >
   <paragraph
@@ -17,11 +19,15 @@
 
         
 
+        
+
         ) to the parameter array type. In this case, the parameter array acts precisely like a value parameter. </list_item
       >
       <list_item
         > Alternatively, the invocation can specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink
         >13.1</hyperlink>
+
+        
 
         
 
@@ -32,6 +38,8 @@
   <paragraph
     >Except for allowing a variable number of arguments in an invocation, a parameter array is precisely equivalent to a value parameter (<hyperlink
     >17.5.1.1</hyperlink>
+
+    
 
     
 
@@ -63,6 +71,8 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
         <![CDATA[
@@ -85,12 +95,16 @@ F(new int[] {});
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
   <paragraph
     >When performing overload resolution, a method with a parameter array may be applicable either in its normal form or in its expanded form (<hyperlink
     >14.4.2.1</hyperlink>
+
+    
 
     
 
@@ -123,6 +137,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -171,6 +187,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          properties <see
          cref="P:System.Security.Permissions.PermissionSetAttribute.Name" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Security.Permissions.PermissionSetAttribute.XML" />
+
+        
 
         
 
@@ -61,13 +69,19 @@
 
         
 
+        
+
          that is used. A <see
          cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
+        
+
          performed on a <see
          cref="T:System.Security.PermissionSet" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
       <para
         >Allows security actions for a <see
          cref="T:System.Security.PermissionSet" />
+
+        
 
         
 
@@ -117,11 +133,15 @@
 
             
 
+            
+
              class with the specified security action.</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,6 +174,8 @@
           <para
             >This method is not used; it is included only to support inheritance from <see
              cref="T:System.Security.Permissions.SecurityAttribute" />
+
+            
 
             
 
@@ -224,6 +246,8 @@
           <para
             >If the file specified is Unicode, set the <see
              cref="P:System.Security.Permissions.PermissionSetAttribute.UnicodeEncoded" />
+
+            
 
             
 
@@ -304,6 +328,8 @@
 
             
 
+            
+
              is null this property is not used.</para
           >
         </remarks>
@@ -312,6 +338,8 @@
           <para
             >Gets or sets a value indicating whether the file specified by <see
              cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute enables you to change this default behavior and to specify a different parent table column to use as the column for the foreign key field.</para
       >
       <para>When you apply this attribute, you must adhere to the following usage constraints:</para>
@@ -77,11 +79,15 @@
 
             
 
+            
+
              class by using the specified column. </para
           >
         </summary>
         <param name="displayColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -115,6 +121,8 @@
 
             
 
+            
+
              will be sorted in ascending order.</para
           >
         </remarks>
@@ -126,6 +134,8 @@
 
             
 
+            
+
              class by using the specified display and sort columns. </para
           >
         </summary>
@@ -134,10 +144,14 @@
 
           
 
+          
+
           The name of the column to use as the display column.</param
         >
         <param name="sortColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,11 +187,15 @@
 
             
 
+            
+
              class by using the specified display column, and the specified sort column and sort order. </para
           >
         </summary>
         <param name="displayColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,10 +206,14 @@
 
           
 
+          
+
           The name of the column to use for sorting.</param
         >
         <param name="sortDescending">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

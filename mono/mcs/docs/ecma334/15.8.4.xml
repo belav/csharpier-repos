@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>foreach</keyword>
@@ -29,6 +31,8 @@
 
     
 
+    
+
     ) must exist from the element type of the collection to the type of the iteration variable. If expression has the value null, a System.NullReferenceException is thrown. </paragraph
   >
   <paragraph
@@ -40,8 +44,12 @@
 
         
 
+        
+
         , <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -50,11 +58,15 @@
 
         
 
+        
+
         , which is called E in the following text. </list_item
       >
       <list_item
         > E contains a public instance method with the signature MoveNext() and the return type <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -70,6 +82,8 @@
 
     
 
+    
+
     ) is a collection type, and since all array types derive from System.Array, any array type expression is permitted in a foreach statement. The order in which foreach traverses the elements of an array is as follows: For single-dimensional arrays elements are traversed in increasing index order, starting with index 0 and ending with index Length  -1. For  multi-dimensional arrays, elements are traversed such that the indices of the rightmost dimension are increased first, then the next left dimension, and so on to the left. </paragraph
   >
   <paragraph
@@ -79,6 +93,8 @@
 foreach (ElementType element in collection) statement  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -160,6 +176,8 @@ class Test
 1.2 2.3 3.4 4.5 5.6 6.7 7.8 8.9  
 ]]>
       </code_example>
+
+      
 
       
 

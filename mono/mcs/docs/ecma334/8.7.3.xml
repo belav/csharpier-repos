@@ -6,8 +6,12 @@
 
     
 
+    
+
      is <keyword
     >void</keyword>
+
+    
 
     
 
@@ -39,6 +43,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -81,6 +87,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

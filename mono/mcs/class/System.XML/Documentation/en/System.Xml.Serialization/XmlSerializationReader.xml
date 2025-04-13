@@ -30,8 +30,12 @@
 
         
 
+        
+
          class. <see
          cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         . Instead, call one of the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -66,6 +78,8 @@
       <para
         >Controls deserialization by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -95,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+            
 
             
 
@@ -195,6 +211,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -203,8 +221,12 @@
 
             
 
+            
+
             . During this process, the .NET Framework generates read methods that implement the <see
              cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+            
 
             
 
@@ -213,6 +235,8 @@
           <para
             >You should not directly create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+            
 
             
 
@@ -227,11 +251,15 @@
 
             
 
+            
+
              delegate and its input data for a later invocation. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,6 +270,8 @@
 
           
 
+          
+
           The namespace of the .NET Framework type that is being deserialized.</param
         >
         <param name="type">
@@ -249,8 +279,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -261,8 +295,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+          
 
           
 
@@ -298,6 +336,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times by ref attributes (or href attributes in SOAP 1.1) in substitute elements. </para>
@@ -311,6 +351,8 @@
 
             
 
+            
+
              method. </para
           >
         </summary>
@@ -319,10 +361,14 @@
 
           
 
+          
+
           The value of the id attribute of a multiRef element that identifies the element.</param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,6 +432,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -399,6 +447,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,6 +487,8 @@
 
             
 
+            
+
              are intended only for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -445,6 +497,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -459,6 +513,8 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
@@ -467,10 +523,14 @@
 
           
 
+          
+
           The name of the abstract type.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -513,6 +573,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -521,6 +583,8 @@
           <para
             >Populates an object from its XML representation at the current location of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -535,11 +599,15 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
         <param name="xsdDerived">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -550,10 +618,14 @@
 
           
 
+          
+
           The namespace of the derived XML Schema data type.</param
         >
         <param name="xsdBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,6 +636,8 @@
 
           
 
+          
+
           The namespace of the base XML Schema data type.</param
         >
         <param name="clrDerived">
@@ -571,10 +645,14 @@
 
           
 
+          
+
           The namespace of the derived .NET Framework type.</param
         >
         <param name="clrBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,6 +690,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -620,6 +700,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -634,11 +716,15 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -676,6 +762,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -684,6 +772,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -698,11 +788,15 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -741,6 +835,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -749,6 +845,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -763,6 +861,8 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
@@ -771,8 +871,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -780,6 +884,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -819,6 +925,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -827,6 +935,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -841,6 +951,8 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
@@ -849,8 +961,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -861,10 +977,14 @@
 
           
 
+          
+
           The object that cannot be cast. This object is incorporated into the exception message.</param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,6 +1024,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -912,6 +1034,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -926,11 +1050,15 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -941,10 +1069,14 @@
 
           
 
+          
+
           The namespace of the XML Schema data type that is mapped to the unavailable derived type.</param
         >
         <param name="clrType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -982,6 +1114,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -990,6 +1124,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1004,11 +1140,15 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1047,6 +1187,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1055,6 +1197,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1069,6 +1213,8 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
@@ -1077,10 +1223,14 @@
 
           
 
+          
+
           The enumeration value that is not valid.</param
         >
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1113,6 +1263,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1124,8 +1276,12 @@
 
             
 
+            
+
              that indicates that the current position of <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1137,6 +1293,8 @@
           <para
             >An <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1175,6 +1333,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1183,6 +1343,8 @@
           <para
             >Creates an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1197,6 +1359,8 @@
 
             
 
+            
+
              exception.</para
           >
         </returns>
@@ -1205,8 +1369,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -1236,8 +1404,12 @@
 
             
 
+            
+
              method writes valid XML from invalid sources. For example, the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -1246,8 +1418,12 @@
 
             
 
+            
+
              class can contain spaces, which are invalid as XML. The <see
              cref="M:System.Xml.XmlConvert.DecodeName(System.String)" />
+
+            
 
             
 
@@ -1256,13 +1432,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
+            
+
              class cannot read such encoded XML. In that case, set the <see
              cref="P:System.Xml.Serialization.XmlSerializationWriter.EscapeName" />
+
+            
 
             
 
@@ -1297,6 +1479,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+            
 
             
 
@@ -1341,6 +1525,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1356,6 +1542,8 @@
 
             
 
+            
+
             , if it is already large enough; otherwise, a new, larger array that contains the original array's elements.</para
           >
         </returns>
@@ -1364,8 +1552,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1376,6 +1568,8 @@
 
           
 
+          
+
           The required index.</param
         >
         <param name="elementType">
@@ -1383,8 +1577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1419,6 +1617,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -1427,8 +1627,12 @@
 
             
 
+            
+
              method implements the <see
              cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+
+            
 
             
 
@@ -1440,8 +1644,12 @@
 
             
 
+            
+
              method for SOAP-encoded arrays whose data types map to .NET Framework reference types. The method then is called by <see
              cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" />
+
+            
 
             
 
@@ -1455,6 +1663,8 @@
         </summary>
         <param name="fixup">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1493,11 +1703,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.GetArrayLength(System.String,System.String)" />
+
+            
 
             
 
@@ -1509,6 +1723,8 @@
           <para
             >Gets the length of the SOAP-encoded array where the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1524,10 +1740,14 @@
 
           
 
+          
+
           The local name that the array should have.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1560,6 +1780,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1571,6 +1793,8 @@
 
             
 
+            
+
              is currently positioned has a null attribute set to the value true.</para
           >
         </summary>
@@ -1579,6 +1803,8 @@
           <para
             >true if <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1614,6 +1840,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
@@ -1626,6 +1854,8 @@
 
             
 
+            
+
             .  </para
           >
         </summary>
@@ -1635,6 +1865,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1667,6 +1899,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>The type attribute from the instance of the XML Schema namespace explicitly specifies the data type of an XML element.</para>
@@ -1676,6 +1910,8 @@
           <para
             >Gets the value of the xsi:type attribute for the XML element at the current location of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1713,6 +1949,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -1721,8 +1959,12 @@
 
             
 
+            
+
             . During this process, the .NET Framework generates read methods that implement the <see
              cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+            
 
             
 
@@ -1734,11 +1976,15 @@
 
             
 
+            
+
              method is where the temporary derived class creates an instance of and initializes read callback methods.</para
           >
           <para
             >You should not directly create an instance of <see
              cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+            
 
             
 
@@ -1777,11 +2023,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.InitIDs" />
+
+            
 
             
 
@@ -1793,6 +2043,8 @@
           <para
             >Stores element and attribute names in a <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -1820,6 +2072,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+            
 
             
 
@@ -1859,11 +2113,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >An attribute name indicates an XML namespace if it takes the form xmlns:<paramref
              name="key" />
+
+            
 
             
 
@@ -1880,6 +2138,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1917,6 +2177,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>WSDL uses the namespace "http://schemas.xmlsoap.org/wsdl/".</para>
@@ -1930,8 +2192,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -1967,6 +2233,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -1975,6 +2243,8 @@
           <para
             >Makes the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2012,6 +2282,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para />
@@ -2021,6 +2293,8 @@
           <para
             >Makes the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2054,6 +2328,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2065,8 +2341,12 @@
 
             
 
+            
+
              object that is being used by <see
              cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+            
 
             
 
@@ -2097,8 +2377,12 @@
 
             
 
+            
+
              uses an instance of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2107,8 +2391,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Xml.XmlReader.ReadElementString" />
+
+            
 
             
 
@@ -2120,6 +2408,8 @@
           <para
             >Gets the current count of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2153,6 +2443,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2161,6 +2453,8 @@
           <para
             >Instructs the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2201,6 +2495,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2212,6 +2508,8 @@
 
             
 
+            
+
              to read the fully qualified name of the element where it is currently positioned. </para
           >
         </summary>
@@ -2220,6 +2518,8 @@
           <para
             >A <see
              cref="T:System.Xml.XmlQualifiedName" />
+
+            
 
             
 
@@ -2253,6 +2553,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2261,6 +2563,8 @@
           <para
             >Instructs the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2326,11 +2630,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ReadReferencedElement" />
+
+            
 
             
 
@@ -2380,11 +2688,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >This signature of the <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ReadReferencedElement" />
+
+            
 
             
 
@@ -2406,10 +2718,14 @@
 
           
 
+          
+
           The local name of the element's XML Schema data type.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2439,6 +2755,8 @@
           <para
             >The protected members of <see
              cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+            
 
             
 
@@ -2577,6 +2895,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2585,6 +2905,8 @@
           <para
             >Populates an object from its XML representation at the current location of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2599,8 +2921,12 @@
 
             
 
+            
+
              interface with its members populated from the location of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2612,13 +2938,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.IXmlSerializable" />
 
           
 
+          
+
            that corresponds to the current position of the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2653,6 +2985,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2661,6 +2995,8 @@
           <para
             >Produces the result of a call to the <see
              cref="M:System.Xml.XmlReader.ReadString" />
+
+            
 
             
 
@@ -2675,6 +3011,8 @@
 
             
 
+            
+
              method appended to the input value.</para
           >
         </returns>
@@ -2683,8 +3021,12 @@
 
           
 
+          
+
           A string to prefix to the result of a call to the <see
            cref="M:System.Xml.XmlReader.ReadString" />
+
+          
 
           
 
@@ -2724,8 +3066,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2741,10 +3087,14 @@
 
           
 
+          
+
           A string that will be appended to.</param
         >
         <param name="trim">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2783,6 +3133,8 @@
 
             
 
+            
+
              value. </para
           >
         </summary>
@@ -2794,6 +3146,8 @@
 
             
 
+            
+
              that represents a null XML value.</para
           >
         </returns>
@@ -2802,13 +3156,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
 
           
 
+          
+
            that represents the simple data type for the current location of the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2846,6 +3206,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2854,6 +3216,8 @@
           <para
             >Gets the value of the XML node at which the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2869,13 +3233,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
 
           
 
+          
+
            that represents the simple data type for the current location of the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2913,6 +3283,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2921,6 +3293,8 @@
           <para
             >Instructs the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2935,11 +3309,15 @@
 
             
 
+            
+
              that contains the root element that has been read.</para
           >
         </returns>
         <param name="wrapped">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2977,6 +3355,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -2985,6 +3365,8 @@
           <para
             >Instructs the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2999,11 +3381,15 @@
 
             
 
+            
+
              that represents the XML node that has been read.</para
           >
         </returns>
         <param name="wrapped">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3038,6 +3424,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. </para>
@@ -3049,6 +3437,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3086,11 +3476,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ResolveDynamicAssembly(System.String)" />
+
+            
 
             
 
@@ -3109,11 +3503,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="assemblyFullName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3154,6 +3552,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3169,8 +3569,12 @@
 
             
 
+            
+
             , if it is already small enough; otherwise, a new, smaller array that contains the original array's elements up to the size of<paramref
              name=" length" />
+
+            
 
             
 
@@ -3182,10 +3586,14 @@
 
           
 
+          
+
           The array that is being checked.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3196,8 +3604,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3205,6 +3617,8 @@
         >
         <param name="isNullable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3239,6 +3653,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3247,6 +3663,8 @@
           <para
             >Instructs the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3261,11 +3679,15 @@
 
             
 
+            
+
              parameter is true.</para
           >
         </returns>
         <param name="isNull">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3303,11 +3725,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToByteArrayBase64(System.String)" />
+
+            
 
             
 
@@ -3324,6 +3750,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3358,6 +3786,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
         </remarks>
@@ -3366,6 +3796,8 @@
           <para
             >Instructs the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3380,11 +3812,15 @@
 
             
 
+            
+
              parameter is true. </para
           >
         </returns>
         <param name="isNull">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3422,11 +3858,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToByteArrayHex(System.String)" />
+
+            
 
             
 
@@ -3443,6 +3883,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3477,11 +3919,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToChar(System.String)" />
+
+            
 
             
 
@@ -3496,6 +3942,8 @@
 
             
 
+            
+
              object from an input string. </para
           >
         </summary>
@@ -3507,6 +3955,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -3515,8 +3965,12 @@
 
           
 
+          
+
           A string to translate into a <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -3551,11 +4005,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToDate(System.String)" />
+
+            
 
             
 
@@ -3570,6 +4028,8 @@
 
             
 
+            
+
              object from an input string. </para
           >
         </summary>
@@ -3581,6 +4041,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -3589,8 +4051,12 @@
 
           
 
+          
+
           A string to translate into a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -3625,11 +4091,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToDateTime(System.String)" />
+
+            
 
             
 
@@ -3644,6 +4114,8 @@
 
             
 
+            
+
              object from an input string. </para
           >
         </summary>
@@ -3655,6 +4127,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -3663,8 +4137,12 @@
 
           
 
+          
+
           A string to translate into a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -3704,11 +4182,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToEnum(System.String,System.Collections.Hashtable,System.String)" />
+
+            
 
             
 
@@ -3728,10 +4210,14 @@
 
           
 
+          
+
           A string that consists of delimited identifiers where each identifier represents a constant from the set enumerator list.</param
         >
         <param name="h">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3740,10 +4226,14 @@
 
           
 
+          
+
            that consists of the identifiers as keys and the constants as integral numbers.</param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3778,11 +4268,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >The <see
              cref="M:System.Xml.Serialization.XmlSerializationReader.ToTime(System.String)" />
+
+            
 
             
 
@@ -3797,6 +4291,8 @@
 
             
 
+            
+
              from a string that represents the time. </para
           >
         </summary>
@@ -3808,6 +4304,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -3816,8 +4314,12 @@
 
           
 
+          
+
           A string to translate into a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -3852,6 +4354,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -3860,10 +4364,14 @@
 
             
 
+            
+
              method is static. </para
           >
           <para>
             <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlName(System.String)" />
+
+            
 
             
 
@@ -3880,6 +4388,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3914,6 +4424,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -3922,10 +4434,14 @@
 
             
 
+            
+
              method is static.</para
           >
           <para>
             <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNCName(System.String)" />
+
+            
 
             
 
@@ -3942,6 +4458,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3976,6 +4494,8 @@
 
             
 
+            
+
              are only intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -3984,10 +4504,14 @@
 
             
 
+            
+
              method is static.</para
           >
           <para>
             <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmToken(System.String)" />
+
+            
 
             
 
@@ -4004,6 +4528,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4041,6 +4567,8 @@
 
             
 
+            
+
              are intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -4049,10 +4577,14 @@
 
             
 
+            
+
              method is static.</para
           >
           <para>
             <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmTokens(System.String)" />
+
+            
 
             
 
@@ -4069,6 +4601,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4106,6 +4640,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -4114,8 +4650,12 @@
 
             
 
+            
+
              method looks up the associated namespace for the current XML document and places the value in the <see
              cref="T:System.Xml.XmlQualifiedName" />
+
+            
 
             
 
@@ -4130,6 +4670,8 @@
 
             
 
+            
+
              from a name that may contain a prefix. </para
           >
         </summary>
@@ -4141,11 +4683,15 @@
 
             
 
+            
+
              that represents a namespace-qualified XML name.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4184,6 +4730,8 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
@@ -4192,13 +4740,19 @@
 
             
 
+            
+
              method to handle unknown attributes while the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
+            
+
              is executing its <see
              cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" />
+
+            
 
             
 
@@ -4213,8 +4767,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4226,13 +4784,19 @@
 
           
 
+          
+
           An object that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
+          
+
            is attempting to deserialize, subsequently accessible through the <see
            cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" />
+
+          
 
           
 
@@ -4243,8 +4807,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -4285,8 +4853,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4298,13 +4870,19 @@
 
           
 
+          
+
           An object that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
+          
+
            is attempting to deserialize, subsequently accessible through the <see
            cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" />
+
+          
 
           
 
@@ -4315,8 +4893,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -4324,6 +4906,8 @@
         >
         <param name="qnames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4363,8 +4947,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4376,8 +4964,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4388,8 +4980,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -4430,8 +5026,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4443,13 +5043,19 @@
 
           
 
+          
+
           An object that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
+          
+
            is attempting to deserialize, subsequently accessible through the <see
            cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" />
+
+          
 
           
 
@@ -4460,8 +5066,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -4469,6 +5079,8 @@
         >
         <param name="qnames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4504,8 +5116,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4514,6 +5130,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4553,8 +5171,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4566,10 +5188,14 @@
 
           
 
+          
+
           The object being deserialized.</param
         >
         <param name="qnames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4608,11 +5234,15 @@
 
             
 
+            
+
              are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
           >
           <para
             >SOAP encoding, as specified in Section 5 of the SOAP 1.1 specification, allows for elements referenced multiple times in a SOAP message (or optionally, just once) to be referred by an href attribute in the main message. An <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
+
+            
 
             
 
@@ -4624,13 +5254,19 @@
 
             
 
+            
+
              to provide custom handling for unreferenced objects while the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
+            
+
              executes its <see
              cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" />
+
+            
 
             
 
@@ -4645,8 +5281,12 @@
 
             
 
+            
+
              event for the current position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4658,8 +5298,12 @@
 
           
 
+          
+
           A unique string that is used to identify the unreferenced object, subsequently accessible through the <see
            cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" />
+
+          
 
           
 
@@ -4670,13 +5314,19 @@
 
           
 
+          
+
           An object that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
+          
+
            is attempting to deserialize, subsequently accessible through the <see
            cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" />
+
+          
 
           
 

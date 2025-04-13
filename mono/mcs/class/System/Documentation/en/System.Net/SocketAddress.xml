@@ -34,8 +34,12 @@
 
         
 
+        
+
          enumerated value. When the <see
          cref="T:System.Net.SocketAddress" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
         , the third and fourth bytes are used to store port number information. The next bytes are used to store the IP address. You can access any information within this underlying byte buffer by referring to its index position; the byte buffer uses zero-based indexing. You can also use the <see
          cref="P:System.Net.SocketAddress.Family" />
+
+        
 
         
 
@@ -54,13 +62,19 @@
 
         
 
+        
+
          properties to get the <see
          cref="T:System.Net.Sockets.AddressFamily" />
 
         
 
+        
+
          value and the buffer size, respectively. To view any of this information as a string, use the <see
          cref="M:System.Net.SocketAddress.ToString" />
+
+        
 
         
 
@@ -72,6 +86,8 @@
       <para
         >Stores serialized information from <see
          cref="T:System.Net.EndPoint" />
+
+        
 
         
 
@@ -116,6 +132,8 @@
 
             
 
+            
+
              class for the given address family.</para
           >
         </summary>
@@ -124,8 +142,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Sockets.AddressFamily" />
+
+          
 
           
 
@@ -164,6 +186,8 @@
 
           
 
+          
+
            is less than 2.</exception
         >
         <remarks>
@@ -171,6 +195,8 @@
           <para
             >Use this overload to create a new instance of the <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -185,6 +211,8 @@
 
             
 
+            
+
              class using the specified address family and buffer size.</para
           >
         </summary>
@@ -193,8 +221,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Sockets.AddressFamily" />
+
+          
 
           
 
@@ -202,6 +234,8 @@
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -240,8 +274,12 @@
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -251,15 +289,21 @@ indicates <paramref
 
             
 
+            
+
              is an
 instance of the <see
              cref="T:System.Net.SocketAddress" />
 
             
 
+            
+
              class and contains the same data as the current
 instance; otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -271,6 +315,8 @@ instance; otherwise <see
             <para
               >This method overrides <see
                cref="M:System.Object.Equals(System.Object)" qualify="true" />
+
+              
 
               
 
@@ -286,8 +332,12 @@ instance; otherwise <see
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -299,13 +349,19 @@ instance; otherwise <see
 
           
 
+          
+
           The specified <see
            cref="T:System.Object" />
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Net.SocketAddress" />
+
+          
 
           
 
@@ -345,6 +401,8 @@ instance; otherwise <see
 
             
 
+            
+
              enumeration.</para
           >
         </value>
@@ -356,8 +414,12 @@ instance; otherwise <see
 
             
 
+            
+
              enumerated value that represents the addressing scheme of the current <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -366,8 +428,12 @@ instance; otherwise <see
 
             
 
+            
+
             , use the <see
              cref="M:System.Net.SocketAddress.ToString" />
+
+            
 
             
 
@@ -382,8 +448,12 @@ instance; otherwise <see
 
             
 
+            
+
              enumerated value of the current <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -421,6 +491,8 @@ instance; otherwise <see
 
             
 
+            
+
              containing the hash code for the current instance.</para
           >
         </returns>
@@ -431,6 +503,8 @@ instance; otherwise <see
             <para
               >This method overrides <see
                cref="M:System.Object.GetHashCode" qualify="true" />
+
+              
 
               
 
@@ -471,6 +545,8 @@ instance; otherwise <see
 
           
 
+          
+
            containing the zero-based index of the element to get or set.</param
         >
         <summary>
@@ -478,6 +554,8 @@ instance; otherwise <see
             >Gets or sets the element at the specified index of
       the <see
              cref="T:System.Byte" qualify="true" />
+
+            
 
             
 
@@ -491,6 +569,8 @@ instance; otherwise <see
 
             
 
+            
+
              containing the element at the specified index.</para
           >
         </value>
@@ -498,6 +578,8 @@ instance; otherwise <see
         <exception cref="T:System.IndexOutOfRangeException">
           <para>
             <paramref name="offset" />
+
+            
 
             
 
@@ -509,8 +591,12 @@ instance; otherwise <see
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Net.SocketAddress.Size" />
+
+            
 
             
 
@@ -545,9 +631,13 @@ instance; otherwise <see
 
             
 
+            
+
              containing the length of the
 <see
              cref="T:System.Byte" qualify="true" />
+
+            
 
             
 
@@ -563,6 +653,8 @@ instance; otherwise <see
 
             
 
+            
+
              in bytes.</para
           >
         </remarks>
@@ -571,6 +663,8 @@ instance; otherwise <see
           <para
             >Gets the underlying buffer size of the <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -633,13 +727,19 @@ public class SocketAddressToString{
 
             
 
+            
+
              method returns a string that contains the <see
              cref="T:System.Net.Sockets.AddressFamily" />
 
             
 
+            
+
              enumerated value, the size of the underlying buffer of the <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -655,6 +755,8 @@ public class SocketAddressToString{
           <para
             >A string that contains information about the <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 

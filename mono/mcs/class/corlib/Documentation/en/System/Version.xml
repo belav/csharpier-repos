@@ -70,13 +70,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Version.MinorRevision" />
 
         
 
+        
+
          properties enable you to identify a temporary version of your application that, for example, corrects a problem until you can release a permanent solution.  Furthermore, the Windows NT operating system uses the <see
          cref="P:System.Version.MajorRevision" />
+
+        
 
         
 
@@ -91,8 +97,12 @@
 
         
 
+        
+
          class is not used to assign a version number to an assembly. Instead, the <see
          cref="T:System.Reflection.AssemblyVersionAttribute" />
+
+        
 
         
 
@@ -106,6 +116,8 @@
 
         
 
+        
+
          objects are most frequently used to store version information about some system or application component (such as the operating system), the common language runtime, the current application's executable, or a particular assembly. The following examples illustrate some of the most common scenarios:</para
       >
       <list type="bullet">
@@ -113,6 +125,8 @@
           <para
             >Retrieving the operating system version. The following example uses the <see
              cref="P:System.OperatingSystem.Version" />
+
+            
 
             
 
@@ -127,6 +141,8 @@
 
             
 
+            
+
              property to retrieve version information about the common language runtime.</para
           >
           <para>code reference: System.Version.Class#2</para>
@@ -138,8 +154,12 @@
 
             
 
+            
+
              method to obtain a reference to an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -154,8 +174,12 @@
 
             
 
+            
+
              method to obtain a reference to an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -170,13 +194,19 @@
 
             
 
+            
+
              method to obtain a reference to an <see
              cref="T:System.Reflection.Assembly" />
 
             
 
+            
+
              object that has a particular file name, and then retrieves its version information. Note that several other methods also exist to instantiate an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -188,6 +218,8 @@
           <para
             >Retrieving the Publish Version of a ClickOnce application. The following example uses the <see
              cref="P:System.Deployment.Application.ApplicationDeployment.CurrentVersion" />
+
+            
 
             
 
@@ -208,13 +240,19 @@
 
         
 
+        
+
          method to determine whether one <see
          cref="T:System.Version" />
 
         
 
+        
+
          object is earlier than, the same as, or later than a second <see
          cref="T:System.Version" />
+
+        
 
         
 
@@ -227,8 +265,12 @@
 
         
 
+        
+
          object must be identical to those of the second <see
          cref="T:System.Version" />
+
+        
 
         
 
@@ -237,8 +279,12 @@
 
         
 
+        
+
          object is undefined, that <see
          cref="T:System.Version" />
+
+        
 
         
 
@@ -247,8 +293,12 @@
 
         
 
+        
+
          object whose build or revision number is equal to zero. The following example illustrates this by comparing three <see
          cref="T:System.Version" />
+
+        
 
         
 
@@ -287,8 +337,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -298,8 +352,12 @@
             
 
             
+
+            
 and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -311,6 +369,8 @@ and <see
           <para
             >Initializes a new instance of the <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -346,10 +406,14 @@ and <see
 
           
 
+          
+
            has fewer than 2 components or more than 4 components (i.e. fewer than 1 or more than 3 period characters).</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="version" />
+
+          
 
           
 
@@ -360,8 +424,12 @@ and <see
 
           
 
+          
+
           , <paramref
            name="minor" />
+
+          
 
           
 
@@ -370,8 +438,12 @@ and <see
 
           
 
+          
+
           , or <paramref
            name="revision " />
+
+          
 
           
 
@@ -383,8 +455,12 @@ and <see
 
           
 
+          
+
            does not parse to a <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -393,8 +469,12 @@ and <see
 
           
 
+          
+
            (<see
            cref="T:System.String" />
+
+          
 
           
 
@@ -427,6 +507,8 @@ Version is 6.1.2.4</para>
 
             
 
+            
+
              parameter can contain only the components major, minor, build, and revision, in that order, and all separated by periods. There must be at least two components, and at most four. The first two components are assumed to be major and minor. The value of unspecified components is undefined.</para
           >
           <para>The format of the version number is as follows. Optional components are shown in square brackets ('[' and ']'): </para>
@@ -434,6 +516,8 @@ Version is 6.1.2.4</para>
           <para
             >All defined components must be integers greater than or equal to 0. For example, if the major number is 6, the minor number is 2, the build number is 1, and the revision number is 3, then <paramref
              name="version" />
+
+            
 
             
 
@@ -448,11 +532,15 @@ Version is 6.1.2.4</para>
 
             
 
+            
+
              class using the specified string.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,8 +577,12 @@ Version is 6.1.2.4</para>
 
           
 
+          
+
            or <paramref
            name="minor" />
+
+          
 
           
 
@@ -520,10 +612,14 @@ Version is 6.1</para>
 
           
 
+          
+
           The major version number. </param
         >
         <param name="minor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,6 +633,8 @@ Version is 6.1</para>
 
             
 
+            
+
              class using the specified major and minor values.</para
           >
         </summary>
@@ -545,10 +643,14 @@ Version is 6.1</para>
 
           
 
+          
+
           The major version number. </param
         >
         <param name="minor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -586,13 +688,19 @@ Version is 6.1</para>
 
           
 
+          
+
           , <paramref
            name="minor" />
 
           
 
+          
+
           , or <paramref
            name="build" />
+
+          
 
           
 
@@ -622,6 +730,8 @@ Version is 6.1.2</para>
 
           
 
+          
+
           The major version number. </param
         >
         <param name="minor">
@@ -629,10 +739,14 @@ Version is 6.1.2</para>
 
           
 
+          
+
           The minor version number. </param
         >
         <param name="build">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -646,11 +760,15 @@ Version is 6.1.2</para>
 
             
 
+            
+
              class using the specified major, minor, and build values.</para
           >
         </summary>
         <param name="major">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,10 +779,14 @@ Version is 6.1.2</para>
 
           
 
+          
+
           The minor version number. </param
         >
         <param name="build">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,8 +828,12 @@ Version is 6.1.2</para>
 
           
 
+          
+
           , <paramref
            name="minor" />
+
+          
 
           
 
@@ -716,8 +842,12 @@ Version is 6.1.2</para>
 
           
 
+          
+
           , or <paramref
            name="revision" />
+
+          
 
           
 
@@ -747,10 +877,14 @@ Version is 6.1.2.4</para>
 
           
 
+          
+
           The major version number. </param
         >
         <param name="minor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -761,10 +895,14 @@ Version is 6.1.2.4</para>
 
           
 
+          
+
           The build number. </param
         >
         <param name="revision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -778,11 +916,15 @@ Version is 6.1.2.4</para>
 
             
 
+            
+
              class with the specified major, minor, build, and revision numbers.</para
           >
         </summary>
         <param name="major">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -793,6 +935,8 @@ Version is 6.1.2.4</para>
 
           
 
+          
+
           The minor version number. </param
         >
         <param name="build">
@@ -800,10 +944,14 @@ Version is 6.1.2.4</para>
 
           
 
+          
+
           The build number. </param
         >
         <param name="revision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -837,6 +985,8 @@ Version is 6.1.2.4</para>
 
             
 
+            
+
              specifying the build component, or -1 if the build component is undefined.</para
           >
         </value>
@@ -867,6 +1017,8 @@ class VersionBuildExample {
           <para
             >Gets the value of the build component of the version number for the current <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -933,8 +1085,12 @@ class VersionCloneExample {
 
             
 
+            
+
              instance that is returned by this method to a <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -949,8 +1105,12 @@ class VersionCloneExample {
 
             
 
+            
+
              object whose value is the same as the current <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -965,8 +1125,12 @@ class VersionCloneExample {
 
             
 
+            
+
              whose values are a copy of the current <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -1004,8 +1168,12 @@ class VersionCloneExample {
 
           
 
+          
+
            is not a <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1082,6 +1250,8 @@ class VersionTest {
 
             
 
+            
+
              object to a specified object and returns an indication of their relative values.</para
           >
         </summary>
@@ -1110,8 +1280,12 @@ class VersionTest {
 
                   
 
+                  
+
                    object is a version before <paramref
                    name="version" />
+
+                  
 
                   
 
@@ -1130,8 +1304,12 @@ class VersionTest {
 
                   
 
+                  
+
                    object is the same version as <paramref
                    name="version" />
+
+                  
 
                   
 
@@ -1150,8 +1328,12 @@ class VersionTest {
 
                   
 
+                  
+
                    object is a version subsequent to <paramref
                    name="version" />
+
+                  
 
                   
 
@@ -1163,6 +1345,8 @@ class VersionTest {
 
                   
 
+                  
+
                    is null. </para
                 >
               </description>
@@ -1171,6 +1355,8 @@ class VersionTest {
         </returns>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1206,13 +1392,19 @@ class VersionTest {
 
             
 
+            
+
              interface, and performs slightly better than the <see
              cref="M:System.Version.CompareTo(System.Object)" />
 
             
 
+            
+
              method because it does not have to unbox the <paramref
              name="value" />
+
+            
 
             
 
@@ -1245,8 +1437,12 @@ class VersionTest {
 
             
 
+            
+
              object to a specified <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -1278,8 +1474,12 @@ class VersionTest {
 
                   
 
+                  
+
                    object is a version before <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1298,8 +1498,12 @@ class VersionTest {
 
                   
 
+                  
+
                    object is the same version as <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1318,8 +1522,12 @@ class VersionTest {
 
                   
 
+                  
+
                    object is a version subsequent to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1328,6 +1536,8 @@ class VersionTest {
                 <para>-or-</para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -1342,13 +1552,19 @@ class VersionTest {
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
 
           
 
+          
+
            object to compare to the current <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1388,6 +1604,8 @@ class VersionTest {
 
               
 
+              
+
               .</block
             >
           </para>
@@ -1422,8 +1640,12 @@ class VersionEqualsExample {
 
           
 
+          
+
           An object to compare with the current <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1434,6 +1656,8 @@ class VersionEqualsExample {
           <para
             >Returns a value indicating whether the current <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -1448,8 +1672,12 @@ class VersionEqualsExample {
 
             
 
+            
+
              object and <paramref
              name="obj" />
+
+            
 
             
 
@@ -1458,13 +1686,19 @@ class VersionEqualsExample {
 
             
 
+            
+
              objects, and every component of the current <see
              cref="T:System.Version" />
 
             
 
+            
+
              object matches the corresponding component of <paramref
              name="obj" />
+
+            
 
             
 
@@ -1476,8 +1710,12 @@ class VersionEqualsExample {
 
           
 
+          
+
           An object to compare with the current <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1513,13 +1751,19 @@ class VersionEqualsExample {
 
             
 
+            
+
              interface, and performs slightly better than the <see
              cref="M:System.Version.Equals(System.Object)" />
 
             
 
+            
+
              method because it does not have to unbox the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1534,8 +1778,12 @@ class VersionEqualsExample {
 
             
 
+            
+
              object and a specified <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -1550,8 +1798,12 @@ class VersionEqualsExample {
 
             
 
+            
+
              object matches the corresponding component of the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1563,13 +1815,19 @@ class VersionEqualsExample {
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
 
           
 
+          
+
            object to compare to the current <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1609,6 +1867,8 @@ class VersionEqualsExample {
 
               
 
+              
+
               .</block
             >
           </para>
@@ -1618,6 +1878,8 @@ class VersionEqualsExample {
           <para
             >Returns a hash code for the current <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -1657,6 +1919,8 @@ class VersionEqualsExample {
             
 
             
+
+            
 specifying the major component. </para
           >
         </value>
@@ -1690,6 +1954,8 @@ class VersionMajorExample {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1718,8 +1984,12 @@ class VersionMajorExample {
 
             
 
+            
+
              property to obtain the entire revision number, use the <see
              cref="P:System.Version.MajorRevision" />
+
+            
 
             
 
@@ -1728,11 +1998,15 @@ class VersionMajorExample {
 
             
 
+            
+
              property to obtain the low 16 bits.</para
           >
           <para
             >Starting in the .NET Framework version 2.0, the Windows NT operating system uses the <see
              cref="P:System.Version.MajorRevision" />
+
+            
 
             
 
@@ -1771,6 +2045,8 @@ class VersionMajorExample {
             
 
             
+
+            
 specifying the minor component. </para
           >
         </value>
@@ -1805,6 +2081,8 @@ class VersionMinorExample {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1833,13 +2111,19 @@ class VersionMinorExample {
 
             
 
+            
+
              property to obtain the entire revision number, use the <see
              cref="P:System.Version.MajorRevision" />
 
             
 
+            
+
              property to obtain the high 16 bits, and use the <see
              cref="P:System.Version.MinorRevision" />
+
+            
 
             
 
@@ -1887,8 +2171,12 @@ class VersionMinorExample {
 
             
 
+            
+
              property and then the <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -1897,8 +2185,12 @@ class VersionMinorExample {
 
             
 
+            
+
             , and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -1914,6 +2206,8 @@ class VersionMinorExample {
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -1925,8 +2219,12 @@ class VersionMinorExample {
 
             
 
+            
+
              equals <paramref
              name="v2" />
+
+            
 
             
 
@@ -1938,8 +2236,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The first <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1950,8 +2252,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The second <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -1995,9 +2301,13 @@ class VersionMinorExample {
 
             
 
+            
+
              
    property and then the <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -2006,8 +2316,12 @@ class VersionMinorExample {
 
             
 
+            
+
             , and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -2021,8 +2335,12 @@ class VersionMinorExample {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -2036,8 +2354,12 @@ class VersionMinorExample {
 
             
 
+            
+
              object is greater than the second specified <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -2052,8 +2374,12 @@ class VersionMinorExample {
 
             
 
+            
+
              is greater than <paramref
              name="v2" />
+
+            
 
             
 
@@ -2065,8 +2391,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The first <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2077,8 +2407,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The second <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2122,9 +2456,13 @@ class VersionMinorExample {
 
             
 
+            
+
              
    property and then the <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -2133,8 +2471,12 @@ class VersionMinorExample {
 
             
 
+            
+
             , and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -2148,8 +2490,12 @@ class VersionMinorExample {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -2163,8 +2509,12 @@ class VersionMinorExample {
 
             
 
+            
+
              object is greater than or equal to the second specified <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -2179,8 +2529,12 @@ class VersionMinorExample {
 
             
 
+            
+
              is greater than or equal to <paramref
              name="v2" />
+
+            
 
             
 
@@ -2192,8 +2546,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The first <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2204,8 +2562,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The second <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2249,9 +2611,13 @@ class VersionMinorExample {
 
             
 
+            
+
              
    property and then the <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -2260,8 +2626,12 @@ class VersionMinorExample {
 
             
 
+            
+
             , and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -2278,6 +2648,8 @@ class VersionMinorExample {
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -2289,8 +2661,12 @@ class VersionMinorExample {
 
             
 
+            
+
              does not equal <paramref
              name="v2" />
+
+            
 
             
 
@@ -2302,8 +2678,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The first <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2314,8 +2694,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The second <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2359,9 +2743,13 @@ class VersionMinorExample {
 
             
 
+            
+
              
    property and then the <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -2370,8 +2758,12 @@ class VersionMinorExample {
 
             
 
+            
+
             , and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -2385,8 +2777,12 @@ class VersionMinorExample {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -2400,8 +2796,12 @@ class VersionMinorExample {
 
             
 
+            
+
              object is less than the second specified <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -2416,8 +2816,12 @@ class VersionMinorExample {
 
             
 
+            
+
              is less than <paramref
              name="v2" />
+
+            
 
             
 
@@ -2429,8 +2833,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The first <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2441,8 +2849,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The second <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2486,9 +2898,13 @@ class VersionMinorExample {
 
             
 
+            
+
              
    property and then the <see
              cref="P:System.Version.Minor" />
+
+            
 
             
 
@@ -2497,8 +2913,12 @@ class VersionMinorExample {
 
             
 
+            
+
             , and <see
              cref="P:System.Version.Revision" />
+
+            
 
             
 
@@ -2512,8 +2932,12 @@ class VersionMinorExample {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -2527,8 +2951,12 @@ class VersionMinorExample {
 
             
 
+            
+
              object is less than or equal to the second <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -2543,8 +2971,12 @@ class VersionMinorExample {
 
             
 
+            
+
              is less than or equal to <paramref
              name="v2" />
+
+            
 
             
 
@@ -2556,8 +2988,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The first <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2568,8 +3004,12 @@ class VersionMinorExample {
 
           
 
+          
+
           The second <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -2603,6 +3043,8 @@ class VersionMinorExample {
 
             
 
+            
+
              parameter must have the following format:</para
           >
           <code>major.minor[.build[.revision]]</code>
@@ -2614,8 +3056,12 @@ class VersionMinorExample {
 
               
 
+              
+
                method to parse user input. Alternatively, you can call the <see
                cref="M:System.Version.TryParse(System.String,System.Version@)" />
+
+              
 
               
 
@@ -2628,8 +3074,12 @@ class VersionMinorExample {
 
             
 
+            
+
              method is a convenience method; it is equivalent to calling the <see
              cref="M:System.Version.#ctor(System.String)" />
+
+            
 
             
 
@@ -2644,6 +3094,8 @@ class VersionMinorExample {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2655,11 +3107,15 @@ class VersionMinorExample {
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2689,6 +3145,8 @@ class VersionMinorExample {
           <para
             >A <see
              cref="T:System.Int32" qualify="true" />
+
+            
 
             
 
@@ -2727,6 +3185,8 @@ class VersionRevisionExample {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2759,8 +3219,12 @@ class VersionRevisionExample {
 
             
 
+            
+
              object to its equivalent <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2775,8 +3239,12 @@ class VersionRevisionExample {
 
             
 
+            
+
              representation of the values of the major, minor, build, and revision components of the current <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -2789,8 +3257,12 @@ class VersionRevisionExample {
 
             
 
+            
+
              object using the constructor Version(1,1), the returned string is "1.1". If you create a <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -2827,8 +3299,12 @@ class VersionRevisionExample {
 
             
 
+            
+
              object to its equivalent <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2843,13 +3319,19 @@ class VersionRevisionExample {
 
             
 
+            
+
              representation of the values of the major, minor, build, and revision components of the current <see
              cref="T:System.Version" />
 
             
 
+            
+
              object, each separated by a period character ('.'). The <paramref
              name="fieldCount" />
+
+            
 
             
 
@@ -2913,6 +3395,8 @@ class VersionRevisionExample {
 
             
 
+            
+
              object using the constructor Version(1,3,5), ToString(2) returns "1.3" and ToString(4) throws an exception.</para
           >
         </returns>
@@ -2921,8 +3405,12 @@ class VersionRevisionExample {
 
           
 
+          
+
           The number of components to return. The <paramref
            name="fieldCount" />
+
+          
 
           
 

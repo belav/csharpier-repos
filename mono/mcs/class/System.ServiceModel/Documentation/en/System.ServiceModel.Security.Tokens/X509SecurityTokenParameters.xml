@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -87,8 +89,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.Any" />
+
+                
 
                 
 
@@ -101,8 +107,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -112,6 +122,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -129,6 +141,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -137,8 +151,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />
+
+          
 
           
 
@@ -175,6 +193,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -183,6 +203,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" />
+
+            
 
             
 
@@ -225,8 +247,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="inclusionMode" />
+
+                
 
                 
 
@@ -239,8 +265,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="x509ReferenceStyle" />
+
+                
 
                 
 
@@ -250,6 +280,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -267,6 +299,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -275,8 +309,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />
+
+          
 
           
 
@@ -287,8 +325,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />
+
+          
 
           
 
@@ -322,8 +364,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -334,8 +380,12 @@
 
             
 
+            
+
              is an abstract class which is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -347,8 +397,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.X509SecurityTokenParameters)" />
+
+            
 
             
 
@@ -364,6 +418,8 @@
           <para
             >A new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -410,6 +466,8 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
@@ -417,8 +475,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+
+          
 
           
 
@@ -479,6 +541,8 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
@@ -488,8 +552,12 @@
 
                 
 
+                
+
                  = <see
                  cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.X509Certificate" />
+
+                
 
                 
 
@@ -502,6 +570,8 @@
 
                 
 
+                
+
                  = true.</para
               >
             </item>
@@ -511,8 +581,12 @@
 
             
 
+            
+
              = <see
              cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
+
+            
 
             
 
@@ -528,8 +602,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+          
 
           
 

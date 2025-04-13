@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>for</keyword>
@@ -32,6 +34,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.5.1">local-variable-declaration</non_terminal>
@@ -47,6 +51,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.7.1">boolean-expression</non_terminal>
@@ -59,6 +65,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.8.3">statement-expression-list</non_terminal>
@@ -68,6 +76,8 @@
       <name>
         <non_terminal where="15.8.3">statement-expression-list</non_terminal>
       </name>
+
+      
 
       
 
@@ -88,8 +98,12 @@
 
     
 
+    
+
     , if present, consists of either a <non_terminal
      where="15.5.1">local-variable-declaration</non_terminal>
+
+    
 
     
 
@@ -98,8 +112,12 @@
 
     
 
+    
+
     ) or a list of  <non_terminal
      where="15.6">statement-expression</non_terminal>
+
+    
 
     
 
@@ -108,8 +126,12 @@
 
     
 
+    
+
     ) separated by commas. The scope of a local variable declared by a <non_terminal
      where="15.8.3">for-initializer</non_terminal>
+
+    
 
     
 
@@ -118,13 +140,19 @@
 
     
 
+    
+
      for the variable and extends to the end of the embedded statement. The scope includes the <non_terminal
      where="15.8.3">for-condition</non_terminal>
 
     
 
+    
+
      and the <non_terminal
      where="15.8.3">for-iterator</non_terminal>
+
+    
 
     
 
@@ -136,13 +164,19 @@
 
     
 
+    
+
     , if present, must be a <non_terminal
      where="15.7.1">boolean-expression</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >14.16</hyperlink>
+
+    
 
     
 
@@ -154,13 +188,19 @@
 
     
 
+    
+
     , if present, consists of a list of <non_terminal
      where="15.6">statement-expression</non_terminal>
 
     
 
+    
+
     s (<hyperlink
     >15.6</hyperlink>
+
+    
 
     
 
@@ -175,11 +215,15 @@
 
         
 
+        
+
          is present, the variable initializers or statement expressions are executed in the order they are written. This step is only performed once. </list_item
       >
       <list_item
         > If a <non_terminal
          where="15.8.3">for-condition</non_terminal>
+
+        
 
         
 
@@ -191,8 +235,12 @@
 
         
 
+        
+
          is not present or if the evaluation yields true, control is transferred to the embedded statement. When and if control reaches the end point of the embedded statement (possibly from execution of a continue statement), the expressions of the <non_terminal
          where="15.8.3">for-iterator</non_terminal>
+
+        
 
         
 
@@ -201,11 +249,15 @@
 
         
 
+        
+
          in the step above. </list_item
       >
       <list_item
         > If the <non_terminal
          where="15.8.3">for-condition</non_terminal>
+
+        
 
         
 
@@ -219,8 +271,12 @@
 
     
 
+    
+
     ) may be used to transfer control to the end point of the for statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink
     >15.9.2</hyperlink>
+
+    
 
     
 
@@ -235,11 +291,15 @@
 
         
 
+        
+
          is present. </list_item
       >
       <list_item
         > The for statement is reachable and a <non_terminal
          where="15.8.3">for-condition</non_terminal>
+
+        
 
         
 
@@ -254,6 +314,8 @@
       <list_item
         > The for statement is reachable and a <non_terminal
          where="15.8.3">for-condition</non_terminal>
+
+        
 
         
 

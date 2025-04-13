@@ -37,6 +37,8 @@
 
         
 
+        
+
          class to create button controls on a Web page. An &lt;input type=button&gt; HTML element is a push button with no default behavior when clicked. An &lt;input type=submit&gt; HTML element is a button that submits a form when clicked. An &lt;input type=reset&gt; HTML button resets all controls to their initial values when clicked.</para
       >
       <para
@@ -45,8 +47,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputButton.#ctor" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -119,6 +131,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -141,6 +155,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -170,6 +186,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -178,6 +196,8 @@
           <para
             >The following table shows the different possible values for the <paramref
              name="type" />
+
+            
 
             
 
@@ -228,11 +248,15 @@
 
             
 
+            
+
              class using the specified button type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +285,8 @@
 
             
 
+            
+
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
@@ -269,13 +295,19 @@
 
             
 
+            
+
              control is clicked by using the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
 
             
 
+            
+
              property. To prevent validation from being performed, set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+
+            
 
             
 
@@ -287,6 +319,8 @@
 
             
 
+            
+
              event to prevent page validation from occurring when a Cancel or Reset button is clicked.</para
           >
         </remarks>
@@ -295,6 +329,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -330,13 +366,19 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
+            
+
              method. <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputButton.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -351,6 +393,8 @@
 
             
 
+            
+
              event and registers client script for generating postback.</para
           >
         </summary>
@@ -359,8 +403,12 @@
 
           
 
+          
+
           An <see
            cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+
+          
 
           
 
@@ -390,8 +438,12 @@
 
             
 
+            
+
              event is raised when an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -404,6 +456,8 @@
 
               
 
+              
+
                event.</para
             >
           </block>
@@ -413,10 +467,14 @@
 
             
 
+            
+
              delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -431,6 +489,8 @@
 
             
 
+            
+
              event. This allows you to handle the event directly.</para
           >
         </summary>
@@ -439,8 +499,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -476,13 +540,19 @@
 
             
 
+            
+
              method is used by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
+            
+
              control, when it is clicked, to raise a <see
              cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+
+            
 
             
 
@@ -494,8 +564,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="M:System.Web.UI.Page.Validate(System.String)" />
+
+            
 
             
 
@@ -504,11 +578,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -523,11 +601,15 @@
 
             
 
+            
+
              control when it posts back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -556,13 +638,19 @@
 
             
 
+            
+
              method overrides the base <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
+            
+
             .method. <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -577,6 +665,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -585,8 +675,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -614,12 +708,16 @@
 
             
 
+            
+
              control is clicked.</para
           >
           <block subset="none" type="note">
             <para
               >A Reset button does not raise the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+
+              
 
               
 
@@ -634,6 +732,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -642,6 +742,8 @@
           <para
             >Occurs when an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -680,8 +782,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -693,8 +799,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -726,8 +836,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -739,8 +853,12 @@
 
             
 
+            
+
              property is set to true. When you specify a value for the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
+
+            
 
             
 
@@ -749,8 +867,12 @@
 
             
 
+            
+
              control posts back to the server. If you do not specify a value for this property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+
+            
 
             
 
@@ -762,6 +884,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 

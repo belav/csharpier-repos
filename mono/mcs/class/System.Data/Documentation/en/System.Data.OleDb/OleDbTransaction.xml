@@ -26,8 +26,12 @@
 
         
 
+        
+
          object by calling <see
          cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction), are performed on the <see
          cref="T:System.Data.OleDb.OleDbTransaction" />
+
+        
 
         
 
@@ -106,6 +114,8 @@
 
           
 
+          
+
           The isolation level to use for the transaction. </param
         >
       </Docs>
@@ -152,6 +162,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -160,6 +172,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -242,6 +256,8 @@
 
             
 
+            
+
              applies to the whole transaction.</para
           >
         </remarks>
@@ -250,6 +266,8 @@
           <para
             >Specifies the <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -278,8 +296,12 @@
 
             
 
+            
+
              has been called, but before <see
              cref="M:System.Data.OleDb.OleDbTransaction.Commit" />
+
+            
 
             
 

@@ -46,6 +46,8 @@ x = 1, y = 0
 
       
 
+      
+
       ) because the assignment to y is not executed until after the base class constructor returns. </example
     >
   </paragraph>
@@ -53,6 +55,8 @@ x = 1, y = 0
     <example
       >It is useful to think of instance variable initializers and constructor initializers as statements that are automatically inserted before the <non_terminal
        where="17.10">constructor-body</non_terminal>
+
+      
 
       
 
@@ -85,6 +89,8 @@ class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -126,6 +132,8 @@ class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

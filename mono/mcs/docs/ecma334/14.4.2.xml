@@ -9,8 +9,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.5</hyperlink>
+
+        
 
         
 
@@ -22,8 +26,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.10.1</hyperlink>
+
+        
 
         
 
@@ -35,8 +43,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.6</hyperlink>
+
+        
 
         
 
@@ -48,8 +60,12 @@
 
         
 
+        
+
          and <hyperlink
         >14.2.4</hyperlink>
+
+        
 
         
 
@@ -66,11 +82,15 @@
 
         
 
+        
+
         ). If this reduced set is empty, a compile-time error occurs. </list_item
       >
       <list_item
         > Then, given the set of applicable candidate function members, the best function member in that set is located. If the set contains only one function member, then that function member is the best function member. Otherwise, the best function member is the one function member that is better than all other function members with respect to the given argument list, provided that each function member is compared to all other function members using the rules in <hyperlink
         >14.4.2.2</hyperlink>
+
+        
 
         
 

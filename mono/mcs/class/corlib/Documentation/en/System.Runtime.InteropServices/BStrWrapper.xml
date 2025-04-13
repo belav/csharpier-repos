@@ -29,8 +29,12 @@
 
         
 
+        
+
          class controls how the wrapped object is marshaled when passed as VARIANT. You can wrap a <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          object to marshal it as VT_BSTR. <see
          cref="T:System.Runtime.InteropServices.BStrWrapper" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         , a null string is passed as VT_EMPTY; however, wrapping the string with <see
          cref="T:System.Runtime.InteropServices.BStrWrapper" />
+
+        
 
         
 
@@ -86,8 +98,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -96,6 +112,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -128,8 +146,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -138,6 +160,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,6 +189,8 @@
           <para
             >Gets the wrapped <see
              cref="T:System.String" />
+
+            
 
             
 

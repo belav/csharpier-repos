@@ -51,13 +51,19 @@
 
         
 
+        
+
          interface. The <see
          cref="T:System.Collections.CaseInsensitiveComparer" />
 
         
 
+        
+
          class is the implementation of the <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
          of the current thread unless otherwise specified. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
          cref="N:System.Globalization" />
+
+        
 
         
 
@@ -78,6 +88,8 @@
          type="text/html">
           <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
         </format>
+
+        
 
         
 
@@ -117,8 +129,12 @@
 
             
 
+            
+
              to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
              cref="N:System.Globalization" />
+
+            
 
             
 
@@ -126,6 +142,8 @@
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -140,8 +158,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -153,13 +175,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
 
           
 
+          
+
            to use for the new <see
            cref="T:System.Collections.Comparer" />
+
+          
 
           
 
@@ -198,8 +226,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -208,8 +240,12 @@
 
             
 
+            
+
              and do not implement the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -222,8 +258,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -232,11 +272,15 @@
 
             
 
+            
+
              and are not assignment-compatible types.</para
           >
         </exception>
         <param name="a">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,8 +294,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -260,8 +308,12 @@
 
             
 
+            
+
             . CompareTo (<paramref
              name="b" />
+
+            
 
             
 
@@ -270,8 +322,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -280,8 +336,12 @@
 
             
 
+            
+
             . CompareTo (<paramref
              name="a" />
+
+            
 
             
 
@@ -293,6 +353,8 @@
 
             
 
+            
+
             . When sorting, null is considered to be less than any other object.</para
           >
           <para
@@ -301,10 +363,14 @@
 
             
 
+            
+
              namespace and <format
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -323,8 +389,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -351,8 +421,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -370,8 +444,12 @@
 
                   
 
+                  
+
                    equals <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -389,8 +467,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -405,10 +487,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,8 +535,12 @@
 
             
 
+            
+
              of the current thread to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
              cref="N:System.Globalization" />
+
+            
 
             
 
@@ -458,6 +548,8 @@
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -472,8 +564,12 @@
 
             
 
+            
+
              that is associated with the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -510,8 +606,12 @@
 
             
 
+            
+
              to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
              cref="N:System.Globalization" />
+
+            
 
             
 
@@ -519,6 +619,8 @@
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -533,8 +635,12 @@
 
             
 
+            
+
              that is associated with <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -574,8 +680,12 @@
 
             
 
+            
+
              method is not visible to COM clients by default, inheriting the <see
              cref="T:System.Collections.Comparer" />
+
+            
 
             
 
@@ -590,6 +700,8 @@
 
             
 
+            
+
              object with the data required for serialization.  </para
           >
         </summary>
@@ -598,10 +710,14 @@
 
           
 
+          
+
           The object to populate with data.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

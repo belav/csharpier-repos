@@ -16,13 +16,19 @@
 
         
 
+        
+
          provides methods you can use to determine whether a feature is currently installed on the system and to get the version number of a feature. Call <see
          cref="M:System.Windows.Forms.IFeatureSupport.IsPresent(System.Object)" />
 
         
 
+        
+
          to determine whether a feature, or a specific version of a feature, is currently installed. Call <see
          cref="M:System.Windows.Forms.IFeatureSupport.GetVersionPresent(System.Object)" />
+
+        
 
         
 
@@ -34,8 +40,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.OSFeature" />
+
+        
 
         
 
@@ -66,6 +76,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -81,11 +93,15 @@
 
             
 
+            
+
              representing the version number of the specified feature; or null if the feature is not installed.</para
           >
         </returns>
         <param name="feature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,6 +134,8 @@
         </returns>
         <param name="feature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,6 +175,8 @@
 
           
 
+          
+
           The feature to look for. </param
         >
         <param name="minimumVersion">
@@ -164,8 +184,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
+
+          
 
           
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is a complete implementation for a component editor page that consists of an empty window. You can extend this page to add your own controls. <see
          cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          of a <see
          cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >Provides a base implementation for a <see
          cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+
+        
 
         
 
@@ -64,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+
+            
 
             
 
@@ -269,13 +281,19 @@
 
             
 
+            
+
              method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see
              cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
 
             
 
+            
+
              completes, it should call the <see
              cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" />
+
+            
 
             
 
@@ -287,8 +305,12 @@
 
             
 
+            
+
              property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see
              cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
+
+            
 
             
 
@@ -321,13 +343,19 @@
 
             
 
+            
+
              method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see
              cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
 
             
 
+            
+
              completes, it should call the <see
              cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" />
+
+            
 
             
 
@@ -339,8 +367,12 @@
 
             
 
+            
+
              property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see
              cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
+
+            
 
             
 
@@ -400,6 +432,8 @@
 
             
 
+            
+
              that represents the window for this page.</para
           >
         </returns>
@@ -430,6 +464,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -698,8 +734,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -753,6 +793,8 @@
 
           
 
+          
+
           The site for this page. </param
         >
       </Docs>
@@ -777,13 +819,19 @@
 
             
 
+            
+
              returns true. The Help system calls the <see
              cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" />
 
             
 
+            
+
              method to provide Help for the page. <see
              cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" />
+
+            
 
             
 

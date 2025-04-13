@@ -27,13 +27,19 @@
 
         
 
+        
+
          events that are to be traced. The <see
          cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
+        
+
          class uses the <see
          cref="T:System.Diagnostics.SourceLevels" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          class uses the <see
          cref="T:System.Diagnostics.SourceLevels" />
+
+        
 
         
 
@@ -87,8 +97,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceEventType.Start" />
+
+            
 
             
 
@@ -97,13 +111,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceEventType.Transfer" />
 
             
 
+            
+
             , and <see
              cref="F:System.Diagnostics.TraceEventType.Resume" />
+
+            
 
             
 
@@ -156,6 +176,8 @@
 
             
 
+            
+
              events through.</para
           >
         </summary>
@@ -184,8 +206,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Diagnostics.TraceEventType.Error" />
+
+            
 
             
 
@@ -217,8 +243,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceEventType.Error" />
+
+            
 
             
 
@@ -227,8 +257,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Diagnostics.TraceEventType.Information" />
+
+            
 
             
 
@@ -281,8 +315,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceEventType.Error" />
+
+            
 
             
 
@@ -291,13 +329,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceEventType.Information" />
 
             
 
+            
+
             , and <see
              cref="F:System.Diagnostics.TraceEventType.Verbose" />
+
+            
 
             
 
@@ -329,13 +373,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceEventType.Error" />
 
             
 
+            
+
             , and <see
              cref="F:System.Diagnostics.TraceEventType.Warning" />
+
+            
 
             
 

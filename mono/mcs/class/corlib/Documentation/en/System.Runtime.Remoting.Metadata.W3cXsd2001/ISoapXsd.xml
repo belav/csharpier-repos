@@ -54,6 +54,8 @@
 
             
 
+            
+
              that indicates the XSD of the current SOAP type.</para
           >
         </returns>

@@ -25,6 +25,8 @@
 
         
 
+        
+
          derived control, you need to inherit from this class.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Interacts with the parser to build a <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
+
+            
 
             
 
@@ -81,8 +87,12 @@
 
             
 
+            
+
              method overrides the inherited implementation of the <see
              cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
+
+            
 
             
 
@@ -91,8 +101,12 @@
 
             
 
+            
+
              control are not represented by <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -104,6 +118,8 @@
           <para
             >Determines whether the control builder should process the white space literals that are represented by the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
              base class, this method adds the builders of all child controls associated with the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -151,8 +171,12 @@
 
             
 
+            
+
              object. This method is inherited from the <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -161,13 +185,19 @@
 
             
 
+            
+
             . In the overridden implementation in <see
              cref="T:System.Web.UI.WebControls.LiteralControlBuilder" />
 
             
 
+            
+
             , the method always throws <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -182,8 +212,12 @@
 
             
 
+            
+
             , because adding child control builders does not apply to the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -195,8 +229,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 

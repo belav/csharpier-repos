@@ -25,13 +25,19 @@
 
         
 
+        
+
          method before you use any instance of <see
          cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
         
 
+        
+
         . To avoid races when you store an instance of a <see
          cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -55,13 +63,19 @@
 
             
 
+            
+
             , and then assign the <see
              cref="T:System.Runtime.InteropServices.SafeBuffer" />
 
             
 
+            
+
              to the static variable, for example, by using the <see
              cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)" />
+
+            
 
             
 
@@ -102,11 +116,15 @@
 
             
 
+            
+
              class, and specifies whether the buffer handle is to be reliably released. </para
           >
         </summary>
         <param name="ownsHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,11 +217,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="numBytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,6 +271,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -257,10 +281,14 @@
 
           
 
+          
+
           The number of elements in the buffer.</param
         >
         <param name="sizeOfEachElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,6 +339,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -319,10 +349,14 @@
 
           
 
+          
+
           The number of elements of the value type to allocate memory for.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,10 +415,14 @@
 
           
 
+          
+
           The location from which to read the value type. You may have to consider alignment issues.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,6 +508,8 @@
           <para
             >Releases a pointer that was obtained by the <see
              cref="M:System.Runtime.InteropServices.SafeBuffer.AcquirePointer(System.Byte*@)" />
+
+            
 
             
 

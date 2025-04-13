@@ -52,8 +52,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -66,8 +70,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -77,6 +85,8 @@
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                
 
                 
 
@@ -90,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -135,6 +149,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+            
 
             
 
@@ -170,8 +186,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -184,8 +204,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -198,6 +222,8 @@
 
                 
 
+                
+
                  is set to true.</para
               >
             </item>
@@ -207,8 +233,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="tokenType" />
+
+                
 
                 
 
@@ -225,11 +255,15 @@
 
             
 
+            
+
              class using the specified token type.</para
           >
         </summary>
         <param name="tokenType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,8 +299,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -279,8 +317,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -293,6 +335,8 @@
 
                 
 
+                
+
                  is set to true.</para
               >
             </item>
@@ -302,8 +346,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="tokenType" />
+
+                
 
                 
 
@@ -316,8 +364,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="issuerAddress" />
+
+                
 
                 
 
@@ -334,6 +386,8 @@
 
             
 
+            
+
              class using the specified token type and issuer address.</para
           >
         </summary>
@@ -342,10 +396,14 @@
 
           
 
+          
+
           The token type.</param
         >
         <param name="issuerAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -382,8 +440,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -396,8 +458,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -410,6 +476,8 @@
 
                 
 
+                
+
                  is set to true.</para
               >
             </item>
@@ -419,8 +487,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="tokenType" />
+
+                
 
                 
 
@@ -433,8 +505,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="issuerAddress" />
+
+                
 
                 
 
@@ -447,8 +523,12 @@
 
                 
 
+                
+
                  is set to <paramref
                  name="issuerBinding" />
+
+                
 
                 
 
@@ -465,11 +545,15 @@
 
             
 
+            
+
              class using the specified token type, issuer address and issuer binding.</para
           >
         </summary>
         <param name="tokenType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,10 +564,14 @@
 
           
 
+          
+
           The address of the endpoint that issues the token.</param
         >
         <param name="issuerBinding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,6 +630,8 @@
 
             
 
+            
+
              in the returned collection specifies the types of required and optional claims expected to appear in a federated credential.</para
           >
           <para>A claim type requirement consists of the URI of the claim type requested in the issued token along with a Boolean parameter that indicates whether that claim type is required in the issued token or is optional.</para>
@@ -578,8 +668,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -590,8 +684,12 @@
 
             
 
+            
+
              is an abstract class that is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -603,8 +701,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters)" />
+
+            
 
             
 
@@ -620,6 +722,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -660,8 +764,12 @@
 
             
 
+            
+
              method, with <paramref
              name="referenceStyle" />
+
+            
 
             
 
@@ -681,10 +789,14 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,6 +844,8 @@
 
             
 
+            
+
              that contains XML elements that represent the request parameters.</para
           >
         </returns>
@@ -740,10 +854,14 @@
 
           
 
+          
+
           The message security version.</param
         >
         <param name="securityTokenSerializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -804,12 +922,16 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" />
+
+                
 
                 
 
@@ -822,12 +944,16 @@
 
                 
 
+                
+
                  = true.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" />
+
+                
 
                 
 
@@ -842,6 +968,8 @@
         </summary>
         <param name="requirement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1097,8 +1225,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
+
+            
 
             
 
@@ -1107,8 +1239,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerAddress" />
+
+            
 
             
 
@@ -1117,13 +1253,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.IssuerBinding" />
 
             
 
+            
+
              (if not null) and binding elements, and <see
              cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.ClaimTypeRequirements" />
+
+            
 
             
 

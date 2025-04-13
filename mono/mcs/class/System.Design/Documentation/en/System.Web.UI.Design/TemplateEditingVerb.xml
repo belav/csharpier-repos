@@ -27,8 +27,12 @@
 
           
 
+          
+
            class is obsolete. Expose templates through the <see
            cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+          
 
           
 
@@ -37,8 +41,12 @@
 
           
 
+          
+
            for each <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -72,8 +80,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -82,8 +94,12 @@
 
               
 
+              
+
                for each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -99,6 +115,8 @@
 
             
 
+            
+
              class with the specified verb text and index.</para
           >
         </summary>
@@ -107,10 +125,14 @@
 
           
 
+          
+
           The text to show for the verb on a menu.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,8 +161,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -149,8 +175,12 @@
 
               
 
+              
+
                for each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -166,11 +196,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,6 +215,8 @@
 
           
 
+          
+
           An optional integer value that can be used by a designer, typically to indicate the index of the verb within a set of verbs. </param
         >
         <param name="designer">
@@ -188,8 +224,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+
+          
 
           
 
@@ -217,8 +257,12 @@
 
             
 
+            
+
              allows the resources used by the <see
              cref="T:System.Web.UI.Design.TemplateEditingVerb" />
+
+            
 
             
 
@@ -231,8 +275,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -241,8 +289,12 @@
 
               
 
+              
+
                for each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -255,6 +307,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Web.UI.Design.TemplateEditingVerb" />
+
+            
 
             
 
@@ -285,8 +339,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -295,8 +353,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -308,8 +370,12 @@
 
             
 
+            
+
              is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Web.UI.Design.TemplateEditingVerb" />
+
+            
 
             
 
@@ -324,11 +390,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,11 +426,15 @@
 
             
 
+            
+
              and cleans up resources by calling Dispose(false). Override Dispose(Boolean) to customize the cleanup.</para
           >
           <para
             >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -376,10 +450,14 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -392,6 +470,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -401,8 +481,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -411,8 +495,12 @@
 
               
 
+              
+
                for each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 
@@ -448,8 +536,12 @@
 
               
 
+              
+
                class is obsolete. Expose templates through the <see
                cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -458,8 +550,12 @@
 
               
 
+              
+
                for each <see
                cref="T:System.Web.UI.Design.TemplateGroup" />
+
+              
 
               
 

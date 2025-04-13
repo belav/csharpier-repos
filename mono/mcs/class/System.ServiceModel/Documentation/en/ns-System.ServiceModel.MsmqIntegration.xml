@@ -10,6 +10,8 @@
 
         
 
+        
+
          namespace contains classes that relate to Microsoft Message Queuing Service (MSMQ) integration, which allows communication between MSMQ applications and indigo1 applications.</para
       >
     </summary>

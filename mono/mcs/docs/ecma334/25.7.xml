@@ -6,11 +6,15 @@
 
     
 
+    
+
     ) may include a stack allocation initializer, which allocates memory from the call stack. <grammar_production
     >
       <name>
         <non_terminal where="15.5.1">local-variable-initializer</non_terminal>
       </name>
+
+      
 
       
 
@@ -30,6 +34,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>stackalloc</keyword>
@@ -46,8 +52,12 @@
 
     
 
+    
+
      indicates the type of the items that will be stored in the newly allocated location, and the expression indicates the number of these items. Taken together, these specify the required allocation size. Since the size of a stack allocation cannot be negative, it is a compile-time error to specify the number of items as a <non_terminal
      where="14.15">constant-expression</non_terminal>
+
+    
 
     
 
@@ -59,8 +69,12 @@
 
     
 
+    
+
     ) and E to be an expression of type <keyword
     >int</keyword>
+
+    
 
     
 
@@ -73,10 +87,14 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph>
     <note>[Note: There is no way to explicitly free memory allocated using stackalloc. end note]</note>
+
+    
 
     
 
@@ -111,6 +129,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

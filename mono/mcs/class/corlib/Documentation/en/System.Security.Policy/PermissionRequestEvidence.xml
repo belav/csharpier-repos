@@ -71,6 +71,8 @@
 
             
 
+            
+
              to determine which permissions the code should be granted.</para
           >
         </remarks>
@@ -82,11 +84,15 @@
 
             
 
+            
+
              class with the permission request of a code assembly.</para
           >
         </summary>
         <param name="request">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,10 +103,14 @@
 
           
 
+          
+
           The permissions the code can use if they are granted, but that are not required. </param
         >
         <param name="denied">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +147,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -145,6 +157,8 @@
           <para
             >An equivalent copy of the current <see
              cref="T:System.Security.Policy.PermissionRequestEvidence" />
+
+            
 
             
 
@@ -346,6 +360,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -357,6 +373,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -365,6 +383,8 @@
           <para
             >A representation of the state of the <see
              cref="T:System.Security.Policy.PermissionRequestEvidence" />
+
+            
 
             
 

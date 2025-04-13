@@ -31,6 +31,8 @@
 
         
 
+        
+
          expressions that can be either catch statements or filters.</para
       >
       <para>The fault block runs if an exception is thrown.</para>
@@ -97,6 +99,8 @@
 
             
 
+            
+
              representing the body of the try block.</para
           >
         </summary>
@@ -126,6 +130,8 @@
           <para
             >Gets the <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -161,6 +167,8 @@
 
             
 
+            
+
              representing the finally block.</para
           >
         </summary>
@@ -190,6 +198,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Linq.Expressions.CatchBlock" />
+
+            
 
             
 
@@ -225,6 +235,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -248,6 +260,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -296,8 +310,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.TryExpression.Body" />
+
+          
 
           
 
@@ -308,8 +326,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.TryExpression.Handlers" />
+
+          
 
           
 
@@ -320,8 +342,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.TryExpression.Finally" />
+
+          
 
           
 
@@ -332,8 +358,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.TryExpression.Fault" />
+
+          
 
           
 

@@ -10,6 +10,8 @@
 
         
 
+        
+
          namespace provides classes that the binary rewriter can use to handle a contract failure.</para
       >
     </summary>

@@ -54,8 +54,12 @@
 
         
 
+        
+
          class to inspect events and to hook up event handlers, as shown in the example code for the <see
          cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
       <block subset="none" type="note">
         <para>
           <see cref="T:System.Reflection.EventInfo" />
+
+          
 
           
 
@@ -79,13 +85,19 @@
 
         
 
+        
+
          on EventInfo when the <paramref
          name="inherit" />
 
         
 
+        
+
          parameter of GetCustomAttributes is true does not walk the type hierarchy. Use <see
          cref="T:System.Attribute" />
+
+        
 
         
 
@@ -163,8 +175,12 @@
 
             
 
+            
+
             is not the same <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -177,8 +193,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -198,10 +218,14 @@
 
           
 
+          
+
           The event source. </param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,6 +260,8 @@
 
             
 
+            
+
              with a value of true.</para
           >
         </remarks>
@@ -247,8 +273,12 @@
 
             
 
+            
+
              object for the <see
              cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" />
+
+            
 
             
 
@@ -285,6 +315,8 @@
           <para
             >A <see
              cref="T:System.Reflection.EventAttributes" />
+
+            
 
             
 
@@ -334,11 +366,15 @@
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -374,6 +410,8 @@
 
             
 
+            
+
              that represents
    the type of the
    event-handler <see
@@ -381,9 +419,13 @@
 
             
 
+            
+
              associated with the event reflected by the current
    instance. Returns <see
              langword="null" />
+
+            
 
             
 
@@ -397,6 +439,8 @@
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -446,6 +490,8 @@
 
             
 
+            
+
              object representing the method used to add an event handler delegate to the event source.</para
           >
         </returns>
@@ -483,8 +529,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -493,6 +543,8 @@
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -510,6 +562,8 @@
 
             
 
+            
+
              method of the event, specifying whether to return non-public methods.</para
           >
         </summary>
@@ -521,11 +575,15 @@
 
             
 
+            
+
              object representing the method used to add an event handler delegate to the event source.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,8 +649,12 @@
 
                 
 
+                
+
                  method to retrieve an <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -606,8 +668,12 @@
 
                 
 
+                
+
                  method to retrieve an <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -621,8 +687,12 @@
 
                 
 
+                
+
                  method to retrieve an <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -636,8 +706,12 @@
 
                 
 
+                
+
                  method to retrieve an array of <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -656,6 +730,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.EventInfo" />
+
+            
 
             
 
@@ -697,8 +773,12 @@
 
                 
 
+                
+
                  method to retrieve an <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -712,8 +792,12 @@
 
                 
 
+                
+
                  method to retrieve an <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -727,8 +811,12 @@
 
                 
 
+                
+
                  method to retrieve an <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -742,8 +830,12 @@
 
                 
 
+                
+
                  method to retrieve an array of <see
                  cref="T:System.Reflection.EventInfo" />
+
+                
 
                 
 
@@ -765,11 +857,15 @@
 
             
 
+            
+
              objects representing methods that have been associated with an event in metadata by using the .other directive. If there are no methods matching the specification, an empty array is returned.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -847,8 +943,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -857,6 +957,8 @@
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -876,6 +978,8 @@
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -915,8 +1019,12 @@
 
             
 
+            
+
             (<see
              langword="false" />
+
+            
 
             
 
@@ -940,6 +1048,8 @@
           <para
             >A <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -992,8 +1102,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -1002,6 +1116,8 @@
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+          
 
           
 
@@ -1019,11 +1135,15 @@
 
             
 
+            
+
              object representing the method used to remove an event handler delegate from the event source.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1122,8 +1242,12 @@
 
             
 
+            
+
             . Therefore, when you examine a set of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1132,13 +1256,19 @@
 
             
 
+            
+
              — the <see
              cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
+            
+
              property returns <see
              cref="F:System.Reflection.MemberTypes.Event" />
+
+            
 
             
 
@@ -1150,6 +1280,8 @@
           <para
             >Gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -1188,6 +1320,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -1199,8 +1333,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1212,10 +1350,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1253,6 +1395,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -1264,8 +1408,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1277,10 +1425,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1311,6 +1463,8 @@
           <para
             >This property is the equivalent of calling the <see
              cref="M:System.Reflection.EventInfo.GetRaiseMethod(System.Boolean)" />
+
+            
 
             
 
@@ -1361,8 +1515,12 @@
 
             
 
+            
+
             is not the same type <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1378,6 +1536,8 @@
 
             
 
+            
+
              will no longer be invoked.</para
           >
         </remarks>
@@ -1390,10 +1550,14 @@
 
           
 
+          
+
           The event source. </param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1425,6 +1589,8 @@
           <para
             >This property is the equivalent of calling the <see
              cref="M:System.Reflection.EventInfo.GetRemoveMethod(System.Boolean)" />
+
+            
 
             
 
@@ -1496,8 +1662,12 @@
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.EventInfo" />
+
+            
 
             
 
@@ -1512,8 +1682,12 @@
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.EventInfo" />
+
+            
 
             
 
@@ -1554,6 +1728,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1566,6 +1742,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1573,10 +1751,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

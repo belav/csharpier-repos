@@ -19,8 +19,12 @@
 
         
 
+        
+
          class. This class is used in the <see
          cref="T:System.Web.UI.SimpleWebHandlerParser" />
+
+        
 
         
 
@@ -31,10 +35,14 @@
 
         
 
+        
+
          is introduced in the .NET Framework version 3.5.  For more information, see <format
          type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
+
+        
 
         
 
@@ -61,6 +69,8 @@
 
             
 
+            
+
              instance, use the constructor overload that takes parameters.</para
           >
         </remarks>
@@ -69,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Compilation.LinePragmaCodeInfo" />
+
+            
 
             
 

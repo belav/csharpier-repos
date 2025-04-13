@@ -30,6 +30,8 @@
 
         
 
+        
+
          objects.</para
       >
       <para>Any process can act as either a named pipe server or client, or both. </para>
@@ -42,6 +44,8 @@
       <para
         >Exposes a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -78,8 +82,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+                
 
                 
 
@@ -93,8 +101,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.Pipes.PipeOptions.None" />
+
+                
 
                 
 
@@ -108,8 +120,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.Security.Principal.TokenImpersonationLevel.None" />
+
+                
 
                 
 
@@ -123,8 +139,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.HandleInheritability.None" />
+
+                
 
                 
 
@@ -141,11 +161,15 @@
 
             
 
+            
+
              class with the specified pipe name.</para
           >
         </summary>
         <param name="pipeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,8 +206,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+                
 
                 
 
@@ -197,8 +225,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.Pipes.PipeOptions.None" />
+
+                
 
                 
 
@@ -212,8 +244,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.Security.Principal.TokenImpersonationLevel.None" />
+
+                
 
                 
 
@@ -227,8 +263,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.HandleInheritability.None" />
+
+                
 
                 
 
@@ -245,6 +285,8 @@
 
             
 
+            
+
              class with the specified pipe and server names.</para
           >
         </summary>
@@ -253,10 +295,14 @@
 
           
 
+          
+
           The name of the remote computer to connect to, or "." to specify the local computer.</param
         >
         <param name="pipeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,8 +340,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.Pipes.PipeOptions.None" />
+
+                
 
                 
 
@@ -309,8 +359,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.Security.Principal.TokenImpersonationLevel.None" />
+
+                
 
                 
 
@@ -324,8 +378,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.HandleInheritability.None" />
+
+                
 
                 
 
@@ -342,11 +400,15 @@
 
             
 
+            
+
              class with the specified pipe and server names, and the specified pipe direction.</para
           >
         </summary>
         <param name="serverName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,10 +419,14 @@
 
           
 
+          
+
           The name of the pipe.</param
         >
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,11 +463,15 @@
 
             
 
+            
+
              class for the specified pipe handle with the specified pipe direction.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,10 +482,14 @@
 
           
 
+          
+
           true to indicate that the handle was opened asynchronously; otherwise, false.</param
         >
         <param name="isConnected">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,8 +500,12 @@
 
           
 
+          
+
           A safe handle for the pipe that this <see
            cref="T:System.IO.Pipes.NamedPipeClientStream" />
+
+          
 
           
 
@@ -466,8 +544,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.Security.Principal.TokenImpersonationLevel.None" />
+
+                
 
                 
 
@@ -481,8 +563,12 @@
 
                 
 
+                
+
                  value of <see
                  cref="F:System.IO.HandleInheritability.None" />
+
+                
 
                 
 
@@ -499,11 +585,15 @@
 
             
 
+            
+
              class with the specified pipe and server names, and the specified pipe direction and pipe options.</para
           >
         </summary>
         <param name="serverName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,6 +604,8 @@
 
           
 
+          
+
           The name of the pipe.</param
         >
         <param name="direction">
@@ -521,10 +613,14 @@
 
           
 
+          
+
           One of the enumeration values that determines the direction of the pipe.</param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,8 +660,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.HandleInheritability.None" />
+
+            
 
             
 
@@ -580,11 +680,15 @@
 
             
 
+            
+
              class with the specified pipe and server names, and the specified pipe direction, pipe options, and security impersonation level.</para
           >
         </summary>
         <param name="serverName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,10 +699,14 @@
 
           
 
+          
+
           The name of the pipe.</param
         >
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -609,10 +717,14 @@
 
           
 
+          
+
           One of the enumeration values that determines how to open or create the pipe.</param
         >
         <param name="impersonationLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -653,8 +765,12 @@
 
             
 
+            
+
              parameter. If the <paramref
              name="desiredAccessRights" />
+
+            
 
             
 
@@ -663,13 +779,19 @@
 
             
 
+            
+
             , the pipe direction will be <see
              cref="F:System.IO.Pipes.PipeDirection.In" />
 
             
 
+            
+
             . If the value of <paramref
              name="desiredAccessRights" />
+
+            
 
             
 
@@ -678,8 +800,12 @@
 
             
 
+            
+
             , the pipe direction will be <see
              cref="F:System.IO.Pipes.PipeDirection.Out" />
+
+            
 
             
 
@@ -688,8 +814,12 @@
 
             
 
+            
+
              includes both <see
              cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
+
+            
 
             
 
@@ -698,8 +828,12 @@
 
             
 
+            
+
             , the pipe direction will be <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -714,11 +848,15 @@
 
             
 
+            
+
              class with the specified pipe and server names, and the specified pipe options, security impersonation level, and inheritability mode.</para
           >
         </summary>
         <param name="serverName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -729,10 +867,14 @@
 
           
 
+          
+
           The name of the pipe.</param
         >
         <param name="desiredAccessRights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -743,6 +885,8 @@
 
           
 
+          
+
           One of the enumeration values that determines how to open or create the pipe.</param
         >
         <param name="impersonationLevel">
@@ -750,10 +894,14 @@
 
           
 
+          
+
           One of the enumeration values that determines the security impersonation level.</param
         >
         <param name="inheritability">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -795,11 +943,15 @@
 
             
 
+            
+
              class with the specified pipe and server names, and the specified pipe direction, pipe options, security impersonation level, and inheritability mode.</para
           >
         </summary>
         <param name="serverName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -810,10 +962,14 @@
 
           
 
+          
+
           The name of the pipe.</param
         >
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -824,6 +980,8 @@
 
           
 
+          
+
           One of the enumeration values that determines how to open or create the pipe.</param
         >
         <param name="impersonationLevel">
@@ -831,10 +989,14 @@
 
           
 
+          
+
           One of the enumeration values that determines the security impersonation level.</param
         >
         <param name="inheritability">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -865,6 +1027,8 @@
 
             
 
+            
+
              method with an infinite time-out value.</para
           >
           <para
@@ -873,8 +1037,12 @@
 
             
 
+            
+
              might return before <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
+
+            
 
             
 
@@ -883,13 +1051,19 @@
 
             
 
+            
+
              object, but <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
 
             
 
+            
+
              will not return until <see
              cref="Overload:System.IO.Pipes.NamedPipeClientStream.Connect" />
+
+            
 
             
 
@@ -901,13 +1075,19 @@
 
             
 
+            
+
              object has connected, but before the server has called <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
 
             
 
+            
+
             , will be available to the server following the call to <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
+
+            
 
             
 
@@ -945,8 +1125,12 @@
 
             
 
+            
+
              might return before <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
+
+            
 
             
 
@@ -955,8 +1139,12 @@
 
             
 
+            
+
             , but <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
+
+            
 
             
 
@@ -965,13 +1153,19 @@
 
             
 
+            
+
              has returned. You set the <paramref
              name="timeout" />
 
             
 
+            
+
              parameter to <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -983,13 +1177,19 @@
 
             
 
+            
+
              object has connected, but before the server has called <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
 
             
 
+            
+
             , will be available to the server following the call to <see
              cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />
+
+            
 
             
 
@@ -1002,6 +1202,8 @@
         </summary>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1029,8 +1231,12 @@
 
             
 
+            
+
              object that the current <see
              cref="T:System.IO.Pipes.NamedPipeClientStream" />
+
+            
 
             
 
@@ -1039,8 +1245,12 @@
 
             
 
+            
+
              object has not yet connected to a named pipe server, or if the current pipe handle has not yet been set, this property throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 

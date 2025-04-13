@@ -44,6 +44,8 @@ class C: ICloneable
 
       
 
+      
+
       the ICloneable.Clone member of C becomes the implementation of Clone in ICloneable because explicit interface member implementations take precedence over other members. end example]</example
     >
   </paragraph>
@@ -115,6 +117,8 @@ class C: IDerived
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -147,6 +151,8 @@ class ComboBox: IControl, ITextBox, IListBox
 
       
 
+      
+
       it is not possible to have separate implementations for the IControl named in the base class list, the IControl inherited by ITextBox, and the IControl inherited by IListBox. Indeed, there is no notion of a separate identity for these interfaces. Rather, the implementations of ITextBox and IListBox share the same implementation of IControl, and ComboBox is simply considered to implement three interfaces, IControl, ITextBox, and IListBox. end example]</example
     >
   </paragraph>
@@ -171,6 +177,8 @@ class Class2: Class1, Interface1
 }  
 ]]>
       </code_example>
+
+      
 
       
 

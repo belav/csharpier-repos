@@ -34,8 +34,12 @@
 
         
 
+        
+
          property to get the <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Xml.XmlElement.SetAttribute(System.String,System.String)" />
+
+        
 
         
 
@@ -57,13 +65,19 @@
 
         
 
+        
+
         , and so on). Additionally, you can call the <see
          cref="P:System.Xml.XmlElement.Attributes" />
 
         
 
+        
+
          property, which returns an <see
          cref="T:System.Xml.XmlAttributeCollection" />
+
+        
 
         
 
@@ -106,8 +120,12 @@
 
             
 
+            
+
              directly; instead, use methods such as <see
              cref="Overload:System.Xml.XmlDocument.CreateAttribute" />
+
+            
 
             
 
@@ -122,11 +140,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +159,8 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceURI">
@@ -144,10 +168,14 @@
 
           
 
+          
+
           The namespace uniform resource identifier (URI).</param
         >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,11 +213,15 @@
 
             
 
+            
+
              is already in the tree, it is first removed.</para
           >
           <para
             >If the node being inserted was created from another document, you can use <see
              cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+
+            
 
             
 
@@ -208,6 +240,8 @@
 
             
 
+            
+
              added.</para
           >
         </returns>
@@ -216,8 +250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -244,6 +282,8 @@
 
           
 
+          
+
            is returned.</value
         >
         <remarks>
@@ -252,6 +292,8 @@
           <para
             >For additional information on BaseURI and how it behaves with other node types, see <see
              cref="P:System.Xml.XmlNode.BaseURI" />
+
+            
 
             
 
@@ -295,11 +337,15 @@
 
             
 
+            
+
              returns null).</para
           >
           <para
             >Cloning an unspecified attribute returns a specified attribute (<see
              cref="P:System.Xml.XmlAttribute.Specified" />
+
+            
 
             
 
@@ -316,6 +362,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -403,8 +451,12 @@
 
             
 
+            
+
              is null, insert <paramref
              name="newChild" />
+
+            
 
             
 
@@ -413,8 +465,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.Xml.XmlDocumentFragment" />
+
+            
 
             
 
@@ -423,8 +479,12 @@
 
             
 
+            
+
             . If the <paramref
              name="newChild" />
+
+            
 
             
 
@@ -433,6 +493,8 @@
           <para
             >If the node being inserted was created from another document, you can use <see
              cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+
+            
 
             
 
@@ -452,6 +514,8 @@
 
             
 
+            
+
              inserted.</para
           >
         </returns>
@@ -460,8 +524,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -472,8 +540,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -482,8 +554,12 @@
 
           
 
+          
+
            is placed after the <paramref
            name="refChild" />
+
+          
 
           
 
@@ -522,8 +598,12 @@
 
             
 
+            
+
              is null, insert <paramref
              name="newChild" />
+
+            
 
             
 
@@ -532,8 +612,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.Xml.XmlDocumentFragment" />
+
+            
 
             
 
@@ -542,8 +626,12 @@
 
             
 
+            
+
             . If the <paramref
              name="newChild" />
+
+            
 
             
 
@@ -552,6 +640,8 @@
           <para
             >If the node being inserted was created from another document, you can use <see
              cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+
+            
 
             
 
@@ -570,6 +660,8 @@
 
             
 
+            
+
              inserted.</para
           >
         </returns>
@@ -578,8 +670,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -590,13 +686,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            that is the reference node. The <paramref
            name="newChild" />
+
+          
 
           
 
@@ -623,6 +725,8 @@
           <para
             >If the node does not have a prefix, LocalName is the same as <see
              cref="P:System.Xml.XmlAttribute.Name" />
+
+            
 
             
 
@@ -736,6 +840,8 @@
 
             
 
+            
+
              to which this node belongs.</para
           >
         </summary>
@@ -767,6 +873,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -803,8 +911,12 @@
 
             
 
+            
+
              property to get the <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -871,11 +983,15 @@
 
             
 
+            
+
              is already in the tree, it is first removed.</para
           >
           <para
             >If the node being inserted was created from another document, you can use <see
              cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+
+            
 
             
 
@@ -895,6 +1011,8 @@
 
             
 
+            
+
              added.</para
           >
         </returns>
@@ -903,13 +1021,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
           
 
+          
+
            to add. If it is an <see
            cref="T:System.Xml.XmlDocumentFragment" />
+
+          
 
           
 
@@ -952,6 +1076,8 @@
 
             
 
+            
+
              removed.</para
           >
         </returns>
@@ -960,8 +1086,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -1000,6 +1130,8 @@
 
             
 
+            
+
              is already in the tree, it is first removed.</para
           >
           <para
@@ -1008,8 +1140,12 @@
 
             
 
+            
+
              was created from another document, you can use <see
              cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+
+            
 
             
 
@@ -1028,6 +1164,8 @@
 
             
 
+            
+
              replaced.</para
           >
         </returns>
@@ -1036,8 +1174,12 @@
 
           
 
+          
+
           The new child <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -1048,8 +1190,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -1082,6 +1228,8 @@
           <para
             >The <see
              cref="P:System.Xml.XmlAttribute.SchemaInfo" />
+
+            
 
             
 
@@ -1205,6 +1353,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1216,11 +1366,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1258,6 +1412,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1269,11 +1425,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -6,6 +6,8 @@
 
     
 
+    
+
     s. For static fields, variable initializers correspond to assignment statements that are executed during class initialization. For instance fields, variable initializers correspond to assignment statements that are executed when an instance of the class is created. </paragraph
   >
   <paragraph>
@@ -29,6 +31,8 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
         <![CDATA[
@@ -38,12 +42,16 @@ x = 1.4142135623731, i = 100, s = Hello
 
       
 
+      
+
       because an assignment to x occurs when static field initializers execute and assignments to i and s occur when the instance field initializers execute. end example]</example
     >
   </paragraph>
   <paragraph
     >The default value initialization described in <hyperlink
     >17.4.3</hyperlink>
+
+    
 
     
 
@@ -69,6 +77,8 @@ class Test
 
       
 
+      
+
       exhibits this behavior. Despite the circular definitions of a and b, the program is valid. It results in the output <code_example
       >
         <![CDATA[
@@ -78,8 +88,12 @@ a = 1, b = 2
 
       
 
+      
+
       because the static fields a and b are initialized to 0 (the default value for <keyword
       >int</keyword>
+
+      
 
       
 

@@ -43,6 +43,8 @@
 
         
 
+        
+
          are for compiler writers use only.</para
       >
     </remarks>
@@ -73,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.CompilerGlobalScopeAttribute" />
+
+            
 
             
 

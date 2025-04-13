@@ -26,13 +26,19 @@
 
         
 
+        
+
           is a class that can be used to convert <see
          cref="T:System.Drawing.Image" />
 
         
 
+        
+
          objects from one data type to another. Access this class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.ImageConverter" />
+
+            
 
             
 
@@ -87,6 +95,8 @@
 
             
 
+            
+
              is equal to a byte array.</para
           >
         </remarks>
@@ -98,8 +108,12 @@
 
             
 
+            
+
              can convert an instance of a specified type to an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -114,6 +128,8 @@
 
             
 
+            
+
              can perform the conversion; otherwise, false.</para
           >
         </returns>
@@ -122,8 +138,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -134,8 +154,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -169,6 +193,8 @@
 
             
 
+            
+
              is equal to a byte array or string.</para
           >
         </remarks>
@@ -180,8 +206,12 @@
 
             
 
+            
+
              can convert an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -196,6 +226,8 @@
 
             
 
+            
+
              can perform the conversion; otherwise, false.</para
           >
         </returns>
@@ -204,8 +236,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -216,8 +252,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -253,6 +293,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -264,6 +306,8 @@
 
             
 
+            
+
              that it created by converting the specified object. Otherwise, it throws an exception.</para
           >
         </returns>
@@ -272,8 +316,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -284,8 +332,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -296,8 +348,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -333,8 +389,12 @@
 
             
 
+            
+
              method of the object if the object is valid and if the destination type is string. If this method cannot convert the specified object to the destination type, it throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -349,8 +409,12 @@
 
             
 
+            
+
              (or an object that can be cast to an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -366,6 +430,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
@@ -373,8 +439,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -385,8 +455,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -397,13 +471,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            to convert the <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -438,6 +518,8 @@
 
             
 
+            
+
              method for the correct data type.</para
           >
         </remarks>
@@ -454,10 +536,14 @@
 
           
 
+          
+
           A type descriptor through which additional context can be provided. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -468,8 +554,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -507,11 +597,15 @@
 
             
 
+            
+
              method should be called to find the properties of this object.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

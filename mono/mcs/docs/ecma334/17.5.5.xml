@@ -36,6 +36,8 @@ class C: B
 
       
 
+      
+
       the class B provides two override methods: an F method that has the sealed modifier and a G method that does not. B's use of the sealed modifier prevents C from further overriding F. end example]</example
     >
   </paragraph>

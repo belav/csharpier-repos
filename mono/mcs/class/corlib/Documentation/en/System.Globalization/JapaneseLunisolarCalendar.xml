@@ -30,13 +30,19 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Globalization.EastAsianLunisolarCalendar" />
 
         
 
+        
+
          class, which represents the lunisolar calendar. The <see
          cref="T:System.Globalization.EastAsianLunisolarCalendar" />
+
+        
 
         
 
@@ -49,10 +55,14 @@
 
           
 
+          
+
            class and the other calendar classes in the .NET Framework, see <format
            type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
+
+          
 
           
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
          cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          is not used by any of the cultures supported by the <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -91,8 +109,12 @@
 
         
 
+        
+
          object supports a set of calendars. The <see
          cref="P:System.Globalization.CultureInfo.Calendar" />
+
+        
 
         
 
@@ -101,8 +123,12 @@
 
         
 
+        
+
          property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -111,13 +137,19 @@
 
         
 
+        
+
          property of <see
          cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
+        
+
          to a new <see
          cref="T:System.Globalization.Calendar" />
+
+        
 
         
 
@@ -150,6 +182,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Globalization.JapaneseLunisolarCalendar" />
+
+            
 
             
 
@@ -188,6 +222,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -216,8 +252,12 @@
 
             
 
+            
+
              property returns the same values as the <see
              cref="P:System.Globalization.JapaneseCalendar.Eras" />
+
+            
 
             
 
@@ -229,6 +269,8 @@
           <para
             >Gets the eras that are relevant to the <see
              cref="T:System.Globalization.JapaneseLunisolarCalendar" />
+
+            
 
             
 
@@ -265,6 +307,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -276,6 +320,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -284,8 +330,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -349,6 +399,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -380,6 +432,8 @@
           <para
             >Gets the minimum date and time supported by the <see
              cref="T:System.Globalization.JapaneseLunisolarCalendar" />
+
+            
 
             
 

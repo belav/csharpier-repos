@@ -45,8 +45,12 @@
 
         
 
+        
+
          connection must conform to the properties that are specified in your <see
          cref="T:System.Net.SocketPermissionAttribute" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          connection on port 80, set the <see
          cref="P:System.Net.SocketPermissionAttribute.Port" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          to "80". The security information that is specified in <see
          cref="T:System.Net.SocketPermissionAttribute" />
+
+        
 
         
 
@@ -75,13 +87,19 @@
 
         
 
+        
+
          is applied. The system then accesses the information at run time. The <see
          cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
+        
+
          that is passed to the constructor determines the allowable <see
          cref="T:System.Net.SocketPermissionAttribute" />
+
+        
 
         
 
@@ -91,6 +109,8 @@
         <para
           >The properties of a <see
            cref="T:System.Net.SocketPermissionAttribute" />
+
+          
 
           
 
@@ -108,6 +128,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -117,6 +139,8 @@
       <para
         >Specifies security actions to control <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -154,8 +178,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -169,8 +197,12 @@
 
             
 
+            
+
              value that is passed to this constructor specifies the allowable <see
              cref="T:System.Net.SocketPermissionAttribute" />
+
+            
 
             
 
@@ -185,8 +217,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -198,8 +234,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -233,6 +273,8 @@
 
             
 
+            
+
              containing a
    network access method allowed by the current instance. Valid values are
    "Accept" and "Connect".</para
@@ -243,8 +285,12 @@
 
           
 
+          
+
            is being set and is not <see
            langword="null" />
+
+          
 
           
 
@@ -258,6 +304,8 @@
 
             
 
+            
+
              enumeration values.</para
           >
         </remarks>
@@ -266,6 +314,8 @@
           <para
             >Gets or sets the network access method that is allowed by this <see
              cref="T:System.Net.SocketPermissionAttribute" />
+
+            
 
             
 
@@ -305,8 +355,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Net.SocketPermissionAttribute.Host" />
+
+          
 
           
 
@@ -315,13 +369,19 @@
 
           
 
+          
+
            or <see
            cref="P:System.Net.SocketPermissionAttribute.Port" />
 
           
 
+          
+
            properties is <see
            langword="null" />
+
+          
 
           
 
@@ -335,8 +395,12 @@
 
             
 
+            
+
              method is called by the security system, not by the application code. The security information described by <see
              cref="T:System.Net.SocketPermissionAttribute" />
+
+            
 
             
 
@@ -345,13 +409,19 @@
 
             
 
+            
+
              is applied. The system then accesses the information at run-time and calls <see
              cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
 
             
 
+            
+
             . The system uses the returned <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -366,6 +436,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -374,6 +446,8 @@
           <para
             >An instance of the <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -408,6 +482,8 @@
 
             
 
+            
+
              containing a DNS host name or
    IP address.</para
           >
@@ -417,8 +493,12 @@
 
           
 
+          
+
            is being set and is not <see
            langword="null" />
+
+          
 
           
 
@@ -433,6 +513,8 @@
           <para
             >Gets or sets the DNS host name or IP address that is specified by this <see
              cref="T:System.Net.SocketPermissionAttribute" />
+
+            
 
             
 
@@ -467,6 +549,8 @@
 
             
 
+            
+
              containing a port number, or "All" or
    -1 to indicate all
    ports.</para
@@ -477,8 +561,12 @@
 
           
 
+          
+
            is being set and is not <see
            langword="null" />
+
+          
 
           
 
@@ -493,6 +581,8 @@
           <para
             >Gets or sets the port number that is associated with this <see
              cref="T:System.Net.SocketPermissionAttribute" />
+
+            
 
             
 
@@ -527,6 +617,8 @@
 
             
 
+            
+
              containing the
    transport type associated with the current
    instance. Valid values are "All", "Connectionless", "ConnectionOriented", "Tcp", and
@@ -538,8 +630,12 @@
 
           
 
+          
+
            is being set and is not <see
            langword="null" />
+
+          
 
           
 
@@ -553,8 +649,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Net.TransportType.Connectionless" />
+
+            
 
             
 
@@ -563,13 +663,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Net.TransportType.Tcp" />
 
             
 
+            
+
             , and <see
              cref="F:System.Net.TransportType.Udp" />
+
+            
 
             
 
@@ -584,8 +690,12 @@
 
             
 
+            
+
              that is specified by this <see
              cref="T:System.Net.SocketPermissionAttribute" />
+
+            
 
             
 

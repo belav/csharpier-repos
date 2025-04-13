@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is obtained from the channel context and is used primarily for error processing. For example, if an application reads a message from the dead-letter queue, the application should examine properties like <see
          cref="P:System.ServiceModel.Channels.MsmqMessageProperty.DeliveryFailure" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         . If an application is performing its own poison-message handling, it should examine properties like <see
          cref="P:System.ServiceModel.Channels.MsmqMessageProperty.AbortCount" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.Channels.MsmqMessageProperty" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -83,6 +95,8 @@
           <para
             >Gets an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -117,6 +131,8 @@
 
             
 
+            
+
              when reading a message from a dead-letter queue to determine why the message failed delivery.</para
           >
         </remarks>
@@ -125,6 +141,8 @@
           <para
             >Gets a value from the <see
              cref="T:System.ServiceModel.Channels.DeliveryFailure" />
+
+            
 
             
 
@@ -159,8 +177,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ServiceModel.Channels.DeliveryStatus.NotDelivered" />
+
+            
 
             
 
@@ -169,8 +191,12 @@
 
             
 
+            
+
              unless Message Queuing (MSMQ) can determine that it was not delivered, in which case its delivery status becomes <see
              cref="F:System.ServiceModel.Channels.DeliveryStatus.NotDelivered" />
+
+            
 
             
 
@@ -183,6 +209,8 @@
 
             
 
+            
+
              when reading a message from a dead-letter queue to determine why the message failed delivery.</para
           >
         </remarks>
@@ -191,6 +219,8 @@
           <para
             >Gets a value from the <see
              cref="T:System.ServiceModel.Channels.DeliveryStatus" />
+
+            
 
             
 
@@ -228,8 +258,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -244,8 +278,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -257,8 +295,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -287,6 +329,8 @@
 
             
 
+            
+
              value that indicates the number of times the message has moved from the main queue to the subqueue or the other way.</para
           >
         </summary>
@@ -311,6 +355,8 @@
 
             
 
+            
+
              that contains the string "MsmqMessageProperty".</para
           >
         </remarks>
@@ -319,6 +365,8 @@
           <para
             >Gets a <see
              cref="T:System.String" />
+
+            
 
             
 

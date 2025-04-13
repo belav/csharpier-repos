@@ -29,6 +29,8 @@
 
         
 
+        
+
          configuration element to which this class corresponds.</para
       >
       <list type="table">
@@ -105,8 +107,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -140,6 +146,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.ProxyElement" />
+
+            
 
             
 
@@ -179,6 +187,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Net.Configuration.ProxyElement.AutoDetectValues" />
+
+            
 
             
 
@@ -303,6 +313,8 @@
 
             
 
+            
+
              value that specifies the location of the automatic proxy detection script.</para
           >
         </summary>
@@ -339,6 +351,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

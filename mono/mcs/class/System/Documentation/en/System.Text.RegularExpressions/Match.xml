@@ -31,8 +31,12 @@
 
         
 
+        
+
          object is immutable and has no public constructor. An instance of the <see
          cref="T:System.Text.RegularExpressions.Match" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          method and represents the first pattern match in a string. Subsequent matches are represented by <see
          cref="T:System.Text.RegularExpressions.Match" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          method. In addition, a <see
          cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
          objects is returned by the <see
          cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
          method fails to match a regular expression pattern in an input string, it returns an empty <see
          cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+        
 
         
 
@@ -87,8 +107,12 @@
 
         
 
+        
+
          method fails to match the regular expression pattern, it returns a <see
          cref="T:System.Text.RegularExpressions.Match" />
+
+        
 
         
 
@@ -97,8 +121,12 @@
 
         
 
+        
+
         . You can use the <see
          cref="P:System.Text.RegularExpressions.Group.Success" />
+
+        
 
         
 
@@ -111,13 +139,19 @@
 
         
 
+        
+
          property contains the matched substring, the <see
          cref="P:System.Text.RegularExpressions.Capture.Index" />
 
         
 
+        
+
          property indicates the zero-based starting position of the matched substring in the input string, and the <see
          cref="P:System.Text.RegularExpressions.Capture.Length" />
+
+        
 
         
 
@@ -129,8 +163,12 @@
 
         
 
+        
+
          has a <see
          cref="P:System.Text.RegularExpressions.Match.Groups" />
+
+        
 
         
 
@@ -139,13 +177,19 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Text.RegularExpressions.GroupCollection" />
 
         
 
+        
+
          has accessors that return each group. The <see
          cref="T:System.Text.RegularExpressions.Match" />
+
+        
 
         
 
@@ -186,6 +230,8 @@
 
             
 
+            
+
             ).</para
           >
         </remarks>
@@ -223,13 +269,19 @@
 
             
 
+            
+
              property provides access to information about those subexpression matches. For example, the regular expression pattern (\d{3})-(\d{3}-\d{4}), which matches North American telephone numbers, has two subexpressions. The first consists of the area code, which composes the first three digits of the telephone number. This group is captured by the first portion of the regular expression, (\d{3}).The second consists of the individual telephone number, which composes the last seven digits of the telephone number. This group is captured by the second portion of the regular expression, (\d{3}-\d{4}). These two groups can then be retrieved from the <see
              cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
+            
+
              object that is returned by the <see
              cref="P:System.Text.RegularExpressions.Match.Groups" />
+
+            
 
             
 
@@ -242,8 +294,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Text.RegularExpressions.Match.Groups" />
+
+            
 
             
 
@@ -252,8 +308,12 @@
 
             
 
+            
+
              property of the single <see
              cref="T:System.Text.RegularExpressions.Group" />
+
+            
 
             
 
@@ -262,8 +322,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -272,13 +336,19 @@
 
             
 
+            
+
             . If the regular expression engine can find a match, the first element of the <see
              cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Text.RegularExpressions.Match.Groups" />
+
+            
 
             
 
@@ -288,6 +358,8 @@
                 >Grouping Constructs in Regular Expressions</a
               >
             </format>
+
+            
 
             
 
@@ -328,12 +400,16 @@
 
             
 
+            
+
              again and passing (Index+Length) as the new starting position. </para
           >
           <block subset="none" type="note">
             <para
               >This method does not modify the current instance. Instead, it returns a new <see
                cref="T:System.Text.RegularExpressions.Match" />
+
+              
 
               
 
@@ -346,6 +422,8 @@
 
             
 
+            
+
              if a time-out value for matching operations is in effect and the attempt to find the next match exceeds that time-out interval.</para
           >
         </remarks>
@@ -354,6 +432,8 @@
           <para
             >Returns a new <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -393,13 +473,19 @@
 
             
 
+            
+
              method replaces all matches in an input string with a specified replacement pattern, the <see
              cref="M:System.Text.RegularExpressions.Match.Result(System.String)" />
 
             
 
+            
+
              method replaces a single match with a specified replacement pattern. Because it operates on an individual match, it is also possible to perform processing on the matched string before you call the <see
              cref="M:System.Text.RegularExpressions.Match.Result(System.String)" />
+
+            
 
             
 
@@ -411,10 +497,14 @@
 
             
 
+            
+
              parameter is a standard regular expression replacement pattern. It can consist of literal characters and regular expression substitutions. For more information, see <format
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">Substitutions</a>
             </format>
+
+            
 
             
 
@@ -433,11 +523,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -481,6 +575,8 @@
 
             
 
+            
+
              instance equivalent to the one supplied that is suitable to share between multiple threads.</para
           >
         </summary>
@@ -490,6 +586,8 @@
         </returns>
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

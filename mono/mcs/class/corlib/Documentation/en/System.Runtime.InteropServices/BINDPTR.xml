@@ -35,6 +35,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -60,6 +62,8 @@
           <para
             >Represents a pointer to a <see
              cref="T:System.Runtime.InteropServices.FUNCDESC" />
+
+            
 
             
 
@@ -91,6 +95,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -116,6 +122,8 @@
           <para
             >Represents a pointer to a <see
              cref="T:System.Runtime.InteropServices.VARDESC" />
+
+            
 
             
 

@@ -41,8 +41,12 @@
 
         
 
+        
+
          generic class is a binary search tree with O(log <paramref
          name="n" />
+
+        
 
         
 
@@ -51,13 +55,19 @@
 
         
 
+        
+
          is the number of elements in the dictionary. In this respect, it is similar to the <see
          cref="T:System.Collections.Generic.SortedList`2" />
 
         
 
+        
+
          generic class. The two classes have similar object models, and both have O(log <paramref
          name="n" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
             
 
+            
+
              uses less memory than <see
              cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+            
 
             
 
@@ -84,8 +98,12 @@
 
             
 
+            
+
              has faster insertion and removal operations for unsorted data: O(log <paramref
              name="n" />
+
+            
 
             
 
@@ -94,8 +112,12 @@
 
             
 
+            
+
             ) for <see
              cref="T:System.Collections.Generic.SortedList`2" />
+
+            
 
             
 
@@ -109,8 +131,12 @@
 
             
 
+            
+
              is faster than <see
              cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+            
 
             
 
@@ -124,13 +150,19 @@
 
         
 
+        
+
          structure, or as a <see
          cref="T:System.Collections.DictionaryEntry" />
 
         
 
+        
+
          through the nongeneric <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -142,13 +174,19 @@
 
         
 
+        
+
         . Every key in a <see
          cref="T:System.Collections.Generic.SortedDictionary`2" />
 
         
 
+        
+
          must be unique. A key cannot be null, but a value can be, if the value type <paramref
          name="TValue" />
+
+        
 
         
 
@@ -159,8 +197,12 @@
 
         
 
+        
+
          requires a comparer implementation to perform key comparisons. You can specify an implementation of the <see
          cref="T:System.Collections.Generic.IComparer`1" />
+
+        
 
         
 
@@ -169,8 +211,12 @@
 
         
 
+        
+
          parameter; if you do not specify an implementation, the default generic comparer <see
          cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+        
 
         
 
@@ -179,8 +225,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.IComparable`1" />
+
+        
 
         
 
@@ -192,8 +242,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 

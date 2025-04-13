@@ -9,8 +9,12 @@
 
         
 
+        
+
          namespace provides classes that allow you to write custom installers for your own components. The <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -25,8 +29,12 @@
 
         
 
+        
+
          property, an installer contains a collection of other installers as children. As the installer is executed, it cycles through its children and calls <see
          cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -35,8 +43,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -45,13 +57,19 @@
 
         
 
+        
+
         . For an example of an object in the <see
          cref="P:System.Configuration.Install.Installer.Installers" />
 
         
 
+        
+
          collection, see <see
          cref="T:System.Diagnostics.EventLogInstaller" />
+
+        
 
         
 
@@ -63,8 +81,12 @@
 
         
 
+        
+
          property contains information about the installation. For example, information about the location of the log file for the installation, the location of the file that saves information required by the <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -72,6 +94,8 @@
          type="text/html">
           <a href="3F9D0533-F895-4897-B4EA-528284E0241D">Installer Tool (Installutil.exe)</a>
         </format>
+
+        
 
         
 
@@ -83,8 +107,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -93,8 +121,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -103,8 +135,12 @@
 
         
 
+        
+
         . For example, you might use an <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -113,8 +149,12 @@
 
         
 
+        
+
         . Later, uninstalling the application creates a new reference to an <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -123,8 +163,12 @@
 
         
 
+        
+
          method is called on a different instance of <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -133,8 +177,12 @@
 
         
 
+        
+
          that is preserved across calls and passed into the <see
          cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -143,13 +191,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
 
         
 
+        
+
         , and <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 

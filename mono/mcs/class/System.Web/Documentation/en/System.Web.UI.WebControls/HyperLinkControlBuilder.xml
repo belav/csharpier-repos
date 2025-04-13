@@ -26,6 +26,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -43,6 +45,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.HyperLinkControlBuilder" />
+
+            
 
             
 
@@ -71,8 +75,12 @@
 
             
 
+            
+
              property to ignore white space in the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 

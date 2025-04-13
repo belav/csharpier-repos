@@ -129,11 +129,15 @@ public override MyMethod(int x) {
 
             
 
+            
+
              class by using the provided category, setting, and enable/disable value.</para
           >
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,10 +148,14 @@ public override MyMethod(int x) {
 
           
 
+          
+
           The option setting.</param
         >
         <param name="enabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +190,8 @@ public override MyMethod(int x) {
 
             
 
+            
+
              overload by specifying "true" or "false" in string format; for example:</para
           >
           <code>[ContractOption("contract", "inheritance", “false”)]
@@ -198,11 +208,15 @@ class MyConcurrentList&lt;T&gt; : IList&lt;T&gt; {
 
             
 
+            
+
              class by using the provided category, setting, and value.</para
           >
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,10 +227,14 @@ class MyConcurrentList&lt;T&gt; : IList&lt;T&gt; {
 
           
 
+          
+
           The option setting.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

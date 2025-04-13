@@ -91,8 +91,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.Design.SelectionRules.AllSizeable" />
+
+            
 
             
 
@@ -101,8 +105,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.Design.SelectionRules.LeftSizeable" />
+
+            
 
             
 
@@ -111,8 +119,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Windows.Forms.Design.SelectionRules.TopSizeable" />
+
+            
 
             
 
@@ -205,6 +217,8 @@
           <para
             >Indicates the component has some form of visible user interface and the selection service is drawing a selection border around this user interface. If a selected component has this rule set, you can assume that the component implements <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 

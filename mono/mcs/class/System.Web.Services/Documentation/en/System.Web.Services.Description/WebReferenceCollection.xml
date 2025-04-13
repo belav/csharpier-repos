@@ -25,13 +25,19 @@
 
         
 
+        
+
          objects when invoking the static <see
          cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
         
 
+        
+
          method of the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -43,6 +49,8 @@
       <para
         >Describes a collection of <see
          cref="T:System.Web.Services.Description.WebReference" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.WebReferenceCollection" />
+
+            
 
             
 
@@ -100,6 +110,8 @@
 
             
 
+            
+
              instance to the collection.</para
           >
         </summary>
@@ -109,6 +121,8 @@
         </returns>
         <param name="webReference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,6 +156,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -151,6 +167,8 @@
         </returns>
         <param name="webReference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,10 +207,14 @@
 
           
 
+          
+
           An array of Web references into which the collection members are copied.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,6 +251,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -238,6 +262,8 @@
         </returns>
         <param name="webReference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,6 +297,8 @@
 
             
 
+            
+
              are each increased by one. Indices are zero based.</para
           >
         </remarks>
@@ -282,6 +310,8 @@
 
             
 
+            
+
              instance at the specified index.</para
           >
         </summary>
@@ -290,10 +320,14 @@
 
           
 
+          
+
           The index at which to insert the specified Web reference.</param
         >
         <param name="webReference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,11 +387,15 @@
 
             
 
+            
+
              instance from the collection.</para
           >
         </summary>
         <param name="webReference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

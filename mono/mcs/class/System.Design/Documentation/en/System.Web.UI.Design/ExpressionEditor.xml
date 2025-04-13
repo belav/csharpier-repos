@@ -19,6 +19,8 @@
 
         
 
+        
+
          class to present custom expression editor sheets to the user, and then evaluate the selected expression for design-time rendering.</para
       >
       <para
@@ -27,13 +29,19 @@
 
         
 
+        
+
          property for a control in the design-time Properties grid, the visual designer displays a dialog box to set expressions for a control property. You can select the expression type based on a list of expression prefixes. When you select an expression prefix from the list, the visual designer uses the associated <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          methods get the expression editor that is associated with a particular expression prefix or expression builder. The <see
          cref="P:System.Web.UI.Design.ExpressionEditor.ExpressionPrefix" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          object returns the configured expression prefix. The <see
          cref="M:System.Web.UI.Design.ExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+
+        
 
         
 
@@ -65,8 +81,12 @@
 
         
 
+        
+
          method returns the <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -78,13 +98,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
 
         
 
+        
+
          implementations. Optionally, you can provide a custom <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -96,8 +122,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -106,13 +136,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
         
 
+        
+
          attributes to the custom <see
          cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+        
 
         
 
@@ -139,13 +175,19 @@
 
             
 
+            
+
              class is abstract, you cannot create an instance of the  <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
 
             
 
+            
+
              class directly using the <see
              cref="M:System.Web.UI.Design.ExpressionEditor.#ctor" />
+
+            
 
             
 
@@ -157,6 +199,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -193,6 +237,8 @@
 
             
 
+            
+
              method to evaluate an expression and provide the design-time value for an associated control property. </para
           >
           <para
@@ -201,8 +247,12 @@
 
             
 
+            
+
              method to parse the expression string at design time, and then calls the <see
              cref="M:System.Web.UI.Design.ExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+
+            
 
             
 
@@ -222,6 +272,8 @@
 
           
 
+          
+
           An expression string to evaluate. The expression does not include the expression prefix.</param
         >
         <param name="parseTimeData">
@@ -229,8 +281,12 @@
 
           
 
+          
+
           An object containing additional parsing information for evaluating <paramref
            name="expression" />
+
+          
 
           
 
@@ -241,8 +297,12 @@
 
           
 
+          
+
           The type of the control property to which <paramref
            name="expression" />
+
+          
 
           
 
@@ -250,6 +310,8 @@
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -277,8 +339,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -287,13 +353,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
+            
+
              attributes to the custom <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -305,8 +377,12 @@
 
             
 
+            
+
              property. The base <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -315,13 +391,19 @@
 
             
 
+            
+
              value based on the <see
              cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
+            
+
              attribute for the associated <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -360,8 +442,12 @@
 
             
 
+            
+
              method overloads to find the <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -373,8 +459,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -386,13 +476,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
+            
+
              attributes to the custom <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -404,8 +500,12 @@
 
             
 
+            
+
              method enumerates the available <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -414,8 +514,12 @@
 
             
 
+            
+
              implementations can be configured in the expressionBuilders section of the Web configuration file. If an available <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -424,13 +528,19 @@
 
             
 
+            
+
              method returns the type that is specified in the <see
              cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
 
             
 
+            
+
              attribute of the <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -445,6 +555,8 @@
 
             
 
+            
+
              implementation that is associated with the specified expression prefix.</para
           >
         </summary>
@@ -456,8 +568,12 @@
 
             
 
+            
+
              implementation associated with <paramref
              name="expressionPrefix" />
+
+            
 
             
 
@@ -466,8 +582,12 @@
 
             
 
+            
+
              is not defined or is not associated with an <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -479,10 +599,14 @@
 
           
 
+          
+
           The expression prefix used to find the associated expression editor.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -516,8 +640,12 @@
 
             
 
+            
+
              overloads to find the <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -529,8 +657,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -542,13 +674,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
 
             
 
+            
+
              attributes to the custom <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -560,8 +698,12 @@
 
             
 
+            
+
              method enumerates the available <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -570,8 +712,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -580,8 +726,12 @@
 
             
 
+            
+
              is found in the set of available <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -590,13 +740,19 @@
 
             
 
+            
+
              method returns the type that is specified in the <see
              cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
 
             
 
+            
+
              attribute of the <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -611,6 +767,8 @@
 
             
 
+            
+
              implementation that is associated with the specified expression builder type.</para
           >
         </summary>
@@ -622,8 +780,12 @@
 
             
 
+            
+
              implementation associated with <paramref
              name="expressionBuilderType" />
+
+            
 
             
 
@@ -632,8 +794,12 @@
 
             
 
+            
+
              cannot be located or has no associated <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -645,10 +811,14 @@
 
           
 
+          
+
           The type of the derived expression builder class, used to locate the associated expression editor.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -682,8 +852,12 @@
 
             
 
+            
+
              method returns an <see
              cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+            
 
             
 
@@ -695,8 +869,12 @@
 
             
 
+            
+
              class optionally can override the <see
              cref="M:System.Web.UI.Design.ExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" />
+
+            
 
             
 
@@ -708,8 +886,12 @@
 
             
 
+            
+
              class derives from the <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+            
 
             
 
@@ -718,8 +900,12 @@
 
             
 
+            
+
              class is associated with the expression prefix Resources and the <see
              cref="T:System.Web.UI.Design.ResourceExpressionEditor" />
+
+            
 
             
 
@@ -728,8 +914,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Web.UI.Design.ResourceExpressionEditorSheet" />
+
+            
 
             
 
@@ -748,6 +938,8 @@
 
             
 
+            
+
              that defines the custom expression properties.</para
           >
         </returns>
@@ -756,10 +948,14 @@
 
           
 
+          
+
           The expression string set for a control property, used to initialize the expression editor sheet.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

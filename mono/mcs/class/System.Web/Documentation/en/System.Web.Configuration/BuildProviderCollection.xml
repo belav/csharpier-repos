@@ -27,8 +27,12 @@
 
         
 
+        
+
          is used to compile custom resource files. You can have any number of build providers. The <see
          cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.BuildProvider" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            
 
             
 
@@ -93,6 +101,8 @@
 
             
 
+            
+
              object already exists in the collection, the build provider is ignored.</para
           >
         </remarks>
@@ -104,8 +114,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            
 
             
 
@@ -117,8 +131,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.BuildProvider" />
+
+          
 
           
 
@@ -147,8 +165,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            
 
             
 
@@ -287,6 +309,8 @@
 
             
 
+            
+
              does not exist in the collection, the build provider is ignored.</para
           >
         </remarks>
@@ -298,8 +322,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            
 
             
 
@@ -311,8 +339,12 @@
 
           
 
+          
+
           A string value specifying the <see
            cref="T:System.Web.Configuration.BuildProvider" />
+
+          
 
           
 
@@ -342,6 +374,8 @@
 
             
 
+            
+
              in the collection, an out-of-range exception is thrown. </para
           >
         </remarks>
@@ -353,8 +387,12 @@
 
             
 
+            
+
              object at the specified index from the <see
              cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            
 
             
 
@@ -366,13 +404,19 @@
 
           
 
+          
+
           An integer value specifying the location of a specific <see
            cref="T:System.Web.Configuration.BuildProvider" />
 
           
 
+          
+
            object within the <see
            cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+          
 
           
 

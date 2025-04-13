@@ -28,8 +28,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.ReadWrite" />
+
+        
 
         
 
@@ -38,13 +42,19 @@
 
         
 
+        
+
          flags are mutually exclusive. The <see
          cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.OpenExistingOnly" />
 
         
 
+        
+
          flag is the only flag that does not require the <see
          cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />
+
+        
 
         
 
@@ -122,6 +132,8 @@
           <para
             >Opens only existing stores; if no store exists, the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" />
+
+            
 
             
 

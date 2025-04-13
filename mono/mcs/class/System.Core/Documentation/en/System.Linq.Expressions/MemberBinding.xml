@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -63,8 +65,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Linq.Expressions.MemberBindingType" />
+
+          
 
           
 
@@ -75,8 +81,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -158,6 +168,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -166,6 +178,8 @@
           <para
             >A textual representation of the <see
              cref="T:System.Linq.Expressions.MemberBinding" />
+
+            
 
             
 

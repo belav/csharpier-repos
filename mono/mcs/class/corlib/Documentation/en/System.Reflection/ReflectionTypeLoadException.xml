@@ -41,6 +41,8 @@
 
         
 
+        
+
          method if any of the classes in a module cannot be loaded. This class cannot be inherited.</para
       >
     </summary>
@@ -76,11 +78,15 @@
 
             
 
+            
+
              class with the given classes and their associated exceptions.</para
           >
         </summary>
         <param name="classes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -91,13 +97,19 @@
 
           
 
+          
+
           An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref
            name="classes" />
 
           
 
+          
+
            array line up with the exceptions in this <paramref
            name="exceptions" />
+
+          
 
           
 
@@ -136,11 +148,15 @@
 
             
 
+            
+
              class with the given classes, their associated exceptions, and exception descriptions.</para
           >
         </summary>
         <param name="classes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,8 +167,12 @@
 
           
 
+          
+
           An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref
            name="classes" />
+
+          
 
           
 
@@ -161,10 +181,14 @@
 
           
 
+          
+
            array. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,6 +228,8 @@
 
             
 
+            
+
              implementation for serialized objects.</para
           >
         </summary>
@@ -212,10 +238,14 @@
 
           
 
+          
+
           The information and data needed to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,6 +278,8 @@
 
             
 
+            
+
              array. This array will contain null values whenever reflection cannot load a class.</para
           >
         </remarks>
@@ -276,6 +308,8 @@
           <para
             >The <see
              cref="P:System.Reflection.ReflectionTypeLoadException.LoaderExceptions" />
+
+            
 
             
 

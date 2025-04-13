@@ -37,13 +37,19 @@
 
         
 
+        
+
          structure has a different underlying data structure from its corresponding .NET Framework type, <see
          cref="T:System.DateTime" />
 
         
 
+        
+
         , which can represent any time between 12:00:00 AM 1/1/0001 and 11:59:59 PM 12/31/9999, to the accuracy of 100 nanoseconds. <see
          cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
             
 
+            
+
              structure using the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -79,6 +89,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,6 +120,8 @@
 
             
 
+            
+
              structure using the supplied parameters.</para
           >
         </summary>
@@ -116,10 +130,14 @@
 
           
 
+          
+
           An integer value that represents the date as ticks. </param
         >
         <param name="timeTicks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,6 +168,8 @@
 
             
 
+            
+
              structure using the supplied parameters to initialize the year, month, day.</para
           >
         </summary>
@@ -158,8 +178,12 @@
 
           
 
+          
+
           An integer representing the year of the of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -170,8 +194,12 @@
 
           
 
+          
+
           An integer value representing the month of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -182,8 +210,12 @@
 
           
 
+          
+
           An integer value representing the day number of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -220,6 +252,8 @@
 
             
 
+            
+
              structure using the supplied parameters to initialize the year, month, day, hour, minute, and second of the new structure.</para
           >
         </summary>
@@ -228,8 +262,12 @@
 
           
 
+          
+
           An integer value representing the year of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -240,8 +278,12 @@
 
           
 
+          
+
           An integer value representing the month of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -252,8 +294,12 @@
 
           
 
+          
+
           An integer value representing the day of the month of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -264,8 +310,12 @@
 
           
 
+          
+
           An integer value representing the hour of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -276,8 +326,12 @@
 
           
 
+          
+
           An integer value representing the minute of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -288,8 +342,12 @@
 
           
 
+          
+
           An integer value representing the second of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -327,6 +385,8 @@
 
             
 
+            
+
              structure using the supplied parameters to initialize the year, month, day, hour, minute, second, and millisecond of the new structure.</para
           >
         </summary>
@@ -335,8 +395,12 @@
 
           
 
+          
+
           An integer value representing the year of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -347,8 +411,12 @@
 
           
 
+          
+
           An integer value representing the month of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -359,8 +427,12 @@
 
           
 
+          
+
           An integer value representing the day of the month of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -371,8 +443,12 @@
 
           
 
+          
+
           An integer value representing the hour of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -383,8 +459,12 @@
 
           
 
+          
+
           An integer value representing the minute of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -395,8 +475,12 @@
 
           
 
+          
+
           An integer value representing the second of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -407,8 +491,12 @@
 
           
 
+          
+
           An double value representing the millisecond of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -446,6 +534,8 @@
 
             
 
+            
+
              structure using the supplied parameters to initialize the year, month, day, hour, minute, second, and billisecond of the new structure.</para
           >
         </summary>
@@ -454,8 +544,12 @@
 
           
 
+          
+
           An integer value representing the year of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -466,8 +560,12 @@
 
           
 
+          
+
           An integer value representing the month of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -478,8 +576,12 @@
 
           
 
+          
+
           An integer value representing the day of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -490,8 +592,12 @@
 
           
 
+          
+
           An integer value representing the hour of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -502,8 +608,12 @@
 
           
 
+          
+
           An integer value representing the minute of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -514,8 +624,12 @@
 
           
 
+          
+
           An integer value representing the second of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -526,8 +640,12 @@
 
           
 
+          
+
           An integer value representing the bilisecond (billionth of a second) of the new <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -565,6 +683,8 @@
 
             
 
+            
+
              to the specified TimeSpan.</para
           >
         </summary>
@@ -576,6 +696,8 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
@@ -584,8 +706,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -593,6 +719,8 @@
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -625,8 +753,12 @@
 
             
 
+            
+
              structure to the supplied <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -658,6 +790,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -670,6 +804,8 @@
                 <para
                   >This instance is the same as <see
                    cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+                  
 
                   
 
@@ -692,6 +828,8 @@
 
                   
 
+                  
+
                    is a null reference (Nothing in Visual Basic) </para
                 >
               </description>
@@ -703,8 +841,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -731,8 +873,12 @@
 
             
 
+            
+
              structure to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -786,8 +932,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -813,6 +963,8 @@
           <para
             >Gets the number of ticks representing the date of this <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -844,8 +996,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -860,11 +1016,15 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -899,6 +1059,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -911,8 +1073,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -923,8 +1089,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -984,6 +1154,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -995,6 +1167,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1003,8 +1177,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1035,6 +1213,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1046,8 +1226,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1056,8 +1240,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1066,13 +1254,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1084,8 +1278,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1096,8 +1294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1132,6 +1334,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -1143,8 +1347,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1153,8 +1361,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1163,13 +1375,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1181,8 +1399,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1193,8 +1415,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1224,6 +1450,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1232,6 +1460,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1267,6 +1497,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1278,8 +1510,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1288,8 +1524,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1298,13 +1538,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1316,8 +1562,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1328,8 +1578,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1364,6 +1618,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1375,8 +1631,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1385,8 +1645,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1395,13 +1659,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1413,8 +1683,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1425,8 +1699,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1457,6 +1735,8 @@
 
             
 
+            
+
              structure is December 31, 9999.</para
           >
         </remarks>
@@ -1465,6 +1745,8 @@
           <para
             >Represents the maximum valid date value for a <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1496,6 +1778,8 @@
 
             
 
+            
+
              structure is January 1, 1753.</para
           >
         </remarks>
@@ -1504,6 +1788,8 @@
           <para
             >Represents the minimum valid date value for a <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1539,6 +1825,8 @@
 
             
 
+            
+
              to determine whether they are not equal.</para
           >
         </summary>
@@ -1550,8 +1838,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1560,8 +1852,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1570,13 +1866,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1588,8 +1890,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1600,8 +1906,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1632,10 +1942,14 @@
 
             
 
+            
+
              structure. For more information, see <format
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1650,8 +1964,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1691,13 +2009,19 @@
 
             
 
+            
+
              parameter, <paramref
              name="t" />
 
             
 
+            
+
             , to the supplied <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -1712,8 +2036,12 @@
 
             
 
+            
+
             . If either argument is <see
              cref="F:System.Data.SqlTypes.SqlDateTime.Null" />
+
+            
 
             
 
@@ -1722,8 +2050,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Data.SqlTypes.SqlDateTime.Null" />
+
+            
 
             
 
@@ -1735,8 +2067,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1747,8 +2083,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1783,6 +2123,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -1795,8 +2137,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1807,8 +2153,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1889,6 +2239,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1900,8 +2252,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1910,8 +2266,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -1920,13 +2280,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1938,8 +2304,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1950,8 +2320,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -1986,6 +2360,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -1997,8 +2373,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2007,8 +2387,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2017,13 +2401,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2035,8 +2425,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2047,8 +2441,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2106,6 +2504,8 @@
 
             
 
+            
+
              to determine whether they are not equal.</para
           >
         </summary>
@@ -2117,8 +2517,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2127,8 +2531,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2137,13 +2545,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2155,8 +2569,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2167,8 +2585,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2203,6 +2625,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2214,8 +2638,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2224,8 +2652,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2234,13 +2666,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2252,8 +2690,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2264,8 +2706,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2300,6 +2746,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2311,8 +2759,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2321,8 +2773,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2331,13 +2787,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2349,8 +2811,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2361,8 +2827,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2397,13 +2867,19 @@
 
             
 
+            
+
              structure, <paramref
              name="t" />
 
             
 
+            
+
             , from the supplied <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2418,6 +2894,8 @@
 
             
 
+            
+
              structure representing the results of the subtraction.</para
           >
         </returns>
@@ -2426,8 +2904,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2438,8 +2920,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -2469,8 +2955,12 @@
 
             
 
+            
+
              representation of a date and time to its <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2485,11 +2975,15 @@
 
             
 
+            
+
              structure equal to the date and time represented by the specified string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2593,6 +3087,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -2604,6 +3100,8 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
@@ -2612,8 +3110,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+          
 
           
 
@@ -2621,6 +3123,8 @@
         >
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2679,6 +3183,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -2709,6 +3215,8 @@
 
           
 
+          
+
           XmlWriter </param
         >
       </Docs>
@@ -2727,6 +3235,8 @@
           <para
             >Gets the number of ticks representing the time of this <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2759,8 +3269,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2772,6 +3286,8 @@
           <para
             >A SqlString structure whose value is a string representing the date and time that is contained in this <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2801,8 +3317,12 @@
 
             
 
+            
+
              structure to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2817,8 +3337,12 @@
 
             
 
+            
+
              property of this <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2845,6 +3369,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 

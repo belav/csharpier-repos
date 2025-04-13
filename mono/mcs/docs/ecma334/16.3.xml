@@ -6,8 +6,12 @@
 
     
 
+    
+
     s (<hyperlink
     >10.8</hyperlink>
+
+    
 
     
 
@@ -16,13 +20,19 @@
 
     
 
+    
+
     s (<hyperlink
     >14.5.2</hyperlink>
 
     
 
+    
+
     ), but unlike declarations, <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 
@@ -33,8 +43,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -54,6 +68,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="16.3.1">using-alias-directive</non_terminal>
@@ -69,8 +85,12 @@
 
     
 
+    
+
      (<hyperlink
     >16.3.1</hyperlink>
+
+    
 
     
 
@@ -82,8 +102,12 @@
 
     
 
+    
+
      (<hyperlink
     >16.3.2</hyperlink>
+
+    
 
     
 
@@ -95,8 +119,12 @@
 
     
 
+    
+
      extends over the <non_terminal
      where="16.4">namespace-member-declaration</non_terminal>
+
+    
 
     
 
@@ -105,13 +133,19 @@
 
     
 
+    
+
      specifically does not include its peer <non_terminal
      where="16.3">using-directive</non_terminal>
 
     
 
+    
+
     s. Thus, peer <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 

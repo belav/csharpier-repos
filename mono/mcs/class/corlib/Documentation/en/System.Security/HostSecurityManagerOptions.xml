@@ -120,8 +120,12 @@
 
             
 
+            
+
              method to the <see
              cref="M:System.Security.HostSecurityManager.DetermineApplicationTrust(System.Security.Policy.Evidence,System.Security.Policy.Evidence,System.Security.Policy.TrustManagerContext)" />
+
+            
 
             
 
@@ -154,6 +158,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -180,6 +186,8 @@
           <para
             >Use the <see
              cref="M:System.Security.HostSecurityManager.ResolvePolicy(System.Security.Policy.Evidence)" />
+
+            
 
             
 

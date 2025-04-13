@@ -112,6 +112,8 @@
 
             
 
+            
+
              objects in this collection to the specific array, starting at the specified index in the target array.</para
           >
         </summary>
@@ -137,6 +139,8 @@
           <para
             >Determines if a specified <see
              cref="T:System.DirectoryServices.SearchResult" />
+
+            
 
             
 
@@ -171,6 +175,8 @@
 
             
 
+            
+
              object in this collection.</para
           >
         </summary>
@@ -182,6 +188,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -190,8 +198,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DirectoryServices.SearchResult" />
+
+          
 
           
 
@@ -223,6 +235,8 @@
 
             
 
+            
+
              object that you can use to iterate through this collection.</para
           >
         </returns>
@@ -244,8 +258,12 @@
 
             
 
+            
+
              method, it allows the resources that are used by the <see
              cref="T:System.DirectoryServices.SearchResultCollection" />
+
+            
 
             
 
@@ -254,10 +272,14 @@
 
             
 
+            
+
             , see <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -269,8 +291,12 @@
 
             
 
+            
+
              object. Therefore, an application must call the <see
              cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+
+            
 
             
 
@@ -282,6 +308,8 @@
           <para
             >Releases all resources that are used by the <see
              cref="T:System.DirectoryServices.SearchResultCollection" />
+
+            
 
             
 
@@ -307,6 +335,8 @@
 
             
 
+            
+
              objects in this collection.</para
           >
         </summary>
@@ -326,6 +356,8 @@
           <para
             >Gets the <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -350,11 +382,15 @@
 
             
 
+            
+
              that created this collection calls the <see
 
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/idirectorysearch_executesearch.asp"
               >IDirectorySearch::ExecuteSearch</see
             >
+
+            
 
             
 
@@ -366,8 +402,12 @@
 
             
 
+            
+
              topic in the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -379,8 +419,12 @@
 
             
 
+            
+
              object. This handle corresponds to the search handle in ADSI. This handle persists until you call the <see
              cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+
+            
 
             
 
@@ -389,8 +433,12 @@
 
             
 
+            
+
              object, so you must call <see
              cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
+
+            
 
             
 
@@ -408,6 +456,8 @@
 
             
 
+            
+
              method that performs the actual search. For more information, see the <see
 
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/idirectorysearch_executesearch.asp"
@@ -416,8 +466,12 @@
 
             
 
+            
+
              topic in the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -455,13 +509,19 @@
 
         
 
+        
+
          class cannot release all of its unmanaged resources when it is garbage collected. To prevent a memory leak, you must call the <see
          cref="M:System.DirectoryServices.SearchResultCollection.Dispose" />
 
         
 
+        
+
          method when the <see
          cref="T:System.DirectoryServices.SearchResultCollection" />
+
+        
 
         
 
@@ -476,13 +536,19 @@
 
         
 
+        
+
          class contains the <see
          cref="T:System.DirectoryServices.SearchResult" />
 
         
 
+        
+
          instances that the Active Directory hierarchy returned during a <see
          cref="T:System.DirectoryServices.DirectorySearcher" />
+
+        
 
         
 

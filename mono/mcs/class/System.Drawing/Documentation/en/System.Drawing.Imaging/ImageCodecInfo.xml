@@ -22,8 +22,12 @@
 
         
 
+        
+
          objects to various file formats. Image encoders are built into GDI+ for the BMP, JPEG, GIF, TIFF, and PNG formats. An encoder is invoked when you call the <see
          cref="Overload:System.Drawing.Image.Save" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          method of a <see
          cref="T:System.Drawing.Image" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >The <see
          cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+        
 
         
 
@@ -68,6 +78,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -161,6 +173,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </summary>
@@ -208,6 +222,8 @@
 
             
 
+            
+
              structure that contains a GUID that identifies the codec's format.</para
           >
         </summary>
@@ -237,6 +253,8 @@
 
             
 
+            
+
              objects that contain information about the image decoders built into GDI+.</para
           >
         </summary>
@@ -248,8 +266,12 @@
 
             
 
+            
+
              objects. Each <see
              cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+            
 
             
 
@@ -282,6 +304,8 @@
 
             
 
+            
+
              objects that contain information about the image encoders built into GDI+.</para
           >
         </summary>
@@ -293,8 +317,12 @@
 
             
 
+            
+
              objects. Each <see
              cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+            
 
             
 

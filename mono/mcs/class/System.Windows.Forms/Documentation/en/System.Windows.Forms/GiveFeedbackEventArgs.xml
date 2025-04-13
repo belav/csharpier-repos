@@ -24,8 +24,12 @@
 
         
 
+        
+
          event occurs during a drag operation. It allows the source of a drag event to modify the appearance of the mouse pointer in order to give the user visual feedback during a drag-and-drop operation. A <see
          cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -47,6 +53,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.GiveFeedback" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -83,8 +93,12 @@
 
           
 
+          
+
           The type of drag-and-drop operation. Possible values are obtained by applying the bitwise OR (|) operation to the constants defined in the <see
            cref="T:System.Windows.Forms.DragDropEffects" />
+
+          
 
           
 
@@ -92,6 +106,8 @@
         >
         <param name="useDefaultCursors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,6 +154,8 @@
           <para
             >The system provides default drag-drop cursors for different drag-drop operations such as move or copy. If <see
              cref="P:System.Windows.Forms.GiveFeedbackEventArgs.UseDefaultCursors" />
+
+            
 
             
 

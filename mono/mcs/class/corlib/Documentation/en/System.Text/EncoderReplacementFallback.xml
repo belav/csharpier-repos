@@ -27,8 +27,12 @@
 
         
 
+        
+
          object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see
          cref="T:System.Text.EncoderReplacementFallback" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          object is the replacement string used to initialize that object.</para
       >
       <para
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class, which throws an <see
          cref="T:System.Text.EncoderFallbackException" />
+
+        
 
         
 
@@ -58,6 +68,8 @@
       <para
         >When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -92,6 +104,8 @@
 
             
 
+            
+
              object is "?".</para
           >
         </remarks>
@@ -100,6 +114,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -135,8 +151,12 @@
 
             
 
+            
+
              parameter initializes the replacement string that is the value of this <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -145,8 +165,12 @@
 
             
 
+            
+
              value that contains only characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -155,11 +179,15 @@
 
             
 
+            
+
              object cannot include the character "¿" (U+00BF) because that character is itself not a valid ASCII character.</para
           >
           <para
             >As a result of this, U+FFFD, which is a good choice for a fallback string for <see
              cref="T:System.Text.DecoderExceptionFallback" />
+
+            
 
             
 
@@ -174,11 +202,15 @@
 
             
 
+            
+
              class using a specified replacement string.</para
           >
         </summary>
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,8 +247,12 @@
 
             
 
+            
+
              object that is initialized with the replacement string of this <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -231,8 +267,12 @@
 
             
 
+            
+
              object equal to this <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -261,6 +301,8 @@
           <para
             >Gets the replacement string that is the value of the <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -296,8 +338,12 @@
 
             
 
+            
+
              object is the value of its <see
              cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
+
+            
 
             
 
@@ -312,6 +358,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -323,13 +371,19 @@
 
             
 
+            
+
              parameter specifies an <see
              cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
+            
+
              object and the replacement string of that object is equal to the replacement string of this <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -341,8 +395,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Text.EncoderReplacementFallback" />
+
+          
 
           
 
@@ -375,8 +433,12 @@
 
             
 
+            
+
              object is the value of its <see
              cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
+
+            
 
             
 
@@ -388,6 +450,8 @@
           <para
             >Retrieves the hash code for the value of the <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -420,6 +484,8 @@
           <para
             >Gets the number of characters in the replacement string for the <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 

@@ -38,13 +38,19 @@
 
         
 
+        
+
          or <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
 
         
 
+        
+
          classes to serialize an object, use the <see
          cref="T:System.NonSerializedAttribute" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          attribute are public and private fields of a serializable class. By default, classes are not serializable unless they are marked with <see
          cref="T:System.SerializableAttribute" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          are excluded during serialization. If you are using the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          class to get the same functionality. Alternatively, implement the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
          must still be marked with <see
          cref="T:System.SerializableAttribute" />
+
+        
 
         
 
@@ -96,6 +118,8 @@
       <para
         >To apply the <see
          cref="T:System.NonSerializedAttribute" />
+
+        
 
         
 
@@ -109,6 +133,8 @@ public event ChangedEventHandler Changed;</code>
 
         
 
+        
+
          to the method.</para
       >
       <para
@@ -116,6 +142,8 @@ public event ChangedEventHandler Changed;</code>
          type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -149,6 +177,8 @@ public event ChangedEventHandler Changed;</code>
           <para
             >Initializes a new instance of the <see
              cref="T:System.NonSerializedAttribute" />
+
+            
 
             
 

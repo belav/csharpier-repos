@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the date selection modes of the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -33,6 +37,8 @@
       <para
         >Specifies the date selection mode of the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
           <para
             >A single date can be selected on the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -110,6 +120,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -133,6 +145,8 @@
           <para
             >No dates can be selected on the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 

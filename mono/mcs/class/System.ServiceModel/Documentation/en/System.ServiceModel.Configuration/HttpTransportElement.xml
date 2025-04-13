@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,6 +106,8 @@
         </summary>
         <param name="bindingElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,6 +230,8 @@
 
           
 
+          
+
           The source that contains the element to be copied.</param
         >
       </Docs>
@@ -258,6 +264,8 @@
           <para
             >The newly created <see
              cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+            
 
             
 
@@ -319,6 +327,8 @@
           <para
             >Gets a <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+
+            
 
             
 
@@ -384,6 +394,8 @@
         </summary>
         <param name="bindingElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,13 +481,19 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

@@ -172,6 +172,8 @@ if (cs == Cairo.Status.Success) {
 
           
 
+          
+
            representing the matrix</returns
         >
         <remarks />
@@ -319,8 +321,12 @@ if (cs == Cairo.Status.Success) {
 
           
 
+          
+
           .Success. Otherwise, return <see
            cref="T:Cairo.Status" />
+
+          
 
           
 
@@ -532,6 +538,8 @@ if (cs == Cairo.Status.Success) {
               <term>dy2 = dx1 * b + dy1 * d;</term>
             </item>
           </list>
+
+          
 
           
 

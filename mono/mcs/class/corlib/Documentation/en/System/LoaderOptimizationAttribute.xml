@@ -38,6 +38,8 @@
 
         
 
+        
+
          can only be set on the main method for an executable application and is ignored on all other methods.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
          attribute is specified with a <see
          cref="T:System.LoaderOptimization" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
           
 
+          
+
           , by using the <see
            cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
+
+          
 
           
 
@@ -71,8 +81,12 @@
 
           
 
+          
+
            is created using the <see
            cref="F:System.LoaderOptimization.MultiDomain" />
+
+          
 
           
 
@@ -81,8 +95,12 @@
 
           
 
+          
+
            flag; that is, only assemblies in the GAC are shared. When this occurs, the loader does not throw an exception and the application does not experience the performance gains associated with the <see
            cref="F:System.LoaderOptimization.MultiDomain" />
+
+          
 
           
 
@@ -122,6 +140,8 @@
 
             
 
+            
+
              class to the specified value.</para
           >
         </summary>
@@ -130,8 +150,12 @@
 
           
 
+          
+
           A value equivalent to a <see
            cref="T:System.LoaderOptimization" />
+
+          
 
           
 
@@ -168,6 +192,8 @@
 
             
 
+            
+
              class to the specified value.</para
           >
         </summary>
@@ -176,8 +202,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.LoaderOptimization" />
+
+          
 
           
 
@@ -208,6 +238,8 @@
           <para
             >Gets the current <see
              cref="T:System.LoaderOptimization" />
+
+            
 
             
 

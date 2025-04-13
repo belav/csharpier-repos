@@ -40,6 +40,8 @@
 
         
 
+        
+
          class can allocate.</para
       >
     </summary>
@@ -106,8 +108,12 @@
 
             
 
+            
+
             , but allows the address of the pinned object to be taken. This prevents the garbage collector from moving the object and hence undermines the efficiency of the garbage collector. Use the <see
              cref="M:System.Runtime.InteropServices.GCHandle.Free" />
+
+            
 
             
 
@@ -143,6 +149,8 @@
 
             
 
+            
+
              are zeroed. Weak references are zeroed before the finalizer runs, so even if the finalizer resurrects the object, the Weak reference is still zeroed.</para
           >
         </summary>
@@ -171,6 +179,8 @@
           <para
             >This handle type is similar to <see
              cref="F:System.Runtime.InteropServices.GCHandleType.Weak" />
+
+            
 
             
 

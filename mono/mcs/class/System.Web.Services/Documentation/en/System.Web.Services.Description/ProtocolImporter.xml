@@ -21,8 +21,12 @@
 
         
 
+        
+
          class and its concrete derived classes generate client proxy code or abstract server code according to a specified communication protocol. <see
          cref="T:System.Web.Services.Description.ProtocolImporter" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         , a developer uses these classes indirectly through the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.ProtocolImporter" />
+
+            
 
             
 
@@ -90,6 +100,8 @@
           <para
             >Gets the abstract XML schemas used by the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -131,8 +143,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.OptionalExtensionsIgnored" />
+
+            
 
             
 
@@ -144,8 +160,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCommentStatementCollection" />
+
+          
 
           
 
@@ -156,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+
+          
 
           
 
@@ -188,8 +212,12 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.BeginClass" />
+
+            
 
             
 
@@ -226,8 +254,12 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.BeginNamespace" />
+
+            
 
             
 
@@ -306,6 +338,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Serialization.CodeIdentifiers" />
+
+            
 
             
 
@@ -394,6 +428,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -419,8 +455,12 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.EndClass" />
+
+            
 
             
 
@@ -453,8 +493,12 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.EndNamespace" />
+
+            
 
             
 
@@ -490,8 +534,12 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.GenerateMethod" />
+
+            
 
             
 
@@ -550,13 +598,19 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.IsBindingSupported" />
 
             
 
+            
+
              method to determine whether to generate a class for the current binding, as represented by the <see
              cref="P:System.Web.Services.Description.ProtocolImporter.Binding" />
+
+            
 
             
 
@@ -598,8 +652,12 @@
 
             
 
+            
+
              class calls the <see
              cref="M:System.Web.Services.Description.ProtocolImporter.IsOperationFlowSupported(System.Web.Services.Description.OperationFlow)" />
+
+            
 
             
 
@@ -608,13 +666,19 @@
 
             
 
+            
+
              property. This evaluation takes place for each operation in a binding for which a class is being generated. If a false value is returned, the <see
              cref="T:System.Web.Services.Description.ProtocolImporter" />
 
             
 
+            
+
              class calls its <see
              cref="M:System.Web.Services.Description.ProtocolImporter.UnsupportedOperationWarning(System.String)" />
+
+            
 
             
 
@@ -626,13 +690,19 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Services.Description.Operation.Messages" />
 
             
 
+            
+
              property is of type <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -652,8 +722,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.Services.Description.OperationFlow" />
+
+          
 
           
 
@@ -703,8 +777,12 @@
 
             
 
+            
+
              element in a WSDL document. The method is generated with a <see
              cref="T:System.Web.Services.WebMethodAttribute" />
+
+            
 
             
 
@@ -737,6 +815,8 @@
           <para
             >The method is generated with a <see
              cref="T:System.Web.Services.WebMethodAttribute" />
+
+            
 
             
 
@@ -775,6 +855,8 @@
 
             
 
+            
+
              instance for which a binding class is being generated is invalid within the target namespace.</para
           >
         </summary>
@@ -786,11 +868,15 @@
 
             
 
+            
+
              instance for which a binding class is being generated is invalid within the target namespace.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -824,6 +910,8 @@
 
             
 
+            
+
              instance for which a binding class is being generated is invalid within the target namespace.</para
           >
         </summary>
@@ -835,11 +923,15 @@
 
             
 
+            
+
              instance for which a binding class is being generated is invalid within the target namespace.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -915,6 +1007,8 @@
 
             
 
+            
+
              that is implemented by the binding that the protocol importer is currently processing to generate a binding class.</para
           >
         </summary>
@@ -964,6 +1058,8 @@
           <para
             >Gets all the XML schemas, both abstract and concrete, used by the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -1018,8 +1114,12 @@
 
             
 
+            
+
              objects that belong to the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -1052,8 +1152,12 @@
 
             
 
+            
+
              instance's <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.Style" />
+
+            
 
             
 
@@ -1085,8 +1189,12 @@
 
             
 
+            
+
              warning in the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+
+            
 
             
 
@@ -1095,11 +1203,15 @@
 
             
 
+            
+
              property. This method also adds a warning message to the comments for the class that is being generated.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1133,8 +1245,12 @@
 
             
 
+            
+
              warning in the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+
+            
 
             
 
@@ -1143,11 +1259,15 @@
 
             
 
+            
+
              property. This method also adds a warning message to the comments for the class that is being generated.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1181,8 +1301,12 @@
 
             
 
+            
+
              warning in the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+
+            
 
             
 
@@ -1191,11 +1315,15 @@
 
             
 
+            
+
              property. This method also adds a warning message to the comments for the class that is being generated.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1225,6 +1353,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImportWarnings" />
+
+            
 
             
 

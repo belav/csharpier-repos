@@ -21,13 +21,19 @@
 
         
 
+        
+
          object that represents a customer table, you want to bind to the properties on the customer object that the <see
          cref="T:System.Data.DataView" />
 
         
 
+        
+
          represents, not the properties of the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
             
 
+            
+
             , provided the implementer has a strongly typed <see
              cref="P:System.Collections.IList.Item(System.Int32)" />
+
+            
 
             
 
@@ -58,8 +68,12 @@
 
             
 
+            
+
              is anything but <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -68,13 +82,19 @@
 
             
 
+            
+
              private. If you want to create an <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
              that follows the rules of a strongly typed collection, you should derive from <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -88,6 +108,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -98,11 +120,15 @@
 
         
 
+        
+
          objects by following the same rules.</para
       >
       <para
         >For more information on binding to a data source, see the <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -145,8 +171,12 @@
 
             
 
+            
+
              parameter is not null, it typically contains a property descriptor that identifies a list of containers to retrieve for the object that implements <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -155,8 +185,12 @@
 
             
 
+            
+
              containing two tables, myCustomers and myOrders, with a relationship between them called myCustOrders. If you create a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -165,8 +199,12 @@
 
             
 
+            
+
              method with null returns the property descriptors for the columns in myCustomers. As a result, one of the returned property descriptors is a property descriptor for myCustOrders, just as calling the <see
              cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -181,6 +219,8 @@
 
             
 
+            
+
              that represents the properties on each item used to bind data.</para
           >
         </summary>
@@ -192,6 +232,8 @@
 
             
 
+            
+
              that represents the properties on each item used to bind data.</para
           >
         </returns>
@@ -200,8 +242,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -239,6 +285,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -255,8 +303,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 

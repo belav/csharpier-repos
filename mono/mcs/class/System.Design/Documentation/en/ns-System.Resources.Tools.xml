@@ -9,8 +9,12 @@
 
         
 
+        
+
          namespace contains the <see
          cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" />
+
+        
 
         
 
@@ -22,6 +26,8 @@
       <para
         >For more information about strongly-typed resources, see <see
          cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" />
+
+        
 
         
 

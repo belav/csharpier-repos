@@ -26,8 +26,12 @@
 
         
 
+        
+
          class adjust image colors by using a color-remap table, which is an array of <see
          cref="T:System.Drawing.Imaging.ColorMap" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Imaging.ColorMap" />
+
+            
 
             
 
@@ -78,6 +84,8 @@
 
             
 
+            
+
              structure to which to convert.</para
           >
         </summary>
@@ -102,6 +110,8 @@
           <para
             >Gets or sets the existing <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 

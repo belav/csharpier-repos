@@ -40,6 +40,8 @@
 
         
 
+        
+
          class to convert one character array to two byte
 arrays.</para
       >
@@ -97,13 +99,19 @@ public class EncoderExample
 
         
 
+        
+
          class, the application should use the <see
          cref="M:System.Text.Encoding.GetEncoder" />
 
         
 
+        
+
          method of an <see
          cref="T:System.Text.Encoding" />
+
+        
 
         
 
@@ -115,8 +123,12 @@ public class EncoderExample
 
         
 
+        
+
          method determines how many bytes result in encoding a set of Unicode characters, and the <see
          cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />
+
+        
 
         
 
@@ -125,8 +137,12 @@ public class EncoderExample
 
         
 
+        
+
          class. For more information, see <see
          cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" />
+
+        
 
         
 
@@ -138,8 +154,12 @@ public class EncoderExample
 
         
 
+        
+
          object maintains state information between successive calls to GetBytes or <see
          cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
+
+        
 
         
 
@@ -148,13 +168,19 @@ public class EncoderExample
 
         
 
+        
+
          also preserves trailing characters at the end of data blocks and uses the trailing characters in the next encoding operation. For example, a data block might end with an unmatched high surrogate, and the matching low surrogate might be in the next data block. Therefore, <see
          cref="M:System.Text.Encoding.GetDecoder" />
 
         
 
+        
+
          and <see
          cref="M:System.Text.Encoding.GetEncoder" />
+
+        
 
         
 
@@ -167,8 +193,12 @@ public class EncoderExample
 
           
 
+          
+
            parameter to true in the appropriate method call. If an exception occurs or if the application switches streams, it should call <see
            cref="M:System.Text.Encoder.Reset" />
+
+          
 
           
 
@@ -184,8 +214,12 @@ public class EncoderExample
 
         
 
+        
+
          or <see
          cref="T:System.Text.Encoder" />
+
+        
 
         
 
@@ -225,8 +259,12 @@ public class EncoderExample
 
             
 
+            
+
              method of an <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -238,6 +276,8 @@ public class EncoderExample
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -379,6 +419,8 @@ public class EncoderExample
 
             
 
+            
+
              object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para
           >
         </remarks>
@@ -390,8 +432,12 @@ public class EncoderExample
 
             
 
+            
+
              object for the current <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -433,13 +479,19 @@ public class EncoderExample
 
             
 
+            
+
              object represents data used by the <see
              cref="T:System.Text.EncoderFallback" />
 
             
 
+            
+
              object. The <see
              cref="T:System.Text.EncoderFallback" />
+
+            
 
             
 
@@ -454,8 +506,12 @@ public class EncoderExample
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Text.Encoder" />
+
+            
 
             
 
@@ -505,8 +561,12 @@ public class EncoderExample
 
             
 
+            
+
              requires to store the resulting bytes, the application should use <see
              cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -515,6 +575,8 @@ public class EncoderExample
           <para
             >If GetBytes is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -534,6 +596,8 @@ public class EncoderExample
 
           
 
+          
+
           A pointer to the first character to encode. </param
         >
         <param name="count">
@@ -541,10 +605,14 @@ public class EncoderExample
 
           
 
+          
+
           The number of characters to encode. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -586,8 +654,12 @@ public class EncoderExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -600,11 +672,15 @@ public class EncoderExample
 
             
 
+            
+
             . </para
           >
           <para>-or- </para>
           <para>
             <paramref name="index" />
+
+            
 
             
 
@@ -616,6 +692,8 @@ public class EncoderExample
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
@@ -624,8 +702,12 @@ public class EncoderExample
 
             
 
+            
+
              and <paramref
              name="count" />
+
+            
 
             
 
@@ -634,8 +716,12 @@ public class EncoderExample
 
             
 
+            
+
              (i.e. (<paramref
              name="index" />
+
+            
 
             
 
@@ -644,8 +730,12 @@ public class EncoderExample
 
             
 
+            
+
             ) &gt; <paramref
              name="chars" />
+
+            
 
             
 
@@ -661,8 +751,12 @@ public class EncoderExample
 
             
 
+            
+
              requires to store the resulting bytes, the application should use <see
              cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -671,6 +765,8 @@ public class EncoderExample
           <para
             >If GetBytes is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -690,10 +786,14 @@ public class EncoderExample
 
           
 
+          
+
           The character array containing the set of characters to encode. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -704,10 +804,14 @@ public class EncoderExample
 
           
 
+          
+
           The number of characters to encode. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -758,13 +862,19 @@ public class EncoderExample
 
             
 
+            
+
              object saves state between calls to <see
              cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />
 
             
 
+            
+
             . When the application is done with a stream of data, it should set the <paramref
              name="flush" />
+
+            
 
             
 
@@ -776,11 +886,15 @@ public class EncoderExample
 
             
 
+            
+
             . </para
           >
           <para
             >If GetBytes is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -792,8 +906,12 @@ public class EncoderExample
 
             
 
+            
+
              method. <see
              cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -802,8 +920,12 @@ public class EncoderExample
 
             
 
+            
+
              will fill as much space as possible and return the chars read and bytes written. Also see the <see
              cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" />
+
+            
 
             
 
@@ -822,11 +944,15 @@ public class EncoderExample
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="chars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -837,10 +963,14 @@ public class EncoderExample
 
           
 
+          
+
           The number of characters to encode. </param
         >
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -851,10 +981,14 @@ public class EncoderExample
 
           
 
+          
+
           The maximum number of bytes to write. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -899,6 +1033,8 @@ public class EncoderExample
 
             
 
+            
+
              does not contain sufficient space to store the encoded characters.</para
           >
         </exception>
@@ -908,8 +1044,12 @@ public class EncoderExample
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -921,8 +1061,12 @@ public class EncoderExample
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -935,6 +1079,8 @@ public class EncoderExample
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
@@ -943,11 +1089,15 @@ public class EncoderExample
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
           <para>
             <paramref name="byteIndex " />
+
+            
 
             
 
@@ -960,13 +1110,19 @@ public class EncoderExample
 
             
 
+            
+
             .Length - <paramref
              name="charIndex" />
 
             
 
+            
+
             ) &lt; <paramref
              name="charCount" />
+
+            
 
             
 
@@ -978,8 +1134,12 @@ public class EncoderExample
 
             
 
+            
+
              &gt; <paramref
              name="bytes" />
+
+            
 
             
 
@@ -994,13 +1154,19 @@ public class EncoderExample
 
             
 
+            
+
              object saves state between calls to <see
              cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" />
 
             
 
+            
+
             . When the application is done with a stream of data, it should set the <paramref
              name="flush" />
+
+            
 
             
 
@@ -1012,11 +1178,15 @@ public class EncoderExample
 
             
 
+            
+
             . </para
           >
           <para
             >If GetBytes is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -1028,8 +1198,12 @@ public class EncoderExample
 
             
 
+            
+
              method. <see
              cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1038,8 +1212,12 @@ public class EncoderExample
 
             
 
+            
+
              will fill as much space as possible and return the chars read and bytes written. Also see the <see
              cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -1058,11 +1236,15 @@ public class EncoderExample
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="chars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1073,10 +1255,14 @@ public class EncoderExample
 
           
 
+          
+
           The index of the first character to encode. </param
         >
         <param name="charCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1087,6 +1273,8 @@ public class EncoderExample
 
           
 
+          
+
           The byte array to contain the resulting sequence of bytes. </param
         >
         <param name="byteIndex">
@@ -1094,10 +1282,14 @@ public class EncoderExample
 
           
 
+          
+
           The index at which to start writing the resulting sequence of bytes. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1136,13 +1328,19 @@ public class EncoderExample
 
             
 
+            
+
              object. The method clears any state information preserved from a previous call to <see
              cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />
 
             
 
+            
+
              or <see
              cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
+
+            
 
             
 
@@ -1154,8 +1352,12 @@ public class EncoderExample
 
             
 
+            
+
              or <see
              cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />
+
+            
 
             
 

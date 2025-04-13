@@ -9,6 +9,8 @@
 
         
 
+        
+
          to object. </list_item
       >
       <list_item
@@ -17,8 +19,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -30,8 +36,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -43,8 +53,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -56,8 +70,12 @@
 
         
 
+        
+
          S with an element type SE to an <non_terminal
          where="19.1">array-type</non_terminal>
+
+        
 
         
 
@@ -71,6 +89,8 @@
 
           
 
+          
+
           s. </list_item
         >
         <list_item> An implicit reference conversion exists from SE to TE. </list_item>
@@ -78,6 +98,8 @@
       <list_item
         > From any <non_terminal
          where="19.1">array-type</non_terminal>
+
+        
 
         
 
@@ -89,6 +111,8 @@
 
         
 
+        
+
          to System.Delegate. </list_item
       >
       <list_item
@@ -97,8 +121,12 @@
 
         
 
+        
+
          or <non_terminal
          where="11.2">delegate-type</non_terminal>
+
+        
 
         
 
@@ -110,6 +138,8 @@
 
         
 
+        
+
         . </list_item
       >
     </list>
@@ -117,6 +147,8 @@
   <paragraph
     >The implicit reference conversions are those conversions between <non_terminal
      where="11.2">reference-type</non_terminal>
+
+    
 
     
 

@@ -104,6 +104,8 @@
 
             
 
+            
+
              can be used as a signature for the whole client certificate.</para
           >
         </remarks>
@@ -162,11 +164,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="field">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,8 +374,12 @@
 
             
 
+            
+
              is specified without a subfield, the <see
              cref="T:System.Web.HttpClientCertificate" />
+
+            
 
             
 

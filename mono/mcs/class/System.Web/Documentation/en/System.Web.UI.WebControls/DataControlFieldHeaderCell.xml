@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is used by data tables (such as the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -45,11 +53,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.DataControlFieldHeaderCell" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
 
             
 
+            
+
              property is true.</para
           >
         </item>
@@ -73,13 +87,19 @@
 
             
 
+            
+
              object whose <see
              cref="P:System.Web.UI.WebControls.BoundField.DataField" />
 
             
 
+            
+
              property is set as the <see
              cref="P:System.Web.UI.WebControls.GridView.RowHeaderColumn" />
+
+            
 
             
 
@@ -93,6 +113,8 @@
 
         
 
+        
+
          object is used, which renders a &lt;td&gt; instead of a &lt;th&gt; element.</para
       >
       <para
@@ -101,8 +123,12 @@
 
         
 
+        
+
          class supports the <see
          cref="P:System.Web.UI.WebControls.DataControlFieldHeaderCell.AbbreviatedText" />
+
+        
 
         
 
@@ -111,8 +137,12 @@
 
         
 
+        
+
          control whenever the <see
          cref="P:System.Web.UI.WebControls.GridView.UseAccessibleHeader" />
+
+        
 
         
 
@@ -124,6 +154,8 @@
       <para
         >In accessibility scenarios, represents a header cell in the rendered table of a tabular ASP.NET data-bound control, such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -152,8 +184,12 @@
 
             
 
+            
+
              constructor passes the <see
              cref="F:System.Web.UI.HtmlTextWriterTag.Th" />
+
+            
 
             
 
@@ -162,13 +198,19 @@
 
             
 
+            
+
              parameter, which is the representation of the HTML tag it is rendered with. The <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
+            
+
              passed in the <paramref
              name="containingField" />
+
+            
 
             
 
@@ -183,8 +225,12 @@
 
             
 
+            
+
              class, setting the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -210,6 +256,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.DataControlFieldHeaderCell.AbbreviatedText" />
+
+            
 
             
 
@@ -247,8 +295,12 @@
 
             
 
+            
+
              method adds the <see
              cref="F:System.Web.UI.HtmlTextWriterAttribute.Scope" />
+
+            
 
             
 
@@ -257,13 +309,19 @@
 
             
 
+            
+
              attributes if the respective <see
              cref="P:System.Web.UI.WebControls.DataControlFieldHeaderCell.Scope" />
 
             
 
+            
+
              or <see
              cref="P:System.Web.UI.WebControls.DataControlFieldHeaderCell.AbbreviatedText" />
+
+            
 
             
 
@@ -279,8 +337,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -311,8 +373,12 @@
 
             
 
+            
+
              property is rendered as an HTML scope attribute by the <see
              cref="T:System.Web.UI.WebControls.DataControlFieldHeaderCell" />
+
+            
 
             
 
@@ -321,8 +387,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Web.UI.WebControls.TableHeaderScope.NotSet" />
+
+            
 
             
 
@@ -331,8 +401,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.TableHeaderScope.Row" />
+
+            
 
             
 
@@ -341,6 +415,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.DataControlFieldHeaderCell.Scope" />
+
+            
 
             
 

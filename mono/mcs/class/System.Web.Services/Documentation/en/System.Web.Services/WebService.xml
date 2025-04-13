@@ -25,8 +25,12 @@
 
         
 
+        
+
         . Additional ASP.NET objects can be accessed through <see
          cref="P:System.Web.Services.WebService.Context" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property of either <see
          cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+        
 
         
 
@@ -48,13 +56,19 @@
 
         
 
+        
+
          set to true, do not have access to their <see
          cref="T:System.Web.HttpContext" />
 
         
 
+        
+
         . As such, accessing any of the properties of the <see
          cref="T:System.Web.Services.WebService" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+        
 
         
 
@@ -76,8 +94,12 @@
 
         
 
+        
+
          property of set to true, do not have access to their <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -86,8 +108,12 @@
 
         
 
+        
+
          property. To access the <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -96,8 +122,12 @@
 
         
 
+        
+
          and access the <see
          cref="P:System.Web.Services.WebService.Context" />
+
+        
 
         
 
@@ -122,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.WebService" />
+
+            
 
             
 
@@ -157,8 +189,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Services.WebMethodAttribute" />
+
+            
 
             
 
@@ -206,8 +242,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+            
 
             
 
@@ -216,8 +256,12 @@
 
             
 
+            
+
              property of set to true, do not have access to their <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -226,8 +270,12 @@
 
             
 
+            
+
              property. To access the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -236,8 +284,12 @@
 
             
 
+            
+
              and access the <see
              cref="P:System.Web.Services.WebService.Context" />
+
+            
 
             
 
@@ -249,6 +301,8 @@
           <para
             >Gets the ASP.NET <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -289,8 +343,12 @@
 
             
 
+            
+
              class provides several methods that can be used in the processing of Web requests, including <see
              cref="M:System.Web.HttpServerUtility.CreateObject(System.String)" />
+
+            
 
             
 
@@ -302,6 +360,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -343,6 +403,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -396,8 +458,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Web.Services.Protocols.SoapProtocolVersion.Default" />
+
+            
 
             
 
@@ -409,13 +475,19 @@
 
             
 
+            
+
              class, the version of the SOAP protocol used to make the SOAP request to the XML Web service can be also be accessed using the "WebServiceSoapVersion" entry of the <see
              cref="P:System.Web.HttpContext.Items" />
 
             
 
+            
+
              property. That entry is of type <see
              cref="T:System.Web.Services.Protocols.SoapProtocolVersion" />
+
+            
 
             
 
@@ -451,6 +523,8 @@
 
             
 
+            
+
              property to be meaningful. Authentication is the process of accepting credentials from a user and validating those credentials against some authority. If the credentials are valid, you have an authenticated identity. Authentication in the .NET Framework is configured by placing entries in the web.config file.</para
           >
           <para>The following example demonstrates the entries you place in the web.config file to enable Windows authentication.</para>
@@ -468,6 +542,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -476,6 +552,8 @@
           <para
             >Gets the ASP.NET server <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 

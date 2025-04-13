@@ -29,6 +29,8 @@
 
         
 
+        
+
         . This class cannot be inherited.</para
       >
     </summary>
@@ -60,11 +62,15 @@
 
             
 
+            
+
              is in the table; otherwise, false.</para
           >
         </returns>
         <param name="statementOwner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -95,8 +101,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" />
+
+            
 
             
 
@@ -111,8 +121,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" />
+
+            
 
             
 
@@ -167,6 +181,8 @@
 
             
 
+            
+
              method if you want statement tables to be used to store values for certain objects.</para
           >
         </remarks>
@@ -176,6 +192,8 @@
         </summary>
         <param name="statementOwners">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,6 +222,8 @@
 
             
 
+            
+
              method if you want statement tables to be used to store values for certain objects.</para
           >
         </remarks>
@@ -213,6 +233,8 @@
         </summary>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,8 +264,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -258,6 +284,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -266,6 +294,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

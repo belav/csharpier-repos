@@ -24,6 +24,8 @@ bool operator !=(string x, string y);
 
       
 
+      
+
       , the reference type equality operators can be used to compare string references instead of string values. end note]</note
     >
   </paragraph>

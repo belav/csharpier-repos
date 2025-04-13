@@ -32,6 +32,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -66,8 +68,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -78,8 +84,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -90,8 +100,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 

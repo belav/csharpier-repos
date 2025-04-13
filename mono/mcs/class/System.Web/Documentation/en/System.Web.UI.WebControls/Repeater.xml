@@ -83,6 +83,8 @@
 
         
 
+        
+
          control is a basic templated data-bound list. It has no built-in layout or styles, so you must explicitly declare all layout, formatting, and style tags within the control's templates.</para
       >
       <para
@@ -91,8 +93,12 @@
 
         
 
+        
+
          control allows you to split markup tags across the templates.  To create a table using templates, include the begin table tag (&lt;table&gt;) in the <see
          cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
+
+        
 
         
 
@@ -101,8 +107,12 @@
 
         
 
+        
+
         , and the end table tag (&lt;/table&gt;) in the <see
          cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
+
+        
 
         
 
@@ -114,8 +124,12 @@
 
         
 
+        
+
          control has no built-in selection capabilities or editing support. You can use the <see
          cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+
+        
 
         
 
@@ -127,6 +141,8 @@
            type="text/html">
             <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
           </format>
+
+          
 
           
 
@@ -145,8 +161,12 @@
 
         
 
+        
+
          control provides two properties to support data binding. To bind data to any collection that implements the <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -155,8 +175,12 @@
 
         
 
+        
+
         , a <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -165,8 +189,12 @@
 
         
 
+        
+
          interface, use the <see
          cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+        
 
         
 
@@ -175,8 +203,12 @@
 
         
 
+        
+
          property, you must manually write the code to perform data binding. To automatically bind the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -185,8 +217,12 @@
 
         
 
+        
+
          property to the <see
          cref="P:System.Web.UI.Control.ID" />
+
+        
 
         
 
@@ -195,8 +231,12 @@
 
         
 
+        
+
          property, the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -205,8 +245,12 @@
 
         
 
+        
+
          method unless you have changed data-related properties of the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -218,8 +262,12 @@
 
         
 
+        
+
          control binds its <see
          cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+
+        
 
         
 
@@ -228,8 +276,12 @@
 
         
 
+        
+
          to either the data model declared and referenced by its <see
          cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+        
 
         
 
@@ -238,8 +290,12 @@
 
         
 
+        
+
          property. The <see
          cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
+
+        
 
         
 
@@ -248,8 +304,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
+
+        
 
         
 
@@ -261,8 +321,12 @@
 
         
 
+        
+
          control's data source is set but no data is returned, the control renders the <see
          cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
+
+        
 
         
 
@@ -271,8 +335,12 @@
 
         
 
+        
+
          with no items. If the data source is null, the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -290,8 +358,12 @@
 
         
 
+        
+
          control must define an <see
          cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+
+        
 
         
 
@@ -328,6 +400,8 @@
             <para
               >If defined, determines the content and layout of alternating (zero-based odd-indexed) items. If not defined, <see
                cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+
+              
 
               
 
@@ -382,9 +456,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -402,6 +480,8 @@
     runat="server"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -446,6 +526,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -478,8 +560,12 @@
 
             
 
+            
+
              control from what is specified in the <see
              cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+
+            
 
             
 
@@ -494,6 +580,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -503,6 +591,8 @@
           <para
             >Gets or sets the object implementing <see
              cref="T:System.Web.UI.ITemplate" />
+
+            
 
             
 
@@ -552,8 +642,12 @@
 
             
 
+            
+
              collection to manage the child controls of the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -566,8 +660,12 @@
 
               
 
+              
+
                control, iterate through the <see
                cref="T:System.Web.UI.WebControls.Repeater" />
+
+              
 
               
 
@@ -576,8 +674,12 @@
 
               
 
+              
+
                collection to retrieve the <see
                cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+              
 
               
 
@@ -586,8 +688,12 @@
 
               
 
+              
+
                item's inherited <see
                cref="M:System.Web.UI.Control.FindControl(System.String)" />
+
+              
 
               
 
@@ -603,8 +709,12 @@
 
             
 
+            
+
              that contains the child controls of the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -656,6 +766,8 @@
 
           
 
+          
+
           Indicates whether to use the specified data source. </param
         >
       </Docs>
@@ -686,13 +798,19 @@
 
             
 
+            
+
              property calls the <see
              cref="M:System.Web.UI.WebControls.Repeater.CreateDataSourceSelectArguments" />
 
             
 
+            
+
              method to return the <see
              cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+
+            
 
             
 
@@ -707,6 +825,8 @@
 
             
 
+            
+
              value. </para
           >
         </summary>
@@ -715,6 +835,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+
+            
 
             
 
@@ -746,8 +868,12 @@
 
             
 
+            
+
              object with the specified item type and location within the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -762,6 +888,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -770,8 +898,12 @@
 
           
 
+          
+
           The specified location within the <see
            cref="T:System.Web.UI.WebControls.Repeater" />
+
+          
 
           
 
@@ -782,13 +914,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
+          
+
            that represents the specified type of the <see
            cref="T:System.Web.UI.WebControls.Repeater" />
+
+          
 
           
 
@@ -816,8 +954,12 @@
 
             
 
+            
+
              method to bind the data source specified by the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+            
 
             
 
@@ -826,8 +968,12 @@
 
             
 
+            
+
              control. When you bind a data source to the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -839,6 +985,8 @@
 
             
 
+            
+
              method is also commonly used to synchronize the data source and a data listing control after information in the data source is updated. This allows any changes in the data source to also be updated in a data listing control.</para
           >
           <para
@@ -847,8 +995,12 @@
 
             
 
+            
+
              control is specified by the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -857,8 +1009,12 @@
 
             
 
+            
+
              method. ASP.NET calls this method automatically to bind the specified data source control to the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -870,6 +1026,8 @@
           <para
             >Binds the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -899,8 +1057,12 @@
 
             
 
+            
+
              property contains multiple sources of data, use the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+
+            
 
             
 
@@ -909,8 +1071,12 @@
 
             
 
+            
+
              with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -923,6 +1089,8 @@
           <para
             >Gets or sets the specific table in the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+            
 
             
 
@@ -957,8 +1125,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+            
 
             
 
@@ -967,8 +1139,12 @@
 
             
 
+            
+
              collection such as a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -977,13 +1153,19 @@
 
             
 
+            
+
             , or an array, or an <see
              cref="T:System.ComponentModel.IListSource" />
 
             
 
+            
+
              object. When you set the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+            
 
             
 
@@ -995,8 +1177,12 @@
 
             
 
+            
+
              property contains multiple sources of data, use the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+
+            
 
             
 
@@ -1005,8 +1191,12 @@
 
             
 
+            
+
              with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -1018,8 +1208,12 @@
 
             
 
+            
+
              property to automatically bind to a data source represented by a data source control. When you set the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -1028,13 +1222,19 @@
 
             
 
+            
+
              control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
+            
+
              method unless you dynamically change properties of the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1046,13 +1246,19 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
+            
+
              property, ASP.NET is not able to resolve the data source and a <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1107,8 +1313,12 @@
 
             
 
+            
+
              property to access the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1117,8 +1327,12 @@
 
             
 
+            
+
              control should use to retrieve its data source. The data source control that is referenced by the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -1127,8 +1341,12 @@
 
             
 
+            
+
              interface. The data source control must exist either in the same naming container as the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1137,8 +1355,12 @@
 
             
 
+            
+
              control. When you specify a value for the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -1147,8 +1369,12 @@
 
             
 
+            
+
              control binds to the specified data source control. You do not need to write code that explicitly calls the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -1160,8 +1386,12 @@
 
             
 
+            
+
              property to specify the source of values to bind to the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1170,8 +1400,12 @@
 
             
 
+            
+
              interface (such as the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1180,13 +1414,19 @@
 
             
 
+            
+
              object) or the <see
              cref="T:System.ComponentModel.IListSource" />
 
             
 
+            
+
              interface. When you set the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+
+            
 
             
 
@@ -1198,13 +1438,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
+            
+
              properties, ASP.NET is not able to resolve the data source and an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1220,8 +1466,12 @@
 
             
 
+            
+
              property of the data source control that the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1257,8 +1507,12 @@
 
             
 
+            
+
              property indicates whether themes are enabled. When the <see
              cref="P:System.Web.UI.WebControls.Repeater.EnableTheming" />
+
+            
 
             
 
@@ -1290,8 +1544,12 @@
 
             
 
+            
+
              property, ASP.NET automatically binds the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1300,8 +1558,12 @@
 
             
 
+            
+
              control, it first calls the <see
              cref="M:System.Web.UI.WebControls.Repeater.EnsureDataBound" />
+
+            
 
             
 
@@ -1310,8 +1572,12 @@
 
             
 
+            
+
              interface is specified for its <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -1320,8 +1586,12 @@
 
             
 
+            
+
              method then calls the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -1336,8 +1606,12 @@
 
             
 
+            
+
              control requires data binding and that a valid data source control is specified before calling the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -1369,6 +1643,8 @@
 
             
 
+            
+
              control is displayed.</para
           >
           <block subset="none" type="note">
@@ -1377,6 +1653,8 @@
                type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
+
+              
 
               
 
@@ -1392,8 +1670,12 @@
 
             
 
+            
+
              that defines how the footer section of the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1442,13 +1724,19 @@
 
             
 
+            
+
              property or by the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Repeater.SelectArguments" />
+
+            
 
             
 
@@ -1463,6 +1751,8 @@
 
             
 
+            
+
              interface from the data source.</para
           >
         </summary>
@@ -1471,6 +1761,8 @@
           <para
             >An object implementing <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1502,6 +1794,8 @@
 
             
 
+            
+
              control is displayed.</para
           >
           <block subset="none" type="note">
@@ -1510,6 +1804,8 @@
                type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
+
+              
 
               
 
@@ -1525,8 +1821,12 @@
 
             
 
+            
+
              that defines how the header section of the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1572,8 +1872,12 @@
 
             
 
+            
+
              property is a helper property that is used to determine whether data binding is required when the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+
+            
 
             
 
@@ -1582,8 +1886,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -1618,11 +1926,15 @@
 
             
 
+            
+
              with a sub-hierarchy of child controls.</para
           >
         </summary>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1653,13 +1965,19 @@
 
             
 
+            
+
              property is a helper property that determines whether the control is bound to an ASP.NET 2.0 data source control, such as an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
+            
+
              or a <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1671,6 +1989,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -1698,6 +2018,8 @@
 
             
 
+            
+
              control is clicked.</para
           >
           <para>This event causes a round-trip from the client to occur.</para>
@@ -1709,6 +2031,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1717,6 +2041,8 @@
           <para
             >Occurs when a button is clicked in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1748,6 +2074,8 @@
 
             
 
+            
+
              control.</para
           >
           <para
@@ -1755,6 +2083,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1766,6 +2096,8 @@
           <para
             >Occurs when an item is created in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1797,6 +2129,8 @@
 
             
 
+            
+
              control is data-bound.</para
           >
           <para
@@ -1804,6 +2138,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1815,6 +2151,8 @@
           <para
             >Occurs after an item in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1846,8 +2184,12 @@
 
             
 
+            
+
              control populates the <see
              cref="P:System.Web.UI.WebControls.Repeater.Items" />
+
+            
 
             
 
@@ -1856,13 +2198,19 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
             
 
+            
+
              collection is then used by the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1877,8 +2225,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1922,6 +2274,8 @@
 
             
 
+            
+
              control are displayed.</para
           >
           <block subset="none" type="note">
@@ -1930,6 +2284,8 @@
                type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
+
+              
 
               
 
@@ -1945,8 +2301,12 @@
 
             
 
+            
+
              that defines how items in the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -1996,13 +2356,19 @@
 
             
 
+            
+
              event if the <paramref
              name="EventArgs" />
 
             
 
+            
+
              parameter is an instance of <see
              cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+
+            
 
             
 
@@ -2017,11 +2383,15 @@
 
             
 
+            
+
              was raised, otherwise false.</para
           >
         </returns>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2032,8 +2402,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2065,8 +2439,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2097,8 +2475,12 @@
 
             
 
+            
+
              method is a helper method that is called when the <see
              cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+
+            
 
             
 
@@ -2107,8 +2489,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -2146,8 +2532,12 @@
 
             
 
+            
+
              method is a helper method that participates in the data binding process. This method is called when the <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -2156,8 +2546,12 @@
 
             
 
+            
+
              event. The event causes the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -2172,11 +2566,15 @@
 
             
 
+            
+
              property to true.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2187,8 +2585,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2218,6 +2620,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2226,8 +2630,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2258,6 +2666,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2269,6 +2679,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2277,8 +2689,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+
+          
 
           
 
@@ -2313,6 +2729,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2324,6 +2742,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2332,8 +2752,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+
+          
 
           
 
@@ -2368,6 +2792,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2379,6 +2805,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2387,8 +2815,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+
+          
 
           
 
@@ -2421,8 +2853,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -2437,6 +2873,8 @@
 
             
 
+            
+
              event and performs other initialization. </para
           >
         </summary>
@@ -2445,8 +2883,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+
+          
 
           
 
@@ -2498,6 +2940,8 @@
 
             
 
+            
+
              event is used to perform any updates before the output for the server control is rendered to the page. Any changes in the view state of the server control can be saved during this event. Such changes made in the rendering phase are not saved.</para
           >
         </remarks>
@@ -2509,6 +2953,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2517,8 +2963,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+
+          
 
           
 
@@ -2545,13 +2995,19 @@
 
             
 
+            
+
              control uses the <see
              cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
+            
+
              property to determine whether the control needs to call the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -2563,8 +3019,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+
+            
 
             
 
@@ -2573,8 +3033,12 @@
 
             
 
+            
+
              property to change the data source after the <see
              cref="M:System.Web.UI.WebControls.Repeater.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -2583,13 +3047,19 @@
 
             
 
+            
+
              property to true. The value of the <see
              cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
+            
+
              property is also set to true when the <see
              cref="M:System.Web.UI.WebControls.Repeater.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -2601,8 +3071,12 @@
 
             
 
+            
+
              property to false immediately after the <see
              cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+
+            
 
             
 
@@ -2614,6 +3088,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -2644,13 +3120,19 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.UI.WebControls.Repeater.CreateDataSourceSelectArguments" />
 
             
 
+            
+
              method to create the <see
              cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+
+            
 
             
 
@@ -2665,8 +3147,12 @@
 
             
 
+            
+
              object that the <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -2698,6 +3184,8 @@
 
             
 
+            
+
              property to create a template that controls how the separator between items is displayed.</para
           >
           <block subset="none" type="note">
@@ -2707,10 +3195,14 @@
 
               
 
+              
+
                property to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
                type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
+
+              
 
               
 
@@ -2723,6 +3215,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.UI.ITemplate" />
+
+            
 
             
 

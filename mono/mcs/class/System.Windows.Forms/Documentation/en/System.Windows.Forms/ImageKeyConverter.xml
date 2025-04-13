@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used to convert key values of an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -31,10 +35,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -57,8 +69,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -86,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ImageKeyConverter" />
+
+            
 
             
 
@@ -125,8 +143,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -137,8 +159,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -177,6 +203,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -185,8 +213,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -197,8 +229,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -209,8 +245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -250,8 +290,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -263,8 +307,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -275,8 +323,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -287,10 +339,14 @@
 
           
 
+          
+
           The object to convert, typically an image key.</param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,13 +378,19 @@
 
             
 
+            
+
              supports null as a standard value, the <see
              cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
+            
+
              method returns a collection containing a single empty string. If no image list is found, and null is not supported as a standard value, <see
              cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -347,6 +409,8 @@
 
             
 
+            
+
              that contains the standard set of image key values. </para
           >
         </returns>
@@ -355,8 +419,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -388,8 +456,12 @@
 
             
 
+            
+
              method is exclusive, no other values are valid. This is typical of an enumerated data type. If the list is not exclusive, there are other valid values besides the list of standard values that <see
              cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+
+            
 
             
 
@@ -402,13 +474,19 @@
 
             
 
+            
+
              method before you attempt to use the <see
              cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" />
 
             
 
+            
+
              and <see
              cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValuesExclusive" />
+
+            
 
             
 
@@ -423,8 +501,12 @@
 
             
 
+            
+
              is exclusive (that is, whether it allows values other than those returned by <see
              cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" />
+
+            
 
             
 
@@ -440,8 +522,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -473,13 +559,19 @@
 
             
 
+            
+
              class, the <see
              cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
+            
+
              method always returns true since <see
              cref="T:System.Windows.Forms.ImageKeyConverter" />
+
+            
 
             
 
@@ -499,8 +591,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -528,6 +624,8 @@
           <para
             >Gets or sets a value indicating whether null is valid in the <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 

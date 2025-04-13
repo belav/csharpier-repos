@@ -19,8 +19,12 @@
 
         
 
+        
+
          whenever an error occurs. Each instance of <see
          cref="T:System.Data.Odbc.OdbcError" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          is then managed by the <see
          cref="T:System.Data.Odbc.OdbcErrorCollection" />
+
+        
 
         
 
@@ -39,11 +47,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >If the severity of the error is too great, the server may close the <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 

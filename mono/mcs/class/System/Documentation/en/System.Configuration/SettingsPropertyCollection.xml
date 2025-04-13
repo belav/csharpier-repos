@@ -34,13 +34,19 @@
 
         
 
+        
+
          collection contains a collection of <see
          cref="T:System.Configuration.SettingsProperty" />
 
         
 
+        
+
          objects. A <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
       <para
         >Contains a collection of <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -80,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsPropertyCollection" />
+
+            
 
             
 
@@ -119,6 +129,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -127,8 +139,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -159,6 +175,8 @@
           <para
             >Removes all <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -197,6 +215,8 @@
 
             
 
+            
+
              class.</para
           >
         </returns>
@@ -231,6 +251,8 @@
 
             
 
+            
+
              object to an array.</para
           >
         </summary>
@@ -239,10 +261,14 @@
 
           
 
+          
+
           The array to copy the object to.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,6 +296,8 @@
           <para
             >Gets a value that specifies the number of <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -307,6 +335,8 @@
 
             
 
+            
+
              object as it applies to the collection.</para
           >
         </summary>
@@ -315,6 +345,8 @@
           <para
             >The <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -403,6 +435,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -411,8 +445,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -451,6 +489,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -459,8 +499,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -494,6 +538,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -522,6 +568,8 @@
           <para
             >Performs additional, custom processing after clearing the contents of the <see
              cref="T:System.Configuration.SettingsPropertyCollection" />
+
+            
 
             
 
@@ -561,6 +609,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -569,8 +619,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -609,6 +663,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -617,8 +673,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -654,6 +714,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -662,8 +724,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 

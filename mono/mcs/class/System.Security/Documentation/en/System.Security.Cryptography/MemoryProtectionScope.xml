@@ -23,8 +23,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
       <para
         >Specifies the scope of memory protection to be applied by the <see
          cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -97,6 +105,8 @@
 
             
 
+            
+
              method can unprotect memory.</para
           >
         </summary>
@@ -123,6 +133,8 @@
           <para
             >Only code running in the same process as the code that called the <see
              cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+
+            
 
             
 

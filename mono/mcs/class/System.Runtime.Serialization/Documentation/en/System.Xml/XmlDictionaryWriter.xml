@@ -30,6 +30,8 @@
 
         
 
+        
+
          to do serialization and deserialization.</para
       >
     </summary>
@@ -59,6 +61,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -84,10 +88,14 @@
 
             
 
+            
+
              can canonicalize the XML content being written to it, according to the Exclusive XML Canonicalization rules as defined in <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96655"
               >Exclusive XML Canonicalization Version 1.0</see
             >
+
+            
 
             
 
@@ -129,6 +137,8 @@
 
             
 
+            
+
              that writes indigo2 binary XML format.</para
           >
         </summary>
@@ -140,11 +150,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +196,8 @@
 
             
 
+            
+
              that writes indigo2 binary XML format.</para
           >
         </summary>
@@ -193,11 +209,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,8 +228,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -248,6 +272,8 @@
 
             
 
+            
+
              that writes indigo2 binary XML format.</para
           >
         </summary>
@@ -259,11 +285,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,8 +304,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -286,8 +320,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlBinaryWriterSession" />
+
+          
 
           
 
@@ -327,6 +365,8 @@
 
             
 
+            
+
              that writes indigo2 binary XML format.</para
           >
         </summary>
@@ -338,11 +378,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,8 +397,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -365,8 +413,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlBinaryWriterSession" />
+
+          
 
           
 
@@ -374,6 +426,8 @@
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,8 +464,12 @@
 
             
 
+            
+
              from an existing <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -426,6 +484,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -434,8 +494,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -475,6 +539,8 @@
 
             
 
+            
+
              that writes XML in the MTOM format.</para
           >
         </summary>
@@ -486,11 +552,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,6 +571,8 @@
 
           
 
+          
+
           The character encoding of the stream.</param
         >
         <param name="maxSizeInBytes">
@@ -508,10 +580,14 @@
 
           
 
+          
+
           The maximum number of bytes that are buffered in the writer.</param
         >
         <param name="startInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,6 +631,8 @@
 
             
 
+            
+
              that writes XML in the MTOM format.</para
           >
         </summary>
@@ -566,11 +644,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,10 +663,14 @@
 
           
 
+          
+
           The character encoding of the stream.</param
         >
         <param name="maxSizeInBytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,10 +681,14 @@
 
           
 
+          
+
           The content-type of the MIME part that contains the Infoset.</param
         >
         <param name="boundary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -609,6 +699,8 @@
 
           
 
+          
+
           The content-id URI of the MIME part that contains the Infoset.</param
         >
         <param name="writeMessageHeaders">
@@ -616,10 +708,14 @@
 
           
 
+          
+
           true to write message headers.</param
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,6 +755,8 @@
 
             
 
+            
+
              that writes text XML.</para
           >
         </summary>
@@ -670,11 +768,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -711,6 +813,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -719,6 +823,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryWriter" />
+
+            
 
             
 
@@ -733,6 +839,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -741,10 +849,14 @@
 
           
 
+          
+
           The stream to write to.</param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -783,6 +895,8 @@
 
             
 
+            
+
              that writes text XML.</para
           >
         </summary>
@@ -794,11 +908,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -809,10 +927,14 @@
 
           
 
+          
+
           The character encoding of the stream.</param
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -844,6 +966,8 @@
           <para
             >When implemented by a derived class, it stops the canonicalization started by the matching <see
              cref="M:System.Xml.XmlDictionaryWriter.StartCanonicalization(System.IO.Stream,System.Boolean,System.String[])" />
+
+            
 
             
 
@@ -887,6 +1011,8 @@
 
           
 
+          
+
           The stream to write to.</param
         >
         <param name="includeComments">
@@ -894,10 +1020,14 @@
 
           
 
+          
+
           true to include comments; otherwise, false.</param
         >
         <param name="inclusivePrefixes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -940,11 +1070,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -955,10 +1089,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -969,10 +1107,14 @@
 
           
 
+          
+
           The array that contains the data.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,11 +1157,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1030,10 +1176,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1044,10 +1194,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1090,11 +1244,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1105,10 +1263,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1119,10 +1281,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1165,11 +1331,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1180,10 +1350,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1194,10 +1368,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1240,11 +1418,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1255,10 +1437,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1269,10 +1455,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1315,11 +1505,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1330,10 +1524,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1344,10 +1542,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1390,11 +1592,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1405,10 +1611,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1419,10 +1629,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1465,11 +1679,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1480,10 +1698,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1494,10 +1716,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1540,11 +1766,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1555,10 +1785,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1569,10 +1803,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1615,11 +1853,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1630,10 +1872,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1644,10 +1890,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1690,11 +1940,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1705,10 +1959,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1719,10 +1977,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1765,11 +2027,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1780,10 +2046,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1794,10 +2064,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1840,11 +2114,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1855,10 +2133,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1869,10 +2151,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1915,11 +2201,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1930,10 +2220,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1944,10 +2238,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1990,11 +2288,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2005,10 +2307,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2019,10 +2325,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2065,11 +2375,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2080,10 +2394,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2094,10 +2412,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2140,11 +2462,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2155,10 +2481,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2169,10 +2499,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2215,11 +2549,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2230,10 +2568,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2244,10 +2586,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2290,11 +2636,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2305,10 +2655,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2319,10 +2673,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2365,11 +2723,15 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2380,10 +2742,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2394,10 +2760,14 @@
 
           
 
+          
+
           The array that contains the nodes.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2437,6 +2807,8 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceUri">
@@ -2444,10 +2816,14 @@
 
           
 
+          
+
           The namespace URI of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2488,10 +2864,14 @@
 
           
 
+          
+
           The prefix of the attribute.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2502,10 +2882,14 @@
 
           
 
+          
+
           The namespace URI of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2545,6 +2929,8 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
@@ -2552,10 +2938,14 @@
 
           
 
+          
+
           The namespace URI of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2596,10 +2986,14 @@
 
           
 
+          
+
           The prefix of the element.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2610,10 +3004,14 @@
 
           
 
+          
+
           The namespace URI of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2651,6 +3049,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2659,8 +3059,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -2668,6 +3072,8 @@
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2705,6 +3111,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2713,8 +3121,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2725,8 +3137,12 @@
 
           
 
+          
+
           true to copy the default attributes from the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2769,10 +3185,14 @@
 
           
 
+          
+
           The local name of the qualified name.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2811,10 +3231,14 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2854,6 +3278,8 @@
 
           
 
+          
+
           The namespace prefix.</param
         >
         <param name="localName">
@@ -2861,10 +3287,14 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2903,10 +3333,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2946,6 +3380,8 @@
 
           
 
+          
+
           The prefix of the element.</param
         >
         <param name="localName">
@@ -2953,10 +3389,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2991,6 +3431,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3031,6 +3473,8 @@
 
             
 
+            
+
              is currently positioned on.</para
           >
         </summary>
@@ -3039,8 +3483,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -3048,6 +3496,8 @@
         >
         <param name="isAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3082,6 +3532,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -3111,6 +3563,8 @@
           <para
             >Writes a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3148,6 +3602,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3159,6 +3615,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3167,8 +3625,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IStreamProvider" />
+
+          
 
           
 
@@ -3233,6 +3695,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -3241,8 +3705,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -3281,10 +3749,14 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3323,10 +3795,14 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3365,10 +3841,14 @@
 
           
 
+          
+
           The prefix that is bound to the given namespace.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3407,10 +3887,14 @@
 
           
 
+          
+
           The prefix that is bound to the given namespace.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

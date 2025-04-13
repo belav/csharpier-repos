@@ -37,8 +37,12 @@
 
         
 
+        
+
          can be used to generate unique file names and to keep track of a list of files. This can be useful to <see
          cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+        
 
         
 
@@ -50,13 +54,19 @@
 
         
 
+        
+
          or <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" />
 
         
 
+        
+
          methods, be deleted when the collection is disposed or the <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          using the <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.AddFile(System.String,System.Boolean)" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          and specifiy the extension of the file name to generate. The <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" />
+
+        
 
         
 
@@ -91,8 +109,12 @@
 
         
 
+        
+
          property. The <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" />
+
+        
 
         
 
@@ -104,13 +126,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" />
 
         
 
+        
+
          methods have overloads that allow you to specify whether the files should be deleted when the collection is disposed or the <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" />
+
+        
 
         
 
@@ -122,6 +150,8 @@
 
         
 
+        
+
          method will delete all the files in the collection except those that are marked to be kept.</para
       >
       <para
@@ -130,8 +160,12 @@
 
         
 
+        
+
          property indicates a full path to the base file name, without a file name extension, used to generate the file names returned by the <see
          cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" />
+
+        
 
         
 
@@ -144,6 +178,8 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -151,10 +187,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -195,6 +235,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -226,11 +268,15 @@
 
             
 
+            
+
              class using the specified temporary directory that is set to delete the temporary files after their generation and use, by default.</para
           >
         </summary>
         <param name="tempDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,8 +313,12 @@
 
             
 
+            
+
              is used to set the <see
              cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+
+            
 
             
 
@@ -277,8 +327,12 @@
 
             
 
+            
+
              property in the collection. As each file is added to the collection, the current value of <see
              cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+
+            
 
             
 
@@ -287,8 +341,12 @@
 
             
 
+            
+
              parameter, in which case that value is used for that specific file. When the <see
              cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" />
+
+            
 
             
 
@@ -297,8 +355,12 @@
 
             
 
+            
+
              is true, all files are deleted, including those added with a <see
              cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+
+            
 
             
 
@@ -313,6 +375,8 @@
 
             
 
+            
+
              class using the specified temporary directory and specified value indicating whether to keep or delete the temporary files after their generation and use, by default.</para
           >
         </summary>
@@ -321,10 +385,14 @@
 
           
 
+          
+
           A path to the temporary directory to use for storing the temporary files. </param
         >
         <param name="keepFiles">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -366,6 +434,8 @@
         </returns>
         <param name="fileExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,10 +484,14 @@
 
           
 
+          
+
           The file name extension for the auto-generated temporary file name to add to the collection. </param
         >
         <param name="keepFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,6 +531,8 @@
 
             
 
+            
+
              method is called.</para
           >
         </summary>
@@ -465,10 +541,14 @@
 
           
 
+          
+
           The name of the file to add to the collection. </param
         >
         <param name="keepFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -527,10 +607,14 @@
 
           
 
+          
+
           The array of strings to copy to. </param
         >
         <param name="start">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,8 +668,12 @@
 
             
 
+            
+
              method examines each file in the collection to determine, on an individual basis, whether the file is to be kept or deleted. Files can be explicitly marked to be kept when added to the collection using add methods that take a <paramref
              name="keepFile" />
+
+            
 
             
 
@@ -594,13 +682,19 @@
 
             
 
+            
+
              overload that does not have a <paramref
              name="keepFile" />
 
             
 
+            
+
              parameter the value of the <see
              cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+
+            
 
             
 
@@ -640,8 +734,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -650,8 +748,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -663,8 +765,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.CodeDom.Compiler.TempFileCollection" />
+
+            
 
             
 
@@ -679,11 +785,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,11 +826,15 @@
 
             
 
+            
+
              and cleans up resources by calling Dispose(false). Override Dispose(Boolean) to customize the cleanup.</para
           >
           <para
             >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -736,6 +850,8 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
@@ -745,12 +861,16 @@
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="8026CB68-FE93-43FC-96C1-C09AD7D64CD3"
                 >[&lt;topic://cpconOverridingFinalizeMethod&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -796,6 +916,8 @@
 
             
 
+            
+
              that contains the collection's members.</para
           >
         </returns>
@@ -824,8 +946,12 @@
 
             
 
+            
+
              property is used as the default value when the <see
              cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" />
+
+            
 
             
 
@@ -834,13 +960,19 @@
 
             
 
+            
+
              parameter is called to add a temporary file to the collection. Each temporary file in the collection has an associated keep file flag that determines, on a per-file basis, whether that file is to be kept or deleted. Files are automatically kept or deleted on completion of the compilation based on their associated keep files value. However, after compilation is complete, files that were kept can be released by setting <see
              cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
 
             
 
+            
+
              false and calling the <see
              cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" />
+
+            
 
             
 
@@ -852,6 +984,8 @@
           <para
             >Gets or sets a value indicating whether to keep the files, by default, when the <see
              cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" />
+
+            
 
             
 
@@ -888,8 +1022,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -905,8 +1043,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -915,8 +1057,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -924,6 +1070,8 @@
         >
         <param name="start">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -956,8 +1104,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -998,8 +1150,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1040,8 +1196,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1082,8 +1242,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1099,6 +1263,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1132,8 +1298,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 

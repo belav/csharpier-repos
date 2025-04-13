@@ -24,8 +24,12 @@
 
         
 
+        
+
          version 1.0, XML schemas were loaded into an <see
          cref="T:System.Xml.Schema.XmlSchemaCollection" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          version 2.0, the <see
          cref="T:System.Xml.XmlValidatingReader" />
+
+        
 
         
 
@@ -44,13 +52,19 @@
 
         
 
+        
+
          classes are obsolete, and have been replaced by the <see
          cref="Overload:System.Xml.XmlReader.Create" />
 
         
 
+        
+
          method and the <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+        
 
         
 
@@ -62,6 +76,8 @@
 
         
 
+        
+
          has been introduced to fix a number of issues, including standards compatibility, performance, and the obsolete Microsoft XML-Data Reduced (XDR) schema format.</para
       >
       <para
@@ -70,8 +86,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+        
 
         
 
@@ -104,6 +124,8 @@
 
               
 
+              
+
                method is called.</para
             >
           </term>
@@ -111,6 +133,8 @@
             <para
               >Schemas are not compiled when the <see
                cref="Overload:System.Xml.Schema.XmlSchemaSet.Add" />
+
+              
 
               
 
@@ -146,8 +170,12 @@
 
             
 
+            
+
              class is used to resolve external schemas by default. To disable resolution of include, import, and redefine elements of a schema, set the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.XmlResolver" />
+
+            
 
             
 
@@ -161,8 +189,12 @@
 
             
 
+            
+
              class uses the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -176,8 +208,12 @@
 
             
 
+            
+
              class, such as the <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -186,13 +222,19 @@
 
             
 
+            
+
              property of an <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
 
             
 
+            
+
              returns the URI path to the schema file that caused the exception. The <see
              cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
+
+            
 
             
 
@@ -230,6 +272,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -263,8 +307,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -276,8 +324,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -315,8 +367,12 @@
 
             
 
+            
+
              object already exists in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -325,11 +381,15 @@
 
             
 
+            
+
              method does nothing.</para
           >
           <para
             >The functionality of this method is identical to that of the <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -344,8 +404,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -360,13 +424,19 @@
 
             
 
+            
+
              object if the schema is valid. If the schema is not valid and a <see
              cref="T:System.Xml.Schema.ValidationEventHandler" />
 
             
 
+            
+
              is specified, then null is returned and the appropriate validation event is raised. Otherwise, an <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -378,13 +448,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
+          
+
            object to add to the <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -422,6 +498,8 @@
 
             
 
+            
+
             , it has to be successfully preprocessed. Preprocessing performs the following basic tasks.</para
           >
           <list type="ordered">
@@ -435,13 +513,19 @@
 
                 
 
+                
+
                 . Imported schemas are added as separate <see
                  cref="T:System.Xml.Schema.XmlSchema" />
 
                 
 
+                
+
                  objects, and included schemas are made a part of the including <see
                  cref="T:System.Xml.Schema.XmlSchema" />
+
+                
 
                 
 
@@ -455,8 +539,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -465,8 +553,12 @@
 
             
 
+            
+
              to add are added to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -475,8 +567,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -485,8 +581,12 @@
 
             
 
+            
+
              fails to be preprocessed, no schemas are added; instead, an <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -517,6 +617,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              property is set to false, no schemas are added to schemaSet. In the second example, a number of schemas can be added to schemaSet before an invalid schema is encountered and an exception is thrown.</para
           >
         </remarks>
@@ -528,8 +630,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -541,8 +647,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -581,6 +691,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             , it has to be successfully preprocessed. Preprocessing performs the following basic tasks.</para
           >
           <list type="ordered">
@@ -594,13 +706,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                 . Imported schemas are added as separate <see
                  cref="T:System.Xml.Schema.XmlSchema" />
 
                 
 
+                
+
                  objects, and included schemas are made a part of the including <see
                  cref="T:System.Xml.Schema.XmlSchema" />
+
+                
 
                 
 
@@ -614,6 +732,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -624,8 +744,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  with the same target namespace and schema location URL as a schema already contained within the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -639,13 +763,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                 , the <see
                  cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -659,13 +789,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method is called. Failure to resolve include and import elements results in a schema validation warning and if no <see
                  cref="E:System.Xml.Schema.XmlSchemaSet.ValidationEventHandler" />
 
                 
 
+                
+
                  has been specified for the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -679,8 +815,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -690,6 +830,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
                 <para
                   >This behavior differs from the obsolete <see
                    cref="T:System.Xml.Schema.XmlSchemaCollection" />
+
+                  
 
                   
 
@@ -704,8 +846,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -714,8 +860,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method is called. Specifying null in the <paramref
                  name="targetNamespace" />
+
+                
 
                 
 
@@ -724,8 +874,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method instructs the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -753,8 +907,12 @@ foreach(XmlSchema schema in schemaSet.Schemas("http://www.contoso.com/books"))
 
             
 
+            
+
              parameter to the <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -763,8 +921,12 @@ foreach(XmlSchema schema in schemaSet.Schemas("http://www.contoso.com/books"))
 
             
 
+            
+
              method would be identical if http://www.contoso.com/books had been specified as the <paramref
              name="targetNamespace" />
+
+            
 
             
 
@@ -778,8 +940,12 @@ foreach(XmlSchema schema in schemaSet.Schemas("http://www.contoso.com/books"))
 
                 
 
+                
+
                  and coerced into the target namespace specified by the <see
                  cref="M:System.Xml.Schema.XmlSchemaSet.Add(System.String,System.String)" />
+
+                
 
                 
 
@@ -793,6 +959,8 @@ foreach(XmlSchema schema in schemaSet.Schemas("http://www.contoso.com/books"))
           <para
             >If the schema above is added to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -823,6 +991,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -834,13 +1004,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object if the schema is valid. If the schema is not valid and a <see
              cref="T:System.Xml.Schema.ValidationEventHandler" />
 
             
 
+            
+
              is specified, then null is returned and the appropriate validation event is raised. Otherwise, an <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -852,10 +1028,14 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The schema targetNamespace property, or null to use the targetNamespace specified in the schema.</param
         >
         <param name="schemaUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -894,6 +1074,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             , it has to be successfully preprocessed. Preprocessing performs the following basic tasks.</para
           >
           <list type="ordered">
@@ -907,13 +1089,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                 . Imported schemas are added as separate <see
                  cref="T:System.Xml.Schema.XmlSchema" />
 
                 
 
+                
+
                  objects, and included schemas are made a part of the including <see
                  cref="T:System.Xml.Schema.XmlSchema" />
+
+                
 
                 
 
@@ -927,6 +1115,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -937,8 +1127,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  are also added to the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -952,8 +1146,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  is not positioned on the root element, an <see
                  cref="T:System.Xml.Schema.XmlSchemaException" />
+
+                
 
                 
 
@@ -962,8 +1160,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                 ; otherwise, an <see
                  cref="T:System.Xml.Schema.XmlSchemaException" />
+
+                
 
                 
 
@@ -977,6 +1179,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  is positioned over a sequence of XML nodes, only the first node in the sequence is added.</para
               >
             </item>
@@ -987,8 +1191,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method call, the value of the <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" />
+
+                
 
                 
 
@@ -1002,8 +1210,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -1012,8 +1224,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -1027,8 +1243,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -1037,8 +1257,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method is called. Specifying null or <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -1047,13 +1271,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
                 
 
+                
+
                  method instructs the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
+                
+
                  to use the target namespace defined in the schema. For an example of this behavior, see the <see
                  cref="M:System.Xml.Schema.XmlSchemaSet.Add(System.String,System.String)" />
+
+                
 
                 
 
@@ -1064,6 +1294,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
           <para
             >The remaining functionality of this method is identical to that of the <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -1078,8 +1310,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1094,13 +1330,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object if the schema is valid. If the schema is not valid and a <see
              cref="T:System.Xml.Schema.ValidationEventHandler" />
 
             
 
+            
+
              is specified, then null is returned and the appropriate validation event is raised. Otherwise, an <see
              cref="T:System.Xml.Schema.XmlSchemaException" />
+
+            
 
             
 
@@ -1112,6 +1354,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The schema targetNamespace property, or null to use the targetNamespace specified in the schema.</param
         >
         <param name="schemaDocument">
@@ -1119,8 +1363,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1156,13 +1404,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              class specifies Unique Particle Attribution (UPA) validation options for the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
+            
+
             . For more information about enabling UPA validation checks, see the <see
              cref="P:System.Xml.Schema.XmlSchemaCompilationSettings.EnableUpaCheck" />
+
+            
 
             
 
@@ -1177,8 +1431,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              for the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1212,8 +1470,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              has not been previously compiled—for example, when an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1222,8 +1484,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object in the <see
              cref="Overload:System.Xml.Schema.XmlSchemaSet.Schemas" />
+
+            
 
             
 
@@ -1232,13 +1498,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object. If the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
+            
+
              is already in the compiled state, this method will not recompile the schemas. If this method executes successfully, the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+            
 
             
 
@@ -1250,8 +1522,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              are not recompiled. However, schemas that were compiled using the <see
              cref="M:System.Xml.Schema.XmlSchemaCollection.Compile" />
+
+            
 
             
 
@@ -1260,13 +1536,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              and the <see
              cref="M:System.Xml.Schema.XmlSchema.Compile" />
 
             
 
+            
+
              of the <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -1279,8 +1561,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
               
 
+              
+
                method if you have changed a schema (or one of its includes/imports) after adding it to the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1289,8 +1575,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
               
 
+              
+
                method will check the schema for structural validity according to the rules of W3C XML Schema. However, it will not perform a full validation check. It will also resolve references to internal and external schema components. Any imported or included schemas that are successfully retrieved are also added to the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1299,13 +1589,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
               
 
+              
+
                objects while included schemas are made part of the including <see
                cref="T:System.Xml.Schema.XmlSchema" />
 
               
 
+              
+
               . If the call to reprocess is successful, the <see
                cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+              
 
               
 
@@ -1318,6 +1614,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
           <para
             >Compiles the XML Schema definition language (XSD) schemas added to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1353,8 +1651,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              are detected by the <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Contains(System.String)" />
+
+            
 
             
 
@@ -1363,13 +1665,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             , calling <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Contains(System.String)" />
 
             
 
+            
+
              with <paramref
              name="http://www.contoso.com/books" />
+
+            
 
             
 
@@ -1384,6 +1692,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1395,11 +1705,15 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="targetNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1438,8 +1752,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object is in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1454,8 +1772,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object is in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1467,8 +1789,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -1508,8 +1834,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              objects from the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1521,10 +1851,14 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The array to copy the objects to.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1554,13 +1888,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.Count" />
 
             
 
+            
+
              property would return 1 because the schemas are treated as a single logical schema for validation purposes. However, if a schema for the namespace http://www.contoso.com/retail imported a schema for the http://www.contoso.com/books namespace, the value of the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.Count" />
+
+            
 
             
 
@@ -1572,6 +1912,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
           <para
             >Gets the number of logical XML Schema definition language (XSD) schemas in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1609,6 +1951,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1640,6 +1984,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
           <para
             >Gets all the global elements in all the XML Schema definition language (XSD) schemas in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1676,6 +2022,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              property always returns a type that represents the xs:anyType complex type.</para
           >
         </remarks>
@@ -1684,6 +2032,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
           <para
             >Gets all of the global simple and complex types in all the XML Schema definition language (XSD) schemas in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1714,8 +2064,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              property is not affected if schemas are edited while in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1724,8 +2078,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              are not tracked. As a result, the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+            
 
             
 
@@ -1734,8 +2092,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              has been altered, as long as no schemas were added or removed from the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1747,6 +2109,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
           <para
             >Gets a value that indicates whether the XML Schema definition language (XSD) schemas in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1781,8 +2145,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              used by the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1821,8 +2189,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              sets the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+            
 
             
 
@@ -1837,6 +2209,8 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1848,13 +2222,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              object removed from the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
+            
+
              or null if the schema was not found in the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1866,13 +2246,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
+          
+
            object to remove from the <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1910,8 +2296,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              method removes the specified schema and all the schemas it imports from the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1920,13 +2310,19 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
             , nothing is removed and <see
              cref="M:System.Xml.Schema.XmlSchemaSet.RemoveRecursive(System.Xml.Schema.XmlSchema)" />
 
             
 
+            
+
              returns false. If false is returned and a <see
              cref="E:System.Xml.Schema.XmlSchemaSet.ValidationEventHandler" />
+
+            
 
             
 
@@ -1938,8 +2334,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              method, the <see
              cref="M:System.Xml.Schema.XmlSchemaSet.RemoveRecursive(System.Xml.Schema.XmlSchema)" />
+
+            
 
             
 
@@ -1948,8 +2348,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              imports <paramref
              name="childSchema1" />
+
+            
 
             
 
@@ -1958,8 +2362,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              the following code will only remove <paramref
              name="parentSchema" />
+
+            
 
             
 
@@ -1968,8 +2376,12 @@ foreach(XmlSchema schema in schemaSet.Schemas())
 
             
 
+            
+
              and <paramref
              name="childSchema2 " />
+
+            
 
             
 
@@ -1989,6 +2401,8 @@ ss.Compile();</code>
 
             
 
+            
+
              and the imported schemas:</para
           >
           <code>XmlSchemaSet ss = new XmlSchemaSet();
@@ -2003,8 +2417,12 @@ ss.Compile();</code>
 
             
 
+            
+
              method has no effect on the state of the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+            
 
             
 
@@ -2019,6 +2437,8 @@ ss.Compile();</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2030,6 +2450,8 @@ ss.Compile();</code>
 
             
 
+            
+
              object and all its imports were successfully removed; otherwise, false.</para
           >
         </returns>
@@ -2038,13 +2460,19 @@ ss.Compile();</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
+          
+
            object to remove from the <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -2082,13 +2510,19 @@ ss.Compile();</code>
 
             
 
+            
+
              method is called. If the call to <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Reprocess(System.Xml.Schema.XmlSchema)" />
 
             
 
+            
+
              is successful, the <see
              cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+            
 
             
 
@@ -2100,8 +2534,12 @@ ss.Compile();</code>
 
             
 
+            
+
              has been modified, after the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -2114,8 +2552,12 @@ ss.Compile();</code>
 
               
 
+              
+
                method if you have changed a schema (or one of its includes/imports) after adding it to the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -2124,8 +2566,12 @@ ss.Compile();</code>
 
               
 
+              
+
                method will check the schema for structural validity according to the rules of W3C XML Schema. However, it will not perform a full validation check. It will also resolve references to internal and external schema components. Any imported or included schemas that are successfully retrieved are also added to the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -2134,13 +2580,19 @@ ss.Compile();</code>
 
               
 
+              
+
                objects while included schemas are made part of the including <see
                cref="T:System.Xml.Schema.XmlSchema" />
 
               
 
+              
+
               . If the call to reprocess is successful, the <see
                cref="P:System.Xml.Schema.XmlSchemaSet.IsCompiled" />
+
+              
 
               
 
@@ -2156,6 +2608,8 @@ ss.Compile();</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2167,8 +2621,12 @@ ss.Compile();</code>
 
             
 
+            
+
              object if the schema is a valid schema. If the schema is not valid and a <see
              cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+            
 
             
 
@@ -2177,11 +2635,15 @@ ss.Compile();</code>
 
             
 
+            
+
              is thrown.</para
           >
         </returns>
         <param name="schema">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2214,6 +2676,8 @@ ss.Compile();</code>
 
             
 
+            
+
              because they were imported.</para
           >
           <block subset="none" type="note">
@@ -2223,13 +2687,19 @@ ss.Compile();</code>
 
               
 
+              
+
                method is the equivalent of the <see
                cref="M:System.Xml.Schema.XmlSchemaCollection.GetEnumerator" />
 
               
 
+              
+
                method of the obsolete <see
                cref="T:System.Xml.Schema.XmlSchemaCollection" />
+
+              
 
               
 
@@ -2245,6 +2715,8 @@ ss.Compile();</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2256,8 +2728,12 @@ ss.Compile();</code>
 
             
 
+            
+
              object containing all the schemas that have been added to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -2266,8 +2742,12 @@ ss.Compile();</code>
 
             
 
+            
+
             , an empty <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2306,8 +2786,12 @@ ss.Compile();</code>
 
             
 
+            
+
              parameter is null or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2316,6 +2800,8 @@ ss.Compile();</code>
           <para
             >This method returns schemas that were added indirectly to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -2328,13 +2814,19 @@ ss.Compile();</code>
 
               
 
+              
+
                method is the equivalent of the <see
                cref="P:System.Xml.Schema.XmlSchemaCollection.Item(System.String)" />
 
               
 
+              
+
                method of the obsolete <see
                cref="T:System.Xml.Schema.XmlSchemaCollection" />
+
+              
 
               
 
@@ -2350,6 +2842,8 @@ ss.Compile();</code>
 
             
 
+            
+
              that belong to the given namespace.</para
           >
         </summary>
@@ -2361,8 +2855,12 @@ ss.Compile();</code>
 
             
 
+            
+
              object containing all the schemas that have been added to the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -2371,8 +2869,12 @@ ss.Compile();</code>
 
             
 
+            
+
             , an empty <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2381,6 +2883,8 @@ ss.Compile();</code>
         </returns>
         <param name="targetNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2415,13 +2919,19 @@ ss.Compile();</code>
 
             
 
+            
+
              or <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Compile" />
 
             
 
+            
+
              methods of the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -2433,8 +2943,12 @@ ss.Compile();</code>
 
             
 
+            
+
              is thrown on any validation errors where the <see
              cref="T:System.Xml.Schema.XmlSeverityType" />
+
+            
 
             
 
@@ -2443,13 +2957,19 @@ ss.Compile();</code>
 
             
 
+            
+
             . Exceptions are not thrown for validation errors with an <see
              cref="T:System.Xml.Schema.XmlSeverityType" />
 
             
 
+            
+
              of <see
              cref="F:System.Xml.Schema.XmlSeverityType.Warning" />
+
+            
 
             
 
@@ -2487,8 +3007,12 @@ ss.Compile();</code>
 
             
 
+            
+
              of an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -2497,8 +3021,12 @@ ss.Compile();</code>
 
             
 
+            
+
              or <see
              cref="M:System.Xml.Schema.XmlSchemaSet.Reprocess(System.Xml.Schema.XmlSchema)" />
+
+            
 
             
 
@@ -2511,8 +3039,12 @@ ss.Compile();</code>
 
               
 
+              
+
                class is used to resolve external schemas by default. To disable resolution of include, import, and redefine elements of a schema, set the <see
                cref="P:System.Xml.Schema.XmlSchemaSet.XmlResolver" />
+
+              
 
               
 
@@ -2525,6 +3057,8 @@ ss.Compile();</code>
           <para
             >Sets the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 

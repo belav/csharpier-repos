@@ -34,6 +34,8 @@
 
         
 
+        
+
          class identifies the event for which data-bound controls can be loaded. It is intended for use at design time to determine which event to handle when autogenerating data-binding code.</para
       >
     </remarks>
@@ -70,11 +72,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="eventName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

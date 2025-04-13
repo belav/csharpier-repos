@@ -33,13 +33,19 @@
 
         
 
+        
+
          event is raised before a Web Parts control is added to a Web Parts zone. You can specify which Web Parts controls can be added to a zone by customizing how the event is handled. The method specified in the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartAuthorizationEventHandler" />
 
         
 
+        
+
          delegate is called when an <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.AuthorizeWebPart" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -66,8 +74,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+
+        
 
         
 

@@ -33,13 +33,19 @@
 
         
 
+        
+
          is returned, for example, by the <see
          cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" />
 
         
 
+        
+
          property and by the <see
          cref="M:System.ServiceModel.Description.WsdlImporter.ImportAllEndpoints" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          the endpoints of a particular type, that have a specific name or address, or to <see
          cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+
+        
 
         
 
@@ -94,8 +104,12 @@
 
             
 
+            
+
              overload is specific to the indigo1 programming model. It looks at the <see
              cref="P:System.ServiceModel.Description.ContractDescription.ContractType" />
+
+            
 
             
 
@@ -104,8 +118,12 @@
 
             
 
+            
+
              may be null if the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -117,8 +135,12 @@
 
             
 
+            
+
              objects that satisfy the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+
+            
 
             
 
@@ -134,6 +156,8 @@
           <para
             >The first <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -171,8 +195,12 @@
 
             
 
+            
+
              objects that satisfy the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+
+            
 
             
 
@@ -188,6 +216,8 @@
           <para
             >The first <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -225,8 +255,12 @@
 
             
 
+            
+
              objects that satisfy the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+
+            
 
             
 
@@ -242,6 +276,8 @@
           <para
             >The first <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -279,8 +315,12 @@
 
             
 
+            
+
              objects that satisfy the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+
+            
 
             
 
@@ -299,6 +339,8 @@
 
             
 
+            
+
              of the specified contract type and binding name and namespace or null if none was found.</para
           >
         </returns>
@@ -307,8 +349,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -319,8 +365,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -357,8 +407,12 @@
 
             
 
+            
+
              objects that satisfy the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+
+            
 
             
 
@@ -377,6 +431,8 @@
 
             
 
+            
+
              with the specified binding and contract names and namespaces.</para
           >
         </returns>
@@ -385,8 +441,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -397,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -434,8 +498,12 @@
 
             
 
+            
+
              that satisfies the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+
+            
 
             
 
@@ -454,8 +522,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -467,8 +539,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -505,8 +581,12 @@
 
             
 
+            
+
              that satisfies the specified criteria, use one of the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+
+            
 
             
 
@@ -525,8 +605,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -564,6 +648,8 @@
 
             
 
+            
+
              method defined in the base class and is provided to do input validation that ensures null values are not inserted into the collection. It is not intended to be called by users.</para
           >
         </remarks>
@@ -576,10 +662,14 @@
 
           
 
+          
+
           The zero-based index at which the item should be inserted.</param
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,8 +678,12 @@
 
           
 
+          
+
            item to insert at the specified <paramref
            name="index" />
+
+          
 
           
 
@@ -626,6 +720,8 @@
 
             
 
+            
+
              method defined in the base class and is provided to do input validation that ensures null values are not inserted into the collection. It is not intended to be called by users.</para
           >
         </remarks>
@@ -638,10 +734,14 @@
 
           
 
+          
+
           The zero-based index of the element to replace.</param
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -650,8 +750,12 @@
 
           
 
+          
+
            item at the specified <paramref
            name="index" />
+
+          
 
           
 

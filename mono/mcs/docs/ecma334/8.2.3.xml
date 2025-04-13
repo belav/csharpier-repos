@@ -21,8 +21,12 @@ class Test
 
     
 
+    
+
     creates a single-dimensional array of <keyword
     >int</keyword>
+
+    
 
     
 
@@ -40,6 +44,8 @@ arr[4] = 16
   <paragraph
     >The type int[] used in the previous example is an array type. Array types are written using a  <non_terminal
      where="19.1">non-array-type</non_terminal>
+
+    
 
     
 
@@ -61,8 +67,12 @@ class Test
 
     
 
+    
+
     shows a variety of local variable declarations that use array types with <keyword
     >int</keyword>
+
+    
 
     
 
@@ -89,11 +99,15 @@ class Test
 
     
 
+    
+
     shows a variety of array creation expressions. The variables a1, a2 and a3 denote rectangular arrays, and the variable j2 denotes a jagged array. It should be no surprise that these terms are based on the shapes of the arrays. Rectangular arrays always have a rectangular shape. Given the length of each dimension of the array, its rectangular shape is clear. For example, the lengths of a3's three dimensions are 10, 20, and 30, respectively, and it is easy to see that this array contains 10*20*30 elements. </paragraph
   >
   <paragraph
     >In contrast, the variable j2 denotes a "jagged" array, or an "array of arrays". Specifically, j2 denotes an array of an array of <keyword
     >int</keyword>
+
+    
 
     
 
@@ -103,6 +117,8 @@ class Test
     <note
       >[Note: In C++, an array declared as <keyword
       >int</keyword>
+
+      
 
       
 
@@ -119,6 +135,8 @@ int[,,] a3 = new int[10, 20, 30];
 
     
 
+    
+
     has an array type of int[,,] and an array creation expression of new int[10, 20, 30]. </paragraph
   >
   <paragraph
@@ -131,12 +149,16 @@ int[] a1 = new int[] {1, 2, 3};
 
     
 
+    
+
     can be shortened to <code_example
     >
       <![CDATA[
 int[] a1 = {1, 2, 3};  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -156,6 +178,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

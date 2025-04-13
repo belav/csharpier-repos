@@ -55,8 +55,12 @@
 
         
 
+        
+
          class does not have a public constructor. <see
          cref="T:System.Reflection.FieldInfo" />
+
+        
 
         
 
@@ -65,8 +69,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Type.GetField(System.String,System.Reflection.BindingFlags)" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
       <para
         >Fields are variables defined in the class. <see
          cref="T:System.Reflection.FieldInfo" />
+
+        
 
         
 
@@ -142,6 +152,8 @@
           <para
             >A <see
              cref="T:System.Reflection.FieldAttributes" />
+
+            
 
             
 
@@ -245,11 +257,15 @@ class FieldAttributesExample
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,6 +328,8 @@ class FieldAttributesExample
 
             
 
+            
+
              of the field
    reflected by the current instance.
    </para
@@ -363,6 +381,8 @@ class FieldAttributesExample
 
             
 
+            
+
              for the field represented by the specified handle.</para
           >
         </summary>
@@ -374,8 +394,12 @@ class FieldAttributesExample
 
             
 
+            
+
              object representing the field specified by <paramref
              name="handle" />
+
+            
 
             
 
@@ -387,8 +411,12 @@ class FieldAttributesExample
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeFieldHandle" />
+
+          
 
           
 
@@ -433,8 +461,12 @@ class FieldAttributesExample
 
             
 
+            
+
              should always be the runtime type handle of the constructed type that <paramref
              name="handle" />
+
+            
 
             
 
@@ -443,8 +475,12 @@ class FieldAttributesExample
 
             
 
+            
+
              is a runtime field handle for a field that belongs to MyType&lt;int&gt; (MyType(Of Integer) in Visual Basic), <paramref
              name="declaringType" />
+
+            
 
             
 
@@ -456,13 +492,19 @@ class FieldAttributesExample
 
             
 
+            
+
              object that is returned represents a field on the type that <paramref
              name="declaringType" />
 
             
 
+            
+
              specifies, regardless of the original source of <paramref
              name="handle" />
+
+            
 
             
 
@@ -474,13 +516,19 @@ class FieldAttributesExample
 
             
 
+            
+
              overload is to ensure that <paramref
              name="declaringType" />
 
             
 
+            
+
              is the runtime type handle for the constructed type that <paramref
              name="handle" />
+
+            
 
             
 
@@ -495,6 +543,8 @@ class FieldAttributesExample
 
             
 
+            
+
              for the field represented by the specified handle, for the specified generic type.</para
           >
         </summary>
@@ -506,13 +556,19 @@ class FieldAttributesExample
 
             
 
+            
+
              object representing the field specified by <paramref
              name="handle" />
 
             
 
+            
+
             , in the generic type specified by <paramref
              name="declaringType" />
+
+            
 
             
 
@@ -524,8 +580,12 @@ class FieldAttributesExample
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeFieldHandle" />
+
+          
 
           
 
@@ -536,8 +596,12 @@ class FieldAttributesExample
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -596,8 +660,12 @@ class FieldAttributesExample
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.FieldInfo.GetRequiredCustomModifiers" />
+
+            
 
             
 
@@ -606,8 +674,12 @@ class FieldAttributesExample
 
             
 
+            
+
              and related classes in the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -618,10 +690,14 @@ class FieldAttributesExample
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -640,8 +716,12 @@ class FieldAttributesExample
 
             
 
+            
+
              objects that identify the optional custom modifiers of the current field, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
+
+            
 
             
 
@@ -681,10 +761,14 @@ class FieldAttributesExample
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -701,6 +785,8 @@ class FieldAttributesExample
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -734,8 +820,12 @@ class FieldAttributesExample
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.FieldInfo.GetRequiredCustomModifiers" />
+
+            
 
             
 
@@ -744,8 +834,12 @@ class FieldAttributesExample
 
             
 
+            
+
              and related classes in the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -756,10 +850,14 @@ class FieldAttributesExample
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -778,13 +876,19 @@ class FieldAttributesExample
 
             
 
+            
+
              objects that identify the required custom modifiers of the current property, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
 
             
 
+            
+
              or <see
              cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
+
+            
 
             
 
@@ -847,8 +951,12 @@ class FieldAttributesExample
 
           
 
+          
+
            nor in any class from which <paramref
            name="obj" />
+
+          
 
           
 
@@ -860,8 +968,12 @@ class FieldAttributesExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -870,6 +982,8 @@ class FieldAttributesExample
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to access non-public members of a type in loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -883,8 +997,12 @@ class FieldAttributesExample
 
             
 
+            
+
              is ignored. For non-static fields, <paramref
              name="obj" />
+
+            
 
             
 
@@ -900,8 +1018,12 @@ class FieldAttributesExample
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -911,6 +1033,8 @@ class FieldAttributesExample
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -929,6 +1053,8 @@ class FieldAttributesExample
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -978,8 +1104,12 @@ class FieldAttributesExample
 
           
 
+          
+
           A <see
            cref="T:System.TypedReference" />
+
+          
 
           
 
@@ -1009,6 +1139,8 @@ class FieldAttributesExample
 
             
 
+            
+
              property might be true for a field, but if it is a field of a private nested type then the field is not visible outside the containing type.</para
           >
           <para
@@ -1017,8 +1149,12 @@ class FieldAttributesExample
 
             
 
+            
+
              if the only visibility modifier is internal (Friend in Visual Basic). This property is false for fields that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
              cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -1030,6 +1166,8 @@ class FieldAttributesExample
           <para
             >Gets a value indicating whether the potential visibility of this field is described by <see
              cref="F:System.Reflection.FieldAttributes.Assembly" />
+
+            
 
             
 
@@ -1060,8 +1198,12 @@ class FieldAttributesExample
 
             
 
+            
+
              if the only visibility modifier is protected. This property is false for fields that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
              cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -1073,6 +1215,8 @@ class FieldAttributesExample
           <para
             >Gets a value indicating whether the visibility of this field is described by <see
              cref="F:System.Reflection.FieldAttributes.Family" />
+
+            
 
             
 
@@ -1103,11 +1247,15 @@ class FieldAttributesExample
 
             
 
+            
+
              level visibility, it can be called from any member in a derived class that is also in the same assembly, but not from any other type.</para
           >
           <para
             >The visibility of a field is exactly described by <see
              cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
+
+            
 
             
 
@@ -1119,6 +1267,8 @@ class FieldAttributesExample
           <para
             >Gets a value indicating whether the visibility of this field is described by <see
              cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
+
+            
 
             
 
@@ -1149,11 +1299,15 @@ class FieldAttributesExample
 
             
 
+            
+
              level visibility, it can be called from any member in a derived class or any member in the same assembly, but not from any other type.</para
           >
           <para
             >The actual visibility of a field is limited by the visibility of its type. The <see
              cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -1165,6 +1319,8 @@ class FieldAttributesExample
 
             
 
+            
+
              if the visibility modifier is protected internal in C# (Protected Friend in Visual Basic, protected public in C++).</para
           >
         </remarks>
@@ -1173,6 +1329,8 @@ class FieldAttributesExample
           <para
             >Gets a value indicating whether the potential visibility of this field is described by <see
              cref="F:System.Reflection.FieldAttributes.FamORAssem" />
+
+            
 
             
 
@@ -1204,8 +1362,12 @@ class FieldAttributesExample
 
             
 
+            
+
              with either or both of <see
              cref="F:System.Reflection.BindingFlags.Static" />
+
+            
 
             
 
@@ -1214,11 +1376,15 @@ class FieldAttributesExample
 
             
 
+            
+
              in the GetField method.</para
           >
           <para
             >The IsInitOnly property is set when the <see
              cref="F:System.Reflection.FieldAttributes.InitOnly" />
+
+            
 
             
 
@@ -1302,6 +1468,8 @@ class FieldAttributesExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1379,13 +1547,19 @@ class FieldAttributesExample
 
             
 
+            
+
             , <see
              cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
 
             
 
+            
+
             , and <see
              cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
+
+            
 
             
 
@@ -1459,8 +1633,12 @@ class FieldAttributesExample
 
               
 
+              
+
                and <see
                cref="P:System.AppDomain.IsFullyTrusted" />
+
+              
 
               
 
@@ -1477,12 +1655,16 @@ class FieldAttributesExample
 
             
 
+            
+
             . For information about transparency, see <format
              type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
             </format>
+
+            
 
             
 
@@ -1515,13 +1697,19 @@ class FieldAttributesExample
 
             
 
+            
+
             , <see
              cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
 
             
 
+            
+
             , and <see
              cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
+
+            
 
             
 
@@ -1595,8 +1783,12 @@ class FieldAttributesExample
 
               
 
+              
+
                and <see
                cref="P:System.AppDomain.IsFullyTrusted" />
+
+              
 
               
 
@@ -1613,12 +1805,16 @@ class FieldAttributesExample
 
             
 
+            
+
             . For information about transparency, see <format
              type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
             </format>
+
+            
 
             
 
@@ -1651,13 +1847,19 @@ class FieldAttributesExample
 
             
 
+            
+
             , <see
              cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
 
             
 
+            
+
             , and <see
              cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
+
+            
 
             
 
@@ -1731,8 +1933,12 @@ class FieldAttributesExample
 
               
 
+              
+
                and <see
                cref="P:System.AppDomain.IsFullyTrusted" />
+
+              
 
               
 
@@ -1749,12 +1955,16 @@ class FieldAttributesExample
 
             
 
+            
+
             . For information about transparency, see <format
              type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
             </format>
+
+            
 
             
 
@@ -1790,6 +2000,8 @@ class FieldAttributesExample
           <para
             >Gets a value indicating whether the corresponding SpecialName attribute is set in the <see
              cref="T:System.Reflection.FieldAttributes" />
+
+            
 
             
 
@@ -1853,8 +2065,12 @@ class FieldAttributesExample
 
             
 
+            
+
             . Therefore, when you examine a set of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1863,13 +2079,19 @@ class FieldAttributesExample
 
             
 
+            
+
              — the <see
              cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
+            
+
              property returns <see
              cref="F:System.Reflection.MemberTypes.Field" />
+
+            
 
             
 
@@ -1881,6 +2103,8 @@ class FieldAttributesExample
           <para
             >Gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -1919,6 +2143,8 @@ class FieldAttributesExample
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -1930,8 +2156,12 @@ class FieldAttributesExample
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1943,10 +2173,14 @@ class FieldAttributesExample
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1984,6 +2218,8 @@ class FieldAttributesExample
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -1995,8 +2231,12 @@ class FieldAttributesExample
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -2008,10 +2248,14 @@ class FieldAttributesExample
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2055,8 +2299,12 @@ class FieldAttributesExample
 
             
 
+            
+
              nor in any class from which <paramref
              name="obj" />
+
+            
 
             
 
@@ -2064,6 +2312,8 @@ class FieldAttributesExample
           >
           <para>
             <paramref name="value" />
+
+            
 
             
 
@@ -2079,8 +2329,12 @@ class FieldAttributesExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2092,10 +2346,14 @@ class FieldAttributesExample
 
           
 
+          
+
           .</permission
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2109,8 +2367,12 @@ class FieldAttributesExample
 
             
 
+            
+
              to the field reflected by this instance on object <paramref
              name="obj" />
+
+            
 
             
 
@@ -2119,8 +2381,12 @@ class FieldAttributesExample
 
             
 
+            
+
              will be ignored. For non-static fields, <paramref
              name="obj" />
+
+            
 
             
 
@@ -2136,8 +2402,12 @@ class FieldAttributesExample
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2147,6 +2417,8 @@ class FieldAttributesExample
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2164,10 +2436,14 @@ class FieldAttributesExample
 
           
 
+          
+
           The object whose field value will be set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2213,8 +2489,12 @@ class FieldAttributesExample
 
             
 
+            
+
              nor in any class from which <paramref
              name="obj" />
+
+            
 
             
 
@@ -2222,6 +2502,8 @@ class FieldAttributesExample
           >
           <para>
             <paramref name="value" />
+
+            
 
             
 
@@ -2237,8 +2519,12 @@ class FieldAttributesExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2250,10 +2536,14 @@ class FieldAttributesExample
 
           
 
+          
+
           .</permission
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2264,8 +2554,12 @@ class FieldAttributesExample
 
           
 
+          
+
           A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2273,6 +2567,8 @@ class FieldAttributesExample
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2286,8 +2582,12 @@ class FieldAttributesExample
 
             
 
+            
+
              to the field reflected by this instance on <paramref
              name="obj" />
+
+            
 
             
 
@@ -2296,8 +2596,12 @@ class FieldAttributesExample
 
             
 
+            
+
              will be ignored. For non-static fields, <paramref
              name="obj" />
+
+            
 
             
 
@@ -2313,8 +2617,12 @@ class FieldAttributesExample
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2324,6 +2632,8 @@ class FieldAttributesExample
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2341,10 +2651,14 @@ class FieldAttributesExample
 
           
 
+          
+
           The object whose field value will be set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2355,10 +2669,14 @@ class FieldAttributesExample
 
           
 
+          
+
           A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding). </param
         >
         <param name="binder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2367,10 +2685,14 @@ class FieldAttributesExample
 
           
 
+          
+
            is null, then Binder.DefaultBinding is used. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2416,8 +2738,12 @@ class FieldAttributesExample
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -2427,6 +2753,8 @@ class FieldAttributesExample
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -2444,8 +2772,12 @@ class FieldAttributesExample
 
           
 
+          
+
           A <see
            cref="T:System.TypedReference" />
+
+          
 
           
 
@@ -2453,6 +2785,8 @@ class FieldAttributesExample
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2519,8 +2853,12 @@ class FieldAttributesExample
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -2535,8 +2873,12 @@ class FieldAttributesExample
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -2577,6 +2919,8 @@ class FieldAttributesExample
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -2589,6 +2933,8 @@ class FieldAttributesExample
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -2596,10 +2942,14 @@ class FieldAttributesExample
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

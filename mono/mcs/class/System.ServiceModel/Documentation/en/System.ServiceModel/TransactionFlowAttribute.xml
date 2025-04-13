@@ -34,13 +34,19 @@
 
         
 
+        
+
          is an attribute used declaratively to associate a specific transaction flow policy with a service operation. The <see
          cref="T:System.ServiceModel.TransactionFlowOption" />
 
         
 
+        
+
          property of this attribute specifies whether the respective operation accepts a transaction flowed from the client, or if the operation requires the client to always flow a transaction. The <see
          cref="T:System.ServiceModel.TransactionFlowAttribute" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
         <para
           >The OperationContract for each method that uses the <see
            cref="T:System.ServiceModel.TransactionFlowAttribute" />
+
+          
 
           
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -97,8 +107,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.TransactionFlowOption" />
+
+          
 
           
 
@@ -143,10 +157,14 @@
 
           
 
+          
+
           The operation description for which the attribute adds extra functionality.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +201,8 @@
 
             
 
+            
+
             , the implementation of this method is empty. This method is called internally by the infrastructure when a service proxy is created.</para
           >
         </remarks>
@@ -195,6 +215,8 @@
 
           
 
+          
+
           The operation to which the attribute attaches functionality.</param
         >
         <param name="proxy">
@@ -202,8 +224,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+          
 
           
 
@@ -240,6 +266,8 @@
 
             
 
+            
+
             , the implementation of this method is empty. This method is called internally by the infrastructure when a service is created.</para
           >
         </remarks>
@@ -251,11 +279,15 @@
 
             
 
+            
+
              object for the method that the attribute marks. This method cannot be inherited.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,8 +298,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+          
 
           
 
@@ -303,6 +339,8 @@
 
             
 
+            
+
             , the implementation of this method is empty. This method is called internally by the infrastructure when a service is created.</para
           >
         </remarks>
@@ -312,6 +350,8 @@
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

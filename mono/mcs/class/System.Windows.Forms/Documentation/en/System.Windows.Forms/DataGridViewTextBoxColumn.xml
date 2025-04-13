@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          has an associated <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -42,13 +50,19 @@
 
         
 
+        
+
          that intersects it. When a <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
         
 
+        
+
          becomes activated, it supplies a <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+
+        
 
         
 
@@ -60,6 +74,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -68,6 +84,8 @@
       <para
         >Hosts a collection of <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -109,6 +127,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -132,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+
+            
 
             
 
@@ -163,8 +185,12 @@
 
             
 
+            
+
              class initializes this property to a newly created <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -174,6 +200,8 @@
             <para
               >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
                cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+
+              
 
               
 
@@ -215,6 +243,8 @@
 
             
 
+            
+
              property does not affect the length of text entered programmatically through the cell's value or through cell formatting. It affects only what the user can input and edit.</para
           >
           <para
@@ -223,13 +253,19 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewTextBoxColumn.CellTemplate" />
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewTextBoxCell.MaxInputLength" />
+
+            
 
             
 
@@ -270,13 +306,19 @@
 
             
 
+            
+
              control is sorted using a column with a <see
              cref="P:System.Windows.Forms.DataGridViewTextBoxColumn.SortMode" />
 
             
 
+            
+
              property value of <see
              cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Automatic" />
+
+            
 
             
 
@@ -288,13 +330,19 @@
 
             
 
+            
+
              property value of <see
              cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Programmatic" />
 
             
 
+            
+
             , you must display the sorting glyph yourself through the <see
              cref="P:System.Windows.Forms.DataGridViewColumnHeaderCell.SortGlyphDirection" />
+
+            
 
             
 
@@ -306,13 +354,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Automatic" />
 
             
 
+            
+
             . The default sort mode for other column types is <see
              cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />
+
+            
 
             
 
@@ -324,8 +378,12 @@
 
             
 
+            
+
              value does not prevent you from sorting a column programmatically, although other restrictions may apply. For more information, see the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -337,13 +395,19 @@
 
             
 
+            
+
              property value of <see
              cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />
 
             
 
+            
+
              will not prevent the <see
              cref="E:System.Windows.Forms.DataGridView.ColumnHeaderMouseClick" />
+
+            
 
             
 

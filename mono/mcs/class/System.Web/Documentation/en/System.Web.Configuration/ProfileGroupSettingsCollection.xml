@@ -30,13 +30,19 @@
 
         
 
+        
+
          class contains a collection of <see
          cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
         
 
+        
+
          objects, which each contain a collection of <see
          cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+        
 
         
 
@@ -48,11 +54,15 @@
 
         
 
+        
+
          class provides a way to programmatically create, access, and modify the definition of an individual property added to the &lt;properties&gt; subsection of the &lt;profile&gt; section of a configuration file. </para
       >
       <para
         >The &lt;profile&gt; section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the &lt;profile&gt; section to generate a class called ProfileCommon, which is derived from <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -68,10 +78,14 @@
 
         
 
+        
+
         . For more information about the profile features added to ASP.NET version 2.0, see <format
          type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
         </format>
+
+        
 
         
 
@@ -83,6 +97,8 @@
       <para
         >Contains a set of <see
          cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+        
 
         
 
@@ -103,6 +119,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" />
+
+            
 
             
 
@@ -136,6 +154,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -147,6 +167,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -155,8 +177,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -206,6 +232,8 @@
 
             
 
+            
+
              objects from the collection.</para
           >
         </summary>
@@ -232,6 +260,8 @@
           <para
             >Gets the <see
              cref="T:System.Configuration.ConfigurationElementCollectionType" />
+
+            
 
             
 
@@ -286,6 +316,8 @@
 
             
 
+            
+
              object at the specified index.</para
           >
         </summary>
@@ -297,6 +329,8 @@
 
             
 
+            
+
              object at the specified index, or null if there is no object at that index.</para
           >
         </returns>
@@ -305,8 +339,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -340,6 +378,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </summary>
@@ -351,6 +391,8 @@
 
             
 
+            
+
              object with the specified name, or null if the name does not exist.</para
           >
         </returns>
@@ -359,8 +401,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -393,8 +439,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -425,6 +475,8 @@
 
             
 
+            
+
              object at the specified index.</para
           >
         </summary>
@@ -436,6 +488,8 @@
 
             
 
+            
+
              object at the specified index, or null if there is no object at that index.</para
           >
         </returns>
@@ -444,8 +498,12 @@
 
           
 
+          
+
           The index of a <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -479,6 +537,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -490,8 +550,12 @@
 
             
 
+            
+
              object, or -1 if the specified <see
              cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+            
 
             
 
@@ -503,8 +567,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -618,6 +686,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -626,8 +696,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -661,6 +735,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -669,8 +745,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 
@@ -718,6 +798,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -729,6 +811,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -737,8 +821,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+          
 
           
 

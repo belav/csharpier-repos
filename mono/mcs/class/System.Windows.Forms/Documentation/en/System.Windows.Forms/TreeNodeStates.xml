@@ -23,13 +23,19 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DrawTreeNodeEventArgs" />
 
         
 
+        
+
          class. For more information, see the <see
          cref="E:System.Windows.Forms.TreeView.DrawNode" />
+
+        
 
         
 
@@ -41,6 +47,8 @@
       <para
         >Defines constants that represent the possible states of a <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -130,6 +138,8 @@
           <para
             >The node is hot. This state occurs when the <see
              cref="P:System.Windows.Forms.TreeView.HotTracking" />
+
+            
 
             
 

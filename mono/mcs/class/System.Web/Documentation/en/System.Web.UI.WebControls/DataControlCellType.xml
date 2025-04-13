@@ -17,8 +17,12 @@
 
         
 
+        
+
          objects and the data-bound controls that use them use the <see
          cref="T:System.Web.UI.WebControls.DataControlCellType" />
+
+        
 
         
 
@@ -27,8 +31,12 @@
 
         
 
+        
+
          cell type identifies a data-bound cell in a <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -37,13 +45,19 @@
 
         
 
+        
+
          control, whereas the <see
          cref="F:System.Web.UI.WebControls.DataControlCellType.Header" />
 
         
 
+        
+
          and <see
          cref="F:System.Web.UI.WebControls.DataControlCellType.Footer" />
+
+        
 
         
 
@@ -55,6 +69,8 @@
       <para
         >Describes the function of a <see
          cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+        
 
         
 
@@ -76,6 +92,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+            
 
             
 
@@ -103,6 +121,8 @@
 
             
 
+            
+
              that is the footer cell of a table. Items in the cell are not bound to data.</para
           >
         </summary>
@@ -124,6 +144,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+            
 
             
 

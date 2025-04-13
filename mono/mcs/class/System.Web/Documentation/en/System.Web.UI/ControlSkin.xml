@@ -24,13 +24,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.ControlSkin" />
 
         
 
+        
+
         , or <see
          cref="T:System.Web.UI.PageTheme" />
+
+        
 
         
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          objects represent a named skin or default skin of a <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -51,13 +61,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.ControlSkin" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.ControlSkinDelegate" />
+
+        
 
         
 
@@ -68,6 +84,8 @@
          type="text/html">
           <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">Introduction to ASP.NET Themes</a>
         </format>
+
+        
 
         
 
@@ -101,8 +119,12 @@
 
             
 
+            
+
              class using the passed <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -114,13 +136,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            of <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -131,13 +159,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlSkinDelegate" />
 
           
 
+          
+
            that applies the style elements defined in a control skin file to the type identified by the <paramref
            name="controlType" />
+
+          
 
           
 
@@ -170,8 +204,12 @@
 
             
 
+            
+
              object associated with the <see
              cref="T:System.Web.UI.ControlSkin" />
+
+            
 
             
 
@@ -180,8 +218,12 @@
 
             
 
+            
+
             , which applies the skin to the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -196,8 +238,12 @@
 
             
 
+            
+
              control contained by the <see
              cref="T:System.Web.UI.ControlSkin" />
+
+            
 
             
 
@@ -206,6 +252,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,8 +282,12 @@
 
             
 
+            
+
              of the control that the <see
              cref="T:System.Web.UI.ControlSkin" />
+
+            
 
             
 

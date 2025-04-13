@@ -33,8 +33,12 @@
 
         
 
+        
+
          class, some of the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Windows.Forms.PrintPreviewControl.#ctor" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          objects are found on <see
          cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+        
 
         
 
@@ -82,6 +94,8 @@
           <para
             >When you create an instance of the <see
              cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+            
 
             
 
@@ -159,6 +173,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -187,6 +203,8 @@
           <para
             >Gets or sets a value indicating whether resizing the control or changing the number of pages shown automatically adjusts the <see
              cref="P:System.Windows.Forms.PrintPreviewControl.Zoom" />
+
+            
 
             
 
@@ -316,6 +334,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -324,8 +344,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -358,8 +382,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="M:System.Windows.Forms.PrintPreviewControl.OnResize(System.EventArgs)" />
+
+            
 
             
 
@@ -368,13 +396,19 @@
 
             
 
+            
+
              control. If <see
              cref="P:System.Windows.Forms.PrintPreviewControl.AutoZoom" />
 
             
 
+            
+
              is false, the <see
              cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+            
 
             
 
@@ -389,6 +423,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -397,8 +433,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -433,11 +473,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PrintPreviewControl.OnStartPageChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -452,6 +496,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -460,8 +506,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -489,8 +539,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+            
 
             
 
@@ -505,8 +559,12 @@
 
             
 
+            
+
              property to <see
              cref="P:System.Drawing.SystemColors.AppWorkspace" />
+
+            
 
             
 
@@ -540,8 +598,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+            
 
             
 
@@ -556,8 +618,12 @@
 
             
 
+            
+
              to <see
              cref="P:System.Drawing.Color.White" />
+
+            
 
             
 
@@ -667,6 +733,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -734,6 +802,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewControl.Text" />
+
+            
 
             
 

@@ -18,6 +18,8 @@ public delegate void EventHandler(object sender, EventArgs e);
 
     
 
+    
+
     shows an interface that contains an indexer, an event E, a method F, and a property P. </paragraph
   >
   <paragraph
@@ -42,6 +44,8 @@ interface IComboBox: ITextBox, IListBox {}
 
     
 
+    
+
     the interface IComboBox inherits from both ITextBox and IListBox. </paragraph
   >
   <paragraph
@@ -59,6 +63,8 @@ public class EditBox: Control, IControl, IDataBound
 }   
 ]]>
     </code_example>
+
+    
 
     
 

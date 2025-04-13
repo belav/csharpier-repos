@@ -30,6 +30,8 @@
 
         
 
+        
+
          class enables a parent process to send or receive information from a child process.</para
       >
       <para
@@ -38,8 +40,12 @@
 
         
 
+        
+
          value of <see
          cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          read modes.</para
       >
       <para
@@ -59,13 +67,19 @@
 
         
 
+        
+
          method. The string is then passed as a parameter when creating the client process. From the client process, it is then passed to the <see
          cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
         
 
+        
+
          constructor as the <paramref
          name="pipeHandleAsString" />
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
          object must dispose the client handle using the <see
          cref="M:System.IO.Pipes.AnonymousPipeServerStream.DisposeLocalCopyOfClientHandle" />
+
+        
 
         
 
@@ -114,8 +132,12 @@
 
             
 
+            
+
              constructors without a <see
              cref="T:System.IO.Pipes.PipeDirection" />
+
+            
 
             
 
@@ -124,13 +146,19 @@
 
             
 
+            
+
             . A <see
              cref="T:System.IO.Pipes.PipeDirection" />
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -142,13 +170,19 @@
 
             
 
+            
+
              object that has the default buffer size, no pipe security, and a <see
              cref="T:System.IO.HandleInheritability" />
 
             
 
+            
+
              value of <see
              cref="F:System.IO.HandleInheritability.None" />
+
+            
 
             
 
@@ -160,6 +194,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
+
+            
 
             
 
@@ -193,8 +229,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -206,13 +246,19 @@
 
             
 
+            
+
              object that has the default buffer size, no pipe security, and a <see
              cref="T:System.IO.HandleInheritability" />
 
             
 
+            
+
              value of <see
              cref="F:System.IO.HandleInheritability.None" />
+
+            
 
             
 
@@ -227,11 +273,15 @@
 
             
 
+            
+
              class with the specified pipe direction.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,8 +315,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -275,6 +329,8 @@
           <para
             >This constructor creates an <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
+
+            
 
             
 
@@ -289,11 +345,15 @@
 
             
 
+            
+
              class with the specified pipe direction and inheritability mode.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,13 +364,19 @@
 
           
 
+          
+
           One of the enumeration values that determines whether the underlying handle can be inherited by child processes. Must be set to either <see
            cref="F:System.IO.HandleInheritability.None" />
 
           
 
+          
+
            or <see
            cref="F:System.IO.HandleInheritability.Inheritable" />
+
+          
 
           
 
@@ -350,8 +416,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -366,11 +436,15 @@
 
             
 
+            
+
              class from the specified pipe handles.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,8 +455,12 @@
 
           
 
+          
+
           A safe handle for the pipe that this <see
            cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
+
+          
 
           
 
@@ -393,8 +471,12 @@
 
           
 
+          
+
           A safe handle for the <see
            cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+          
 
           
 
@@ -429,8 +511,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -439,6 +525,8 @@
           <para
             >This constructor creates an <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
+
+            
 
             
 
@@ -453,11 +541,15 @@
 
             
 
+            
+
              class with the specified pipe direction, inheritability mode, and buffer size.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -468,8 +560,12 @@
 
           
 
+          
+
           One of the enumeration values that determines whether the underlying handle can be inherited by child processes. Must be set to either <see
            cref="F:System.IO.HandleInheritability.None" />
+
+          
 
           
 
@@ -478,10 +574,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,8 +617,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -533,11 +637,15 @@
 
             
 
+            
+
              class with the specified pipe direction, inheritability mode, buffer size, and pipe security.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -548,6 +656,8 @@
 
           
 
+          
+
           One of the enumeration values that determines whether the underlying handle can be inherited by child processes.</param
         >
         <param name="bufferSize">
@@ -555,10 +665,14 @@
 
           
 
+          
+
           The size of the buffer. This value must be greater than or equal to 0. </param
         >
         <param name="pipeSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -597,13 +711,19 @@
 
             
 
+            
+
              method should be called after a client handle has been passed to a client process. If this method is not called, the <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
 
             
 
+            
+
              object will not receive notice when the client disposes of its <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -618,8 +738,12 @@
 
             
 
+            
+
              object that is currently connected to the <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
+
+            
 
             
 
@@ -656,13 +780,19 @@
 
             
 
+            
+
              method should be called after the client handle has been passed to the client. If this method is not called, the <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
 
             
 
+            
+
              object will not receive notice when the client disposes of its <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -674,6 +804,8 @@
           <para
             >Closes the local copy of the <see
              cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+            
 
             
 
@@ -705,13 +837,19 @@
 
             
 
+            
+
              method should be called after a client handle has been passed to a client process. If this method is not called, the <see
              cref="T:System.IO.Pipes.AnonymousPipeServerStream" />
 
             
 
+            
+
              object will not receive notice when the client disposes of its <see
              cref="T:System.IO.Pipes.PipeStream" />
+
+            
 
             
 
@@ -726,6 +864,8 @@
 
             
 
+            
+
              object's handle as a string.</para
           >
         </summary>
@@ -734,6 +874,8 @@
           <para
             >A string that represents the connected <see
              cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+            
 
             
 
@@ -768,6 +910,8 @@
 
             
 
+            
+
              read mode.</para
           >
         </remarks>
@@ -779,8 +923,12 @@
 
             
 
+            
+
              object. For anonymous pipes, transmission mode must be <see
              cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />
+
+            
 
             
 
@@ -812,6 +960,8 @@
           <para
             >Anonymous pipes do not support <see
              cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+
+            
 
             
 

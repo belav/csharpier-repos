@@ -30,8 +30,12 @@
 
         
 
+        
+
          instance for the Web application. This class cannot be inherited. This class was used by earlier versions of the .NET Framework than version 2.0, which uses the <see
          cref="T:System.Web.Hosting.AppManagerAppDomainFactory" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
             
 
+            
+
              class. This class was used by earlier versions of the .NET Framework than version 2.0, which uses the <see
              cref="T:System.Web.Hosting.AppManagerAppDomainFactory" />
+
+            
 
             
 
@@ -96,6 +104,8 @@
 
             
 
+            
+
              class instead.</para
           >
         </summary>
@@ -108,10 +118,14 @@
 
           
 
+          
+
           The module containing the Web application.</param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,10 +136,14 @@
 
           
 
+          
+
           The unique identifier for the Web application.</param
         >
         <param name="appPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,10 +154,14 @@
 
           
 
+          
+
           The URL of origin for the Web application.</param
         >
         <param name="iZone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          causes the parser to ignore inner text if it contains only white space characters.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Interacts with the parser to build a <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.LabelControlBuilder" />
+
+            
 
             
 
@@ -81,8 +87,12 @@
 
             
 
+            
+
              property to ignore white space in the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 

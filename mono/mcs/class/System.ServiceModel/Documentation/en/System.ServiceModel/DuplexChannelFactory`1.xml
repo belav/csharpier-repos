@@ -35,6 +35,8 @@
 
         
 
+        
+
          methods are used to create these duplex channels. The duplex message pattern is one of three message patterns available to indigo1 services. The other two message patterns are one-way and request-reply.</para
       >
       <para
@@ -45,10 +47,14 @@
 
         
 
+        
+
         . For an outline and discussion of the steps involved in writing a indigo1 client application using a channel factory, see <format
          type="text/html">
           <a href="d48f01b5-582b-4c8b-b547-8adddae7e371">How to: Use the ChannelFactory</a>
         </format>
+
+        
 
         
 
@@ -58,6 +64,8 @@
             >How to: Access Services with a Duplex Contract</a
           >
         </format>
+
+        
 
         
 
@@ -100,6 +108,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract.</para
           >
         </summary>
@@ -131,6 +141,8 @@
 
             
 
+            
+
              class with specified instance context.</para
           >
         </summary>
@@ -139,8 +151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -174,6 +190,8 @@
 
             
 
+            
+
              class with specified type of callback instance.</para
           >
         </summary>
@@ -182,8 +200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -222,6 +244,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified binding.</para
           >
         </summary>
@@ -230,8 +254,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -270,6 +298,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified endpoint.</para
           >
         </summary>
@@ -278,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -318,11 +352,15 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified configuration.</para
           >
         </summary>
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,6 +398,8 @@
 
             
 
+            
+
              class with a context that implements the callback contract and a specified binding.</para
           >
         </summary>
@@ -368,8 +408,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -380,8 +424,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -419,6 +467,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified endpoint.</para
           >
         </summary>
@@ -427,8 +477,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -439,8 +493,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -478,6 +536,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified configuration.</para
           >
         </summary>
@@ -486,8 +546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -495,6 +559,8 @@
         >
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +595,8 @@
 
             
 
+            
+
              class with specified type of callback instance and binding.</para
           >
         </summary>
@@ -537,8 +605,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -549,8 +621,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -585,6 +661,8 @@
 
             
 
+            
+
              class with specified type of callback instance and service endpoint.</para
           >
         </summary>
@@ -593,8 +671,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -605,8 +687,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -641,6 +727,8 @@
 
             
 
+            
+
              class with specified type of callback instance and configuration.</para
           >
         </summary>
@@ -649,8 +737,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -658,6 +750,8 @@
         >
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -697,6 +791,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified binding and endpoint address.</para
           >
         </summary>
@@ -705,8 +801,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -717,8 +817,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -755,6 +859,8 @@
 
             
 
+            
+
              class with specified callback object, binding, and remote address.</para
           >
         </summary>
@@ -763,8 +869,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -772,6 +882,8 @@
         >
         <param name="remoteAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,11 +923,15 @@
 
             
 
+            
+
              class with an object that implements the callback contract, and a specified configuration and endpoint address.</para
           >
         </summary>
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,8 +942,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -866,6 +986,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified binding and endpoint address.</para
           >
         </summary>
@@ -874,8 +996,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -886,8 +1012,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -898,8 +1028,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -935,6 +1069,8 @@
 
             
 
+            
+
              class with specified instance context, binding, and remote address.</para
           >
         </summary>
@@ -943,8 +1079,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -955,8 +1095,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -964,6 +1108,8 @@
         >
         <param name="remoteAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1002,6 +1148,8 @@
 
             
 
+            
+
              class with an object that implements the callback contract and a specified configuration and endpoint address.</para
           >
         </summary>
@@ -1010,8 +1158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1022,6 +1174,8 @@
 
           
 
+          
+
           The name used for the endpoint configuration.</param
         >
         <param name="remoteAddress">
@@ -1029,8 +1183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1066,6 +1224,8 @@
 
             
 
+            
+
              class with specified type of callback instance, binding, and remote address.</para
           >
         </summary>
@@ -1074,8 +1234,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1086,8 +1250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -1098,8 +1266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1135,6 +1307,8 @@
 
             
 
+            
+
              class with the specified type of callback instance, binding, and remote address.</para
           >
         </summary>
@@ -1143,8 +1317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1155,8 +1333,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -1164,6 +1346,8 @@
         >
         <param name="remoteAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1199,6 +1383,8 @@
 
             
 
+            
+
              class with the specified type of callback instance, configuration, and remote address.</para
           >
         </summary>
@@ -1207,8 +1393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1219,6 +1409,8 @@
 
           
 
+          
+
           The name used for the endpoint configuration.</param
         >
         <param name="remoteAddress">
@@ -1226,8 +1418,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1268,6 +1464,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1276,8 +1474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1319,6 +1521,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1327,8 +1531,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1336,6 +1544,8 @@
         >
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1377,6 +1587,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1385,8 +1597,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1397,8 +1613,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1440,6 +1660,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1448,8 +1670,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1460,8 +1686,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1503,6 +1733,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1511,8 +1743,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1520,6 +1756,8 @@
         >
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1562,6 +1800,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1570,8 +1810,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1582,8 +1826,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -1594,8 +1842,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1638,6 +1890,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1646,8 +1900,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1658,8 +1916,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -1670,8 +1932,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1714,6 +1980,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1722,8 +1990,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1734,8 +2006,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1746,8 +2022,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1791,6 +2071,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1799,8 +2081,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1811,8 +2097,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -1823,8 +2113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1835,8 +2129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1880,6 +2178,8 @@
 
             
 
+            
+
             , the generic parameter for the factory, between the client and service.</para
           >
         </returns>
@@ -1888,8 +2188,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -1900,8 +2204,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -1912,8 +2220,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1924,8 +2236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 

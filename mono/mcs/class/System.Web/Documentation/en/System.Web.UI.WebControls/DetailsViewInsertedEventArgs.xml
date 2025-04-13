@@ -22,13 +22,19 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.DetailsView.ItemInserted" />
 
         
 
+        
+
          event when an Insert button (a button with its CommandName property set to "Insert") within the control is clicked, but after the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          object is passed to the event handler, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the insert operation, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.AffectedRows" />
+
+        
 
         
 
@@ -50,13 +60,19 @@
 
         
 
+        
+
          property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event handler by setting the <see
          cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.ExceptionHandled" />
 
         
 
+        
+
          property. If you need to access the values of the inserted record, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.Values" />
+
+        
 
         
 
@@ -68,8 +84,12 @@
 
         
 
+        
+
          control returns to the mode specified by the <see
          cref="P:System.Web.UI.WebControls.DetailsView.DefaultMode" />
+
+        
 
         
 
@@ -78,8 +98,12 @@
 
         
 
+        
+
          control in insert mode, set the <see
          cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.KeepInInsertMode" />
+
+        
 
         
 
@@ -93,6 +117,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -101,8 +127,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.#ctor(System.Int32,System.Exception)" />
+
+        
 
         
 
@@ -114,6 +144,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.DetailsView.ItemInserted" />
+
+        
 
         
 
@@ -142,11 +174,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.DetailsViewInsertedEventArgs" />
+
+            
 
             
 
@@ -176,6 +212,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -193,8 +231,12 @@
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="e" />
+
+                  
 
                   
 
@@ -235,11 +277,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="affectedRows">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,8 +296,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -276,6 +326,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.AffectedRows" />
+
+            
 
             
 
@@ -308,12 +360,16 @@
 
             
 
+            
+
              property to determine the exception (if any) that was raised during the insert operation. If no exceptions were raised, this property returns null.</para
           >
           <block subset="none" type="note">
             <para
               >If an exception was raised and you decide to handle the exception in the event handler, be sure to set the <see
                cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.ExceptionHandled" />
+
+              
 
               
 
@@ -347,8 +403,12 @@
 
             
 
+            
+
              property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not passed further up the call stack. If this property is set to false, the exception is passed to the next method on the call stack for handling. To determine which exception was raised, use the <see
              cref="P:System.Web.UI.WebControls.DetailsViewInsertedEventArgs.Exception" />
+
+            
 
             
 
@@ -381,8 +441,12 @@
 
             
 
+            
+
              control returns to the mode specified by the <see
              cref="P:System.Web.UI.WebControls.DetailsView.DefaultMode" />
+
+            
 
             
 
@@ -391,13 +455,19 @@
 
             
 
+            
+
              property to specify whether the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
+            
+
              control should remain in insert mode after an insert operation. To keep the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -410,8 +480,12 @@
 
               
 
+              
+
                control needs to remain in insert mode by default, set the <see
                cref="P:System.Web.UI.WebControls.DetailsView.DefaultMode" />
+
+              
 
               
 
@@ -424,6 +498,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -455,6 +531,8 @@
 
             
 
+            
+
              property to access the values of the fields for the inserted record. For example, you can use these values to keep a log of inserted records.</para
           >
           <para
@@ -463,13 +541,19 @@
 
             
 
+            
+
              property returns an object that implements the <see
              cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
+            
+
              interface. The object contains <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -479,6 +563,8 @@
             <para
               >As a shortcut, you can also use the indexer of the <see
                cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+              
 
               
 

@@ -35,12 +35,16 @@
 
         
 
+        
+
          class represents the .NET Framework's regular expression engine. It can be used to quickly parse large amounts of text to find specific character patterns; to extract, edit, replace, or delete text substrings; and to add the extracted strings to a collection to generate a report.</para
       >
       <block subset="none" type="note">
         <para
           >If your primary interest is to validate a string by determining whether it conforms to a particular pattern, you can use the <see
            cref="T:System.Configuration.RegexStringValidator" />
+
+          
 
           
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
         . Next, you can optionally instantiate a <see
          cref="T:System.Text.RegularExpressions.Regex" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
       <para
         >For more information about using the <see
          cref="T:System.Text.RegularExpressions.Regex" />
+
+        
 
         
 
@@ -118,8 +128,12 @@
 
         
 
+        
+
          class includes several search and comparison methods that you can use to perform pattern matching with text. For example, the <see
          cref="M:System.String.Contains(System.String)" />
+
+        
 
         
 
@@ -128,8 +142,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.String.StartsWith(System.String)" />
+
+        
 
         
 
@@ -138,8 +156,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.String.IndexOfAny(System.Char[])" />
+
+        
 
         
 
@@ -148,8 +170,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.String.LastIndexOfAny(System.Char[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -158,8 +184,12 @@
 
         
 
+        
+
          class when you are searching for a specific string. Use the <see
          cref="T:System.Text.RegularExpressions.Regex" />
+
+        
 
         
 
@@ -167,6 +197,8 @@
          type="text/html">
           <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
         </format>
+
+        
 
         
 
@@ -192,8 +224,12 @@
 
             
 
+            
+
              object that represents the regular expression. To do this, you pass the regular expression pattern to a <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String)" />
+
+            
 
             
 
@@ -202,8 +238,12 @@
 
             
 
+            
+
              object is immutable; when you instantiate a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -217,8 +257,12 @@
 
             
 
+            
+
              method. This enables you to use a regular expression without explicitly creating a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -232,6 +276,8 @@
 
         
 
+        
+
          pattern identification methods include both static and instance overloads. </para
       >
       <para
@@ -240,8 +286,12 @@
 
         
 
+        
+
          objects are immutable, this is a one-time procedure that occurs when a <see
          cref="T:System.Text.RegularExpressions.Regex" />
+
+        
 
         
 
@@ -259,6 +309,8 @@
 
             
 
+            
+
              property.</para
           >
         </item>
@@ -269,8 +321,12 @@
 
             
 
+            
+
              objects with regular expressions that have previously been compiled. For example, the following code defines a regular expression to locate duplicated words in a text stream. Although the example uses a single regular expression, it instantiates a new <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -280,6 +336,8 @@
           <para
             >To prevent recompilation, you should instantiate a single <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -305,8 +363,12 @@
 
         
 
+        
+
          object and call its methods or call static methods, the <see
          cref="T:System.Text.RegularExpressions.Regex" />
+
+        
 
         
 
@@ -320,6 +382,8 @@
 
             
 
+            
+
              method to determine whether a match is present.</para
           >
         </item>
@@ -330,13 +394,19 @@
 
             
 
+            
+
              method to retrieve a <see
              cref="T:System.Text.RegularExpressions.Match" />
 
             
 
+            
+
              object that represents the first match in a string or in part of a string. Subsequent matches can be retrieved by calling the <see
              cref="M:System.Text.RegularExpressions.Match.NextMatch" />
+
+            
 
             
 
@@ -350,8 +420,12 @@
 
             
 
+            
+
              method to retrieve a <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -365,13 +439,19 @@
 
             
 
+            
+
              method to replace matched text. The replacement text can also be defined by a regular expression. In addition, some of the <see
              cref="Overload:System.Text.RegularExpressions.Regex.Replace" />
 
             
 
+            
+
              methods include a <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -385,6 +465,8 @@
 
             
 
+            
+
              method to split an input string at positions that are defined by the regular expression.</para
           >
         </item>
@@ -392,6 +474,8 @@
       <para
         >In addition to its pattern-matching methods, the <see
          cref="T:System.Text.RegularExpressions.Regex" />
+
+        
 
         
 
@@ -405,6 +489,8 @@
 
             
 
+            
+
              method escapes any characters that may be interpreted as regular expression operators in a regular expression or input string. </para
           >
         </item>
@@ -412,6 +498,8 @@
           <para
             >The <see
              cref="M:System.Text.RegularExpressions.Regex.Unescape(System.String)" />
+
+            
 
             
 
@@ -425,8 +513,12 @@
 
             
 
+            
+
              method creates an assembly that contains predefined regular expressions. The .NET Framework contains examples of these special-purpose assemblies in the <see
              cref="N:System.Web.RegularExpressions" />
+
+            
 
             
 
@@ -453,10 +545,14 @@
 
         
 
+        
+
         . For more information about excessive backtracking, see <format
          type="text/html">
           <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
         </format>
+
+        
 
         
 
@@ -465,6 +561,8 @@
       <para
         >Starting with the net_v45, you can define a time-out interval for regular expression matches. If the regular expression engine cannot identify a match within this time interval, the matching operation throws a <see
          cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+        
 
         
 
@@ -477,8 +575,12 @@
 
         
 
+        
+
          constructor when you instantiate a regular expression object. For static methods, you can set a time-out interval by calling an overload of a matching method that has a <paramref
          name="matchTimeout" />
+
+        
 
         
 
@@ -492,13 +594,19 @@
 
             
 
+            
+
              object is instantiated or the static method call is made. You can set the application-wide time-out value by calling the <see
              cref="M:System.AppDomain.SetData(System.String,System.Object)" />
 
             
 
+            
+
              method to assign the string representation of a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -509,6 +617,8 @@
           <para
             >By using the value <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -524,6 +634,8 @@
               >Best Practices for Regular Expressions in the .NET Framework</a
             >
           </format>
+
+          
 
           
 
@@ -566,6 +678,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -596,10 +710,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see the <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -612,6 +730,8 @@
 
             
 
+            
+
              topics.</para
           >
           <para
@@ -620,8 +740,12 @@
 
             
 
+            
+
              constructor is equivalent to calling the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions)" />
+
+            
 
             
 
@@ -630,8 +754,12 @@
 
             
 
+            
+
              for the <paramref
              name="options" />
+
+            
 
             
 
@@ -643,6 +771,8 @@
 
             
 
+            
+
              object is immutable, which means that it can be used only for the match pattern you define when you create it. However, it can be used any number of times without being recompiled.</para
           >
           <para
@@ -651,8 +781,12 @@
 
             
 
+            
+
             . For a case-insensitive match, use the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions)" />
+
+            
 
             
 
@@ -667,11 +801,15 @@
 
             
 
+            
+
              class for the specified regular expression.</para
           >
         </summary>
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -707,6 +845,8 @@
 
             
 
+            
+
              class by using serialized data.</para
           >
         </summary>
@@ -715,8 +855,12 @@
 
           
 
+          
+
           The object that contains a serialized pattern and <see
            cref="T:System.Text.RegularExpressions.RegexOptions" />
+
+          
 
           
 
@@ -724,6 +868,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,10 +906,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see the <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -776,11 +926,15 @@
 
             
 
+            
+
              topics.</para
           >
           <para
             >A <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -795,6 +949,8 @@
 
             
 
+            
+
              class for the specified regular expression, with options that modify the pattern.</para
           >
         </summary>
@@ -803,10 +959,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -846,10 +1006,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see the <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -862,11 +1026,15 @@
 
             
 
+            
+
              topics.</para
           >
           <para
             >A <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -878,8 +1046,12 @@
 
             
 
+            
+
              parameter specifies how long a pattern-matching method should try to find a match before it times out. If no match is found in that time interval, the pattern-matching method throws a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -888,13 +1060,19 @@
 
             
 
+            
+
              overrides any default time-out value defined for the application domain in which the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              object is created. The instance pattern-matching methods that observe the <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -942,10 +1120,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -968,11 +1150,15 @@
 
             
 
+            
+
              class for the specified regular expression, with options that modify the pattern and a value that specifies how long a pattern matching method should attempt a match before it times out.</para
           >
         </summary>
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -983,6 +1169,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that modify the regular expression.</param
         >
         <param name="matchTimeout">
@@ -990,8 +1178,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -1020,11 +1212,15 @@
 
             
 
+            
+
              class maintains an internal cache of compiled regular expressions used in static method calls. If the value specified in a set operation is less than the current cache size, cache entries are discarded until the cache size is equal to the specified value. </para
           >
           <para
             >By default, the cache holds 15 compiled static regular expressions. Your application typically will not have to modify the size of the cache. Use the <see
              cref="P:System.Text.RegularExpressions.Regex.CacheSize" />
+
+            
 
             
 
@@ -1067,8 +1263,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -1107,8 +1307,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -1144,8 +1348,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -1181,8 +1389,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -1229,13 +1441,19 @@
 
             
 
+            
+
              method generates a .NET Framework assembly in which each regular expression defined in the <paramref
              name="regexinfos" />
 
             
 
+            
+
              array is represented by a class. Typically, the <see
              cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -1249,6 +1467,8 @@
 
                 
 
+                
+
                  class.</para
               >
             </item>
@@ -1259,13 +1479,19 @@
 
                 
 
+                
+
                  and <paramref
                  name="name" />
 
                 
 
+                
+
                  parameters of its corresponding <see
                  cref="T:System.Text.RegularExpressions.RegexCompilationInfo" />
+
+                
 
                 
 
@@ -1283,6 +1509,8 @@
           <para
             >Compiles one or more specified <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -1331,13 +1559,19 @@
 
             
 
+            
+
              method generates a .NET Framework assembly in which each regular expression defined in the <paramref
              name="regexinfos" />
 
             
 
+            
+
              array is represented by a class. Typically, the <see
              cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName,System.Reflection.Emit.CustomAttributeBuilder[])" />
+
+            
 
             
 
@@ -1351,6 +1585,8 @@
 
                 
 
+                
+
                  class.</para
               >
             </item>
@@ -1361,13 +1597,19 @@
 
                 
 
+                
+
                  and <paramref
                  name="name" />
 
                 
 
+                
+
                  parameters of its corresponding <see
                  cref="T:System.Text.RegularExpressions.RegexCompilationInfo" />
+
+                
 
                 
 
@@ -1385,8 +1627,12 @@
 
             
 
+            
+
              method generates a .NET Framework assembly from a method call instead of using a particular language's class definition keyword (such as class in C# or Class…End Class in Visual Basic), it does not allow .NET Framework attributes to be assigned to the assembly by using the development language's standard attribute syntax. The <paramref
              name="attributes" />
+
+            
 
             
 
@@ -1400,6 +1646,8 @@
 
                 
 
+                
+
                  objects representing the parameter types of the attribute constructor that you want to call. </para
               >
             </item>
@@ -1407,6 +1655,8 @@
               <para
                 >Retrieve a <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -1420,8 +1670,12 @@
 
                 
 
+                
+
                  method of the attribute <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -1430,13 +1684,19 @@
 
                 
 
+                
+
                  object representing the attribute constructor that you want to call. Pass the <see
                  cref="M:System.Type.GetConstructor(System.Type[])" />
 
                 
 
+                
+
                  method the array of <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -1450,6 +1710,8 @@
 
                 
 
+                
+
                  array that defines the parameters to pass to the attribute's constructor.</para
               >
             </item>
@@ -1460,13 +1722,19 @@
 
                 
 
+                
+
                  object by passing its constructor the <see
                  cref="T:System.Reflection.ConstructorInfo" />
 
                 
 
+                
+
                  object retrieved in step 3 and the <see
                  cref="T:System.Object" />
+
+                
 
                 
 
@@ -1480,13 +1748,19 @@
 
             
 
+            
+
              objects instead of the <paramref
              name="attributes" />
 
             
 
+            
+
              parameter to the <see
              cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName,System.Reflection.Emit.CustomAttributeBuilder[])" />
+
+            
 
             
 
@@ -1498,6 +1772,8 @@
           <para
             >Compiles one or more specified <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -1547,13 +1823,19 @@
 
             
 
+            
+
              method generates a .NET Framework assembly in which each regular expression defined in the <paramref
              name="regexinfos" />
 
             
 
+            
+
              array is represented by a class. Typically, the <see
              cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName,System.Reflection.Emit.CustomAttributeBuilder[],System.String)" />
+
+            
 
             
 
@@ -1567,6 +1849,8 @@
 
                 
 
+                
+
                  class.</para
               >
             </item>
@@ -1577,13 +1861,19 @@
 
                 
 
+                
+
                  and <paramref
                  name="name" />
 
                 
 
+                
+
                  parameters of its corresponding <see
                  cref="T:System.Text.RegularExpressions.RegexCompilationInfo" />
+
+                
 
                 
 
@@ -1601,8 +1891,12 @@
 
             
 
+            
+
              method generates a .NET Framework assembly from a method call instead of using a particular language's class definition keyword (such as class in C# or Class…End Class in Visual Basic), it does not allow .NET Framework attributes to be assigned to the assembly by using the development language's standard attribute syntax. The <paramref
              name="attributes" />
+
+            
 
             
 
@@ -1616,6 +1910,8 @@
 
                 
 
+                
+
                  objects representing the parameter types of the attribute constructor that you want to call. </para
               >
             </item>
@@ -1623,6 +1919,8 @@
               <para
                 >Retrieve a <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -1636,8 +1934,12 @@
 
                 
 
+                
+
                  method of the attribute <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -1646,13 +1948,19 @@
 
                 
 
+                
+
                  object representing the attribute constructor that you want to call. Pass the <see
                  cref="M:System.Type.GetConstructor(System.Type[])" />
 
                 
 
+                
+
                  method the array of <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -1666,6 +1974,8 @@
 
                 
 
+                
+
                  array that defines the parameters to pass to the attribute's constructor.</para
               >
             </item>
@@ -1676,13 +1986,19 @@
 
                 
 
+                
+
                  object by passing its constructor the <see
                  cref="T:System.Reflection.ConstructorInfo" />
 
                 
 
+                
+
                  object retrieved in step 3 and the <see
                  cref="T:System.Object" />
+
+                
 
                 
 
@@ -1696,13 +2012,19 @@
 
             
 
+            
+
              objects instead of the <paramref
              name="attributes" />
 
             
 
+            
+
              parameter to the <see
              cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName,System.Reflection.Emit.CustomAttributeBuilder[],System.String)" />
+
+            
 
             
 
@@ -1717,11 +2039,15 @@
 
             
 
+            
+
              objects and a specified resource file to a named assembly with the specified attributes.</para
           >
         </summary>
         <param name="resourceFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1755,12 +2081,16 @@
 
             
 
+            
+
              converts a string so that the regular expression engine will interpret any metacharacters that it may contain as character literals. For example, consider a regular expression that is designed to extract comments that are delimited by straight opening and closing brackets ([ and ]) from text. In the following example, the regular expression "[(.*?)]" is interpreted as a character class. Rather than matching comments embedded in the input text, the regular expression matches each opening or closing parenthesis, period, asterisk, or question mark.</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Escape#1</para>
           <para
             >However, if the opening bracket is escaped by passing it to the <see
              cref="M:System.Text.RegularExpressions.Regex.Escape(System.String)" />
+
+            
 
             
 
@@ -1773,8 +2103,12 @@
 
             
 
+            
+
              method. In a regular expression that is defined dynamically using characters that are not known at design time, calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Escape(System.String)" />
+
+            
 
             
 
@@ -1787,12 +2121,16 @@
 
               
 
+              
+
                option enabled.</para
             >
           </block>
           <para
             >While the <see
              cref="M:System.Text.RegularExpressions.Regex.Escape(System.String)" />
+
+            
 
             
 
@@ -1809,6 +2147,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1849,8 +2189,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -1966,8 +2310,12 @@
 
             
 
+            
+
             .) The <see
              cref="M:System.Text.RegularExpressions.Regex.GroupNameFromNumber(System.Int32)" />
+
+            
 
             
 
@@ -1979,8 +2327,12 @@
 
             
 
+            
+
              is the number of a named group, the method returns the name of the group. If <paramref
              name="i" />
+
+            
 
             
 
@@ -1989,13 +2341,19 @@
 
             
 
+            
+
              is 1, the method returns "1". If <paramref
              name="i" />
 
             
 
+            
+
              is not the number of a capturing group, the method returns <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2007,8 +2365,12 @@
 
             
 
+            
+
              object that represents the captured group from the <see
              cref="P:System.Text.RegularExpressions.GroupCollection.Item(System.Int32)" />
+
+            
 
             
 
@@ -2017,8 +2379,12 @@
 
             
 
+            
+
              object is returned by the <see
              cref="P:System.Text.RegularExpressions.Match.Groups" />
+
+            
 
             
 
@@ -2037,8 +2403,12 @@
 
             
 
+            
+
             , the method returns <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2047,6 +2417,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2083,8 +2455,12 @@
 
             
 
+            
+
             .) The <see
              cref="M:System.Text.RegularExpressions.Regex.GroupNumberFromName(System.String)" />
+
+            
 
             
 
@@ -2096,8 +2472,12 @@
 
             
 
+            
+
              is the string representation of a group number that is present in the regular expression pattern, the method returns that number. If <paramref
              name="name" />
+
+            
 
             
 
@@ -2106,8 +2486,12 @@
 
             
 
+            
+
              with the group name is case-sensitive. If <paramref
              name="name" />
+
+            
 
             
 
@@ -2126,11 +2510,15 @@
 
             
 
+            
+
              is not a valid group name.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2163,8 +2551,12 @@
 
             
 
+            
+
              class constructor and a number of static matching methods use the <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -2174,6 +2566,8 @@
             <para
               >Setting the regular expression engine's time-out value to <see
                cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+              
 
               
 
@@ -2187,6 +2581,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2196,8 +2592,12 @@
 
             
 
+            
+
              constant can be supplied as the value of the <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -2278,8 +2678,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -2315,13 +2719,19 @@
 
             
 
+            
+
              method is typically used to validate a string or to ensure that a string conforms to a particular pattern without retrieving that string for subsequent manipulation. If you want to determine whether one or more strings match a regular expression pattern and then retrieve them for subsequent manipulation, call the <see
              cref="Overload:System.Text.RegularExpressions.Regex.Match" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.RegularExpressions.Regex.Matches" />
+
+            
 
             
 
@@ -2333,8 +2743,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -2343,13 +2757,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -2364,6 +2784,8 @@
 
             
 
+            
+
              constructor finds a match in a specified input string.</para
           >
         </summary>
@@ -2373,6 +2795,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2408,13 +2832,19 @@
 
             
 
+            
+
              method is typically used to validate a string or to ensure that a string conforms to a particular pattern without retrieving that string for subsequent manipulation. If you want to determine whether one or more strings match a regular expression pattern and then retrieve them for subsequent manipulation, call the <see
              cref="Overload:System.Text.RegularExpressions.Regex.Match" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.RegularExpressions.Regex.Matches" />
+
+            
 
             
 
@@ -2426,8 +2856,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -2436,13 +2870,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -2454,6 +2894,8 @@
           <para
             >Indicates whether the regular expression specified in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -2469,10 +2911,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="startat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2511,13 +2957,19 @@
 
             
 
+            
+
              method is typically used to validate a string or to ensure that a string conforms to a particular pattern without retrieving that string for subsequent manipulation. If you want to determine whether one or more strings match a regular expression pattern and then retrieve them for subsequent manipulation, call the <see
              cref="Overload:System.Text.RegularExpressions.Regex.Match" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.RegularExpressions.Regex.Matches" />
+
+            
 
             
 
@@ -2529,8 +2981,12 @@
 
             
 
+            
+
              method is equivalent to constructing a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -2539,8 +2995,12 @@
 
             
 
+            
+
              and calling the <see
              cref="M:System.Text.RegularExpressions.Regex.IsMatch(System.String)" />
+
+            
 
             
 
@@ -2552,10 +3012,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -2568,6 +3032,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2576,8 +3042,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -2597,10 +3067,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2640,13 +3114,19 @@
 
             
 
+            
+
              method is typically used to validate a string or to ensure that a string conforms to a particular pattern without retrieving that string for subsequent manipulation. If you want to determine whether one or more strings match a regular expression pattern and then retrieve them for subsequent manipulation, call the <see
              cref="Overload:System.Text.RegularExpressions.Regex.Match" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.RegularExpressions.Regex.Matches" />
+
+            
 
             
 
@@ -2658,8 +3138,12 @@
 
             
 
+            
+
              method is equivalent to constructing a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -2668,13 +3152,19 @@
 
             
 
+            
+
              and the regular expression options specified by <paramref
              name="options" />
 
             
 
+            
+
              and calling the <see
              cref="M:System.Text.RegularExpressions.Regex.IsMatch(System.String)" />
+
+            
 
             
 
@@ -2686,10 +3176,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -2702,6 +3196,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2710,8 +3206,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -2731,6 +3231,8 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="pattern">
@@ -2738,10 +3240,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2785,13 +3291,19 @@
 
             
 
+            
+
              method is typically used to validate a string or to ensure that a string conforms to a particular pattern without retrieving that string for subsequent manipulation. If you want to determine whether one or more strings match a regular expression pattern and then retrieve them for subsequent manipulation, call the <see
              cref="Overload:System.Text.RegularExpressions.Regex.Match" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Text.RegularExpressions.Regex.Matches" />
+
+            
 
             
 
@@ -2803,8 +3315,12 @@
 
             
 
+            
+
              method is equivalent to constructing a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -2813,13 +3329,19 @@
 
             
 
+            
+
              and the regular expression options specified by <paramref
              name="options" />
 
             
 
+            
+
              and calling the <see
              cref="M:System.Text.RegularExpressions.Regex.IsMatch(System.String)" />
+
+            
 
             
 
@@ -2831,10 +3353,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -2847,11 +3373,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -2864,10 +3394,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -2876,8 +3410,12 @@
 
             
 
+            
+
              exception. <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -2897,10 +3435,14 @@
 
           
 
+          
+
           The string to search for a match.</param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2911,6 +3453,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that provide options for matching.</param
         >
         <param name="matchTimeout">
@@ -2918,8 +3462,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -2957,12 +3505,16 @@
 
             
 
+            
+
              method returns the first substring that matches a regular expression pattern in an input string. For information about the language elements used to build a regular expression pattern, see <format
              type="text/html">
               <a href="930653a6-95d2-4697-9d5a-52d11bb6fd4c"
                 >Regular Expression Language - Quick Reference</a
               >
             </format>
+
+            
 
             
 
@@ -2974,8 +3526,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Group.Success" />
+
+            
 
             
 
@@ -2984,8 +3540,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -2994,8 +3554,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. If no match is found, its value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -3007,8 +3571,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. You can retrieve subsequent matches by repeatedly calling the returned <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -3017,8 +3585,12 @@
 
             
 
+            
+
              method. You can also retrieve all matches in a single method call by calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
+
+            
 
             
 
@@ -3030,8 +3602,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -3040,13 +3616,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -3061,6 +3643,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </summary>
@@ -3070,6 +3654,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3108,8 +3694,12 @@
 
             
 
+            
+
              method returns the first substring that matches a regular expression pattern, starting at or after the <paramref
              name="startat" />
+
+            
 
             
 
@@ -3122,6 +3712,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3130,8 +3722,12 @@
 
             
 
+            
+
              method searches is defined by the call to one of the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -3144,6 +3740,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3152,8 +3750,12 @@
 
             
 
+            
+
              parameter. When the regular expression engine parses from left to right (the default), the match and the scan move rightward, starting at the character specified in <paramref
              name="startat" />
+
+            
 
             
 
@@ -3162,8 +3764,12 @@
 
             
 
+            
+
              option), the match and scan move in the opposite direction and begin with the character at <paramref
              name="startat" />
+
+            
 
             
 
@@ -3172,8 +3778,12 @@
 
             
 
+            
+
              position. If the regular expression searches from left to right, the default <paramref
              name="startat" />
+
+            
 
             
 
@@ -3182,13 +3792,19 @@
 
             
 
+            
+
             ; if it searches from right to left, the default <paramref
              name="startat" />
 
             
 
+            
+
              position is at the right end of <paramref
              name="input" />
+
+            
 
             
 
@@ -3200,6 +3816,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3208,8 +3826,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Group.Success" />
+
+            
 
             
 
@@ -3218,8 +3840,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -3228,8 +3854,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. If no match is found, its value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -3241,8 +3871,12 @@
 
             
 
+            
+
              character position in <paramref
              name="input" />
+
+            
 
             
 
@@ -3251,13 +3885,19 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Text.RegularExpressions.Match.NextMatch" />
 
             
 
+            
+
              method. You can also retrieve all matches in a single method call by calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.Int32)" />
+
+            
 
             
 
@@ -3269,8 +3909,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -3279,13 +3923,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -3305,10 +3955,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="startat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3347,12 +4001,16 @@
 
             
 
+            
+
              method returns the first substring that matches a regular expression pattern in an input string. For information about the language elements used to build a regular expression pattern, see <format
              type="text/html">
               <a href="930653a6-95d2-4697-9d5a-52d11bb6fd4c"
                 >Regular Expression Language - Quick Reference</a
               >
             </format>
+
+            
 
             
 
@@ -3364,13 +4022,19 @@
 
             
 
+            
+
              method is equivalent to constructing a <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+
+            
 
             
 
@@ -3382,10 +4046,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -3398,6 +4066,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3406,8 +4076,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Group.Success" />
+
+            
 
             
 
@@ -3416,8 +4090,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -3426,8 +4104,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. If no match is found, its value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -3439,8 +4121,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. You can retrieve subsequent matches by repeatedly calling the returned <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -3449,8 +4135,12 @@
 
             
 
+            
+
              method. You can also retrieve all matches in a single method call by calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String)" />
+
+            
 
             
 
@@ -3462,8 +4152,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -3483,10 +4177,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3526,12 +4224,16 @@
 
             
 
+            
+
              method returns the first substring that matches a regular expression pattern in a portion of an input string. For information about the language elements used to build a regular expression pattern, see <format
              type="text/html">
               <a href="930653a6-95d2-4697-9d5a-52d11bb6fd4c"
                 >Regular Expression Language - Quick Reference</a
               >
             </format>
+
+            
 
             
 
@@ -3543,8 +4245,12 @@
 
             
 
+            
+
              method searches is defined by the call to one of the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -3557,6 +4263,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3565,8 +4273,12 @@
 
             
 
+            
+
              method searches the portion of <paramref
              name="input" />
+
+            
 
             
 
@@ -3575,8 +4287,12 @@
 
             
 
+            
+
              and <paramref
              name="length" />
+
+            
 
             
 
@@ -3585,8 +4301,12 @@
 
             
 
+            
+
              always defines the index of the leftmost character to include in the search, and <paramref
              name="length" />
+
+            
 
             
 
@@ -3595,13 +4315,19 @@
 
             
 
+            
+
              to the character at index <paramref
              name="beginning" />
 
             
 
+            
+
              + <paramref
              name="length" />
+
+            
 
             
 
@@ -3610,8 +4336,12 @@
 
             
 
+            
+
              option so that the search proceeds from right to left, the regular expression engine searches from the character at index <paramref
              name="beginning" />
+
+            
 
             
 
@@ -3620,8 +4350,12 @@
 
             
 
+            
+
              – 1 to the character at index <paramref
              name="beginning" />
+
+            
 
             
 
@@ -3630,8 +4364,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Text.RegularExpressions.Match.NextMatch" />
+
+            
 
             
 
@@ -3643,8 +4381,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Group.Success" />
+
+            
 
             
 
@@ -3653,8 +4395,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -3663,8 +4409,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. If no match is found, its value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -3676,8 +4426,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -3686,13 +4440,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -3712,6 +4472,8 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="beginning">
@@ -3719,10 +4481,14 @@
 
           
 
+          
+
           The zero-based character position in the input string that defines the leftmost position to be searched. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3762,12 +4528,16 @@
 
             
 
+            
+
              method returns the first substring that matches a regular expression pattern in an input string. For information about the language elements used to build a regular expression pattern, see <format
              type="text/html">
               <a href="930653a6-95d2-4697-9d5a-52d11bb6fd4c"
                 >Regular Expression Language - Quick Reference</a
               >
             </format>
+
+            
 
             
 
@@ -3779,8 +4549,12 @@
 
             
 
+            
+
              method is equivalent to constructing a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -3789,8 +4563,12 @@
 
             
 
+            
+
              constructor and calling the instance <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+
+            
 
             
 
@@ -3802,10 +4580,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -3818,6 +4600,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3826,8 +4610,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Group.Success" />
+
+            
 
             
 
@@ -3836,8 +4624,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -3846,8 +4638,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. If no match is found, its value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -3859,8 +4655,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. You can retrieve subsequent matches by repeatedly calling the returned <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -3869,8 +4669,12 @@
 
             
 
+            
+
              method. You can also retrieve all matches in a single method call by calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+
+            
 
             
 
@@ -3882,8 +4686,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the matching operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -3903,6 +4711,8 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="pattern">
@@ -3910,10 +4720,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3957,12 +4771,16 @@
 
             
 
+            
+
              method returns the first substring that matches a regular expression pattern in an input string. For information about the language elements used to build a regular expression pattern, see <format
              type="text/html">
               <a href="930653a6-95d2-4697-9d5a-52d11bb6fd4c"
                 >Regular Expression Language - Quick Reference</a
               >
             </format>
+
+            
 
             
 
@@ -3974,8 +4792,12 @@
 
             
 
+            
+
              method is equivalent to constructing a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -3984,8 +4806,12 @@
 
             
 
+            
+
              constructor and calling the instance <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+
+            
 
             
 
@@ -3997,10 +4823,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -4013,6 +4843,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4021,8 +4853,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Group.Success" />
+
+            
 
             
 
@@ -4031,8 +4867,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -4041,8 +4881,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. If no match is found, its value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -4054,8 +4898,12 @@
 
             
 
+            
+
              that matches the regular expression pattern. You can retrieve subsequent matches by repeatedly calling the returned <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -4064,8 +4912,12 @@
 
             
 
+            
+
              method. You can also retrieve all matches in a single method call by calling the <see
              cref="M:System.Text.RegularExpressions.Regex.Matches(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+
+            
 
             
 
@@ -4074,6 +4926,8 @@
           <para
             >The <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -4086,10 +4940,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -4098,8 +4956,12 @@
 
             
 
+            
+
              exception. <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -4119,10 +4981,14 @@
 
           
 
+          
+
           The string to search for a match.</param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4133,6 +4999,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that provide options for matching.</param
         >
         <param name="matchTimeout">
@@ -4140,8 +5008,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -4179,8 +5051,12 @@
 
             
 
+            
+
              method is similar to the <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+
+            
 
             
 
@@ -4194,8 +5070,12 @@
 
             
 
+            
+
              method searches is defined by the call to one of the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -4208,6 +5088,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4216,8 +5098,12 @@
 
             
 
+            
+
              method uses lazy evaluation to populate the returned <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4226,8 +5112,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.RegularExpressions.MatchCollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -4239,8 +5129,12 @@
 
             
 
+            
+
              method does not throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -4249,13 +5143,19 @@
 
             
 
+            
+
              object returned by this method, if the <see
              cref="P:System.Text.RegularExpressions.Regex.MatchTimeout" />
 
             
 
+            
+
              property is not <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -4274,11 +5174,15 @@
 
             
 
+            
+
              objects found by the search. If no matches are found, the method returns an empty collection object.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4317,8 +5221,12 @@
 
             
 
+            
+
              method is similar to the  <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" />
+
+            
 
             
 
@@ -4331,8 +5239,12 @@
 
             
 
+            
+
              method searches is defined by the call to one of the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -4345,6 +5257,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4353,8 +5267,12 @@
 
             
 
+            
+
              method uses lazy evaluation to populate the returned <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4363,8 +5281,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.RegularExpressions.MatchCollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -4376,8 +5298,12 @@
 
             
 
+            
+
              method does not throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -4386,13 +5312,19 @@
 
             
 
+            
+
              object returned by this method, if the <see
              cref="P:System.Text.RegularExpressions.Regex.MatchTimeout" />
 
             
 
+            
+
              property is not <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -4411,6 +5343,8 @@
 
             
 
+            
+
              objects found by the search. If no matches are found, the method returns an empty collection object.</para
           >
         </returns>
@@ -4419,10 +5353,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="startat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4461,8 +5399,12 @@
 
             
 
+            
+
              method is similar to the <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.String)" />
+
+            
 
             
 
@@ -4475,6 +5417,8 @@
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance method Matches. </para
           >
           <para
@@ -4483,10 +5427,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -4499,6 +5447,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4507,8 +5457,12 @@
 
             
 
+            
+
              method uses lazy evaluation to populate the returned <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4517,8 +5471,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.RegularExpressions.MatchCollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -4530,13 +5488,19 @@
 
             
 
+            
+
              method does not throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
+            
+
              exception. However, the exception is thrown when an operation is performed on the <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4555,6 +5519,8 @@
 
             
 
+            
+
              objects found by the search. If no matches are found, the method returns an empty collection object.</para
           >
         </returns>
@@ -4563,10 +5529,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4606,8 +5576,12 @@
 
             
 
+            
+
              method is similar to the <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />
+
+            
 
             
 
@@ -4620,6 +5594,8 @@
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance method Matches. </para
           >
           <para
@@ -4628,10 +5604,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -4644,6 +5624,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4652,8 +5634,12 @@
 
             
 
+            
+
              method uses lazy evaluation to populate the returned <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4662,8 +5648,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.RegularExpressions.MatchCollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -4675,13 +5665,19 @@
 
             
 
+            
+
              method does not throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
+            
+
              exception. However, the exception is thrown when an operation is performed on the <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4700,11 +5696,15 @@
 
             
 
+            
+
              objects found by the search. If no matches are found, the method returns an empty collection object.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4715,10 +5715,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4762,8 +5766,12 @@
 
             
 
+            
+
              method is similar to the <see
              cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -4776,6 +5784,8 @@
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance method Matches. </para
           >
           <para
@@ -4784,10 +5794,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -4800,6 +5814,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4808,8 +5824,12 @@
 
             
 
+            
+
              method uses lazy evaluation to populate the returned <see
              cref="T:System.Text.RegularExpressions.MatchCollection" />
+
+            
 
             
 
@@ -4818,8 +5838,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.RegularExpressions.MatchCollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -4831,8 +5855,12 @@
 
             
 
+            
+
              method does not throw a <see
              cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+
+            
 
             
 
@@ -4841,8 +5869,12 @@
 
             
 
+            
+
              object returned by this method, if a matching operation exceeds this time-out interval specified by the<paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -4861,11 +5893,15 @@
 
             
 
+            
+
              objects found by the search. If no matches are found, the method returns an empty collection object.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4876,10 +5912,14 @@
 
           
 
+          
+
           The regular expression pattern to match.</param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4890,8 +5930,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -4927,8 +5971,12 @@
 
             
 
+            
+
              property defines the approximate maximum time interval for a <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -4937,10 +5985,14 @@
 
             
 
+            
+
              exception during its next timing check after the time-out interval has elapsed. This prevents the regular expression engine from processing input strings that require excessive backtracking. For more information, see <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -4953,6 +6005,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -4961,8 +6015,12 @@
 
             
 
+            
+
              object by calling the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -4971,13 +6029,19 @@
 
             
 
+            
+
              matching operations in an application domain by calling the <see
              cref="M:System.AppDomain.SetData(System.String,System.Object)" />
 
             
 
+            
+
              method and providing a value for the "REGEX_DEFAULT_MATCH_TIMEOUT" property. If you do not explicitly set a time-out interval, the default value <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -5018,8 +6082,12 @@
 
             
 
+            
+
              property consists of one or more members of the <see
              cref="T:System.Text.RegularExpressions.RegexOptions" />
+
+            
 
             
 
@@ -5028,8 +6096,12 @@
 
             
 
+            
+
              class constructor, its value is <see
              cref="F:System.Text.RegularExpressions.RegexOptions.None" />
+
+            
 
             
 
@@ -5037,6 +6109,8 @@
              type="text/html">
               <a href="c82dc689-7e82-4767-a18d-cd24ce5f05e9">Regular Expression Options</a>
             </format>
+
+            
 
             
 
@@ -5048,6 +6122,8 @@
           <para
             >Gets the options that were passed into the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -5078,8 +6154,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -5119,8 +6199,12 @@
 
             
 
+            
+
              string. The regular expression is the pattern defined by the constructor for the current <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -5132,8 +6216,12 @@
 
             
 
+            
+
              parameter specifies the string that is to replace each match in <paramref
              name="input" />
+
+            
 
             
 
@@ -5142,10 +6230,14 @@
 
             
 
+            
+
              can consist of any combination of literal text and <format
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">substitutions</a>
             </format>
+
+            
 
             
 
@@ -5160,6 +6252,8 @@
 
               
 
+              
+
               , are allowed in regular expression patterns only and are not recognized in replacement patterns.</para
             >
           </block>
@@ -5169,8 +6263,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -5179,13 +6277,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -5197,8 +6301,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -5218,10 +6326,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5260,6 +6372,8 @@
 
             
 
+            
+
              method is useful for replacing a regular expression match if any of the following conditions is true:</para
           >
           <list type="bullet">
@@ -5279,8 +6393,12 @@
 
             
 
+            
+
              method and passing each <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -5289,8 +6407,12 @@
 
             
 
+            
+
              collection to the <paramref
              name="evaluator" />
+
+            
 
             
 
@@ -5302,6 +6424,8 @@
 
             
 
+            
+
              object. </para
           >
           <para
@@ -5310,8 +6434,12 @@
 
             
 
+            
+
              parameter is the delegate for a custom method that you define and that examines each match. The custom method must have the following signature to match the <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -5325,8 +6453,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -5335,13 +6467,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -5353,8 +6491,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -5366,6 +6508,8 @@
           <para
             >In a specified input string, replaces all strings that match a specified regular expression with a string returned by a <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -5381,10 +6525,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="evaluator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5424,8 +6572,12 @@
 
             
 
+            
+
              string. The regular expression is the pattern that is defined by the constructor for the current <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -5434,8 +6586,12 @@
 
             
 
+            
+
              is negative, replacements continue to the end of the string. If <paramref
              name="count" />
+
+            
 
             
 
@@ -5447,8 +6603,12 @@
 
             
 
+            
+
              parameter specifies the string that is to replace the first <paramref
              name="count" />
+
+            
 
             
 
@@ -5457,8 +6617,12 @@
 
             
 
+            
+
             . <paramref
              name="replacement" />
+
+            
 
             
 
@@ -5466,6 +6630,8 @@
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">substitutions</a>
             </format>
+
+            
 
             
 
@@ -5480,6 +6646,8 @@
 
               
 
+              
+
               , are allowed in regular expression patterns only and are not recognized in replacement patterns.</para
             >
           </block>
@@ -5489,8 +6657,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -5499,13 +6671,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -5517,8 +6695,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -5538,6 +6720,8 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="replacement">
@@ -5545,10 +6729,14 @@
 
           
 
+          
+
           The replacement string. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5588,6 +6776,8 @@
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance method Replace. </para
           >
           <para
@@ -5596,10 +6786,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -5612,8 +6806,12 @@
 
             
 
+            
+
             . The search for matches starts at the beginning of the <paramref
              name="input" />
+
+            
 
             
 
@@ -5625,8 +6823,12 @@
 
             
 
+            
+
              parameter specifies the string that is to replace each match in <paramref
              name="input" />
+
+            
 
             
 
@@ -5635,10 +6837,14 @@
 
             
 
+            
+
              can consist of any combination of literal text and <format
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">substitutions</a>
             </format>
+
+            
 
             
 
@@ -5653,6 +6859,8 @@
 
               
 
+              
+
               , are allowed in regular expression patterns only and are not recognized in replacement patterns.</para
             >
           </block>
@@ -5662,8 +6870,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -5675,8 +6887,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -5695,11 +6911,15 @@
 
             
 
+            
+
              is not matched in the current instance, the method returns the current instance unchanged.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5710,10 +6930,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5753,6 +6977,8 @@
 
             
 
+            
+
              method is useful for replacing a regular expression match if any of the following conditions is true:</para
           >
           <list type="bullet">
@@ -5772,8 +6998,12 @@
 
             
 
+            
+
              method and passing each <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -5782,8 +7012,12 @@
 
             
 
+            
+
              collection to the <paramref
              name="evaluator" />
+
+            
 
             
 
@@ -5795,10 +7029,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -5811,6 +7049,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -5819,8 +7059,12 @@
 
             
 
+            
+
              parameter is the delegate for a custom method that you define and that examines each match. The custom method must have the following signature to match the <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -5834,8 +7078,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -5847,8 +7095,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -5863,6 +7115,8 @@
 
             
 
+            
+
              delegate.</para
           >
         </summary>
@@ -5874,11 +7128,15 @@
 
             
 
+            
+
              is not matched in the current instance, the method returns the current instance unchanged. </para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5889,10 +7147,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="evaluator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5932,6 +7194,8 @@
 
             
 
+            
+
              method is useful for replacing a regular expression match if any of the following conditions is true:</para
           >
           <list type="bullet">
@@ -5951,9 +7215,13 @@
 
             
 
+            
+
              method and passing the first <paramref
              name="count" />
             <see cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -5962,8 +7230,12 @@
 
             
 
+            
+
              collection to the <paramref
              name="evaluator" />
+
+            
 
             
 
@@ -5975,6 +7247,8 @@
 
             
 
+            
+
              object. </para
           >
           <para
@@ -5983,8 +7257,12 @@
 
             
 
+            
+
              parameter is the delegate for a custom method that you define and that examines each match. The custom method must have the following signature to match the <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -5998,8 +7276,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -6008,13 +7290,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -6026,8 +7314,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6039,6 +7331,8 @@
           <para
             >In a specified input string, replaces a specified maximum number of strings that match a regular expression pattern with a string returned by a <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -6054,6 +7348,8 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="evaluator">
@@ -6061,10 +7357,14 @@
 
           
 
+          
+
           A custom method that examines each match and returns either the original matched string or a replacement string.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6105,8 +7405,12 @@
 
             
 
+            
+
              string at the position specified by the <paramref
              name="startat" />
+
+            
 
             
 
@@ -6115,13 +7419,19 @@
 
             
 
+            
+
              object. If <paramref
              name="count" />
 
             
 
+            
+
              is negative, replacements continue to the end of the string. If <paramref
              name="count" />
+
+            
 
             
 
@@ -6133,8 +7443,12 @@
 
             
 
+            
+
              parameter specifies the string that is to replace each match in <paramref
              name="input" />
+
+            
 
             
 
@@ -6143,10 +7457,14 @@
 
             
 
+            
+
              can consist of any combination of literal text and <format
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">substitutions</a>
             </format>
+
+            
 
             
 
@@ -6161,6 +7479,8 @@
 
               
 
+              
+
               , are allowed in regular expression patterns only and are not recognized in replacement patterns.</para
             >
           </block>
@@ -6170,8 +7490,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -6180,13 +7504,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -6198,8 +7528,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6219,10 +7553,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6233,10 +7571,14 @@
 
           
 
+          
+
           Maximum number of times the replacement can occur. </param
         >
         <param name="startat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6277,6 +7619,8 @@
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance method Replace. </para
           >
           <para
@@ -6285,10 +7629,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -6301,13 +7649,19 @@
 
             
 
+            
+
             . If you specify <see
              cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
 
             
 
+            
+
              for the <paramref
              name="options" />
+
+            
 
             
 
@@ -6319,8 +7673,12 @@
 
             
 
+            
+
              parameter specifies the string that is to replace each match in <paramref
              name="input" />
+
+            
 
             
 
@@ -6329,10 +7687,14 @@
 
             
 
+            
+
              can consist of any combination of literal text and <format
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">substitutions</a>
             </format>
+
+            
 
             
 
@@ -6347,6 +7709,8 @@
 
               
 
+              
+
               , are allowed in regular expression patterns only and are not recognized in replacement patterns.</para
             >
           </block>
@@ -6356,8 +7720,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -6369,8 +7737,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6389,11 +7761,15 @@
 
             
 
+            
+
              is not matched in the current instance, the method returns the current instance unchanged.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6404,6 +7780,8 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="replacement">
@@ -6411,10 +7789,14 @@
 
           
 
+          
+
           The replacement string. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6455,6 +7837,8 @@
 
             
 
+            
+
              method is useful for replacing a regular expression match in if any of the following conditions is true:</para
           >
           <list type="bullet">
@@ -6474,8 +7858,12 @@
 
             
 
+            
+
              method and passing each <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -6484,8 +7872,12 @@
 
             
 
+            
+
              collection to the <paramref
              name="evaluator" />
+
+            
 
             
 
@@ -6497,10 +7889,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -6513,6 +7909,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -6521,8 +7919,12 @@
 
             
 
+            
+
              parameter is the delegate for a custom method that you define and that examines each match. The custom method must have the following signature to match the <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -6536,8 +7938,12 @@
 
             
 
+            
+
              for the <paramref
              name="options" />
+
+            
 
             
 
@@ -6549,8 +7955,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -6562,8 +7972,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6578,6 +7992,8 @@
 
             
 
+            
+
              delegate. Specified options modify the matching operation.</para
           >
         </summary>
@@ -6589,11 +8005,15 @@
 
             
 
+            
+
              is not matched in the current instance, the method returns the current instance unchanged.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6604,6 +8024,8 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="evaluator">
@@ -6611,10 +8033,14 @@
 
           
 
+          
+
           A custom method that examines each match and returns either the original matched string or a replacement string. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6655,6 +8081,8 @@
 
             
 
+            
+
              method is useful for replacing a regular expression match if any of the following conditions is true:</para
           >
           <list type="bullet">
@@ -6674,9 +8102,13 @@
 
             
 
+            
+
              method and passing the first <paramref
              name="count" />
             <see cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -6685,8 +8117,12 @@
 
             
 
+            
+
              collection to the <paramref
              name="evaluator" />
+
+            
 
             
 
@@ -6698,6 +8134,8 @@
 
             
 
+            
+
              object. </para
           >
           <para
@@ -6706,8 +8144,12 @@
 
             
 
+            
+
              parameter is the delegate for a custom method that you define and that examines each match. The custom method must have the following signature to match the <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -6721,8 +8163,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the replacement operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -6731,13 +8177,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -6749,8 +8201,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6762,6 +8218,8 @@
           <para
             >In a specified input substring, replaces a specified maximum number of strings that match a regular expression pattern with a string returned by a <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -6777,10 +8235,14 @@
 
           
 
+          
+
           The string to search for a match. </param
         >
         <param name="evaluator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6791,10 +8253,14 @@
 
           
 
+          
+
           The maximum number of times the replacement will occur. </param
         >
         <param name="startat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6839,6 +8305,8 @@
 
             
 
+            
+
              object with the specified regular expression pattern and calling the instance method Replace. </para
           >
           <para
@@ -6847,10 +8315,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -6863,13 +8335,19 @@
 
             
 
+            
+
             . If you specify <see
              cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
 
             
 
+            
+
              for the <paramref
              name="options" />
+
+            
 
             
 
@@ -6881,8 +8359,12 @@
 
             
 
+            
+
              parameter specifies the string that is to replace each match in <paramref
              name="input" />
+
+            
 
             
 
@@ -6891,10 +8373,14 @@
 
             
 
+            
+
              can consist of any combination of literal text and <format
              type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">substitutions</a>
             </format>
+
+            
 
             
 
@@ -6909,12 +8395,16 @@
 
               
 
+              
+
               , are allowed in regular expression patterns only and are not recognized in replacement patterns.</para
             >
           </block>
           <para
             >The <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -6927,10 +8417,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -6939,8 +8433,12 @@
 
             
 
+            
+
              exception. <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -6952,8 +8450,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6972,11 +8474,15 @@
 
             
 
+            
+
              is not matched in the current instance, the method returns the current instance unchanged. </para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6987,10 +8493,14 @@
 
           
 
+          
+
           The regular expression pattern to match.</param
         >
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7001,6 +8511,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that provide options for matching.</param
         >
         <param name="matchTimeout">
@@ -7008,8 +8520,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -7054,6 +8570,8 @@
 
             
 
+            
+
              method is useful for replacing a regular expression match if any of the following conditions is true:</para
           >
           <list type="bullet">
@@ -7073,8 +8591,12 @@
 
             
 
+            
+
              method and passing each <see
              cref="T:System.Text.RegularExpressions.Match" />
+
+            
 
             
 
@@ -7083,8 +8605,12 @@
 
             
 
+            
+
              collection to the <paramref
              name="evaluator" />
+
+            
 
             
 
@@ -7096,10 +8622,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -7112,6 +8642,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -7120,8 +8652,12 @@
 
             
 
+            
+
              parameter is the delegate for a custom method that you define and that examines each match. The custom method must have the following signature to match the <see
              cref="T:System.Text.RegularExpressions.MatchEvaluator" />
+
+            
 
             
 
@@ -7135,8 +8671,12 @@
 
             
 
+            
+
              for the <paramref
              name="options" />
+
+            
 
             
 
@@ -7145,6 +8685,8 @@
           <para
             >The <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -7157,10 +8699,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -7169,8 +8715,12 @@
 
             
 
+            
+
              exception. <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -7182,8 +8732,12 @@
 
             
 
+            
+
              unchanged if there is no match, you can use the <see
              cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -7198,6 +8752,8 @@
 
             
 
+            
+
              delegate. Additional parameters specify options that modify the matching operation and a time-out interval if no match is found.</para
           >
         </summary>
@@ -7209,11 +8765,15 @@
 
             
 
+            
+
              is not matched in the current instance, the method returns the current instance unchanged. </para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7224,10 +8784,14 @@
 
           
 
+          
+
           The regular expression pattern to match.</param
         >
         <param name="evaluator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7238,6 +8802,8 @@
 
           
 
+          
+
           A bitwise combination of enumeration values that provide options for matching.</param
         >
         <param name="matchTimeout">
@@ -7245,8 +8811,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -7275,13 +8845,19 @@
 
             
 
+            
+
              is true if the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              instance was created with the <see
              cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
+
+            
 
             
 
@@ -7322,8 +8898,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -7359,13 +8939,19 @@
 
             
 
+            
+
              methods are similar to the <see
              cref="M:System.String.Split(System.Char[])" />
 
             
 
+            
+
              method, except that <see
              cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+            
 
             
 
@@ -7379,12 +8965,16 @@
 
             
 
+            
+
             .</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#21</para>
           <para
             >If capturing parentheses are used in a <see
              cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+            
 
             
 
@@ -7399,6 +8989,8 @@
 
             
 
+            
+
              will split the string into an array of single-character strings because the empty string delimiter can be found at every location. For example:</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#11</para>
@@ -7409,8 +9001,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the split operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -7419,13 +9015,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -7440,6 +9042,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </summary>
@@ -7449,6 +9053,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7484,8 +9090,12 @@
 
             
 
+            
+
              methods are similar to the <see
              cref="M:System.String.Split(System.Char[])" />
+
+            
 
             
 
@@ -7494,8 +9104,12 @@
 
             
 
+            
+
              splits the string at a delimiter determined by a regular expression instead of a set of characters. The <paramref
              name="count" />
+
+            
 
             
 
@@ -7504,8 +9118,12 @@
 
             
 
+            
+
              string can be split; the last string contains the unsplit remainder of the string. A <paramref
              name="count" />
+
+            
 
             
 
@@ -7517,8 +9135,12 @@
 
             
 
+            
+
             , and the number of matches found is at least two less than <paramref
              name="count" />
+
+            
 
             
 
@@ -7527,8 +9149,12 @@
 
             
 
+            
+
             . In the following example, the regular expression /d+ is used to split an input string that includes one or more decimal digits into a maximum of three substrings. Because the beginning of the input string matches the regular expression pattern, the first array element contains <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -7541,6 +9167,8 @@
 
             
 
+            
+
             . For example, splitting the string "apple-apricot-plum-pear-banana" into a maximum of four substrings results in a seven-element array, as the following code shows. </para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#4</para>
@@ -7550,8 +9178,12 @@
 
             
 
+            
+
             . For example, in the following code, a regular expression uses two sets of capturing parentheses to extract the elements of a date from a date string. The first set of capturing parentheses captures the hyphen, and the second set captures the forward slash. The call to the <see
              cref="M:System.Text.RegularExpressions.Regex.Split(System.String,System.Int32)" />
+
+            
 
             
 
@@ -7564,6 +9196,8 @@
 
             
 
+            
+
              will split the string into an array of single-character strings because the empty string delimiter can be found at every location. The following example splits the string "characters" into as many elements as there are in the input string. Because the null string matches the beginning of the input string, a null string is inserted at the beginning of the returned array. This causes the tenth element to consist of the two characters at the end of the input string.</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#12</para>
@@ -7573,8 +9207,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the split operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -7583,13 +9221,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -7601,6 +9245,8 @@
           <para
             >Splits an input string a specified maximum number of times into an array of substrings, at the positions defined by a regular expression specified in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -7616,10 +9262,14 @@
 
           
 
+          
+
           The string to be split. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7658,8 +9308,12 @@
 
             
 
+            
+
              methods are similar to the <see
              cref="M:System.String.Split(System.Char[])" />
+
+            
 
             
 
@@ -7668,8 +9322,12 @@
 
             
 
+            
+
              splits the string at a delimiter determined by a regular expression instead of a set of characters. The <paramref
              name="input" />
+
+            
 
             
 
@@ -7678,13 +9336,19 @@
 
             
 
+            
+
              is not found in the <paramref
              name="input" />
 
             
 
+            
+
              string, the return value contains one element whose value is the original <paramref
              name="input" />
+
+            
 
             
 
@@ -7696,10 +9360,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -7712,6 +9380,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -7721,8 +9391,12 @@
 
               
 
+              
+
                methods are automatically cached. To manage the lifetime of compiled regular expressions yourself, use the instance <see
                cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+              
 
               
 
@@ -7737,12 +9411,16 @@
 
             
 
+            
+
             .</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#22</para>
           <para
             >If capturing parentheses are used in a <see
              cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+            
 
             
 
@@ -7757,6 +9435,8 @@
 
             
 
+            
+
              will split the string into an array of single-character strings because the empty string delimiter can be found at every location. For example:</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#13</para>
@@ -7767,8 +9447,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the split operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -7788,10 +9472,14 @@
 
           
 
+          
+
           The string to split. </param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7831,8 +9519,12 @@
 
             
 
+            
+
              methods are similar to the <see
              cref="M:System.String.Split(System.Char[])" />
+
+            
 
             
 
@@ -7841,8 +9533,12 @@
 
             
 
+            
+
               splits the string at a delimiter determined by a regular expression instead of a set of characters. The <paramref
              name="count" />
+
+            
 
             
 
@@ -7851,13 +9547,19 @@
 
             
 
+            
+
              string is split; the last string contains the unsplit remainder of the string. A <paramref
              name="count" />
 
             
 
+            
+
              value of zero provides the default behavior of splitting as many times as possible. The <paramref
              name="startat" />
+
+            
 
             
 
@@ -7869,8 +9571,12 @@
 
             
 
+            
+
             +1 position in the string, the method returns a one-element array that contains the <paramref
              name="input" />
+
+            
 
             
 
@@ -7882,13 +9588,19 @@
 
             
 
+            
+
             , an empty string is inserted into the array. Similarly, if a match is found at <paramref
              name="startat" />
 
             
 
+            
+
             , which is the first character in the string, the first element of the returned array is an empty string. That is, empty strings that result from adjacent matches are counted in determining whether the number of matched substrings equals <paramref
              name="count" />
+
+            
 
             
 
@@ -7898,6 +9610,8 @@
           <para
             >If capturing parentheses are used in a regular expression, any captured text is included in the array of split strings. However, any array elements that contain captured text are not counted in determining whether the number of matches has reached <paramref
              name="count" />
+
+            
 
             
 
@@ -7912,6 +9626,8 @@
 
             
 
+            
+
              will split the string into an array of single-character strings because the empty string delimiter can be found at every location. The following example splits the string "characters" into as many elements as the input string contains, starting with the character "a". Because the null string matches the end of the input string, a null string is inserted at the end of the returned array.</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#14</para>
@@ -7921,8 +9637,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the split operation exceeds the time-out interval specified by the <see
              cref="M:System.Text.RegularExpressions.Regex.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)" />
+
+            
 
             
 
@@ -7931,13 +9651,19 @@
 
             
 
+            
+
              object is created. If no time-out is defined in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
 
             
 
+            
+
              constructor call or in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -7949,6 +9675,8 @@
           <para
             >Splits an input string a specified maximum number of times into an array of substrings, at the positions defined by a regular expression specified in the <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -7964,6 +9692,8 @@
 
           
 
+          
+
           The string to be split. </param
         >
         <param name="count">
@@ -7971,10 +9701,14 @@
 
           
 
+          
+
           The maximum number of times the split can occur. </param
         >
         <param name="startat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8014,8 +9748,12 @@
 
             
 
+            
+
              methods are similar to the <see
              cref="M:System.String.Split(System.Char[])" />
+
+            
 
             
 
@@ -8024,8 +9762,12 @@
 
             
 
+            
+
              splits the string at a delimiter determined by a regular expression instead of a set of characters. The string is split as many times as possible. If no delimiter is found, the return value contains one element whose value is the original <paramref
              name="input" />
+
+            
 
             
 
@@ -8037,10 +9779,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -8053,6 +9799,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -8062,8 +9810,12 @@
 
               
 
+              
+
                methods are automatically cached. To manage the lifetime of compiled regular expressions yourself, use the instance <see
                cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+              
 
               
 
@@ -8077,12 +9829,16 @@
 
             
 
+            
+
             .</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#24</para>
           <para
             >If capturing parentheses are used in a <see
              cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+            
 
             
 
@@ -8097,6 +9853,8 @@
 
             
 
+            
+
              will split the string into an array of single-character strings because the empty string delimiter can be found at every location.</para
           >
           <para
@@ -8105,8 +9863,12 @@
 
             
 
+            
+
              exception is thrown if the execution time of the split operation exceeds the time-out interval specified for the application domain in which the method is called. If no time-out is defined in the application domain's properties, or if the time-out value is <see
              cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+            
 
             
 
@@ -8126,6 +9888,8 @@
 
           
 
+          
+
           The string to split. </param
         >
         <param name="pattern">
@@ -8133,10 +9897,14 @@
 
           
 
+          
+
           The regular expression pattern to match. </param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8180,8 +9948,12 @@
 
             
 
+            
+
              methods are similar to the <see
              cref="M:System.String.Split(System.Char[])" />
+
+            
 
             
 
@@ -8190,8 +9962,12 @@
 
             
 
+            
+
              splits the string at a delimiter determined by a regular expression instead of a set of characters. The string is split as many times as possible. If no delimiter is found, the return value contains one element whose value is the original <paramref
              name="input" />
+
+            
 
             
 
@@ -8203,10 +9979,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -8219,6 +9999,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -8228,8 +10010,12 @@
 
               
 
+              
+
                methods are automatically cached. To manage the lifetime of compiled regular expressions yourself, use the instance <see
                cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+              
 
               
 
@@ -8243,12 +10029,16 @@
 
             
 
+            
+
             .</para
           >
           <para>code reference: System.Text.RegularExpressions.Regex.Split#23</para>
           <para
             >If capturing parentheses are used in a <see
              cref="M:System.Text.RegularExpressions.Regex.Split(System.String)" />
+
+            
 
             
 
@@ -8263,11 +10053,15 @@
 
             
 
+            
+
              will split the string into an array of single-character strings because the empty string delimiter can be found at every location.</para
           >
           <para
             >The <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -8280,10 +10074,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="34df1152-0b22-4a1c-a76c-3c28c47b70d8">Backtracking</a>
             </format>
+
+            
 
             
 
@@ -8292,8 +10090,12 @@
 
             
 
+            
+
              exception. <paramref
              name="matchTimeout" />
+
+            
 
             
 
@@ -8313,10 +10115,14 @@
 
           
 
+          
+
           The string to split.</param
         >
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8327,6 +10133,8 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that provide options for matching.</param
         >
         <param name="matchTimeout">
@@ -8334,8 +10142,12 @@
 
           
 
+          
+
           A time-out interval, or <see
            cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout" />
+
+          
 
           
 
@@ -8376,8 +10188,12 @@
 
             
 
+            
+
              object with the data necessary to deserialize the current <see
              cref="T:System.Text.RegularExpressions.Regex" />
+
+            
 
             
 
@@ -8386,6 +10202,8 @@
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8418,10 +10236,14 @@
 
             
 
+            
+
              parameter consists of regular expression language elements that symbolically describe the string to match. For more information about regular expressions, see <format
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -8431,6 +10253,8 @@
                 >Regular Expression Language Elements</a
               >
             </format>
+
+            
 
             
 
@@ -8446,6 +10270,8 @@
           <para
             >The <paramref
              name="pattern" />
+
+            
 
             
 
@@ -8481,6 +10307,8 @@
 
             
 
+            
+
              method performs one of the following two transformations: </para
           >
           <list type="bullet">
@@ -8491,8 +10319,12 @@
 
                 
 
+                
+
                  method by removing the escape character ("\") from each character escaped by the method. These include the \, *, +, ?, |, {, [, (,), ^, $,., #, and white space characters. In addition, the <see
                  cref="M:System.Text.RegularExpressions.Regex.Unescape(System.String)" />
+
+                
 
                 
 
@@ -8503,6 +10335,8 @@
           <block subset="none" type="note">
             <para>
               <see cref="M:System.Text.RegularExpressions.Regex.Unescape(System.String)" />
+
+              
 
               
 
@@ -8520,8 +10354,12 @@
 
             
 
+            
+
              method encounters other escape sequences that it cannot convert, such as \w or \s, it throws an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -8538,6 +10376,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8571,8 +10411,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -8587,8 +10431,12 @@
 
             
 
+            
+
              property contains the <see
              cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" />
+
+            
 
             
 
@@ -8623,8 +10471,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="Overload:System.Text.RegularExpressions.Regex.CompileToAssembly" />
+
+            
 
             
 
@@ -8639,8 +10491,12 @@
 
             
 
+            
+
              property contains the <see
              cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
+
+            
 
             
 

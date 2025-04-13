@@ -18,8 +18,12 @@
 
         
 
+        
+
          values correspond to the states of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -63,8 +67,12 @@
 
         
 
+        
+
          values are also used as an argument in the <see
          cref="Overload:System.Windows.Forms.TabRenderer.DrawTabItem" />
+
+        
 
         
 

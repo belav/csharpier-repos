@@ -27,13 +27,19 @@
 
         
 
+        
+
          and <see
          cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" />
 
         
 
+        
+
          return the socket to a disconnected, reusable state after the file has been transmitted. These flags should not be used on a socket where quality of service (QOS) has been requested, because the service provider might immediately delete any quality of service associated with the socket before the file transfer has completed. The best approach for a QOS-enabled socket is to call <see
          cref="M:System.Net.Sockets.Socket.Close" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
       <para
         >The <see
          cref="T:System.Net.Sockets.TransmitFileOptions" />
+
+        
 
         
 
@@ -76,6 +84,8 @@
 
             
 
+            
+
             , these flags return the socket to a disconnected, reusable state after the file has been transmitted.</para
           >
         </summary>
@@ -104,8 +114,12 @@
 
             
 
+            
+
              is also specified. When used with <see
              cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" />
+
+            
 
             
 
@@ -200,8 +214,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" />
+
+            
 
             
 

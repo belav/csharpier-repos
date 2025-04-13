@@ -31,8 +31,12 @@
 
         
 
+        
+
          factory methods to create a <see
          cref="T:System.Linq.Expressions.MemberInitExpression" />
+
+        
 
         
 
@@ -44,13 +48,19 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Linq.Expressions.MemberInitExpression" />
 
         
 
+        
+
          is <see
          cref="F:System.Linq.Expressions.ExpressionType.MemberInit" />
+
+        
 
         
 
@@ -187,6 +197,8 @@
 
             
 
+            
+
              when overriding this method.</para
           >
         </summary>
@@ -223,6 +235,8 @@
 
             
 
+            
+
              to a simpler expression. </para
           >
         </summary>
@@ -250,6 +264,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -296,8 +312,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" />
+
+          
 
           
 
@@ -308,8 +328,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.MemberInitExpression.Bindings" />
+
+          
 
           
 

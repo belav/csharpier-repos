@@ -45,6 +45,8 @@
 
             
 
+            
+
              object that child controls and templates belong to. These child controls are in turn defined within an inline template.</para
           >
         </summary>
@@ -53,8 +55,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

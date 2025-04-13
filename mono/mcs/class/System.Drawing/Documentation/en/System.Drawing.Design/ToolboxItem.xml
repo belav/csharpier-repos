@@ -29,8 +29,12 @@
 
         
 
+        
+
          is a base class for toolbox items that can be displayed in the toolbox of a design-time environment. A toolbox item typically represents a component to create when invoked on a design mode document. The <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          class can be configured with a name, bitmap, and type to create, without creating a class that derives from <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          class also provides a base class for custom toolbox item implementations. A custom <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          and override the <see
          cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+        
 
         
 
@@ -72,8 +88,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Drawing.Design.ToolboxItem.Deserialize(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+        
 
         
 
@@ -82,6 +102,8 @@
       <para
         >The following properties and methods must be configured for a <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -95,6 +117,8 @@
 
             
 
+            
+
              property specifies the label for the toolbox item when displayed in a toolbox.</para
           >
         </item>
@@ -105,13 +129,19 @@
 
             
 
+            
+
              property specifies the fully qualified name of the type of the component that the item creates. If a derived class creates multiple components, the <see
              cref="P:System.Drawing.Design.ToolboxItem.TypeName" />
 
             
 
+            
+
              property may or may not be used, contingent on whether a <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -125,6 +155,8 @@
 
             
 
+            
+
              property specifies the assembly that contains the type of a component that the item creates.</para
           >
         </item>
@@ -132,6 +164,8 @@
           <para
             >The <see
              cref="P:System.Drawing.Design.ToolboxItem.Bitmap" />
+
+            
 
             
 
@@ -145,8 +179,12 @@
 
             
 
+            
+
              property optionally contains any <see
              cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+
+            
 
             
 
@@ -160,6 +198,8 @@
 
             
 
+            
+
              method returns the component instance or instances to insert where this tool is used.</para
           >
         </item>
@@ -170,8 +210,12 @@
 
             
 
+            
+
              method saves the toolbox item to a specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -185,8 +229,12 @@
 
             
 
+            
+
              method configures the toolbox item from the state information contained in the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -200,8 +248,12 @@
 
             
 
+            
+
              method configures the toolbox item to create the specified type of component, if the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -215,6 +267,8 @@
 
             
 
+            
+
              property indicates whether the properties of the toolbox item can be changed. A toolbox item is typically locked after it is added to a toolbox.</para
           >
         </item>
@@ -222,6 +276,8 @@
           <para
             >The <see
              cref="M:System.Drawing.Design.ToolboxItem.Lock" />
+
+            
 
             
 
@@ -235,8 +291,12 @@
 
             
 
+            
+
              method throws an exception if the <see
              cref="P:System.Drawing.Design.ToolboxItem.Locked" />
+
+            
 
             
 
@@ -266,6 +326,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -292,6 +354,8 @@
 
             
 
+            
+
              class that creates the specified type of component.</para
           >
         </summary>
@@ -300,8 +364,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -330,6 +398,8 @@
           <para
             >The <see
              cref="P:System.Drawing.Design.ToolboxItem.AssemblyName" />
+
+            
 
             
 
@@ -382,8 +452,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -392,8 +466,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -430,6 +508,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -453,6 +533,8 @@
 
             
 
+            
+
              event is raised each time components of this toolbox item are created. </para
           >
           <para
@@ -460,6 +542,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -494,6 +578,8 @@
 
             
 
+            
+
              event is raised each time components of the toolbox item are about to be created. </para
           >
           <para
@@ -501,6 +587,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -537,6 +625,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -561,13 +651,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
 
             
 
+            
+
              method to retrieve an array of type <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -583,6 +679,8 @@
           <para
             >An array of created <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -616,13 +714,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
 
             
 
+            
+
              method to retrieve an array of type <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -641,6 +745,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -649,8 +755,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -687,13 +797,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost,System.Collections.IDictionary)" />
 
             
 
+            
+
              method to retrieve an array of type <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -712,6 +828,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -720,8 +838,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -729,6 +851,8 @@
         >
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -757,8 +881,12 @@
 
             
 
+            
+
              is not null, the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -777,6 +905,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -785,8 +915,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -823,8 +957,12 @@
 
             
 
+            
+
              is not null, the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -843,6 +981,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -851,10 +991,14 @@
 
           
 
+          
+
           The designer host to use when creating components.</param
         >
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -888,6 +1032,8 @@
 
             
 
+            
+
              for the toolbox item.</para
           >
         </summary>
@@ -910,6 +1056,8 @@
           <para
             >Gets or sets the description for this <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -942,8 +1090,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -954,8 +1106,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -984,6 +1140,8 @@
 
             
 
+            
+
              property indicates the string that is displayed for the toolbox item in the toolbox.</para
           >
           <para
@@ -992,13 +1150,19 @@
 
             
 
+            
+
              class sets its <see
              cref="P:System.Drawing.Design.ToolboxItem.DisplayName" />
 
             
 
+            
+
              property to a short form of the fully qualified type name specified by the <see
              cref="P:System.Drawing.Design.ToolboxItem.TypeName" />
+
+            
 
             
 
@@ -1034,6 +1198,8 @@
 
             
 
+            
+
              instances are equal.</para
           >
         </summary>
@@ -1045,8 +1211,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -1058,13 +1228,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1096,8 +1272,12 @@
 
             
 
+            
+
              property collection contains <see
              cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+
+            
 
             
 
@@ -1109,8 +1289,12 @@
 
             
 
+            
+
              can be used, see the documentation for the <see
              cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+
+            
 
             
 
@@ -1152,6 +1336,8 @@
 
             
 
+            
+
              method enables a property to always clone values, or to provide a default value when none exists.</para
           >
         </remarks>
@@ -1168,10 +1354,14 @@
 
           
 
+          
+
           The name of the property to filter.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1197,6 +1387,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -1233,6 +1425,8 @@
 
             
 
+            
+
              interface. However, the loaded type is not added to the list of references in the designer host.</para
           >
         </remarks>
@@ -1249,8 +1443,12 @@
 
           
 
+          
+
           The designer host to query for <see
            cref="T:System.ComponentModel.Design.ITypeResolutionService" />
+
+          
 
           
 
@@ -1288,8 +1486,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -1300,8 +1502,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -1312,10 +1518,14 @@
 
           
 
+          
+
           The name of the type to create an instance of. </param
         >
         <param name="reference">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1345,8 +1555,12 @@
 
             
 
+            
+
              method configures the toolbox item to create the specified type, if the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -1361,8 +1575,12 @@
 
                 
 
+                
+
                  property to an <see
                  cref="T:System.Reflection.AssemblyName" />
+
+                
 
                 
 
@@ -1376,6 +1594,8 @@
 
                 
 
+                
+
                  property to a short type name based on the name of the specified type.</para
               >
             </item>
@@ -1386,8 +1606,12 @@
 
                 
 
+                
+
                  attributes found on the specified type to the <see
                  cref="P:System.Drawing.Design.ToolboxItem.Filter" />
+
+                
 
                 
 
@@ -1405,8 +1629,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1434,6 +1662,8 @@
           <para
             >The <see
              cref="P:System.Drawing.Design.ToolboxItem.IsTransient" />
+
+            
 
             
 
@@ -1484,6 +1714,8 @@
 
             
 
+            
+
              is locked, you cannot adjust its properties.</para
           >
         </remarks>
@@ -1492,6 +1724,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -1525,13 +1759,19 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreated" />
 
             
 
+            
+
              event. This method is called after a toolbox item is invoked to create components and the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -1545,11 +1785,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Drawing.Design.ToolboxItem.OnComponentsCreated(System.Drawing.Design.ToolboxComponentsCreatedEventArgs)" />
+
+            
 
             
 
@@ -1564,6 +1808,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1572,8 +1818,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxComponentsCreatedEventArgs" />
+
+          
 
           
 
@@ -1606,13 +1856,19 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" />
 
             
 
+            
+
              event. This method is called after a toolbox item is invoked to create components, just before the <see
              cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -1626,11 +1882,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Drawing.Design.ToolboxItem.OnComponentsCreating(System.Drawing.Design.ToolboxComponentsCreatingEventArgs)" />
+
+            
 
             
 
@@ -1645,6 +1905,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1653,8 +1915,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" />
+
+          
 
           
 
@@ -1688,6 +1954,8 @@
 
             
 
+            
+
              property dictionary becomes read-only after the toolbox item has been locked.</para
           >
           <para
@@ -1696,8 +1964,12 @@
 
             
 
+            
+
              method, and default values are obtained from the <see
              cref="Overload:System.ComponentModel.TypeDescriptor.GetDefaultProperty" />
+
+            
 
             
 
@@ -1734,8 +2006,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1746,8 +2022,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1785,8 +2065,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -1801,6 +2085,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1809,8 +2095,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1821,8 +2111,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1847,8 +2141,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -1863,8 +2161,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -1894,6 +2196,8 @@
 
             
 
+            
+
              property specifies the fully qualified type name of the type of component to create.</para
           >
         </remarks>
@@ -1902,6 +2206,8 @@
           <para
             >Gets or sets the fully qualified name of the type of <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -1941,8 +2247,12 @@
 
             
 
+            
+
              method is called as a helper method to the <see
              cref="M:System.Drawing.Design.ToolboxItem.ValidatePropertyValue(System.String,System.Object)" />
+
+            
 
             
 
@@ -1958,10 +2268,14 @@
 
           
 
+          
+
           The name of the property to validate.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1972,10 +2286,14 @@
 
           
 
+          
+
           The expected type of the property.</param
         >
         <param name="allowNull">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2008,6 +2326,8 @@
 
             
 
+            
+
              method is called whenever a value is set in the property dictionary. With this method, you can change the value of an object before committing it, or reject it by throwing an exception.</para
           >
         </remarks>
@@ -2024,10 +2344,14 @@
 
           
 
+          
+
           The name of the property to validate.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2052,6 +2376,8 @@
           <para
             >Gets the version for this <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 

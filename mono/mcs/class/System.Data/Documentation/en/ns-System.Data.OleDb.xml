@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace is the.NET Framework Data Provider for OLE DB.</para
       >
     </summary>
@@ -20,8 +22,12 @@
 
         
 
+        
+
         , you can fill a memory-resident <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -33,8 +39,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Data.OleDb.OleDbDataReader" />
+
+        
 
         
 
@@ -43,8 +53,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 

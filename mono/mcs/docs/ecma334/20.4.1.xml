@@ -48,6 +48,8 @@ class MyFile: IDisposable {
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -77,6 +79,8 @@ class Shape: ICloneable
 
       
 
+      
+
       the declaration of IComparable.CompareTo results in a compile-time error because IComparable is not listed in the base class list of Shape and is not a base interface of ICloneable. Likewise, in the declarations <code_example
       >
         <![CDATA[
@@ -90,6 +94,8 @@ class Ellipse: Shape
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -117,6 +123,8 @@ class TextBox: ITextBox
 }  
 ]]>
       </code_example>
+
+      
 
       
 

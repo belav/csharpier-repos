@@ -25,6 +25,8 @@ namespace CSharp.Introduction
 
     
 
+    
+
     shows the HelloMessage class in a namespace named CSharp.Introduction. The HelloMessage class provides a read-only property named Message. Namespaces can nest, and the declaration <code_example
     >
       <![CDATA[
@@ -32,6 +34,8 @@ namespace CSharp.Introduction
 {...}  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -64,6 +68,8 @@ class HelloApp
 
     
 
+    
+
     shows a using namespace directive that refers to the CSharp.Introduction namespace. The occurrences of HelloMessage are shorthand for CSharp.Introduction.HelloMessage. </paragraph
   >
   <paragraph
@@ -73,6 +79,8 @@ class HelloApp
 using MessageSource = CSharp.Introduction.HelloMessage;  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -86,6 +94,8 @@ csc /target:library HelloLibrary.cs
 csc /reference:HelloLibrary.dll HelloApp.cs  
 ]]>
     </code_example>
+
+    
 
     
 

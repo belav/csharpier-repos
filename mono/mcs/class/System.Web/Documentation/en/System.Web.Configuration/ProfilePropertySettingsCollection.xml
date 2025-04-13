@@ -30,8 +30,12 @@
 
         
 
+        
+
         . The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see
          cref="P:System.Web.HttpContext.Profile" />
+
+        
 
         
 
@@ -44,10 +48,14 @@
 
         
 
+        
+
         . For more information about the profile features added to vstecasplong, see <format
          type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
         </format>
+
+        
 
         
 
@@ -59,6 +67,8 @@
       <para
         >Contains a set of <see
          cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -115,6 +127,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -126,6 +140,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -134,8 +150,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+          
 
           
 
@@ -161,6 +181,8 @@
           <para
             >Returns an array containing the names of all the <see
              cref="T:System.Web.Configuration.ProfileSection" />
+
+            
 
             
 
@@ -190,6 +212,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -216,6 +240,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+            
 
             
 
@@ -289,6 +315,8 @@
 
             
 
+            
+
              object at the specified index.</para
           >
         </summary>
@@ -300,6 +328,8 @@
 
             
 
+            
+
              object at the specified index, or null if there is no object at that index.</para
           >
         </returns>
@@ -308,8 +338,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.ProfileSection" />
+
+          
 
           
 
@@ -343,6 +377,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </summary>
@@ -354,6 +390,8 @@
 
             
 
+            
+
              object with the specified name, or null if the name does not exist.</para
           >
         </returns>
@@ -362,8 +400,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileSection" />
+
+          
 
           
 
@@ -402,8 +444,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -437,6 +483,8 @@
 
             
 
+            
+
              at the specified index location.</para
           >
         </summary>
@@ -448,6 +496,8 @@
 
             
 
+            
+
              at the specified index location.</para
           >
         </returns>
@@ -456,8 +506,12 @@
 
           
 
+          
+
           The index of a <see
            cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+          
 
           
 
@@ -494,6 +548,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -505,6 +561,8 @@
 
             
 
+            
+
              object, or -1 if the object is not found in the collection.</para
           >
         </returns>
@@ -513,8 +571,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+          
 
           
 
@@ -595,8 +657,12 @@
 
             
 
+            
+
              throws specialized errors if the element name is either "clear" or "group".  After checking for these conditions, the method then explicitly calls its base implementation, the <see
              cref="M:System.Configuration.ConfigurationElementCollection.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -616,10 +682,14 @@
 
           
 
+          
+
           The name of the unrecognized element.</param
         >
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -671,6 +741,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -679,8 +751,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+          
 
           
 
@@ -714,6 +790,8 @@
 
             
 
+            
+
              object at the specified index location from the collection.</para
           >
         </summary>
@@ -722,8 +800,12 @@
 
           
 
+          
+
           The index of a <see
            cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+          
 
           
 
@@ -759,6 +841,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -770,6 +854,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -778,8 +864,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+          
 
           
 

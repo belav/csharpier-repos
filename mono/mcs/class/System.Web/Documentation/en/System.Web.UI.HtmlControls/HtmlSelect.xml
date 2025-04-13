@@ -43,8 +43,12 @@
 
         
 
+        
+
          control to create a selection box. Specify item listings in the control by placing HTML &lt;option&gt; elements between the opening and closing &lt;select&gt; tags. Each item is represented by a <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -53,13 +57,19 @@
 
         
 
+        
+
          property of the item, or simply place text between the opening and closing &lt;option&gt; tags. By setting the <see
          cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
         
 
+        
+
          property of the item, you can associate a value with the item that is different from the text. To select an item from the list by default, set the <see
          cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+        
 
         
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
          control by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          properties. The <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+
+        
 
         
 
@@ -91,8 +109,12 @@
 
         
 
+        
+
          property specifies whether more than one item can be concurrently selected in the <see
          cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+        
 
         
 
@@ -104,13 +126,19 @@
 
         
 
+        
+
          control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
         
 
+        
+
          property to true) or specify a height greater than one row (by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+
+        
 
         
 
@@ -122,13 +150,19 @@
 
         
 
+        
+
          control, use the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
 
         
 
+        
+
          property to get the index of the selected item. You can then use this value to retrieve the item from the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+        
 
         
 
@@ -140,13 +174,19 @@
 
         
 
+        
+
          control that allows multiple selections, iterate through the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
         
 
+        
+
          collection and test the <see
          cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+        
 
         
 
@@ -158,8 +198,12 @@
 
         
 
+        
+
          class provides two properties to support data binding. To bind data to any object that implements the <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -168,8 +212,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -178,8 +226,12 @@
 
         
 
+        
+
         ), or the <see
          cref="T:System.ComponentModel.IListSource" />
+
+        
 
         
 
@@ -188,8 +240,12 @@
 
         
 
+        
+
          property to specify the data source to bind to. When you set the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+
+        
 
         
 
@@ -198,8 +254,12 @@
 
         
 
+        
+
          control to a data source represented by a data source control, use the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+        
 
         
 
@@ -208,8 +268,12 @@
 
         
 
+        
+
          property of the data source control to use. When you set the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+        
 
         
 
@@ -218,8 +282,12 @@
 
         
 
+        
+
          control automatically binds to the specified data source control. Therefore, you do not need to explicitly call the <see
          cref="M:System.Web.UI.Control.DataBind" />
+
+        
 
         
 
@@ -231,8 +299,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+        
 
         
 
@@ -241,8 +313,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+
+        
 
         
 
@@ -251,13 +327,19 @@
 
         
 
+        
+
          property to specify the specific source to bind to the control. For example, if you have a <see
          cref="T:System.Data.DataSet" />
 
         
 
+        
+
          object with multiple tables, you must specify which table to bind to the control with the <see
          cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+
+        
 
         
 
@@ -269,8 +351,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlSelect.#ctor" />
+
+        
 
         
 
@@ -297,11 +383,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -338,6 +428,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -368,8 +460,12 @@
 
             
 
+            
+
              method is used by ASP.NET to add parsed child controls to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -384,11 +480,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,8 +516,12 @@
 
             
 
+            
+
              method iterates through the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -426,8 +530,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -436,8 +544,12 @@
 
             
 
+            
+
              property of each <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -452,8 +564,12 @@
 
             
 
+            
+
              control and sets the <see
              cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+            
 
             
 
@@ -485,6 +601,8 @@
 
             
 
+            
+
              control does not allow child controls.</para
           >
         </remarks>
@@ -496,8 +614,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -509,6 +631,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -538,13 +662,19 @@
 
             
 
+            
+
              property contains multiple sets of data, use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
+            
+
              property to specify which set of data to bind to the control. For example, if you have a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -556,8 +686,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -566,8 +700,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+
+            
 
             
 
@@ -582,8 +720,12 @@
 
             
 
+            
+
              control from a <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+
+            
 
             
 
@@ -621,8 +763,12 @@
 
             
 
+            
+
              property to specify the data source to bind to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -631,8 +777,12 @@
 
             
 
+            
+
              interface (such as <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -641,8 +791,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -651,8 +805,12 @@
 
             
 
+            
+
              interface. When you set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+
+            
 
             
 
@@ -664,8 +822,12 @@
 
             
 
+            
+
              object with multiple tables, use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
+
+            
 
             
 
@@ -677,8 +839,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -687,8 +853,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+
+            
 
             
 
@@ -700,13 +870,19 @@
 
             
 
+            
+
              property to automatically bind to a data source represented by a data source control. When you set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
+            
+
              property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -718,13 +894,19 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
+            
+
              property, ASP.NET is not able to resolve the data source and a <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -736,6 +918,8 @@
           <para
             >Gets or sets the source of information to bind to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -780,8 +964,12 @@
 
             
 
+            
+
              property to set or access the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -790,8 +978,12 @@
 
             
 
+            
+
              control should use to retrieve its data source. The data source control referenced by the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -800,8 +992,12 @@
 
             
 
+            
+
              interface. The data source control must exist either in the same naming container as the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -810,13 +1006,19 @@
 
             
 
+            
+
              control. When you specify a value for this property, the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
+            
+
              control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -828,8 +1030,12 @@
 
             
 
+            
+
              property to specify the source of values to bind to an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -838,8 +1044,12 @@
 
             
 
+            
+
              interface (such as <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -848,8 +1058,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -858,8 +1072,12 @@
 
             
 
+            
+
              interface. When you set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+
+            
 
             
 
@@ -871,13 +1089,19 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
 
             
 
+            
+
              property, ASP.NET is not able to resolve the data source and a <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -892,8 +1116,12 @@
 
             
 
+            
+
              property of the data source control that the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -919,8 +1147,12 @@
 
             
 
+            
+
              property to specify which field from the data source to bind to the <see
              cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+            
 
             
 
@@ -929,8 +1161,12 @@
 
             
 
+            
+
              property that differs from the value of the <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -942,8 +1178,12 @@
 
             
 
+            
+
              class provides two properties for specifying the data source to bind to. The <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+
+            
 
             
 
@@ -952,8 +1192,12 @@
 
             
 
+            
+
              control to any collection that implements the <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -962,8 +1206,12 @@
 
             
 
+            
+
              interfaces (such as <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -972,8 +1220,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -982,13 +1234,19 @@
 
             
 
+            
+
              property to specify the data source, you must explicitly call the <see
              cref="M:System.Web.UI.Control.DataBind" />
 
             
 
+            
+
              method to bind the control and its <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataTextField" />
+
+            
 
             
 
@@ -1000,8 +1258,12 @@
 
             
 
+            
+
              property allows you to bind an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1010,8 +1272,12 @@
 
             
 
+            
+
              property to specify the data source, the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1020,8 +1286,12 @@
 
             
 
+            
+
              property automatically bind to the specified data source control. Therefore, you do not need to explicitly call the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -1036,8 +1306,12 @@
 
             
 
+            
+
              property of each item in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1072,8 +1346,12 @@
 
             
 
+            
+
              property to specify which field from the data source to bind to the <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -1082,8 +1360,12 @@
 
             
 
+            
+
              property that differs from the value of the <see
              cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+            
 
             
 
@@ -1095,8 +1377,12 @@
 
             
 
+            
+
              class provides two properties for specifying the data source to bind to. The <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" />
+
+            
 
             
 
@@ -1105,8 +1391,12 @@
 
             
 
+            
+
              control to any collection that implements the <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1115,8 +1405,12 @@
 
             
 
+            
+
              interfaces (such as <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1125,8 +1419,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -1135,13 +1433,19 @@
 
             
 
+            
+
              property to specify the data source, you must explicitly call the <see
              cref="M:System.Web.UI.Control.DataBind" />
 
             
 
+            
+
              method to bind the control and its <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" />
+
+            
 
             
 
@@ -1153,8 +1457,12 @@
 
             
 
+            
+
              property allows you to bind an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1163,8 +1471,12 @@
 
             
 
+            
+
              property to specify the data source, the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1173,8 +1485,12 @@
 
             
 
+            
+
              property automatically bind to the data source control. Therefore, you do not need to explicitly call the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -1189,8 +1505,12 @@
 
             
 
+            
+
              property of each item in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1227,8 +1547,12 @@
 
             
 
+            
+
              property, ASP.NET automatically binds the data listing control to the specified data source control. When ASP.NET performs data binding for the control, it calls the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.EnsureDataBound" />
+
+            
 
             
 
@@ -1237,8 +1561,12 @@
 
             
 
+            
+
              interface is specified for its <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -1247,8 +1575,12 @@
 
             
 
+            
+
              method then calls the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -1263,8 +1595,12 @@
 
             
 
+            
+
              control requires data binding and that a valid data source control is specified before calling the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -1295,8 +1631,12 @@
 
             
 
+            
+
              method returns an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1305,8 +1645,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -1321,8 +1665,12 @@
 
             
 
+            
+
              object that represents the data source that is bound to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1334,6 +1682,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1363,13 +1713,19 @@
 
               
 
+              
+
                exception is thrown. This property is inherited from the <see
                cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+              
 
               
 
@@ -1408,13 +1764,19 @@
 
               
 
+              
+
                exception is thrown. This property is inherited from the <see
                cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+              
 
               
 
@@ -1451,8 +1813,12 @@
 
             
 
+            
+
              property string is greater than zero, then <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.IsBoundUsingDataSourceID" />
+
+            
 
             
 
@@ -1467,8 +1833,12 @@
 
             
 
+            
+
              property is defined for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1500,8 +1870,12 @@
 
             
 
+            
+
              collection to manage the items listed in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1513,13 +1887,19 @@
 
             
 
+            
+
              collection is commonly used to iterate through the items in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
+            
+
              control. For example, when multiple items are selected, you can iterate through the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -1531,6 +1911,8 @@
           <para
             >Gets a collection that contains the items listed in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1579,8 +1961,12 @@
 
             
 
+            
+
              method checks whether the postback data of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1589,8 +1975,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+
+            
 
             
 
@@ -1599,8 +1989,12 @@
 
             
 
+            
+
              control, then the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -1609,8 +2003,12 @@
 
             
 
+            
+
              property. If the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1619,8 +2017,12 @@
 
             
 
+            
+
              property is true, indicating a multiple-selection <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1629,8 +2031,12 @@
 
             
 
+            
+
              method checks the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+
+            
 
             
 
@@ -1642,8 +2048,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1658,6 +2068,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1669,6 +2081,8 @@
 
             
 
+            
+
              control's state has changed as a result of a postback; otherwise, false.</para
           >
         </returns>
@@ -1677,10 +2091,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1711,6 +2129,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1719,8 +2139,12 @@
 
             
 
+            
+
              control's view state is stored as a <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -1729,8 +2153,12 @@
 
             
 
+            
+
              field of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -1739,13 +2167,19 @@
 
             
 
+            
+
              control's base view state. The <see
              cref="F:System.Web.UI.Triplet.Second" />
 
             
 
+            
+
              field of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -1754,8 +2188,12 @@
 
             
 
+            
+
              collection represented by the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -1764,8 +2202,12 @@
 
             
 
+            
+
              field of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -1774,13 +2216,19 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.LoadViewState(System.Object)" />
 
             
 
+            
+
              method calls the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -1792,8 +2240,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1808,8 +2260,12 @@
 
             
 
+            
+
              control's view state information from a previous page request that was saved by the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
+
+            
 
             
 
@@ -1821,8 +2277,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1851,8 +2311,12 @@
 
             
 
+            
+
              property to specify whether multiple items can be concurrently selected in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1864,13 +2328,19 @@
 
             
 
+            
+
              control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
+            
+
              property to true) or specify a height greater than one row (by setting the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+
+            
 
             
 
@@ -1882,13 +2352,19 @@
 
             
 
+            
+
              control that allows multiple simultaneous selections, iterate through the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
+            
+
              collection and test the <see
              cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+            
 
             
 
@@ -1901,6 +2377,8 @@
 
               
 
+              
+
                control only if this property is set to true.</para
             >
           </block>
@@ -1910,6 +2388,8 @@
           <para
             >Gets or sets a value indicating whether multiple items can be selected concurrently in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -1947,13 +2427,19 @@
 
             
 
+            
+
              property to determine the unique identifier name for an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
+            
+
              control. In this implementation, the get accessor returns the value of the <see
              cref="P:System.Web.UI.Control.UniqueID" />
+
+            
 
             
 
@@ -1966,13 +2452,19 @@
 
               
 
+              
+
                property must have the same value as the <see
                cref="P:System.Web.UI.Control.UniqueID" />
 
               
 
+              
+
                property for the <see
                cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+              
 
               
 
@@ -1985,6 +2477,8 @@
           <para
             >Gets or sets the unique identifier name associated with the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2023,8 +2517,12 @@
 
             
 
+            
+
              event is raised when data is bound to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2033,8 +2531,12 @@
 
             
 
+            
+
              method creates the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -2043,8 +2545,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -2058,11 +2564,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataBinding(System.EventArgs)" />
+
+            
 
             
 
@@ -2077,8 +2587,12 @@
 
             
 
+            
+
              event of an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2090,8 +2604,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2122,8 +2640,12 @@
 
             
 
+            
+
              method sets the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+
+            
 
             
 
@@ -2132,13 +2654,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
+            
+
             , or <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -2153,13 +2681,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
+            
+
             , or <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -2193,8 +2727,12 @@
 
             
 
+            
+
              method sets the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+
+            
 
             
 
@@ -2209,13 +2747,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataMember" />
 
             
 
+            
+
             , or <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -2227,6 +2771,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -2234,8 +2780,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2264,8 +2814,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2274,13 +2828,19 @@
 
             
 
+            
+
              property is false and the <see
              cref="P:System.Web.UI.Page.IsPostBack" />
 
             
 
+            
+
              property is true, then the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
+
+            
 
             
 
@@ -2295,8 +2855,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2308,8 +2872,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2338,8 +2906,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2348,8 +2920,12 @@
 
             
 
+            
+
              method connects the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2358,8 +2934,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -2368,13 +2948,19 @@
 
             
 
+            
+
              property is to specify the data source control that the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
+            
+
              control should use to retrieve its data source, then the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -2389,8 +2975,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2402,8 +2992,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2452,8 +3046,12 @@
 
             
 
+            
+
              property is greater than 1, then the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -2462,8 +3060,12 @@
 
             
 
+            
+
              control with the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2478,8 +3080,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2491,8 +3097,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2522,8 +3132,12 @@
 
             
 
+            
+
              event is raised when the selected items in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2539,12 +3153,16 @@
 
               
 
+              
+
                event to work correctly.</para
             >
           </block>
           <para
             >You can use this event to perform data validation on the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2558,11 +3176,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnServerChange(System.EventArgs)" />
+
+            
 
             
 
@@ -2577,8 +3199,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2590,8 +3216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2622,8 +3252,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2638,8 +3272,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2673,8 +3311,12 @@
 
             
 
+            
+
              method renders the <paramref
              name="name" />
+
+            
 
             
 
@@ -2683,8 +3325,12 @@
 
             
 
+            
+
              control directly to ensure that it has the same value as the <see
              cref="P:System.Web.UI.Control.UniqueID" />
+
+            
 
             
 
@@ -2693,8 +3339,12 @@
 
             
 
+            
+
              method calls the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -2706,8 +3356,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2722,8 +3376,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -2761,8 +3419,12 @@
 
             
 
+            
+
              method overrides the base class's <see
              cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -2771,8 +3433,12 @@
 
             
 
+            
+
              attribute, a <paramref
              name="selected" />
+
+            
 
             
 
@@ -2784,8 +3450,12 @@
 
             
 
+            
+
              property is set to false, then an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -2800,8 +3470,12 @@
 
             
 
+            
+
              control's child controls to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -2833,13 +3507,19 @@
 
             
 
+            
+
              control uses the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
+            
+
              property to determine whether the control needs to call the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -2851,8 +3531,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" />
+
+            
 
             
 
@@ -2861,8 +3545,12 @@
 
             
 
+            
+
              property to change the data source after the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -2871,13 +3559,19 @@
 
             
 
+            
+
              property to true. The value of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.RequiresDataBinding" />
 
             
 
+            
+
              property is also set to true when the <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.OnDataPropertyChanged" />
+
+            
 
             
 
@@ -2889,8 +3583,12 @@
 
             
 
+            
+
              property to false immediately after the <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -2902,6 +3600,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -2926,8 +3626,12 @@
 
             
 
+            
+
              control's view state is stored as a <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -2936,8 +3640,12 @@
 
             
 
+            
+
              field of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -2946,13 +3654,19 @@
 
             
 
+            
+
              control's base view state. The <see
              cref="F:System.Web.UI.Triplet.Second" />
 
             
 
+            
+
              field of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -2961,8 +3675,12 @@
 
             
 
+            
+
              collection represented by the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -2971,8 +3689,12 @@
 
             
 
+            
+
              field of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -2981,13 +3703,19 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Web.UI.HtmlControls.HtmlSelect.SaveViewState" />
 
             
 
+            
+
              method calls the base class's <see
              cref="M:System.Web.UI.Control.SaveViewState" />
+
+            
 
             
 
@@ -2999,8 +3727,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3015,6 +3747,8 @@
 
             
 
+            
+
              control view state changes that have occurred since the page was posted back to the server.</para
           >
         </summary>
@@ -3026,8 +3760,12 @@
 
             
 
+            
+
              that contains the changes to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3061,8 +3799,12 @@
 
             
 
+            
+
              method selects multiple items of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -3077,8 +3819,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -3090,13 +3836,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
 
           
 
+          
+
            of type <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -3125,13 +3877,19 @@
 
             
 
+            
+
              property is commonly used to determine the index of the selected item in a single-selection <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
+            
+
              control. This index can then be used to retrieve the item from the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+            
 
             
 
@@ -3143,8 +3901,12 @@
 
             
 
+            
+
              property is set to true, indicating that multiple items can be concurrently selected, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+
+            
 
             
 
@@ -3153,13 +3915,19 @@
 
             
 
+            
+
              control that allows multiple simultaneous selections, iterate through the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
+            
+
              collection and test the <see
              cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+            
 
             
 
@@ -3172,8 +3940,12 @@
 
               
 
+              
+
                property contains a value of -1. This commonly occurs when the page first loads and an item is not selected by default. Provide code to test this value before referencing the item in the <see
                cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
+
+              
 
               
 
@@ -3186,8 +3958,12 @@
 
             
 
+            
+
              control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
+
+            
 
             
 
@@ -3196,8 +3972,12 @@
 
             
 
+            
+
              property to a value greater than 1), the control is displayed as a list box. If a drop-down list box is displayed, an item is always selected. If a list box is displayed, you can programmatically clear the selection from all items by setting the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+
+            
 
             
 
@@ -3209,6 +3989,8 @@
           <para
             >Gets or sets the ordinal index of the selected item in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3245,13 +4027,19 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
 
             
 
+            
+
              class to return a collection that contains the zero-based indexes of all currently selected items in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3263,8 +4051,12 @@
 
             
 
+            
+
              class can override the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndices" />
+
+            
 
             
 
@@ -3276,6 +4068,8 @@
           <para
             >Gets a collection that contains the zero-based indexes of all currently selected items in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3304,8 +4098,12 @@
 
             
 
+            
+
              event is raised when the selected items in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3315,6 +4113,8 @@
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlSelect.ServerChange" />
+
+              
 
               
 
@@ -3329,6 +4129,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3337,6 +4139,8 @@
           <para
             >Occurs when the selected items in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3366,8 +4170,12 @@
 
             
 
+            
+
              property to specify the height (in rows) of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3379,13 +4187,19 @@
 
             
 
+            
+
              control is displayed as a drop-down list box. If you allow multiple selections (by setting the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Multiple" />
 
             
 
+            
+
              property to true) or specify a height greater than one row (by setting the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Size" />
+
+            
 
             
 
@@ -3397,6 +4211,8 @@
           <para
             >Gets or sets the height (in rows) of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3443,8 +4259,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -3459,6 +4279,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3470,6 +4292,8 @@
 
             
 
+            
+
              control's state has changed as a result of a postback; otherwise, false.</para
           >
         </returns>
@@ -3478,10 +4302,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3512,8 +4340,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -3525,6 +4357,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -3549,13 +4383,19 @@
 
             
 
+            
+
              method persists items in the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.Items" />
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -3570,13 +4410,19 @@
 
             
 
+            
+
              control so the changes can be stored in the control's <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object. This object is accessible through the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -3606,8 +4452,12 @@
 
             
 
+            
+
              property is commonly used to get the value of the item referenced by the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+
+            
 
             
 
@@ -3620,6 +4470,8 @@
 
               
 
+              
+
                is returned.</para
             >
           </block>
@@ -3629,8 +4481,12 @@
 
             
 
+            
+
              property is updated with the index of the first item in the list that contains that value. If no matching value is found, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+
+            
 
             
 
@@ -3645,8 +4501,12 @@
 
             
 
+            
+
              control or sets the <see
              cref="P:System.Web.UI.HtmlControls.HtmlSelect.SelectedIndex" />
+
+            
 
             
 

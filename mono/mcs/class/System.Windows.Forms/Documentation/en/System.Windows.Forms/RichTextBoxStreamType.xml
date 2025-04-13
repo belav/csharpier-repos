@@ -18,13 +18,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
         
 
+        
+
          methods of the <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 
@@ -36,6 +42,8 @@
       <para
         >Specifies the types of input and output streams used to load and save data in the <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 
@@ -76,8 +84,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 
@@ -122,8 +134,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          event occurs when the mouse pointer hovers over a <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.ItemMouseHover" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -71,8 +79,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 

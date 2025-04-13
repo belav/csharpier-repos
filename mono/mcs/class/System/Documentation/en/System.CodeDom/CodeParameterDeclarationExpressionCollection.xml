@@ -42,8 +42,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" />
+
+            
 
             
 
@@ -124,8 +132,12 @@
 
             
 
+            
+
              class containing the specified array of <see
              cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+            
 
             
 
@@ -137,8 +149,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 
@@ -178,6 +194,8 @@
 
             
 
+            
+
              class containing the elements of the specified source collection.</para
           >
         </summary>
@@ -186,8 +204,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" />
+
+          
 
           
 
@@ -226,6 +248,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -238,8 +262,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 
@@ -279,8 +307,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 
@@ -322,6 +354,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -330,8 +364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" />
+
+          
 
           
 
@@ -370,6 +408,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -382,8 +422,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 
@@ -423,6 +467,8 @@
 
             
 
+            
+
              instance beginning at the specified index.</para
           >
         </summary>
@@ -431,8 +477,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -440,6 +490,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,6 +530,8 @@
 
             
 
+            
+
             , if it exists in the collection.</para
           >
         </summary>
@@ -490,8 +544,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 
@@ -531,11 +589,15 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,8 +608,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 
@@ -614,6 +680,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -622,8 +690,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+          
 
           
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
       <para
         >Specifies how properties are sorted in the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -107,6 +113,8 @@
           <para
             >Properties are displayed in the order in which they are retrieved from the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 

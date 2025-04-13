@@ -25,13 +25,19 @@
 
         
 
+        
+
          method of <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
         
 
+        
+
         , all valid referenced documents and a file containing a map of all save documents can be written to disk. The file containing a map of all saved documents contains the details of each document as summarized by the properties of <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          method, you can invoke the <see
          cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ReadAll(System.String)" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+
+            
 
             
 
@@ -103,8 +115,12 @@
 
             
 
+            
+
              class and sets the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
+
+            
 
             
 
@@ -113,8 +129,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Url" />
+
+            
 
             
 
@@ -123,13 +143,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Filename" />
 
             
 
+            
+
              property to <paramref
              name="filename" />
+
+            
 
             
 
@@ -141,8 +167,12 @@
 
           
 
+          
+
           Name of the class representing the type of reference in the discovery document. Sets the <see
            cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
+
+          
 
           
 
@@ -153,8 +183,12 @@
 
           
 
+          
+
           URL for the reference. Sets the <see
            cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Url" />
+
+          
 
           
 
@@ -165,8 +199,12 @@
 
           
 
+          
+
           Name of the file in which the reference was saved. Sets the <see
            cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Filename" />
+
+          
 
           
 
@@ -223,8 +261,12 @@
 
             
 
+            
+
              can have the following values: <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -233,8 +275,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 

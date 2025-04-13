@@ -40,8 +40,12 @@
 
         
 
+        
+
          is thrown by descendants of <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          to indicate an error using the underlying protocol. For example, the <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          classes throw a <see
          cref="T:System.Net.ProtocolViolationException" />
+
+        
 
         
 
@@ -101,8 +113,12 @@
 
             
 
+            
+
              property is initialized to a system-supplied message that describes the error. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -114,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.ProtocolViolationException" />
+
+            
 
             
 
@@ -152,8 +170,12 @@
 
             
 
+            
+
              class with the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -162,8 +184,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="message" />
+
+            
 
             
 
@@ -178,11 +204,15 @@
 
             
 
+            
+
              class with the specified message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,8 +249,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.ProtocolViolationException" />
+
+            
 
             
 
@@ -235,13 +269,19 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -253,13 +293,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that contains the information that is required to deserialize the <see
            cref="T:System.Net.ProtocolViolationException" />
+
+          
 
           
 
@@ -270,13 +316,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.Net.ProtocolViolationException" />
+
+          
 
           
 
@@ -314,6 +366,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -325,6 +379,8 @@
 
             
 
+            
+
              with the data required to serialize the target object.</para
           >
         </summary>
@@ -333,8 +389,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -345,8 +405,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -385,6 +449,8 @@
           <para
             >Serializes this instance into the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 

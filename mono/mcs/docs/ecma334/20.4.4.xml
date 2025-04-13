@@ -24,6 +24,8 @@ class MyControl: Control, IControl
 
       
 
+      
+
       the fact that Control maps IControl.Paint onto Control.IControl.Paint doesn't affect the  re-implementation in MyControl, which maps IControl.Paint onto MyControl.Paint. end example]</example
     >
   </paragraph>

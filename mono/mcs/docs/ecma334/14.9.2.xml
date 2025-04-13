@@ -36,6 +36,8 @@ bool operator >=(double x, double y);
 
         
 
+        
+
         where min and max are the smallest and largest positive finite values that can be represented in the given floating-point format. Notable effects of this ordering are: </list_item
       >
       <list>

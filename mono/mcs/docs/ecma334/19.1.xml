@@ -6,11 +6,15 @@
 
     
 
+    
+
      followed by one or more rank-specifiers: <grammar_production
     >
       <name>
         <non_terminal where="19.1">array-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -27,6 +31,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -38,8 +44,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -59,6 +69,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>[</terminal>
@@ -71,6 +83,8 @@
       <name>
         <non_terminal where="19.1">dim-separators</non_terminal>
       </name>
+
+      
 
       
 
@@ -90,8 +104,12 @@
 
     
 
+    
+
      is any type that is not itself an <non_terminal
      where="19.1">array-type</non_terminal>
+
+    
 
     
 
@@ -103,13 +121,19 @@
 
     
 
+    
+
      in the array-type: A <non_terminal
      where="19.1">rank-specifier</non_terminal>
 
     
 
+    
+
      indicates that the array is an array with a rank of one plus the number of "," tokens in the <non_terminal
      where="19.1">rank-specifier</non_terminal>
+
+    
 
     
 
@@ -128,10 +152,14 @@
 
     
 
+    
+
     s are read from left to right before the final non-array element type. <example
 
       >[Example: The type int[][,,][,] is a single-dimensional array of three-dimensional arrays of two-dimensional arrays of <keyword
       >int</keyword>
+
+      
 
       
 

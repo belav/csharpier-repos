@@ -25,8 +25,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -95,6 +101,8 @@
           <para
             >Gets or sets an object that represents the method that handles the <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+
+            
 
             
 
@@ -132,6 +140,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -163,6 +173,8 @@
           <para
             >Gets or sets an object that represents the method that handles the <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
+
+            
 
             
 

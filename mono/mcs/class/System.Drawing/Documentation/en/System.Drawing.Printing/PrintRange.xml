@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.PrintDialog" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -114,8 +120,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 

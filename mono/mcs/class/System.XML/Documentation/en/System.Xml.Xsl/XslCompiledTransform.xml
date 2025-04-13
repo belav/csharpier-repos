@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is an XSLT processor that supports the XSLT 1.0 syntax. It is a new implementation and includes performance gains when compared to the obsolete <see
          cref="T:System.Xml.Xsl.XslTransform" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          class is very similar to the <see
          cref="T:System.Xml.Xsl.XslTransform" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          method loads and compiles the style sheet, while the <see
          cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+        
 
         
 
@@ -57,8 +69,12 @@
 
         
 
+        
+
          object and passing it to the <see
          cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+
+        
 
         
 
@@ -72,10 +88,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="9404d758-679f-4ffb-995d-3d07d817659e">Migrating From the XslTransform Class</a>
         </format>
+
+        
 
         
 
@@ -87,6 +107,8 @@
       <para
         >When creating an application that uses the <see
          cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+        
 
         
 
@@ -103,8 +125,12 @@
 
             
 
+            
+
              object to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -118,8 +144,12 @@
 
             
 
+            
+
              object containing extension objects is passed to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -136,6 +166,8 @@
 
             
 
+            
+
              method and executes the transformation.</para
           >
         </item>
@@ -143,6 +175,8 @@
       <para
         >These security issues can be mitigated by not enabling scripting or the document() function unless the style sheet comes from a trusted source, and by not accepting <see
          cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+        
 
         
 
@@ -178,6 +212,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -210,6 +246,8 @@
 
                 
 
+                
+
                  parameter is set to true.</para
               >
             </item>
@@ -220,8 +258,12 @@
 
                 
 
+                
+
                  method either as a URI, or an implementation of the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -230,13 +272,19 @@
 
                 
 
+                
+
                  interface. The <see
                  cref="T:System.Xml.IXmlLineInfo" />
 
                 
 
+                
+
                  interface is implemented on all text-parsing <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -248,8 +296,12 @@
 
                 
 
+                
+
                  object, such as an <see
                  cref="T:System.Xml.XmlDocument" />
+
+                
 
                 
 
@@ -258,13 +310,19 @@
 
                 
 
+                
+
                 , or an <see
                  cref="T:System.Xml.XmlReader" />
 
                 
 
+                
+
                  implementation that does not implement the <see
                  cref="T:System.Xml.IXmlLineInfo" />
+
+                
 
                 
 
@@ -278,8 +336,12 @@
 
                 
 
+                
+
                  used to load the style sheet is a file-based <see
                  cref="T:System.Xml.XmlResolver" />
+
+                
 
                 
 
@@ -288,13 +350,19 @@
 
                 
 
+                
+
                  (this is the default <see
                  cref="T:System.Xml.XmlResolver" />
 
                 
 
+                
+
                  used by the <see
                  cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+                
 
                 
 
@@ -314,11 +382,15 @@
 
             
 
+            
+
              class with the specified debug setting. </para
           >
         </summary>
         <param name="enableDebug">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,6 +425,8 @@
 
             
 
+            
+
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para>This method has the following behavior:</para>
@@ -361,6 +435,8 @@
               <para
                 >An <see
                  cref="T:System.Xml.XmlUrlResolver" />
+
+                
 
                 
 
@@ -374,8 +450,12 @@
 
                 
 
+                
+
                  with default settings is used to load the style sheet. DTD processing is disabled on the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -384,8 +464,12 @@
 
                 
 
+                
+
                  with this feature enabled, and pass it to the <see
                  cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+
+                
 
                 
 
@@ -405,8 +489,12 @@
 
             
 
+            
+
              overload to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -419,6 +507,8 @@
         </summary>
         <param name="stylesheetUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,6 +543,8 @@
 
             
 
+            
+
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para
@@ -461,8 +553,12 @@
 
             
 
+            
+
              through all its children. This enables you to use a portion of a document as the style sheet. After the <see
              cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -471,8 +567,12 @@
 
             
 
+            
+
              is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -484,6 +584,8 @@
               <para
                 >An <see
                  cref="T:System.Xml.XmlUrlResolver" />
+
+                
 
                 
 
@@ -503,8 +605,12 @@
 
             
 
+            
+
              overload to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -519,6 +625,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -527,8 +635,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -566,6 +678,8 @@
 
             
 
+            
+
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para>This method has the following behavior:</para>
@@ -574,6 +688,8 @@
               <para
                 >An <see
                  cref="T:System.Xml.XmlUrlResolver" />
+
+                
 
                 
 
@@ -593,8 +709,12 @@
 
             
 
+            
+
              overload to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -609,6 +729,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -617,8 +739,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -627,13 +753,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -673,6 +805,8 @@
 
             
 
+            
+
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para
@@ -681,8 +815,12 @@
 
             
 
+            
+
              with default settings is used to load the style sheet. DTD processing is disabled on the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -691,8 +829,12 @@
 
             
 
+            
+
              with this feature enabled, and pass it to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+
+            
 
             
 
@@ -707,11 +849,15 @@
 
             
 
+            
+
              resolves any XSLT import or include elements and the XSLT settings determine the permissions for the style sheet.</para
           >
         </summary>
         <param name="stylesheetUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -722,13 +868,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Xsl.XsltSettings" />
 
           
 
+          
+
            to apply to the style sheet. If this is null, the <see
            cref="P:System.Xml.Xsl.XsltSettings.Default" />
+
+          
 
           
 
@@ -739,8 +891,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -780,6 +936,8 @@
 
             
 
+            
+
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
           <para
@@ -788,8 +946,12 @@
 
             
 
+            
+
              through all its children. This enables you to use a portion of a document as the style sheet. After the <see
              cref="M:System.Xml.Xsl.XslCompiledTransform.Load(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -798,8 +960,12 @@
 
             
 
+            
+
              is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -814,8 +980,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -827,8 +997,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -839,13 +1013,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Xsl.XsltSettings" />
 
           
 
+          
+
            to apply to the style sheet. If this is null, the <see
            cref="P:System.Xml.Xsl.XsltSettings.Default" />
+
+          
 
           
 
@@ -856,8 +1036,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -897,6 +1081,8 @@
 
             
 
+            
+
              class supports the XSLT 1.0 syntax. The XSLT style sheet must use the http://www.w3.org/1999/XSL/Transform namespace.</para
           >
         </remarks>
@@ -908,8 +1094,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -921,8 +1111,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -931,13 +1125,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -948,13 +1148,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Xsl.XsltSettings" />
 
           
 
+          
+
            to apply to the style sheet. If this is null, the <see
            cref="P:System.Xml.Xsl.XsltSettings.Default" />
+
+          
 
           
 
@@ -965,8 +1171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -1002,8 +1212,12 @@
 
             
 
+            
+
              method. It contains information derived from the xsl:output element of a compiled style sheet. This <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -1012,8 +1226,12 @@
 
             
 
+            
+
              method to create the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1025,6 +1243,8 @@
           <para
             >Gets an <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -1065,8 +1285,12 @@
 
             
 
+            
+
              that contains the temporary files generated on disk after a successful call to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+
+            
 
             
 
@@ -1106,13 +1330,19 @@
 
             
 
+            
+
              with no user credentials to resolve the input and output documents. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1124,8 +1354,12 @@
 
             
 
+            
+
              with default settings is used to load the input document. DTD processing is disabled on the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1134,8 +1368,12 @@
 
             
 
+            
+
              with this feature enabled, and pass it to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -1151,10 +1389,14 @@
 
           
 
+          
+
           The URI of the input document.</param
         >
         <param name="resultsFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1193,13 +1435,19 @@
 
             
 
+            
+
              with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1211,8 +1459,12 @@
 
             
 
+            
+
              with default settings is used to load the input document. DTD processing is disabled on the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1221,8 +1473,12 @@
 
             
 
+            
+
              with this feature enabled, and pass it to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -1234,8 +1490,12 @@
 
             
 
+            
+
              overload which takes an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1250,11 +1510,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="inputUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1265,8 +1529,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1305,13 +1573,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1326,8 +1600,12 @@
 
             
 
+            
+
              object and outputs the results to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1339,8 +1617,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1351,8 +1633,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1391,13 +1677,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1409,8 +1701,12 @@
 
             
 
+            
+
              overload which takes an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1422,13 +1718,19 @@
 
             
 
+            
+
              interface is implemented in the <see
              cref="T:System.Xml.XmlNode" />
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -1442,6 +1744,8 @@
 
                 
 
+                
+
                  class is based on the W3C Document Object Model (DOM) and includes editing capabilities.</para
               >
             </item>
@@ -1452,13 +1756,19 @@
 
                 
 
+                
+
                  class is a read-only data store based on the XPath data model. <see
                  cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
+                
+
                  is the recommended class for XSLT processing. It provides faster performance when compared to the <see
                  cref="T:System.Xml.XmlNode" />
+
+                
 
                 
 
@@ -1472,10 +1782,14 @@
 
             
 
+            
+
              method. For more information, see <format
              type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
+
+            
 
             
 
@@ -1490,8 +1804,12 @@
 
             
 
+            
+
              object and outputs the results to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1503,8 +1821,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -1513,13 +1835,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -1530,8 +1858,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1571,13 +1903,19 @@
 
             
 
+            
+
              with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1589,8 +1927,12 @@
 
             
 
+            
+
              with default settings is used to load the input document. DTD processing is disabled on the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1599,8 +1941,12 @@
 
             
 
+            
+
              with this feature enabled, and pass it to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -1615,11 +1961,15 @@
 
             
 
+            
+
              provides additional run-time arguments.</para
           >
         </summary>
         <param name="inputUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1630,8 +1980,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -1639,6 +1993,8 @@
         >
         <param name="results">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1678,13 +2034,19 @@
 
             
 
+            
+
              with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1696,8 +2058,12 @@
 
             
 
+            
+
              with default settings is used to load the input document. DTD processing is disabled on the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1706,8 +2072,12 @@
 
             
 
+            
+
              with this feature enabled, and pass it to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -1722,11 +2092,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="inputUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1737,8 +2111,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -1749,8 +2127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1790,13 +2172,19 @@
 
             
 
+            
+
              with no user credentials to resolve the input document and any instances of the XSLT document() function found in the style sheet. If any of these resources are located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1808,8 +2196,12 @@
 
             
 
+            
+
              with default settings is used to load the input document. DTD processing is disabled on the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1818,8 +2210,12 @@
 
             
 
+            
+
              with this feature enabled, and pass it to the <see
              cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+            
 
             
 
@@ -1834,8 +2230,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -1847,6 +2247,8 @@
 
           
 
+          
+
           The URI of the input document.</param
         >
         <param name="arguments">
@@ -1854,8 +2256,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -1866,8 +2272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1907,13 +2317,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1928,8 +2344,12 @@
 
             
 
+            
+
              object and outputs the results to a stream. The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -1941,8 +2361,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1953,8 +2377,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -1962,6 +2390,8 @@
         >
         <param name="results">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2001,13 +2431,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2022,13 +2458,19 @@
 
             
 
+            
+
              object and outputs the results to a <see
              cref="T:System.IO.TextWriter" />
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -2040,8 +2482,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2052,8 +2498,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2064,8 +2514,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -2105,13 +2559,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2126,13 +2586,19 @@
 
             
 
+            
+
              object and outputs the results to an <see
              cref="T:System.Xml.XmlWriter" />
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -2144,8 +2610,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2156,8 +2626,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2168,8 +2642,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2209,13 +2687,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2227,8 +2711,12 @@
 
             
 
+            
+
              overload which takes an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2240,13 +2728,19 @@
 
             
 
+            
+
              interface is implemented in the <see
              cref="T:System.Xml.XmlNode" />
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -2260,6 +2754,8 @@
 
                 
 
+                
+
                  class is based on the W3C Document Object Model (DOM) and includes editing capabilities.</para
               >
             </item>
@@ -2270,13 +2766,19 @@
 
                 
 
+                
+
                  class is a read-only data store based on the XPath data model. <see
                  cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
+                
+
                  is the recommended class for XSLT processing. It provides faster performance when compared to the <see
                  cref="T:System.Xml.XmlNode" />
+
+                
 
                 
 
@@ -2290,10 +2792,14 @@
 
             
 
+            
+
              method. For more information, see <format
              type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
+
+            
 
             
 
@@ -2308,8 +2814,12 @@
 
             
 
+            
+
              object and outputs the results to a stream. The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -2321,8 +2831,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -2331,13 +2845,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -2348,8 +2868,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2357,6 +2881,8 @@
         >
         <param name="results">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2396,13 +2922,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2414,8 +2946,12 @@
 
             
 
+            
+
              overload which takes an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2427,13 +2963,19 @@
 
             
 
+            
+
              interface is implemented in the <see
              cref="T:System.Xml.XmlNode" />
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -2447,6 +2989,8 @@
 
                 
 
+                
+
                  class is based on the W3C Document Object Model (DOM) and includes editing capabilities.</para
               >
             </item>
@@ -2457,13 +3001,19 @@
 
                 
 
+                
+
                  class is a read-only data store based on the XPath data model. <see
                  cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
+                
+
                  is the recommended class for XSLT processing. It provides faster performance when compared to the <see
                  cref="T:System.Xml.XmlNode" />
+
+                
 
                 
 
@@ -2477,10 +3027,14 @@
 
             
 
+            
+
              method. For more information, see <format
              type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
+
+            
 
             
 
@@ -2495,13 +3049,19 @@
 
             
 
+            
+
              object and outputs the results to an <see
              cref="T:System.IO.TextWriter" />
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -2513,8 +3073,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -2523,13 +3087,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -2540,8 +3110,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2552,8 +3126,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -2593,13 +3171,19 @@
 
             
 
+            
+
              with no user credentials. If the external resource is located on a network resource that requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2611,8 +3195,12 @@
 
             
 
+            
+
              overload which takes an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2624,13 +3212,19 @@
 
             
 
+            
+
              interface is implemented in the <see
              cref="T:System.Xml.XmlNode" />
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -2644,6 +3238,8 @@
 
                 
 
+                
+
                  class is based on the W3C Document Object Model (DOM) and includes editing capabilities.</para
               >
             </item>
@@ -2654,13 +3250,19 @@
 
                 
 
+                
+
                  class is a read-only data store based on the XPath data model. <see
                  cref="T:System.Xml.XPath.XPathDocument" />
 
                 
 
+                
+
                  is the recommended class for XSLT processing. It provides faster performance when compared to the <see
                  cref="T:System.Xml.XmlNode" />
+
+                
 
                 
 
@@ -2674,10 +3276,14 @@
 
             
 
+            
+
              method. For more information, see <format
              type="text/html">
               <a href="73a6c582-b9d7-4fa7-9a05-6d931e1f3de8">How To: Transform a Node Fragment</a>
             </format>
+
+            
 
             
 
@@ -2692,13 +3298,19 @@
 
             
 
+            
+
              object and outputs the results to an <see
              cref="T:System.Xml.XmlWriter" />
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -2710,8 +3322,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -2720,13 +3336,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -2737,8 +3359,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2749,8 +3375,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2792,13 +3422,19 @@
 
             
 
+            
+
              object and outputs the results to an <see
              cref="T:System.Xml.XmlWriter" />
 
             
 
+            
+
             . The <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -2810,8 +3446,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2822,8 +3462,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2834,8 +3478,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2846,8 +3494,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 

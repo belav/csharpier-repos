@@ -69,6 +69,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -93,11 +95,15 @@
 
           
 
+          
+
           . False if a new transform must be created for a new operation.</value
         >
         <remarks
           >You should never assume that a specific algorithm can be reused without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see
            cref="T:System.Security.Cryptography.CryptoConfig" />
+
+          
 
           
 
@@ -134,8 +140,12 @@
 
           
 
+          
+
            or <see
            cref="M:System.Security.Cryptography.HashAlgorithm.TransformFinalBlock" />
+
+          
 
           
 
@@ -144,6 +154,8 @@
         <remarks
           >You should never assume that a specific algorithm can transform multiple blocks without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see
            cref="T:System.Security.Cryptography.CryptoConfig" />
+
+          
 
           
 
@@ -180,6 +192,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -188,10 +202,14 @@
 
             
 
+            
+
              class to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -203,6 +221,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -236,8 +256,12 @@
 
           
 
+          
+
            property until the <see
            cref="M:System.Security.Cryptography.HashAlgorithm.Initialize" />
+
+          
 
           
 
@@ -253,6 +277,8 @@
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,8 +314,12 @@
 
           
 
+          
+
            property until the <see
            cref="M:System.Security.Cryptography.HashAlgorithm.Initialize" />
+
+          
 
           
 
@@ -303,6 +333,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -312,6 +344,8 @@
         </returns>
         <param name="inputStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +383,12 @@
 
           
 
+          
+
            property until the <see
            cref="M:System.Security.Cryptography.HashAlgorithm.Initialize" />
+
+          
 
           
 
@@ -369,6 +407,8 @@
 
           
 
+          
+
           The input to compute the hash code for. </param
         >
         <param name="offset">
@@ -376,10 +416,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,13 +459,19 @@
 
             
 
+            
+
              implementation of a hash algorithm. If you want to specify a different implementation, use the <see
              cref="M:System.Security.Cryptography.HashAlgorithm.Create(System.String)" />
 
             
 
+            
+
              overload, which lets you specify an algorithm name, instead. The cryptography configuration system defines the default implementation of <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -440,10 +490,14 @@
 
             
 
+            
+
              instance, unless the default settings have been changed using the <format
              type="text/html">
               <a href="03db52ef-010e-44ea-b6fd-b9c900ecad50">&lt;cryptoClass&gt; Element</a>
             </format>
+
+            
 
             
 
@@ -487,6 +541,8 @@
 
             
 
+            
+
              is not a valid hash algorithm.</para
           >
         </returns>
@@ -495,8 +551,12 @@
 
           
 
+          
+
           The hash algorithm implementation to use. The following table shows the valid values for the <paramref
            name="hashName" />
+
+          
 
           
 
@@ -527,8 +587,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -537,8 +601,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -552,10 +620,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -568,8 +640,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+              
 
               
 
@@ -582,6 +658,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -617,8 +695,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -630,8 +712,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -646,11 +732,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -680,8 +770,12 @@
 
             
 
+            
+
              property is a byte array; the <see
              cref="P:System.Security.Cryptography.HashAlgorithm.HashSize" />
+
+            
 
             
 
@@ -690,8 +784,12 @@
 
             
 
+            
+
              is one-eighth the size of <see
              cref="P:System.Security.Cryptography.HashAlgorithm.HashSize" />
+
+            
 
             
 
@@ -742,6 +840,8 @@
 
           
 
+          
+
           The input to compute the hash code for. </param
         >
         <param name="ibStart">
@@ -749,10 +849,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -834,11 +938,15 @@
 
             
 
+            
+
              uses a hash size of 160 bits.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.HashAlgorithm.HashSize" />
+
+            
 
             
 
@@ -870,6 +978,8 @@
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.HashAlgorithm.Hash" />
+
+            
 
             
 
@@ -905,6 +1015,8 @@
           <para
             >Initializes an implementation of the <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -1001,8 +1113,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1014,8 +1130,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -1027,6 +1147,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -1073,8 +1195,12 @@
 
             
 
+            
+
              method before calling the <see
              cref="M:System.Security.Cryptography.HashAlgorithm.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1086,8 +1212,12 @@
 
             
 
+            
+
              method, get the byte array contained within the <see
              cref="P:System.Security.Cryptography.HashAlgorithm.Hash" />
+
+            
 
             
 
@@ -1099,8 +1229,12 @@
 
             
 
+            
+
              method with different input and output arrays results in an <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -1120,10 +1254,14 @@
 
           
 
+          
+
           The input to compute the hash code for. </param
         >
         <param name="inputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1134,6 +1272,8 @@
 
           
 
+          
+
           The number of bytes in the input byte array to use as data. </param
         >
         <param name="outputBuffer">
@@ -1141,10 +1281,14 @@
 
           
 
+          
+
           A copy of the part of the input array used to compute the hash code. </param
         >
         <param name="outputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1184,8 +1328,12 @@
 
             
 
+            
+
              method after calling the <see
              cref="M:System.Security.Cryptography.HashAlgorithm.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -1197,8 +1345,12 @@
 
             
 
+            
+
              method, get the byte array contained in the <see
              cref="P:System.Security.Cryptography.HashAlgorithm.Hash" />
+
+            
 
             
 
@@ -1218,6 +1370,8 @@
 
           
 
+          
+
           The input to compute the hash code for. </param
         >
         <param name="inputOffset">
@@ -1225,10 +1379,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="inputCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

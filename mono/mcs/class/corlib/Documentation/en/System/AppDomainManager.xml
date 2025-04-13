@@ -30,6 +30,8 @@
 
           
 
+          
+
            to configure an application domain in ASP.NET. In ASP.NET, configuration must be handled by the host.</para
         >
       </block>
@@ -39,13 +41,19 @@
 
         
 
+        
+
          class enables a hosting application to participate in the creation of new application domains. To replace the default <see
          cref="T:System.AppDomainManager" />
 
         
 
+        
+
         , identify the assembly and type of the replacement <see
          cref="T:System.AppDomainManager" />
+
+        
 
         
 
@@ -56,10 +64,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="ae8d5a7e-e7f7-47f7-98d9-455cc243a322">&lt;appDomainManagerType&gt;</a>
         </format>
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
           
 
+          
+
            depends on assemblies that are marked with the conditional <see
            cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+
+          
 
           
 
@@ -84,8 +100,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.AppDomainSetup" />
+
+          
 
           
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          is the managed equivalent of the unmanaged host. An <see
          cref="T:System.AppDomainManager" />
+
+        
 
         
 
@@ -108,8 +132,12 @@
 
         
 
+        
+
          before other managed code runs. The <see
          cref="T:System.AppDomainManager" />
+
+        
 
         
 
@@ -118,8 +146,12 @@
 
         
 
+        
+
          can identify a <see
          cref="T:System.Security.HostSecurityManager" />
+
+        
 
         
 
@@ -132,8 +164,12 @@
 
           
 
+          
+
            in the <see
            cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+          
 
           
 
@@ -142,8 +178,12 @@
 
           
 
+          
+
            constructor and the <see
            cref="M:System.AppDomainManager.InitializeNewDomain(System.AppDomainSetup)" />
+
+          
 
           
 
@@ -157,6 +197,8 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -164,10 +206,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -205,8 +251,12 @@
 
               
 
+              
+
                in the <see
                cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+              
 
               
 
@@ -215,8 +265,12 @@
 
               
 
+              
+
                constructor and the <see
                cref="M:System.AppDomainManager.InitializeNewDomain(System.AppDomainSetup)" />
+
+              
 
               
 
@@ -229,6 +283,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.AppDomainManager" />
+
+            
 
             
 
@@ -265,8 +321,12 @@
 
             
 
+            
+
              class in each <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -275,8 +335,12 @@
 
             
 
+            
+
              for the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -285,8 +349,12 @@
 
             
 
+            
+
             , or an instance of the default <see
              cref="T:System.Runtime.Hosting.ApplicationActivator" />
+
+            
 
             
 
@@ -329,8 +397,12 @@
 
             
 
+            
+
              method has been called to increase the isolated storage quota. An application that hosts the common language runtime (CLR) can override the <see
              cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+            
 
             
 
@@ -339,13 +411,19 @@
 
             
 
+            
+
              object (which inherits <see
              cref="T:System.Security.SecurityState" />
 
             
 
+            
+
             ), and can then allow or prevent the increase. For example, a host could prompt the end user to approve or deny the request to increase the quota. The host's implementation of <see
              cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+            
 
             
 
@@ -364,6 +442,8 @@
 
             
 
+            
+
              to be performed in the application domain; otherwise, false.</para
           >
         </returns>
@@ -372,8 +452,12 @@
 
           
 
+          
+
           A subclass of <see
            cref="T:System.Security.SecurityState" />
+
+          
 
           
 
@@ -413,8 +497,12 @@
 
             
 
+            
+
              parameter, can be displayed in user interfaces to identify the domain. For more information, see the <see
              cref="P:System.AppDomain.FriendlyName" />
+
+            
 
             
 
@@ -426,8 +514,12 @@
 
             
 
+            
+
              method calls the protected <see
              cref="M:System.AppDomainManager.CreateDomainHelper(System.String,System.Security.Policy.Evidence,System.AppDomainSetup)" />
+
+            
 
             
 
@@ -436,8 +528,12 @@
 
             
 
+            
+
             . Overrides of this method do not need to call the <see
              cref="M:System.AppDomainManager.CreateDomainHelper(System.String,System.Security.Policy.Evidence,System.AppDomainSetup)" />
+
+            
 
             
 
@@ -457,6 +553,8 @@
 
           
 
+          
+
           The friendly name of the domain. </param
         >
         <param name="securityInfo">
@@ -464,10 +562,14 @@
 
           
 
+          
+
           An object that contains evidence mapped through the security policy to establish a top-of-stack permission set.</param
         >
         <param name="appDomainInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,8 +610,12 @@
 
             
 
+            
+
              parameter, can be displayed in user interfaces to identify the domain. For more information, see the <see
              cref="P:System.AppDomain.FriendlyName" />
+
+            
 
             
 
@@ -529,6 +635,8 @@
 
           
 
+          
+
           The friendly name of the domain. </param
         >
         <param name="securityInfo">
@@ -536,10 +644,14 @@
 
           
 
+          
+
           An object that contains evidence mapped through the security policy to establish a top-of-stack permission set.</param
         >
         <param name="appDomainInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,6 +684,8 @@
           <para
             >If the application is a manifest-activated application, the entry assembly is determined from the application manifest. If the application is not manifest activated, the entry assembly is the process executable in the default application domain. In other application domains, the entry assembly is the first executable that was executed by the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -612,6 +726,8 @@
 
             
 
+            
+
              that can participate in the flow of the execution context across asynchronous calls. </para
           >
         </remarks>
@@ -646,6 +762,8 @@
           <para
             >This property allows a host to provide a <see
              cref="T:System.Security.HostSecurityManager" />
+
+            
 
             
 
@@ -716,6 +834,8 @@
 
               
 
+              
+
                when it attempts to initialize the application domain. The exception message indicates that initialization has already occurred.</para
             >
           </block>
@@ -725,8 +845,12 @@
 
             
 
+            
+
              implementation does nothing.  A custom implementation can set up internal classes and delegates, set up an interface with the unmanaged host interface, or set up event handlers for the new <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -738,6 +862,8 @@
 
             
 
+            
+
              as the target application domain.</para
           >
           <para
@@ -746,8 +872,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Policy.ApplicationTrust.FullTrustAssemblies" />
+
+            
 
             
 
@@ -756,13 +886,19 @@
 
             
 
+            
+
              object that is assigned to the <see
              cref="P:System.AppDomainSetup.ApplicationTrust" />
 
             
 
+            
+
              property of <paramref
              name="appDomainInfo" />
+
+            
 
             
 
@@ -775,8 +911,12 @@
 
               
 
+              
+
                in the <see
                cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+              
 
               
 
@@ -785,8 +925,12 @@
 
               
 
+              
+
                constructor and the <see
                cref="M:System.AppDomainManager.InitializeNewDomain(System.AppDomainSetup)" />
+
+              
 
               
 
@@ -800,6 +944,8 @@
         </summary>
         <param name="appDomainInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

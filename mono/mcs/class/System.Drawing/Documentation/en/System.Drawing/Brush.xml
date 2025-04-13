@@ -33,8 +33,12 @@
 
         
 
+        
+
         , such as <see
          cref="T:System.Drawing.SolidBrush" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -96,6 +106,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -104,6 +116,8 @@
           <para
             >The new <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -132,8 +146,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -145,8 +163,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -155,8 +177,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -165,13 +191,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.Brush" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -182,10 +214,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -198,13 +234,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Brush" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Brush" />
+
+              
 
               
 
@@ -217,6 +259,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -251,8 +295,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -261,8 +309,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -274,8 +326,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -290,11 +346,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,6 +402,8 @@
         </summary>
         <param name="brush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -26,8 +26,12 @@
 
         
 
+        
+
          is used to access ASP.NET from within a remoting XML Web service that derives from the <see
          cref="T:System.Runtime.Remoting.Services.RemotingService" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Services.RemotingService" />
+
+            
 
             
 
@@ -122,6 +128,8 @@
 
             
 
+            
+
              for the current request.</para
           >
         </summary>
@@ -151,6 +159,8 @@
 
             
 
+            
+
              for the current request.</para
           >
         </summary>
@@ -176,6 +186,8 @@
           <para
             >For more information about identities, see <see
              cref="T:System.Security.Principal.IIdentity" />
+
+            
 
             
 

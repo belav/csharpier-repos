@@ -23,11 +23,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >If you do not want to specify this parameter when calling methods on <see
          cref="T:System.Windows.Forms.MessageBox" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >Specifies options on a <see
          cref="T:System.Windows.Forms.MessageBox" />
+
+        
 
         
 
@@ -62,13 +68,19 @@
 
             
 
+            
+
              will cause the application that raised the <see
              cref="T:System.Windows.Forms.MessageBox" />
 
             
 
+            
+
              to lose focus. The <see
              cref="T:System.Windows.Forms.MessageBox" />
+
+            
 
             
 
@@ -78,6 +90,8 @@
                 >Rendering Controls with Visual Styles</a
               >
             </format>
+
+            
 
             
 

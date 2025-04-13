@@ -47,6 +47,8 @@
 
         
 
+        
+
         , for example, Demand, with a custom security attribute.</para
       >
       <para
@@ -55,11 +57,15 @@
 
         
 
+        
+
          are used to help restrict access to resources or securable operations.</para
       >
       <para
         >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. Use the corresponding permission class derived from <see
          cref="T:System.Security.CodeAccessPermission" />
+
+        
 
         
 
@@ -101,8 +107,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -120,8 +130,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -133,8 +147,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 

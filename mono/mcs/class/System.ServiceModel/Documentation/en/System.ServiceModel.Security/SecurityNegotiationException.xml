@@ -33,10 +33,14 @@
 
             
 
+            
+
              or TLSNEGO. crdefault <format
              type="text/html">
               <a href="57ffcbea-807c-4e43-a41c-44b3db8ed2af">Security Protocols</a>
             </format>
+
+            
 
             
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
         /<newTerm
         >Sslnego</newTerm>
+
+        
 
         
 
@@ -88,6 +96,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.SecurityNegotiationException" />
+
+            
 
             
 
@@ -122,11 +132,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +175,8 @@
 
             
 
+            
+
              class with serialization information and streaming context specified.</para
           >
         </summary>
@@ -169,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -181,8 +201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -217,11 +241,15 @@
 
             
 
+            
+
              class with serialization information and inner exception specified.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -232,8 +260,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 

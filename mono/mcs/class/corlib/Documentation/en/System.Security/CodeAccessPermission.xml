@@ -51,6 +51,8 @@
 
         
 
+        
+
         .</para
       >
       <para>The call stack is typically represented as growing down, so that methods higher in the call stack call methods lower in the call stack.</para>
@@ -60,8 +62,12 @@
 
         
 
+        
+
          class must be granted full trust to function correctly as permissions extending the security infrastructure. To determine that the inheritors are fully trusted, <see
          cref="T:System.Security.CodeAccessPermission" />
+
+        
 
         
 
@@ -70,13 +76,19 @@
 
         
 
+        
+
          for <see
          cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
 
         
 
+        
+
          = true and <see
          cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlPolicy" />
+
+        
 
         
 
@@ -87,6 +99,8 @@
          type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9">Inheritance Demands</a>
         </format>
+
+        
 
         
 
@@ -127,6 +141,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -160,6 +176,8 @@
 
           
 
+          
+
           . </exception
         >
         <permission cref="T:System.Security.Permissions.SecurityPermission"
@@ -168,8 +186,12 @@
 
           
 
+          
+
           . See <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.Assertion" />
+
+          
 
           
 
@@ -183,8 +205,12 @@
 
             
 
+            
+
              prevents a stack walk originating lower in the call stack from proceeding up the call stack beyond the code that calls this method. Therefore, even if callers higher on the call stack do not have the requisite permissions to access a resource, they can still access it through the code that calls this method on the necessary permission. An assertion is effective only if the code that calls <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -196,8 +222,12 @@
 
             
 
+            
+
              is effective until the calling code returns to its caller. Only one <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -206,8 +236,12 @@
 
             
 
+            
+
              when an active <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -216,8 +250,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Security.CodeAccessPermission.RevertAssert" />
+
+            
 
             
 
@@ -226,8 +264,12 @@
 
             
 
+            
+
              to remove an active <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -238,8 +280,12 @@
 
             
 
+            
+
              is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack calls <see
              cref="M:System.Security.CodeAccessPermission.Demand" />
+
+            
 
             
 
@@ -248,8 +294,12 @@
 
             
 
+            
+
              is thrown when the stack walk reaches the code that tried to call <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -258,8 +308,12 @@
 
             
 
+            
+
              has not been granted the permission, even though it tried to <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -272,6 +326,8 @@
 
               
 
+              
+
                removes the requirement that all code in the call chain must be granted permission to access the specified resource, it can open up security issues if used incorrectly or inappropriately. Therefore, it should be used with great caution.</para
             >
           </block>
@@ -281,6 +337,8 @@
           <para
             >Declares that the calling code can access the resource protected by a permission demand through the code that calls this method, even if callers higher in the stack have not been granted permission to access the resource. Using <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -356,6 +414,8 @@
 
             
 
+            
+
              for the resource protected by the current instance. </para
           >
         </exception>
@@ -367,8 +427,12 @@
 
             
 
+            
+
              for the necessary <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -380,8 +444,12 @@
 
             
 
+            
+
              succeeds only if no <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -393,6 +461,8 @@
           <para
             >Forces a <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -432,8 +502,12 @@
 
               
 
+              
+
                method should be used only to protect resources from accidental access by fully trusted code. It should not be used to protect resources from intentional misuse by untrusted code. For example, if method A issues a <see
                cref="M:System.Security.CodeAccessPermission.Deny" />
+
+              
 
               
 
@@ -442,8 +516,12 @@
 
               
 
+              
+
                by issuing an <see
                cref="M:System.Security.CodeAccessPermission.Assert" />
+
+              
 
               
 
@@ -452,8 +530,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+              
 
               
 
@@ -462,8 +544,12 @@
 
               
 
+              
+
                method. In that case, the <see
                cref="M:System.Security.CodeAccessPermission.Deny" />
+
+              
 
               
 
@@ -476,8 +562,12 @@
 
             
 
+            
+
              can limit the liability of the programmer or help prevent accidental security issues because it helps prevent the method that calls <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -486,13 +576,19 @@
 
             
 
+            
+
              on a permission, and if a <see
              cref="M:System.Security.CodeAccessPermission.Demand" />
 
             
 
+            
+
              for that permission is invoked by a caller lower in the call stack, that security check will fail when it reaches the <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -504,8 +600,12 @@
 
             
 
+            
+
              is effective until the calling code returns to its caller. Only one <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -514,8 +614,12 @@
 
             
 
+            
+
              when an active <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -524,8 +628,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Security.CodeAccessPermission.RevertDeny" />
+
+            
 
             
 
@@ -534,13 +642,19 @@
 
             
 
+            
+
              to remove an active <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
 
             
 
+            
+
             . <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -586,6 +700,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -597,8 +713,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -613,8 +733,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -626,13 +750,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.CodeAccessPermission" />
 
           
 
+          
+
            object to compare with the current <see
            cref="T:System.Security.CodeAccessPermission" />
+
+          
 
           
 
@@ -672,12 +802,16 @@
 
             
 
+            
+
              does not contain the XML encoding for a instance of the same type as the current instance.</para
           >
           <para>-or-</para>
           <para
             >The version number of <paramref
              name="elem" />
+
+            
 
             
 
@@ -692,8 +826,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />
+
+            
 
             
 
@@ -706,6 +844,8 @@
         </summary>
         <param name="elem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -744,6 +884,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -755,6 +897,8 @@
 
             
 
+            
+
              object that is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </summary>
@@ -763,6 +907,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -802,13 +948,19 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
           
 
+          
+
            and is not a <see
            cref="T:System.Security.CodeAccessPermission" />
+
+          
 
           
 
@@ -828,6 +980,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -867,13 +1021,19 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.CodeAccessPermission" />
+
+          
 
           
 
@@ -888,13 +1048,19 @@
 
             
 
+            
+
              method. X, Y, and Z represent custom code access permission objects that are not null references, U represents an unrestricted code access permission, and N represents an empty permission with a <see
              cref="T:System.Security.Permissions.PermissionState" />
 
             
 
+            
+
              of <see
              cref="F:System.Security.Permissions.PermissionState.None" />
+
+            
 
             
 
@@ -935,6 +1101,8 @@
 
           
 
+          
+
           A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
         >
       </Docs>
@@ -966,8 +1134,12 @@
 
               
 
+              
+
                method should be used only to protect resources from accidental access by fully trusted code. It should not be used to protect resources from intentional misuse by untrusted code. For example, if method A issues a <see
                cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+              
 
               
 
@@ -976,8 +1148,12 @@
 
               
 
+              
+
                by issuing an <see
                cref="M:System.Security.CodeAccessPermission.Assert" />
+
+              
 
               
 
@@ -986,8 +1162,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+              
 
               
 
@@ -996,8 +1176,12 @@
 
               
 
+              
+
                method. In that case, the <see
                cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+              
 
               
 
@@ -1009,8 +1193,12 @@
 
             
 
+            
+
              is similar to <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -1019,8 +1207,12 @@
 
             
 
+            
+
              specifies permissions that will cause the stack walk to fail, but <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1032,8 +1224,12 @@
 
             
 
+            
+
              is effective until the calling code returns to its caller. Only one <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1042,8 +1238,12 @@
 
             
 
+            
+
              when an active <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1052,8 +1252,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Security.CodeAccessPermission.RevertPermitOnly" />
+
+            
 
             
 
@@ -1062,8 +1266,12 @@
 
             
 
+            
+
              to remove an active <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1074,8 +1282,12 @@
 
             
 
+            
+
              is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack later calls <see
              cref="M:System.Security.CodeAccessPermission.Demand" />
+
+            
 
             
 
@@ -1084,8 +1296,12 @@
 
             
 
+            
+
              is thrown when the stack walk reaches the code that tried to call <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1094,8 +1310,12 @@
 
             
 
+            
+
              has not been granted the permission, even though it called <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1133,8 +1353,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -1143,8 +1367,12 @@
 
             
 
+            
+
             ) for the current frame, an <see
              cref="T:System.ExecutionEngineException" />
+
+            
 
             
 
@@ -1182,8 +1410,12 @@
 
             
 
+            
+
              for the current frame, an <see
              cref="T:System.ExecutionEngineException" />
+
+            
 
             
 
@@ -1195,6 +1427,8 @@
           <para
             >Causes any previous <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -1228,8 +1462,12 @@
 
             
 
+            
+
              for the current frame, an <see
              cref="T:System.ExecutionEngineException" />
+
+            
 
             
 
@@ -1241,6 +1479,8 @@
           <para
             >Causes any previous <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -1274,8 +1514,12 @@
 
             
 
+            
+
              for the current frame, an <see
              cref="T:System.ExecutionEngineException" />
+
+            
 
             
 
@@ -1287,6 +1531,8 @@
           <para
             >Causes any previous <see
              cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            
 
             
 
@@ -1363,8 +1609,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />
+
+            
 
             
 
@@ -1413,8 +1663,12 @@
 
           
 
+          
+
            is not of type <see
            cref="T:System.Security.CodeAccessPermission" />
+
+          
 
           
 
@@ -1425,8 +1679,12 @@
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -1437,6 +1695,8 @@
           <para
             >The result of a call to <see
              cref="M:System.Security.CodeAccessPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -1453,6 +1713,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

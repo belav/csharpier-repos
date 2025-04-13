@@ -37,8 +37,12 @@
 
         
 
+        
+
          uses an XPath expression to determine whether an XML document contains specific elements, attributes, text, or other XML syntactic constructs. Typically, an application uses an <see
          cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -59,6 +65,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkId=96180"
           >XML Path Language (XPath) Version 1.0, section 3.5</see
         >
+
+        
 
         
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
              class with an empty XPath expression. An empty XPath expression always matches a well-formed XML document, so all objects satisfy the criteria of a filter defined by an empty XPath expression.</para
           >
         </remarks>
@@ -99,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+
+            
 
             
 
@@ -130,8 +142,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.ServiceModel.Dispatcher.XPathMessageFilter.Namespaces" />
+
+            
 
             
 
@@ -140,8 +156,12 @@
 
             
 
+            
+
             , so the XPath expression has access to the function library that the <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+
+            
 
             
 
@@ -156,6 +176,8 @@
 
             
 
+            
+
              class using an XPath expression to specify query criteria for the filter.</para
           >
         </summary>
@@ -164,8 +186,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -199,6 +225,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -210,6 +238,8 @@
 
             
 
+            
+
              class by reading a streamed XPath with the specified XML reader.</para
           >
         </summary>
@@ -218,8 +248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -253,13 +287,19 @@
 
             
 
+            
+
             , or when you want to use your own <see
              cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
+            
+
             . An instance of <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+
+            
 
             
 
@@ -271,8 +311,12 @@
 
             
 
+            
+
              implementations, it is equivalent to calling the <see
              cref="M:System.ServiceModel.Dispatcher.XPathMessageFilter.#ctor(System.String,System.Xml.Xsl.XsltContext)" />
+
+            
 
             
 
@@ -287,11 +331,15 @@
 
             
 
+            
+
              class using the specified XPath expression and namespace manager.</para
           >
         </summary>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,13 +350,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
+          
+
            that resolves any namespace prefixes in <paramref
            name="xpath" />
+
+          
 
           
 
@@ -344,8 +398,12 @@
 
             
 
+            
+
              class using a specified XPath expression and <see
              cref="T:System.Xml.Xsl.XsltContext" />
+
+            
 
             
 
@@ -354,6 +412,8 @@
         </summary>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,8 +447,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -404,6 +468,8 @@
 
             
 
+            
+
              class by reading in a streamed XPath with a specified XML reader and using the specified namespace manager.</para
           >
         </summary>
@@ -412,8 +478,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -424,8 +494,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -434,8 +508,12 @@
 
           
 
+          
+
           . This can also be an <see
            cref="T:System.Xml.Xsl.XsltContext" />
+
+          
 
           
 
@@ -470,8 +548,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -487,8 +569,12 @@
 
             
 
+            
+
              class by reading a streamed XPath with a specified XML reader and using the <see
              cref="T:System.Xml.Xsl.XsltContext" />
+
+            
 
             
 
@@ -500,8 +586,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -538,8 +628,12 @@
 
             
 
+            
+
             . Users should create a filter table by calling a constructor for the filter table. This implementation returns an instance of <see
              cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+
+            
 
             
 
@@ -554,6 +648,8 @@
 
             
 
+            
+
              that has a specified type of data associated with it.</para
           >
         </summary>
@@ -565,8 +661,12 @@
 
             
 
+            
+
              object to which filters associated with <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -575,6 +675,8 @@
         </returns>
         <typeparam name="FilterData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,6 +712,8 @@
 
             
 
+            
+
              method to match elements from the body. An exception is thrown by this method if the engine attempts to access the message body in order to evaluate the XPath expression. This helps to ensure that the filter engine does not access the body stream.</para
           >
         </remarks>
@@ -625,6 +729,8 @@
 
             
 
+            
+
              satisfies the filter criteria; otherwise, false. </para
           >
         </returns>
@@ -633,8 +739,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -670,8 +780,12 @@
 
             
 
+            
+
              method when a <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 
@@ -690,6 +804,8 @@
 
             
 
+            
+
              satisfies the filter criteria; otherwise false. </para
           >
         </returns>
@@ -698,8 +814,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+          
 
           
 
@@ -735,8 +855,12 @@
 
             
 
+            
+
              class extends the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -755,6 +879,8 @@
 
             
 
+            
+
              satisfies the filter criteria; otherwise, false. </para
           >
         </returns>
@@ -763,8 +889,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+
+          
 
           
 
@@ -805,6 +935,8 @@
 
             
 
+            
+
              satisfies the filter criteria; false otherwise. </para
           >
         </returns>
@@ -813,8 +945,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -848,8 +984,12 @@
 
             
 
+            
+
              property can also be an <see
              cref="T:System.Xml.Xsl.XsltContext" />
+
+            
 
             
 
@@ -881,6 +1021,8 @@
           <para
             >The quota is initially set to <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -924,6 +1066,8 @@
 
             
 
+            
+
              that represents the current document.</para
           >
         </returns>
@@ -959,8 +1103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -997,6 +1145,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1005,8 +1155,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1043,6 +1197,8 @@
 
             
 
+            
+
              that is used to resolve functions and variables.</para
           >
         </remarks>
@@ -1054,6 +1210,8 @@
 
             
 
+            
+
              with an XPath obtained from a specified XML reader using a specified namespace manager.</para
           >
         </summary>
@@ -1062,8 +1220,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1074,8 +1236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -1116,6 +1282,8 @@
 
             
 
+            
+
              used to serialize the XPath filter.</para
           >
         </returns>
@@ -1124,8 +1292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmLSchemaSet" />
+
+          
 
           
 
@@ -1164,6 +1336,8 @@
 
             
 
+            
+
              that represents the current document.</para
           >
         </returns>
@@ -1199,8 +1373,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1237,6 +1415,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1245,8 +1425,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1308,8 +1492,12 @@
 
             
 
+            
+
              must be in the <newTerm
             >Start</newTerm>
+
+            
 
             
 
@@ -1324,6 +1512,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1332,8 +1522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1344,8 +1538,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -1385,8 +1583,12 @@
 
             
 
+            
+
              must be in the <newTerm
             >Start</newTerm>
+
+            
 
             
 
@@ -1402,13 +1604,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
 
           
 
+          
+
            used to write the <see
            cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />
+
+          
 
           
 
@@ -1419,10 +1627,14 @@
 
           
 
+          
+
           The namespace prefix of the XPath XML element. </param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1433,10 +1645,14 @@
 
           
 
+          
+
           The namespace URI to associate with the XML element. </param
         >
         <param name="writeNamespaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

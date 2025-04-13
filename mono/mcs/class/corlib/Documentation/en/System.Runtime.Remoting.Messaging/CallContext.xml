@@ -30,8 +30,12 @@
 
         
 
+        
+
          is a specialized collection object similar to a Thread Local Storage for method calls and provides data slots that are unique to each logical thread of execution. The slots are not shared across call contexts on other logical threads. Objects can be added to the <see
          cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          instance that travels along with the remote call. Only objects that expose the <see
          cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          are propagated outside the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -73,8 +89,12 @@
 
         
 
+        
+
         . Objects that do not support this interface are not transmitted in <see
          cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+        
 
         
 
@@ -87,8 +107,12 @@
 
           
 
+          
+
            are static and operate on the call context in the current <see
            cref="T:System.Threading.Thread" />
+
+          
 
           
 
@@ -101,6 +125,8 @@
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -143,6 +169,8 @@
 
           
 
+          
+
           The name of the data slot to empty. </param
         >
       </Docs>
@@ -175,6 +203,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -184,6 +214,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,6 +306,8 @@
 
           
 
+          
+
           The name of the item in the logical call context. </param
         >
       </Docs>
@@ -310,10 +344,14 @@
 
           
 
+          
+
           The name with which to associate the new item in the logical call context. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,10 +392,14 @@
 
           
 
+          
+
           The name with which to associate the new item in the call context. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,8 +439,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Remoting.Messaging.Header" />
+
+          
 
           
 

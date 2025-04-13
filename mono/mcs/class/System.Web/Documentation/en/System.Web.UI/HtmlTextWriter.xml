@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is used to render HTML 4.0 to desktop browsers. The <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          namespace, including the <see
          cref="T:System.Web.UI.ChtmlTextWriter" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.XhtmlTextWriter" />
+
+        
 
         
 
@@ -76,8 +88,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter)" />
+
+            
 
             
 
@@ -86,8 +102,12 @@
 
             
 
+            
+
              constant when indentation of a line is necessary. It calls the <see
              cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+
+            
 
             
 
@@ -102,6 +122,8 @@
 
             
 
+            
+
              class that uses a default tab string.</para
           >
         </summary>
@@ -110,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -143,8 +169,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+
+            
 
             
 
@@ -153,8 +183,12 @@
 
             
 
+            
+
              when indentation of a line is necessary. It calls the <see
              cref="M:System.IO.TextWriter.#ctor(System.IFormatProvider)" />
+
+            
 
             
 
@@ -169,6 +203,8 @@
 
             
 
+            
+
              class with a specified tab string character.</para
           >
         </summary>
@@ -177,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -186,6 +226,8 @@
         >
         <param name="tabString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,13 +261,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
+            
+
              method if the attribute is not one of the <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -237,8 +285,12 @@
 
             
 
+            
+
              class maintains a list of attributes for that element. When the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -247,8 +299,12 @@
 
             
 
+            
+
              method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -263,6 +319,8 @@
 
                 
 
+                
+
                  method to add any attributes to the element.</para
               >
             </item>
@@ -270,6 +328,8 @@
               <para
                 >Use the <see
                  cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+                
 
                 
 
@@ -286,6 +346,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -299,8 +361,12 @@
 
             
 
+            
+
              object creates with a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -312,10 +378,14 @@
 
           
 
+          
+
           A string containing the name of the attribute to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +419,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
+
+            
 
             
 
@@ -362,8 +436,12 @@
 
             
 
+            
+
              class maintains a list of attributes for that element. When the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -372,8 +450,12 @@
 
             
 
+            
+
              method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -388,6 +470,8 @@
 
                 
 
+                
+
                  method to add any attributes to the element.</para
               >
             </item>
@@ -395,6 +479,8 @@
               <para
                 >Use the <see
                  cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+                
 
                 
 
@@ -411,6 +497,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -424,8 +512,12 @@
 
             
 
+            
+
              object creates with a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -437,8 +529,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -446,6 +542,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -481,13 +579,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
 
             
 
+            
+
              method if the attribute is not one of the <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -499,8 +603,12 @@
 
             
 
+            
+
              class maintains a list of attributes for that element. When the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -509,8 +617,12 @@
 
             
 
+            
+
              method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -522,13 +634,19 @@
 
             
 
+            
+
              method with <paramref
              name="fEncode" />
 
             
 
+            
+
              set to true, if the attribute can possibly contain a quotation mark ("), a less than sign (&lt;), or an ampersand (&amp;). The method call will encode the attribute to meet the requirements of the requesting device. You can set <paramref
              name="fEncode" />
+
+            
 
             
 
@@ -543,6 +661,8 @@
 
                 
 
+                
+
                  method to add any attributes to the element.</para
               >
             </item>
@@ -550,6 +670,8 @@
               <para
                 >Use the <see
                  cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+                
 
                 
 
@@ -566,6 +688,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -579,8 +703,12 @@
 
             
 
+            
+
              object creates with a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -592,10 +720,14 @@
 
           
 
+          
+
           A string containing the name of the attribute to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,8 +762,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+
+            
 
             
 
@@ -640,13 +776,19 @@
 
             
 
+            
+
              class. It enables you to create new <paramref
              name="name" />
 
             
 
+            
+
              and <paramref
              name="key" />
+
+            
 
             
 
@@ -661,13 +803,19 @@
 
             
 
+            
+
              enumeration value, to the opening tag of the element that the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
+            
+
              object creates with a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -679,10 +827,14 @@
 
           
 
+          
+
           A string containing the name of the attribute to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -693,8 +845,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -729,8 +885,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -742,8 +902,12 @@
 
             
 
+            
+
              class maintains a list of attributes for that element. When the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -752,8 +916,12 @@
 
             
 
+            
+
              are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -765,13 +933,19 @@
 
             
 
+            
+
              method with <paramref
              name="fEncode" />
 
             
 
+            
+
              set to true, if the attribute can possibly contain a quotation mark ("), a less than sign (&lt;), or an ampersand (&amp;). The method call will encode the attribute to meet the requirements of the requesting device. You can set <paramref
              name="fEncode" />
+
+            
 
             
 
@@ -786,6 +960,8 @@
 
                 
 
+                
+
                  method to add any attributes to the element.</para
               >
             </item>
@@ -793,6 +969,8 @@
               <para
                 >Use the <see
                  cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+                
 
                 
 
@@ -809,6 +987,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -822,8 +1002,12 @@
 
             
 
+            
+
              object creates with a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -835,8 +1019,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -847,10 +1035,14 @@
 
           
 
+          
+
           A string containing the value to assign to the attribute. </param
         >
         <param name="fEncode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -884,13 +1076,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
+            
+
              method when the style is not a member of the <see
              cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+            
 
             
 
@@ -902,13 +1100,19 @@
 
             
 
+            
+
              class maintains a list of styles for the markup elements it renders. When the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
+            
+
              method is called, any styles that are added by the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+
+            
 
             
 
@@ -923,6 +1127,8 @@
 
                 
 
+                
+
                  method to add any style attributes to the element.</para
               >
             </item>
@@ -930,6 +1136,8 @@
               <para
                 >Use the <see
                  cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+                
 
                 
 
@@ -946,6 +1154,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -959,6 +1169,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -967,10 +1179,14 @@
 
           
 
+          
+
           A string that contains the style attribute to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1004,13 +1220,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.Web.UI.HtmlTextWriterStyle,System.String)" />
 
             
 
+            
+
              method when the style is a member of the <see
              cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+            
 
             
 
@@ -1022,13 +1244,19 @@
 
             
 
+            
+
              class maintains a list of styles for the markup elements it renders. When the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
+            
+
              method is called, any styles added by the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+
+            
 
             
 
@@ -1043,6 +1271,8 @@
 
                 
 
+                
+
                  method to add any style attributes to the element.</para
               >
             </item>
@@ -1050,6 +1280,8 @@
               <para
                 >Use the <see
                  cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+                
 
                 
 
@@ -1066,6 +1298,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -1079,8 +1313,12 @@
 
             
 
+            
+
              value and the attribute value to the opening markup tag created by a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -1092,8 +1330,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -1101,6 +1343,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1135,8 +1379,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -1145,8 +1393,12 @@
 
             
 
+            
+
              class. It enables you to create new <paramref
              name="name" />
+
+            
 
             
 
@@ -1155,8 +1407,12 @@
 
             
 
+            
+
              pairs for <see
              cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+            
 
             
 
@@ -1171,8 +1427,12 @@
 
             
 
+            
+
              enumeration value, to the opening markup tag created by a subsequent call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -1184,10 +1444,14 @@
 
           
 
+          
+
           A string that contains the style attribute to be added. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1198,8 +1462,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -1230,8 +1498,12 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+
+            
 
             
 
@@ -1240,13 +1512,19 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
+            
+
              to provide your own rendering functionality. For example, in a markup language that might require &lt;p&gt; elements to be rendered immediately ahead of a control, but where the need for the &lt;p&gt; element is determined earlier, you could use the <see
              cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+
+            
 
             
 
@@ -1258,6 +1536,8 @@
           <para
             >Notifies an <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1282,8 +1562,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.IO.TextWriter.Close" />
+
+            
 
             
 
@@ -1295,8 +1579,12 @@
 
             
 
+            
+
              method, any operations on the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1308,6 +1596,8 @@
           <para
             >Closes the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1358,8 +1648,12 @@
 
             
 
+            
+
              field is used by the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1398,13 +1692,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
 
             
 
+            
+
              method if the attribute is not an <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -1416,8 +1716,12 @@
 
             
 
+            
+
              method removes double quotation marks ("), ampersands (&amp;), and less than signs (&lt;) so that invalid tags are not generated, regardless of the input. The actual encoding is performed by the <see
              cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+
+            
 
             
 
@@ -1432,6 +1736,8 @@
 
             
 
+            
+
              object of the current context.</para
           >
         </summary>
@@ -1443,8 +1749,12 @@
 
             
 
+            
+
              is empty, or the unencoded attribute value if <paramref
              name="fEncode" />
+
+            
 
             
 
@@ -1456,10 +1766,14 @@
 
           
 
+          
+
           A string containing the attribute value to encode. </param
         >
         <param name="fEncode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1493,8 +1807,12 @@
 
             
 
+            
+
              method removes double quotation marks ("), ampersands (&amp;), and less than signs (&lt;) so that invalid tags are not generated, regardless of the input. The actual encoding is performed by the <see
              cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+
+            
 
             
 
@@ -1506,6 +1824,8 @@
           <para
             >Encodes the value of the specified markup attribute based on the requirements of the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -1521,8 +1841,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -1530,6 +1854,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1568,6 +1894,8 @@
 
           
 
+          
+
           A string containing the URL to encode. </param
         >
       </Docs>
@@ -1599,8 +1927,12 @@
 
             
 
+            
+
              property obtains its value from the base <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -1612,6 +1944,8 @@
           <para
             >Gets the encoding that the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1643,8 +1977,12 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
+
+            
 
             
 
@@ -1653,8 +1991,12 @@
 
             
 
+            
+
              in a class derived from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1666,8 +2008,12 @@
 
             
 
+            
+
              method to close any markup elements opened in the <see
              cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+
+            
 
             
 
@@ -1682,8 +2028,12 @@
 
             
 
+            
+
              object, or an object of a derived class, that a control has finished rendering. You can use this method to close any markup elements opened in the <see
              cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+
+            
 
             
 
@@ -1708,8 +2058,12 @@
 
             
 
+            
+
              field is used by the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -1750,6 +2104,8 @@
 
             
 
+            
+
              method to apply styles, such as background color or border width, to a block of markup.</para
           >
           <para
@@ -1758,8 +2114,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+
+            
 
             
 
@@ -1768,13 +2128,19 @@
 
             
 
+            
+
              in the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
+            
+
              method that you use in the corresponding <see
              cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+
+            
 
             
 
@@ -1786,8 +2152,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -1796,8 +2166,12 @@
 
             
 
+            
+
              object. If you want to render a different markup element to contain the attributes and style attributes, use the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -1813,8 +2187,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -1847,6 +2225,8 @@
 
             
 
+            
+
              method to apply styles, such as background color or border width, to a block of markup.</para
           >
           <para
@@ -1855,8 +2235,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+
+            
 
             
 
@@ -1865,13 +2249,19 @@
 
             
 
+            
+
              in the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
+            
+
              method that you use in the corresponding <see
              cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+
+            
 
             
 
@@ -1883,8 +2273,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -1893,8 +2287,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -1903,8 +2301,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -1920,8 +2322,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -1932,13 +2338,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
+          
+
            that specifies the opening tag of the markup element that will contain the style object specified in <paramref
            name="style" />
+
+          
 
           
 
@@ -1962,8 +2374,12 @@
 
             
 
+            
+
              field instead of the <see
              cref="F:System.Web.UI.HtmlTextWriter.EqualsChar" />
+
+            
 
             
 
@@ -1996,13 +2412,19 @@
 
             
 
+            
+
              field is used by the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
+            
+
              and <see
              cref="Overload:System.Web.UI.HtmlTextWriter.WriteAttribute" />
+
+            
 
             
 
@@ -2043,13 +2465,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
 
             
 
+            
+
              method renders the closing tag of a &lt;span&gt; element after the closing tag of the control, closing the element opened by the corresponding <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -2061,8 +2489,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -2071,13 +2503,19 @@
 
             
 
+            
+
              in the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
+            
+
              method that you use in the corresponding <see
              cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -2093,8 +2531,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -2127,8 +2569,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -2137,8 +2583,12 @@
 
             
 
+            
+
              after the closing tag of the control, closing the element that was opened by the corresponding <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -2150,8 +2600,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -2160,13 +2614,19 @@
 
             
 
+            
+
              in the <see
              cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
+            
+
              method that you use in the corresponding <see
              cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -2182,8 +2642,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -2194,13 +2658,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
+          
+
            that specifies the closing tag of the markup element that contained the attributes that applied the specified style. This must match the key passed in the corresponding <see
            cref="M:System.Web.UI.HtmlTextWriter.EnterStyle" />
+
+          
 
           
 
@@ -2224,8 +2694,12 @@
 
             
 
+            
+
              method is called. In turn, the <see
              cref="M:System.Web.UI.HtmlTextWriter.FilterAttributes" />
+
+            
 
             
 
@@ -2234,8 +2708,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -2268,13 +2746,19 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.Flush" />
 
             
 
+            
+
              method just calls the <see
              cref="M:System.IO.TextWriter.Flush" />
+
+            
 
             
 
@@ -2286,6 +2770,8 @@
           <para
             >Clears all buffers for the current <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -2319,8 +2805,12 @@
 
             
 
+            
+
              is null or an empty string (""), or cannot be found in the table of attribute names, the value -1, typed to an <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -2335,6 +2825,8 @@
 
             
 
+            
+
              enumeration value for the specified attribute.</para
           >
         </summary>
@@ -2346,8 +2838,12 @@
 
             
 
+            
+
              enumeration value for the specified attribute; otherwise, an invalid <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -2359,8 +2855,12 @@
 
           
 
+          
+
           A string that contains the attribute for which to obtain the <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -2393,13 +2893,19 @@
 
             
 
+            
+
              method returns an empty string (""), if <paramref
              name="attrKey" />
 
             
 
+            
+
              is not a valid <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -2411,6 +2917,8 @@
           <para
             >Obtains the name of the markup attribute associated with the specified <see
              cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+            
 
             
 
@@ -2426,8 +2934,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -2460,8 +2972,12 @@
 
             
 
+            
+
              method returns the value -1 typed as a <see
              cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+            
 
             
 
@@ -2470,8 +2986,12 @@
 
             
 
+            
+
              does not correspond to any <see
              cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+            
 
             
 
@@ -2486,6 +3006,8 @@
 
             
 
+            
+
              enumeration value for the specified style.</para
           >
         </summary>
@@ -2497,8 +3019,12 @@
 
             
 
+            
+
              enumeration value corresponding to <paramref
              name="styleName" />
+
+            
 
             
 
@@ -2510,8 +3036,12 @@
 
           
 
+          
+
           The style attribute for which to obtain the <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -2544,13 +3074,19 @@
 
             
 
+            
+
              is not a valid <see
              cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
+            
+
              object, the <see
              cref="M:System.Web.UI.HtmlTextWriter.GetStyleName(System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -2565,6 +3101,8 @@
 
             
 
+            
+
              enumeration value.</para
           >
         </summary>
@@ -2576,8 +3114,12 @@
 
             
 
+            
+
              enumeration value specified in <paramref
              name="styleKey" />
+
+            
 
             
 
@@ -2589,8 +3131,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -2623,13 +3169,19 @@
 
             
 
+            
+
              is null, an empty string (""), or cannot be found in the table of markup tag names, the <see
              cref="M:System.Web.UI.HtmlTextWriter.GetTagKey(System.String)" />
 
             
 
+            
+
              method returns the <see
              cref="F:System.Web.UI.HtmlTextWriterTag.Unknown" />
+
+            
 
             
 
@@ -2644,6 +3196,8 @@
 
             
 
+            
+
              enumeration value associated with the specified markup element.</para
           >
         </summary>
@@ -2655,8 +3209,12 @@
 
             
 
+            
+
              enumeration value; otherwise, if <paramref
              name="tagName" />
+
+            
 
             
 
@@ -2665,8 +3223,12 @@
 
             
 
+            
+
              value, <see
              cref="F:System.Web.UI.HtmlTextWriterTag.Unknown" />
+
+            
 
             
 
@@ -2678,8 +3240,12 @@
 
           
 
+          
+
           The markup element for which to obtain the <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -2712,13 +3278,19 @@
 
             
 
+            
+
              is not a valid <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
+            
+
              value, the <see
              cref="M:System.Web.UI.HtmlTextWriter.GetTagName(System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -2730,6 +3302,8 @@
           <para
             >Obtains the markup element associated with the specified <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -2745,8 +3319,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -2775,8 +3353,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+
+            
 
             
 
@@ -2785,11 +3367,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >If the <see
              cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+
+            
 
             
 
@@ -2830,13 +3416,19 @@
 
             
 
+            
+
              property is set to a <see
              cref="T:System.IO.TextWriter" />
 
             
 
+            
+
              object that is an instance of the <see
              cref="T:System.Web.HttpWriter" />
+
+            
 
             
 
@@ -2874,8 +3466,12 @@
 
             
 
+            
+
              object, use the <see
              cref="M:System.Web.UI.HtmlTextWriter.IsAttributeDefined(System.Web.UI.HtmlTextWriterAttribute,System.String@)" />
+
+            
 
             
 
@@ -2890,6 +3486,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -2901,6 +3499,8 @@
 
             
 
+            
+
              method; otherwise, false.</para
           >
         </returns>
@@ -2909,8 +3509,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -2977,8 +3581,12 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.IsStyleAttributeDefined(System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -2993,6 +3601,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -3004,6 +3614,8 @@
 
             
 
+            
+
              method; otherwise, false.</para
           >
         </returns>
@@ -3012,8 +3624,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -3083,13 +3699,19 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
 
             
 
+            
+
              method returns true for all attributes. Override the <see
              cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
+
+            
 
             
 
@@ -3106,6 +3728,8 @@
         </returns>
         <param name="attribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3134,8 +3758,12 @@
 
             
 
+            
+
              methods is called. If the <see
              cref="P:System.Web.UI.HtmlTextWriter.NewLine" />
+
+            
 
             
 
@@ -3147,6 +3775,8 @@
           <para
             >Gets or sets the line terminator string used by the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -3182,13 +3812,19 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
+            
+
              method always returns true. The <see
              cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+
+            
 
             
 
@@ -3208,10 +3844,14 @@
 
           
 
+          
+
           A string containing the name of the attribute to render. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3222,8 +3862,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -3258,13 +3902,19 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
+            
+
              method always returns true. The <see
              cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -3284,10 +3934,14 @@
 
           
 
+          
+
           A string containing the name of the style attribute to render. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3298,8 +3952,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -3333,13 +3991,19 @@
 
             
 
+            
+
              class implementation of the <see
              cref="M:System.Web.UI.HtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
+            
+
              method always returns true. The <see
              cref="M:System.Web.UI.HtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -3359,6 +4023,8 @@
 
           
 
+          
+
           A string containing the name of the element to render. </param
         >
         <param name="key">
@@ -3366,8 +4032,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -3395,8 +4065,12 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+
+            
 
             
 
@@ -3408,8 +4082,12 @@
 
             
 
+            
+
              constructor. If no tab string is specified, the <see
              cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+
+            
 
             
 
@@ -3442,13 +4120,19 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
+            
+
              method removes markup elements from the list by calling the <see
              cref="M:System.Web.UI.HtmlTextWriter.PopEndTag" />
+
+            
 
             
 
@@ -3464,6 +4148,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3494,13 +4180,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.HtmlTextWriter.PushEndTag(System.String)" />
 
             
 
+            
+
              method. The <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+
+            
 
             
 
@@ -3513,6 +4205,8 @@
         </summary>
         <param name="endTag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3546,13 +4240,19 @@
 
             
 
+            
+
              method when the first <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
+            
+
              object is created. Dynamic attributes can be registered by using the <see
              cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+
+            
 
             
 
@@ -3564,8 +4264,12 @@
 
             
 
+            
+
              method is static, so registration of attributes applies to all <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -3581,6 +4285,8 @@
 
           
 
+          
+
           A string containing the name of the markup attribute to register. </param
         >
         <param name="key">
@@ -3588,8 +4294,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -3623,13 +4333,19 @@
 
             
 
+            
+
              method when the first <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
+            
+
              object is created. Dynamic style attributes can be registered by using the <see
              cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -3641,8 +4357,12 @@
 
             
 
+            
+
              method is static, so registration of attributes applies to all <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -3658,6 +4378,8 @@
 
           
 
+          
+
           The string passed from the source file specifying the style name. </param
         >
         <param name="key">
@@ -3665,8 +4387,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -3700,13 +4426,19 @@
 
             
 
+            
+
              method when the first <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
+            
+
              object is created. Dynamic markup tags can be registered by using the <see
              cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -3718,8 +4450,12 @@
 
             
 
+            
+
              method is static, so registration of tags applies to all <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -3735,6 +4471,8 @@
 
           
 
+          
+
           A string that contains the HTML tag. </param
         >
         <param name="key">
@@ -3742,8 +4480,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -3768,6 +4510,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderAfterContent" />
+
+            
 
             
 
@@ -3804,6 +4548,8 @@
 
             
 
+            
+
              method can be useful if you want to render additional closing tags after the element tag.</para
           >
         </remarks>
@@ -3837,6 +4583,8 @@
 
             
 
+            
+
              method can be useful if you want to insert child elements into the current markup element before the inner markup.</para
           >
         </remarks>
@@ -3849,6 +4597,8 @@
           <para
             >The text or spacing to write prior to the content of the element. If not overridden, <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeContent" />
+
+            
 
             
 
@@ -3874,6 +4624,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeTag" />
+
+            
 
             
 
@@ -3912,13 +4664,19 @@
 
             
 
+            
+
              override of the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
+            
+
              method, if the markup element is not one of the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -3930,8 +4688,12 @@
 
             
 
+            
+
              method, first call the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+
+            
 
             
 
@@ -3940,8 +4702,12 @@
 
             
 
+            
+
              methods, as necessary, to specify any element attributes or style attributes that are to appear in the opening tag of the element. After generating the inner markup, call the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+
+            
 
             
 
@@ -3954,6 +4720,8 @@
         </summary>
         <param name="tagName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3986,13 +4754,19 @@
 
             
 
+            
+
              overload of the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
+            
+
              method if the markup element is of a known type that is one of the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -4004,8 +4778,12 @@
 
             
 
+            
+
              method, first call the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+
+            
 
             
 
@@ -4014,8 +4792,12 @@
 
             
 
+            
+
              methods, as necessary, to specify any element attributes or style attributes that are to appear in the opening tag of the element. After generating the inner markup, call the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+
+            
 
             
 
@@ -4030,6 +4812,8 @@
 
             
 
+            
+
              enumeration value to the output stream.</para
           >
         </summary>
@@ -4038,8 +4822,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -4067,8 +4855,12 @@
 
             
 
+            
+
              method after the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -4098,6 +4890,8 @@
           <para
             >The <see
              cref="F:System.Web.UI.HtmlTextWriter.SelfClosingChars" />
+
+            
 
             
 
@@ -4131,8 +4925,12 @@
 
             
 
+            
+
              field is used by the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -4165,8 +4963,12 @@
 
             
 
+            
+
              field as the parameter argument in a <see
              cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char)" />
+
+            
 
             
 
@@ -4199,6 +5001,8 @@
 
             
 
+            
+
              field when it is necessary to render an apostrophe.</para
           >
         </remarks>
@@ -4228,13 +5032,19 @@
 
             
 
+            
+
              field to render the slash marks when you write a URL. The <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
 
             
 
+            
+
              method uses the <see
              cref="F:System.Web.UI.HtmlTextWriter.SlashChar" />
+
+            
 
             
 
@@ -4267,13 +5077,19 @@
 
             
 
+            
+
              field is used by the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -4306,8 +5122,12 @@
 
             
 
+            
+
              field is used by the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -4343,8 +5163,12 @@
 
             
 
+            
+
              property is of use only to classes that inherit from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -4353,8 +5177,12 @@
 
             
 
+            
+
              property only in a call to the <see
              cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+            
 
             
 
@@ -4366,6 +5194,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -4394,8 +5224,12 @@
 
             
 
+            
+
              field is used by the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -4404,13 +5238,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+
+            
 
             
 
@@ -4443,8 +5283,12 @@
 
             
 
+            
+
              property is of use only to classes that inherit from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -4453,8 +5297,12 @@
 
             
 
+            
+
              property only in <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+
+            
 
             
 
@@ -4487,8 +5335,12 @@
 
             
 
+            
+
              field is used by the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -4497,8 +5349,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+
+            
 
             
 
@@ -4533,8 +5389,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4550,8 +5410,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -4581,8 +5445,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4595,6 +5463,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4624,8 +5494,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4638,6 +5512,8 @@
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4667,8 +5543,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4681,6 +5561,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4710,8 +5592,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4724,6 +5610,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4753,8 +5641,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4767,6 +5659,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4796,8 +5690,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4810,6 +5708,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4839,8 +5739,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4853,6 +5757,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4882,8 +5788,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4896,6 +5806,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4929,8 +5841,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -4945,6 +5861,8 @@
 
             
 
+            
+
              method, along with any pending tab spacing.</para
           >
         </summary>
@@ -4953,10 +5871,14 @@
 
           
 
+          
+
           A string that contains zero or more format items. </param
         >
         <param name="arg0">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4997,8 +5919,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -5013,11 +5939,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5052,8 +5982,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -5069,6 +6003,8 @@
 
           
 
+          
+
           The array of characters from which to write text to the output stream. </param
         >
         <param name="index">
@@ -5076,10 +6012,14 @@
 
           
 
+          
+
           The index location in the array where writing begins. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5114,8 +6054,12 @@
 
             
 
+            
+
              method generates any tabs that are pending, and then calls the <see
              cref="Overload:System.IO.TextWriter.Write" />
+
+            
 
             
 
@@ -5130,11 +6074,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5145,10 +6093,14 @@
 
           
 
+          
+
           An object to format. </param
         >
         <param name="arg1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5182,8 +6134,12 @@
 
             
 
+            
+
              method to write markup attributes and their values with no encoding. The <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -5192,8 +6148,12 @@
 
             
 
+            
+
              is null, the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -5209,10 +6169,14 @@
 
           
 
+          
+
           The attribute to write to the output stream. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5247,13 +6211,19 @@
 
             
 
+            
+
              method to write markup attributes and their values with or without encoding. The <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -5265,13 +6235,19 @@
 
             
 
+            
+
              method writes the attribute value enclosed in double quotation marks ("). If <paramref
              name="value" />
 
             
 
+            
+
              is null, the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -5287,6 +6263,8 @@
 
           
 
+          
+
           The markup attribute to write to the output stream. </param
         >
         <param name="value">
@@ -5294,10 +6272,14 @@
 
           
 
+          
+
           The value assigned to the attribute. </param
         >
         <param name="fEncode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5327,8 +6309,12 @@
 
             
 
+            
+
              method does not write the closing angle bracket (&gt;) of the markup element's opening tag. This allows the writing of markup attributes to the opening tag of the element. Use the <see
              cref="F:System.Web.UI.HtmlTextWriter.TagRightChar" />
+
+            
 
             
 
@@ -5337,8 +6323,12 @@
 
             
 
+            
+
              method. Use the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+
+            
 
             
 
@@ -5347,11 +6337,15 @@
 
             
 
+            
+
              constant when you write markup elements that are self-closing.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+
+            
 
             
 
@@ -5364,6 +6358,8 @@
         </summary>
         <param name="tagName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5394,8 +6390,12 @@
 
             
 
+            
+
              method to render line breaks in custom control or adapter markup. The <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteBreak" />
+
+            
 
             
 
@@ -5429,6 +6429,8 @@
 
             
 
+            
+
              method when a string contains angle brackets (&lt; or &gt;) or an ampersand (&amp;).</para
           >
           <para
@@ -5437,8 +6439,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.HttpUtility.HtmlEncode(System.String,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -5451,6 +6457,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5479,8 +6487,12 @@
 
             
 
+            
+
              method encodes the string in the <paramref
              name="url" />
+
+            
 
             
 
@@ -5493,6 +6505,8 @@
         </summary>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5529,6 +6543,8 @@
 
           
 
+          
+
           The URL parameter string to encode and write to the output stream. </param
         >
       </Docs>
@@ -5551,8 +6567,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+
+            
 
             
 
@@ -5565,6 +6585,8 @@
         </summary>
         <param name="tagName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5597,13 +6619,19 @@
 
             
 
+            
+
              method automatically writes the closing angle bracket (&gt;) of the opening tag of the element, unlike the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
+            
+
              method, which does not write the closing angle bracket. Use <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
+
+            
 
             
 
@@ -5616,6 +6644,8 @@
         </summary>
         <param name="tagName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5640,6 +6670,8 @@
           <para
             >The default line terminator string is a carriage return followed by a line feed ("\r\n"). For more information, see <see
              cref="Overload:System.IO.TextWriter.WriteLine" />
+
+            
 
             
 
@@ -5674,8 +6706,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5688,6 +6724,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5717,8 +6755,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5731,6 +6773,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5760,8 +6804,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5774,6 +6822,8 @@
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5803,8 +6853,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5817,6 +6871,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5846,8 +6902,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5860,6 +6920,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5889,8 +6951,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5903,6 +6969,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5932,8 +7000,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5946,6 +7018,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5975,8 +7049,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -5989,6 +7067,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6018,8 +7098,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6032,6 +7116,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6061,8 +7147,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6075,6 +7165,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6113,8 +7205,12 @@
 
             
 
+            
+
              method uses the same semantics as the <see
              cref="M:System.String.Format(System.String,System.Object)" />
+
+            
 
             
 
@@ -6123,8 +7219,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6140,10 +7240,14 @@
 
           
 
+          
+
           A string containing zero or more format items. </param
         >
         <param name="arg0">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6184,8 +7288,12 @@
 
             
 
+            
+
              method uses the same semantics as the <see
              cref="M:System.String.Format(System.String,System.Object[])" />
+
+            
 
             
 
@@ -6194,8 +7302,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6208,6 +7320,8 @@
         </summary>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6242,8 +7356,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6259,6 +7377,8 @@
 
           
 
+          
+
           The character array from which to write text to the output stream. </param
         >
         <param name="index">
@@ -6266,10 +7386,14 @@
 
           
 
+          
+
           The location in the character array where writing begins. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6304,8 +7428,12 @@
 
             
 
+            
+
              method uses the same semantics as the <see
              cref="M:System.String.Format(System.String,System.Object,System.Object)" />
+
+            
 
             
 
@@ -6314,8 +7442,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6331,6 +7463,8 @@
 
           
 
+          
+
           A string containing zero or more format items.</param
         >
         <param name="arg0">
@@ -6338,10 +7472,14 @@
 
           
 
+          
+
           An object to format.</param
         >
         <param name="arg1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6371,13 +7509,19 @@
 
             
 
+            
+
              method rather than the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String)" />
 
             
 
+            
+
              method when you do not want to render any tab spacing ahead of the rendered string <paramref
              name="s" />
+
+            
 
             
 
@@ -6389,8 +7533,12 @@
 
             
 
+            
+
              base method is used to write the <paramref
              name="value" />
+
+            
 
             
 
@@ -6403,6 +7551,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6436,6 +7586,8 @@
 
             
 
+            
+
              method writes the style attribute in the following form:</para
           >
           <para>
@@ -6443,8 +7595,12 @@
 
             
 
+            
+
             =<paramref
              name="value" />
+
+            
 
             
 
@@ -6460,10 +7616,14 @@
 
           
 
+          
+
           The style attribute to write to the output stream. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6498,6 +7658,8 @@
 
             
 
+            
+
              method writes the style attribute in the following form:</para
           >
           <para>
@@ -6505,8 +7667,12 @@
 
             
 
+            
+
             =<paramref
              name="value" />
+
+            
 
             
 
@@ -6518,8 +7684,12 @@
 
             
 
+            
+
              method is used to encode the <paramref
              name="value" />
+
+            
 
             
 
@@ -6535,6 +7705,8 @@
 
           
 
+          
+
           The style attribute to write to the output stream. </param
         >
         <param name="value">
@@ -6542,10 +7714,14 @@
 
           
 
+          
+
           The value assigned to the style attribute. </param
         >
         <param name="fEncode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6582,8 +7758,12 @@
 
             
 
+            
+
              method encodes characters that could be considered URL delimiters (dependent on the setting of <paramref
              name="argument" />
+
+            
 
             
 
@@ -6592,13 +7772,19 @@
 
             
 
+            
+
             , if the ASCII code is less than 128; otherwise, %u<paramref
              name="xxxx" />
 
             
 
+            
+
             , where <paramref
              name="x" />
+
+            
 
             
 
@@ -6610,13 +7796,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrlParameter(System.String)" />
 
             
 
+            
+
              methods use the <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteUrlEncodedString(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -6632,10 +7824,14 @@
 
           
 
+          
+
           The string to encode and write to the output stream. </param
         >
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

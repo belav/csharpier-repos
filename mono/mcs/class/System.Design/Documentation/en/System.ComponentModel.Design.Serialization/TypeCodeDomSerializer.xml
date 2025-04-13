@@ -24,8 +24,12 @@
 
         
 
+        
+
          class performs the same tasks as a <see
          cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" />
+
+            
 
             
 
@@ -88,6 +94,8 @@
 
             
 
+            
+
              method deserializes a previously serialized code type declaration. The following table shows the tasks default implementation performs.</para
           >
           <list type="table">
@@ -109,6 +117,8 @@
                 <para
                   >The implementation searches for a <see
                    cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+                  
 
                   
 
@@ -136,6 +146,8 @@
           <para
             >The following table shows the services the <see
              cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration)" />
+
+            
 
             
 
@@ -175,6 +187,8 @@
 
                   
 
+                  
+
                    is made. If this query succeeds, the container is checked for the object. The container is also used as a stand-in for any container argument needed by components.</para
                 >
               </description>
@@ -195,10 +209,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="declaration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,13 +253,19 @@
 
             
 
+            
+
              method returns the method to emit all of the initialization code for the given member. The default implementation returns an empty constructor. If the same method is to be returned for multiple values, the same instance of the method should be returned. You can use the <see
              cref="P:System.CodeDom.CodeObject.UserData" />
 
             
 
+            
+
              dictionary to remember methods you have created. The <paramref
              name="typeDecl" />
+
+            
 
             
 
@@ -261,6 +285,8 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="declaration">
@@ -268,10 +294,14 @@
 
           
 
+          
+
           The type declaration to use for serialization.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,6 +345,8 @@
 
             
 
+            
+
              array of methods to be interpreted during deserialization.</para
           >
         </returns>
@@ -323,10 +355,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="declaration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,13 +399,19 @@
 
             
 
+            
+
              method serializes the given root object and optional collection of members to create a new type definition. If the <paramref
              name="members" />
 
             
 
+            
+
              collection contains values, these values are serialized. Values themselves may serialize as either member variables or local variables. This determination is done by searching for an extender property on the object called GenerateMember. If true, a member is generated. Otherwise, a local variable is generated. For convenience, the <paramref
              name="members" />
+
+            
 
             
 
@@ -379,6 +421,8 @@
           <para
             >The following table shows the tasks performed by the default implementation of the <see
              cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -406,6 +450,8 @@
 
                   
 
+                  
+
                    and <see
                    cref="T:System.CodeDom.CodeTypeDeclaration" />
                 </para>
@@ -422,13 +468,19 @@
 
                   
 
+                  
+
                    walks all of the members and calls <see
                    cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
                   
 
+                  
+
                   . Because serialization is done opportunistically in <see
                    cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+
+                  
 
                   
 
@@ -455,13 +507,19 @@
 
                   
 
+                  
+
                    method orders the statements and adds them to a method returned from <see
                    cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
 
                   
 
+                  
+
                   . Finally, a constructor is fabricated that calls all of the methods returned from <see
                    cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.GetInitializeMethod(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeTypeDeclaration,System.Object)" />
+
+                  
 
                   
 
@@ -478,6 +536,8 @@
           <para
             >The following table shows the objects the <see
              cref="M:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Collections.ICollection)" />
+
+            
 
             
 
@@ -528,11 +588,15 @@
 
             
 
+            
+
              that defines the root object.</para
           >
         </returns>
         <param name="manager">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,10 +607,14 @@
 
           
 
+          
+
           The object to serialize.</param
         >
         <param name="members">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

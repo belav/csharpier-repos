@@ -23,6 +23,8 @@
 
       
 
+      
+
        which is being parsed.</summary
     >
     <remarks
@@ -31,6 +33,8 @@
       override the 
       <see
        cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+
+      
 
       
 
@@ -64,6 +68,8 @@
 
           
 
+          
+
            instance to use for
           message localization purposes.
         </param
@@ -72,6 +78,8 @@
           >Constructs and initializes a new instance of the
           <see
            cref="T:Mono.Options.OptionContext" />
+
+          
 
           
 
@@ -85,9 +93,13 @@
 
           
 
+          
+
            property of
           the new instance using <paramref
            name="set" />
+
+          
 
           
 
@@ -119,11 +131,15 @@
 
           
 
+          
+
            being parsed.</summary
         >
         <value
           >The <see
            cref="T:Mono.Options.Option" />
+
+          
 
           
 
@@ -154,6 +170,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -164,10 +182,14 @@
 
           
 
+          
+
            containing the index within the
           options list of the last value within 
           <see
            cref="P:Mono.Options.OptionContext.OptionValues" />
+
+          
 
           
 
@@ -199,6 +221,8 @@
 
           
 
+          
+
            containing the actual option name used.</value
         >
         <remarks
@@ -208,14 +232,20 @@
 
           
 
+          
+
            can contain multiple
           <c
           >|</c>
 
           
 
+          
+
           -delimited aliases, e.g. <c
           >h|help</c>
+
+          
 
           
 
@@ -225,9 +255,13 @@
 
           
 
+          
+
            vs.
           <c
           >--help</c>
+
+          
 
           
 
@@ -260,6 +294,8 @@
 
           
 
+          
+
            to use for message
           localizations.
         </summary
@@ -268,6 +304,8 @@
           >
           The <see
            cref="T:Mono.Options.OptionSet" />
+
+          
 
           
 
@@ -281,6 +319,8 @@
             This property is initialized in the 
             <see
              cref="C:Mono.Options.OptionContext(Mono.Options.OptionSet)" />
+
+            
 
             
 
@@ -318,9 +358,13 @@
 
           
 
+          
+
            values to provide to
           <see
            cref="P:Mono.Options.OptionContext.Option" />
+
+          
 
           
 
@@ -334,15 +378,21 @@
 
           
 
+          
+
            containing 
           <see
            cref="T:System.String" />
 
           
 
+          
+
            values to provide to
           <see
            cref="P:Mono.Options.OptionContext.Option" />
+
+          
 
           
 
@@ -357,6 +407,8 @@
 
             
 
+            
+
              indexer
             makes use of the 
             <see
@@ -365,8 +417,12 @@
             
 
             
+
+            
             and <see
              cref="P:Mono.Options.Option.MaxValueCount" />
+
+            
 
             
 
@@ -377,9 +433,13 @@
 
             
 
+            
+
             , and the 
             <see
              cref="P:Mono.Options.OptionContext.Option" />
+
+            
 
             
 
@@ -389,15 +449,21 @@
 
             
 
+            
+
             ,
             <see
              langword="null" />
 
             
 
+            
+
              is returned; otherwise an
             <see
              cref="T:Mono.Options.OptionException" />
+
+            
 
             
 

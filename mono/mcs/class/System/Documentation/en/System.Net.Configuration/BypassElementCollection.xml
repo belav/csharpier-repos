@@ -32,8 +32,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Initializes an empty instance of the <see
              cref="T:System.Net.Configuration.BypassElementCollection" />
+
+            
 
             
 
@@ -106,8 +112,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.BypassElement" />
+
+          
 
           
 
@@ -172,6 +182,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -217,6 +229,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -225,8 +239,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.BypassElement" />
+
+          
 
           
 
@@ -269,6 +287,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -277,8 +297,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.BypassElement" />
+
+          
 
           
 
@@ -379,8 +403,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.BypassElement" />
+
+          
 
           
 
@@ -417,6 +445,8 @@
 
           
 
+          
+
           The key of the element to remove.</param
         >
       </Docs>
@@ -447,6 +477,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

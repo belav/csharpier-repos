@@ -26,8 +26,12 @@
 
         
 
+        
+
          delegate is used in conjunction with the <see
          cref="T:System.Web.UI.CompiledTemplateBuilder" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          delegate handles the <see
          cref="M:System.Web.UI.CompiledTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+
+        
 
         
 

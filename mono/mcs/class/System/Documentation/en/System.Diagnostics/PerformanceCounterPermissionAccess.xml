@@ -39,6 +39,8 @@
 
         
 
+        
+
          permission classes.</para
       >
     </summary>
@@ -67,6 +69,8 @@
           <para
             >The <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 
@@ -106,6 +110,8 @@
 
             
 
+            
+
              can read categories.</para
           >
         </summary>
@@ -142,6 +148,8 @@
 
             
 
+            
+
              can read and write categories.</para
           >
         </summary>
@@ -173,6 +181,8 @@
 
             
 
+            
+
              has no permissions.</para
           >
         </summary>
@@ -201,6 +211,8 @@
 
             
 
+            
+
              can read categories.</para
           >
         </summary>
@@ -226,6 +238,8 @@
           <para
             >The <see
              cref="T:System.Diagnostics.PerformanceCounter" />
+
+            
 
             
 

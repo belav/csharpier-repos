@@ -22,6 +22,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -82,6 +84,8 @@
 
             
 
+            
+
             . This hatch pattern is not antialiased.</para
           >
         </summary>
@@ -108,8 +112,12 @@
 
             
 
+            
+
              and are twice the width of <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />
+
+            
 
             
 
@@ -139,6 +147,8 @@
 
             
 
+            
+
             , and are twice its width, but the lines are not antialiased.</para
           >
         </summary>
@@ -162,6 +172,8 @@
           <para
             >Specifies vertical lines that are spaced 50 percent closer together than <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" />
+
+            
 
             
 
@@ -419,6 +431,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -442,6 +456,8 @@
           <para
             >Specifies a hatch that has the appearance of confetti, and is composed of larger pieces than <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.SmallConfetti" />
+
+            
 
             
 
@@ -471,6 +487,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -494,6 +512,8 @@
           <para
             >Specifies diagonal lines that slant to the right from top points to bottom points and are spaced 50 percent closer together than <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />
+
+            
 
             
 
@@ -523,6 +543,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -546,6 +568,8 @@
           <para
             >Specifies diagonal lines that slant to the left from top points to bottom points and are spaced 50 percent closer together than <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />
+
+            
 
             
 
@@ -575,6 +599,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -598,6 +624,8 @@
           <para
             >Specifies hatch style <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.SolidDiamond" />
+
+            
 
             
 
@@ -627,6 +655,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -653,8 +683,12 @@
 
             
 
+            
+
              (or 25 percent closer together than <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.LightHorizontal" />
+
+            
 
             
 
@@ -684,8 +718,12 @@
 
             
 
+            
+
              (or 25 percent closer together than <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.LightVertical" />
+
+            
 
             
 
@@ -1038,6 +1076,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1178,6 +1218,8 @@
 
             
 
+            
+
             , and are triple its width, but are not antialiased.</para
           >
         </summary>
@@ -1201,6 +1243,8 @@
           <para
             >Specifies diagonal lines that slant to the left from top points to bottom points, have the same spacing as hatch style <see
              cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />
+
+            
 
             
 

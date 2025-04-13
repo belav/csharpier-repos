@@ -12,12 +12,16 @@ protected C(): base() {}
 
       
 
+      
+
       or <code_example
       >
         <![CDATA[
 public C(): base() {}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -39,6 +43,8 @@ class Message
 
       
 
+      
+
       a default constructor is provided because the class contains no instance constructor declarations. Thus, the example is precisely equivalent to <code_example
       >
         <![CDATA[
@@ -50,6 +56,8 @@ class Message
 }  
 ]]>
       </code_example>
+
+      
 
       
 

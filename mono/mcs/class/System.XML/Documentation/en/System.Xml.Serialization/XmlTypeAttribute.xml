@@ -35,8 +35,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -49,11 +53,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can apply the <see
          cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
          cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
          type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
+
+        
 
         
 
@@ -86,10 +100,14 @@
 
           
 
+          
+
            property to false, the <format
            type="text/html">
             <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
           </format>
+
+          
 
           
 
@@ -104,12 +122,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlType in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+          
 
           
 
@@ -122,6 +144,8 @@
       <para
         >Controls the XML schema that is generated when the attribute target is serialized by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -151,6 +175,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -184,8 +210,12 @@
 
             
 
+            
+
              to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -195,6 +225,8 @@
                 >XML Schema Definition Tool (Xsd.exe)</a
               >
             </format>
+
+            
 
             
 
@@ -209,6 +241,8 @@
 
             
 
+            
+
              class and specifies the name of the XML type.</para
           >
         </summary>
@@ -217,8 +251,12 @@
 
           
 
+          
+
           The name of the XML type that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -270,8 +308,12 @@
 
             
 
+            
+
              to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -329,8 +371,12 @@
 
             
 
+            
+
              to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -340,6 +386,8 @@
                 >XML Schema Definition Tool (Xsd.exe)</a
               >
             </format>
+
+            
 
             
 

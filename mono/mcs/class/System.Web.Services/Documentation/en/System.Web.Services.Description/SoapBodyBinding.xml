@@ -35,6 +35,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -46,8 +48,12 @@
 
         
 
+        
+
          or an <see
          cref="T:System.Web.Services.Description.OutputBinding" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.SoapBodyBinding" />
+
+            
 
             
 
@@ -94,6 +102,8 @@
           <para
             >The value of this property should be set only if the value of the <see
              cref="P:System.Web.Services.Description.SoapBodyBinding.Use" />
+
+            
 
             
 
@@ -135,6 +145,8 @@
 
             
 
+            
+
              property is Encoded. Otherwise the property value will be ignored, thus leading to unexpected behavior by the XML Web service.</para
           >
         </remarks>
@@ -143,6 +155,8 @@
           <para
             >Get or sets the URI representing the location of the specifications for encoding of content not specifically defined by the <see
              cref="P:System.Web.Services.Description.SoapBodyBinding.Encoding" />
+
+            
 
             
 
@@ -180,8 +194,12 @@
 
             
 
+            
+
             . In such a case, the other members of the <see
              cref="P:System.Web.Services.Description.MimePart.Extensions" />
+
+            
 
             
 
@@ -190,6 +208,8 @@
           <para
             >This property returns exactly the same information as the <see
              cref="P:System.Web.Services.Description.SoapBodyBinding.PartsString" />
+
+            
 
             
 
@@ -228,8 +248,12 @@
 
             
 
+            
+
             . In such a case, the other members of the <see
              cref="P:System.Web.Services.Description.MimePart.Extensions" />
+
+            
 
             
 
@@ -241,8 +265,12 @@
 
             
 
+            
+
              property, but the results are returned within a space-delimited string rather than within an array. PartsString is used internally for xml serialization and shouldn't be called directly. To return the transmitted message parts appearing within the SOAP body portion of the transmission, use the <see
              cref="P:System.Web.Services.Description.SoapBodyBinding.Parts" />
+
+            
 
             
 
@@ -284,8 +312,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Description.SoapBodyBinding.Encoding" />
+
+            
 
             
 

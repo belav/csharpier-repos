@@ -25,12 +25,16 @@
 
             
 
+            
+
              uses the naming and calling conventions of the C language. The caller pushes the parameters onto the stack in reverse (right-to-left) order, and cleans the stack after the function returns. This calling convention enables you to call functions with varargs, which makes it appropriate for use with methods that accept a variable number of parameters, such as the C run-time functions <format
              type="text/html">
               <a href="77a854ae-5b48-4865-89f4-f2dc5cf80f52"
                 >printf, _printf_l, wprintf, _wprintf_l</a
               >
             </format>
+
+            
 
             
 
@@ -43,6 +47,8 @@
 
             
 
+            
+
              uses the Pascal calling convention. The caller pushes the parameters onto the stack in left-to-right order. The called function cleans the stack before returning.</para
           >
         </item>
@@ -52,12 +58,16 @@
 
             
 
+            
+
              is the standard calling convention for Win32 functions. It is the default convention for calling unmanaged functions with platform invoke. The caller pushes the parameters onto the stack in reverse (right to left) order, and the called function cleans the stack before returning.</para
           >
         </item>
         <item>
           <para>
             <see cref="F:System.Runtime.InteropServices.ComTypes.CALLCONV.CC_SYSCALL" />
+
+            
 
             
 
@@ -72,6 +82,8 @@
 
         
 
+        
+
         , see the MSDN Library.</para
       >
       <para
@@ -79,6 +91,8 @@
          type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
+
+        
 
         
 
@@ -92,6 +106,8 @@
          type="text/html">
           <a href="85fd7121-3eed-4a83-9ba2-caa81fa1e048">METHODDATA</a>
         </format>
+
+        
 
         
 
@@ -165,6 +181,8 @@
           <para
             >Indicates the end of the <see
              cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
+
+            
 
             
 

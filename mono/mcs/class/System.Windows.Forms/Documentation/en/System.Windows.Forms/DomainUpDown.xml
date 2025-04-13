@@ -39,13 +39,19 @@
 
         
 
+        
+
          control displays a single string value that is selected from an <see
          cref="T:System.Object" />
 
         
 
+        
+
          collection by clicking the up or down buttons of the control. The user can also enter text in the control, unless the <see
          cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          control, you can add or remove the items individually by using the <see
          cref="M:System.Collections.ArrayList.Add(System.Object)" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          methods. This can be called in an event handler, such as the <see
          cref="E:System.Windows.Forms.Control.Click" />
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
          property to true. When the <see
          cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+
+        
 
         
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Windows.Forms.DomainUpDown.DownButton" />
+
+        
 
         
 
@@ -100,8 +122,12 @@
 
         
 
+        
+
          is called to update the control with the new string. If <see
          cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+        
 
         
 
@@ -125,6 +151,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DomainUpDown" />
+
+            
 
             
 
@@ -156,8 +184,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -167,6 +199,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -182,6 +216,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -190,6 +226,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.DomainUpDown.DomainUpDownAccessibleObject" />
+
+            
 
             
 
@@ -218,8 +256,12 @@
 
             
 
+            
+
              control using the down button, you will eventually reach the last item in the collection. If you continue, and <see
              cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+
+            
 
             
 
@@ -266,8 +308,12 @@
 
             
 
+            
+
              collection can be built and made available to the <see
              cref="T:System.Windows.Forms.DomainUpDown" />
+
+            
 
             
 
@@ -276,8 +322,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.ArrayList.Insert(System.Int32,System.Object)" />
+
+            
 
             
 
@@ -317,11 +367,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,8 +386,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -369,11 +427,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DomainUpDown.OnSelectedItemChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -388,11 +450,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -403,8 +469,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -464,13 +534,19 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
+            
+
              control chooses the item on the list that begins with the character. If more than one item in the collection starts with the same character, the <see
              cref="T:System.Windows.Forms.DomainUpDown" />
+
+            
 
             
 
@@ -484,11 +560,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DomainUpDown.OnTextBoxKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -503,11 +583,15 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -518,8 +602,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -560,8 +648,12 @@
 
             
 
+            
+
              property, it will have a value of <see
              cref="F:System.Windows.Forms.Padding.Empty" />
+
+            
 
             
 
@@ -573,6 +665,8 @@
           <para
             >Gets or sets the spacing between the <see
              cref="T:System.Windows.Forms.DomainUpDown" />
+
+            
 
             
 
@@ -609,6 +703,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -617,6 +713,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DomainUpDown.Padding" />
+
+            
 
             
 
@@ -649,8 +747,12 @@
 
             
 
+            
+
              property holds the index value of the item in the collection that is currently selected in the spin box (also known as an up-down control). Collection items can be reassigned new index values if the <see
              cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
+
+            
 
             
 
@@ -660,6 +762,8 @@
             <para
               >If the user has entered an item in the spin box, or if no item has been selected, the <see
                cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
+
+              
 
               
 
@@ -701,6 +805,8 @@
 
             
 
+            
+
              property is set to the appropriate index value.</para
           >
         </remarks>
@@ -729,8 +835,12 @@
 
             
 
+            
+
              event to occur, the <see
              cref="P:System.Windows.Forms.DomainUpDown.SelectedItem" />
+
+            
 
             
 
@@ -742,6 +852,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DomainUpDown.SelectedItem" />
+
+            
 
             
 
@@ -775,6 +887,8 @@
 
             
 
+            
+
              is set to true, the collection is sorted in alphabetical order.</para
           >
         </remarks>
@@ -804,8 +918,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
+
+            
 
             
 
@@ -820,6 +938,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -828,6 +948,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.DomainUpDown" />
+
+            
 
             
 
@@ -856,8 +978,12 @@
 
             
 
+            
+
              control using the up button, you will eventually reach the first item in the collection. If you continue, and <see
              cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+
+            
 
             
 
@@ -914,6 +1040,8 @@
           <para
             >When the <see
              cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+
+            
 
             
 

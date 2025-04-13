@@ -37,8 +37,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -47,13 +51,19 @@
 
         
 
+        
+
          objects, in turn, represent the items displayed in list controls, such as the <see
          cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
+        
+
         . To programmatically retrieve <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -67,6 +77,8 @@
 
             
 
+            
+
              from the collection, using array notation.</para
           >
         </item>
@@ -77,8 +89,12 @@
 
             
 
+            
+
              method to copy the contents of the collection to a <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -92,8 +108,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -110,13 +130,19 @@
 
         
 
+        
+
          property specifies the total number of items in the collection, and is commonly used to determine the upper bound of the collection. You can add and remove items from the collection by using the <see
          cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
+
+        
 
         
 
@@ -128,6 +154,8 @@
       <para
         >A collection of <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -150,6 +178,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </remarks>
@@ -158,6 +188,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -188,8 +220,12 @@
 
             
 
+            
+
              method to append a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -198,13 +234,19 @@
 
             
 
+            
+
              to represent the text specified by the <paramref
              name="item" />
 
             
 
+            
+
              parameter. This <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -219,6 +261,8 @@
 
             
 
+            
+
              to the end of the collection that represents the specified string.</para
           >
         </summary>
@@ -227,8 +271,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -261,8 +309,12 @@
 
             
 
+            
+
              method to append a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -271,8 +323,12 @@
 
             
 
+            
+
              specified by the <paramref
              name="item" />
+
+            
 
             
 
@@ -287,6 +343,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -295,8 +353,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -329,8 +391,12 @@
 
             
 
+            
+
              method to add the items in the array of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -339,8 +405,12 @@
 
             
 
+            
+
              parameter. This allows you to add multiple <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -355,6 +425,8 @@
 
             
 
+            
+
              objects to the collection.</para
           >
         </summary>
@@ -363,8 +435,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -393,8 +469,12 @@
 
             
 
+            
+
              property to specify or determine the maximum number of items that the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -406,6 +486,8 @@
           <para
             >Gets or sets the maximum number of items that the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -434,13 +516,19 @@
 
             
 
+            
+
              method to remove all <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              objects. The <see
              cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+
+            
 
             
 
@@ -453,6 +541,8 @@
 
               
 
+              
+
                objects are removed from the collection. You cannot undo this.</para
             >
           </block>
@@ -462,6 +552,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -495,13 +587,19 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              specified by the <paramref
              name="item" />
+
+            
 
             
 
@@ -521,8 +619,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -553,8 +655,12 @@
 
             
 
+            
+
              into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -567,8 +673,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -584,8 +694,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -597,13 +711,19 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+          
 
           
 
@@ -614,8 +734,12 @@
 
           
 
+          
+
           The first index in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -643,8 +767,12 @@
 
             
 
+            
+
              property to determine the number of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -653,8 +781,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+
+            
 
             
 
@@ -666,6 +798,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -699,8 +833,12 @@
 
             
 
+            
+
              method to search the collection for a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -709,8 +847,12 @@
 
             
 
+            
+
              property that equals text specified by the <paramref
              name="text" />
+
+            
 
             
 
@@ -725,8 +867,12 @@
 
             
 
+            
+
              with a <see
              cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+            
 
             
 
@@ -741,8 +887,12 @@
 
             
 
+            
+
              that contains the text specified by the <paramref
              name="text" />
+
+            
 
             
 
@@ -751,6 +901,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -783,8 +935,12 @@
 
             
 
+            
+
              method to search the collection for a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -793,8 +949,12 @@
 
             
 
+            
+
              property that contains value specified by the <paramref
              name="value" />
+
+            
 
             
 
@@ -809,8 +969,12 @@
 
             
 
+            
+
              with a <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -825,8 +989,12 @@
 
             
 
+            
+
              that contains the value specified by the <paramref
              name="value" />
+
+            
 
             
 
@@ -835,6 +1003,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -865,13 +1035,19 @@
 
             
 
+            
+
              that can be iterated through to get each <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -883,6 +1059,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -891,11 +1069,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -908,8 +1090,12 @@
 
               
 
+              
+
                object or use the <see
                cref="M:System.Collections.IEnumerator.Reset" />
+
+              
 
               
 
@@ -918,8 +1104,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -935,13 +1125,19 @@
 
             
 
+            
+
              implemented object that contains all <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -956,13 +1152,19 @@
 
             
 
+            
+
              implemented object that contains all <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -996,13 +1198,19 @@
 
             
 
+            
+
              method to determine the index value of the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              specified by the <paramref
              name="item" />
+
+            
 
             
 
@@ -1017,6 +1225,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </summary>
@@ -1028,6 +1238,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </returns>
@@ -1036,8 +1248,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -1068,8 +1284,12 @@
 
             
 
+            
+
              method to add a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1078,8 +1298,12 @@
 
             
 
+            
+
              parameter. This implementation of the method creates a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1088,8 +1312,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+            
 
             
 
@@ -1098,8 +1326,12 @@
 
             
 
+            
+
              has the value <paramref
              name="item" />
+
+            
 
             
 
@@ -1108,8 +1340,12 @@
 
             
 
+            
+
              property has the value null. This <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1124,6 +1360,8 @@
 
             
 
+            
+
              which represents the specified string in the collection at the specified index location.</para
           >
         </summary>
@@ -1132,8 +1370,12 @@
 
           
 
+          
+
           The location in the collection to insert the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -1144,8 +1386,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1179,8 +1425,12 @@
 
             
 
+            
+
              method to add a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1189,13 +1439,19 @@
 
             
 
+            
+
              parameter. This implementation of the method takes the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              specified by the <paramref
              name="item" />
+
+            
 
             
 
@@ -1210,6 +1466,8 @@
 
             
 
+            
+
              in the collection at the specified index location.</para
           >
         </summary>
@@ -1218,8 +1476,12 @@
 
           
 
+          
+
           The location in the collection to insert the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -1230,8 +1492,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -1259,6 +1525,8 @@
 
             
 
+            
+
              can be written to in all cases.</para
           >
         </remarks>
@@ -1267,6 +1535,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -1295,6 +1565,8 @@
 
             
 
+            
+
              and is overridden to always return false.</para
           >
           <para
@@ -1303,13 +1575,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1321,6 +1599,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -1374,8 +1654,12 @@
 
             
 
+            
+
              method to remove a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1384,8 +1668,12 @@
 
             
 
+            
+
              object using the text in the <paramref
              name="item" />
+
+            
 
             
 
@@ -1394,8 +1682,12 @@
 
             
 
+            
+
              from the collection. The specified <paramref
              name="item" />
+
+            
 
             
 
@@ -1404,8 +1696,12 @@
 
             
 
+            
+
              property of an existing <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1420,6 +1716,8 @@
 
             
 
+            
+
              from the collection that represents the specified string.</para
           >
         </summary>
@@ -1428,8 +1726,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1462,8 +1764,12 @@
 
             
 
+            
+
              method to remove a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1472,8 +1778,12 @@
 
             
 
+            
+
              specified by the <paramref
              name="item" />
+
+            
 
             
 
@@ -1488,6 +1798,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1496,8 +1808,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -1527,8 +1843,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1543,6 +1863,8 @@
 
             
 
+            
+
              at the specified index from the collection.</para
           >
         </summary>
@@ -1551,8 +1873,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -1580,6 +1906,8 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
@@ -1588,13 +1916,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1606,6 +1940,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -1641,8 +1977,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1654,6 +1994,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Add(System.Object)" />
+
+            
 
             
 
@@ -1689,8 +2031,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1705,6 +2051,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1716,8 +2064,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1749,8 +2101,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1765,6 +2121,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1773,6 +2131,8 @@
           <para
             >The index of <paramref
              name="value" />
+
+            
 
             
 
@@ -1805,8 +2165,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1821,6 +2185,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1829,8 +2195,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1858,8 +2228,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1871,6 +2245,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1925,8 +2301,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1938,6 +2318,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Remove(System.Object)" />
+
+            
 
             
 
@@ -1969,8 +2351,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1982,6 +2368,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IStateManager.IsTrackingViewState" />
+
+            
 
             
 
@@ -2016,8 +2404,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2050,8 +2442,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2070,8 +2466,12 @@
 
             
 
+            
+
              that represents the state of the <see
              cref="T:System.Web.UI.WebControls.ListItemCollection" />
+
+            
 
             
 
@@ -2100,8 +2500,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 

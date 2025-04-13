@@ -23,12 +23,16 @@
 
           
 
+          
+
            delegate instead. </para
         >
       </block>
       <para
         >When you use the <see
          cref="T:System.Action" />
+
+        
 
         
 
@@ -41,12 +45,16 @@
 
         
 
+        
+
          delegate instead of explicitly defining a new delegate and assigning a named method to it. </para
       >
       <para>code reference: System.Action#2</para>
       <para
         >You can also use the <see
          cref="T:System.Action" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
 
         
 
+        
+
         .)</para
       >
       <para>code reference: System.Action#3</para>
@@ -68,12 +78,16 @@
 
         
 
+        
+
          delegate instance, as the following example illustrates. (For an introduction to lambda expressions, see <format
          type="text/html">
           <a href="57e3ba27-9a82-4067-aca7-5ca446b7bf93"
             >Lambda Expressions (C# Programming Guide)</a
           >
         </format>
+
+        
 
         
 

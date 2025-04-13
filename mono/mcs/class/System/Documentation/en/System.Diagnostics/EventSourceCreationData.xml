@@ -24,6 +24,8 @@
 
         
 
+        
+
          class to configure a new source for writing localized entries to an event log. It is not necessary to use this class to read from an event log.</para
       >
       <para
@@ -32,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Diagnostics.EventSourceCreationData.Source" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          and call the <see
          cref="M:System.Diagnostics.EventLog.CreateEventSource(System.Diagnostics.EventSourceCreationData)" />
+
+        
 
         
 
@@ -52,13 +62,19 @@
 
         
 
+        
+
          property and registers it for the event log specified in <see
          cref="P:System.Diagnostics.EventSourceCreationData.LogName" />
 
         
 
+        
+
         . This behavior is similar to using the <see
          cref="T:System.Diagnostics.EventLogInstaller" />
+
+        
 
         
 
@@ -70,8 +86,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Diagnostics.EventLog.WriteEntry" />
+
+        
 
         
 
@@ -83,8 +103,12 @@
 
         
 
+        
+
         , or using the <see
          cref="Overload:System.Diagnostics.EventLog.CreateEventSource" />
+
+        
 
         
 
@@ -99,8 +123,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+        
 
         
 
@@ -109,8 +137,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Diagnostics.EventSourceCreationData.ParameterResourceFile" />
+
+        
 
         
 
@@ -122,8 +154,12 @@
 
         
 
+        
+
          method writes the given string directly to the event log; it does not use a localizable message resource file. Use the <see
          cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
+
+        
 
         
 
@@ -135,8 +171,12 @@
 
         
 
+        
+
          method to write entries using resource identifiers to the event log. Then create a different source without resource files and use that source in the <see
          cref="Overload:System.Diagnostics.EventLog.WriteEntry" />
+
+        
 
         
 
@@ -177,8 +217,12 @@
 
             
 
+            
+
              instance, configure the instance properties for your application, and call the <see
              cref="M:System.Diagnostics.EventLog.CreateEventSource(System.Diagnostics.EventSourceCreationData)" />
+
+            
 
             
 
@@ -187,8 +231,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Diagnostics.EventLog.WriteEntry" />
+
+            
 
             
 
@@ -200,8 +248,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -210,8 +262,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.EventSourceCreationData.ParameterResourceFile" />
+
+            
 
             
 
@@ -223,8 +279,12 @@
 
             
 
+            
+
              method to write entries using resource identifiers to the event log. Then create a different source without resource files and use that source in the <see
              cref="Overload:System.Diagnostics.EventLog.WriteEntry" />
+
+            
 
             
 
@@ -233,6 +293,8 @@
           <para
             >The following table shows initial property values for an <see
              cref="T:System.Diagnostics.EventSourceCreationData" />
+
+            
 
             
 
@@ -262,6 +324,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -276,6 +340,8 @@
                 <para
                   >The <paramref
                    name="logName" />
+
+                  
 
                   
 
@@ -343,6 +409,8 @@
 
             
 
+            
+
              class with a specified event source and event log name.</para
           >
         </summary>
@@ -351,10 +419,14 @@
 
           
 
+          
+
           The name to register with the event log as a source of entries. </param
         >
         <param name="logName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,8 +456,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -397,8 +473,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -407,6 +487,8 @@
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -441,8 +523,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -454,8 +540,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -464,6 +554,8 @@
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -498,8 +590,12 @@
 
             
 
+            
+
              property to identify the event log that your application writes entries to using the new source. The event log can be a new log or an existing log. Applications and services should write to the Application log or a custom log. Device drivers should write to the System log. If you do not explicitly set the <see
              cref="P:System.Diagnostics.EventSourceCreationData.LogName" />
+
+            
 
             
 
@@ -514,8 +610,12 @@
 
             
 
+            
+
              property to the existing event log name. To create a new event log for the source, you must set the <see
              cref="P:System.Diagnostics.EventSourceCreationData.LogName" />
+
+            
 
             
 
@@ -527,13 +627,19 @@
 
             
 
+            
+
              or the <see
              cref="Overload:System.Diagnostics.EventLog.CreateEventSource" />
 
             
 
+            
+
              method to create a new event log, the associated file is stored in the %SystemRoot%\System32\Config directory on the specified computer. The file name is set by appending the first 8 characters of the <see
              cref="P:System.Diagnostics.EventSourceCreationData.LogName" />
+
+            
 
             
 
@@ -565,6 +671,8 @@
           <para
             >The <see
              cref="P:System.Diagnostics.EventSourceCreationData.MachineName" />
+
+            
 
             
 
@@ -600,11 +708,15 @@
 
             
 
+            
+
              property to configure an event log source to write localized event messages. Event messages are application-defined strings that describe the event to the user.</para
           >
           <para
             >Your application can write event log entries using resource identifiers. A resource identifier indexes a message located in the <see
              cref="P:System.Diagnostics.EventSourceCreationData.MessageResourceFile" />
+
+            
 
             
 
@@ -616,6 +728,8 @@
 
             
 
+            
+
              method to write localized entries for a source configured with a message resource file.</para
           >
           <para
@@ -624,11 +738,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -663,13 +781,19 @@
 
             
 
+            
+
              property to configure an event log source to write localized event messages with inserted parameter strings. Each localized event message specified in the <see
              cref="P:System.Diagnostics.EventSourceCreationData.MessageResourceFile" />
 
             
 
+            
+
              property can contain placeholders for insertion strings. These placeholders are used to specify the position and resource identifier for a language-independent string within the event message. The Event Viewer fills in the placeholders using the corresponding strings from the <see
              cref="P:System.Diagnostics.EventSourceCreationData.ParameterResourceFile" />
+
+            
 
             
 
@@ -698,6 +822,8 @@ TRIGGER.EXE
 
             
 
+            
+
              method to write localized entries for a source configured with a message resource file.</para
           >
           <para
@@ -706,8 +832,12 @@ TRIGGER.EXE
 
             
 
+            
+
              property does not contain messages with parameter insertion placeholders, do not set the <see
              cref="P:System.Diagnostics.EventSourceCreationData.ParameterResourceFile" />
+
+            
 
             
 
@@ -716,6 +846,8 @@ TRIGGER.EXE
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -750,8 +882,12 @@ TRIGGER.EXE
 
             
 
+            
+
              method uses the <see
              cref="P:System.Diagnostics.EventSourceCreationData.Source" />
+
+            
 
             
 
@@ -760,8 +896,12 @@ TRIGGER.EXE
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.EventSourceCreationData.MachineName" />
+
+            
 
             
 

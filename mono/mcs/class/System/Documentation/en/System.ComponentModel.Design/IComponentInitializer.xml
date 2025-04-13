@@ -20,13 +20,19 @@
 
         
 
+        
+
          interface can be implemented by any designer, which is a component that also implements <see
          cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
+        
+
         , which receives a recommended set of default values for the component it is designing. <see
          cref="T:System.ComponentModel.Design.IComponentInitializer" />
+
+        
 
         
 
@@ -38,13 +44,19 @@
 
         
 
+        
+
          should not depend on either of its methods—<see
          cref="M:System.ComponentModel.Design.IComponentInitializer.InitializeNewComponent(System.Collections.IDictionary)" />
 
         
 
+        
+
          or <see
          cref="M:System.ComponentModel.Design.IComponentInitializer.InitializeExistingComponent(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -55,6 +67,8 @@
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -96,13 +110,19 @@
 
             
 
+            
+
              method is called when a designer will re-initialize an existing component. For example, <see
              cref="M:System.ComponentModel.Design.IComponentInitializer.InitializeExistingComponent(System.Collections.IDictionary)" />
 
             
 
+            
+
              is commonly called after a drag-and-drop operation. The <paramref
              name="defaultValues" />
+
+            
 
             
 
@@ -112,6 +132,8 @@
             <para
               >When implementing this method, generally you should not modify the component properties beyond those recommendations found in <paramref
                name="defaultValue" />
+
+              
 
               
 
@@ -125,6 +147,8 @@
         </summary>
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +185,8 @@
 
             
 
+            
+
              method is called after a new component is created. It is typically called by the toolbox item itself and is used to configure the component’s default values.</para
           >
           <para>This dictionary may be null if no default values are specified. If the dictionary is null, the component properties should be left in their implicit default states.</para>
@@ -171,6 +197,8 @@
         </summary>
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

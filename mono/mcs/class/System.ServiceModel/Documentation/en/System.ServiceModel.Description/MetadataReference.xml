@@ -35,11 +35,15 @@
 
         
 
+        
+
          class is used with WS-MetadataExchange responses where references are directly encoded as &lt;mex:MetadataReference&gt; or &lt;mex:MetadataLocation&gt;. </para
       >
       <para
         >Metadata documents can reference many other documents that describe types and those documents can contain even more references. The <see
          cref="T:System.ServiceModel.Description.MetadataReference" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          class are commonly used when processing a <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          class is designed to resolve all references used to return the metadata. If, however, you need to examine each reference, use the <see
          cref="T:System.ServiceModel.Description.MetadataReference" />
+
+        
 
         
 
@@ -100,6 +112,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -132,6 +146,8 @@
 
             
 
+            
+
              class and specifies the network address and address version of the endpoint. </para
           >
         </summary>
@@ -140,8 +156,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -152,8 +172,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -242,6 +266,8 @@
 
             
 
+            
+
              that represents the XML Schema Document (XSD) for the metadata endpoint reference.</para
           >
         </returns>
@@ -277,8 +303,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -316,8 +346,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

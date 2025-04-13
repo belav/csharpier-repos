@@ -58,6 +58,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -101,6 +103,8 @@
 
             
 
+            
+
              that contains the new channel factory of the specified type.</para
           >
         </returns>
@@ -110,10 +114,14 @@
 
           
 
+          
+
            that specifies the binding context for the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +172,8 @@
 
             
 
+            
+
              that contains the new channel listener of the specified type.</para
           >
         </returns>
@@ -173,11 +183,15 @@
 
           
 
+          
+
            that specifies the binding context for the channel listener.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -223,11 +237,15 @@
 
           
 
+          
+
            that specifies the binding context for the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -278,11 +296,15 @@
 
           
 
+          
+
            that specifies the binding context for the channel listener.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -316,6 +338,8 @@
 
             
 
+            
+
              type.</para
           >
         </remarks>
@@ -327,6 +351,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -370,6 +396,8 @@
 
             
 
+            
+
             :</para
           >
           <list type="bullet">
@@ -398,6 +426,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -406,6 +436,8 @@
           <para
             >The property from the specified <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -418,10 +450,14 @@
 
           
 
+          
+
            that specifies the binding context.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,8 +616,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -623,8 +663,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -635,8 +679,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 
@@ -679,8 +727,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 

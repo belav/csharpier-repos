@@ -27,8 +27,12 @@
 
         
 
+        
+
          methods can be used to create a <see
          cref="T:System.Linq.Expressions.CatchBlock" />
+
+        
 
         
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              filter.</para
           >
         </summary>
@@ -116,6 +122,8 @@
           <para
             >Gets the type of <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -148,8 +156,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -164,8 +176,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -210,8 +226,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.CatchBlock.Variable" />
+
+          
 
           
 
@@ -222,8 +242,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.CatchBlock.Filter" />
+
+          
 
           
 
@@ -234,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.CatchBlock.Body" />
+
+          
 
           
 
@@ -267,6 +295,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Exception" />
+
+            
 
             
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
          uses the default <see
          cref="M:System.Object.Equals(System.Object)" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
       <para
         >For a list of initial property values for an instance of <see
          cref="T:System.Security.XmlSyntaxException" />
+
+        
 
         
 
@@ -76,6 +82,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.XmlSyntaxException" />
+
+            
 
             
 
@@ -122,6 +130,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -150,6 +160,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.XmlSyntaxException" />
+
+            
 
             
 
@@ -189,6 +201,8 @@
 
                   
 
+                  
+
                   ." </para
                 >
               </description>
@@ -203,11 +217,15 @@
 
             
 
+            
+
              class with the line number where the exception was detected.</para
           >
         </summary>
         <param name="lineNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,6 +255,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.XmlSyntaxException" />
+
+            
 
             
 
@@ -283,11 +303,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +346,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.XmlSyntaxException" />
+
+            
 
             
 
@@ -361,8 +387,12 @@
 
                   
 
+                  
+
                    - <paramref
                    name="message" />
+
+                  
 
                   
 
@@ -380,6 +410,8 @@
 
             
 
+            
+
              class with a specified error message and the line number where the exception was detected.</para
           >
         </summary>
@@ -388,10 +420,14 @@
 
           
 
+          
+
           The line number of the XML stream where the XML syntax error was detected. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,8 +464,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -438,11 +478,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.XmlSyntaxException" />
+
+            
 
             
 
@@ -489,11 +533,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,8 +552,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

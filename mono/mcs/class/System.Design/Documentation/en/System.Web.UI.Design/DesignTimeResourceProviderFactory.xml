@@ -37,6 +37,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,6 +70,8 @@
 
             
 
+            
+
              interface and resource class name.</para
           >
         </summary>
@@ -79,8 +83,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Web.UI.Design.IDesignTimeResourceWriter" />
+
+            
 
             
 
@@ -92,10 +100,14 @@
 
           
 
+          
+
           A reference to the design host.</param
         >
         <param name="classKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              or a class derived from <see
              cref="T:System.Web.Compilation.IResourceProvider" />
+
+            
 
             
 
@@ -142,6 +158,8 @@
         </returns>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,6 +194,8 @@
         </returns>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

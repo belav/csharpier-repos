@@ -38,13 +38,19 @@
 
         
 
+        
+
          attribute to a type to indicate that instances of this type can be serialized. The common language runtime throws <see
          cref="T:System.Runtime.Serialization.SerializationException" />
 
         
 
+        
+
          if any type in the graph of objects being serialized does not have the <see
          cref="T:System.SerializableAttribute" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          attribute even if the class also implements the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          attribute to a type, all private and public fields are serialized by default. You can control serialization more granularly by implementing the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          attribute to the field. If a field of a serializable type contains a pointer, a handle, or some other data structure that is specific to a particular environment, and cannot be meaningfully reconstituted in a different environment, then you might want to apply the <see
          cref="T:System.NonSerializedAttribute" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
         . For more information about serialization, see <see
          cref="N:System.Runtime.Serialization" />
+
+        
 
         
 
@@ -134,6 +156,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.SerializableAttribute" />
+
+            
 
             
 

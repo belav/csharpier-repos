@@ -43,6 +43,8 @@
 
         
 
+        
+
          to base 64.</para
       >
     </summary>
@@ -69,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -150,6 +154,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -158,10 +164,14 @@
 
             
 
+            
+
              to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -173,6 +183,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -204,8 +216,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -214,8 +230,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -229,10 +249,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -245,8 +269,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+              
 
               
 
@@ -259,6 +287,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -295,8 +325,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -311,11 +345,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,6 +384,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -418,8 +458,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -431,6 +475,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.Security.Cryptography.ToBase64Transform" />
+
+            
 
             
 
@@ -477,8 +523,12 @@
 
             
 
+            
+
              class is a block algorithm that processes input blocks of 3 bytes and creates output blocks of 4 bytes.  The <see
              cref="M:System.Security.Cryptography.ToBase64Transform.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -498,10 +548,14 @@
 
           
 
+          
+
           The input to compute to base 64. </param
         >
         <param name="inputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -512,6 +566,8 @@
 
           
 
+          
+
           The number of bytes in the input byte array to use as data. </param
         >
         <param name="outputBuffer">
@@ -519,10 +575,14 @@
 
           
 
+          
+
           The output to which to write the result. </param
         >
         <param name="outputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -568,6 +628,8 @@
 
           
 
+          
+
           The input to convert to base 64. </param
         >
         <param name="inputOffset">
@@ -575,10 +637,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="inputCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

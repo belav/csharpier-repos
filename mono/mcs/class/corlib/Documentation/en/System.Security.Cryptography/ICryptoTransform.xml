@@ -36,6 +36,8 @@
 
         
 
+        
+
         ).</para
       >
     </remarks>
@@ -62,6 +64,8 @@
         <remarks
           >You should never assume that a specific algorithm can be reused without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see
            cref="T:System.Security.Cryptography.CryptoConfig" />
+
+          
 
           
 
@@ -95,8 +99,12 @@
 
           
 
+          
+
            or <see
            cref="M:System.Security.Cryptography.HashAlgorithm.TransformFinalBlock" />
+
+          
 
           
 
@@ -105,6 +113,8 @@
         <remarks
           >You should never assume that a specific algorithm can transform multiple blocks without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see
            cref="T:System.Security.Cryptography.CryptoConfig" />
+
+          
 
           
 
@@ -198,10 +208,14 @@
 
           
 
+          
+
           The input for which to compute the transform. </param
         >
         <param name="inputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -212,6 +226,8 @@
 
           
 
+          
+
           The number of bytes in the input byte array to use as data. </param
         >
         <param name="outputBuffer">
@@ -219,10 +235,14 @@
 
           
 
+          
+
           The output to which to write the transform. </param
         >
         <param name="outputOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +281,8 @@
 
             
 
+            
+
              is a special function for transforming the last block or a partial block in the stream. It returns a new array that contains the remaining transformed bytes. A new array is returned, because the amount of information returned at the end might be larger than a single block when padding is added.</para
           >
         </remarks>
@@ -277,6 +299,8 @@
 
           
 
+          
+
           The input for which to compute the transform. </param
         >
         <param name="inputOffset">
@@ -284,10 +308,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="inputCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

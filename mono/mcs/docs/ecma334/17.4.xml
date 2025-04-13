@@ -6,11 +6,15 @@
 
     
 
+    
+
      introduces one or more fields of a given type. <grammar_production
     >
       <name>
         <non_terminal where="17.4">field-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -49,6 +57,8 @@
       <name>
         <non_terminal where="17.4">field-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -84,8 +94,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -106,6 +120,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -120,6 +136,8 @@
       <name>
         <non_terminal where="19.6">variable-initializer</non_terminal>
       </name>
+
+      
 
       
 
@@ -138,8 +156,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -148,8 +170,12 @@
 
     
 
+    
+
     ), a valid combination of the four access modifiers (<hyperlink
     >17.2.3</hyperlink>
+
+    
 
     
 
@@ -158,8 +184,12 @@
 
     
 
+    
+
     ). In addition, a <non_terminal
      where="17.4">field-declaration</non_terminal>
+
+    
 
     
 
@@ -168,13 +198,19 @@
 
     
 
+    
+
     ) or a volatile modifier (<hyperlink
     >17.4.3</hyperlink>
 
     
 
+    
+
     ), but not both The attributes and modifiers apply to all of the members declared by the <non_terminal
      where="17.4">field-declaration</non_terminal>
+
+    
 
     
 
@@ -186,8 +222,12 @@
 
     
 
+    
+
      specifies the type of the members introduced by the declaration. The type is followed by a list of <non_terminal
      where="17.4">variable-declarator</non_terminal>
+
+    
 
     
 
@@ -196,13 +236,19 @@
 
     
 
+    
+
      consists of an identifier that names that member, optionally followed by an "=" token and a  <non_terminal
      where="19.6">variable-initializer</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >17.4.5</hyperlink>
+
+    
 
     
 
@@ -214,6 +260,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -222,8 +270,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -232,8 +284,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.4</hyperlink>
+
+    
 
     
 
@@ -242,13 +298,19 @@
 
     
 
+    
+
     ). The value of a  non-readonly field can be both obtained and modified using postfix increment and decrement operators (<hyperlink
     >14.5.9</hyperlink>
 
     
 
+    
+
     ) and prefix increment and decrement operators (<hyperlink
     >14.6.5</hyperlink>
+
+    
 
     
 
@@ -269,6 +331,8 @@ class A
 
       
 
+      
+
       is equivalent to <code_example
       >
         <![CDATA[
@@ -280,6 +344,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

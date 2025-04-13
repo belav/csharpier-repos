@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration describes how data cached by a data source control expires in the ASP.NET cache. An ASP.NET data source control caches data in the ASP.NET cache based on a specified time-out period, which is set using the CacheDuration property. The <see
          cref="T:System.Web.UI.DataSourceCacheExpiry" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
         , the cached data is discarded when the amount of time specified passes since the data was first cached. If the expiration policy is set to <see
          cref="F:System.Web.UI.DataSourceCacheExpiry.Sliding" />
+
+        
 
         
 

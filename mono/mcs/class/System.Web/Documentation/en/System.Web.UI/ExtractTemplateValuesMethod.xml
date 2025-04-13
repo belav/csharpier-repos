@@ -29,6 +29,8 @@
 
         
 
+        
+
          delegate is used by ASP.NET and is not meant to be used directly from your code. </para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          class, which is the default implementation of the <see
          cref="T:System.Web.UI.IBindableTemplate" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
       <para
         >Provides a delegate with which ASP.NET extracts a set of name/value pairs from an <see
          cref="T:System.Web.UI.IBindableTemplate" />
+
+        
 
         
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          instances.</para
       >
     </summary>
@@ -60,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingCollectionElement" />
+
+            
 
             
 

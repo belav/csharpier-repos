@@ -9,6 +9,8 @@
 
         
 
+        
+
         . If X and Y are the same type, or if X and Y are derived from a common base type, then shared candidate operators only occur in the combined set once. </list_item
       >
       <list_item
@@ -17,8 +19,12 @@
 
         
 
+        
+
          through <hyperlink
         >14.13</hyperlink>
+
+        
 
         
 
@@ -27,6 +33,8 @@
       <list_item
         > The overload resolution rules of <hyperlink
         >14.4.2</hyperlink>
+
+        
 
         
 

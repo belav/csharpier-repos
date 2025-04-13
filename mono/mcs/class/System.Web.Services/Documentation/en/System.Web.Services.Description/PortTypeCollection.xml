@@ -26,6 +26,8 @@
 
         
 
+        
+
          class; that is, a collection of sets of operations supported by the XML Web service. This class cannot be inherited.</para
       >
     </summary>
@@ -53,8 +55,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.PortTypeCollection" />
+
+            
 
             
 
@@ -69,6 +75,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -77,8 +85,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 
@@ -112,8 +124,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.PortTypeCollection" />
+
+            
 
             
 
@@ -128,8 +144,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.PortTypeCollection" />
+
+            
 
             
 
@@ -141,8 +161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 
@@ -177,8 +201,12 @@
 
             
 
+            
+
              to a one-dimensional array of type <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -190,8 +218,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 
@@ -199,6 +231,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +292,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -270,8 +306,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 
@@ -306,8 +346,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -316,8 +360,12 @@
 
             
 
+            
+
              instance is added to the end of the <see
              cref="T:System.Web.Services.Description.PortTypeCollection" />
+
+            
 
             
 
@@ -333,8 +381,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.PortTypeCollection" />
+
+            
 
             
 
@@ -346,8 +398,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="portType" />
+
+          
 
           
 
@@ -358,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 
@@ -438,11 +498,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -457,8 +521,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.PortTypeCollection" />
+
+            
 
             
 
@@ -470,8 +538,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 

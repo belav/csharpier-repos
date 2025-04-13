@@ -28,13 +28,19 @@
 
         
 
+        
+
         , the class will provide a MethodNameCompleted event. If you add an instance of the <see
          cref="T:System.ComponentModel.AsyncCompletedEventHandler" />
 
         
 
+        
+
          delegate to the event, you will receive information about the outcome of asynchronous operations in the <see
          cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
 
         
 
+        
+
          property to determine if the asynchronous task was cancelled.</para
       >
       <para
@@ -54,11 +62,15 @@
 
         
 
+        
+
          property to determine if an exception occurred during execution of the asynchronous task.</para
       >
       <para
         >If the class supports multiple asynchronous methods, or multiple calls to the same asynchronous method, you can determine which task raised the MethodNameCompleted event by checking the value of the <see
          cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+        
 
         
 
@@ -101,11 +113,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,6 +132,8 @@
 
           
 
+          
+
           A value indicating whether the asynchronous operation was canceled.</param
         >
         <param name="userState">
@@ -123,8 +141,12 @@
 
           
 
+          
+
           The optional user-supplied state object passed to the <see
            cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync(System.Object)" />
+
+          
 
           
 
@@ -154,6 +176,8 @@
 
             
 
+            
+
              property is true, the asynchronous operation was interrupted.</para
           >
           <para
@@ -162,13 +186,19 @@
 
             
 
+            
+
              property before accessing any properties in a class derived from <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
             
 
+            
+
             ; otherwise, the property will raise an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -203,8 +233,12 @@
 
             
 
+            
+
              property. The client application's event-handler delegate should check the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+            
 
             
 
@@ -213,8 +247,12 @@
 
             
 
+            
+
             ; otherwise, the property will raise a <see
              cref="T:System.Reflection.TargetInvocationException" />
+
+            
 
             
 
@@ -223,8 +261,12 @@
 
             
 
+            
+
              property holding a reference to <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+            
 
             
 
@@ -233,6 +275,8 @@
           <para
             >The value of the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+            
 
             
 
@@ -288,6 +332,8 @@
           <para
             >If a class supports multiple asynchronous methods, or multiple invocations of a single method, you can determine which task raised the MethodNameCompleted event by checking the value of the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 

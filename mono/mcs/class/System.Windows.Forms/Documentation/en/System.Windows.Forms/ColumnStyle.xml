@@ -22,13 +22,19 @@
 
         
 
+        
+
          class represents the user interface (UI) characteristics of column in a <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
+        
+
         . The styles for all the columns in such a table are collected in the <see
          cref="P:System.Windows.Forms.TableLayoutPanel.ColumnStyles" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+        
 
         
 
@@ -68,13 +78,19 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.SizeType.AutoSize" />
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.ColumnStyle.Width" />
+
+            
 
             
 
@@ -86,6 +102,8 @@
           <para
             >Initializes and instance of the <see
              cref="T:System.Windows.Forms.ColumnStyle" />
+
+            
 
             
 
@@ -116,6 +134,8 @@
 
             
 
+            
+
              property to 0.</para
           >
         </remarks>
@@ -127,8 +147,12 @@
 
             
 
+            
+
              class using the supplied <see
              cref="T:System.Windows.Forms.SizeType" />
+
+            
 
             
 
@@ -140,8 +164,12 @@
 
           
 
+          
+
           A <see
            cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+          
 
           
 
@@ -172,13 +200,19 @@
 
             
 
+            
+
              parameter will vary depending on the <paramref
              name="sizeType" />
 
             
 
+            
+
              parameter. For more information, see the <see
              cref="P:System.Windows.Forms.ColumnStyle.Width" />
+
+            
 
             
 
@@ -193,8 +227,12 @@
 
             
 
+            
+
              class using the supplied <see
              cref="T:System.Windows.Forms.SizeType" />
+
+            
 
             
 
@@ -206,8 +244,12 @@
 
           
 
+          
+
           A <see
            cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+          
 
           
 
@@ -218,8 +260,12 @@
 
           
 
+          
+
           The preferred width, in pixels or percentage, depending on the <paramref
            name="sizeType" />
+
+          
 
           
 
@@ -247,8 +293,12 @@
 
             
 
+            
+
              parameter will take on different meanings depending on the <see
              cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+            
 
             
 
@@ -263,12 +313,16 @@
 
                     
 
+                    
+
                      value</para
                   >
                 </term>
                 <description>
                   <para>
                     <paramref name="width" />
+
+                    
 
                     
 

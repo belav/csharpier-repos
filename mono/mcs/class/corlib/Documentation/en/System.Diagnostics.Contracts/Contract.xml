@@ -24,11 +24,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >For tools and detailed instructions for using code contracts, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=152461">Code Contracts</see>
+
+        
 
         
 
@@ -41,13 +45,19 @@
 
           
 
+          
+
            method can only be tested statically and will not throw exceptions during run time if a contract is violated. You can download the binary rewriter CCRewrite from <see
            cref="http://go.microsoft.com/fwlink/?LinkId=152461">Code Contracts</see>
 
           
 
+          
+
            on the MSDN DevLabs Web site. CCRewrite comes with a Visual Studio add-in that enables you to activate run-time contract enforcement from the project <ui
           >Properties</ui>
+
+          
 
           
 
@@ -97,6 +107,8 @@
 
             
 
+            
+
              dialog box if a debugger is not attached. Optionally, the analyzer can be instructed to throw an exception.</para
           >
         </remarks>
@@ -106,6 +118,8 @@
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,13 +167,19 @@
 
             
 
+            
+
              dialog box if a debugger is not attached. Optionally, the analyzer can be instructed to throw an exception. The <paramref
              name="userMessage" />
 
             
 
+            
+
              parameter is passed to the debugger output. If <paramref
              name="userMessage" />
+
+            
 
             
 
@@ -175,10 +195,14 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <param name="userMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,6 +246,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -231,6 +257,8 @@
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,11 +306,15 @@
 
             
 
+            
+
              is not a constant string literal, the contract may not be understood by tools.</para
           >
           <para
             >At run time, using this method is equivalent to using the <see
              cref="M:System.Diagnostics.Contracts.Contract.Assert(System.Boolean,System.String)" />
+
+            
 
             
 
@@ -298,10 +330,14 @@
 
           
 
+          
+
           The conditional expression to assume true.</param
         >
         <param name="userMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,6 +370,8 @@
 
             
 
+            
+
              object that is passed to the event handler. This event notifies a managed application environment such as an interactive interpreter or a Web browser host that a contract has failed. Before doing so, it will raise an event that an application can handle as it sees fit. For example, if code is being run in a testing framework, you can log a test failure and then end the test. </para
           >
           <para
@@ -342,8 +380,12 @@
 
             
 
+            
+
              method in the .NET Framework class library is to call each handler that is registered with the <see
              cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+
+            
 
             
 
@@ -352,8 +394,12 @@
 
             
 
+            
+
              method for the event arguments. If any handler sets the failure as handled, the method returns null and no further action is taken. Alternatively, handlers can call the <see
              cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetUnwind" />
+
+            
 
             
 
@@ -397,8 +443,12 @@
 
             
 
+            
+
              method call, such as a <see
              cref="Overload:System.Diagnostics.Contracts.Contract.Requires" />
+
+            
 
             
 
@@ -407,8 +457,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" />
+
+            
 
             
 
@@ -417,11 +471,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When if-then-throw statements appear in this form, the contract tools recognize them as legacy-require statements. The <see
              cref="M:System.Diagnostics.Contracts.Contract.EndContractBlock" />
+
+            
 
             
 
@@ -467,6 +525,8 @@
 
             
 
+            
+
              parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally.</para
           >
           <list type="bullet">
@@ -477,6 +537,8 @@
               <para
                 >You must use the binary rewriter (available at <see
                  cref="http://go.microsoft.com/fwlink/?LinkId=152461">Code Contracts</see>
+
+                
 
                 
 
@@ -494,8 +556,12 @@
 
           
 
+          
+
           The conditional expression to test. The expression may include <see
            cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" />
+
+          
 
           
 
@@ -504,8 +570,12 @@
 
           
 
+          
+
           , and <see
            cref="M:System.Diagnostics.Contracts.Contract.Result``1" />
+
+          
 
           
 
@@ -550,6 +620,8 @@
 
             
 
+            
+
              parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally. </para
           >
           <list type="bullet">
@@ -566,6 +638,8 @@
 
                 
 
+                
+
                  on the MSDN DevLabs Web site) for run-time enforcement of this postcondition.</para
               >
             </item>
@@ -573,6 +647,8 @@
               <para
                 >If <paramref
                  name="userMessage" />
+
+                
 
                 
 
@@ -590,8 +666,12 @@
 
           
 
+          
+
           The conditional expression to test. The expression may include <see
            cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" />
+
+          
 
           
 
@@ -600,10 +680,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="userMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -654,8 +738,12 @@
 
             
 
+            
+
              parameter specifies a postcondition that is expected to be true when the enclosing method or property terminates abnormally and an exception of type <paramref
              name="TException" />
+
+            
 
             
 
@@ -682,10 +770,14 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <typeparam name="TException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,13 +829,19 @@
 
             
 
+            
+
              parameter specifies a postcondition that is expected to be true when the enclosing method or property terminates abnormally and an exception of type <paramref
              name="TException" />
 
             
 
+            
+
              is thrown. The <paramref
              name="message" />
+
+            
 
             
 
@@ -766,6 +864,8 @@
 
                 
 
+                
+
                  is not a constant string literal, the contract may not be understood by tools.</para
               >
             </item>
@@ -780,6 +880,8 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <param name="userMessage">
@@ -787,10 +889,14 @@
 
           
 
+          
+
           The message to display if the expression is false.</param
         >
         <typeparam name="TException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,6 +939,8 @@
 
             
 
+            
+
              parameter is one more than the last integer to facilitate using the length of a range of integers starting at 0. For example, it would be set to 5 for integers 0 through 4.</para
           >
         </remarks>
@@ -849,13 +957,19 @@
 
             
 
+            
+
              returns true for any integer starting from <paramref
              name="fromInclusive" />
 
             
 
+            
+
              to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -867,8 +981,12 @@
 
           
 
+          
+
           The first integer to pass to <paramref
            name="predicate" />
+
+          
 
           
 
@@ -879,8 +997,12 @@
 
           
 
+          
+
           One more than the last integer to pass to <paramref
            name="predicate" />
+
+          
 
           
 
@@ -888,6 +1010,8 @@
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -938,13 +1062,19 @@
 
             
 
+            
+
              returns true for any element of type <paramref
              name="T" />
 
             
 
+            
+
              in <paramref
              name="collection" />
+
+            
 
             
 
@@ -956,13 +1086,19 @@
 
           
 
+          
+
           The collection from which elements of type <paramref
            name="T" />
 
           
 
+          
+
            will be drawn to pass to <paramref
            name="predicate" />
+
+          
 
           
 
@@ -973,8 +1109,12 @@
 
           
 
+          
+
           The function to evaluate for an element in <paramref
            name="collection" />
+
+          
 
           
 
@@ -985,8 +1125,12 @@
 
           
 
+          
+
           The type that is contained in <paramref
            name="collection" />
+
+          
 
           
 
@@ -1029,6 +1173,8 @@
 
             
 
+            
+
              parameter is one more than the last integer to facilitate using the length of a range of integers starting at 0. For example, it would be set to 5 for integers 0 through 4.</para
           >
         </remarks>
@@ -1045,13 +1191,19 @@
 
             
 
+            
+
              returns true for all integers starting from <paramref
              name="fromInclusive" />
 
             
 
+            
+
              to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -1063,8 +1215,12 @@
 
           
 
+          
+
           The first integer to pass to <paramref
            name="predicate" />
+
+          
 
           
 
@@ -1075,8 +1231,12 @@
 
           
 
+          
+
           One more than the last integer to pass to <paramref
            name="predicate" />
+
+          
 
           
 
@@ -1084,6 +1244,8 @@
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1134,13 +1296,19 @@
 
             
 
+            
+
              returns true for all elements of type <paramref
              name="T" />
 
             
 
+            
+
              in <paramref
              name="collection" />
+
+            
 
             
 
@@ -1152,13 +1320,19 @@
 
           
 
+          
+
           The collection from which elements of type <paramref
            name="T" />
 
           
 
+          
+
            will be drawn to pass to <paramref
            name="predicate" />
+
+          
 
           
 
@@ -1169,8 +1343,12 @@
 
           
 
+          
+
           The function to evaluate for the existence of all the elements in <paramref
            name="collection" />
+
+          
 
           
 
@@ -1181,8 +1359,12 @@
 
           
 
+          
+
           The type that is contained in <paramref
            name="collection" />
+
+          
 
           
 
@@ -1222,8 +1404,12 @@
 
             
 
+            
+
              contracts are contained within a method that is identified by the <see
              cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" />
+
+            
 
             
 
@@ -1253,6 +1439,8 @@
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1296,8 +1484,12 @@
 
             
 
+            
+
              contracts are contained within a method that is identified by the <see
              cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" />
+
+            
 
             
 
@@ -1327,10 +1519,14 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <param name="userMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1411,6 +1607,8 @@
 
                 
 
+                
+
                  method when backward compatibility does not force you to throw a particular exception.</para
               >
             </item>
@@ -1422,6 +1620,8 @@
         </summary>
         <param name="condition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1474,6 +1674,8 @@
 
                 
 
+                
+
                  method when backward compatibility does not force you to throw a particular exception.</para
               >
             </item>
@@ -1488,10 +1690,14 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <param name="userMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1540,8 +1746,12 @@
 
               
 
+              
+
                method. If run-time checking is turned off, the process will be terminated. To obtain the tools for runtime checking, see <see
                cref="http://go.microsoft.com/fwlink/?LinkId=152461">Code Contracts</see>
+
+              
 
               
 
@@ -1562,6 +1772,8 @@
 
                 
 
+                
+
                  method when you want to throw an exception if the precondition fails. </para
               >
             </item>
@@ -1576,10 +1788,14 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <typeparam name="TException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1743,8 +1959,12 @@
 
                   
 
+                  
+
                    method. If run-time checking is turned off, the process will be terminated. To obtain the tools for runtime checking, see <see
                    cref="http://go.microsoft.com/fwlink/?LinkId=152461">Code Contracts</see>
+
+                  
 
                   
 
@@ -1763,6 +1983,8 @@
 
                 
 
+                
+
                  method when you want to throw an exception if the precondition fails. </para
               >
             </item>
@@ -1777,6 +1999,8 @@
 
           
 
+          
+
           The conditional expression to test.</param
         >
         <param name="userMessage">
@@ -1784,10 +2008,14 @@
 
           
 
+          
+
           The message to display if the condition is false.</param
         >
         <typeparam name="TException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1944,6 +2172,8 @@
 
             
 
+            
+
              contract.</para
           >
         </remarks>
@@ -1957,6 +2187,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

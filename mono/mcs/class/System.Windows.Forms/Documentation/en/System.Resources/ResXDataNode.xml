@@ -25,6 +25,8 @@
 
         
 
+        
+
          class supports the representation of rich data types within a resource file. It can support the storage of any object in a resource file, so long as the object supports serialization and type editors. </para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          object by calling one of its overloaded class constructors. You can then add the resource item or element to a resource file by calling the <see
          cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          object, you must enumerate the <see
          cref="T:System.Resources.ResXDataNode" />
+
+        
 
         
 
@@ -56,13 +66,19 @@
 
         
 
+        
+
          object, setting the <see
          cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
 
         
 
+        
+
          property to true, and calling the <see
          cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
+
+        
 
         
 
@@ -95,6 +111,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -103,10 +121,14 @@
 
           
 
+          
+
           The name of the resource.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +159,8 @@
 
             
 
+            
+
              class with a reference to a resource file.</para
           >
         </summary>
@@ -145,10 +169,14 @@
 
           
 
+          
+
           The name of the resource.</param
         >
         <param name="fileRef">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +203,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -188,8 +220,12 @@
 
             
 
+            
+
              property of an data node in an existing XML resource file by instantiating a <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -198,8 +234,12 @@
 
             
 
+            
+
              property to true, and calling the <see
              cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
+
+            
 
             
 
@@ -208,13 +248,19 @@
 
             
 
+            
+
              object that you use to enumerate the items in the XML resource file. The <see
              cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
+            
+
              property returns the <see
              cref="T:System.Resources.ResXDataNode" />
+
+            
 
             
 
@@ -269,8 +315,12 @@
 
             
 
+            
+
             ) and a column position (<see
              cref="P:System.Drawing.Point.Y" />
+
+            
 
             
 
@@ -279,8 +329,12 @@
 
             
 
+            
+
              of 0 and a <see
              cref="P:System.Drawing.Point.Y" />
+
+            
 
             
 
@@ -313,13 +367,19 @@
 
             
 
+            
+
              looks for a <see
              cref="T:System.ComponentModel.TypeConverter" />
 
             
 
+            
+
              by using the specified type resolution service that can convert from a string to the appropriate object. If the resource is a file reference, <see
              cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
+
+            
 
             
 
@@ -336,6 +396,8 @@
         </returns>
         <param name="typeResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -367,13 +429,19 @@
 
             
 
+            
+
              looks in the assemblies identified by names to find the object's corresponding type, and then looks for a <see
              cref="T:System.ComponentModel.TypeConverter" />
 
             
 
+            
+
              that can convert from a string to the appropriate object. If the resource is a file reference, <see
              cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
+
+            
 
             
 
@@ -390,6 +458,8 @@
         </returns>
         <param name="names">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -427,6 +497,8 @@
 
           
 
+          
+
           The type resolution service to use to locate a converter for this type. </param
         >
       </Docs>
@@ -458,6 +530,8 @@
         </returns>
         <param name="names">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,8 +582,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -524,6 +602,8 @@
 
             
 
+            
+
              object with the data needed to serialize the target object.</para
           >
         </summary>
@@ -532,10 +612,14 @@
 
           
 
+          
+
           An  object to populate with data.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -41,13 +41,19 @@
 
         
 
+        
+
          enables you to add arbitrary registration code to accommodate the requirements of COM clients. For example, you can update the registry using registration functions from the <see
          cref="N:Microsoft.Win32" />
 
         
 
+        
+
          namespace. If you provide a registration method, you must also apply <see
          cref="T:System.Runtime.InteropServices.ComUnregisterFunctionAttribute" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
         or through the <see
          cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
+
+        
 
         
 
@@ -85,8 +95,12 @@
 
             
 
+            
+
              parameter or a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -125,6 +139,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.ComRegisterFunctionAttribute" />
+
+            
 
             
 

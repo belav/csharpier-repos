@@ -19,8 +19,12 @@
 
         
 
+        
+
          class provides a set of static methods that can be used to render a group box control. Rendering a control refers to drawing the user interface of a control. To draw a group box, use one of the <see
          cref="Overload:System.Windows.Forms.GroupBoxRenderer.DrawGroupBox" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          will draw the group box with the current visual style. Otherwise, <see
          cref="Overload:System.Windows.Forms.GroupBoxRenderer.DrawGroupBox" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          that is set to one of the elements exposed by the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.GroupBox" />
+
+        
 
         
 
@@ -54,6 +66,8 @@
          type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
+
+        
 
         
 
@@ -95,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -107,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -119,8 +141,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.GroupBoxState" />
+
+          
 
           
 
@@ -162,8 +188,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -174,8 +204,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -186,8 +220,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -198,13 +236,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="groupBoxText" />
+
+          
 
           
 
@@ -215,8 +259,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.GroupBoxState" />
+
+          
 
           
 
@@ -259,8 +307,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -271,8 +323,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -283,8 +339,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -295,13 +355,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="groupBoxText" />
+
+          
 
           
 
@@ -312,13 +378,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
           
 
+          
+
            to apply to <paramref
            name="groupBoxText" />
+
+          
 
           
 
@@ -329,8 +401,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.GroupBoxState" />
+
+          
 
           
 
@@ -373,8 +449,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -385,8 +465,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -397,8 +481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -409,13 +497,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="groupBoxText" />
+
+          
 
           
 
@@ -426,8 +520,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -438,8 +536,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.GroupBoxState" />
+
+          
 
           
 
@@ -483,8 +585,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -495,8 +601,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -507,8 +617,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -519,13 +633,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to apply to <paramref
            name="groupBoxText" />
+
+          
 
           
 
@@ -536,13 +656,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
           
 
+          
+
            to apply to <paramref
            name="groupBoxText" />
+
+          
 
           
 
@@ -553,8 +679,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -565,8 +695,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.GroupBoxState" />
+
+          
 
           
 
@@ -603,13 +737,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to draw the background of the parent of <paramref
            name="childControl" />
+
+          
 
           
 
@@ -620,8 +760,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -629,6 +773,8 @@
         >
         <param name="childControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -667,8 +813,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.GroupBoxState" />
+
+          
 
           
 
@@ -699,8 +849,12 @@
 
             
 
+            
+
              is true, the <see
              cref="T:System.Windows.Forms.GroupBoxRenderer" />
+
+            
 
             
 
@@ -709,8 +863,12 @@
 
             
 
+            
+
              to determine the rendering style. If <see
              cref="P:System.Windows.Forms.GroupBoxRenderer.RenderMatchingApplicationState" />
+
+            
 
             
 

@@ -38,11 +38,15 @@
 
         
 
+        
+
          defines the set of all possible values for a thread priority. Thread priorities specify the relative priority of one thread versus another.</para
       >
       <para
         >Every thread has an assigned priority. Threads created within the runtime are initially assigned the Normal priority, while threads created outside the runtime retain their previous priority when they enter the runtime. You can get and set the priority of a thread by accessing its <see
          cref="P:System.Threading.Thread.Priority" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          before the operating system can schedule it.</para
       >
     </remarks>
@@ -63,6 +69,8 @@
       <para
         >Specifies the scheduling priority of a <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 
@@ -99,6 +107,8 @@
           <para
             >The <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -139,6 +149,8 @@
 
             
 
+            
+
              can be scheduled after threads with Normal priority and before those with Lowest priority.</para
           >
         </summary>
@@ -173,6 +185,8 @@
           <para
             >The <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -213,6 +227,8 @@
 
             
 
+            
+
              can be scheduled after threads with any other priority.</para
           >
         </summary>
@@ -247,6 +263,8 @@
           <para
             >The <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 

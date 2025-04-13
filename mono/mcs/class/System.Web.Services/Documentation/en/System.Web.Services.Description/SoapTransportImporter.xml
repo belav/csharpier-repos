@@ -32,6 +32,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -53,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.SoapTransportImporter" />
+
+            
 
             
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              object model (available through the <see
              cref="P:System.Web.Services.Description.SoapTransportImporter.ImportContext" />
+
+            
 
             
 
@@ -116,6 +124,8 @@
 
             
 
+            
+
              object model, the current class name, or the current method name.</para
           >
         </remarks>
@@ -124,6 +134,8 @@
           <para
             >Gets or sets a reference to the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -160,6 +172,8 @@
         </returns>
         <param name="transport">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

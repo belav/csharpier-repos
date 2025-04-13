@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          control is often used with the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , see the <see
          cref="Overload:System.Web.UI.HtmlControls.HtmlInputReset.#ctor" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+
+            
 
             
 
@@ -114,6 +128,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -135,6 +151,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+
+            
 
             
 
@@ -164,6 +182,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -172,6 +192,8 @@
           <para
             >Setting the <paramref
              name="type" />
+
+            
 
             
 
@@ -186,11 +208,15 @@
 
             
 
+            
+
              class using the specified input type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,6 +252,8 @@
 
             
 
+            
+
              property is not intended to be used directly from your code. </para
           >
         </remarks>
@@ -234,6 +262,8 @@
           <para
             >Gets or sets a value that indicates whether validation is performed when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+
+            
 
             
 
@@ -269,6 +299,8 @@
 
             
 
+            
+
              event is not intended to be used directly from your code. </para
           >
         </remarks>
@@ -277,6 +309,8 @@
           <para
             >Occurs when an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+
+            
 
             
 
@@ -313,6 +347,8 @@
 
             
 
+            
+
              property is not intended to be used directly from your code. </para
           >
         </remarks>
@@ -321,6 +357,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+
+            
 
             
 

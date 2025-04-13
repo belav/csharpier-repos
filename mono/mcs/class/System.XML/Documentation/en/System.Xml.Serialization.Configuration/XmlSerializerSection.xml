@@ -26,6 +26,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -49,6 +51,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.Configuration.XmlSerializerSection" />
+
+            
 
             
 
@@ -83,6 +87,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -91,6 +97,8 @@
           <para
             >Gets or sets a value that determines whether an additional check of progress of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

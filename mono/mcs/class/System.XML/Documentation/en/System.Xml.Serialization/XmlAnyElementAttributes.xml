@@ -30,8 +30,12 @@
 
         
 
+        
+
          to override the behavior of a set of <see
          cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          class can be applied to a class member, as long as each instance has a distinct <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          to collect unknown elements under the named element into the appropriate array. It is for this reason that multiple instances of the <see
          cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+        
 
         
 
@@ -60,11 +72,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To override a set of <see
          cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+        
 
         
 
@@ -78,6 +94,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -88,8 +106,12 @@
 
             
 
+            
+
              objects, and add each object to the collection using the <see
              cref="M:System.Xml.Serialization.XmlAnyElementAttributes.Add(System.Xml.Serialization.XmlAnyElementAttribute)" />
+
+            
 
             
 
@@ -100,6 +122,8 @@
           <para
             >Create an <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -113,8 +137,12 @@
 
             
 
+            
+
              property to the <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
+
+            
 
             
 
@@ -128,6 +156,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -138,13 +168,19 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
+            
+
              using the <see
              cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+
+            
 
             
 
@@ -158,8 +194,12 @@
 
             
 
+            
+
              using the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -173,6 +213,8 @@
 
             
 
+            
+
              objects.</para
           >
         </item>
@@ -183,6 +225,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+        
 
         
 
@@ -212,6 +256,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttributes" />
+
+            
 
             
 
@@ -251,6 +297,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -262,6 +310,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -270,8 +320,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 
@@ -310,6 +364,8 @@
 
             
 
+            
+
              exists in the collection.</para
           >
         </summary>
@@ -321,6 +377,8 @@
 
             
 
+            
+
              exists in the collection; otherwise, false.</para
           >
         </returns>
@@ -329,8 +387,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 
@@ -370,6 +432,8 @@
 
             
 
+            
+
              objects, starting at the specified index of the target array. </para
           >
         </summary>
@@ -378,8 +442,12 @@
 
           
 
+          
+
           The one-dimensional array of <see
            cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+          
 
           
 
@@ -390,8 +458,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -430,6 +502,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -441,6 +515,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -449,8 +525,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 
@@ -490,6 +570,8 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
@@ -498,8 +580,12 @@
 
           
 
+          
+
           The index where the <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 
@@ -510,8 +596,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 
@@ -578,6 +668,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -586,8 +678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 

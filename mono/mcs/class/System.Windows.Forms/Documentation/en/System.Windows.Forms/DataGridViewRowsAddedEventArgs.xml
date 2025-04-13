@@ -22,8 +22,12 @@
 
         
 
+        
+
          event occurs when rows are added to a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          value in the handler for this event is equal to the index of the new location of the row for new records, which is one greater than the row just added. When you add rows programmatically, however, the <see
          cref="P:System.Windows.Forms.DataGridViewRowsAddedEventArgs.RowIndex" />
+
+        
 
         
 
@@ -47,6 +55,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -55,6 +65,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -92,10 +106,14 @@
 
           
 
+          
+
           The index of the first added row.</param
         >
         <param name="rowCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

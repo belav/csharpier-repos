@@ -23,8 +23,12 @@
 
         
 
+        
+
          class uses the <see
          cref="T:Microsoft.Win32.SessionSwitchReason" />
+
+        
 
         
 

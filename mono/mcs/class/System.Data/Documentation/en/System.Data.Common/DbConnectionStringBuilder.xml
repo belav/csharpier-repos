@@ -29,13 +29,19 @@
 
         
 
+        
+
          class provides the base class from which the strongly typed connection string builders (<see
          cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
         
 
+        
+
         , <see
          cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          has been defined in a database-agnostic manner. Because of the addition of the <see
          cref="N:System.Data.Common" />
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
         
 
+        
+
          class lets users assign arbitrary key/value pairs and pass the resulting connection string to a strongly typed provider. All the data providers that are included as part of the .NET Framework provide a strongly typed class that inherits from <see
          cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+        
 
         
 
@@ -67,8 +81,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Data.OracleClient.OracleConnectionStringBuilder" />
+
+        
 
         
 
@@ -77,8 +95,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />
+
+        
 
         
 
@@ -91,8 +113,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+        
 
         
 
@@ -104,8 +130,12 @@
 
         
 
+        
+
          class or one of its strongly typed derivatives to build and modify connection strings. The <see
          cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+        
 
         
 
@@ -117,13 +147,19 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
         
 
+        
+
          performs no checks for valid key/value pairs. Therefore, it is possible using this class to create invalid connection strings. The <see
          cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+        
 
         
 
@@ -135,8 +171,12 @@
 
         
 
+        
+
          method and <see
          cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" />
+
+        
 
         
 
@@ -178,6 +218,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -205,8 +247,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              is true, this <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -215,8 +261,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              is false, this <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -231,11 +281,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              class, optionally using ODBC rules for quoting values.</para
           >
         </summary>
         <param name="useOdbcRules">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,6 +320,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              property can also be used to add new elements by setting the value of a key that does not exist in the dictionary. For example: myCollection["myNonexistentKey"] = myValue. </para
           >
           <para
@@ -274,13 +330,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              method by passing a null (Nothing in Visual Basic) key throws an <see
              cref="T:System.ArgumentNullException" />
 
             
 
+            
+
             . However, calling the <see
              cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" />
+
+            
 
             
 
@@ -295,6 +357,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -303,8 +367,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key to add to the <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+          
 
           
 
@@ -312,6 +380,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,8 +416,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              to create a collection of key/value pairs to be able to take advantage of the features included in the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -356,8 +430,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -372,6 +450,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -380,8 +460,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The <see
            cref="T:System.Text.StringBuilder" />
+
+          
 
           
 
@@ -392,10 +476,14 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key to be added.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,8 +519,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              to create a collection of key/value pairs to be able to take advantage of the features included in the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -441,8 +533,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -454,8 +550,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              use ODBC rules for delimiting fields, set the <paramref
              name="useOdbcRules" />
+
+            
 
             
 
@@ -470,6 +570,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -478,8 +580,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The <see
            cref="T:System.Text.StringBuilder" />
+
+          
 
           
 
@@ -490,6 +596,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key to be added.</param
         >
         <param name="value">
@@ -497,10 +605,14 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The value for the supplied key.</param
         >
         <param name="useOdbcRules">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,8 +654,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              class must be able to make the connection string visible or invisible within the designer's property grid. The <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.BrowsableConnectionString" />
+
+            
 
             
 
@@ -555,6 +671,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Gets or sets a value that indicates whether the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+
+            
 
             
 
@@ -583,8 +701,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              method removes all key/value pairs from the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -593,8 +715,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              property to 0 and the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+
+            
 
             
 
@@ -606,6 +732,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Clears the contents of the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -636,6 +764,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -647,8 +777,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              objects on the associated <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -679,12 +813,16 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             . Each pair contains the key and value, separated by an equal sign. The following example illustrates a typical connection string.</para
           >
           <code>"Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=AdventureWorks;Data Source=(local)"</code>
           <para
             >Data providers may expect specific keys and values for each connection string property. , These values are documented individually. The <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -696,8 +834,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -706,8 +848,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              collection, the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+
+            
 
             
 
@@ -716,8 +862,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              property, the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -729,6 +879,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Gets or sets the connection string associated with the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -760,6 +912,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -771,6 +925,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              contains an entry with the specified key; otherwise false.</para
           >
         </returns>
@@ -779,8 +935,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+          
 
           
 
@@ -811,6 +971,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Gets the current number of keys that are contained within the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+
+            
 
             
 
@@ -848,6 +1010,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              method returns true if the key/value pairs are equal, regardless of their order. The connection behavior of the two connection strings are equivalent, because order is never significant within connection strings. However, different order may affect connection pooling behavior of connections based on these connection strings.</para
           >
         </remarks>
@@ -856,6 +1020,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Compares the connection information in this <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -870,6 +1036,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              objects causes an equivalent connection string; otherwise false.</para
           >
         </returns>
@@ -878,13 +1046,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
           
 
+          
+
            to be compared with this <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+          
 
           
 
@@ -918,8 +1092,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              with information about all the properties of this <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -931,13 +1109,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Hashtable" />
 
           
 
+          
+
            to be filled with information about this <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+          
 
           
 
@@ -975,6 +1159,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -1007,6 +1193,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -1071,13 +1259,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              is unspecified, but it is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.Values" />
+
+            
 
             
 
@@ -1089,8 +1283,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1099,13 +1297,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
+            
+
              are reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1120,8 +1324,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              that contains the keys in the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -1152,8 +1360,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              method returns a value that indicates its success, it is not required to look for the key before trying to remove the key/value pair from the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -1165,6 +1377,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Removes the entry with the specified key from the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -1180,8 +1394,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key of the key/value pair to be removed from the connection string in this <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+          
 
           
 
@@ -1214,6 +1432,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1222,6 +1442,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Indicates whether the specified key exists in this <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -1236,6 +1458,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              contains an entry with the specified key; otherwise false.</para
           >
         </returns>
@@ -1244,8 +1468,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+          
 
           
 
@@ -1278,8 +1506,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1288,6 +1520,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -1302,13 +1536,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1320,8 +1560,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1330,8 +1574,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1342,8 +1590,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1373,8 +1625,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1386,6 +1642,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1394,6 +1652,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1424,8 +1684,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1437,6 +1701,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1445,6 +1711,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1475,8 +1743,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1485,6 +1757,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1499,6 +1773,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1507,8 +1783,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1519,8 +1799,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1549,8 +1833,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1559,6 +1847,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.Collections.IDictionary.Contains(System.Object)" />
+
+            
 
             
 
@@ -1573,6 +1863,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object contains an element with the specified key.</para
           >
         </summary>
@@ -1584,6 +1876,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              contains an element with the key; otherwise, false.</para
           >
         </returns>
@@ -1592,8 +1886,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1623,8 +1921,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1633,6 +1935,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IDictionary.GetEnumerator" />
+
+            
 
             
 
@@ -1647,8 +1951,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1663,8 +1971,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1716,8 +2028,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1726,6 +2042,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IDictionary.Remove(System.Object)" />
+
+            
 
             
 
@@ -1740,11 +2058,15 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="keyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1774,8 +2096,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1784,6 +2110,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -1799,6 +2127,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1829,8 +2159,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1839,6 +2173,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />
+
+            
 
             
 
@@ -1854,6 +2190,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >An <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -1881,8 +2219,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1891,6 +2233,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
+
+            
 
             
 
@@ -1926,8 +2270,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1936,6 +2284,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+
+            
 
             
 
@@ -1974,8 +2324,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -1984,6 +2338,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />
+
+            
 
             
 
@@ -2002,8 +2358,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              that is the converter for this object, or null if there is no <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -2034,8 +2394,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2044,6 +2408,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />
+
+            
 
             
 
@@ -2059,6 +2425,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -2089,8 +2457,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2099,6 +2471,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />
+
+            
 
             
 
@@ -2114,6 +2488,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -2146,8 +2522,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2156,6 +2536,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEditor(System.Type)" />
+
+            
 
             
 
@@ -2174,6 +2556,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              of the specified type that is the editor for this object, or null if the editor cannot be found.</para
           >
         </returns>
@@ -2182,8 +2566,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2213,8 +2601,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2223,6 +2615,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />
+
+            
 
             
 
@@ -2238,6 +2632,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -2270,8 +2666,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2280,6 +2680,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents(System.Attribute[])" />
+
+            
 
             
 
@@ -2298,6 +2700,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              that represents the filtered events for this component instance.</para
           >
         </returns>
@@ -2306,8 +2710,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -2337,8 +2745,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2347,6 +2759,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />
+
+            
 
             
 
@@ -2362,6 +2776,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -2394,8 +2810,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2404,6 +2824,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties(System.Attribute[])" />
+
+            
 
             
 
@@ -2422,6 +2844,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              that represents the filtered properties for this component instance.</para
           >
         </returns>
@@ -2430,8 +2854,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -2463,8 +2891,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2473,6 +2905,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
+
+            
 
             
 
@@ -2491,6 +2925,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              that represents the owner of the specified property.</para
           >
         </returns>
@@ -2499,8 +2935,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2526,6 +2966,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2534,6 +2976,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
           <para
             >The current <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+
+            
 
             
 
@@ -2595,13 +3039,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              is unspecified, but it is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.Keys" />
+
+            
 
             
 
@@ -2613,8 +3063,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2623,13 +3077,19 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
+            
+
              are reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2644,8 +3104,12 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
 
             
 
+            
+
              that contains the values in the <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 

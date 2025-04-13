@@ -42,6 +42,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -86,6 +88,8 @@
           <para
             >A reference parameter corresponds to the &lt;ReferenceParameters&gt; element described in the in the <see
              cref="http://go.microsoft.com/fwlink/?LinkID=96163">WS-Addressing specification</see>
+
+            
 
             
 

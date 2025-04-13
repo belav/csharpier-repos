@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace provides advanced GDI+ typography functionality.</para
       >
     </summary>
@@ -20,12 +22,16 @@
 
         
 
+        
+
          namespace. The classes in this namespace allow users to create and use collections of fonts.</para
       >
       <block subset="none" type="note">
         <para
           >Classes within the <see
            cref="N:System.Drawing.Text" />
+
+          
 
           
 

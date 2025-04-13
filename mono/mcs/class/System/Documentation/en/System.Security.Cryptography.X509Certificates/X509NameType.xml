@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -53,6 +55,8 @@
           <para
             >The DNS name associated with the alternative name of either the subject or the issuer of an X.509 certificate.  This value is equivalent to the <see
              cref="F:System.Security.Cryptography.X509Certificates.X509NameType.DnsName" />
+
+            
 
             
 

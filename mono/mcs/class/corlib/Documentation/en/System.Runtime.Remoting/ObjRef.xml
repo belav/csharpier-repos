@@ -42,8 +42,12 @@
 
         
 
+        
+
          is a serializable representation of an object that extends <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          is used to transfer an object reference across a <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          for an object is known as marshaling. You can create a <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
         ) either explicitly, by registering the MBR object with the remoting infrastructure (see <see
          cref="T:System.Runtime.Remoting.RemotingConfiguration" />
+
+        
 
         
 
@@ -82,13 +98,19 @@
 
         
 
+        
+
         ), or implicitly, by passing an MBR object as a parameter when calling a remote object. Remoting uses <see
          cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
+        
+
          objects to store and transmit all the relevant information about the <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -100,8 +122,12 @@
 
         
 
+        
+
          contains information that describes the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -113,8 +139,12 @@
 
         
 
+        
+
          is marshaled, the <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -123,10 +153,14 @@
 
         
 
+        
+
          is deserialized (see <format
          type="text/html">
           <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">[&lt;topic://cpconserialization&gt;]</a>
         </format>
+
+        
 
         
 
@@ -138,8 +172,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+        
 
         
 
@@ -151,11 +189,15 @@
 
         
 
+        
+
         . Applications need not distinguish between proxy references and object references. However, service providers dealing with issues such as activation, lifetime management, and transactions need to make such distinctions.</para
       >
       <para
         >This class makes a link demand and an inheritance demand at the class level. A <see
          cref="T:System.Security.SecurityException" />
+
+        
 
         
 
@@ -166,12 +208,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
             >[&lt;topic://cpconInheritanceDemands&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -205,6 +251,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -243,13 +291,19 @@
 
             
 
+            
+
              class to reference a specified <see
              cref="T:System.MarshalByRefObject" />
 
             
 
+            
+
              of a specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -261,8 +315,12 @@
 
           
 
+          
+
           The object that the new <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -273,13 +331,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            of the object that the new <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -316,6 +380,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -327,6 +393,8 @@
 
             
 
+            
+
              class from serialized data.</para
           >
         </summary>
@@ -335,10 +403,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -380,8 +452,12 @@
 
             
 
+            
+
              is created (see <see
              cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
+
+            
 
             
 
@@ -396,8 +472,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -435,6 +515,8 @@
 
             
 
+            
+
              bound object types only, and represents the groups of objects that provide such run-time services as transactions.</para
           >
         </remarks>
@@ -446,8 +528,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -487,8 +573,12 @@
 
             
 
+            
+
              with all the data needed to recreate the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -497,6 +587,8 @@
           <para
             >The current method is an implementation of <see
              cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+            
 
             
 
@@ -511,8 +603,12 @@
 
             
 
+            
+
              with the data needed to serialize the current <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -524,8 +620,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -533,6 +633,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,6 +676,8 @@
 
             
 
+            
+
              describes.</para
           >
         </summary>
@@ -585,11 +689,15 @@
 
             
 
+            
+
              describes.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,8 +731,12 @@
 
             
 
+            
+
              instance references an object located in the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -639,8 +751,12 @@
 
             
 
+            
+
              instance references an object located in the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -680,6 +796,8 @@
 
             
 
+            
+
              instance references an object located in the current process.</para
           >
         </summary>
@@ -688,6 +806,8 @@
           <para
             >A Boolean value that indicates whether the current <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -724,8 +844,12 @@
 
             
 
+            
+
              contains detailed information about the type of remote object represented by the current <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -740,8 +864,12 @@
 
             
 
+            
+
              for the object that the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 

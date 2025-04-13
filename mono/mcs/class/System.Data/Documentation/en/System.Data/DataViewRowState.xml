@@ -29,8 +29,12 @@
 
         
 
+        
+
          values are used either to retrieve a particular version of data from a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -56,13 +64,19 @@
 
         
 
+        
+
          uses <see
          cref="T:System.Data.DataViewRowState" />
 
         
 
+        
+
          in the <see
          cref="M:System.Data.DataTable.Select" />
+
+        
 
         
 
@@ -74,6 +88,8 @@
       <para
         >Describes the version of data in a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -115,6 +131,8 @@
           <para
             >Current rows including unchanged, new, and modified rows. By default, <see
              cref="T:System.Data.DataViewRowState" />
+
+            
 
             
 

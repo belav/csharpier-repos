@@ -33,8 +33,12 @@
 
           
 
+          
+
            class instead of the <see
            cref="T:System.TimeZone" />
+
+          
 
           
 
@@ -47,13 +51,19 @@
 
         
 
+        
+
          class to retrieve information about the current time zone, and to convert times from local time to Coordinated Universal Time (UTC) or vice versa. However, you cannot use the <see
          cref="T:System.TimeZone" />
 
         
 
+        
+
          class to represent time zones other than the local zone or to handle date and time conversions from one time zone to another. For this purpose, use the <see
          cref="T:System.TimeZoneInfo" />
+
+        
 
         
 
@@ -65,13 +75,19 @@
 
         
 
+        
+
          class supports only a single daylight saving time adjustment rule for the local time zone. As a result, the <see
          cref="T:System.TimeZone" />
 
         
 
+        
+
          class can accurately report daylight saving time information or convert between UTC and local time only for the period in which the latest adjustment rule is in effect. In contrast, the <see
          cref="T:System.TimeZoneInfo" />
+
+        
 
         
 
@@ -108,6 +124,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -135,13 +153,19 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.TimeZoneInfo.Local" />
 
             
 
+            
+
              property. Whenever possible, use the <see
              cref="P:System.TimeZoneInfo.Local" />
+
+            
 
             
 
@@ -177,13 +201,19 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.TimeZoneInfo.DaylightName" />
 
             
 
+            
+
              property. Whenever possible, use the <see
              cref="P:System.TimeZoneInfo.DaylightName" />
+
+            
 
             
 
@@ -227,8 +257,12 @@
 
             
 
+            
+
              object, where the value of <see
              cref="P:System.Globalization.DaylightTime.Start" />
+
+            
 
             
 
@@ -237,8 +271,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -247,8 +285,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -267,8 +309,12 @@
 
             
 
+            
+
              object that contains the start and end date for daylight saving time in <paramref
              name="year" />
+
+            
 
             
 
@@ -277,6 +323,8 @@
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,10 +362,14 @@
 
             
 
+            
+
              parameter and Coordinated Universal Time (UTC). That is:</para
           >
           <para>
             <paramref name="time" />
+
+            
 
             
 
@@ -329,8 +381,12 @@
 
             
 
+            
+
              based on its <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -339,8 +395,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -349,8 +409,12 @@
 
             
 
+            
+
             , the method returns the offset of the local time zone. If the value of the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -359,8 +423,12 @@
 
             
 
+            
+
             , the method returns an offset equal to <see
              cref="F:System.TimeSpan.Zero" />
+
+            
 
             
 
@@ -372,8 +440,12 @@
 
             
 
+            
+
              applies the current adjustment rule to <paramref
              name="time" />
+
+            
 
             
 
@@ -382,8 +454,12 @@
 
             
 
+            
+
              reflects whether <paramref
              name="time" />
+
+            
 
             
 
@@ -396,8 +472,12 @@
 
               
 
+              
+
                method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the UTC offset of a local time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref
                name="time" />
+
+              
 
               
 
@@ -410,13 +490,19 @@
 
             
 
+            
+
              method corresponds to the <see
              cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" />
 
             
 
+            
+
              method. Whenever possible, use the <see
              cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" />
+
+            
 
             
 
@@ -428,13 +514,19 @@
 
             
 
+            
+
              and this value's offset from UTC are not tightly coupled, a local or unspecified date and time value can return a different offset value when run on different computers or when run on the same computer under different time zones. If this behavior is undesirable, use a <see
              cref="T:System.DateTimeOffset" />
 
             
 
+            
+
              value instead. The <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -453,11 +545,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="time">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +591,8 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
@@ -503,8 +601,12 @@
 
             
 
+            
+
              class supports a single daylight saving time adjustment rule, the <see
              cref="M:System.TimeZone.IsDaylightSavingTime(System.DateTime)" />
+
+            
 
             
 
@@ -513,8 +615,12 @@
 
             
 
+            
+
              method. Whenever possible, use the <see
              cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
+
+            
 
             
 
@@ -533,11 +639,15 @@
 
             
 
+            
+
              is in a daylight saving time period; otherwise, false.</para
           >
         </returns>
         <param name="time">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -576,13 +686,19 @@
 
             
 
+            
+
              method provides the same functionality as this overload of the <see
              cref="M:System.TimeZone.IsDaylightSavingTime(System.DateTime,System.Globalization.DaylightTime)" />
 
             
 
+            
+
              method. Whenever possible, use the <see
              cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
+
+            
 
             
 
@@ -601,8 +717,12 @@
 
             
 
+            
+
              is in <paramref
              name="daylightTimes" />
+
+            
 
             
 
@@ -614,10 +734,14 @@
 
           
 
+          
+
           A date and time. </param
         >
         <param name="daylightTimes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -647,13 +771,19 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.TimeZoneInfo.StandardName" />
 
             
 
+            
+
              property. Whenever possible, use the <see
              cref="P:System.TimeZoneInfo.StandardName" />
+
+            
 
             
 
@@ -693,8 +823,12 @@
 
             
 
+            
+
              parameter and the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -706,6 +840,8 @@
                 <term>
                   <para>
                     <paramref name="time" />
+
+                    
 
                     
 
@@ -728,6 +864,8 @@
 
                   
 
+                  
+
                   ).</para
                 >
               </term>
@@ -741,8 +879,12 @@
 
                   
 
+                  
+
                    object whose value is the local time that corresponds to <paramref
                    name="time" />
+
+                  
 
                   
 
@@ -755,6 +897,8 @@
                 <para
                   >A local time (<see
                    cref="F:System.DateTimeKind.Local" />
+
+                  
 
                   
 
@@ -771,8 +915,12 @@
 
                   
 
+                  
+
                    value represented by the <paramref
                    name="time" />
+
+                  
 
                   
 
@@ -785,6 +933,8 @@
                 <para
                   >An unspecified time (<see
                    cref="F:System.DateTimeKind.Unspecified" />
+
+                  
 
                   
 
@@ -801,8 +951,12 @@
 
                   
 
+                  
+
                    object whose value is the local time that corresponds to <paramref
                    name="time" />
+
+                  
 
                   
 
@@ -817,8 +971,12 @@
 
             
 
+            
+
              applies the current adjustment rule to <paramref
              name="time" />
+
+            
 
             
 
@@ -831,8 +989,12 @@
 
               
 
+              
+
                method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the local time corresponding to a particular UTC time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref
                name="time" />
+
+              
 
               
 
@@ -845,8 +1007,12 @@
 
             
 
+            
+
              method corresponds to the <see
              cref="M:System.TimeZoneInfo.ConvertTimeFromUtc(System.DateTime,System.TimeZoneInfo)" />
+
+            
 
             
 
@@ -855,13 +1021,19 @@
 
             
 
+            
+
              parameter set to <see
              cref="P:System.TimeZoneInfo.Local" />
 
             
 
+            
+
             . Whenever possible, use the <see
              cref="M:System.TimeZoneInfo.ConvertTimeFromUtc(System.DateTime,System.TimeZoneInfo)" />
+
+            
 
             
 
@@ -880,8 +1052,12 @@
 
             
 
+            
+
              object whose value is the local time that corresponds to <paramref
              name="time" />
+
+            
 
             
 
@@ -890,6 +1066,8 @@
         </returns>
         <param name="time">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -927,8 +1105,12 @@
 
             
 
+            
+
              applies the current adjustment rule to the <paramref
              name="time" />
+
+            
 
             
 
@@ -941,8 +1123,12 @@
 
               
 
+              
+
                method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the Coordinated Universal Time (UTC) corresponding to a particular local time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref
                name="time" />
+
+              
 
               
 
@@ -955,8 +1141,12 @@
 
             
 
+            
+
              parameter is an ambiguous time, the method assumes that it is a standard time. (An ambiguous time is one that can map either to a standard time or to a daylight saving time in the local time zone.) If <paramref
              name="time" />
+
+            
 
             
 
@@ -968,8 +1158,12 @@
 
             
 
+            
+
              is interpreted in relation to the current time zone on the current system, the date and time returned by this method can differ if an application is run on different computers or on the same computer with different time zones. For cases in which a date and time value must represent a single, unambiguous point in time, use a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -981,8 +1175,12 @@
 
             
 
+            
+
              method corresponds to the <see
              cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" />
+
+            
 
             
 
@@ -991,8 +1189,12 @@
 
             
 
+            
+
              parameter whose <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -1001,8 +1203,12 @@
 
             
 
+            
+
             . Whenever possible, use the <see
              cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" />
+
+            
 
             
 
@@ -1021,8 +1227,12 @@
 
             
 
+            
+
              object whose value is the Coordinated Universal Time (UTC) that corresponds to <paramref
              name="time" />
+
+            
 
             
 
@@ -1031,6 +1241,8 @@
         </returns>
         <param name="time">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

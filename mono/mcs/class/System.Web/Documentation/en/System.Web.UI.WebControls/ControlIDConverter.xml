@@ -22,8 +22,12 @@
 
         
 
+        
+
          class derives from the <see
          cref="T:System.ComponentModel.StringConverter" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          class also serves as the base class for the <see
          cref="T:System.Web.UI.WebControls.AssociatedControlConverter" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.ValidatedControlConverter" />
+
+        
 
         
 
@@ -54,12 +64,16 @@
 
         
 
+        
+
          or <format
          type="text/html">
           <a href="49253AE6-7657-4810-82AB-1176A6FEEADA"
             >[&lt;topic://cpconGeneralizedTypeConversion&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -87,8 +101,12 @@
 
               
 
+              
+
                object. For more information, see the examples in <see
                cref="T:System.ComponentModel.TypeConverter" />
+
+              
 
               
 
@@ -101,6 +119,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ControlIDConverter" />
+
+            
 
             
 
@@ -135,8 +155,12 @@
 
             
 
+            
+
              that is returned by the <see
              cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -152,8 +176,12 @@
 
           
 
+          
+
           The control instance to test for inclusion in the <see
            cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+          
 
           
 
@@ -186,8 +214,12 @@
 
             
 
+            
+
              method is called on each control found in the container. The control ID is only added to the <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 
@@ -202,6 +234,8 @@
 
             
 
+            
+
              when provided with a format context.</para
           >
         </summary>
@@ -213,6 +247,8 @@
 
             
 
+            
+
              that holds a set of strings representing the control IDs of the controls in the current container. If no controls are currently contained, an empty collection is returned. If the context is null or there is no current container, then null is returned.</para
           >
         </returns>
@@ -221,8 +257,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -259,6 +299,8 @@
 
             
 
+            
+
              method is an exclusive list of possible values, using the specified context.</para
           >
         </summary>
@@ -271,8 +313,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -310,6 +356,8 @@
 
             
 
+            
+
              should be called to find a common set of control ID values the object supports; otherwise, false. This implementation returns true if the context is not null; otherwise, false.</para
           >
         </returns>
@@ -318,8 +366,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

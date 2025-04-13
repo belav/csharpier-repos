@@ -22,13 +22,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Channels.AddressingVersion.WSAddressing10" />
 
         
 
+        
+
          properties, respectively. There is also an addressing version available that is not associated with WS-Addressing, which is retrieved using the <see
          cref="P:System.ServiceModel.Channels.AddressingVersion.None" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          provides the return type for the <see
          cref="P:System.ServiceModel.Channels.MessageVersion.Addressing" />
+
+        
 
         
 
@@ -50,13 +60,19 @@
 
         
 
+        
+
          also contains the SOAP envelope version in addition to the addressing version information. The <see
          cref="T:System.ServiceModel.EnvelopeVersion" />
 
         
 
+        
+
          provides the return type for the <see
          cref="P:System.ServiceModel.Channels.MessageVersion.Envelope" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
             
 
+            
+
              provides the return type for the <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Addressing" />
+
+            
 
             
 
@@ -105,13 +125,19 @@
 
             
 
+            
+
              also contains the SOAP envelope version in addition to the addressing version information. The <see
              cref="T:System.ServiceModel.EnvelopeVersion" />
 
             
 
+            
+
              provides the return type for the <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Envelope" />
+
+            
 
             
 
@@ -176,8 +202,12 @@
 
             
 
+            
+
              provides the return type for the <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Addressing" />
+
+            
 
             
 
@@ -186,13 +216,19 @@
 
             
 
+            
+
              also contains the SOAP envelope version in addition to the addressing version information. The <see
              cref="T:System.ServiceModel.EnvelopeVersion" />
 
             
 
+            
+
              provides the return type for the <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Envelope" />
+
+            
 
             
 
@@ -231,8 +267,12 @@
 
             
 
+            
+
              provides the return type for the <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Addressing" />
+
+            
 
             
 
@@ -241,13 +281,19 @@
 
             
 
+            
+
              also contains the SOAP envelope version in addition to the addressing version information. The <see
              cref="T:System.ServiceModel.EnvelopeVersion" />
 
             
 
+            
+
              provides the return type for the <see
              cref="P:System.ServiceModel.Channels.MessageVersion.Envelope" />
+
+            
 
             
 

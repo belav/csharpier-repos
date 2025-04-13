@@ -24,6 +24,8 @@
 
         
 
+        
+
          control to enable selecting data in a data-bound control through the query string.</para
       >
     </summary>
@@ -48,6 +50,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.IPersistedSelector.DataKey" />
+
+            
 
             
 

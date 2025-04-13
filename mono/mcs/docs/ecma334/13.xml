@@ -8,8 +8,12 @@
 
       
 
+      
+
        to type <keyword
       >long</keyword>
+
+      
 
       
 
@@ -18,8 +22,12 @@
 
       
 
+      
+
        can implicitly be treated as type <keyword
       >long</keyword>
+
+      
 
       
 
@@ -28,8 +36,12 @@
 
       
 
+      
+
        to type <keyword
       >int</keyword>
+
+      
 
       
 
@@ -44,13 +56,19 @@ int c = (int) b;  // explicit conversion from long to int
 
       
 
+      
+
       end example]</example
     >
 
     
 
+    
+
      Some conversions are defined by the language. Programs may also define their own conversions (<hyperlink
     >13.4</hyperlink>
+
+    
 
     
 

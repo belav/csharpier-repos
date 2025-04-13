@@ -19,6 +19,8 @@
 
         
 
+        
+
          method starts a user interface for selecting a URL.</para
       >
     </remarks>
@@ -59,8 +61,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -71,8 +77,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -83,6 +93,8 @@
 
           
 
+          
+
           The initial URL to be shown in the picker window. </param
         >
         <param name="caption">
@@ -90,10 +102,14 @@
 
           
 
+          
+
           The caption of the picker window. </param
         >
         <param name="filter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,6 +148,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -144,8 +162,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -156,8 +178,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -168,10 +194,14 @@
 
           
 
+          
+
           The initial URL to be shown in the picker window. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +212,8 @@
 
           
 
+          
+
           The filter string to use to optionally filter the files displayed in the picker window. </param
         >
         <param name="options">
@@ -189,8 +221,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.UrlBuilderOptions" />
+
+          
 
           
 
@@ -231,8 +267,12 @@
 
             
 
+            
+
              interface is used to obtain the <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -244,6 +284,8 @@
           <para
             >Creates a UI to create or pick a URL, using the specified <see
              cref="T:System.Web.UI.Design.UrlBuilderOptions" />
+
+            
 
             
 
@@ -259,8 +301,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -271,8 +317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -283,10 +333,14 @@
 
           
 
+          
+
           The initial URL to be shown in the picker window.</param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,6 +351,8 @@
 
           
 
+          
+
           The filter string to use to optionally filter the files displayed in the picker window.</param
         >
         <param name="options">
@@ -304,8 +360,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.UrlBuilderOptions" />
+
+          
 
           
 

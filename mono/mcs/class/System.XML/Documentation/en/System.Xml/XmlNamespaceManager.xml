@@ -48,10 +48,14 @@
 
         
 
+        
+
         . </para
       >
       <para>
         <see cref="T:System.Xml.XmlNamespaceManager" />
+
+        
 
         
 
@@ -79,6 +83,8 @@
 
               
 
+              
+
                method</para
             >
           </description>
@@ -90,6 +96,8 @@
           <description>
             <para>
               <see cref="M:System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)" />
+
+              
 
               
 
@@ -107,6 +115,8 @@
 
               
 
+              
+
                property</para
             >
           </description>
@@ -118,6 +128,8 @@
           <description>
             <para>
               <see cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" />
+
+              
 
               
 
@@ -135,6 +147,8 @@
 
               
 
+              
+
                method</para
             >
           </description>
@@ -146,6 +160,8 @@
           <description>
             <para>
               <see cref="M:System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+
+              
 
               
 
@@ -163,8 +179,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Xml.XmlNamespaceManager.PopScope" />
+
+              
 
               
 
@@ -182,6 +202,8 @@
 
               
 
+              
+
                method</para
             >
           </description>
@@ -193,6 +215,8 @@
           <description>
             <para>
               <see cref="P:System.Xml.XmlNamespaceManager.NameTable" />
+
+              
 
               
 
@@ -208,8 +232,12 @@
 
         
 
+        
+
          object and then use the <see
          cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+
+        
 
         
 
@@ -221,8 +249,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Xml.Xsl.XsltContext" />
+
+        
 
         
 
@@ -231,8 +263,12 @@
 
         
 
+        
+
          class, and then use the <see
          cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+
+        
 
         
 
@@ -244,8 +280,12 @@
 
         
 
+        
+
          object as a parameter to the <see
          cref="Overload:System.Xml.XmlNode.SelectNodes" />
+
+        
 
         
 
@@ -254,8 +294,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -267,6 +311,8 @@
 
         
 
+        
+
          specification. The namespace manager does not perform any validation. </para
       >
       <para
@@ -275,13 +321,19 @@
 
         
 
+        
+
          method and when a lookup is performed by using the <see
          cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" />
 
         
 
+        
+
          or <see
          cref="M:System.Xml.XmlNamespaceManager.LookupPrefix(System.String)" />
+
+        
 
         
 
@@ -298,6 +350,8 @@
 
         
 
+        
+
          method:</para
       >
       <code>nsmgr.LookupNamespace("xsd")</code>
@@ -305,6 +359,8 @@
       <para
         >The following example creates an <see
          cref="T:System.Xml.XmlNamespaceManager" />
+
+        
 
         
 
@@ -367,8 +423,12 @@ while (reader.Read())
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -382,8 +442,12 @@ while (reader.Read())
 
             
 
+            
+
              object is used, after each read, any namespace and prefix strings pushed into the name table can be re-used by <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -392,6 +456,8 @@ while (reader.Read())
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -404,13 +470,19 @@ while (reader.Read())
 
               
 
+              
+
               . You must use <see
                cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
               
 
+              
+
                and <see
                cref="M:System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)" />
+
+              
 
               
 
@@ -426,8 +498,12 @@ while (reader.Read())
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -439,8 +515,12 @@ while (reader.Read())
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -481,6 +561,8 @@ while (reader.Read())
 
           
 
+          
+
            is "xml" or "xmlns".</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -489,8 +571,12 @@ while (reader.Read())
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -499,8 +585,12 @@ while (reader.Read())
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -509,6 +599,8 @@ while (reader.Read())
         </exception>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -521,13 +613,19 @@ while (reader.Read())
 
             
 
+            
+
              does not check <paramref
              name="prefix" />
 
             
 
+            
+
              and <paramref
              name="uri" />
+
+            
 
             
 
@@ -538,8 +636,12 @@ while (reader.Read())
 
             
 
+            
+
              checks names, including prefixes and namespaces, to ensure they are valid XML names according to the World Wide Web Consortium (W3C) <see
              cref="http://www.w3.org/TR/REC-xml-names/">Namespaces specification</see>
+
+            
 
             
 
@@ -548,13 +650,19 @@ while (reader.Read())
 
             
 
+            
+
              is used internally by <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
             , so to avoid a duplication of efforts, <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -564,6 +672,8 @@ while (reader.Read())
           <para
             >The following prefix/namespace pairs are added by default to the <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -615,10 +725,14 @@ while (reader.Read())
 
           
 
+          
+
           The prefix to associate with the namespace being added. Use String.Empty to add a default namespace.</param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -652,9 +766,13 @@ while (reader.Read())
 
             
 
+            
+
              containing the
    namespace URI for the default namespace, or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -705,8 +823,12 @@ while (reader.Read())
 
             
 
+            
+
              to view all the namespace pairs stored in the <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -727,6 +849,8 @@ Loop</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -738,8 +862,12 @@ Loop</code>
 
             
 
+            
+
              containing the prefixes stored by the <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -780,8 +908,12 @@ Loop</code>
 
             
 
+            
+
              values affect the namespaces returned by the <see
              cref="M:System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+
+            
 
             
 
@@ -861,6 +993,8 @@ Loop</code>
 
           
 
+          
+
           An enumeration value that specifies the type of namespace nodes to return.</param
         >
       </Docs>
@@ -896,12 +1030,16 @@ Loop</code>
 
             
 
+            
+
              to String.Empty. A return value of true indicates that there is a default namespace defined in the current scope; false indicates that no default namespace is defined.</para
           >
           <block subset="none" type="note">
             <para
               >xmlns:x= "" is illegal according to the <see
                cref="http://www.w3.org/TR/REC-xml-names/">W3C Namespaces</see>
+
+              
 
               
 
@@ -919,6 +1057,8 @@ Loop</code>
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -967,6 +1107,8 @@ Loop</code>
               
 
               
+
+              
       class.
       </block
             >
@@ -984,6 +1126,8 @@ Loop</code>
 
             
 
+            
+
              or null if there is no mapped namespace. The returned string is atomized.</para
           >
           <para
@@ -992,11 +1136,15 @@ Loop</code>
 
             
 
+            
+
              class.</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1036,11 +1184,15 @@ Loop</code>
 
             
 
+            
+
             ).</para
           >
           <para
             >The returned string is also atomized. For more information on atomized strings, see the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1057,6 +1209,8 @@ Loop</code>
         </returns>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1096,6 +1250,8 @@ Loop</code>
 
             
 
+            
+
              used by the current instance.</para
           >
         </value>
@@ -1108,6 +1264,8 @@ Loop</code>
           <para
             >Gets the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1143,13 +1301,19 @@ Loop</code>
 
             
 
+            
+
              (by calling <see
              cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
             
 
+            
+
             ) since the last call to <see
              cref="M:System.Xml.XmlNamespaceManager.PopScope" />
+
+            
 
             
 
@@ -1193,8 +1357,12 @@ Loop</code>
 
             
 
+            
+
              (by calling <see
              cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+
+            
 
             
 
@@ -1248,8 +1416,12 @@ Loop</code>
 
               
 
+              
+
                or <paramref
                name=" uri" />
+
+              
 
               
 
@@ -1267,6 +1439,8 @@ Loop</code>
               
 
               
+
+              
       class.
       </block
             >
@@ -1277,8 +1451,12 @@ Loop</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1287,8 +1465,12 @@ Loop</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1296,6 +1478,8 @@ Loop</code>
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1310,10 +1494,14 @@ Loop</code>
 
           
 
+          
+
           The prefix for the namespace </param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -22,13 +22,19 @@
 
         
 
+        
+
          class provides formatting capabilities that ASP.NET server controls use when rendering XHTML content to clients. You can use the <see
          cref="M:System.Web.UI.XhtmlTextWriter.SetDocType(System.Web.UI.XhtmlMobileDocType)" />
 
         
 
+        
+
          method to specify which type of XHTML the text writer renders. Supported document types are defined in the <see
          cref="T:System.Web.UI.XhtmlMobileDocType" />
+
+        
 
         
 
@@ -40,8 +46,12 @@
 
         
 
+        
+
          class renders two sets of attributes for elements. One set is a collection of common attributes, as referenced in the <see
          cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" />
+
+        
 
         
 
@@ -50,10 +60,14 @@
 
         
 
+        
+
          property. For more information on the elements and styles that are rendered, see the XHTML modularization specification at the <see
          cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web site</see
         >
+
+        
 
         
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
          class and any derived classes to create custom text writers to use in custom XHTML page adapters or class adapters. You can also create derived classes that override the standard behavior of the <see
          cref="T:System.Web.UI.XhtmlTextWriter" />
+
+        
 
         
 
@@ -80,11 +98,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -97,6 +119,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -105,6 +129,8 @@
       <para
         >Writes Extensible Hypertext Markup Language (XHTML)-specific characters, including all variations of XHTML modules that derive from XTHML, to the output stream for an ASP.NET server control for mobile devices. Override the <see
          cref="T:System.Web.UI.XhtmlTextWriter" />
+
+        
 
         
 
@@ -132,8 +158,12 @@
 
             
 
+            
+
              constructor that takes a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -147,6 +177,8 @@
 
                 
 
+                
+
                  instance.</para
               >
             </item>
@@ -154,6 +186,8 @@
               <para
                 >The string value that is specified in the <see
                  cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+
+                
 
                 
 
@@ -170,13 +204,19 @@
 
             
 
+            
+
              class that uses the line indentation that is specified in the <see
              cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
             
 
+            
+
              field. Use the <see
              cref="M:System.Web.UI.XhtmlTextWriter.#ctor(System.IO.TextWriter)" />
+
+            
 
             
 
@@ -188,8 +228,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -221,6 +265,8 @@
 
             
 
+            
+
              class with the specified line indentation.</para
           >
         </summary>
@@ -229,8 +275,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -238,6 +288,8 @@
         >
         <param name="tabString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,13 +323,19 @@
 
             
 
+            
+
              method to add an attribute to an XHTML element. The added attribute can then be recognized and rendered by the <see
              cref="T:System.Web.UI.XhtmlTextWriter" />
 
             
 
+            
+
              object. To prevent the writer from rendering a common attribute of an XHTML element, use the <see
              cref="M:System.Web.UI.XhtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -292,8 +350,12 @@
 
             
 
+            
+
              object is referenced by the <see
              cref="P:System.Web.UI.XhtmlTextWriter.ElementSpecificAttributes" />
+
+            
 
             
 
@@ -305,10 +367,14 @@
 
           
 
+          
+
           The XHTML element to add the attribute to.</param
         >
         <param name="attributeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -339,8 +405,12 @@
 
             
 
+            
+
              collection contains attributes that are allowed in XHTML elements and that are not suppressed in the <see
              cref="P:System.Web.UI.XhtmlTextWriter.SuppressCommonAttributes" />
+
+            
 
             
 
@@ -351,11 +421,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When a new instance of the <see
              cref="T:System.Web.UI.XhtmlTextWriter" />
+
+            
 
             
 
@@ -384,8 +458,12 @@
 
             
 
+            
+
              object containing common attributes of the markup tags for the <see
              cref="T:System.Web.UI.XhtmlTextWriter" />
+
+            
 
             
 
@@ -417,8 +495,12 @@
 
             
 
+            
+
              method to add recognized attributes to an XHTML element. To remove common attributes on an XHTML element, use the <see
              cref="M:System.Web.UI.XhtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -430,8 +512,12 @@
 
             
 
+            
+
              class is created, the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -681,6 +767,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -689,6 +777,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -731,6 +821,8 @@
 
           
 
+          
+
           The attribute name to check. </param
         >
       </Docs>
@@ -768,10 +860,14 @@
 
           
 
+          
+
           The XHTML attribute to render. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -782,8 +878,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+
+          
 
           
 
@@ -824,10 +924,14 @@
 
           
 
+          
+
           The XHTML style attribute to render. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -838,8 +942,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -874,6 +982,8 @@
 
             
 
+            
+
              collection of an element.</para
           >
         </summary>
@@ -882,10 +992,14 @@
 
           
 
+          
+
           The XHTML element to remove an attribute from.</param
         >
         <param name="attributeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -918,8 +1032,12 @@
 
             
 
+            
+
              method in a custom page adapter to define the type of XHTML that you want to render to the requesting device. Supported document types are defined in the <see
              cref="T:System.Web.UI.XhtmlMobileDocType" />
+
+            
 
             
 
@@ -935,8 +1053,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.XhtmlMobileDocType" />
+
+          
 
           
 
@@ -967,6 +1089,8 @@
 
             
 
+            
+
              attributes are not rendered. </para
           >
           <para
@@ -975,13 +1099,19 @@
 
             
 
+            
+
              class is created, the <see
              cref="T:System.Collections.Hashtable" />
 
             
 
+            
+
              object of elements for which <see
              cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" />
+
+            
 
             
 
@@ -1019,8 +1149,12 @@
 
             
 
+            
+
              object of elements for which <see
              cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" />
+
+            
 
             
 

@@ -26,8 +26,12 @@
 
         
 
+        
+
          event contains an <see
          cref="T:System.Data.OleDb.OleDbErrorCollection" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+        
 
         
 
@@ -63,13 +69,19 @@
 
             
 
+            
+
              property of the first <see
              cref="T:System.Data.OleDb.OleDbError" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" />
+
+            
 
             
 
@@ -124,13 +136,19 @@
 
             
 
+            
+
              property of the first <see
              cref="T:System.Data.OleDb.OleDbError" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" />
+
+            
 
             
 
@@ -163,13 +181,19 @@
 
             
 
+            
+
              property of the first <see
              cref="T:System.Data.OleDb.OleDbError" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" />
+
+            
 
             
 
@@ -203,6 +227,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -211,6 +237,8 @@
           <para
             >A string representing the <see
              cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+            
 
             
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          property returns a member of the collection.</para
       >
     </remarks>
@@ -45,6 +47,8 @@
       <para
         >Stores a set of <see
          cref="T:System.Net.NetworkInformation.IPAddressInformation" />
+
+        
 
         
 
@@ -84,11 +88,15 @@
 
             
 
+            
+
              because this operation is not supported for this collection.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -119,6 +127,8 @@
           <para
             >Throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -158,6 +168,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -169,6 +181,8 @@
 
             
 
+            
+
              object exists in the collection; otherwise. false.</para
           >
         </returns>
@@ -177,8 +191,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkInformation.IPAddressInformation" />
+
+          
 
           
 
@@ -217,6 +235,8 @@
 
             
 
+            
+
              parameter must be one-dimensional with zero-based indexing.</para
           >
         </remarks>
@@ -229,6 +249,8 @@
 
           
 
+          
+
           A one-dimensional array that receives a copy of the collection.</param
         >
         <param name="offset">
@@ -236,8 +258,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -265,6 +291,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Net.NetworkInformation.IPAddressInformation" />
+
+            
 
             
 
@@ -301,8 +329,12 @@
 
             
 
+            
+
              method before you can access the first element. To access the element at the current position, call the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -314,13 +346,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
+            
+
              causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -332,8 +370,12 @@
 
             
 
+            
+
              class and the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -352,8 +394,12 @@
 
             
 
+            
+
              interface and provides access to the <see
              cref="T:System.Net.NetworkInformation.IPAddressInformation" />
+
+            
 
             
 
@@ -442,6 +488,8 @@
 
             
 
+            
+
              because this operation is not supported for this collection.</para
           >
         </summary>
@@ -453,11 +501,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -492,8 +544,12 @@
 
             
 
+            
+
              method before you can access the first element. To access the element at the current position, call the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -505,13 +561,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
+            
+
              causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -523,8 +585,12 @@
 
             
 
+            
+
              class and the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -543,8 +609,12 @@
 
             
 
+            
+
              interface and provides access to the <see
              cref="T:System.Net.NetworkInformation.IPAddressInformation" />
+
+            
 
             
 

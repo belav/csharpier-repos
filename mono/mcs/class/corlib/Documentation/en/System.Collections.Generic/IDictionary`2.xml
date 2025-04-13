@@ -40,11 +40,15 @@
 
         
 
+        
+
          interface is the base interface for generic collections of key/value pairs.</para
       >
       <para
         >Each element is a key/value pair stored in a <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          to be null. The value can be null and does not have to be unique. The <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -82,6 +94,8 @@
         <para
           >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
            cref="M:System.Type.Equals(System.Object)" />
+
+          
 
           
 
@@ -120,11 +134,15 @@
 
           
 
+          
+
            to use as the key of the entry to add.</param
         >
         <param name="value"
           >The <see
            langword="TValue" />
+
+          
 
           
 
@@ -141,15 +159,21 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the  <see
              cref="P:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Item(TKey)" />
             <see langword="(TKey)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Add(TKey,TValue)" />
             <see langword="(TKey,TValue)" />
+
+            
 
             
 
@@ -194,8 +218,12 @@
 
             
 
+            
+
              if the current instance contains an entry with the key; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -239,15 +267,21 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the dictionary. However, if the specified key already exists in the dictionary, setting the  <see
              cref="P:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Item(TKey)" />
             <see langword="(TKey)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Add(TKey,TValue)" />
             <see langword="(TKey,TValue)" />
+
+            
 
             
 
@@ -260,6 +294,8 @@
           <para
             >The property is read but <paramref
              name="key" />
+
+            
 
             
 
@@ -301,13 +337,19 @@
 
             
 
+            
+
              is unspecified, but it is guaranteed to be the same order as the corresponding values in the <see
              cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Generic.IDictionary`2.Values" />
+
+            
 
             
 
@@ -322,8 +364,12 @@
 
             
 
+            
+
              containing the keys of the <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -360,8 +406,12 @@
 
             
 
+            
+
               if the element is successfully removed; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -373,8 +423,12 @@
 
                 
 
+                
+
                  if <paramref
                  name="key" />
+
+                
 
                 
 
@@ -452,13 +506,19 @@
 
             
 
+            
+
              is unspecified, but it is guaranteed to be the same order as the corresponding keys in the <see
              cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Generic.IDictionary`2.Keys" />
+
+            
 
             
 
@@ -473,8 +533,12 @@
 
             
 
+            
+
              containing the values in the <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          for more efficient serialization.</para
       >
     </summary>
@@ -50,6 +52,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializerFactory" />
+
+            
 
             
 
@@ -89,6 +93,8 @@
 
             
 
+            
+
              class that is used to serialize the specified type.</para
           >
         </summary>
@@ -100,6 +106,8 @@
 
             
 
+            
+
              class that is specifically created to serialize the specified type.</para
           >
         </returns>
@@ -108,8 +116,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -148,6 +160,8 @@
 
             
 
+            
+
              class using an object that maps one type to another.</para
           >
         </summary>
@@ -159,6 +173,8 @@
 
             
 
+            
+
              class that is specifically created to serialize the mapped type.</para
           >
         </returns>
@@ -167,8 +183,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+          
 
           
 
@@ -208,6 +228,8 @@
 
             
 
+            
+
              class that is used to serialize the specified type and namespace.</para
           >
         </summary>
@@ -219,6 +241,8 @@
 
             
 
+            
+
              class that is specifically created to serialize the specified type.</para
           >
         </returns>
@@ -227,8 +251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -236,6 +264,8 @@
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,8 +304,12 @@
 
             
 
+            
+
              to create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -290,8 +324,12 @@
 
             
 
+            
+
              class that is used to serialize the specified type. If a property or field returns an array, the <paramref
              name="extraTypes" />
+
+            
 
             
 
@@ -306,6 +344,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -314,8 +354,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -326,8 +370,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -366,8 +414,12 @@
 
             
 
+            
+
              to create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -382,6 +434,8 @@
 
             
 
+            
+
              class that can serialize objects of the specified type into XML documents, and vice versa. Each object to be serialized can itself contain instances of classes, which this overload can override with other classes.</para
           >
         </summary>
@@ -393,6 +447,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -401,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -413,8 +473,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+          
 
           
 
@@ -453,8 +517,12 @@
 
             
 
+            
+
              to create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -469,6 +537,8 @@
 
             
 
+            
+
              class that can serialize objects of the specified type into XML documents, and vice versa. Specifies the object that represents the XML root element.</para
           >
         </summary>
@@ -480,6 +550,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -488,8 +560,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -500,8 +576,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -543,8 +623,12 @@
 
             
 
+            
+
              to create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -559,6 +643,8 @@
 
             
 
+            
+
              class that can serialize objects of the specified type into XML document instances, and vice versa. Each object to be serialized can itself contain instances of classes, which this overload can override with other classes. This overload also specifies the default namespace for all the XML elements, and the class to use as the XML root element.</para
           >
         </summary>
@@ -570,6 +656,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -578,8 +666,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -590,8 +682,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+          
 
           
 
@@ -602,8 +698,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -614,8 +714,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -623,6 +727,8 @@
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -666,8 +772,12 @@
 
             
 
+            
+
              to create an instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -682,6 +792,8 @@
 
             
 
+            
+
              class that can serialize objects of the specified type into XML document instances, and vice versa. Each object to be serialized can itself contain instances of classes, which this overload can override with other classes. This overload also specifies the default namespace for all the XML elements, and the class to use as the XML root element.</para
           >
         </summary>
@@ -693,6 +805,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -701,13 +815,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            of the object that this <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -718,8 +838,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+          
 
           
 
@@ -730,8 +854,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -742,8 +870,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -754,10 +886,14 @@
 
           
 
+          
+
           The default namespace of all XML elements in the XML document.</param
         >
         <param name="location">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -768,8 +904,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 

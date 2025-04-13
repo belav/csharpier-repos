@@ -25,8 +25,12 @@
 
         
 
+        
+
          event lets you handle exceptions thrown by code outside your control (for example, by an external data source). Use the <see
          cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.Context" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          at the time of the exception. Use the <see
          cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.Exception" />
 
         
 
+        
+
          property to retrieve the exception data. If you want to handle the exception by additional event handlers, set the <see
          cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.ThrowException" />
+
+        
 
         
 
@@ -53,13 +63,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridViewCellCancelEventArgs.RowIndex" />
 
         
 
+        
+
          properties normally indicate the cell in which the data error occurred. When the error occurs in an external data source, however, the data source may not provide the column in which the error occurred. In this case, the <see
          cref="P:System.Windows.Forms.DataGridViewCellCancelEventArgs.ColumnIndex" />
+
+        
 
         
 
@@ -71,6 +87,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.DataError" />
+
+        
 
         
 
@@ -102,11 +120,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="exception">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,8 +139,12 @@
 
           
 
+          
+
           The column index of the cell that raised the <see
            cref="E:System.Windows.Forms.DataGridView.DataError" />
+
+          
 
           
 
@@ -129,8 +155,12 @@
 
           
 
+          
+
           The row index of the cell that raised the <see
            cref="E:System.Windows.Forms.DataGridView.DataError" />
+
+          
 
           
 
@@ -141,8 +171,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -173,8 +207,12 @@
 
             
 
+            
+
              enumeration may be combined using the bitwise OR operator to represent the state of a data-bound <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -183,8 +221,12 @@
 
             
 
+            
+
              will try to commit the invalid cell value. When the commit fails, the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -193,8 +235,12 @@
 
             
 
+            
+
              event whose <see
              cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.Context" />
+
+            
 
             
 
@@ -203,8 +249,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.CurrentCellChange" />
+
+            
 
             
 
@@ -216,6 +266,8 @@
           <para
             >Gets details about the state of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -244,8 +296,12 @@
 
             
 
+            
+
             , throw the exception again at the end of a handler by setting the <see
              cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.ThrowException" />
+
+            
 
             
 
@@ -278,8 +334,12 @@
 
             
 
+            
+
              has dealt with the exception represented by the <see
              cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.Exception" />
+
+            
 
             
 
@@ -288,8 +348,12 @@
 
             
 
+            
+
              that may handle the <see
              cref="E:System.Windows.Forms.DataGridView.DataError" />
+
+            
 
             
 
@@ -302,6 +366,8 @@
           <para
             >Gets or sets a value indicating whether to throw the exception after the <see
              cref="T:System.Windows.Forms.DataGridViewDataErrorEventHandler" />
+
+            
 
             
 

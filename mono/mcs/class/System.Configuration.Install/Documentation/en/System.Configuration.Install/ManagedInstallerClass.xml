@@ -47,6 +47,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -77,11 +79,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -119,8 +125,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Configuration.Install.IManagedInstaller" />
+
+            
 
             
 
@@ -132,6 +142,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Configuration.Install.IManagedInstaller.ManagedInstall(System.String,System.Int32)" />
+
+            
 
             
 
@@ -147,10 +159,14 @@
 
           
 
+          
+
           The command line to install.</param
         >
         <param name="hInstall">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

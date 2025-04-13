@@ -30,8 +30,12 @@
 
         
 
+        
+
          applied to a class implementing an XML Web service. An XML Web service can implement multiple bindings, by applying multiple <see
          cref="T:System.Web.Services.WebServiceBindingAttribute" />
+
+        
 
         
 
@@ -43,13 +47,19 @@
 
         
 
+        
+
          attributes are applied to an XML Web service, a <see
          cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
         
 
+        
+
          or <see
          cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+        
 
         
 
@@ -58,13 +68,19 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
         
 
+        
+
          or <see
          cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+        
 
         
 
@@ -89,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.WebServiceBindingAttribute" />
+
+            
 
             
 
@@ -121,6 +139,8 @@
 
             
 
+            
+
              class setting the name of the binding the XML Web service method is implementing.</para
           >
         </summary>
@@ -129,8 +149,12 @@
 
           
 
+          
+
           The name of the binding an XML Web service method is implementing an operation for. Sets the <see
            cref="P:System.Web.Services.WebServiceBindingAttribute.Name" />
+
+          
 
           
 
@@ -166,6 +190,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -174,8 +200,12 @@
 
           
 
+          
+
           The name of the binding an XML Web service method is implementing an operation for. Sets the <see
            cref="P:System.Web.Services.WebServiceBindingAttribute.Name" />
+
+          
 
           
 
@@ -186,8 +216,12 @@
 
           
 
+          
+
           The namespace associated with the binding. Sets the <see
            cref="P:System.Web.Services.WebServiceBindingAttribute.Namespace" />
+
+          
 
           
 
@@ -224,6 +258,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -232,8 +268,12 @@
 
           
 
+          
+
           The name of the binding an XML Web service method is implementing an operation for. Sets the <see
            cref="P:System.Web.Services.WebServiceBindingAttribute.Name" />
+
+          
 
           
 
@@ -244,8 +284,12 @@
 
           
 
+          
+
           The namespace associated with the binding. Sets the <see
            cref="P:System.Web.Services.WebServiceBindingAttribute.Namespace" />
+
+          
 
           
 
@@ -253,6 +297,8 @@
         >
         <param name="location">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,6 +333,8 @@
 
             
 
+            
+
              property controls whether the conformance claims are provided when a WSDL description of the Web service is published.</para
           >
         </remarks>
@@ -312,6 +360,8 @@
           <para
             >The value of this property controls whether the conformance claims expressed by the <see
              cref="P:System.Web.Services.WebServiceBindingAttribute.ConformsTo" />
+
+            
 
             
 

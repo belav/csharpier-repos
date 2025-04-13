@@ -35,6 +35,8 @@
 
             
 
+            
+
              method that represents the DataSourceInformation collection.</para
           >
         </summary>
@@ -57,6 +59,8 @@
           <para
             >A constant for use with the <see
              cref="M:System.Data.Common.DbConnection.GetSchema" />
+
+            
 
             
 
@@ -85,6 +89,8 @@
 
             
 
+            
+
              method that represents the MetaDataCollections collection.</para
           >
         </summary>
@@ -110,6 +116,8 @@
 
             
 
+            
+
              method that represents the ReservedWords collection.</para
           >
         </summary>
@@ -132,6 +140,8 @@
           <para
             >A constant for use with the <see
              cref="M:System.Data.Common.DbConnection.GetSchema" />
+
+            
 
             
 

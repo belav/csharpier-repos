@@ -28,8 +28,12 @@
 
         
 
+        
+
          interface provides access only to the symbol-related attributes of a method, such as sequence points, lexical scopes, and parameter information. Use it with the <see
          cref="N:System.Reflection" />
+
+        
 
         
 
@@ -117,6 +121,8 @@
 
           
 
+          
+
           The document for which the offset is requested. </param
         >
         <param name="line">
@@ -124,10 +130,14 @@
 
           
 
+          
+
           The document line corresponding to the offset. </param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,6 +220,8 @@
 
           
 
+          
+
           The document for which the offset is requested. </param
         >
         <param name="line">
@@ -217,10 +229,14 @@
 
           
 
+          
+
           The document line corresponding to the ranges. </param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +274,8 @@
 
             
 
+            
+
              method to start local variable searches.</para
           >
         </remarks>
@@ -271,6 +289,8 @@
         </returns>
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,10 +333,14 @@
 
             
 
+            
+
              to retrieve the count of all sequence points and create arrays of the proper size.</para
           >
           <para>
             <see cref="M:System.Diagnostics.SymbolStore.ISymbolMethod.GetSequencePoints(System.Int32[],System.Diagnostics.SymbolStore.ISymbolDocument[],System.Int32[],System.Int32[],System.Int32[],System.Int32[])" />
+
+            
 
             
 
@@ -332,10 +356,14 @@
 
           
 
+          
+
           The array of byte offsets from the beginning of the method for the sequence points. </param
         >
         <param name="documents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,10 +374,14 @@
 
           
 
+          
+
           The array of lines in the documents at which the sequence points are located. </param
         >
         <param name="columns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,10 +392,14 @@
 
           
 
+          
+
           The array of lines in the documents at which the sequence points end. </param
         >
         <param name="endColumns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,6 +448,8 @@
 
           
 
+          
+
           The starting and ending source documents. </param
         >
         <param name="lines">
@@ -419,10 +457,14 @@
 
           
 
+          
+
           The starting and ending lines in the corresponding source documents. </param
         >
         <param name="columns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,6 +546,8 @@
           <para
             >Gets the <see
              cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+            
 
             
 

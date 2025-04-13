@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration represents the visibility and position of the scroll bars in a <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -33,13 +37,19 @@
 
         
 
+        
+
          property uses these enumeration values to specify the type of scroll bars to display in a <see
          cref="T:System.Web.UI.WebControls.Panel" />
 
         
 
+        
+
          control. The default value for the <see
          cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+
+        
 
         
 
@@ -51,8 +61,12 @@
 
         
 
+        
+
          property, scroll bars are automatically shown when the size of the content in a <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -61,8 +75,12 @@
 
         
 
+        
+
          control. For example, if a <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -74,6 +92,8 @@
       <para
         >Specifies the visibility and position of scroll bars in a <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 

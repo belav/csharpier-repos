@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is bound to a data source and generates its user interface or child control hierarchy by enumerating the items in the data source to which it is bound. <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
+        
+
          controls. For more information, see <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          modifies the behavior of a <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -63,8 +77,12 @@
 
         
 
+        
+
          class. Therefore, it is likely that a single adapter can be used for a number of browser class behaviors or that inclusion of the adaptability in the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -76,13 +94,19 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
+        
+
          uses the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -94,6 +118,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -102,13 +128,19 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Web.UI.WebControls.Adapters.DataBoundControlAdapter.Control" />
 
         
 
+        
+
          property returns a strongly typed reference to the <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -120,6 +152,8 @@
       <para
         >Customizes the behavior of a <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -142,8 +176,12 @@
 
             
 
+            
+
              class when it creates the corresponding <see
              cref="T:System.Web.UI.WebControls.Adapters.DataBoundControlAdapter" />
+
+            
 
             
 
@@ -155,6 +193,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Adapters.DataBoundControlAdapter" />
+
+            
 
             
 
@@ -186,8 +226,12 @@
 
             
 
+            
+
              object is attached to a <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -199,6 +243,8 @@
           <para
             >Retrieves a strongly-typed reference to the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -234,8 +280,12 @@
 
             
 
+            
+
              method is called in place of the <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" />
+
+            
 
             
 
@@ -244,8 +294,12 @@
 
             
 
+            
+
              control adapter is attached to a control derived from the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -257,13 +311,19 @@
 
             
 
+            
+
              iterates through data, creating distinct names and values when necessary, and saves it to an internal collection. Usually, <see
              cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
+            
+
              or a similar method of the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -278,6 +338,8 @@
 
             
 
+            
+
              object to the control adapter.</para
           >
         </summary>
@@ -286,8 +348,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -296,8 +362,12 @@
 
           
 
+          
+
            to be bound to the derived <see
            cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+          
 
           
 

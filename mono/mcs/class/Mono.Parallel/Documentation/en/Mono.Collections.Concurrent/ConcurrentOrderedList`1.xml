@@ -137,8 +137,12 @@
 
           
 
+          
+
            if the item is found, <see
            langword="false" />
+
+          
 
           
 
@@ -171,8 +175,12 @@
 
           
 
+          
+
            if an item corresponding to the given hash is found, <see
            langword="false" />
+
+          
 
           
 
@@ -184,13 +192,19 @@
 
           
 
+          
+
            is equivalent to calling this method using the <see
            cref="T:System.Collections.Generic.IEqualityComparer&lt;T&gt;.GetHashCode(T)" />
 
           
 
+          
+
            method with <see
            cref="P:ConcurrentOrderedList&lt;T&gt;.Comparer" />
+
+          
 
           
 
@@ -373,6 +387,8 @@
         <returns
           >True if the insertion was successful, <see
            langword="false" />
+
+          
 
           
 

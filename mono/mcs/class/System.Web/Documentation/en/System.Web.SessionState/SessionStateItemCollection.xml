@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is used to manage session-state variable values indexed by a variable name or by numerical index. The session-state variables are exposed to ASP.NET application code using the <see
          cref="T:System.Web.SessionState.HttpSessionState" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property of the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Web.SessionState.HttpSessionState" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          class, which manages session-state variable values using the <see
          cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
             
 
+            
+
              class is used to manage session-state variable values indexed by a variable name or by numerical index. The session-state variables are exposed to ASP.NET application code using the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -98,8 +118,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -108,8 +132,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -118,8 +146,12 @@
 
             
 
+            
+
              class, which manages session-state variable values using the <see
              cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+            
 
             
 
@@ -131,6 +163,8 @@
           <para
             >Creates a new, empty <see
              cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+            
 
             
 
@@ -181,8 +215,12 @@
 
             
 
+            
+
              method can be used to read the contents of a <see
              cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+            
 
             
 
@@ -194,8 +232,12 @@
 
             
 
+            
+
              object to the session store, use the <see
              cref="M:System.Web.SessionState.SessionStateItemCollection.Serialize(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -210,8 +252,12 @@
 
             
 
+            
+
              collection from a storage location that is written to using the <see
              cref="M:System.Web.SessionState.SessionStateItemCollection.Serialize(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -226,8 +272,12 @@
 
             
 
+            
+
              collection populated with the contents from a storage location that is written to using the <see
              cref="M:System.Web.SessionState.SessionStateItemCollection.Serialize(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -239,8 +289,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.BinaryReader" />
+
+          
 
           
 
@@ -267,8 +321,12 @@
 
             
 
+            
+
              property is used to indicate whether the contents of the <see
              cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+            
 
             
 
@@ -280,8 +338,12 @@
 
             
 
+            
+
              property is set to true when an object value is set or added to the collection using the <see
              cref="Overload:System.Web.SessionState.SessionStateItemCollection.Item" />
+
+            
 
             
 
@@ -290,13 +352,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.SessionState.SessionStateItemCollection.RemoveAt(System.Int32)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Web.SessionState.SessionStateItemCollection.Clear" />
+
+            
 
             
 
@@ -308,8 +376,12 @@
 
             
 
+            
+
              property is also set to true when a mutable object is retrieved from the collection using the <see
              cref="Overload:System.Web.SessionState.SessionStateItemCollection.Item" />
+
+            
 
             
 
@@ -321,13 +393,19 @@
 
             
 
+            
+
              method to populate a <see
              cref="T:System.Web.SessionState.SessionStateItemCollection" />
 
             
 
+            
+
              collection results in the <see
              cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" />
+
+            
 
             
 
@@ -364,6 +442,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -455,8 +535,12 @@
 
             
 
+            
+
              collection does not contain an element with the specified <paramref
              name="name" />
+
+            
 
             
 
@@ -469,6 +553,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,8 +583,12 @@
 
             
 
+            
+
              collection does not contain an element with the specified <paramref
              name="name" />
+
+            
 
             
 
@@ -511,6 +601,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,8 +634,12 @@
 
             
 
+            
+
              method can be used to write the contents of a <see
              cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+            
 
             
 
@@ -555,8 +651,12 @@
 
             
 
+            
+
              object from the session store, use the <see
              cref="M:System.Web.SessionState.SessionStateItemCollection.Deserialize(System.IO.BinaryReader)" />
+
+            
 
             
 
@@ -571,6 +671,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -579,8 +681,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.BinaryWriter" />
+
+          
 
           
 

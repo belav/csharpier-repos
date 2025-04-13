@@ -18,13 +18,19 @@
 
         
 
+        
+
          member has a different meaning for clients than it does for XML Web services. For details, see the <see
          cref="P:System.Web.Services.Protocols.SoapHttpClientProtocol.SoapVersion" />
 
         
 
+        
+
          and <see
          cref="P:System.Web.Services.WebService.SoapVersion" />
+
+        
 
         
 

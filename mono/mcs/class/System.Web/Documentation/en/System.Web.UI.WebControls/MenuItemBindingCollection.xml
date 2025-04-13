@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          class as the data type for its <see
          cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          property is used to store any menu item bindings defined for the <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
           
 
+          
+
            objects appear in the collection has no effect on how those objects are applied to the menu items in a <see
            cref="T:System.Web.UI.WebControls.Menu" />
+
+          
 
           
 
@@ -80,6 +100,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" />
+
+        
 
         
 
@@ -93,8 +115,12 @@
 
             
 
+            
+
              indexer to directly retrieve the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -108,6 +134,8 @@
 
             
 
+            
+
              method to create an enumerator that can be used to iterate through the collection.</para
           >
         </item>
@@ -115,6 +143,8 @@
           <para
             >Use the <see
              cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Web.UI.WebControls.MenuItem[],System.Int32)" />
+
+            
 
             
 
@@ -128,8 +158,12 @@
 
         
 
+        
+
          object by adding and removing <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -138,8 +172,12 @@
 
         
 
+        
+
          or the <see
          cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemBinding)" />
+
+        
 
         
 
@@ -148,13 +186,19 @@
 
         
 
+        
+
         , the <see
          cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.RemoveAt(System.Int32)" />
 
         
 
+        
+
         , or the <see
          cref="M:System.Web.UI.StateManagedCollection.Clear" />
+
+        
 
         
 
@@ -166,8 +210,12 @@
 
         
 
+        
+
          class contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see
          cref="P:System.Web.UI.StateManagedCollection.Count" />
+
+        
 
         
 
@@ -176,8 +224,12 @@
 
         
 
+        
+
          object, use the <see
          cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Contains(System.Web.UI.WebControls.MenuItemBinding)" />
+
+        
 
         
 
@@ -186,8 +238,12 @@
 
         
 
+        
+
          object in the collection, use the <see
          cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.IndexOf(System.Web.UI.WebControls.MenuItemBinding)" />
+
+        
 
         
 
@@ -199,6 +255,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -229,8 +287,12 @@
 
             
 
+            
+
              method to append the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -243,6 +305,8 @@
 
               
 
+              
+
                objects to the collection.</para
             >
           </block>
@@ -252,8 +316,12 @@
 
             
 
+            
+
              object in the collection at a specific index by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemBinding)" />
+
+            
 
             
 
@@ -266,8 +334,12 @@
 
               
 
+              
+
                objects appear in the collection has no effect on how those objects are applied to the menu items in a <see
                cref="T:System.Web.UI.WebControls.Menu" />
+
+              
 
               
 
@@ -283,6 +355,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -294,6 +368,8 @@
 
             
 
+            
+
              was inserted in the collection.</para
           >
         </returns>
@@ -302,8 +378,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+          
 
           
 
@@ -336,13 +416,19 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
+            
+
              object is contained in the collection. This method is commonly used to test for the existence of a <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -357,6 +443,8 @@
 
             
 
+            
+
              object is in the collection.</para
           >
         </summary>
@@ -368,6 +456,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
@@ -376,8 +466,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+          
 
           
 
@@ -411,8 +505,12 @@
 
             
 
+            
+
              method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. With the array, you can then use array syntax to access the items in the <see
              cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" />
+
+            
 
             
 
@@ -421,6 +519,8 @@
           <para
             >As an alternative, you can also use the <see
              cref="M:System.Web.UI.StateManagedCollection.GetEnumerator" />
+
+            
 
             
 
@@ -435,8 +535,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -448,8 +552,12 @@
 
           
 
+          
+
           A zero-based array of <see
            cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+          
 
           
 
@@ -457,6 +565,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,13 +599,19 @@
 
             
 
+            
+
              method is a helper function that is used to create an <see
              cref="T:System.Object" />
 
             
 
+            
+
              of the data type that corresponds to the specified index. The index is often determined by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.GetKnownTypes" />
+
+            
 
             
 
@@ -507,8 +623,12 @@
 
             
 
+            
+
              parameter is not used in this implementation of the method and is ignored. You should always pass in null for this parameter. This implementation of the method always returns an empty <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -526,6 +646,8 @@
 
             
 
+            
+
              of the data type that corresponds to the specified index.</para
           >
         </summary>
@@ -537,11 +659,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -569,8 +695,12 @@
 
             
 
+            
+
              method is a helper function that is used to create an array of data types supported by the <see
              cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" />
+
+            
 
             
 
@@ -579,8 +709,12 @@
 
             
 
+            
+
              method to create an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -598,8 +732,12 @@
 
             
 
+            
+
              objects that contains the supported data types of the <see
              cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" />
+
+            
 
             
 
@@ -614,8 +752,12 @@
 
             
 
+            
+
              objects that contains the data types supported by the <see
              cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" />
+
+            
 
             
 
@@ -650,8 +792,12 @@
 
             
 
+            
+
              method to determine the index of the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -664,8 +810,12 @@
 
               
 
+              
+
                objects appear in the collection has no effect on how those objects are applied to the menu items in a <see
                cref="T:System.Web.UI.WebControls.Menu" />
+
+              
 
               
 
@@ -685,6 +835,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -693,6 +845,8 @@
           <para
             >The zero-based index of the first occurrence of <paramref
              name="value" />
+
+            
 
             
 
@@ -727,8 +881,12 @@
 
             
 
+            
+
              method to insert the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -741,6 +899,8 @@
 
               
 
+              
+
                objects to the collection.</para
             >
           </block>
@@ -750,8 +910,12 @@
 
             
 
+            
+
              object to the end of the collection by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Add(System.Web.UI.WebControls.MenuItemBinding)" />
+
+            
 
             
 
@@ -764,8 +928,12 @@
 
               
 
+              
+
                objects appear in the collection has no effect on the how those objects are applied to the menu items in a <see
                cref="T:System.Web.UI.WebControls.Menu" />
+
+              
 
               
 
@@ -781,6 +949,8 @@
 
             
 
+            
+
              object to the collection at the specified index location.</para
           >
         </summary>
@@ -789,8 +959,12 @@
 
           
 
+          
+
           The zero-based index location at which to insert the <see
            cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+          
 
           
 
@@ -801,8 +975,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+          
 
           
 
@@ -858,12 +1036,16 @@
 
             
 
+            
+
              method to remove the specified menu item binding from the collection. All items that follow that menu item are then moved up to fill in the vacant position. The indexes of the moved items are also updated. </para
           >
           <block subset="none" type="note">
             <para
               >The collection can contain null values, as well as duplicate <see
                cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+              
 
               
 
@@ -876,8 +1058,12 @@
 
             
 
+            
+
              method. You can also remove all menu items from the collection by using the <see
              cref="M:System.Web.UI.StateManagedCollection.Clear" />
+
+            
 
             
 
@@ -890,8 +1076,12 @@
 
               
 
+              
+
                objects appear in the collection has no effect on how those objects are applied to the menu items in a <see
                cref="T:System.Web.UI.WebControls.Menu" />
+
+              
 
               
 
@@ -907,6 +1097,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -915,8 +1107,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+          
 
           
 
@@ -946,8 +1142,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -960,6 +1160,8 @@
 
               
 
+              
+
                objects.</para
             >
           </block>
@@ -969,13 +1171,19 @@
 
             
 
+            
+
              object by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Remove(System.Web.UI.WebControls.MenuItemBinding)" />
 
             
 
+            
+
              method. You can also remove all menu items from the collection by using the <see
              cref="M:System.Web.UI.StateManagedCollection.Clear" />
+
+            
 
             
 
@@ -990,11 +1198,15 @@
 
             
 
+            
+
              object at the specified index location from the collection.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1024,13 +1236,19 @@
 
             
 
+            
+
              method is a helper function that is used by the <see
              cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" />
 
             
 
+            
+
              class to mark a <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1048,6 +1266,8 @@
 
             
 
+            
+
              object as having changed since the last load or save from view state.</para
           >
         </summary>
@@ -1056,8 +1276,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

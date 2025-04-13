@@ -16,8 +16,12 @@
 
         
 
+        
+
          interface. The <see
          cref="T:System.Web.UI.IFilterResolutionService" />
+
+        
 
         
 
@@ -29,6 +33,8 @@
 
         
 
+        
+
          interface is used when a designer developer needs to support the editing of filtered properties. </para
       >
       <para
@@ -37,8 +43,12 @@
 
         
 
+        
+
          interface is specific to controls' use of device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see
          cref="T:System.Web.UI.IFilterResolutionService" />
+
+        
 
         
 
@@ -50,8 +60,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Web.UI.IFilterResolutionService" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
             
 
+            
+
              is a parent of the filter identified by <paramref
              name="filter2" />
+
+            
 
             
 
@@ -102,8 +120,12 @@
 
             
 
+            
+
              is a parent of the filter identified by <paramref
              name="filter1" />
+
+            
 
             
 
@@ -115,10 +137,14 @@
 
           
 
+          
+
           A device filter name.</param
         >
         <param name="filter2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,8 +174,12 @@
 
             
 
+            
+
              method determines whether a named device filter is a type of filter supported by the <see
              cref="T:System.Web.UI.IFilterResolutionService" />
+
+            
 
             
 
@@ -166,6 +196,8 @@
         </returns>
         <param name="filterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

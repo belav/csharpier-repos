@@ -23,8 +23,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.NestedContainer" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          method each time they need to construct a component collection for return to a caller. <see
          cref="M:System.ComponentModel.ContainerFilterService.FilterComponents(System.ComponentModel.ComponentCollection)" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ContainerFilterService" />
+
+            
 
             
 
@@ -103,6 +113,8 @@
 
             
 
+            
+
              method filters the component collection by optionally returning a new, modified collection. The default implementation returns the input collection, thereby performing no filtering.</para
           >
         </remarks>
@@ -118,11 +130,15 @@
 
             
 
+            
+
              that represents a modified collection.</para
           >
         </returns>
         <param name="components">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

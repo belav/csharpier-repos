@@ -26,13 +26,19 @@
 
         
 
+        
+
          contains a collection of XML namespaces, each with an associated prefix. The <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
+        
+
          uses an instance of the <see
          cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          must conform to the www.w3.org specification named <paramref
          name="Namespaces in XML" />
+
+        
 
         
 
@@ -61,12 +71,16 @@
 
             
 
+            
+
              instance.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -77,6 +91,8 @@
           <para
             >Apply the appropriate.NET attribute to each property or class that the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -124,6 +140,8 @@
 
             
 
+            
+
              object.</para
           >
         </item>
@@ -134,13 +152,19 @@
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -161,6 +185,8 @@ ns.Add("", "")</code>
       <para
         >Contains the XML namespaces and prefixes that the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -190,6 +216,8 @@ ns.Add("", "")</code>
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -227,6 +255,8 @@ ns.Add("", "")</code>
 
             
 
+            
+
              class, using the specified instance of XmlSerializerNamespaces containing the collection of prefix and namespace pairs.</para
           >
         </summary>
@@ -235,8 +265,12 @@ ns.Add("", "")</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+          
 
           
 
@@ -273,6 +307,8 @@ ns.Add("", "")</code>
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -281,8 +317,12 @@ ns.Add("", "")</code>
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -318,8 +358,12 @@ ns.Add("", "")</code>
 
             
 
+            
+
              to qualify the element and attribute names in an XML document, you must <see
              cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -328,11 +372,15 @@ ns.Add("", "")</code>
 
             
 
+            
+
              object.</para
           >
           <para
             >Any namespaces that you add must conform to the www.w3.org specification <paramref
              name="Namespaces in XML" />
+
+            
 
             
 
@@ -347,6 +395,8 @@ ns.Add("", "")</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -355,10 +405,14 @@ ns.Add("", "")</code>
 
           
 
+          
+
           The prefix associated with an XML namespace. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -413,6 +467,8 @@ ns.Add("", "")</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -421,6 +477,8 @@ ns.Add("", "")</code>
           <para
             >An array of <see
              cref="T:System.Xml.XmlQualifiedName" />
+
+            
 
             
 

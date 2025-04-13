@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -85,11 +87,15 @@
 
             
 
+            
+
              for the new argument types.</para
           >
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -100,8 +106,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Linq.Expressions.ParameterExpression" />
+
+          
 
           
 
@@ -109,6 +119,8 @@
         >
         <param name="returnLabel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,6 +170,8 @@
 
           
 
+          
+
           The CallSite the bind is being performed for.</param
         >
         <param name="args">
@@ -165,10 +179,14 @@
 
           
 
+          
+
           The arguments for the binder.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

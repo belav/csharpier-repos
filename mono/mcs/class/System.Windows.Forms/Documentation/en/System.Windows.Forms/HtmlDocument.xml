@@ -17,8 +17,12 @@
 
         
 
+        
+
          provides a managed wrapper around Internet Explorer's document object, also known as the HTML Document Object Model (DOM). You obtain an instance of <see
          cref="T:System.Windows.Forms.HtmlDocument" />
+
+        
 
         
 
@@ -27,8 +31,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -40,8 +48,12 @@
 
         
 
+        
+
          thus represents a document tree, whose children are instances of the <see
          cref="T:System.Windows.Forms.HtmlElement" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          represents the entire document inside the HTML tags. The BODY, DIV, FORM and SPAN tags are represented by individual <see
          cref="T:System.Windows.Forms.HtmlElement" />
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
          property to access the BODY tag and all of its children. The <see
          cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+
+        
 
         
 
@@ -85,8 +105,12 @@
 
         
 
+        
+
          for the element on an HTML page that has user input focus. All elements within an HTML page can have a name; the <see
          cref="P:System.Windows.Forms.HtmlDocument.All" />
+
+        
 
         
 
@@ -95,8 +119,12 @@
 
         
 
+        
+
          using its name as an index. <see
          cref="M:System.Windows.Forms.HtmlDocument.GetElementsByTagName(System.String)" />
+
+        
 
         
 
@@ -105,8 +133,12 @@
 
         
 
+        
+
          of all <see
          cref="T:System.Windows.Forms.HtmlElement" />
+
+        
 
         
 
@@ -115,8 +147,12 @@
 
         
 
+        
+
          will return the single <see
          cref="T:System.Windows.Forms.HtmlElement" />
+
+        
 
         
 
@@ -125,8 +161,12 @@
 
         
 
+        
+
          will return the <see
          cref="T:System.Windows.Forms.HtmlElement" />
+
+        
 
         
 
@@ -138,8 +178,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.HtmlDocument.Images" />
+
+        
 
         
 
@@ -150,13 +194,19 @@
 
         
 
+        
+
          is based on the unmanaged interfaces implemented by Internet Explorer's DHTML DOM: IHTMLDocument, IHTMLDocument2, IHTMLDocument3, and IHTMLDocument4. Only the most frequently used properties and methods on these unmanaged interfaces are exposed by <see
          cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
+        
+
         . You can access all other properties and methods directly using the <see
          cref="P:System.Windows.Forms.HtmlDocument.DomDocument" />
+
+        
 
         
 
@@ -168,8 +218,12 @@
 
         
 
+        
+
          control. Each frame displays its own HTML page. The <see
          cref="P:System.Windows.Forms.HtmlWindow.Frames" />
+
+        
 
         
 
@@ -178,8 +232,12 @@
 
         
 
+        
+
          property. You may also use the <see
          cref="P:System.Windows.Forms.HtmlDocument.Window" />
+
+        
 
         
 
@@ -190,8 +248,12 @@
 
         
 
+        
+
          exposes the most common events you would expect to handle when hosting HTML pages. For events not exposed directly by the interface, you can add a handler for the event using <see
          cref="M:System.Windows.Forms.HtmlDocument.AttachEventHandler(System.String,System.EventHandler)" />
+
+        
 
         
 
@@ -200,6 +262,8 @@
       <para
         >HTML files may contain SCRIPT tags that encapsulate code written in one of the Active Scripting languages, such as JScript or VBScript. The <see
          cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
+
+        
 
         
 
@@ -212,6 +276,8 @@
 
           
 
+          
+
            have kept the same names as they have on the unmanaged DOM, some have been changed for consistency with the dnprdnshort. </para
         >
       </block>
@@ -221,6 +287,8 @@
       <para
         >Provides top-level programmatic access to an HTML document hosted by the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -251,11 +319,15 @@
 
             
 
+            
+
              returns the element corresponding to the &lt;BODY&gt; tag. </para
           >
           <para
             >If the document does not have focus, <see
              cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" />
+
+            
 
             
 
@@ -267,6 +339,8 @@
 
             
 
+            
+
              will return the element that contains the TABLE element. </para
           >
         </remarks>
@@ -275,6 +349,8 @@
           <para
             >Provides the <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -306,6 +382,8 @@
 
             
 
+            
+
              type in the dnprdnshort supports an Alpha value, but the HTML DOM does not. Therefore, Alpha will have no effect when assigned to this property.</para
           >
         </remarks>
@@ -314,6 +392,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -344,6 +424,8 @@
 
             
 
+            
+
              collection provides random access to any element in the HTML document, regardless of its position in the document tree. Use it to access any element in an HTML document by name, ID, or index. You may also iterate over all of the elements within a document. </para
           >
           <para>Some elements, such as HEAD and TITLE, will never have names associated with them. All other elements will have names only if the author of the HTML file assigned them. You can access elements without names by ID or index. </para>
@@ -353,8 +435,12 @@
 
             
 
+            
+
              collection, because all elements in an HTML file outside of the HTML tag must have a parent element. Use the <see
              cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+
+            
 
             
 
@@ -363,8 +449,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -379,8 +469,12 @@
 
             
 
+            
+
             , which stores all <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -414,8 +508,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -424,6 +522,8 @@
           <para
             >This method allows you to attach handlers to unmanaged DOM events not exposed by <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -436,8 +536,12 @@
 
             
 
+            
+
              and the IHTMLDocument interfaces: <see
              cref="http://go.microsoft.com/fwlink/?LinkId=104882">IHTMLDocument</see>
+
+            
 
             
 
@@ -446,8 +550,12 @@
 
             
 
+            
+
             , <see
              cref="http://go.microsoft.com/fwlink/?LinkId=104886">IHTMLDocument3</see>
+
+            
 
             
 
@@ -456,8 +564,12 @@
 
             
 
+            
+
             , <see
              cref="http://go.microsoft.com/fwlink/?LinkId=104888">IHTMLDocument5</see>
+
+            
 
             
 
@@ -473,10 +585,14 @@
 
           
 
+          
+
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,11 +618,15 @@
 
             
 
+            
+
              will display when no other element occupies that area of the screen.</para
           >
           <para
             >The <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -550,8 +670,12 @@
 
             
 
+            
+
             . To obtain the HEAD element, use <see
              cref="M:System.Windows.Forms.HtmlDocument.GetElementsByTagName(System.String)" />
+
+            
 
             
 
@@ -563,6 +687,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -591,6 +717,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -645,8 +773,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -655,6 +787,8 @@
           <para
             >A <newTerm
             >cookie</newTerm>
+
+            
 
             
 
@@ -680,11 +814,15 @@
 
             
 
+            
+
              property may contain multiple cookies.</para
           >
           <para
             >You can only use the <see
              cref="P:System.Windows.Forms.HtmlDocument.Cookie" />
+
+            
 
             
 
@@ -720,10 +858,14 @@
 
             
 
+            
+
              may be one of any of the supported HTML tags in Internet Explorer, except for FRAME or IFRAME.</para
           >
           <para>
             <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+
+            
 
             
 
@@ -732,8 +874,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+
+            
 
             
 
@@ -745,8 +891,12 @@
 
             
 
+            
+
              control's <ui
             >View Source</ui>
+
+            
 
             
 
@@ -755,13 +905,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
 
             
 
+            
+
              properties of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -773,8 +929,12 @@
 
             
 
+            
+
             , you will not be able to set certain properties, such as Name. In cases where you need to set the Name attribute, assign them as HTML to the <see
              cref="P:System.Windows.Forms.HtmlElement.InnerHtml" />
+
+            
 
             
 
@@ -791,6 +951,8 @@
         </returns>
         <param name="elementTag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -814,6 +976,8 @@
           <para
             >The default encoding is the encoding the managed HTML Document Object Model (DOM) will attempt to use when the page is initially loaded. This encoding is derived either from Internet Explorer's <ui
             >Encoding</ui>
+
+            
 
             
 
@@ -853,10 +1017,14 @@
 
           
 
+          
+
           The name of the event you want to cease handling.</param
         >
         <param name="eventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -883,8 +1051,12 @@
 
             
 
+            
+
              property. In the pervious URL example, setting <see
              cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+
+            
 
             
 
@@ -896,8 +1068,12 @@
 
             
 
+            
+
              property must be valid top-level domains. In the previous URL example, you can set <see
              cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+
+            
 
             
 
@@ -909,8 +1085,12 @@
 
             
 
+            
+
              property to enable cross-frame scripting for pages accessed using two different protocols. If one frame in your page comes from a Web server (the http:// protocol) and another comes from the file system (the file://) protocol, they will not be able to communicate with one another regardless of the value of the <see
              cref="P:System.Windows.Forms.HtmlDocument.Domain" />
+
+            
 
             
 
@@ -941,6 +1121,8 @@
 
             
 
+            
+
              is a wrapper for the Internet Explorer Document Object Model (DOM), which is written in COM. If you need to access unexposed properties or methods on the underlying COM interfaces, such as IHTMLDocument2, you can use this object to query for them.</para
           >
           <para>To use the unmanaged interfaces, import the MSHTML library (mshtml.dll) into your application. However, you can also execute unexposed properties and methods using the IDispatch::Invoke method. </para>
@@ -950,6 +1132,8 @@
           <para
             >Gets the unmanaged interface pointer for this <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -1003,6 +1187,8 @@
 
           
 
+          
+
           The object to test.</param
         >
       </Docs>
@@ -1032,8 +1218,12 @@
 
             
 
+            
+
              exposes a large array of commands for which there are no methods exposed on <see
              cref="T:System.Windows.Forms.HtmlDocument" />
+
+            
 
             
 
@@ -1042,8 +1232,12 @@
 
             
 
+            
+
              you can insert new HTML elements, select and format text, and clear any cached authentication credentials. For a full list of commands, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=198814">Command Identifiers</see>
+
+            
 
             
 
@@ -1056,8 +1250,12 @@
 
               
 
+              
+
               , you cannot obtain a return value from your call. To retrieve return values, use the corresponding unmanaged method on a <see
                cref="P:System.Windows.Forms.HtmlDocument.DomDocument" />
+
+              
 
               
 
@@ -1074,6 +1272,8 @@
 
           
 
+          
+
           The name of the command to execute.</param
         >
         <param name="showUI">
@@ -1081,10 +1281,14 @@
 
           
 
+          
+
           Whether or not to show command-specific dialog boxes or message boxes to the user. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1111,8 +1315,12 @@
 
             
 
+            
+
              will set focus on the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -1171,6 +1379,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1197,6 +1407,8 @@
             >The <see
              cref="T:System.Drawing.Color" />
             <see cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1232,8 +1444,12 @@
 
             
 
+            
+
              and calling its Submit method using the <see
              cref="Overload:System.Windows.Forms.HtmlElement.InvokeMember" />
+
+            
 
             
 
@@ -1245,8 +1461,12 @@
 
             
 
+            
+
              property of an element previously added to the HTML DOM; or you can use the <see
              cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+
+            
 
             
 
@@ -1255,8 +1475,12 @@
 
             
 
+            
+
             , and add it as a child of an existing element using <see
              cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+
+            
 
             
 
@@ -1293,6 +1517,8 @@
 
             
 
+            
+
              will return the first one it finds.</para
           >
         </remarks>
@@ -1301,6 +1527,8 @@
           <para
             >Retrieves a single <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -1315,11 +1543,15 @@
 
             
 
+            
+
              cannot be found. </para
           >
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1350,8 +1582,12 @@
 
             
 
+            
+
              uses client coordinates, in which the upper-left corner of the document is assigned the value (0,0). Client coordinates for the current position of the cursor can be obtained using the <see
              cref="P:System.Windows.Forms.HtmlWindow.Position" />
+
+            
 
             
 
@@ -1370,11 +1606,15 @@
 
             
 
+            
+
              at the specified screen location in the document.</para
           >
         </returns>
         <param name="point">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1411,6 +1651,8 @@
 
             
 
+            
+
              argument.</para
           >
         </returns>
@@ -1419,8 +1661,12 @@
 
           
 
+          
+
           The name of the HTML tag for the <see
            cref="T:System.Windows.Forms.HtmlElement" />
+
+          
 
           
 
@@ -1452,6 +1698,8 @@
 
             
 
+            
+
              representing an in-memory hash of this object.</para
           >
         </returns>
@@ -1478,8 +1726,12 @@
 
             
 
+            
+
              returns a collection of <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -1488,8 +1740,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+
+            
 
             
 
@@ -1501,8 +1757,12 @@
 
             
 
+            
+
              property of an element previously added to the HTML DOM; or use the <see
              cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" />
+
+            
 
             
 
@@ -1511,8 +1771,12 @@
 
             
 
+            
+
             , and add it as a child of an existing element using <see
              cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" />
+
+            
 
             
 
@@ -1546,13 +1810,19 @@
 
             
 
+            
+
              will vary. If the called Active Scripting function returns scalar data, such as a string or an integer, it will be returned as a string. If it returns a script-based object, such as an object created using JScript or VBScript's new operator, it will be of type Object. (You can make calls on such objects by calling <see
              cref="M:System.Object.GetType" />
 
             
 
+            
+
              and using <see
              cref="Overload:System.Type.InvokeMember" />
+
+            
 
             
 
@@ -1562,6 +1832,8 @@
           <para
             >The <see
              cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String)" />
+
+            
 
             
 
@@ -1578,6 +1850,8 @@
         </returns>
         <param name="scriptName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1610,13 +1884,19 @@
 
             
 
+            
+
              will vary. If the called Active Scripting function returns scalar data, such as a string or an integer, it will be returned as a string. If it returns a script-based object, such as an object created using JScript or VBScript's new operator, it will be of type Object. (You can make calls on such objects by calling <see
              cref="M:System.Object.GetType" />
 
             
 
+            
+
              and using <see
              cref="Overload:System.Type.InvokeMember" />
+
+            
 
             
 
@@ -1638,10 +1918,14 @@
 
           
 
+          
+
           The name of the script method to invoke.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1665,6 +1949,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1700,8 +1986,12 @@
 
             
 
+            
+
              objects contained within this collection encapsulate the unmanaged IHTMLLinkElement interface. To access the properties of the underlying interface safely, use the <see
              cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" />
+
+            
 
             
 
@@ -1737,6 +2027,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1767,8 +2059,12 @@
 
             
 
+            
+
              event occurs before the <see
              cref="E:System.Windows.Forms.HtmlDocument.Click" />
+
+            
 
             
 
@@ -1779,6 +2075,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1814,6 +2112,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1843,6 +2143,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1878,6 +2180,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1907,6 +2211,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1945,6 +2251,8 @@
 
             
 
+            
+
              instances represent the same value. </para
           >
         </summary>
@@ -1957,10 +2265,14 @@
 
           
 
+          
+
           The first instance to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1994,6 +2306,8 @@
 
             
 
+            
+
              instances do not represent the same value. </para
           >
         </summary>
@@ -2006,10 +2320,14 @@
 
           
 
+          
+
           The first instance to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2040,8 +2358,12 @@
 
             
 
+            
+
              will clear the previous loaded document, including any associated state, such as variables. It will not cause navigation events in <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2052,13 +2374,19 @@
 
             
 
+            
+
              always creates a new document in the current window. To open a document in a new window, use the <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
 
             
 
+            
+
              method on the <see
              cref="T:System.Windows.Forms.HtmlWindow" />
+
+            
 
             
 
@@ -2073,8 +2401,12 @@
 
             
 
+            
+
              to use with the <see
              cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
+
+            
 
             
 
@@ -2087,6 +2419,8 @@
         </returns>
         <param name="replaceInHistory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2112,6 +2446,8 @@
 
             
 
+            
+
              will not have any value unless it has been set explicitly, either in code or in HTML.</para
           >
           <para
@@ -2120,8 +2456,12 @@
 
             
 
+            
+
              property on Windows Forms controls, <see
              cref="P:System.Windows.Forms.HtmlDocument.RightToLeft" />
+
+            
 
             
 
@@ -2155,13 +2495,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
+            
+
              control. Navigation failures caused by network outages or malfunctioning Web sites will not cause <see
              cref="E:System.Windows.Forms.HtmlDocument.Stop" />
+
+            
 
             
 
@@ -2172,6 +2518,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2203,6 +2551,8 @@
 
             
 
+            
+
              property to identify the document by way of a human-readable name.</para
           >
           <para
@@ -2211,8 +2561,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2244,8 +2598,12 @@
 
             
 
+            
+
              property on the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -2304,6 +2662,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2312,6 +2672,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.HtmlWindow" />
+
+            
 
             
 
@@ -2341,8 +2703,12 @@
 
             
 
+            
+
              should be preceded by a call to <see
              cref="M:System.Windows.Forms.HtmlDocument.OpenNew(System.Boolean)" />
+
+            
 
             
 
@@ -2351,8 +2717,12 @@
 
             
 
+            
+
              will create a new HTML document in its place. To change only a specific portion of the document, obtain the appropriate <see
              cref="T:System.Windows.Forms.HtmlElement" />
+
+            
 
             
 
@@ -2361,11 +2731,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >It is recommended that you write an entire valid HTML document using the <see
              cref="M:System.Windows.Forms.HtmlDocument.Write(System.String)" />
+
+            
 
             
 
@@ -2378,6 +2752,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

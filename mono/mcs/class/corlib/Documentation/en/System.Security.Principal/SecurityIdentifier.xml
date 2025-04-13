@@ -60,11 +60,15 @@
 
             
 
+            
+
              class by using an integer that represents the binary form of a security identifier (SID).</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,6 +101,8 @@
 
             
 
+            
+
              class by using the specified security identifier (SID) in Security Descriptor Definition Language (SDDL) format.</para
           >
         </summary>
@@ -105,8 +111,12 @@
 
           
 
+          
+
           SDDL string for the SID used to create the <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -143,11 +153,15 @@
 
             
 
+            
+
              class by using a specified binary representation of a security identifier (SID).</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,8 +172,12 @@
 
           
 
+          
+
           The byte offset to use as the starting index in <paramref
            name="binaryForm" />
+
+          
 
           
 
@@ -196,6 +214,8 @@
 
             
 
+            
+
              class by using the specified well known security identifier (SID) type and domain SID.</para
           >
         </summary>
@@ -204,8 +224,12 @@
 
           
 
+          
+
           One of the enumeration values. This value must not be <see
            cref="F:System.Security.Principal.WellKnownSidType.LogonIdsSid" />
+
+          
 
           
 
@@ -216,13 +240,19 @@
 
           
 
+          
+
           The domain SID. This value is required for the following <see
            cref="T:System.Security.Principal.WellKnownSidType" />
 
           
 
+          
+
            values. This parameter is ignored for any other <see
            cref="T:System.Security.Principal.WellKnownSidType" />
+
+          
 
           
 
@@ -259,8 +289,12 @@
 
             
 
+            
+
              object if the SID represents a Windows account SID. If the SID does not represent a Windows account SID, this property returns <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -289,6 +323,8 @@
           <para
             >Returns the length, in bytes, of the security identifier (SID) represented by the <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -328,8 +364,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -341,6 +381,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="sid" />
+
+            
 
             
 
@@ -368,6 +410,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -380,6 +424,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="sid" />
+
+                  
 
                   
 
@@ -398,6 +444,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -406,6 +454,8 @@
         </returns>
         <param name="sid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -441,6 +491,8 @@
 
             
 
+            
+
              object is equal to a specified object.</para
           >
         </summary>
@@ -452,8 +504,12 @@
 
             
 
+            
+
              is an object with the same underlying type and value as this <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -465,8 +521,12 @@
 
           
 
+          
+
           An object to compare with this <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -505,8 +565,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -521,8 +585,12 @@
 
             
 
+            
+
              is equal to the value of the current <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -531,6 +599,8 @@
         </returns>
         <param name="sid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -570,11 +640,15 @@
 
             
 
+            
+
              class to a byte array.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -585,8 +659,12 @@
 
           
 
+          
+
           The byte offset to use as the starting index in <paramref
            name="binaryForm" />
+
+          
 
           
 
@@ -620,8 +698,12 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Security.Principal.SecurityIdentifier.GetHashCode" />
+
+            
 
             
 
@@ -633,6 +715,8 @@
           <para
             >A hash value for the current <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -667,6 +751,8 @@
 
             
 
+            
+
              object is a valid Windows account SID.</para
           >
         </summary>
@@ -675,6 +761,8 @@
           <para
             >true if the SID represented by this <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -714,6 +802,8 @@
 
             
 
+            
+
              object is from the same domain as the specified SID.</para
           >
         </summary>
@@ -725,8 +815,12 @@
 
             
 
+            
+
              object is in the same domain as the <paramref
              name="sid" />
+
+            
 
             
 
@@ -738,8 +832,12 @@
 
           
 
+          
+
           The SID to compare with this <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -778,6 +876,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -789,8 +889,12 @@
 
             
 
+            
+
              is a valid translation type for the <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -802,8 +906,12 @@
 
           
 
+          
+
           The type being queried for validity to serve as a conversion from <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -842,6 +950,8 @@
 
             
 
+            
+
              object matches the specified well known security identifier (SID) type. </para
           >
         </summary>
@@ -853,8 +963,12 @@
 
             
 
+            
+
              is the SID type for the <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -866,8 +980,12 @@
 
           
 
+          
+
           A value to compare with the <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -955,8 +1073,12 @@
 
             
 
+            
+
              objects to determine whether they are equal. They are considered equal if they have the same canonical representation as the one returned by the <see
              cref="P:System.Security.Principal.SecurityIdentifier.Value" />
+
+            
 
             
 
@@ -971,8 +1093,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -984,10 +1110,14 @@
 
           
 
+          
+
           The left operand to use for the equality comparison. This parameter can be null.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1027,8 +1157,12 @@
 
             
 
+            
+
              objects to determine whether they are not equal. They are considered not equal if they have different canonical name representations than the one returned by the <see
              cref="P:System.Security.Principal.SecurityIdentifier.Value" />
+
+            
 
             
 
@@ -1043,8 +1177,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -1056,10 +1194,14 @@
 
           
 
+          
+
           The left operand to use for the inequality comparison. This parameter can be null.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1093,6 +1235,8 @@
 
             
 
+            
+
              object. An example of the SDDL format is S-1-5-9. </para
           >
         </summary>
@@ -1101,6 +1245,8 @@
           <para
             >The SID, in SDDL format, for the account represented by the <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -1140,8 +1286,12 @@
 
             
 
+            
+
              object into another <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -1157,13 +1307,19 @@
 
           
 
+          
+
           The target type for the conversion from <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
+          
+
           . The target type must be a type that is considered valid by the <see
            cref="M:System.Security.Principal.SecurityIdentifier.IsValidTargetType(System.Type)" />
+
+          
 
           
 
@@ -1191,6 +1347,8 @@
           <para
             >Returns an uppercase Security Descriptor Definition Language (SDDL) string for the security identifier (SID) represented by this <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 

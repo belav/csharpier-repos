@@ -39,13 +39,19 @@
 
         
 
+        
+
          class contains an <see
          cref="T:System.ApplicationIdentity" />
 
         
 
+        
+
          and provides internal-only access to the application manifest. The activation context is used during manifest-based activation to set up the domain policy and provide an application-based security model. For more information, see the <see
          cref="T:System.Security.Policy.ApplicationSecurityManager" />
+
+        
 
         
 
@@ -88,8 +94,12 @@
 
             
 
+            
+
              method calls an internal constructor to create a new activation context. The implementation of the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
 
             
 
+            
+
              class using the specified application identity.</para
           >
         </summary>
@@ -113,6 +125,8 @@
         </returns>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,8 +165,12 @@
 
             
 
+            
+
              method calls an internal constructor to create a new activation context. The implementation of the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -164,6 +182,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -179,10 +199,14 @@
 
           
 
+          
+
           An object that identifies an application.</param
         >
         <param name="manifestPaths">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,8 +239,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -225,8 +253,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -235,13 +267,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ActivationContext" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -252,10 +290,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -268,13 +310,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ActivationContext" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ActivationContext" />
+
+              
 
               
 
@@ -287,6 +335,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -321,8 +371,12 @@
 
             
 
+            
+
              object to attempt to free resources and perform other cleanup operations before the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -356,8 +410,12 @@
 
             
 
+            
+
             . An application that is contained in the store is classified as <see
              cref="F:System.ActivationContext.ContextForm.StoreBounded" />
+
+            
 
             
 
@@ -392,6 +450,8 @@
           <para
             >An <see
              cref="T:System.ApplicationIdentity" />
+
+            
 
             
 
@@ -436,6 +496,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -444,10 +506,14 @@
 
           
 
+          
+
           The object to populate with data.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

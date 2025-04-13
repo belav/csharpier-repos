@@ -26,8 +26,12 @@
 
         
 
+        
+
          interface. In the .NET Framework, constructors of the <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+        
 
         
 
@@ -49,11 +57,15 @@
 
         
 
+        
+
          interface. </para
       >
       <para
         >For the generic version of this interface, see <see
          cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+        
 
         
 
@@ -103,10 +115,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
             corresponding to the customized equality comparison provided by the <see
              cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -162,8 +182,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

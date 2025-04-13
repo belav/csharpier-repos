@@ -27,8 +27,12 @@
 
         
 
+        
+
          class to bind the value of a field that is passed as part of an HTTP request query string to a parameter that is used in a parameterized query or command. The field is retrieved from the <see
          cref="P:System.Web.HttpRequest.QueryString" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          object is referenced, but no corresponding query-string name/value pair is passed. Similarly, they might display no data if the query-string field name is passed without a corresponding value. To avoid these situations, set the <see
          cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+        
 
         
 
@@ -53,13 +61,19 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Web.UI.WebControls.QueryStringParameter.QueryStringField" />
 
         
 
+        
+
          property, which identifies the name of the query string value to bind to. It also provides the properties that are inherited from the <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
           
 
+          
+
            class does not validate the value that is passed; it provides the raw value. However, you can validate the value of a <see
            cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+          
 
           
 
@@ -82,8 +100,12 @@
 
           
 
+          
+
            property of the associated <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -111,8 +133,12 @@
 
             
 
+            
+
              object that is created by using the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.#ctor" />
+
+            
 
             
 
@@ -125,12 +151,16 @@
 
                 
 
+                
+
                  is initialized to an empty string ("").</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.Parameter.Name" />
+
+                
 
                 
 
@@ -143,8 +173,12 @@
 
                 
 
+                
+
                  is initialized to <see
                  cref="F:System.TypeCode.Object" />
+
+                
 
                 
 
@@ -157,8 +191,12 @@
 
                 
 
+                
+
                  is initialized to <see
                  cref="F:System.Data.ParameterDirection.Input" />
+
+                
 
                 
 
@@ -168,6 +206,8 @@
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+                
 
                 
 
@@ -181,6 +221,8 @@
           <para
             >Initializes a new unnamed instance of the <see
              cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+            
 
             
 
@@ -211,8 +253,12 @@
 
             
 
+            
+
              constructor is a protected copy constructor that is used to clone a <see
              cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+            
 
             
 
@@ -221,13 +267,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -242,8 +294,12 @@
 
             
 
+            
+
              class, using the values of the instance that is specified by the <paramref
              name="original" />
+
+            
 
             
 
@@ -255,8 +311,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+          
 
           
 
@@ -287,8 +347,12 @@
 
             
 
+            
+
              object that is created by using the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -297,8 +361,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -313,6 +381,8 @@
 
             
 
+            
+
              class, using the specified string to identify which query-string field to bind to.</para
           >
         </summary>
@@ -321,10 +391,14 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
         <param name="queryStringField">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,8 +430,12 @@
 
             
 
+            
+
              object that is created by using the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.#ctor(System.String,System.TypeCode,System.String)" />
+
+            
 
             
 
@@ -366,8 +444,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -382,11 +464,15 @@
 
             
 
+            
+
              class, using the specified string to identify which query-string field to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,8 +483,12 @@
 
           
 
+          
+
           The type that the parameter represents. The default is <see
            cref="F:System.TypeCode.Object" />
+
+          
 
           
 
@@ -406,6 +496,8 @@
         >
         <param name="queryStringField">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,13 +528,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.#ctor(System.Web.UI.WebControls.QueryStringParameter)" />
 
             
 
+            
+
              constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+            
 
             
 
@@ -454,6 +552,8 @@
           <para
             >Returns a duplicate of the current <see
              cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+            
 
             
 
@@ -493,8 +593,12 @@
 
             
 
+            
+
              object tries to bind to the query-string field every time that the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -506,13 +610,19 @@
 
             
 
+            
+
              parameter is used by the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
+            
+
              method to retrieve the value of the specified query-string field from the query string. The <paramref
              name="control" />
+
+            
 
             
 
@@ -527,6 +637,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -538,6 +650,8 @@
 
             
 
+            
+
              method returns null. </para
           >
         </returns>
@@ -546,8 +660,12 @@
 
           
 
+          
+
           A Web server control that is associated with the ASP.NET Web page where the <see
            cref="T:System.Web.UI.WebControls.QueryStringParameter" />
+
+          
 
           
 
@@ -580,8 +698,12 @@
 
             
 
+            
+
              property identifies a name/value pair that is passed with the query string. The <see
              cref="P:System.Web.UI.WebControls.QueryStringParameter.QueryStringField" />
+
+            
 
             
 
@@ -590,8 +712,12 @@
 
             
 
+            
+
              property binds to its corresponding value at run time. If the expected query-string name/value pair is not passed to the page with the query string, the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -600,13 +726,19 @@
 
             
 
+            
+
              property. If the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
             
 
+            
+
              property is not set, the <see
              cref="M:System.Web.UI.WebControls.QueryStringParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          class corresponds to the Web Services Description Language (WSDL) operation element enclosed by the portType element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 
@@ -86,8 +90,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 
@@ -113,6 +121,8 @@
           <para
             >Gets the collection of faults, or error messages, defined by the current <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 
@@ -155,8 +165,12 @@
 
             
 
+            
+
              matches with the <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 
@@ -171,8 +185,12 @@
 
             
 
+            
+
              instance matches the <paramref
              name="operationBinding" />
+
+            
 
             
 
@@ -184,13 +202,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
+          
+
            to be checked to determine whether it matches with the <see
            cref="T:System.Web.Services.Description.Operation" />
+
+          
 
           
 
@@ -221,13 +245,19 @@
 
             
 
+            
+
              is associated with exactly one <see
              cref="T:System.Web.Services.Description.OperationInput" />
 
             
 
+            
+
              and exactly one <see
              cref="T:System.Web.Services.Description.OperationOutput" />
+
+            
 
             
 
@@ -242,8 +272,12 @@
 
             
 
+            
+
              class defined by the current <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 
@@ -303,6 +337,8 @@
 
             
 
+            
+
              property, but housed in an array rather than a space-delimited string.</para
           >
         </remarks>
@@ -311,6 +347,8 @@
           <para
             >Gets or sets an array of the elements contained in the <see
              cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
+
+            
 
             
 
@@ -345,6 +383,8 @@
 
             
 
+            
+
              instances must adhere to the following rules: </para
           >
           <list type="bullet">
@@ -352,6 +392,8 @@
               <para
                 >The order of the named <see
                  cref="T:System.Web.Services.Description.MessagePart" />
+
+                
 
                 
 
@@ -368,8 +410,12 @@
 
                 
 
+                
+
                  name appears in both the input and output messages, it is an <paramref
                  name="in/out" />
+
+                
 
                 
 
@@ -380,6 +426,8 @@
               <para
                 >If the <see
                  cref="T:System.Web.Services.Description.MessagePart" />
+
+                
 
                 
 
@@ -388,6 +436,8 @@
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -398,8 +448,12 @@
 
                 
 
+                
+
                  name appears only in the output message, it is an <paramref
                  name="out" />
+
+                
 
                 
 
@@ -413,8 +467,12 @@
 
             
 
+            
+
              is to be used with an RPC-style <see
              cref="T:System.Web.Services.Description.Binding" />
+
+            
 
             
 
@@ -423,8 +481,12 @@
 
             
 
+            
+
              directly. This method is only used internally for XML serialization. To return the parameter list use <see
              cref="P:System.Web.Services.Description.Operation.ParameterOrder" />
+
+            
 
             
 
@@ -469,8 +531,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 

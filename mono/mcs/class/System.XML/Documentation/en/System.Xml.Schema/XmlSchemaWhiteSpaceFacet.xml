@@ -30,6 +30,8 @@
 
         
 
+        
+
          class defines how the simpleType value's white space will be treated. The whiteSpace facet value can be one of preserve, replace, or collapse.</para
       >
     </remarks>
@@ -60,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaWhiteSpaceFacet" />
+
+            
 
             
 

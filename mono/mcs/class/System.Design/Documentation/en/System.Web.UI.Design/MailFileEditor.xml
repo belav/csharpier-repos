@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is an <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          control uses the <see
          cref="T:System.Web.UI.Design.MailFileEditor" />
 
         
 
+        
+
          class at design time to set the value of the <see
          cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          attribute to associate the <see
          cref="T:System.Web.UI.Design.MailFileEditor" />
+
+        
 
         
 
@@ -59,13 +73,19 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
+        
+
          method displays a dialog box for selecting a mail file name from a filtered list of files, and returns the file name that is selected by the user. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
+
+        
 
         
 
@@ -77,13 +97,19 @@
 
         
 
+        
+
          to define a custom editor for a mail file name property. For example, a derived class can override the <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
+        
+
          method, and display an <see
          cref="T:System.Windows.Forms.OpenFileDialog" />
+
+        
 
         
 
@@ -110,6 +136,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.MailFileEditor" />
+
+            
 
             
 

@@ -26,8 +26,12 @@
 
         
 
+        
+
          is a major component of the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          defines the schema of the table, the <see
          cref="T:System.Data.DataRowCollection" />
+
+        
 
         
 
@@ -46,8 +54,12 @@
 
         
 
+        
+
          in the <see
          cref="T:System.Data.DataRowCollection" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
+
+        
 
         
 
@@ -69,8 +85,12 @@
 
         
 
+        
+
          objects from the <see
          cref="T:System.Data.DataRowCollection" />
+
+        
 
         
 
@@ -79,13 +99,19 @@
 
         
 
+        
+
          method to search for <see
          cref="T:System.Data.DataRow" />
 
         
 
+        
+
          objects that contain specific values in primary key columns, and the <see
          cref="M:System.Data.DataRowCollection.Contains(System.Object)" />
+
+        
 
         
 
@@ -97,13 +123,19 @@
 
         
 
+        
+
         , use methods on the <see
          cref="T:System.Data.DataRowCollection" />
 
         
 
+        
+
         ’s associated <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -115,6 +147,8 @@
       <para
         >Represents a collection of rows for a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -141,8 +175,12 @@
 
             
 
+            
+
             , you must use the <see
              cref="M:System.Data.DataTable.NewRow" />
+
+            
 
             
 
@@ -151,8 +189,12 @@
 
             
 
+            
+
              class. When you use the <see
              cref="M:System.Data.DataTable.NewRow" />
+
+            
 
             
 
@@ -161,8 +203,12 @@
 
             
 
+            
+
              object is returned using the schema of parent <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -171,8 +217,12 @@
 
             
 
+            
+
              object and set the values for each of its columns, use the <see
              cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
+
+            
 
             
 
@@ -181,6 +231,8 @@
           <para
             >Generates an exception if the user generates an exception in the <see
              cref="E:System.Data.DataTable.RowChanging" />
+
+            
 
             
 
@@ -195,8 +247,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -208,8 +264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -245,8 +305,12 @@
 
             
 
+            
+
              object has its <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
+
+            
 
             
 
@@ -258,8 +322,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Data.DataTable.RowChanging" />
+
+            
 
             
 
@@ -274,6 +342,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -283,6 +353,8 @@
         </returns>
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,8 +403,12 @@
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -341,8 +417,12 @@
 
             
 
+            
+
              object belongs to must have at least one column designated as a primary key column. See the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -354,8 +434,12 @@
 
             
 
+            
+
              method to return the specific <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -374,11 +458,15 @@
 
             
 
+            
+
              with the specified primary key value; otherwise, false.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -408,8 +496,12 @@
 
             
 
+            
+
              method with an array of values, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -418,13 +510,19 @@
 
             
 
+            
+
              object belongs must have an array of columns designated as primary keys. See the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
+            
+
              property for more information about how to create an array of primary key columns. The number of array elements must correspond to the number of primary key columns in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -436,8 +534,12 @@
 
             
 
+            
+
              method to return the specific <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -456,8 +558,12 @@
 
             
 
+            
+
              contains a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -466,6 +572,8 @@
         </returns>
         <param name="keys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,11 +612,15 @@
 
             
 
+            
+
              objects from the collection into the given array, starting at the given destination array index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,6 +654,8 @@
 
             
 
+            
+
              objects from the collection into the given array, starting at the given destination array index.</para
           >
         </summary>
@@ -550,10 +664,14 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the DataRowCollection. The array must have zero-based indexing.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -582,6 +700,8 @@
 
             
 
+            
+
              objects in this collection.</para
           >
         </summary>
@@ -605,13 +725,19 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Data.DataRowCollection" />
 
             
 
+            
+
              object belongs must have at least one column designated as a primary key column. See the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -630,8 +756,12 @@
 
             
 
+            
+
              that contains the primary key value specified; otherwise a null value if the primary key value does not exist in the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -643,8 +773,12 @@
 
           
 
+          
+
           The primary key value of the <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -674,8 +808,12 @@
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -684,8 +822,12 @@
 
             
 
+            
+
              object belongs must have at least one column designated as a primary key column. When two or more rows have the same primary key value, then the first row found is returned. This occurs when <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -694,13 +836,19 @@
 
             
 
+            
+
              property for more information about how to create a <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
+            
+
              column, or an array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -719,8 +867,12 @@
 
             
 
+            
+
              object that contains the primary key values specified; otherwise a null value if the primary key value does not exist in the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -729,6 +881,8 @@
         </returns>
         <param name="keys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -763,6 +917,8 @@
 
             
 
+            
+
              for this collection.</para
           >
         </summary>
@@ -771,6 +927,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -801,6 +959,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -810,6 +970,8 @@
         </returns>
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -839,8 +1001,12 @@
 
             
 
+            
+
              is reflected by the order of rows in the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -849,8 +1015,12 @@
 
             
 
+            
+
              array, the inserted row may not be returned in the location specified by <see
              cref="M:System.Data.DataRowCollection.InsertAt(System.Data.DataRow,System.Int32)" />
+
+            
 
             
 
@@ -859,8 +1029,12 @@
 
             
 
+            
+
              property returns the row in the specified insert position. <see
              cref="M:System.Data.DataTable.Select" />
+
+            
 
             
 
@@ -869,8 +1043,12 @@
 
             
 
+            
+
              may not. When you write the contents of the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -879,8 +1057,12 @@
 
             
 
+            
+
             , the rows are written according to the order specified by the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -889,6 +1071,8 @@
           <para
             >If the value specified for the <paramref
              name="pos" />
+
+            
 
             
 
@@ -904,8 +1088,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -913,6 +1101,8 @@
         >
         <param name="pos">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -984,8 +1174,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -994,8 +1188,12 @@
 
             
 
+            
+
              and then calling <see
              cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 
@@ -1006,8 +1204,12 @@
 
             
 
+            
+
              should not be called in a foreach loop while iterating through a <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -1016,11 +1218,15 @@
 
             
 
+            
+
              modifies the state of the collection.</para
           >
           <para
             >You can also use the <see
              cref="M:System.Data.DataRowCollection.Clear" />
+
+            
 
             
 
@@ -1035,6 +1241,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1043,8 +1251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -1074,8 +1286,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1084,8 +1300,12 @@
 
             
 
+            
+
              and then calling <see
              cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 
@@ -1094,6 +1314,8 @@
           <para
             >You can use the <see
              cref="M:System.Data.DataRowCollection.Clear" />
+
+            
 
             
 
@@ -1106,6 +1328,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

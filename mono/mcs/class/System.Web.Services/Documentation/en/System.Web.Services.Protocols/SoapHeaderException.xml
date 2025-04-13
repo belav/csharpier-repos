@@ -25,13 +25,19 @@
 
         
 
+        
+
          property set to true, the XML Web service method must set the <see
          cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
 
         
 
+        
+
          property to true; otherwise, a <see
          cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          property cannot be set according to the SOAP specification for a <see
          cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
           
 
+          
+
            to access SOAP faults. However, applications that use the SOAP 1.2 specification must use the <see
            cref="T:System.Web.Services.Protocols.SoapException" />
+
+          
 
           
 
@@ -86,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+
+            
 
             
 
@@ -117,6 +133,8 @@
 
             
 
+            
+
              class with parameters for controlling serialization.</para
           >
         </summary>
@@ -125,8 +143,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -137,8 +159,12 @@
 
           
 
+          
+
           A <see
            cref="M:System.Web.Services.Protocols.SoapHeaderException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+          
 
           
 
@@ -167,6 +193,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -175,8 +203,12 @@
 
           
 
+          
+
           A message that identifies the reason the exception occurred. This parameter sets the <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -187,8 +219,12 @@
 
           
 
+          
+
           The type of error that occurred. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+          
 
           
 
@@ -222,6 +258,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -230,8 +268,12 @@
 
           
 
+          
+
           A message that identifies the reason the exception occurred. This parameter sets the <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -242,8 +284,12 @@
 
           
 
+          
+
           The type of error that occurred. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+          
 
           
 
@@ -254,8 +300,12 @@
 
           
 
+          
+
           A reference to the root cause of an exception. This parameter sets the <see
            cref="P:System.Exception.InnerException" />
+
+          
 
           
 
@@ -289,6 +339,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -297,8 +349,12 @@
 
           
 
+          
+
           A message that identifies the reason the exception occurred. This parameter sets the <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -309,8 +365,12 @@
 
           
 
+          
+
           The type of error that occurred. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+          
 
           
 
@@ -321,8 +381,12 @@
 
           
 
+          
+
           The piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Actor" />
+
+          
 
           
 
@@ -357,6 +421,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -365,8 +431,12 @@
 
           
 
+          
+
           A message that identifies the reason the exception occurred. This parameter sets the <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -377,8 +447,12 @@
 
           
 
+          
+
           The type of error that occurred. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+          
 
           
 
@@ -389,8 +463,12 @@
 
           
 
+          
+
           The piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Actor" />
+
+          
 
           
 
@@ -401,8 +479,12 @@
 
           
 
+          
+
           A reference to the root cause of an exception. This parameter sets the <see
            cref="P:System.Exception.InnerException" />
+
+          
 
           
 
@@ -442,6 +524,8 @@
 
             
 
+            
+
              class with the associated data.</para
           >
         </summary>
@@ -450,8 +534,12 @@
 
           
 
+          
+
           A message that identifies the reason the exception occurred. This parameter sets the <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -462,8 +550,12 @@
 
           
 
+          
+
           The type of error that occurred. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+          
 
           
 
@@ -474,8 +566,12 @@
 
           
 
+          
+
           The piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Actor" />
+
+          
 
           
 
@@ -486,8 +582,12 @@
 
           
 
+          
+
           An URI that represents the role of the XML Web service in the processing of the SOAP message. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Role" />
+
+          
 
           
 
@@ -498,8 +598,12 @@
 
           
 
+          
+
           A reference to the root cause of the exception. This parameter sets the <see
            cref="P:System.Exception.InnerException" />
+
+          
 
           
 
@@ -536,6 +640,8 @@
 
             
 
+            
+
              class with the associated data.</para
           >
         </summary>
@@ -544,8 +650,12 @@
 
           
 
+          
+
           A message that identifies the reason the exception occurred. This parameter sets the <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -556,8 +666,12 @@
 
           
 
+          
+
           The type of error that occurred. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Code" />
+
+          
 
           
 
@@ -568,8 +682,12 @@
 
           
 
+          
+
           The piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Actor" />
+
+          
 
           
 
@@ -580,8 +698,12 @@
 
           
 
+          
+
           An URI that represents the role of the XML Web service in the processing of the SOAP message. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Role" />
+
+          
 
           
 
@@ -592,8 +714,12 @@
 
           
 
+          
+
           A string that identifies the human language associated with the exception. This parameter sets the <see
            cref="P:System.Web.Services.Protocols.SoapException.Lang" />
+
+          
 
           
 
@@ -604,8 +730,12 @@
 
           
 
+          
+
           A reference to the root cause of an exception. This parameter sets the <see
            cref="P:System.Exception.InnerException" />
+
+          
 
           
 

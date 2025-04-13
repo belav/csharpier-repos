@@ -28,8 +28,12 @@
 
         
 
+        
+
          object includes a URI and an optional collection of addressing headers. The addressing and message headers are canonicalized to be compared for equality. If a parameter appears more than once in an <see
          cref="T:System.ServiceModel.EndpointAddress" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , except that the test for whether a message matches an endpoint address is done by a <newTerm
         >Longest-Prefix Match</newTerm>
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >Represents a query that tests whether a message matches an EndpointAddress using a <newTerm
         >Longest-Prefix Match</newTerm>
+
+        
 
         
 
@@ -89,6 +99,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -97,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -147,6 +163,8 @@
 
             
 
+            
+
              parameter is false, the above URIs all resolve to the same endpoint.</para
           >
         </remarks>
@@ -158,6 +176,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -166,8 +186,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -175,6 +199,8 @@
         >
         <param name="includeHostNameInComparison">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,6 +232,8 @@
           <para
             >Gets the Endpoint Address that the <see
              cref="T:System.ServiceModel.Dispatcher.PrefixEndpointAddressMessageFilter" />
+
+            
 
             
 
@@ -243,11 +271,15 @@
 
             
 
+            
+
              that is optimized to test for specific message endpoints.</para
           >
           <para
             >This method is intended to be used by <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
+
+            
 
             
 
@@ -266,8 +298,12 @@
 
             
 
+            
+
              interface that can contain <see
              cref="T:System.ServiceModel.Dispatcher.PrefixEndpointAddressMessageFilter" />
+
+            
 
             
 
@@ -276,11 +312,15 @@
 
             
 
+            
+
             . </para
           >
         </returns>
         <typeparam name="FilterData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +404,8 @@
 
             
 
+            
+
              object satisfies the endpoint address specified in the filter; otherwise, false. </para
           >
         </returns>
@@ -372,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -417,6 +463,8 @@
 
             
 
+            
+
              object satisfies the endpoint address; otherwise, false. </para
           >
         </returns>
@@ -425,8 +473,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+          
 
           
 

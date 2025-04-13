@@ -37,8 +37,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          interface, allowing it to be hosted in a <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          is in edit mode, you can retrieve the <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -80,13 +96,19 @@
 
         
 
+        
+
          event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see
          cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
 
         
 
+        
+
          property rather than setting the properties of the control returned by the <see
          cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+
+        
 
         
 
@@ -98,6 +120,8 @@
       <para
         >Represents the hosted combo box control in a <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -120,6 +144,8 @@
 
             
 
+            
+
              property to false. </para
           >
           <para
@@ -128,8 +154,12 @@
 
             
 
+            
+
              class, because this is performed automatically when the containing <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -141,6 +171,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+
+            
 
             
 
@@ -174,8 +206,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Control.BackColor" />
+
+            
 
             
 
@@ -184,8 +220,12 @@
 
             
 
+            
+
              properties of the control align with the corresponding properties of the <paramref
              name="dataGridViewCellStyle" />
+
+            
 
             
 
@@ -201,8 +241,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -233,8 +277,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -243,8 +291,12 @@
 
             
 
+            
+
              or added to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -256,6 +308,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -287,8 +341,12 @@
 
             
 
+            
+
              property contains the actual data contained in the control. This data is the string shown in the text box portion of the control. In contrast, the <see
              cref="M:System.Windows.Forms.DataGridViewComboBoxEditingControl.GetEditingControlFormattedValue(System.Windows.Forms.DataGridViewDataErrorContexts)" />
+
+            
 
             
 
@@ -350,6 +408,8 @@
 
             
 
+            
+
              property is set to true to specify that the owning cell's value has changed, and the cell may need to be updated to reflect this change. The owning cell or table will reset this property to false after it has updated itself.</para
           >
           <para>When the control is initialized, this property is set to false.</para>
@@ -386,6 +446,8 @@
 
             
 
+            
+
              control calls this method to determine whether to handle an input key or let the editing control handle it.</para
           >
           <para
@@ -394,8 +456,12 @@
 
             
 
+            
+
              includes the <see
              cref="F:System.Windows.Forms.Keys.Up" />
+
+            
 
             
 
@@ -404,8 +470,12 @@
 
             
 
+            
+
              values or if the drop-down list is displayed and <paramref
              name="keyData" />
+
+            
 
             
 
@@ -414,13 +484,19 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.Keys.Enter" />
 
             
 
+            
+
              values. This method also returns true if <paramref
              name="dataGridViewWantsInputKey" />
+
+            
 
             
 
@@ -432,6 +508,8 @@
           <para
             >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -447,8 +525,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -459,8 +541,12 @@
 
           
 
+          
+
           true to indicate that the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -520,6 +606,8 @@
 
             
 
+            
+
              that represents the formatted version of the cell contents.</para
           >
         </returns>
@@ -528,8 +616,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -583,6 +675,8 @@
         </summary>
         <param name="selectAll">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          control can present its underlying data in both tabular and hierarchical format to Web server controls that bind to it. The <see
          cref="T:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.DropDownList" />
+
+        
 
         
 
@@ -48,13 +56,19 @@
 
         
 
+        
+
          to bind to site map data and present it in list form, while controls that derive from the <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
 
         
 
+        
+
          class, such as <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -66,13 +80,19 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
+        
+
         , a <see
          cref="T:System.Web.UI.WebControls.SiteMapDataSourceView" />
+
+        
 
         
 
@@ -82,8 +102,12 @@
 
         
 
+        
+
          method, a <see
          cref="T:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView" />
+
+        
 
         
 
@@ -92,8 +116,12 @@
 
         
 
+        
+
          class is provided for Web server controls that derive from <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -102,8 +130,12 @@
 
         
 
+        
+
          is provided for Web server controls that derive from <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -115,8 +147,12 @@
 
         
 
+        
+
          helper objects, the <see
          cref="T:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView" />
+
+        
 
         
 
@@ -125,13 +161,19 @@
 
         
 
+        
+
          class only overrides the <see
          cref="M:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView.Select" />
 
         
 
+        
+
          method, the associated <see
          cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+        
 
         
 
@@ -143,6 +185,8 @@
       <para
         >Represents a data view on a site map node or collection of nodes for a <see
          cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+        
 
         
 
@@ -170,8 +214,12 @@
 
             
 
+            
+
              class maintains an internal <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -180,8 +228,12 @@
 
             
 
+            
+
              constructor is used, the specified node is added to the collection. A call to the <see
              cref="M:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView.Select" />
+
+            
 
             
 
@@ -196,8 +248,12 @@
 
             
 
+            
+
              class, adding the specified node to the <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -209,8 +265,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -240,13 +300,19 @@
 
             
 
+            
+
              class maintains an internal <see
              cref="T:System.Web.SiteMapNodeCollection" />
 
             
 
+            
+
              collection of nodes. When the <see
              cref="M:System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView.#ctor(System.Web.SiteMapNodeCollection)" />
+
+            
 
             
 
@@ -261,8 +327,12 @@
 
             
 
+            
+
              class, setting the specified collection to the <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -274,8 +344,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -306,8 +380,12 @@
 
             
 
+            
+
              method returns an <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -316,8 +394,12 @@
 
             
 
+            
+
              method to get an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -332,6 +414,8 @@
 
             
 
+            
+
              objects that represents the site navigation structure for the current user.</para
           >
         </summary>
@@ -340,6 +424,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 

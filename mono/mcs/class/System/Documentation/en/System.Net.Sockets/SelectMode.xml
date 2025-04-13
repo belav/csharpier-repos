@@ -35,8 +35,12 @@
 
         
 
+        
+
          enumeration defines the polling modes that can be passed to the <see
          cref="M:System.Net.Sockets.Socket.Poll(System.Int32,System.Net.Sockets.SelectMode)" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          value to determine if a listening <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          value to determine if a <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -65,13 +77,19 @@
 
         
 
+        
+
          value to determine if there is an error condition present on the <see
          cref="T:System.Net.Sockets.Socket" />
 
         
 
+        
+
         . For explanations of writeability, readability, and the presence of error conditions, see the <see
          cref="M:System.Net.Sockets.Socket.Poll(System.Int32,System.Net.Sockets.SelectMode)" />
+
+        
 
         
 
@@ -83,6 +101,8 @@
       <para
         >Defines the polling modes for the <see
          cref="M:System.Net.Sockets.Socket.Poll(System.Int32,System.Net.Sockets.SelectMode)" />
+
+        
 
         
 

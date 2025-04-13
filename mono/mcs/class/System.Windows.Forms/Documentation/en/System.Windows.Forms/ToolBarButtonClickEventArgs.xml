@@ -22,13 +22,19 @@
 
         
 
+        
+
          control. The <see
          cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
 
         
 
+        
+
          property contains the <see
          cref="T:System.Windows.Forms.ToolBarButton" />
+
+        
 
         
 
@@ -40,6 +46,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ToolBar.ButtonClick" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
             
 
+            
+
              property is set equal to the <paramref
              name="button" />
+
+            
 
             
 
@@ -82,6 +94,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -90,8 +104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolBarButton" />
+
+          
 
           
 
@@ -122,13 +140,19 @@
 
             
 
+            
+
              property is initially set equal to the <paramref
              name="button" />
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Windows.Forms.ToolBarButtonClickEventArgs.#ctor(System.Windows.Forms.ToolBarButton)" />
+
+            
 
             
 
@@ -140,6 +164,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.ToolBarButton" />
+
+            
 
             
 

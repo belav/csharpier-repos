@@ -31,13 +31,19 @@
 
         
 
+        
+
          and <see
          cref="M:System.Security.CodeAccessPermission.Assert" />
 
         
 
+        
+
          actions. For example, if a <see
          cref="M:System.Security.CodeAccessPermission.Deny" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          class is used internally by the <see
          cref="T:System.Security.SecurityContext" />
+
+        
 
         
 
@@ -59,13 +69,19 @@
 
         
 
+        
+
          method captures the compressed stack for the current call stack, along with impersonation and culture information. The <see
          cref="T:System.Security.SecurityContext" />
 
         
 
+        
+
          class is used in turn by the <see
          cref="T:System.Threading.ExecutionContext" />
+
+        
 
         
 
@@ -107,13 +123,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
+            
+
              actions, in a compressed format. For example, if a <see
              cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            
 
             
 
@@ -130,6 +152,8 @@
           <para
             >A <see
              cref="T:System.Threading.CompressedStack" />
+
+            
 
             
 
@@ -179,6 +203,8 @@
 
             
 
+            
+
              object representing the current compressed stack.</para
           >
         </returns>
@@ -217,8 +243,12 @@
 
             
 
+            
+
              returns an empty <see
              cref="T:System.Threading.CompressedStack" />
+
+            
 
             
 
@@ -231,8 +261,12 @@
 
               
 
+              
+
                to prevent it from being called from untrusted code; only the immediate caller is required to have <see
                cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" />
+
+              
 
               
 
@@ -240,6 +274,8 @@
                type="text/html">
                 <a href="1ab877f2-70f4-4e0d-8116-943999dfe8f5">Demand vs. LinkDemand</a>
               </format>
+
+              
 
               
 
@@ -259,6 +295,8 @@
           <para
             >A <see
              cref="T:System.Threading.CompressedStack" />
+
+            
 
             
 
@@ -303,8 +341,12 @@
 
             
 
+            
+
              sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -313,11 +355,15 @@
 
             
 
+            
+
              transmitted over the stream.</para
           >
           <para
             >For more information, see <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -332,6 +378,8 @@
 
             
 
+            
+
              object with the logical context information needed to recreate an instance of this execution context.</para
           >
         </summary>
@@ -340,8 +388,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -352,8 +404,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -403,8 +459,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CompressedStack" />
+
+          
 
           
 
@@ -415,8 +475,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.ContextCallback" />
+
+          
 
           
 
@@ -424,6 +488,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

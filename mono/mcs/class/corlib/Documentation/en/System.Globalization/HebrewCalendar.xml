@@ -30,6 +30,8 @@
 
         
 
+        
+
          class recognizes only the current era (A.M.) and the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
       >
       <block subset="none" type="note">
@@ -39,10 +41,14 @@
 
           
 
+          
+
            class and the other calendar classes in the .NET Framework, see <format
            type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
+
+          
 
           
 
@@ -316,6 +322,8 @@
 
         
 
+        
+
          method returns true for these days. </para
       >
       <para>The date January 1, 2001 A.D. in the Gregorian calendar is equivalent to the sixth day of Tevet in the year 5761 A.M. in the Hebrew calendar.</para>
@@ -325,8 +333,12 @@
 
         
 
+        
+
          supports a set of calendars. The <see
          cref="P:System.Globalization.CultureInfo.Calendar" />
+
+        
 
         
 
@@ -335,8 +347,12 @@
 
         
 
+        
+
          property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -345,13 +361,19 @@
 
         
 
+        
+
          property of <see
          cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
+        
+
          to a new <see
          cref="T:System.Globalization.Calendar" />
+
+        
 
         
 
@@ -385,6 +407,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -424,6 +448,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
           <para
@@ -432,8 +458,12 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -442,8 +472,12 @@
 
             
 
+            
+
             . This implementation supports only the current era. Therefore, <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -452,13 +486,19 @@
 
             
 
+            
+
             . The time-of-day part of the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -470,6 +510,8 @@
 
             
 
+            
+
              parameter is 5, the resulting year is one more than the specified year, the resulting month is Tevet, and the resulting day is the 29th day, which is the last day in Tevet.</para
           >
           <para
@@ -478,13 +520,19 @@
 
             
 
+            
+
              parameter is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -496,8 +544,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -506,8 +558,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -516,8 +572,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -533,8 +593,12 @@
 
             
 
+            
+
              that is the specified number of months away from the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -549,8 +613,12 @@
 
             
 
+            
+
              that results from adding the specified number of months to the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -562,8 +630,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -572,10 +644,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="months">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,6 +690,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
           <para
@@ -622,8 +700,12 @@
 
             
 
+            
+
              is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. For example, Cheshvan can have 29 or 30 days, depending on the placement of Jewish holidays. Suppose that Cheshvan has 30 days in the current year and 29 in the following year. If the specified date is the 30th day of Cheshvan in the current year and the value of <paramref
              name="years" />
+
+            
 
             
 
@@ -635,8 +717,12 @@
 
             
 
+            
+
              is affected if the resulting month is not a valid month in the resulting year. It is changed to the last valid month in the resulting year. For example, if the month in the <paramref
              name="time" />
+
+            
 
             
 
@@ -645,8 +731,12 @@
 
             
 
+            
+
              is 1, the month in the resulting <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -658,8 +748,12 @@
 
             
 
+            
+
              is thrown if the resulting year is outside the era of the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -671,8 +765,12 @@
 
             
 
+            
+
              remains the same as the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -684,13 +782,19 @@
 
             
 
+            
+
              is negative, the resulting <see
              cref="T:System.DateTime" />
 
             
 
+            
+
              is earlier than the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -702,8 +806,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -712,8 +820,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -722,8 +834,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -739,8 +855,12 @@
 
             
 
+            
+
              that is the specified number of years away from the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -755,8 +875,12 @@
 
             
 
+            
+
              that results from adding the specified number of years to the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -768,8 +892,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -778,10 +906,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="years">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -838,6 +970,8 @@
 
             
 
+            
+
              class recognizes only the current era (A.M.). This property always returns an array with only one element.</para
           >
         </remarks>
@@ -846,6 +980,8 @@
           <para
             >Gets the list of eras in the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -882,6 +1018,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -893,6 +1031,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -901,8 +1041,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -937,6 +1081,8 @@
           <para
             >The <see
              cref="T:System.DayOfWeek" />
+
+            
 
             
 
@@ -1019,6 +1165,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1030,8 +1178,12 @@
 
             
 
+            
+
              value that represents the day of the week in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1043,8 +1195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1079,8 +1235,12 @@
 
             
 
+            
+
              for the first day of the first month returns 1, and <see
              cref="M:System.Globalization.HebrewCalendar.GetDayOfYear(System.DateTime)" />
+
+            
 
             
 
@@ -1089,11 +1249,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This implementation of the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -1108,6 +1272,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1119,6 +1285,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1127,8 +1295,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1169,6 +1341,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
         </remarks>
@@ -1185,10 +1359,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1199,8 +1377,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1239,11 +1421,15 @@
 
             
 
+            
+
              is a leap year.</para
           >
           <para
             >This implementation of the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -1263,6 +1449,8 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
@@ -1270,8 +1458,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1306,6 +1498,8 @@
 
             
 
+            
+
              class recognizes only the current era (A.M.) and only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
         </remarks>
@@ -1314,6 +1508,8 @@
           <para
             >Returns the era in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1328,8 +1524,12 @@
 
             
 
+            
+
             . The return value is always <see
              cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+            
 
             
 
@@ -1341,8 +1541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1380,8 +1584,12 @@
 
             
 
+            
+
              method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
              cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+
+            
 
             
 
@@ -1400,8 +1608,12 @@
 
             
 
+            
+
              and <paramref
              name="era" />
+
+            
 
             
 
@@ -1413,6 +1625,8 @@
 
           
 
+          
+
           A year.</param
         >
         <param name="era">
@@ -1420,8 +1634,12 @@
 
           
 
+          
+
           An era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1457,6 +1675,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1468,6 +1688,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1476,8 +1698,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1516,6 +1742,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
         </remarks>
@@ -1532,6 +1760,8 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
@@ -1539,8 +1769,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1575,6 +1809,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
         </remarks>
@@ -1583,6 +1819,8 @@
           <para
             >Returns the year in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1597,6 +1835,8 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
@@ -1605,8 +1845,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1635,6 +1879,8 @@
           <para
             >The Hebrew calendar recognizes two eras: B.C.E. (before the common era) and A.M. (Latin "Anno Mundi", which means "the year of the world"). This implementation of the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -1680,6 +1926,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
           <para>In every 19-year cycle that ends with a year that is evenly divisible by 19, the 3rd, 6th, 8th, 11th, 14th, 17th, and 19th years are leap years. A common year can have from 353 to 355 days, depending on the placement of Jewish holidays. A leap year can have from 383 to 385 days.</para>
@@ -1698,10 +1946,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1712,6 +1964,8 @@
 
           
 
+          
+
           An integer from 1 to 30 that represents the day. </param
         >
         <param name="era">
@@ -1719,8 +1973,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1760,6 +2018,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
           <para>In every 19-year cycle that ends with a year that is evenly divisible by 19, the 3rd, 6th, 8th, 11th, 14th, 17th, and 19th years are leap years. A common year can have from 353 to 355 days, depending on the placement of Jewish holidays. A leap year can have from 383 to 385 days.</para>
@@ -1778,10 +2038,14 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1792,8 +2056,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1829,6 +2097,8 @@
 
             
 
+            
+
              class recognizes only the Hebrew years 5343 to 5999 (1583 to 2239 in the Gregorian calendar).</para
           >
           <para>In every 19-year cycle that ends with a year that is evenly divisible by 19, the 3rd, 6th, 8th, 11th, 14th, 17th, and 19th years are leap years. A common year can have from 353 to 355 days, depending on the placement of Jewish holidays. A leap year can have from 383 to 385 days.</para>
@@ -1846,6 +2116,8 @@
 
           
 
+          
+
           An integer that represents the year. </param
         >
         <param name="era">
@@ -1853,8 +2125,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -1891,6 +2167,8 @@
 
             
 
+            
+
              type.</para
           >
         </summary>
@@ -1924,8 +2202,12 @@
 
             
 
+            
+
              type, which is January 1, 0001 C.E. However, the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -1933,6 +2215,8 @@
              type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b">Standard DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1944,6 +2228,8 @@
           <para
             >Gets the earliest date and time supported by the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -1989,11 +2275,15 @@
 
             
 
+            
+
              method is useful because it can convert any date in the current calendar to a Gregorian calendar date. The Gregorian date can subsequently be used, for example, to compare dates in different calendars or create an equivalent date in a particular calendar.</para
           >
           <para
             >This implementation of the <see
              cref="T:System.Globalization.HebrewCalendar" />
+
+            
 
             
 
@@ -2008,6 +2298,8 @@
 
             
 
+            
+
              that is set to the specified date and time in the specified era.</para
           >
         </summary>
@@ -2019,11 +2311,15 @@
 
             
 
+            
+
              that is set to the specified date and time in the current era.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2034,10 +2330,14 @@
 
           
 
+          
+
           An integer from 1 to 13 that represents the month. </param
         >
         <param name="day">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2048,10 +2348,14 @@
 
           
 
+          
+
           An integer from 0 to 23 that represents the hour. </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2062,10 +2366,14 @@
 
           
 
+          
+
           An integer from 0 to 59 that represents the second. </param
         >
         <param name="millisecond">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2076,8 +2384,12 @@
 
           
 
+          
+
           An integer that represents the era. Specify either <see
            cref="F:System.Globalization.HebrewCalendar.HebrewEra" />
+
+          
 
           
 
@@ -2112,8 +2424,12 @@
 
             
 
+            
+
              method uses the <paramref
              name="year" />
+
+            
 
             
 
@@ -2122,13 +2438,19 @@
 
             
 
+            
+
              property, and a year to calculate a 4-digit year. The century is determined by finding the sole occurrence of the <paramref
              name="year" />
 
             
 
+            
+
              parameter within that 100-year range. For example, if <see
              cref="P:System.Globalization.HebrewCalendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -2140,13 +2462,19 @@
 
             
 
+            
+
              property has the special value 99, the <see
              cref="M:System.Globalization.HebrewCalendar.ToFourDigitYear(System.Int32)" />
 
             
 
+            
+
              method ignores the settings in the regional and language options in Control Panel and returns the value of the <paramref
              name="year" />
+
+            
 
             
 
@@ -2157,13 +2485,19 @@
 
             
 
+            
+
              supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see
              cref="P:System.Globalization.HebrewCalendar.TwoDigitYearMax" />
 
             
 
+            
+
              value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see
              cref="M:System.Globalization.HebrewCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 
@@ -2178,6 +2512,8 @@
 
             
 
+            
+
              property to determine the appropriate century.</para
           >
         </summary>
@@ -2189,8 +2525,12 @@
 
             
 
+            
+
              parameter is a 2-digit year, the return value is the corresponding 4-digit year. If the <paramref
              name="year" />
+
+            
 
             
 
@@ -2199,11 +2539,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2233,6 +2577,8 @@
 
             
 
+            
+
              property allows a 2-digit year to be properly translated to a 4-digit year. For example, if this property is set to 5729, the 100-year range is from 5630 to 5729. Therefore, a 2-digit value of 30 is interpreted as 5630, while a 2-digit value of 29 is interpreted as 5729.</para
           >
           <para
@@ -2241,11 +2587,15 @@
 
             
 
+            
+
              class does not automatically detect the change.</para
           >
           <para
             >The special value 99 causes the <see
              cref="M:System.Globalization.HebrewCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 

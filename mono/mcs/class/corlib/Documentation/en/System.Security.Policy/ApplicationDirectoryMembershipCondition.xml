@@ -44,14 +44,20 @@
 
         
 
+        
+
          determines whether an <see
          cref="T:System.Security.Policy.ApplicationDirectory" />
         <see cref="P:System.Security.Policy.ApplicationDirectory.Directory" />
 
         
 
+        
+
          property contains the assembly URL evidence path. For example, if the <see
          cref="T:System.Security.Policy.ApplicationDirectory" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Security.Policy.Url" />
+
+        
 
         
 
@@ -74,6 +84,8 @@
         <para
           >The membership condition is determined by the URL evidence for the application. You cannot configure the <see
            cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+
+          
 
           
 
@@ -110,6 +122,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -118,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+
+            
 
             
 
@@ -156,8 +172,12 @@
 
             
 
+            
+
              parameter must contain both <see
              cref="T:System.Security.Policy.ApplicationDirectory" />
+
+            
 
             
 
@@ -166,13 +186,19 @@
 
             
 
+            
+
              evidence that specifies the code base of the assembly. The code base specified by the <see
              cref="T:System.Security.Policy.Url" />
 
             
 
+            
+
              evidence must represent a path in the directory tree of the application directory specified by the <see
              cref="T:System.Security.Policy.ApplicationDirectory" />
+
+            
 
             
 
@@ -189,6 +215,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,6 +283,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -266,6 +296,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -274,8 +306,12 @@
 
           
 
+          
+
           The object to compare to <see
            cref="T:System.Security.Policy.ApplicationDirectoryMembershipCondition" />
+
+          
 
           
 
@@ -312,6 +348,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,10 +390,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,6 +520,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -487,6 +531,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

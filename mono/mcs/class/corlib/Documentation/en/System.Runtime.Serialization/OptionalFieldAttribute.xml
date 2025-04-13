@@ -32,13 +32,19 @@
 
         
 
+        
+
          is applied to) are ignored by the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 
+        
+
          or the <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.OptionalFieldAttribute" />
+
+            
 
             
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          resource settings.</para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Provides an interface for designers to access resource readers and writers for specific <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              interface that contains the resources for the culture, or null if no resources for the culture exist.</para
           >
         </returns>
@@ -86,8 +92,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -133,6 +143,8 @@
 
             
 
+            
+
              interface for the specified culture.</para
           >
         </returns>
@@ -141,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 

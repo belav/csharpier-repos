@@ -32,8 +32,12 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.AppDomainSetup" />
+
+        
 
         
 
@@ -74,13 +78,19 @@
 
             
 
+            
+
              object represented by the <paramref
              name="activationData" />
 
             
 
+            
+
              parameter contains the <see
              cref="T:System.ApplicationIdentity" />
+
+            
 
             
 
@@ -95,11 +105,15 @@
 
             
 
+            
+
              class with the specified activation context. </para
           >
         </summary>
         <param name="activationData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,11 +152,15 @@
 
             
 
+            
+
              class with the specified application identity.</para
           >
         </summary>
         <param name="applicationIdentity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -178,13 +196,19 @@
 
             
 
+            
+
              object represented by the <paramref
              name="activationContext" />
 
             
 
+            
+
              parameter contains the <see
              cref="T:System.ApplicationIdentity" />
+
+            
 
             
 
@@ -199,6 +223,8 @@
 
             
 
+            
+
              class with the specified activation context and activation data.</para
           >
         </summary>
@@ -207,10 +233,14 @@
 
           
 
+          
+
           An object that identifies the manifest-based activation application.</param
         >
         <param name="activationData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +280,8 @@
 
             
 
+            
+
              class with the specified application identity and activation data.</para
           >
         </summary>
@@ -258,10 +290,14 @@
 
           
 
+          
+
           An object that identifies the manifest-based activation application.</param
         >
         <param name="activationData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,8 +330,12 @@
 
             
 
+            
+
              object contains an <see
              cref="T:System.ApplicationIdentity" />
+
+            
 
             
 

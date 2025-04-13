@@ -22,8 +22,12 @@
 
         
 
+        
+
          event can be canceled by setting the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          will not change to the <see
          cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.ColumnReordered" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -83,8 +95,12 @@
 
           
 
+          
+
           The previous display position of the <see
            cref="T:System.Windows.Forms.ColumnHeader" />
+
+          
 
           
 
@@ -95,8 +111,12 @@
 
           
 
+          
+
           The new display position for the <see
            cref="T:System.Windows.Forms.ColumnHeader" />
+
+          
 
           
 
@@ -107,8 +127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnHeader" />
+
+          
 
           
 
@@ -140,6 +164,8 @@
 
             
 
+            
+
              that is being reordered.</para
           >
         </summary>
@@ -165,8 +191,12 @@
 
             
 
+            
+
              event can be canceled by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -175,8 +205,12 @@
 
             
 
+            
+
              will not change to the <see
              cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" />
+
+            
 
             
 
@@ -212,8 +246,12 @@
 
             
 
+            
+
              event can be canceled by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -222,8 +260,12 @@
 
             
 
+            
+
              will not change to the <see
              cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" />
+
+            
 
             
 
@@ -235,6 +277,8 @@
           <para
             >Gets the previous display position of the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 

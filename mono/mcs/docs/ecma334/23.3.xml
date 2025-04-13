@@ -6,6 +6,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph>When an exception occurs, the system searches for the nearest catch clause that can handle the exception, as determined by the run-time type of the exception. First, the current method is searched for a lexically enclosing try statement, and the associated catch clauses of the try statement are considered in order. If that fails, the method that called the current method is searched for a lexically enclosing try statement that encloses the point of the call to the current method. This search continues until a catch clause is found that can handle the current exception, by naming an exception class that is of the same class, or a base class, of the run-time type of the exception being thrown. A catch clause that doesn't name an exception class can handle any exception. </paragraph>
@@ -16,6 +18,8 @@
       <list_item
         > If the search for a matching catch clause reaches a static constructor (<hyperlink
         >17.11</hyperlink>
+
+        
 
         
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          objects to determine whether classes that extend <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          have encountered an error or warning condition by checking the <see
          cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
+
+        
 
         
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+        
 
         
 
@@ -92,11 +106,15 @@
 
             
 
+            
+
              class using the specified message. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,8 +152,12 @@
 
             
 
+            
+
              class using the specified message and <paramref
              name="isWarning" />
+
+            
 
             
 
@@ -147,6 +169,8 @@
 
           
 
+          
+
           The message for the warning or error.</param
         >
         <param name="isWarning">
@@ -154,8 +178,12 @@
 
           
 
+          
+
           Whether the <see
            cref="T:System.ServiceModel.Description.MetadataConversionError" />
+
+          
 
           
 
@@ -189,6 +217,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -200,6 +230,8 @@
 
             
 
+            
+
              objects have value equality.</para
           >
         </summary>
@@ -208,6 +240,8 @@
           <para
             >true if the two <see
              cref="T:System.ServiceModel.Description.MetadataConversionError" />
+
+            
 
             
 
@@ -239,6 +273,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -247,6 +283,8 @@
           <para
             >Returns a value that serves as a hash function for a <see
              cref="T:System.ServiceModel.Description.MetadataConversionError" />
+
+            
 
             
 
@@ -277,6 +315,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.ServiceModel.Description.MetadataConversionError" />
+
+            
 
             
 

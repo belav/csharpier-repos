@@ -25,8 +25,12 @@
 
         
 
+        
+
          event occurs before a row is painted on a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          enables you to manually adjust the appearance of the row before any of the cells in the row are painted. This is useful if you want to customize the row, such as to produce a row where the content of one column spans multiple columns. Use the properties in <see
          cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />
 
         
 
+        
+
          to get the settings of the row without directly accessing the row in the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -53,6 +63,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -98,8 +112,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -110,13 +128,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -127,13 +151,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -144,13 +174,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -161,6 +197,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="rowState">
@@ -168,8 +206,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -180,6 +222,8 @@
 
           
 
+          
+
           An error message that is associated with the row.</param
         >
         <param name="inheritedRowStyle">
@@ -187,8 +231,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -199,8 +247,12 @@
 
           
 
+          
+
           true to indicate whether the current row is the first row currently displayed in the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -211,13 +263,19 @@
 
           
 
+          
+
           true to indicate whether the current row is the last row in the <see
            cref="T:System.Windows.Forms.DataGridView" />
 
           
 
+          
+
            that has the <see
            cref="P:System.Windows.Forms.DataGridViewRow.Visible" />
+
+          
 
           
 
@@ -248,8 +306,12 @@
 
             
 
+            
+
              property represents the area of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -258,8 +320,12 @@
 
             
 
+            
+
              with another window and then uncovers it, then <see
              cref="P:System.Windows.Forms.DataGridViewRowPrePaintEventArgs.ClipBounds" />
+
+            
 
             
 
@@ -268,13 +334,19 @@
 
             
 
+            
+
             . If a user covers a small area of the <see
              cref="T:System.Windows.Forms.DataGridView" />
 
             
 
+            
+
              and then uncovers it, then <see
              cref="P:System.Windows.Forms.DataGridViewRowPrePaintEventArgs.ClipBounds" />
+
+            
 
             
 
@@ -286,6 +358,8 @@
           <para
             >Gets or sets the area of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -320,8 +394,12 @@
 
             
 
+            
+
              method when you draw the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -330,8 +408,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+            
 
             
 
@@ -340,8 +422,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
+
+            
 
             
 
@@ -357,8 +443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -369,13 +459,19 @@
 
           
 
+          
+
           true to use the <see
            cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" />
 
           
 
+          
+
            property of the <see
            cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+          
 
           
 
@@ -384,8 +480,12 @@
 
           
 
+          
+
            property of the <see
            cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+          
 
           
 
@@ -413,8 +513,12 @@
 
             
 
+            
+
              property is the same as the current row's <see
              cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+            
 
             
 
@@ -426,6 +530,8 @@
           <para
             >Gets a string that represents an error message for the current <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -454,6 +560,8 @@
 
             
 
+            
+
              class provides properties and methods that are useful for custom drawing.</para
           >
         </remarks>
@@ -465,8 +573,12 @@
 
             
 
+            
+
              used to paint the current <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -498,8 +610,12 @@
 
             
 
+            
+
              property contains the same values as the row's <see
              cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+            
 
             
 
@@ -508,8 +624,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -518,8 +638,12 @@
 
             
 
+            
+
              in the <see
              cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+
+            
 
             
 
@@ -531,13 +655,19 @@
 
             
 
+            
+
              property is read-only. Although you can set the properties of the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
             
 
+            
+
              retrieved through the <see
              cref="P:System.Windows.Forms.DataGridViewRowPrePaintEventArgs.InheritedRowStyle" />
+
+            
 
             
 
@@ -571,6 +701,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -594,6 +726,8 @@
           <para
             >Gets a value indicating whether the current row is the last visible row in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -630,13 +764,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -647,8 +787,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -682,8 +826,12 @@
 
             
 
+            
+
              method when you draw the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -692,8 +840,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+            
 
             
 
@@ -702,8 +854,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
+
+            
 
             
 
@@ -719,13 +875,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -736,13 +898,19 @@
 
           
 
+          
+
           true to paint the background of the specified bounds with the color of the <see
            cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" />
 
           
 
+          
+
            property of the <see
            cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+          
 
           
 
@@ -751,8 +919,12 @@
 
           
 
+          
+
            property of the <see
            cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+          
 
           
 
@@ -787,13 +959,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that specifies the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -826,8 +1004,12 @@
 
             
 
+            
+
              method when you draw the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -836,8 +1018,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+            
 
             
 
@@ -846,8 +1032,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
+
+            
 
             
 
@@ -862,6 +1052,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -870,8 +1062,12 @@
 
           
 
+          
+
           true to paint the row header with the color of the <see
            cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" />
+
+          
 
           
 
@@ -880,13 +1076,19 @@
 
           
 
+          
+
           ; false to paint the row header with the <see
            cref="P:System.Windows.Forms.DataGridViewCellStyle.BackColor" />
 
           
 
+          
+
            of the <see
            cref="P:System.Windows.Forms.DataGridView.RowHeadersDefaultCellStyle" />
+
+          
 
           
 
@@ -921,8 +1123,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -972,8 +1178,12 @@
 
             
 
+            
+
              property is the same as the width of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -982,8 +1192,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridViewColumnCollection.GetColumnsWidth(System.Windows.Forms.DataGridViewElementStates)" />
+
+            
 
             
 
@@ -995,6 +1209,8 @@
           <para
             >Get the bounds of the current <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -1023,6 +1239,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1031,6 +1249,8 @@
           <para
             >Gets the index of the current <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -1063,6 +1283,8 @@
           <para
             >Gets the state of the current <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
         .</para
       >
       <list type="table">
@@ -450,6 +452,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -495,10 +499,14 @@
 
           
 
+          
+
           The algorithm to map to.</param
         >
         <param name="names">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,10 +554,14 @@
 
           
 
+          
+
           The object identifier (OID) to map to.</param
         >
         <param name="names">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,6 +618,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -619,6 +633,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,6 +679,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -679,10 +697,14 @@
 
           
 
+          
+
           The simple name of the cryptographic object of which to create an instance. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -717,6 +739,8 @@ A <see
 
             
 
+            
+
              will be thrown if the OID is invalid, like: 
 <list
              type="bullet">
@@ -735,13 +759,19 @@ A <see
 
             
 
+            
+
              will be thrown if a part of the OID is bigger than <see
              cref="T:System.Int32" />
 
             
 
+            
+
             .<see
              cref="M:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -759,6 +789,8 @@ A <see
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -793,6 +825,8 @@ A <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -806,6 +840,8 @@ A <see
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          can be configured for server applications using standard configuration files.</para
       >
     </remarks>
@@ -44,8 +46,12 @@
 
         
 
+        
+
          class represents a configuration element for an <see
          cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+        
 
         
 
@@ -74,8 +80,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.PolicyEnforcement" />
+
+            
 
             
 
@@ -84,8 +94,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.ProtectionScenario" />
+
+            
 
             
 
@@ -94,8 +108,12 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -107,8 +125,12 @@
 
             
 
+            
+
              class instance should be set to appropriate values for the application before calling the <see
              cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
+
+            
 
             
 
@@ -120,6 +142,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+
+            
 
             
 
@@ -154,8 +178,12 @@
 
             
 
+            
+
              class instance must be set before calling the <see
              cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
+
+            
 
             
 
@@ -170,13 +198,19 @@
 
             
 
+            
+
              method builds a new <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 
+            
+
              instance based on the properties set on the <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+
+            
 
             
 
@@ -188,6 +222,8 @@
           <para
             >A new <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 
@@ -254,6 +290,8 @@
           <para
             >This value is an <see
              cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+
+            
 
             
 

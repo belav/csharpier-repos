@@ -28,12 +28,16 @@
 
         
 
+        
+
          represents a MIME text pattern for which an HTTP transmission will be searched. For more information about specifying protocols for XML Web services, see <format
          type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -45,6 +49,8 @@
       <para
         >Provides a collection of instances of the <see
          cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.MimeTextMatchCollection" />
+
+            
 
             
 
@@ -99,8 +107,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.MimeTextMatchCollection" />
+
+            
 
             
 
@@ -115,6 +127,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -123,8 +137,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+          
 
           
 
@@ -158,8 +176,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.MimeTextMatchCollection" />
+
+            
 
             
 
@@ -174,6 +196,8 @@
 
             
 
+            
+
              parameter is a member of the MimeTextMatchCollection; otherwise, false.</para
           >
         </returns>
@@ -182,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+          
 
           
 
@@ -218,8 +246,12 @@
 
             
 
+            
+
              to a compatible one-dimensional array of type <see
              cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+            
 
             
 
@@ -231,8 +263,12 @@
 
           
 
+          
+
           The array of type <see
            cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+          
 
           
 
@@ -240,6 +276,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,6 +311,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -285,8 +325,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+          
 
           
 
@@ -321,8 +365,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -331,8 +379,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.MimeTextMatchCollection" />
+
+            
 
             
 
@@ -348,8 +400,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.MimeTextMatchCollection" />
+
+            
 
             
 
@@ -361,8 +417,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="match" />
+
+          
 
           
 
@@ -373,8 +433,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+          
 
           
 
@@ -430,6 +494,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The elements that follow the removed MimeTextMatch move up to occupy the vacated spot.</para>
@@ -442,8 +508,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.MimeTextMatchCollection" />
+
+            
 
             
 
@@ -455,8 +525,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimeTextMatch" />
+
+          
 
           
 

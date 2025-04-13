@@ -20,8 +20,12 @@
 
         
 
+        
+
          that can inspect or modify a message at specific stages in message processing on either the client or the server. This enumeration specifies the processing stage of the <see
          cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
+
+            
 
             
 
@@ -63,8 +71,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
+
+            
 
             
 
@@ -76,6 +88,8 @@
           <para
             >The stage just after a <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+            
 
             
 
@@ -104,8 +118,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
+
+            
 
             
 
@@ -117,8 +135,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
+
+            
 
             
 
@@ -130,6 +152,8 @@
           <para
             >The stage just after a <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+            
 
             
 
@@ -158,8 +182,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
+
+            
 
             
 
@@ -171,8 +199,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
+
+            
 
             
 
@@ -184,6 +216,8 @@
           <para
             >The stage just before a <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+            
 
             
 
@@ -212,8 +246,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -225,8 +263,12 @@
 
             
 
+            
+
              processing, the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -238,6 +280,8 @@
           <para
             >The stage just prior to a <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+            
 
             
 

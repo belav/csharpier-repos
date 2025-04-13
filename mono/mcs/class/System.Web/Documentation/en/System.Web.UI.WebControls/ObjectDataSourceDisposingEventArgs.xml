@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnObjectDisposing(System.Web.UI.WebControls.ObjectDataSourceDisposingEventArgs)" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          control and business object are performed, but before the business object is destroyed. The business object is accessed using the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceDisposingEventArgs.ObjectInstance" />
 
         
 
+        
+
          property. By adding a delegate to handle the <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          method is not called by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying business object at various times in its lifecycle. The following table lists the events and the associated <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -94,6 +112,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs immediately before the instance of the business object is created.</para>
@@ -113,6 +133,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
+
+              
 
               
 
@@ -138,6 +160,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs before the data is retrieved.</para>
@@ -160,13 +184,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+
+              
 
               
 
@@ -210,13 +240,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+              
 
               
 
@@ -239,6 +275,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+              
 
               
 
@@ -267,8 +305,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -297,6 +339,8 @@
 
             
 
+            
+
              class using the specified object.</para
           >
         </summary>
@@ -305,8 +349,12 @@
 
           
 
+          
+
           The business object with which the <see
            cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+          
 
           
 
@@ -334,8 +382,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.UpdateMethod" />
+
+            
 
             
 
@@ -344,8 +396,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.InsertMethod" />
+
+            
 
             
 
@@ -354,8 +410,12 @@
 
             
 
+            
+
              property in the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+            
 
             
 
@@ -364,8 +424,12 @@
 
             
 
+            
+
              events, you can retrieve the business object from the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceEventArgs.ObjectInstance" />
+
+            
 
             
 
@@ -377,6 +441,8 @@
           <para
             >Gets an object that represents the business object with which the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 

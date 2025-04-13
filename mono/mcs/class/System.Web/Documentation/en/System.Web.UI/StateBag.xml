@@ -32,8 +32,12 @@
 
         
 
+        
+
          property. Controls can also store essential state information in control state, but that information is not stored as a <see
          cref="T:System.Web.UI.StateBag" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          method is executed for a page request, and saves the changes to the page's or control's view state.</para
       >
       <para
@@ -52,6 +58,8 @@
          type="text/html">
           <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
         </format>
+
+        
 
         
 
@@ -76,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -105,11 +115,15 @@
 
             
 
+            
+
              class that allows stored state values to be case-insensitive.</para
           >
         </summary>
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,13 +158,19 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object. If the item already exists in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -165,6 +185,8 @@
 
             
 
+            
+
              that represents the object added to view state.</para
           >
         </returns>
@@ -173,8 +195,12 @@
 
           
 
+          
+
           The attribute name for the <see
            cref="T:System.Web.UI.StateItem" />
+
+          
 
           
 
@@ -185,8 +211,12 @@
 
           
 
+          
+
           The value of the item to add to the <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -212,6 +242,8 @@
           <para
             >Removes all items from the current <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -241,8 +273,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -275,8 +311,12 @@
 
             
 
+            
+
              objects stored in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -311,8 +351,12 @@
 
             
 
+            
+
              parameter does not exist in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -327,13 +371,19 @@
 
             
 
+            
+
              object stored in the <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object to evaluate whether it has been modified since the call to <see
              cref="M:System.Web.UI.Control.TrackViewState" />
+
+            
 
             
 
@@ -346,6 +396,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -398,8 +450,12 @@
 
             
 
+            
+
              objects stored in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -411,6 +467,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -419,6 +477,8 @@
           <para
             >Gets a collection of keys representing the items in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -450,11 +510,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -487,8 +551,12 @@
 
             
 
+            
+
              method is used to force the collection and its contents to be serialized during a call to the <see
              cref="M:System.Web.UI.StateBag.System.Web.UI.IStateManager.SaveViewState" />
+
+            
 
             
 
@@ -503,8 +571,12 @@
 
             
 
+            
+
              object as well as the <see
              cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+
+            
 
             
 
@@ -513,11 +585,15 @@
 
             
 
+            
+
              objects contained by it.</para
           >
         </summary>
         <param name="dirty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -544,13 +620,19 @@
 
             
 
+            
+
              method is used to prevent or force state management of specific properties, represented by <see
              cref="T:System.Web.UI.StateItem" />
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -565,13 +647,19 @@
 
             
 
+            
+
              property for the specified <see
              cref="T:System.Web.UI.StateItem" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -583,8 +671,12 @@
 
           
 
+          
+
           The key that identifies which <see
            cref="T:System.Web.UI.StateItem" />
+
+          
 
           
 
@@ -593,10 +685,14 @@
 
           
 
+          
+
            to set. </param
         >
         <param name="dirty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -631,8 +727,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -647,6 +747,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -655,8 +757,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -665,8 +771,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -677,8 +787,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -709,8 +823,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -722,6 +840,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -753,8 +873,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -766,6 +890,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -797,8 +923,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -813,6 +943,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -821,8 +953,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -833,8 +969,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -864,8 +1004,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -880,6 +1024,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -891,6 +1037,8 @@
 
             
 
+            
+
              contains an element with the key; otherwise, false.</para
           >
         </returns>
@@ -899,8 +1047,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -931,8 +1083,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -944,6 +1100,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IDictionary.IsFixedSize" />
+
+            
 
             
 
@@ -975,8 +1133,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -988,6 +1150,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IDictionary.IsReadOnly" />
+
+            
 
             
 
@@ -1041,8 +1205,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1057,11 +1225,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1092,8 +1264,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1108,6 +1284,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1116,6 +1294,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1172,8 +1352,12 @@
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.StateBag.System.Web.UI.IStateManager.SaveViewState" />
+
+            
 
             
 
@@ -1187,6 +1371,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1195,6 +1381,8 @@
           <para
             >Restores the previously saved view state of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1224,8 +1412,12 @@
 
             
 
+            
+
               property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1236,11 +1428,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML Hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -1253,10 +1449,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -1271,6 +1471,8 @@
 
             
 
+            
+
              object since the time the page was posted back to the server.</para
           >
         </summary>
@@ -1282,13 +1484,19 @@
 
             
 
+            
+
             . If there are no changes, or there are no <see
              cref="T:System.Web.UI.StateItem" />
 
             
 
+            
+
              elements in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1315,6 +1523,8 @@
           <para
             >Causes the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1346,8 +1556,12 @@
 
             
 
+            
+
              objects in the specified page or control. You can iterate through these values by using the <see
              cref="M:System.Web.UI.StateBag.GetEnumerator" />
+
+            
 
             
 
@@ -1359,6 +1573,8 @@
           <para
             >Gets a collection of the view-state values stored in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 

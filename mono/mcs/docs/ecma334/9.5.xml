@@ -10,6 +10,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.3">pp-declaration</non_terminal>
@@ -36,13 +38,19 @@
 
         
 
+        
+
          and <symbol
         >#undef</symbol>
 
         
 
+        
+
         , which are used to define and undefine, respectively, conditional compilation symbols (<hyperlink
         >9.5.3</hyperlink>
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , <symbol
         >#elif</symbol>
+
+        
 
         
 
@@ -63,13 +75,19 @@
 
         
 
+        
+
         , and <symbol
         >#endif</symbol>
 
         
 
+        
+
         , which are used to conditionally skip sections of source code (<hyperlink
         >9.5.1</hyperlink>
+
+        
 
         
 
@@ -80,8 +98,12 @@
 
         
 
+        
+
         , which is used to control line numbers emitted for errors and warnings (<hyperlink
         >9.5.7</hyperlink>
+
+        
 
         
 
@@ -92,13 +114,19 @@
 
         
 
+        
+
          and <symbol
         >#warning</symbol>
 
         
 
+        
+
         , which are used to issue errors and warnings, respectively (<hyperlink
         >9.5.5</hyperlink>
+
+        
 
         
 
@@ -109,13 +137,19 @@
 
         
 
+        
+
          and <symbol
         >#endregion</symbol>
 
         
 
+        
+
         , which are used to explicitly mark sections of source code (<hyperlink
         >9.5.6</hyperlink>
+
+        
 
         
 
@@ -130,8 +164,12 @@
 
     
 
+    
+
     , <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -140,8 +178,12 @@
 
     
 
+    
+
     , <symbol
     >#elif</symbol>
+
+    
 
     
 
@@ -150,13 +192,19 @@
 
     
 
+    
+
     , <symbol
     >#endif</symbol>
 
     
 
+    
+
     , or <symbol
     >#line</symbol>
+
+    
 
     
 
@@ -185,6 +233,8 @@ class C
 }  
 ]]>
       </code_example>
+
+      
 
       
 

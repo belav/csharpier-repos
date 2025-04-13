@@ -34,8 +34,12 @@
 
         
 
+        
+
          class by adding strongly typed helper methods. You can use this class to add, remove, or modify attributes in the collection. XmlAttributeCollection is returned by the <see
          cref="P:System.Xml.XmlElement.Attributes" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              is added to the end of the collection.</para
           >
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
@@ -95,8 +101,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -139,6 +149,8 @@
 
             
 
+            
+
              objects from this collection into the given array.</para
           >
         </summary>
@@ -147,10 +159,14 @@
 
           
 
+          
+
           The array that is the destination of the objects copied from this collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,13 +205,19 @@
 
             
 
+            
+
              is inserted into the collection. If <paramref
              name="refNode" />
 
             
 
+            
+
              is null, <paramref
              name="newNode" />
+
+            
 
             
 
@@ -216,8 +238,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -228,8 +254,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -238,8 +268,12 @@
 
           
 
+          
+
            is placed after the <paramref
            name="refNode" />
+
+          
 
           
 
@@ -278,13 +312,19 @@
 
             
 
+            
+
              is inserted into the collection. If <paramref
              name="refNode" />
 
             
 
+            
+
              is null, <paramref
              name="newNode" />
+
+            
 
             
 
@@ -305,8 +345,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -317,8 +361,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -327,8 +375,12 @@
 
           
 
+          
+
            is placed before the <paramref
            name="refNode" />
+
+          
 
           
 
@@ -449,6 +501,8 @@
 
             
 
+            
+
              is added to the beginning of the collection.</para
           >
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
@@ -466,8 +520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -514,8 +572,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlAttribute" />
+
+          
 
           
 
@@ -586,6 +648,8 @@
 
           
 
+          
+
           The index of the node to remove. The first node has index 0. </param
         >
       </Docs>
@@ -621,8 +685,12 @@
 
             
 
+            
+
              using its <see
              cref="P:System.Xml.XmlNode.Name" />
+
+            
 
             
 
@@ -637,11 +705,15 @@
 
             
 
+            
+
              replaces an existing node with the same name, the old node is returned; otherwise, the added node is returned.</para
           >
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -677,8 +749,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -693,6 +769,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -701,10 +779,14 @@
 
           
 
+          
+
           The array that is the destination of the objects copied from this collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -740,8 +822,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -753,6 +839,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.XmlAttributeCollection.System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -789,8 +877,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -802,6 +894,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.XmlAttributeCollection.System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 

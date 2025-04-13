@@ -20,8 +20,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -30,13 +34,19 @@
 
         
 
+        
+
         , to perform most Web development tasks. You use the base <see
          cref="T:System.Web.UI.DataSourceControl" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -48,8 +58,12 @@
 
         
 
+        
+
          object and its associated lists of data, called data source views. Each list of data is represented by a <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -58,13 +72,19 @@
 
         
 
+        
+
          class is the base class for all data source views, or lists of data, associated with data source controls. Data source views define the capabilities of a data source control. Because the underlying data storage contains one or more lists of data, a data source control is always associated with one or more named data source views. The data source control uses the <see
          cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
         
 
+        
+
          method to enumerate the data source views currently associated with the data source control and the <see
          cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+
+        
 
         
 
@@ -76,8 +96,12 @@
 
         
 
+        
+
          objects support data retrieval from the underlying data source using the <see
          cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+        
 
         
 
@@ -86,8 +110,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -96,13 +124,19 @@
 
         
 
+        
+
         . A data-bound control can discover the capabilities of a data source control by retrieving an associated data source view using the <see
          cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+
+        
 
         
 
@@ -136,6 +170,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -144,8 +180,12 @@
 
           
 
+          
+
           The data source control that the <see
            cref="T:System.Web.UI.DataSourceView" />
+
+          
 
           
 
@@ -156,8 +196,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.UI.DataSourceView" />
+
+          
 
           
 
@@ -185,13 +229,19 @@
 
             
 
+            
+
              property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data source view supports the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
+            
+
              operation in general, if a required property or some other data is not set, the <see
              cref="P:System.Web.UI.DataSourceView.CanDelete" />
+
+            
 
             
 
@@ -206,13 +256,19 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.DataSourceControl" />
 
             
 
+            
+
              object supports the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -241,13 +297,19 @@
 
             
 
+            
+
              property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data source control supports the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
+            
+
              operation, if a required insert command or some other data is not set, the <see
              cref="P:System.Web.UI.DataSourceView.CanInsert" />
+
+            
 
             
 
@@ -262,13 +324,19 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.DataSourceControl" />
 
             
 
+            
+
              object supports the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -297,8 +365,12 @@
 
             
 
+            
+
              field to the <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -307,8 +379,12 @@
 
             
 
+            
+
              method. If a data-bound control requests paging, but the <see
              cref="P:System.Web.UI.DataSourceView.CanPage" />
+
+            
 
             
 
@@ -323,13 +399,19 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.DataSourceControl" />
 
             
 
+            
+
              object supports paging through the data retrieved by the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -361,8 +443,12 @@
 
             
 
+            
+
              field to the <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -371,8 +457,12 @@
 
             
 
+            
+
              method. If a data-bound control requests a total row count, but the <see
              cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
+
+            
 
             
 
@@ -387,8 +477,12 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -417,8 +511,12 @@
 
             
 
+            
+
              field to the <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -427,8 +525,12 @@
 
             
 
+            
+
              method. If a data-bound control requests sorting, but the <see
              cref="P:System.Web.UI.DataSourceView.CanSort" />
+
+            
 
             
 
@@ -443,8 +545,12 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.DataSourceControl" />
+
+            
 
             
 
@@ -473,13 +579,19 @@
 
             
 
+            
+
              property reflects not only a capability of the data source control, but also whether it is currently appropriate to perform an operation. For example, even though a data-bound control supports the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
 
             
 
+            
+
              operation, if a required update command or some other data is not set, the <see
              cref="P:System.Web.UI.DataSourceView.CanUpdate" />
+
+            
 
             
 
@@ -494,13 +606,19 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.DataSourceControl" />
 
             
 
+            
+
              object supports the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -528,6 +646,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -569,8 +689,12 @@
 
             
 
+            
+
              method is the asynchronous data deletion interface for all data source view objects. The <see
              cref="M:System.Web.UI.DataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+            
 
             
 
@@ -579,8 +703,12 @@
 
             
 
+            
+
              method using any <paramref
              name="keys" />
+
+            
 
             
 
@@ -589,8 +717,12 @@
 
             
 
+            
+
              parameter values supplied. The <paramref
              name="callback" />
+
+            
 
             
 
@@ -599,8 +731,12 @@
 
             
 
+            
+
              operation has completed. The method uses the parameters of the <see
              cref="T:System.Web.UI.DataSourceViewOperationCallback" />
+
+            
 
             
 
@@ -609,8 +745,12 @@
 
             
 
+            
+
              exception that is thrown by the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -625,6 +765,8 @@
 
             
 
+            
+
              object represents.</para
           >
         </summary>
@@ -633,13 +775,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of object or row keys to be deleted by the <see
            cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+          
 
           
 
@@ -667,6 +815,8 @@
           <para
             >This property is of type <see
              cref="T:System.ComponentModel.EventHandlerList" />
+
+            
 
             
 
@@ -706,8 +856,12 @@
 
             
 
+            
+
              operation is supported by a data source control by retrieving the <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -716,8 +870,12 @@
 
             
 
+            
+
              method, and checking the <see
              cref="P:System.Web.UI.DataSourceView.CanDelete" />
+
+            
 
             
 
@@ -729,8 +887,12 @@
 
             
 
+            
+
              parameter represents the object or row keys of the data to delete. For data sources that represent relational data, such as the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -739,8 +901,12 @@
 
             
 
+            
+
              parameter is a collection of database primary keys. In other scenarios, the <paramref
              name="keys" />
+
+            
 
             
 
@@ -753,8 +919,12 @@
 
               
 
+              
+
                class's default implementation is to throw a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 
@@ -763,8 +933,12 @@
 
               
 
+              
+
                class, override the <see
                cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+              
 
               
 
@@ -780,6 +954,8 @@
 
             
 
+            
+
              object represents.</para
           >
         </summary>
@@ -792,13 +968,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of object or row keys to be deleted by the <see
            cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+          
 
           
 
@@ -832,8 +1014,12 @@
 
             
 
+            
+
              operation is supported by a data source control by retrieving the <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -842,8 +1028,12 @@
 
             
 
+            
+
              method, and checking the <see
              cref="P:System.Web.UI.DataSourceView.CanInsert" />
+
+            
 
             
 
@@ -852,6 +1042,8 @@
           <para
             >The <paramref
              name="values" />
+
+            
 
             
 
@@ -864,8 +1056,12 @@
 
               
 
+              
+
                class's default implementation is to throw a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 
@@ -874,8 +1070,12 @@
 
               
 
+              
+
                class, override the <see
                cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+              
 
               
 
@@ -888,6 +1088,8 @@
           <para
             >Performs an insert operation on the list of data that the <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -927,8 +1129,12 @@
 
             
 
+            
+
              method is called to retrieve data from the underlying data store and return it as an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -937,8 +1143,12 @@
 
             
 
+            
+
              event or a <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -957,6 +1167,8 @@
 
             
 
+            
+
              list of data from the underlying data storage.</para
           >
         </returns>
@@ -965,8 +1177,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 
@@ -998,8 +1214,12 @@
 
             
 
+            
+
              operation is supported by a data source control by using the <see
              cref="M:System.Web.UI.DataSourceControl.GetView(System.String)" />
+
+            
 
             
 
@@ -1008,8 +1228,12 @@
 
             
 
+            
+
              object and checking the value of the <see
              cref="P:System.Web.UI.DataSourceView.CanUpdate" />
+
+            
 
             
 
@@ -1021,8 +1245,12 @@
 
             
 
+            
+
              parameter represents the object or row keys of the data to update. For data sources that represent relational data, such as the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1031,13 +1259,19 @@
 
             
 
+            
+
              parameter is a collection of database primary keys. In other scenarios, the <paramref
              name="keys" />
 
             
 
+            
+
              parameter is a collection of name/value pairs and is used to filter a list of data. Any data matching a name/value pair is updated with the values found in the <paramref
              name="values" />
+
+            
 
             
 
@@ -1050,8 +1284,12 @@
 
               
 
+              
+
                class's default implementation is to throw a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 
@@ -1060,8 +1298,12 @@
 
               
 
+              
+
                class, override the <see
                cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+              
 
               
 
@@ -1077,6 +1319,8 @@
 
             
 
+            
+
              object represents.</para
           >
         </summary>
@@ -1089,8 +1333,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1101,8 +1349,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1113,8 +1365,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1149,8 +1405,12 @@
 
             
 
+            
+
              method is the asynchronous data insertion interface for all data source view objects. The <see
              cref="M:System.Web.UI.DataSourceView.Insert(System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+            
 
             
 
@@ -1159,8 +1419,12 @@
 
             
 
+            
+
              method using any <paramref
              name="values" />
+
+            
 
             
 
@@ -1169,8 +1433,12 @@
 
             
 
+            
+
              parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1179,13 +1447,19 @@
 
             
 
+            
+
              delegate to return the number of affected records and any <see
              cref="T:System.Exception" />
 
             
 
+            
+
              exception that is thrown by the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1200,6 +1474,8 @@
 
             
 
+            
+
              object represents.</para
           >
         </summary>
@@ -1208,8 +1484,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1262,8 +1542,12 @@
 
             
 
+            
+
              method notifies a data-bound control that the underlying data source has changed and that the control should rebind and perform any necessary work. Typically, the <see
              cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1277,11 +1561,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.DataSourceView.OnDataSourceViewChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1293,6 +1581,8 @@
           <para
             >Raises the <see
              cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+
+            
 
             
 
@@ -1328,13 +1618,19 @@
 
             
 
+            
+
              method is used by the data source view to examine each of the capabilities requested by a data-bound control, represented by the <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
+            
+
              object passed to the <see
              cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+
+            
 
             
 
@@ -1349,8 +1645,12 @@
 
             
 
+            
+
              method to compare the capabilities requested for an <see
              cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -1362,8 +1662,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.DataSourceCapabilities" />
+
+          
 
           
 
@@ -1396,8 +1700,12 @@
 
             
 
+            
+
              method is the asynchronous data retrieval interface for all data source view objects. The <see
              cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+
+            
 
             
 
@@ -1406,8 +1714,12 @@
 
             
 
+            
+
              method, passing any <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -1416,8 +1728,12 @@
 
             
 
+            
+
              parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -1426,8 +1742,12 @@
 
             
 
+            
+
              call is returned in the parameter of the <see
              cref="T:System.Web.UI.DataSourceViewSelectCallback" />
+
+            
 
             
 
@@ -1469,8 +1789,12 @@
 
             
 
+            
+
              method is the asynchronous data modification interface for all data source view objects. The <see
              cref="M:System.Web.UI.DataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary,System.Web.UI.DataSourceViewOperationCallback)" />
+
+            
 
             
 
@@ -1479,8 +1803,12 @@
 
             
 
+            
+
              method using any <paramref
              name="keys" />
+
+            
 
             
 
@@ -1489,8 +1817,12 @@
 
             
 
+            
+
             , and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -1499,8 +1831,12 @@
 
             
 
+            
+
              parameter is a delegate that a data-bound control passes to the data source view, which is used to notify the data-bound control when the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1509,13 +1845,19 @@
 
             
 
+            
+
              delegate to return the number of affected records and any <see
              cref="T:System.Exception" />
 
             
 
+            
+
              exception that is thrown by the <see
              cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1530,6 +1872,8 @@
 
             
 
+            
+
              object represents.</para
           >
         </summary>
@@ -1538,8 +1882,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1550,8 +1898,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1562,8 +1914,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

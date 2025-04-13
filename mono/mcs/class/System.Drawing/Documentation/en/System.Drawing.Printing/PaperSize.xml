@@ -22,8 +22,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Drawing.Printing.PageSettings.PaperSize" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          constructor to specify a custom paper size. The <see
          cref="P:System.Drawing.Printing.PaperSize.Width" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          property values can be set only for custom <see
          cref="T:System.Drawing.Printing.PaperSize" />
+
+        
 
         
 
@@ -55,6 +67,8 @@
       <para
         >For more information about printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -110,8 +126,12 @@
 
             
 
+            
+
              created with this constructor always has its <see
              cref="P:System.Drawing.Printing.PaperSize.Kind" />
+
+            
 
             
 
@@ -120,8 +140,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Drawing.Printing.PaperSize.Width" />
+
+            
 
             
 
@@ -130,8 +154,12 @@
 
             
 
+            
+
              property values can be set only for custom <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 
@@ -146,11 +174,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,10 +193,14 @@
 
           
 
+          
+
           The width of the paper, in hundredths of an inch. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,13 +229,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PaperSize.Height" />
 
             
 
+            
+
              property values can be set only for custom <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 
@@ -235,6 +277,8 @@
 
             
 
+            
+
              constructor to specify a custom paper size.</para
           >
         </remarks>
@@ -265,8 +309,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Drawing.Printing.PaperKind.Custom" />
+
+            
 
             
 
@@ -302,8 +350,12 @@
 
             
 
+            
+
              enumeration members. A value equal to 48 or 49 or larger than 118 indicates a custom paper size; however, the <see
              cref="P:System.Drawing.Printing.PaperSize.RawKind" />
+
+            
 
             
 
@@ -1498,6 +1550,8 @@
 
             
 
+            
+
              values or a custom value.</para
           >
         </summary>
@@ -1517,6 +1571,8 @@
           <para
             >Provides information about the <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 
@@ -1550,13 +1606,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PaperSize.Height" />
 
             
 
+            
+
              property values can be set only for custom <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 

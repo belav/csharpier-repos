@@ -26,8 +26,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.TreeView.NodeMouseDoubleClick" />
+
+        
 
         
 
@@ -60,11 +64,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -75,8 +83,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -87,6 +99,8 @@
 
           
 
+          
+
           The number of clicks that occurred.</param
         >
         <param name="x">
@@ -94,10 +108,14 @@
 
           
 
+          
+
           The x-coordinate where the click occurred.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

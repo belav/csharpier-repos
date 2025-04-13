@@ -18,8 +18,12 @@
 
         
 
+        
+
          can be enabled and disabled. Only enabled <see
          cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
         . An <see
          cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
          objects, and the <see
          cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+        
 
         
 
@@ -53,6 +65,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -61,6 +75,8 @@
       <para
         >Manages a collection of user-interface related <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
             
 
+            
+
              constructor creates a new <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -98,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+            
 
             
 
@@ -128,8 +150,12 @@
 
             
 
+            
+
              is added to the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -138,13 +164,19 @@
 
             
 
+            
+
             , the collection sets this property so that the <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
+            
+
              can call back to the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -159,8 +191,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+            
 
             
 
@@ -188,13 +224,19 @@
 
             
 
+            
+
              property is true, the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
+            
+
              class will send HitTest and Paint messages to the <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+            
 
             
 
@@ -206,6 +248,8 @@
           <para
             >Gets or sets a value indicating if the <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+            
 
             
 
@@ -237,6 +281,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -259,6 +305,8 @@
           <para
             >Forces the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -292,8 +340,12 @@
 
             
 
+            
+
              to refresh its adorner window within the given <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -302,6 +354,8 @@
         </summary>
         <param name="rectangle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,8 +388,12 @@
 
             
 
+            
+
              to refresh its adorner window within the given <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -347,8 +405,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          class is designed for interoperation with services that implement WS-* specifications. The transport security for this binding is Secure Sockets Layer (SSL) over HTTP, or HTTPS.</para
       >
     </remarks>
@@ -30,6 +32,8 @@
       <para
         >Represents the security settings for the <see
          cref="T:System.ServiceModel.WSHttpBinding" />
+
+        
 
         
 
@@ -89,8 +93,12 @@
 
             
 
+            
+
              and/or <see
              cref="P:System.ServiceModel.WSHttpSecurity.Message" />
+
+            
 
             
 
@@ -102,6 +110,8 @@
           <para
             >Specifies the message <see
              cref="T:System.ServiceModel.SecurityMode" />
+
+            
 
             
 

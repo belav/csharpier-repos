@@ -27,8 +27,12 @@
 
         
 
+        
+
          is a derived class of <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          method reports the error condition that caused the call to <see
          cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+
+        
 
         
 
@@ -50,6 +58,8 @@
       <para
         >The exception that is thrown when the call is to an <see
          cref="T:System.ServiceModel.ICommunicationObject" />
+
+        
 
         
 
@@ -76,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+
+            
 
             
 
@@ -110,8 +122,12 @@
 
             
 
+            
+
              using the specified <paramref
              name="message" />
+
+            
 
             
 
@@ -123,6 +139,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+
+            
 
             
 
@@ -161,8 +179,12 @@
 
             
 
+            
+
              class used to deserialize data into a <see
              cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+
+            
 
             
 
@@ -174,8 +196,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -186,8 +212,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -223,13 +253,19 @@
 
             
 
+            
+
              using the specified <paramref
              name="message" />
 
             
 
+            
+
              and <paramref
              name="innerException" />
+
+            
 
             
 
@@ -241,6 +277,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+
+            
 
             
 

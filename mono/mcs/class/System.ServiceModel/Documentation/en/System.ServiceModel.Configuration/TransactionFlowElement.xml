@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -74,6 +76,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -109,8 +113,12 @@
 
             
 
+            
+
              object that has enabled transaction flow and uses the same <see
              cref="T:System.ServiceModel.TransactionProtocol" />
+
+            
 
             
 
@@ -125,8 +133,12 @@
 
             
 
+            
+
              object that has enabled transaction flow, and uses the same <see
              cref="T:System.ServiceModel.TransactionProtocol" />
+
+            
 
             
 
@@ -162,13 +174,19 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          type to a <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.UriTypeConverter" />
+
+            
 
             
 
@@ -102,8 +108,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -112,8 +122,12 @@
 
             
 
+            
+
              type can be assigned from <paramref
              name="sourceType" />
+
+            
 
             
 
@@ -125,8 +139,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -137,8 +155,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -182,8 +204,12 @@
 
             
 
+            
+
              is of type <see
              cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+            
 
             
 
@@ -192,8 +218,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -205,8 +235,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -217,8 +251,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -263,6 +301,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -271,8 +311,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -283,8 +327,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -295,8 +343,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -342,6 +394,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -350,8 +404,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -362,8 +420,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -374,8 +436,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -386,13 +452,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            to convert the <paramref
            name="value" />
+
+          
 
           
 
@@ -432,8 +504,12 @@
 
             
 
+            
+
              or a <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -448,8 +524,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -458,8 +538,12 @@
 
             
 
+            
+
              from which a <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -471,8 +555,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -483,8 +571,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

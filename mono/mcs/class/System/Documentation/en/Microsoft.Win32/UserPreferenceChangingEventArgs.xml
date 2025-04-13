@@ -27,6 +27,8 @@
 
         
 
+        
+
          event occurs when a change to a user preference is about to be applied.</para
       >
     </remarks>
@@ -35,6 +37,8 @@
       <para
         >Provides data for the <see
          cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
+
+        
 
         
 
@@ -71,6 +75,8 @@
 
             
 
+            
+
              class using the specified user preference category identifier.</para
           >
         </summary>
@@ -79,8 +85,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:Microsoft.Win32.UserPreferenceCategory" />
+
+          
 
           
 

@@ -60,6 +60,8 @@
 
         
 
+        
+
         .</para
       >
       <para>Note that a .NET Framework module is not the same as a module in Visual Basic, which is used by a programmers to organize functions and subroutines in an application.</para>
@@ -90,6 +92,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -98,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.Module" />
+
+            
 
             
 
@@ -137,6 +143,8 @@
 
             
 
+            
+
              instance that reflects the 
    assembly that contains the module reflected by the current instance.</para
           >
@@ -152,8 +160,12 @@
 
             
 
+            
+
              for this instance of <see
              cref="T:System.Reflection.Module" />
+
+            
 
             
 
@@ -219,11 +231,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -321,6 +337,8 @@
 
             
 
+            
+
              is a special class load exception. The ReflectionTypeLoadException.Types property contains the array of classes that were defined in the module and were loaded. This array may contain some null values. The ReflectionTypeLoadException.LoaderExceptions property is an array of exceptions that represent the exceptions that were thrown by the class loader. The holes in the class array line up with the exceptions.</para
           >
           <para
@@ -329,8 +347,12 @@
 
             
 
+            
+
              is called for each class in the module, passing along the Type object representing the class as well as the given <paramref
              name="filterCriteria" />
+
+            
 
             
 
@@ -339,13 +361,19 @@
 
             
 
+            
+
              returns a particular class, that class will be included in the returned array. If <paramref
              name="filter" />
 
             
 
+            
+
              returns null, all classes are returned and <paramref
              name="filterCriteria" />
+
+            
 
             
 
@@ -366,10 +394,14 @@
 
           
 
+          
+
           The delegate used to filter the classes. </param
         >
         <param name="filterCriteria">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,11 +434,15 @@
 
             
 
+            
+
              that represents
    the full path of the module reflected by the current instance. If the assembly
    that contains the module reflected by the current instance was loaded from
    a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -423,11 +459,15 @@
 
             
 
+            
+
              and <see
 
               cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery"
               qualify="true"
             />
+
+            
 
             
 
@@ -439,6 +479,8 @@
           <para
             >To get the name without the path, use <see
              cref="P:System.Reflection.Module.Name" />
+
+            
 
             
 
@@ -492,6 +534,8 @@
 
           
 
+          
+
           This argument is ignored for objects of this type. </param
         >
       </Docs>
@@ -533,10 +577,14 @@
 
           
 
+          
+
           The type of attribute to get. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -570,13 +618,19 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Reflection.Module.GetCustomAttributes" />
 
             
 
+            
+
              cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and example code, see the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -591,6 +645,8 @@
 
             
 
+            
+
              objects for the current module, which can be used in the reflection-only context.</para
           >
         </summary>
@@ -599,6 +655,8 @@
           <para
             >A generic list of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -646,8 +704,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -663,6 +725,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -711,8 +775,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -731,10 +799,14 @@
 
           
 
+          
+
           The field name. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,6 +844,8 @@
 
             
 
+            
+
              method does not return fields in a particular order, such as alphabetical or declaration order. Your code must not depend on the order in which fields are returned, because that order can vary.</para
           >
         </remarks>
@@ -784,6 +858,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -823,6 +899,8 @@
 
             
 
+            
+
              method does not return fields in a particular order, such as alphabetical or declaration order. Your code must not depend on the order in which fields are returned, because that order can vary.</para
           >
         </remarks>
@@ -838,6 +916,8 @@
 
             
 
+            
+
              representing the global fields defined on the module that match the specified binding flags; if no global fields match the binding flags, an empty array is returned.</para
           >
         </returns>
@@ -846,8 +926,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -920,8 +1004,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -937,6 +1025,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -986,8 +1076,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -999,8 +1093,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1013,8 +1111,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1034,10 +1136,14 @@
 
           
 
+          
+
           The method name. </param
         >
         <param name="types">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1087,10 +1193,14 @@
 
           
 
+          
+
           The method name. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1101,10 +1211,14 @@
 
           
 
+          
+
           An object that implements Binder, containing properties related to this method. </param
         >
         <param name="callConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1115,10 +1229,14 @@
 
           
 
+          
+
           The parameter types to search for. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1167,10 +1285,14 @@
 
           
 
+          
+
           The method name. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1181,10 +1303,14 @@
 
           
 
+          
+
           An object that implements Binder, containing properties related to this method. </param
         >
         <param name="callConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1195,10 +1321,14 @@
 
           
 
+          
+
           The parameter types to search for. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1244,6 +1374,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -1294,6 +1426,8 @@
 
             
 
+            
+
              representing the global methods defined on the module that match the specified binding flags; if no global methods match the binding flags, an empty array is returned.</para
           >
         </returns>
@@ -1302,8 +1436,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1343,6 +1481,8 @@
 
             
 
+            
+
              implementation for serialized objects.</para
           >
         </summary>
@@ -1351,10 +1491,14 @@
 
           
 
+          
+
           The information and data needed to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1463,6 +1607,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1472,13 +1618,19 @@
 
             
 
+            
+
             . Calling <see
              cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
+            
+
              on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
              cref="Overload:System.Reflection.Assembly.GetType" />
+
+            
 
             
 
@@ -1495,6 +1647,8 @@
         </returns>
         <param name="className">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1543,6 +1697,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1552,13 +1708,19 @@
 
             
 
+            
+
             . Calling <see
              cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
+            
+
              on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
              cref="Overload:System.Reflection.Assembly.GetType" />
+
+            
 
             
 
@@ -1578,10 +1740,14 @@
 
           
 
+          
+
           The name of the type to locate. The name must be fully qualified with the namespace. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1626,13 +1792,19 @@
 
             
 
+            
+
              parameter affects only what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
              cref="T:System.TypeLoadException" />
 
             
 
+            
+
              can be thrown even if <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -1649,6 +1821,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1658,13 +1832,19 @@
 
             
 
+            
+
             . Calling <see
              cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
+            
+
              on the module that contains the manifest will not search the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
              cref="Overload:System.Reflection.Assembly.GetType" />
+
+            
 
             
 
@@ -1683,11 +1863,15 @@
 
             
 
+            
+
              object representing the specified type, if the type is declared in this module; otherwise, null.</para
           >
         </returns>
         <param name="className">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1698,10 +1882,14 @@
 
           
 
+          
+
           true to throw an exception if the type cannot be found; false to return null. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1738,6 +1926,8 @@
                   >Type Forwarding in the Common Language Runtime</a
                 >
               </format>
+
+              
 
               
 
@@ -1791,6 +1981,8 @@
 
             
 
+            
+
              have been applied to this module; otherwise, false.</para
           >
         </returns>
@@ -1799,10 +1991,14 @@
 
           
 
+          
+
           The type of custom attribute to test for. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1863,10 +2059,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1904,6 +2104,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -1915,10 +2117,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1981,6 +2187,8 @@
 
             
 
+            
+
              property is referred to as the mvid, and is stored in the GUID heap.</para
           >
           <block subset="none" type="note">
@@ -1992,10 +2200,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2034,11 +2246,15 @@
 
             
 
+            
+
              containing the 
    name of the module reflected by the current instance, with the path component
    removed. If the assembly that contains the module reflected by the current
    instance was loaded from a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2054,6 +2270,8 @@
           <para
             >To get the name and the path, use <see
              cref="P:System.Reflection.Module.FullyQualifiedName" />
+
+            
 
             
 
@@ -2097,6 +2315,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -2108,8 +2328,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -2121,10 +2345,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2162,6 +2390,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -2173,8 +2403,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -2186,10 +2420,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2227,6 +2465,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. That is, when you are resolving a metadata token for a field that depends on the generic type parameters of the generic type and/or the generic method in which the token is embedded, you must use the overload that allows you to supply those type parameters.</para
           >
           <block subset="none" type="note">
@@ -2238,10 +2478,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2251,6 +2495,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -2269,11 +2515,15 @@
 
             
 
+            
+
              object representing the field that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2312,13 +2562,19 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -2327,13 +2583,19 @@
 
             
 
+            
+
              method on the method where <paramref
              name="metadataToken" />
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -2348,10 +2610,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2361,6 +2627,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -2379,11 +2647,15 @@
 
             
 
+            
+
              object representing the field that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2394,8 +2666,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2406,8 +2682,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2445,6 +2725,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. That is, when you are resolving a metadata token for a member that depends on the generic type parameters of the generic type and/or the generic method in which the token is embedded, you must use the overload that allows you to supply those type parameters.</para
           >
           <block subset="none" type="note">
@@ -2456,10 +2738,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2469,6 +2755,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -2487,11 +2775,15 @@
 
             
 
+            
+
              object representing the type or member that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2530,13 +2822,19 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -2545,13 +2843,19 @@
 
             
 
+            
+
              method on the method where <paramref
              name="metadataToken" />
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -2566,10 +2870,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2579,6 +2887,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -2597,11 +2907,15 @@
 
             
 
+            
+
              object representing the type or member that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2612,8 +2926,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2624,8 +2942,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2663,6 +2985,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. That is, when you are resolving a metadata token for a method that depends on the generic type parameters of the generic type and/or the generic method in which the token is embedded, you must use the overload that allows you to supply those type parameters.</para
           >
           <block subset="none" type="note">
@@ -2674,10 +2998,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2697,11 +3025,15 @@
 
             
 
+            
+
              object representing the method or constructor that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2740,8 +3072,12 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
+
+            
 
             
 
@@ -2750,8 +3086,12 @@
 
             
 
+            
+
             . Use the <see
              cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+
+            
 
             
 
@@ -2760,8 +3100,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericMethodArguments" />
+
+            
 
             
 
@@ -2776,10 +3120,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2799,11 +3147,15 @@
 
             
 
+            
+
              object representing the method that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2814,8 +3166,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2826,8 +3182,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2868,10 +3228,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2889,6 +3253,8 @@
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2929,10 +3295,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2952,11 +3322,15 @@
 
             
 
+            
+
              containing a string value from the metadata string heap.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2991,6 +3365,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. That is, when you are resolving a metadata token for a type that depends on the generic type parameters of the generic type and/or the generic method in which the token is embedded, you must use the overload that allows you to supply those type parameters.</para
           >
           <block subset="none" type="note">
@@ -3002,10 +3378,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -3025,11 +3405,15 @@
 
             
 
+            
+
              object representing the type that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3068,13 +3452,19 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -3083,13 +3473,19 @@
 
             
 
+            
+
              method on the method where <paramref
              name="metadataToken" />
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -3104,10 +3500,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -3117,6 +3517,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -3135,11 +3537,15 @@
 
             
 
+            
+
              object representing the type that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3150,8 +3556,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3162,8 +3572,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3262,6 +3676,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -3274,6 +3690,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -3281,10 +3699,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3384,6 +3806,8 @@
               >This method
       overrides <see
                cref="M:System.Object.ToString" qualify="true" />
+
+              
 
               
 

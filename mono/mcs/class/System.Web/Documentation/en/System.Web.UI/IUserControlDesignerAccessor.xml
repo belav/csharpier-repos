@@ -38,6 +38,8 @@
 
             
 
+            
+
              property is used by the designer to specify or determine the text between the opening and closing tags of a user control.</para
           >
         </remarks>
@@ -65,6 +67,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.IUserControlDesignerAccessor.TagName" />
+
+            
 
             
 

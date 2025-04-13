@@ -28,13 +28,19 @@
 
         
 
+        
+
          class to control designers through the <see
          cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
         
 
+        
+
          property of the designer. Control designers use the <see
          cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+
+        
 
         
 
@@ -61,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+            
 
             
 
@@ -95,8 +103,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.ClientScriptItem" />
+
+          
 
           
 
@@ -139,6 +151,8 @@
 
           
 
+          
+
           The control to add to the Web Forms page.</param
         >
         <param name="referenceControl">
@@ -146,8 +160,12 @@
 
           
 
+          
+
           The control relative to which <paramref
            name="newControl" />
+
+          
 
           
 
@@ -158,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.ControlLocation" />
+
+          
 
           
 
@@ -168,8 +190,12 @@
 
           
 
+          
+
            relative to <paramref
            name="referenceControl" />
+
+          
 
           
 
@@ -199,8 +225,12 @@
 
             
 
+            
+
              property is set by the <see
              cref="M:System.Web.UI.Design.WebFormsRootDesigner.Initialize(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -237,6 +267,8 @@
 
             
 
+            
+
              method is called by a control designer and provides a way for action items for the control designer to be implemented in the Web Forms page through a design host, such as vsprvslong.</para
           >
         </remarks>
@@ -245,6 +277,8 @@
           <para
             >Returns a design-time <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -260,8 +294,12 @@
 
           
 
+          
+
           A design host, such as vsprvslong, cast as an <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -289,6 +327,8 @@
           <para
             >Returns an <see
              cref="T:System.Web.UI.IUrlResolutionService" />
+
+            
 
             
 
@@ -344,11 +384,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,6 +438,8 @@
 
             
 
+            
+
              object before it is reclaimed by the garbage collector.</para
           >
         </summary>
@@ -423,6 +469,8 @@
 
             
 
+            
+
              method enables a consistent display of empty controls at design time.</para
           >
         </remarks>
@@ -436,6 +484,8 @@
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,6 +525,8 @@
 
           
 
+          
+
           The control that raised the exception.</param
         >
         <param name="e">
@@ -482,10 +534,14 @@
 
           
 
+          
+
           The exception. </param
         >
         <param name="errorMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -513,6 +569,8 @@
           <para
             >When overridden in a derived class, returns a <see
              cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+
+            
 
             
 
@@ -584,6 +642,8 @@
 
           
 
+          
+
           The type of service to retrieve.</param
         >
       </Docs>
@@ -613,6 +673,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -625,13 +687,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ViewTechnology" />
 
           
 
+          
+
            obtained from the <see
            cref="P:System.Web.UI.Design.WebFormsRootDesigner.SupportedTechnologies" />
+
+          
 
           
 
@@ -664,11 +732,15 @@
 
             
 
+            
+
              object using the specified component.</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -751,6 +823,8 @@
 
             
 
+            
+
              event when the Web Forms page is completely loaded.</para
           >
         </summary>
@@ -759,8 +833,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -793,11 +871,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -830,11 +912,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -867,11 +953,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,11 +994,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -941,11 +1035,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -978,11 +1076,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1010,6 +1112,8 @@
           <para
             >When overridden in a derived class, gets a <see
              cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+
+            
 
             
 
@@ -1044,6 +1148,8 @@
 
           
 
+          
+
           The identifier for the previously registered client script.</param
         >
       </Docs>
@@ -1071,6 +1177,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1104,11 +1212,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="relativeUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1143,10 +1255,14 @@
 
           
 
+          
+
           The control on which to set the ID.</param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1194,8 +1310,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesigner" />
+
+            
 
             
 
@@ -1207,6 +1327,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.Design.IDesigner.DoDefaultAction" />
+
+            
 
             
 
@@ -1237,8 +1359,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesigner" />
+
+            
 
             
 
@@ -1250,6 +1376,8 @@
           <para
             >Gets or sets the design-time verbs that are supported by the designer. For a description of this member, see <see
              cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+
+            
 
             
 
@@ -1282,8 +1410,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1298,11 +1430,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1334,8 +1470,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1350,11 +1490,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1386,8 +1530,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1402,11 +1550,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1438,8 +1590,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1454,11 +1610,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1490,8 +1650,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1506,11 +1670,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1542,8 +1710,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1558,11 +1730,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1594,8 +1770,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -1610,6 +1790,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1619,6 +1801,8 @@
         </returns>
         <param name="viewTechnology">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1648,8 +1832,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -1661,6 +1849,8 @@
           <para
             >Gets an array of technologies that the designer component can support for its display. For a description of this member, see <see
              cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
+
+            
 
             
 
@@ -1688,8 +1878,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1701,6 +1895,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -1729,6 +1925,8 @@
             <para
               >Typically, a design-time environment provides a <ui
               >Properties</ui>
+
+              
 
               
 

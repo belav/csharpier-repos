@@ -6,6 +6,8 @@
 
     
 
+    
+
     s and the members inherited from the type System.ValueType. <grammar_production
     >
       <name>
@@ -13,8 +15,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -31,6 +37,8 @@
       <name>
         <non_terminal where="18.2">struct-member-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -73,13 +81,19 @@
 
     
 
+    
+
     , the descriptions of class members provided in <hyperlink
     >17.2</hyperlink>
 
     
 
+    
+
      through <hyperlink
     >17.11</hyperlink>
+
+    
 
     
 

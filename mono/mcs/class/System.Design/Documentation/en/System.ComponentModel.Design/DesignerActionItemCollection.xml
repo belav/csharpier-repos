@@ -25,6 +25,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -44,6 +46,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+
+            
 
             
 
@@ -77,6 +81,8 @@
 
             
 
+            
+
              to the current collection.</para
           >
         </summary>
@@ -88,6 +94,8 @@
 
             
 
+            
+
              index at which the value has been added.</para
           >
         </returns>
@@ -96,8 +104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+          
 
           
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              contains a specific element.</para
           >
         </summary>
@@ -141,6 +155,8 @@
 
             
 
+            
+
              contains the specified value; otherwise, false.</para
           >
         </returns>
@@ -149,13 +165,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+
+          
 
           
 
@@ -190,8 +212,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+          
 
           
 
@@ -202,8 +228,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -240,8 +270,12 @@
 
             
 
+            
+
              within the entire <see
              cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+
+            
 
             
 
@@ -253,8 +287,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+          
 
           
 
@@ -288,6 +326,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -296,8 +336,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -308,8 +352,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+          
 
           
 
@@ -364,6 +412,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -372,13 +422,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.ComponentModel.Design.DesignerActionItemCollection" />
+
+          
 
           
 

@@ -25,13 +25,19 @@
 
         
 
+        
+
          control that allows you to link to other pages when paging is enabled. The <see
          cref="P:System.Web.UI.WebControls.DataGrid.PagerStyle" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
+
+        
 
         
 
@@ -56,6 +66,8 @@
       <para
         >Specifies the style for the pager of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -85,13 +97,19 @@
 
             
 
+            
+
              method to copy the style properties of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
             
 
+            
+
              object into this instance of the <see
              cref="T:System.Web.UI.WebControls.DataGridPagerStyle" />
+
+            
 
             
 
@@ -106,8 +124,12 @@
 
             
 
+            
+
              object into this instance of the <see
              cref="T:System.Web.UI.WebControls.DataGridPagerStyle" />
+
+            
 
             
 
@@ -119,8 +141,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -153,8 +179,12 @@
 
             
 
+            
+
              method to combine the style properties of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -163,8 +193,12 @@
 
             
 
+            
+
              class. If a property from this instance is already set to a value, the property is unchanged. If a property is not set, this method sets that property with the value from the corresponding property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -179,8 +213,12 @@
 
             
 
+            
+
              object with this instance of the <see
              cref="T:System.Web.UI.WebControls.DataGridPagerStyle" />
+
+            
 
             
 
@@ -192,8 +230,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -225,8 +267,12 @@
 
             
 
+            
+
              property to specify which set of pager buttons to use on the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -268,8 +314,12 @@
 
             
 
+            
+
              property to provide custom text for the next page button. The <see
              cref="P:System.Web.UI.WebControls.DataGridPagerStyle.Mode" />
+
+            
 
             
 
@@ -281,8 +331,12 @@
 
             
 
+            
+
              property to create a custom set of controls for the next and previous buttons of the pager on the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -297,12 +351,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -347,13 +405,19 @@
 
             
 
+            
+
              property to specify the number of numeric buttons to display concurrently in the pager element of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.DataGridPagerStyle.Mode" />
+
+            
 
             
 
@@ -365,6 +429,8 @@
 
             
 
+            
+
              control than specified in this property, ellipsis buttons (...) are displayed in the pager element. When clicked, these buttons display the next or previous set of numeric buttons.</para
           >
         </remarks>
@@ -373,6 +439,8 @@
           <para
             >Gets or sets the number of numeric buttons to display concurrently in the pager element of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -413,13 +481,19 @@
 
             
 
+            
+
              property to specify the location where the pager element is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
+            
+
              control. The pager element can be displayed at the upper edge, the lower edge, or at both the upper and lower edges of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -431,6 +505,8 @@
           <para
             >Gets or sets the position of the pager element in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -468,8 +544,12 @@
 
             
 
+            
+
              property to provide custom text for the next page button. The <see
              cref="P:System.Web.UI.WebControls.DataGridPagerStyle.Mode" />
+
+            
 
             
 
@@ -481,8 +561,12 @@
 
             
 
+            
+
              property to create a custom appearance for the next and previous buttons of the pager on the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -497,12 +581,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -546,8 +634,12 @@
 
             
 
+            
+
              method to restore the <see
              cref="T:System.Web.UI.WebControls.DataGridPagerStyle" />
+
+            
 
             
 
@@ -559,6 +651,8 @@
           <para
             >Restores the <see
              cref="T:System.Web.UI.WebControls.DataGridPagerStyle" />
+
+            
 
             
 
@@ -588,8 +682,12 @@
 
             
 
+            
+
              property to specify whether the pager is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -601,6 +699,8 @@
           <para
             >Gets or sets a value indicating whether the pager is displayed in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

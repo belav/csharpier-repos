@@ -29,8 +29,12 @@
 
         
 
+        
+
          class to control how executing code can connect back to the site it was downloaded from. These classes provide programmatic control of the <see
          cref="T:System.Net.WebPermission" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          object based on the code's origin scheme, use the <see
          cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          object that can use any scheme but is restricted by port, use the <see
          cref="M:System.Security.Policy.CodeConnectAccess.CreateAnySchemeAccess(System.Int32)" />
+
+        
 
         
 
@@ -97,13 +109,19 @@
 
             
 
+            
+
              property is set using the <paramref
              name="allowScheme" />
 
             
 
+            
+
              parameter. The scheme is converted to lowercase. The value of <see
              cref="P:System.Security.Policy.CodeConnectAccess.Scheme" />
+
+            
 
             
 
@@ -115,13 +133,19 @@
 
             
 
+            
+
              property is set using the <paramref
              name="allowPort" />
 
             
 
+            
+
              parameter. The value of <see
              cref="P:System.Security.Policy.CodeConnectAccess.Port" />
+
+            
 
             
 
@@ -136,6 +160,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -144,10 +170,14 @@
 
           
 
+          
+
           The URI scheme represented by the current instance.</param
         >
         <param name="allowPort">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,13 +206,19 @@
 
             
 
+            
+
              object using this value, you can call the <see
              cref="M:System.Security.Policy.CodeConnectAccess.CreateAnySchemeAccess(System.Int32)" />
 
             
 
+            
+
              method to obtain a <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
+
+            
 
             
 
@@ -226,8 +262,12 @@
 
             
 
+            
+
              instance returned by this method uses the scheme wildcard value <see
              cref="F:System.Security.Policy.CodeConnectAccess.AnyScheme" />
+
+            
 
             
 
@@ -242,6 +282,8 @@
 
             
 
+            
+
              instance that represents access to the specified port using any scheme.</para
           >
         </summary>
@@ -253,11 +295,15 @@
 
             
 
+            
+
              instance for the specified port.</para
           >
         </returns>
         <param name="allowPort">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,8 +341,12 @@
 
             
 
+            
+
              instance returned by this method has the scheme value <see
              cref="F:System.Security.Policy.CodeConnectAccess.OriginScheme" />
+
+            
 
             
 
@@ -311,6 +361,8 @@
 
             
 
+            
+
              instance that represents access to the specified port using the code's scheme of origin.</para
           >
         </summary>
@@ -322,11 +374,15 @@
 
             
 
+            
+
              instance for the specified port.</para
           >
         </returns>
         <param name="allowPort">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,13 +412,19 @@
 
             
 
+            
+
              object that has the default port for a specified scheme, use this field as the <paramref
              name="allowPort" />
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" />
+
+            
 
             
 
@@ -403,13 +465,19 @@
 
             
 
+            
+
              objects are equal if their <see
              cref="P:System.Security.Policy.CodeConnectAccess.Scheme" />
 
             
 
+            
+
              and <see
              cref="P:System.Security.Policy.CodeConnectAccess.Port" />
+
+            
 
             
 
@@ -421,6 +489,8 @@
           <para
             >Returns a value indicating whether two <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
+
+            
 
             
 
@@ -436,8 +506,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Security.Policy.CodeConnectAccess" />
+
+          
 
           
 
@@ -489,13 +563,19 @@
 
             
 
+            
+
              object that has the same port as the port in the executing code's URL evidence, use this field as the <paramref
              name="allowPort" />
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" />
+
+            
 
             
 
@@ -530,8 +610,12 @@
 
             
 
+            
+
              constructor. Instead, use the <see
              cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" />
+
+            
 
             
 
@@ -567,6 +651,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -595,6 +681,8 @@
           <para
             >The scheme value is specified when you create an instance of <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
+
+            
 
             
 

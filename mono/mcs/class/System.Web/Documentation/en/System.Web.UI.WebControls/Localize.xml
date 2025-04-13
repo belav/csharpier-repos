@@ -42,6 +42,8 @@
 
         
 
+        
+
          control to reserve a location on a Web page in which to display localized text. </para
       >
       <block subset="none" type="note">
@@ -53,8 +55,12 @@
 
         
 
+        
+
          control inherits from the <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          control is used at design time to distinguish static text that can be localized from other static text. Although the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -73,13 +83,19 @@
 
         
 
+        
+
          control does not. You can programmatically manage the text displayed in the control by setting the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
 
         
 
+        
+
          property, inherited from the <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -94,6 +110,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -103,12 +121,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -128,9 +150,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -138,6 +164,8 @@
     ID="string"
     Mode="<codeFeaturedElement
         >Transform</codeFeaturedElement>
+
+        
 
         
 
@@ -153,6 +181,8 @@
     Text="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -180,6 +210,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -188,6 +220,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Localize" />
+
+            
 
             
 

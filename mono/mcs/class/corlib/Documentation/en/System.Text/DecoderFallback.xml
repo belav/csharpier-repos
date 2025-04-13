@@ -24,8 +24,12 @@
 
         
 
+        
+
          class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see
          cref="M:System.Text.Encoding.GetBytes(System.String)" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Text.Encoding.GetString(System.Byte[])" />
+
+        
 
         
 
@@ -47,6 +55,8 @@
 
         
 
+        
+
          object cannot decode a byte sequence if that sequence represents a character that has a code point value that is outside the range U+0000 to U+007F. </para
       >
       <para
@@ -55,8 +65,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Text.DecoderFallbackBuffer" />
+
+        
 
         
 
@@ -67,8 +81,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Text.DecoderFallbackBuffer" />
+
+        
 
         
 
@@ -82,6 +100,8 @@
 
             
 
+            
+
              class might map Æ (U+00C6) to AE (U+0041 + U+0045). A best-fit fallback handler might also be implemented to transliterate one alphabet (such as Cyrillic) to another (such as Latin or Roman). The .NET Framework does not provide any public best-fit fallback implementations.</para
           >
         </item>
@@ -92,8 +112,12 @@
 
             
 
+            
+
              class replaces each byte sequence that cannot be decoded with a question mark character ("?", or U+003F) or a REPLACEMENT CHARACTER (U+FFFD). You can customize the replacement string by specifying a substitute in the call to the <see
              cref="M:System.Text.DecoderReplacementFallback.#ctor(System.String)" />
+
+            
 
             
 
@@ -107,8 +131,12 @@
 
             
 
+            
+
              class throws a <see
              cref="T:System.Text.DecoderFallbackException" />
+
+            
 
             
 
@@ -122,6 +150,8 @@
 
         
 
+        
+
          class:</para
       >
       <list type="bullet">
@@ -132,13 +162,19 @@
 
             
 
+            
+
              method, which returns a class instance derived from <see
              cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 
+            
+
             . Depending on the type of fallback handler that you are developing, the <see
              cref="T:System.Text.DecoderFallbackBuffer" />
+
+            
 
             
 
@@ -149,6 +185,8 @@
           <para
             >The <see
              cref="P:System.Text.DecoderFallback.MaxCharCount" />
+
+            
 
             
 
@@ -163,6 +201,8 @@
             >Character Encoding in the .NET Framework</a
           >
         </format>
+
+        
 
         
 
@@ -195,6 +235,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderFallback" />
+
+            
 
             
 
@@ -231,8 +273,12 @@
 
             
 
+            
+
              that is responsible for performing the fallback operation. For example, of the predefined <see
              cref="T:System.Text.DecoderFallback" />
+
+            
 
             
 
@@ -241,8 +287,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+
+            
 
             
 
@@ -251,8 +301,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Text.DecoderExceptionFallbackBuffer" />
+
+            
 
             
 
@@ -264,8 +318,12 @@
 
             
 
+            
+
              method is called by a decoder when it encounters the first byte that it is unable to decode. The <see
              cref="T:System.Text.DecoderFallbackBuffer" />
+
+            
 
             
 
@@ -277,6 +335,8 @@
           <para
             >When overridden in a derived class, initializes a new instance of the <see
              cref="T:System.Text.DecoderFallbackBuffer" />
+
+            
 
             
 
@@ -339,6 +399,8 @@
           <para
             >When overridden in a derived class, gets the maximum number of characters the current <see
              cref="T:System.Text.DecoderFallback" />
+
+            
 
             
 

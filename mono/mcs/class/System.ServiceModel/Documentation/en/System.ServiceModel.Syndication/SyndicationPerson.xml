@@ -28,13 +28,19 @@
 
         
 
+        
+
          objects can be added to the authors and contributors collections on <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
 
         
 
+        
+
          is written out as an &lt;author&gt; or &lt;contributor&gt; element.</para
       >
       <para
@@ -54,8 +62,12 @@
 
         
 
+        
+
          instance is written out as a &lt;managingEditor&gt;, &lt;a10:author&gt;, or &lt;a10:contributor&gt; element. How a <see
          cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+        
 
         
 
@@ -64,8 +76,12 @@
 
         
 
+        
+
          objects added to a <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
         , which collection the <see
          cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+        
 
         
 
@@ -84,8 +104,12 @@
 
         
 
+        
+
          parameter to the <see
          cref="M:System.ServiceModel.Syndication.Rss20ItemFormatter.#ctor(System.ServiceModel.Syndication.SyndicationItem,System.Boolean)" />
+
+        
 
         
 
@@ -94,13 +118,19 @@
 
         
 
+        
+
          is added to the <see
          cref="P:System.ServiceModel.Syndication.SyndicationFeed.Authors" />
 
         
 
+        
+
          (or <see
          cref="P:System.ServiceModel.Syndication.SyndicationItem.Authors" />
+
+        
 
         
 
@@ -109,8 +139,12 @@
 
         
 
+        
+
          is serialized to a &lt;managingEditor&gt; element. If more than one <see
          cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+        
 
         
 
@@ -119,8 +153,12 @@
 
         
 
+        
+
          (or <see
          cref="P:System.ServiceModel.Syndication.SyndicationItem.Authors" />
+
+        
 
         
 
@@ -129,8 +167,12 @@
 
         
 
+        
+
          is set to true, all of the <see
          cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+        
 
         
 
@@ -139,8 +181,12 @@
 
         
 
+        
+
          is set to false, the <see
          cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+        
 
         
 
@@ -149,8 +195,12 @@
 
         
 
+        
+
          instances added to the <see
          cref="P:System.ServiceModel.Syndication.SyndicationFeed.Contributors" />
+
+        
 
         
 
@@ -159,8 +209,12 @@
 
         
 
+        
+
         ) collection are only serialized if <paramref
          name="SerializeExtensionsAsAtom" />
+
+        
 
         
 
@@ -191,6 +245,8 @@
           <para
             >Initializes a new <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -225,6 +281,8 @@
 
             
 
+            
+
              class with the specified instance.</para
           >
         </summary>
@@ -233,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+          
 
           
 
@@ -265,11 +327,15 @@
 
             
 
+            
+
              instance with the specified e-mail address.</para
           >
         </summary>
         <param name="email">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,11 +371,15 @@
 
             
 
+            
+
              instance with the specified e-mail address, name, and Uniform Resource Identifier (URI).</para
           >
         </summary>
         <param name="email">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -320,10 +390,14 @@
 
           
 
+          
+
           The name of the person.</param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,6 +431,8 @@
 
             
 
+            
+
              instance. You can add any valid XML attribute/value. </para
           >
           <para>When serialized to Atom 1.0, any custom attribute/value is written as an attribute in the &lt;author&gt; or &lt;contributor&gt; elements. When serialized to RSS 2.0, any custom attribute/value is written as an attribute in the &lt;managingEditor&gt;, &lt;a10:contributor&gt;, or &lt;a10:author&gt; elements.</para>
@@ -366,6 +442,8 @@
           <para
             >Gets the attribute extensions for the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -401,6 +479,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -409,6 +489,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -443,6 +525,8 @@
 
             
 
+            
+
              instance. You can add any valid XML element as long as the element namespace and the containing namespace are different.</para
           >
           <para>When serialized to Atom 1.0, any custom element is written as an XML element within an &lt;author&gt; or &lt;contributor&gt; element.</para>
@@ -453,6 +537,8 @@
           <para
             >Gets the element extensions for the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -481,8 +567,12 @@
 
             
 
+            
+
              property is written as an &lt;email&gt; element. The &lt;email&gt; element appears within an &lt;author&gt; or &lt;contributor&gt; element, which depends upon which collection (authors or contributors) the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -494,13 +584,19 @@
 
             
 
+            
+
              is added to the authors collection, the &lt;email&gt; element is written within the &lt;managingEditor&gt; element. If more than one <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
+            
+
              is added to the authors collection, the &lt;email&gt; element is written within an &lt;a10:author&gt; element. If the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -512,6 +608,8 @@
           <para
             >Gets and sets the e-mail address of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -540,8 +638,12 @@
 
             
 
+            
+
              property is written as a &lt;name&gt; element. The &lt;name&gt; element appears within an &lt;author&gt; or &lt;contributor&gt; element, which depends upon which collection (authors or contributors) the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -553,8 +655,12 @@
 
             
 
+            
+
              property is written as an &lt;a10:name&gt; element. The &lt;a10:name&gt; element appears within a &lt;managingEditor&gt;, &lt;a10:author&gt;, or &lt;a10:contributor&gt; element. If only one <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -563,8 +669,12 @@
 
             
 
+            
+
              is added to the authors collection, the &lt;a10:name&gt; element is written within the &lt;a10:author&gt; element. If the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -576,6 +686,8 @@
           <para
             >Gets and sets the name of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -615,6 +727,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -631,10 +745,14 @@
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -645,10 +763,14 @@
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -685,6 +807,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized element extensions.</para
           >
         </remarks>
@@ -701,8 +825,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -710,6 +838,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,8 +867,12 @@
 
             
 
+            
+
              property is written as a &lt;uri&gt; element. The &lt;uri&gt; element appears within an &lt;author&gt; or &lt;contributor&gt; element, which depends upon which collection (authors or contributors) the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -750,8 +884,12 @@
 
             
 
+            
+
              property is written as an &lt;a10:uri&gt; element. The &lt;a10:uri&gt; element appears within a &lt;managingEditor&gt;, &lt;a10:author&gt;, or &lt;a10:contributor&gt; element. If only one <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -760,8 +898,12 @@
 
             
 
+            
+
              is added to the authors collection, the &lt;a10:uri&gt; element is written within the &lt;a10:author&gt; element. If the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -773,6 +915,8 @@
           <para
             >Gets and sets the URI of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -810,6 +954,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -821,6 +967,8 @@
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -829,8 +977,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -838,6 +990,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -874,6 +1028,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized element extensions.</para
           >
         </remarks>
@@ -885,6 +1041,8 @@
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -893,8 +1051,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -902,6 +1064,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

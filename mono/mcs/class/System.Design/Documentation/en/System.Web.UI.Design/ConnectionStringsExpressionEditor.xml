@@ -25,6 +25,8 @@
 
         
 
+        
+
          class to select a connection string from the connectionStrings configuration section.</para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
+
+            
 
             
 
@@ -95,8 +103,12 @@
 
             
 
+            
+
              method looks up the connection name and type specified by <paramref
              name="expression" />
+
+            
 
             
 
@@ -108,13 +120,19 @@
 
             
 
+            
+
              method to evaluate a connection string expression and provide the design-time value for an associated control property. The visual designer uses the <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
+            
+
              method to parse the expression string at design time, and then calls the <see
              cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+
+            
 
             
 
@@ -126,13 +144,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
+            
+
              methods of the corresponding <see
              cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+            
 
             
 
@@ -152,10 +176,14 @@
 
           
 
+          
+
           A connection string expression to evaluate. The expression does not include the ConnectionStrings expression prefix.</param
         >
         <param name="parseTimeData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,10 +194,14 @@
 
           
 
+          
+
           The type of the control property.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,10 +235,14 @@
 
             
 
+            
+
              method returns an editor sheet implementation for connection string expressions. The editor sheet for connection string expressions allows users to select a connection name and type, based on the current connection strings that are defined in the <format
              type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de">connectionStrings</a>
             </format>
+
+            
 
             
 
@@ -225,6 +261,8 @@
 
             
 
+            
+
              instance that defines the connection string expression properties.</para
           >
         </returns>
@@ -233,10 +271,14 @@
 
           
 
+          
+
           The expression string set for a control property, used to initialize the expression editor sheet. The expression does not include the ConnectionStrings expression prefix.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

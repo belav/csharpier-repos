@@ -28,12 +28,16 @@
 
         
 
+        
+
          interface can be a parameter, a local variable, or a field.</para
       >
       <block subset="none" type="note">
         <para
           >This interface is the managed counterpart of the <unmanagedCodeEntityReference
           >ISymUnmanagedVariable</unmanagedCodeEntityReference>
+
+          
 
           
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -100,6 +106,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -128,6 +136,8 @@
           <para
             >For more information about the use of this property, see the <see
              cref="T:System.Diagnostics.SymbolStore.SymAddressKind" />
+
+            
 
             
 
@@ -166,6 +176,8 @@
           <para
             >Gets the <see
              cref="T:System.Diagnostics.SymbolStore.SymAddressKind" />
+
+            
 
             
 

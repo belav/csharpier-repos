@@ -35,6 +35,8 @@
 
         
 
+        
+
          class is the starting point for creating a custom binding that implements the HTTP transport protocol. HTTP is the primary transport used for interoperability purposes. This transport is supported by indigo1 to ensure interoperability with other non-indigo2 Web services stacks.</para
       >
       <para
@@ -43,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -56,13 +62,19 @@
 
         
 
+        
+
         , <see
          cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostNameComparisonMode" />
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.MaxBufferSize" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
         , such as <see
          cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />
+
+        
 
         
 
@@ -84,13 +100,19 @@
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />
 
         
 
+        
+
         . For a complete list of properties, see <see
          cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        
 
         
 
@@ -121,6 +143,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+
+            
 
             
 
@@ -156,6 +180,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+
+            
 
             
 
@@ -265,10 +291,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,10 +352,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -398,8 +432,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -407,6 +445,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,8 +496,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -465,6 +509,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -586,6 +632,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -597,6 +645,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -605,8 +655,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -614,6 +668,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -733,6 +789,8 @@
 
             
 
+            
+
              is thrown. For a non-streamed message, if the message size is greater than this property, then the message is dropped.</para
           >
           <para>If not specified, this defaults to 65536.</para>
@@ -742,6 +800,8 @@
           <para
             >Gets or sets the maximum size of the buffer to use. For buffered messages this value is the same as <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -832,6 +892,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -893,8 +955,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+            
 
             
 
@@ -903,13 +969,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
+            
+
             , and <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -921,8 +993,12 @@
 
             
 
+            
+
              property exposes the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -931,11 +1007,15 @@
 
             
 
+            
+
              that indicate where security policy assertions should be added.</para
           >
           <para
             >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -951,8 +1031,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -963,8 +1047,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 
@@ -1006,8 +1094,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -1015,6 +1107,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1057,8 +1151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -1094,6 +1192,8 @@
           <para
             >Specifying <see
              cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.TransferMode" />
+
+            
 
             
 
@@ -1137,6 +1237,8 @@
 
             
 
+            
+
              of the initial request.</para
           >
           <para>This property has no effect when NTLM is not the authentication protocol. </para>
@@ -1146,6 +1248,8 @@
           <para
             >crdefault <see
              cref="P:System.Net.HttpListener.UnsafeConnectionNtlmAuthentication" />
+
+            
 
             
 

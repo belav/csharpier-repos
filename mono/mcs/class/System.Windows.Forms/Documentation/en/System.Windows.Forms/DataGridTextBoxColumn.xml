@@ -22,8 +22,12 @@
 
         
 
+        
+
          class derives from the abstract class <see
          cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          hosts a <see
          cref="T:System.Windows.Forms.DataGridTextBox" />
+
+        
 
         
 
@@ -45,13 +53,19 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.DataGridTextBoxColumn.HideEditBox" />
 
         
 
+        
+
         . These properties allow you to access the hosted <see
          cref="T:System.Windows.Forms.DataGridTextBox" />
+
+        
 
         
 
@@ -63,8 +77,12 @@
 
         
 
+        
+
          containing <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -73,8 +91,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          : <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -93,8 +119,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -103,8 +133,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int16" />
+
+        
 
         
 
@@ -113,8 +147,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int64" />
+
+        
 
         
 
@@ -123,8 +161,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.UInt32" />
+
+        
 
         
 
@@ -133,13 +175,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Single" />
 
         
 
+        
+
         , and <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -153,8 +201,12 @@
 
           
 
+          
+
           , <see
            cref="T:System.UInt16" />
+
+          
 
           
 
@@ -163,13 +215,19 @@
 
           
 
+          
+
           , <see
            cref="T:System.UInt64" />
 
           
 
+          
+
           , and <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -185,8 +243,12 @@
 
         
 
+        
+
          control in a cell of a <see
          cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+        
 
         
 
@@ -206,6 +268,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+            
 
             
 
@@ -236,8 +300,12 @@
 
             
 
+            
+
              uses a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -246,13 +314,19 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -267,8 +341,12 @@
 
             
 
+            
+
              with a specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -280,13 +358,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
+          
+
            for the column with which the <see
            cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+          
 
           
 
@@ -317,8 +401,12 @@
 
             
 
+            
+
              uses a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -327,13 +415,19 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -348,13 +442,19 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
+            
+
             . Specifies whether the <see
              cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+            
 
             
 
@@ -366,13 +466,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
+          
+
            to be associated with the <see
            cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+          
 
           
 
@@ -383,8 +489,12 @@
 
           
 
+          
+
           Specifies whether the <see
            cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+          
 
           
 
@@ -416,8 +526,12 @@
 
             
 
+            
+
              uses a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -426,13 +540,19 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -446,10 +566,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -464,8 +588,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -477,8 +605,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -487,10 +619,14 @@
 
           
 
+          
+
            will be associated. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -522,8 +658,12 @@
 
             
 
+            
+
              uses a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -532,13 +672,19 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -553,8 +699,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -566,13 +716,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
+          
+
            to be associated with the <see
            cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+          
 
           
 
@@ -583,6 +739,8 @@
 
           
 
+          
+
           The format used. </param
         >
         <param name="isDefault">
@@ -590,8 +748,12 @@
 
           
 
+          
+
           Specifies whether the <see
            cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+          
 
           
 
@@ -625,8 +787,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataGridTextBoxColumn.EndEdit" />
+
+            
 
             
 
@@ -639,6 +805,8 @@
         </summary>
         <param name="rowNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -672,8 +840,12 @@
 
             
 
+            
+
              into the column; otherwise, it uses the <see
              cref="M:System.Windows.Forms.DataGridColumnStyle.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32,System.Object)" />
+
+            
 
             
 
@@ -682,6 +854,8 @@
           <para
             >The method is called by the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -701,8 +875,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -711,10 +889,14 @@
 
           
 
+          
+
            control the column belongs to. </param
         >
         <param name="rowNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -742,8 +924,12 @@
 
             
 
+            
+
              control hosted by the <see
              cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+            
 
             
 
@@ -786,8 +972,12 @@
 
             
 
+            
+
              sites a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -796,8 +986,12 @@
 
             
 
+            
+
              class's <see
              cref="M:System.Windows.Forms.DataGrid.BeginEdit(System.Windows.Forms.DataGridColumnStyle,System.Int32)" />
+
+            
 
             
 
@@ -813,13 +1007,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
+          
+
            of the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -830,6 +1030,8 @@
 
           
 
+          
+
           The row number in this column being edited. </param
         >
         <param name="bounds">
@@ -837,8 +1039,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -849,6 +1055,8 @@
 
           
 
+          
+
           A value indicating whether the column is a read-only. true if the value is read-only; otherwise, false. </param
         >
         <param name="displayText">
@@ -856,10 +1064,14 @@
 
           
 
+          
+
           The text to display in the control. </param
         >
         <param name="cellIsVisible">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -883,8 +1095,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.Data.DataRow.BeginEdit" />
+
+            
 
             
 
@@ -893,13 +1109,19 @@
 
             
 
+            
+
              method on both the <see
              cref="T:System.Data.DataRow" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -911,6 +1133,8 @@
           <para
             >Ends an edit operation on the <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -943,6 +1167,8 @@
 
             
 
+            
+
              value into the cell.</para
           >
         </remarks>
@@ -951,6 +1177,8 @@
           <para
             >Enters a <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -983,8 +1211,12 @@
 
             
 
+            
+
              property specifies how values are displayed in the column. For example, set the property to "c" to specify that the values will be formatted as the local currency. The <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -998,10 +1230,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1014,8 +1250,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+            
 
             
 
@@ -1024,8 +1264,12 @@
 
             
 
+            
+
              property to a new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1037,8 +1281,12 @@
 
             
 
+            
+
              for the application, set the <see
              cref="P:System.Windows.Forms.Application.CurrentCulture" />
+
+            
 
             
 
@@ -1047,8 +1295,12 @@
 
             
 
+            
+
              object to a new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1089,8 +1341,12 @@
 
             
 
+            
+
              property to one of the formatting characters, the <see
              cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+            
 
             
 
@@ -1099,8 +1355,12 @@
 
             
 
+            
+
              property to further specify what cultural-specific formatting to use. For example, when the <see
              cref="P:System.Windows.Forms.DataGridTextBoxColumn.Format" />
+
+            
 
             
 
@@ -1109,13 +1369,19 @@
 
             
 
+            
+
              object with the locale ID for Italy, and set the <see
              cref="P:System.Windows.Forms.DataGridTextBoxColumn.FormatInfo" />
 
             
 
+            
+
              property to the new <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1129,10 +1395,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1169,6 +1439,8 @@
 
             
 
+            
+
              is calculated by adding the size of the column's font plus a margin value.</para
           >
         </remarks>
@@ -1177,6 +1449,8 @@
           <para
             >Gets the height of a cell in a <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -1221,8 +1495,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1230,6 +1508,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1271,6 +1551,8 @@
 
             
 
+            
+
              that contains the dimensions of the cell.</para
           >
         </returns>
@@ -1279,8 +1561,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1288,6 +1574,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1312,8 +1600,12 @@
 
             
 
+            
+
              control and moves the focus to the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -1355,8 +1647,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1365,8 +1661,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -1378,8 +1678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1390,8 +1694,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1402,8 +1710,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -1412,10 +1724,14 @@
 
           
 
+          
+
            the that contains the column. </param
         >
         <param name="rowNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1452,13 +1768,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Windows.Forms.DataGridColumnStyle.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32)" />
 
             
 
+            
+
              to determine the value to draw in the cell. The <see
              cref="M:System.Windows.Forms.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics,System.Drawing.Rectangle,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1473,8 +1795,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1483,8 +1809,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -1496,8 +1826,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1508,8 +1842,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1520,13 +1858,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
+          
+
            of the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -1537,10 +1881,14 @@
 
           
 
+          
+
           The number of the row in the underlying data table. </param
         >
         <param name="alignToRight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1579,13 +1927,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Windows.Forms.DataGridColumnStyle.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32)" />
 
             
 
+            
+
              to determine the value to draw in the cell. The <see
              cref="M:System.Windows.Forms.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics,System.Drawing.Rectangle,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1600,8 +1954,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1610,13 +1968,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
+            
+
             , row number, <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1628,8 +1992,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1640,8 +2008,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1652,13 +2024,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
+          
+
            of the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -1669,6 +2047,8 @@
 
           
 
+          
+
           The number of the row in the underlying data table. </param
         >
         <param name="backBrush">
@@ -1676,8 +2056,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
+
+          
 
           
 
@@ -1688,8 +2072,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
+
+          
 
           
 
@@ -1697,6 +2085,8 @@
         >
         <param name="alignToRight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1728,13 +2118,19 @@
 
             
 
+            
+
              method uses the <see
              cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
+            
+
              object set with the <see
              cref="P:System.Windows.Forms.DataGridTextBoxColumn.Format" />
+
+            
 
             
 
@@ -1746,8 +2142,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Windows.Forms.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics,System.Drawing.Rectangle,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1763,8 +2163,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1775,8 +2179,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1787,10 +2195,14 @@
 
           
 
+          
+
           The string to be drawn to the screen. </param
         >
         <param name="alignToRight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1828,8 +2240,12 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.Windows.Forms.DataGridTextBoxColumn.Format" />
+
+            
 
             
 
@@ -1841,8 +2257,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Windows.Forms.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics,System.Drawing.Rectangle,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1858,8 +2278,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1870,8 +2294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1882,6 +2310,8 @@
 
           
 
+          
+
           The string to be drawn to the screen. </param
         >
         <param name="backBrush">
@@ -1889,8 +2319,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
+
+          
 
           
 
@@ -1901,8 +2335,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Brush" />
+
+          
 
           
 
@@ -1910,6 +2348,8 @@
         >
         <param name="alignToRight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1946,8 +2386,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+            
 
             
 
@@ -1999,8 +2443,12 @@
 
             
 
+            
+
              holds to the <see
              cref="T:System.Windows.Forms.DataGridTextBox" />
+
+            
 
             
 
@@ -2012,6 +2460,8 @@
           <para
             >Removes the reference that the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -2041,8 +2491,12 @@
 
             
 
+            
+
              control is added to the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -2051,8 +2505,12 @@
 
             
 
+            
+
             . This allows the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -2067,13 +2525,19 @@
 
             
 
+            
+
              control to the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
             
 
+            
+
              control's <see
              cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+            
 
             
 
@@ -2085,13 +2549,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGrid" />
 
           
 
+          
+
            control the <see
            cref="T:System.Windows.Forms.TextBox" />
+
+          
 
           
 
@@ -2125,6 +2595,8 @@
           <para
             >Gets the hosted <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -2166,8 +2638,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -2178,10 +2654,14 @@
 
           
 
+          
+
           The index of the row to update. </param
         >
         <param name="displayText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

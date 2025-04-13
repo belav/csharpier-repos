@@ -27,6 +27,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -88,6 +90,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -96,6 +100,8 @@
           <para
             >Specifies a description of the <see
              cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" />
+
+            
 
             
 

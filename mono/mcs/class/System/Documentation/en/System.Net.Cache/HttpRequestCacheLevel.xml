@@ -23,11 +23,15 @@
 
         
 
+        
+
          objects.</para
       >
       <para
         >This <see
          cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
          property is used to get or set the default cache policy for <see
          cref="T:System.Net.HttpWebRequest" />
 
         
 
+        
+
          instances. The <see
          cref="P:System.Net.WebRequest.CachePolicy" />
+
+        
 
         
 
@@ -54,8 +64,12 @@
 
         
 
+        
+
          instances. The <see
          cref="P:System.Net.WebRequest.CachePolicy" />
+
+        
 
         
 
@@ -137,6 +151,8 @@
 
             
 
+            
+
              exception is thrown if the item is not in the client cache.</para
           >
         </summary>
@@ -163,6 +179,8 @@
           <para
             >Satisfies a request for a resource either from the local computer's cache or a remote cache on the local area network. If the request cannot be satisfied, a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 

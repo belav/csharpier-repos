@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) as if the operation was written x op y. Then, <list
     >
       <list_item> If the return type of the selected operator is implicitly convertible to the type of x, the operation is evaluated as x = x op y, except that x is evaluated only once. </list_item>
@@ -21,6 +23,8 @@
 
       
 
+      
+
       , the methods are invoked only once, in the order A, B, C. end example]</example
     >
   </paragraph>
@@ -31,8 +35,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -41,8 +49,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -51,13 +63,19 @@
 
     
 
+    
+
     . Even when both arguments are of one of those types, the predefined operators produce a result of type <keyword
     >int</keyword>
 
     
 
+    
+
     , as described in <hyperlink
     >14.2.6.2</hyperlink>
+
+    
 
     
 
@@ -80,6 +98,8 @@ ch += 1;       // Error, ch = 1 not permitted
 ch += (char)1;   // Ok  
 ]]>
       </code_example>
+
+      
 
       
 

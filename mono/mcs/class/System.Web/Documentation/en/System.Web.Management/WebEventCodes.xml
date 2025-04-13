@@ -18,6 +18,8 @@
 
         
 
+        
+
          namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para
       >
       <para
@@ -26,11 +28,15 @@
 
         
 
+        
+
          class contains codes that identify types of health-monitoring events. Two types of codes are defined within the class: major codes, which identify the ASP.NET health-monitoring events; and detail codes, which provide more information about a related major code. These codes are implemented as integers, rather than as an enumeration, to allow for extensibility.</para
       >
       <para
         >When a health-monitoring event is raised, it is associated with a major event code. The following list identifies the categories of major event codes that are defined within the <see
          cref="T:System.Web.Management.WebEventCodes" />
+
+        
 
         
 
@@ -44,13 +50,19 @@
 
             
 
+            
+
              field constant. They are associated with the <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
 
             
 
+            
+
              event type. The heartbeat event is a special kind of application event. It identifies events raised at periodic intervals to provide information relative to the state of the running process. It is associated with the <see
              cref="T:System.Web.Management.WebHeartbeatEvent" />
+
+            
 
             
 
@@ -64,8 +76,12 @@
 
             
 
+            
+
              field constant. They are associated with the <see
              cref="T:System.Web.Management.WebRequestEvent" />
+
+            
 
             
 
@@ -79,13 +95,19 @@
 
             
 
+            
+
              event type. The systemic errors relate to configuration or application code, including parser errors and compilation errors. They are associated with the <see
              cref="T:System.Web.Management.WebErrorEvent" />
 
             
 
+            
+
              event type. Both kinds of errors have values greater than the <see
              cref="F:System.Web.Management.WebEventCodes.ErrorCodeBase" />
+
+            
 
             
 
@@ -99,8 +121,12 @@
 
             
 
+            
+
             . They are associated with <see
              cref="T:System.Web.Management.WebAuditEvent" />
+
+            
 
             
 
@@ -114,8 +140,12 @@
 
             
 
+            
+
             . Refer also to <see
              cref="F:System.Web.Management.WebEventCodes.WebEventProviderInformation" />
+
+            
 
             
 
@@ -129,6 +159,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -137,8 +169,12 @@
 
         
 
+        
+
          configured to handle <see
          cref="T:System.Web.Management.WebFailureAuditEvent" />
+
+        
 
         
 
@@ -161,6 +197,8 @@
       <para
         >You can create your own custom event code by choosing code values above <see
          cref="F:System.Web.Management.WebEventCodes.WebExtendedBase" />
+
+        
 
         
 
@@ -204,13 +242,19 @@
 
             
 
+            
+
              value represents the offset for major event codes associated with the <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
 
             
 
+            
+
              type. All application codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationCodeBase" />
+
+            
 
             
 
@@ -242,13 +286,19 @@
 
             
 
+            
+
              value is a major code and its value is greater than the <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationCodeBase" />
 
             
 
+            
+
              value. ASP.NET raises the related <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
+
+            
 
             
 
@@ -280,13 +330,19 @@
 
             
 
+            
+
              value is a major code and its value is greater than the <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationCodeBase" />
 
             
 
+            
+
              value. ASP.NET raises the related <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
+
+            
 
             
 
@@ -318,13 +374,19 @@
 
             
 
+            
+
              value represents the offset for the detail event code range associated with the <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
 
             
 
+            
+
              type. All application detail codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationDetailCodeBase" />
+
+            
 
             
 
@@ -356,13 +418,19 @@
 
             
 
+            
+
              is a major code and its value is greater than <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationCodeBase" />
 
             
 
+            
+
             . ASP.NET raises the related <see
              cref="T:System.Web.Management.WebHeartbeatEvent" />
+
+            
 
             
 
@@ -393,13 +461,19 @@
 
             
 
+            
+
              is a major code and its value is greater than <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationCodeBase" />
 
             
 
+            
+
             . ASP.NET raises the related <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
+
+            
 
             
 
@@ -434,6 +508,8 @@
 
             
 
+            
+
              is the detail code that specifies the causes of the shutdown. </para
           >
           <para
@@ -442,13 +518,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownBinDirChangeOrDirectoryRename" />
+
+            
 
             
 
@@ -482,6 +564,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.</para
           >
           <para
@@ -490,13 +574,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownBrowsersDirChangeOrDirectoryRename" />
+
+            
 
             
 
@@ -530,6 +620,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown. </para
           >
           <para
@@ -538,13 +630,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownChangeInGlobalAsax" />
+
+            
 
             
 
@@ -578,6 +676,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown. </para
           >
           <para
@@ -586,13 +686,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownChangeInSecurityPolicyFile" />
+
+            
 
             
 
@@ -626,6 +732,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.</para
           >
           <para
@@ -634,13 +742,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownCodeDirChangeOrDirectoryRename" />
+
+            
 
             
 
@@ -674,6 +788,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown. </para
           >
           <para
@@ -682,13 +798,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownConfigurationChange" />
+
+            
 
             
 
@@ -723,6 +845,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown. </para
           >
           <para
@@ -731,13 +855,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownHostingEnvironment" />
+
+            
 
             
 
@@ -771,6 +901,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown. </para
           >
           <para
@@ -779,13 +911,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownHttpRuntimeClose" />
+
+            
 
             
 
@@ -820,6 +958,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown. </para
           >
           <para
@@ -828,13 +968,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownIdleTimeout" />
+
+            
 
             
 
@@ -868,6 +1014,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.  </para
           >
           <para
@@ -876,13 +1024,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownInitializationError" />
+
+            
 
             
 
@@ -916,6 +1070,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.  </para
           >
           <para
@@ -924,13 +1080,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownMaxRecompilationsReached" />
+
+            
 
             
 
@@ -964,6 +1126,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.</para
           >
           <para
@@ -972,13 +1136,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownPhysicalApplicationPathChanged" />
+
+            
 
             
 
@@ -1012,6 +1182,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.  </para
           >
           <para
@@ -1020,13 +1192,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownResourcesDirChangeOrDirectoryRename" />
+
+            
 
             
 
@@ -1057,6 +1235,8 @@
 
             
 
+            
+
              is the detail code that specifies the causes of the shutdown.</para
           >
           <para
@@ -1065,13 +1245,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownUnknown" />
+
+            
 
             
 
@@ -1105,6 +1291,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the shutdown.</para
           >
           <para
@@ -1113,13 +1301,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdown" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationShutdownUnloadAppDomainCalled" />
+
+            
 
             
 
@@ -1150,13 +1344,19 @@
 
             
 
+            
+
              is the major code that refers to the start of an application. When the application starts, ASP.NET raises a <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationStart" />
+
+            
 
             
 
@@ -1188,8 +1388,12 @@
 
             
 
+            
+
              value represents the offset for the major event code range associated with the <see
              cref="T:System.Web.Management.WebAuthenticationSuccessAuditEvent" />
+
+            
 
             
 
@@ -1198,8 +1402,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.Management.WebAuthenticationFailureAuditEvent" />
+
+            
 
             
 
@@ -1208,8 +1416,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.Management.WebViewStateFailureAuditEvent" />
+
+            
 
             
 
@@ -1218,6 +1430,8 @@
           <para
             >All audit codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.AuditCodeBase" />
+
+            
 
             
 
@@ -1248,8 +1462,12 @@
 
             
 
+            
+
              represents the offset for the detail-event-code range associated with audit events. All audit detail codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.AuditDetailCodeBase" />
+
+            
 
             
 
@@ -1283,13 +1501,19 @@
 
             
 
+            
+
              is the major code for the health event related to the access of a file for which authorization is not granted. When a file-authorization failure occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditFileAuthorizationFailure" />
+
+            
 
             
 
@@ -1323,13 +1547,19 @@
 
             
 
+            
+
              is the major code for the health event related to the access of a file for which authorization is granted. When a file authorization is successful, ASP.NET raises a <see
              cref="T:System.Web.Management.WebSuccessAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditFileAuthorizationSuccess" />
+
+            
 
             
 
@@ -1363,13 +1593,19 @@
 
             
 
+            
+
              is the major code for the health event related to user's authentication failure. When this event happens, ASP.NET raises a <see
              cref="T:System.Web.Management.WebAuthenticationFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditFormsAuthenticationFailure" />
+
+            
 
             
 
@@ -1404,13 +1640,19 @@
 
             
 
+            
+
              is the major code for the health event related to a user's authentication success. When this event occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebAuthenticationSuccessAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditFormsAuthenticationSuccess" />
+
+            
 
             
 
@@ -1444,13 +1686,19 @@
 
             
 
+            
+
              is the major code for the health event related to view-state verification failure. When this event occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebViewStateFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditInvalidViewStateFailure" />
+
+            
 
             
 
@@ -1485,13 +1733,19 @@
 
             
 
+            
+
              is the major code for the health event related to a user's membership-authentication failure. When this event occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebAuthenticationFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditMembershipAuthenticationFailure" />
+
+            
 
             
 
@@ -1525,13 +1779,19 @@
 
             
 
+            
+
              is the major code for the health event related to a user's membership-authentication success. When this event occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebAuthenticationSuccessAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditMembershipAuthenticationSuccess" />
+
+            
 
             
 
@@ -1565,13 +1825,19 @@
 
             
 
+            
+
              is the major code for the unhandled health event related to the access of a resource for which authorization is not granted. When this event occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditUnhandledAccessException" />
+
+            
 
             
 
@@ -1605,13 +1871,19 @@
 
             
 
+            
+
              is the major code of the unhandled health event related to a security violation. When an unhandled security exception is thrown, ASP.NET raises a <see
              cref="T:System.Web.Management.WebFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditUnhandledSecurityException" />
+
+            
 
             
 
@@ -1645,13 +1917,19 @@
 
             
 
+            
+
              is the major code for the health event related to the use of a URL for which authorization is not granted. When the URL-authorization failure occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebFailureAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditUrlAuthorizationFailure" />
+
+            
 
             
 
@@ -1685,13 +1963,19 @@
 
             
 
+            
+
              is the major code for the health event related to the use of a URL for which authorization is granted. When a URL is successfully authorized, ASP.NET raises a <see
              cref="T:System.Web.Management.WebSuccessAuditEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditUrlAuthorizationSuccess" />
+
+            
 
             
 
@@ -1723,8 +2007,12 @@
 
             
 
+            
+
              value represents the offset for the major event code range associated with the <see
              cref="T:System.Web.Management.WebRequestErrorEvent" />
+
+            
 
             
 
@@ -1733,8 +2021,12 @@
 
             
 
+            
+
              types. All error codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.ErrorCodeBase" />
+
+            
 
             
 
@@ -1765,6 +2057,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the user's authentication failure.</para
           >
           <para
@@ -1773,13 +2067,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditFormsAuthenticationFailure" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.ExpiredTicketFailure" />
+
+            
 
             
 
@@ -1811,6 +2111,8 @@
 
             
 
+            
+
              represents the use of a code value that is not allowed by the system. For instance, this can happen if you customize an ASP.NET health-monitoring event and use a code value that is already assigned by the system.</para
           >
         </remarks>
@@ -1838,6 +2140,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the user's authentication failure.</para
           >
           <para
@@ -1846,13 +2150,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditFormsAuthenticationFailure" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.InvalidTicketFailure" />
+
+            
 
             
 
@@ -1883,6 +2193,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the view-state failure.  </para
           >
           <para
@@ -1891,13 +2203,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditInvalidViewStateFailure" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.InvalidViewState" />
+
+            
 
             
 
@@ -1928,6 +2246,8 @@
 
             
 
+            
+
              is the detail code that specifies the cause of the view-state failure.  </para
           >
           <para
@@ -1936,13 +2256,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.AuditInvalidViewStateFailure" />
 
             
 
+            
+
              and a detail code of <see
              cref="F:System.Web.Management.WebEventCodes.InvalidViewStateMac" />
+
+            
 
             
 
@@ -1974,8 +2300,12 @@
 
             
 
+            
+
              value represents the offset for the major event code range associated with health events that have not been categorized. All miscellaneous codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.MiscCodeBase" />
+
+            
 
             
 
@@ -2007,13 +2337,19 @@
 
             
 
+            
+
              value represents the offset for the major event code range associated with the <see
              cref="T:System.Web.Management.WebRequestEvent" />
 
             
 
+            
+
              type. All request codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.RequestCodeBase" />
+
+            
 
             
 
@@ -2044,13 +2380,19 @@
 
             
 
+            
+
              is the major code that refers to a Web-request abnormal termination. When a Web request aborts, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RequestTransactionAbort" />
+
+            
 
             
 
@@ -2081,13 +2423,19 @@
 
             
 
+            
+
              is the major code that refers to a Web request normal termination. When the Web request completes normally, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RequestTransactionComplete" />
+
+            
 
             
 
@@ -2118,13 +2466,19 @@
 
             
 
+            
+
              is the major code that refers to a data posting whose size exceeds the allowed limits. When a form posts data that exceeds the allowed limits, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RuntimeErrorPostTooLarge" />
+
+            
 
             
 
@@ -2155,13 +2509,19 @@
 
             
 
+            
+
              is the major code that refers to the abnormal termination of the Web request. When the Web request aborts, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RuntimeErrorRequestAbort" />
+
+            
 
             
 
@@ -2195,13 +2555,19 @@
 
             
 
+            
+
              is the major code that refers to the occurrence of an exception that is not handled by ASP.NET. When the exception occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RuntimeErrorUnhandledException" />
+
+            
 
             
 
@@ -2235,13 +2601,19 @@
 
             
 
+            
+
              is the major code that refers to the occurrence of a validation exception that is not handled by ASP.NET. When this exception occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RuntimeErrorValidationFailure" />
+
+            
 
             
 
@@ -2275,13 +2647,19 @@
 
             
 
+            
+
              is the major code that refers to a view-state failure. When this happens, ASP.NET raises a <see
              cref="T:System.Web.Management.WebRequestErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.RuntimeErrorViewStateFailure" />
+
+            
 
             
 
@@ -2334,13 +2712,19 @@
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.WebErrorOtherError" />
 
             
 
+            
+
              and detail code of <see
              cref="F:System.Web.Management.WebEventCodes.StateServerConnectionError" />
+
+            
 
             
 
@@ -2352,8 +2736,12 @@
 
             
 
+            
+
              is a detail code and its value is greater than the <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationCodeBase" />
+
+            
 
             
 
@@ -2384,6 +2772,8 @@
 
             
 
+            
+
              represents the use of a major code value that is not defined by the system. </para
           >
         </remarks>
@@ -2408,6 +2798,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="F:System.Web.Management.WebEventCodes.UndefinedEventCode" />
+
+            
 
             
 
@@ -2438,13 +2830,19 @@
 
             
 
+            
+
              is the major code that refers to an error that happened during the application compilation phase. When this error occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.WebErrorCompilationError" />
+
+            
 
             
 
@@ -2475,13 +2873,19 @@
 
             
 
+            
+
              is the major code that refers to an error that happened during the application-configuring phase. When this error occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.WebErrorConfigurationError" />
+
+            
 
             
 
@@ -2533,13 +2937,19 @@
 
             
 
+            
+
              is the major code for an unclassified error. When this error occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.WebErrorOtherError" />
+
+            
 
             
 
@@ -2570,13 +2980,19 @@
 
             
 
+            
+
              is the major code that refers to an error that happened during the application-parsing phase. When this error occurs, ASP.NET raises a <see
              cref="T:System.Web.Management.WebErrorEvent" />
 
             
 
+            
+
              with a major code of <see
              cref="F:System.Web.Management.WebEventCodes.WebErrorParserError" />
+
+            
 
             
 
@@ -2629,13 +3045,19 @@
 
             
 
+            
+
              value represents the offset for the detail-event code range associated with the <see
              cref="T:System.Web.Management.WebApplicationLifetimeEvent" />
 
             
 
+            
+
              type. All application detail codes are assigned values greater than <see
              cref="F:System.Web.Management.WebEventCodes.ApplicationDetailCodeBase" />
+
+            
 
             
 
@@ -2666,8 +3088,12 @@
 
             
 
+            
+
              is the major code used by providers to store nonstandard health event information. Its value is greater than <see
              cref="F:System.Web.Management.WebEventCodes.MiscCodeBase" />
+
+            
 
             
 
@@ -2679,8 +3105,12 @@
 
             
 
+            
+
              adds a warning to the top of the messages without using the <see
              cref="F:System.Web.Management.WebEventCodes.WebEventProviderInformation" />
+
+            
 
             
 
@@ -2689,13 +3119,19 @@
 
             
 
+            
+
              to write this warning is to create a record in the database. Because every record in the database needs an event ID, the provider uses the <see
              cref="F:System.Web.Management.WebEventCodes.WebEventProviderInformation" />
 
             
 
+            
+
              as its major code and <see
              cref="F:System.Web.Management.WebEventCodes.SqlProviderEventsDropped" />
+
+            
 
             
 
@@ -2705,6 +3141,8 @@
             <para
               >As you can see from the above discussion, the <see
                cref="F:System.Web.Management.WebEventCodes.WebEventProviderInformation" />
+
+              
 
               
 
@@ -2734,6 +3172,8 @@
           <para
             >If you create your own custom event, you must use an event code with a value greater than <see
              cref="F:System.Web.Management.WebEventCodes.WebExtendedBase" />
+
+            
 
             
 

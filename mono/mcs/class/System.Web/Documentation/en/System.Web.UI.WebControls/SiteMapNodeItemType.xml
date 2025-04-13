@@ -18,8 +18,12 @@
 
         
 
+        
+
          control manages its site navigation information as a collection of <see
          cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+        
 
         
 
@@ -28,13 +32,19 @@
 
         
 
+        
+
          objects represent functionally different types of <see
          cref="T:System.Web.SiteMapNode" />
 
         
 
+        
+
          nodes. Accordingly, they are managed by the <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+        
 
         
 
@@ -60,8 +70,12 @@
 
         
 
+        
+
         , except nodes of the <see
          cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
+
+        
 
         
 
@@ -76,13 +90,19 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
+        
+
          control to identify the type of a <see
          cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+        
 
         
 
@@ -138,6 +158,8 @@
           <para
             >A site map navigation path separator. The default separator for the <see
              cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+            
 
             
 

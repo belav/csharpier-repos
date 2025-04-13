@@ -19,8 +19,12 @@
 
         
 
+        
+
          class, see the <see
          cref="T:System.Windows.Forms.DataFormats" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          to put data on the Clipboard, replacing its current contents. To place a persistent copy of the data on the Clipboard, set the <paramref
          name="copy" />
+
+        
 
         
 
@@ -46,8 +54,12 @@
 
           
 
+          
+
            class or an <see
            cref="T:System.Windows.Forms.IDataObject" />
+
+          
 
           
 
@@ -60,8 +72,12 @@
 
         
 
+        
+
          to retrieve data from the Clipboard. The data is returned as an object that implements the <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -70,8 +86,12 @@
 
         
 
+        
+
          and fields in <see
          cref="T:System.Windows.Forms.DataFormats" />
+
+        
 
         
 
@@ -80,8 +100,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -90,8 +114,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -103,8 +131,12 @@
 
         
 
+        
+
          class provides additional methods that make it easier to work with the system Clipboard. Call the <see
          cref="M:System.Windows.Forms.Clipboard.Clear" />
+
+        
 
         
 
@@ -113,8 +145,12 @@
 
         
 
+        
+
         , or call the <see
          cref="M:System.Windows.Forms.Clipboard.SetData(System.String,System.Object)" />
+
+        
 
         
 
@@ -123,8 +159,12 @@
 
         
 
+        
+
         ) method to determine whether the Clipboard contains data in that format, and then call the appropriate GetFormat method (such as <see
          cref="Overload:System.Windows.Forms.Clipboard.GetText" />
+
+        
 
         
 
@@ -133,8 +173,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.Clipboard.GetData(System.String)" />
+
+        
 
         
 
@@ -148,8 +192,12 @@
 
           
 
+          
+
            for more information on serialization. If your target application requires a very specific data format, the headers added to the data in the serialization process may prevent the application from recognizing your data. To preserve your data format, add your data as a <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -158,13 +206,19 @@
 
           
 
+          
+
            and pass the <see
            cref="T:System.IO.MemoryStream" />
 
           
 
+          
+
            to the <see
            cref="M:System.Windows.Forms.DataObject.SetData(System.Object)" />
+
+          
 
           
 
@@ -176,8 +230,12 @@
 
           
 
+          
+
            class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
            cref="T:System.STAThreadAttribute" />
+
+          
 
           
 
@@ -186,6 +244,8 @@
         <para
           >Special considerations may be necessary when using the metafile format with the Clipboard. Due to a limitation in the current implementation of the <see
            cref="T:System.Windows.Forms.DataObject" />
+
+          
 
           
 
@@ -220,8 +280,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -254,6 +318,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -263,8 +329,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -277,6 +347,8 @@
           <para
             >Indicates whether there is data on the Clipboard in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+
+            
 
             
 
@@ -310,11 +382,15 @@
 
             
 
+            
+
              class contains pre-defined format names that you can use with this method.</para
           >
           <para
             >Use this method to determine whether the Clipboard contains data in the specified format or a compatible format before retrieving it with the <see
              cref="M:System.Windows.Forms.Clipboard.GetData(System.String)" />
+
+            
 
             
 
@@ -328,8 +404,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -349,6 +429,8 @@
 
             
 
+            
+
              or can be converted to that format; otherwise, false.</para
           >
         </returns>
@@ -357,8 +439,12 @@
 
           
 
+          
+
           The format of the data to look for. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -386,6 +472,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -395,8 +483,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -409,6 +501,8 @@
           <para
             >Indicates whether there is data on the Clipboard that is in the <see
              cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+
+            
 
             
 
@@ -440,6 +534,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -449,8 +545,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -463,6 +563,8 @@
           <para
             >Indicates whether there is data on the Clipboard that is in the <see
              cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+
+            
 
             
 
@@ -494,8 +596,12 @@
 
             
 
+            
+
              format on WinXpFamily and Win2kFamily. Otherwise, this method checks for the presence of data in the <see
              cref="F:System.Windows.Forms.TextDataFormat.Text" />
+
+            
 
             
 
@@ -504,6 +610,8 @@
           <para
             >Use this method to determine whether the Clipboard contains text data before retrieving it with the <see
              cref="Overload:System.Windows.Forms.Clipboard.GetText" />
+
+            
 
             
 
@@ -516,8 +624,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -533,8 +645,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+
+            
 
             
 
@@ -571,6 +687,8 @@
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
@@ -580,8 +698,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -597,6 +719,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -608,6 +732,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -616,8 +742,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TextDataFormat" />
+
+          
 
           
 
@@ -644,11 +774,15 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains audio data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="Overload:System.Windows.Forms.Clipboard.SetAudio" />
+
+            
 
             
 
@@ -661,8 +795,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -682,8 +820,12 @@
 
             
 
+            
+
              containing audio data or null if the Clipboard does not contain any data in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+
+            
 
             
 
@@ -713,6 +855,8 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains data in the specified format or a compatible format before retrieving it with this method.</para
           >
           <para>If this method cannot find data in the specified format, it attempts to convert the data to the format. If the data cannot be converted to the specified format, or if the data was stored with automatic conversion set to false, this method returns null.</para>
@@ -724,8 +868,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -735,6 +883,8 @@
           <para
             >Use the <see
              cref="M:System.Windows.Forms.Clipboard.SetData(System.String,System.Object)" />
+
+            
 
             
 
@@ -753,8 +903,12 @@
 
             
 
+            
+
              representing the Clipboard data or null if the Clipboard does not contain any data that is in the specified <paramref
              name="format" />
+
+            
 
             
 
@@ -766,8 +920,12 @@
 
           
 
+          
+
           The format of the data to retrieve. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -794,8 +952,12 @@
 
             
 
+            
+
             . Then you can use methods of the <see
              cref="T:System.Windows.Forms.IDataObject" />
+
+            
 
             
 
@@ -804,6 +966,8 @@
           <para
             >This method attempts to get the data ten times in 100-millisecond intervals, and throws an <see
              cref="T:System.Runtime.InteropServices.ExternalException" />
+
+            
 
             
 
@@ -816,8 +980,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -834,6 +1002,8 @@
           <para
             >An <see
              cref="T:System.Windows.Forms.IDataObject" />
+
+            
 
             
 
@@ -869,8 +1039,12 @@
 
             
 
+            
+
              array. This method converts this array to a <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -882,11 +1056,15 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains a file drop list before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="M:System.Windows.Forms.Clipboard.SetFileDropList(System.Collections.Specialized.StringCollection)" />
+
+            
 
             
 
@@ -899,8 +1077,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -920,8 +1102,12 @@
 
             
 
+            
+
              containing file names or null if the Clipboard does not contain any data that is in the <see
              cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+
+            
 
             
 
@@ -949,11 +1135,15 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains image data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="M:System.Windows.Forms.Clipboard.SetImage(System.Drawing.Image)" />
+
+            
 
             
 
@@ -966,8 +1156,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -987,8 +1181,12 @@
 
             
 
+            
+
              representing the Clipboard image data or null if the Clipboard does not contain any data that is in the <see
              cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+
+            
 
             
 
@@ -1016,8 +1214,12 @@
 
             
 
+            
+
              format on WinXpFamily and Win2kFamily. Otherwise, this method returns text data in the <see
              cref="F:System.Windows.Forms.TextDataFormat.Text" />
+
+            
 
             
 
@@ -1029,11 +1231,15 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains text data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="Overload:System.Windows.Forms.Clipboard.SetText" />
+
+            
 
             
 
@@ -1046,8 +1252,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1063,8 +1273,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+
+            
 
             
 
@@ -1079,13 +1293,19 @@
 
             
 
+            
+
              if the Clipboard does not contain data in the <see
              cref="F:System.Windows.Forms.TextDataFormat.Text" />
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+
+            
 
             
 
@@ -1118,11 +1338,15 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains text data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="Overload:System.Windows.Forms.Clipboard.SetText" />
+
+            
 
             
 
@@ -1135,8 +1359,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1152,6 +1380,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -1163,6 +1393,8 @@
 
             
 
+            
+
              if the Clipboard does not contain data in the specified format.</para
           >
         </returns>
@@ -1171,8 +1403,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TextDataFormat" />
+
+          
 
           
 
@@ -1201,8 +1437,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains audio data before retrieving it with the <see
              cref="M:System.Windows.Forms.Clipboard.GetAudioStream" />
+
+            
 
             
 
@@ -1215,8 +1455,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1232,13 +1476,19 @@
 
             
 
+            
+
              array in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
 
             
 
+            
+
              format after converting it to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1250,8 +1500,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1283,8 +1537,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains audio data before retrieving it with the <see
              cref="M:System.Windows.Forms.Clipboard.GetAudioStream" />
+
+            
 
             
 
@@ -1297,8 +1555,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1314,8 +1576,12 @@
 
             
 
+            
+
              in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+
+            
 
             
 
@@ -1327,8 +1593,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1363,8 +1633,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains data in that format before retrieving it with the <see
              cref="M:System.Windows.Forms.Clipboard.GetData(System.String)" />
+
+            
 
             
 
@@ -1377,8 +1651,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1395,8 +1673,12 @@
 
           
 
+          
+
           The format of the data to set. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -1407,8 +1689,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1435,12 +1721,16 @@
 
             
 
+            
+
              if all attempts are unsuccessful.</para
           >
           <block subset="none" type="note">
             <para
               >An object must be serializable for it to be put on the Clipboard. If you pass a non-serializable object to this method, it will fail without throwing an exception. See <see
                cref="N:System.Runtime.Serialization" />
+
+              
 
               
 
@@ -1452,8 +1742,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1467,6 +1761,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1500,11 +1796,15 @@
 
             
 
+            
+
              parameter is false, the data will be deleted from system Clipboard when the application exits.</para
           >
           <para
             >This method attempts to set the data ten times in 100-millisecond intervals, and throws an <see
              cref="T:System.Runtime.InteropServices.ExternalException" />
+
+            
 
             
 
@@ -1517,6 +1817,8 @@
 
               
 
+              
+
                for more information on serialization.</para
             >
             <para
@@ -1525,8 +1827,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1543,10 +1849,14 @@
 
           
 
+          
+
           The data to place on the Clipboard. </param
         >
         <param name="copy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1586,12 +1896,16 @@
 
             
 
+            
+
              parameter is false, the data will be deleted from system Clipboard when the application exits.</para
           >
           <block subset="none" type="note">
             <para
               >An object must be serializable for it to be put on the Clipboard. If you pass a non-serializable object to this method, it will fail without throwing an exception. See <see
                cref="N:System.Runtime.Serialization" />
+
+              
 
               
 
@@ -1603,8 +1917,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1621,10 +1939,14 @@
 
           
 
+          
+
           The data to place on the Clipboard.</param
         >
         <param name="copy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1635,10 +1957,14 @@
 
           
 
+          
+
           The number of times to attempt placing the data on the Clipboard.</param
         >
         <param name="retryDelay">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1671,13 +1997,19 @@
 
             
 
+            
+
              array. This method converts <paramref
              name="filePaths" />
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1689,8 +2021,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains data in that format before retrieving it with the <see
              cref="M:System.Windows.Forms.Clipboard.GetFileDropList" />
+
+            
 
             
 
@@ -1703,8 +2039,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1720,6 +2060,8 @@
 
             
 
+            
+
              format.</para
           >
         </summary>
@@ -1728,8 +2070,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -1761,8 +2107,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains image data before retrieving it with the <see
              cref="M:System.Windows.Forms.Clipboard.GetImage" />
+
+            
 
             
 
@@ -1775,8 +2125,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1792,8 +2146,12 @@
 
             
 
+            
+
              in the <see
              cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+
+            
 
             
 
@@ -1805,8 +2163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -1835,8 +2197,12 @@
 
             
 
+            
+
              format on WinXpFamily and Win2kFamily. Otherwise, this method adds text data in the <see
              cref="F:System.Windows.Forms.TextDataFormat.Text" />
+
+            
 
             
 
@@ -1848,8 +2214,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains text data before retrieving it with the <see
              cref="Overload:System.Windows.Forms.Clipboard.GetText" />
+
+            
 
             
 
@@ -1862,8 +2232,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1879,8 +2253,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+
+            
 
             
 
@@ -1889,6 +2267,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1921,8 +2301,12 @@
 
             
 
+            
+
              method to determine whether the Clipboard contains text data before retrieving it with the <see
              cref="Overload:System.Windows.Forms.Clipboard.GetText" />
+
+            
 
             
 
@@ -1935,8 +2319,12 @@
 
               
 
+              
+
                class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1952,11 +2340,15 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1967,8 +2359,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TextDataFormat" />
+
+          
 
           
 

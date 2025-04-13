@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -39,6 +41,8 @@
          type="text/html">
           <a href="f3356463-3373-4279-bae1-953378aa2680">ITypeInfo</a>
         </format>
+
+        
 
         
 
@@ -181,10 +185,14 @@
 
           
 
+          
+
           The ID of the member function whose DLL entry description is to be returned. </param
         >
         <param name="invKind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,8 +201,12 @@
 
           
 
+          
+
            values that specifies the kind of member identified by <paramref
            name="memid" />
+
+          
 
           
 
@@ -205,8 +217,12 @@
 
           
 
+          
+
           If not null, the function sets <paramref
            name="pBstrDllName" />
+
+          
 
           
 
@@ -217,8 +233,12 @@
 
           
 
+          
+
           If not null, the function sets <paramref
            name="lpbstrName" />
+
+          
 
           
 
@@ -229,8 +249,12 @@
 
           
 
+          
+
           If not null, and the function is defined by an ordinal, then <paramref
            name="lpwOrdinal" />
+
+          
 
           
 
@@ -339,6 +363,8 @@
 
           
 
+          
+
           An array of names to map. </param
         >
         <param name="cNames">
@@ -346,10 +372,14 @@
 
           
 
+          
+
           The count of names to map. </param
         >
         <param name="pMemId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -672,8 +702,12 @@
 
             
 
+            
+
              structure previously returned by the <see
              cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" />
+
+            
 
             
 
@@ -682,6 +716,8 @@
         </summary>
         <param name="pFuncDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -720,8 +756,12 @@
 
             
 
+            
+
              structure previously returned by the <see
              cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetTypeAttr(System.IntPtr@)" />
+
+            
 
             
 
@@ -730,6 +770,8 @@
         </summary>
         <param name="pTypeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -768,11 +810,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="pVarDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

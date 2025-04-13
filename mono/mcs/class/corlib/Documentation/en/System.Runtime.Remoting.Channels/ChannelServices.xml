@@ -32,8 +32,12 @@
 
         
 
+        
+
          interface, which provides informational properties such as the <see
          cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         . Channels are registered using the <see
          cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
          type="text/html">
           <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE">[&lt;topic://gnconchanneltemplate&gt;]</a>
         </format>
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          chain. The first channel sink is typically a <see
          cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />
+
+        
 
         
 
@@ -72,6 +86,8 @@
       <para
         >On the server side, the server transport sink reads requests off the wire and passes the request stream to the server channel sink chain. The server formatter sink at the end of this chain will deserialize the request into a message. It will then hand this message off to the remoting infrastructure, which will dispatch it to the server <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -123,6 +139,8 @@
 
             
 
+            
+
              object used to control the asynchronously dispatched message.</para
           >
         </returns>
@@ -131,10 +149,14 @@
 
           
 
+          
+
           The message to dispatch. </param
         >
         <param name="replySink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +204,8 @@
 
           
 
+          
+
           The first provider in the chain of sink providers that will create the channel sink chain. </param
         >
         <param name="channel">
@@ -189,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" />
+
+          
 
           
 
@@ -277,6 +305,8 @@
 
           
 
+          
+
           The channel name. </param
         >
       </Docs>
@@ -312,6 +342,8 @@
 
             
 
+            
+
              of properties for a given proxy.</para
           >
         </summary>
@@ -321,6 +353,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +398,8 @@
 
           
 
+          
+
           The object to retrieve the URL array for. </param
         >
       </Docs>
@@ -403,8 +439,12 @@
 
               
 
+              
+
                is obsolete. Please use <see
                cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
+
+              
 
               
 
@@ -417,8 +457,12 @@
 
             
 
+            
+
              method takes in the <see
              cref="T:System.Runtime.Remoting.Channels.IChannel" />
+
+            
 
             
 
@@ -427,13 +471,19 @@
 
             
 
+            
+
              must be unique, or the channel must be anonymous. A channel is anonymous if the <see
              cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
             
 
+            
+
              is set to either null or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -445,13 +495,19 @@
 
             
 
+            
+
             . By default, the name of a <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
+            
+
              is "http" and the name of a <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+            
 
             
 
@@ -463,12 +519,16 @@
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE"
                 >[&lt;topic://gnconchanneltemplate&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -483,8 +543,12 @@
 
             
 
+            
+
              is obsolete. Please use <see
              cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
+
+            
 
             
 
@@ -493,6 +557,8 @@
         </summary>
         <param name="chnl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,8 +597,12 @@
 
             
 
+            
+
              method receives the <see
              cref="T:System.Runtime.Remoting.Channels.IChannel" />
+
+            
 
             
 
@@ -541,13 +611,19 @@
 
             
 
+            
+
              must be unique, or the channel must be anonymous. A channel is anonymous if the <see
              cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
             
 
+            
+
              is set to either null or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -559,13 +635,19 @@
 
             
 
+            
+
             . By default, the name of a <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
+            
+
              is "http" and the name of a <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+            
 
             
 
@@ -581,12 +663,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE"
                 >[&lt;topic://gnconchanneltemplate&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -598,13 +684,19 @@
 
             
 
+            
+
              parameter is set to true, the remoting system determines whether the channel implements <see
              cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
 
             
 
+            
+
             , and if so, enables encryption and digital signatures. An exception is thrown if the channel does not implement <see
              cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
+
+            
 
             
 
@@ -617,8 +709,12 @@
 
               
 
+              
+
                to true throws a <see
                cref="T:System.Runtime.Remoting.RemotingException" />
+
+              
 
               
 
@@ -627,8 +723,12 @@
 
               
 
+              
+
                on Windows 98 (Since secure tcp channels are not supported on Windows 9x), and for the <see
                cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+              
 
               
 
@@ -645,10 +745,14 @@
 
           
 
+          
+
           The channel to register.</param
         >
         <param name="ensureSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -719,6 +823,8 @@
 
           
 
+          
+
           The message to dispatch. </param
         >
       </Docs>
@@ -752,6 +858,8 @@
         </summary>
         <param name="chnl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

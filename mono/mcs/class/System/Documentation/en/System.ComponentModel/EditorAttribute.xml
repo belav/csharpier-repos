@@ -37,8 +37,12 @@
 
         
 
+        
+
          property to find this editor's base type. The only available base type is <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
       <para
         >Use the <see
          cref="P:System.ComponentModel.EditorAttribute.EditorTypeName" />
+
+        
 
         
 
@@ -60,10 +66,14 @@
 
         
 
+        
+
         . For more information on design-time attributes, see <format
          type="text/html">
           <a href="7aed9eb4-124b-4a15-a0a3-458f37ac9ef7">Attributes and Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -97,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.EditorAttribute" />
+
+            
 
             
 
@@ -134,8 +146,12 @@
 
             
 
+            
+
              parameter must be in the <see
              cref="P:System.Type.AssemblyQualifiedName" />
+
+            
 
             
 
@@ -147,8 +163,12 @@
 
             
 
+            
+
              represented by the <paramref
              name="typeName" />
+
+            
 
             
 
@@ -160,8 +180,12 @@
 
             
 
+            
+
              represented by the <paramref
              name="baseTypeName" />
+
+            
 
             
 
@@ -170,8 +194,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.ComponentEditor" />
+
+            
 
             
 
@@ -186,11 +214,15 @@
 
             
 
+            
+
              class with the type name and base type name of the editor.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,8 +233,12 @@
 
           
 
+          
+
           The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see
            cref="T:System.Drawing.Design.UITypeEditor" />
+
+          
 
           
 
@@ -239,8 +275,12 @@
 
             
 
+            
+
              parameter must be in the <see
              cref="P:System.Type.AssemblyQualifiedName" />
+
+            
 
             
 
@@ -252,8 +292,12 @@
 
             
 
+            
+
              represented by the <paramref
              name="typeName" />
+
+            
 
             
 
@@ -262,6 +306,8 @@
           <para
             >The <paramref
              name="baseType" />
+
+            
 
             
 
@@ -276,11 +322,15 @@
 
             
 
+            
+
              class with the type name and the base type.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,13 +341,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see
            cref="T:System.Drawing.Design.UITypeEditor" />
+
+          
 
           
 
@@ -331,8 +387,12 @@
 
             
 
+            
+
              represented by the <paramref
              name="type" />
+
+            
 
             
 
@@ -341,6 +401,8 @@
           <para
             >The <paramref
              name="baseType" />
+
+            
 
             
 
@@ -355,6 +417,8 @@
 
             
 
+            
+
              class with the type and the base type.</para
           >
         </summary>
@@ -363,8 +427,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -375,13 +443,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
           
 
+          
+
            of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see
            cref="T:System.Drawing.Design.UITypeEditor" />
+
+          
 
           
 
@@ -411,13 +485,19 @@
 
             
 
+            
+
              property is an assembly qualified type name. The dnprdnshort provides both <see
              cref="T:System.Drawing.Design.UITypeEditor" />
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.ComponentEditor" />
+
+            
 
             
 
@@ -450,6 +530,8 @@
           <para
             >Gets the name of the editor class in the <see
              cref="P:System.Type.AssemblyQualifiedName" />
+
+            
 
             
 
@@ -486,6 +568,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -495,6 +579,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,13 +632,19 @@
 
             
 
+            
+
              property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see
              cref="T:System.Type" />
 
             
 
+            
+
              instance for the attribute. <see
              cref="T:System.ComponentModel.EditorAttribute" />
+
+            
 
             
 

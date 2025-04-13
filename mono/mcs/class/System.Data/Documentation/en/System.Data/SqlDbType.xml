@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Data.DbType" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >Specifies SQL Server-specific data type of a field, property, for use in a <see
          cref="T:System.Data.SqlClient.SqlParameter" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Int64" />
+
+            
 
             
 
@@ -83,8 +91,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -113,6 +125,8 @@
 
             
 
+            
+
             . An unsigned numeric value that can be 0, 1, or null. </para
           >
         </summary>
@@ -135,6 +149,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.String" />
+
+            
 
             
 
@@ -163,6 +179,8 @@
 
             
 
+            
+
             . Date and time data ranging in value from January 1, 1753 to December 31, 9999 to an accuracy of 3.33 milliseconds.</para
           >
         </summary>
@@ -188,13 +206,19 @@
 
             
 
+            
+
             . A fixed precision and scale numeric value between -10 <superscript
             >38</superscript>
 
             
 
+            
+
              -1 and 10 <superscript
             >38</superscript>
+
+            
 
             
 
@@ -223,6 +247,8 @@
 
             
 
+            
+
             . A floating point number within the range of -1.79E +308 through 1.79E +308.</para
           >
         </summary>
@@ -248,13 +274,19 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
 
             
 
+            
+
             . A variable-length stream of binary data ranging from 0 to 2 <superscript
             >31</superscript>
+
+            
 
             
 
@@ -283,6 +315,8 @@
 
             
 
+            
+
             . A 32-bit signed integer.</para
           >
         </summary>
@@ -308,13 +342,19 @@
 
             
 
+            
+
             . A currency value ranging from -2 <superscript
             >63</superscript>
 
             
 
+            
+
              (or -9,223,372,036,854,775,808) to 2 <superscript
             >63</superscript>
+
+            
 
             
 
@@ -343,6 +383,8 @@
 
             
 
+            
+
             . A fixed-length stream of Unicode characters ranging between 1 and 4,000 characters.</para
           >
         </summary>
@@ -368,8 +410,12 @@
 
             
 
+            
+
             . A variable-length stream of Unicode data with a maximum length of 2 <superscript
             >30</superscript>
+
+            
 
             
 
@@ -398,8 +444,12 @@
 
             
 
+            
+
             . A variable-length stream of Unicode characters ranging between 1 and 4,000 characters. Implicit conversion fails if the string is greater than 4,000 characters. Explicitly set the object when working with strings longer than 4,000 characters. Use <see
              cref="F:System.Data.SqlDbType.NVarChar" />
+
+            
 
             
 
@@ -428,6 +478,8 @@
 
             
 
+            
+
             . A floating point number within the range of -3.40E +38 through 3.40E +38.</para
           >
         </summary>
@@ -450,6 +502,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.DateTime" />
+
+            
 
             
 
@@ -478,6 +532,8 @@
 
             
 
+            
+
             . A 16-bit signed integer.</para
           >
         </summary>
@@ -500,6 +556,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Decimal" />
+
+            
 
             
 
@@ -528,8 +586,12 @@
 
             
 
+            
+
             . A variable-length stream of non-Unicode data with a maximum length of 2 <superscript
             >31</superscript>
+
+            
 
             
 
@@ -558,8 +620,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -585,6 +651,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Byte" />
+
+            
 
             
 
@@ -629,6 +697,8 @@
 
             
 
+            
+
             . A globally unique identifier (or GUID).</para
           >
         </summary>
@@ -654,8 +724,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -684,8 +758,12 @@
 
             
 
+            
+
             . A variable-length stream of non-Unicode characters ranging between 1 and 8,000 characters. Use <see
              cref="F:System.Data.SqlDbType.VarChar" />
+
+            
 
             
 
@@ -711,6 +789,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Object" />
+
+            
 
             
 
@@ -741,8 +821,12 @@
 
             
 
+            
+
              method or <see
              cref="P:System.Data.SqlTypes.SqlXml.Value" />
+
+            
 
             
 
@@ -751,8 +835,12 @@
 
             
 
+            
+
              by calling the <see
              cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
+
+            
 
             
 

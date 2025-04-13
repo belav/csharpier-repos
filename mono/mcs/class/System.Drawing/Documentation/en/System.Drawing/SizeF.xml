@@ -30,8 +30,12 @@
 
         
 
+        
+
          structure depends on the <see
          cref="P:System.Drawing.Graphics.PageUnit" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          settings for the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
             
 
+            
+
              structure from the specified <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -84,13 +96,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
 
           
 
+          
+
            structure from which to initialize this <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -119,8 +137,12 @@
 
             
 
+            
+
              structure from the specified existing <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -132,13 +154,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
 
           
 
+          
+
            structure from which to create the new <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -168,6 +196,8 @@
 
             
 
+            
+
              structure from the specified dimensions.</para
           >
         </summary>
@@ -176,8 +206,12 @@
 
           
 
+          
+
           The width component of the new <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -188,8 +222,12 @@
 
           
 
+          
+
           The height component of the new <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -227,8 +265,12 @@
 
             
 
+            
+
              structure to the width and height of another <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -243,6 +285,8 @@
 
             
 
+            
+
              structure that is the result of the addition operation.</para
           >
         </returns>
@@ -251,8 +295,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -263,8 +311,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -289,13 +341,19 @@
 
             
 
+            
+
              structure that has a <see
              cref="P:System.Drawing.SizeF.Height" />
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -327,8 +385,12 @@
 
             
 
+            
+
              structure with the same dimensions as this <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -343,13 +405,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.SizeF" />
 
             
 
+            
+
              and has the same width and height as this <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -361,8 +429,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -391,6 +463,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -399,6 +473,8 @@
           <para
             >An integer value that specifies a hash value for this <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -428,8 +504,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -438,8 +518,12 @@
 
             
 
+            
+
              structure depend on the <see
              cref="P:System.Drawing.Graphics.PageUnit" />
+
+            
 
             
 
@@ -448,8 +532,12 @@
 
             
 
+            
+
              settings for the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -461,6 +549,8 @@
           <para
             >Gets or sets the vertical component of this <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -487,6 +577,8 @@
           <para
             >Gets a value that indicates whether this <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -527,8 +619,12 @@
 
             
 
+            
+
              structure to the width and height of another <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -543,6 +639,8 @@
 
             
 
+            
+
              structure that is the result of the addition operation.</para
           >
         </returns>
@@ -551,8 +649,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -563,8 +665,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -599,6 +705,8 @@
 
             
 
+            
+
              structures are equal.</para
           >
         </summary>
@@ -610,8 +718,12 @@
 
             
 
+            
+
              and <paramref
              name="sz2" />
+
+            
 
             
 
@@ -623,8 +735,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -635,8 +751,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -694,6 +814,8 @@
 
             
 
+            
+
              structures are different.</para
           >
         </summary>
@@ -705,8 +827,12 @@
 
             
 
+            
+
              and <paramref
              name="sz2" />
+
+            
 
             
 
@@ -715,8 +841,12 @@
 
             
 
+            
+
              and <paramref
              name="sz2" />
+
+            
 
             
 
@@ -728,8 +858,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -740,8 +874,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -776,8 +914,12 @@
 
             
 
+            
+
              structure from the width and height of another <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -792,6 +934,8 @@
 
             
 
+            
+
              that is the result of the subtraction operation.</para
           >
         </returns>
@@ -800,8 +944,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -812,8 +960,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -851,8 +1003,12 @@
 
             
 
+            
+
              structure from the width and height of another <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -867,6 +1023,8 @@
 
             
 
+            
+
              structure that is a result of the subtraction operation.</para
           >
         </returns>
@@ -875,8 +1033,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -887,8 +1049,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -913,8 +1079,12 @@
 
             
 
+            
+
              structure to a <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -926,6 +1096,8 @@
           <para
             >Returns a <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -954,13 +1126,19 @@
 
             
 
+            
+
              structure is converted to a <see
              cref="T:System.Drawing.Size" />
 
             
 
+            
+
              structure by truncating the values of the <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -975,8 +1153,12 @@
 
             
 
+            
+
              structure to a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -988,6 +1170,8 @@
           <para
             >Returns a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -1017,6 +1201,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -1025,6 +1211,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -1054,8 +1242,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.SizeF.Width" />
+
+            
 
             
 
@@ -1064,8 +1256,12 @@
 
             
 
+            
+
              structure depend on the <see
              cref="P:System.Drawing.Graphics.PageUnit" />
+
+            
 
             
 
@@ -1074,8 +1270,12 @@
 
             
 
+            
+
              settings for the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1087,6 +1287,8 @@
           <para
             >Gets or sets the horizontal component of this <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 

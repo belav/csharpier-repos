@@ -36,8 +36,12 @@
 
         
 
+        
+
          with an associated <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -49,11 +53,15 @@
 
         
 
+        
+
          to perform DTD validation if necessary.</para
       >
       <para
         >To validate an sqltecxlinq tree against an XML schema, use the <see
          cref="Overload:System.Xml.Schema.Extensions.Validate" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
       <para
         >You can populate an XML tree with an XML document that contains an internal DTD. The XML tree will then contain a <see
          cref="P:System.Xml.Linq.XDocument.DocumentType" />
+
+        
 
         
 
@@ -105,8 +115,12 @@
 
             
 
+            
+
              class from another <see
              cref="T:System.Xml.Linq.XDocumentType" />
+
+            
 
             
 
@@ -118,8 +132,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XDocumentType" />
+
+          
 
           
 
@@ -156,6 +174,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -164,8 +184,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -176,8 +200,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -188,8 +216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -200,8 +232,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -273,13 +309,19 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -364,6 +406,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -375,8 +419,12 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -388,8 +436,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

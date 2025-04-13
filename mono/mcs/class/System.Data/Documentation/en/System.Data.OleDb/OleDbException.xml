@@ -26,8 +26,12 @@
 
         
 
+        
+
          always contains at least one instance of <see
          cref="T:System.Data.OleDb.OleDbError" />
+
+        
 
         
 
@@ -39,11 +43,15 @@
 
         
 
+        
+
         . However, the user can reopen the connection and continue.</para
       >
       <para
         >For general information about handling exceptions for a .NET Framework data provider, see <see
          cref="T:System.Data.SqlClient.SqlException" />
+
+        
 
         
 
@@ -99,8 +107,12 @@
 
             
 
+            
+
              class always contains at least one instance of the <see
              cref="T:System.Data.OleDb.OleDbError" />
+
+            
 
             
 
@@ -112,6 +124,8 @@
 
             
 
+            
+
              collection.</para
           >
         </remarks>
@@ -120,6 +134,8 @@
           <para
             >Gets a collection of one or more <see
              cref="T:System.Data.OleDb.OleDbError" />
+
+            
 
             
 
@@ -158,13 +174,19 @@
 
             
 
+            
+
              sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -179,6 +201,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -187,8 +211,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -199,8 +227,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

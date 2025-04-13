@@ -20,13 +20,19 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Input.RoutedUICommand" />
 
         
 
+        
+
          are two implementations of the <see
          cref="T:System.Windows.Input.ICommand" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
         ="<legacyItalic
         >predefinedCommandName</legacyItalic>
+
+        
 
         
 
@@ -55,6 +65,8 @@
       <para
         >&lt;<legacyItalic
         >object property</legacyItalic>
+
+        
 
         
 
@@ -63,6 +75,8 @@
 
         
 
+        
+
         "/&gt;</para
       >
       <para>- or -</para>
@@ -72,11 +86,15 @@
 
         
 
+        
+
         ="{<format
          type="text/html">
           <a href="056aee79-7cdd-434f-8174-dfc856cad343">x:Static</a>
         </format>
         <legacyItalic> customClassName.customCommandName</legacyItalic>
+
+        
 
         
 
@@ -117,6 +135,8 @@
                   >XAML Namespaces and Namespace Mapping</a
                 >
               </format>
+
+              
 
               
 
@@ -165,8 +185,12 @@
 
             
 
+            
+
              method when the <see
              cref="E:System.Windows.Input.ICommand.CanExecuteChanged" />
+
+            
 
             
 
@@ -183,6 +207,8 @@
         </returns>
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +235,8 @@
           <para
             >Normally, a command source calls <see
              cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)" />
+
+            
 
             
 
@@ -246,6 +274,8 @@
         </summary>
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

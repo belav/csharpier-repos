@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -29,6 +31,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.2">block</non_terminal>
@@ -44,8 +48,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -58,8 +66,12 @@
 
     
 
+    
+
      consists of a semicolon. For all other destructors, the <non_terminal
      where="17.12">destructor-body</non_terminal>
+
+    
 
     
 
@@ -68,8 +80,12 @@
 
     
 
+    
+
      corresponds exactly to the <non_terminal
      where="17.5">method-body</non_terminal>
+
+    
 
     
 
@@ -78,8 +94,12 @@
 
     
 
+    
+
      return type (<hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -122,6 +142,8 @@ class Test
 
       
 
+      
+
       is <code_example
       >
         <![CDATA[
@@ -129,6 +151,8 @@ B's destructor
 A's destructor  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -153,6 +177,8 @@ class A
 
       
 
+      
+
       contains two errors. end example]</example
     >
   </paragraph>
@@ -171,12 +197,16 @@ class A
 
       
 
+      
+
       is valid and the method shown hides System.Object's Finalize method. end example]</example
     >
   </paragraph>
   <paragraph
     >For a discussion of the behavior when an exception is thrown from a destructor, see <hyperlink
     >23.3</hyperlink>
+
+    
 
     
 

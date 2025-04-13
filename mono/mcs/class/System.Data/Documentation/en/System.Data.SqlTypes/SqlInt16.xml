@@ -52,11 +52,15 @@
 
             
 
+            
+
              structure using the supplied short integer parameter.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -91,6 +95,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -102,13 +108,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
 
             
 
+            
+
              property contains the sum of the two <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -120,8 +132,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -132,8 +148,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -168,6 +188,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -179,8 +201,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -192,8 +218,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -204,8 +234,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -240,6 +274,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -251,8 +287,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -264,8 +304,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -276,8 +320,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -314,8 +362,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -369,8 +421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -397,8 +453,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -452,8 +512,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -488,6 +552,8 @@
 
             
 
+            
+
              operand by the second.</para
           >
         </summary>
@@ -499,8 +565,12 @@
 
             
 
+            
+
              whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -512,8 +582,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -524,8 +598,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -556,8 +634,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -572,11 +654,15 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -611,6 +697,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -623,8 +711,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -635,8 +727,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -696,6 +792,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -707,8 +805,12 @@
 
             
 
+            
+
              value that indicates the XSD of the specified <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -720,8 +822,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -752,6 +858,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -763,8 +871,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -773,8 +885,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -783,13 +899,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -801,8 +923,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -813,8 +939,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -849,6 +979,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -860,8 +992,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -870,8 +1006,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -880,13 +1020,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -898,8 +1044,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -910,8 +1060,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -937,6 +1091,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -972,6 +1128,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -983,8 +1141,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -993,8 +1155,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1003,13 +1169,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1021,8 +1193,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1033,8 +1209,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1069,6 +1249,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1080,8 +1262,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1090,8 +1276,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1100,13 +1290,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1118,8 +1314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1130,8 +1330,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1163,6 +1367,8 @@
           <para
             >A constant representing the largest possible value of a <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1198,6 +1404,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1230,6 +1438,8 @@
 
             
 
+            
+
              operand by its second.</para
           >
         </summary>
@@ -1241,8 +1451,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -1254,8 +1468,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1266,8 +1484,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1304,8 +1526,12 @@
 
             
 
+            
+
              or <paramref
              name="y" />
+
+            
 
             
 
@@ -1320,6 +1546,8 @@
 
             
 
+            
+
              values and returns the remainder.</para
           >
         </summary>
@@ -1331,8 +1559,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1344,8 +1576,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1356,8 +1592,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1388,6 +1628,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -1399,8 +1641,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -1412,8 +1658,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1424,8 +1674,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1460,6 +1714,8 @@
 
             
 
+            
+
              structures to determine whether they are not equal.</para
           >
         </summary>
@@ -1471,8 +1727,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1481,8 +1741,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1491,13 +1755,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1509,8 +1779,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1521,8 +1795,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1552,8 +1830,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1561,6 +1843,8 @@
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1575,8 +1859,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1611,6 +1899,8 @@
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -1622,13 +1912,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
 
             
 
+            
+
              property contains the complement of the specified <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1640,8 +1936,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1680,6 +1980,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1691,13 +1993,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
 
             
 
+            
+
              property contains the sum of the two <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -1709,8 +2017,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1721,8 +2033,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1757,6 +2073,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1768,8 +2086,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -1781,8 +2103,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1793,8 +2119,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1829,6 +2159,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1840,8 +2172,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -1853,8 +2189,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1865,8 +2205,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1901,6 +2245,8 @@
 
             
 
+            
+
              operand by the second.</para
           >
         </summary>
@@ -1912,8 +2258,12 @@
 
             
 
+            
+
              whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -1925,8 +2275,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1937,8 +2291,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -1973,6 +2331,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -1984,8 +2344,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1994,8 +2358,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2004,13 +2372,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2022,8 +2396,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2034,8 +2412,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2074,8 +2456,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -2087,8 +2473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2099,8 +2489,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2342,6 +2736,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -2353,8 +2749,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2363,8 +2763,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2373,13 +2777,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2391,8 +2801,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2403,8 +2817,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2439,6 +2857,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -2450,8 +2870,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2460,8 +2884,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2470,13 +2898,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2488,8 +2922,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2500,8 +2938,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2582,6 +3024,8 @@
 
             
 
+            
+
              structures to determine whether they are not equal.</para
           >
         </summary>
@@ -2593,8 +3037,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2603,8 +3051,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2613,13 +3065,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2631,8 +3089,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2643,8 +3105,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2679,6 +3145,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2690,8 +3158,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2700,8 +3172,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2710,13 +3186,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2728,8 +3210,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2740,8 +3226,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2776,6 +3266,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2787,8 +3279,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2797,8 +3293,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2807,13 +3307,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2825,8 +3331,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2837,8 +3347,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2873,6 +3387,8 @@
 
             
 
+            
+
              operand by its second.</para
           >
         </summary>
@@ -2884,8 +3400,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -2897,8 +3417,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2909,8 +3433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2945,6 +3473,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -2956,8 +3486,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -2969,8 +3503,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -2981,8 +3519,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3016,6 +3558,8 @@
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -3027,13 +3571,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
 
             
 
+            
+
              property contains the complement of the specified <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3045,8 +3595,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3081,6 +3635,8 @@
 
             
 
+            
+
              parameter from the first.</para
           >
         </summary>
@@ -3092,8 +3648,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -3105,8 +3665,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3117,8 +3681,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3152,8 +3720,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3168,6 +3740,8 @@
 
             
 
+            
+
              structure that contains the negated value.</para
           >
         </returns>
@@ -3176,8 +3750,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3207,6 +3785,8 @@
 
             
 
+            
+
              representation of a number to its 16-bit signed integer equivalent.</para
           >
         </summary>
@@ -3218,11 +3798,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3257,6 +3841,8 @@
 
             
 
+            
+
              parameter from the first.</para
           >
         </summary>
@@ -3268,8 +3854,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -3281,8 +3871,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3293,8 +3887,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3357,6 +3955,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -3387,6 +3987,8 @@
 
           
 
+          
+
           XmlWriter </param
         >
       </Docs>
@@ -3411,8 +4013,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3424,6 +4030,8 @@
           <para
             >true if the <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -3453,8 +4061,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3469,8 +4081,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
+
+            
 
             
 
@@ -3479,8 +4095,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3489,8 +4109,12 @@
 
             
 
+            
+
              is less than 0 or greater than 255, an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -3523,8 +4147,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3539,8 +4167,12 @@
 
             
 
+            
+
              structure whose Value equals the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3573,8 +4205,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3589,8 +4225,12 @@
 
             
 
+            
+
              structure whose Value equals the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3620,8 +4260,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -3636,8 +4280,12 @@
 
             
 
+            
+
              structure whose Value equals the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3667,8 +4315,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3683,8 +4335,12 @@
 
             
 
+            
+
              structure whose Value equals the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3714,8 +4370,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -3730,8 +4390,12 @@
 
             
 
+            
+
              structure whose Value equals the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3764,8 +4428,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3780,8 +4448,12 @@
 
             
 
+            
+
              structure whose Value equals the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3814,8 +4486,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3830,13 +4506,19 @@
 
             
 
+            
+
              representing the <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
 
             
 
+            
+
              of this instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3866,8 +4548,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3882,13 +4568,19 @@
 
             
 
+            
+
              object representing the <see
              cref="P:System.Data.SqlTypes.SqlInt16.Value" />
 
             
 
+            
+
              of this instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3915,6 +4607,8 @@
           <para
             >Gets the value of this instance of <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3954,6 +4648,8 @@
 
             
 
+            
+
              structure that contains the results of the XOR operation.</para
           >
         </returns>
@@ -3962,8 +4658,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -3974,8 +4674,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt16" />
+
+          
 
           
 
@@ -4006,8 +4710,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -4022,8 +4730,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 

@@ -19,6 +19,8 @@
 
         
 
+        
+
          namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para
       >
       <para
@@ -27,11 +29,15 @@
 
         
 
+        
+
          is a supporting type used to uniformly format event-related information, which is useful if the event data must be logged and later presented to the user.. </para
       >
       <para
         >Instances of the <see
          cref="T:System.Web.Management.WebEventFormatter" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
 
             
 
+            
+
              method allows you to customize the event information by adding your own event-specific data.</para
           >
         </remarks>
@@ -72,6 +80,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -99,8 +109,12 @@
 
             
 
+            
+
              property allows you to control how the event information is indented. The base unit of indentation is defined by the <see
              cref="P:System.Web.Management.WebEventFormatter.TabSize" />
+
+            
 
             
 
@@ -133,13 +147,19 @@
 
             
 
+            
+
              property allows you to control the tab size used when writing event information. The <see
              cref="P:System.Web.Management.WebEventFormatter.TabSize" />
 
             
 
+            
+
              determines the number of spaces per unit of indentation, controlled by <see
              cref="P:System.Web.Management.WebEventFormatter.IndentationLevel" />
+
+            
 
             
 
@@ -172,13 +192,19 @@
 
             
 
+            
+
              uses an internal <see
              cref="T:System.Text.StringBuilder" />
 
             
 
+            
+
              variable to store the event information. This <see
              cref="M:System.Web.Management.WebEventFormatter.ToString" />
+
+            
 
             
 

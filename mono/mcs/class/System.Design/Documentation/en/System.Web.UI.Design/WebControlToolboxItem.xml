@@ -21,8 +21,12 @@
 
         
 
+        
+
          provides a base class for toolbox items that create Web server controls. This class extends <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
             
 
+            
+
              gets the value of an attribute of the toolbox item.</para
           >
         </item>
@@ -44,12 +50,16 @@
 
             
 
+            
+
              gets the HTML that represents the initial state of the control.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Web.UI.Design.WebControlToolboxItem.GetToolType(System.ComponentModel.Design.IDesignerHost)" />
+
+            
 
             
 
@@ -63,6 +73,8 @@
       <para
         >Provides a base class for a Web server control <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
 
             
 
+            
+
              is set to a short version of the type name.</para
           >
         </remarks>
@@ -92,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+
+            
 
             
 
@@ -119,6 +135,8 @@
 
             
 
+            
+
              is set to a short version of the type name.</para
           >
         </remarks>
@@ -130,6 +148,8 @@
 
             
 
+            
+
              class using the provided type.</para
           >
         </summary>
@@ -138,8 +158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -174,13 +198,19 @@
 
             
 
+            
+
              class using the provided <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              object and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -192,10 +222,14 @@
 
           
 
+          
+
           A SerializationInfo object containing information needed to instantiate the Web control through deserialization.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,8 +257,12 @@
 
             
 
+            
+
              always throws an exception, indicating that the method is inherited from <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -239,6 +277,8 @@
 
             
 
+            
+
             , and adds them to the specified designer.</para
           >
         </summary>
@@ -250,6 +290,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -258,8 +300,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -295,13 +341,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that describes the <see
            cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+
+          
 
           
 
@@ -312,8 +364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -347,13 +403,19 @@
 
             
 
+            
+
              if the <paramref
              name="attributeType" />
 
             
 
+            
+
              parameter is anything other than a <see
              cref="T:System.Web.UI.PersistChildrenAttribute" />
+
+            
 
             
 
@@ -373,8 +435,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -382,6 +448,8 @@
         >
         <param name="attributeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +488,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -459,6 +531,8 @@
 
             
 
+            
+
              of this toolbox item.</para
           >
         </returns>
@@ -467,8 +541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -500,8 +578,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -537,13 +619,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            used to save the state of the <see
            cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+
+          
 
           
 
@@ -554,8 +642,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

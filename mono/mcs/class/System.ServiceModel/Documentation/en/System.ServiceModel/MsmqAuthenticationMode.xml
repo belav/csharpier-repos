@@ -21,6 +21,8 @@
 
         
 
+        
+
          property to indicate how a message must be authenticated by the MSMQ transport.</para
       >
       <para
@@ -29,8 +31,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.ServiceModel.MsmqAuthenticationMode.None" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          property must also be set to <see
          cref="F:System.Net.Security.ProtectionLevel.None" />
+
+        
 
         
 

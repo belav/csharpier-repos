@@ -25,6 +25,8 @@
 
         
 
+        
+
          derived control, you need to inherit from this class.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Interacts with the parser to build a <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ListItemControlBuilder" />
+
+            
 
             
 
@@ -81,13 +87,19 @@
 
             
 
+            
+
              method to always indicate that white spaces in the text associated with the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
+            
+
              control are not represented by <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -102,8 +114,12 @@
 
             
 
+            
+
              are represented by <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -136,8 +152,12 @@
 
             
 
+            
+
              method is used to determine whether HTML entities in the text associated with the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -146,8 +166,12 @@
 
             
 
+            
+
              method to always return true. This indicates that HTML entities in the text associated with the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -160,6 +184,8 @@
 
               
 
+              
+
                is rendered as an attribute of the &lt;option&gt; HTML element. When the attribute is rendered on the client, special characters are automatically converted to their equivalent HTML entity. For example, the less than character (&lt;) is converted to &amp;lt;. When the attribute is parsed, HTML entities are automatically converted back to their equivalent, plain text characters.</para
             >
           </block>
@@ -169,6 +195,8 @@
           <para
             >Determines whether HTML entities in the text associated with the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 

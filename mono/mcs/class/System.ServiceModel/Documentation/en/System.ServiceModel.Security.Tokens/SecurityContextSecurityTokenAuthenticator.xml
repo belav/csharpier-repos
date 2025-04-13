@@ -54,6 +54,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -93,8 +95,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Tokens.SecurityToken" />
+
+          
 
           
 
@@ -135,6 +141,8 @@
 
             
 
+            
+
              instances.</para
           >
         </returns>
@@ -143,8 +151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Tokens.SecurityToken" />
+
+          
 
           
 

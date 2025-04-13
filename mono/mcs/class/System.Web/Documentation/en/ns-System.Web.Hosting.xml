@@ -17,6 +17,8 @@
 
         
 
+        
+
          namespace provides the functionality for hosting ASP.NET applications from managed applications outside Microsoft Internet Information Services (IIS).</para
       >
     </summary>

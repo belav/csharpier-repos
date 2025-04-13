@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is used to supply event values to the <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          constructs a <see
          cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          and passes it to the <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -64,8 +76,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
          event to set the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -84,8 +104,12 @@
 
         
 
+        
+
          to a custom <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -94,8 +118,12 @@
 
         
 
+        
+
          property during the <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -104,8 +132,12 @@
 
         
 
+        
+
          property is set to the identity returned by the <see
          cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+        
 
         
 
@@ -117,8 +149,12 @@
 
         
 
+        
+
          event is raised only when the authentication <see
          cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+
+        
 
         
 
@@ -127,8 +163,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+        
 
         
 
@@ -140,6 +180,8 @@
       <para
         >Provides data for the <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -168,8 +210,12 @@
 
             
 
+            
+
              constructs a <see
              cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+            
 
             
 
@@ -178,8 +224,12 @@
 
             
 
+            
+
              and passes it to the <system
             >WindowsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -194,6 +244,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -202,10 +254,14 @@
 
           
 
+          
+
           The Windows identity object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,8 +293,12 @@
 
             
 
+            
+
              provides access to <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -247,8 +307,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -260,6 +324,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -295,8 +361,12 @@
 
             
 
+            
+
              constructs a <see
              cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+            
 
             
 
@@ -305,8 +375,12 @@
 
             
 
+            
+
              and passes it to the <system
             >WindowsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -318,8 +392,12 @@
 
             
 
+            
+
              property is set to the identity returned by the <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+            
 
             
 
@@ -331,6 +409,8 @@
           <para
             >Gets the Windows identity passed to the <see
              cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+            
 
             
 
@@ -366,8 +446,12 @@
 
             
 
+            
+
              property to set the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -376,8 +460,12 @@
 
             
 
+            
+
              to a custom <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 
@@ -389,8 +477,12 @@
 
             
 
+            
+
              property during the <system
             >WindowsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -399,8 +491,12 @@
 
             
 
+            
+
              property is set to the identity returned by the <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+            
 
             
 
@@ -412,6 +508,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 

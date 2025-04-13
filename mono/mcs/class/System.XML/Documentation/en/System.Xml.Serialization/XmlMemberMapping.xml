@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is used with the <see
          cref="T:System.Xml.Serialization.XmlMembersMapping" />
+
+        
 
         
 
@@ -36,11 +40,15 @@
 
         
 
+        
+
          objects. </para
       >
       <para
         >An <see
          cref="T:System.Xml.Serialization.XmlMemberMapping" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
         
 
+        
+
          objects are accessible through the indexed operator property.</para
       >
       <para
@@ -77,8 +87,12 @@
 
         
 
+        
+
          class for an explanation of the conditions under which an <see
          cref="T:System.Xml.Serialization.XmlMemberMapping" />
+
+        
 
         
 
@@ -110,6 +124,8 @@
           <para
             >A true value for the <see
              cref="P:System.Xml.Serialization.XmlMemberMapping.Any" />
+
+            
 
             
 
@@ -148,8 +164,12 @@
 
             
 
+            
+
             , maps either of these constructs to a public field or property that is accompanied by a public field of type bool whose name is the first field's name with "Specified" appended. The <see
              cref="P:System.Xml.Serialization.XmlMemberMapping.CheckSpecified" />
+
+            
 
             
 
@@ -214,6 +234,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -226,8 +248,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -258,8 +284,12 @@
 
             
 
+            
+
              class for cases when a member corresponds to a &lt;part&gt; element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method, (indicated by the <see
              cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+
+            
 
             
 
@@ -271,13 +301,19 @@
 
             
 
+            
+
              object, the return type's <see
              cref="P:System.Xml.Serialization.XmlMemberMapping.MemberName" />
 
             
 
+            
+
              property becomes the method name (made unique from other member names, if necessary) with "Result" appended. This convention also is used, in some circumstances, while importing Web service classes from <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 

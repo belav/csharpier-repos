@@ -25,8 +25,12 @@
 
         
 
+        
+
          class allows you to programmatically access a collection of <see
          cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
       <para
         >Contains a collection of <see
          cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+            
 
             
 
@@ -93,8 +101,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+            
 
             
 
@@ -106,8 +118,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -118,8 +134,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+          
 
           
 
@@ -151,6 +171,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -177,8 +199,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+            
 
             
 
@@ -214,8 +240,12 @@
 
             
 
+            
+
              collection to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -227,8 +257,12 @@
 
           
 
+          
+
           A one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -237,8 +271,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -249,8 +287,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -284,6 +326,8 @@
 
             
 
+            
+
              collection element at the specified index.</para
           >
         </summary>
@@ -295,6 +339,8 @@
 
             
 
+            
+
              element at the specified index.</para
           >
         </returns>
@@ -303,13 +349,19 @@
 
           
 
+          
+
           An integer value that specifies a particular <see
            cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
+          
+
            object within the <see
            cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          
 
           
 
@@ -343,6 +395,8 @@
 
             
 
+            
+
              collection element based on the specified virtual-directory name.</para
           >
         </summary>
@@ -354,6 +408,8 @@
 
             
 
+            
+
              element based on the specified virtual-directory name.</para
           >
         </returns>
@@ -362,8 +418,12 @@
 
           
 
+          
+
           A string that contains the name of the <see
            cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+          
 
           
 
@@ -394,6 +454,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -405,6 +467,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -413,13 +477,19 @@
 
           
 
+          
+
           An integer value that specifies a particular <see
            cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
+          
+
            object within the <see
            cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          
 
           
 
@@ -496,8 +566,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+            
 
             
 
@@ -509,8 +583,12 @@
 
           
 
+          
+
           A string that contains the name of the <see
            cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+          
 
           
 
@@ -541,8 +619,12 @@
 
             
 
+            
+
              object at the specified index from the <see
              cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+            
 
             
 
@@ -554,13 +636,19 @@
 
           
 
+          
+
           An integer value that specifies a particular <see
            cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
+          
+
            object within the <see
            cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          
 
           
 

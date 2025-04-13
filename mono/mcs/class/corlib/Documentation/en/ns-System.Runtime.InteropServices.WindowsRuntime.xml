@@ -10,6 +10,8 @@
 
         
 
+        
+
          namespace contains classes that support interoperation between managed code and the wrt, and that enable the creation of wrt types with managed code. </para
       >
     </summary>

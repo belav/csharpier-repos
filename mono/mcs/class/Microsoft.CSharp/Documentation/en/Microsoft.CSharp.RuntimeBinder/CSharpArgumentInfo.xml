@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -62,6 +64,8 @@
 
             
 
+            
+
              class.</para
           >
         </returns>
@@ -70,10 +74,14 @@
 
           
 
+          
+
           The flags for the argument.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

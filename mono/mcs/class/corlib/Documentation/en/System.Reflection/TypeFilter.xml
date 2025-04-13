@@ -44,8 +44,12 @@
 
         
 
+        
+
          objects. The <see
          cref="M:System.Type.FindInterfaces(System.Reflection.TypeFilter,System.Object)" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.MulticastDelegate" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
       <para
         >Filters the classes represented in an array of <see
          cref="T:System.Type" />
+
+        
 
         
 

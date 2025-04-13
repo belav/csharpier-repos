@@ -9,6 +9,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.4">pp-if-section</non_terminal>
@@ -23,6 +25,8 @@
       <name>
         <non_terminal where="9.5.4">pp-if-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -65,6 +73,8 @@
       <name>
         <non_terminal where="9.5.4">pp-elif-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -90,6 +100,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -107,6 +119,8 @@
       <name>
         <non_terminal where="9.5.4">pp-endif</non_terminal>
       </name>
+
+      
 
       
 
@@ -128,6 +142,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3">input-section</non_terminal>
@@ -140,6 +156,8 @@
       <name>
         <non_terminal where="9.5.4">skipped-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -156,6 +174,8 @@
       <name>
         <non_terminal where="9.5.4">skipped-section-part</non_terminal>
       </name>
+
+      
 
       
 
@@ -176,6 +196,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -192,10 +214,14 @@
 
       
 
+      
+
        :: <rhs
 
         >Any <non_terminal
          where="9.3.2">input-character</non_terminal>
+
+        
 
         
 
@@ -210,8 +236,12 @@
 
       
 
+      
+
        directive, zero or more <symbol
       >#elif</symbol>
+
+      
 
       
 
@@ -220,8 +250,12 @@
 
       
 
+      
+
        directive, and an <symbol
       >#endif</symbol>
+
+      
 
       
 
@@ -234,8 +268,12 @@
 
     
 
+    
+
      selects at most one of the contained <non_terminal
      where="9.5.4">conditional-section</non_terminal>
+
+    
 
     
 
@@ -247,8 +285,12 @@
 
         
 
+        
+
         s of the <symbol
         >#if</symbol>
+
+        
 
         
 
@@ -257,8 +299,12 @@
 
         
 
+        
+
          directives are evaluated in order until one yields true. If an expression yields true, the <non_terminal
          where="9.5.4">conditional-section</non_terminal>
+
+        
 
         
 
@@ -270,8 +316,12 @@
 
         
 
+        
+
         s yield false, and if an <symbol
         >#else</symbol>
+
+        
 
         
 
@@ -280,8 +330,12 @@
 
         
 
+        
+
          of the <symbol
         >#else</symbol>
+
+        
 
         
 
@@ -290,6 +344,8 @@
       <list_item
         > Otherwise, no <non_terminal
          where="9.5.4">conditional-section</non_terminal>
+
+        
 
         
 
@@ -303,6 +359,8 @@
 
     
 
+    
+
     , if any, is processed as a normal input-section: the source code contained in the section must adhere to the lexical grammar; tokens are generated from the source code in the section; and pre-processing directives in the section have the prescribed effects. </paragraph
   >
   <paragraph
@@ -311,8 +369,12 @@
 
     
 
+    
+
     s, if any, are processed as skipped-sections: except for pre-processing directives, the source code in the section need not adhere to the lexical grammar; no tokens are generated from the source code in the section; and pre-processing directives in the section must be lexically correct but are not otherwise processed. Within a <non_terminal
      where="9.5.4">conditional-section</non_terminal>
+
+    
 
     
 
@@ -321,8 +383,12 @@
 
     
 
+    
+
     , any nested <non_terminal
      where="9.5.4">conditional-section</non_terminal>
+
+    
 
     
 
@@ -331,8 +397,12 @@
 
     
 
+    
+
     ...<symbol
     >#endif</symbol>
+
+    
 
     
 
@@ -341,13 +411,19 @@
 
     
 
+    
+
     ...<symbol
     >#endregion</symbol>
 
     
 
+    
+
      constructs) are also processed as <non_terminal
      where="9.5.4">skipped-section</non_terminal>
+
+    
 
     
 
@@ -380,6 +456,8 @@ class PurchaseTransaction
     <example
       >Except for pre-processing directives, skipped source code is not subject to lexical analysis. For example, the following is valid despite the unterminated comment in the <symbol
       >#else</symbol>
+
+      
 
       
 
@@ -426,6 +504,8 @@ class Hello
 
       
 
+      
+
       results in the output: <code_example
       >
         <![CDATA[
@@ -446,6 +526,8 @@ Nebraska
 
       
 
+      
+
       . The example: <code_example
       >
         <![CDATA[
@@ -459,9 +541,13 @@ Nebraska
 
       
 
+      
+
       always produces the same token stream (class Q <symbol
       >{</symbol>
       <symbol>}</symbol>
+
+      
 
       
 
@@ -470,8 +556,12 @@ Nebraska
 
       
 
+      
+
        and <symbol
       >#endif</symbol>
+
+      
 
       
 
@@ -480,13 +570,19 @@ Nebraska
 
       
 
+      
+
       , <symbol
       >#else</symbol>
 
       
 
+      
+
       , <symbol
       >#endif</symbol>
+
+      
 
       
 

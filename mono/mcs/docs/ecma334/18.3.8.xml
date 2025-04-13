@@ -6,6 +6,8 @@
 
     
 
+    
+
     ). A struct can declare instance constructors having parameters. <example
 
       >[Example: For example <code_example
@@ -35,6 +37,8 @@ Point p2 = new Point(0, 0);
 
       
 
+      
+
       both create a Point with x and y initialized to zero. end example]</example
     >
   </paragraph>
@@ -42,6 +46,8 @@ Point p2 = new Point(0, 0);
   <paragraph
     >The this variable of a struct instance constructor corresponds to an out parameter of the struct type, and similar to an out parameter, this must be definitely assigned (<hyperlink
     >12.3</hyperlink>
+
+    
 
     
 

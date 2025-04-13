@@ -57,6 +57,8 @@
 
         
 
+        
+
          that is used.</para
       >
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
@@ -66,13 +68,19 @@
 
         
 
+        
+
          class, follow the security action with the permission(s) that are being requested. Each security permission that can be requested, as defined in the <see
          cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
         
 
+        
+
          enumeration, has a corresponding property in the <see
          cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
+
+        
 
         
 
@@ -85,8 +93,12 @@
 
           
 
+          
+
            enumeration and the <see
            cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
+
+          
 
           
 
@@ -95,13 +107,19 @@
 
           
 
+          
+
            enumeration value is represented by the <see
            cref="P:System.Security.Permissions.SecurityAttribute.Unrestricted" />
 
           
 
+          
+
            property (inherited from the <see
            cref="T:System.Security.Permissions.SecurityAttribute" />
+
+          
 
           
 
@@ -114,6 +132,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.SecurityPermission" />
+
+        
 
         
 
@@ -152,8 +172,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -180,8 +208,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -255,6 +287,8 @@
           <para
             >Gets or sets a value indicating whether permission to manipulate <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -350,6 +384,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -378,6 +414,8 @@
           <para
             >For more information, see <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -427,6 +465,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -435,6 +475,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.SecurityPermission" />
+
+            
 
             
 
@@ -466,13 +508,19 @@
 
             
 
+            
+
              permission at the assembly level is ignored. If an assembly has the right to execute, <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
 
             
 
+            
+
              permission is automatically granted, and setting the <see
              cref="P:System.Security.Permissions.SecurityPermissionAttribute.Execution" />
+
+            
 
             
 
@@ -516,6 +564,8 @@
 
             
 
+            
+
              values.
  To specify multiple values in a set operation,
  use the bitwise OR operator.</para
@@ -527,6 +577,8 @@
           <para
             >Gets or sets all permission flags comprising the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
+
+            
 
             
 
@@ -629,12 +681,16 @@
 
             
 
+            
+
             , see <format
              type="text/html">
               <a href="095CD1F6-D8DB-4C0E-BCE2-83CCB34DD5DC"
                 >[&lt;topic://cpcontypesafetysecurity&gt;]</a
               >
             </format>
+
+            
 
             
 

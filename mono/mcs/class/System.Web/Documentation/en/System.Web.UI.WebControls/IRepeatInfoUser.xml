@@ -18,8 +18,12 @@
 
         
 
+        
+
          interface defines the properties and methods that must be implemented by all list controls that repeats a list of items, such as <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
+
+        
 
         
 
@@ -48,8 +60,12 @@
 
         
 
+        
+
          properties, respectively. The <see
          cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
+
+        
 
         
 
@@ -58,8 +74,12 @@
 
         
 
+        
+
          method to determine the style of an item in the list. The <see
          cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -94,8 +114,12 @@
 
             
 
+            
+
              interface must implement the <see
              cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+
+            
 
             
 
@@ -114,6 +138,8 @@
 
             
 
+            
+
              that represents the style of the specified item type at the specified index in the list control.</para
           >
         </returns>
@@ -122,8 +148,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -131,6 +161,8 @@
         >
         <param name="repeatIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,8 +190,12 @@
 
             
 
+            
+
              interface must implement the <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
+
+            
 
             
 
@@ -192,8 +228,12 @@
 
             
 
+            
+
              interface must implement the <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasHeader" />
+
+            
 
             
 
@@ -226,8 +266,12 @@
 
             
 
+            
+
              interface must implement the <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasSeparators" />
+
+            
 
             
 
@@ -268,8 +312,12 @@
 
             
 
+            
+
              interface must implement the <see
              cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -285,8 +333,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -297,6 +349,8 @@
 
           
 
+          
+
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
@@ -304,8 +358,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+          
 
           
 
@@ -316,8 +374,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -345,8 +407,12 @@
 
             
 
+            
+
              interface must implement the <see
              cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
+
+            
 
             
 

@@ -42,8 +42,12 @@
 
         
 
+        
+
          class is a version of the <see
          cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          is a specialized collection object similar to a thread local storage for method calls, and provides data slots that are unique to each logical thread of execution. The slots are not shared across call contexts on other logical threads. Objects can be added to the <see
          cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          that travels along with the remote call. Only objects that expose the <see
          cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
          are propagated outside the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -95,8 +115,12 @@
 
         
 
+        
+
         . Objects that do not support this interface are not transmitted in <see
          cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+        
 
         
 
@@ -108,6 +132,8 @@
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -146,8 +172,12 @@
 
             
 
+            
+
              method produces a deep copy of the current <see
              cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+            
 
             
 
@@ -193,6 +223,8 @@
 
           
 
+          
+
           The name of the data slot to empty. </param
         >
       </Docs>
@@ -227,6 +259,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,8 +299,12 @@
 
             
 
+            
+
              with all the data needed to recreate the <see
              cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+            
 
             
 
@@ -275,6 +313,8 @@
           <para
             >The current method is an implementation of <see
              cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+            
 
             
 
@@ -289,8 +329,12 @@
 
             
 
+            
+
              with the data needed to serialize the current <see
              cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+            
 
             
 
@@ -302,8 +346,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -311,6 +359,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,6 +388,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+            
 
             
 
@@ -376,10 +428,14 @@
 
           
 
+          
+
           The name with which to associate the new item in the call context. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

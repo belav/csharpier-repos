@@ -34,6 +34,8 @@
 
         
 
+        
+
          is a type of keyed hash algorithm that is constructed from the SHA1 hash function and used as an HMAC, or hash-based message authentication code. The HMAC process mixes a secret key with the message data, hashes the result with the hash function, mixes that hash value with the secret key again, and then applies the hash function a second time. The output hash is 160 bits in length.</para
       >
       <para>An HMAC can be used to determine whether a message sent over an insecure channel has been tampered with, provided that the sender and receiver share a secret key. The sender computes the hash value for the original data and sends both the original data and hash value as a single message. The receiver recalculates the hash value on the received message and checks that the computed HMAC matches the transmitted HMAC.</para>
@@ -41,6 +43,8 @@
       <para>The SHA-1 (Secure Hash Algorithm, also called SHS, Secure Hash Standard) is a cryptographic hash algorithm published by the United States Government. It produces a 160-bit hash value from an arbitrary length string.</para>
       <para>
         <see cref="T:System.Security.Cryptography.HMACSHA1" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Computes a Hash-based Message Authentication Code (HMAC) using the <see
          cref="T:System.Security.Cryptography.SHA1" />
+
+        
 
         
 
@@ -82,6 +88,8 @@
 
             
 
+            
+
              is a type of keyed hash algorithm that is constructed from the SHA1 hash function and used as an HMAC, or hash-based message authentication code. The HMAC process mixes a secret key with the message data, hashes the result with the hash function, mixes that hash value with the secret key again, and then applies the hash function a second time. The output hash is 160 bits (20 bytes) in length.</para
           >
           <para>This constructor uses a 64-byte, randomly generated key.</para>
@@ -91,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.HMACSHA1" />
+
+            
 
             
 
@@ -123,12 +133,16 @@
 
             
 
+            
+
              is a type of keyed hash algorithm that is constructed from the SHA1 hash function and used as an HMAC, or hash-based message authentication code. The HMAC process mixes a secret key with the message data, hashes the result with the hash function, mixes that hash value with the secret key again, and then applies the hash function a second time. The output hash is 160 bits (20 bytes) in length.</para
           >
           <block subset="none" type="note">
             <para
               >This constructor creates an unmanaged instance of the algorithm by using the <see
                cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" />
+
+              
 
               
 
@@ -144,6 +158,8 @@
 
             
 
+            
+
              class with the specified key data.</para
           >
         </summary>
@@ -152,8 +168,12 @@
 
           
 
+          
+
           The secret key for <see
            cref="T:System.Security.Cryptography.HMACSHA1" />
+
+          
 
           
 
@@ -187,6 +207,8 @@
 
             
 
+            
+
              class with the specified key data and a value that specifies whether to use the managed version of the SHA1 algorithm.</para
           >
         </summary>
@@ -195,8 +217,12 @@
 
           
 
+          
+
           The secret key for <see
            cref="T:System.Security.Cryptography.HMACSHA1" />
+
+          
 
           
 
@@ -207,13 +233,19 @@
 
           
 
+          
+
           true to use the managed implementation of the SHA1 algorithm (the <see
            cref="T:System.Security.Cryptography.SHA1Managed" />
 
           
 
+          
+
            class); false to use the unmanaged implementation (the <see
            cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" />
+
+          
 
           
 

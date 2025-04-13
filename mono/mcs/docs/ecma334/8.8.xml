@@ -41,6 +41,8 @@ struct Point
 
     
 
+    
+
     only one object is instantiated-the one for the array. The Point instances are allocated in-line within the array. This optimization can be misused. Using structs instead of classes can also make an application run slower or take up more memory, as passing a struct instance by value causes a copy of that struct to be created. </paragraph
   >
 </clause>

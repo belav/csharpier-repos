@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -34,6 +36,8 @@
         <summary
           >Represents the public <b
           >G</b>
+
+          
 
           
 
@@ -60,6 +64,8 @@
 
           
 
+          
+
            parameter of the Diffie-Hellman algorithm.</summary
         >
         <remarks>To be added</remarks>
@@ -80,6 +86,8 @@
         <summary
           >Represents the private <b
           >X</b>
+
+          
 
           
 

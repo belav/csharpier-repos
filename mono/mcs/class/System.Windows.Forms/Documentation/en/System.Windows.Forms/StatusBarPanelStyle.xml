@@ -18,8 +18,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          will be displayed. <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
          objects support displaying images or a different font from the rest of the <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -48,8 +60,12 @@
 
         
 
+        
+
          control, while system-drawn <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -58,8 +74,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -68,13 +88,19 @@
 
         
 
+        
+
         , use the <see
          cref="E:System.Windows.Forms.StatusBar.DrawItem" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -89,8 +115,12 @@
 
         
 
+        
+
          object on a <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -111,6 +141,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -135,6 +167,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 

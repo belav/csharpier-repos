@@ -38,8 +38,12 @@
 
         
 
+        
+
          method of a component sited in design mode. Designers and other objects can add or remove services at design time through the <see
          cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >Service containers can be contained by other service containers, forming a tree of service containers. By default, the <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 
@@ -93,10 +99,14 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +147,8 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="serviceInstance">
@@ -144,8 +156,12 @@
 
           
 
+          
+
           An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref
            name="serviceType" />
+
+          
 
           
 
@@ -187,6 +203,8 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="callback">
@@ -194,10 +212,14 @@
 
           
 
+          
+
           A callback object that is used to create the service. This allows a service to be declared as available, but delays the creation of the object until the service is requested. </param
         >
         <param name="promote">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,10 +261,14 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="serviceInstance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,10 +277,14 @@
 
           
 
+          
+
            parameter. </param
         >
         <param name="promote">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,6 +318,8 @@
         </summary>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,10 +360,14 @@
 
           
 
+          
+
           The type of service to remove. </param
         >
         <param name="promote">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

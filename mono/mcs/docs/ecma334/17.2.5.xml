@@ -13,8 +13,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -44,6 +52,8 @@
       <list_item
         > An instance function member (method, property, indexer, instance constructor, or destructor) operates on a given instance of the class, and this instance can be accessed as this (<hyperlink
         >14.5.7</hyperlink>
+
+        
 
         
 
@@ -88,8 +98,12 @@ class Test
 
       
 
+      
+
        (<hyperlink
       >14.5.2</hyperlink>
+
+      
 
       
 
@@ -98,13 +112,19 @@ class Test
 
       
 
+      
+
       . The Main method shows that in a <non_terminal
        where="14.5.4">member-access</non_terminal>
 
       
 
+      
+
        (<hyperlink
       >14.5.4</hyperlink>
+
+      
 
       
 

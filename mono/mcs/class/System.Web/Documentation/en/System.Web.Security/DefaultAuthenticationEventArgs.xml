@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is used to supply event values to the <system
         >DefaultAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          constructs a <see
          cref="T:System.Web.Security.DefaultAuthenticationEventArgs" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          and passes it to the <system
         >DefaultAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -64,6 +76,8 @@
       <para
         >Provides data for the <system
         >DefaultAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
             
 
+            
+
              object constructs a <see
              cref="T:System.Web.Security.DefaultAuthenticationEventArgs" />
+
+            
 
             
 
@@ -101,8 +119,12 @@
 
             
 
+            
+
              and passes it to the <system
             >DefaultAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -114,8 +136,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.DefaultAuthenticationEventArgs" />
+
+            
 
             
 
@@ -124,8 +150,12 @@
 
             
 
+            
+
              event to set the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -134,8 +164,12 @@
 
             
 
+            
+
              to a custom <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 
@@ -144,8 +178,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -154,8 +192,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.Security.DefaultAuthenticationModule" />
+
+            
 
             
 
@@ -164,13 +206,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.HttpContext" />
 
             
 
+            
+
              to a <see
              cref="T:System.Security.Principal.GenericPrincipal" />
+
+            
 
             
 
@@ -182,13 +230,19 @@
 
             
 
+            
+
              event is raised after the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
+            
+
              event and before the <see
              cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+            
 
             
 
@@ -199,8 +253,12 @@
 
             
 
+            
+
              section that depends on the user name to deny or allow access to your application, modifying the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -209,8 +267,12 @@
 
             
 
+            
+
              can affect the behavior of your application. Be sure that the user name you set during the <system
             >DefaultAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -218,6 +280,8 @@
              type="text/html">
               <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
             </format>
+
+            
 
             
 
@@ -232,11 +296,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +336,12 @@
 
             
 
+            
+
              provides access to <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -278,8 +350,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -291,6 +367,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 

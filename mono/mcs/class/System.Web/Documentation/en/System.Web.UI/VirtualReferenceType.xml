@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration describes the type of resource referenced by a virtual path. The <see
          cref="T:System.Web.UI.VirtualReferenceType" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          enumeration directly. Extensibility developers might use the <see
          cref="T:System.Web.UI.VirtualReferenceType" />
+
+        
 
         
 
@@ -41,8 +49,12 @@
 
         
 
+        
+
          class and overriding its <see
          cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)" />
+
+        
 
         
 

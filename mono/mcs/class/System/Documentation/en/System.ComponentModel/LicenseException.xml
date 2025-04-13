@@ -31,8 +31,12 @@
 
         
 
+        
+
          method throws <see
          cref="T:System.ComponentModel.LicenseException" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
          type="text/html">
           <a href="8e66c1ed-a445-4b26-8185-990b6e2bbd57">How to: License Components and Controls</a>
         </format>
+
+        
 
         
 
@@ -81,6 +87,8 @@
 
             
 
+            
+
              class for the type of component that was denied a license. </para
           >
         </summary>
@@ -89,8 +97,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -126,13 +138,19 @@
 
             
 
+            
+
              class with the given <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -144,8 +162,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -153,6 +175,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +214,8 @@
 
             
 
+            
+
              class for the type and the instance of the component that was denied a license.</para
           >
         </summary>
@@ -198,8 +224,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -207,6 +237,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +277,8 @@
 
             
 
+            
+
              class for the type and the instance of the component that was denied a license, along with a message to display.</para
           >
         </summary>
@@ -253,8 +287,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -265,10 +303,14 @@
 
           
 
+          
+
           The instance of the component that was not granted a license. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,6 +350,8 @@
 
             
 
+            
+
              class for the type and the instance of the component that was denied a license, along with a message to display and the original exception thrown.</para
           >
         </summary>
@@ -316,8 +360,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -328,10 +376,14 @@
 
           
 
+          
+
           The instance of the component that was not granted a license. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,8 +394,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -382,6 +438,8 @@
 
             
 
+            
+
              with information about the exception.</para
           >
         </summary>
@@ -390,8 +448,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -399,6 +461,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

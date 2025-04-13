@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -31,13 +33,19 @@
 
     
 
+    
+
     , identifier, and <non_terminal
      where="17.5.1">formal-parameter-list</non_terminal>
 
     
 
+    
+
      of an interface method declaration have the same meaning as those of a method declaration in a class (<hyperlink
     >17.5</hyperlink>
+
+    
 
     
 

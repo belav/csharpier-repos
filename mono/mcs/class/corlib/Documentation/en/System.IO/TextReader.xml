@@ -47,13 +47,19 @@
 
         
 
+        
+
          is the abstract base class of <see
          cref="T:System.IO.StreamReader" />
 
         
 
+        
+
          and <see
          cref="T:System.IO.StringReader" />
+
+        
 
         
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -129,11 +137,15 @@
 
             
 
+            
+
              method and passes it a true value.</para
           >
           <para
             >Flushing the text reader will not flush its underlying encoder unless you explicitly call Close. Setting the <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -146,8 +158,12 @@
 
               
 
+              
+
                method. Instead, override the <see
                cref="M:System.IO.TextReader.Dispose(System.Boolean)" />
+
+              
 
               
 
@@ -160,6 +176,8 @@
           <para
             >Closes the <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -194,8 +212,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -204,8 +226,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -214,13 +240,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.IO.TextReader" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -236,10 +268,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -252,8 +288,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.IO.TextReader" />
+
+              
 
               
 
@@ -262,8 +302,12 @@
 
               
 
+              
+
                object's <see
                cref="M:System.Object.Finalize" />
+
+              
 
               
 
@@ -276,6 +320,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -315,8 +361,12 @@
 
             
 
+            
+
              method. By default, this method specifies the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -325,8 +375,12 @@
 
             
 
+            
+
              specifies the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -338,8 +392,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -354,11 +412,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,6 +459,8 @@
 
             
 
+            
+
              text reader is similar to reading from the end of a stream: </para
           >
           <list type="bullet">
@@ -407,8 +471,12 @@
 
                 
 
+                
+
                  and <see
                  cref="M:System.IO.TextReader.Peek" />
+
+                
 
                 
 
@@ -422,6 +490,8 @@
 
                 
 
+                
+
                  method returns zero.</para
               >
             </item>
@@ -432,6 +502,8 @@
 
                 
 
+                
+
                  method returns null.</para
               >
             </item>
@@ -439,6 +511,8 @@
               <para
                 >The <see
                  cref="M:System.IO.TextReader.ReadToEnd" />
+
+                
 
                 
 
@@ -481,8 +555,12 @@
 
             
 
+            
+
              method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -494,6 +572,8 @@
 
             
 
+            
+
              is not changed by this operation. The returned value is -1 if no more characters are available. The default implementation returns -1.</para
           >
           <para
@@ -502,13 +582,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.Peek" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.Peek" />
+
+            
 
             
 
@@ -553,13 +639,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.Read" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -610,8 +702,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -623,14 +719,20 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
            ) &gt; <paramref
            name="buffer" />
           <see langword="." />
+
+          
 
           
 
@@ -642,6 +744,8 @@
 
             
 
+            
+
             0<paramref
              name=" " />
           </para>
@@ -650,10 +754,14 @@
 
             
 
+            
+
              or-</para
           >
           <para>
             <paramref name="count &lt; " />
+
+            
 
             
 
@@ -669,8 +777,12 @@
 
             
 
+            
+
              characters are read or the end of the file is reached. <see
              cref="M:System.IO.TextReader.ReadBlock(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -682,13 +794,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.Read(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.Read(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -707,6 +825,8 @@
 
             
 
+            
+
             , depending on whether the data is available within the reader. This method returns 0 (zero) if it is called when no more characters are left to read.</para
           >
         </returns>
@@ -715,8 +835,12 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -725,8 +849,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -737,8 +865,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -746,6 +878,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -784,6 +918,8 @@
 
             
 
+            
+
              parameter are read or the end of the file is reached. </para
           >
           <para
@@ -792,13 +928,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.ReadAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.ReadAsync(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -817,6 +959,8 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the text has been reached.</para
           >
         </returns>
@@ -825,8 +969,12 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -835,8 +983,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -847,8 +999,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -856,6 +1012,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -896,8 +1054,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -909,14 +1071,20 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
            - 1) &gt; <paramref
            name="buffer" />
           <see langword="." />
+
+          
 
           
 
@@ -928,6 +1096,8 @@
 
             
 
+            
+
             0<paramref
              name=" " />
           </para>
@@ -936,10 +1106,14 @@
 
             
 
+            
+
              or-</para
           >
           <para>
             <paramref name="count &lt; " />
+
+            
 
             
 
@@ -955,6 +1129,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -963,8 +1139,12 @@
 
             
 
+            
+
              characters are read, or all characters have been read. This is a blocking version of <see
              cref="M:System.IO.TextReader.Read" />
+
+            
 
             
 
@@ -983,6 +1163,8 @@
 
             
 
+            
+
             , depending on whether all input characters have been read.</para
           >
         </returns>
@@ -991,8 +1173,12 @@
 
           
 
+          
+
           When this method returns, this parameter contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -1001,8 +1187,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1013,8 +1203,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1022,6 +1216,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1060,6 +1256,8 @@
 
             
 
+            
+
              parameter are read, or the end of the text has been reached. </para
           >
         </remarks>
@@ -1075,6 +1273,8 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the text has been reached.</para
           >
         </returns>
@@ -1083,8 +1283,12 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -1093,8 +1297,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1105,8 +1313,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1114,6 +1326,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1152,6 +1366,8 @@
 
           
 
+          
+
           .</exception
         >
         <remarks>
@@ -1159,6 +1375,8 @@
           <para
             >A line is defined as a sequence of characters followed by a carriage return (0x000d), a line feed (0x000a), a carriage return followed by a line feed, <see
              cref="P:System.Environment.NewLine" />
+
+            
 
             
 
@@ -1170,8 +1388,12 @@
 
             
 
+            
+
              exception, the reader's position in the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1180,13 +1402,19 @@
 
             
 
+            
+
              buffer are discarded. Because the position of the reader in the stream cannot be changed, the characters that were already read are unrecoverable and can be accessed only by reinitializing the <see
              cref="T:System.IO.TextReader" />
 
             
 
+            
+
              object. If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1198,6 +1426,8 @@
 
             
 
+            
+
              method and store the read characters in a preallocated buffer.</para
           >
           <para
@@ -1206,13 +1436,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.ReadLine" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.ReadLine" />
+
+            
 
             
 
@@ -1256,13 +1492,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.ReadLineAsync" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.ReadLineAsync" />
+
+            
 
             
 
@@ -1278,6 +1520,8 @@
           <para
             >A task that represents the asynchronous read operation. The value of the <paramref
              name="TResult" />
+
+            
 
             
 
@@ -1317,6 +1561,8 @@
 
           
 
+          
+
           .</exception
         >
         <remarks>
@@ -1327,8 +1573,12 @@
 
             
 
+            
+
              exception, the reader's position in the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1337,13 +1587,19 @@
 
             
 
+            
+
              buffer are discarded. Because the position of the reader in the stream cannot be changed, the characters that were already read are unrecoverable and can be accessed only by reinitializing the <see
              cref="T:System.IO.TextReader" />
 
             
 
+            
+
             . If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1355,6 +1611,8 @@
 
             
 
+            
+
              method and store the read characters in a preallocated buffer.</para
           >
           <para
@@ -1363,13 +1621,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.ReadToEnd" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -1413,13 +1677,19 @@
 
             
 
+            
+
              class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
              cref="M:System.IO.TextReader.ReadToEndAsync" />
 
             
 
+            
+
              method, see the <see
              cref="M:System.IO.StreamReader.ReadToEndAsync" />
+
+            
 
             
 
@@ -1435,6 +1705,8 @@
           <para
             >A task that represents the asynchronous read operation. The value of the <paramref
              name="TResult" />
+
+            
 
             
 
@@ -1475,8 +1747,12 @@
 
           
 
+          
+
            parameter is <see
            langword="null" />
+
+          
 
           
 
@@ -1487,6 +1763,8 @@
           <para
             >The current method returns a class that wraps around the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1505,11 +1783,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1534,8 +1816,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1547,6 +1833,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 

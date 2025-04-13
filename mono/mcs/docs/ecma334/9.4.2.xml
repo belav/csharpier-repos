@@ -7,6 +7,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.4.2">available-identifier</non_terminal>
@@ -23,10 +25,14 @@
 
       
 
+      
+
        :: <rhs
 
         >An <non_terminal
          where="9.4.2">identifier-or-keyword</non_terminal>
+
+        
 
         
 
@@ -38,6 +44,8 @@
       <name>
         <non_terminal where="9.4.2">identifier-or-keyword</non_terminal>
       </name>
+
+      
 
       
 
@@ -55,6 +63,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.4.2">letter-character</non_terminal>
@@ -67,8 +77,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -88,6 +102,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.4.2">letter-character</non_terminal>
@@ -112,11 +128,15 @@
 
       
 
+      
+
        :: <rhs
       >A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs>
       <rhs
         >A <non_terminal
          where="9.4.1">unicode-escape-sequence</non_terminal>
+
+        
 
         
 
@@ -130,11 +150,15 @@
 
       
 
+      
+
        :: <rhs
       >A Unicode character of classes Mn or Mc </rhs>
       <rhs
         >A <non_terminal
          where="9.4.1">unicode-escape-sequence</non_terminal>
+
+        
 
         
 
@@ -148,11 +172,15 @@
 
       
 
+      
+
        :: <rhs
       >A Unicode character of the class Nd </rhs>
       <rhs
         >A <non_terminal
          where="9.4.1">unicode-escape-sequence</non_terminal>
+
+        
 
         
 
@@ -166,11 +194,15 @@
 
       
 
+      
+
        :: <rhs
       >A Unicode character of the class Pc </rhs>
       <rhs
         >A <non_terminal
          where="9.4.1">unicode-escape-sequence</non_terminal>
+
+        
 
         
 
@@ -184,11 +216,15 @@
 
       
 
+      
+
        :: <rhs
       >A Unicode character of the class Cf </rhs>
       <rhs
         >A <non_terminal
          where="9.4.1">unicode-escape-sequence</non_terminal>
+
+        
 
         
 
@@ -232,6 +268,8 @@ class Class1
 
       
 
+      
+
       defines a class named "class" with a static method named "static" that takes a parameter named "bool". Note that since Unicode escapes are not permitted in keywords, the token "cl\u0061ss" is an identifier, and is the same identifier as "@class". end example]</example
     >
   </paragraph>
@@ -245,11 +283,15 @@ class Class1
 
         
 
+        
+
          is transformed into its corresponding Unicode character. </list_item
       >
       <list_item
         > Any <non_terminal
          where="9.4.2">formatting-character</non_terminal>
+
+        
 
         
 

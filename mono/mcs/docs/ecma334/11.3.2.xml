@@ -6,8 +6,12 @@
 
     
 
+    
+
      or from any <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
      that implements the <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -26,11 +34,15 @@
 
     
 
+    
+
     , and then copying the value out of the instance. </paragraph
   >
   <paragraph
     >Referring to the imaginary boxing class described in the previous section, an unboxing conversion of an object box to a <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 
@@ -46,6 +58,8 @@ int i = (int)box;
 
       
 
+      
+
       conceptually correspond to <code_example
       >
         <![CDATA[
@@ -53,6 +67,8 @@ object box = new int_Box(123);
 int i = ((int_Box)box).value;  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -65,8 +81,12 @@ int i = ((int_Box)box).value;
 
     
 
+    
+
      to succeed at run-time, the value of the source operand must be a reference to an object that was previously created by boxing a value of that <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          class, and any derived class, defines the <see
          cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Web.UI.Design.TemplateGroupCollection" />
+
+        
 
         
 
@@ -48,11 +56,15 @@
 
         
 
+        
+
          property to determine how many groups are in the collection.</para
       >
       <para
         >Additionally, use the <see
          cref="T:System.Web.UI.Design.TemplateGroupCollection" />
+
+        
 
         
 
@@ -66,6 +78,8 @@
 
             
 
+            
+
              method to add a single group to the collection. </para
           >
         </item>
@@ -73,6 +87,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Insert(System.Int32,System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -86,6 +102,8 @@
 
             
 
+            
+
              method to remove a group. </para
           >
         </item>
@@ -93,6 +111,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -106,6 +126,8 @@
 
             
 
+            
+
              method to determine whether a particular group is already in the collection. </para
           >
         </item>
@@ -113,6 +135,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.IndexOf(System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -126,6 +150,8 @@
 
             
 
+            
+
              indexer to get or set the group at a particular index, using array notation.</para
           >
         </item>
@@ -133,6 +159,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.AddRange(System.Web.UI.Design.TemplateGroupCollection)" />
+
+            
 
             
 
@@ -144,8 +172,12 @@
 
             
 
+            
+
              object that you retrieve through the <see
              cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" />
+
+            
 
             
 
@@ -159,6 +191,8 @@
 
             
 
+            
+
              method to remove all groups from the collection.</para
           >
         </item>
@@ -169,6 +203,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.UI.Design.TemplateGroup" />
+
+        
 
         
 
@@ -193,8 +229,12 @@
 
             
 
+            
+
              constructor to create an empty collection. You can add elements to the collection by using the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Add(System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -203,8 +243,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Insert(System.Int32,System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -216,6 +260,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.TemplateGroupCollection" />
+
+            
 
             
 
@@ -248,8 +294,12 @@
 
             
 
+            
+
              method adds the specified <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -258,8 +308,12 @@
 
             
 
+            
+
              object to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Insert(System.Int32,System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -268,6 +322,8 @@
           <para
             >To add multiple groups to the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.AddRange(System.Web.UI.Design.TemplateGroupCollection)" />
+
+            
 
             
 
@@ -282,6 +338,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -293,6 +351,8 @@
 
             
 
+            
+
              was added to the collection.</para
           >
         </returns>
@@ -301,8 +361,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -334,8 +398,12 @@
 
             
 
+            
+
              method adds multiple groups to the collection. To add a single <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -344,13 +412,19 @@
 
             
 
+            
+
              method. To add a <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
 
             
 
+            
+
              object to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Insert(System.Int32,System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -365,8 +439,12 @@
 
             
 
+            
+
              object to the current <see
              cref="T:System.Web.UI.Design.TemplateGroupCollection" />
+
+            
 
             
 
@@ -378,8 +456,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.TemplateGroupCollection" />
+
+          
 
           
 
@@ -406,13 +488,19 @@
 
             
 
+            
+
              method to remove all groups from the collection. To remove a specific group from the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Remove(System.Web.UI.Design.TemplateGroup)" />
 
             
 
+            
+
              method. To remove a group at a particular index, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -449,13 +537,19 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -467,8 +561,12 @@
 
             
 
+            
+
              method performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.TemplateGroupCollection.Count" />
+
+            
 
             
 
@@ -487,6 +585,8 @@
 
             
 
+            
+
              is in the collection; otherwise, false.</para
           >
         </returns>
@@ -495,8 +595,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -529,8 +633,12 @@
 
             
 
+            
+
              object in the same order in which the group elements are indexed within the <see
              cref="T:System.Web.UI.Design.TemplateGroupCollection" />
+
+            
 
             
 
@@ -546,13 +654,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the copied groups. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -563,8 +677,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -591,6 +709,8 @@
 
             
 
+            
+
              property generally is used to determine the upper boundary index when iterating through objects in the collection. Because the collection indexes are zero-based, the first element is at index 0 and the last element is at index Count-1.</para
           >
         </remarks>
@@ -599,6 +719,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -631,13 +753,19 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -649,8 +777,12 @@
 
             
 
+            
+
              performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.TemplateGroupCollection.Count" />
+
+            
 
             
 
@@ -665,6 +797,8 @@
 
             
 
+            
+
              object within the collection.</para
           >
         </summary>
@@ -676,8 +810,12 @@
 
             
 
+            
+
              within the collection; otherwise, -1, if <paramref
              name="group" />
+
+            
 
             
 
@@ -689,8 +827,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -723,8 +865,12 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -733,13 +879,19 @@
 
             
 
+            
+
              to the end of the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Add(System.Web.UI.Design.TemplateGroup)" />
 
             
 
+            
+
              method. To add multiple groups to the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.AddRange(System.Web.UI.Design.TemplateGroupCollection)" />
+
+            
 
             
 
@@ -757,6 +909,8 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
@@ -765,8 +919,12 @@
 
           
 
+          
+
           The zero-based index within the collection at which to insert <paramref
            name="group" />
+
+          
 
           
 
@@ -777,8 +935,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -832,8 +994,12 @@
 
             
 
+            
+
              method removes the first occurrence of <paramref
              name="group" />
+
+            
 
             
 
@@ -842,8 +1008,12 @@
 
             
 
+            
+
              object does not contain <paramref
              name="group" />
+
+            
 
             
 
@@ -855,13 +1025,19 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.TemplateGroup" />
+
+            
 
             
 
@@ -873,8 +1049,12 @@
 
             
 
+            
+
              method performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.TemplateGroupCollection.Count" />
+
+            
 
             
 
@@ -886,8 +1066,12 @@
 
             
 
+            
+
              method. To remove all the groups from the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Clear" />
+
+            
 
             
 
@@ -905,6 +1089,8 @@
 
             
 
+            
+
              object from the collection. </para
           >
         </summary>
@@ -913,8 +1099,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -943,13 +1133,19 @@
 
             
 
+            
+
              method to remove a group at a particular index from the collection. To remove a specified group from the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Remove(System.Web.UI.Design.TemplateGroup)" />
 
             
 
+            
+
              method. To remove all the groups from the collection, use the <see
              cref="M:System.Web.UI.Design.TemplateGroupCollection.Clear" />
+
+            
 
             
 
@@ -967,6 +1163,8 @@
 
             
 
+            
+
              object at the specified index within the collection.</para
           >
         </summary>
@@ -975,8 +1173,12 @@
 
           
 
+          
+
           The zero-based index within the collection of the <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -1006,8 +1208,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1022,6 +1228,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1030,13 +1238,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the copied groups. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1047,8 +1261,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1075,8 +1293,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1088,6 +1310,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.Count" />
+
+            
 
             
 
@@ -1118,8 +1342,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1131,6 +1359,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -1161,8 +1391,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1174,6 +1408,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1204,8 +1440,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1220,6 +1460,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1228,6 +1470,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1257,8 +1501,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1273,6 +1521,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1284,6 +1534,8 @@
 
             
 
+            
+
              was added to the collection.</para
           >
         </returns>
@@ -1292,8 +1544,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -1320,8 +1576,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1333,6 +1593,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Clear" />
+
+            
 
             
 
@@ -1362,8 +1624,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1378,6 +1644,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1389,6 +1657,8 @@
 
             
 
+            
+
              is in the collection; otherwise, false.</para
           >
         </returns>
@@ -1397,8 +1667,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -1427,8 +1701,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1443,6 +1721,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1454,8 +1734,12 @@
 
             
 
+            
+
              within the collection; otherwise, -1, if <paramref
              name="o" />
+
+            
 
             
 
@@ -1467,8 +1751,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.TemplateGroup" />
+
+          
 
           
 
@@ -1498,8 +1786,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1514,6 +1806,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1522,8 +1816,12 @@
 
           
 
+          
+
           The zero-based index within the collection at which to insert <paramref
            name="o" />
+
+          
 
           
 
@@ -1531,6 +1829,8 @@
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1557,8 +1857,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1570,6 +1874,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1597,8 +1903,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1610,6 +1920,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -1661,8 +1973,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1677,11 +1993,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1710,8 +2030,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1726,11 +2050,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

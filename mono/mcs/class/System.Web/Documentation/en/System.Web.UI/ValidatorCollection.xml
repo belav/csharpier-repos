@@ -29,13 +29,19 @@
 
         
 
+        
+
          reference is associated with a validation server control contained on the requested page. These controls add themselves to this collection when the <see
          cref="E:System.Web.UI.Control.Init" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -54,8 +64,12 @@
 
         
 
+        
+
          class inherits both of these methods from the <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -67,8 +81,12 @@
 
         
 
+        
+
          property. If the tested condition of any validator in this collection fails, the <see
          cref="P:System.Web.UI.Page.IsValid" />
+
+        
 
         
 
@@ -80,6 +98,8 @@
       <para
         >Exposes an array of <see
          cref="T:System.Web.UI.IValidator" />
+
+        
 
         
 
@@ -100,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ValidatorCollection" />
+
+            
 
             
 
@@ -133,8 +155,12 @@
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -143,8 +169,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.UI.IValidator" />
+
+            
 
             
 
@@ -153,13 +183,19 @@
 
             
 
+            
+
              method is called together with the <see
              cref="M:System.Web.UI.IValidator.Validate" />
 
             
 
+            
+
              methods of all other validators. All validators then share in determining whether the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -174,11 +210,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="validator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -212,6 +252,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -221,6 +263,8 @@
         </returns>
         <param name="validator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,10 +297,14 @@
 
           
 
+          
+
           The collection to which the validation server control is added. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,8 +354,12 @@
 
             
 
+            
+
              instance that can be iterated through easily to get each item in the <see
              cref="T:System.Web.UI.ValidatorCollection" />
+
+            
 
             
 
@@ -322,8 +374,12 @@
 
             
 
+            
+
              instance for the <see
              cref="T:System.Web.UI.ValidatorCollection" />
+
+            
 
             
 
@@ -335,6 +391,8 @@
           <para
             >The <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -364,6 +422,8 @@
 
             
 
+            
+
              collection is read-only.</para
           >
         </summary>
@@ -390,6 +450,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Web.UI.ValidatorCollection" />
+
+            
 
             
 
@@ -447,11 +509,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="validator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,6 +543,8 @@
           <para
             >Gets an object that can be used to synchronize the <see
              cref="T:System.Web.UI.ValidatorCollection" />
+
+            
 
             
 

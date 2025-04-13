@@ -6,8 +6,12 @@
 
     
 
+    
+
      and <keyword
     >long</keyword>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
      to <keyword
     >long</keyword>
+
+    
 
     
 
@@ -38,13 +46,19 @@ class Test
 
     
 
+    
+
     implicitly converts an <keyword
     >int</keyword>
 
     
 
+    
+
      to a <keyword
     >long</keyword>
+
+    
 
     
 
@@ -68,13 +82,19 @@ class Test
 
     
 
+    
+
     uses an explicit conversion to convert a <keyword
     >long</keyword>
 
     
 
+    
+
      to an <keyword
     >int</keyword>
+
+    
 
     
 
@@ -84,6 +104,8 @@ class Test
 (int) 9223372036854775807 = -1  
 ]]>
     </code_example>
+
+    
 
     
 

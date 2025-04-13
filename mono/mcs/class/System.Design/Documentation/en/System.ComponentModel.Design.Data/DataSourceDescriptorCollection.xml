@@ -25,6 +25,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -44,6 +46,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+            
 
             
 
@@ -77,6 +81,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -88,6 +94,8 @@
 
             
 
+            
+
              that was added to the collection.</para
           >
         </returns>
@@ -96,8 +104,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+
+          
 
           
 
@@ -130,8 +142,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+
+            
 
             
 
@@ -146,6 +162,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
@@ -154,8 +172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+
+          
 
           
 
@@ -189,8 +211,12 @@
 
             
 
+            
+
              values to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -202,13 +228,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the values copied from the <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+          
 
           
 
@@ -219,8 +251,12 @@
 
           
 
+          
+
           The index in the <paramref
            name="array" />
+
+          
 
           
 
@@ -253,8 +289,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+            
 
             
 
@@ -269,13 +309,19 @@
 
             
 
+            
+
              of <paramref
              name="value" />
 
             
 
+            
+
              in the <see
              cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+            
 
             
 
@@ -287,8 +333,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+
+          
 
           
 
@@ -322,8 +372,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+            
 
             
 
@@ -335,8 +389,12 @@
 
           
 
+          
+
           The zero-based index where <paramref
            name="value" />
+
+          
 
           
 
@@ -347,8 +405,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+
+          
 
           
 
@@ -403,8 +465,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+            
 
             
 
@@ -416,13 +482,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.ComponentModel.Design.Data.DataSourceDescriptorCollection" />
+
+          
 
           
 

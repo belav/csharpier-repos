@@ -31,8 +31,12 @@
 
         
 
+        
+
          interface is implemented by classes containing methods that can operate asynchronously. It is the return type of methods that initiate an asynchronous operation, such as <see
          cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         . <see
          cref="T:System.IAsyncResult" />
+
+        
 
         
 
@@ -51,11 +59,15 @@
 
         
 
+        
+
          delegates when an asynchronous operation completes.</para
       >
       <para
         >An object that supports the <see
          cref="T:System.IAsyncResult" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
           
 
+          
+
            class is the implementation of <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -82,12 +98,16 @@
 
         
 
+        
+
          interface is used, see the <format
          type="text/html">
           <a href="41972034-92ED-450A-9664-AB93FCC6F1FB"
             >Calling Synchronous Methods Asynchronously</a
           >
         </format>
+
+        
 
         
 
@@ -122,6 +142,8 @@
           <para
             >The supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -170,6 +192,8 @@
 
             
 
+            
+
              that is signaled when an asynchronous operation completes.</para
           >
         </value>
@@ -181,8 +205,12 @@
 
             
 
+            
+
              until the operation concludes. The return value can be used to perform a <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -191,8 +219,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -204,13 +236,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Threading.AutoResetEvent" />
 
             
 
+            
+
             , and <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -222,6 +260,8 @@
           <para
             >Gets a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -255,9 +295,13 @@
 
             
 
+            
+
              if the operation synchronously;
    otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -269,6 +313,8 @@
           <para
             >If the synchronous completion of the call is detected in the <see
              cref="T:System.AsyncCallback" />
+
+            
 
             
 
@@ -306,9 +352,13 @@
 
             
 
+            
+
              if the operation has completed;
    otherwise <see
              langword="false" />
+
+            
 
             
 

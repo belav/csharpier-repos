@@ -22,6 +22,8 @@
 
         
 
+        
+
          class either to modify the default behavior of a service or individual endpoint, or to insert objects that implement custom modifications to one or both of the following service processes:</para
       >
       <list type="ordered">
@@ -38,6 +40,8 @@
 
         
 
+        
+
          object has one endpoint dispatcher and an associated channel dispatcher; in addition, each client that participates in duplex communication also has an endpoint dispatcher and channel dispatcher for each callback endpoint.</para
       >
       <para
@@ -46,8 +50,12 @@
 
         
 
+        
+
          enables you to intercept and extend the channel or endpoint dispatcher for all messages across a particular contract, even when a message is not recognized. When a message arrives that does not match any messages declared in the contract it is dispatched to the operation that was returned by the <see
          cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
+
+        
 
         
 
@@ -56,11 +64,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >There are four main areas of dispatcher extensibility exposed by the <see
          cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
             
 
+            
+
              and those of the associated channel dispatcher returned by the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ChannelDispatcher" />
+
+            
 
             
 
@@ -84,8 +100,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" />
+
+            
 
             
 
@@ -99,8 +119,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.OperationSelector" />
+
+            
 
             
 
@@ -109,8 +133,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ErrorHandlers" />
+
+            
 
             
 
@@ -124,13 +152,19 @@
 
             
 
+            
+
              property. This category includes the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
 
             
 
+            
+
              and the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
+
+            
 
             
 
@@ -146,12 +180,16 @@
 
                 
 
+                
+
                  indicates where audit events are written. </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ImpersonateCallerForAllOperations" />
+
+                
 
                 
 
@@ -164,8 +202,12 @@
 
                 
 
+                
+
                  controls whether successful message authentication events are written to the event log specified by <see
                  cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
+
+                
 
                 
 
@@ -178,8 +220,12 @@
 
                 
 
+                
+
                  controls how the <see
                  cref="P:System.Threading.Thread.CurrentPrincipal" />
+
+                
 
                 
 
@@ -192,12 +238,16 @@
 
                 
 
+                
+
                  specifies how the auditing of authorization events is performed.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SuppressAuditFailure" />
+
+                
 
                 
 
@@ -213,8 +263,12 @@
 
         
 
+        
+
          property or inserted into a collection by a service behavior (an object that implements <see
          cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+        
 
         
 
@@ -223,13 +277,19 @@
 
         
 
+        
+
         ), or an endpoint behavior (an object that implements <see
          cref="T:System.ServiceModel.Description.IEndpointBehavior" />
 
         
 
+        
+
         ). Then the installing behavior object is added to the appropriate collection of behaviors either programmatically or by implementing a custom <see
          cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+
+        
 
         
 
@@ -269,8 +329,12 @@
 
             
 
+            
+
              property to false, the channel must be closed by some other mechanism. In this case, you must add a custom session shutdown handler to the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" />
+
+            
 
             
 
@@ -279,6 +343,8 @@
           <para
             >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" />
+
+            
 
             
 
@@ -317,8 +383,12 @@
 
             
 
+            
+
              to add custom extension objects that view or modify the conversion of parameters to outbound messages and response messages back into return values. For details, see <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+            
 
             
 
@@ -330,6 +400,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+            
 
             
 
@@ -362,6 +434,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -424,6 +498,8 @@
 
             
 
+            
+
              property to obtain the endpoint dispatcher associated with this dispatch runtime to modify or customize endpoint-specific execution.</para
           >
         </remarks>
@@ -432,6 +508,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+            
 
             
 
@@ -463,6 +541,8 @@
           <para
             >Use this property to add a custom implementation of <see
              cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+            
 
             
 
@@ -501,6 +581,8 @@
 
             
 
+            
+
              allows third-party channel developers who use a proprietary transaction flow mechanism for their channel to introduce their transaction into indigo1. If this property is set to true, the transaction is ignored when executing the service method. </para
           >
         </remarks>
@@ -509,6 +591,8 @@
           <para
             >Gets or sets whether to ignore the <see
              cref="T:System.ServiceModel.Channels.TransactionMessageProperty" />
+
+            
 
             
 
@@ -543,8 +627,12 @@
 
             
 
+            
+
              property to control whether impersonation is performed when an operation's <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
+
+            
 
             
 
@@ -553,13 +641,19 @@
 
             
 
+            
+
             . An exception is thrown if the property is true but an operation's <see
              cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
 
             
 
+            
+
              property value is <see
              cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />
+
+            
 
             
 
@@ -571,8 +665,12 @@
 
             
 
+            
+
              property value is <see
              cref="F:System.ServiceModel.ImpersonationOption.Required" />
+
+            
 
             
 
@@ -611,8 +709,12 @@
 
             
 
+            
+
              object to this property to control the manner in which input sessions are closed. When a call to the <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+            
 
             
 
@@ -621,8 +723,12 @@
 
             
 
+            
+
              first returns null, (which indicates that the input session has been closed), the dispatcher invokes each <see
              cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+
+            
 
             
 
@@ -631,13 +737,19 @@
 
             
 
+            
+
              object. Custom <see
              cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
 
             
 
+            
+
              objects can use this <see
              cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+            
 
             
 
@@ -649,6 +761,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.IInputSessionShutdown" />
+
+            
 
             
 
@@ -683,8 +797,12 @@
 
             
 
+            
+
              property to add a custom initializer that can inspect or modify an <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -693,8 +811,12 @@
 
             
 
+            
+
              objects are created is controlled by the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -709,8 +831,12 @@
 
             
 
+            
+
              objects that can be used to inspect or modify an <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -746,8 +872,12 @@
 
             
 
+            
+
              to be used by the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -782,8 +912,12 @@
 
             
 
+            
+
              interface and assign the implementation to the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
+
+            
 
             
 
@@ -795,8 +929,12 @@
 
             
 
+            
+
              method is invoked once, when the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -805,8 +943,12 @@
 
             
 
+            
+
              method is also invoked once, when the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -818,8 +960,12 @@
 
             
 
+            
+
              object is closed. This can be configured by using the <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+
+            
 
             
 
@@ -828,8 +974,12 @@
 
             
 
+            
+
              method. If this is done, the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -838,8 +988,12 @@
 
             
 
+            
+
              method. If a new message arrives after the instance has been released, a new instance is created using the <see
              cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+
+            
 
             
 
@@ -851,6 +1005,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+
+            
 
             
 
@@ -885,6 +1041,8 @@
 
             
 
+            
+
              property to specify whether successful message authentication events are written to the event log. </para
           >
         </remarks>
@@ -893,6 +1051,8 @@
           <para
             >Gets or sets a value that specifies whether successful message authentication events are written to the event log specified by <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" />
+
+            
 
             
 
@@ -927,13 +1087,19 @@
 
             
 
+            
+
              property to attach custom <see
              cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
 
             
 
+            
+
              objects that can inspect or transform all messages that flow through the endpoint. Because the <see
              cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
+
+            
 
             
 
@@ -945,6 +1111,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
+
+            
 
             
 
@@ -979,8 +1147,12 @@
 
             
 
+            
+
              property to inspect or modify parameters, control parameter and return value serialization and deserialization, control operation invocation, and modify other behaviors for a single operation. For details, see <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -992,6 +1164,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -1026,13 +1200,19 @@
 
             
 
+            
+
              property to decide which operation receives a given message. The default operation selector returns the value of the action header for the message, which is used as the key to locate the correct <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
+            
+
             . If no matching operation is found, the invocation is dispatched to the return value from the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" />
+
+            
 
             
 
@@ -1047,8 +1227,12 @@
 
             
 
+            
+
              object that controls the selection of a destination <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -1083,13 +1267,19 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />
 
             
 
+            
+
             , the <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
+
+            
 
             
 
@@ -1101,13 +1291,19 @@
 
             
 
+            
+
              the <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
+            
+
              property is populated with a <see
              cref="T:System.Security.Principal.WindowsPrincipal" />
+
+            
 
             
 
@@ -1119,13 +1315,19 @@
 
             
 
+            
+
              the <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
+            
+
              property is populated with an <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 
@@ -1137,13 +1339,19 @@
 
             
 
+            
+
              the <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
 
             
 
+            
+
              property is populated by a custom <see
              cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+            
 
             
 
@@ -1155,6 +1363,8 @@
           <para
             >Gets or sets a value that specifies how the <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
+
+            
 
             
 
@@ -1189,8 +1399,12 @@
 
             
 
+            
+
              to specify that the <see
              cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+
+            
 
             
 
@@ -1230,8 +1444,12 @@
 
             
 
+            
+
              that is used by the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -1291,8 +1509,12 @@
 
             
 
+            
+
              value is <see
              cref="F:System.ServiceModel.AuditLevel.Success" />
+
+            
 
             
 
@@ -1301,8 +1523,12 @@
 
             
 
+            
+
              property. If this property has a value of <see
              cref="F:System.ServiceModel.AuditLevel.Failure" />
+
+            
 
             
 
@@ -1311,13 +1537,19 @@
 
             
 
+            
+
              property. If the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationAuditLevel" />
 
             
 
+            
+
              value is <see
              cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
+
+            
 
             
 
@@ -1357,8 +1589,12 @@
 
             
 
+            
+
              that provides authorization checking for the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -1394,8 +1630,12 @@
 
             
 
+            
+
              to be used by the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -1424,8 +1664,12 @@
 
             
 
+            
+
              to false if you want exceptions that occur during the course of writing the audit log to be re-thrown to the application. In the default case, only the <see
              cref="T:System.OutOfMemoryException" />
+
+            
 
             
 
@@ -1434,13 +1678,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Threading.ThreadAbortException" />
 
             
 
+            
+
             , and <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1507,8 +1757,12 @@
 
             
 
+            
+
              is true and there is an active transaction, the transaction is completed when the session closes. If <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" />
+
+            
 
             
 
@@ -1566,8 +1820,12 @@
 
             
 
+            
+
              is the operation indicated by the use of the "*" (asterisk) in the <see
              cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+            
 
             
 
@@ -1601,6 +1859,8 @@
           <para
             >Gets or sets the value of <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
+
+            
 
             
 

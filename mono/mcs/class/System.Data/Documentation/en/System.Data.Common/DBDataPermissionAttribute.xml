@@ -50,11 +50,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,6 +136,8 @@
 
             
 
+            
+
              property are the only connection string parameters allowed.</para
           >
         </summary>
@@ -157,6 +163,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -165,11 +173,15 @@
 
             
 
+            
+
              property is set to AllowOnly, no additional connection string parameters are allowed.</para
           >
           <para
             >If no key restrictions are specified, and the <see
              cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+
+            
 
             
 

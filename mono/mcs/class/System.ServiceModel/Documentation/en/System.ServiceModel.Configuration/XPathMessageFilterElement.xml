@@ -30,6 +30,8 @@
 
         
 
+        
+
          is true), only messages matching the filters are logged.</para
       >
     </remarks>
@@ -57,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.XPathMessageFilterElement" />
+
+            
 
             
 

@@ -30,8 +30,12 @@
 
         
 
+        
+
          interface adds the concept of an owning component to the <see
          cref="T:System.ComponentModel.IContainer" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
       <para
         >Nested containers can be found by querying a component's site for services of type <see
          cref="T:System.ComponentModel.INestedContainer" />
+
+        
 
         
 

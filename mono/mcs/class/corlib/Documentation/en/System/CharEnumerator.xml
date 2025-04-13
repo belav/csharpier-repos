@@ -51,8 +51,12 @@
 
         
 
+        
+
          provides read-only access to the characters in a referenced <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          from a <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
         . Instead, call a <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          method to obtain a <see
          cref="T:System.CharEnumerator" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          maintains an internal index to the characters in the string the <see
          cref="T:System.CharEnumerator" />
+
+        
 
         
 
@@ -110,8 +130,12 @@
 
         
 
+        
+
          method increments the index by one, so the first and subsequent characters are accessed in turn. The <see
          cref="M:System.CharEnumerator.Reset" />
+
+        
 
         
 
@@ -120,13 +144,19 @@
 
         
 
+        
+
          property retrieves the character currently referenced by index. The <see
          cref="M:System.CharEnumerator.Clone" />
 
         
 
+        
+
          method creates a copy of the <see
          cref="T:System.CharEnumerator" />
+
+        
 
         
 
@@ -139,8 +169,12 @@
 
           
 
+          
+
            across one or more threads can have access to a single instance of <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -149,8 +183,12 @@
 
           
 
+          
+
            interface. For more information regarding the use of an enumerator, see the <see
            cref="T:System.Collections.IEnumerator" />
+
+          
 
           
 
@@ -163,6 +201,8 @@
       <para
         >Supports iterating over a <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -200,8 +240,12 @@
 
             
 
+            
+
              and its current state. This is useful for saving your state while iterating through a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -213,8 +257,12 @@
 
             
 
+            
+
              to iterate through each character in a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -223,13 +271,19 @@
 
             
 
+            
+
              method. In effect, this saves the <see
              cref="T:System.CharEnumerator" />
 
             
 
+            
+
              object's index in the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -241,8 +295,12 @@
 
             
 
+            
+
              instance to resume working on the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -252,6 +310,8 @@
             <para
               >This method is implemented to support the <see
                cref="T:System.ICloneable" />
+
+              
 
               
 
@@ -267,6 +327,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -278,8 +340,12 @@
 
             
 
+            
+
              that is a copy of the current <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -314,8 +380,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -330,6 +400,8 @@
 
             
 
+            
+
             .</para
           >
         </exception>
@@ -341,8 +413,12 @@
 
             
 
+            
+
              class maintains an internal index to the enumerated string, and the <see
              cref="P:System.CharEnumerator.Current" />
+
+            
 
             
 
@@ -354,8 +430,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.CharEnumerator.Reset" />
+
+            
 
             
 
@@ -364,8 +444,12 @@
 
             
 
+            
+
              method to adjust the index to the first character in the enumerated string. The index is valid whenever the <see
              cref="M:System.CharEnumerator.MoveNext" />
+
+            
 
             
 
@@ -376,8 +460,12 @@
 
             
 
+            
+
              does not move the index, and consecutive calls to <see
              cref="P:System.CharEnumerator.Current" />
+
+            
 
             
 
@@ -386,13 +474,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.CharEnumerator.Reset" />
 
             
 
+            
+
             , or <see
              cref="M:System.String.GetEnumerator" />
+
+            
 
             
 
@@ -404,6 +498,8 @@
           <para
             >Gets the currently referenced character in the string enumerated by this <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -436,8 +532,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -446,8 +546,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -456,13 +560,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.CharEnumerator" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -476,10 +586,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -492,13 +606,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.CharEnumerator" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.CharEnumerator" />
+
+              
 
               
 
@@ -511,6 +631,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -548,8 +670,12 @@
 
             
 
+            
+
              class maintains an internal index to the enumerated string, and the <see
              cref="M:System.CharEnumerator.MoveNext" />
+
+            
 
             
 
@@ -558,13 +684,19 @@
 
             
 
+            
+
              after calling <see
              cref="M:System.String.GetEnumerator" />
 
             
 
+            
+
              or <see
              cref="M:System.CharEnumerator.Reset" />
+
+            
 
             
 
@@ -577,13 +709,19 @@
 
             
 
+            
+
              is always invalid. This is because the internal index for the <see
              cref="T:System.CharEnumerator" />
 
             
 
+            
+
              is initially before the first character of the enumerated string and is therefore invalid. <see
              cref="M:System.CharEnumerator.MoveNext" />
+
+            
 
             
 
@@ -595,6 +733,8 @@
           <para
             >Increments the internal index of the current <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -637,8 +777,12 @@
 
             
 
+            
+
              class maintains an internal index to the enumerated string, and the <see
              cref="M:System.CharEnumerator.Reset" />
+
+            
 
             
 
@@ -680,8 +824,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -696,8 +844,12 @@
 
             
 
+            
+
              object. For a description of this member, see <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -723,8 +875,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -733,13 +889,19 @@
 
             
 
+            
+
              class in an unusable state. After calling it, you must release all references to the <see
              cref="T:System.CharEnumerator" />
 
             
 
+            
+
              class so the garbage collector can reclaim the memory that the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 
@@ -753,10 +915,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -769,8 +935,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.CharEnumerator" />
+
+              
 
               
 
@@ -779,8 +949,12 @@
 
               
 
+              
+
                object's <see
                cref="M:System.Object.Finalize" />
+
+              
 
               
 
@@ -793,6 +967,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.CharEnumerator" />
+
+            
 
             
 

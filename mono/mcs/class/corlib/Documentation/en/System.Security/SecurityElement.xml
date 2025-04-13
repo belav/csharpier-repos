@@ -56,6 +56,8 @@
 
         
 
+        
+
         . These rules apply to all properties and methods.</para
       >
       <block subset="none" type="note">
@@ -92,8 +94,12 @@
 
             
 
+            
+
              parameter must consist of a valid XML tag name. Use <see
              cref="M:System.Security.SecurityElement.Escape(System.String)" />
+
+            
 
             
 
@@ -108,11 +114,15 @@
 
             
 
+            
+
              class with the specified tag.</para
           >
         </summary>
         <param name="tag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,6 +155,8 @@
 
             
 
+            
+
              parameter is null this constructor produces an element identical to the default constructor.</para
           >
         </remarks>
@@ -156,6 +168,8 @@
 
             
 
+            
+
              class with the specified tag and text.</para
           >
         </summary>
@@ -164,10 +178,14 @@
 
           
 
+          
+
           The tag name of the XML element. </param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,6 +224,8 @@
 
             
 
+            
+
              to remove invalid characters from the string.</para
           >
           <para>There is no support for quoted strings, so strings for name/value pairs should not contain quotes or other characters requiring quoting.</para>
@@ -219,10 +239,14 @@
 
           
 
+          
+
           The name of the attribute. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -262,6 +286,8 @@
         </summary>
         <param name="child">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,11 +331,15 @@
 
             
 
+            
+
              exists.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -345,11 +375,15 @@
 
             
 
+            
+
              as a name/value pair.</para
           >
           <para
             >Names and values in attributes should contain only valid XML attribute characters. Use <see
              cref="M:System.Security.SecurityElement.Escape(System.String)" />
+
+            
 
             
 
@@ -391,8 +425,12 @@
 
             
 
+            
+
              contains both <see
              cref="P:System.Security.SecurityElement.Text" />
+
+            
 
             
 
@@ -401,8 +439,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Security.SecurityElement.Text" />
+
+            
 
             
 
@@ -445,8 +487,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.SecurityElement.Attributes" />
+
+            
 
             
 
@@ -461,6 +507,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -469,6 +517,8 @@
           <para
             >A copy of the current <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -516,11 +566,15 @@
 
             
 
+            
+
              parameter; otherwise, false.</para
           >
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,13 +609,19 @@
 
             
 
+            
+
             . If invalid characters are used in a <see
              cref="T:System.Security.SecurityElement" />
 
             
 
+            
+
              without being escaped, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -634,6 +694,8 @@
 
           
 
+          
+
           The string within which to escape invalid characters. </param
         >
       </Docs>
@@ -677,11 +739,15 @@
 
             
 
+            
+
              created from the XML.</para
           >
         </returns>
         <param name="xml">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -727,11 +793,15 @@
 
             
 
+            
+
              parameter is a valid XML attribute name; otherwise, false.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -777,11 +847,15 @@
 
             
 
+            
+
              parameter is a valid XML attribute value; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -816,6 +890,8 @@
 
             
 
+            
+
              before setting it.</para
           >
         </remarks>
@@ -831,11 +907,15 @@
 
             
 
+            
+
              parameter is a valid XML tag; otherwise, false.</para
           >
         </returns>
         <param name="tag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -870,6 +950,8 @@
 
             
 
+            
+
              before setting it.</para
           >
         </remarks>
@@ -885,11 +967,15 @@
 
             
 
+            
+
              parameter is a valid XML text element; otherwise, false.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -937,11 +1023,15 @@
 
             
 
+            
+
              exists.</para
           >
         </returns>
         <param name="tag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -989,6 +1079,8 @@
 
           
 
+          
+
           The tag for which to search in child elements. </param
         >
       </Docs>
@@ -1015,6 +1107,8 @@
           <para
             >Assign only valid XML tag strings to this property. Use <see
              cref="M:System.Security.SecurityElement.Escape(System.String)" />
+
+            
 
             
 
@@ -1049,6 +1143,8 @@
 
             
 
+            
+
              to remove invalid characters from the string.</para
           >
           <para
@@ -1057,8 +1153,12 @@
 
             
 
+            
+
              contains both <see
              cref="P:System.Security.SecurityElement.Text" />
+
+            
 
             
 
@@ -1067,8 +1167,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Security.SecurityElement.Text" />
+
+            
 
             
 

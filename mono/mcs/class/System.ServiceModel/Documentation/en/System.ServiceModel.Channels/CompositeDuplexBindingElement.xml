@@ -29,8 +29,12 @@
 
         
 
+        
+
          property. Note that indigo1 auto-generates a <see
          cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" />
+
+            
 
             
 
@@ -100,8 +106,12 @@
 
             
 
+            
+
              for the <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -120,8 +130,12 @@
 
             
 
+            
+
              that creates a composite duplex channel of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -133,8 +147,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -145,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -190,8 +212,12 @@
 
             
 
+            
+
              for the <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -210,8 +236,12 @@
 
             
 
+            
+
              that accepts a composite duplex channel of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -223,8 +253,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -235,8 +269,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -297,8 +335,12 @@
 
             
 
+            
+
              copies over the <see
              cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" />
+
+            
 
             
 
@@ -314,6 +356,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" />
+
+            
 
             
 
@@ -365,6 +409,8 @@
 
             
 
+            
+
              requested if it is supported; or null if it is not.</para
           >
         </returns>
@@ -373,8 +419,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -382,6 +432,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

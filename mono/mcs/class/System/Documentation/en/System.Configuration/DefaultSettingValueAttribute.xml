@@ -35,6 +35,8 @@
 
           
 
+          
+
            can only be applied to individual settings properties; it is invalid to apply this attribute to an entire application settings class. </para
         >
       </block>
@@ -44,8 +46,12 @@
 
         
 
+        
+
         . For example, the <see
          cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          requires that the default value can be represented as a string. As a result, settings using XML serialization cannot have a default value specified by means of this attribute. Some providers may choose to support multiple serialization schemes which can be specified at compile time using the <see
          cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+        
 
         
 
@@ -97,8 +107,12 @@
 
             
 
+            
+
             , then a <paramref
              name="value" />
+
+            
 
             
 
@@ -116,6 +130,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -124,8 +140,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -155,8 +175,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="M:System.Configuration.DefaultSettingValueAttribute.#ctor(System.String)" />
+
+            
 
             
 
@@ -165,6 +189,8 @@
           <para
             >Setting providers may support multiple serialization schemes that can be specified with the <see
              cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+            
 
             
 

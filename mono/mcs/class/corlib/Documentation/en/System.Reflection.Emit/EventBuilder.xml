@@ -79,6 +79,8 @@
 
           
 
+          
+
           A MethodBuilder object that represents the other method. </param
         >
       </Docs>
@@ -146,6 +148,8 @@
 
           
 
+          
+
           A MethodBuilder object that represents the method used to subscribe to this event. </param
         >
       </Docs>
@@ -179,6 +183,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,6 +228,8 @@
 
             
 
+            
+
             . The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -229,10 +237,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -248,10 +260,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,6 +307,8 @@
 
           
 
+          
+
           A MethodBuilder object that represents the method used to raise this event. </param
         >
       </Docs>
@@ -324,6 +342,8 @@
         </summary>
         <param name="mdBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -398,6 +418,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -410,6 +432,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -417,10 +441,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

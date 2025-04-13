@@ -25,12 +25,16 @@
 
         
 
+        
+
          interface also provides access to all locals defined within the current scope.</para
       >
       <block subset="none" type="note">
         <para
           >This interface is the managed counterpart of the <unmanagedCodeEntityReference
           >ISymUnmanagedScope</unmanagedCodeEntityReference>
+
+          
 
           
 
@@ -43,6 +47,8 @@
       <para
         >Represents a lexical scope within <see
          cref="T:System.Diagnostics.SymbolStore.ISymbolMethod" />
+
+        
 
         
 

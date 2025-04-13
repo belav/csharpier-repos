@@ -27,6 +27,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -53,6 +55,8 @@
           <para
             >An attempt was made to access a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -151,6 +155,8 @@
 
             
 
+            
+
              already has an operation in progress.</para
           >
         </summary>
@@ -243,6 +249,8 @@
           <para
             >A required address was omitted from an operation on a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -407,6 +415,8 @@
 
             
 
+            
+
              call was canceled.</para
           >
         </summary>
@@ -433,6 +443,8 @@
           <para
             >An invalid argument was supplied to a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -484,6 +496,8 @@
           <para
             >The <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -560,6 +574,8 @@
 
             
 
+            
+
              on a connection that has already timed out.</para
           >
         </summary>
@@ -608,6 +624,8 @@
           <para
             >No free buffer space is available for a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -684,6 +702,8 @@
 
             
 
+            
+
              is not connected.</para
           >
         </summary>
@@ -735,6 +755,8 @@
 
             
 
+            
+
              operation was attempted on a non-socket.</para
           >
         </summary>
@@ -761,6 +783,8 @@
           <para
             >The overlapped operation was aborted due to the closure of the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -881,6 +905,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -907,6 +933,8 @@
           <para
             >The protocol type is incorrect for this <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -939,6 +967,8 @@
 
             
 
+            
+
              has already been closed.</para
           >
         </summary>
@@ -965,6 +995,8 @@
           <para
             >An unspecified <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1016,6 +1048,8 @@
           <para
             >The <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 

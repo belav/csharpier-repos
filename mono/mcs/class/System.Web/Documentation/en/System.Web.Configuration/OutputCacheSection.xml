@@ -22,6 +22,8 @@
 
         
 
+        
+
          class allows you to programmatically access and modify the OutputCache section. </para
       >
     </remarks>
@@ -45,13 +47,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.OutputCacheSection" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -63,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.OutputCacheSection" />
+
+            
 
             
 
@@ -96,10 +106,14 @@
 
             
 
+            
+
              property is set to false, no user control output is cached, regardless of the <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">OutputCache</a>
             </format>
+
+            
 
             
 
@@ -108,8 +122,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -153,6 +171,8 @@
 
             
 
+            
+
              property to true doesn’t ensure kernel caching of responses. Modules in the processing pipeline must set the kernel cache policy.</para
           >
           <para>
@@ -160,10 +180,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -198,10 +222,14 @@
 
             
 
+            
+
              property is set to false, no page is cached on the server, regardless of the settings in <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
+
+            
 
             
 
@@ -210,8 +238,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -249,8 +281,12 @@
 
             
 
+            
+
              property is false. By default, ASP.NET sends the vary header in all POST requests, as well as in all GET-request query strings. If the <see
              cref="P:System.Web.Configuration.OutputCacheSection.OmitVaryStar" />
+
+            
 
             
 
@@ -304,6 +340,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" />
+
+            
 
             
 

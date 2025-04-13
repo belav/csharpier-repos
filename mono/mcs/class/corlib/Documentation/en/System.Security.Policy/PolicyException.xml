@@ -35,11 +35,15 @@
 
         
 
+        
+
          uses the HRESULT CORSEC_E_POLICY_EXCEPTION.</para
       >
       <para
         >For a list of initial property values for an instance of <see
          cref="T:System.Security.Policy.PolicyException" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.Policy.PolicyException" />
+
+            
 
             
 
@@ -118,6 +124,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -145,6 +153,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.Policy.PolicyException" />
+
+            
 
             
 
@@ -191,11 +201,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,6 +250,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -244,10 +260,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,8 +304,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -294,11 +318,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Security.Policy.PolicyException" />
+
+            
 
             
 
@@ -345,11 +373,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,8 +392,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="exception" />
+
+          
 
           
 

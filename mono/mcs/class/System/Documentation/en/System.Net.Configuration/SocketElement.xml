@@ -29,6 +29,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
@@ -39,6 +41,8 @@
       <para
         >Represents information used to configure <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -69,13 +73,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
+            
+
              properties to the <see
              cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
+
+            
 
             
 
@@ -87,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.SocketElement" />
+
+            
 
             
 
@@ -213,13 +225,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
+            
+
             , and <see
              cref="P:System.Net.Configuration.SocketElement.IPProtectionLevel" />
+
+            
 
             
 

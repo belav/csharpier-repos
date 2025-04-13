@@ -37,6 +37,8 @@
 
         
 
+        
+
         . This class can be used to define a simpleType element as a list of values of a specified data type.</para
       >
     </summary>
@@ -63,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleTypeList" />
+
+            
 
             
 
@@ -108,13 +112,19 @@
 
             
 
+            
+
              representing the type of the simpleType element based on the <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemType" />
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemTypeName" />
+
+            
 
             
 
@@ -154,6 +164,8 @@
           <para
             >The base value must be a QName. The use of <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemTypeName" />
+
+            
 
             
 
@@ -197,6 +209,8 @@
           <para
             >The simple type list value must be a QName. The use of ItemTypeName and <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemType" />
+
+            
 
             
 

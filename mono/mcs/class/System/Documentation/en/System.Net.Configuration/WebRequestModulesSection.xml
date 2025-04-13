@@ -31,6 +31,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -77,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -109,6 +117,8 @@
           <para
             >This method initializes a <see
              cref="T:System.Net.Configuration.WebRequestModulesSection" />
+
+            
 
             
 
@@ -175,6 +185,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -217,8 +229,12 @@
 
             
 
+            
+
              returned by this property contains one <see
              cref="T:System.Net.Configuration.WebRequestModuleElement" />
+
+            
 
             
 

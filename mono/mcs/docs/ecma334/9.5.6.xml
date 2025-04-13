@@ -9,6 +9,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.6">pp-start-region</non_terminal>
@@ -21,6 +23,8 @@
       <name>
         <non_terminal where="9.5.6">pp-start-region</non_terminal>
       </name>
+
+      
 
       
 
@@ -42,6 +46,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -60,8 +66,12 @@
 
     
 
+    
+
      or <symbol
     >#endregion</symbol>
+
+    
 
     
 
@@ -70,13 +80,19 @@
 
     
 
+    
+
      and <symbol
     >#endregion</symbol>
 
     
 
+    
+
      directives may have different <non_terminal
      where="9.5.5">pp-message</non_terminal>
+
+    
 
     
 
@@ -91,6 +107,8 @@
 #endregion  
 ]]>
     </code_example>
+
+    
 
     
 

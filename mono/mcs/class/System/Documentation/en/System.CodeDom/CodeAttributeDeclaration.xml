@@ -35,8 +35,12 @@
 
         
 
+        
+
          can be used to represent an expression that declares an attribute. The attribute name and the arguments for the attribute are stored as properties of the object. A <see
          cref="T:System.CodeDom.CodeAttributeArgument" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,13 +110,19 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" />
 
             
 
+            
+
              and <see
              cref="P:System.CodeDom.CodeAttributeDeclaration.Name" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              class using the specified code type reference.</para
           >
         </summary>
@@ -133,8 +147,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -168,11 +186,15 @@
 
             
 
+            
+
              class using the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,8 +235,12 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" />
+
+            
 
             
 
@@ -223,8 +249,12 @@
 
             
 
+            
+
              properties, and the <paramref
              name="arguments" />
+
+            
 
             
 
@@ -233,8 +263,12 @@
 
             
 
+            
+
              property for the <see
              cref="T:System.CodeDom.CodeAttributeDeclaration" />
+
+            
 
             
 
@@ -249,6 +283,8 @@
 
             
 
+            
+
              class using the specified code type reference and arguments.</para
           >
         </summary>
@@ -257,8 +293,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -269,8 +309,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeAttributeArgument" />
+
+          
 
           
 
@@ -314,11 +358,15 @@
 
             
 
+            
+
              class using the specified name and arguments.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -329,8 +377,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeAttributeArgument" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is intended primarily to be used by data-bound controls, and not as a programmable object in page code.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          class implements the data functionality for the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -54,8 +64,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Insert(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -67,8 +81,12 @@
 
         
 
+        
+
          object is created for each instance of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -77,8 +95,12 @@
 
         
 
+        
+
          class are handled by the instance of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+        
 
         
 
@@ -87,13 +109,19 @@
 
         
 
+        
+
          class directly. Control developers can create custom data controls by extending the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+        
 
         
 
@@ -105,8 +133,12 @@
 
         
 
+        
+
          class performs data operations by calling methods on business or data objects using reflection. At run time, the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -115,8 +147,12 @@
 
         
 
+        
+
          property, and then calls the appropriate method for the data operation. The instantiated object is not cached in memory by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+        
 
         
 
@@ -128,8 +164,12 @@
 
         
 
+        
+
          is not directly exposed to page developers by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -138,8 +178,12 @@
 
         
 
+        
+
          are accessed through the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -148,8 +192,12 @@
 
         
 
+        
+
          of <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+        
 
         
 
@@ -158,8 +206,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -174,8 +226,12 @@
 
         
 
+        
+
          method, which retrieves an <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -184,8 +240,12 @@
 
         
 
+        
+
          object and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -199,6 +259,8 @@
 
             
 
+            
+
              method</para
           >
         </item>
@@ -206,6 +268,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.SelectMethod" />
+
+            
 
             
 
@@ -219,6 +283,8 @@
 
             
 
+            
+
              property </para
           >
         </item>
@@ -229,6 +295,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -236,6 +304,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Selected" />
+
+            
 
             
 
@@ -252,8 +322,12 @@
 
         
 
+        
+
          object supports data updates by calling a business or data object method that is identified by the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+        
 
         
 
@@ -262,8 +336,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -272,13 +350,19 @@
 
         
 
+        
+
          interface to the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
         
 
+        
+
          and the view object merges these parameters with any parameters that are found in the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateParameters" />
+
+        
 
         
 
@@ -290,8 +374,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -305,6 +393,8 @@
 
             
 
+            
+
              method</para
           >
         </item>
@@ -312,6 +402,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.UpdateMethod" />
+
+            
 
             
 
@@ -325,6 +417,8 @@
 
             
 
+            
+
              property</para
           >
         </item>
@@ -335,6 +429,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -342,6 +438,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
+
+            
 
             
 
@@ -358,8 +456,12 @@
 
         
 
+        
+
          object supports inserting new rows of data by calling a business or data object method that is identified by the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+        
 
         
 
@@ -368,8 +470,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -378,13 +484,19 @@
 
         
 
+        
+
          interface to the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
         
 
+        
+
          and the view object merges these parameters with any parameters that are found in the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertParameters" />
+
+        
 
         
 
@@ -396,8 +508,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -411,6 +527,8 @@
 
             
 
+            
+
              method</para
           >
         </item>
@@ -418,6 +536,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.InsertMethod" />
+
+            
 
             
 
@@ -431,6 +551,8 @@
 
             
 
+            
+
              property</para
           >
         </item>
@@ -441,6 +563,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -448,6 +572,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Inserted" />
+
+            
 
             
 
@@ -464,8 +590,12 @@
 
         
 
+        
+
          object supports deleting data by calling a business or data object method that is identified by the <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+        
 
         
 
@@ -474,8 +604,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -484,8 +618,12 @@
 
         
 
+        
+
          interface to the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+        
 
         
 
@@ -494,13 +632,19 @@
 
         
 
+        
+
          collection. The following delete methods, properties, and events are implemented by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -514,6 +658,8 @@
 
             
 
+            
+
              method</para
           >
         </item>
@@ -521,6 +667,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.DeleteMethod" />
+
+            
 
             
 
@@ -534,6 +682,8 @@
 
             
 
+            
+
              property</para
           >
         </item>
@@ -544,6 +694,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -551,6 +703,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+            
 
             
 
@@ -567,8 +721,12 @@
 
         
 
+        
+
          control if the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+        
 
         
 
@@ -577,8 +735,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -587,8 +749,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.FilterParameters" />
+
+        
 
         
 
@@ -597,8 +763,12 @@
 
         
 
+        
+
          object and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -610,8 +780,12 @@
 
         
 
+        
+
          by ordering the data in memory after it is retrieved. Sorting is supported only by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -620,8 +794,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -630,8 +808,12 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceView.CanSort" />
+
+        
 
         
 
@@ -640,8 +822,12 @@
 
         
 
+        
+
          cannot determine what type is returned by the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+        
 
         
 
@@ -650,8 +836,12 @@
 
         
 
+        
+
          property syntax is the same as for a <see
          cref="P:System.Data.DataView.Sort" />
+
+        
 
         
 
@@ -666,8 +856,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Web.UI.IStateManager" />
+
+        
 
         
 
@@ -676,8 +870,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.SaveViewState" />
+
+        
 
         
 
@@ -686,10 +884,14 @@
 
         
 
+        
+
          methods are provided to enable view state tracking for the control. For more information, see <format
          type="text/html">
           <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
         </format>
+
+        
 
         
 
@@ -701,6 +903,8 @@
       <para
         >Supports the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -730,8 +934,12 @@
 
             
 
+            
+
              constructor is called by the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.GetView(System.String)" />
+
+            
 
             
 
@@ -740,8 +948,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -750,8 +962,12 @@
 
             
 
+            
+
              at any time, and always names the view DefaultView, although this naming restriction is imposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -760,8 +976,12 @@
 
             
 
+            
+
             . You can override the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.GetView(System.String)" />
+
+            
 
             
 
@@ -773,8 +993,12 @@
 
             
 
+            
+
              object that is passed by <paramref
              name="context" />
+
+            
 
             
 
@@ -783,8 +1007,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -799,6 +1027,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -807,13 +1037,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
           
 
+          
+
            that the <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+          
 
           
 
@@ -824,6 +1060,8 @@
 
           
 
+          
+
           A unique name for the data source view, within the scope of the data source control that owns it.</param
         >
         <param name="context">
@@ -831,8 +1069,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -860,8 +1102,12 @@
 
             
 
+            
+
              property returns true, if the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -876,8 +1122,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -906,8 +1156,12 @@
 
             
 
+            
+
              property returns true, if the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -922,8 +1176,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -952,8 +1210,12 @@
 
             
 
+            
+
              property indicates whether the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -962,8 +1224,12 @@
 
             
 
+            
+
             , see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.EnablePaging" />
+
+            
 
             
 
@@ -978,8 +1244,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1011,8 +1281,12 @@
 
             
 
+            
+
              property returns true, if the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectCountMethod" />
+
+            
 
             
 
@@ -1021,8 +1295,12 @@
 
             
 
+            
+
              control pager. For more information on paging support, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.EnablePaging" />
+
+            
 
             
 
@@ -1034,13 +1312,19 @@
 
             
 
+            
+
              property is checked during a call to the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
+            
+
              method to ensure that the data source control supports all capabilities requested by setting the various <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -1055,8 +1339,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1085,8 +1373,12 @@
 
             
 
+            
+
              control only supports sorting data when the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
+
+            
 
             
 
@@ -1095,8 +1387,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1105,13 +1401,19 @@
 
             
 
+            
+
              object, the view object cannot determine whether sorting is supported until the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
+            
+
              method is called and returns. For this reason, the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.CanSort" />
+
+            
 
             
 
@@ -1126,8 +1428,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1156,8 +1462,12 @@
 
             
 
+            
+
              property returns true, if the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -1172,8 +1482,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1205,8 +1519,12 @@
 
             
 
+            
+
              property determines whether parameters for old and new values are applied to the Update method. For example, if the method that is specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -1215,8 +1533,12 @@
 
             
 
+            
+
              object with the columns Name and Number, and the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -1225,8 +1547,12 @@
 
             
 
+            
+
              value, parameters are created for Name and Number for the Update method. If the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -1235,8 +1561,12 @@
 
             
 
+            
+
              value, parameters are created with the names Name, Number, original_Name, and original_Name. (The exact name of the parameters for the original values depends on the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -1245,8 +1575,12 @@
 
             
 
+            
+
              then determines if the method that is specified in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -1258,8 +1592,12 @@
 
             
 
+            
+
              property to the <see
              cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+            
 
             
 
@@ -1271,6 +1609,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1279,6 +1619,8 @@
           <para
             >Gets or sets a value that determines how the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1307,8 +1649,12 @@
 
             
 
+            
+
              value can result in errors at run time. Use the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.ConvertNullToDBNull" />
+
+            
 
             
 
@@ -1317,13 +1663,19 @@
 
             
 
+            
+
              values that are passed to an update, insert, or a delete operation are automatically converted from null to the <see
              cref="F:System.DBNull.Value" />
 
             
 
+            
+
              value. For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.ConvertNullToDBNull" />
+
+            
 
             
 
@@ -1338,8 +1690,12 @@
 
             
 
+            
+
              values that are passed to an update, insert, or delete operation are automatically converted from null to the <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -1368,6 +1724,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1379,13 +1737,19 @@
 
             
 
+            
+
              control uses for a parameter in a data operation. The <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
+            
+
              control uses the specified class instead of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1420,8 +1784,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -1430,8 +1798,12 @@
 
             
 
+            
+
              event handler. The number of affected rows is typically returned by the Delete method for the business object, and that value is available from the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.ReturnValue" />
+
+            
 
             
 
@@ -1440,8 +1812,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+            
 
             
 
@@ -1453,8 +1829,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1463,8 +1843,12 @@
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -1479,13 +1863,19 @@
 
             
 
+            
+
              property using the specified <paramref
              name="keys" />
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -1501,13 +1891,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of the key values used to identify the item to delete. These parameters are used with the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+          
 
           
 
@@ -1518,8 +1914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1528,8 +1928,12 @@
 
           
 
+          
+
            property is set to the <see
            cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+          
 
           
 
@@ -1559,13 +1963,19 @@
 
             
 
+            
+
              event to examine the values of a return value and output parameters or to determine whether an exception was thrown after a <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Delete" />
 
             
 
+            
+
              operation has completed. The return value, output parameters, and exception handling properties are available from the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -1579,6 +1989,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1587,6 +1999,8 @@
           <para
             >Occurs when a <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Delete" />
+
+            
 
             
 
@@ -1615,8 +2029,12 @@
 
             
 
+            
+
              property can be an instance method or a static (Shared in Visual Basic) method. If it is an instance method, the business object is created and destroyed each time the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -1625,8 +2043,12 @@
 
             
 
+            
+
              event to work with the business object before the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -1635,8 +2057,12 @@
 
             
 
+            
+
              event that is raised after the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -1648,8 +2074,12 @@
 
             
 
+            
+
              control works with implements more than one method or function with the same name (method overloads), the data source control attempts to invoke the correct one according to a set of conditions, including the parameters in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteParameters" />
+
+            
 
             
 
@@ -1658,8 +2088,12 @@
 
             
 
+            
+
              collection do not match those of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -1671,11 +2105,15 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
           <para
             >For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.DeleteMethod" />
+
+            
 
             
 
@@ -1687,6 +2125,8 @@
           <para
             >Gets or sets the name of the method or function that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -1718,8 +2158,12 @@
 
             
 
+            
+
              collection must match the names and types of the parameters that are in the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -1728,8 +2172,12 @@
 
             
 
+            
+
              property and are case sensitive. When working with data-bound controls that supply parameters, such as <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -1738,8 +2186,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1751,6 +2203,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1759,6 +2213,8 @@
           <para
             >Gets the parameters collection that contains the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -1789,8 +2245,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -1799,8 +2259,12 @@
 
             
 
+            
+
              operation. The parameters are available as an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1809,8 +2273,12 @@
 
             
 
+            
+
              property, which is exposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+            
 
             
 
@@ -1824,6 +2292,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1832,6 +2302,8 @@
           <para
             >Occurs before a <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Delete" />
+
+            
 
             
 
@@ -1860,8 +2332,12 @@
 
             
 
+            
+
              control is handled by setting the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.EnablePaging" />
+
+            
 
             
 
@@ -1870,8 +2346,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.MaximumRowsParameterName" />
+
+            
 
             
 
@@ -1880,8 +2360,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -1890,8 +2374,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -1900,8 +2388,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.MaximumRowsParameterName" />
+
+            
 
             
 
@@ -1913,13 +2405,19 @@
 
             
 
+            
+
              property is checked during a call to the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
+            
+
              method to ensure that the data source control supports all capabilities requested by setting the various <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -1931,8 +2429,12 @@
 
             
 
+            
+
              property is set, the data-bound control calls the method before rendering the pager controls. For example, if a <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -1941,11 +2443,15 @@
 
             
 
+            
+
              method returns 20, only 4 pages are displayed in the pager.</para
           >
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.EnablePaging" />
+
+            
 
             
 
@@ -1984,8 +2490,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1994,8 +2504,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.Delete" />
+
+            
 
             
 
@@ -2007,13 +2521,19 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Deleting" />
 
             
 
+            
+
              event. You can handle this event to examine the values of the parameters and perform any preprocessing before the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Delete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2025,8 +2545,12 @@
 
             
 
+            
+
              uses reflection to call the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+            
 
             
 
@@ -2035,8 +2559,12 @@
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -2045,8 +2573,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Deleted" />
+
+            
 
             
 
@@ -2061,13 +2593,19 @@
 
             
 
+            
+
              method and the specified <paramref
              name="keys" />
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -2082,6 +2620,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2090,13 +2630,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of parameters used with the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.DeleteMethod" />
+
+          
 
           
 
@@ -2107,8 +2653,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2117,8 +2667,12 @@
 
           
 
+          
+
            property is set to the  <see
            cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+          
 
           
 
@@ -2151,8 +2705,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2161,8 +2719,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Insert" />
+
+            
 
             
 
@@ -2174,13 +2736,19 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Inserting" />
 
             
 
+            
+
              event. You can handle this event to examine the values of the parameters and perform any preprocessing before the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Insert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2192,8 +2760,12 @@
 
             
 
+            
+
              control uses reflection to call the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -2202,8 +2774,12 @@
 
             
 
+            
+
              collection, and then executes it. After the operation completes, the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnInserted(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -2212,11 +2788,15 @@
 
             
 
+            
+
              event. You can handle this event to examine any return values, error codes, and perform any post-processing.</para
           >
           <para
             >For more information on returning the number of rows inserted, see <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Insert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2231,8 +2811,12 @@
 
             
 
+            
+
              property using the specified <paramref
              name="values" />
+
+            
 
             
 
@@ -2247,6 +2831,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2255,13 +2841,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of parameters used with the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+          
 
           
 
@@ -2296,8 +2888,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -2306,8 +2902,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Select" />
+
+            
 
             
 
@@ -2316,6 +2916,8 @@
           <para
             >The specified method can have any method signature, but must return one of the types for the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -2345,8 +2947,12 @@
 
                   
 
+                  
+
                    is returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -2367,13 +2973,19 @@
 
                   
 
+                  
+
                    is created using the <see
                    cref="T:System.Data.DataTable" />
 
                   
 
+                  
+
                    and returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -2394,8 +3006,12 @@
 
                   
 
+                  
+
                    of the <see
                    cref="T:System.Data.DataSet" />
+
+                  
 
                   
 
@@ -2404,8 +3020,12 @@
 
                   
 
+                  
+
                    is created and returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -2426,8 +3046,12 @@
 
                   
 
+                  
+
                    and returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -2442,8 +3066,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Selecting" />
+
+            
 
             
 
@@ -2455,8 +3083,12 @@
 
             
 
+            
+
              control uses reflection to call the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -2465,13 +3097,19 @@
 
             
 
+            
+
              collection, and then executes it. After the operation completes, the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelected(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Selected" />
+
+            
 
             
 
@@ -2483,8 +3121,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2493,13 +3135,19 @@
 
             
 
+            
+
              retrieves data from and saves data to the cache during the operation. The cache is created, discarded, or refreshed based on the caching behavior that is specified by the combination of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.CacheDuration" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.CacheExpirationPolicy" />
+
+            
 
             
 
@@ -2511,8 +3159,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2521,8 +3173,12 @@
 
             
 
+            
+
              property has been specified, it is evaluated along with any supplied <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.FilterParameters" />
+
+            
 
             
 
@@ -2531,11 +3187,15 @@
 
             
 
+            
+
              operation.</para
           >
           <para
             >For information on returning the number of rows selected, see <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -2550,13 +3210,19 @@
 
             
 
+            
+
              property by calling the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
 
             
 
+            
+
              property and passing any values in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -2571,6 +3237,8 @@
 
             
 
+            
+
              list of data rows.</para
           >
         </returns>
@@ -2579,8 +3247,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 
@@ -2612,8 +3284,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2622,8 +3298,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.Update" />
+
+            
 
             
 
@@ -2635,8 +3315,12 @@
 
             
 
+            
+
              and <paramref
              name="values" />
+
+            
 
             
 
@@ -2645,8 +3329,12 @@
 
             
 
+            
+
              collection. If the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -2655,13 +3343,19 @@
 
             
 
+            
+
              value, the values that are contained in the <paramref
              name="oldValues" />
 
             
 
+            
+
              collection are formatted with the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -2673,8 +3367,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.Updating" />
+
+            
 
             
 
@@ -2683,8 +3381,12 @@
 
             
 
+            
+
              uses reflection to call the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -2693,8 +3395,12 @@
 
             
 
+            
+
              collection, and then executes it. After the operation completes, the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnUpdated(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -2703,11 +3409,15 @@
 
             
 
+            
+
              event. You can handle this event to examine any return values, error codes, and perform any post-processing.</para
           >
           <para
             >For more information on returning the number of rows updated, see <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Update(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2722,8 +3432,12 @@
 
             
 
+            
+
              property and using any parameters that are supplied in the <paramref
              name="keys" />
+
+            
 
             
 
@@ -2732,8 +3446,12 @@
 
             
 
+            
+
             , or <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -2748,6 +3466,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2756,13 +3476,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of primary keys to use with the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+          
 
           
 
@@ -2773,13 +3499,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of values to be used with the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+          
 
           
 
@@ -2790,8 +3522,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2819,8 +3555,12 @@
 
             
 
+            
+
              control supports filtering data only when the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -2829,13 +3569,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Data.DataView" />
 
             
 
+            
+
             , or <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2847,8 +3593,12 @@
 
             
 
+            
+
              property is a format string-style expression. The filter expression syntax is the same syntax that is accepted by the <see
              cref="P:System.Data.DataView.RowFilter" />
+
+            
 
             
 
@@ -2857,8 +3607,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -2867,8 +3621,12 @@
 
             
 
+            
+
              method. (For more information, see <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -2877,8 +3635,12 @@
 
             
 
+            
+
              collection, you can also include format string placeholders, for example "{0}", in the expression to substitute for parameter values. The placeholders are replaced according to the index of the parameter in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterParameters" />
+
+            
 
             
 
@@ -2890,8 +3652,12 @@
 
             
 
+            
+
             . If the type of the parameter is a string or character type, enclose the parameter in single quotation marks. Quotation marks are not needed if the parameter is a numeric type.The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterParameters" />
+
+            
 
             
 
@@ -2900,11 +3666,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -2917,13 +3687,19 @@
 
               
 
+              
+
                object that is returned by the <see
                cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
 
               
 
+              
+
                method. If you are using the <see
                cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+              
 
               
 
@@ -2936,6 +3712,8 @@
           <para
             >Gets or sets a filtering expression that is applied when the business object method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -2966,8 +3744,12 @@
 
             
 
+            
+
              event to perform validation operations on filter parameter values before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -2976,8 +3758,12 @@
 
             
 
+            
+
              operation by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -2986,8 +3772,12 @@
 
             
 
+            
+
              object to true. The event is raised, only if the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+            
 
             
 
@@ -3001,6 +3791,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -3010,13 +3802,19 @@
 
               
 
+              
+
                object that is returned by the <see
                cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
 
               
 
+              
+
                method. If you are using the <see
                cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+              
 
               
 
@@ -3053,8 +3851,12 @@
 
             
 
+            
+
              control supports filtering data only when the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -3063,13 +3865,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
             , or <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -3081,8 +3889,12 @@
 
             
 
+            
+
              collection are associated with any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3091,13 +3903,19 @@
 
             
 
+            
+
              property are matched to parameter objects in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.FilterParameters" />
 
             
 
+            
+
              collection when the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -3109,6 +3927,8 @@
           <para
             >Gets a collection of parameters that are associated with any parameter placeholders that are in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3142,13 +3962,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
 
             
 
+            
+
              object of the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Inserted" />
+
+            
 
             
 
@@ -3157,13 +3983,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
 
             
 
+            
+
              object of the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Inserted" />
+
+            
 
             
 
@@ -3175,13 +4007,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
             
 
+            
+
              method, passing the <paramref
              name="values" />
+
+            
 
             
 
@@ -3196,8 +4034,12 @@
 
             
 
+            
+
              property using the specified <paramref
              name="values" />
+
+            
 
             
 
@@ -3213,13 +4055,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            collection of parameters used with the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+          
 
           
 
@@ -3249,13 +4097,19 @@
 
             
 
+            
+
              event to examine the values of a return value and output parameters or to determine whether an exception was thrown after an <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Insert" />
 
             
 
+            
+
              operation has completed. The return value, output parameters, and exception handling properties are available from the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -3269,6 +4123,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3277,6 +4133,8 @@
           <para
             >Occurs when an <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Insert" />
+
+            
 
             
 
@@ -3307,8 +4165,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -3317,8 +4179,12 @@
 
             
 
+            
+
              operation. The parameters are available as an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -3327,8 +4193,12 @@
 
             
 
+            
+
              property, which is exposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+            
 
             
 
@@ -3342,6 +4212,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3350,6 +4222,8 @@
           <para
             >Occurs before an <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Insert" />
+
+            
 
             
 
@@ -3378,8 +4252,12 @@
 
             
 
+            
+
              property can be an instance method or a static (Shared in Visual Basic) method. If it is an instance method, the business object is created and destroyed each time the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -3388,8 +4266,12 @@
 
             
 
+            
+
              event to work with the business object before the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -3398,13 +4280,19 @@
 
             
 
+            
+
              event that is raised after the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
 
             
 
+            
+
              property is called. (Dispose is called, only if the business object implements the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -3416,8 +4304,12 @@
 
             
 
+            
+
              object implements more than one method or function with the same name (method overloads), the data source control attempts to invoke the correct one according to a set of conditions, including the parameters in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertParameters" />
+
+            
 
             
 
@@ -3426,8 +4318,12 @@
 
             
 
+            
+
              collection do not match those of the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -3439,11 +4335,15 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
           <para
             >For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.InsertMethod" />
+
+            
 
             
 
@@ -3455,6 +4355,8 @@
           <para
             >Gets or sets the name of the method or function that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -3486,8 +4388,12 @@
 
             
 
+            
+
              collection must match the names and types of the parameters that are in the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -3496,8 +4402,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -3506,8 +4416,12 @@
 
             
 
+            
+
              control automatically merges any parameters that are explicitly specified in the collection with those parameters that are provided by the data-bound control. For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.InsertMethod" />
+
+            
 
             
 
@@ -3519,6 +4433,8 @@
           <para
             >Gets the parameters collection that contains the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.InsertMethod" />
+
+            
 
             
 
@@ -3545,6 +4461,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -3580,6 +4498,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3588,13 +4508,19 @@
 
             
 
+            
+
              method restores view-state information for the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.SaveViewState" />
+
+            
 
             
 
@@ -3610,8 +4536,12 @@
 
           
 
+          
+
           An object that represents the <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+          
 
           
 
@@ -3639,8 +4569,12 @@
 
             
 
+            
+
              property is used to support data source paging. For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.EnablePaging" />
+
+            
 
             
 
@@ -3649,6 +4583,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.MaximumRowsParameterName" />
+
+            
 
             
 
@@ -3683,8 +4619,12 @@
 
             
 
+            
+
              event to call other methods on the business object, set properties, or to perform other initialization that is specific to the business object before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -3693,8 +4633,12 @@
 
             
 
+            
+
              property, which is exposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceEventArgs" />
+
+            
 
             
 
@@ -3706,8 +4650,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectCreated" />
+
+            
 
             
 
@@ -3722,8 +4670,12 @@
 
             
 
+            
+
              object creates an instance of the type that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.TypeName" />
+
+            
 
             
 
@@ -3754,8 +4706,12 @@
 
             
 
+            
+
              control automatically calls the default constructor of a business object to create and instance of it using reflection. Handle the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectCreating" />
+
+            
 
             
 
@@ -3764,8 +4720,12 @@
 
             
 
+            
+
              property of the associated <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceEventArgs" />
+
+            
 
             
 
@@ -3779,6 +4739,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3787,8 +4749,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectCreated" />
+
+            
 
             
 
@@ -3803,8 +4769,12 @@
 
             
 
+            
+
              object creates an instance of the type that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.TypeName" />
+
+            
 
             
 
@@ -3835,8 +4805,12 @@
 
             
 
+            
+
              event is raised before the instance of the  business object is discarded. If the business object implements the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -3845,8 +4819,12 @@
 
             
 
+            
+
              method is called after The <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectDisposing" />
+
+            
 
             
 
@@ -3858,13 +4836,19 @@
 
             
 
+            
+
              event to call other methods on the object and set properties or to perform clean-up that is specific to the object before the object is destroyed. A reference to the object is accessed by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceEventArgs.ObjectInstance" />
 
             
 
+            
+
              property, which is exposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceEventArgs" />
+
+            
 
             
 
@@ -3876,6 +4860,8 @@
 
             
 
+            
+
              event is never raised. </para
           >
         </remarks>
@@ -3884,6 +4870,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -3915,8 +4903,12 @@
 
             
 
+            
+
              format string is applied to primary keys only, such as those that are identified with the DataKeyNames property of a data-bound control or in delete and update scenarios, where the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -3925,11 +4917,15 @@
 
             
 
+            
+
              value and the set of original values that are passed to the corresponding data method. </para
           >
           <para
             >Two common scenarios where you might change the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -3943,13 +4939,19 @@
 
                 
 
+                
+
                  property is set to the <see
                  cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
 
                 
 
+                
+
                  value, parameters for both the original and new values are added to the <see
                  cref="P:System.Web.UI.WebControls.ObjectDataSource.UpdateParameters" />
+
+                
 
                 
 
@@ -3963,6 +4965,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -4002,11 +5006,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnDeleted(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4021,8 +5029,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4034,8 +5046,12 @@
 
           
 
+          
+
           An  <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4070,11 +5086,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnDeleting(System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs)" />
+
+            
 
             
 
@@ -4089,8 +5109,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4102,8 +5126,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+          
 
           
 
@@ -4138,11 +5166,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnFiltering(System.Web.UI.WebControls.ObjectDataSourceFilteringEventArgs)" />
+
+            
 
             
 
@@ -4157,8 +5189,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4170,8 +5206,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceFilteringEventArgs" />
+
+          
 
           
 
@@ -4206,11 +5246,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnInserted(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4225,8 +5269,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4238,8 +5286,12 @@
 
           
 
+          
+
           An  <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4272,6 +5324,8 @@
 
             
 
+            
+
              method is called, only if the method that is identified to perform the data operation is not static (Shared in Visual Basic).</para
           >
           <para
@@ -4282,11 +5336,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnInserting(System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs)" />
+
+            
 
             
 
@@ -4301,8 +5359,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4314,8 +5376,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+          
 
           
 
@@ -4348,6 +5414,8 @@
 
             
 
+            
+
              method is called, only if the method that is identified to perform the data operation is not static (Shared in Visual Basic). </para
           >
           <para
@@ -4356,11 +5424,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnObjectCreated(System.Web.UI.WebControls.ObjectDataSourceEventArgs)" />
+
+            
 
             
 
@@ -4375,13 +5447,19 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
             
 
+            
+
              creates an instance of the object that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.TypeName" />
+
+            
 
             
 
@@ -4393,8 +5471,12 @@
 
           
 
+          
+
           An  <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceEventArgs" />
+
+          
 
           
 
@@ -4429,11 +5511,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnObjectCreating(System.Web.UI.WebControls.ObjectDataSourceEventArgs)" />
+
+            
 
             
 
@@ -4448,8 +5534,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4461,8 +5551,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceEventArgs" />
+
+          
 
           
 
@@ -4495,13 +5589,19 @@
 
             
 
+            
+
              is called when the instance of an object that was created to perform a data operation is discarded. The Dispose method is called, only if the type that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.TypeName" />
 
             
 
+            
+
              property implements the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -4515,11 +5615,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnObjectDisposing(System.Web.UI.WebControls.ObjectDataSourceDisposingEventArgs)" />
+
+            
 
             
 
@@ -4534,8 +5638,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4547,8 +5655,12 @@
 
           
 
+          
+
           An  <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceDisposingEventArgs" />
+
+          
 
           
 
@@ -4583,11 +5695,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelected(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4602,8 +5718,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4615,8 +5735,12 @@
 
           
 
+          
+
           An  <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4651,11 +5775,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelecting(System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs)" />
+
+            
 
             
 
@@ -4670,8 +5798,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4683,8 +5815,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+
+          
 
           
 
@@ -4719,11 +5855,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnUpdated(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4738,8 +5878,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4751,8 +5895,12 @@
 
           
 
+          
+
           An  <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4787,11 +5935,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnUpdating(System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs)" />
+
+            
 
             
 
@@ -4806,8 +5958,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4819,8 +5975,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+          
 
           
 
@@ -4848,6 +6008,8 @@
 
             
 
+            
+
              method is primarily used by control developers.</para
           >
           <para
@@ -4856,13 +6018,19 @@
 
             
 
+            
+
              property for the server control, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -4874,10 +6042,14 @@
 
             
 
+            
+
              method and modifying the ViewState property for your server control. For more information, see <format
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -4892,6 +6064,8 @@
 
             
 
+            
+
              object since the time when the page was posted back to the server.</para
           >
         </summary>
@@ -4900,6 +6074,8 @@
           <para
             >The object that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -4933,13 +6109,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
+            
+
              passing the <paramref
              name="arguments" />
+
+            
 
             
 
@@ -4954,13 +6136,19 @@
 
             
 
+            
+
              property by calling the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
 
             
 
+            
+
              property and passing any values in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -4975,8 +6163,12 @@
 
             
 
+            
+
              list of data rows. For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -4988,8 +6180,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 
@@ -5017,8 +6213,12 @@
 
             
 
+            
+
              identifies a business object method that is used to retrieve a total row count to support data source paging. The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectCountMethod" />
+
+            
 
             
 
@@ -5027,13 +6227,19 @@
 
             
 
+            
+
              property is set to true. For information on how paging is supported by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
 
             
 
+            
+
             , see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.EnablePaging" />
+
+            
 
             
 
@@ -5045,6 +6251,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -5053,6 +6261,8 @@
           <para
             >Gets or sets the name of the method or function that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -5083,8 +6293,12 @@
 
             
 
+            
+
              event to examine the values of a return value and output parameters or to determine whether an exception was thrown after a data retrieval operation has completed. The return value, output parameters, and exception handling properties are available from the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -5095,6 +6309,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5129,8 +6345,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -5139,13 +6359,19 @@
 
             
 
+            
+
              collection that is accessed by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs.InputParameters" />
 
             
 
+            
+
              property, which is exposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+            
 
             
 
@@ -5156,6 +6382,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5188,6 +6416,8 @@
 
             
 
+            
+
              control to call it successfully</para
           >
           <list type="table">
@@ -5214,8 +6444,12 @@
 
                   
 
+                  
+
                    is returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -5236,13 +6470,19 @@
 
                   
 
+                  
+
                    is created using the <see
                    cref="T:System.Data.DataTable" />
 
                   
 
+                  
+
                    and returned by the <see
                    cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Select" />
+
+                  
 
                   
 
@@ -5263,8 +6503,12 @@
 
                   
 
+                  
+
                    of the <see
                    cref="T:System.Data.DataSet" />
+
+                  
 
                   
 
@@ -5273,8 +6517,12 @@
 
                   
 
+                  
+
                    is created and returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -5295,8 +6543,12 @@
 
                   
 
+                  
+
                    and returned by the <see
                    cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+                  
 
                   
 
@@ -5311,8 +6563,12 @@
 
             
 
+            
+
              property can be an instance method or a static (Shared in Visual Basic) method. If it is an instance method, the business object is created and destroyed each time the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -5321,8 +6577,12 @@
 
             
 
+            
+
              event to work with the business object before the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -5331,13 +6591,19 @@
 
             
 
+            
+
              event that is raised after the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
 
             
 
+            
+
              property is called. (Dispose is called only if the business object implements the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -5349,8 +6615,12 @@
 
             
 
+            
+
              control works with implements more than one method or function with the same name (method overloads), the data source control attempts to invoke the correct one according to a set of conditions, including the parameters in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -5359,8 +6629,12 @@
 
             
 
+            
+
              collection do not match those of the signature of the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -5372,6 +6646,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5380,6 +6656,8 @@
           <para
             >Gets or sets the name of the method or function that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -5411,8 +6689,12 @@
 
             
 
+            
+
              collection must match the names and types of the parameters that are in the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -5421,8 +6703,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -5431,8 +6717,12 @@
 
             
 
+            
+
              control automatically merges any parameters that are explicitly specified in the collection with those parameters that are provided by the data-bound control. For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.SelectMethod" />
+
+            
 
             
 
@@ -5444,6 +6734,8 @@
           <para
             >Gets the parameters collection containing the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -5472,8 +6764,12 @@
 
             
 
+            
+
              property is used to support data source sorting. When a <see
              cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+
+            
 
             
 
@@ -5482,8 +6778,12 @@
 
             
 
+            
+
              object and passed to the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -5492,8 +6792,12 @@
 
             
 
+            
+
              property identifies the parameter name of the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SelectMethod" />
+
+            
 
             
 
@@ -5502,6 +6806,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.SortParameterName" />
+
+            
 
             
 
@@ -5537,8 +6843,12 @@
 
             
 
+            
+
              property must be set to enable paging. For information on how paging is supported by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -5547,11 +6857,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.StartRowIndexParameterName" />
+
+            
 
             
 
@@ -5589,8 +6903,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5602,6 +6920,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IStateManager.IsTrackingViewState" />
+
+            
 
             
 
@@ -5634,8 +6954,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5650,6 +6974,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5658,8 +6984,12 @@
 
           
 
+          
+
           An object that represents the <see
            cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+          
 
           
 
@@ -5686,8 +7016,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5702,6 +7036,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5710,6 +7046,8 @@
           <para
             >The object that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -5737,8 +7075,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5750,6 +7092,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IStateManager.TrackViewState" />
+
+            
 
             
 
@@ -5775,6 +7119,8 @@
 
             
 
+            
+
              method is primarily used by control developers.</para
           >
         </remarks>
@@ -5786,8 +7132,12 @@
 
             
 
+            
+
              object to track changes to its view state so that the changes can be stored in the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -5816,8 +7166,12 @@
 
             
 
+            
+
              control binds to, the control uses reflection to load the type that is identified by the type name at run time. Therefore, the value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.TypeName" />
+
+            
 
             
 
@@ -5829,6 +7183,8 @@
           <para
             >Gets or sets the name of the class that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -5864,8 +7220,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -5874,8 +7234,12 @@
 
             
 
+            
+
              event. The number of affected rows is typically returned by the Update method for the business object, and that value is available from the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.ReturnValue" />
+
+            
 
             
 
@@ -5884,8 +7248,12 @@
 
             
 
+            
+
               parameter of the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
+
+            
 
             
 
@@ -5897,8 +7265,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -5907,13 +7279,19 @@
 
             
 
+            
+
             , <paramref
              name="values" />
 
             
 
+            
+
             , and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -5928,8 +7306,12 @@
 
             
 
+            
+
              property and using any parameters that are supplied in the <paramref
              name="keys" />
+
+            
 
             
 
@@ -5938,8 +7320,12 @@
 
             
 
+            
+
             , or <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -5955,13 +7341,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of the key values used to identify the item to update. These parameters are used with the method specified by the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+          
 
           
 
@@ -5972,13 +7364,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of new values to apply to the data source. These parameters are used with the method specified by the <see
            cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+          
 
           
 
@@ -5989,8 +7387,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -5999,8 +7401,12 @@
 
           
 
+          
+
            property is set to the <see
            cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+          
 
           
 
@@ -6030,13 +7436,19 @@
 
             
 
+            
+
              event to examine the values of a return value and output parameters or to determine whether an exception was thrown after an <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Update" />
 
             
 
+            
+
              operation has completed. The return value, output parameters, and exception handling properties are available from the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -6050,6 +7462,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6058,6 +7472,8 @@
           <para
             >Occurs when an <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Update" />
+
+            
 
             
 
@@ -6086,8 +7502,12 @@
 
             
 
+            
+
              object assumes that the method that is identified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -6099,8 +7519,12 @@
 
             
 
+            
+
              property is called. You can handle the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectCreated" />
+
+            
 
             
 
@@ -6109,8 +7533,12 @@
 
             
 
+            
+
              property is called. You can also handle the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSourceView.ObjectDisposing" />
+
+            
 
             
 
@@ -6119,8 +7547,12 @@
 
             
 
+            
+
              method is called. (Dispose is called, only if the business object implements the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -6132,8 +7564,12 @@
 
             
 
+            
+
              object works with implements more than one method or function with the same name (method overloads), the data source control attempts to invoke the correct one according to a set of conditions, including the parameters in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateParameters" />
+
+            
 
             
 
@@ -6142,8 +7578,12 @@
 
             
 
+            
+
              collection do not match those of the signature of the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -6155,11 +7595,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -6171,6 +7615,8 @@
           <para
             >Gets or sets the name of the method or function that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceView" />
+
+            
 
             
 
@@ -6202,8 +7648,12 @@
 
             
 
+            
+
              collection must match the names and types of the parameters that are in the method specified by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -6212,8 +7662,12 @@
 
             
 
+            
+
              property and are case sensitive. When working with data-bound controls that supply parameters, such as <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -6222,13 +7676,19 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
+            
+
              control automatically merges any parameters that are explicitly specified in the collection with those parameters that are provided by the data-bound control. For more information, see <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.UpdateMethod" />
+
+            
 
             
 
@@ -6240,6 +7700,8 @@
           <para
             >Gets the parameters collection containing the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceView.UpdateMethod" />
+
+            
 
             
 
@@ -6270,8 +7732,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -6280,8 +7746,12 @@
 
             
 
+            
+
              operation. The parameters are available as an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -6290,8 +7760,12 @@
 
             
 
+            
+
              property, which is exposed by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+            
 
             
 
@@ -6305,6 +7779,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6313,6 +7789,8 @@
           <para
             >Occurs before an <see
              cref="Overload:System.Web.UI.WebControls.ObjectDataSourceView.Update" />
+
+            
 
             
 

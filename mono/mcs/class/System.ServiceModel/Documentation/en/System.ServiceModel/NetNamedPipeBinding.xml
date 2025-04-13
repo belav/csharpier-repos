@@ -29,6 +29,8 @@
 
         
 
+        
+
          generates a run-time communication stack by default, which uses transport security, named pipes for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for on-machine communication. It also supports transactions.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          is similar to the configuration provided by the <see
          cref="T:System.ServiceModel.NetTcpBinding" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          setting only offers the <see
          cref="F:System.ServiceModel.SecurityMode.None" />
+
+        
 
         
 
@@ -57,13 +67,19 @@
 
         
 
+        
+
          options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref
          name="securityMode" />
 
         
 
+        
+
          parameter in <see
          cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" />
+
+        
 
         
 
@@ -96,6 +112,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -104,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+            
 
             
 
@@ -137,6 +157,8 @@
 
             
 
+            
+
              when using the default constructor.</para
           >
         </remarks>
@@ -148,6 +170,8 @@
 
             
 
+            
+
              class with a specified security mode.</para
           >
         </summary>
@@ -156,8 +180,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.NetNamedPipeSecurityMode" />
+
+          
 
           
 
@@ -194,6 +222,8 @@
 
             
 
+            
+
              class with a specified configuration name.</para
           >
         </summary>
@@ -202,10 +232,14 @@
 
           
 
+          
+
           The binding configuration name for the <format
            type="text/html">
             <a href="00a8580b-face-47a4-838d-b9fed48e72df">netNamedPipeBinding Element</a>
           </format>
+
+          
 
           
 
@@ -244,8 +278,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -436,12 +474,16 @@
 
                 
 
+                
+
                  = 32</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" />
+
+                
 
                 
 
@@ -454,6 +496,8 @@
 
                 
 
+                
+
                  = 16384</para
               >
             </item>
@@ -463,12 +507,16 @@
 
                 
 
+                
+
                  = 4096</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" />
+
+                
 
                 
 
@@ -528,8 +576,12 @@
 
             
 
+            
+
              provides the types of security and settings available to the <see
              cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+            
 
             
 
@@ -587,6 +639,8 @@
 
             
 
+            
+
              property enables you to specify whether this binding should support flowing transactions. </para
           >
         </remarks>
@@ -619,6 +673,8 @@
           <para
             >The WS-Atomic Transaction protocol can also be used by setting the <see
              cref="P:System.ServiceModel.TransactionProtocol.WSAtomicTransactionOctober2004" />
+
+            
 
             
 
@@ -657,8 +713,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ServiceModel.TransferMode.StreamedResponse" />
+
+            
 
             
 

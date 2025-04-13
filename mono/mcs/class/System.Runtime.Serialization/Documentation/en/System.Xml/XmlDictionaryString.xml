@@ -22,13 +22,19 @@
 
         
 
+        
+
         .  It associates an integer value with a string value for use by <see
          cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlDictionaryWriter" />
+
+        
 
         
 
@@ -40,6 +46,8 @@
       <para
         >Represents an entry stored in a <see
          cref="T:System.Xml.XmlDictionary" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
             
 
+            
+
              does not automatically add itself to the specified dictionary.</para
           >
         </remarks>
@@ -87,8 +97,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlDictionary" />
+
+          
 
           
 
@@ -99,10 +113,14 @@
 
           
 
+          
+
           The string that is the value of the dictionary entry.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,8 +152,12 @@
 
             
 
+            
+
              passed to the constructor of this instance of <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -171,6 +193,8 @@
 
             
 
+            
+
              representing the empty string.</para
           >
         </summary>
@@ -193,6 +217,8 @@
           <para
             >This property must be greater than 0 and less than <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 

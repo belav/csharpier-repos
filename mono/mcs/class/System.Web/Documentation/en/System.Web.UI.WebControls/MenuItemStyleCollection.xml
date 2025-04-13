@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -42,13 +50,19 @@
 
         
 
+        
+
          class as the underlying data type of the <see
          cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+
+        
 
         
 
@@ -60,8 +74,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+
+        
 
         
 
@@ -70,13 +88,19 @@
 
         
 
+        
+
         ). These properties are applied to regular menu items and the selected menu item, respectively, based on the menu item's level in the menu. The first style in the collection corresponds to the menu item style for the first level of the menu. The second style in the collection corresponds to the menu item style for the second level of the menu, and so on. The <see
          cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+
+        
 
         
 
@@ -88,13 +112,19 @@
 
         
 
+        
+
          class inherits most of its members from the <see
          cref="T:System.Web.UI.StateManagedCollection" />
 
         
 
+        
+
          class. For more information on the inherited members, see <see
          cref="T:System.Web.UI.StateManagedCollection" />
+
+        
 
         
 
@@ -109,8 +139,12 @@
 
         
 
+        
+
          objects in a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -141,8 +175,12 @@
 
             
 
+            
+
              method to append the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -151,8 +189,12 @@
 
             
 
+            
+
              object into the collection at a specific index by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemStyle)" />
+
+            
 
             
 
@@ -167,6 +209,8 @@
 
             
 
+            
+
              object to the end of the current collection.</para
           >
         </summary>
@@ -178,6 +222,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -186,8 +232,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 
@@ -220,13 +270,19 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
+            
+
              object is contained in the collection. This method is commonly used to test for the existence of a <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -241,6 +297,8 @@
 
             
 
+            
+
              object is in the collection.</para
           >
         </summary>
@@ -252,6 +310,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
@@ -260,8 +320,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 
@@ -296,13 +360,19 @@
 
             
 
+            
+
              method to copy the contents of the <see
              cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
             
 
+            
+
              object into the specified zero-based array of <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -317,8 +387,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -327,6 +401,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,8 +475,12 @@
 
             
 
+            
+
              method to determine the zero-based index of the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -410,6 +490,8 @@
             <para
               >If the specified <see
                cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+              
 
               
 
@@ -425,6 +507,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -436,6 +520,8 @@
 
             
 
+            
+
             , if found; otherwise, -1.</para
           >
         </returns>
@@ -444,8 +530,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 
@@ -479,8 +569,12 @@
 
             
 
+            
+
              method to insert the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -492,8 +586,12 @@
 
             
 
+            
+
              object to the end of the collection using the <see
              cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Add(System.Web.UI.WebControls.MenuItemStyle)" />
+
+            
 
             
 
@@ -508,6 +606,8 @@
 
             
 
+            
+
              object into the collection at the specified index location.</para
           >
         </summary>
@@ -516,8 +616,12 @@
 
           
 
+          
+
           The zero-based index location at which to insert the <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 
@@ -528,8 +632,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 
@@ -585,8 +693,12 @@
 
             
 
+            
+
              method to remove the specified <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -598,8 +710,12 @@
 
             
 
+            
+
              object at a specific index by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -614,6 +730,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -622,8 +740,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 
@@ -653,8 +775,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+            
 
             
 
@@ -666,8 +792,12 @@
 
             
 
+            
+
              object by using the <see
              cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Remove(System.Web.UI.WebControls.MenuItemStyle)" />
+
+            
 
             
 
@@ -682,6 +812,8 @@
 
             
 
+            
+
              object at the specified index location from the collection.</para
           >
         </summary>
@@ -690,8 +822,12 @@
 
           
 
+          
+
           The zero-based index location of the <see
            cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+
+          
 
           
 

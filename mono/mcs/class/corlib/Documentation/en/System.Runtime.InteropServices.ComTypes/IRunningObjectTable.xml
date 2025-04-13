@@ -32,11 +32,15 @@
 
         
 
+        
+
          function.</para
       >
       <para
         >For more information, see the documentation for the COM <see
          cref="http://go.microsoft.com/fwlink/?LinkId=163473">IRunningObjectTable</see>
+
+        
 
         
 
@@ -47,6 +51,8 @@
          type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
+
+        
 
         
 
@@ -186,6 +192,8 @@
 
             
 
+            
+
              method in the MSDN library.</para
           >
         </remarks>
@@ -199,6 +207,8 @@
         </returns>
         <param name="pmkObjectName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,10 +280,14 @@
 
             
 
+            
+
              (weak and strong) determine object lifetime. For more information, see the documentation for the COM <see
              cref="http://go.microsoft.com/fwlink/?LinkId=163474"
               >IRunningObjectTable::Register</see
             >
+
+            
 
             
 
@@ -292,8 +306,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.ComTypes.IRunningObjectTable.NoteChangeTime(System.Int32,System.Runtime.InteropServices.ComTypes.FILETIME@)" />
+
+            
 
             
 
@@ -305,8 +323,12 @@
 
           
 
+          
+
           Specifies whether the Running Object Table's (ROT) reference to <paramref
            name="punkObject" />
+
+          
 
           
 
@@ -317,6 +339,8 @@
 
           
 
+          
+
           A reference to the object being registered as running. </param
         >
         <param name="pmkObjectName">
@@ -324,8 +348,12 @@
 
           
 
+          
+
           A reference to the moniker that identifies <paramref
            name="punkObject" />
+
+          
 
           
 
@@ -360,6 +388,8 @@
 
             
 
+            
+
              method in the MSDN library.</para
           >
         </remarks>
@@ -373,6 +403,8 @@
         </returns>
         <param name="dwRegister">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

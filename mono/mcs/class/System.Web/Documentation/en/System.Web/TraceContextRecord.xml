@@ -18,13 +18,19 @@
 
         
 
+        
+
          object encapsulates the trace message, category, any associated <see
          cref="T:System.Exception" />
 
         
 
+        
+
         , and whether the trace record was written by the <see
          cref="Overload:System.Web.TraceContext.Warn" />
+
+        
 
         
 
@@ -36,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Web.TraceContext.Warn" />
+
+        
 
         
 
@@ -46,13 +56,19 @@
 
         
 
+        
+
          object that is added to the <see
          cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
 
         
 
+        
+
          messages collection. You can access the collection of records by handling the <see
          cref="E:System.Web.TraceContext.TraceFinished" />
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Web.TraceContext.Warn" />
+
+            
 
             
 
@@ -99,8 +119,12 @@
 
             
 
+            
+
              object that is added to the <see
              cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
+
+            
 
             
 
@@ -109,13 +133,19 @@
 
             
 
+            
+
              method call sets the <see
              cref="P:System.Web.TraceContextRecord.IsWarning" />
 
             
 
+            
+
              property to true, while the <see
              cref="Overload:System.Web.TraceContext.Write" />
+
+            
 
             
 
@@ -130,11 +160,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,10 +179,14 @@
 
           
 
+          
+
           The trace message.</param
         >
         <param name="isWarning">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,13 +195,19 @@
 
           
 
+          
+
            is the <see
            cref="Overload:System.Web.TraceContext.Warn" />
 
           
 
+          
+
            method; false if the tracing method is the <see
            cref="Overload:System.Web.TraceContext.Write" />
+
+          
 
           
 
@@ -174,8 +218,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -202,13 +250,19 @@
 
             
 
+            
+
              class uses <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
              as its default category for methods that take only a <paramref
              name="message" />
+
+            
 
             
 
@@ -240,13 +294,19 @@
 
             
 
+            
+
              property is null when the trace record is associated with one of the <see
              cref="T:System.Web.TraceContext" />
 
             
 
+            
+
              methods that does not have an explicit <paramref
              name="errorInfo" />
+
+            
 
             
 
@@ -258,6 +318,8 @@
           <para
             >Gets the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -286,6 +348,8 @@
 
             
 
+            
+
              method call.</para
           >
         </summary>
@@ -310,8 +374,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Web.TraceContext.Warn" />
+
+            
 
             
 

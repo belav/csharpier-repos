@@ -18,8 +18,12 @@
 
         
 
+        
+
          in the <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -43,8 +51,12 @@
 
           
 
+          
+
            class only supports <see
            cref="F:System.Windows.Forms.DrawMode.Normal" />
+
+          
 
           
 
@@ -54,6 +66,8 @@
       <para
         >For more information about using the <see
          cref="T:System.Windows.Forms.DrawMode" />
+
+        
 
         
 

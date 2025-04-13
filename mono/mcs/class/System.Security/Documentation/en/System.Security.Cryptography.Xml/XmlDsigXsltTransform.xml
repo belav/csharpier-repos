@@ -22,6 +22,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -37,11 +39,15 @@
 
         
 
+        
+
          class allows you to address an XML document using an XSLT transformation.  This class uses XSLT to transform XML nodes into other XML nodes that you want to sign or encrypt.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXsltTransformUrl" />
+
+        
 
         
 
@@ -92,6 +102,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -123,11 +135,15 @@
 
             
 
+            
+
              class with comments, if specified.</para
           >
         </summary>
         <param name="includeComments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -172,6 +190,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 
@@ -205,6 +225,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -216,6 +238,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -224,6 +248,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 
@@ -259,6 +285,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -270,8 +298,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -286,8 +318,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -299,8 +335,12 @@
 
           
 
+          
+
           The type of the output to return. <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -334,8 +374,12 @@
 
             
 
+            
+
              are <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -344,8 +388,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -360,8 +408,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 
@@ -404,8 +456,12 @@
 
             
 
+            
+
              object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 
@@ -417,8 +473,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
+
+          
 
           
 
@@ -427,8 +487,12 @@
 
           
 
+          
+
            object. This style sheet is applied to the document loaded by the <see
            cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" />
+
+          
 
           
 
@@ -463,8 +527,12 @@
 
             
 
+            
+
              property. The valid input types to <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 
@@ -473,13 +541,19 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -494,6 +568,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -502,8 +578,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+          
 
           
 
@@ -539,8 +619,12 @@
 
             
 
+            
+
              is the only valid output type for <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 
@@ -555,8 +639,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" />
+
+            
 
             
 

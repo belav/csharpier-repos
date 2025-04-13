@@ -22,8 +22,12 @@
 
         
 
+        
+
          class represents a row in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridView.SelectedRows" />
+
+        
 
         
 
@@ -45,13 +53,19 @@
 
         
 
+        
+
         , a <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
 
         
 
+        
+
          physically contains a collection of all of the cells in that row. You can access this collection through the <see
          cref="P:System.Windows.Forms.DataGridViewRow.Cells" />
+
+        
 
         
 
@@ -63,13 +77,19 @@
 
         
 
+        
+
          class is used to access the individual cell elements, as well as to adjust the appearance and behavior of the row user interface (UI), such as height and cell style. Typically, you will want all rows or most rows in the control to share the same characteristics. To set cell styles for all rows in the control, set the properties of the object returned by the <see
          cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />
 
         
 
+        
+
          property. To set styles for alternating rows, use the <see
          cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />
+
+        
 
         
 
@@ -82,8 +102,12 @@
 
         
 
+        
+
         . You can also use the <see
          cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+        
 
         
 
@@ -95,8 +119,12 @@
 
         
 
+        
+
          control will share <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -105,8 +133,12 @@
 
         
 
+        
+
          property value of -1. Some members of the <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -115,8 +147,12 @@
 
         
 
+        
+
          property. Rows can also become unshared in other ways. To access a row without unsharing it, use the <see
          cref="M:System.Windows.Forms.DataGridViewRowCollection.SharedRow(System.Int32)" />
+
+        
 
         
 
@@ -129,6 +165,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -137,6 +175,8 @@
       <para
         >Represents a row in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -160,6 +200,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -191,11 +233,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If no <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -208,12 +254,16 @@
 
               
 
+              
+
                property, you must add a reference to the Accessibility assembly installed with the dnprdnshort.</para
             >
           </block>
           <para
             >For more information about accessible objects, see the "Active Accessibility" section of the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -228,8 +278,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -279,8 +333,12 @@
 
             
 
+            
+
              control internally calls the <see
              cref="M:System.Windows.Forms.DataGridViewRow.AdjustRowHeaderBorderStyle(System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -289,13 +347,19 @@
 
             
 
+            
+
              control typically uses the value of the <see
              cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" />
 
             
 
+            
+
              property for the <paramref
              name="dataGridViewAdvancedBorderStyleInput" />
+
+            
 
             
 
@@ -314,6 +378,8 @@
 
             
 
+            
+
              that represents the new border style used.</para
           >
         </returns>
@@ -322,8 +388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -334,8 +404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -346,10 +420,14 @@
 
           
 
+          
+
           true to add a single vertical border to the result; otherwise, false. </param
         >
         <param name="singleHorizontalBorderAdded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,8 +438,12 @@
 
           
 
+          
+
           true if the row is the first row displayed in the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -372,13 +454,19 @@
 
           
 
+          
+
           true if the row is the last row in the <see
            cref="T:System.Windows.Forms.DataGridView" />
 
           
 
+          
+
            that has its <see
            cref="P:System.Windows.Forms.DataGridViewRow.Visible" />
+
+          
 
           
 
@@ -414,8 +502,12 @@
 
             
 
+            
+
              will be created by a call to the <see
              cref="M:System.Windows.Forms.DataGridViewRow.CreateCellsInstance" />
+
+            
 
             
 
@@ -456,6 +548,8 @@
 
             
 
+            
+
              method copies the row and its property values, but does not copy the cell values that the row contains. For information about how to copy cell values when cloning a row, see the example section.</para
           >
           <para
@@ -464,8 +558,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -484,8 +582,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -524,13 +626,19 @@
 
             
 
+            
+
              control <see
              cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" />
 
             
 
+            
+
              event or the row <see
              cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+            
 
             
 
@@ -542,8 +650,12 @@
 
             
 
+            
+
              control <see
              cref="P:System.Windows.Forms.DataGridView.DataSource" />
+
+            
 
             
 
@@ -552,8 +664,12 @@
 
             
 
+            
+
              property is true, getting the value of the <see
              cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+            
 
             
 
@@ -562,13 +678,19 @@
 
             
 
+            
+
              event of the control and returns the value of the <see
              cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.ContextMenuStrip" />
 
             
 
+            
+
              property as specified in the event handler. If there are no handlers for the event, getting the value of the <see
              cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+            
 
             
 
@@ -580,8 +702,12 @@
 
             
 
+            
+
              event is primarily useful when working with large amounts of data to avoid performance penalties when setting the row <see
              cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+            
 
             
 
@@ -594,6 +720,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -602,8 +730,12 @@
 
             
 
+            
+
              event on the owning <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -612,6 +744,8 @@
           <para
             >If the current row is shared, use the <see
              cref="M:System.Windows.Forms.DataGridViewRow.GetContextMenuStrip(System.Int32)" />
+
+            
 
             
 
@@ -644,8 +778,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.DataGridViewRow.AccessibilityObject" />
+
+            
 
             
 
@@ -655,6 +793,8 @@
             <para
               > To get or set <see
                cref="P:System.Windows.Forms.DataGridViewRow.AccessibilityObject" />
+
+              
 
               
 
@@ -670,6 +810,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -681,8 +823,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -716,8 +862,12 @@
 
             
 
+            
+
              and reinitializes it with the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.CellTemplate" />
+
+            
 
             
 
@@ -726,8 +876,12 @@
 
             
 
+            
+
              parameter. As a result, the row adopts the appearance and behavior of a row from the <paramref
              name="dataGridView" />
+
+            
 
             
 
@@ -742,6 +896,8 @@
 
             
 
+            
+
              template.</para
           >
         </summary>
@@ -750,8 +906,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -791,8 +951,12 @@
 
             
 
+            
+
              and reinitializes it with the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.CellTemplate" />
+
+            
 
             
 
@@ -801,8 +965,12 @@
 
             
 
+            
+
              parameter. As a result, the row adopts the appearance and behavior of a row from the <paramref
              name="dataGridView" />
+
+            
 
             
 
@@ -811,6 +979,8 @@
           <para
             >If there are more elements in the <paramref
              name="values" />
+
+            
 
             
 
@@ -826,8 +996,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -835,6 +1009,8 @@
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -865,8 +1041,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Windows.Forms.BaseCollection.Count" />
+
+            
 
             
 
@@ -882,6 +1062,8 @@
           <para
             >The newly created <see
              cref="T:System.Windows.Forms.DataGridViewCellCollection" />
+
+            
 
             
 
@@ -948,8 +1130,12 @@
 
             
 
+            
+
              control displays its cells using the styles indicated by the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />
+
+            
 
             
 
@@ -958,8 +1144,12 @@
 
             
 
+            
+
             . For cells in this row, the styles specified through the <see
              cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />
+
+            
 
             
 
@@ -968,8 +1158,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
+
+            
 
             
 
@@ -978,13 +1172,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />
 
             
 
+            
+
              properties, but are overridden by the styles specified through the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -1000,6 +1200,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1008,8 +1210,12 @@
 
             
 
+            
+
              with default values will be created if the property has not already been accessed. This can cause a performance impact when getting this property for many rows. Whenever possible, use a single <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -1019,6 +1225,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1086,6 +1294,8 @@
 
             
 
+            
+
             . The extra edge does not extend the area in which users can double-click to automatically resize a row. To resize a row, the user must double-click on the boundary between the divider and the adjacent row. </para
           >
         </remarks>
@@ -1141,8 +1351,12 @@
 
             
 
+            
+
              parameter is not used in the base-class implementation of the <see
              cref="M:System.Windows.Forms.DataGridViewRow.DrawFocus(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Windows.Forms.DataGridViewCellStyle,System.Boolean)" />
+
+            
 
             
 
@@ -1158,13 +1372,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1175,13 +1395,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -1192,13 +1418,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1209,6 +1441,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="rowState">
@@ -1216,8 +1450,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1228,8 +1466,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -1240,13 +1482,19 @@
 
           
 
+          
+
           true to use the <see
            cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" />
 
           
 
+          
+
            property of <paramref
            name="cellStyle" />
+
+          
 
           
 
@@ -1255,8 +1503,12 @@
 
           
 
+          
+
            property of <paramref
            name="cellStyle" />
+
+          
 
           
 
@@ -1282,8 +1534,12 @@
 
             
 
+            
+
              control, setting this property will raise the <see
              cref="E:System.Windows.Forms.DataGridView.RowErrorTextChanged" />
+
+            
 
             
 
@@ -1321,6 +1577,8 @@
           <para
             >This property lets you keep one or several rows of important information in place when a user scrolls through the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1365,8 +1623,12 @@
 
             
 
+            
+
              method the indexer you used to retrieve the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -1375,8 +1637,12 @@
 
             
 
+            
+
              property for the <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -1385,8 +1651,12 @@
 
             
 
+            
+
              is -1, which is an invalid value for <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -1405,8 +1675,12 @@
 
             
 
+            
+
              that belongs to the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -1415,6 +1689,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1441,8 +1717,12 @@
 
             
 
+            
+
              method the index you used to retrieve the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -1451,8 +1731,12 @@
 
             
 
+            
+
              property for the <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -1461,8 +1745,12 @@
 
             
 
+            
+
              is -1, which is an invalid value for <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -1472,6 +1760,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1488,6 +1778,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1522,13 +1814,19 @@
 
             
 
+            
+
              control to determine the ideal height of a row. The <paramref
              name="rowIndex" />
 
             
 
+            
+
              value lets you specify the actual row index of a shared row. (Shared rows have <see
              cref="P:System.Windows.Forms.DataGridViewBand.Index" />
+
+            
 
             
 
@@ -1540,6 +1838,8 @@
 
             
 
+            
+
              parameter value of false calculates the row height based on calculated column widths that will achieve ideal cell height-to-width ratios. </para
           >
           <para
@@ -1548,8 +1848,12 @@
 
             
 
+            
+
              property value of <see
              cref="F:System.Windows.Forms.DataGridViewTriState.True" />
+
+            
 
             
 
@@ -1562,6 +1866,8 @@
                 >Sizing Options in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1581,10 +1887,14 @@
 
           
 
+          
+
           The index of the row whose preferred height is calculated.</param
         >
         <param name="autoSizeRowMode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1593,10 +1903,14 @@
 
           
 
+          
+
            that specifies an automatic sizing mode.</param
         >
         <param name="fixedWidth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1629,13 +1943,19 @@
 
             
 
+            
+
              values of -1, which prevents you from using the <see
              cref="P:System.Windows.Forms.DataGridViewRow.State" />
 
             
 
+            
+
              property with shared rows. To use this method, pass in the actual row index. You can retrieve the actual index of a shared row by calling the <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.IndexOf(System.Windows.Forms.DataGridViewRow)" />
+
+            
 
             
 
@@ -1654,11 +1974,15 @@
 
             
 
+            
+
              values indicating the row state.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1694,8 +2018,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect" />
+
+            
 
             
 
@@ -1733,6 +2061,8 @@
           <para
             >To set the minimum height for a row, use the <see
              cref="P:System.Windows.Forms.DataGridViewRow.MinimumHeight" />
+
+            
 
             
 
@@ -1776,6 +2106,8 @@
 
             
 
+            
+
              property inherits its values from the following properties:</para
           >
           <list type="bullet">
@@ -1787,6 +2119,8 @@
             <item>
               <para>
                 <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />
+
+                
 
                 
 
@@ -1811,6 +2145,8 @@
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1843,8 +2179,12 @@
 
             
 
+            
+
              collection, use the <see
              cref="P:System.Windows.Forms.DataGridViewRow.IsNewRow" />
+
+            
 
             
 
@@ -1883,6 +2223,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.DataGridViewRow.MinimumHeight" />
+
+            
 
             
 
@@ -1936,6 +2278,8 @@
 
             
 
+            
+
              control calls this method to paint the row.</para
           >
           <para
@@ -1944,8 +2288,12 @@
 
             
 
+            
+
              event. If a handler for the event does not set the <see
              cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+            
 
             
 
@@ -1954,13 +2302,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataGridViewRow.PaintCells(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean,System.Windows.Forms.DataGridViewPaintParts)" />
 
             
 
+            
+
              methods and raises the <see
              cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
+
+            
 
             
 
@@ -1976,13 +2330,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1993,13 +2353,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -2010,13 +2376,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -2027,6 +2399,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="rowState">
@@ -2034,8 +2408,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -2046,8 +2424,12 @@
 
           
 
+          
+
           true to indicate whether the current row is the first row displayed in the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -2058,13 +2440,19 @@
 
           
 
+          
+
           true to indicate whether the current row is the last row in the <see
            cref="T:System.Windows.Forms.DataGridView" />
 
           
 
+          
+
            that has the <see
            cref="P:System.Windows.Forms.DataGridViewRow.Visible" />
+
+          
 
           
 
@@ -2108,8 +2496,12 @@
 
             
 
+            
+
              control calls this method to paint the cells in the row except when a handler for the <see
              cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+
+            
 
             
 
@@ -2118,8 +2510,12 @@
 
             
 
+            
+
              property to true. For more information, see <see
              cref="M:System.Windows.Forms.DataGridViewRow.Paint(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -2135,13 +2531,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -2152,13 +2554,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -2169,13 +2577,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -2186,6 +2600,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="rowState">
@@ -2193,8 +2609,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -2205,8 +2625,12 @@
 
           
 
+          
+
           true to indicate whether the current row is the first row displayed in the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -2217,13 +2641,19 @@
 
           
 
+          
+
           true to indicate whether the current row is the last row in the <see
            cref="T:System.Windows.Forms.DataGridView" />
 
           
 
+          
+
            that has the <see
            cref="P:System.Windows.Forms.DataGridViewRow.Visible" />
+
+          
 
           
 
@@ -2234,8 +2664,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -2279,8 +2713,12 @@
 
             
 
+            
+
              control calls this method to paint the row header except when a handler for the <see
              cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+
+            
 
             
 
@@ -2289,8 +2727,12 @@
 
             
 
+            
+
              property to true. For more information, see <see
              cref="M:System.Windows.Forms.DataGridViewRow.Paint(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -2306,13 +2748,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -2323,13 +2771,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -2340,13 +2794,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -2357,6 +2817,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="rowState">
@@ -2364,8 +2826,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -2376,8 +2842,12 @@
 
           
 
+          
+
           true to indicate that the current row is the first row displayed in the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -2388,13 +2858,19 @@
 
           
 
+          
+
           true to indicate that the current row is the last row in the <see
            cref="T:System.Windows.Forms.DataGridView" />
 
           
 
+          
+
            that has the <see
            cref="P:System.Windows.Forms.DataGridViewRow.Visible" />
+
+          
 
           
 
@@ -2405,8 +2881,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -2431,8 +2911,12 @@
 
             
 
+            
+
              property affects the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
+
+            
 
             
 
@@ -2441,6 +2925,8 @@
           <para
             >Setting this property has no effect if the value of the <see
              cref="P:System.Windows.Forms.DataGridView.ReadOnly" />
+
+            
 
             
 
@@ -2491,6 +2977,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2499,8 +2987,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Windows.Forms.DataGridViewTriState.False" />
+
+            
 
             
 
@@ -2512,8 +3004,12 @@
 
             
 
+            
+
              property value is based on the <see
              cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" />
+
+            
 
             
 
@@ -2522,8 +3018,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.DataGridViewTriState.True" />
+
+            
 
             
 
@@ -2532,13 +3032,19 @@
 
             
 
+            
+
             , however, the control value is ignored. Set <see
              cref="P:System.Windows.Forms.DataGridViewRow.Resizable" />
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" />
+
+            
 
             
 
@@ -2550,8 +3056,12 @@
 
             
 
+            
+
              restores the value inheritance, the <see
              cref="P:System.Windows.Forms.DataGridViewRow.Resizable" />
+
+            
 
             
 
@@ -2560,8 +3070,12 @@
 
             
 
+            
+
              value unless the row has not been added to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -2570,8 +3084,12 @@
 
             
 
+            
+
              property value of a row is inherited or has been specified explicitly, check its <see
              cref="P:System.Windows.Forms.DataGridViewElement.State" />
+
+            
 
             
 
@@ -2580,13 +3098,19 @@
 
             
 
+            
+
              value includes the <see
              cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" />
 
             
 
+            
+
              flag, the <see
              cref="P:System.Windows.Forms.DataGridViewRow.Resizable" />
+
+            
 
             
 
@@ -2598,6 +3122,8 @@
           <para
             >Gets or sets a value indicating whether users can resize the row or indicating that the behavior is inherited from the <see
              cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" />
+
+            
 
             
 
@@ -2632,6 +3158,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -2674,8 +3202,12 @@
 
             
 
+            
+
              parameter represents a variable number of arguments used to populate cell values in the row. These values can be passed to this method as multiple, individual arguments or as members of a single <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -2684,8 +3216,12 @@
 
             
 
+            
+
             , however, if you pass in an array of value-type values (such as <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2694,11 +3230,15 @@
 
             
 
+            
+
              array or pass in multiple values as multiple arguments.</para
           >
           <para
             >If there are more values in the <paramref
              name="values" />
+
+            
 
             
 
@@ -2716,6 +3256,8 @@
         </returns>
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2740,6 +3282,8 @@
           <para
             >You cannot use this property with shared rows because shared rows do not store their state locally. To get the state of a shared row, use the <see
              cref="M:System.Windows.Forms.DataGridViewRow.GetState(System.Int32)" />
+
+            
 
             
 
@@ -2772,13 +3316,19 @@
 
             
 
+            
+
              method supplies the class name and the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Index" />
 
             
 
+            
+
              information for this instance of the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -2794,6 +3344,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2822,8 +3374,12 @@
 
             
 
+            
+
             . To completely remove a row, use the <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.Remove(System.Windows.Forms.DataGridViewRow)" />
+
+            
 
             
 

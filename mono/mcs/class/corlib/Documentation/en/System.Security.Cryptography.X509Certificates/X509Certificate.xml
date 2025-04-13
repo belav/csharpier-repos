@@ -46,6 +46,8 @@
 
         
 
+        
+
          class instead.</para
       >
     </remarks>
@@ -81,6 +83,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -112,13 +116,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="data" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -133,11 +143,15 @@
 
             
 
+            
+
              class defined from a sequence of bytes representing an X.509v3 certificate.</para
           >
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,6 +184,8 @@
 
             
 
+            
+
              object using a handle for the Microsoft Cryptographic API certificate context, PCCERT_CONTEXT.</para
           >
           <block subset="none" type="note">
@@ -179,8 +195,12 @@
 
               
 
+              
+
                property, but it is valid only during the lifetime of the <see
                cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+              
 
               
 
@@ -196,11 +216,15 @@
 
             
 
+            
+
              class using a handle to an unmanaged PCCERT_CONTEXT structure.</para
           >
         </summary>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,8 +267,12 @@
 
             
 
+            
+
              class using another <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -256,8 +284,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -290,13 +322,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="fileName" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -311,11 +349,15 @@
 
             
 
+            
+
              class using the name of a PKCS7 signed file. </para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -355,6 +397,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -364,13 +408,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="rawData" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -385,6 +435,8 @@
 
             
 
+            
+
              class using a byte array and a password.</para
           >
         </summary>
@@ -393,10 +445,14 @@
 
           
 
+          
+
           A byte array that contains data from an X.509 certificate.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,6 +492,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -445,13 +503,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="rawData" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -466,6 +530,8 @@
 
             
 
+            
+
              class using a byte array and a password.</para
           >
         </summary>
@@ -474,10 +540,14 @@
 
           
 
+          
+
           A byte array containing data from an X.509 certificate.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,13 +584,19 @@
 
             
 
+            
+
              class using a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              object and a <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -532,8 +608,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -544,8 +624,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -585,6 +669,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -594,13 +680,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="fileName" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -615,6 +707,8 @@
 
             
 
+            
+
              class using a certificate file name and a password.</para
           >
         </summary>
@@ -623,10 +717,14 @@
 
           
 
+          
+
           The name of a certificate file. </param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,13 +761,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="fileName" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -684,6 +788,8 @@
 
             
 
+            
+
              class using the name of a PKCS7 signed file and a password to access the certificate.</para
           >
         </summary>
@@ -692,10 +798,14 @@
 
           
 
+          
+
           The name of a PKCS7 signed file. </param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -740,6 +850,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -749,13 +861,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="rawData" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -770,11 +888,15 @@
 
             
 
+            
+
              class using a byte array, a password, and a key storage flag.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -785,10 +907,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -828,11 +954,15 @@
 
             
 
+            
+
              object using a byte array, a password that is needed to access the certificate data, and a key storage flag.  Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP). </para
           >
           <para
             >The <see
              cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+
+            
 
             
 
@@ -848,6 +978,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -857,13 +989,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="rawData" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -878,11 +1016,15 @@
 
             
 
+            
+
              class using a byte array, a password, and a key storage flag.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -893,10 +1035,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -936,13 +1082,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="fileName" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -957,11 +1109,15 @@
 
             
 
+            
+
              class using a certificate file name, a password, and a key storage flag. </para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -972,10 +1128,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,13 +1175,19 @@
 
             
 
+            
+
              certificate by specifying a PKCS7 signed file store for <paramref
              name="fileName" />
 
             
 
+            
+
             , the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -1036,11 +1202,15 @@
 
             
 
+            
+
              class using the name of a PKCS7 signed file, a password to access the certificate, and a key storage flag. </para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1051,10 +1221,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1104,6 +1278,8 @@
 
           
 
+          
+
           The path of the PKCS7 signed file from which to create the X.509 certificate. </param
         >
       </Docs>
@@ -1147,6 +1323,8 @@
 
           
 
+          
+
           The path of the signed file from which to create the X.509 certificate. </param
         >
       </Docs>
@@ -1183,6 +1361,8 @@
 
             
 
+            
+
              objects and they have the same issuer and serial number.</para
           >
         </remarks>
@@ -1191,6 +1371,8 @@
           <para
             >Compares two <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -1205,8 +1387,12 @@
 
             
 
+            
+
              object is equal to the object specified by the <paramref
              name="other" />
+
+            
 
             
 
@@ -1218,8 +1404,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -1260,6 +1450,8 @@
 
             
 
+            
+
              objects are considered equal if they have the same issuer and serial number.</para
           >
         </remarks>
@@ -1268,6 +1460,8 @@
           <para
             >Compares two <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -1282,8 +1476,12 @@
 
             
 
+            
+
              object is equal to the object specified by the <paramref
              name="other" />
+
+            
 
             
 
@@ -1295,8 +1493,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -1342,8 +1544,12 @@
 
             
 
+            
+
              parameter accepts only the following values of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1352,8 +1558,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />
+
+            
 
             
 
@@ -1362,8 +1572,12 @@
 
             
 
+            
+
             .  Passing any other value causes a <see
              cref="T:System.Security.Cryptography.CryptographicException" />
+
+            
 
             
 
@@ -1378,8 +1592,12 @@
 
             
 
+            
+
              object to a byte array in a format described by one of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1394,6 +1612,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1402,8 +1622,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+          
 
           
 
@@ -1445,8 +1669,12 @@
 
             
 
+            
+
              parameter accepts only the following values of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1455,8 +1683,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />
+
+            
 
             
 
@@ -1465,8 +1697,12 @@
 
             
 
+            
+
             .  Passing any other value causes a <see
              cref="T:System.Security.Cryptography.CryptographicException" />
+
+            
 
             
 
@@ -1478,6 +1714,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -1493,6 +1731,8 @@
 
             
 
+            
+
              object to a byte array using the specified format and a password.</para
           >
         </summary>
@@ -1504,6 +1744,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1512,8 +1754,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+          
 
           
 
@@ -1521,6 +1767,8 @@
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1567,8 +1815,12 @@
 
             
 
+            
+
              parameter accepts only the following values of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1577,8 +1829,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />
+
+            
 
             
 
@@ -1587,8 +1843,12 @@
 
             
 
+            
+
             .  Passing any other value causes a <see
              cref="T:System.Security.Cryptography.CryptographicException" />
+
+            
 
             
 
@@ -1600,6 +1860,8 @@
                type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
               </format>
+
+              
 
               
 
@@ -1615,8 +1877,12 @@
 
             
 
+            
+
              object to a byte array in a format described by one of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1631,6 +1897,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1639,8 +1907,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+          
 
           
 
@@ -1648,6 +1920,8 @@
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1680,8 +1954,12 @@
 
             
 
+            
+
              falls back to a calendar that can express the date. If the <see
              cref="P:System.Globalization.CultureInfo.Calendar" />
+
+            
 
             
 
@@ -1690,13 +1968,19 @@
 
             
 
+            
+
             , the calendar is changed to the <see
              cref="T:System.Globalization.HijriCalendar" />
 
             
 
+            
+
              class; otherwise, it is changed to the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -1715,11 +1999,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="date">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1809,6 +2097,8 @@
 
             
 
+            
+
              method returns a string that shows the date formatted in Short Date Pattern followed by the time formatted in Long Time Pattern.  The date and time are formatted using the current culture and time zone.   </para
           >
         </remarks>
@@ -1848,12 +2138,16 @@
 
             
 
+            
+
              method returns a string that shows the date formatted in Short Date Pattern followed by the time formatted in Long Time Pattern.  The date and time are formatted using the current culture and time zone.</para
           >
           <block subset="none" type="note">
             <para
               >This method may return a different string format on Macintosh computers, although the underlying <see
                cref="T:System.DateTime" />
+
+              
 
               
 
@@ -2281,6 +2575,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -2322,6 +2618,8 @@
 
             
 
+            
+
              object with its associated values.</para
           >
         </remarks>
@@ -2333,11 +2631,15 @@
 
             
 
+            
+
              object with data from a byte array.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2377,6 +2679,8 @@
 
             
 
+            
+
              object with the certificate that the file contains.</para
           >
         </remarks>
@@ -2388,11 +2692,15 @@
 
             
 
+            
+
              object with information from a certificate file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2438,6 +2746,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -2450,11 +2760,15 @@
 
             
 
+            
+
              object using data from a byte array, a password, and a key storage flag.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2465,10 +2779,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2516,8 +2834,12 @@
 
             
 
+            
+
              object using a password for the certificate represented by the byte array. The <see
              cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+
+            
 
             
 
@@ -2532,11 +2854,15 @@
 
             
 
+            
+
              object using data from a byte array, a password, and flags for determining how the private key is imported.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2547,10 +2873,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2596,6 +2926,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -2608,11 +2940,15 @@
 
             
 
+            
+
              object with information from a certificate file, a password, and a key storage flag.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2623,10 +2959,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2677,6 +3017,8 @@
 
               
 
+              
+
               , a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
             >
           </block>
@@ -2689,8 +3031,12 @@
 
             
 
+            
+
              object with information from a certificate file, a password, and a <see
              cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+
+            
 
             
 
@@ -2702,6 +3048,8 @@
 
           
 
+          
+
           The name of a certificate file represented as a string. </param
         >
         <param name="password">
@@ -2709,10 +3057,14 @@
 
           
 
+          
+
           The password required to access the X.509 certificate data. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2771,6 +3123,8 @@
 
             
 
+            
+
              method to reset the state of the certificate. This method also frees any resources associated with the certificate.</para
           >
         </remarks>
@@ -2779,6 +3133,8 @@
           <para
             >Resets the state of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -2839,11 +3195,15 @@
 
             
 
+            
+
              interface and is called back by the deserialization event when deserialization is complete.  </para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2883,6 +3243,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2891,10 +3253,14 @@
 
           
 
+          
+
           The object to populate with serialization information.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2925,6 +3291,8 @@
 
           
 
+          
+
           .</remarks
         >
         <summary>
@@ -2932,6 +3300,8 @@
           <para
             >Returns a string representation of the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -2943,6 +3313,8 @@
           <para
             >A string representation of the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -2979,6 +3351,8 @@
 
             
 
+            
+
              object, with extra information, if specified.</para
           >
         </summary>
@@ -2990,11 +3364,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="fVerbose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -57,10 +57,14 @@
 
           
 
+          
+
           The number of arguments.</param
         >
         <param name="argNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -99,10 +103,14 @@
 
           
 
+          
+
           The number of arguments.</param
         >
         <param name="argNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,8 +193,12 @@
 
           
 
+          
+
           The instance of <see
            cref="T:System.Dynamic.CallInfo" />
+
+          
 
           
 
@@ -218,6 +230,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -226,6 +240,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Dynamic.CallInfo" />
+
+            
 
             
 

@@ -7,6 +7,8 @@
 
     
 
+    
+
     ) supported by C#, and at times they are referred to as static variables and instance variables, respectively. </paragraph
   >
   <paragraph>A static field is not part of a specific instance; instead, it identifies exactly one storage location. No matter how many instances of a class are created, there is only ever one copy of a static field for the associated application domain. </paragraph>
@@ -17,8 +19,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.4</hyperlink>
+
+    
 
     
 
@@ -27,6 +33,8 @@
   <paragraph
     >The differences between static and instance members are discussed further in <hyperlink
     >17.2.5</hyperlink>
+
+    
 
     
 

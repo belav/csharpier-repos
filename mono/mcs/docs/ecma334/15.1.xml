@@ -19,6 +19,8 @@ void F() {
 
       
 
+      
+
       the second invocation of Console.WriteLine is unreachable because there is no possibility that the statement will be executed. end example]</example
     >
   </paragraph>
@@ -27,6 +29,8 @@ void F() {
     <note
       >[Note: To determine whether a particular statement or end point is reachable, the compiler performs flow analysis according to the reachability rules defined for each statement. The flow analysis takes into account the values of constant expressions (<hyperlink
       >14.15</hyperlink>
+
+      
 
       
 
@@ -47,6 +51,8 @@ void F() {
 
       
 
+      
+
       the boolean expression of the if statement is a constant expression because both operands of the == operator are constants. As the constant expression is evaluated at compile-time, producing the value false, the Console.WriteLine invocation is considered unreachable. However, if i is changed to be a local variable <code_example
       >
         <![CDATA[
@@ -56,6 +62,8 @@ void F() {
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -77,11 +85,15 @@ void F(int x) {
 
       
 
+      
+
       the reachability of the second Console.WriteLine is determined as follows: <list
       >
         <list_item
           > The first Console.WriteLine expression statement is reachable because the block of the F method is reachable (<hyperlink
           >15.2</hyperlink>
+
+          
 
           
 
@@ -93,8 +105,12 @@ void F(int x) {
 
           
 
+          
+
            and <hyperlink
           >15.2</hyperlink>
+
+          
 
           
 
@@ -106,8 +122,12 @@ void F(int x) {
 
           
 
+          
+
            and <hyperlink
           >15.2</hyperlink>
+
+          
 
           
 

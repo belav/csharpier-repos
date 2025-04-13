@@ -34,8 +34,12 @@
 
         
 
+        
+
          class represents a parameter in a parameterized SQL query, a filtering expression, or a business object method call that an ASP.NET data source control uses to select, filter, or modify data. <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object. <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -54,6 +62,8 @@
       <para
         >Use classes that derive from <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -137,10 +147,14 @@
 
         
 
+        
+
          class when you want to implement your own custom parameter types.</para
       >
       <para>
         <see cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -149,8 +163,12 @@
 
         
 
+        
+
          and a <see
          cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+        
 
         
 
@@ -159,11 +177,15 @@
 
         
 
+        
+
          property, for cases when a parameter is bound to a value, but the value evaluates to null at run time.</para
       >
       <para
         >When using a collection of <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -176,12 +198,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="45fb67ee-9be7-49b7-9421-e242203dafa4"
             >Using Parameters with the ObjectDataSource Control</a
           >
         </format>
+
+        
 
         
 
@@ -208,8 +234,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.Parameter.#ctor" />
+
+            
 
             
 
@@ -218,8 +248,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -228,8 +262,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.TypeCode.Object" />
+
+            
 
             
 
@@ -238,13 +276,19 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Data.ParameterDirection.Input" />
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -256,6 +300,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -283,8 +329,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.Parameter.#ctor(System.String)" />
+
+            
 
             
 
@@ -293,8 +343,12 @@
 
             
 
+            
+
              and default values for its other properties. The <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -303,8 +357,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -313,8 +371,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -329,11 +391,15 @@
 
             
 
+            
+
              class, using the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,8 +429,12 @@
 
             
 
+            
+
              constructor is a protected copy constructor used to clone a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -373,8 +443,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -383,13 +457,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -404,6 +484,8 @@
 
             
 
+            
+
              class with the values of the original, specified instance.</para
           >
         </summary>
@@ -412,8 +494,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -441,8 +527,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.Parameter.#ctor(System.String,System.TypeCode)" />
+
+            
 
             
 
@@ -451,8 +541,12 @@
 
             
 
+            
+
              and <paramref
              name="type" />
+
+            
 
             
 
@@ -461,13 +555,19 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Data.ParameterDirection.Input" />
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -482,11 +582,15 @@
 
             
 
+            
+
              class, using the specified name and type.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,8 +601,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TypeCode" />
+
+          
 
           
 
@@ -530,8 +638,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.Parameter.#ctor(System.String,System.TypeCode,System.String)" />
+
+            
 
             
 
@@ -540,8 +652,12 @@
 
             
 
+            
+
              parameter and <paramref
              name="type" />
+
+            
 
             
 
@@ -550,13 +666,19 @@
 
             
 
+            
+
              property value. The <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Data.ParameterDirection.Input" />
+
+            
 
             
 
@@ -571,8 +693,12 @@
 
             
 
+            
+
              class, using the specified name, the specified type, and the specified string for its <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -584,6 +710,8 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
         <param name="type">
@@ -591,8 +719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TypeCode" />
+
+          
 
           
 
@@ -603,13 +735,19 @@
 
           
 
+          
+
           A string that serves as a default value for the parameter, if the <see
            cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
+          
+
            is bound to a value that is not yet initialized when <see
            cref="M:System.Web.UI.WebControls.Parameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+          
 
           
 
@@ -640,13 +778,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.Parameter.#ctor(System.Web.UI.WebControls.Parameter)" />
 
             
 
+            
+
              copy constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -658,8 +802,12 @@
 
             
 
+            
+
              class, you can override the <see
              cref="M:System.Web.UI.WebControls.Parameter.Clone" />
+
+            
 
             
 
@@ -674,6 +822,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -682,6 +832,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -715,8 +867,12 @@
 
             
 
+            
+
              property of the parameter is changed, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -731,8 +887,12 @@
 
             
 
+            
+
              object is bound to should be converted to null if it is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -766,8 +926,12 @@
 
             
 
+            
+
              property is used in scenarios where the parameter is bound to a value, but the value is null or cannot be resolved when the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -779,8 +943,12 @@
 
             
 
+            
+
              property of the parameter is changed, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -792,6 +960,8 @@
           <para
             >Specifies a default value for the parameter, should the value that the parameter is bound to be uninitialized when the <see
              cref="M:System.Web.UI.WebControls.Parameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -828,8 +998,12 @@
 
             
 
+            
+
              property is currently not used by the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -841,8 +1015,12 @@
 
             
 
+            
+
              property describes the direction of the flow of data between the value that a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -851,8 +1029,12 @@
 
             
 
+            
+
              object itself. The default value for the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -861,8 +1043,12 @@
 
             
 
+            
+
             , describes the most common scenario where the flow of data is always in one direction: from the value to which the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -871,8 +1057,12 @@
 
             
 
+            
+
              object. Any changes made to the underlying value are reflected by the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -881,8 +1071,12 @@
 
             
 
+            
+
              object are not reflected by the underlying data. You can set the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -891,13 +1085,19 @@
 
             
 
+            
+
              or <see
              cref="F:System.Data.ParameterDirection.Output" />
 
             
 
+            
+
              when working with output parameters, or <see
              cref="F:System.Data.ParameterDirection.ReturnValue" />
+
+            
 
             
 
@@ -909,8 +1109,12 @@
 
             
 
+            
+
              property of the parameter is changed, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -922,6 +1126,8 @@
           <para
             >Indicates whether the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -956,8 +1162,12 @@
 
             
 
+            
+
              method is to return null in all cases. Classes that derive from the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -966,8 +1176,12 @@
 
             
 
+            
+
              method to return an updated parameter value. For example, the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -976,8 +1190,12 @@
 
             
 
+            
+
              object retrieves the current name/value pair from the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -989,6 +1207,8 @@
           <para
             >Updates and returns the value of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1004,8 +1224,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -1016,13 +1240,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
 
           
 
+          
+
            the parameter is bound to. If the parameter is not bound to a control, the <paramref
            name="control" />
+
+          
 
           
 
@@ -1048,6 +1278,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1083,6 +1315,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1091,8 +1325,12 @@
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.Parameter.SaveViewState" />
+
+            
 
             
 
@@ -1108,13 +1346,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that represents the <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -1146,8 +1390,12 @@
 
             
 
+            
+
              objects are not required to have a name; however, data source controls might use the parameter name to match a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1156,8 +1404,12 @@
 
             
 
+            
+
              control can use the name of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1166,8 +1418,12 @@
 
             
 
+            
+
              control can use the name of a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1176,8 +1432,12 @@
 
             
 
+            
+
              collection to match a placeholder in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.FilterExpression" />
+
+            
 
             
 
@@ -1186,8 +1446,12 @@
 
             
 
+            
+
              object is added to a <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1200,6 +1464,8 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="45fb67ee-9be7-49b7-9421-e242203dafa4"
@@ -1209,11 +1475,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the name of the parameter is changed, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -1246,8 +1516,12 @@
 
             
 
+            
+
              object is not contained by a <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -1256,8 +1530,12 @@
 
             
 
+            
+
              method has no effect. If the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1266,13 +1544,19 @@
 
             
 
+            
+
              collection, <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
 
             
 
+            
+
              raises the <see
              cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
+
+            
 
             
 
@@ -1284,13 +1568,19 @@
 
             
 
+            
+
              collection is contained by a data source control, the <see
              cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
 
             
 
+            
+
              event raises the data source control's <see
              cref="E:System.Web.UI.IDataSource.DataSourceChanged" />
+
+            
 
             
 
@@ -1304,11 +1594,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -1323,13 +1617,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
+            
+
              collection that contains the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1359,8 +1659,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1369,6 +1673,8 @@
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see
              cref="P:System.Web.UI.WebControls.Parameter.ViewState" />
+
+            
 
             
 
@@ -1383,6 +1689,8 @@
 
             
 
+            
+
              object's view state since the time the page was posted back to the server.</para
           >
         </summary>
@@ -1394,8 +1702,12 @@
 
             
 
+            
+
              that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1426,13 +1738,19 @@
 
             
 
+            
+
              method is called directly by the <see
              cref="M:System.Web.UI.WebControls.ParameterCollection.SetDirtyObject(System.Object)" />
 
             
 
+            
+
              method, to mark the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1444,6 +1762,8 @@
           <para
             >Marks the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1474,8 +1794,12 @@
 
             
 
+            
+
              is changed, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -1510,13 +1834,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.Parameter.#ctor(System.Web.UI.WebControls.Parameter)" />
 
             
 
+            
+
              constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1528,8 +1858,12 @@
 
             
 
+            
+
              class, you can override the <see
              cref="M:System.Web.UI.WebControls.Parameter.Clone" />
+
+            
 
             
 
@@ -1544,6 +1878,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1552,6 +1888,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1580,6 +1918,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1612,8 +1952,12 @@
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.Parameter.SaveViewState" />
+
+            
 
             
 
@@ -1630,13 +1974,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that represents the <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -1664,8 +2014,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1674,6 +2028,8 @@
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see
              cref="P:System.Web.UI.WebControls.Parameter.ViewState" />
+
+            
 
             
 
@@ -1688,6 +2044,8 @@
 
             
 
+            
+
              object's view state since the time the page was posted back to the server.</para
           >
         </summary>
@@ -1699,8 +2057,12 @@
 
             
 
+            
+
              that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1729,8 +2091,12 @@
 
             
 
+            
+
              object to track changes to its view state so they can be stored in the control's <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -1756,8 +2122,12 @@
 
             
 
+            
+
              method returns the <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
+
+            
 
             
 
@@ -1766,8 +2136,12 @@
 
             
 
+            
+
              object. If the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1776,8 +2150,12 @@
 
             
 
+            
+
              returns <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1815,8 +2193,12 @@
 
             
 
+            
+
              object to track changes to its view state so they can be stored in the control's <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -1848,6 +2230,8 @@
           <para
             >If the type of the parameter is changed, the <see
              cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+
+            
 
             
 
@@ -1888,6 +2272,8 @@
 
             
 
+            
+
              class, to store the property values. The values are then passed as a variable to an HTML hidden input element when subsequent requests are processed. View state is enabled for all server controls by default.</para
           >
           <para
@@ -1895,6 +2281,8 @@
              type="text/html">
               <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
             </format>
+
+            
 
             
 
@@ -1906,6 +2294,8 @@
           <para
             >Gets a dictionary of state information that allows you to save and restore the view state of a <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 

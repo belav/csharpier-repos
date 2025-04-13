@@ -27,6 +27,8 @@
 
         
 
+        
+
          input and output
    functions. The program waits for the user to enter a name.</para
       >
@@ -62,11 +64,15 @@ public class ConsoleTest {
 
         
 
+        
+
          class provides basic support for applications that read characters from, and write characters to, the console. </para
       >
       <para
         >For information about developing with the <see
          cref="T:System.Console" />
+
+        
 
         
 
@@ -114,13 +120,19 @@ public class ConsoleTest {
 
         
 
+        
+
         , <see
          cref="P:System.Console.Out" />
 
         
 
+        
+
         , and <see
          cref="P:System.Console.Error" />
+
+        
 
         
 
@@ -132,8 +144,12 @@ public class ConsoleTest {
 
         
 
+        
+
          property is a <see
          cref="T:System.IO.TextReader" />
+
+        
 
         
 
@@ -142,8 +158,12 @@ public class ConsoleTest {
 
         
 
+        
+
          and <see
          cref="P:System.Console.Error" />
+
+        
 
         
 
@@ -152,8 +172,12 @@ public class ConsoleTest {
 
         
 
+        
+
          objects. However, you can set these properties to streams that do not represent the console; for example, you can set these properties to streams that represent files. To redirect the standard input, standard output, or standard error stream, call the <see
          cref="M:System.Console.SetIn(System.IO.TextReader)" />
+
+        
 
         
 
@@ -162,8 +186,12 @@ public class ConsoleTest {
 
         
 
+        
+
         , or <see
          cref="M:System.Console.SetError(System.IO.TextWriter)" />
+
+        
 
         
 
@@ -176,13 +204,19 @@ public class ConsoleTest {
 
           
 
+          
+
            class to display output in unattended applications, such as server applications. Calls to methods such as <see
            cref="Overload:System.Console.Write" />
 
           
 
+          
+
            and <see
            cref="Overload:System.Console.WriteLine" />
+
+          
 
           
 
@@ -194,8 +228,12 @@ public class ConsoleTest {
 
         
 
+        
+
          class members that work normally when the underlying stream is directed to a console might throw an exception if the stream is redirected, for example, to a file. Program your application to catch <see
          cref="T:System.IO.IOException" />
+
+        
 
         
 
@@ -204,8 +242,12 @@ public class ConsoleTest {
 
         
 
+        
+
         , <see
          cref="P:System.Console.IsInputRedirected" />
+
+        
 
         
 
@@ -214,8 +256,12 @@ public class ConsoleTest {
 
         
 
+        
+
          properties to determine whether a standard stream is redirected before performing an operation that throws an <see
          cref="T:System.IO.IOException" />
+
+        
 
         
 
@@ -227,8 +273,12 @@ public class ConsoleTest {
 
         
 
+        
+
         , <see
          cref="P:System.Console.Out" />
+
+        
 
         
 
@@ -237,8 +287,12 @@ public class ConsoleTest {
 
         
 
+        
+
          properties. For example, by default, the <see
          cref="M:System.Console.ReadLine" />
+
+        
 
         
 
@@ -247,8 +301,12 @@ public class ConsoleTest {
 
         
 
+        
+
          method writes data to the standard output stream, and the data is followed by the default line termination string, which is  a carriage return and line feed ("\r\n"). However, the <see
          cref="T:System.Console" />
+
+        
 
         
 
@@ -260,13 +318,19 @@ public class ConsoleTest {
 
         
 
+        
+
          property of the <see
          cref="P:System.Console.Out" />
 
         
 
+        
+
          or <see
          cref="P:System.Console.Error" />
+
+        
 
         
 
@@ -276,6 +340,8 @@ public class ConsoleTest {
       <para
         >You can then explicitly call the <see
          cref="Overload:System.IO.TextWriter.WriteLine" />
+
+        
 
         
 
@@ -297,6 +363,8 @@ public class ConsoleTest {
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -313,8 +381,12 @@ public class ConsoleTest {
 
         
 
+        
+
          class supports UTF-8 encoding with the <see
          cref="T:System.Text.UTF8Encoding" />
+
+        
 
         
 
@@ -323,8 +395,12 @@ public class ConsoleTest {
 
         
 
+        
+
          class also supports UTF-16 encoding with the <see
          cref="T:System.Text.UnicodeEncoding" />
+
+        
 
         
 
@@ -333,13 +409,19 @@ public class ConsoleTest {
 
         
 
+        
+
          property to either <see
          cref="T:System.Text.UTF8Encoding" />
 
         
 
+        
+
          or  <see
          cref="T:System.Text.UnicodeEncoding" />
+
+        
 
         
 
@@ -353,8 +435,12 @@ public class ConsoleTest {
 
         
 
+        
+
          applet in Control Panel, choose the <ui
         >Find a character</ui>
+
+        
 
         
 
@@ -363,8 +449,12 @@ public class ConsoleTest {
 
         
 
+        
+
          list of the <ui
         >Character Map</ui>
+
+        
 
         
 
@@ -375,6 +465,8 @@ public class ConsoleTest {
          cref="http://go.microsoft.com/fwlink/?LinkId=229111"
           >Globalization Step-by-Step: Fonts</see
         >
+
+        
 
         
 
@@ -390,8 +482,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -414,8 +510,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method before sending output to the console. In the following example, a string that contains the combining character sequence U+0061 U+0308 is displayed to the console as two characters before the output string is normalized, and as a single character after the <see
              cref="M:System.String.Normalize" />
+
+            
 
             
 
@@ -442,6 +542,8 @@ public class ConsoleTest {
 
         
 
+        
+
          class contains the following methods for reading console input and writing console output: </para
       >
       <list type="bullet">
@@ -449,6 +551,8 @@ public class ConsoleTest {
           <para
             >The overloads of the <see
              cref="M:System.Console.ReadKey" />
+
+            
 
             
 
@@ -462,6 +566,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method reads an entire line of input.</para
           >
         </item>
@@ -469,6 +575,8 @@ public class ConsoleTest {
           <para
             >The <see
              cref="M:System.Console.Write(System.Boolean)" />
+
+            
 
             
 
@@ -482,8 +590,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method overloads output the same string as the <see
              cref="M:System.Console.Write(System.Boolean)" />
+
+            
 
             
 
@@ -497,6 +609,8 @@ public class ConsoleTest {
 
         
 
+        
+
          class also contains methods and properties to perform the following operations:</para
       >
       <list type="bullet">
@@ -507,13 +621,19 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.BufferWidth" />
 
             
 
+            
+
              properties let you get or set the buffer height and width, respectively, and the <see
              cref="M:System.Console.SetBufferSize(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -527,13 +647,19 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.WindowWidth" />
 
             
 
+            
+
              properties let you get or set the window height and width, respectively, and the <see
              cref="M:System.Console.SetWindowSize(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -547,6 +673,8 @@ public class ConsoleTest {
 
             
 
+            
+
              property specifies the height of the cursor in a character cell.</para
           >
         </item>
@@ -557,13 +685,19 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.WindowLeft" />
 
             
 
+            
+
              properties let you get or set the top row and leftmost column of the screen buffer that appears in the console window, and the <see
              cref="M:System.Console.SetWindowPosition(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -577,13 +711,19 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.CursorLeft" />
 
             
 
+            
+
              properties, or set the position of the cursor by calling the <see
              cref="M:System.Console.SetCursorPosition(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -597,8 +737,12 @@ public class ConsoleTest {
 
             
 
+            
+
              or <see
              cref="M:System.Console.Clear" />
+
+            
 
             
 
@@ -612,13 +756,19 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.BackgroundColor" />
 
             
 
+            
+
              properties, or reset the background and foreground to their default colors by calling the <see
              cref="M:System.Console.ResetColor" />
+
+            
 
             
 
@@ -629,6 +779,8 @@ public class ConsoleTest {
           <para
             >Play the sound of a beep through the console speaker by calling the <see
              cref="M:System.Console.Beep" />
+
+            
 
             
 
@@ -671,13 +823,19 @@ public class ConsoleTest {
 
             
 
+            
+
              property affects only output that is written to individual character cells after the background color is changed. To change the background color of the console window as a whole, set the <see
              cref="P:System.Console.BackgroundColor" />
 
             
 
+            
+
              property and call the <see
              cref="M:System.Console.Clear" />
+
+            
 
             
 
@@ -687,6 +845,8 @@ public class ConsoleTest {
           <para
             >A get operation for a Windows-based application, in which a console does not exist, returns <see
              cref="F:System.ConsoleColor.Black" />
+
+            
 
             
 
@@ -723,6 +883,8 @@ public class ConsoleTest {
             <para
               >   The <see
                cref="Overload:System.Console.Beep" />
+
+              
 
               
 
@@ -768,6 +930,8 @@ public class ConsoleTest {
 
               
 
+              
+
                method is not supported on the 64-bit editions of Windows Vista and Windows XP.</para
             >
           </block>
@@ -781,10 +945,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The frequency of the beep, ranging from 37 to 32767 hertz.</param
         >
         <param name="duration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -814,8 +982,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property defines the number of rows that are actually displayed in the console window at any particular time. If the number of rows actually written to the buffer exceeds the number of rows defined by the <see
              cref="P:System.Console.WindowHeight" />
+
+            
 
             
 
@@ -824,11 +996,15 @@ public class ConsoleTest {
 
             
 
+            
+
              property and are located anywhere in the buffer.</para
           >
           <para
             >If a set operation decreases the value of the <see
              cref="P:System.Console.BufferHeight" />
+
+            
 
             
 
@@ -860,6 +1036,8 @@ public class ConsoleTest {
           <para
             >If a set operation decreases the value of the <see
              cref="P:System.Console.BufferWidth" />
+
+            
 
             
 
@@ -899,8 +1077,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="T:System.ConsoleCancelEventArgs" />
+
+            
 
             
 
@@ -909,10 +1091,14 @@ public class ConsoleTest {
 
             
 
+            
+
              event enables a console application to intercept the Ctrl+C signal so the event handler can decide whether to continue executing or terminate. For more information about handling events, see <format
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -924,13 +1110,19 @@ public class ConsoleTest {
 
             
 
+            
+
              event is fired and the application's <see
              cref="T:System.ConsoleCancelEventHandler" />
 
             
 
+            
+
              event handler is executed. The event handler is passed a <see
              cref="T:System.ConsoleCancelEventArgs" />
+
+            
 
             
 
@@ -943,13 +1135,19 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , which allows you to determine whether the handler was invoked as a result of the user pressing Ctrl+C (the property value is <see
                  cref="F:System.ConsoleSpecialKey.ControlC" />
 
                 
 
+                
+
                 ) or Ctrl+Break (the property value is <see
                  cref="F:System.ConsoleSpecialKey.ControlBreak" />
+
+                
 
                 
 
@@ -962,8 +1160,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , which allows you to determine how to your application should respond to the user pressing Ctrl+C or Ctrl+Break. By default, the <see
                  cref="P:System.ConsoleCancelEventArgs.Cancel" />
+
+                
 
                 
 
@@ -975,6 +1177,8 @@ public class ConsoleTest {
             <para
               >If your application has simple requirements, you can use the <see
                cref="P:System.Console.TreatControlCAsInput" />
+
+              
 
               
 
@@ -991,8 +1195,12 @@ public class ConsoleTest {
 
             
 
+            
+
              modifier key (Ctrl) and either the <see
              cref="F:System.ConsoleKey.C" />
+
+            
 
             
 
@@ -1046,8 +1254,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method is equivalent invoking the MS-DOS cls command in the command prompt window. When the <see
              cref="M:System.Console.Clear" />
+
+            
 
             
 
@@ -1060,13 +1272,19 @@ public class ConsoleTest {
 
               
 
+              
+
                method when a console application's output is redirected to a file throws a <see
                cref="T:System.IO.IOException" />
 
               
 
+              
+
               . To prevent this, always wrap a call to the <see
                cref="M:System.Console.Clear" />
+
+              
 
               
 
@@ -1191,6 +1409,8 @@ public class ConsoleTest {
 
             
 
+            
+
              object where error
    output is sent.</para
           >
@@ -1200,6 +1420,8 @@ public class ConsoleTest {
           <para
             >This property is set to the standard error stream by default. This property can be set to another stream with the <see
              cref="M:System.Console.SetError(System.IO.TextWriter)" />
+
+            
 
             
 
@@ -1241,6 +1463,8 @@ public class ConsoleTest {
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1275,6 +1499,8 @@ public class ConsoleTest {
 
             
 
+            
+
              object from which user input is received.</para
           >
         </value>
@@ -1283,6 +1509,8 @@ public class ConsoleTest {
           <para
             >This property is set to the standard input stream by default. This property can be set to another stream with the <see
              cref="M:System.Console.SetIn(System.IO.TextReader)" />
+
+            
 
             
 
@@ -1325,8 +1553,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property is modified by some means other than an assignment to the <see
              cref="P:System.Console.InputEncoding" />
+
+            
 
             
 
@@ -1418,6 +1650,8 @@ public class ConsoleTest {
 
             
 
+            
+
              property does not block input until a key press is available.</para
           >
           <para
@@ -1426,8 +1660,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property in conjunction with only the <see
              cref="M:System.Console.ReadKey" />
+
+            
 
             
 
@@ -1436,8 +1674,12 @@ public class ConsoleTest {
 
             
 
+            
+
              or <see
              cref="M:System.Console.ReadLine" />
+
+            
 
             
 
@@ -1526,6 +1768,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method copies the source area to the destination area. If the destination area does not intersect the source area, the source area is filled with blanks using the current foreground and background colors. Otherwise, the intersected portion of the source area is not filled.</para
           >
         </remarks>
@@ -1538,10 +1782,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The leftmost column of the source area. </param
         >
         <param name="sourceTop">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1552,10 +1800,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The number of columns in the source area. </param
         >
         <param name="sourceHeight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1566,10 +1818,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The leftmost column of the destination area. </param
         >
         <param name="targetTop">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1616,8 +1872,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method copies the source area to the destination area. If the destination area does not intersect the source area, the source area is filled with the character specified by <paramref
              name="sourceChar" />
+
+            
 
             
 
@@ -1626,8 +1886,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <paramref
              name="sourceBackColor" />
+
+            
 
             
 
@@ -1639,13 +1903,19 @@ public class ConsoleTest {
 
             
 
+            
+
              method performs no operation if <paramref
              name="sourceWidth" />
 
             
 
+            
+
              or <paramref
              name="sourceHeight" />
+
+            
 
             
 
@@ -1661,10 +1931,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The leftmost column of the source area. </param
         >
         <param name="sourceTop">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1675,10 +1949,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The number of columns in the source area. </param
         >
         <param name="sourceHeight">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1689,10 +1967,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The leftmost column of the destination area. </param
         >
         <param name="targetTop">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1703,6 +1985,8 @@ public class ConsoleTest {
 
           
 
+          
+
           The character used to fill the source area. </param
         >
         <param name="sourceForeColor">
@@ -1710,10 +1994,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The foreground color used to fill the source area. </param
         >
         <param name="sourceBackColor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1770,6 +2058,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1818,6 +2108,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1831,6 +2123,8 @@ public class ConsoleTest {
         </returns>
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1865,6 +2159,8 @@ public class ConsoleTest {
           <para
             >This method can be used to reacquire the standard input stream after it has been changed by the <see
              cref="M:System.Console.SetIn(System.IO.TextReader)" />
+
+            
 
             
 
@@ -1916,6 +2212,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1929,6 +2227,8 @@ public class ConsoleTest {
         </returns>
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1966,6 +2266,8 @@ public class ConsoleTest {
           <para
             >This method can be used to reacquire the standard output stream after it has been changed by the <see
              cref="M:System.Console.SetOut(System.IO.TextWriter)" />
+
+            
 
             
 
@@ -2017,6 +2319,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -2030,6 +2334,8 @@ public class ConsoleTest {
         </returns>
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2063,6 +2369,8 @@ public class ConsoleTest {
 
             
 
+            
+
              object where normal output is sent.</para
           >
         </value>
@@ -2074,11 +2382,15 @@ public class ConsoleTest {
 
             
 
+            
+
              method.</para
           >
           <para
             >Note that calls to Console.Out.WriteLine methods are equivalent to calls to the corresponding <see
              cref="Overload:System.Console.WriteLine" />
+
+            
 
             
 
@@ -2121,8 +2433,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property is modified by some means other than an assignment to the <see
              cref="P:System.Console.OutputEncoding" />
+
+            
 
             
 
@@ -2162,8 +2478,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method blocks its return while you type input characters; it terminates when you press the <see
              cref="F:System.ConsoleKey.Enter" />
+
+            
 
             
 
@@ -2172,8 +2492,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method retrieve your input one character at a time. After the final character is retrieved, <see
              cref="M:System.Console.Read" />
+
+            
 
             
 
@@ -2185,8 +2509,12 @@ public class ConsoleTest {
 
             
 
+            
+
              modifier key and <see
              cref="F:System.ConsoleKey.Z" />
+
+            
 
             
 
@@ -2198,8 +2526,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method, or the <see
              cref="P:System.Console.KeyAvailable" />
+
+            
 
             
 
@@ -2208,8 +2540,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method are preferable to using the <see
              cref="M:System.Console.Read" />
+
+            
 
             
 
@@ -2252,13 +2588,19 @@ public class ConsoleTest {
 
             
 
+            
+
              method waits, that is, blocks on the thread issuing the <see
              cref="M:System.Console.ReadKey" />
 
             
 
+            
+
              method, until a character or function key is pressed. A character or function key can be pressed in combination with one or more Alt, Ctrl, or Shift modifier keys. However, pressing a modifier key by itself will not cause the <see
              cref="M:System.Console.ReadKey" />
+
+            
 
             
 
@@ -2270,8 +2612,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method in conjunction with the <see
              cref="P:System.Console.KeyAvailable" />
+
+            
 
             
 
@@ -2283,8 +2629,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method reads from the keyboard even if the standard input is redirected to a file with the <see
              cref="M:System.Console.SetIn(System.IO.TextReader)" />
+
+            
 
             
 
@@ -2303,8 +2653,12 @@ public class ConsoleTest {
 
             
 
+            
+
              object that describes the <see
              cref="T:System.ConsoleKey" />
+
+            
 
             
 
@@ -2313,8 +2667,12 @@ public class ConsoleTest {
 
             
 
+            
+
              object also describes, in a bitwise combination of <see
              cref="T:System.ConsoleModifiers" />
+
+            
 
             
 
@@ -2353,13 +2711,19 @@ public class ConsoleTest {
 
             
 
+            
+
              method waits, that is, blocks on the thread issuing the <see
              cref="M:System.Console.ReadKey" />
 
             
 
+            
+
              method, until a character or function key is pressed. A character or function key can be pressed in combination with one or more Alt, Ctrl, or Shift modifier keys. However, pressing a modifier key by itself will not cause the <see
              cref="M:System.Console.ReadKey" />
+
+            
 
             
 
@@ -2371,6 +2735,8 @@ public class ConsoleTest {
 
             
 
+            
+
              parameter is true, the pressed key is intercepted and not displayed in the console window; otherwise, the pressed key is displayed.</para
           >
           <para
@@ -2379,8 +2745,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method in conjunction with the <see
              cref="P:System.Console.KeyAvailable" />
+
+            
 
             
 
@@ -2392,8 +2762,12 @@ public class ConsoleTest {
 
             
 
+            
+
              method reads from the keyboard even if the standard input is redirected to a file with the <see
              cref="M:System.Console.SetIn(System.IO.TextReader)" />
+
+            
 
             
 
@@ -2412,8 +2786,12 @@ public class ConsoleTest {
 
             
 
+            
+
              object that describes the <see
              cref="T:System.ConsoleKey" />
+
+            
 
             
 
@@ -2422,8 +2800,12 @@ public class ConsoleTest {
 
             
 
+            
+
              object also describes, in a bitwise combination of <see
              cref="T:System.ConsoleModifiers" />
+
+            
 
             
 
@@ -2432,6 +2814,8 @@ public class ConsoleTest {
         </returns>
         <param name="intercept">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2469,13 +2853,19 @@ public class ConsoleTest {
 
             
 
+            
+
              property. The returned string does not contain the terminating character(s). By default, the method reads input from a 256-character input buffer. Because this includes the <see
              cref="P:System.Environment.NewLine" />
 
             
 
+            
+
              character(s), the method can read lines that contain up to 254 characters. To read longer lines, call the <see
              cref="M:System.Console.OpenStandardInput(System.Int32)" />
+
+            
 
             
 
@@ -2487,8 +2877,12 @@ public class ConsoleTest {
 
             
 
+            
+
             , the reader's position in the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2497,13 +2891,19 @@ public class ConsoleTest {
 
             
 
+            
+
              buffer are discarded. Since the position of the reader in the stream cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see
              cref="T:System.IO.TextReader" />
 
             
 
+            
+
             . If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2515,11 +2915,15 @@ public class ConsoleTest {
 
             
 
+            
+
              method and store the read characters in a preallocated buffer.</para
           >
           <para
             >If the Ctrl+Z character is pressed when the method is reading input from the console, the method returns null. This enables the user to prevent further keyboard input when the <see
              cref="M:System.Console.ReadLine" />
+
+            
 
             
 
@@ -2563,8 +2967,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.BackgroundColor" />
+
+            
 
             
 
@@ -2610,10 +3018,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The width of the buffer area measured in columns. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2652,11 +3064,15 @@ public class ConsoleTest {
 
             
 
+            
+
              method to specify where the next write operation in the console window is to begin. If the specified cursor position is outside the area that is currently visible in the console window, the window origin changes automatically to make the cursor visible.</para
           >
           <para
             >The cursor automatically moves to the next character position each time a character is written to the console window. If the cursor is at the bottom right character position of the console window, the next write operation causes the console window to scroll so the cursor remains visible. If you want to write a character to the bottom right character position without causing the console window to scroll, use the <see
              cref="Overload:System.Console.MoveBufferArea" />
+
+            
 
             
 
@@ -2672,10 +3088,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The column position of the cursor. Columns are numbered from left to right starting at 0. </param
         >
         <param name="top">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2717,8 +3137,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2727,6 +3151,8 @@ public class ConsoleTest {
         <permission cref="T:System.Security.Permissions.SecurityPermissionFlag"
           >Requires <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+          
 
           
 
@@ -2740,6 +3166,8 @@ public class ConsoleTest {
 
             
 
+            
+
              property is set to the standard error output stream.</para
           >
           <para
@@ -2748,8 +3176,12 @@ public class ConsoleTest {
 
             
 
+            
+
              that encapsulates a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2764,8 +3196,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property to the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -2774,6 +3210,8 @@ public class ConsoleTest {
         </summary>
         <param name="newError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2813,8 +3251,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2823,6 +3265,8 @@ public class ConsoleTest {
         <permission cref="T:System.Security.Permissions.SecurityPermissionFlag"
           >Requires permission to execute unmanaged code. See <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+          
 
           
 
@@ -2836,6 +3280,8 @@ public class ConsoleTest {
 
             
 
+            
+
              property is set to the standard input stream.</para
           >
           <para
@@ -2844,8 +3290,12 @@ public class ConsoleTest {
 
             
 
+            
+
              that encapsulates a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2860,8 +3310,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property to the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -2870,6 +3324,8 @@ public class ConsoleTest {
         </summary>
         <param name="newIn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2909,8 +3365,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2919,6 +3379,8 @@ public class ConsoleTest {
         <permission cref="T:System.Security.Permissions.SecurityPermissionFlag"
           >Requires permission to execute unmanaged code. See <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+          
 
           
 
@@ -2932,6 +3394,8 @@ public class ConsoleTest {
 
             
 
+            
+
              property is set to the standard output stream.</para
           >
           <para
@@ -2940,8 +3404,12 @@ public class ConsoleTest {
 
             
 
+            
+
              that encapsulates a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2957,8 +3425,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property to the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -2967,6 +3439,8 @@ public class ConsoleTest {
         </summary>
         <param name="newOut">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3006,11 +3480,15 @@ public class ConsoleTest {
 
             
 
+            
+
              method affects the position of the console window relative to the screen buffer, but does not affect the position of the operating system window relative to the desktop.</para
           >
           <para
             >The console and operating system windows generally do not affect each other. However, if the screen buffer cannot be displayed in the current boundaries of the console window, the operating system automatically appends scroll bars to the operating system window. In that case, moving the operating system window scroll bars affects the position of the console window, and moving the console window with the <see
              cref="M:System.Console.SetWindowPosition(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3026,10 +3504,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The column position of the upper left  corner of the console window. </param
         >
         <param name="top">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3070,10 +3552,14 @@ public class ConsoleTest {
 
           
 
+          
+
           The width of the console window measured in columns. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3127,6 +3613,8 @@ public class ConsoleTest {
 
             
 
+            
+
              property is false and Ctrl+C is pressed, the pressed keys are not stored in the input buffer and the operating system terminates the currently executing process. This is the default value. </para
           >
           <block subset="none" type="note">
@@ -3141,8 +3629,12 @@ public class ConsoleTest {
 
             
 
+            
+
              modifier key and <see
              cref="F:System.ConsoleKey.C" />
+
+            
 
             
 
@@ -3194,8 +3686,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.BufferWidth" />
+
+            
 
             
 
@@ -3204,8 +3700,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.WindowWidth" />
+
+            
 
             
 
@@ -3214,8 +3714,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property determines which column of the buffer area is displayed in the first column of the console window. The value of the <see
              cref="P:System.Console.WindowLeft" />
+
+            
 
             
 
@@ -3224,13 +3728,19 @@ public class ConsoleTest {
 
             
 
+            
+
              - <see
              cref="P:System.Console.WindowWidth" />
 
             
 
+            
+
             . Attempting to set it to a value outside that range throws an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -3242,8 +3752,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property is zero, which indicates that the first column shown by the console corresponds to the first column (the column at position zero) in the buffer area. The default width of both the console window and the buffer area is 80 columns. This means that the <see
              cref="P:System.Console.WindowLeft" />
+
+            
 
             
 
@@ -3252,6 +3766,8 @@ public class ConsoleTest {
           <para
             >Note that if the width of the buffer area exceeds the width of the console window, the value of the <see
              cref="P:System.Console.WindowLeft" />
+
+            
 
             
 
@@ -3286,8 +3802,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.BufferWidth" />
+
+            
 
             
 
@@ -3296,8 +3816,12 @@ public class ConsoleTest {
 
             
 
+            
+
              and <see
              cref="P:System.Console.WindowWidth" />
+
+            
 
             
 
@@ -3306,8 +3830,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property determines which row of the buffer area is displayed in the first column of the console window. The value of the <see
              cref="P:System.Console.WindowTop" />
+
+            
 
             
 
@@ -3316,13 +3844,19 @@ public class ConsoleTest {
 
             
 
+            
+
              - <see
              cref="P:System.Console.WindowHeight" />
 
             
 
+            
+
             . Attempting to set it to a value outside that range throws an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -3388,8 +3922,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling <see
              cref="M:System.Boolean.ToString" />
+
+            
 
             
 
@@ -3398,8 +3936,12 @@ public class ConsoleTest {
 
             
 
+            
+
              or <see
              cref="F:System.Boolean.FalseString" />
+
+            
 
             
 
@@ -3412,6 +3954,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3454,6 +3998,8 @@ public class ConsoleTest {
 
           
 
+          
+
           The value to write. </param
         >
       </Docs>
@@ -3489,8 +4035,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is equivalent to <see
              cref="P:System.Console.Out" />
+
+            
 
             
 
@@ -3499,8 +4049,12 @@ public class ConsoleTest {
 
             
 
+            
+
             ( <paramref
              name="buffer" />
+
+            
 
             
 
@@ -3515,6 +4069,8 @@ public class ConsoleTest {
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3555,8 +4111,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling <see
              cref="M:System.Decimal.ToString" />
+
+            
 
             
 
@@ -3571,11 +4131,15 @@ public class ConsoleTest {
 
             
 
+            
+
              value to the standard output stream.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3617,8 +4181,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Double.ToString" />
+
+            
 
             
 
@@ -3631,6 +4199,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3672,8 +4242,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Int32.ToString" />
+
+            
 
             
 
@@ -3686,6 +4260,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3726,8 +4302,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Int64.ToString" />
+
+            
 
             
 
@@ -3740,6 +4320,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3780,8 +4362,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is null, nothing is written and no exception is thrown. Otherwise, the ToString method of <paramref
              name="value" />
+
+            
 
             
 
@@ -3794,6 +4380,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3834,8 +4422,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Single.ToString" />
+
+            
 
             
 
@@ -3848,6 +4440,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3894,6 +4488,8 @@ public class ConsoleTest {
 
           
 
+          
+
           The value to write. </param
         >
       </Docs>
@@ -3936,8 +4532,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.UInt32.ToString" />
+
+            
 
             
 
@@ -3950,6 +4550,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3995,8 +4597,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.UInt64.ToString" />
+
+            
 
             
 
@@ -4009,6 +4615,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4049,8 +4657,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4061,6 +4673,8 @@ public class ConsoleTest {
           <para
             >The format specification in <paramref
              name="format" />
+
+            
 
             
 
@@ -4079,11 +4693,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -4099,8 +4717,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -4109,10 +4731,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -4128,10 +4754,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4149,10 +4779,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4168,6 +4802,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4177,6 +4813,8 @@ public class ConsoleTest {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -4194,6 +4832,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks). </param
         >
         <param name="arg0">
@@ -4201,8 +4841,12 @@ public class ConsoleTest {
 
           
 
+          
+
           An object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -4250,13 +4894,19 @@ public class ConsoleTest {
 
             
 
+            
+
              or <paramref
              name="arg " />
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4271,12 +4921,16 @@ public class ConsoleTest {
 
             
 
+            
+
              is invalid.</para
           >
           <para>-or-</para>
           <para
             >The number indicating an argument to be formatted is less than zero, or greater than or equal to <paramref
              name="arg" />
+
+            
 
             
 
@@ -4293,11 +4947,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -4313,8 +4971,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -4323,10 +4985,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -4342,10 +5008,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4363,10 +5033,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4382,6 +5056,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4391,6 +5067,8 @@ public class ConsoleTest {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -4408,6 +5086,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg">
@@ -4415,8 +5095,12 @@ public class ConsoleTest {
 
           
 
+          
+
           An array of objects to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -4460,13 +5144,19 @@ public class ConsoleTest {
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              ) is greater than the length of <paramref
              name="buffer" />
+
+            
 
             
 
@@ -4479,8 +5169,12 @@ public class ConsoleTest {
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -4491,8 +5185,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4506,13 +5204,19 @@ public class ConsoleTest {
 
             
 
+            
+
              characters starting at position <paramref
              name="index" />
 
             
 
+            
+
              of <paramref
              name="buffer" />
+
+            
 
             
 
@@ -4528,10 +5232,14 @@ public class ConsoleTest {
 
           
 
+          
+
           An array of Unicode characters. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4540,10 +5248,14 @@ public class ConsoleTest {
 
           
 
+          
+
           . </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4585,8 +5297,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4597,6 +5313,8 @@ public class ConsoleTest {
           <para
             >The format specification in <paramref
              name="format" />
+
+            
 
             
 
@@ -4615,11 +5333,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -4635,8 +5357,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -4645,10 +5371,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -4664,10 +5394,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4685,10 +5419,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4704,6 +5442,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4713,6 +5453,8 @@ public class ConsoleTest {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -4730,6 +5472,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -4737,8 +5481,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The first object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -4749,8 +5497,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The second object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -4794,8 +5546,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4807,6 +5563,8 @@ public class ConsoleTest {
           <para
             >The format specification in <paramref
              name="format" />
+
+            
 
             
 
@@ -4825,11 +5583,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -4845,8 +5607,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -4855,10 +5621,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -4874,10 +5644,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4895,10 +5669,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4914,6 +5692,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4923,6 +5703,8 @@ public class ConsoleTest {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -4940,6 +5722,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -4947,8 +5731,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The first object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -4959,8 +5747,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The second object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -4971,8 +5763,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The third object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -5022,11 +5818,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -5042,8 +5842,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -5052,10 +5856,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -5071,10 +5879,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -5092,10 +5904,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -5111,6 +5927,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -5120,6 +5938,8 @@ public class ConsoleTest {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -5137,6 +5957,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -5144,8 +5966,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The first object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -5156,8 +5982,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The second object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -5168,8 +5998,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The third object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -5180,8 +6014,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The fourth object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -5216,8 +6054,12 @@ public class ConsoleTest {
 
             
 
+            
+
              property of the <see
              cref="P:System.Console.Out" />
+
+            
 
             
 
@@ -5263,8 +6105,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Boolean.ToString" />
+
+            
 
             
 
@@ -5273,6 +6119,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5285,6 +6133,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5325,6 +6175,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method that takes no parameters.</para
           >
         </remarks>
@@ -5334,6 +6186,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5371,8 +6225,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5386,6 +6244,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method that takes no parameters.</para
           >
         </remarks>
@@ -5395,6 +6255,8 @@ public class ConsoleTest {
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5435,8 +6297,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Decimal.ToString" />
+
+            
 
             
 
@@ -5445,6 +6311,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5459,11 +6327,15 @@ public class ConsoleTest {
 
             
 
+            
+
              value, followed by the current line terminator, to the standard output stream.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5505,8 +6377,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Double.ToString" />
+
+            
 
             
 
@@ -5515,6 +6391,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5527,6 +6405,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5568,8 +6448,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Int32.ToString" />
+
+            
 
             
 
@@ -5578,6 +6462,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5590,6 +6476,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5630,8 +6518,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Int64.ToString" />
+
+            
 
             
 
@@ -5640,6 +6532,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5652,6 +6546,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5692,8 +6588,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is null, only the line terminator is written. Otherwise, the ToString method of <paramref
              name="value" />
+
+            
 
             
 
@@ -5702,6 +6602,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5714,6 +6616,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5754,8 +6658,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.Single.ToString" />
+
+            
 
             
 
@@ -5764,6 +6672,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5776,6 +6686,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5818,6 +6730,8 @@ public class ConsoleTest {
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -5827,6 +6741,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5872,8 +6788,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.UInt32.ToString" />
+
+            
 
             
 
@@ -5882,6 +6802,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5894,6 +6816,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5939,8 +6863,12 @@ public class ConsoleTest {
 
             
 
+            
+
              is produced by calling the <see
              cref="M:System.UInt64.ToString" />
+
+            
 
             
 
@@ -5949,6 +6877,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -5961,6 +6891,8 @@ public class ConsoleTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6001,8 +6933,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6013,6 +6949,8 @@ public class ConsoleTest {
           <para
             >The format specification in <paramref
              name="format" />
+
+            
 
             
 
@@ -6031,11 +6969,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -6051,8 +6993,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -6061,10 +7007,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -6080,10 +7030,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6101,10 +7055,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6120,6 +7078,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -6132,6 +7092,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -6139,6 +7101,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -6154,6 +7118,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -6161,8 +7127,12 @@ public class ConsoleTest {
 
           
 
+          
+
           An object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -6210,13 +7180,19 @@ public class ConsoleTest {
 
             
 
+            
+
              or <paramref
              name="arg " />
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -6231,12 +7207,16 @@ public class ConsoleTest {
 
             
 
+            
+
              is invalid.</para
           >
           <para>-or-</para>
           <para
             >The number indicating an argument to be formatted is less than zero, or greater than or equal to <paramref
              name="arg" />
+
+            
 
             
 
@@ -6253,11 +7233,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -6273,8 +7257,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -6283,10 +7271,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -6302,10 +7294,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6323,10 +7319,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6342,6 +7342,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -6354,6 +7356,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -6361,6 +7365,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -6376,6 +7382,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg">
@@ -6383,8 +7391,12 @@ public class ConsoleTest {
 
           
 
+          
+
           An array of objects to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -6428,13 +7440,19 @@ public class ConsoleTest {
 
             
 
+            
+
              + <paramref
              name="count" />
 
             
 
+            
+
              ) is greater than the length of <paramref
              name="buffer" />
+
+            
 
             
 
@@ -6447,8 +7465,12 @@ public class ConsoleTest {
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -6459,8 +7481,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6474,8 +7500,12 @@ public class ConsoleTest {
 
             
 
+            
+
              characters starting at position <paramref
              name="index" />
+
+            
 
             
 
@@ -6484,11 +7514,15 @@ public class ConsoleTest {
 
             
 
+            
+
              to the standard output stream.</para
           >
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -6504,10 +7538,14 @@ public class ConsoleTest {
 
           
 
+          
+
           An array of Unicode characters. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6516,10 +7554,14 @@ public class ConsoleTest {
 
           
 
+          
+
           . </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6561,8 +7603,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6573,6 +7619,8 @@ public class ConsoleTest {
           <para
             >The format specification in <paramref
              name="format" />
+
+            
 
             
 
@@ -6591,11 +7639,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -6611,8 +7663,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -6621,10 +7677,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -6640,10 +7700,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6661,10 +7725,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6680,6 +7748,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -6692,6 +7762,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -6699,6 +7771,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -6714,6 +7788,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -6721,8 +7797,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The first object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -6733,8 +7813,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The second object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -6777,8 +7861,12 @@ public class ConsoleTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6789,6 +7877,8 @@ public class ConsoleTest {
           <para
             >The format specification in <paramref
              name="format" />
+
+            
 
             
 
@@ -6807,11 +7897,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -6827,8 +7921,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -6837,10 +7935,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -6856,10 +7958,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6877,10 +7983,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -6896,6 +8006,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -6908,6 +8020,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -6915,6 +8029,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -6930,6 +8046,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -6937,8 +8055,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The first object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -6949,8 +8071,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The second object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -6961,8 +8087,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The third object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -7012,11 +8142,15 @@ public class ConsoleTest {
 
             
 
+            
+
              of the .NET Framework to convert the value of an object to its text representation and embed that representation in a string. The resulting string is written to the output stream. </para
           >
           <para
             >The <paramref
              name="format" />
+
+            
 
             
 
@@ -7032,8 +8166,12 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , <see
                  cref="Overload:System.Text.StringBuilder.AppendFormat" />
+
+                
 
                 
 
@@ -7042,10 +8180,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                 , see <format
                  type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
                 </format>
+
+                
 
                 
 
@@ -7061,10 +8203,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -7082,10 +8228,14 @@ public class ConsoleTest {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -7101,6 +8251,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -7113,6 +8265,8 @@ public class ConsoleTest {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -7120,6 +8274,8 @@ public class ConsoleTest {
           <para
             >For more information about the line terminator, see the Remarks section of the <see
              cref="M:System.Console.WriteLine" />
+
+            
 
             
 
@@ -7135,6 +8291,8 @@ public class ConsoleTest {
 
           
 
+          
+
           A composite format string (see Remarks).</param
         >
         <param name="arg0">
@@ -7142,8 +8300,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The first object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -7154,8 +8316,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The second object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -7166,8 +8332,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The third object to write using <paramref
            name="format" />
+
+          
 
           
 
@@ -7178,8 +8348,12 @@ public class ConsoleTest {
 
           
 
+          
+
           The fourth object to write using <paramref
            name="format" />
+
+          
 
           
 

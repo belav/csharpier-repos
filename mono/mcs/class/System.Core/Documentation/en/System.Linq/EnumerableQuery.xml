@@ -23,8 +23,12 @@
 
         
 
+        
+
          as an <see
          cref="T:System.Linq.EnumerableQuery" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Linq.EnumerableQuery" />
+
+            
 
             
 

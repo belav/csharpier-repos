@@ -38,6 +38,8 @@
 
         
 
+        
+
          objects encapsulate security decisions about an application. </para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Security.Policy.ApplicationTrust" />
+
+        
 
         
 
@@ -84,8 +88,12 @@
 
             
 
+            
+
              object is added to the end of the collection.  To remove an application trust that you previously added, use the <see
              cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" />
+
+            
 
             
 
@@ -105,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -144,8 +156,12 @@
 
             
 
+            
+
              objects contained in the <paramref
              name="trusts" />
+
+            
 
             
 
@@ -154,6 +170,8 @@
           <para
             >To remove a range of application trusts that you previously added, use the <see
              cref="Overload:System.Security.Policy.ApplicationTrustCollection.RemoveRange" />
+
+            
 
             
 
@@ -168,6 +186,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -176,8 +196,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -215,8 +239,12 @@
 
             
 
+            
+
              objects contained in <paramref
              name="trusts" />
+
+            
 
             
 
@@ -228,8 +256,12 @@
 
             
 
+            
+
              method to quickly add another collection of application trust objects to the collection instead of manually adding each application trust to the collection using the <see
              cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" />
+
+            
 
             
 
@@ -238,6 +270,8 @@
           <para
             >To remove a range of application trusts that you previously added, use the <see
              cref="Overload:System.Security.Policy.ApplicationTrustCollection.RemoveRange" />
+
+            
 
             
 
@@ -252,6 +286,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -260,8 +296,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+          
 
           
 
@@ -294,8 +334,12 @@
 
             
 
+            
+
              in the collection is identified by its <see
              cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
+
+            
 
             
 
@@ -304,13 +348,19 @@
 
             
 
+            
+
              property for any <see
              cref="T:System.Security.Policy.ApplicationTrust" />
 
             
 
+            
+
              object in the collection is null, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -361,8 +411,12 @@
 
           
 
+          
+
           The one-dimensional array of type <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -373,8 +427,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -434,6 +492,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -449,8 +509,12 @@
 
             
 
+            
+
              containing all matching <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -462,8 +526,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ApplicationIdentity" />
+
+          
 
           
 
@@ -474,8 +542,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Policy.ApplicationVersionMatch" />
+
+          
 
           
 
@@ -511,8 +583,12 @@
 
             
 
+            
+
              implements the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -524,6 +600,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -532,11 +610,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -549,13 +631,19 @@
 
               
 
+              
+
                method to reposition the enumerator to the start of the collection, you must then call the <see
                cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
+              
+
                method to position the enumerator to the first item. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -572,6 +660,8 @@
           <para
             >An <see
              cref="T:System.Security.Policy.ApplicationTrustEnumerator" />
+
+            
 
             
 
@@ -693,8 +783,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -733,8 +827,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="M:System.Security.Policy.ApplicationTrustCollection.Find(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
+
+            
 
             
 
@@ -751,13 +849,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ApplicationIdentity" />
 
           
 
+          
+
            of the <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -768,8 +872,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Policy.ApplicationVersionMatch" />
+
+          
 
           
 
@@ -812,8 +920,12 @@
 
           
 
+          
+
           A one-dimensional array of type <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -856,8 +968,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+          
 
           
 
@@ -918,13 +1034,19 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -936,8 +1058,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -946,8 +1072,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -958,8 +1088,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -997,6 +1131,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

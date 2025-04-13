@@ -21,13 +21,19 @@
 
         
 
+        
+
          supports absolute serialization. This means that instead of serializing only values that differ from an object's default values, all values are serialized, allowing values to be reset to their defaults for objects that may have already been initialized. When a component serialization service wishes to indicate this behavior to <see
          cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
 
         
 
+        
+
          objects, it will place a <see
          cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -86,6 +94,8 @@
 
             
 
+            
+
              is null, this context will be used for all members.</para
           >
         </remarks>
@@ -97,11 +107,15 @@
 
             
 
+            
+
              class with the option of binding to a specific member. </para
           >
         </summary>
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,6 +171,8 @@
         </returns>
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

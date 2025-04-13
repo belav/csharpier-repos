@@ -27,6 +27,8 @@
 
         
 
+        
+
          class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to perform auditing.  This class can also specify how audit rules are inherited from and propagated to objects.</para
       >
       <para>To permit file and directory auditing on Windows NT or later, you must enable Audit Access Security policy on your machine.  By default, this policy is set to No Auditing.</para>
@@ -36,6 +38,8 @@
           <para
             >Open the <ui
             >Local Security Settings</ui>
+
+            
 
             
 
@@ -52,8 +56,12 @@
 
             
 
+            
+
              entry on the right pane of the MMC snap-in, or right-click and choose Properties to display the <ui
             >Audit object access properties</ui>
+
+            
 
             
 
@@ -67,8 +75,12 @@
 
             
 
+            
+
              or <ui
             >Failure</ui>
+
+            
 
             
 
@@ -83,13 +95,19 @@
 
         
 
+        
+
          class to create a new audit rule.  You can persist this rule using the <see
          cref="T:System.Security.AccessControl.FileSecurity" />
 
         
 
+        
+
          or <see
          cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+        
 
         
 
@@ -131,8 +149,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -147,6 +169,8 @@
 
             
 
+            
+
              class using a reference to a user account, a value that specifies the type of operation associated with the audit rule, and a value that specifies when to perform auditing. </para
           >
         </summary>
@@ -155,8 +179,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -167,8 +195,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -179,8 +211,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -217,8 +253,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -230,8 +270,12 @@
 
             
 
+            
+
              parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
              name="DOMAIN" />
+
+            
 
             
 
@@ -240,8 +284,12 @@
 
             
 
+            
+
              is the name of a valid user account on a domain or computer: <paramref
              name="DOMAIN\account" />
+
+            
 
             
 
@@ -256,11 +304,15 @@
 
             
 
+            
+
              class using a user account name, a value that specifies the type of operation associated with the audit rule, and a value that specifies when to perform auditing.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,8 +323,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -283,8 +339,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -323,8 +383,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -339,6 +403,8 @@
 
             
 
+            
+
              class using the name of a reference to a user account, a value that specifies the type of operation associated with the audit rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies when to perform auditing.  </para
           >
         </summary>
@@ -347,8 +413,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -359,8 +429,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -371,8 +445,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -383,8 +461,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -395,8 +477,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -435,8 +521,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -448,8 +538,12 @@
 
             
 
+            
+
              parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
              name="DOMAIN" />
+
+            
 
             
 
@@ -458,8 +552,12 @@
 
             
 
+            
+
              is the name of a valid user account on a domain or computer: <paramref
              name="DOMAIN\account" />
+
+            
 
             
 
@@ -474,11 +572,15 @@
 
             
 
+            
+
              class using the name of a user account, a value that specifies the type of operation associated with the audit rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies when to perform auditing. </para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,8 +591,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -501,8 +607,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -513,8 +623,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -525,8 +639,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -563,8 +681,12 @@
 
             
 
+            
+
              flags associated with the current <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -66,6 +68,8 @@
           <para
             >Gets the current <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -154,8 +158,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -167,6 +175,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.Schema.XmlSchemaObjectEnumerator.Current" />
+
+            
 
             
 
@@ -200,8 +210,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -216,6 +230,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -224,6 +240,8 @@
           <para
             >The next <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -257,8 +275,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -270,6 +292,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Xml.Schema.XmlSchemaObjectEnumerator.Reset" />
+
+            
 
             
 

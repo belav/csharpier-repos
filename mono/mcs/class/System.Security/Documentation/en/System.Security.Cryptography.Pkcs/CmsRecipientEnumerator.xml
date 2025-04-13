@@ -35,8 +35,12 @@
 
         
 
+        
+
          class provides enumeration functionality for the <see
          cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -84,13 +92,19 @@
 
             
 
+            
+
              property retrieves the current <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -125,13 +139,19 @@
 
             
 
+            
+
              method advances the enumeration to the next <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -143,6 +163,8 @@
           <para
             >true if the enumeration successfully moved to the next <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+            
 
             
 
@@ -177,13 +199,19 @@
 
             
 
+            
+
              method resets the enumeration to the first <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -220,13 +248,19 @@
 
             
 
+            
+
              property retrieves the current <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 

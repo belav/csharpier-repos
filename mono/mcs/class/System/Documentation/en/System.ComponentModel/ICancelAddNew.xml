@@ -20,8 +20,12 @@
 
         
 
+        
+
          interface enables a collection to add a new item in an extensible way. The new item subsequently can be committed or rolled back. The <see
          cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
           <para
             >The <see
              cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
+
+            
 
             
 
@@ -48,6 +54,8 @@
 
             
 
+            
+
              method will roll back the pending addition if it has not already been committed.</para
           >
         </item>
@@ -59,8 +67,12 @@
 
           
 
+          
+
            or <see
            cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" />
+
+          
 
           
 
@@ -76,8 +88,12 @@
 
             
 
+            
+
              interface and is data-bound directly using the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -86,8 +102,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.CurrencyManager.EndCurrentEdit" />
+
+            
 
             
 
@@ -96,8 +116,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -106,8 +130,12 @@
 
             
 
+            
+
              interface. If the items do not support this interface, the item will always be added to the list, regardless of subsequent calls to <see
              cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+
+            
 
             
 
@@ -121,8 +149,12 @@
 
             
 
+            
+
              class, which implements the <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -131,8 +163,12 @@
 
             
 
+            
+
              interfaces. In this case, the transactional support is managed by the <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -173,13 +209,19 @@
 
             
 
+            
+
              method rolls back a pending addition (<see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
+            
+
             ) of an item previously added to the collection at position <paramref
              name="itemIndex" />
+
+            
 
             
 
@@ -192,6 +234,8 @@
         </summary>
         <param name="itemIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,13 +269,19 @@
 
             
 
+            
+
              commits a pending addition (<see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 
+            
+
             ) of an item previously added to the collection at position <paramref
              name="itemIndex" />
+
+            
 
             
 
@@ -244,6 +294,8 @@
         </summary>
         <param name="itemIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

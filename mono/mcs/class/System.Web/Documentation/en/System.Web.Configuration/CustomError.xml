@@ -22,8 +22,12 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the error section of a configuration file. This type is part of a group that includes the <see
          cref="T:System.Web.Configuration.CustomErrorCollection" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.Configuration.CustomErrorsSection" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
       <para
         >Configures a <see
          cref="T:System.Web.Configuration.CustomError" />
+
+        
 
         
 
@@ -76,13 +86,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.CustomError" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -97,6 +113,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -105,10 +123,14 @@
 
           
 
+          
+
           The HTTP status code that will result in redirection to the error page.</param
         >
         <param name="redirect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,6 +160,8 @@
 
             
 
+            
+
              method compares all errors against objects that are passed to the method.</para
           >
         </remarks>
@@ -146,6 +170,8 @@
           <para
             >Compares <see
              cref="T:System.Web.Configuration.CustomError" />
+
+            
 
             
 
@@ -158,6 +184,8 @@
         </returns>
         <param name="customError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,6 +214,8 @@
 
             
 
+            
+
              object hash code.</para
           >
         </summary>
@@ -194,6 +224,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.CustomError" />
+
+            
 
             
 
@@ -246,6 +278,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.CustomError.Redirect" />
+
+            
 
             
 

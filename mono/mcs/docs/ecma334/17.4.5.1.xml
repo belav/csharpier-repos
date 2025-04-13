@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) exists in the class, execution of the static field initializers occurs immediately prior to executing that static constructor. Otherwise, the static field initializers are executed at an implementation-dependent time prior to the first use of a static field of that class. <example
 
       >[Example: The example <code_example
@@ -35,6 +37,8 @@ class B
 
       
 
+      
+
       might produce either the output: <code_example
       >
         <![CDATA[
@@ -46,6 +50,8 @@ Init B
 
       
 
+      
+
       or the output: <code_example
       >
         <![CDATA[
@@ -54,6 +60,8 @@ Init A
 1 1  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -85,6 +93,8 @@ class B
 
       
 
+      
+
       the output must be: <code_example
       >
         <![CDATA[
@@ -93,6 +103,8 @@ Init A
 1 1  
 ]]>
       </code_example>
+
+      
 
       
 

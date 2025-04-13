@@ -29,6 +29,8 @@
 
         
 
+        
+
          provides an interface for viewing hexadecimal, ANSI, and Unicode formatted data.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          enumeration specifies the identifiers that are used to indicate the display mode to use. The <see
          cref="F:System.ComponentModel.Design.DisplayMode.Auto" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          uses a simple algorithm to determine what kind of data is stored in the buffer. The hexadecimal <see
          cref="F:System.ComponentModel.Design.DisplayMode.Hexdump" />
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.ComponentModel.Design.DisplayMode.Unicode" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.ByteViewer" />
+
+            
 
             
 
@@ -141,6 +157,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -197,6 +215,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -205,8 +225,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -274,6 +298,8 @@
 
           
 
+          
+
           The file path to save to. </param
         >
       </Docs>
@@ -305,13 +331,19 @@
 
             
 
+            
+
              event on the <see
              cref="T:System.ComponentModel.Design.ByteViewer" />
 
             
 
+            
+
              control's <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -323,6 +355,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -330,8 +364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -360,6 +398,8 @@
         </summary>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,6 +434,8 @@
 
           
 
+          
+
           The display mode to set. </param
         >
       </Docs>
@@ -425,6 +467,8 @@
 
           
 
+          
+
           The file path to load from. </param
         >
       </Docs>
@@ -451,6 +495,8 @@
 
             
 
+            
+
              display mode displays the buffer starting at the specified line. If the specified line is out of range, the start line is set to zero.</para
           >
         </remarks>
@@ -462,11 +508,15 @@
 
             
 
+            
+
              view.</para
           >
         </summary>
         <param name="line">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

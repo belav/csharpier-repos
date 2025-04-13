@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>goto</keyword>
@@ -60,6 +62,8 @@ class Test
 
       
 
+      
+
       a goto statement is used to transfer control out of a nested scope. end note]</note
     >
   </paragraph>
@@ -69,13 +73,19 @@ class Test
 
     
 
+    
+
     ) which contains a case label with the given constant value. If the goto case statement is not enclosed by a switch statement, if the <non_terminal
      where="14.15">constant-expression</non_terminal>
 
     
 
+    
+
      is not implicitly convertible (<hyperlink
     >13.1</hyperlink>
+
+    
 
     
 
@@ -87,11 +97,15 @@ class Test
 
     
 
+    
+
     ), which contains a default label. If the goto default statement is not enclosed by a switch statement, or if the nearest enclosing switch statement does not contain a default label, a compile-time error occurs. </paragraph
   >
   <paragraph
     >A goto statement cannot exit a finally block (<hyperlink
     >15.10</hyperlink>
+
+    
 
     
 

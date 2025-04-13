@@ -33,8 +33,12 @@
 
         
 
+        
+
          delegate is used to enable a <see
          cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
          method.</para
       >
     </remarks>
@@ -54,6 +60,8 @@
       <para
         >Represents the method that handles the <see
          cref="E:System.Web.SessionState.SessionStateModule.End" />
+
+        
 
         
 

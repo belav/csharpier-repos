@@ -28,13 +28,19 @@
 
         
 
+        
+
          interface includes a single method, <see
          cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
 
         
 
+        
+
         . When this interface is implemented by a reference or value type, the <see
          cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          interface is implemented with the <see
          cref="T:System.IFormatProvider" />
+
+        
 
         
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          parameter. Specifically, the <see
          cref="T:System.ICustomFormatter" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Text.StringBuilder.AppendFormat(System.IFormatProvider,System.String,System.Object[])" />
+
+        
 
         
 
@@ -82,8 +100,12 @@
 
             
 
+            
+
              interface and its single member, the <see
              cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
+
+            
 
             
 
@@ -97,8 +119,12 @@
 
             
 
+            
+
              interface and its single member, the <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -107,8 +133,12 @@
 
             
 
+            
+
              method returns an instance of your <see
              cref="T:System.ICustomFormatter" />
+
+            
 
             
 
@@ -117,8 +147,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -132,13 +166,19 @@
 
             
 
+            
+
              implementation as the <paramref
              name="provider" />
 
             
 
+            
+
              argument of the <see
              cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+
+            
 
             
 
@@ -185,13 +225,19 @@
 
             
 
+            
+
              is a callback method. It is called by a method that supports custom formatting, such as <see
              cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
             
 
+            
+
              or <see
              cref="M:System.Text.StringBuilder.AppendFormat(System.IFormatProvider,System.String,System.Object[])" />
+
+            
 
             
 
@@ -202,8 +248,12 @@
 
             
 
+            
+
             . For example, in the following statement, the <see
              cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
+
+            
 
             
 
@@ -216,6 +266,8 @@
 
             
 
+            
+
              parameter is the object in the object list whose zero-based position corresponds to the index of a particular format item. </para
           >
           <para
@@ -224,8 +276,12 @@
 
             
 
+            
+
              parameter contains a format string, which is the <paramref
              name="formatString" />
+
+            
 
             
 
@@ -234,8 +290,12 @@
 
             
 
+            
+
              component, the value of <paramref
              name="format" />
+
+            
 
             
 
@@ -244,8 +304,12 @@
 
             
 
+            
+
              is null, depending on the type of <paramref
              name="arg" />
+
+            
 
             
 
@@ -257,8 +321,12 @@
 
             
 
+            
+
              parameter is the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -267,13 +335,19 @@
 
             
 
+            
+
             . Typically, it is an instance of your <see
              cref="T:System.ICustomFormatter" />
 
             
 
+            
+
              implementation. If <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -285,8 +359,12 @@
 
             
 
+            
+
              method must include the following functionality so the .NET Framework can provide formatting you do not support. If your format method does not support a format, determine whether the object being formatted implements the <see
              cref="T:System.IFormattable" />
+
+            
 
             
 
@@ -295,8 +373,12 @@
 
             
 
+            
+
              method of that interface. Otherwise, invoke the default <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -316,13 +398,19 @@
 
             
 
+            
+
             , formatted as specified by <paramref
              name="format" />
 
             
 
+            
+
              and <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -334,6 +422,8 @@
 
           
 
+          
+
           A format string containing formatting specifications. </param
         >
         <param name="arg">
@@ -341,10 +431,14 @@
 
           
 
+          
+
           An object to format. </param
         >
         <param name="formatProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          represents an individual panel in the <see
          cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          control. A <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
         , accessible through the <see
          cref="P:System.Windows.Forms.StatusBar.Panels" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
          control, to retrieve, add, or remove an individual <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
         
 
+        
+
          provides properties that enable you to modify the display behavior of a panel within a <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -90,8 +110,12 @@
 
         
 
+        
+
          property to display an icon within a panel. This property can be used to provide a graphical representation of state in an application. The <see
          cref="P:System.Windows.Forms.StatusBarPanel.Alignment" />
+
+        
 
         
 
@@ -100,13 +124,19 @@
 
         
 
+        
+
          property to automatically resize the panel to fit the text of the panel or to fill the remaining space within the <see
          cref="T:System.Windows.Forms.StatusBar" />
 
         
 
+        
+
          control. The <see
          cref="P:System.Windows.Forms.StatusBarPanel.MinWidth" />
+
+        
 
         
 
@@ -118,8 +148,12 @@
 
         
 
+        
+
          control is typically used to display Help information or state information about your application. Often, it is important to display additional information about data that is presented in a panel. You can use the <see
          cref="P:System.Windows.Forms.StatusBarPanel.ToolTipText" />
+
+        
 
         
 
@@ -131,8 +165,12 @@
 
         
 
+        
+
          control is typically used to display textual information, you can also provide your own type of display to a <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -141,8 +179,12 @@
 
         
 
+        
+
          property enables you to specify how the <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -151,8 +193,12 @@
 
         
 
+        
+
          property is used to display the value of the <see
          cref="P:System.Windows.Forms.StatusBarPanel.Text" />
+
+        
 
         
 
@@ -161,8 +207,12 @@
 
         
 
+        
+
          property). If the property is set to <see
          cref="F:System.Windows.Forms.StatusBarPanelStyle.OwnerDraw" />
+
+        
 
         
 
@@ -174,8 +224,12 @@
 
         
 
+        
+
          class, the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Windows.Forms.StatusBarPanel.#ctor" />
+
+        
 
         
 
@@ -190,8 +244,12 @@
 
         
 
+        
+
          control. Although the <see
          cref="T:System.Windows.Forms.StatusStrip" />
+
+        
 
         
 
@@ -200,8 +258,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -220,6 +282,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -345,6 +409,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -381,8 +447,12 @@
 
             
 
+            
+
              property within the borders of the panel. Text and icons can be aligned to the left, right, or center of the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -391,8 +461,12 @@
 
             
 
+            
+
             . For example, you cannot position an icon to the left side of the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -435,8 +509,12 @@
 
             
 
+            
+
              objects set to <see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" />
+
+            
 
             
 
@@ -445,8 +523,12 @@
 
             
 
+            
+
              value. For example, a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -455,8 +537,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" />
+
+            
 
             
 
@@ -465,13 +551,19 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
 
             
 
+            
+
              property set to <see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" />
+
+            
 
             
 
@@ -483,8 +575,12 @@
 
             
 
+            
+
              to ensure that the contents of a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -493,8 +589,12 @@
 
             
 
+            
+
              control that contains more than one panel. For example, you might want a panel that contains text to adjust automatically to the amount of text it is displaying (<see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" />
+
+            
 
             
 
@@ -503,8 +603,12 @@
 
             
 
+            
+
              that displays an owner-drawn progress bar would need to be a fixed size (<see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.None" />
+
+            
 
             
 
@@ -537,13 +641,19 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Windows.Forms.StatusBarPanel.BeginInit" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.StatusBarPanel.EndInit" />
+
+            
 
             
 
@@ -555,6 +665,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -594,6 +706,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -625,8 +739,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -635,8 +753,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -648,8 +770,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -664,11 +790,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -696,13 +826,19 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Windows.Forms.StatusBarPanel.BeginInit" />
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.StatusBarPanel.EndInit" />
+
+            
 
             
 
@@ -714,6 +850,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -750,6 +888,8 @@
 
             
 
+            
+
              to indicate whether a file save operation is in progress or complete.</para
           >
           <block subset="none" type="note">
@@ -759,13 +899,19 @@
 
               
 
+              
+
               . For example, you cannot position an icon to the left side of the <see
                cref="T:System.Windows.Forms.StatusBarPanel" />
 
               
 
+              
+
                while aligning the text on the right side using the <see
                cref="P:System.Windows.Forms.StatusBarPanel.Alignment" />
+
+              
 
               
 
@@ -810,8 +956,12 @@
 
             
 
+            
+
              property is used when the <see
              cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+            
 
             
 
@@ -820,8 +970,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" />
+
+            
 
             
 
@@ -830,8 +984,12 @@
 
             
 
+            
+
              from automatically resizing to a width that is too small. When the <see
              cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+            
 
             
 
@@ -840,13 +998,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.StatusBarPanel.MinWidth" />
 
             
 
+            
+
              property is automatically set to the same value as the <see
              cref="P:System.Windows.Forms.StatusBarPanel.Width" />
+
+            
 
             
 
@@ -858,6 +1022,8 @@
           <para
             >Gets or sets the minimum allowed width of the status bar panel within the <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -894,13 +1060,19 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
+
+            
 
             
 
@@ -912,6 +1084,8 @@
           <para
             >Gets or sets the name to apply to the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -944,8 +1118,12 @@
 
             
 
+            
+
              control that a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -954,8 +1132,12 @@
 
             
 
+            
+
              objects are added to a <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -964,8 +1146,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
+
+            
 
             
 
@@ -974,13 +1160,19 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Windows.Forms.StatusBar" />
 
             
 
+            
+
              control is accessible through the <see
              cref="P:System.Windows.Forms.StatusBar.Panels" />
+
+            
 
             
 
@@ -992,6 +1184,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -1028,8 +1222,12 @@
 
             
 
+            
+
              displays text or whether the panel is managed as an owner-drawn <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -1038,8 +1236,12 @@
 
             
 
+            
+
              needs to be drawn, create an event handler for the <see
              cref="E:System.Windows.Forms.StatusBar.DrawItem" />
+
+            
 
             
 
@@ -1048,8 +1250,12 @@
 
             
 
+            
+
              control. The <see
              cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
+
+            
 
             
 
@@ -1058,8 +1264,12 @@
 
             
 
+            
+
              event enables you to determine which panel needs to be drawn. The <see
              cref="T:System.Windows.Forms.StatusBarDrawItemEventArgs" />
+
+            
 
             
 
@@ -1068,8 +1278,12 @@
 
             
 
+            
+
              object you can use to perform drawing tasks on the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -1120,6 +1334,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1149,8 +1365,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.StatusBarPanelStyle.Text" />
+
+            
 
             
 
@@ -1159,8 +1379,12 @@
 
             
 
+            
+
              control. For example, you can use the <see
              cref="P:System.Windows.Forms.StatusBarPanel.Text" />
+
+            
 
             
 
@@ -1169,8 +1393,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.StatusBarPanel.Alignment" />
+
+            
 
             
 
@@ -1211,8 +1439,12 @@
 
             
 
+            
+
             . For example, you can display a ToolTip that provides data transfer speed for a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -1221,6 +1453,8 @@
           <para
             >To display ToolTips for other controls in your application, use the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1284,8 +1518,12 @@
 
             
 
+            
+
              property always reflects the actual width of a <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -1294,8 +1532,12 @@
 
             
 
+            
+
              property. To automatically resize the width of the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -1304,8 +1546,12 @@
 
             
 
+            
+
             , you can use the <see
              cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+            
 
             
 
@@ -1317,6 +1563,8 @@
           <para
             >Gets or sets the width of the status bar panel within the <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 

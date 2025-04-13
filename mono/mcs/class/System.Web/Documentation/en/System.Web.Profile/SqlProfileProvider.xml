@@ -22,8 +22,12 @@
 
         
 
+        
+
          property of the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          class is used by ASP.NET to store and retrieve profile settings for an ASP.NET application that is using a SQL Server database. To use a <see
          cref="T:System.Web.Profile.SqlProfileProvider" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
         . To create the database used by the <see
          cref="T:System.Web.Profile.SqlProfileProvider" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          folder, and specify the <system
         >-A p</system>
+
+        
 
         
 
@@ -67,6 +83,8 @@
       <para
         >The machine configuration contains a default <see
          cref="T:System.Web.Profile.SqlProfileProvider" />
+
+        
 
         
 
@@ -96,8 +114,12 @@
 
             
 
+            
+
              constructor to create an instance of the <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
+
+            
 
             
 
@@ -109,6 +131,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
+
+            
 
             
 
@@ -137,8 +161,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
+
+            
 
             
 
@@ -147,8 +175,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Profile.SqlProfileProvider.ApplicationName" />
+
+            
 
             
 
@@ -160,8 +192,12 @@
 
             
 
+            
+
              value is used for ASP.NET applications. For non-ASP.NET applications, the default value is the <see
              cref="P:System.Diagnostics.ProcessModule.ModuleName" />
+
+            
 
             
 
@@ -174,8 +210,12 @@
 
               
 
+              
+
                object, you can have multiple requests executing concurrently and attempting to set the <see
                cref="P:System.Web.Profile.SqlProfileProvider.ApplicationName" />
+
+              
 
               
 
@@ -184,8 +224,12 @@
 
               
 
+              
+
                property is not thread safe for multiple writes, and changing the <see
                cref="P:System.Web.Profile.SqlProfileProvider.ApplicationName" />
+
+              
 
               
 
@@ -194,8 +238,12 @@
 
               
 
+              
+
                property unless you must. An example of an application where setting the <see
                cref="P:System.Web.Profile.SqlProfileProvider.ApplicationName" />
+
+              
 
               
 
@@ -238,8 +286,12 @@
 
             
 
+            
+
              method is used to remove unused profile data from the data source for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -248,8 +300,12 @@
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -258,6 +314,8 @@
           <para
             >The database updates that are performed during the call to the <see
              cref="M:System.Web.Profile.SqlProfileProvider.DeleteInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" />
+
+            
 
             
 
@@ -277,8 +335,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -289,13 +351,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -328,8 +396,12 @@
 
             
 
+            
+
              method deletes all profile information and properties for the specified profiles from the data source for the application specified by the applicationName attribute in the configuration file. The list of profiles to delete is specified as a string array of user names. If profile properties and information exist in the data source for a user name in the <paramref
              name="usernames" />
+
+            
 
             
 
@@ -341,8 +413,12 @@
 
             
 
+            
+
             . This indicates that some of the profiles in the specified array of <paramref
              name="usernames" />
+
+            
 
             
 
@@ -351,6 +427,8 @@
           <para
             >The database updates that are performed during the call to the <see
              cref="M:System.Web.Profile.SqlProfileProvider.DeleteProfiles(System.String[])" />
+
+            
 
             
 
@@ -367,6 +445,8 @@
         </returns>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,8 +479,12 @@
 
             
 
+            
+
              method deletes all profile information and properties for the specified profiles from the data source for the application specified by the applicationName attribute in the configuration file. The list of profiles to delete is specified using a <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -409,8 +493,12 @@
 
             
 
+            
+
              parameter. A <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -419,8 +507,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Profile.SqlProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -429,8 +521,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Profile.SqlProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -442,8 +538,12 @@
 
             
 
+            
+
              value for the supplied <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -452,11 +552,15 @@
 
             
 
+            
+
              were no longer found in the data store.</para
           >
           <para
             >The database updates that are performed during the call to the <see
              cref="M:System.Web.Profile.SqlProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" />
+
+            
 
             
 
@@ -476,8 +580,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+          
 
           
 
@@ -650,8 +758,12 @@
 
             
 
+            
+
              method is used to retrieve a count of all of the unused user profiles from the data source for the application specified by the applicationName attribute in the configuration file. Use the <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -660,8 +772,12 @@
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -673,6 +789,8 @@
           <para
             >Gets the number of profiles in the data source where the last activity date occurred on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -688,8 +806,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -700,13 +822,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -740,8 +868,12 @@
 
             
 
+            
+
              method is used by the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -750,8 +882,12 @@
 
             
 
+            
+
             . Property values are returned from the data source for the application specified by the applicationName attribute in the configuration file. Property values and additional property information are returned as a collection of <see
              cref="T:System.Configuration.SettingsPropertyValue" />
+
+            
 
             
 
@@ -770,6 +906,8 @@
 
             
 
+            
+
              containing profile property information and values.</para
           >
         </returns>
@@ -778,8 +916,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -790,8 +932,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyCollection" />
+
+          
 
           
 
@@ -825,6 +971,8 @@
 
             
 
+            
+
              with the property values specified in the ASP.NET application configuration file (Web.config). This method is not intended to be used directly from your code.</para
           >
         </remarks>
@@ -837,8 +985,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Profile.SqlProfileProvider" />
+
+          
 
           
 
@@ -849,8 +1001,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -884,13 +1040,19 @@
 
             
 
+            
+
              method is used by ASP.NET profile services to update the SQL Server profile database when property values are set for the current request. Property values are set at the data source for the application specified by the applicationName attribute in the configuration file. Profile property information and values to be updated by the <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
 
             
 
+            
+
              are specified as a collection of <see
              cref="T:System.Configuration.SettingsPropertyValue" />
+
+            
 
             
 
@@ -906,8 +1068,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -918,8 +1084,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+          
 
           
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          can be set when applying a <see
          cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+        
 
         
 
@@ -30,8 +34,12 @@
 
         
 
+        
+
          can also be set by applying a <see
          cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+
+        
 
         
 
@@ -80,8 +88,12 @@
 
             
 
+            
+
              for the XML Web service. The default for an XML Web service can be set by applying a <see
              cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+
+            
 
             
 
@@ -90,8 +102,12 @@
 
             
 
+            
+
              is not applied to the class implementing the XML Web service, the default is <see
              cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+
+            
 
             
 

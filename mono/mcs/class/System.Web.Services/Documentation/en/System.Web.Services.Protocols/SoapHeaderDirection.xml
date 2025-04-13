@@ -25,8 +25,12 @@
 
         
 
+        
+
          can be applied to either an XML Web service method or a method of a proxy class to an XML Web service. In either case, the recipient(s) are specified by the <see
          cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.Direction" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         . To specify that an XML Web service method returns a SOAP header when an exception is thrown during its execution, apply an <see
          cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          property to <see
          cref="F:System.Web.Services.Protocols.SoapHeaderDirection.Fault" />
+
+        
 
         
 
@@ -58,6 +70,8 @@
 
         
 
+        
+
          value.</para
       >
     </remarks>
@@ -66,6 +80,8 @@
       <para
         >Specifies whether the recipient of the <see
          cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+        
 
         
 
@@ -93,6 +109,8 @@
 
             
 
+            
+
              is sent to the XML Web service client when an exception is thrown by the XML Web service method.</para
           >
         </summary>
@@ -112,6 +130,8 @@
           <para
             >Specifies the <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 
@@ -141,6 +161,8 @@
 
             
 
+            
+
              is sent to both the XML Web service and the XML Web service client.</para
           >
         </summary>
@@ -164,6 +186,8 @@
           <para
             >Specifies the <see
              cref="T:System.Web.Services.Protocols.SoapHeader" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
       >
     </summary>
@@ -42,6 +44,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -50,6 +54,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlTypes.SqlNotFilledException" />
+
+            
 
             
 
@@ -77,6 +83,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -88,11 +96,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +135,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -134,6 +148,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -142,10 +158,14 @@
 
           
 
+          
+
           The string to display when the exception is thrown.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

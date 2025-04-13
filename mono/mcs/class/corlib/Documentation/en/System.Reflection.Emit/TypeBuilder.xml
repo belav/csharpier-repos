@@ -46,8 +46,12 @@
 
         
 
+        
+
          object, use the <see
          cref="M:System.Reflection.Emit.TypeBuilder.MakeArrayType" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          method, or <see
          cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+
+        
 
         
 
@@ -107,6 +115,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -120,10 +130,14 @@
 
           
 
+          
+
           The security action to be taken such as Demand, Assert, and so on. </param
         >
         <param name="pset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,6 +179,8 @@
         </summary>
         <param name="interfaceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -224,8 +240,12 @@
 
             
 
+            
+
             ) and the display name of the assembly (<see
              cref="P:System.Reflection.AssemblyName.FullName" />
+
+            
 
             
 
@@ -234,6 +254,8 @@
           <para
             >See <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -317,11 +339,15 @@
 
             
 
+            
+
              method must be called on the enclosing type before it is called on the nested type.</para
           >
           <para
             >If the current type derives from an incomplete type or implements incomplete interfaces, call the <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -333,8 +359,12 @@
 
             
 
+            
+
              method on the enclosing type will generate a <see
              cref="E:System.AppDomain.TypeResolve" />
+
+            
 
             
 
@@ -343,13 +373,19 @@
 
             
 
+            
+
              event to complete the definition of the nested type by calling <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
 
             
 
+            
+
              on the <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -361,8 +397,12 @@
 
             
 
+            
+
              method is called. All calls return the same <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -377,6 +417,8 @@
 
             
 
+            
+
              object for the class. After defining fields and methods on the class, CreateType is called in order to load its Type object.</para
           >
         </summary>
@@ -385,6 +427,8 @@
           <para
             >Returns the new <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -422,8 +466,12 @@
 
               
 
+              
+
                object rather than by a <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -502,8 +550,12 @@
 
                 
 
+                
+
                  method to create one (and optionally restrict access to it). Do not provide an implementation for this default constructor. If you do, an exception is thrown when you try to use the constructor. No exception is thrown when the <see
                  cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+                
 
                 
 
@@ -514,6 +566,8 @@
               <para
                 >If you want a default constructor that does something more than simply calling the default constructor of the base class, or that calls another constructor of the base class, or that does something else entirely, you must use the <see
                  cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" />
+
+                
 
                 
 
@@ -535,6 +589,8 @@
 
           
 
+          
+
           The attributes of the constructor. </param
         >
         <param name="callingConvention">
@@ -542,10 +598,14 @@
 
           
 
+          
+
           The calling convention of the constructor. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -596,10 +656,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -620,10 +684,14 @@
 
           
 
+          
+
           The attributes of the constructor. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,6 +702,8 @@
 
           
 
+          
+
           The parameter types of the constructor. </param
         >
         <param name="requiredCustomModifiers">
@@ -641,8 +711,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -653,8 +727,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -703,8 +781,12 @@
 
                 
 
+                
+
                 , <see
                  cref="F:System.Reflection.MethodAttributes.Public" />
+
+                
 
                 
 
@@ -713,13 +795,19 @@
 
                 
 
+                
+
                 , <see
                  cref="F:System.Reflection.MethodAttributes.SpecialName" />
 
                 
 
+                
+
                 , and <see
                  cref="F:System.Reflection.MethodAttributes.RTSpecialName" />
+
+                
 
                 
 
@@ -738,6 +826,8 @@
         </returns>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -783,8 +873,12 @@
 
           
 
+          
+
           The name of the event. <paramref
            name="name" />
+
+          
 
           
 
@@ -795,10 +889,14 @@
 
           
 
+          
+
           The attributes of the event. </param
         >
         <param name="eventtype">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -844,8 +942,12 @@
 
           
 
+          
+
           The name of the field. <paramref
            name="fieldName" />
+
+          
 
           
 
@@ -856,10 +958,14 @@
 
           
 
+          
+
           The type of the field </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -910,8 +1016,12 @@
 
           
 
+          
+
           The name of the field. <paramref
            name="fieldName" />
+
+          
 
           
 
@@ -922,6 +1032,8 @@
 
           
 
+          
+
           The type of the field </param
         >
         <param name="requiredCustomModifiers">
@@ -929,8 +1041,12 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers for the field, such as <see
            cref="T:Microsoft.VisualC.IsConstModifier" />
+
+          
 
           
 
@@ -941,8 +1057,12 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers for the field, such as <see
            cref="T:Microsoft.VisualC.IsConstModifier" />
+
+          
 
           
 
@@ -950,6 +1070,8 @@
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -993,6 +1115,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -1001,6 +1125,8 @@
           <para
             >Defines the generic type parameters for the current type, specifying their number and their names, and returns an array of <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -1015,11 +1141,15 @@
 
             
 
+            
+
              objects that can be used to define the constraints of the generic type parameters for the current type.</para
           >
         </returns>
         <param name="names">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1059,6 +1189,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -1075,8 +1207,12 @@
 
           
 
+          
+
           The name used to refer to the data. <paramref
            name="name" />
+
+          
 
           
 
@@ -1087,10 +1223,14 @@
 
           
 
+          
+
           The blob of data. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1129,6 +1269,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1137,8 +1279,12 @@
 
             
 
+            
+
             . If you need to define a method without a signature, with a different calling convention, use the <see
              cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Reflection.CallingConventions)" />
+
+            
 
             
 
@@ -1157,6 +1303,8 @@
 
             
 
+            
+
              representing the newly defined method.</para
           >
         </returns>
@@ -1165,8 +1313,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1174,6 +1326,8 @@
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1213,6 +1367,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1228,6 +1384,8 @@
 
             
 
+            
+
              representing the newly defined method.</para
           >
         </returns>
@@ -1236,8 +1394,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1248,10 +1410,14 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1298,8 +1464,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1310,6 +1480,8 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="returnType">
@@ -1317,10 +1489,14 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1367,6 +1543,8 @@
 
             
 
+            
+
              representing the newly defined method.</para
           >
         </returns>
@@ -1375,8 +1553,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1387,10 +1569,14 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1401,10 +1587,14 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1450,13 +1640,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Reflection.CallingConventions)" />
 
             
 
+            
+
              method overloads to define the method and then use the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" />
+
+            
 
             
 
@@ -1471,10 +1667,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1494,6 +1694,8 @@
 
             
 
+            
+
              object representing the newly added method.</para
           >
         </returns>
@@ -1502,8 +1704,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1514,10 +1720,14 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1528,6 +1738,8 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="returnTypeRequiredCustomModifiers">
@@ -1535,8 +1747,12 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -1547,8 +1763,12 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -1559,6 +1779,8 @@
 
           
 
+          
+
           The types of the parameters of the method.</param
         >
         <param name="parameterTypeRequiredCustomModifiers">
@@ -1566,8 +1788,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -1578,8 +1804,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -1619,6 +1849,8 @@
 
             
 
+            
+
              method is used when a method body and a method declaration have different names. For example, a class might override a base class method and also provide a separate implementation for an interface member with the same name, as demonstrated in the code example. </para
           >
           <para>DefineMethodOverride defines a methodimpl, which consists of a pair of metadata tokens. One token points to an implementation, and the other token points to a declaration that the body implements. The body must be defined on the type the method impl is defined on, and the body must be virtual (Overridable in Visual Basic). The declaration can be made to a method defined on an interface implemented by the type, a method on a derived class, or a method defined in the type. If the declaration is on an interface only, the slot defined for the interface is altered. If the declaration is made to a method on a base type, the slot for the method is overridden and any duplicates for the overridden method are also replaced. The overridden method cannot be the actual method that is declared. If the method is on the same type, the slot is replaced and any duplicates for the replaced methods are overridden.</para>
@@ -1631,10 +1863,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1648,8 +1884,12 @@
 
               
 
+              
+
                method is called, some features of <paramref
                name="methodInfoBody" />
+
+              
 
               
 
@@ -1658,8 +1898,12 @@
 
               
 
+              
+
                by using the <see
                cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetGenericParameterAttributes(System.Reflection.GenericParameterAttributes)" />
+
+              
 
               
 
@@ -1668,8 +1912,12 @@
 
               
 
+              
+
                method, do so after all characteristics of <paramref
                name="methodInfoBody" />
+
+              
 
               
 
@@ -1686,10 +1934,14 @@
 
           
 
+          
+
           The method body to be used. This should be a MethodBuilder object. </param
         >
         <param name="methodInfoDeclaration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1727,6 +1979,8 @@
 
             
 
+            
+
              method has been called on the enclosing type. </para
           >
           <para
@@ -1735,13 +1989,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Type.GetNestedType(System.String)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Type.GetNestedTypes" />
+
+            
 
             
 
@@ -1753,11 +2013,15 @@
 
             
 
+            
+
              for the order in which nested types and nesting types should be completed. </para
           >
           <para
             >A duplicate name is not necessarily created if <paramref
              name="name" />
+
+            
 
             
 
@@ -1777,8 +2041,12 @@
 
           
 
+          
+
           The short name of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -1817,6 +2085,8 @@
 
             
 
+            
+
              method has been called on the enclosing type. </para
           >
           <para
@@ -1825,13 +2095,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Type.GetNestedType(System.String)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Type.GetNestedTypes" />
+
+            
 
             
 
@@ -1843,11 +2119,15 @@
 
             
 
+            
+
              for the order in which nested types and nesting types should be completed.</para
           >
           <para
             >A duplicate name is not necessarily created if <paramref
              name="name" />
+
+            
 
             
 
@@ -1867,8 +2147,12 @@
 
           
 
+          
+
           The short name of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -1876,6 +2160,8 @@
         >
         <param name="attr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1915,6 +2201,8 @@
 
             
 
+            
+
              method has been called on the enclosing type. </para
           >
           <para
@@ -1923,13 +2211,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Type.GetNestedType(System.String)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Type.GetNestedTypes" />
+
+            
 
             
 
@@ -1941,11 +2235,15 @@
 
             
 
+            
+
              for the order in which nested types and nesting types should be completed.</para
           >
           <para
             >A duplicate name is not necessarily created if <paramref
              name="name" />
+
+            
 
             
 
@@ -1965,8 +2263,12 @@
 
           
 
+          
+
           The short name of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -1977,10 +2279,14 @@
 
           
 
+          
+
           The attributes of the type. </param
         >
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2021,6 +2327,8 @@
 
             
 
+            
+
              method has been called on the enclosing type. </para
           >
           <para
@@ -2029,13 +2337,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Type.GetNestedType(System.String)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Type.GetNestedTypes" />
+
+            
 
             
 
@@ -2047,11 +2361,15 @@
 
             
 
+            
+
              for the order in which nested types and nesting types should be completed.</para
           >
           <para
             >A duplicate name is not necessarily created if <paramref
              name="name" />
+
+            
 
             
 
@@ -2071,8 +2389,12 @@
 
           
 
+          
+
           The short name of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2083,6 +2405,8 @@
 
           
 
+          
+
           The attributes of the type. </param
         >
         <param name="parent">
@@ -2090,10 +2414,14 @@
 
           
 
+          
+
           The type that the nested type extends. </param
         >
         <param name="typeSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2134,6 +2462,8 @@
 
             
 
+            
+
              method has been called on the enclosing type. </para
           >
           <para
@@ -2142,13 +2472,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Type.GetNestedType(System.String)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Type.GetNestedTypes" />
+
+            
 
             
 
@@ -2160,11 +2496,15 @@
 
             
 
+            
+
              for the order in which nested types and nesting types should be completed.</para
           >
           <para
             >A duplicate name is not necessarily created if <paramref
              name="name" />
+
+            
 
             
 
@@ -2184,8 +2524,12 @@
 
           
 
+          
+
           The short name of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2196,6 +2540,8 @@
 
           
 
+          
+
           The attributes of the type. </param
         >
         <param name="parent">
@@ -2203,10 +2549,14 @@
 
           
 
+          
+
           The type that the nested type extends. </param
         >
         <param name="packSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2252,6 +2602,8 @@
 
             
 
+            
+
              method has been called on the enclosing type. </para
           >
           <para
@@ -2260,13 +2612,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Type.GetNestedType(System.String)" />
 
             
 
+            
+
             , or <see
              cref="M:System.Type.GetNestedTypes" />
+
+            
 
             
 
@@ -2278,11 +2636,15 @@
 
             
 
+            
+
              for the order in which nested types and nesting types should be completed.</para
           >
           <para
             >A duplicate name is not necessarily created if <paramref
              name="name" />
+
+            
 
             
 
@@ -2302,8 +2664,12 @@
 
           
 
+          
+
           The short name of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2314,6 +2680,8 @@
 
           
 
+          
+
           The attributes of the type. </param
         >
         <param name="parent">
@@ -2321,10 +2689,14 @@
 
           
 
+          
+
           The type that the nested type extends. </param
         >
         <param name="interfaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2369,8 +2741,12 @@
 
             
 
+            
+
             ) cannot be specified as arguments to this method. For example, the DLL import attribute <see
              cref="F:System.Reflection.MethodImplAttributes.PreserveSig" />
+
+            
 
             
 
@@ -2390,8 +2766,12 @@
 
           
 
+          
+
           The name of the PInvoke method. <paramref
            name="name" />
+
+          
 
           
 
@@ -2402,10 +2782,14 @@
 
           
 
+          
+
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2416,10 +2800,14 @@
 
           
 
+          
+
           The method's calling convention. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2430,6 +2818,8 @@
 
           
 
+          
+
           The types of the method's parameters. </param
         >
         <param name="nativeCallConv">
@@ -2437,10 +2827,14 @@
 
           
 
+          
+
           The native calling convention. </param
         >
         <param name="nativeCharSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2486,8 +2880,12 @@
 
             
 
+            
+
             ) cannot be specified as arguments to this method. For example, the DLL import attribute <see
              cref="F:System.Reflection.MethodImplAttributes.PreserveSig" />
+
+            
 
             
 
@@ -2507,8 +2905,12 @@
 
           
 
+          
+
           The name of the PInvoke method. <paramref
            name="name" />
+
+          
 
           
 
@@ -2519,10 +2921,14 @@
 
           
 
+          
+
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="entryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2533,10 +2939,14 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2547,10 +2957,14 @@
 
           
 
+          
+
           The method's return type. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2561,10 +2975,14 @@
 
           
 
+          
+
           The native calling convention. </param
         >
         <param name="nativeCharSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2614,8 +3032,12 @@
 
             
 
+            
+
             ) cannot be specified as arguments to this method. For example, the DLL import attribute <see
              cref="F:System.Reflection.MethodImplAttributes.PreserveSig" />
+
+            
 
             
 
@@ -2630,10 +3052,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2653,6 +3079,8 @@
 
             
 
+            
+
              representing the defined PInvoke method.</para
           >
         </returns>
@@ -2661,8 +3089,12 @@
 
           
 
+          
+
           The name of the PInvoke method. <paramref
            name="name" />
+
+          
 
           
 
@@ -2673,10 +3105,14 @@
 
           
 
+          
+
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="entryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2687,10 +3123,14 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2701,6 +3141,8 @@
 
           
 
+          
+
           The method's return type. </param
         >
         <param name="returnTypeRequiredCustomModifiers">
@@ -2708,8 +3150,12 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2720,8 +3166,12 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2732,6 +3182,8 @@
 
           
 
+          
+
           The types of the method's parameters. </param
         >
         <param name="parameterTypeRequiredCustomModifiers">
@@ -2739,8 +3191,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2751,8 +3207,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2763,10 +3223,14 @@
 
           
 
+          
+
           The native calling convention. </param
         >
         <param name="nativeCharSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2813,8 +3277,12 @@
 
           
 
+          
+
           The name of the property. <paramref
            name="name" />
+
+          
 
           
 
@@ -2825,6 +3293,8 @@
 
           
 
+          
+
           The attributes of the property. </param
         >
         <param name="returnType">
@@ -2832,10 +3302,14 @@
 
           
 
+          
+
           The return type of the property. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2881,8 +3355,12 @@
 
           
 
+          
+
           The name of the property. <paramref
            name="name" />
+
+          
 
           
 
@@ -2893,10 +3371,14 @@
 
           
 
+          
+
           The attributes of the property. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2907,10 +3389,14 @@
 
           
 
+          
+
           The return type of the property. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2959,10 +3445,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -2983,8 +3473,12 @@
 
           
 
+          
+
           The name of the property. <paramref
            name="name" />
+
+          
 
           
 
@@ -2995,10 +3489,14 @@
 
           
 
+          
+
           The attributes of the property. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3009,8 +3507,12 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3021,8 +3523,12 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3033,6 +3539,8 @@
 
           
 
+          
+
           The types of the parameters of the property. </param
         >
         <param name="parameterTypeRequiredCustomModifiers">
@@ -3040,8 +3548,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3052,8 +3564,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3102,10 +3618,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -3127,8 +3647,12 @@
 
           
 
+          
+
           The name of the property. <paramref
            name="name" />
+
+          
 
           
 
@@ -3139,10 +3663,14 @@
 
           
 
+          
+
           The attributes of the property. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3153,6 +3681,8 @@
 
           
 
+          
+
           The return type of the property. </param
         >
         <param name="returnTypeRequiredCustomModifiers">
@@ -3160,8 +3690,12 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3172,8 +3706,12 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3184,6 +3722,8 @@
 
           
 
+          
+
           The types of the parameters of the property. </param
         >
         <param name="parameterTypeRequiredCustomModifiers">
@@ -3191,8 +3731,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3203,8 +3747,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -3283,6 +3831,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -3299,8 +3849,12 @@
 
           
 
+          
+
           The name used to refer to the data. <paramref
            name="name" />
+
+          
 
           
 
@@ -3311,10 +3865,14 @@
 
           
 
+          
+
           The size of the data field. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3374,8 +3932,12 @@
 
               
 
+              
+
                object rather than by a <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -3415,8 +3977,12 @@
 
               
 
+              
+
                object rather than by a <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -3429,13 +3995,19 @@
 
             
 
+            
+
              does not represent a generic type parameter, the value of this property is undefined. Use the <see
              cref="P:System.Reflection.Emit.TypeBuilder.IsGenericType" />
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -3504,13 +4076,19 @@
 
             
 
+            
+
              method provides a way to get a <see
              cref="T:System.Reflection.ConstructorInfo" />
 
             
 
+            
+
              object that represents a constructor of a constructed generic type whose generic type definition is represented by a <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -3522,8 +4100,12 @@
 
             
 
+            
+
              object that represents the type G&lt;T&gt; in C# syntax (G(Of T) in Visual Basic, generic &lt;T&gt; ref class G in C++) and a <see
              cref="T:System.Reflection.Emit.ConstructorBuilder" />
+
+            
 
             
 
@@ -3532,8 +4114,12 @@
 
             
 
+            
+
              object that represents the constructor of this constructed type — in other words, that creates an instance of G&lt;U&gt;. To do this, first call the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -3542,8 +4128,12 @@
 
             
 
+            
+
              object, specifying the <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -3552,8 +4142,12 @@
 
             
 
+            
+
              method with the return value of the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -3562,8 +4156,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Reflection.Emit.ConstructorBuilder" />
+
+            
 
             
 
@@ -3572,8 +4170,12 @@
 
             
 
+            
+
             . The return value is the <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -3592,8 +4194,12 @@
 
             
 
+            
+
              object that represents the constructor of <paramref
              name="type" />
+
+            
 
             
 
@@ -3602,8 +4208,12 @@
 
             
 
+            
+
             , which specifies a constructor belonging to the generic type definition of <paramref
              name="type" />
+
+            
 
             
 
@@ -3615,10 +4225,14 @@
 
           
 
+          
+
           The constructed generic type whose constructor is returned.</param
         >
         <param name="constructor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3627,8 +4241,12 @@
 
           
 
+          
+
           , which specifies which constructor of <paramref
            name="type" />
+
+          
 
           
 
@@ -3707,8 +4325,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -3723,6 +4345,8 @@
 
             
 
+            
+
              objects representing the public and non-public constructors defined for this class, as specified.</para
           >
         </summary>
@@ -3734,6 +4358,8 @@
 
             
 
+            
+
              objects representing the specified constructors defined for this class. If no constructors are defined, an empty array is returned.</para
           >
         </returns>
@@ -3742,8 +4368,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -3784,6 +4414,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3828,10 +4460,14 @@
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3864,8 +4500,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -3877,6 +4517,8 @@
           <para
             >Calling this method always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3920,8 +4562,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -3940,11 +4586,15 @@
 
             
 
+            
+
              object representing the event declared or inherited by this type with the specified name, or null if there are no matches.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3955,8 +4605,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -3992,8 +4646,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4009,6 +4667,8 @@
           <para
             >Returns an array of <see
              cref="T:System.Reflection.EventInfo" />
+
+            
 
             
 
@@ -4047,8 +4707,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4067,6 +4731,8 @@
 
             
 
+            
+
              objects representing the events declared or inherited by this type that match the specified binding flags. An empty array is returned if there are no matching events.</para
           >
         </returns>
@@ -4075,8 +4741,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -4115,8 +4785,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4135,11 +4809,15 @@
 
             
 
+            
+
              object representing the field declared or inherited by this type with the specified name and public or non-public modifier. If there are no matches then null is returned.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4150,8 +4828,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -4190,13 +4872,19 @@
 
             
 
+            
+
              method provides a way to get a <see
              cref="T:System.Reflection.FieldInfo" />
 
             
 
+            
+
              object that represents a field of a constructed generic type whose generic type definition is represented by a <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -4208,8 +4896,12 @@
 
             
 
+            
+
              object that represents the type G&lt;T&gt; in C# syntax (G(Of T) in Visual Basic, generic &lt;T&gt; ref class G in C++) and a <see
              cref="T:System.Reflection.Emit.FieldBuilder" />
+
+            
 
             
 
@@ -4218,8 +4910,12 @@
 
             
 
+            
+
              object that represents F on the constructed type — in other words, that is of type U rather than type T. To do this, first call the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -4228,8 +4924,12 @@
 
             
 
+            
+
              object, specifying the <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -4238,8 +4938,12 @@
 
             
 
+            
+
              method with the return value of the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -4248,8 +4952,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Reflection.Emit.FieldBuilder" />
+
+            
 
             
 
@@ -4258,8 +4966,12 @@
 
             
 
+            
+
             . The return value is the <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -4278,8 +4990,12 @@
 
             
 
+            
+
              object that represents the field of <paramref
              name="type" />
+
+            
 
             
 
@@ -4288,8 +5004,12 @@
 
             
 
+            
+
             , which specifies a field belonging to the generic type definition of <paramref
              name="type" />
+
+            
 
             
 
@@ -4301,10 +5021,14 @@
 
           
 
+          
+
           The constructed generic type whose field is returned.</param
         >
         <param name="field">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4313,8 +5037,12 @@
 
           
 
+          
+
           , which specifies which field of <paramref
            name="type" />
+
+          
 
           
 
@@ -4352,6 +5080,8 @@
 
             
 
+            
+
              method does not return fields in a particular order, such as alphabetical or declaration order. Your code must not depend on the order in which fields are returned, because that order can vary.</para
           >
           <para
@@ -4360,8 +5090,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4380,6 +5114,8 @@
 
             
 
+            
+
              objects representing the public and non-public fields declared or inherited by this type. An empty array is returned if there are no fields, as specified.</para
           >
         </returns>
@@ -4388,8 +5124,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -4423,8 +5163,12 @@
 
             
 
+            
+
              object represents a generic type definition if the <see
              cref="M:System.Reflection.Emit.TypeBuilder.DefineGenericParameters(System.String[])" />
+
+            
 
             
 
@@ -4433,11 +5177,15 @@
 
             
 
+            
+
              objects that represent the generic type parameters.</para
           >
           <para
             >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -4452,6 +5200,8 @@
 
             
 
+            
+
              objects representing the type arguments of a generic type or the type parameters of a generic type definition.</para
           >
         </summary>
@@ -4460,6 +5210,8 @@
           <para
             >An array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -4493,8 +5245,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -4503,13 +5259,19 @@
 
             
 
+            
+
              property returns true, the <see
              cref="M:System.Reflection.Emit.TypeBuilder.GetGenericTypeDefinition" />
 
             
 
+            
+
              property returns the current instance. A <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -4521,8 +5283,12 @@
 
             
 
+            
+
              method to construct a generic type from a <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -4531,8 +5297,12 @@
 
             
 
+            
+
              method on the constructed type gets back the <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -4547,6 +5317,8 @@
 
             
 
+            
+
              object that represents a generic type definition from which the current type can be obtained.</para
           >
         </summary>
@@ -4555,6 +5327,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -4594,8 +5368,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4614,6 +5392,8 @@
 
             
 
+            
+
              object representing the implemented interface. Returns null if no interface matching name is found.</para
           >
         </returns>
@@ -4622,10 +5402,14 @@
 
           
 
+          
+
           The name of the interface. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4668,8 +5452,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4689,8 +5477,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4725,6 +5517,8 @@
           <para
             >Returns an array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -4765,8 +5559,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4785,8 +5583,12 @@
 
             
 
+            
+
              objects representing the public and non-public members defined on this type if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -4798,10 +5600,14 @@
 
           
 
+          
+
           The name of the member. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4812,8 +5618,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -4851,8 +5661,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -4871,6 +5685,8 @@
 
             
 
+            
+
              objects representing the public and non-public members declared or inherited by this type. An empty array is returned if there are no matching members.</para
           >
         </returns>
@@ -4879,8 +5695,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -4919,13 +5739,19 @@
 
             
 
+            
+
              method provides a way to get a <see
              cref="T:System.Reflection.MethodInfo" />
 
             
 
+            
+
              object that represents a method of a constructed generic type whose generic type definition is represented by a <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -4937,8 +5763,12 @@
 
             
 
+            
+
              object that represents the type G&lt;T&gt; in C# syntax (G(Of T) in Visual Basic, generic &lt;T&gt; ref class G in C++) and a <see
              cref="T:System.Reflection.Emit.MethodBuilder" />
+
+            
 
             
 
@@ -4947,8 +5777,12 @@
 
             
 
+            
+
              object that represents M on the constructed type — in other words, that returns type U rather than type T. To do this, first call the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -4957,8 +5791,12 @@
 
             
 
+            
+
              object, specifying the <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -4967,8 +5805,12 @@
 
             
 
+            
+
              method with the return value of the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -4977,8 +5819,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Reflection.Emit.MethodBuilder" />
+
+            
 
             
 
@@ -4987,8 +5833,12 @@
 
             
 
+            
+
             . The return value is the <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -5007,8 +5857,12 @@
 
             
 
+            
+
              object that represents the method of <paramref
              name="type" />
+
+            
 
             
 
@@ -5017,8 +5871,12 @@
 
             
 
+            
+
             , which specifies a method belonging to the generic type definition of <paramref
              name="type" />
+
+            
 
             
 
@@ -5030,10 +5888,14 @@
 
           
 
+          
+
           The constructed generic type whose method is returned.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5042,8 +5904,12 @@
 
           
 
+          
+
           , which specifies which method of <paramref
            name="type" />
+
+          
 
           
 
@@ -5119,8 +5985,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5139,8 +6009,12 @@
 
             
 
+            
+
              objects representing the public and non-public methods defined on this type if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -5152,8 +6026,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -5192,8 +6070,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5213,6 +6095,8 @@
 
             
 
+            
+
              object representing the nested type that matches the specified requirements, if found; otherwise, null.</para
           >
         </returns>
@@ -5221,8 +6105,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -5233,8 +6121,12 @@
 
           
 
+          
+
           A bitmask comprised of one or more <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -5272,8 +6164,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5293,8 +6189,12 @@
 
             
 
+            
+
              objects representing all the types nested within the current <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -5306,8 +6206,12 @@
 
             
 
+            
+
             , if no types are nested within the current <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -5319,8 +6223,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -5358,8 +6266,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5378,6 +6290,8 @@
 
             
 
+            
+
              is used; otherwise, only the public properties are returned.</para
           >
         </returns>
@@ -5386,8 +6300,12 @@
 
           
 
+          
+
           This invocation attribute. This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -5455,8 +6373,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5533,8 +6455,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5554,10 +6480,14 @@
 
           
 
+          
+
           The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5568,8 +6498,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -5580,10 +6514,14 @@
 
           
 
+          
+
           The object on which to invoke the specified member. If the member is static, this parameter is ignored. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5594,8 +6532,12 @@
 
           
 
+          
+
           An array of the same length as <paramref
            name="args" />
+
+          
 
           
 
@@ -5606,10 +6548,14 @@
 
           
 
+          
+
           An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures.) </param
         >
         <param name="namedParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5618,8 +6564,12 @@
 
           
 
+          
+
            array gets the value in the corresponding element in the <paramref
            name="args" />
+
+          
 
           
 
@@ -5628,8 +6578,12 @@
 
           
 
+          
+
            is greater than the length of <paramref
            name="namedParameters" />
+
+          
 
           
 
@@ -5688,6 +6642,8 @@
 
             
 
+            
+
              object can be assigned to this object.</para
           >
         </summary>
@@ -5699,11 +6655,15 @@
 
             
 
+            
+
              can be assigned to this object; otherwise, false.</para
           >
         </returns>
         <param name="typeInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5739,6 +6699,8 @@
 
             
 
+            
+
              can be assigned to this object.</para
           >
         </summary>
@@ -5750,8 +6712,12 @@
 
             
 
+            
+
              parameter and the current type represent the same type, or if the current type is in the inheritance hierarchy of <paramref
              name="c" />
+
+            
 
             
 
@@ -5760,8 +6726,12 @@
 
             
 
+            
+
              supports. false if none of these conditions are valid, or if <paramref
              name="c" />
+
+            
 
             
 
@@ -5770,6 +6740,8 @@
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5868,8 +6840,12 @@
 
             
 
+            
+
              method has been called, the type represented by the <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -5885,6 +6861,8 @@
           <para
             >true if the <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -5924,8 +6902,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -5944,8 +6926,12 @@
 
             
 
+            
+
             , or an attribute derived from <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -5957,10 +6943,14 @@
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5991,8 +6981,12 @@
 
               
 
+              
+
                object rather than by a <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -6028,8 +7022,12 @@
 
             
 
+            
+
              object represents a generic type definition if the <see
              cref="M:System.Reflection.Emit.TypeBuilder.DefineGenericParameters(System.String[])" />
+
+            
 
             
 
@@ -6038,11 +7036,15 @@
 
             
 
+            
+
              class that is generic is always a generic type definition.</para
           >
           <para
             >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -6080,13 +7082,19 @@
 
             
 
+            
+
              object represents a generic type definition if the <see
              cref="M:System.Reflection.Emit.TypeBuilder.DefineGenericParameters(System.String[])" />
 
             
 
+            
+
              method has been used to give it generic type parameters. An instance of the <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -6098,13 +7106,19 @@
 
             
 
+            
+
              can be used to build generic type definitions, but not constructed generic types. To get a constructed generic type, call the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
 
             
 
+            
+
              method on a <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -6116,6 +7130,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -6124,6 +7140,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -6213,8 +7231,12 @@
 
             
 
+            
+
             , or is a subtype of type <paramref
              name="c" />
+
+            
 
             
 
@@ -6226,8 +7248,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -6281,6 +7307,8 @@
 
             
 
+            
+
              method provides a way to generate an array type with any possible element type, including generic types.</para
           >
         </remarks>
@@ -6292,6 +7320,8 @@
 
             
 
+            
+
              object that represents a one-dimensional array of the current type, with a lower bound of zero.</para
           >
         </summary>
@@ -6300,6 +7330,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -6334,6 +7366,8 @@
 
             
 
+            
+
              method provides a way to generate an array type with any possible element type, including generic types.</para
           >
         </remarks>
@@ -6342,6 +7376,8 @@
           <para
             >Returns a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -6356,11 +7392,15 @@
 
             
 
+            
+
              object that represents a one-dimensional array of the current type.</para
           >
         </returns>
         <param name="rank">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6392,12 +7432,16 @@
 
             
 
+            
+
              method provides a way to generate ref types (ByRef in Visual Basic) for parameter lists.</para
           >
           <block subset="none" type="note">
             <para
               >Using Microsoft intermediate language (MSIL) syntax, if the current <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -6413,6 +7457,8 @@
 
             
 
+            
+
              object that represents the current type when passed as a ref parameter (ByRef in Visual Basic).</para
           >
         </summary>
@@ -6421,6 +7467,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -6464,8 +7512,12 @@
 
             
 
+            
+
              method before calling the <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" />
+
+            
 
             
 
@@ -6474,8 +7526,12 @@
 
             
 
+            
+
              that represents a generic type definition. If the current <see
              cref="T:System.Reflection.Emit.TypeBuilder" />
+
+            
 
             
 
@@ -6484,11 +7540,15 @@
 
             
 
+            
+
              is thrown.</para
           >
           <para
             >The object returned by this method functions as a placeholder for a constructed generic type in your emitted code. It is an instance of a class derived from <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -6502,13 +7562,19 @@
 
                 
 
+                
+
                 , <see
                  cref="M:System.Reflection.Emit.TypeBuilder.GetField(System.Type,System.Reflection.FieldInfo)" />
 
                 
 
+                
+
                 , and <see
                  cref="M:System.Reflection.Emit.TypeBuilder.GetConstructor(System.Type,System.Reflection.ConstructorInfo)" />
+
+                
 
                 
 
@@ -6534,8 +7600,12 @@
 
             
 
+            
+
              representing the constructed type formed by substituting the elements of <paramref
              name="typeArguments" />
+
+            
 
             
 
@@ -6544,6 +7614,8 @@
         </returns>
         <param name="typeArguments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6575,12 +7647,16 @@
 
             
 
+            
+
              method provides a way to generate pointer types for parameter lists.</para
           >
           <block subset="none" type="note">
             <para
               >Using Microsoft intermediate language (MSIL) syntax, if the current <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -6596,6 +7672,8 @@
 
             
 
+            
+
              object that represents the type of an unmanaged pointer to the current type.</para
           >
         </summary>
@@ -6604,6 +7682,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -6763,8 +7843,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -6774,6 +7858,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -6787,6 +7873,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6830,6 +7918,8 @@
 
             
 
+            
+
             , see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -6837,10 +7927,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -6853,8 +7947,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -6864,6 +7962,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -6880,10 +7980,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6918,8 +8022,12 @@
 
             
 
+            
+
              is null, <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -6931,13 +8039,19 @@
 
             
 
+            
+
              is an interface type, but a <see
              cref="T:System.TypeLoadException" />
 
             
 
+            
+
              is thrown when the <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -6949,13 +8063,19 @@
 
             
 
+            
+
              method does not check for most invalid parent types. For example, it does not reject a parent type that has no default constructor when the current type has a default constructor, it does not reject sealed types, and it does not reject the <see
              cref="T:System.Delegate" />
 
             
 
+            
+
              type. In all these cases, exceptions are thrown by the <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -6968,6 +8088,8 @@
         </summary>
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7063,6 +8185,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -7075,6 +8199,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -7082,10 +8208,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7217,8 +8347,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 

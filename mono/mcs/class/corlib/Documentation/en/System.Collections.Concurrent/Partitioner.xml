@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -66,6 +68,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -82,10 +86,14 @@
 
           
 
+          
+
           The lower, inclusive bound of the range.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,6 +134,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -142,10 +152,14 @@
 
           
 
+          
+
           The lower, inclusive bound of the range.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,6 +201,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -203,6 +219,8 @@
 
           
 
+          
+
           The lower, inclusive bound of the range.</param
         >
         <param name="toExclusive">
@@ -210,10 +228,14 @@
 
           
 
+          
+
           The upper, exclusive bound of the range.</param
         >
         <param name="rangeSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,6 +277,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -271,6 +295,8 @@
 
           
 
+          
+
           The lower, inclusive bound of the range.</param
         >
         <param name="toExclusive">
@@ -278,10 +304,14 @@
 
           
 
+          
+
           The upper, exclusive bound of the range.</param
         >
         <param name="rangeSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,6 +354,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -332,6 +364,8 @@
           <para
             >Creates an orderable partitioner from a <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -347,10 +381,14 @@
 
           
 
+          
+
           The enumerable to be partitioned.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,6 +435,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -409,6 +449,8 @@
 
           
 
+          
+
           The enumerable to be partitioned.</param
         >
         <param name="partitionerOptions">
@@ -416,10 +458,14 @@
 
           
 
+          
+
           Options to control the buffering behavior of the partitioner.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -463,6 +509,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -471,6 +519,8 @@
           <para
             >Creates an orderable partitioner from an <see
              cref="T:System.Collections.Generic.IList`1" />
+
+            
 
             
 
@@ -486,6 +536,8 @@
 
           
 
+          
+
           The list to be partitioned.</param
         >
         <param name="loadBalance">
@@ -493,10 +545,14 @@
 
           
 
+          
+
           A Boolean value that indicates whether the created partitioner should dynamically load balance between partitions rather than statically partition.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

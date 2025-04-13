@@ -34,9 +34,13 @@
 
         
 
+        
+
          is 10 under FreeBSD, while it's 7 
     for x86 Linux.  Meanwhile, <see
          cref="F:Mono.Unix.Native.Signum.SIGBUS" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
     have the same value everywhere.  Since it is undesirable to require
     recompilation for every target platform, the <see
          cref="N:Mono.Unix.Native" />
+
+        
 
         
 
@@ -100,6 +106,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -107,6 +115,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -147,6 +157,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -154,6 +166,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -190,6 +204,8 @@
 
           
 
+          
+
            in the user's
         current time zone.</param
         >
@@ -199,9 +215,13 @@
 
           
 
+          
+
            into a Unix
         <c
           >time_t</c>
+
+          
 
           
 
@@ -214,6 +234,8 @@
         <remarks
           >A Unix <c
           >time_t</c>
+
+          
 
           
 
@@ -252,6 +274,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -259,6 +283,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -351,6 +377,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -358,6 +386,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -398,6 +428,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -405,6 +437,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -445,6 +479,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -452,6 +488,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -492,6 +530,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -499,6 +539,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -539,6 +581,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -546,6 +590,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -586,6 +632,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -593,6 +641,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -633,6 +683,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -640,6 +692,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -680,6 +734,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -687,6 +743,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -727,6 +785,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -734,6 +794,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -774,6 +836,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -781,6 +845,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -821,6 +887,8 @@
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -828,6 +896,8 @@
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -868,6 +938,8 @@
 
           
 
+          
+
            value.</param
         >
         <summary
@@ -877,9 +949,13 @@
 
           
 
+          
+
            into a 
         <see
            cref="T:Mono.Unix.Native.FilePermissions" />
+
+          
 
           
 
@@ -892,6 +968,8 @@
 
           
 
+          
+
           .</returns
         >
         <remarks>
@@ -899,6 +977,8 @@
             >This method makes it easier to create a 
           <see
              cref="T:Mono.Unix.Native.FilePermissions" />
+
+            
 
             
 
@@ -958,6 +1038,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -965,6 +1047,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1005,6 +1089,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1012,6 +1098,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1052,6 +1140,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1059,6 +1149,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1099,6 +1191,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1106,6 +1200,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1146,6 +1242,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1153,6 +1251,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1192,6 +1292,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1228,6 +1330,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1235,6 +1339,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1275,6 +1381,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1282,6 +1390,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1322,6 +1432,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1329,6 +1441,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1369,6 +1483,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1376,6 +1492,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1416,6 +1534,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1423,6 +1543,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1463,6 +1585,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1470,6 +1594,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1506,6 +1632,8 @@ class Test
 
           
 
+          
+
            value.</param
         >
         <summary
@@ -1514,9 +1642,13 @@ class Test
 
           
 
+          
+
            in the user's current time zone 
         into a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1528,11 +1660,15 @@ class Test
 
           
 
+          
+
           .</returns
         >
         <remarks
           >A Unix <c
           >time_t</c>
+
+          
 
           
 
@@ -1571,6 +1707,8 @@ class Test
 
           
 
+          
+
            value.</param
         >
         <summary
@@ -1580,9 +1718,13 @@ class Test
 
           
 
+          
+
            into a 
         <see
            cref="T:Mono.Unix.Native.FilePermissions" />
+
+          
 
           
 
@@ -1592,6 +1734,8 @@ class Test
           >The converted 
         <see
            cref="T:Mono.Unix.Native.FilePermissions" />
+
+          
 
           
 
@@ -1605,9 +1749,13 @@ class Test
 
             
 
+            
+
             , e.g.
           "<c
             >-rwxr-x---</c>
+
+            
 
             
 
@@ -1617,6 +1765,8 @@ class Test
             >This method makes it easier to create a 
           <see
              cref="T:Mono.Unix.Native.FilePermissions" />
+
+            
 
             
 
@@ -1689,6 +1839,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1696,6 +1848,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1736,6 +1890,8 @@ class Test
 
           
 
+          
+
            
           to an OS-specific value.</summary
         >
@@ -1743,6 +1899,8 @@ class Test
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1778,9 +1936,13 @@ class Test
 
           
 
+          
+
            corresponds to a 
         Unix <c
           >time_t</c>
+
+          
 
           
 
@@ -1838,6 +2000,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -1849,14 +2013,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -1871,9 +2041,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
+
+            
 
             
 
@@ -1915,12 +2089,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1957,6 +2135,8 @@ class Test
 
           
 
+          
+
            value.</param
         >
         <summary
@@ -1965,9 +2145,13 @@ class Test
 
           
 
+          
+
            in the user's current time zone 
         into a <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1979,11 +2163,15 @@ class Test
 
           
 
+          
+
           .</returns
         >
         <remarks
           >A Unix <c
           >time_t</c>
+
+          
 
           
 
@@ -2023,6 +2211,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2034,14 +2224,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2056,9 +2252,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
+
+            
 
             
 
@@ -2152,12 +2352,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -2199,12 +2403,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -2246,6 +2454,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2257,14 +2467,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2279,9 +2495,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
+
+            
 
             
 
@@ -2323,6 +2543,8 @@ class Test
 
           
 
+          
+
            into a
         string suitable for use with
         <see
@@ -2330,9 +2552,13 @@ class Test
 
           
 
+          
+
           's 
         <paramref
            name="mode" />
+
+          
 
           
 
@@ -2346,9 +2572,13 @@ class Test
 
           
 
+          
+
            API, such as with 
         <see
            cref="T:Mono.Unix.StdioFileStream" />
+
+          
 
           
 
@@ -2386,6 +2616,8 @@ class Test
 
           
 
+          
+
            into a
         string suitable for use with
         <see
@@ -2393,9 +2625,13 @@ class Test
 
           
 
+          
+
           's 
         <paramref
            name="mode" />
+
+          
 
           
 
@@ -2409,9 +2645,13 @@ class Test
 
           
 
+          
+
            API, such as with 
         <see
            cref="T:Mono.Unix.StdioFileStream" />
+
+          
 
           
 
@@ -2454,8 +2694,12 @@ class Test
 
             
 
+            
+
             )</c
           >
+
+          
 
           
 
@@ -2466,9 +2710,13 @@ class Test
 
           
 
+          
+
           's 
         <paramref
            name="mode" />
+
+          
 
           
 
@@ -2482,9 +2730,13 @@ class Test
 
           
 
+          
+
            API, such as with 
         <see
            cref="T:Mono.Unix.StdioFileStream" />
+
+          
 
           
 
@@ -2522,12 +2774,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -2569,12 +2825,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -2616,6 +2876,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2627,14 +2889,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2649,9 +2917,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
+
+            
 
             
 
@@ -2693,6 +2965,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2704,14 +2978,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2726,9 +3006,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
+
+            
 
             
 
@@ -2770,6 +3054,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2781,14 +3067,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2803,9 +3095,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
+
+            
 
             
 
@@ -2847,6 +3143,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2858,14 +3156,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2880,9 +3184,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
+
+            
 
             
 
@@ -2924,6 +3232,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -2935,14 +3245,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -2957,9 +3273,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
+
+            
 
             
 
@@ -3001,6 +3321,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -3012,14 +3334,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -3034,9 +3362,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
+
+            
 
             
 
@@ -3076,11 +3408,15 @@ class Test
 
           
 
+          
+
            value.</param
         >
         <summary
           >Converts a <see
            cref="T:Mono.Unix.Native.FilePermissions" />
+
+          
 
           
 
@@ -3090,6 +3426,8 @@ class Test
         <returns
           >An octal string representation of a Unix <c
           >mode_t</c>
+
+          
 
           
 
@@ -3157,6 +3495,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -3168,14 +3508,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -3190,9 +3536,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
+
+            
 
             
 
@@ -3239,8 +3589,12 @@ class Test
 
             
 
+            
+
             )</c
           >
+
+          
 
           
 
@@ -3256,9 +3610,13 @@ class Test
 
           
 
+          
+
            API, such as with 
         <see
            cref="T:Mono.Unix.UnixStream" />
+
+          
 
           
 
@@ -3296,12 +3654,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3343,6 +3705,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -3354,14 +3718,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -3376,9 +3746,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
+
+            
 
             
 
@@ -3420,12 +3794,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3467,12 +3845,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3541,12 +3923,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3588,12 +3974,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3635,12 +4025,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3682,12 +4076,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3729,12 +4127,16 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>The equivalent managed value.</returns>
         <remarks></remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="value" />
+
+          
 
           
 
@@ -3776,6 +4178,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -3787,14 +4191,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -3809,9 +4219,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
+
+            
 
             
 
@@ -3848,6 +4262,8 @@ class Test
 
           
 
+          
+
            in the user's
         current time zone.</param
         >
@@ -3857,9 +4273,13 @@ class Test
 
           
 
+          
+
            into a Unix
         <c
           >time_t</c>
+
+          
 
           
 
@@ -3872,6 +4292,8 @@ class Test
         <remarks
           >A Unix <c
           >time_t</c>
+
+          
 
           
 
@@ -3908,11 +4330,15 @@ class Test
 
           
 
+          
+
            to convert.</param
         >
         <summary
           >Converts a <see
            cref="Mono.Unix.Native.FilePermissions" />
+
+          
 
           
 
@@ -3927,9 +4353,13 @@ class Test
 
             
 
+            
+
             , e.g.
           "<c
             >-rwxr-x---</c>
+
+            
 
             
 
@@ -4000,6 +4430,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -4011,14 +4443,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -4033,9 +4471,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
+
+            
 
             
 
@@ -4077,6 +4519,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>An approximation of the equivalent managed value.</returns>
@@ -4088,14 +4532,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -4110,9 +4560,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
+
+            
 
             
 
@@ -4631,6 +5085,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -4639,9 +5095,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -4655,6 +5115,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -4664,8 +5126,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -4675,8 +5141,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -4719,6 +5189,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -4727,9 +5199,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -4743,6 +5219,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -4752,8 +5230,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -4763,8 +5245,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -4807,6 +5293,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -4815,9 +5303,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -4831,6 +5323,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -4840,8 +5334,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -4851,8 +5349,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -4951,6 +5453,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -4959,9 +5463,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -4975,6 +5483,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -4984,8 +5494,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -4995,8 +5509,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5039,6 +5557,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5047,9 +5567,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5063,6 +5587,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5072,8 +5598,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5083,8 +5613,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5127,6 +5661,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5135,9 +5671,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5151,6 +5691,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5160,8 +5702,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5171,8 +5717,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5215,6 +5765,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5223,9 +5775,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5239,6 +5795,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5248,8 +5806,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5259,8 +5821,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5303,6 +5869,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5311,9 +5879,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5327,6 +5899,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5336,8 +5910,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5347,8 +5925,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5391,6 +5973,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5399,9 +5983,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5415,6 +6003,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5424,8 +6014,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5435,8 +6029,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5479,6 +6077,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5487,9 +6087,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5503,6 +6107,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5512,8 +6118,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5523,8 +6133,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5567,6 +6181,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5575,9 +6191,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5591,6 +6211,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5600,8 +6222,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5611,8 +6237,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5655,6 +6285,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5663,9 +6295,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5679,6 +6315,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5688,8 +6326,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5699,8 +6341,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5743,6 +6389,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5751,9 +6399,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5767,6 +6419,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5776,8 +6430,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5787,8 +6445,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5831,6 +6493,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5839,9 +6503,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5855,6 +6523,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5864,8 +6534,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5875,8 +6549,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -5919,6 +6597,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -5927,9 +6607,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -5943,6 +6627,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -5952,8 +6638,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -5963,8 +6653,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6007,6 +6701,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6015,9 +6711,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6031,6 +6731,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6040,8 +6742,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6051,8 +6757,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6095,6 +6805,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6103,9 +6815,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6119,6 +6835,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6128,8 +6846,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6139,8 +6861,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6183,6 +6909,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6191,9 +6919,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6207,6 +6939,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6216,8 +6950,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6227,8 +6965,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6271,6 +7013,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6279,9 +7023,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6295,6 +7043,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6304,8 +7054,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6315,8 +7069,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6359,6 +7117,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6367,9 +7127,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6383,6 +7147,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6392,8 +7158,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6403,8 +7173,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6447,6 +7221,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6455,9 +7231,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6471,6 +7251,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6480,8 +7262,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6491,8 +7277,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6535,6 +7325,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6543,9 +7335,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6559,6 +7355,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6568,8 +7366,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6579,8 +7381,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6623,6 +7429,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6631,9 +7439,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6647,6 +7459,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6656,8 +7470,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6667,8 +7485,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6711,6 +7533,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6719,9 +7543,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6735,6 +7563,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6744,8 +7574,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6755,8 +7589,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6799,6 +7637,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6807,9 +7647,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6823,6 +7667,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6832,8 +7678,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6843,8 +7693,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6887,6 +7741,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6895,9 +7751,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6911,6 +7771,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -6920,8 +7782,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -6931,8 +7797,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -6975,6 +7845,8 @@ class Test
 
           
 
+          
+
            
           enumeration value to an OS-specific value.</summary
         >
@@ -6983,9 +7855,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -6999,6 +7875,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7008,8 +7886,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7019,8 +7901,12 @@ class Test
 
             
 
+            
+
              will contain <c
             >0</c>
+
+            
 
             
 
@@ -7064,6 +7950,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7071,9 +7959,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7087,6 +7979,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7096,8 +7990,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7107,14 +8005,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.AccessModes" />
+
+            
 
             
 
@@ -7127,14 +8031,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -7149,9 +8059,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
+
+            
 
             
 
@@ -7195,6 +8109,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7202,9 +8118,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7218,6 +8138,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7227,8 +8149,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7238,14 +8164,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.ConfstrName" />
+
+            
 
             
 
@@ -7289,6 +8221,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7296,9 +8230,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7312,6 +8250,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7321,8 +8261,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7332,14 +8276,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
+
+            
 
             
 
@@ -7352,14 +8302,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -7374,9 +8330,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
+
+            
 
             
 
@@ -7476,6 +8436,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7483,9 +8445,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7499,6 +8465,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7508,8 +8476,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7519,14 +8491,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.Errno" />
+
+            
 
             
 
@@ -7570,6 +8548,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7577,9 +8557,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7593,6 +8577,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7602,8 +8588,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7613,14 +8603,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.FcntlCommand" />
+
+            
 
             
 
@@ -7664,6 +8660,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7671,9 +8669,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7687,6 +8689,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7696,8 +8700,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7707,14 +8715,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.FilePermissions" />
+
+            
 
             
 
@@ -7727,14 +8741,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -7749,9 +8769,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
+
+            
 
             
 
@@ -7795,6 +8819,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7802,9 +8828,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7818,6 +8848,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7827,8 +8859,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7838,14 +8874,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.LockfCommand" />
+
+            
 
             
 
@@ -7889,6 +8931,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7896,9 +8940,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -7912,6 +8960,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -7921,8 +8971,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -7932,14 +8986,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.LockType" />
+
+            
 
             
 
@@ -7983,6 +9043,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -7990,9 +9052,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8006,6 +9072,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8015,8 +9083,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8026,14 +9098,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.MlockallFlags" />
+
+            
 
             
 
@@ -8046,14 +9124,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8068,9 +9152,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
+
+            
 
             
 
@@ -8114,6 +9202,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8121,9 +9211,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8137,6 +9231,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8146,8 +9242,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8157,14 +9257,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.MmapFlags" />
+
+            
 
             
 
@@ -8177,14 +9283,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8199,9 +9311,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
+
+            
 
             
 
@@ -8245,6 +9361,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8252,9 +9370,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8268,6 +9390,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8277,8 +9401,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8288,14 +9416,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.MmapProts" />
+
+            
 
             
 
@@ -8308,14 +9442,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8330,9 +9470,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
+
+            
 
             
 
@@ -8376,6 +9520,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8383,9 +9529,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8399,6 +9549,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8408,8 +9560,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8419,14 +9575,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.MountFlags" />
+
+            
 
             
 
@@ -8439,14 +9601,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8461,9 +9629,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
+
+            
 
             
 
@@ -8507,6 +9679,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8514,9 +9688,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8530,6 +9708,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8539,8 +9719,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8550,14 +9734,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.MremapFlags" />
+
+            
 
             
 
@@ -8570,14 +9760,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8592,9 +9788,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
+
+            
 
             
 
@@ -8638,6 +9838,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8645,9 +9847,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8661,6 +9867,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8670,8 +9878,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8681,14 +9893,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.MsyncFlags" />
+
+            
 
             
 
@@ -8701,14 +9919,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8723,9 +9947,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
+
+            
 
             
 
@@ -8769,6 +9997,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8776,9 +10006,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8792,6 +10026,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8801,8 +10037,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8812,14 +10052,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.OpenFlags" />
+
+            
 
             
 
@@ -8832,14 +10078,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -8854,9 +10106,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
+
+            
 
             
 
@@ -8900,6 +10156,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -8907,9 +10165,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -8923,6 +10185,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -8932,8 +10196,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -8943,14 +10211,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.PathconfName" />
+
+            
 
             
 
@@ -8994,6 +10268,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9001,9 +10277,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9017,6 +10297,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9026,8 +10308,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9037,14 +10323,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.PollEvents" />
+
+            
 
             
 
@@ -9057,14 +10349,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -9079,9 +10377,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
+
+            
 
             
 
@@ -9125,6 +10427,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9132,9 +10436,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9148,6 +10456,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9157,8 +10467,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9168,14 +10482,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
+
+            
 
             
 
@@ -9219,6 +10539,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9226,9 +10548,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9242,6 +10568,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9251,8 +10579,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9262,14 +10594,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
+
+            
 
             
 
@@ -9313,6 +10651,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9320,9 +10660,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9336,6 +10680,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9345,8 +10691,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9356,14 +10706,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.SeekFlags" />
+
+            
 
             
 
@@ -9407,6 +10763,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9414,9 +10772,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9430,6 +10792,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9439,8 +10803,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9450,14 +10818,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.Signum" />
+
+            
 
             
 
@@ -9501,6 +10875,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9508,9 +10884,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9524,6 +10904,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9533,8 +10915,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9544,14 +10930,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.SysconfName" />
+
+            
 
             
 
@@ -9595,6 +10987,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9602,9 +10996,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9618,6 +11016,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9627,8 +11027,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9638,14 +11042,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.SyslogFacility" />
+
+            
 
             
 
@@ -9689,6 +11099,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9696,9 +11108,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9712,6 +11128,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9721,8 +11139,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9732,14 +11154,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.SyslogLevel" />
+
+            
 
             
 
@@ -9783,6 +11211,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9790,9 +11220,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9806,6 +11240,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9815,8 +11251,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9826,14 +11266,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.SyslogOptions" />
+
+            
 
             
 
@@ -9846,14 +11292,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -9868,9 +11320,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
+
+            
 
             
 
@@ -9914,6 +11370,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -9921,9 +11379,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -9937,6 +11399,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -9946,8 +11410,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -9957,14 +11425,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.WaitOptions" />
+
+            
 
             
 
@@ -9977,14 +11451,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -9999,9 +11479,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
+
+            
 
             
 
@@ -10045,6 +11529,8 @@ class Test
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -10052,9 +11538,13 @@ class Test
 
           
 
+          
+
            if the conversion was successful; 
         otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -10068,6 +11558,8 @@ class Test
 
             
 
+            
+
             .</para
           >
           <para
@@ -10077,8 +11569,12 @@ class Test
 
             
 
+            
+
              into <paramref
              name="rval" />
+
+            
 
             
 
@@ -10088,14 +11584,20 @@ class Test
 
             
 
+            
+
              will contain a <c
             >0</c>
 
             
 
             
+
+            
         cast to a <see
              cref="T:Mono.Unix.Native.XattrFlags" />
+
+            
 
             
 
@@ -10108,14 +11610,20 @@ class Test
 
             
 
+            
+
             -marked enumeration <i
             >does not</i>
+
+            
 
             
 
              
         exist on the current platform.  As such, if <paramref
              name="value" />
+
+            
 
             
 
@@ -10130,9 +11638,13 @@ class Test
 
             
 
+            
+
              previously returned by 
         <see
              cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
+
+            
 
             
 

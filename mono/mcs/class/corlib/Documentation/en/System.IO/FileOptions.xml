@@ -32,6 +32,8 @@
 
         
 
+        
+
          object.</para
       >
     </summary>
@@ -124,6 +126,8 @@
           <para
             >Indicates that no additional options should be used when creating a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 

@@ -63,11 +63,15 @@
 
             
 
+            
+
              class using items.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -110,11 +114,15 @@
 
             
 
+            
+
              class using items.</para
           >
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,10 +192,14 @@
 
           
 
+          
+
           The key for the element added.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,6 +237,8 @@
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,6 +282,8 @@
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,6 +344,8 @@
 
           
 
+          
+
           The key to check for.</param
         >
       </Docs>
@@ -366,10 +384,14 @@
 
           
 
+          
+
           The destination array type to which the elements of the JsonObject are copied.</param
         >
         <param name="arrayIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -523,6 +545,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          is used to apply individual application settings properties and property groups to indicate that special, predefined services are to be provided for them. The <see
          cref="T:System.Configuration.SettingsManageability" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
              type="text/html">
               <a href="d3cca593-4521-408d-b323-ea398d226de3">Isolated Storage and Roaming</a>
             </format>
+
+            
 
             
 

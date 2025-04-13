@@ -29,8 +29,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqBindingBase" />
+
+            
 
             
 
@@ -105,6 +115,8 @@
 
             
 
+            
+
              must use the net.msmq scheme.</para
           >
           <para
@@ -113,8 +125,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.DeadLetterQueue.None" />
+
+            
 
             
 
@@ -123,8 +139,12 @@
 
             
 
+            
+
             , then <see
              cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+
+            
 
             
 
@@ -133,13 +153,19 @@
 
             
 
+            
+
              is not null, then <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
 
             
 
+            
+
              must be set to <see
              cref="F:System.ServiceModel.DeadLetterQueue.Custom" />
+
+            
 
             
 
@@ -181,6 +207,8 @@
 
                 
 
+                
+
                  is set to false.</para
               >
             </item>
@@ -191,6 +219,8 @@
 
                 
 
+                
+
                  is set to true.</para
               >
             </item>
@@ -198,6 +228,8 @@
               <para
                 >Custom: The queue specified in the <see
                  cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+
+                
 
                 
 
@@ -229,6 +261,8 @@
               <para
                 >The sender does not have the <see
                  cref="http://go.microsoft.com/fwlink/?LinkID=96167">access rights</see>
+
+                
 
                 
 
@@ -273,6 +307,8 @@
 
             
 
+            
+
              is set to true, the messages must be durable.</para
           >
         </remarks>
@@ -303,10 +339,14 @@
 
             
 
+            
+
              set to true must be sent to a transactional queue only.</para
           >
           <para>
             <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+
+            
 
             
 
@@ -318,8 +358,12 @@
 
             
 
+            
+
              to be false, the <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 
@@ -331,8 +375,12 @@
 
             
 
+            
+
              to be true, the <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 
@@ -387,13 +435,19 @@
 
             
 
+            
+
              property. If the application fails to access the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see
              cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" />
 
             
 
+            
+
              property. The <see
              cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" />
+
+            
 
             
 
@@ -432,8 +486,12 @@
 
             
 
+            
+
             , the listener is faulted and a <see
              cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+
+            
 
             
 
@@ -442,8 +500,12 @@
 
             
 
+            
+
              contains a <see
              cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" />
+
+            
 
             
 
@@ -455,6 +517,8 @@
 
             
 
+            
+
             , the poison message is dropped.</para
           >
           <para
@@ -463,11 +527,15 @@
 
             
 
+            
+
             , a negative acknowledgement is sent to the client and the poison message is removed from the queue. This option is available only on Message Queuing 4.0 and requires wv.</para
           >
           <para
             >When set to <see
              cref="F:System.ServiceModel.ReceiveErrorHandling.Move" />
+
+            
 
             
 
@@ -501,8 +569,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" />
+
+            
 
             
 
@@ -538,13 +610,19 @@
 
             
 
+            
+
              property. If the application fails to access the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see
              cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" />
 
             
 
+            
+
             . The number of retry cycles is specified by <see
              cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" />
+
+            
 
             
 
@@ -575,6 +653,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
+
+            
 
             
 
@@ -613,8 +693,12 @@
 
             
 
+            
+
              property is set to true when the <see
              cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+
+            
 
             
 
@@ -650,8 +734,12 @@
 
             
 
+            
+
              property is set to ensure that time-sensitive messages do not become stale before they are processed by the receiving applications. A message in a queue that is not accessed by the receiving application within the time interval specified is expired. Expired messages are sent to a special queue called the dead-letter queue. The location of the dead-letter queue is set with the <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 

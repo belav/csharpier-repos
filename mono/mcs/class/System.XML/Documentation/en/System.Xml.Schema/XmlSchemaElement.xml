@@ -33,6 +33,8 @@
 
         
 
+        
+
         . This class is the base class for all particle types and is used to describe an element in an XML document.</para
       >
     </summary>
@@ -59,6 +61,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -366,13 +370,19 @@
 
             
 
+            
+
              object representing the type of the element based on the <see
              cref="P:System.Xml.Schema.XmlSchemaElement.SchemaType" />
 
             
 
+            
+
              or <see
              cref="P:System.Xml.Schema.XmlSchemaElement.SchemaTypeName" />
+
+            
 
             
 
@@ -411,8 +421,12 @@
 
             
 
+            
+
              if the element has a built-in XML Schema type or <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+
+            
 
             
 
@@ -426,8 +440,12 @@
 
               
 
+              
+
                property is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see
                cref="P:System.Xml.Schema.XmlSchemaElement.ElementSchemaType" />
+
+              
 
               
 
@@ -443,8 +461,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -540,6 +562,8 @@
           <para
             >See also <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -858,6 +882,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.Xml.Schema.XmlSchemaElement.QualifiedName" />
+
+            
 
             
 

@@ -9,10 +9,14 @@
 
         
 
+        
+
          namespace contains classes used to read the values found in application configuration files under the <format
          type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec">system.xml.serialization</a>
         </format>
+
+        
 
         
 
@@ -31,6 +35,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -39,8 +45,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+        
 
         
 

@@ -28,13 +28,19 @@
 
         
 
+        
+
          is not able to complete a <see
          cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
         
 
+        
+
          or <see
          cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Initializes an empty instance of the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+            
 
             
 
@@ -98,8 +106,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -114,6 +126,8 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
@@ -122,8 +136,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -159,8 +177,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
+
+            
 
             
 
@@ -169,8 +191,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Net.Mail.SmtpFailedRecipientException.FailedRecipient" />
+
+            
 
             
 
@@ -185,6 +211,8 @@
 
             
 
+            
+
              class with the specified status code and e-mail address.</para
           >
         </summary>
@@ -193,8 +221,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Mail.SmtpStatusCode" />
+
+          
 
           
 
@@ -205,8 +237,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -244,8 +280,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+            
 
             
 
@@ -260,13 +300,19 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -304,6 +350,8 @@
 
             
 
+            
+
              class with the specified error message and inner exception.</para
           >
         </summary>
@@ -312,8 +360,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -321,6 +373,8 @@
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,8 +411,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
+
+            
 
             
 
@@ -367,8 +425,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Net.Mail.SmtpFailedRecipientException.FailedRecipient" />
+
+            
 
             
 
@@ -383,6 +445,8 @@
 
             
 
+            
+
              class with the specified status code, e-mail address, and server response.</para
           >
         </summary>
@@ -391,8 +455,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Mail.SmtpStatusCode" />
+
+          
 
           
 
@@ -403,8 +471,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -415,8 +487,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -454,6 +530,8 @@
 
             
 
+            
+
              class with the specified error message, e-mail address, and inner exception.</para
           >
         </summary>
@@ -462,8 +540,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -474,8 +556,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -483,6 +569,8 @@
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,6 +630,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -553,8 +643,12 @@
 
             
 
+            
+
              instance with the data that is needed to serialize the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+            
 
             
 
@@ -566,8 +660,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -578,8 +676,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -618,8 +720,12 @@
 
             
 
+            
+
              instance with the data that is needed to serialize the <see
              cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+            
 
             
 
@@ -631,13 +737,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            instance, which holds the serialized data for the <see
            cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+          
 
           
 
@@ -648,13 +760,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            instance that contains the destination of the serialized stream that is associated with the new <see
            cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+
+          
 
           
 

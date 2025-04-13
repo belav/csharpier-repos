@@ -32,8 +32,12 @@
 
         
 
+        
+
          and <unmanagedCodeEntityReference
         >IComparer&lt;XNode&gt;</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >We recommend that instead of using this class directly, you use the <see
          cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+
+        
 
         
 
@@ -74,6 +80,8 @@
 
             
 
+            
+
              method. This class is used internally by that method.</para
           >
         </remarks>
@@ -82,6 +90,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Linq.XNodeDocumentOrderComparer" />
+
+            
 
             
 
@@ -119,6 +129,8 @@
 
             
 
+            
+
              method. This class is used internally by that method.</para
           >
         </remarks>
@@ -134,8 +146,12 @@
 
             
 
+            
+
              that contains 0 if the nodes are equal; -1 if <paramref
              name="x" />
+
+            
 
             
 
@@ -144,13 +160,19 @@
 
             
 
+            
+
             ; 1 if <paramref
              name="x" />
 
             
 
+            
+
              is after <paramref
              name="y" />
+
+            
 
             
 
@@ -162,8 +184,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -174,8 +200,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -211,6 +241,8 @@
 
             
 
+            
+
              method. This class is used internally by that method. </para
           >
         </remarks>
@@ -226,8 +258,12 @@
 
             
 
+            
+
              that contains 0 if the nodes are equal; -1 if <paramref
              name="x" />
+
+            
 
             
 
@@ -236,13 +272,19 @@
 
             
 
+            
+
             ; 1 if <paramref
              name="x" />
 
             
 
+            
+
              is after <paramref
              name="y" />
+
+            
 
             
 

@@ -17,8 +17,12 @@ bool operator !=(object x, object y);
 
     
 
+    
+
      values or the value null; furthermore, they require that a standard implicit conversion (<hyperlink
     >13.3.1</hyperlink>
+
+    
 
     
 
@@ -35,6 +39,8 @@ bool operator !=(object x, object y);
   <paragraph
     >For an operation of the form x == y or x != y, if any applicable operator == or operator != exists, the operator overload resolution (<hyperlink
     >14.2.4</hyperlink>
+
+    
 
     
 
@@ -60,6 +66,8 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
         <![CDATA[
@@ -75,6 +83,8 @@ False
     <example
       >The s and t variables refer to two distinct string instances containing the same characters. The first comparison outputs True because the predefined string equality operator (<hyperlink
       >14.9.7</hyperlink>
+
+      
 
       
 
@@ -99,8 +109,12 @@ class Test
 
       
 
+      
+
       outputs False because the casts create references to two separate instances of boxed <keyword
       >int</keyword>
+
+      
 
       
 

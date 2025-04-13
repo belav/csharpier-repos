@@ -30,8 +30,12 @@
 
         
 
+        
+
          class provides a collection of options. Each of these option collections has an indexer that enables it to be further filtered. Each option collection contains its own set of options, as well as a rollup of all of its child options. In the event of a naming conflict between properties, the outermost options object takes precedence. The following <ui
         >Tools | Options</ui>
+
+        
 
         
 
@@ -63,8 +67,12 @@
 
         
 
+        
+
          named service, to get to the value of the <see
          cref="P:System.Windows.Forms.Design.ParentControlDesigner.GridSize" />
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
         
 
+        
+
          to another page. Also, <see
          cref="T:System.ComponentModel.Design.IDesignerOptionService" />
+
+        
 
         
 
@@ -90,8 +102,12 @@
 
         
 
+        
+
          class addresses these issues. You can query collections, and there is a type converter defined on the <see
          cref="T:System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection" />
+
+        
 
         
 
@@ -123,6 +139,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.DesignerOptionService" />
+
+            
 
             
 
@@ -290,6 +308,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -298,10 +318,14 @@
 
           
 
+          
+
           The page to which the option is bound.</param
         >
         <param name="valueName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,6 +366,8 @@
 
           
 
+          
+
           The page to which the option is bound</param
         >
         <param name="valueName">
@@ -349,10 +375,14 @@
 
           
 
+          
+
           The name of the option value.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

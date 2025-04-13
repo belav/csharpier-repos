@@ -26,8 +26,12 @@
 
         
 
+        
+
          property retrieves the rectangular area that represents the portion of the page between the margins. The <see
          cref="P:System.Drawing.Printing.PrintPageEventArgs.PageBounds" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          property defines the graphics object with which to do the painting. The <see
          cref="P:System.Drawing.Printing.PrintPageEventArgs.PageSettings" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -62,6 +74,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -101,8 +117,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -113,10 +133,14 @@
 
           
 
+          
+
           The area between the margins. </param
         >
         <param name="pageBounds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,8 +151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Printing.PageSettings" />
+
+          
 
           
 
@@ -174,6 +202,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 

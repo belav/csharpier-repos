@@ -25,13 +25,19 @@
 
         
 
+        
+
          event is raised when the value of the <see
          cref="P:System.Windows.Forms.DataGridView.AutoSizeColumnsMode" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -53,6 +61,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnsModeChanged" />
+
+        
 
         
 
@@ -84,6 +94,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -92,13 +104,19 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" />
 
           
 
+          
+
            values representing the previous <see
            cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+
+          
 
           
 
@@ -127,6 +145,8 @@
           <para
             >Gets an array of the previous values of the column <see
              cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+
+            
 
             
 

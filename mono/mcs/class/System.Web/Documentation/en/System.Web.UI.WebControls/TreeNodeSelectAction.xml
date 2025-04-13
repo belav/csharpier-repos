@@ -18,8 +18,12 @@
 
         
 
+        
+
          property for a <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          property is set to an empty string, clicking the node causes a postback. The <see
          cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
          event is raised. No events are raised if the <see
          cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+        
 
         
 
@@ -52,13 +64,19 @@
 
           
 
+          
+
            property is not rendered for a node with its <see
            cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
 
           
 
+          
+
            property set to the <see
            cref="F:System.Web.UI.WebControls.TreeNodeSelectAction.None" />
+
+          
 
           
 
@@ -71,6 +89,8 @@
       <para
         >Represents the event or events to raise when a node in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -92,6 +112,8 @@
           <para
             >Raises the <see
              cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+
+            
 
             
 
@@ -136,6 +158,8 @@
 
             
 
+            
+
              event when a node is selected.</para
           >
         </summary>
@@ -160,8 +184,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+
+            
 
             
 

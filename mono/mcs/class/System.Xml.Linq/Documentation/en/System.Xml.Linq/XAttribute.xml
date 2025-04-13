@@ -23,8 +23,12 @@
 
         
 
+        
+
          contains a list of the attributes for that element. Attributes must have a qualified name that is unique to the element. Attributes are not derived from <see
          cref="T:System.Xml.Linq.XNode" />
+
+        
 
         
 
@@ -36,11 +40,15 @@
 
         
 
+        
+
         , they are returned in the order that they were added to the element, and are not sorted.</para
       >
       <para
         >Technically, in XML, namespace declarations are not attributes proper. However, this distinction is not normally made by many XML programmers. Instead, because namespace declarations have exactly the same XML syntax as attributes, most XML programmers think of namespaces as attributes. To simplify the sqltecxlinq programming interface, namespaces are represented in the XML tree as attributes. Such namespace attributes impact serialization of an XML tree. When serializing, sqltecxlinq attempts to serialize with the namespace prefix specified in namespace attributes. You can use the <see
          cref="P:System.Xml.Linq.XAttribute.IsNamespaceDeclaration" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          class derives from <see
          cref="T:System.Xml.Linq.XObject" />
+
+        
 
         
 
@@ -65,10 +77,14 @@
 
         
 
+        
+
          methods can be used from XAML. For more information, see <format
          type="text/html">
           <a href="0455f47c-4a68-4f2e-a3f8-dd1d85b99012">LINQ to XML Dynamic Properties</a>
         </format>
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
             
 
+            
+
              class from another <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -123,8 +143,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XAttribute" />
+
+          
 
           
 
@@ -158,8 +182,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the first parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -174,8 +202,12 @@
 
             
 
+            
+
              and a string to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -193,6 +225,8 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
             .</para
           >
           <para>These same approaches will work for Visual Basic, however XML literals provide a better approach for creating XML trees.</para>
@@ -202,8 +236,12 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              parameter can be a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -212,8 +250,12 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
             , or <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -222,8 +264,12 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              or <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -238,6 +284,8 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              class from the specified name and value. </para
           >
         </summary>
@@ -246,8 +294,12 @@ XElement root = new XElement(aw + "Root",
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -258,8 +310,12 @@ XElement root = new XElement(aw + "Root",
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -290,6 +346,8 @@ XElement root = new XElement(aw + "Root",
           <para
             >This property is typically used by class implementers when writing a method that returns a collection of attributes. If the method needs to return an empty collection of attributes, it could use this property to get an empty collection of <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -375,6 +433,8 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
             , they are returned in the order that they were added, and are not sorted. When you request the next attribute through this property, this property returns the attribute that was added after this attribute.</para
           >
           <para>If this attribute does not have a parent, or if there is no next attribute, then this property returns null.</para>
@@ -411,13 +471,19 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -1231,6 +1297,8 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
             , they are returned in the order that they were added, and are not sorted. When you request the previous attribute through this property, this property returns the attribute that was added before this attribute.</para
           >
           <para>If this attribute does not have a parent, or if this attribute is the first attribute, then this property returns null.</para>
@@ -1240,13 +1308,19 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              class stores its attributes as a singly-linked list of <see
              cref="T:System.Xml.Linq.XAttribute" />
 
             
 
+            
+
              objects. This means that the <see
              cref="P:System.Xml.Linq.XAttribute.PreviousAttribute" />
+
+            
 
             
 
@@ -1283,8 +1357,12 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              using the <see
              cref="M:System.Linq.Enumerable.ToList``1(System.Collections.Generic.IEnumerable{``0})" />
+
+            
 
             
 
@@ -1297,11 +1375,15 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
             .</para
           >
           <para
             >Alternatively, if you want to remove a set of attributes, it is recommended that you use the <see
              cref="M:System.Xml.Linq.Extensions.Remove(System.Collections.Generic.IEnumerable{System.Xml.Linq.XAttribute})" />
+
+            
 
             
 
@@ -1339,6 +1421,8 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              property.</para
           >
           <para
@@ -1347,13 +1431,19 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
             , such as <see
              cref="T:System.Xml.Linq.XElement" />
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -1365,8 +1455,12 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1379,6 +1473,8 @@ XElement root = new XElement(aw + "Root",
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1411,6 +1507,8 @@ XElement root = new XElement(aw + "Root",
 
               
 
+              
+
                contains control character, an exception is thrown with a message like: hexadecimal value 0x0B, is an invalid character.</para
             >
           </block>
@@ -1423,6 +1521,8 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              object to a string representation.</para
           >
         </summary>
@@ -1431,6 +1531,8 @@ XElement root = new XElement(aw + "Root",
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1460,8 +1562,12 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1473,13 +1579,19 @@ XElement root = new XElement(aw + "Root",
 
             
 
+            
+
              of <see
              cref="T:System.Int32" />
 
             
 
+            
+
             . If the attribute does not exist, then the nullable type is set to null. Before using this property, you must make sure that the <see
              cref="M:System.Xml.Linq.XElement.Attribute(System.Xml.Linq.XName)" />
+
+            
 
             
 

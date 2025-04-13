@@ -28,6 +28,8 @@
 
         
 
+        
+
          class except that the data encrypted is always a key value. </para
       >
     </remarks>
@@ -59,6 +61,8 @@
 
             
 
+            
+
              class. For more information on XML encryption standards, see the XML Encryption Syntax and Processing document at http://www.w3.org/TR/xmlenc-core/.</para
           >
         </remarks>
@@ -67,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -105,13 +111,19 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -127,13 +139,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
+          
+
            object to add to the <see
            cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
+
+          
 
           
 
@@ -171,13 +189,19 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -193,13 +217,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
+          
+
            object to add to the <see
            cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
+
+          
 
           
 
@@ -260,6 +290,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -268,6 +300,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -306,6 +340,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -318,8 +354,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 

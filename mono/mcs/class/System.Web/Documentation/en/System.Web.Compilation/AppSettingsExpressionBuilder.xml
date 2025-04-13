@@ -33,6 +33,8 @@
 
         
 
+        
+
          class provides access to values in the &lt;appSettings&gt; section of the Web.config file. The &lt;appSettings&gt; section of the Web.config file contains application-specific values in key/value pairs. </para
       >
       <para>An application value is retrieved by assigning an expression of the form</para>
@@ -47,6 +49,8 @@
 
         
 
+        
+
          class to handle the expression. </para
       >
       <para
@@ -55,8 +59,12 @@
 
         
 
+        
+
          object generates code to retrieve the specified value from the Web.config file. This code is executed during the execution of the generated page class. If the expression is encountered in a page that will not be compiled, the <see
          cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+
+        
 
         
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+
+            
 
             
 
@@ -117,8 +127,12 @@
 
             
 
+            
+
              by calling the <see
              cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.GetAppSetting(System.String,System.Type,System.String)" />
+
+            
 
             
 
@@ -127,8 +141,12 @@
 
             
 
+            
+
              property as the <paramref
              name="key" />
+
+            
 
             
 
@@ -137,8 +155,12 @@
 
             
 
+            
+
              property on the <see
              cref="P:System.Web.UI.PropertyEntry.PropertyInfo" />
+
+            
 
             
 
@@ -147,8 +169,12 @@
 
             
 
+            
+
              parameter, and the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -157,8 +183,12 @@
 
             
 
+            
+
              parameter as the <paramref
              name="targetType" />
+
+            
 
             
 
@@ -177,11 +207,15 @@
 
             
 
+            
+
              associated with a key in the &lt;appSettings&gt; section of the Web.config file.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,10 +226,14 @@
 
           
 
+          
+
           The property to which the expression is bound..</param
         >
         <param name="parsedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,10 +242,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,13 +279,19 @@
 
             
 
+            
+
              property with the key as the index. The <see
              cref="T:System.Object" />
 
             
 
+            
+
              returned is of the type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -262,11 +310,15 @@
 
             
 
+            
+
              associated with the key in the &lt;appSettings&gt; section of the Web.config file.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,13 +353,19 @@
 
             
 
+            
+
              property with the key as the index. The resulting string value is converted to a new type based on the <paramref
              name="targetType" />
 
             
 
+            
+
              and <paramref
              name="propertyName" />
+
+            
 
             
 
@@ -326,11 +384,15 @@
 
             
 
+            
+
              associated with the key in the &lt;appSettings&gt; section of the Web.config file.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,10 +403,14 @@
 
           
 
+          
+
           The type of the object that contains the property entry.</param
         >
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +445,8 @@
 
             
 
+            
+
              object represents the code expression to add to the property assignment in the generated page class.</para
           >
         </remarks>
@@ -394,11 +462,15 @@
 
             
 
+            
+
              that is used in the property assignment.</para
           >
         </returns>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,8 +481,12 @@
 
           
 
+          
+
           The object that represents parsed data as returned by <see
            cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+
+          
 
           
 
@@ -418,6 +494,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +523,12 @@
 
             
 
+            
+
              property indicates whether the <see
              cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -455,8 +537,12 @@
 
             
 
+            
+
              must be implemented within an expression builder for an expression to be evaluated in a page that is not compiled. The <see
              cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+
+            
 
             
 

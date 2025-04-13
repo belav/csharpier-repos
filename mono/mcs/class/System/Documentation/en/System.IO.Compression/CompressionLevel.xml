@@ -21,6 +21,8 @@
 
         
 
+        
+
          enumeration to indicate which factor is more important in your development scenario: the time to complete the compression operation or the size of the compressed file. These values do not correspond to specific compression levels; the object that implements compression determines how to handle them.</para
       >
       <para
@@ -29,8 +31,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.Compression.GZipStream" />
+
+        
 
         
 
@@ -39,13 +45,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.Compression.ZipFile" />
 
         
 
+        
+
         , and <see
          cref="T:System.IO.Compression.ZipFileExtensions" />
+
+        
 
         
 

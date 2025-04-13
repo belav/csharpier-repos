@@ -28,6 +28,8 @@
 
         
 
+        
+
          at a specific URL.</para
       >
       <para
@@ -36,8 +38,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.DiscoverAny(System.String)" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          property. At that point, only that document is downloaded and verified to point to valid information about XML Web services. However, the references contained in that document are not verified at this stage. Instead they are added to the <see
          cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+        
 
         
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+        
 
         
 
@@ -66,8 +80,12 @@
 
         
 
+        
+
          property. Last, if a client wants to save the discovery results to disk, invoke the <see
          cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.WriteAll(System.String,System.String)" />
+
+        
 
         
 
@@ -80,6 +98,8 @@
             >[&lt;topic://cpgrfwebservicesdiscoverytooldiscoexe&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -104,6 +124,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+
+            
 
             
 
@@ -139,8 +161,12 @@
 
             
 
+            
+
              property primarily contains SOAP bindings, represented by the <see
              cref="T:System.Web.Services.Discovery.SoapBinding" />
+
+            
 
             
 
@@ -178,8 +204,12 @@
 
             
 
+            
+
              method expects that the supplied URL is a discovery document. If the URL refers to a service description or an XML schema an exception is thrown. To discover an XML schema or a service description invoke the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.DiscoverAny(System.String)" />
+
+            
 
             
 
@@ -191,8 +221,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -201,13 +235,19 @@
 
             
 
+            
+
              collection, but not verified to point to valid discovery documents. To verify the references, point to valid discovery documents to invoke the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
 
             
 
+            
+
              or <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -226,11 +266,15 @@
 
             
 
+            
+
              containing the results of XML Web services discovery at the supplied URL.</para
           >
         </returns>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,8 +307,12 @@
 
             
 
+            
+
              method discovers whether the supplied URL is a discovery document, service description or XSD schema. If it is known that the URL only refers to a discovery document, the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.Discover(System.String)" />
+
+            
 
             
 
@@ -276,8 +324,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -286,8 +338,12 @@
 
             
 
+            
+
              is created in memory and added to the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+
+            
 
             
 
@@ -296,8 +352,12 @@
 
             
 
+            
+
              collections. Additionally, references within the discovery document are added to the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -306,8 +366,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -326,8 +390,12 @@
 
             
 
+            
+
              containing the results of XML Web services discovery at the supplied URL. If the <paramref
              name="url" />
+
+            
 
             
 
@@ -336,11 +404,15 @@
 
             
 
+            
+
              is created in memory for it.</para
           >
         </returns>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,8 +443,12 @@
 
             
 
+            
+
              collection is populated during invocations to the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.Discover(System.String)" />
+
+            
 
             
 
@@ -381,13 +457,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
 
             
 
+            
+
              and <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -396,8 +478,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.DiscoverAny(System.String)" />
+
+            
 
             
 
@@ -406,8 +492,12 @@
 
             
 
+            
+
              collection. During invocations to the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+
+            
 
             
 
@@ -416,13 +506,19 @@
 
             
 
+            
+
              methods, valid discovery document references in the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
 
             
 
+            
+
              collection are added to the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+
+            
 
             
 
@@ -518,8 +614,12 @@
 
             
 
+            
+
              collection is populated with exceptions that occurred during invocations to the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.Discover(System.String)" />
+
+            
 
             
 
@@ -528,8 +628,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+
+            
 
             
 
@@ -538,8 +642,12 @@
 
             
 
+            
+
              methods. The <see
              cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+            
 
             
 
@@ -585,6 +693,8 @@
 
             
 
+            
+
              object to load any external references.</para
           >
         </summary>
@@ -611,11 +721,15 @@
 
             
 
+            
+
              method or Disco.exe.</para
           >
           <para
             >The <paramref
              name="topLevelFilename" />
+
+            
 
             
 
@@ -630,8 +744,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -646,8 +764,12 @@
 
             
 
+            
+
              containing the results found in the file with the map of saved discovery documents. The file format is a <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol.DiscoveryClientResultsFile" />
+
+            
 
             
 
@@ -656,11 +778,15 @@
 
             
 
+            
+
              method or Disco.exe.</para
           >
         </returns>
         <param name="topLevelFilename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,8 +817,12 @@
 
             
 
+            
+
              collection is populated during invocations to the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.Discover(System.String)" />
+
+            
 
             
 
@@ -701,13 +831,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
 
             
 
+            
+
              and <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -716,8 +852,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.DiscoverAny(System.String)" />
+
+            
 
             
 
@@ -726,8 +866,12 @@
 
             
 
+            
+
              collection together with references found in the discovery document. References added during invocations to the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.Discover(System.String)" />
+
+            
 
             
 
@@ -736,8 +880,12 @@
 
             
 
+            
+
              methods are not necessarily valid discovery documents. During invocations to <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+
+            
 
             
 
@@ -746,13 +894,19 @@
 
             
 
+            
+
              references within the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
 
             
 
+            
+
              collection are verified as being valid discovery documents. If they are valid and contain references, they are also added to the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -784,8 +938,12 @@
 
             
 
+            
+
              resolves all valid references it finds and places them in the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+
+            
 
             
 
@@ -794,8 +952,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -804,8 +966,12 @@
 
             
 
+            
+
              property. However, the two methods differ in how they handle discovery documents. <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -814,8 +980,12 @@
 
             
 
+            
+
              property; if a discovery document contains references to other discovery documents, <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -824,13 +994,19 @@
 
             
 
+            
+
             ; whereas <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
 
             
 
+            
+
              resolves them all. <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+
+            
 
             
 
@@ -842,8 +1018,12 @@
 
             
 
+            
+
              are not thrown at the time of occurrence, but rather collected and added to the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Errors" />
+
+            
 
             
 
@@ -855,6 +1035,8 @@
           <para
             >Resolves all references to discovery documents, XML Schema Definition (XSD) schemas, and service descriptions in the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -882,8 +1064,12 @@
 
             
 
+            
+
              resolves all valid references it finds and places them in the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+
+            
 
             
 
@@ -892,8 +1078,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -902,8 +1092,12 @@
 
             
 
+            
+
              property. However, the two methods differ in how they handle discovery documents. <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -912,8 +1106,12 @@
 
             
 
+            
+
              property. If a discovery document contains references to other discovery documents, <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveOneLevel" />
+
+            
 
             
 
@@ -922,13 +1120,19 @@
 
             
 
+            
+
             ; whereas <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
 
             
 
+            
+
              resolve them all. <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+
+            
 
             
 
@@ -940,8 +1144,12 @@
 
             
 
+            
+
              are not thrown at the time of occurrence, but rather collected and added to the <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Errors" />
+
+            
 
             
 
@@ -953,6 +1161,8 @@
           <para
             >Resolves all references to discovery documents, XML Schema Definition (XSD) schemas and service descriptions in <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+
+            
 
             
 
@@ -987,8 +1197,12 @@
 
             
 
+            
+
              parameter in the directory specified by the directory parameter contains a map of saved discovery documents, XML Schema Definition (XSD) schemas and service descriptions. This file can be read in using the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ReadAll(System.String)" />
+
+            
 
             
 
@@ -997,13 +1211,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
             
 
+            
+
              properties. The format of the file is XML containing an serialized version of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol.DiscoveryClientResultsFile" />
+
+            
 
             
 
@@ -1015,8 +1235,12 @@
 
             
 
+            
+
              parameter in the <paramref
              name="directory" />
+
+            
 
             
 
@@ -1025,8 +1249,12 @@
 
             
 
+            
+
              method. The <paramref
              name="topLevelFilename" />
+
+            
 
             
 
@@ -1041,6 +1269,8 @@
 
             
 
+            
+
              property to the supplied directory and creates a file in that directory.</para
           >
         </summary>
@@ -1052,6 +1282,8 @@
 
             
 
+            
+
              containing the results of all files saved.</para
           >
         </returns>
@@ -1060,8 +1292,12 @@
 
           
 
+          
+
           The directory in which to save all documents currently in the <see
            cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+
+          
 
           
 
@@ -1069,6 +1305,8 @@
         >
         <param name="topLevelFilename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          object associates an <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          object can have many <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          queries each of the associated <see
          cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
          object is responsible for processing messages from a <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+        
 
         
 
@@ -68,8 +84,12 @@
 
         
 
+        
+
          property and the message action matches the <see
          cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ContractFilter" />
+
+        
 
         
 
@@ -81,8 +101,12 @@
 
         
 
+        
+
          object. In addition to the <see
          cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+        
 
         
 
@@ -91,8 +115,12 @@
 
         
 
+        
+
          objects, the <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -101,8 +129,12 @@
 
         
 
+        
+
         , the associated and <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -140,6 +172,8 @@
 
             
 
+            
+
              class from the provided listener, with system-provided default timeouts.</para
           >
         </remarks>
@@ -151,6 +185,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -159,8 +195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+          
 
           
 
@@ -194,6 +234,8 @@
 
             
 
+            
+
              class from the provided listener and binding, with system-provided default timeouts.</para
           >
         </remarks>
@@ -205,6 +247,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -213,8 +257,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+          
 
           
 
@@ -222,6 +270,8 @@
         >
         <param name="bindingName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,6 +306,8 @@
 
             
 
+            
+
              class from the provided listener and binding, with the specified default timeouts.</para
           >
         </remarks>
@@ -267,6 +319,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -275,8 +329,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+          
 
           
 
@@ -287,6 +345,8 @@
 
           
 
+          
+
           The name of the binding used to configure the service.</param
         >
         <param name="timeouts">
@@ -294,8 +354,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+
+          
 
           
 
@@ -331,8 +395,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -348,8 +416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -409,6 +481,8 @@
 
             
 
+            
+
              objects that you can use to inspect and add state to channels when they are first created.</para
           >
         </summary>
@@ -465,6 +539,8 @@
 
             
 
+            
+
             . Otherwise, a service model default value of 1 minute is used.</para
           >
         </remarks>
@@ -497,6 +573,8 @@
           <para
             >This default open timeout can be set using <see
              cref="M:System.ServiceModel.Dispatcher.ChannelDispatcher.#ctor(System.ServiceModel.Channels.IChannelListener,System.String,System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -537,8 +615,12 @@
 
             
 
+            
+
              can only be detached when the instance of the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -547,11 +629,15 @@
 
             
 
+            
+
              state, as this is the only state that is both mutable and not disposed.</para
           >
           <para
             >Sets the <see
              cref="T:System.ServiceModel.ServiceHostBase" />
+
+            
 
             
 
@@ -567,8 +653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -602,8 +692,12 @@
 
             
 
+            
+
              has a distinct <see
              cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+            
 
             
 
@@ -612,6 +706,8 @@
           <para
             >Use the <see
              cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+            
 
             
 
@@ -651,6 +747,8 @@
 
             
 
+            
+
              objects that can be used to insert custom error handling functionality for an endpoint.</para
           >
         </summary>
@@ -682,13 +780,19 @@
 
             
 
+            
+
              object can have many <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
             
 
+            
+
              objects, each associated with a different <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+            
 
             
 
@@ -727,8 +831,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -780,13 +888,19 @@
 
             
 
+            
+
              property can only be set when the instance of the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -825,8 +939,12 @@
 
             
 
+            
+
              associates an <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+            
 
             
 
@@ -859,8 +977,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -869,6 +991,8 @@
           <para
             >Set the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ManualAddressing" />
+
+            
 
             
 
@@ -901,13 +1025,19 @@
 
             
 
+            
+
              property can only be set when the instance of the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -947,8 +1077,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -1018,6 +1152,8 @@
 
             
 
+            
+
              that references the asynchronous operation to close a channel listener for the dispatcher. </para
           >
         </returns>
@@ -1026,8 +1162,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1038,8 +1178,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1047,6 +1191,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1092,6 +1238,8 @@
 
             
 
+            
+
              that references the asynchronous operation to open a channel listener for the dispatcher. </para
           >
         </returns>
@@ -1100,8 +1248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1112,8 +1264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1121,6 +1277,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1155,8 +1313,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1216,13 +1378,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Dispatcher.ChannelDispatcher.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1260,13 +1428,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Dispatcher.ChannelDispatcher.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1304,8 +1478,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1383,13 +1561,19 @@
 
             
 
+            
+
             , indigo1 assigns the value of the <see
              cref="P:System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously" />
 
             
 
+            
+
              property to this property. So if this value is true, the false default value of <see
              cref="P:System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously" />
+
+            
 
             
 
@@ -1401,8 +1585,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -1442,8 +1630,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -1482,6 +1674,8 @@
 
             
 
+            
+
              property to get or set the default isolation level for new transactions created by the dispatcher for the service.</para
           >
           <para
@@ -1490,8 +1684,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -1527,8 +1725,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 

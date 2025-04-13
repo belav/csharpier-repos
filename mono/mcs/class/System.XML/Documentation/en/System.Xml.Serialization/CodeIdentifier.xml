@@ -26,6 +26,8 @@
 
         
 
+        
+
          class are used by the XML serialization infrastructure while producing .NET Framework types from XML element and data type definitions. XML element or attribute names typically provide the methods' input text.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          class directly from your code. Instead, use the various tools and APIs provided by the .NET Framework for XML serialization, such as the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -43,6 +49,8 @@
          type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
+
+        
 
         
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -116,6 +126,8 @@
 
             
 
+            
+
              method converts the initial character from an upper-case to lower-case letter, if necessary.</para
           >
           <para>You do not need to call this method directly.</para>
@@ -130,6 +142,8 @@
         </returns>
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +178,8 @@
 
             
 
+            
+
              method converts the initial character from a lower-case to upper-case letter, if necessary.</para
           >
           <para>You do not need to call this method directly.</para>
@@ -178,6 +194,8 @@
         </returns>
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -212,6 +230,8 @@
 
             
 
+            
+
              method removes any characters that cannot appear in a code identifier. It returns the string "Item" if no characters are valid. It prefixes the string "Item" to an input that begins with an invalid start character, for example, a digit, or a currency symbol.</para
           >
           <para>You do not need to call this method directly.</para>
@@ -226,6 +246,8 @@
         </returns>
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.DataView.DataViewManager" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.DataView.RowStateFilter" />
+
+        
 
         
 
@@ -48,13 +56,19 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Data.DataView.Table" />
 
         
 
+        
+
          for DataViews created from the <see
          cref="T:System.Data.DataViewManager" />
+
+        
 
         
 
@@ -103,8 +117,12 @@
 
             
 
+            
+
              that contains this <see
              cref="T:System.Data.DataViewSetting" />
+
+            
 
             
 
@@ -140,8 +158,12 @@
 
             
 
+            
+
             . See <see
              cref="P:System.Data.DataView.RowFilter" />
+
+            
 
             
 
@@ -174,6 +196,8 @@
 
             
 
+            
+
              is DataViewRowState.CurrentRows.</para
           >
         </remarks>
@@ -182,6 +206,8 @@
           <para
             >Gets or sets a value indicating whether to display Current, Deleted, Modified Current, ModifiedOriginal, New, Original, Unchanged, or no rows in the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -210,8 +236,12 @@
 
             
 
+            
+
              can have two defaults based on the value of <see
              cref="P:System.Data.DataView.RowFilter" />
+
+            
 
             
 
@@ -220,13 +250,19 @@
 
             
 
+            
+
              is null or empty (that is, the value is not explicitly specified), the <see
              cref="T:System.Data.DataRowView" />
 
             
 
+            
+
              in the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -235,8 +271,12 @@
 
             
 
+            
+
              in the <see
              cref="P:System.Data.DataTable.Rows" />
+
+            
 
             
 
@@ -245,8 +285,12 @@
 
             
 
+            
+
              default, an empty string, causes a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -255,13 +299,19 @@
 
             
 
+            
+
              to be sorted on the position or ordinal of <see
              cref="T:System.Data.DataRow" />
 
             
 
+            
+
              in the <see
              cref="P:System.Data.DataTable.Rows" />
+
+            
 
             
 
@@ -273,6 +323,8 @@
           <para
             >Gets or sets a value indicating the sort to apply in the <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -302,8 +354,12 @@
 
             
 
+            
+
              to which the <see
              cref="T:System.Data.DataViewSetting" />
+
+            
 
             
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          binding. You can then use this object to reference all of the various security settings related to the <see
          cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          class encapsulates the MSMQ security features available when using the <see
          cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
+
+            
 
             
 
@@ -111,6 +121,8 @@
 
             
 
+            
+
              instance encapsulates the SOAP message security settings.</para
           >
         </remarks>
@@ -122,8 +134,12 @@
 
             
 
+            
+
              instance that is associated with the <see
              cref="T:System.ServiceModel.NetMsmqBinding" />
+
+            
 
             
 
@@ -181,8 +197,12 @@
 
             
 
+            
+
              instance that is associated with the <see
              cref="T:System.ServiceModel.NetMsmqBinding" />
+
+            
 
             
 
@@ -248,8 +268,12 @@
 
             
 
+            
+
              element that is associated with the <see
              cref="T:System.ServiceModel.NetMsmqBinding" />
+
+            
 
             
 

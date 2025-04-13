@@ -35,6 +35,8 @@
 
         
 
+        
+
          value that is used.</para
       >
       <para
@@ -43,8 +45,12 @@
 
         
 
+        
+
          attribute is used only for declarative security. For imperative security, use the <see
          cref="T:System.Security.Permissions.StorePermission" />
+
+        
 
         
 
@@ -56,6 +62,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.StorePermission" />
+
+        
 
         
 
@@ -92,6 +100,8 @@
 
             
 
+            
+
              class with the specified security action.</para
           >
         </summary>
@@ -100,8 +110,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -166,6 +180,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -174,6 +190,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.StorePermission" />
+
+            
 
             
 
@@ -201,6 +219,8 @@
           <para
             >New stores are created by calling the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" />
+
+            
 
             
 
@@ -232,6 +252,8 @@
           <para
             >This functionality is not exposed by the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+            
 
             
 
@@ -290,6 +312,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -330,8 +354,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />
+
+            
 
             
 
@@ -340,8 +368,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.Permissions.StorePermissionFlags.AllFlags" />
+
+            
 
             
 

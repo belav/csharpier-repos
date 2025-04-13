@@ -18,8 +18,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" />
+
+        
 
         
 
@@ -29,6 +33,8 @@
       <para
         >If an application depends on the presence of a particular time zone and the attempt to retrieve it throws a <see
          cref="T:System.TimeZoneNotFoundException" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
             
 
+            
+
              method to deserialize a saved <see
              cref="T:System.TimeZoneInfo" />
+
+            
 
             
 
@@ -57,6 +67,8 @@
 
             
 
+            
+
              method to create a time zone.</para
           >
         </item>
@@ -67,8 +79,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
             
 
+            
+
              class. This constructor initializes the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -110,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.TimeZoneNotFoundException" />
+
+            
 
             
 
@@ -136,8 +158,12 @@
 
             
 
+            
+
              string is assigned to the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -152,11 +178,15 @@
 
             
 
+            
+
              class with the specified message string.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,8 +217,12 @@
 
             
 
+            
+
              object. Instead, it is called by the <see
              cref="T:System.Runtime.Serialization.IFormatter" />
+
+            
 
             
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              method when deserializing the <see
              cref="T:System.TimeZoneNotFoundException" />
+
+            
 
             
 
@@ -213,11 +251,15 @@
 
             
 
+            
+
              class from serialized data.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,8 +290,12 @@
 
             
 
+            
+
              overload to handle an exception in a try…catch block. The <paramref
              name="innerException" />
+
+            
 
             
 
@@ -258,8 +304,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -271,8 +321,12 @@
 
             
 
+            
+
              string is assigned to the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -287,11 +341,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

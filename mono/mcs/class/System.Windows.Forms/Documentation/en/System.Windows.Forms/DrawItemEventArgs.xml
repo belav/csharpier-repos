@@ -19,8 +19,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
             
 
+            
+
              class for the specified control with the specified font, state, surface to draw on, and the bounds to draw within.</para
           >
         </summary>
@@ -74,8 +84,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -86,13 +100,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to use, usually the parent control's <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -103,8 +123,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -115,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+          
 
           
 
@@ -127,8 +155,12 @@
 
           
 
+          
+
           The control's <see
            cref="T:System.Windows.Forms.DrawItemState" />
+
+          
 
           
 
@@ -165,6 +197,8 @@
 
             
 
+            
+
              class for the specified control with the specified font, state, foreground color, background color, surface to draw on, and the bounds to draw within.</para
           >
         </summary>
@@ -173,8 +207,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -185,13 +223,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
           
 
+          
+
            to use, usually the parent control's <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -202,8 +246,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -214,8 +262,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+          
 
           
 
@@ -226,8 +278,12 @@
 
           
 
+          
+
           The control's <see
            cref="T:System.Windows.Forms.DrawItemState" />
+
+          
 
           
 
@@ -238,8 +294,12 @@
 
           
 
+          
+
           The foreground <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -250,8 +310,12 @@
 
           
 
+          
+
           The background <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -279,8 +343,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.DrawItemEventArgs.BackColor" />
+
+            
 
             
 
@@ -289,8 +357,12 @@
 
             
 
+            
+
             . If the item's state is not <see
              cref="F:System.Windows.Forms.DrawItemState.Selected" />
+
+            
 
             
 
@@ -299,8 +371,12 @@
 
             
 
+            
+
              property is set to <see
              cref="P:System.Drawing.SystemColors.Window" />
+
+            
 
             
 
@@ -352,6 +428,8 @@
 
             
 
+            
+
             , the background is drawn with the text highlighted.</para
           >
         </remarks>
@@ -360,6 +438,8 @@
           <para
             >Draws the background within the bounds specified in the <see
              cref="Overload:System.Windows.Forms.DrawItemEventArgs.#ctor" />
+
+            
 
             
 
@@ -388,6 +468,8 @@
 
             
 
+            
+
             , the focus rectangle is drawn.</para
           >
         </remarks>
@@ -396,6 +478,8 @@
           <para
             >Draws a focus rectangle within the bounds specified in the <see
              cref="Overload:System.Windows.Forms.DrawItemEventArgs.#ctor" />
+
+            
 
             
 
@@ -424,8 +508,12 @@
 
             
 
+            
+
             , usually the <see
              cref="P:System.Windows.Forms.Control.Font" />
+
+            
 
             
 
@@ -458,8 +546,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.DrawItemEventArgs.ForeColor" />
+
+            
 
             
 
@@ -468,8 +560,12 @@
 
             
 
+            
+
             . If the item's state is not <see
              cref="F:System.Windows.Forms.DrawItemState.Selected" />
+
+            
 
             
 
@@ -478,8 +574,12 @@
 
             
 
+            
+
              property is set to <see
              cref="P:System.Drawing.SystemColors.WindowText" />
+
+            
 
             
 
@@ -531,8 +631,12 @@
 
             
 
+            
+
              value of the item being drawn in the <see
              cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+            
 
             
 
@@ -565,6 +669,8 @@
           <para
             >This property value can be a combination of the <see
              cref="T:System.Windows.Forms.DrawItemState" />
+
+            
 
             
 

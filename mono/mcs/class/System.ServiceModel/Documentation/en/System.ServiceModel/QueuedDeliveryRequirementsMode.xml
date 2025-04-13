@@ -24,6 +24,8 @@
 
         
 
+        
+
          attribute. When applied to a class, it allows the developer to specify whether the class can be used with a message queuing binding.   </para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.QueuedDeliveryRequirementsMode" />
+
+        
 
         
 

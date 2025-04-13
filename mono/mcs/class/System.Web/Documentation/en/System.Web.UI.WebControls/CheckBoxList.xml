@@ -79,13 +79,19 @@
 
         
 
+        
+
          control provides a multi selection check box group that can be dynamically generated with data binding. It contains an <see
          cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
         
 
+        
+
          collection with members corresponding to individual items in the list. To determine which items are checked, iterate through the collection and test the <see
          cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+        
 
         
 
@@ -98,13 +104,19 @@
 
           
 
+          
+
            controls. The <see
            cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
           
 
+          
+
            control is easier for creating a set of check boxes using data binding, while the individual <see
            cref="T:System.Web.UI.WebControls.CheckBox" />
+
+          
 
           
 
@@ -123,13 +135,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatDirection" />
 
         
 
+        
+
          properties. For information about layout options, see the <see
          cref="T:System.Web.UI.WebControls.RepeatLayout" />
+
+        
 
         
 
@@ -141,13 +159,19 @@
 
         
 
+        
+
          is set to RepeatDirection.Vertical. Setting this property to RepeatDirection.Horizontal renders the list horizontally. Some <see
          cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
         
 
+        
+
          settings do not allow horizontal layout. For more information, see the <see
          cref="T:System.Web.UI.WebControls.RepeatLayout" />
+
+        
 
         
 
@@ -165,8 +189,12 @@
 
         
 
+        
+
          control, place a ListItem element for each entry between the opening and closing tags of the <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -178,8 +206,12 @@
 
         
 
+        
+
          control also supports data binding. To bind the control to a data source, first create a data source, such as one of the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -188,8 +220,12 @@
 
         
 
+        
+
          method to bind the data source to the <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -198,13 +234,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.ListControl.DataValueField" />
 
         
 
+        
+
          properties to specify which field in the data source to bind to the Text and Value properties of each list item in the control, respectively. The <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -216,13 +258,19 @@
 
         
 
+        
+
          control, iterate through the <see
          cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
         
 
+        
+
          collection and test the <see
          cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+        
 
         
 
@@ -237,6 +285,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -246,12 +296,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -274,10 +328,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -297,9 +355,13 @@
 
         
 
+        
+
         "
     AutoPostBack="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -311,11 +373,15 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -334,9 +400,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -346,9 +416,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -358,10 +432,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -373,9 +451,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -398,9 +480,13 @@
 
         
 
+        
+
         "
     RepeatLayout="<codeFeaturedElement
         >Table</codeFeaturedElement>
+
+        
 
         
 
@@ -416,11 +502,15 @@
 
         
 
+        
+
         "
     ToolTip="string"
     ValidationGroup="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -433,9 +523,13 @@
 
         
 
+        
+
         |False"
                 Selected="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -466,6 +560,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -474,6 +570,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -503,6 +601,8 @@
 
             
 
+            
+
              control.</para
           >
           <para
@@ -511,8 +611,12 @@
 
             
 
+            
+
              control. The resulting cell size is applied uniformly to all cells in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -548,6 +652,8 @@
           <para
             >Use this property to control the spacing between individual cells in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -588,8 +694,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -604,6 +714,8 @@
 
             
 
+            
+
              control to implement all style related properties.</para
           >
         </summary>
@@ -612,6 +724,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -646,8 +760,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -659,8 +777,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
+
+            
 
             
 
@@ -669,8 +791,12 @@
 
             
 
+            
+
              class. You should not override this version of the <see
              cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
+
+            
 
             
 
@@ -685,8 +811,12 @@
 
             
 
+            
+
              method always returns the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -701,6 +831,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -709,10 +841,14 @@
 
           
 
+          
+
           The identifier for the control to find.</param
         >
         <param name="pathOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -749,8 +885,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -762,13 +902,19 @@
 
             
 
+            
+
              control applies to all list items that are contained by the control. Use the <see
              cref="T:System.Web.UI.WebControls.Style" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -787,6 +933,8 @@
 
             
 
+            
+
              control.</para
           >
         </returns>
@@ -795,8 +943,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -804,6 +956,8 @@
         >
         <param name="repeatIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -830,8 +984,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -840,13 +998,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+
+            
 
             
 
@@ -858,6 +1022,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -885,8 +1051,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -895,13 +1065,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+
+            
 
             
 
@@ -913,6 +1089,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -940,8 +1118,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -950,13 +1132,19 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+
+            
 
             
 
@@ -968,6 +1156,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1004,8 +1194,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1017,8 +1211,12 @@
 
             
 
+            
+
              method indicates whether the state of the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1027,8 +1225,12 @@
 
             
 
+            
+
              value as the last posted value. A user selecting or clearing an item in the control changes the <see
              cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+            
 
             
 
@@ -1037,8 +1239,12 @@
 
             
 
+            
+
              object in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -1047,13 +1253,19 @@
 
             
 
+            
+
              control. If the same list items are selected in the control, or if the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              is disabled, <see
              cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -1065,8 +1277,12 @@
 
             
 
+            
+
              method returns true for a control, the page framework invokes the <see
              cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -1081,6 +1297,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1092,6 +1310,8 @@
 
             
 
+            
+
              is different from the last posting; otherwise, false.</para
           >
         </returns>
@@ -1100,13 +1320,19 @@
 
           
 
+          
+
           The key identifier for the control, used to index the <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
+          
+
            specified in the <paramref
            name="postCollection" />
+
+          
 
           
 
@@ -1117,8 +1343,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -1144,8 +1374,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1154,8 +1388,12 @@
 
             
 
+            
+
              method allows derived classes to handle the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -1167,8 +1405,12 @@
 
             
 
+            
+
              method performs any necessary prerendering steps prior to saving view state and rendering content for the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1177,8 +1419,12 @@
 
             
 
+            
+
              control are initialized for rendering using the current <see
              cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
+
+            
 
             
 
@@ -1187,8 +1433,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+
+            
 
             
 
@@ -1203,6 +1453,8 @@
 
             
 
+            
+
              control prior to rendering on the client.</para
           >
         </summary>
@@ -1211,8 +1463,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1243,8 +1499,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1256,8 +1516,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1266,8 +1530,12 @@
 
             
 
+            
+
              method indicates that the state of the list items have changed in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1276,8 +1544,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1286,8 +1558,12 @@
 
             
 
+            
+
              event. Control developers can override the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1299,8 +1575,12 @@
 
             
 
+            
+
              method can optionally perform validation before raising the <see
              cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+
+            
 
             
 
@@ -1309,8 +1589,12 @@
 
             
 
+            
+
              is selected, set the <see
              cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
+
+            
 
             
 
@@ -1319,8 +1603,12 @@
 
             
 
+            
+
              properties to true, and specify the group of controls to validate in the <see
              cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+
+            
 
             
 
@@ -1332,6 +1620,8 @@
           <para
             >Notifies the ASP.NET application that the state of the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1361,8 +1651,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1374,8 +1668,12 @@
 
             
 
+            
+
              implementation for a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1384,13 +1682,19 @@
 
             
 
+            
+
              object for the list, and calls the <see
              cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
 
             
 
+            
+
              method, which in turn uses the <see
              cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1405,6 +1709,8 @@
 
             
 
+            
+
              on the client.</para
           >
         </summary>
@@ -1413,8 +1719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1453,6 +1763,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -1461,8 +1773,12 @@
 
             
 
+            
+
              implementation for a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1471,8 +1787,12 @@
 
             
 
+            
+
              method, which in turn uses the <see
              cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1484,8 +1804,12 @@
 
             
 
+            
+
              method for a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1494,8 +1818,12 @@
 
             
 
+            
+
              and <paramref
              name="repeatInfo" />
+
+            
 
             
 
@@ -1504,8 +1832,12 @@
 
             
 
+            
+
              value is used to select the checkbox list item in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -1520,6 +1852,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1528,8 +1862,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -1540,6 +1878,8 @@
 
           
 
+          
+
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
@@ -1547,8 +1887,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+          
 
           
 
@@ -1559,8 +1903,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1585,8 +1933,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -1595,8 +1947,12 @@
 
             
 
+            
+
              control. If this property is not set, the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1608,6 +1964,8 @@
           <para
             >Gets or sets the number of columns to display in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1645,12 +2003,16 @@
 
             
 
+            
+
              control.</para
           >
           <block subset="none" type="note">
             <para
               >The number of columns that are displayed is always determined by the <see
                cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
+
+              
 
               
 
@@ -1663,8 +2025,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -1673,8 +2039,12 @@
 
             
 
+            
+
              property is set to 3, the items in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1721,8 +2091,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -1731,8 +2105,12 @@
 
             
 
+            
+
              property is set to 3, the items of the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1808,8 +2186,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1821,8 +2203,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
+
+            
 
             
 
@@ -1831,8 +2217,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
+
+            
 
             
 
@@ -1841,8 +2231,12 @@
 
             
 
+            
+
              property on the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -1854,6 +2248,8 @@
           <para
             >Gets the number of list items in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1882,6 +2278,8 @@
 
             
 
+            
+
              enumeration. </para
           >
           <block subset="none" type="note">
@@ -1891,8 +2289,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
+
+              
 
               
 
@@ -1905,8 +2307,12 @@
 
             
 
+            
+
              settings do not allow horizontal layout. For more information, see the <see
              cref="T:System.Web.UI.WebControls.RepeatLayout" />
+
+            
 
             
 
@@ -1957,8 +2363,12 @@
 
             
 
+            
+
              method to process posted data for a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1970,13 +2380,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1988,6 +2404,8 @@
           <para
             >Processes posted data for the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2003,8 +2421,12 @@
 
           
 
+          
+
           The key identifier for the control, used to index the <paramref
            name="postCollection" />
+
+          
 
           
 
@@ -2015,8 +2437,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -2047,8 +2473,12 @@
 
             
 
+            
+
              method to raise an event when the posted data for a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2060,13 +2490,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -2105,8 +2541,12 @@
 
             
 
+            
+
              method to retrieve the style of an item in a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2118,13 +2558,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2139,6 +2585,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2150,6 +2598,8 @@
 
             
 
+            
+
              object that represents the style of the specified item type at the specified index in the list control.</para
           >
         </returns>
@@ -2158,8 +2608,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -2167,6 +2621,8 @@
         >
         <param name="repeatIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2197,8 +2653,12 @@
 
             
 
+            
+
              property to determine if a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2210,13 +2670,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2252,8 +2718,12 @@
 
             
 
+            
+
              property to determine a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2265,13 +2735,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2307,8 +2783,12 @@
 
             
 
+            
+
              property to determine whether a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2320,13 +2800,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2367,8 +2853,12 @@
 
             
 
+            
+
              method to render items in a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2380,13 +2870,19 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2401,6 +2897,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2409,8 +2907,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -2421,6 +2923,8 @@
 
           
 
+          
+
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
@@ -2428,8 +2932,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+          
 
           
 
@@ -2440,8 +2948,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -2472,8 +2984,12 @@
 
             
 
+            
+
              property to determine the number of items in a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -2485,13 +3001,19 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 

@@ -44,8 +44,12 @@
 
             
 
+            
+
              class with the specified coordinates of the mouse pointer and the upper left corner of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 
@@ -57,10 +61,14 @@
 
           
 
+          
+
           The X coordinate of the mouse pointer in client coordinates. </param
         >
         <param name="mouseCursorY">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -71,8 +79,12 @@
 
           
 
+          
+
           The X coordinate of the upper left corner of the <see
            cref="T:System.Windows.Forms.SplitContainer" />
+
+          
 
           
 
@@ -83,8 +95,12 @@
 
           
 
+          
+
           The Y coordinate of the upper left corner of the <see
            cref="T:System.Windows.Forms.SplitContainer" />
+
+          
 
           
 
@@ -151,6 +167,8 @@
 
             
 
+            
+
              in client coordinates.</para
           >
         </summary>
@@ -174,6 +192,8 @@
           <para
             >Gets or sets the Y coordinate of the upper left corner of the <see
              cref="T:System.Windows.Forms.SplitContainer" />
+
+            
 
             
 

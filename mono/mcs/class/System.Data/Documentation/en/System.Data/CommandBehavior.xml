@@ -26,13 +26,19 @@
 
         
 
+        
+
          values are used by the <see
          cref="M:System.Data.IDbCommand.ExecuteReader" />
 
         
 
+        
+
          method of <see
          cref="T:System.Data.IDbCommand" />
+
+        
 
         
 
@@ -44,13 +50,19 @@
 
         
 
+        
+
          is ignored when used to define a <see
          cref="T:System.Data.Sql.SqlNotificationRequest" />
 
         
 
+        
+
          or <see
          cref="T:System.Data.SqlClient.SqlDependency" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
           
 
+          
+
            to retrieve large values and binary data. Otherwise, an <see
            cref="T:System.OutOfMemoryException" />
+
+          
 
           
 
@@ -114,6 +130,8 @@
 
             
 
+            
+
              flags, so calling ExecuteReader(CommandBehavior.Default) is functionally equivalent to calling ExecuteReader().</para
           >
         </summary>
@@ -139,11 +157,15 @@
 
             
 
+            
+
              is used for command execution, the provider will append extra columns to the result set for existing primary key and timestamp columns. </para
           >
           <para
             >When using <see
              cref="F:System.Data.CommandBehavior.KeyInfo" />
+
+            
 
             
 
@@ -177,6 +199,8 @@
 
             
 
+            
+
             , the .NET Framework Data Provider for SQL Server precedes the statement being executed with SET FMTONLY ON.</para
           >
         </summary>
@@ -202,8 +226,12 @@
 
             
 
+            
+
             , you can reread the current column value until reading past it. When using the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -256,8 +284,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
+
+            
 
             
 
@@ -266,8 +298,12 @@
 
             
 
+            
+
              object, the .NET Framework Data Provider for OLE DB performs binding using the OLE DB IRow interface if it is available. Otherwise, it uses the IRowset interface. If your SQL statement is expected to return only a single row, specifying <see
              cref="F:System.Data.CommandBehavior.SingleRow" />
+
+            
 
             
 

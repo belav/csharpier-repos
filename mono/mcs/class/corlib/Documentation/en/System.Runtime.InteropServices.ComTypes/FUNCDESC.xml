@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -246,6 +248,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -322,6 +326,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -349,6 +355,8 @@
           <para
             >Indicates the <see
              cref="T:System.Runtime.InteropServices.FUNCFLAGS" />
+
+            
 
             
 

@@ -44,8 +44,12 @@
 
         
 
+        
+
          interface is the base interface for nongeneric collections of key/value pairs. For the generic version of this interface, see <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 
@@ -57,11 +61,15 @@
 
         
 
+        
+
          object.</para
       >
       <para
         >Each pair must have a unique key. Implementations can vary in whether they allow the key to be null.  The value can be null and does not have to be unique. The <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          implementations fall into three categories: read-only, fixed-size, variable-size. A read-only <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
         
 
+        
+
          object does not allow the addition or removal of elements, but does allow the modification of existing elements. A variable-size <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          object is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -141,8 +161,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -163,13 +187,19 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the dictionary (for example, myCollection["myNonexistentKey"] = myValue). However, if the specified key already exists in the dictionary, setting the <see
              cref="P:System.Collections.IDictionary.Item(System.Object)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -185,6 +215,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -193,8 +225,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -205,8 +241,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -249,6 +289,8 @@
 
             
 
+            
+
              is read-only. </para
           >
         </exception>
@@ -257,6 +299,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -294,8 +338,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -310,8 +358,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -320,8 +372,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -330,13 +386,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -351,6 +413,8 @@
 
             
 
+            
+
              object contains an element with the specified key.</para
           >
         </summary>
@@ -362,6 +426,8 @@
 
             
 
+            
+
              contains an element with the key; otherwise, false.</para
           >
         </returns>
@@ -370,8 +436,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -415,8 +485,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -425,8 +499,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -437,8 +515,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -447,13 +529,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -465,8 +553,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -475,8 +567,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -485,8 +581,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -495,8 +595,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -513,8 +617,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -529,8 +637,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -564,10 +676,14 @@
 
             
 
+            
+
              if the
    current instance has a fixed size;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -584,6 +700,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -617,10 +735,14 @@
 
             
 
+            
+
              if the
    current instance is read-only; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -636,6 +758,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -681,6 +805,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -696,8 +822,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -709,6 +839,8 @@
           <para
             >The property is set, <paramref
              name="key" />
+
+            
 
             
 
@@ -746,6 +878,8 @@
 
             
 
+            
+
              containing the keys of the current
    instance.</para
           >
@@ -758,13 +892,19 @@
 
             
 
+            
+
              object is unspecified, but is guaranteed to be the same order as the corresponding values in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.IDictionary.Values" />
+
+            
 
             
 
@@ -779,8 +919,12 @@
 
             
 
+            
+
              object containing the keys of the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -818,8 +962,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -836,8 +984,12 @@
 
             
 
+            
+
              object does not contain an element with the specified key, the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -852,11 +1004,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -896,6 +1052,8 @@
 
             
 
+            
+
              containing the values in the current
    instance.</para
           >
@@ -908,13 +1066,19 @@
 
             
 
+            
+
              object is unspecified, but is guaranteed to be the same order as the corresponding keys in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.IDictionary.Keys" />
+
+            
 
             
 
@@ -929,8 +1093,12 @@
 
             
 
+            
+
              object containing the values in the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

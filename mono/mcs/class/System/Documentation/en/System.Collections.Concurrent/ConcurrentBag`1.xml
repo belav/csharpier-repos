@@ -47,10 +47,14 @@
 
         
 
+        
+
          is a thread-safe bag implementation, optimized for scenarios where the same thread will be both producing and consuming data stored in the bag. </para
       >
       <para>
         <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
          cref="http://blogs.msdn.com/b/pfxteam/archive/2010/01/26/9953725.aspx"
           >FAQ: Are all of the new concurrent collections lock-free?</see
         >
+
+        
 
         
 
@@ -91,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+
+            
 
             
 
@@ -191,6 +199,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -222,6 +232,8 @@
 
             
 
+            
+
              was called. The enumerator is safe to use concurrently with reads from and writes to the bag.</para
           >
         </remarks>
@@ -233,6 +245,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -241,6 +255,8 @@
           <para
             >An enumerator for the contents of the <see
              cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+
+            
 
             
 
@@ -267,6 +283,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+
+            
 
             
 
@@ -328,13 +346,19 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -346,8 +370,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -356,8 +384,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -368,8 +400,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -401,6 +437,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -436,6 +474,8 @@
 
             
 
+            
+
             . This property is not supported.</para
           >
         </summary>
@@ -467,6 +507,8 @@
 
             
 
+            
+
              was called.</para
           >
         </remarks>
@@ -478,6 +520,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -486,6 +530,8 @@
           <para
             >An enumerator for the contents of the <see
              cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+
+            
 
             
 
@@ -518,6 +564,8 @@
 
             
 
+            
+
              elements to a new array.</para
           >
         </summary>
@@ -526,6 +574,8 @@
           <para
             >A new array containing a snapshot of elements copied from the <see
              cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+
+            
 
             
 

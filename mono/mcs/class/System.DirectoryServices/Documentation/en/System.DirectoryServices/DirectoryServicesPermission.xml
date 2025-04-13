@@ -91,6 +91,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -119,6 +121,8 @@
 
             
 
+            
+
              class with the specified permission access level entries.</para
           >
         </summary>
@@ -141,6 +145,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+
+            
 
             
 
@@ -173,11 +179,15 @@
 
             
 
+            
+
              class with the specified access levels and specified path to an Active Directory Domain Services node.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -214,8 +224,12 @@
 
         
 
+        
+
          class allows you to control code access security permissions for <see
          cref="N:System.DirectoryServices" />
+
+        
 
         
 

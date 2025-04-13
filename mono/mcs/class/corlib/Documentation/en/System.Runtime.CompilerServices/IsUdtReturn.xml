@@ -24,6 +24,8 @@
 
         
 
+        
+
          modifier is used by the C++ compiler to mark return types of methods that have native C++ object return semantics.  The managed debugger recognizes this modifier to correctly determine that the native calling convention is in use.</para
       >
       <para>Compilers emit custom modifiers within metadata to change the way that the just-in-time (JIT) compiler handles values when the default behavior is not appropriate.  When the JIT compiler encounters a custom modifier, it handles the value in the way that the modifier specifies.  Compilers can apply custom modifiers to methods, parameters, and return values.  The JIT compiler must respond to required modifiers but can ignore optional modifiers.  </para>
@@ -36,8 +38,12 @@
 
             
 
+            
+
              class such as <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -46,13 +52,19 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
+
+            
 
             
 
@@ -65,6 +77,8 @@
              type="text/html">
               <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (Ilasm.exe)</a>
             </format>
+
+            
 
             
 

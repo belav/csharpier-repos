@@ -34,8 +34,12 @@
 
         
 
+        
+
          attribute to configure or extend the execution behavior of a callback contract implementation in a client application. This attribute performs the same function for the callback class as the <see
          cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          must be applied to the class that implements the callback contract. If applied to a non-duplex contract implementation an <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
           
 
+          
+
            attribute for the callback operation implementations. However, if <see
            cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+          
 
           
 
@@ -71,13 +83,19 @@
 
           
 
+          
+
            property must be <see
            cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
           
 
+          
+
            or an <see
            cref="T:System.InvalidOperationException" />
+
+          
 
           
 
@@ -93,6 +111,8 @@
 
             
 
+            
+
              property automatically closes the session when the channel is closed and the callback has finished processing any remaining messages.</para
           >
         </item>
@@ -100,6 +120,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.CallbackBehaviorAttribute.ConcurrencyMode" />
+
+            
 
             
 
@@ -113,6 +135,8 @@
 
             
 
+            
+
              property enables the runtime to ignore extra serialization information that is not required to process the message.</para
           >
         </item>
@@ -120,6 +144,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -133,6 +159,8 @@
 
             
 
+            
+
              property limits on the number of items in an object graph that are serialized.</para
           >
         </item>
@@ -140,6 +168,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.CallbackBehaviorAttribute.TransactionIsolationLevel" />
+
+            
 
             
 
@@ -153,6 +183,8 @@
 
             
 
+            
+
              property specifies the time period within which a transaction must complete or it aborts.</para
           >
         </item>
@@ -163,8 +195,12 @@
 
             
 
+            
+
              property indicates whether to synchronize inbound method calls automatically using the current <see
              cref="T:System.Threading.SynchronizationContext" />
+
+            
 
             
 
@@ -175,6 +211,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
+
+            
 
             
 
@@ -209,6 +247,8 @@
 
             
 
+            
+
              are:</para
           >
           <list type="bullet">
@@ -216,6 +256,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
+
+                
 
                 
 
@@ -229,8 +271,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+                
 
                 
 
@@ -244,6 +290,8 @@
 
                 
 
+                
+
                  property is false.</para
               >
             </item>
@@ -253,12 +301,16 @@
 
                 
 
+                
+
                  is false.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.UseSynchronizationContext" />
+
+                
 
                 
 
@@ -272,6 +324,8 @@
 
                 
 
+                
+
                  property is true.</para
               >
             </item>
@@ -282,6 +336,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
+
+            
 
             
 
@@ -307,6 +363,8 @@
           <para
             >By default, when a service closes a duplex session and the callback has finished processing any remaining messages, the callback closes the session. Setting <see
              cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
+
+            
 
             
 
@@ -346,8 +404,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+            
 
             
 
@@ -356,10 +418,14 @@
 
             
 
+            
+
              means that service objects can be executed by multiple threads at any one time. In this case, you must ensure thread safety and state consistency.</para
           >
           <para>
             <see cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
+
+            
 
             
 
@@ -372,8 +438,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+            
 
             
 
@@ -385,12 +455,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                 >Sessions, Instancing, and Concurrency</a
               >
             </format>
+
+            
 
             
 
@@ -423,8 +497,12 @@
 
             
 
+            
+
              interface, it stores any extra data it does not know about that comes over the wire when deserializing into that type. For example, if a type Person has members FirstName and LastName, and an element called PhoneNumber comes in, it is stored. When later serializing the type, PhoneNumber is re-emitted. The problem is that the schema for Person exported by that service only has FirstName and LastName, so indigo1 generates a schema-invalid instance. If strict schema compliance is important, you can set <see
              cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
+
+            
 
             
 
@@ -436,6 +514,8 @@
 
             
 
+            
+
              setting, indigo2 always processes known data (both in and out) and does not throw exceptions when extra data comes in.</para
           >
           <para
@@ -443,6 +523,8 @@
              type="text/html">
               <a href="4073feda-1857-4be4-9947-227afb847ced">&lt;callbackDebug&gt;</a>
             </format>
+
+            
 
             
 
@@ -481,8 +563,12 @@
 
             
 
+            
+
              to true to enable exception information to flow back to services for debugging purposes when possible. This is a development-only feature and should not be employed in deployed services. These faults appear to the calling service as <see
              cref="T:System.ServiceModel.FaultException" />
+
+            
 
             
 
@@ -492,6 +578,8 @@
             <para
               >Setting <see
                cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
+
+              
 
               
 
@@ -507,8 +595,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -537,10 +629,14 @@
 
             
 
+            
+
              property set a limit on the number of items in an object graph that are serialized. You can also use the <format
              type="text/html">
               <a href="a47513a4-a96c-4350-8586-daacb05dee71">&lt;dataContractSerializer&gt;</a>
             </format>
+
+            
 
             
 
@@ -588,6 +684,8 @@
 
           
 
+          
+
           The collection of binding parameters that are configured.</param
         >
       </Docs>
@@ -621,6 +719,8 @@
         </summary>
         <param name="serviceEndpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,11 +759,15 @@
 
             
 
+            
+
              method. This implementation has no effect.</para
           >
         </summary>
         <param name="serviceEndpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -701,6 +805,8 @@
 
           
 
+          
+
           The endpoint to be validated.</param
         >
       </Docs>
@@ -728,6 +834,8 @@
           <para
             >The isolation level in which your transaction runs determines how data is treated when changes are made in other transactions and how long your transaction must hold locks to protect against these changes. For example, the default value, <see
              cref="F:System.Transactions.IsolationLevel.Unspecified" />
+
+            
 
             
 
@@ -782,6 +890,8 @@
 
             
 
+            
+
              is set to true, synchronizes all calls to the service to run on the user interface thread. </para
           >
           <para
@@ -790,13 +900,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.ServiceModel.DuplexClientBase`1.CreateChannel" />
 
             
 
+            
+
              is called. In the case of an Windows Forms application, this means that these calls should occur after a call to the <see
              cref="M:System.Windows.Forms.Application.Run" />
+
+            
 
             
 
@@ -829,8 +945,12 @@
 
             
 
+            
+
              property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see
              cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+            
 
             
 

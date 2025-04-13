@@ -40,6 +40,8 @@
 
         
 
+        
+
          interface. A root designer typically manages the background view in designer view mode, and usually displays the controls within the base container of the current design time project.</para
       >
     </remarks>
@@ -79,6 +81,8 @@
 
             
 
+            
+
             , because there can be a variety of different user interface technologies. Development environments typically support more than one technology.</para
           >
           <block subset="none" type="note">
@@ -88,13 +92,19 @@
 
               
 
+              
+
                and <see
                cref="F:System.ComponentModel.Design.ViewTechnology.WindowsForms" />
 
               
 
+              
+
                fields are obsolete. Use <see
                cref="F:System.ComponentModel.Design.ViewTechnology.Default" />
+
+              
 
               
 
@@ -115,8 +125,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ViewTechnology" />
+
+          
 
           
 
@@ -152,6 +166,8 @@
 
             
 
+            
+
              enumeration indicates the supported view technologies.</para
           >
           <block subset="none" type="note">
@@ -161,13 +177,19 @@
 
               
 
+              
+
                and <see
                cref="F:System.ComponentModel.Design.ViewTechnology.WindowsForms" />
 
               
 
+              
+
                fields are obsolete. Use <see
                cref="F:System.ComponentModel.Design.ViewTechnology.Default" />
+
+              
 
               
 

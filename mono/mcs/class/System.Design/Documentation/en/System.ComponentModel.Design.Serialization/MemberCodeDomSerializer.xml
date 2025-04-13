@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a "meta" serializer; that is, is a serializer that does not serialize part of the object graph, but instead serializes a reflection primitive within the object graph. For example, a <see
          cref="T:System.ComponentModel.Design.Serialization.MemberCodeDomSerializer" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          in order for it to serialize a property. <see
          cref="T:System.ComponentModel.Design.Serialization.MemberCodeDomSerializer" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          classes, <see
          cref="T:System.ComponentModel.Design.Serialization.MemberCodeDomSerializer" />
+
+        
 
         
 
@@ -75,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.MemberCodeDomSerializer" />
+
+            
 
             
 
@@ -118,10 +132,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,10 +150,14 @@
 
           
 
+          
+
           The descriptor of the member to serialize.</param
         >
         <param name="statements">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,8 +166,12 @@
 
           
 
+          
+
            into which <paramref
            name="descriptor" />
+
+          
 
           
 
@@ -190,11 +216,15 @@
 
             
 
+            
+
              should be serialized; otherwise, false.</para
           >
         </returns>
         <param name="manager">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,10 +235,14 @@
 
           
 
+          
+
           The object to which the member is bound.</param
         >
         <param name="descriptor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

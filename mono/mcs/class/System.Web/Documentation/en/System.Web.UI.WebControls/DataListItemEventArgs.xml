@@ -25,8 +25,12 @@
 
         
 
+        
+
          event is raised when an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          event is raised when an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DataListItemEventArgs.#ctor(System.Web.UI.WebControls.DataListItem)" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
+
+        
 
         
 
@@ -77,13 +91,19 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.DataList.ItemDataBound" />
 
         
 
+        
+
          events of a <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -111,11 +131,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DataListItemEventArgs" />
+
+            
 
             
 
@@ -143,6 +167,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -157,6 +183,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -165,13 +193,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataListItem" />
 
           
 
+          
+
            object that represents an item in the <see
            cref="T:System.Web.UI.WebControls.DataList" />
+
+          
 
           
 
@@ -202,8 +236,12 @@
 
             
 
+            
+
              control are referenced as each item is created or bound to the control. Use this property to programmatically access the referenced item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -212,8 +250,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Web.UI.WebControls.DataList.ItemDataBound" />
+
+            
 
             
 
@@ -225,6 +267,8 @@
           <para
             >Gets the referenced item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 

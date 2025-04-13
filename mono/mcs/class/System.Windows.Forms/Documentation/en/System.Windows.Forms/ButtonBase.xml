@@ -22,8 +22,12 @@
 
         
 
+        
+
         . To create your own button class, inherit from the <see
          cref="T:System.Windows.Forms.Button" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Forms.RadioButton" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          properties. The image can be aligned on the button control by setting the <see
          cref="P:System.Windows.Forms.ButtonBase.ImageAlign" />
+
+        
 
         
 
@@ -65,8 +81,12 @@
 
         
 
+        
+
          displayed on the button control, set the <see
          cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+
+        
 
         
 
@@ -78,13 +98,19 @@
 
         
 
+        
+
          property determines the style and appearance of the control. If the <see
          cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
+        
+
          property is set to <see
          cref="F:System.Windows.Forms.FlatStyle.System" />
+
+        
 
         
 
@@ -108,6 +134,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ButtonBase" />
+
+            
 
             
 
@@ -150,8 +178,12 @@
 
             
 
+            
+
              to true to display text that extends beyond the width of the control when the user passes over the control with the mouse. You must set the control's AutoSize property to false if you want <see
              cref="P:System.Windows.Forms.ButtonBase.AutoEllipsis" />
+
+            
 
             
 
@@ -221,6 +253,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -229,6 +263,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ButtonBase.AutoSize" />
+
+            
 
             
 
@@ -317,8 +353,12 @@
 
             
 
+            
+
              class, this property always returns the Disable value of <see
              cref="T:System.Windows.Forms.ImeMode" />
+
+            
 
             
 
@@ -372,8 +412,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -382,8 +426,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -395,8 +443,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ButtonBase" />
+
+            
 
             
 
@@ -411,11 +463,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -455,8 +511,12 @@
 
             
 
+            
+
              property only with <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -465,8 +525,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.FlatStyle.Flat" />
+
+            
 
             
 
@@ -509,8 +573,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -519,8 +587,12 @@
 
             
 
+            
+
              classes is set to System, the control is drawn by the user's operating system and the check alignment is based upon the CheckAlign and <see
              cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+
+            
 
             
 
@@ -529,13 +601,19 @@
 
             
 
+            
+
              control with a CheckAlign property value of ContentAlignment. MiddleCenter, a <see
              cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
 
             
 
+            
+
              property value of ContentAlignment.TopRight, and the <see
              cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+
+            
 
             
 
@@ -548,8 +626,12 @@
 
               
 
+              
+
                property is set to FlatStyle.System, any images assigned to the <see
                cref="P:System.Windows.Forms.ButtonBase.Image" />
+
+              
 
               
 
@@ -591,8 +673,12 @@
 
             
 
+            
+
              differs by control. The <see
              cref="P:System.Windows.Forms.Control.LayoutEngine" />
+
+            
 
             
 
@@ -601,13 +687,19 @@
 
             
 
+            
+
              parameter, but <paramref
              name="proposedSize" />
 
             
 
+            
+
              should decrease as the constraint decreases. For example, GetPreferredSize(new Size(100, 0)) should not be wider than GetPreferredSize(new Size(200, 0)). The exception is a <paramref
              name="proposedSize" />
+
+            
 
             
 
@@ -626,11 +718,15 @@
 
             
 
+            
+
              representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="proposedSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,13 +755,19 @@
 
             
 
+            
+
              property is set, the <see
              cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
             
 
+            
+
              property will be set to null, and the <see
              cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+            
 
             
 
@@ -678,8 +780,12 @@
 
               
 
+              
+
                property is set to FlatStyle.System, any images assigned to the <see
                cref="P:System.Windows.Forms.ButtonBase.Image" />
+
+              
 
               
 
@@ -760,13 +866,19 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
             
 
+            
+
              properties are set, the <see
              cref="P:System.Windows.Forms.ButtonBase.Image" />
+
+            
 
             
 
@@ -779,8 +891,12 @@
 
               
 
+              
+
                property value is changed to null, the <see
                cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+              
 
               
 
@@ -789,8 +905,12 @@
 
               
 
+              
+
                value is retained internally and used when another <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -799,8 +919,12 @@
 
               
 
+              
+
                property. If the new <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -809,8 +933,12 @@
 
               
 
+              
+
                property has an <see
                cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
+
+              
 
               
 
@@ -819,8 +947,12 @@
 
               
 
+              
+
                property minus one (to account for the collection being a zero-based index), the <see
                cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+              
 
               
 
@@ -829,8 +961,12 @@
 
               
 
+              
+
                property value. For example, consider a button control whose <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -839,13 +975,19 @@
 
               
 
+              
+
                property is set to 2. If a new <see
                cref="T:System.Windows.Forms.ImageList" />
 
               
 
+              
+
                that has only two images is assigned to the button, the <see
                cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+              
 
               
 
@@ -899,6 +1041,8 @@
 
             
 
+            
+
              property specifies the image from the image list to display on the control.</para
           >
         </remarks>
@@ -907,6 +1051,8 @@
           <para
             >Gets or sets the key accessor for the image in the <see
              cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+
+            
 
             
 
@@ -942,13 +1088,19 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
             
 
+            
+
              property is set, the <see
              cref="P:System.Windows.Forms.ButtonBase.Image" />
+
+            
 
             
 
@@ -961,8 +1113,12 @@
 
               
 
+              
+
                property value is changed to null, the <see
                cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+              
 
               
 
@@ -971,8 +1127,12 @@
 
               
 
+              
+
                value is retained internally and used when another <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -981,8 +1141,12 @@
 
               
 
+              
+
                property. If the new <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -991,8 +1155,12 @@
 
               
 
+              
+
                property has an <see
                cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
+
+              
 
               
 
@@ -1001,8 +1169,12 @@
 
               
 
+              
+
                property minus one (because the collection is a zero-based index), the <see
                cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+              
 
               
 
@@ -1011,8 +1183,12 @@
 
               
 
+              
+
                property value. For example, consider a button control whose <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -1021,13 +1197,19 @@
 
               
 
+              
+
                property is set to 2. If a new <see
                cref="T:System.Windows.Forms.ImageList" />
 
               
 
+              
+
                that has only two images is assigned to the button, the <see
                cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+
+              
 
               
 
@@ -1043,8 +1225,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1117,6 +1303,8 @@
 
             
 
+            
+
              property is changed. This event is not relevant for this class.</para
           >
         </summary>
@@ -1142,8 +1330,12 @@
 
             
 
+            
+
              property is set to true, the button is the default button for the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -1152,6 +1344,8 @@
           <para
             >To specify the default button of a form, set the <see
              cref="P:System.Windows.Forms.Form.AcceptButton" />
+
+            
 
             
 
@@ -1210,11 +1404,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnGotFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1229,6 +1427,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1237,8 +1437,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1273,11 +1477,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1290,8 +1498,12 @@
 
               
 
+              
+
                if the button is disabled (this includes calls to the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+              
 
               
 
@@ -1300,13 +1512,19 @@
 
               
 
+              
+
                in a derived class). When disabling the button in an override of <see
                cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
               
 
+              
+
               , call the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+              
 
               
 
@@ -1322,6 +1540,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1330,8 +1550,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1366,11 +1590,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1385,6 +1613,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1393,8 +1623,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1426,11 +1660,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1445,6 +1683,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1453,8 +1693,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1489,11 +1733,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1506,8 +1754,12 @@
 
               
 
+              
+
                if the button is disabled (this includes calls to the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+              
 
               
 
@@ -1516,13 +1768,19 @@
 
               
 
+              
+
                in a derived class). When disabling the button in an override of <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
               
 
+              
+
               , call the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+              
 
               
 
@@ -1538,6 +1796,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1546,8 +1806,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1582,11 +1846,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+
+            
 
             
 
@@ -1599,8 +1867,12 @@
 
               
 
+              
+
                if the button is disabled (this includes call to the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+
+              
 
               
 
@@ -1609,13 +1881,19 @@
 
               
 
+              
+
                in a derived class). When disabling the button in an override of <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
               
 
+              
+
               , call the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+
+              
 
               
 
@@ -1631,6 +1909,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1639,8 +1919,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1675,11 +1959,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -1694,6 +1982,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1702,8 +1992,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1738,11 +2032,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1755,8 +2053,12 @@
 
               
 
+              
+
                if the button is disabled (this includes calls to the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+              
 
               
 
@@ -1765,13 +2067,19 @@
 
               
 
+              
+
                in a derived class). When disabling the button in an override of <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
               
 
+              
+
               , call the base class's <see
                cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+              
 
               
 
@@ -1787,6 +2095,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1795,8 +2105,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1831,11 +2145,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1850,6 +2168,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1858,8 +2178,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1894,11 +2218,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ButtonBase.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1913,6 +2241,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1921,8 +2251,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -2011,6 +2345,8 @@
           <para
             >Resets the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -2124,8 +2460,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2137,8 +2477,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2147,13 +2491,19 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -2168,8 +2518,12 @@
 
             
 
+            
+
              class (ndptecgdiplus) or the <see
              cref="T:System.Windows.Forms.TextRenderer" />
+
+            
 
             
 

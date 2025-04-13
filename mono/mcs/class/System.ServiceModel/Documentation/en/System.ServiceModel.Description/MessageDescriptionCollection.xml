@@ -33,8 +33,12 @@
 
         
 
+        
+
          is used to describe contracts and their associated operations. Each contract operation has a corresponding <see
          cref="T:System.ServiceModel.Description.OperationDescription" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          in turn describes the messages that make up the operation using a collection of <see
          cref="T:System.ServiceModel.Description.MessageDescription" />
+
+        
 
         
 
@@ -85,13 +93,19 @@
 
             
 
+            
+
              objects in the collection that match the specified <paramref
              name="action" />
 
             
 
+            
+
             , use the <see
              cref="M:System.ServiceModel.Description.MessageDescriptionCollection.FindAll(System.String)" />
+
+            
 
             
 
@@ -110,8 +124,12 @@
 
             
 
+            
+
              from the collection whose message has the specified <paramref
              name="action" />
+
+            
 
             
 
@@ -120,11 +138,15 @@
 
             
 
+            
+
              is found.</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,13 +182,19 @@
 
             
 
+            
+
              in the collection that match the specified <paramref
              name="action" />
 
             
 
+            
+
             , use the <see
              cref="M:System.ServiceModel.Description.MessageDescriptionCollection.Find(System.String)" />
+
+            
 
             
 
@@ -185,8 +213,12 @@
 
             
 
+            
+
              that contains the collection message descriptions from the current collection whose messages have the specified <paramref
              name="action" />
+
+            
 
             
 
@@ -195,11 +227,15 @@
 
             
 
+            
+
              objects are found, an empty collection is returned.</para
           >
         </returns>
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

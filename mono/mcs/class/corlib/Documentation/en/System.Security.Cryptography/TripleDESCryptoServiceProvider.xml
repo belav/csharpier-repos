@@ -40,13 +40,19 @@
 
           
 
+          
+
            class instead of the <see
            cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
 
           
 
+          
+
            class. Use <see
            cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
+
+          
 
           
 
@@ -59,6 +65,8 @@
       <para
         >Defines a wrapper object to access the cryptographic service provider (CSP) version of the <see
          cref="T:System.Security.Cryptography.TripleDES" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
+
+            
 
             
 
@@ -127,6 +137,8 @@
 
             
 
+            
+
              overload with the same parameters.</para
           >
         </remarks>
@@ -138,13 +150,19 @@
 
             
 
+            
+
              decryptor object with the specified key (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 
+            
+
             ) and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -159,6 +177,8 @@
 
             
 
+            
+
              decryptor object.</para
           >
         </returns>
@@ -167,10 +187,14 @@
 
           
 
+          
+
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +233,8 @@
 
             
 
+            
+
              overload with the same parameters to decrypt the result of this method.</para
           >
         </remarks>
@@ -220,13 +246,19 @@
 
             
 
+            
+
              encryptor object with the specified key (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
             
 
+            
+
             ) and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -241,6 +273,8 @@
 
             
 
+            
+
              encryptor object.</para
           >
         </returns>
@@ -249,10 +283,14 @@
 
           
 
+          
+
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,6 +327,8 @@
 
             
 
+            
+
             ) to use for the algorithm.</para
           >
         </summary>
@@ -319,6 +359,8 @@
 
             
 
+            
+
             ).</para
           >
           <para>This algorithm supports key lengths from 128 bits to 192 bits in increments of 64 bits.</para>
@@ -328,6 +370,8 @@
           <para
             >Generates a random <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+
+            
 
             
 

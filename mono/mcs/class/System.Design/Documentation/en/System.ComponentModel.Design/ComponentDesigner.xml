@@ -32,6 +32,8 @@
 
         
 
+        
+
          base designer class provides a simple designer that can extend the behavior of an associated component in design mode.</para
       >
       <para>
@@ -39,8 +41,12 @@
 
         
 
+        
+
          provides an empty <see
          cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+        
 
         
 
@@ -52,10 +58,14 @@
 
         
 
+        
+
         . For an overview of customizing design-time behavior, see <format
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          class implements a special behavior for the property descriptors of inherited components. An internal type named InheritedPropertyDescriptor is used by the default <see
          cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+        
 
         
 
@@ -79,6 +93,8 @@
           <para
             >To the root object itself, which is returned by the <see
              cref="P:System.ComponentModel.Design.IDesignerHost.RootComponent" />
+
+            
 
             
 
@@ -108,6 +124,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -187,8 +205,12 @@
 
             
 
+            
+
              method of <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -201,8 +223,12 @@
 
               
 
+              
+
                method, be sure to call the base class <see
                cref="M:System.ComponentModel.Design.ComponentDesigner.Initialize(System.ComponentModel.IComponent)" />
+
+              
 
               
 
@@ -236,8 +262,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -246,8 +276,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -256,13 +290,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -273,10 +313,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -289,13 +333,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+              
 
               
 
@@ -308,6 +358,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -338,8 +390,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -348,8 +404,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -361,8 +421,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -377,11 +441,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,11 +499,15 @@
 
             
 
+            
+
              and cleans up resources by calling Dispose(false). Override Dispose(Boolean) to customize the cleanup.</para
           >
           <para
             >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -449,6 +521,8 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
@@ -456,10 +530,14 @@
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="8026cb68-fe93-43fc-96c1-c09ad7d64cd3">Overriding the Finalize Method</a>
             </format>
+
+            
 
             
 
@@ -572,6 +650,8 @@
 
           
 
+          
+
           The component for this designer. </param
         >
       </Docs>
@@ -604,11 +684,15 @@
 
             
 
+            
+
              method is called when an existing component is being reinitialized. For example, this may occur after the user drags a component to another container. </para
           >
           <para
             >You may use the <paramref
              name="defaultValues" />
+
+            
 
             
 
@@ -622,6 +706,8 @@
         </summary>
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -653,11 +739,15 @@
 
             
 
+            
+
              method is called when a component is first initialized, typically after being first added to a design surface. </para
           >
           <para
             >You may perform any necessary initialization of this component, and you may ignore the <paramref
              name="defaultValues" />
+
+            
 
             
 
@@ -671,6 +761,8 @@
         </summary>
         <param name="defaultValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -727,8 +819,12 @@
 
             
 
+            
+
              of the specified <see
              cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+            
 
             
 
@@ -743,6 +839,8 @@
 
             
 
+            
+
              of the specified designer.</para
           >
         </returns>
@@ -751,8 +849,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+          
 
           
 
@@ -776,6 +878,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.ComponentModel.Design.ComponentDesigner.OnSetComponentDefaults" />
+
+            
 
             
 
@@ -821,8 +925,12 @@
 
             
 
+            
+
              object's <see
              cref="T:System.ComponentModel.Design.ITreeDesigner" />
+
+            
 
             
 
@@ -856,6 +964,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -864,13 +974,19 @@
 
             
 
+            
+
              property. The objects are of type <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
+            
+
             . This method is called immediately after the <see
              cref="M:System.ComponentModel.Design.ComponentDesigner.PreFilterAttributes(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -885,11 +1001,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -922,6 +1042,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -930,8 +1052,12 @@
 
             
 
+            
+
             . This method is called immediately after the <see
              cref="M:System.ComponentModel.Design.ComponentDesigner.PreFilterEvents(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -946,11 +1072,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -983,6 +1113,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -991,8 +1123,12 @@
 
             
 
+            
+
             . This method is called immediately after the <see
              cref="M:System.ComponentModel.Design.ComponentDesigner.PreFilterProperties(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1007,11 +1143,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1044,6 +1184,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1052,13 +1194,19 @@
 
             
 
+            
+
              property. The objects are of type <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
+            
+
             . This method is called immediately before the <see
              cref="M:System.ComponentModel.Design.ComponentDesigner.PostFilterAttributes(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1073,11 +1221,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1110,6 +1262,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1118,8 +1272,12 @@
 
             
 
+            
+
             . This method is called immediately before the <see
              cref="M:System.ComponentModel.Design.ComponentDesigner.PostFilterEvents(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1134,11 +1292,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1171,6 +1333,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1179,8 +1343,12 @@
 
             
 
+            
+
             . This method is called immediately before the <see
              cref="M:System.ComponentModel.Design.ComponentDesigner.PostFilterProperties(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1195,11 +1363,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1234,6 +1406,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1245,6 +1419,8 @@
 
             
 
+            
+
              that this component has been changed.</para
           >
         </summary>
@@ -1253,8 +1429,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.MemberDescriptor" />
+
+          
 
           
 
@@ -1265,10 +1445,14 @@
 
           
 
+          
+
           The old value of the member. </param
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1301,6 +1485,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1312,6 +1498,8 @@
 
             
 
+            
+
              that this component is about to be changed.</para
           >
         </summary>
@@ -1320,8 +1508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.MemberDescriptor" />
+
+          
 
           
 
@@ -1380,8 +1572,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1396,6 +1592,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1404,13 +1602,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Attribute" />
 
           
 
+          
+
            objects for the class of the component. The keys in the dictionary of attributes are the <see
            cref="P:System.Attribute.TypeId" />
+
+          
 
           
 
@@ -1443,8 +1647,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1459,6 +1667,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1467,8 +1677,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1501,8 +1715,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1517,6 +1735,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1525,8 +1745,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1559,8 +1783,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1575,6 +1803,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1583,13 +1813,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Attribute" />
 
           
 
+          
+
            objects for the class of the component. The keys in the dictionary of attributes are the <see
            cref="P:System.Attribute.TypeId" />
+
+          
 
           
 
@@ -1622,8 +1858,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1638,6 +1878,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1646,8 +1888,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1680,8 +1926,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+            
 
             
 
@@ -1696,6 +1946,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1704,8 +1956,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1735,8 +1991,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.ITreeDesigner" />
+
+            
 
             
 
@@ -1748,6 +2008,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
+
+            
 
             
 
@@ -1778,8 +2040,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.ITreeDesigner" />
+
+            
 
             
 
@@ -1791,6 +2057,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.ComponentModel.Design.ITreeDesigner.Parent" />
+
+            
 
             
 
@@ -1819,8 +2087,12 @@
 
             
 
+            
+
              method of the corresponding <see
              cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+            
 
             
 
@@ -1830,6 +2102,8 @@
             <para
               >A design-time environment typically provides a <ui
               >Properties</ui>
+
+              
 
               
 

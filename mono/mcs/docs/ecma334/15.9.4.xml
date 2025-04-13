@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>return</keyword>
@@ -24,6 +26,8 @@
 
     
 
+    
+
     , the set accessor of a property or indexer, the add and remove accessors of an event, an instance constructor, static constructor, or a destructor. </paragraph
   >
   <paragraph
@@ -32,11 +36,15 @@
 
     
 
+    
+
     ) must exist from the type of the expression to the return type of the containing function member. </paragraph
   >
   <paragraph
     >It is a compile-time error for a return statement to appear in a finally block (<hyperlink
     >15.10</hyperlink>
+
+    
 
     
 

@@ -36,8 +36,12 @@
 
         
 
+        
+
          to hold one or more <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.StatusStrip" />
+
+        
 
         
 
@@ -59,13 +67,19 @@
 
         
 
+        
+
          controls meet the needs of your application better than a <see
          cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
+        
+
          if you do not need the four panels and the central <see
          cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        
 
         
 
@@ -77,11 +91,15 @@
 
         
 
+        
+
          works well in Multiple Document Interface (MDI) scenarios.</para
       >
       <para
         >Each <see
          cref="T:System.Windows.Forms.ToolStripPanel" />
+
+        
 
         
 
@@ -106,6 +124,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -281,6 +301,8 @@
 
             
 
+            
+
              automatically adjusts its size when the form is resized.</para
           >
         </summary>
@@ -307,6 +329,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -315,6 +339,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripPanel.AutoSize" />
+
+            
 
             
 
@@ -352,6 +378,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -383,6 +411,8 @@
 
             
 
+            
+
              controls.</para
           >
         </summary>
@@ -391,6 +421,8 @@
           <para
             >A collection of <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -455,8 +487,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -465,8 +501,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -478,8 +518,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -494,11 +538,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -546,6 +594,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -579,8 +629,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -592,13 +646,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -632,8 +692,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -645,13 +709,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -662,13 +732,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
           
 
+          
+
            value representing the x- and y-client coordinates, in pixels, of the new location for the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -702,8 +778,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -715,13 +795,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -732,8 +818,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -742,8 +832,12 @@
 
           
 
+          
+
            to which the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -778,8 +872,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -791,13 +889,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -808,10 +912,14 @@
 
           
 
+          
+
           The horizontal client coordinate, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -856,6 +964,8 @@
 
             
 
+            
+
              can be moved or resized.</para
           >
         </summary>
@@ -897,8 +1007,12 @@
 
             
 
+            
+
              method is called when a child control is added to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -912,11 +1026,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" />
+
+            
 
             
 
@@ -931,6 +1049,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -939,8 +1059,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ControlEventArgs" />
+
+          
 
           
 
@@ -973,8 +1097,12 @@
 
             
 
+            
+
              is called when a child control is removed from the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -988,11 +1116,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" />
+
+            
 
             
 
@@ -1007,6 +1139,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1015,8 +1149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ControlEventArgs" />
+
+          
 
           
 
@@ -1048,11 +1186,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanel.OnDockChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1067,6 +1209,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1075,8 +1219,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1111,11 +1259,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanel.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -1130,6 +1282,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1138,8 +1292,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1200,11 +1358,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1239,11 +1401,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanel.OnRendererChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1258,6 +1424,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1266,8 +1434,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1304,11 +1476,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripPanel.OnRightToLeftChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1323,6 +1499,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1331,8 +1509,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1358,6 +1540,8 @@
           <para
             >Gets or sets a value indicating the horizontal or vertical orientation of the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1392,8 +1576,12 @@
 
             
 
+            
+
              given a point within the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1408,13 +1596,19 @@
 
             
 
+            
+
              that contains the <paramref
              name="raftingContainerPoint" />
 
             
 
+            
+
             , or null if no such <see
              cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+            
 
             
 
@@ -1426,13 +1620,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
           
 
+          
+
            used as a reference to find the <see
            cref="T:System.Windows.Forms.ToolStripPanelRow" />
+
+          
 
           
 
@@ -1472,8 +1672,12 @@
 
             
 
+            
+
              used to customize the appearance of a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1503,6 +1707,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1511,6 +1717,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripPanel.Renderer" />
+
+            
 
             
 
@@ -1543,6 +1751,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1572,8 +1782,12 @@
 
             
 
+            
+
             s and the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1606,8 +1820,12 @@
 
             
 
+            
+
             s in this <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 

@@ -22,13 +22,19 @@
 
         
 
+        
+
          class allows you to map a URL that is displayed to users to a URL that exists in your Web application. Adding a <see
          cref="T:System.Web.Configuration.UrlMapping" />
 
         
 
+        
+
          object to a <see
          cref="T:System.Web.Configuration.UrlMappingCollection" />
+
+        
 
         
 
@@ -40,13 +46,19 @@
 
         
 
+        
+
          object contains two properties identifying a URL. One property specifies the URL shown to the user; the other specifies a URL in your Web application. Trailing white-space characters are ignored in both the <see
          cref="P:System.Web.Configuration.UrlMapping.Url" />
 
         
 
+        
+
          and <see
          cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
+
+        
 
         
 
@@ -59,13 +71,19 @@
 
           
 
+          
+
            property can write information into the related section of the configuration file according to the restrictions defined by the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+
+          
 
           
 
@@ -96,6 +114,8 @@
 
             
 
+            
+
              constructor is intended primarily for internal use by ASP.NET. You do not need to derive from this class, and because it can be used to modify the Web.config file, you will probably never need to use it in code.</para
           >
         </remarks>
@@ -107,6 +127,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -115,10 +137,14 @@
 
           
 
+          
+
           The URL to be displayed to the user.</param
         >
         <param name="mappedUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,12 +177,16 @@
 
             
 
+            
+
              property is the programmatic equivalent of the mappedUrl attribute of the add element in the urlMappings section of a configuration file. </para
           >
           <block subset="none" type="note">
             <para
               >When using IIS 5.0, if you use the <see
                cref="P:System.Web.Configuration.UrlMapping.MappedUrl" />
+
+              
 
               
 
@@ -211,6 +241,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.UrlMapping.Url" />
+
+            
 
             
 

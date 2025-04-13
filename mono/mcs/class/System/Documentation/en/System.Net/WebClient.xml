@@ -42,6 +42,8 @@
 
         
 
+        
+
          class provides common methods for sending data to or receiving data from any local, intranet, or Internet resource identified by a URI.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          class uses the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -60,13 +66,19 @@
 
         
 
+        
+
          instances can access data with any <see
          cref="T:System.Net.WebRequest" />
 
         
 
+        
+
          descendant registered with the <see
          cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
       <para
         >The following table describes <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -107,6 +121,8 @@
 
               
 
+              
+
                used to send data to the resource.</para
             >
           </description>
@@ -121,6 +137,8 @@
             <para
               >Retrieves a <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -141,6 +159,8 @@
 
               
 
+              
+
                array containing any response.</para
             >
           </description>
@@ -158,6 +178,8 @@
 
               
 
+              
+
                array to the resource, without blocking the calling thread.</para
             >
           </description>
@@ -172,6 +194,8 @@
             <para
               >Sends a local file to the resource and returns a <see
                cref="T:System.Byte" />
+
+              
 
               
 
@@ -202,8 +226,12 @@
 
               
 
+              
+
                to the resource and returns a <see
                cref="T:System.Byte" />
+
+              
 
               
 
@@ -224,8 +252,12 @@
 
               
 
+              
+
                to the resource and returns a <see
                cref="T:System.Byte" />
+
+              
 
               
 
@@ -246,6 +278,8 @@
 
               
 
+              
+
                to the resource, without blocking the calling thread.</para
             >
           </description>
@@ -263,6 +297,8 @@
 
               
 
+              
+
                to the resource, without blocking the calling thread.</para
             >
           </description>
@@ -271,6 +307,8 @@
       <para
         >The following table describes <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -297,6 +335,8 @@
             <para
               >Returns the data from a resource as a <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -327,6 +367,8 @@
 
               
 
+              
+
                array.</para
             >
           </description>
@@ -341,6 +383,8 @@
             <para
               >Downloads data from a resource and returns a <see
                cref="T:System.Byte" />
+
+              
 
               
 
@@ -381,8 +425,12 @@
 
               
 
+              
+
                from a resource and returns a <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -403,6 +451,8 @@
 
               
 
+              
+
                from a resource, without blocking the calling thread.</para
             >
           </description>
@@ -414,6 +464,8 @@
 
         
 
+        
+
          method to cancel asynchronous operations that have not completed.</para
       >
       <para
@@ -422,8 +474,12 @@
 
         
 
+        
+
          instance does not send optional HTTP headers by default. If your request requires an optional header, you must add the header to the <see
          cref="P:System.Net.WebClient.Headers" />
+
+        
 
         
 
@@ -434,8 +490,12 @@
 
         
 
+        
+
          is set to true in <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -475,8 +535,12 @@
 
             
 
+            
+
              class. The default HTTP method is GET. The default FTP method is RETR. The default <see
              cref="P:System.Net.WebClient.Encoding" />
+
+            
 
             
 
@@ -485,8 +549,12 @@
 
             
 
+            
+
             . The default value of <see
              cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+            
 
             
 
@@ -498,6 +566,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -532,9 +602,13 @@
 
             
 
+            
+
              containing the base URI for requests made by a
 <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -543,9 +617,13 @@
 
             
 
+            
+
             , if no value 
    was set or <see
              langword="null" />
+
+            
 
             
 
@@ -558,13 +636,19 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
 
           
 
+          
+
           , and is not a URI in a format recognized by the <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -578,8 +662,12 @@
 
             
 
+            
+
              property contains a base URI that is combined with a relative address. When you call a method that uploads or downloads data, the <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -588,8 +676,12 @@
 
             
 
+            
+
              does not use the <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -602,6 +694,8 @@
           <para
             >Gets or sets the base URI for requests made by a <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -644,6 +738,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -673,8 +769,12 @@
 
             
 
+            
+
              on the underlying <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -686,8 +786,12 @@
 
             
 
+            
+
             , your application still receives the completion event associated with the operation. For example, when you call <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -696,8 +800,12 @@
 
             
 
+            
+
              operation, if you have specified an event handler for the <see
              cref="E:System.Net.WebClient.DownloadStringCompleted" />
+
+            
 
             
 
@@ -706,8 +814,12 @@
 
             
 
+            
+
              property on the base class of <see
              cref="T:System.Net.DownloadDataCompletedEventArgs" />
+
+            
 
             
 
@@ -752,10 +864,14 @@
 
             
 
+            
+
              containing the authentication credentials for the
    request. The default is
 <see
              langword="null" />
+
+            
 
             
 
@@ -770,13 +886,19 @@
 
             
 
+            
+
              property contains the authentication credentials used to access a resource on a host. In most client-side scenarios, you should use the <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
 
             
 
+            
+
             , which are the credentials of the currently logged on user. To do this, set the <see
              cref="P:System.Net.WebClient.UseDefaultCredentials" />
+
+            
 
             
 
@@ -788,8 +910,12 @@
 
             
 
+            
+
              class is being used in a middle tier application, such as an ASP.NET application, the <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 
@@ -839,13 +965,19 @@
 
             
 
+            
+
              method downloads the resource with the URI specified by the <paramref
              name="address" />
 
             
 
+            
+
              parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.DownloadDataAsync" />
+
+            
 
             
 
@@ -857,8 +989,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -867,8 +1003,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -877,8 +1017,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -894,6 +1038,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -903,6 +1049,8 @@
           <para
             >Downloads the resource as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -917,11 +1065,15 @@
 
             
 
+            
+
              array containing the downloaded resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -956,13 +1108,19 @@
 
             
 
+            
+
              method downloads the resource with the URI specified by the <paramref
              name="address" />
 
             
 
+            
+
              parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.DownloadDataAsync" />
+
+            
 
             
 
@@ -974,8 +1132,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -984,8 +1146,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -994,8 +1160,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1010,6 +1180,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1018,6 +1190,8 @@
           <para
             >Downloads the resource as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1032,6 +1206,8 @@
 
             
 
+            
+
              array containing the downloaded resource.</para
           >
         </returns>
@@ -1040,8 +1216,12 @@
 
           
 
+          
+
           The URI represented by the <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1075,6 +1255,8 @@
 
             
 
+            
+
             . The data is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. </para
           >
           <para
@@ -1083,8 +1265,12 @@
 
             
 
+            
+
              methods. When the download completes, the <see
              cref="E:System.Net.WebClient.DownloadDataCompleted" />
+
+            
 
             
 
@@ -1093,11 +1279,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >You can use the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -1110,8 +1300,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1120,8 +1314,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1130,8 +1328,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1143,6 +1345,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1158,6 +1362,8 @@
 
             
 
+            
+
              array from the URI specified as an asynchronous operation. </para
           >
         </summary>
@@ -1166,8 +1372,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1205,6 +1415,8 @@
 
             
 
+            
+
             . The data is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. </para
           >
           <para
@@ -1213,8 +1425,12 @@
 
             
 
+            
+
              methods. When the download completes, the <see
              cref="E:System.Net.WebClient.DownloadDataCompleted" />
+
+            
 
             
 
@@ -1223,11 +1439,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >You can use the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -1240,8 +1460,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1250,8 +1474,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1260,8 +1488,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1273,6 +1505,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1288,6 +1522,8 @@
 
             
 
+            
+
              array from the URI specified as an asynchronous operation. </para
           >
         </summary>
@@ -1296,8 +1532,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1305,6 +1545,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1338,6 +1580,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -1346,8 +1590,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.DownloadDataCompletedEventArgs" />
+
+            
 
             
 
@@ -1358,6 +1606,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1398,11 +1648,15 @@
 
             
 
+            
+
               object will complete after the data resource has been downloaded.</para
           >
           <para
             >This method retrieves the specified resource using the default method for the protocol associated with the URI scheme specified in the <paramref
              name="address" />
+
+            
 
             
 
@@ -1414,8 +1668,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1424,8 +1682,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1434,8 +1696,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1448,6 +1714,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1464,6 +1732,8 @@
 
             
 
+            
+
              array from the URI specified as an asynchronous operation using a task object.</para
           >
         </summary>
@@ -1475,6 +1745,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1483,8 +1755,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1493,6 +1769,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1536,11 +1814,15 @@
 
             
 
+            
+
               object will complete after the data resource has been downloaded.</para
           >
           <para
             >This method retrieves the specified resource using the default method for the protocol associated with the URI scheme specified in the <paramref
              name="address" />
+
+            
 
             
 
@@ -1552,8 +1834,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1562,8 +1848,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1572,8 +1862,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1588,6 +1882,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1596,6 +1892,8 @@
           <para
             >Downloads the resource as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1610,6 +1908,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1618,8 +1918,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1628,6 +1932,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1670,13 +1976,19 @@
 
             
 
+            
+
              is <see
              langword="null" />
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1694,6 +2006,8 @@
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -1704,13 +2018,19 @@
 
             
 
+            
+
              method downloads to a local file data from the URI specified by in the <paramref
              name="address" />
 
             
 
+            
+
              parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.DownloadFileAsync" />
+
+            
 
             
 
@@ -1722,8 +2042,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1732,8 +2056,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1742,8 +2070,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1756,6 +2088,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1773,10 +2107,14 @@
 
           
 
+          
+
           The URI from which to download data. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1815,13 +2153,19 @@
 
             
 
+            
+
              method downloads to a local file data from the URI specified by in the <paramref
              name="address" />
 
             
 
+            
+
              parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.DownloadFileAsync" />
+
+            
 
             
 
@@ -1833,8 +2177,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1843,8 +2191,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1853,8 +2205,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1867,6 +2223,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -1884,8 +2242,12 @@
 
           
 
+          
+
           The URI specified as a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1893,6 +2255,8 @@
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1930,13 +2294,19 @@
 
             
 
+            
+
              parameter. When the download completes successfully, the downloaded file is named <paramref
              name="fileName" />
 
             
 
+            
+
              on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file is available, add an event handler to the <see
              cref="E:System.Net.WebClient.DownloadFileCompleted" />
+
+            
 
             
 
@@ -1948,11 +2318,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >You can use the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -1964,8 +2338,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -1974,8 +2352,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -1984,8 +2366,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -1998,6 +2384,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2015,10 +2403,14 @@
 
           
 
+          
+
           The URI of the resource to download. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2057,13 +2449,19 @@
 
             
 
+            
+
              parameter. When the download completes successfully, the downloaded file is named <paramref
              name="fileName" />
 
             
 
+            
+
              on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file is available, add an event handler to the <see
              cref="E:System.Net.WebClient.DownloadFileCompleted" />
+
+            
 
             
 
@@ -2075,11 +2473,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >You can use the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -2091,8 +2493,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -2101,8 +2507,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -2111,8 +2521,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -2125,6 +2539,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2142,6 +2558,8 @@
 
           
 
+          
+
           The URI of the resource to download. </param
         >
         <param name="fileName">
@@ -2149,10 +2567,14 @@
 
           
 
+          
+
           The name of the file to be placed on the local computer. </param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2186,6 +2608,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -2194,8 +2618,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -2206,6 +2634,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2247,6 +2677,8 @@
 
             
 
+            
+
               object will complete after the data resource has been downloaded.</para
           >
           <para
@@ -2255,8 +2687,12 @@
 
             
 
+            
+
              parameter. When the download completes successfully, the downloaded file is named <paramref
              name="fileName" />
+
+            
 
             
 
@@ -2268,6 +2704,8 @@
 
             
 
+            
+
              method to cancel asynchronous operations that have not completed.</para
           >
           <para
@@ -2276,8 +2714,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -2286,8 +2728,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -2296,8 +2742,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -2310,6 +2760,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2330,6 +2782,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -2339,10 +2793,14 @@
 
           
 
+          
+
           The URI of the resource to download.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2387,6 +2845,8 @@
 
             
 
+            
+
               object will complete after the data resource has been downloaded.</para
           >
           <para
@@ -2395,8 +2855,12 @@
 
             
 
+            
+
              parameter. When the download completes successfully, the downloaded file is named <paramref
              name="fileName" />
+
+            
 
             
 
@@ -2408,6 +2872,8 @@
 
             
 
+            
+
              method to cancel asynchronous operations that have not completed.</para
           >
           <para
@@ -2416,8 +2882,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -2426,8 +2896,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -2436,8 +2910,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -2450,6 +2928,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -2470,6 +2950,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -2479,10 +2961,14 @@
 
           
 
+          
+
           The URI of the resource to download.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2535,6 +3021,8 @@
 
                   
 
+                  
+
                    array, without blocking the calling thread.</para
                 >
               </description>
@@ -2566,8 +3054,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.DownloadProgressChangedEventArgs" />
+
+            
 
             
 
@@ -2581,12 +3073,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >A passive FTP file transfer will always show a progress percentage of zero, since the server did not send the file size. To show progress, you can change the FTP connection to active by overriding the <see
                cref="M:System.Net.WebClient.GetWebRequest(System.Uri)" />
+
+              
 
               
 
@@ -2633,13 +3129,19 @@
 
             
 
+            
+
              property to convert the resource to a <see
              cref="T:System.String" />
 
             
 
+            
+
             . This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.DownloadStringAsync" />
+
+            
 
             
 
@@ -2651,8 +3153,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -2661,8 +3167,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -2671,8 +3181,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -2688,6 +3202,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2700,8 +3216,12 @@
 
             
 
+            
+
             . The resource to download is specified as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2716,6 +3236,8 @@
 
             
 
+            
+
              containing the requested resource.</para
           >
         </returns>
@@ -2724,8 +3246,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2759,13 +3285,19 @@
 
             
 
+            
+
              property to convert the resource to a <see
              cref="T:System.String" />
 
             
 
+            
+
             . This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.DownloadStringAsync" />
+
+            
 
             
 
@@ -2777,8 +3309,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -2787,8 +3323,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -2797,8 +3337,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -2814,6 +3358,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2826,8 +3372,12 @@
 
             
 
+            
+
             . The resource to download is specified as a <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -2842,6 +3392,8 @@
 
             
 
+            
+
              containing the requested resource.</para
           >
         </returns>
@@ -2850,8 +3402,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -2886,8 +3442,12 @@
 
             
 
+            
+
              property to convert the resource to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2896,13 +3456,19 @@
 
             
 
+            
+
              method. When the download completes, the <see
              cref="E:System.Net.WebClient.DownloadStringCompleted" />
 
             
 
+            
+
              event is raised. Your application must handle this event to receive notification. The downloaded string is available in the <see
              cref="P:System.Net.DownloadStringCompletedEventArgs.Result" />
+
+            
 
             
 
@@ -2914,6 +3480,8 @@
 
             
 
+            
+
              method to cancel asynchronous operations that have not completed.</para
           >
           <para
@@ -2922,8 +3490,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -2932,8 +3504,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -2942,8 +3518,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -2959,6 +3539,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2971,6 +3553,8 @@
 
             
 
+            
+
             . This method does not block the calling thread.</para
           >
         </summary>
@@ -2979,8 +3563,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -3019,8 +3607,12 @@
 
             
 
+            
+
              property to convert the resource to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3029,13 +3621,19 @@
 
             
 
+            
+
              method. When the download completes, the <see
              cref="E:System.Net.WebClient.DownloadStringCompleted" />
 
             
 
+            
+
              event is raised. Your application must handle this event to receive notification. The downloaded string is available in the <see
              cref="P:System.Net.DownloadStringCompletedEventArgs.Result" />
+
+            
 
             
 
@@ -3047,6 +3645,8 @@
 
             
 
+            
+
              method to cancel asynchronous operations that have not completed.</para
           >
           <para
@@ -3055,8 +3655,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -3065,8 +3669,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -3075,8 +3683,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -3089,6 +3701,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -3105,8 +3719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -3114,6 +3732,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3147,6 +3767,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -3155,8 +3777,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.DownloadStringCompletedEventArgs" />
+
+            
 
             
 
@@ -3167,6 +3793,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3207,6 +3835,8 @@
 
             
 
+            
+
              object will complete after the data resource has been downloaded.  The resource is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
@@ -3215,8 +3845,12 @@
 
             
 
+            
+
              property to convert the resource to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3228,6 +3862,8 @@
 
             
 
+            
+
              method to cancel asynchronous operations that have not completed.</para
           >
           <para
@@ -3236,8 +3872,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -3246,8 +3886,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -3256,8 +3900,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -3272,6 +3920,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3280,6 +3930,8 @@
           <para
             >Downloads the resource as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3294,6 +3946,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3302,8 +3956,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -3312,6 +3970,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3355,6 +4015,8 @@
 
             
 
+            
+
              object will complete after the data resource has been downloaded. The resource is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
@@ -3363,8 +4025,12 @@
 
             
 
+            
+
              property to convert the resource to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3376,6 +4042,8 @@
 
             
 
+            
+
              method to cancel asynchronous operations that have not completed.</para
           >
           <para
@@ -3384,8 +4052,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -3394,8 +4066,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -3404,8 +4080,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -3420,6 +4100,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3428,6 +4110,8 @@
           <para
             >Downloads the resource as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3442,6 +4126,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3450,8 +4136,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -3460,6 +4150,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3491,8 +4183,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Net.WebClient.UploadStringAsync" />
+
+            
 
             
 
@@ -3501,8 +4197,12 @@
 
             
 
+            
+
              array before uploading the string. For additional information, see the <see
              cref="Overload:System.Text.Encoding.GetBytes" />
+
+            
 
             
 
@@ -3514,8 +4214,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.WebClient.DownloadStringAsync" />
+
+            
 
             
 
@@ -3524,8 +4228,12 @@
 
             
 
+            
+
              uses the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -3534,8 +4242,12 @@
 
             
 
+            
+
              array into a string. For additional information, see the <see
              cref="Overload:System.Text.Encoding.GetString" />
+
+            
 
             
 
@@ -3547,6 +4259,8 @@
           <para
             >Gets and sets the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -3584,13 +4298,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.WebClient.Credentials" />
 
             
 
+            
+
             , and method to the newly created <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3602,13 +4322,19 @@
 
             
 
+            
+
             . It is provided to give inheritors access to the underlying <see
              cref="T:System.Net.WebRequest" />
 
             
 
+            
+
              object. Derived classes should call the base class implementation of <see
              cref="M:System.Net.WebClient.GetWebRequest(System.Uri)" />
+
+            
 
             
 
@@ -3623,6 +4349,8 @@
 
             
 
+            
+
              object for the specified resource.</para
           >
         </summary>
@@ -3634,6 +4362,8 @@
 
             
 
+            
+
              object for the specified resource.</para
           >
         </returns>
@@ -3642,8 +4372,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -3680,8 +4414,12 @@
 
             
 
+            
+
              method on the specified <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3693,8 +4431,12 @@
 
             
 
+            
+
             . It is provided to give inheritors access to the underlying <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -3709,8 +4451,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3725,8 +4471,12 @@
 
             
 
+            
+
              containing the response for the specified <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3738,8 +4488,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -3777,8 +4531,12 @@
 
             
 
+            
+
              method on the specified <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3790,8 +4548,12 @@
 
             
 
+            
+
             . It is provided to give inheritors access to the underlying <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -3806,13 +4568,19 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Net.WebRequest" />
 
             
 
+            
+
              using the specified <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3827,8 +4595,12 @@
 
             
 
+            
+
              containing the response for the specified <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3840,8 +4612,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -3852,13 +4628,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            object obtained from a previous call to <see
            cref="M:System.Net.WebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -3897,6 +4679,8 @@
 
             
 
+            
+
              containing header 
    name/value pairs associated with the request or, if this property has not been
    set or was set to <see
@@ -3904,8 +4688,12 @@
 
             
 
+            
+
             , a new instance of the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -3921,13 +4709,19 @@
 
             
 
+            
+
              property contains a <see
              cref="T:System.Net.WebHeaderCollection" />
 
             
 
+            
+
              instance containing protocol headers that the <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -3939,8 +4733,12 @@
 
             
 
+            
+
              object. Any attempt to set one of these restricted headers in the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -3949,8 +4747,12 @@
 
             
 
+            
+
              object will throw an exception later when attempting to send the <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -3968,6 +4770,8 @@
           <para
             >In addition, some other headers are also restricted when using a <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -4002,13 +4806,19 @@
 
             
 
+            
+
              class has properties for setting some of the above headers. If it is important for an application to set these headers, then the <see
              cref="T:System.Net.HttpWebRequest" />
 
             
 
+            
+
              class should be used instead of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -4072,6 +4882,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4086,6 +4898,8 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
         </remarks>
@@ -4097,6 +4911,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4105,8 +4921,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.DownloadDataCompletedEventArgs" />
+
+          
 
           
 
@@ -4143,6 +4963,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4153,11 +4975,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnDownloadFileCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
+
+            
 
             
 
@@ -4172,6 +4998,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4180,8 +5008,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+          
 
           
 
@@ -4218,6 +5050,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4228,11 +5062,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnDownloadProgressChanged(System.Net.DownloadProgressChangedEventArgs)" />
+
+            
 
             
 
@@ -4247,6 +5085,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4255,8 +5095,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.DownloadProgressChangedEventArgs" />
+
+          
 
           
 
@@ -4293,6 +5137,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4303,11 +5149,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnDownloadStringCompleted(System.Net.DownloadStringCompletedEventArgs)" />
+
+            
 
             
 
@@ -4322,6 +5172,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4330,8 +5182,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.DownloadStringCompletedEventArgs" />
+
+          
 
           
 
@@ -4368,6 +5224,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4378,11 +5236,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnOpenReadCompleted(System.Net.OpenReadCompletedEventArgs)" />
+
+            
 
             
 
@@ -4397,6 +5259,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4405,8 +5269,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.OpenReadCompletedEventArgs" />
+
+          
 
           
 
@@ -4443,6 +5311,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4453,11 +5323,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnOpenWriteCompleted(System.Net.OpenWriteCompletedEventArgs)" />
+
+            
 
             
 
@@ -4472,6 +5346,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4480,8 +5356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.OpenWriteCompletedEventArgs" />
+
+          
 
           
 
@@ -4518,6 +5398,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4528,11 +5410,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnUploadDataCompleted(System.Net.UploadDataCompletedEventArgs)" />
+
+            
 
             
 
@@ -4547,6 +5433,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4555,8 +5443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.UploadDataCompletedEventArgs" />
+
+          
 
           
 
@@ -4593,6 +5485,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4603,11 +5497,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnUploadFileCompleted(System.Net.UploadFileCompletedEventArgs)" />
+
+            
 
             
 
@@ -4622,6 +5520,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4630,8 +5530,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.UploadFileCompletedEventArgs" />
+
+          
 
           
 
@@ -4668,6 +5572,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4678,11 +5584,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnUploadProgressChanged(System.Net.UploadProgressChangedEventArgs)" />
+
+            
 
             
 
@@ -4697,6 +5607,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4705,8 +5617,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.UploadProgressChangedEventArgs" />
+
+          
 
           
 
@@ -4743,6 +5659,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4753,11 +5671,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnUploadStringCompleted(System.Net.UploadStringCompletedEventArgs)" />
+
+            
 
             
 
@@ -4772,6 +5694,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4780,8 +5704,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.UploadStringCompletedEventArgs" />
+
+          
 
           
 
@@ -4818,6 +5746,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -4828,11 +5758,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.WebClient.OnUploadValuesCompleted(System.Net.UploadValuesCompletedEventArgs)" />
+
+            
 
             
 
@@ -4847,6 +5781,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4855,8 +5791,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.UploadValuesCompletedEventArgs" />
+
+          
 
           
 
@@ -4900,8 +5840,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -4910,8 +5854,12 @@
 
             
 
+            
+
              parameter. This method blocks while opening the stream. To continue executing while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenReadAsync" />
+
+            
 
             
 
@@ -4923,8 +5871,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -4933,8 +5885,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -4943,8 +5899,12 @@
 
             
 
+            
+
              property is not null, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -4958,8 +5918,12 @@
 
               
 
+              
+
                when finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -4975,6 +5939,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -4984,6 +5950,8 @@
           <para
             >Opens a readable stream for the data downloaded from a resource with the URI specified as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4998,6 +5966,8 @@
 
             
 
+            
+
              used to read data from a resource.</para
           >
         </returns>
@@ -5006,8 +5976,12 @@
 
           
 
+          
+
           The URI specified as a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -5042,8 +6016,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -5052,8 +6030,12 @@
 
             
 
+            
+
              parameter. This method blocks while opening the stream. To continue executing while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenReadAsync" />
+
+            
 
             
 
@@ -5065,8 +6047,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5075,8 +6061,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5085,8 +6075,12 @@
 
             
 
+            
+
              property is not null, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5100,8 +6094,12 @@
 
               
 
+              
+
                when finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -5113,6 +6111,8 @@
              type="text/html">
               <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -5134,6 +6134,8 @@
 
             
 
+            
+
              used to read data from a resource.</para
           >
         </returns>
@@ -5142,8 +6144,12 @@
 
           
 
+          
+
           The URI specified as a <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -5177,13 +6183,19 @@
 
             
 
+            
+
              instance used to access the resource specified by the <paramref
              name="address" />
 
             
 
+            
+
              parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. To receive notification when the stream is available, add an event handler to the <see
              cref="E:System.Net.WebClient.OpenReadCompleted" />
+
+            
 
             
 
@@ -5196,8 +6208,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -5210,11 +6226,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -5226,8 +6246,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5236,8 +6260,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5246,8 +6274,12 @@
 
             
 
+            
+
              property is not null, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5263,6 +6295,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -5273,6 +6307,8 @@
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5310,13 +6346,19 @@
 
             
 
+            
+
              instance used to access the resource specified by the <paramref
              name="address" />
 
             
 
+            
+
              parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. To receive notification when the stream is available, add an event handler to the <see
              cref="E:System.Net.WebClient.OpenReadCompleted" />
+
+            
 
             
 
@@ -5329,8 +6371,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -5343,11 +6389,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -5359,8 +6409,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5369,8 +6423,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5379,8 +6437,12 @@
 
             
 
+            
+
              property is not null, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5393,6 +6455,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -5409,10 +6473,14 @@
 
           
 
+          
+
           The URI of the resource to retrieve.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5446,6 +6514,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -5454,8 +6524,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.OpenReadCompletedEventArgs" />
+
+            
 
             
 
@@ -5466,6 +6540,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5506,6 +6582,8 @@
 
             
 
+            
+
              object will complete after the a readable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
@@ -5514,8 +6592,12 @@
 
             
 
+            
+
              instance used to access the resource specified by the <paramref
              name="address" />
+
+            
 
             
 
@@ -5528,8 +6610,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -5542,6 +6628,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -5550,8 +6638,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5560,8 +6652,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5570,8 +6666,12 @@
 
             
 
+            
+
              property is not null, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5584,6 +6684,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -5603,6 +6705,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -5611,8 +6715,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -5621,6 +6729,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5664,6 +6774,8 @@
 
             
 
+            
+
              object will complete after the a readable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
@@ -5672,8 +6784,12 @@
 
             
 
+            
+
              instance used to access the resource specified by the <paramref
              name="address" />
+
+            
 
             
 
@@ -5686,8 +6802,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -5700,6 +6820,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -5708,8 +6830,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5718,8 +6844,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5728,8 +6858,12 @@
 
             
 
+            
+
              property is not null, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5742,6 +6876,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -5761,6 +6897,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -5769,8 +6907,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -5779,6 +6921,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5822,8 +6966,12 @@
 
             
 
+            
+
              method returns a writable stream that is used to send data to a resource. This method blocks while opening the stream. To continue executing while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenWriteAsync" />
+
+            
 
             
 
@@ -5835,8 +6983,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5845,8 +6997,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5855,8 +7011,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5869,6 +7029,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -5888,11 +7050,15 @@
 
             
 
+            
+
              used to write data to the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5927,8 +7093,12 @@
 
             
 
+            
+
              method returns a writable stream that is used to send data to a resource. This method blocks while opening the stream. To continue executing while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenWriteAsync" />
+
+            
 
             
 
@@ -5940,8 +7110,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -5950,8 +7124,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -5960,8 +7138,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -5974,6 +7156,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -5993,11 +7177,15 @@
 
             
 
+            
+
              used to write data to the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6045,13 +7233,19 @@
 
             
 
+            
+
              method returns a writable stream that is used to send data to a resource. The underlying request is made with the method specified in the <paramref
              name="method" />
 
             
 
+            
+
              parameter. The data is sent to the server when you close the stream. This method blocks while opening the stream. To continue executing while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenWriteAsync" />
+
+            
 
             
 
@@ -6063,13 +7257,19 @@
 
             
 
+            
+
              parameter specifies a method that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -6081,8 +7281,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6091,8 +7295,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6101,8 +7309,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6114,6 +7326,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -6133,6 +7347,8 @@
 
             
 
+            
+
              used to write data to the resource.</para
           >
         </returns>
@@ -6141,10 +7357,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data. </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6183,8 +7403,12 @@
 
             
 
+            
+
              method returns a writable stream that is used to send data to a resource. This method blocks while opening the stream. To continue executing while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenWriteAsync" />
+
+            
 
             
 
@@ -6196,8 +7420,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6206,8 +7434,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6216,8 +7448,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6229,6 +7465,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -6248,6 +7486,8 @@
 
             
 
+            
+
              used to write data to the resource.</para
           >
         </returns>
@@ -6256,10 +7496,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6293,8 +7537,12 @@
 
             
 
+            
+
              event. When you close the stream, the thread blocks until the request is sent to <paramref
              name="address" />
+
+            
 
             
 
@@ -6306,6 +7554,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -6314,8 +7564,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6324,8 +7578,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6334,8 +7592,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6351,6 +7613,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -6361,6 +7625,8 @@
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6398,8 +7664,12 @@
 
             
 
+            
+
              event. When you close the stream, the thread blocks until the request is sent to <paramref
              name="address" />
+
+            
 
             
 
@@ -6411,6 +7681,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -6419,8 +7691,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6429,8 +7705,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6439,8 +7719,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6452,6 +7736,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -6468,10 +7754,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data. </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6510,6 +7800,8 @@
 
             
 
+            
+
              event. The contents of the stream are sent to the server when you close the stream.</para
           >
           <para
@@ -6518,13 +7810,19 @@
 
             
 
+            
+
              parameter specifies a method that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -6536,11 +7834,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This method does not block the calling thread while the stream is being opened. To block while waiting for the stream, use one of the <see
              cref="Overload:System.Net.WebClient.OpenWrite" />
+
+            
 
             
 
@@ -6552,8 +7854,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6562,8 +7868,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6572,8 +7882,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6585,6 +7899,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -6601,6 +7917,8 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
@@ -6608,10 +7926,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6645,6 +7967,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -6653,8 +7977,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.OpenWriteCompletedEventArgs" />
+
+            
 
             
 
@@ -6665,6 +7993,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -6705,6 +8035,8 @@
 
             
 
+            
+
              object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
@@ -6713,8 +8045,12 @@
 
             
 
+            
+
              instance used to write data to the resource specified by the <paramref
              name="address" />
+
+            
 
             
 
@@ -6727,8 +8063,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -6741,6 +8081,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -6749,8 +8091,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6759,8 +8105,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6769,8 +8119,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6782,6 +8136,8 @@
              type="text/html">
               <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -6800,6 +8156,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -6808,8 +8166,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -6818,6 +8180,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6853,6 +8217,8 @@
 
             
 
+            
+
              object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
@@ -6861,8 +8227,12 @@
 
             
 
+            
+
              instance used to write data to the resource specified by the <paramref
              name="address" />
+
+            
 
             
 
@@ -6875,8 +8245,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -6889,6 +8263,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -6897,8 +8273,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -6907,8 +8287,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -6917,8 +8301,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -6930,6 +8318,8 @@
              type="text/html">
               <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -6948,6 +8338,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -6956,8 +8348,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -6966,6 +8362,8 @@
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7002,6 +8400,8 @@
 
             
 
+            
+
              object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
@@ -7010,8 +8410,12 @@
 
             
 
+            
+
              instance used to write data to the resource specified by the <paramref
              name="address" />
+
+            
 
             
 
@@ -7024,8 +8428,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -7038,13 +8446,19 @@
 
             
 
+            
+
              parameter specifies a method that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -7056,6 +8470,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -7064,8 +8480,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -7074,8 +8494,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -7084,8 +8508,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -7097,6 +8525,8 @@
              type="text/html">
               <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -7115,6 +8545,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -7123,8 +8555,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -7136,10 +8572,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7184,6 +8624,8 @@
 
             
 
+            
+
              object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
@@ -7192,8 +8634,12 @@
 
             
 
+            
+
              instance used to write data to the resource specified by the <paramref
              name="address" />
+
+            
 
             
 
@@ -7206,8 +8652,12 @@
 
               
 
+              
+
                when you are finished with the <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -7220,13 +8670,19 @@
 
             
 
+            
+
              parameter specifies a method that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -7238,6 +8694,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -7246,8 +8704,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -7256,8 +8718,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -7266,8 +8732,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -7279,6 +8749,8 @@
              type="text/html">
               <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
             </format>
+
+            
 
             
 
@@ -7297,6 +8769,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -7305,8 +8779,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -7318,10 +8796,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7353,8 +8835,12 @@
 
             
 
+            
+
              property identifies the <see
              cref="T:System.Net.IWebProxy" />
+
+            
 
             
 
@@ -7363,13 +8849,19 @@
 
             
 
+            
+
              object. The proxy is set by the system using configuration files and the Internet Explorer Local Area Network settings. To specify that no proxy should be used, set the <see
              cref="P:System.Net.WebClient.Proxy" />
 
             
 
+            
+
              property to the proxy instance returned by the <see
              cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" />
+
+            
 
             
 
@@ -7383,6 +8875,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7391,6 +8885,8 @@
           <para
             >Gets or sets the proxy used by this <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -7430,6 +8926,8 @@
 
             
 
+            
+
              that contains query name/value
    pairs associated with the request or, if this property has not been
    set or was set to <see
@@ -7437,8 +8935,12 @@
 
             
 
+            
+
             , a new instance of the <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -7454,13 +8956,19 @@
 
             
 
+            
+
              property contains a <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
 
             
 
+            
+
              instance containing name/value pairs that are appended to the URI as a query string. The contents of the <see
              cref="P:System.Net.WebClient.QueryString" />
+
+            
 
             
 
@@ -7505,6 +9013,8 @@
 
             
 
+            
+
              containing header name/value
    pairs associated with the response.</para
           >
@@ -7517,13 +9027,19 @@
 
             
 
+            
+
              property contains a <see
              cref="T:System.Net.WebHeaderCollection" />
 
             
 
+            
+
              instance containing header information the <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -7572,8 +9088,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -7592,6 +9112,8 @@
 
             
 
+            
+
              method sends a data buffer to a resource. </para
           >
           <para
@@ -7600,8 +9122,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -7613,13 +9139,19 @@
 
             
 
+            
+
              method sends the content of <paramref
              name="data" />
 
             
 
+            
+
              to the server without encoding it. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadDataAsync" />
+
+            
 
             
 
@@ -7631,8 +9163,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -7641,8 +9177,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -7651,8 +9191,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -7664,6 +9208,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -7683,6 +9229,8 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
@@ -7691,10 +9239,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7730,6 +9282,8 @@
 
             
 
+            
+
              method sends a data buffer to a resource. </para
           >
           <para
@@ -7738,8 +9292,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -7751,13 +9309,19 @@
 
             
 
+            
+
              method sends the content of <paramref
              name="data" />
 
             
 
+            
+
              to the server without encoding it. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadDataAsync" />
+
+            
 
             
 
@@ -7769,8 +9333,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -7779,8 +9347,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -7789,8 +9361,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -7802,6 +9378,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -7821,6 +9399,8 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
@@ -7829,10 +9409,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7876,8 +9460,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -7896,13 +9484,19 @@
 
             
 
+            
+
              method sends a data buffer to a resource using the HTTP method specified in the <paramref
              name="method" />
 
             
 
+            
+
              parameter, and returns any response from the server. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadDataAsync" />
+
+            
 
             
 
@@ -7914,8 +9508,12 @@
 
             
 
+            
+
              method sends the content of <paramref
              name="data" />
+
+            
 
             
 
@@ -7927,13 +9525,19 @@
 
             
 
+            
+
              parameter specifies a verb that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -7945,8 +9549,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -7955,8 +9563,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -7965,8 +9577,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -7978,6 +9594,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -7997,11 +9615,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8012,10 +9634,14 @@
 
           
 
+          
+
           The HTTP method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8055,13 +9681,19 @@
 
             
 
+            
+
              method sends a data buffer to a resource using the HTTP method specified in the <paramref
              name="method" />
 
             
 
+            
+
              parameter, and returns any response from the server. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadDataAsync" />
+
+            
 
             
 
@@ -8073,8 +9705,12 @@
 
             
 
+            
+
              method sends the content of <paramref
              name="data" />
+
+            
 
             
 
@@ -8086,13 +9722,19 @@
 
             
 
+            
+
              parameter specifies a verb that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -8104,8 +9746,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -8114,8 +9760,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8124,8 +9774,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8137,6 +9791,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -8156,11 +9812,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8171,10 +9831,14 @@
 
           
 
+          
+
           The HTTP method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8212,11 +9876,15 @@
 
             
 
+            
+
              event. </para
           >
           <para
             >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadData" />
+
+            
 
             
 
@@ -8228,6 +9896,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -8236,8 +9906,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -8246,8 +9920,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8256,8 +9934,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8270,6 +9952,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -8286,10 +9970,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8328,11 +10016,15 @@
 
             
 
+            
+
              event. </para
           >
           <para
             >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadData" />
+
+            
 
             
 
@@ -8344,6 +10036,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -8352,8 +10046,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -8362,8 +10060,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8372,8 +10074,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8385,6 +10091,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -8401,6 +10109,8 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
@@ -8408,10 +10118,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8451,11 +10165,15 @@
 
             
 
+            
+
              event. </para
           >
           <para
             >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadData" />
+
+            
 
             
 
@@ -8467,6 +10185,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -8475,8 +10195,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -8485,8 +10209,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8495,8 +10223,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8508,6 +10240,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -8524,10 +10258,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8538,10 +10276,14 @@
 
           
 
+          
+
           The data buffer to send to the resource.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8575,6 +10317,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -8583,8 +10327,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.UploadDataCompletedEventArgs" />
+
+            
 
             
 
@@ -8595,6 +10343,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -8636,12 +10386,16 @@
 
             
 
+            
+
              object will complete after the a data buffer has been uploaded to the resource. </para
           >
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -8653,8 +10407,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -8663,8 +10421,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8673,8 +10435,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8690,6 +10456,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -8699,6 +10467,8 @@
           <para
             >Uploads a data buffer that contains a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8713,6 +10483,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -8721,8 +10493,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8734,10 +10510,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8774,12 +10554,16 @@
 
             
 
+            
+
              object will complete after the a data buffer has been uploaded to the resource. </para
           >
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -8791,8 +10575,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -8801,8 +10589,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8811,8 +10603,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8828,6 +10624,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -8837,6 +10635,8 @@
           <para
             >Uploads a data buffer that contains a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8851,6 +10651,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -8859,8 +10661,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8872,10 +10678,14 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8913,12 +10723,16 @@
 
             
 
+            
+
              object will complete after the a data buffer has been uploaded to the resource. </para
           >
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -8930,8 +10744,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -8940,8 +10758,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -8950,8 +10772,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -8963,6 +10789,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -8978,6 +10806,8 @@
 
             
 
+            
+
              array to the URI specified as an asynchronous operation using a task object.  </para
           >
         </summary>
@@ -8989,6 +10819,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -8997,8 +10829,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -9010,6 +10846,8 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
@@ -9017,10 +10855,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9066,12 +10908,16 @@
 
             
 
+            
+
              object will complete after the a data buffer has been uploaded to the resource. </para
           >
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -9083,8 +10929,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -9093,8 +10943,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -9103,8 +10957,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -9116,6 +10974,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -9131,6 +10991,8 @@
 
             
 
+            
+
              array to the URI specified as an asynchronous operation using a task object.  </para
           >
         </summary>
@@ -9142,6 +11004,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -9150,8 +11014,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -9163,6 +11031,8 @@
 
           
 
+          
+
           The URI of the resource to receive the data.</param
         >
         <param name="method">
@@ -9170,10 +11040,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9216,13 +11090,19 @@
 
             
 
+            
+
              is <see
              langword="null" />
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -9244,8 +11124,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+          
 
           
 
@@ -9259,11 +11143,15 @@
 
             
 
+            
+
              method sends a local file to a resource. This method uses the STOR command to upload an FTP resource. For an HTTP resource, the POST method is used.</para
           >
           <para
             >This method blocks while uploading the file. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFileAsync" />
+
+            
 
             
 
@@ -9275,8 +11163,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -9288,8 +11180,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -9298,8 +11194,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -9308,8 +11208,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -9321,6 +11225,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -9340,6 +11246,8 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
@@ -9348,10 +11256,14 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For example, ftp://localhost/samplefile.txt.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9390,11 +11302,15 @@
 
             
 
+            
+
              method sends a local file to a resource. This method uses the STOR command to upload an FTP resource. For an HTTP resource, the POST method is used.</para
           >
           <para
             >This method blocks while uploading the file. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFileAsync" />
+
+            
 
             
 
@@ -9406,8 +11322,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -9419,8 +11339,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -9429,8 +11353,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -9439,8 +11367,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -9452,6 +11384,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -9471,6 +11405,8 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
@@ -9479,10 +11415,14 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For example, ftp://localhost/samplefile.txt.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9526,13 +11466,19 @@
 
             
 
+            
+
              is <see
              langword="null" />
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -9554,8 +11500,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+          
 
           
 
@@ -9569,13 +11519,19 @@
 
             
 
+            
+
              method sends a local file to a resource using the HTTP method specified in the <paramref
              name="method" />
 
             
 
+            
+
              parameter and returns any response from the server. This method blocks while uploading the file. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFileAsync" />
+
+            
 
             
 
@@ -9587,8 +11543,12 @@
 
             
 
+            
+
              parameter specifies a verb that is not understood by the server or the <paramref
              name="address" />
+
+            
 
             
 
@@ -9597,8 +11557,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -9610,8 +11574,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -9620,8 +11588,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -9630,8 +11602,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -9643,6 +11619,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -9662,11 +11640,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9677,10 +11659,14 @@
 
           
 
+          
+
           The method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9720,13 +11706,19 @@
 
             
 
+            
+
              method sends a local file to a resource using the HTTP method specified in the <paramref
              name="method" />
 
             
 
+            
+
              parameter and returns any response from the server. This method blocks while uploading the file. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFileAsync" />
+
+            
 
             
 
@@ -9738,8 +11730,12 @@
 
             
 
+            
+
              parameter specifies a verb that is not understood by the server or the <paramref
              name="address" />
+
+            
 
             
 
@@ -9748,8 +11744,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -9761,8 +11761,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -9771,8 +11775,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -9781,8 +11789,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -9794,6 +11806,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -9813,11 +11827,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9828,10 +11846,14 @@
 
           
 
+          
+
           The method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9869,11 +11891,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFile" />
+
+            
 
             
 
@@ -9885,6 +11911,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -9893,8 +11921,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -9903,13 +11935,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -9922,6 +11960,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -9938,10 +11978,14 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9980,11 +12024,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFile" />
+
+            
 
             
 
@@ -9996,6 +12044,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -10004,8 +12054,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -10014,13 +12068,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10033,6 +12093,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10049,6 +12111,8 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
         >
         <param name="method">
@@ -10056,10 +12120,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10099,11 +12167,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadFile" />
+
+            
 
             
 
@@ -10115,6 +12187,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -10123,8 +12197,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -10133,13 +12211,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10152,6 +12236,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10168,10 +12254,14 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10182,10 +12272,14 @@
 
           
 
+          
+
           The file to send to the resource.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10219,6 +12313,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -10227,8 +12323,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.UploadFileCompletedEventArgs" />
+
+            
 
             
 
@@ -10239,6 +12339,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -10280,11 +12382,15 @@
 
             
 
+            
+
              object will complete after the file has been uploaded to the resource. The file is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -10296,8 +12402,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -10306,13 +12416,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10325,6 +12441,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10344,6 +12462,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -10352,8 +12472,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -10365,10 +12489,14 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10405,11 +12533,15 @@
 
             
 
+            
+
              object will complete after the file has been uploaded to the resource. The file is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -10421,8 +12553,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -10431,13 +12567,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10450,6 +12592,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10469,6 +12613,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -10477,8 +12623,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -10490,10 +12640,14 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10531,11 +12685,15 @@
 
             
 
+            
+
              object will complete after the file has been uploaded to the resource. The file is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -10547,8 +12705,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -10557,13 +12719,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10576,6 +12744,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10595,6 +12765,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -10603,8 +12775,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -10616,6 +12792,8 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
@@ -10623,10 +12801,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10672,11 +12854,15 @@
 
             
 
+            
+
              object will complete after the file has been uploaded to the resource. The file is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -10688,8 +12874,12 @@
 
             
 
+            
+
              property is not an empty string (""), <paramref
              name="address" />
+
+            
 
             
 
@@ -10698,13 +12888,19 @@
 
             
 
+            
+
              to form the absolute URI of the requested data. If the <see
              cref="P:System.Net.WebClient.QueryString" />
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10717,6 +12913,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10736,6 +12934,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -10744,8 +12944,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -10757,6 +12961,8 @@
 
           
 
+          
+
           The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
@@ -10764,10 +12970,14 @@
 
           
 
+          
+
           The method used to send the data to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10820,6 +13030,8 @@
 
                   
 
+                  
+
                    array to the resource, without blocking the calling thread.</para
                 >
               </description>
@@ -10847,8 +13059,12 @@
 
                   
 
+                  
+
                    to the resource and returns a <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -10863,8 +13079,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.UploadProgressChangedEventArgs" />
+
+            
 
             
 
@@ -10875,6 +13095,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -10917,13 +13139,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadStringAsync" />
+
+            
 
             
 
@@ -10935,8 +13163,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -10945,8 +13177,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -10955,8 +13191,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -10969,6 +13209,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -10988,6 +13230,8 @@
 
             
 
+            
+
              containing the response sent by the server.</para
           >
         </returns>
@@ -10996,10 +13240,14 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For Http resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11037,13 +13285,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadStringAsync" />
+
+            
 
             
 
@@ -11055,8 +13309,12 @@
 
             
 
+            
+
              property is not an empty string (""), and <paramref
              name="address" />
+
+            
 
             
 
@@ -11065,8 +13323,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11075,8 +13337,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11089,6 +13355,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11108,6 +13376,8 @@
 
             
 
+            
+
              containing the response sent by the server.</para
           >
         </returns>
@@ -11116,10 +13386,14 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For Http resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11158,13 +13432,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadStringAsync" />
+
+            
 
             
 
@@ -11176,8 +13456,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -11186,8 +13470,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11196,8 +13484,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11209,6 +13501,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11228,6 +13522,8 @@
 
             
 
+            
+
              containing the response sent by the server.</para
           >
         </returns>
@@ -11236,8 +13532,12 @@
 
           
 
+          
+
           The URI of the resource to receive the string. This URI must identify a resource that can accept a request sent with the <paramref
            name="method" />
+
+          
 
           
 
@@ -11248,10 +13548,14 @@
 
           
 
+          
+
           The HTTP method used to send the string to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11290,13 +13594,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadStringAsync" />
+
+            
 
             
 
@@ -11308,8 +13618,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -11318,8 +13632,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11328,8 +13646,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11341,6 +13663,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11360,6 +13684,8 @@
 
             
 
+            
+
              containing the response sent by the server.</para
           >
         </returns>
@@ -11368,8 +13694,12 @@
 
           
 
+          
+
           The URI of the resource to receive the string. This URI must identify a resource that can accept a request sent with the <paramref
            name="method" />
+
+          
 
           
 
@@ -11380,10 +13710,14 @@
 
           
 
+          
+
           The HTTP method used to send the string to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11421,13 +13755,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. To receive notification when the string upload completes, you can add an event handler to the <see
              cref="E:System.Net.WebClient.UploadStringCompleted" />
+
+            
 
             
 
@@ -11439,11 +13779,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -11455,8 +13799,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -11465,8 +13813,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11475,8 +13827,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11489,6 +13845,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11505,10 +13863,14 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11547,13 +13909,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. To receive notification when the string upload completes, you can add an event handler to the <see
              cref="E:System.Net.WebClient.UploadStringCompleted" />
+
+            
 
             
 
@@ -11565,11 +13933,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -11581,8 +13953,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -11591,8 +13967,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11601,8 +13981,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11614,6 +13998,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11630,6 +14016,8 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
@@ -11637,10 +14025,14 @@
 
           
 
+          
+
           The HTTP method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11680,13 +14072,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. To receive notification when the string upload completes, you can add an event handler to the <see
              cref="E:System.Net.WebClient.UploadStringCompleted" />
+
+            
 
             
 
@@ -11698,11 +14096,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -11714,8 +14116,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -11724,8 +14130,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11734,8 +14144,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11747,6 +14161,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11763,10 +14179,14 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11777,10 +14197,14 @@
 
           
 
+          
+
           The string to be uploaded.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11814,6 +14238,8 @@
 
             
 
+            
+
              methods.</para
           >
           <para
@@ -11822,8 +14248,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.UploadStringCompletedEventArgs" />
+
+            
 
             
 
@@ -11834,6 +14264,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"></a>
             </format>
+
+            
 
             
 
@@ -11875,11 +14307,15 @@
 
             
 
+            
+
              object will complete after the string has been uploaded to the resource. The string is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -11891,8 +14327,12 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
+
+            
 
             
 
@@ -11904,8 +14344,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -11914,8 +14358,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -11924,8 +14372,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -11937,6 +14389,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -11956,6 +14410,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -11964,8 +14420,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -11977,10 +14437,14 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12017,11 +14481,15 @@
 
             
 
+            
+
              object will complete after the string has been uploaded to the resource. The string is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -12033,8 +14501,12 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
+
+            
 
             
 
@@ -12046,8 +14518,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -12056,8 +14532,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -12066,8 +14546,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -12079,6 +14563,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -12098,6 +14584,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -12106,8 +14594,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -12119,10 +14611,14 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12160,11 +14656,15 @@
 
             
 
+            
+
              object will complete after the string has been uploaded to the resource. The string is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -12176,8 +14676,12 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
+
+            
 
             
 
@@ -12189,8 +14693,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -12199,8 +14707,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -12209,8 +14721,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -12222,6 +14738,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -12241,6 +14759,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -12249,8 +14769,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -12262,6 +14786,8 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
@@ -12269,10 +14795,14 @@
 
           
 
+          
+
           The HTTP method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12318,11 +14848,15 @@
 
             
 
+            
+
              object will complete after the string has been uploaded to the resource. The string is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -12334,8 +14868,12 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
+
+            
 
             
 
@@ -12347,8 +14885,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -12357,8 +14899,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -12367,8 +14913,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -12380,6 +14930,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -12399,6 +14951,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -12407,8 +14961,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -12420,6 +14978,8 @@
 
           
 
+          
+
           The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.</param
         >
         <param name="method">
@@ -12427,10 +14987,14 @@
 
           
 
+          
+
           The HTTP method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12473,8 +15037,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -12491,6 +15059,8 @@
 
             
 
+            
+
             , and is not "application/x-www-form-urlencoded".</para
           >
         </exception>
@@ -12502,13 +15072,19 @@
 
             
 
+            
+
              method sends a <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
 
             
 
+            
+
              to a server. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadValuesAsync" />
+
+            
 
             
 
@@ -12520,8 +15096,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -12533,6 +15113,8 @@
 
             
 
+            
+
              method sets it to "application/x-www-form-urlencoded".</para
           >
           <para
@@ -12541,8 +15123,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -12551,8 +15137,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -12561,8 +15151,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -12575,6 +15169,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -12594,11 +15190,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12609,8 +15209,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -12649,13 +15253,19 @@
 
             
 
+            
+
              method sends a <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
 
             
 
+            
+
              to a server. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadValuesAsync" />
+
+            
 
             
 
@@ -12667,8 +15277,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -12680,6 +15294,8 @@
 
             
 
+            
+
              method sets it to "application/x-www-form-urlencoded".</para
           >
           <para
@@ -12688,8 +15304,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -12698,8 +15318,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -12708,8 +15332,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -12722,6 +15350,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -12741,11 +15371,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12756,8 +15390,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -12801,8 +15439,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -12819,6 +15461,8 @@
 
             
 
+            
+
             , and is not "application/x-www-form-urlencoded".</para
           >
         </exception>
@@ -12830,8 +15474,12 @@
 
             
 
+            
+
              method sends a <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -12840,8 +15488,12 @@
 
             
 
+            
+
              parameter and returns any response from the server. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadValuesAsync" />
+
+            
 
             
 
@@ -12853,6 +15505,8 @@
 
             
 
+            
+
              method sets it to application/x-www-form-urlencoded.</para
           >
           <para
@@ -12861,13 +15515,19 @@
 
             
 
+            
+
              parameter specifies a verb that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -12879,8 +15539,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -12889,8 +15553,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -12899,8 +15567,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -12912,6 +15584,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -12931,11 +15605,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12946,6 +15624,8 @@
 
           
 
+          
+
           The HTTP method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
@@ -12953,8 +15633,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -12994,8 +15678,12 @@
 
             
 
+            
+
              method sends a <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -13004,8 +15692,12 @@
 
             
 
+            
+
              parameter and returns any response from the server. This method blocks while uploading the data. To continue executing while waiting for the server's response, use one of the <see
              cref="Overload:System.Net.WebClient.UploadValuesAsync" />
+
+            
 
             
 
@@ -13017,6 +15709,8 @@
 
             
 
+            
+
              method sets it to application/x-www-form-urlencoded.</para
           >
           <para
@@ -13025,13 +15719,19 @@
 
             
 
+            
+
              parameter specifies a verb that is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -13043,8 +15743,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -13053,8 +15757,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -13063,8 +15771,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -13076,6 +15788,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -13095,11 +15809,15 @@
 
             
 
+            
+
              array containing the body of the response from the resource.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13110,6 +15828,8 @@
 
           
 
+          
+
           The HTTP method used to send the file to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
@@ -13117,8 +15837,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -13156,13 +15880,19 @@
 
             
 
+            
+
              array using the encoding specified in the <see
              cref="P:System.Net.WebClient.Encoding" />
 
             
 
+            
+
              property. To receive notification when the string upload completes, you can add an event handler to the <see
              cref="E:System.Net.WebClient.UploadStringCompleted" />
+
+            
 
             
 
@@ -13174,11 +15904,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -13190,8 +15924,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -13200,8 +15938,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -13210,8 +15952,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -13224,6 +15970,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -13240,6 +15988,8 @@
 
           
 
+          
+
           The URI of the resource to receive the collection. This URI must identify a resource that can accept a request sent with the default method. See remarks.</param
         >
         <param name="data">
@@ -13247,8 +15997,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -13287,8 +16041,12 @@
 
             
 
+            
+
              to the <paramref
              name="address" />
+
+            
 
             
 
@@ -13297,13 +16055,19 @@
 
             
 
+            
+
              methods throw a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              if you call this method with a different Content-Type header value set in the <see
              cref="P:System.Net.WebClient.Headers" />
+
+            
 
             
 
@@ -13315,13 +16079,19 @@
 
             
 
+            
+
              method is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -13333,8 +16103,12 @@
 
             
 
+            
+
              is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the upload operation completes, add an event handler to the <see
              cref="E:System.Net.WebClient.UploadValuesCompleted" />
+
+            
 
             
 
@@ -13346,11 +16120,15 @@
 
             
 
+            
+
              methods. </para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -13362,8 +16140,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -13372,8 +16154,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -13382,8 +16168,12 @@
 
             
 
+            
+
              property is not empty, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -13395,6 +16185,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -13411,8 +16203,12 @@
 
           
 
+          
+
           The URI of the resource to receive the collection. This URI must identify a resource that can accept a request sent with the <paramref
            name="method" />
+
+          
 
           
 
@@ -13423,6 +16219,8 @@
 
           
 
+          
+
           The method used to send the string to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
@@ -13430,8 +16228,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -13471,8 +16273,12 @@
 
             
 
+            
+
              to the <paramref
              name="address" />
+
+            
 
             
 
@@ -13481,13 +16287,19 @@
 
             
 
+            
+
              methods throw a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              if you call this method with a different Content-Type header value set in the <see
              cref="P:System.Net.WebClient.Headers" />
+
+            
 
             
 
@@ -13499,13 +16311,19 @@
 
             
 
+            
+
              method is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see
              cref="T:System.Net.WebException" />
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -13517,8 +16335,12 @@
 
             
 
+            
+
              is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the upload operation completes, add an event handler to the <see
              cref="E:System.Net.WebClient.UploadValuesCompleted" />
+
+            
 
             
 
@@ -13530,11 +16352,15 @@
 
             
 
+            
+
              methods. </para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -13546,8 +16372,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -13556,8 +16386,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -13566,8 +16400,12 @@
 
             
 
+            
+
              property is not empty, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -13579,6 +16417,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -13596,8 +16436,12 @@
 
           
 
+          
+
           The URI of the resource to receive the collection. This URI must identify a resource that can accept a request sent with the <paramref
            name="method" />
+
+          
 
           
 
@@ -13608,10 +16452,14 @@
 
           
 
+          
+
           The HTTP method used to send the string to the resource. If null, the default is POST for http and STOR for ftp.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13620,10 +16468,14 @@
 
           
 
+          
+
            to send to the resource.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13657,8 +16509,12 @@
 
             
 
+            
+
              object's data completes. These uploads are started by calling the <see
              cref="Overload:System.Net.WebClient.UploadValuesAsync" />
+
+            
 
             
 
@@ -13670,8 +16526,12 @@
 
             
 
+            
+
              is the delegate for this event. The <see
              cref="T:System.Net.UploadValuesCompletedEventArgs" />
+
+            
 
             
 
@@ -13682,6 +16542,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -13723,11 +16585,15 @@
 
             
 
+            
+
              object will complete after the name/value collection has been uploaded to the resource. The name/value collection is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -13739,8 +16605,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -13753,8 +16623,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -13763,8 +16637,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -13773,8 +16651,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -13787,6 +16669,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -13806,6 +16690,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -13814,8 +16700,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -13827,6 +16717,8 @@
 
           
 
+          
+
           The URI of the resource to receive the collection.</param
         >
         <param name="data">
@@ -13834,8 +16726,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -13872,11 +16768,15 @@
 
             
 
+            
+
              object will complete after the name/value collection has been uploaded to the resource. The name/value collection is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -13888,8 +16788,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -13902,8 +16806,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -13912,8 +16820,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -13922,8 +16834,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -13936,6 +16852,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -13955,6 +16873,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -13963,8 +16883,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -13976,6 +16900,8 @@
 
           
 
+          
+
           The URI of the resource to receive the collection.</param
         >
         <param name="data">
@@ -13983,8 +16909,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -14022,11 +16952,15 @@
 
             
 
+            
+
              object will complete after the name/value collection has been uploaded to the resource. The name/value collection is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -14038,8 +16972,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -14052,8 +16990,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -14062,8 +17004,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -14072,8 +17018,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -14086,6 +17036,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -14105,6 +17057,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -14113,8 +17067,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -14126,10 +17084,14 @@
 
           
 
+          
+
           The URI of the resource to receive the collection.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -14140,8 +17102,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -14187,11 +17153,15 @@
 
             
 
+            
+
              object will complete after the name/value collection has been uploaded to the resource. The name/value collection is sent asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
             >Asynchronous operations that have not completed can be canceled using the <see
              cref="M:System.Net.WebClient.CancelAsync" />
+
+            
 
             
 
@@ -14203,8 +17173,12 @@
 
             
 
+            
+
              is thrown with the <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -14217,8 +17191,12 @@
 
             
 
+            
+
              property is not an empty string ("") and <paramref
              name="address" />
+
+            
 
             
 
@@ -14227,8 +17205,12 @@
 
             
 
+            
+
              must be a relative URI that is combined with <see
              cref="P:System.Net.WebClient.BaseAddress" />
+
+            
 
             
 
@@ -14237,8 +17219,12 @@
 
             
 
+            
+
              property is not an empty string, it is appended to <paramref
              name="address" />
+
+            
 
             
 
@@ -14251,6 +17237,8 @@
                type="text/html">
                 <a href="e993b7c3-087f-45d8-9c02-9dded936d804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -14270,6 +17258,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -14278,8 +17268,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -14291,10 +17285,14 @@
 
           
 
+          
+
           The URI of the resource to receive the collection.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -14305,8 +17303,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -14340,8 +17342,12 @@
 
             
 
+            
+
              object should, if requested by the server, be authenticated using the default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. For middle tier applications, such as ASP.NET applications, instead of using this property, you would typically set the <see
              cref="P:System.Net.WebClient.Credentials" />
+
+            
 
             
 
@@ -14356,8 +17362,12 @@
 
             
 
+            
+
              value that controls whether the <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 

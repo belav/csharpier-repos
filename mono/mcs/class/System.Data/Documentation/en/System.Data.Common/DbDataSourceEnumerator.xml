@@ -35,8 +35,12 @@
 
             
 
+            
+
              class provides the basis for strongly typed enumerators such as <see
              cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+            
 
             
 
@@ -49,6 +53,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Data.Common.DbDataSourceEnumerator" />
+
+            
 
             
 
@@ -154,6 +160,8 @@
 
             
 
+            
+
              containing information about all visible instances of the server represented by the strongly typed instance of this class.</para
           >
         </summary>
@@ -162,6 +170,8 @@
           <para
             >Returns a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 

@@ -33,13 +33,19 @@
 
         
 
+        
+
          class is a simple implementation of the <see
          cref="T:System.ComponentModel.INestedContainer" />
 
         
 
+        
+
          interface, which defines a component that logically contains zero or more other components and is owned by a parent component. The behavior of nested containers differs from a standard <see
          cref="T:System.ComponentModel.Container" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Component.GetService(System.Type)" />
+
+            
 
             
 
@@ -68,6 +78,8 @@
 
             
 
+            
+
              property is a qualified name that includes the owning component’s name followed by a period (.) and the child component’s name.</para
           >
         </item>
@@ -77,8 +89,12 @@
 
             
 
+            
+
              provides support for the <see
              cref="T:System.ComponentModel.INestedContainer" />
+
+            
 
             
 
@@ -96,6 +112,8 @@
 
         
 
+        
+
          to track changes made to components. If the undo engine cannot identify a name for a component through the reference service, the engine will ignore any changes for that component. This service automatically recognizes changes to contained components only if they are exposed as public read-only properties of the same name in their owners. Otherwise, the developer must pass component change events up to the owner. For example, if a nested component’s Text property is resurfaced on its owning component as an Address property, when the Text property is changed, a property change must be programmatically made for the corresponding Address property or else that change will not be tracked by undo. </para
       >
     </remarks>
@@ -104,6 +122,8 @@
       <para
         >Provides the base implementation for the <see
          cref="T:System.ComponentModel.INestedContainer" />
+
+        
 
         
 
@@ -138,8 +158,12 @@
 
             
 
+            
+
              event so that the nested container's <see
              cref="Overload:System.ComponentModel.NestedContainer.Dispose" />
+
+            
 
             
 
@@ -154,6 +178,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -162,8 +188,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -201,8 +231,12 @@
 
             
 
+            
+
              parameter is null, the <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -221,6 +255,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -229,8 +265,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -241,8 +281,12 @@
 
           
 
+          
+
           The name to assign to <paramref
            name="component" />
+
+          
 
           
 
@@ -276,8 +320,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -286,8 +334,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -299,8 +351,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.NestedContainer" />
+
+            
 
             
 
@@ -313,6 +369,8 @@
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,13 +404,19 @@
 
             
 
+            
+
              method. This implementation only resolves requests for the <see
              cref="T:System.ComponentModel.INestedContainer" />
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -371,6 +435,8 @@
 
             
 
+            
+
              that implements the requested service, or null if the service cannot be resolved.</para
           >
         </returns>
@@ -379,8 +445,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -438,13 +508,19 @@
 
             
 
+            
+
              and calls <see
              cref="P:System.ComponentModel.INestedSite.FullName" />
 
             
 
+            
+
             , or <see
              cref="P:System.ComponentModel.ISite.Name" />
+
+            
 
             
 

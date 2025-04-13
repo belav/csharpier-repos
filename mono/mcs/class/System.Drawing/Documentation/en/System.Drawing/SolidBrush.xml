@@ -26,6 +26,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              object of the specified color.</para
           >
         </summary>
@@ -60,8 +64,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -90,6 +98,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -98,6 +108,8 @@
           <para
             >The <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
           <para
             >Gets or sets the color of this <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 

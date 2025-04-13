@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          control uses the <see
          cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
         
 
+        
+
          class at design time to set the value of the <see
          cref="P:System.Web.UI.WebControls.SqlDataSource.ConnectionString" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          attribute to associate the <see
          cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+        
 
         
 
@@ -59,13 +73,19 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
         
 
+        
+
          method displays a user interface for building the connection string expression and returns the connection string that is selected by the user. The <see
          cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
+
+        
 
         
 
@@ -92,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+            
 
             
 
@@ -126,8 +148,12 @@
 
             
 
+            
+
              method starts the user interface for editing the <paramref
              name="value" />
+
+            
 
             
 
@@ -136,8 +162,12 @@
 
             
 
+            
+
              method when you edit the value of a property that the connection string editor is associated with. The input service provider is used to obtain any editing services that are required within the <see
              cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+
+            
 
             
 
@@ -149,8 +179,12 @@
 
             
 
+            
+
              service implementation is supported in the specified context, the <see
              cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+
+            
 
             
 
@@ -159,8 +193,12 @@
 
             
 
+            
+
              control, which prompts you to select an existing connection expression or build a new connection expression. If an <see
              cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+
+            
 
             
 
@@ -169,8 +207,12 @@
 
             
 
+            
+
              method displays a simple instance of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -179,6 +221,8 @@
           <para
             >If you cancel without selecting a connection expression string, the returned object is the same as the <paramref
              name="value" />
+
+            
 
             
 
@@ -197,6 +241,8 @@
 
             
 
+            
+
              that was passed in.</para
           >
         </returns>
@@ -205,8 +251,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -217,10 +267,14 @@
 
           
 
+          
+
           A service provider object through which to obtain editing services.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,8 +306,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+            
 
             
 
@@ -262,8 +320,12 @@
 
             
 
+            
+
              value. If an <see
              cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+
+            
 
             
 
@@ -272,8 +334,12 @@
 
             
 
+            
+
              method returns the <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.DropDown" />
+
+            
 
             
 
@@ -285,13 +351,19 @@
 
             
 
+            
+
              method is not supported in the specified context, the <see
              cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
 
             
 
+            
+
              method returns the <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -310,6 +382,8 @@
 
             
 
+            
+
              enumeration value that indicates the editing style for the provided user interface.</para
           >
         </returns>
@@ -318,8 +392,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -351,8 +429,12 @@
 
             
 
+            
+
              method gets the provider name for the current instance of the <see
              cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+            
 
             
 
@@ -361,13 +443,19 @@
 
             
 
+            
+
              class, which is derived from <see
              cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
+            
+
              class, the <see
              cref="M:System.Web.UI.Design.ConnectionStringEditor.GetProviderName(System.Object)" />
+
+            
 
             
 
@@ -379,6 +467,8 @@
           <para
             >Returns the provider name for the provided instance of the <see
              cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+            
 
             
 
@@ -394,8 +484,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+          
 
           
 
@@ -431,8 +525,12 @@
 
             
 
+            
+
              method sets the provider name on the <paramref
              name="instance" />
+
+            
 
             
 
@@ -441,13 +539,19 @@
 
             
 
+            
+
              class, this either sets the provider name or adds an <see
              cref="T:System.Web.UI.ExpressionBinding" />
 
             
 
+            
+
              object, if the connection is a configured connection. In this implementation, the <see
              cref="M:System.Web.UI.Design.ConnectionStringEditor.SetProviderName(System.Object,System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+            
 
             
 
@@ -462,6 +566,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -470,8 +576,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+
+          
 
           
 
@@ -482,8 +592,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+
+          
 
           
 

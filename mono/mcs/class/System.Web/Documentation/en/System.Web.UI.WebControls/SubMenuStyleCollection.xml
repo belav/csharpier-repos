@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          class as the underlying data type of the <see
          cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
          property provides additional style choices in addition to the <see
          cref="P:System.Web.UI.WebControls.Menu.StaticMenuStyle" />
+
+        
 
         
 
@@ -65,13 +81,19 @@
 
         
 
+        
+
          properties. The first style in the <see
          cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
 
         
 
+        
+
          collection corresponds to the submenu style for the first level of the menu. The second style in the collection corresponds to the submenu style for the second level of the menu, and so on. The <see
          cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+
+        
 
         
 
@@ -83,13 +105,19 @@
 
         
 
+        
+
          class inherits most of its members from the <see
          cref="T:System.Web.UI.StateManagedCollection" />
 
         
 
+        
+
          class. For more information on the inherited members, see the <see
          cref="T:System.Web.UI.StateManagedCollection" />
+
+        
 
         
 
@@ -104,8 +132,12 @@
 
         
 
+        
+
          objects in a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -136,8 +168,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.StateManagedCollection.OnValidate(System.Object)" />
+
+            
 
             
 
@@ -146,13 +182,19 @@
 
             
 
+            
+
              instance is added to the collection, and the <see
              cref="M:System.Web.UI.StateManagedCollection.OnInsertComplete(System.Int32,System.Object)" />
 
             
 
+            
+
              method is called after the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+            
 
             
 
@@ -167,6 +209,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -178,6 +222,8 @@
 
             
 
+            
+
              instance was inserted.</para
           >
         </returns>
@@ -186,8 +232,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+          
 
           
 
@@ -220,13 +270,19 @@
 
             
 
+            
+
              method is called to validate the <paramref
              name="style" />
 
             
 
+            
+
              parameter before the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -241,8 +297,12 @@
 
             
 
+            
+
              collection contains a specific <see
              cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+            
 
             
 
@@ -257,13 +317,19 @@
 
             
 
+            
+
              instance is found in the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
 
             
 
+            
+
              collection; otherwise, false. If null is passed as the <paramref
              name="style" />
+
+            
 
             
 
@@ -275,13 +341,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
 
           
 
+          
+
            instance to locate in the <see
            cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+          
 
           
 
@@ -316,8 +388,12 @@
 
             
 
+            
+
              objects are copied to the destination array in the same order in which the enumerator iterates through the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -332,6 +408,8 @@
 
             
 
+            
+
              collection to an array, starting at a specified array index.</para
           >
         </summary>
@@ -340,8 +418,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -374,13 +456,19 @@
 
             
 
+            
+
              method is a helper function that is used to create an <see
              cref="T:System.Object" />
 
             
 
+            
+
              of the data type that corresponds to the specified index. The index is often determined by using the <see
              cref="M:System.Web.UI.WebControls.SubMenuStyleCollection.GetKnownTypes" />
+
+            
 
             
 
@@ -392,8 +480,12 @@
 
             
 
+            
+
              parameter is not used in this implementation of the method and is ignored. You should always pass in null for this parameter. This implementation of the method always returns an empty <see
              cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+            
 
             
 
@@ -411,6 +503,8 @@
 
             
 
+            
+
              of the data type that corresponds to the specified index.</para
           >
         </summary>
@@ -422,11 +516,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,8 +552,12 @@
 
             
 
+            
+
              method is a helper function that is used to create an array of data types supported by the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -464,8 +566,12 @@
 
             
 
+            
+
              method to create an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -483,8 +589,12 @@
 
             
 
+            
+
              objects that contains the supported data types of the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -499,8 +609,12 @@
 
             
 
+            
+
              objects that contains the data types supported by the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -534,8 +648,12 @@
 
             
 
+            
+
              method is called to validate the <paramref
              name="style" />
+
+            
 
             
 
@@ -550,8 +668,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -566,6 +688,8 @@
 
             
 
+            
+
              object if it is found in the list; otherwise, -1.</para
           >
         </returns>
@@ -574,13 +698,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
 
           
 
+          
+
            object to locate in the <see
            cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+          
 
           
 
@@ -614,8 +744,12 @@
 
             
 
+            
+
              is inserted at the beginning of the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -624,8 +758,12 @@
 
             
 
+            
+
              is appended to the end of the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -637,8 +775,12 @@
 
             
 
+            
+
              method is called to validate the style parameter before it is added to the collection. The <see
              cref="M:System.Web.UI.WebControls.SubMenuStyleCollection.OnInsert(System.Int32,System.Object)" />
+
+            
 
             
 
@@ -647,8 +789,12 @@
 
             
 
+            
+
              object is inserted into the collection, and the <see
              cref="M:System.Web.UI.StateManagedCollection.OnInsertComplete(System.Int32,System.Object)" />
+
+            
 
             
 
@@ -663,8 +809,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -676,8 +826,12 @@
 
           
 
+          
+
           The zero-based index at which the <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+          
 
           
 
@@ -688,13 +842,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
 
           
 
+          
+
            object to insert into the <see
            cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+          
 
           
 
@@ -750,13 +910,19 @@
 
             
 
+            
+
              method is called to validate the style parameter before it is used to locate the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyle" />
 
             
 
+            
+
              object to remove from the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -768,8 +934,12 @@
 
             
 
+            
+
              method is called before the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+            
 
             
 
@@ -778,8 +948,12 @@
 
             
 
+            
+
              method is called after the object is removed from the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -794,8 +968,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -807,8 +985,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+          
 
           
 
@@ -838,8 +1020,12 @@
 
             
 
+            
+
              method is called before the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+            
 
             
 
@@ -848,8 +1034,12 @@
 
             
 
+            
+
              method is called after the object is removed from the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -864,6 +1054,8 @@
 
             
 
+            
+
              object at the specified location.</para
           >
         </summary>
@@ -872,8 +1064,12 @@
 
           
 
+          
+
           The zero-based index location of the <see
            cref="T:System.Web.UI.WebControls.SubMenuStyle" />
+
+          
 
           
 
@@ -903,8 +1099,12 @@
 
             
 
+            
+
              method is called internally by the <see
              cref="M:System.Web.UI.IStateManager.SaveViewState" />
+
+            
 
             
 
@@ -913,8 +1113,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.WebControls.SubMenuStyleCollection.Insert(System.Int32,System.Web.UI.WebControls.SubMenuStyle)" />
+
+            
 
             
 
@@ -929,8 +1133,12 @@
 
             
 
+            
+
              object contained by the <see
              cref="T:System.Web.UI.WebControls.SubMenuStyleCollection" />
+
+            
 
             
 
@@ -939,6 +1147,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

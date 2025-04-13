@@ -29,8 +29,12 @@
 
         
 
+        
+
         , are nullable, but all value types, such as <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -43,13 +47,19 @@
 
         
 
+        
+
          class provides complementary support for the <see
          cref="T:System.Nullable`1" />
 
         
 
+        
+
          structure. The <see
          cref="T:System.Nullable" />
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          object, not the <see
          cref="T:System.Nullable`1" />
+
+        
 
         
 
@@ -74,13 +88,19 @@
 
         
 
+        
+
          property is true, the contents of the <see
          cref="P:System.Nullable`1.Value" />
 
         
 
+        
+
          property is boxed. If the HasValue property is false, null is boxed. When the underlying value of a nullable type is unboxed, the common language runtime creates a new <see
          cref="T:System.Nullable`1" />
+
+        
 
         
 
@@ -134,6 +154,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -145,8 +167,12 @@
 
             
 
+            
+
              and <paramref
              name="n2" />
+
+            
 
             
 
@@ -174,8 +200,12 @@
 
                   
 
+                  
+
                    property for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -184,8 +214,12 @@
 
                   
 
+                  
+
                    property for <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -198,8 +232,12 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -208,8 +246,12 @@
 
                   
 
+                  
+
                    are true, and the value of the <see
                    cref="P:System.Nullable`1.Value" />
+
+                  
 
                   
 
@@ -218,13 +260,19 @@
 
                   
 
+                  
+
                    is less than the value of the <see
                    cref="P:System.Nullable`1.Value" />
 
                   
 
+                  
+
                    property for <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -243,13 +291,19 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
 
                   
 
+                  
+
                    and <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -262,8 +316,12 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -272,8 +330,12 @@
 
                   
 
+                  
+
                    are true, and the value of the <see
                    cref="P:System.Nullable`1.Value" />
+
+                  
 
                   
 
@@ -282,13 +344,19 @@
 
                   
 
+                  
+
                    is equal to the value of the <see
                    cref="P:System.Nullable`1.Value" />
 
                   
 
+                  
+
                    property for <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -307,8 +375,12 @@
 
                   
 
+                  
+
                    property for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -317,8 +389,12 @@
 
                   
 
+                  
+
                    property for <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -331,8 +407,12 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -341,8 +421,12 @@
 
                   
 
+                  
+
                    are true, and the value of the <see
                    cref="P:System.Nullable`1.Value" />
+
+                  
 
                   
 
@@ -351,13 +435,19 @@
 
                   
 
+                  
+
                    is greater than the value of the <see
                    cref="P:System.Nullable`1.Value" />
 
                   
 
+                  
+
                    property for <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -372,8 +462,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Nullable`1" />
+
+          
 
           
 
@@ -384,8 +478,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Nullable`1" />
+
+          
 
           
 
@@ -396,13 +494,19 @@
 
           
 
+          
+
           The underlying value type of the <paramref
            name="n1" />
 
           
 
+          
+
            and <paramref
            name="n2" />
+
+          
 
           
 
@@ -451,6 +555,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -462,8 +568,12 @@
 
             
 
+            
+
              parameter is equal to the <paramref
              name="n2" />
+
+            
 
             
 
@@ -475,8 +585,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Nullable`1.Value" />
+
+            
 
             
 
@@ -504,13 +618,19 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
 
                   
 
+                  
+
                    and <paramref
                    name="n2" />
+
+                  
 
                   
 
@@ -523,8 +643,12 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -533,8 +657,12 @@
 
                   
 
+                  
+
                    are true, and the <see
                    cref="P:System.Nullable`1.Value" />
+
+                  
 
                   
 
@@ -553,6 +681,8 @@
 
                   
 
+                  
+
                    property is true for one parameter and false for the other parameter.</para
                 >
                 <para>-or-</para>
@@ -562,8 +692,12 @@
 
                   
 
+                  
+
                    properties for <paramref
                    name="n1" />
+
+                  
 
                   
 
@@ -572,8 +706,12 @@
 
                   
 
+                  
+
                    are true, and the <see
                    cref="P:System.Nullable`1.Value" />
+
+                  
 
                   
 
@@ -588,8 +726,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Nullable`1" />
+
+          
 
           
 
@@ -600,8 +742,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Nullable`1" />
+
+          
 
           
 
@@ -612,13 +758,19 @@
 
           
 
+          
+
           The underlying value type of the <paramref
            name="n1" />
 
           
 
+          
+
            and <paramref
            name="n2" />
+
+          
 
           
 
@@ -656,6 +808,8 @@
 
             
 
+            
+
             , that contains a type parameter list, and the type parameter list declares one or more type parameters. A closed generic type is a type declaration where a particular type is specified for a type parameter. </para
           >
           <para
@@ -664,8 +818,12 @@
 
             
 
+            
+
              parameter is the type of Nullable&lt;Int32&gt; in C# (Nullable(Of Int32) in Visual Basic), the return value is the type of <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -684,8 +842,12 @@
 
             
 
+            
+
              parameter, if the <paramref
              name="nullableType" />
+
+            
 
             
 
@@ -697,8 +859,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 

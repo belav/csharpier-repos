@@ -8,10 +8,14 @@
 
       
 
+      
+
        System.SByte </table_line
     >
     <table_line>
       <keyword>byte</keyword>
+
+      
 
       
 
@@ -22,10 +26,14 @@
 
       
 
+      
+
        System.Int16 </table_line
     >
     <table_line>
       <keyword>ushort</keyword>
+
+      
 
       
 
@@ -36,10 +44,14 @@
 
       
 
+      
+
        System.Int32 </table_line
     >
     <table_line>
       <keyword>uint</keyword>
+
+      
 
       
 
@@ -50,10 +62,14 @@
 
       
 
+      
+
        System.Int64 </table_line
     >
     <table_line>
       <keyword>ulong</keyword>
+
+      
 
       
 
@@ -64,10 +80,14 @@
 
       
 
+      
+
        System.Char </table_line
     >
     <table_line>
       <keyword>float</keyword>
+
+      
 
       
 
@@ -78,6 +98,8 @@
 
       
 
+      
+
        System.Double </table_line
     >
     <table_line>
@@ -85,10 +107,14 @@
 
       
 
+      
+
        System.Boolean </table_line
     >
     <table_line>
       <keyword>decimal</keyword>
+
+      
 
       
 
@@ -103,6 +129,8 @@
 
       
 
+      
+
        has the members declared in System.Int32 and the members inherited from System.Object, and the following statements are permitted: <code_example
       >
         <![CDATA[
@@ -114,8 +142,12 @@ string t = 123.ToString();   // System.Int32.ToString() instance method
 
       
 
+      
+
       end example]</example
     >
+
+    
 
     
 
@@ -127,10 +159,14 @@ string t = 123.ToString();   // System.Int32.ToString() instance method
 
         
 
+        
+
         ). <example
 
           >[Example: For example, 123 is a literal of type <keyword
           >int</keyword>
+
+          
 
           
 
@@ -139,8 +175,12 @@ string t = 123.ToString();   // System.Int32.ToString() instance method
 
           
 
+          
+
           . end example]</example
         >
+
+        
 
         
 
@@ -152,8 +192,12 @@ string t = 123.ToString();   // System.Int32.ToString() instance method
 
         
 
+        
+
          (<hyperlink
         >14.15</hyperlink>
+
+        
 
         
 
@@ -165,11 +209,15 @@ string t = 123.ToString();   // System.Int32.ToString() instance method
 
         
 
+        
+
         ). It is not possible to have constants of other struct types, but a similar effect is provided by static readonly fields. </list_item
       >
       <list_item
         > Conversions involving simple types can participate in evaluation of conversion operators defined by other struct types, but a user-defined conversion operator can never participate in evaluation of another  user-defined operator (<hyperlink
         >13.4.2</hyperlink>
+
+        
 
         
 

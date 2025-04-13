@@ -59,6 +59,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -141,8 +143,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.OperationMessage" />
+
+            
 
             
 

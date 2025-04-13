@@ -6,8 +6,12 @@
 
     
 
+    
+
     s (<hyperlink
     >16.5</hyperlink>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     s (<hyperlink
     >17.2</hyperlink>
+
+    
 
     
 
@@ -26,8 +34,12 @@
 
     
 
+    
+
     s (<hyperlink
     >20.2</hyperlink>
+
+    
 
     
 
@@ -36,8 +48,12 @@
 
     
 
+    
+
     s (<hyperlink
     >21.1</hyperlink>
+
+    
 
     
 
@@ -46,8 +62,12 @@
 
     
 
+    
+
      (<hyperlink
     >17.6.2</hyperlink>
+
+    
 
     
 
@@ -56,8 +76,12 @@
 
     
 
+    
+
      (<hyperlink
     >17.7</hyperlink>
+
+    
 
     
 
@@ -66,8 +90,12 @@
 
     
 
+    
+
     s (<hyperlink
     >17.5.1</hyperlink>
+
+    
 
     
 
@@ -82,6 +110,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">global-attribute-sections</non_terminal>
@@ -93,8 +123,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -111,6 +145,8 @@
       <name>
         <non_terminal where="24.2">global-attribute-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -135,6 +171,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">global-attribute-target</non_terminal>
@@ -145,6 +183,8 @@
       <name>
         <non_terminal where="24.2">global-attribute-target</non_terminal>
       </name>
+
+      
 
       
 
@@ -158,6 +198,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attribute-sections</non_terminal>
@@ -169,8 +211,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -187,6 +233,8 @@
       <name>
         <non_terminal where="24.2">attribute-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -213,6 +261,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attribute-target</non_terminal>
@@ -223,6 +273,8 @@
       <name>
         <non_terminal where="24.2">attribute-target</non_terminal>
       </name>
+
+      
 
       
 
@@ -256,6 +308,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attribute</non_terminal>
@@ -271,6 +325,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attribute-name</non_terminal>
@@ -282,6 +338,8 @@
       <name>
         <non_terminal where="24.2">attribute-name</non_terminal>
       </name>
+
+      
 
       
 
@@ -297,6 +355,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>(</terminal>
@@ -324,6 +384,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">positional-argument</non_terminal>
@@ -341,6 +403,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attribute-argument-expression</non_terminal>
@@ -350,6 +414,8 @@
       <name>
         <non_terminal where="24.2">named-argument-list</non_terminal>
       </name>
+
+      
 
       
 
@@ -367,6 +433,8 @@
       <name>
         <non_terminal where="24.2">named-argument</non_terminal>
       </name>
+
+      
 
       
 
@@ -384,6 +452,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.14">expression</non_terminal>
@@ -396,8 +466,12 @@
 
     
 
+    
+
      and an optional list of positional and named arguments. The positional arguments (if any) precede the named arguments. A positional argument consists of an  attribute-argument-expression; a named argument consists of a name, followed by an equal sign, followed by an <non_terminal
      where="24.2">attribute-argument-expression</non_terminal>
+
+    
 
     
 
@@ -409,13 +483,19 @@
 
     
 
+    
+
      identifies an attribute class. If the form of <non_terminal
      where="24.2">attribute-name</non_terminal>
 
     
 
+    
+
      is <non_terminal
      where="10.8">type-name</non_terminal>
+
+    
 
     
 
@@ -431,6 +511,8 @@ class Class1 {}
 
       
 
+      
+
       results in a compile-time error because it attempts to use Class1 as an attribute class when Class1 is not an attribute class. end example]</example
     >
   </paragraph>
@@ -440,8 +522,12 @@ class Class1 {}
 
     
 
+    
+
     . When an attribute is placed at the global level, a <non_terminal
      where="24.2">global-attribute-target-specifier</non_terminal>
+
+    
 
     
 
@@ -450,8 +536,12 @@ class Class1 {}
 
     
 
+    
+
      can be used to affirm or override the default in certain ambiguous cases (or to just affirm the default in non-ambiguous cases). Thus, typically, <non_terminal
      where="24.2">attribute-target-specifier</non_terminal>
+
+    
 
     
 
@@ -463,13 +553,19 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the delegate. The presence of the type <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
 
         
 
+        
+
          indicates that the attribute applies to the delegate; the presence of the return <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -481,13 +577,19 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the method. The presence of the method <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
 
         
 
+        
+
          indicates that the attribute applies to the method; the presence of the return <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -499,13 +601,19 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the operator. The presence of the type <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
 
         
 
+        
+
          indicates that the attribute applies to the operator; the presence of the return <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -517,8 +625,12 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the event declaration. The presence of the event <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -527,8 +639,12 @@ class Class1 {}
 
         
 
+        
+
          indicates that the attribute applies to the field; and the presence of the method <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -540,13 +656,19 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the method. The presence of the method <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
 
         
 
+        
+
          indicates that the attribute applies to the method; the presence of the return <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -558,13 +680,19 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the method. The presence of the method <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
 
         
 
+        
+
          indicates that the attribute applies to the method; the presence of the param <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -576,13 +704,19 @@ class Class1 {}
 
         
 
+        
+
         , the attribute applies to the method. The presence of the method <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
 
         
 
+        
+
          indicates that the attribute applies to the method; the presence of the param <non_terminal
          where="24.2">attribute-target-specifier</non_terminal>
+
+        
 
         
 
@@ -597,8 +731,12 @@ class Class1 {}
 
     
 
+    
+
      of the form  <non_terminal
      where="10.8">type-name</non_terminal>
+
+    
 
     
 
@@ -607,8 +745,12 @@ class Class1 {}
 
     
 
+    
+
      is spelled using a verbatim identifier (<hyperlink
     >9.4.2</hyperlink>
+
+    
 
     
 
@@ -637,6 +779,8 @@ class Class4 {}
 
       
 
+      
+
       shows two attribute classes named X and XAttribute. The attribute [X] is ambiguous, since it could refer to either X or XAttribute. Using a verbatim identifier allows the exact intent to be specified in such rare cases. The attribute [XAttribute] is not ambiguous (although it would be if there was an attribute class named XAttributeAttribute!). If the declaration for class X is removed, then both attributes refer to the attribute class named XAttribute, as follows: <code_example
       >
         <![CDATA[
@@ -652,6 +796,8 @@ class Class2 {}
 class Class3 {}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -682,6 +828,8 @@ public class Class1 {}
 
       
 
+      
+
       results in a compile-time error because it attempts to use HelpString, which is a single-use attribute class, more than once on the declaration of Class1. end example]</example
     >
   </paragraph>
@@ -691,11 +839,15 @@ public class Class1 {}
 
     
 
+    
+
      if all of the following statements are true: <list
     >
       <list_item
         > The type of E is an attribute parameter type (<hyperlink
         >24.1.3</hyperlink>
+
+        
 
         
 
@@ -708,6 +860,8 @@ public class Class1 {}
         <list_item
           > A one-dimensional array of <non_terminal
            where="24.2">attribute-argument-expression</non_terminal>
+
+          
 
           
 
@@ -742,6 +896,8 @@ public class MyAttribute: Attribute
 class MyClass {}  
 ]]>
       </code_example>
+
+      
 
       
 

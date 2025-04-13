@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is used to work with a collection of <see
          cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Contains a strongly typed collection of <see
          cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Creates a new <see
              cref="T:System.Web.Services.Configuration.SoapExtensionTypeElementCollection" />
+
+            
 
             
 
@@ -100,6 +108,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -108,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 
@@ -135,6 +149,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+            
 
             
 
@@ -166,8 +182,12 @@
 
             
 
+            
+
              that indicates whether a <see
              cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+            
 
             
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              with the specified key; otherwise, false.</para
           >
         </returns>
@@ -190,8 +212,12 @@
 
           
 
+          
+
           The key of the <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 
@@ -230,8 +256,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 
@@ -242,8 +272,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -323,6 +357,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </summary>
@@ -334,6 +370,8 @@
 
             
 
+            
+
             , or -1 if the element was not found in the collection.</para
           >
         </returns>
@@ -342,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 
@@ -426,6 +468,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -434,8 +478,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 
@@ -467,8 +515,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 
@@ -499,6 +551,8 @@
 
             
 
+            
+
              with the specified key from the collection.</para
           >
         </summary>
@@ -507,8 +561,12 @@
 
           
 
+          
+
           The key of the <see
            cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+          
 
           
 

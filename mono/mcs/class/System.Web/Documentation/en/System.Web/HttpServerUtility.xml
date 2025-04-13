@@ -21,8 +21,12 @@
 
         
 
+        
+
          class are exposed through the intrinsic <see
          cref="P:System.Web.HttpContext.Server" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
           
 
+          
+
           The class or type of object to create an instance of.</param
         >
       </Docs>
@@ -110,8 +116,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -147,6 +157,8 @@
 
           
 
+          
+
           The class identifier of the object to create an instance of.</param
         >
       </Docs>
@@ -173,8 +185,12 @@
 
             
 
+            
+
              method continues execution of the original page after execution of the new page is completed. The <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -186,8 +202,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
+
+            
 
             
 
@@ -199,13 +219,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
 
             
 
+            
+
              method. <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -217,8 +243,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String)" />
+
+            
 
             
 
@@ -231,6 +261,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +300,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -281,10 +317,14 @@
 
           
 
+          
+
           The URL path to execute. </param
         >
         <param name="preserveForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,8 +333,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -303,8 +347,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -334,8 +382,12 @@
 
             
 
+            
+
              method continues execution of the original request after execution of the virtual path specified is completed. The <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -347,8 +399,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -360,13 +416,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" />
 
             
 
+            
+
              method. <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -378,8 +440,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -394,11 +460,15 @@
 
             
 
+            
+
              captures output from the executed handler.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,8 +479,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -445,8 +519,12 @@
 
             
 
+            
+
              method continues execution of the original request after execution of the specified virtual path is completed. The <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -458,8 +536,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter,System.Boolean)" />
+
+            
 
             
 
@@ -471,13 +553,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter,System.Boolean)" />
 
             
 
+            
+
              method. <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -489,8 +577,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter,System.Boolean)" />
+
+            
 
             
 
@@ -505,13 +597,19 @@
 
             
 
+            
+
              captures output from the page and a Boolean parameter specifies whether to clear the <see
              cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -523,6 +621,8 @@
 
           
 
+          
+
           The URL path to execute.</param
         >
         <param name="writer">
@@ -530,8 +630,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -542,13 +646,19 @@
 
           
 
+          
+
           true to preserve the <see
            cref="P:System.Web.HttpRequest.QueryString" />
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -557,8 +667,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -596,8 +710,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler that is indicated by the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" />
+
+            
 
             
 
@@ -609,13 +727,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" />
 
             
 
+            
+
              method. The <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -627,8 +751,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" />
+
+            
 
             
 
@@ -643,13 +771,19 @@
 
             
 
+            
+
              captures output from the executed handler and a Boolean parameter specifies whether to clear the <see
              cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -661,8 +795,12 @@
 
           
 
+          
+
           The HTTP handler that implements the <see
            cref="T:System.Web.IHttpHandler" />
+
+          
 
           
 
@@ -673,8 +811,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -685,13 +827,19 @@
 
           
 
+          
+
           true to preserve the <see
            cref="P:System.Web.HttpRequest.QueryString" />
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -700,8 +848,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -750,6 +902,8 @@
 
             
 
+            
+
              decodes text that has been transmitted to the server.</para
           >
           <para
@@ -758,8 +912,12 @@
 
             
 
+            
+
              method at run time from an ASP.NET application. Internally, this method uses <see
              cref="Overload:System.Web.HttpUtility.HtmlDecode" />
+
+            
 
             
 
@@ -771,8 +929,12 @@
 
             
 
+            
+
              class through the Server property. In a class that is not in a code-behind file, use HttpContext.Current.Server to access an instance of the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -781,6 +943,8 @@
           <para
             >Outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -797,6 +961,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -830,10 +996,14 @@
 
             
 
+            
+
              decodes text that has been transmitted to the server.</para
           >
           <para>
             <see cref="Overload:System.Web.HttpServerUtility.HtmlDecode" />
+
+            
 
             
 
@@ -842,8 +1012,12 @@
 
             
 
+            
+
              method at run time from an ASP.NET application. Internally, <see
              cref="Overload:System.Web.HttpServerUtility.HtmlDecode" />
+
+            
 
             
 
@@ -852,11 +1026,15 @@
 
             
 
+            
+
              to decode strings.</para
           >
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -871,11 +1049,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -886,8 +1068,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -918,8 +1104,12 @@
 
             
 
+            
+
              method at run time from an ASP.NET application. Internally, this method uses <see
              cref="Overload:System.Web.HttpUtility.HtmlEncode" />
+
+            
 
             
 
@@ -931,8 +1121,12 @@
 
             
 
+            
+
              class through the Server property. In a class that is not in a code-behind file, use HttpContext.Current.Server to access an instance of the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -941,6 +1135,8 @@
           <para
             >Outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -957,6 +1153,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -990,8 +1188,12 @@
 
             
 
+            
+
              is a convenient way to access the <see
              cref="Overload:System.Web.HttpUtility.HtmlEncode" />
+
+            
 
             
 
@@ -1000,8 +1202,12 @@
 
             
 
+            
+
              uses <see
              cref="Overload:System.Web.HttpUtility.HtmlEncode" />
+
+            
 
             
 
@@ -1010,6 +1216,8 @@
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1024,11 +1232,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,8 +1251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1089,8 +1305,12 @@
 
             
 
+            
+
              is null, then the <see
              cref="M:System.Web.HttpServerUtility.MapPath(System.String)" />
+
+            
 
             
 
@@ -1100,6 +1320,8 @@
             <para
               >The <see
                cref="M:System.Web.HttpServerUtility.MapPath(System.String)" />
+
+              
 
               
 
@@ -1119,11 +1341,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1152,6 +1378,8 @@
 
             
 
+            
+
              property can be set in the Web.config file by setting the executionTimeout attribute of the <format
              type="text/html">
               <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369">httpRuntime</a>
@@ -1159,8 +1387,12 @@
 
             
 
+            
+
              element. Setting the time-out programmatically with the <see
              cref="P:System.Web.HttpServerUtility.ScriptTimeout" />
+
+            
 
             
 
@@ -1175,8 +1407,12 @@
 
               
 
+              
+
                element to true in the Web.config file, the value of <see
                cref="P:System.Web.HttpServerUtility.ScriptTimeout" />
+
+              
 
               
 
@@ -1212,13 +1448,19 @@
 
             
 
+            
+
              method preserves the <see
              cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -1229,13 +1471,19 @@
 
             
 
+            
+
              calls <see
              cref="M:System.Web.HttpResponse.End" />
 
             
 
+            
+
             , which throws a <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -1247,8 +1495,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String)" />
+
+            
 
             
 
@@ -1260,13 +1512,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String)" />
 
             
 
+            
+
              method. The <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -1278,8 +1536,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String)" />
+
+            
 
             
 
@@ -1292,6 +1554,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1325,13 +1589,19 @@
 
             
 
+            
+
              calls <see
              cref="M:System.Web.HttpResponse.End" />
 
             
 
+            
+
             , which throws a <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -1343,8 +1613,12 @@
 
             
 
+            
+
              parameter to true, the target page will be able to access the view state of the previous page by using the <see
              cref="P:System.Web.UI.Page.PreviousPage" />
+
+            
 
             
 
@@ -1356,8 +1630,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1369,13 +1647,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
 
             
 
+            
+
              method. The <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -1387,8 +1671,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1403,8 +1691,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -1416,10 +1708,14 @@
 
           
 
+          
+
           The URL path of the new page on the server to execute.</param
         >
         <param name="preserveForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1428,8 +1724,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -1438,8 +1738,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -1477,8 +1781,12 @@
 
             
 
+            
+
              parameter to true, the target page will be able to access the view state of the previous page by using the <see
              cref="P:System.Web.UI.Page.PreviousPage" />
+
+            
 
             
 
@@ -1490,8 +1798,12 @@
 
             
 
+            
+
              method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" />
+
+            
 
             
 
@@ -1503,13 +1815,19 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" />
 
             
 
+            
+
              method. The <see
              cref="Overload:System.Web.HttpResponse.Redirect" />
+
+            
 
             
 
@@ -1521,8 +1839,12 @@
 
             
 
+            
+
              method before the application calls the <see
              cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" />
+
+            
 
             
 
@@ -1537,13 +1859,19 @@
 
             
 
+            
+
              interface and specifies whether to clear the <see
              cref="P:System.Web.HttpRequest.QueryString" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -1555,8 +1883,12 @@
 
           
 
+          
+
           The HTTP handler that implements the <see
            cref="T:System.Web.IHttpHandler" />
+
+          
 
           
 
@@ -1567,13 +1899,19 @@
 
           
 
+          
+
           true to preserve the <see
            cref="P:System.Web.HttpRequest.QueryString" />
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -1582,8 +1920,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpRequest.Form" />
+
+          
 
           
 
@@ -1610,8 +1952,12 @@
 
             
 
+            
+
              method at run time from an ASP.NET application. Internally, this method uses <see
              cref="Overload:System.Web.HttpUtility.UrlDecode" />
+
+            
 
             
 
@@ -1623,8 +1969,12 @@
 
             
 
+            
+
              class through the Server property. In a class that is not in a code-behind file, use HttpContext.Current.Server to access an instance of the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -1633,6 +1983,8 @@
           <para
             >Outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1649,6 +2001,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1682,8 +2036,12 @@
 
             
 
+            
+
              is a convenient way to access the <see
              cref="Overload:System.Web.HttpUtility.UrlDecode" />
+
+            
 
             
 
@@ -1692,8 +2050,12 @@
 
             
 
+            
+
              uses <see
              cref="Overload:System.Web.HttpUtility.UrlDecode" />
+
+            
 
             
 
@@ -1702,6 +2064,8 @@
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1716,11 +2080,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1731,8 +2099,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1763,8 +2135,12 @@
 
             
 
+            
+
              method at run time from an ASP.NET application. Internally, this method uses <see
              cref="Overload:System.Web.HttpUtility.UrlEncode" />
+
+            
 
             
 
@@ -1776,8 +2152,12 @@
 
             
 
+            
+
              class through the Server property. In a class that is not in a code-behind file, use HttpContext.Current.Server to access an instance of the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -1786,6 +2166,8 @@
           <para
             >Outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1802,6 +2184,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1835,8 +2219,12 @@
 
             
 
+            
+
              is a convenient way to access the <see
              cref="Overload:System.Web.HttpUtility.UrlEncode" />
+
+            
 
             
 
@@ -1845,8 +2233,12 @@
 
             
 
+            
+
              uses <see
              cref="Overload:System.Web.HttpUtility.UrlEncode" />
+
+            
 
             
 
@@ -1855,6 +2247,8 @@
           <para
             >To encode or decode values outside of a web application, use the <see
              cref="T:System.Net.WebUtility" />
+
+            
 
             
 
@@ -1869,11 +2263,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1884,8 +2282,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1916,6 +2318,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1925,6 +2329,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1957,13 +2363,19 @@
 
             
 
+            
+
              method converts a URL string token, which encodes binary data as base 64 digits, to its equivalent byte array representation. Use the <see
              cref="M:System.Web.HttpServerUtility.UrlTokenDecode(System.String)" />
 
             
 
+            
+
              method to decode tokens transmitted on the URL and encoded by using the <see
              cref="M:System.Web.HttpServerUtility.UrlTokenEncode(System.Byte[])" />
+
+            
 
             
 
@@ -1975,8 +2387,12 @@
 
             
 
+            
+
              method will return an empty byte array if the <paramref
              name="input" />
+
+            
 
             
 
@@ -1993,6 +2409,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2021,6 +2439,8 @@
 
             
 
+            
+
              method converts a byte array into an equivalent string representation encoded with base 64 digits. The resulting string token can be transmitted on the URL.</para
           >
           <para
@@ -2029,8 +2449,12 @@
 
             
 
+            
+
              will return an empty string if the <paramref
              name="input" />
+
+            
 
             
 
@@ -2047,6 +2471,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

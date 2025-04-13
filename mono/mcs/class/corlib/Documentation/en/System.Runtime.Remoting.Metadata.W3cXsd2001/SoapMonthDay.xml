@@ -39,6 +39,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -69,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+
+            
 
             
 
@@ -103,8 +107,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -116,8 +124,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -155,6 +167,8 @@
 
             
 
+            
+
              that indicates the XSD of the current SOAP type.</para
           >
         </returns>
@@ -187,6 +201,8 @@
           <para
             >The <see
              cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Parse(System.String)" />
+
+            
 
             
 
@@ -249,8 +265,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+
+            
 
             
 
@@ -265,8 +285,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -278,8 +302,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -313,8 +341,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -329,8 +361,12 @@
 
             
 
+            
+
              that is obtained from <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
+
+            
 
             
 

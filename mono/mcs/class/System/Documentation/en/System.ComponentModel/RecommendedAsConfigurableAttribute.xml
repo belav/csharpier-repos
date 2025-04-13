@@ -42,8 +42,12 @@
 
         
 
+        
+
          set to true display when you expand the <ui
         >ConfigurableProperties</ui>
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          window. A property that has no recommended setting or that is marked with <see
          cref="T:System.ComponentModel.RecommendedAsConfigurableAttribute" />
+
+        
 
         
 
@@ -65,13 +73,19 @@
 
         
 
+        
+
          to a setting in Visual Studio by clicking the ellipsis button (…) under <ui
         >Settings</ui>
 
         
 
+        
+
          in the <ui
         >Properties</ui>
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
           
 
+          
+
            set to true, the value of this attribute is set to the constant member <see
            cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.Yes" />
+
+          
 
           
 
@@ -94,8 +112,12 @@
 
           
 
+          
+
            set to value false, the value is <see
            cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.No" />
+
+          
 
           
 
@@ -104,8 +126,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.No" />
+
+          
 
           
 
@@ -117,6 +143,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -159,11 +187,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="recommendedAsConfigurable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,8 +232,12 @@
 
             
 
+            
+
             , which is <see
              cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.No" />
+
+            
 
             
 
@@ -242,11 +278,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,6 +321,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.RecommendedAsConfigurableAttribute" />
+
+            
 
             
 
@@ -346,13 +388,19 @@
 
             
 
+            
+
              set to false, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.No" />
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute <see
              cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.No" />
+
+            
 
             
 
@@ -414,8 +462,12 @@
 
             
 
+            
+
              set to true, the value of this attribute is set to the constant member <see
              cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.Yes" />
+
+            
 
             
 
@@ -424,6 +476,8 @@
           <para
             >Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.RecommendedAsConfigurableAttribute.Yes" />
+
+            
 
             
 

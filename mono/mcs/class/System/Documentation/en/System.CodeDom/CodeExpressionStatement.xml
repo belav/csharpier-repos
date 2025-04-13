@@ -39,8 +39,12 @@
 
         
 
+        
+
          contains a <see
          cref="T:System.CodeDom.CodeExpression" />
+
+        
 
         
 
@@ -49,13 +53,19 @@
 
         
 
+        
+
          object, allowing some expressions to stand alone. For example, a <see
          cref="T:System.CodeDom.CodeMethodInvokeExpression" />
 
         
 
+        
+
          contained by a <see
          cref="T:System.CodeDom.CodeExpressionStatement" />
+
+        
 
         
 
@@ -89,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeExpressionStatement" />
+
+            
 
             
 
@@ -126,6 +138,8 @@
 
             
 
+            
+
              class by using the specified expression.</para
           >
         </summary>
@@ -134,8 +148,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

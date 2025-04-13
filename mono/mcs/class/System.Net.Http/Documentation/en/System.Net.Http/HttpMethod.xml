@@ -29,13 +29,19 @@
 
         
 
+        
+
          is to use one of the static properties on this class.  However, if an app needs a different value for the HTTP method, the <see
          cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
 
         
 
+        
+
          constructor initializes a new instance of the <see
          cref="T:System.Net.Http.HttpMethod" />
+
+        
 
         
 
@@ -70,8 +76,12 @@
 
             
 
+            
+
              constructor initializes a new instance of the <see
              cref="T:System.Net.Http.HttpMethod" />
+
+            
 
             
 
@@ -86,11 +96,15 @@
 
             
 
+            
+
              class with a specific HTTP method.</para
           >
         </summary>
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,8 +163,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -165,12 +183,16 @@
 
             
 
+            
+
             .</para
           >
           <para>true if the specified object is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,8 +226,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -220,12 +246,16 @@
 
             
 
+            
+
             .</para
           >
           <para>true if the specified object is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,6 +308,8 @@
 
             
 
+            
+
              method is suitable for use in hashing algorithms and data structures such as a hash table. </para
           >
         </remarks>
@@ -293,11 +325,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >A hash code for the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -377,6 +413,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -388,6 +426,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -396,8 +436,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -409,8 +453,12 @@
 
           
 
+          
+
           The left <see
            cref="T:System.Net.Http.HttpMethod" />
+
+          
 
           
 
@@ -421,8 +469,12 @@
 
           
 
+          
+
           The right  <see
            cref="T:System.Net.Http.HttpMethod" />
+
+          
 
           
 
@@ -460,6 +512,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -471,6 +525,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -479,8 +535,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -492,8 +552,12 @@
 
           
 
+          
+
           The left <see
            cref="T:System.Net.Http.HttpMethod" />
+
+          
 
           
 
@@ -504,8 +568,12 @@
 
           
 
+          
+
           The right  <see
            cref="T:System.Net.Http.HttpMethod" />
+
+          
 
           
 
@@ -607,6 +675,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

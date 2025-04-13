@@ -35,6 +35,8 @@
 
         
 
+        
+
          represents the type and level of inheritance of a member.</para
       >
       <para
@@ -43,13 +45,19 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ComponentModel.Design.IInheritanceService" />
 
         
 
+        
+
          searches the component fields of a component to identify fields that are inherited from a base class, the method represents the inheritance level of each component using an <see
          cref="T:System.ComponentModel.InheritanceAttribute" />
+
+        
 
         
 
@@ -83,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.InheritanceAttribute" />
+
+            
 
             
 
@@ -120,6 +130,8 @@
 
             
 
+            
+
              class with the specified inheritance level.</para
           >
         </summary>
@@ -128,8 +140,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.InheritanceLevel" />
+
+          
 
           
 
@@ -165,6 +181,8 @@
 
             
 
+            
+
              that indicates that the associated component is not inherited.</para
           >
         </remarks>
@@ -176,8 +194,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />
+
+            
 
             
 
@@ -247,6 +269,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -307,6 +331,8 @@
 
             
 
+            
+
              that indicates that the associated component is inherited.</para
           >
         </remarks>
@@ -341,6 +367,8 @@
           <para
             >This field creates a new <see
              cref="T:System.ComponentModel.InheritanceAttribute" />
+
+            
 
             
 
@@ -409,6 +437,8 @@
 
             
 
+            
+
              that indicates that the associated component is not inherited.</para
           >
         </remarks>
@@ -445,6 +475,8 @@
           <para
             >A string that represents this <see
              cref="T:System.ComponentModel.InheritanceAttribute" />
+
+            
 
             
 

@@ -77,9 +77,13 @@
 
           
 
+          
+
            containing the return value of the 
           <see
            cref="M:Mono.Unix.Native.Syscall.setsid" />
+
+          
 
           
 
@@ -105,6 +109,8 @@
             matches the process ID of the calling process.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -136,6 +142,8 @@
 
           
 
+          
+
            containing the current directory of
           the process.
         </value
@@ -144,6 +152,8 @@
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -156,6 +166,8 @@
           directory, see 
           <see
                cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" qualify="true" />
+
+              
 
               
 
@@ -173,6 +185,8 @@
 
           
 
+          
+
           ]
         </exception
         >
@@ -181,6 +195,8 @@
           The current working directory has been unlinked.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -218,6 +234,8 @@
 
           
 
+          
+
            containing information
           about the effective group of the process.
         </value
@@ -232,9 +250,13 @@
             
 
             
+
+            
             gives the process additional permissions during the execution of 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -270,6 +292,8 @@
 
           
 
+          
+
            containing nthe effective group ID
           of the process.
         </value
@@ -284,9 +308,13 @@
             
 
             
+
+            
             gives the process additional permissions during the execution of 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
+
+            
 
             
 
@@ -328,6 +356,8 @@
 
           
 
+          
+
            containing information
           about the effective user of the process.
         </value
@@ -341,10 +371,14 @@
 
             
 
+            
+
              gives
             the process additional permissions during execution of 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+
+            
 
             
 
@@ -380,6 +414,8 @@
 
           
 
+          
+
            containing the effective user ID of
           the process.
         </value
@@ -393,10 +429,14 @@
 
             
 
+            
+
              gives
             the process additional permissions during execution of 
             <see
              cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
+
+            
 
             
 
@@ -445,6 +485,8 @@
 
           
 
+          
+
            value containing the
           configuration value to retrieve.
         </param
@@ -454,6 +496,8 @@
           Retrieve the value of the configuration value 
           <paramref
            name="name" />
+
+          
 
           
 
@@ -467,9 +511,13 @@
 
           
 
+          
+
            containing the value of the
           configuration variable <paramref
            name="name" />
+
+          
 
           
 
@@ -487,9 +535,13 @@
             
 
             
+
+            
             argument is invalid.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -534,6 +586,8 @@
 
           
 
+          
+
            value containing the
           configurable system limit or option variable to lookup.
         </param
@@ -543,6 +597,8 @@
           Retrieve the value of the configurable system limit or 
           option value <paramref
            name="name" />
+
+          
 
           
 
@@ -556,9 +612,13 @@
 
           
 
+          
+
            containing the value of the 
           configurable system limit or option value <paramref
            name="name" />
+
+          
 
           
 
@@ -572,6 +632,8 @@
             current value of a configurable system limit or option variable.  
             The <paramref
              name="name" />
+
+            
 
             
 
@@ -590,9 +652,13 @@
             
 
             
+
+            
             argument is invalid.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -631,6 +697,8 @@
 
           
 
+          
+
            instance containing
           information about the parent process.
         </returns
@@ -660,6 +728,8 @@
           >
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -696,6 +766,8 @@
 
           
 
+          
+
            containing the process group ID of
           the current process.
         </returns
@@ -715,6 +787,8 @@
 
             
 
+            
+
             (1) 
             to create process groups in implementing job control.  The 
             <see
@@ -722,9 +796,13 @@
 
             
 
+            
+
             () and 
             <see
              cref="M:Mono.Unix.Native.Syscall.tcsetpgrp" />
+
+            
 
             
 
@@ -761,6 +839,8 @@
 
           
 
+          
+
            array containing the group access
           list of the current process.
         </returns
@@ -776,10 +856,14 @@
 
             
 
+            
+
              is not the
             file's
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+
+            
 
             
 
@@ -790,10 +874,14 @@
 
             
 
+            
+
              to see if
             group access applies, before using the  "other"
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+
+            
 
             
 
@@ -832,6 +920,8 @@
 
           
 
+          
+
            array containing
           information about the group access list of the current process.
         </returns
@@ -847,10 +937,14 @@
 
             
 
+            
+
              is not the
             file's
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+
+            
 
             
 
@@ -861,10 +955,14 @@
 
             
 
+            
+
              to see if
             group access applies, before using the  "other"
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+
+            
 
             
 
@@ -900,6 +998,8 @@
 
           
 
+          
+
            array containing all user shells on
           the system.
         </returns
@@ -913,9 +1013,13 @@
 
             
 
+            
+
             (5) (frequently the file
             <c
             >/etc/shells</c>
+
+            
 
             
 
@@ -926,8 +1030,12 @@
             
 
             
+
+            
             and <c
             >/bin/csh</c>
+
+            
 
             
 
@@ -961,6 +1069,8 @@
 
           
 
+          
+
            containing the login name of the
           user executing the process.
         </value
@@ -971,6 +1081,8 @@
             This is identical to 
             <see
              cref="P:Mono.Unix.UnixEnvironment.UserName" />
+
+            
 
             
 
@@ -1002,6 +1114,8 @@
 
           
 
+          
+
            containing the machine name.
         </value
         >
@@ -1016,6 +1130,8 @@
             The caller tried to set the host name and was not the super-user.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -1048,6 +1164,8 @@
           >
           A <see
            cref="T:Mono.Unix.UnixGroupInfo" />
+
+          
 
           
 
@@ -1084,6 +1202,8 @@
           >
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -1126,6 +1246,8 @@
 
           
 
+          
+
            containing information
           about the real user of the process.
         </value
@@ -1159,6 +1281,8 @@
           >
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -1203,9 +1327,13 @@
 
           
 
+          
+
            containing the value to add to the
           current process' <i
           >nice value</i>
+
+          
 
           
 
@@ -1215,6 +1343,8 @@
         <summary
           >Subtraces <paramref
            name="inc" />
+
+          
 
           
 
@@ -1228,10 +1358,14 @@
 
             
 
+            
+
              is a value subtraced from the 
             process' priority.  The higher the value of 
             <paramref
              name="inc" />
+
+            
 
             
 
@@ -1244,10 +1378,14 @@
 
           
 
+          
+
            is negative but the caller is not the
           super-user.
           [<see
            cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+          
 
           
 
@@ -1291,6 +1429,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1302,6 +1442,8 @@
             a child of the calling process.
             [<see
              cref="F:Mono.Unix.Native.Errno.ESRCH" />
+
+            
 
             
 
@@ -1318,10 +1460,14 @@
 
             
 
+            
+
             (3)
             operation.
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCES" />
+
+            
 
             
 
@@ -1362,6 +1508,8 @@
 
           
 
+          
+
            array containing the
           new group access list.
         </param
@@ -1383,10 +1531,14 @@
 
             
 
+            
+
              is not the
             file's
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+
+            
 
             
 
@@ -1397,10 +1549,14 @@
 
             
 
+            
+
              to see if
             group access applies, before using the  "other"
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+
+            
 
             
 
@@ -1414,6 +1570,8 @@
             The caller is not the super-user.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -1453,6 +1611,8 @@
 
           
 
+          
+
            array containing the
           new group access list.
         </param
@@ -1474,10 +1634,14 @@
 
             
 
+            
+
              is not the
             file's
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUser" />
+
+            
 
             
 
@@ -1488,10 +1652,14 @@
 
             
 
+            
+
              to see if
             group access applies, before using the  "other"
             <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
+
+            
 
             
 
@@ -1505,6 +1673,8 @@
             The caller is not the super-user.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -1536,6 +1706,8 @@
 
           
 
+          
+
            containing the username of the user
           executing the process.
         </value
@@ -1545,6 +1717,8 @@
             >
             This is the username of the <i
             >real</i>
+
+            
 
             
 
@@ -1559,8 +1733,12 @@
 
             
 
+            
+
             .<see
              cref="P:Mono.Unix.UnixUserInfo.UserName" />
+
+            
 
             
 

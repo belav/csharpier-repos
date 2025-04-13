@@ -40,8 +40,12 @@
 
         
 
+        
+
          control to create a single-line text box that allows the user to enter text or a password. The <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputText.MaxLength" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          property allows you to specify the width of the text box. To determine the value entered by the user into text box, use the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+
+        
 
         
 
@@ -60,13 +68,19 @@
 
         
 
+        
+
          control provides a <see
          cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
         
 
+        
+
          event that is raised when the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
           
 
+          
+
            control does not provide a built-in way to post back to the server. You must provide another control on the Web page that supports posting to the server, such as an <see
            cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+          
 
           
 
@@ -93,6 +111,8 @@
 
         
 
+        
+
          control.</para
       >
       <para
@@ -101,8 +121,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputText.#ctor" />
+
+        
 
         
 
@@ -129,11 +153,15 @@
 
             
 
+            
+
              control using default values. It creates a text type text box control.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -170,6 +198,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -195,11 +225,15 @@
 
             
 
+            
+
              control using the specified input control type. It allows you to create a specific type of text box control, such as password. Only the password or text type is currently supported. This constructor is designed to allow you to create other text box types if they become available.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -229,6 +263,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -246,11 +282,15 @@
 
             
 
+            
+
              class using the specified input control type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,8 +330,12 @@
 
             
 
+            
+
              method checks to see whether the postback value of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -303,8 +347,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -319,6 +367,8 @@
 
             
 
+            
+
              control. </para
           >
         </summary>
@@ -330,6 +380,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -338,10 +390,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,6 +419,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputText.MaxLength" />
+
+            
 
             
 
@@ -405,8 +463,12 @@
 
             
 
+            
+
              method is called just prior to rendering the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -415,8 +477,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -431,6 +497,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -439,8 +507,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -470,8 +542,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+
+            
 
             
 
@@ -481,6 +557,8 @@
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+
+              
 
               
 
@@ -495,11 +573,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnServerChange(System.EventArgs)" />
+
+            
 
             
 
@@ -514,6 +596,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -522,8 +606,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -554,8 +642,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -570,8 +662,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+            
 
             
 
@@ -623,8 +719,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -636,8 +736,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -665,8 +769,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+
+            
 
             
 
@@ -676,6 +784,8 @@
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+
+              
 
               
 
@@ -690,6 +800,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -698,6 +810,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+
+            
 
             
 
@@ -724,6 +838,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputText.Size" />
+
+            
 
             
 
@@ -778,8 +894,12 @@
 
             
 
+            
+
              interface method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -794,6 +914,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -802,10 +924,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -837,8 +963,12 @@
 
             
 
+            
+
              interface method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputText.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -867,12 +997,16 @@
 
             
 
+            
+
              property to programmatically determine the text entered by the user into the text box. You can also use this property to provide default text for the text box.</para
           >
           <block subset="none" type="note">
             <para
               >If you specify a value for a password type <see
                cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+              
 
               
 

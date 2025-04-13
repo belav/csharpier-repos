@@ -43,8 +43,12 @@
 
         
 
+        
+
          collection as an <see
          cref="T:System.Linq.IQueryable`1" />
+
+        
 
         
 
@@ -101,11 +105,15 @@
 
             
 
+            
+
              class and associates the instance with an expression tree.</para
           >
         </summary>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -163,8 +171,12 @@
 
             
 
+            
+
              collection, or, if it is null, through the collection that results from rewriting the associated expression tree as a query on an <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -278,8 +290,12 @@
 
             
 
+            
+
              object and associates it with a specified expression tree that represents an <see
              cref="T:System.Linq.IQueryable" />
+
+            
 
             
 
@@ -294,8 +310,12 @@
 
             
 
+            
+
              object that is associated with <paramref
              name="expression" />
+
+            
 
             
 
@@ -307,8 +327,12 @@
 
           
 
+          
+
           An expression tree that represents an <see
            cref="T:System.Linq.IQueryable" />
+
+          
 
           
 
@@ -349,8 +373,12 @@
 
             
 
+            
+
              object and associates it with a specified expression tree that represents an <see
              cref="T:System.Linq.IQueryable`1" />
+
+            
 
             
 
@@ -365,11 +393,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,13 +438,19 @@
 
             
 
+            
+
              methods instead of <see
              cref="T:System.Linq.Queryable" />
 
             
 
+            
+
              methods on any enumerable data sources that cannot be queried by <see
              cref="T:System.Linq.Queryable" />
+
+            
 
             
 
@@ -427,11 +465,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -472,13 +514,19 @@
 
             
 
+            
+
              methods instead of <see
              cref="T:System.Linq.Queryable" />
 
             
 
+            
+
              methods on any enumerable data sources that cannot be queried by <see
              cref="T:System.Linq.Queryable" />
+
+            
 
             
 
@@ -493,11 +541,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

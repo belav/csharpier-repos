@@ -32,8 +32,12 @@
 
           
 
+          
+
            class is obsolete in the Microsoft .NET Framework version 2.0. The <see
            cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+          
 
           
 
@@ -44,10 +48,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="9404d758-679f-4ffb-995d-3d07d817659e">Migrating From the XslTransform Class</a>
           </format>
+
+          
 
           
 
@@ -59,11 +67,15 @@
 
         
 
+        
+
          supports the XSLT 1.0 syntax. The XSLT style sheet must use the namespace http://www.w3.org/1999/XSL/Transform.</para
       >
       <para
         >Additional arguments can also be added to the style sheet using the <see
          cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
 
             
 
+            
+
              object.</para
           >
         </item>
@@ -88,8 +102,12 @@
 
             
 
+            
+
              method to load the style sheet for the transformation. This method has several overloads and can load a style sheet using an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -98,8 +116,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -113,8 +135,12 @@
 
             
 
+            
+
              method to transform the XML data. This method has several overloads and can handle different types of input and output. You can also specify an <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -129,6 +155,8 @@
 
         
 
+        
+
          class, you should be aware of the following items and their implications:</para
       >
       <list type="bullet">
@@ -139,8 +167,12 @@
 
             
 
+            
+
              object containing extension objects is passed to the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
+
+            
 
             
 
@@ -157,6 +189,8 @@
 
             
 
+            
+
              method and executes the transformation.</para
           >
         </item>
@@ -164,6 +198,8 @@
       <para
         >These security issues can be mitigated by not accepting <see
          cref="T:System.Xml.Xsl.XslTransform" />
+
+        
 
         
 
@@ -183,8 +219,12 @@
 
             
 
+            
+
              object to the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -198,8 +238,12 @@
 
         
 
+        
+
          to the <see
          cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+        
 
         
 
@@ -208,13 +252,19 @@
 
         
 
+        
+
          is thrown if the caller does not have the necessary permissions. See <see
          cref="T:System.Security.Permissions.SecurityPermission" />
 
         
 
+        
+
          and <see
          cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+
+        
 
         
 
@@ -361,6 +411,8 @@
 
           
 
+          
+
            class.</para
         >
       </block>
@@ -369,8 +421,12 @@
 
         
 
+        
+
          has the ability to utilize common language runtime (CLR) code as an extension mechanism. This is accomplished by passing an instance of a class to the <see
          cref="T:System.Xml.Xsl.XslTransform" />
+
+        
 
         
 
@@ -378,6 +434,8 @@
          type="text/html">
           <a href="1690815e-b52b-4967-8380-5780aff08012">params (C# Programmers Reference)</a>
         </format>
+
+        
 
         
 
@@ -390,6 +448,8 @@
             >XSLT Transformations with the XslTransform Class</a
           >
         </format>
+
+        
 
         
 
@@ -426,6 +486,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -459,8 +521,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -473,12 +539,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -490,6 +560,8 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -498,8 +570,12 @@
 
             
 
+            
+
              with no user credentials. If the style sheet(s) are located on a network resource which requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -508,11 +584,15 @@
 
             
 
+            
+
              with the necessary credentials.</para
           >
           <para
             >If the style sheet contains embedded scripting, the script is compiled to an assembly. The URI of the style sheet is used to create evidence, which is applied to the assembly. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -525,13 +605,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -545,6 +631,8 @@
         </summary>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,8 +668,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -594,12 +686,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -611,6 +707,8 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -619,13 +717,19 @@
 
             
 
+            
+
              with no user credentials. If the style sheet(s) are located on a network resource which requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -637,8 +741,12 @@
 
             
 
+            
+
              through all its children. This enables you to use a portion of a document as the style sheet. After the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -647,8 +755,12 @@
 
             
 
+            
+
              is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -660,13 +772,19 @@
 
             
 
+            
+
              that can resolve entities (<see
              cref="P:System.Xml.XmlReader.CanResolveEntity" />
 
             
 
+            
+
              returns true). In this case, an <see
              cref="T:System.Xml.XmlValidatingReader" />
+
+            
 
             
 
@@ -678,8 +796,12 @@
 
             
 
+            
+
              method. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -692,13 +814,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -714,6 +842,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -722,8 +852,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -762,8 +896,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -776,12 +914,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -793,6 +935,8 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -801,13 +945,19 @@
 
             
 
+            
+
              with no user credentials. If the style sheet(s) are located on a network resource which requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -819,8 +969,12 @@
 
             
 
+            
+
              method. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -833,13 +987,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -855,6 +1015,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -863,8 +1025,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -873,13 +1039,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -918,8 +1090,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -932,12 +1108,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -949,6 +1129,8 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -957,13 +1139,19 @@
 
             
 
+            
+
              with no user credentials. If the style sheet(s) are located on a network resource which requires authentication, use the overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
 
             
 
+            
+
              as one of its arguments and specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -975,13 +1163,19 @@
 
             
 
+            
+
             . To use just a portion of the loaded document as the style sheet, navigate to the node corresponding to the beginning of the style sheet. After the <see
              cref="M:System.Xml.Xsl.XslTransform.Load(System.Xml.XPath.XPathNavigator)" />
 
             
 
+            
+
              method returns, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -993,8 +1187,12 @@
 
             
 
+            
+
              method. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -1007,13 +1205,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -1029,6 +1233,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1037,8 +1243,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -1078,8 +1288,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -1092,12 +1306,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -1109,11 +1327,15 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
             >If the style sheet contains embedded scripting, the script is compiled to an assembly. The URI of the style sheet is used to create evidence, which is applied to the assembly. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -1126,13 +1348,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -1149,6 +1377,8 @@
 
           
 
+          
+
           The URL that specifies the XSLT style sheet to load. </param
         >
         <param name="resolver">
@@ -1156,8 +1386,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -1197,8 +1431,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -1211,12 +1449,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -1228,11 +1470,15 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
             >This method loads the XSLT style sheet, including any style sheets referenced in xsl:include and xsl:import elements. The style sheet loads from the current node of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1244,13 +1490,19 @@
 
             
 
+            
+
              method returns, the <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1262,13 +1514,19 @@
 
             
 
+            
+
              that can resolve entities (<see
              cref="P:System.Xml.XmlReader.CanResolveEntity" />
 
             
 
+            
+
              returns true). In this case, an <see
              cref="T:System.Xml.XmlValidatingReader" />
+
+            
 
             
 
@@ -1280,8 +1538,12 @@
 
             
 
+            
+
              method. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -1294,13 +1556,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -1316,6 +1584,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1324,8 +1594,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1336,8 +1610,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -1377,8 +1655,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -1391,12 +1673,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -1408,6 +1694,8 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -1416,8 +1704,12 @@
 
             
 
+            
+
              method. For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -1430,13 +1722,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -1452,6 +1750,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1460,8 +1760,12 @@
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -1470,13 +1774,19 @@
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -1487,8 +1797,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -1528,8 +1842,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -1542,12 +1860,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -1559,6 +1881,8 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -1567,13 +1891,19 @@
 
             
 
+            
+
             . To use a portion of the loaded document as the style sheet, navigate to the node corresponding to the beginning of the style sheet. After the <see
              cref="M:System.Xml.Xsl.XslTransform.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlResolver)" />
 
             
 
+            
+
              method returns, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1585,8 +1915,12 @@
 
             
 
+            
+
             . For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -1599,13 +1933,19 @@
 
               
 
+              
+
                is thrown. See <see
                cref="T:System.Security.Permissions.SecurityPermission" />
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+              
 
               
 
@@ -1621,6 +1961,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1629,8 +1971,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -1641,8 +1987,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -1683,8 +2033,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -1697,12 +2051,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -1714,11 +2072,15 @@
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
             >This method loads the XSLT style sheet, including any style sheets referenced in xsl:include and xsl:import elements. The style sheet loads from the current node of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1730,13 +2092,19 @@
 
             
 
+            
+
              method returns, the <see
              cref="T:System.Xml.XmlReader" />
 
             
 
+            
+
              is positioned on the next node after the end of the style sheet. If the end of the document is reached, the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1748,8 +2116,12 @@
 
             
 
+            
+
              that can resolve entities (<see
              cref="P:System.Xml.XmlReader.CanResolveEntity" />
+
+            
 
             
 
@@ -1758,11 +2130,15 @@
 
             
 
+            
+
              can be used.</para
           >
           <para
             >For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -1813,6 +2189,8 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
                   
 
+                  
+
                    parameter to null. This ensures that xsl:import and xsl:include elements are not processed. </para
                 >
               </description>
@@ -1825,6 +2203,8 @@ xslt.Load(xslReader,resolver,evidence);</code>
                 <para
                   >Request evidence from the caller. The API of the caller must provide a way to provide evidence, typically the <see
                    cref="T:System.Security.Policy.Evidence" />
+
+                  
 
                   
 
@@ -1842,6 +2222,8 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
             
 
+            
+
             . This method allows you to limit the permissions of the style sheet by specifying evidence.</para
           >
         </summary>
@@ -1850,8 +2232,12 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1862,8 +2248,12 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -1874,8 +2264,12 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -1916,8 +2310,12 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -1930,12 +2328,16 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -1947,11 +2349,15 @@ xslt.Load(xslReader,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
             >For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -2002,6 +2408,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
                   
 
+                  
+
                    parameter to null. This ensures that xsl:import and xsl:include elements are not processed. </para
                 >
               </description>
@@ -2014,6 +2422,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
                 <para
                   >Request evidence from the caller. The API of the caller must provide a way to provide evidence, typically the <see
                    cref="T:System.Security.Policy.Evidence" />
+
+                  
 
                   
 
@@ -2031,6 +2441,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
             
 
+            
+
             . This method allows you to limit the permissions of the style sheet by specifying evidence.</para
           >
         </summary>
@@ -2039,8 +2451,12 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -2049,13 +2465,19 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -2066,8 +2488,12 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -2078,8 +2504,12 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -2120,8 +2550,12 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -2134,12 +2568,16 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -2151,6 +2589,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -2159,8 +2599,12 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
             
 
+            
+
             . To use a portion of the loaded document as the style sheet, navigate to the node corresponding to the beginning of the style sheet. After the <see
              cref="M:System.Xml.Xsl.XslTransform.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlResolver,System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -2169,11 +2613,15 @@ xslt.Load(style sheet,resolver,evidence);</code>
 
             
 
+            
+
              is positioned at the beginning of the style sheet (on the xsl:style sheet node).</para
           >
           <para
             >For issues with the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
+
+            
 
             
 
@@ -2224,6 +2672,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
                   
 
+                  
+
                    parameter to null. This ensures that xsl:import and xsl:include elements are not processed. </para
                 >
               </description>
@@ -2246,6 +2696,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
             . This method allows you to limit the permissions of the style sheet by specifying evidence.</para
           >
         </summary>
@@ -2254,8 +2706,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -2266,8 +2722,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -2278,8 +2738,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -2319,8 +2783,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -2333,6 +2801,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
@@ -2342,11 +2812,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para>
             <see cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -2359,13 +2833,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -2382,10 +2862,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The URL of the source document to be transformed. </param
         >
         <param name="outputfile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2425,8 +2909,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -2439,6 +2927,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
@@ -2448,11 +2938,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para>
             <see cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -2465,13 +2959,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -2484,8 +2984,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The xsl:output element is not supported when outputting to an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2493,6 +2997,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -2505,13 +3011,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList)" />
+
+            
 
             
 
@@ -2558,13 +3070,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2579,6 +3097,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing the results of the transformation.</para
           >
         </returns>
@@ -2587,8 +3107,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -2597,13 +3121,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -2614,8 +3144,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2655,8 +3189,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -2669,12 +3207,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -2686,6 +3228,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -2694,13 +3238,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation has been performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, which is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList)" />
+
+            
 
             
 
@@ -2712,10 +3262,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              provides read-only output, the xsl:output element is ignored. See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -2729,13 +3283,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -2751,13 +3311,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2772,6 +3338,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing the results of the transformation.</para
           >
         </returns>
@@ -2780,8 +3348,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -2792,8 +3364,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -2834,8 +3410,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -2848,6 +3428,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
@@ -2857,11 +3439,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para>
             <see cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -2877,10 +3463,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The URL of the source document to be transformed. </param
         >
         <param name="outputfile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2891,8 +3481,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -2933,8 +3527,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -2947,6 +3545,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
@@ -2956,11 +3556,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para>
             <see cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -2973,13 +3577,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -2992,6 +3602,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet.</para
           >
           <para
@@ -3000,13 +3612,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)" />
+
+            
 
             
 
@@ -3053,13 +3671,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3071,8 +3695,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -3081,13 +3709,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -3098,8 +3732,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -3107,6 +3745,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
         >
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3147,8 +3787,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -3161,6 +3805,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
@@ -3170,11 +3816,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para>
             <see cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -3187,13 +3837,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -3206,6 +3862,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet.</para
           >
           <para
@@ -3214,10 +3872,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
             . See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -3229,13 +3891,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment, and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -3282,13 +3950,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -3300,8 +3974,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -3310,13 +3988,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -3327,8 +4011,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -3339,8 +4027,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -3381,8 +4073,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -3395,12 +4091,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -3412,6 +4112,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -3420,8 +4122,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The xsl:output element is not supported when outputting to an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3429,6 +4135,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -3441,13 +4149,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment, and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -3494,13 +4208,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3515,6 +4235,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing the results of the transformation.</para
           >
         </returns>
@@ -3523,8 +4245,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -3533,13 +4259,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -3550,8 +4282,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -3562,8 +4298,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -3604,8 +4344,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -3618,6 +4362,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
@@ -3627,11 +4373,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
               .</para
             >
           </block>
           <para>
             <see cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -3644,13 +4394,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -3663,8 +4419,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The xsl:output element is not supported when outputting to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3672,6 +4432,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -3683,13 +4445,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)" />
+
+            
 
             
 
@@ -3736,13 +4504,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3754,8 +4528,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -3764,13 +4542,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -3781,8 +4565,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -3793,8 +4581,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -3835,8 +4627,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -3849,12 +4645,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -3866,6 +4666,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -3874,13 +4676,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation has been performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, which is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)" />
+
+            
 
             
 
@@ -3894,6 +4702,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              for specifics on which xsl:output attributes are supported.</para
           >
           <block subset="none" type="note">
@@ -3903,13 +4713,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -3925,13 +4741,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3943,8 +4765,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -3955,8 +4781,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -3964,6 +4794,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
         >
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4004,8 +4836,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -4018,12 +4854,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -4035,6 +4875,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -4043,13 +4885,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation is performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, which is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)" />
+
+            
 
             
 
@@ -4061,10 +4909,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
             . See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -4077,13 +4929,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -4099,13 +4957,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -4117,8 +4981,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -4129,8 +4997,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -4141,8 +5013,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -4183,8 +5059,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -4197,12 +5077,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -4214,6 +5098,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -4222,13 +5108,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation has been performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, which is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -4240,10 +5132,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              provides read-only output, the xsl:output element is ignored. See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -4259,13 +5155,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4280,6 +5182,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing the results of the transformation.</para
           >
         </returns>
@@ -4288,8 +5192,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -4300,8 +5208,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -4312,8 +5224,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -4354,8 +5270,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -4368,12 +5288,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -4385,6 +5309,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -4393,13 +5319,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation is performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, that is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)" />
+
+            
 
             
 
@@ -4411,10 +5343,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              (xsl:output is ignored). See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -4427,13 +5363,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                property determines how the XSLT document() function is resolved. The recommended practice is to use the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
 
               
 
+              
+
                method which takes an <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -4449,8 +5391,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified args and outputs the result to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4462,8 +5408,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -4474,8 +5424,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -4486,8 +5440,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -4529,8 +5487,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -4543,12 +5505,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -4560,11 +5526,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
             >The <paramref
              name="args" />
+
+            
 
             
 
@@ -4576,13 +5546,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -4629,13 +5605,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -4647,8 +5629,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -4657,13 +5643,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -4674,8 +5666,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -4686,6 +5682,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The stream to which you want to output. </param
         >
         <param name="resolver">
@@ -4693,8 +5691,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -4736,8 +5738,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -4750,12 +5756,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -4767,11 +5777,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
             >The <paramref
              name="args" />
+
+            
 
             
 
@@ -4783,10 +5797,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
             . See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -4798,13 +5816,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -4851,13 +5875,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -4869,8 +5899,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -4879,13 +5913,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -4896,8 +5936,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -4908,8 +5952,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -4920,8 +5968,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -4963,8 +6015,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -4977,12 +6033,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -4994,6 +6054,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -5002,8 +6064,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The xsl:output element is not supported when outputting to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -5011,6 +6077,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -5022,13 +6090,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              containing just the node fragment and pass that <see
              cref="T:System.Xml.XmlDocument" />
 
             
 
+            
+
              to the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -5075,13 +6149,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -5093,8 +6173,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An object implementing the <see
            cref="T:System.Xml.XPath.IXPathNavigable" />
+
+          
 
           
 
@@ -5103,13 +6187,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (typically an <see
            cref="T:System.Xml.XmlDocument" />
 
           
 
+          
+
           ), or an <see
            cref="T:System.Xml.XPath.XPathDocument" />
+
+          
 
           
 
@@ -5120,8 +6210,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -5132,8 +6226,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -5144,8 +6242,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -5187,8 +6289,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -5201,12 +6307,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -5218,6 +6328,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -5226,13 +6338,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation has been performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, which is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -5243,6 +6361,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -5257,13 +6377,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -5275,8 +6401,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -5287,8 +6417,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -5299,6 +6433,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The stream to which you want to output. </param
         >
         <param name="resolver">
@@ -5306,8 +6442,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -5349,8 +6489,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -5363,12 +6507,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -5380,6 +6528,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -5388,13 +6538,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation is performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, which is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -5406,10 +6562,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
             . See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -5424,13 +6584,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified <paramref
              name="args" />
 
             
 
+            
+
              and outputs the result to a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -5442,8 +6608,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -5454,8 +6624,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -5466,8 +6640,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -5478,8 +6656,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -5521,8 +6703,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -5535,12 +6721,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -5552,6 +6742,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              supports the XSLT 1.0 syntax. The XSLT style sheet must include the namespace declaration xmlns:xsl= http://www.w3.org/1999/XSL/Transform.</para
           >
           <para
@@ -5560,13 +6752,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              are matched with the xsl:param elements defined in the style sheet. The transformation selections apply to the document as a whole. In other words, if the current node is set on a node tree other than the document root node, this does not prevent the transformation process from accessing all nodes in the loaded document. After the transformation is performed, the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
+            
+
              remains in its original state. This means that the node, that is current before the transformation process, remains the current node after the <see
              cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)" />
+
+            
 
             
 
@@ -5578,10 +6776,14 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              (xsl:output is ignored). See <format
              type="text/html">
               <a href="8e149d32-4b2f-493f-9e4b-d0d93475acde">Outputs from an XslTransform</a>
             </format>
+
+            
 
             
 
@@ -5596,8 +6798,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              using the specified args and outputs the result to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -5609,8 +6815,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -5621,8 +6831,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -5633,8 +6847,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -5645,8 +6863,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -5681,8 +6903,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0. The <see
                cref="T:System.Xml.Xsl.XslCompiledTransform" />
+
+              
 
               
 
@@ -5695,12 +6921,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="9404d758-679f-4ffb-995d-3d07d817659e"
                   >Migrating From the XslTransform Class</a
                 >
               </format>
+
+              
 
               
 
@@ -5714,8 +6944,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              with no user credentials is used to resolve the document() function. If authentication is required to access the external resource, use this property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -5727,6 +6961,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
             , this property also cannot be set.</para
           >
           <para
@@ -5735,13 +6971,19 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              to use to resolve xsl:import and xsl:include elements referenced in the style sheet, use the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Load" />
 
             
 
+            
+
              overload, which takes an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -5754,8 +6996,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                using the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
+
+              
 
               
 
@@ -5764,8 +7010,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
               
 
+              
+
                is not cached after the <see
                cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
+
+              
 
               
 
@@ -5781,8 +7031,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
             
 
+            
+
              used to resolve external resources when the <see
              cref="Overload:System.Xml.Xsl.XslTransform.Transform" />
+
+            
 
             
 
@@ -5814,11 +7068,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
         
 
+        
+
          that represents the stylesheet document.</param
       >
       <param name="resolver"
         >A <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -5834,12 +7092,16 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            instance.
 </para
         >
         <para
           >If the input was not valid stylesheet, an <see
            cref="T:System.Xml.Xsl.XslCompileException" />
+
+          
 
           
 
@@ -5852,8 +7114,12 @@ xslt.Load(xslNav,resolver,evidence);</code>
 
           
 
+          
+
            (that is set in advance) is used. If is was not set explicitly, then a <see
            cref="T:System.Xml.XmlUrlResolver" />
+
+          
 
           
 
@@ -5863,6 +7129,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
         <para
           >See also <see
            cref="M:System.Xml.Xsl.XslTransform.Transform" />
+
+          
 
           
 

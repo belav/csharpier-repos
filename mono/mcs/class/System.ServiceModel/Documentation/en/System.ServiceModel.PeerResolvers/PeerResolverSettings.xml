@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -73,8 +75,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.PeerResolvers.PeerResolverMode.Custom" />
+
+            
 
             
 

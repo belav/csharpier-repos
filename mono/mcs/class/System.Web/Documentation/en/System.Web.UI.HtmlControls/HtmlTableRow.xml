@@ -30,8 +30,12 @@
 
         
 
+        
+
          class to programmatically control the &lt;tr&gt; HTML elements in an <see
          cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class allows you to customize the appearance of a row in a table by specifying the background color, the border color, and the height of the cells in the row. These attributes are set using the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableRow.BgColor" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Height" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableRow.VAlign" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
          property controls the horizontal alignment of the contents of the cells, while the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableRow.VAlign" />
+
+        
 
         
 
@@ -89,6 +109,8 @@
 
         
 
+        
+
          collection of this class, you can programmatically access the individual cells in a row of a table. This allows you to control the properties of each cell, as well as the content.</para
       >
       <para
@@ -97,8 +119,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlTableRow.#ctor" />
+
+        
 
         
 
@@ -110,6 +136,8 @@
       <para
         >Represents the &lt;tr&gt; HTML element in an <see
          cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+        
 
         
 
@@ -132,8 +160,12 @@
 
             
 
+            
+
              class. This constructor is used to create an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -142,6 +174,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -178,6 +212,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -204,8 +240,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of the content in the cells of a row in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+            
 
             
 
@@ -218,8 +258,12 @@
 
               
 
+              
+
                class. To apply an alignment attribute to a single cell of a row, set the <see
                cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Align" />
+
+              
 
               
 
@@ -275,6 +319,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -309,8 +355,12 @@
 
             
 
+            
+
              property to specify the background color of the row represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -322,10 +372,14 @@
 
             
 
+            
+
              property. For more information on HTML colors, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -477,8 +531,12 @@
 
             
 
+            
+
              property can be determined from the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -491,6 +549,8 @@
           <para
             >Gets or sets the background color of the row represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -528,8 +588,12 @@
 
             
 
+            
+
              property to specify the border color of the row represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -541,10 +605,14 @@
 
             
 
+            
+
              property. For more information on HTML colors, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -696,8 +764,12 @@
 
             
 
+            
+
              property can be determined from the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -710,6 +782,8 @@
           <para
             >Gets or sets the border color of the row represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -749,8 +823,12 @@
 
             
 
+            
+
              collection to programmatically access the cells of a row in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+            
 
             
 
@@ -760,6 +838,8 @@
             <para
               >If there are no cells defined in a row, an empty <see
                cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+              
 
               
 
@@ -775,8 +855,12 @@
 
             
 
+            
+
              objects that represent the cells contained in a row of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+            
 
             
 
@@ -816,8 +900,12 @@
 
             
 
+            
+
              method creates a new <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -829,8 +917,12 @@
 
             
 
+            
+
              method is primarily of interest to control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -845,8 +937,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -861,8 +957,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -892,8 +992,12 @@
 
             
 
+            
+
              property to specify the height (in pixels) of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -908,6 +1012,8 @@
           <para
             >Gets or sets the height (in pixels) of the row represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -949,13 +1055,19 @@
 
               
 
+              
+
                exception is thrown. This property is inherited from the <see
                cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+              
 
               
 
@@ -994,13 +1106,19 @@
 
               
 
+              
+
                exception is raised. This property is inherited from the <see
                cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+              
 
               
 
@@ -1039,8 +1157,12 @@
 
             
 
+            
+
              method provides additional formatting before and after calling the base class's <see
              cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1049,8 +1171,12 @@
 
             
 
+            
+
              control's rendered HTML easier to read by adding a line return and indenting before rendering the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -1062,8 +1188,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -1078,8 +1208,12 @@
 
             
 
+            
+
              control's child controls to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1091,8 +1225,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1125,13 +1263,19 @@
 
             
 
+            
+
              method provides additional formatting after calling the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
+            
+
              method. The added formatting makes the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -1143,8 +1287,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+            
 
             
 
@@ -1159,6 +1307,8 @@
 
             
 
+            
+
              control's end tag.</para
           >
         </summary>
@@ -1167,8 +1317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1197,8 +1351,12 @@
 
             
 
+            
+
              property to specify the vertical alignment of the content in the cells of a row in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+            
 
             
 
@@ -1211,8 +1369,12 @@
 
               
 
+              
+
                class. To apply an alignment attribute to a single cell of a row, set the <see
                cref="P:System.Web.UI.HtmlControls.HtmlTableCell.VAlign" />
+
+              
 
               
 
@@ -1265,6 +1427,8 @@
           <para
             >Gets or sets the vertical alignment of the content in the cells of a row in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+            
 
             
 

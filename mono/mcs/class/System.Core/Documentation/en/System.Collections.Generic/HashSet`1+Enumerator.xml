@@ -36,6 +36,8 @@
 
         
 
+        
+
          class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.</para
       >
       <para
@@ -44,8 +46,12 @@
 
         
 
+        
+
          object is the number of elements that the object can hold. A <see
          cref="T:System.Collections.Generic.HashSet`1" />
+
+        
 
         
 
@@ -57,10 +63,14 @@
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Collections.Generic.ISet`1" />
+
+        
 
         
 

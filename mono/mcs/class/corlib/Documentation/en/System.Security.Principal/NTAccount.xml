@@ -55,6 +55,8 @@
 
             
 
+            
+
             -derived types will not be possible unless the account or group does exist.</para
           >
         </remarks>
@@ -66,6 +68,8 @@
 
             
 
+            
+
              class by using the specified name.</para
           >
         </summary>
@@ -74,8 +78,12 @@
 
           
 
+          
+
           The name used to create the <see
            cref="T:System.Security.Principal.NTAccount" />
+
+          
 
           
 
@@ -111,6 +119,8 @@
 
             
 
+            
+
             -derived types will not be possible unless the account or group does exist.</para
           >
         </remarks>
@@ -122,6 +132,8 @@
 
             
 
+            
+
              class by using the specified domain name and account name. </para
           >
         </summary>
@@ -130,10 +142,14 @@
 
           
 
+          
+
           The name of the domain. This parameter can be null or an empty string. Domain names that are null values are treated like an empty string.</param
         >
         <param name="accountName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,6 +185,8 @@
 
             
 
+            
+
              object is equal to a specified object.</para
           >
         </summary>
@@ -180,8 +198,12 @@
 
             
 
+            
+
              is an object with the same underlying type and value as this <see
              cref="T:System.Security.Principal.NTAccount" />
+
+            
 
             
 
@@ -193,8 +215,12 @@
 
           
 
+          
+
           An object to compare with this <see
            cref="T:System.Security.Principal.NTAccount" />
+
+          
 
           
 
@@ -228,8 +254,12 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Security.Principal.NTAccount.GetHashCode" />
+
+            
 
             
 
@@ -241,6 +271,8 @@
           <para
             >A hash value for the current <see
              cref="T:System.Security.Principal.NTAccount" />
+
+            
 
             
 
@@ -280,6 +312,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -291,8 +325,12 @@
 
             
 
+            
+
              is a valid translation type for the <see
              cref="T:System.Security.Principal.NTAccount" />
+
+            
 
             
 
@@ -304,8 +342,12 @@
 
           
 
+          
+
           The type being queried for validity to serve as a conversion from <see
            cref="T:System.Security.Principal.NTAccount" />
+
+          
 
           
 
@@ -345,8 +387,12 @@
 
             
 
+            
+
              objects to determine whether they are equal. They are considered equal if they have the same canonical name representation as the one returned by the <see
              cref="P:System.Security.Principal.NTAccount.Value" />
+
+            
 
             
 
@@ -361,8 +407,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -374,10 +424,14 @@
 
           
 
+          
+
           The left operand to use for the equality comparison. This parameter can be null.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,8 +471,12 @@
 
             
 
+            
+
              objects to determine whether they are not equal. They are considered not equal if they have different canonical name representations than the one returned by the <see
              cref="P:System.Security.Principal.NTAccount.Value" />
+
+            
 
             
 
@@ -433,8 +491,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -446,10 +508,14 @@
 
           
 
+          
+
           The left operand to use for the inequality comparison. This parameter can be null.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,8 +549,12 @@
 
             
 
+            
+
             Account format, for the account represented by the <see
              cref="T:System.Security.Principal.NTAccount" />
+
+            
 
             
 
@@ -496,6 +566,8 @@
           <para
             >The account name, in Domain<system
             >\</system>
+
+            
 
             
 
@@ -535,8 +607,12 @@
 
             
 
+            
+
              object into another <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -552,13 +628,19 @@
 
           
 
+          
+
           The target type for the conversion from <see
            cref="T:System.Security.Principal.NTAccount" />
 
           
 
+          
+
           . The target type must be a type that is considered valid by the <see
            cref="M:System.Security.Principal.NTAccount.IsValidTargetType(System.Type)" />
+
+          
 
           
 
@@ -586,6 +668,8 @@
           <para
             >Returns an uppercase string representation of this <see
              cref="T:System.Security.Principal.NTAccount" />
+
+            
 
             
 

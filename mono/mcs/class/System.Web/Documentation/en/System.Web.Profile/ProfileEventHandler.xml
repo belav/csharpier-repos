@@ -30,13 +30,19 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          event to specify a custom user profile. If the <see
          cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
         
 
+        
+
          parameter specified for the <see
          cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+        
 
         
 
@@ -78,8 +96,12 @@
 
         
 
+        
+
          is set to a non-null value when the <see
          cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+        
 
         
 
@@ -88,13 +110,19 @@
 
         
 
+        
+
          will use that value for the <see
          cref="P:System.Web.HttpContext.Profile" />
 
         
 
+        
+
          property of the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -109,8 +137,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 

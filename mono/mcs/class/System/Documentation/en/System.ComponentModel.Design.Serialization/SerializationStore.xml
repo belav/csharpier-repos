@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is an implementation-specific class that stores serialization data for the <see
          cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.IDisposable" />
+
+        
 
         
 
@@ -50,8 +58,12 @@
 
         
 
+        
+
          simply calls the <see
          cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Close" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
       <para
         >Provides the base class for storing serialization data for the <see
          cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -119,6 +135,8 @@
           <para
             >The <see
              cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Close" />
+
+            
 
             
 
@@ -157,8 +175,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -167,8 +189,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -180,8 +206,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+            
 
             
 
@@ -196,11 +226,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,8 +294,12 @@
 
             
 
+            
+
              method will automatically close it for you. You can call <see
              cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Save(System.IO.Stream)" />
+
+            
 
             
 
@@ -274,6 +312,8 @@
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,6 +343,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+            
 
             
 

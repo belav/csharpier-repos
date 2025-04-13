@@ -33,6 +33,8 @@
 
         
 
+        
+
         . This class specifies a list of valid values for a simpleType element. Declaration is contained within a restriction declaration.</para
       >
     </summary>
@@ -59,6 +61,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaEnumerationFacet" />
+
+            
 
             
 

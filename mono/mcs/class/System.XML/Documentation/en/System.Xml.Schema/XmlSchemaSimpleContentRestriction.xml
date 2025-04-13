@@ -36,6 +36,8 @@
 
         
 
+        
+
         . This class can be used to derive simple types by restriction. Such derivations can be used to restrict the range of values for the element to a subset of the values specified in the inherited simple type.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleContentRestriction" />
+
+            
 
             
 
@@ -102,6 +106,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />
+
+            
 
             
 
@@ -147,8 +153,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+
+            
 
             
 

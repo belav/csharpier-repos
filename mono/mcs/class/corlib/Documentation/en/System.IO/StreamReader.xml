@@ -40,13 +40,19 @@
 
         
 
+        
+
          is designed for character input in a particular encoding, whereas the <see
          cref="T:System.IO.Stream" />
 
         
 
+        
+
          class is designed for byte input and output. Use <see
          cref="T:System.IO.StreamReader" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          defaults to UTF-8 encoding unless specified otherwise, instead of defaulting to the ANSI code page for the current system. UTF-8 handles Unicode characters correctly and provides consistent results on localized versions of the operating system. If you get the current character encoding using the <see
          cref="P:System.IO.StreamReader.CurrentEncoding" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          method, since encoding auto detection is not done until the first call to a <see
          cref="M:System.IO.StreamReader.Read" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          is not thread safe. See <see
          cref="M:System.IO.TextReader.Synchronized(System.IO.TextReader)" />
+
+        
 
         
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
           and <see
          cref="M:System.IO.StreamWriter.Write(System.Char[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -103,8 +125,12 @@
 
         
 
+        
+
          parameter. These are to be distinguished from <see
          cref="M:System.IO.BufferedStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -113,13 +139,19 @@
 
         
 
+        
+
         , which read and write the number of bytes specified by the <paramref
          name="count" />
 
         
 
+        
+
          parameter. Use the <see
          cref="T:System.IO.BufferedStream" />
+
+        
 
         
 
@@ -129,6 +161,8 @@
         <para
           >When reading from a <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -143,6 +177,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -151,6 +187,8 @@
       <para
         >Implements a <see
          cref="T:System.IO.TextReader" />
+
+        
 
         
 
@@ -185,6 +223,8 @@
 
           
 
+          
+
            does not support reading.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -192,8 +232,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -207,13 +251,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.IO.StreamReader.BaseStream" />
 
             
 
+            
+
              property using the <paramref
              name="stream" />
+
+            
 
             
 
@@ -225,8 +275,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -235,8 +289,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -253,6 +311,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -264,11 +324,15 @@
 
             
 
+            
+
              class for the specified stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,11 +367,15 @@
 
           
 
+          
+
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -319,10 +387,14 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -333,8 +405,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -348,8 +424,12 @@
 
             
 
+            
+
              parameter. This constructor initializes the encoding to <see
              cref="T:System.Text.UTF8Encoding" />
+
+            
 
             
 
@@ -361,11 +441,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -382,6 +466,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -393,11 +479,15 @@
 
             
 
+            
+
              class for the specified file name.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,6 +526,8 @@
 
           
 
+          
+
            does not support reading.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -443,8 +535,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -458,13 +554,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.IO.StreamReader.BaseStream" />
 
             
 
+            
+
              property using the <paramref
              name="stream" />
+
+            
 
             
 
@@ -476,8 +578,12 @@
 
             
 
+            
+
              parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -489,8 +595,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -499,8 +609,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -511,6 +625,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -525,6 +641,8 @@
 
             
 
+            
+
              class for the specified stream, with the specified byte order mark detection option.</para
           >
         </summary>
@@ -533,10 +651,14 @@
 
           
 
+          
+
           The stream to be read. </param
         >
         <param name="detectEncodingFromByteOrderMarks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -575,10 +697,14 @@
 
           
 
+          
+
            does not support reading.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="stream " />
+
+          
 
           
 
@@ -587,8 +713,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -602,13 +732,19 @@
 
             
 
+            
+
              parameter, and the buffer size is set to 1024 bytes. The <see
              cref="T:System.IO.StreamReader" />
 
             
 
+            
+
              object attempts to  detect the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -620,8 +756,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -630,8 +770,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -648,6 +792,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -659,6 +805,8 @@
 
             
 
+            
+
              class for the specified stream, with the specified character encoding.</para
           >
         </summary>
@@ -667,10 +815,14 @@
 
           
 
+          
+
           The stream to be read. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,11 +861,15 @@
 
           
 
+          
+
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -725,10 +881,14 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -739,8 +899,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -754,13 +918,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.IO.StreamReader.BaseStream" />
 
             
 
+            
+
              property using the <paramref
              name="stream" />
+
+            
 
             
 
@@ -772,11 +942,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -788,13 +962,19 @@
 
             
 
+            
+
              parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the <see
              cref="T:System.Text.UTF8Encoding" />
 
             
 
+            
+
              is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -805,6 +985,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -819,6 +1001,8 @@
 
             
 
+            
+
              class for the specified file name, with the specified byte order mark detection option.</para
           >
         </summary>
@@ -827,10 +1011,14 @@
 
           
 
+          
+
           The complete file path to be read. </param
         >
         <param name="detectEncodingFromByteOrderMarks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -869,11 +1057,15 @@
 
           
 
+          
+
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -885,10 +1077,14 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -899,13 +1095,19 @@
 
           
 
+          
+
           or <paramref
            name="encoding" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -919,13 +1121,19 @@
 
             
 
+            
+
              parameter, and the internal buffer size to 1024 bytes. The <see
              cref="T:System.IO.StreamReader" />
 
             
 
+            
+
              object attempts to  detect the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -937,11 +1145,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -958,6 +1170,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -969,6 +1183,8 @@
 
             
 
+            
+
              class for the specified file name, with the specified character encoding.</para
           >
         </summary>
@@ -977,10 +1193,14 @@
 
           
 
+          
+
           The complete file path to be read. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1020,10 +1240,14 @@
 
           
 
+          
+
            does not support reading.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="stream " />
+
+          
 
           
 
@@ -1032,8 +1256,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1047,13 +1275,19 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.IO.StreamReader.BaseStream" />
 
             
 
+            
+
              property using the <paramref
              name="stream" />
+
+            
 
             
 
@@ -1065,8 +1299,12 @@
 
             
 
+            
+
              parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -1078,8 +1316,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -1088,8 +1330,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1106,6 +1352,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1117,11 +1365,15 @@
 
             
 
+            
+
              class for the specified stream, with the specified character encoding and byte order mark detection option.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1132,10 +1384,14 @@
 
           
 
+          
+
           The character encoding to use. </param
         >
         <param name="detectEncodingFromByteOrderMarks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1175,11 +1431,15 @@
 
           
 
+          
+
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -1191,10 +1451,14 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -1205,13 +1469,19 @@
 
           
 
+          
+
            or <paramref
            name="encoding" />
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1225,6 +1495,8 @@
 
             
 
+            
+
              parameter, and the internal buffer size to 1024 bytes.</para
           >
           <para
@@ -1233,8 +1505,12 @@
 
             
 
+            
+
              parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -1246,11 +1522,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -1267,6 +1547,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1278,11 +1560,15 @@
 
             
 
+            
+
              class for the specified file name, with the specified character encoding and byte order mark detection option.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1293,10 +1579,14 @@
 
           
 
+          
+
           The character encoding to use. </param
         >
         <param name="detectEncodingFromByteOrderMarks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1337,10 +1627,14 @@
 
           
 
+          
+
            does not support reading.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="stream " />
+
+          
 
           
 
@@ -1349,8 +1643,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1358,6 +1656,8 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="bufferSize " />
+
+          
 
           
 
@@ -1371,8 +1671,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="bufferSize" />
+
+            
 
             
 
@@ -1384,13 +1688,19 @@
 
             
 
+            
+
              object. The <paramref
              name="detectEncodingFromByteOrderMarks" />
 
             
 
+            
+
              parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -1402,8 +1712,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -1412,8 +1726,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1423,6 +1741,8 @@
             <para
               >When reading from a <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -1440,6 +1760,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1451,11 +1773,15 @@
 
             
 
+            
+
              class for the specified stream, with the specified character encoding, byte order mark detection option, and buffer size.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1466,6 +1792,8 @@
 
           
 
+          
+
           The character encoding to use. </param
         >
         <param name="detectEncodingFromByteOrderMarks">
@@ -1473,10 +1801,14 @@
 
           
 
+          
+
           Indicates whether to look for byte order marks at the beginning of the file. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1517,11 +1849,15 @@
 
           
 
+          
+
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -1533,10 +1869,14 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -1547,8 +1887,12 @@
 
           
 
+          
+
            or <paramref
            name="encoding" />
+
+          
 
           
 
@@ -1557,10 +1901,14 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="buffersize" />
+
+          
 
           
 
@@ -1574,6 +1922,8 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
@@ -1582,13 +1932,19 @@
 
             
 
+            
+
              object. The <paramref
              name="detectEncodingFromByteOrderMarks" />
 
             
 
+            
+
              parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -1600,8 +1956,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="bufferSize" />
+
+            
 
             
 
@@ -1613,11 +1973,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -1634,6 +1998,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1645,11 +2011,15 @@
 
             
 
+            
+
              class for the specified file name, with the specified character encoding, byte order mark detection option, and buffer size.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1660,6 +2030,8 @@
 
           
 
+          
+
           The character encoding to use. </param
         >
         <param name="detectEncodingFromByteOrderMarks">
@@ -1667,10 +2039,14 @@
 
           
 
+          
+
           Indicates whether to look for byte order marks at the beginning of the file. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1708,8 +2084,12 @@
 
             
 
+            
+
              parameter to true, the <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -1718,13 +2098,19 @@
 
             
 
+            
+
              on the provided <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1736,8 +2122,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="bufferSize" />
+
+            
 
             
 
@@ -1749,13 +2139,19 @@
 
             
 
+            
+
              object. If the <paramref
              name="detectEncodingFromByteOrderMarks" />
 
             
 
+            
+
              parameter is true, the constructor detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -1765,6 +2161,8 @@
             <para
               >When reading from a <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -1783,11 +2181,15 @@
 
             
 
+            
+
              class for the specified stream based on the specified character encoding, byte order mark detection option, and buffer size, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1798,10 +2200,14 @@
 
           
 
+          
+
           The character encoding to use.</param
         >
         <param name="detectEncodingFromByteOrderMarks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1812,6 +2218,8 @@
 
           
 
+          
+
           The minimum buffer size.</param
         >
         <param name="leaveOpen">
@@ -1819,8 +2227,12 @@
 
           
 
+          
+
           true to leave the stream open after the <see
            cref="T:System.IO.StreamReader" />
+
+          
 
           
 
@@ -1856,8 +2268,12 @@
 
             
 
+            
+
              which the current <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -1872,8 +2288,12 @@
 
             
 
+            
+
              class buffers input from the underlying stream when you call one of the <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -1882,8 +2302,12 @@
 
             
 
+            
+
              method; however, this method slows performance and should be called only when absolutely necessary. The <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -1892,8 +2316,12 @@
 
             
 
+            
+
              parameter can change the encoding the first time you read from the <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -1904,6 +2332,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1943,6 +2373,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1951,8 +2383,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1964,8 +2400,12 @@
 
             
 
+            
+
             . Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -1977,6 +2417,8 @@
 
             
 
+            
+
             , any operations on the reader might raise exceptions.</para
           >
         </remarks>
@@ -1985,6 +2427,8 @@
           <para
             >Closes the <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -2025,6 +2469,8 @@
 
           
 
+          
+
            used by the current reader.
 </value
         >
@@ -2038,6 +2484,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2046,6 +2494,8 @@
           <para
             >Gets the current character encoding that the current <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -2084,8 +2534,12 @@
 
             
 
+            
+
              method to reset the internal buffer for the <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -2094,8 +2548,12 @@
 
             
 
+            
+
              do not match. These positions can become mismatched when you read data into the buffer and then seek a new position in the underlying stream. This method slows performance and should be used only when absolutely necessary, such as when you want to read a portion of the contents of a <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -2106,6 +2564,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2150,8 +2610,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -2160,8 +2624,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.StreamReader.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -2170,8 +2638,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -2180,8 +2652,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2193,13 +2669,19 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that the <see
              cref="T:System.IO.StreamReader" />
 
             
 
+            
+
              object references. This method invokes the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -2215,11 +2697,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2273,13 +2759,19 @@
 
             
 
+            
+
             , zero is always returned. When <see
              cref="M:System.IO.StreamReader.ReadLine" />
 
             
 
+            
+
              is invoked on <see
              cref="F:System.IO.StreamReader.Null" />
+
+            
 
             
 
@@ -2293,6 +2785,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2301,6 +2795,8 @@
           <para
             >A <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -2336,8 +2832,12 @@
 
             
 
+            
+
              method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -2349,6 +2849,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2357,8 +2859,12 @@
 
             
 
+            
+
              object is not changed by <see
              cref="M:System.IO.StreamReader.Peek" />
+
+            
 
             
 
@@ -2403,11 +2909,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method returns an integer so that it can return -1 if the end of the stream has been reached. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see
              cref="M:System.IO.StreamReader.DiscardBufferedData" />
+
+            
 
             
 
@@ -2418,6 +2928,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2433,6 +2945,8 @@
           <para
             >The next character from the input stream represented as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2475,13 +2989,19 @@
 
           
 
+          
+
            .Length - <paramref
            name="index" />
 
           
 
+          
+
            &lt; <paramref
            name="count" />
+
+          
 
           
 
@@ -2492,8 +3012,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2504,8 +3028,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -2524,6 +3052,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This method returns an integer so that it can return 0 if the end of the stream has been reached.</para>
@@ -2533,8 +3063,12 @@
 
             
 
+            
+
              method, it is more efficient to use a buffer that is the same size as the internal buffer of the stream, where the internal buffer is set to your desired block size, and to always read less than the block size. If the size of the internal buffer was unspecified when the stream was constructed, its default size is 4 kilobytes (4096 bytes). If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see
              cref="M:System.IO.StreamReader.DiscardBufferedData" />
+
+            
 
             
 
@@ -2546,13 +3080,19 @@
 
             
 
+            
+
              parameter are read, or the end of the file is reached. <see
              cref="M:System.IO.TextReader.ReadBlock(System.Char[],System.Int32,System.Int32)" />
 
             
 
+            
+
              is a blocking version of <see
              cref="Overload:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -2563,6 +3103,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2581,6 +3123,8 @@
 
             
 
+            
+
              parameter, depending on whether the data is available within the stream.</para
           >
         </returns>
@@ -2589,13 +3133,19 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
 
           
 
+          
+
            and (<paramref
            name="index + count - 1" />
+
+          
 
           
 
@@ -2606,8 +3156,12 @@
 
           
 
+          
+
           The index of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2615,6 +3169,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2653,6 +3209,8 @@
 
             
 
+            
+
              parameter are read or the end of the stream is reached.</para
           >
         </remarks>
@@ -2668,6 +3226,8 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.</para
           >
         </returns>
@@ -2676,8 +3236,12 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -2686,8 +3250,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -2698,8 +3266,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2707,6 +3279,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2744,6 +3318,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2752,8 +3328,12 @@
 
             
 
+            
+
              characters are read, or the end of the stream has been reached. This is a blocking version of <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -2772,6 +3352,8 @@
 
             
 
+            
+
             , depending on whether all input characters have been read.</para
           >
         </returns>
@@ -2780,13 +3362,19 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
 
           
 
+          
+
            and (<paramref
            name="index + count - 1" />
+
+          
 
           
 
@@ -2797,8 +3385,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2806,6 +3398,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2843,6 +3437,8 @@
 
             
 
+            
+
              parameter are read, or the end of the stream has been reached.</para
           >
         </remarks>
@@ -2858,6 +3454,8 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.</para
           >
         </returns>
@@ -2866,8 +3464,12 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -2876,8 +3478,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -2888,8 +3494,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2897,6 +3507,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2938,6 +3550,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2946,8 +3560,12 @@
 
             
 
+            
+
             , the reader's position in the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2956,8 +3574,12 @@
 
             
 
+            
+
              buffer are discarded. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see
              cref="M:System.IO.StreamReader.DiscardBufferedData" />
+
+            
 
             
 
@@ -2968,6 +3590,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3016,6 +3640,8 @@
 
             
 
+            
+
              parameter contains the next line from the stream, or is null if all the characters have been read.</para
           >
         </returns>
@@ -3054,6 +3680,8 @@
 
             
 
+            
+
             .</para
           >
           <para>
@@ -3061,8 +3689,12 @@
 
             
 
+            
+
              works best when you need to read all the input from the current position to the end of the stream. If more control is needed over how many characters are read from the stream, use the <see
              cref="M:System.IO.StreamReader.Read(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3073,8 +3705,12 @@
 
             
 
+            
+
              assumes that the stream knows when it has reached an end. For interactive protocols in which the server sends data only when you ask for it and does not close the connection, <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -3086,6 +3722,8 @@
 
             
 
+            
+
               method, it is more efficient to use a buffer that is the same size as the internal buffer of the stream. If the size of the buffer was unspecified when the stream was constructed, its default size is 4 kilobytes (4096 bytes).</para
           >
           <para
@@ -3094,8 +3732,12 @@
 
             
 
+            
+
             , the reader's position in the underlying <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3104,8 +3746,12 @@
 
             
 
+            
+
              buffer are discarded. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see
              cref="M:System.IO.StreamReader.DiscardBufferedData" />
+
+            
 
             
 
@@ -3116,6 +3762,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3161,6 +3809,8 @@
           <para
             >A task that represents the asynchronous read operation. The value of the <paramref
              name="TResult" />
+
+            
 
             
 

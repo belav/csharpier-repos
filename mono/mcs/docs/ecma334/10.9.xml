@@ -12,6 +12,8 @@
 
     
 
+    
+
     ) (if any) for the object is run. Unless overridden by explicit calls, the destructor for the object is run once only. </paragraph
   >
   <paragraph>4 Once the destructor for an object is run, if that object, or any part of it, cannot be accessed by any possible continuation of execution, including the running of destructors, the object is considered inaccessible and the object becomes eligible for collection. </paragraph>
@@ -55,6 +57,8 @@ class Test
 
       
 
+      
+
       creates an instance of class A and an instance of class B. These objects become eligible for garbage collection when the variable b is assigned the value null, since after this time it is impossible for any  user-written code to access them. The output could be either <code_example
       >
         <![CDATA[
@@ -65,6 +69,8 @@ Destruct instance of B
 
       
 
+      
+
       or <code_example
       >
         <![CDATA[
@@ -72,6 +78,8 @@ Destruct instance of B
 Destruct instance of A  
 ]]>
       </code_example>
+
+      
 
       
 

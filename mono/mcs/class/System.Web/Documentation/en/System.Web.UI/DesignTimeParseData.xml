@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used to provide design-time parameters for several methods in the <see
          cref="T:System.Web.UI.DesignTimeTemplateParser" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
             
 
+            
+
              class without a specified filter. </para
           >
         </summary>
@@ -64,10 +70,14 @@
 
           
 
+          
+
           The object for managing designer transactions and components.</param
         >
         <param name="parseText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -103,11 +113,15 @@
 
             
 
+            
+
              class with the specified filter. </para
           >
         </summary>
         <param name="designerHost">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,10 +132,14 @@
 
           
 
+          
+
           The text to parse during design time.</param
         >
         <param name="filter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
          to a string that is formatted as XSD dateTime. </para
       >
     </summary>
@@ -61,6 +63,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDateTime" />
+
+            
 
             
 
@@ -203,8 +207,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -219,8 +227,12 @@
 
             
 
+            
+
              object obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -229,6 +241,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +278,12 @@
 
             
 
+            
+
              object as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -280,8 +298,12 @@
 
             
 
+            
+
              representation of <paramref
              name="value" />
+
+            
 
             
 
@@ -293,8 +315,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 

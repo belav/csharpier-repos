@@ -147,12 +147,16 @@
 
           
 
+          
+
            delegate instead. </para
         >
       </block>
       <para
         >You can also use the <see
          cref="T:System.Func`14" />
+
+        
 
         
 
@@ -165,6 +169,8 @@
       <para
         >Encapsulates a method that has 13 parameters and returns a value of the type specified by the <paramref
          name="TResult" />
+
+        
 
         
 

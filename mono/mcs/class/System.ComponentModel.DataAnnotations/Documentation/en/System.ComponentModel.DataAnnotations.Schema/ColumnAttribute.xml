@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -78,11 +80,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,8 +135,12 @@
 
             
 
+            
+
              appears before <paramref
              name="Line2" />
+
+            
 
             
 
@@ -139,8 +149,12 @@
 
             
 
+            
+
              appears before <paramref
              name="Country" />
+
+            
 
             
 
@@ -181,6 +195,8 @@ public string Country { get; set; }
           <para
             >Gets or sets the name of the class that the <see
              cref="T:System.ComponentModel.DataAnnotations.Schema.ColumnAttribute" />
+
+            
 
             
 

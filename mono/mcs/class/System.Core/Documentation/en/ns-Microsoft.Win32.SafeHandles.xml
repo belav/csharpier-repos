@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes that are abstract derivations of safe handle classes that provide common functionality supporting file and operating system handles.</para
       >
     </summary>
@@ -20,8 +22,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+        
 
         
 

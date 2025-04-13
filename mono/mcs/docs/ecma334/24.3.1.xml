@@ -6,8 +6,12 @@
 
     
 
+    
+
      P and <non_terminal
      where="24.2">named-argument-list</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <list_item
         > Follow the compile-time processing steps for compiling an <non_terminal
          where="14.5.10.1">object-creation-expression</non_terminal>
+
+        
 
         
 
@@ -28,12 +34,16 @@
 
         
 
+        
+
          Arg in N: </list_item
       >
       <list>
         <list_item
           > Let Name be the identifier of the <non_terminal
            where="24.2">named-argument</non_terminal>
+
+          
 
           
 
@@ -47,8 +57,12 @@
 
         
 
+        
+
          P and the <non_terminal
          where="24.2">named-argument-list</non_terminal>
+
+        
 
         
 

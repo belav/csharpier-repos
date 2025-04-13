@@ -30,6 +30,8 @@
 
         
 
+        
+
          objects that get serialized using the multipart/* content type specification.</para
       >
     </summary>
@@ -53,6 +55,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Net.Http.MultipartContent" />
+
+            
 
             
 
@@ -84,11 +88,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="subtype">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +131,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -131,10 +141,14 @@
 
           
 
+          
+
           The subtype of the multipart content.</param
         >
         <param name="boundary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,11 +185,15 @@
 
             
 
+            
+
              objects that get serialized using the multipart/* content type specification.</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,8 +226,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -218,8 +240,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -228,8 +254,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Http.MultipartContent" />
+
+            
 
             
 
@@ -244,11 +274,15 @@
 
             
 
+            
+
              and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,6 +322,8 @@
 
             
 
+            
+
              objects that get serialized using the multipart/* content type specification..</para
           >
         </summary>
@@ -296,6 +332,8 @@
           <para
             >Returns <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 
@@ -342,6 +380,8 @@
 
             
 
+            
+
              object will complete after all of the content has been serialized to the target stream.</para
           >
         </remarks>
@@ -357,6 +397,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -366,10 +408,14 @@
 
           
 
+          
+
           The target stream.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,6 +450,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -412,6 +460,8 @@
           <para
             >Returns <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

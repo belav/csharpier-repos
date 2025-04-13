@@ -22,8 +22,12 @@
 
         
 
+        
+
         . Instead, you call the <see
          cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class. For more information about type converters and to view code examples, see the <see
          cref="T:System.ComponentModel.TypeConverter" />
+
+        
 
         
 
@@ -43,6 +51,8 @@
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
             
 
+            
+
             . Instead, call the <see
              cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+            
 
             
 
@@ -79,8 +93,12 @@
 
             
 
+            
+
              class. For more information, see the code examples in the <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -92,6 +110,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Windows.Forms.OpacityConverter" />
+
+            
 
             
 
@@ -126,8 +146,12 @@
 
             
 
+            
+
              is expected to be a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -147,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -159,8 +187,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -195,8 +227,12 @@
 
             
 
+            
+
              method is specialized to convert <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -205,8 +241,12 @@
 
             
 
+            
+
              values, which represent the opacity as a percentage. Types other than <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -225,8 +265,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -238,8 +282,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -250,10 +298,14 @@
 
           
 
+          
+
           The locale information for the conversion. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,8 +341,12 @@
 
             
 
+            
+
              method is specialized to convert integral values to their <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -309,8 +365,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -322,8 +382,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -334,6 +398,8 @@
 
           
 
+          
+
           The locale information for the conversion. </param
         >
         <param name="value">
@@ -341,10 +407,14 @@
 
           
 
+          
+
           The value to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -6,8 +6,12 @@
 
     
 
+    
+
      (<hyperlink
     >25.2</hyperlink>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="25.5.8">sizeof-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -34,11 +40,15 @@
 
     
 
+    
+
     . For certain predefined types, the sizeof operator yields a constant value as shown in the table below. <table_line
     >Expression Result </table_line>
     <table_line
       >sizeof(<keyword
       >sbyte</keyword>
+
+      
 
       
 
@@ -50,11 +60,15 @@
 
       
 
+      
+
       ) 1 </table_line
     >
     <table_line
       >sizeof(<keyword
       >short</keyword>
+
+      
 
       
 
@@ -66,11 +80,15 @@
 
       
 
+      
+
       ) 2 </table_line
     >
     <table_line
       >sizeof(<keyword
       >int</keyword>
+
+      
 
       
 
@@ -82,11 +100,15 @@
 
       
 
+      
+
       ) 4 </table_line
     >
     <table_line
       >sizeof(<keyword
       >long</keyword>
+
+      
 
       
 
@@ -98,11 +120,15 @@
 
       
 
+      
+
       ) 8 </table_line
     >
     <table_line
       >sizeof(<keyword
       >char</keyword>
+
+      
 
       
 
@@ -114,6 +140,8 @@
 
       
 
+      
+
       ) 4 </table_line
     >
     <table_line
@@ -122,11 +150,15 @@
 
       
 
+      
+
       ) 8 </table_line
     >
     <table_line
       >sizeof(<keyword
       >bool</keyword>
+
+      
 
       
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          is created and managed by the <see
          cref="T:System.Data.OleDb.OleDbErrorCollection" />
+
+        
 
         
 
@@ -32,11 +36,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >If the severity of the error is too great, the server may close the <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -138,6 +146,8 @@
           <para
             >The string is in the form "OleDbError:", followed by the <see
              cref="P:System.Data.OleDb.OleDbError.Message" />
+
+            
 
             
 

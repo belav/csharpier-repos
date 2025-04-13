@@ -33,8 +33,12 @@
 
         
 
+        
+
          control is made up of a collection of <see
          cref="T:System.Web.UI.WebControls.WizardStep" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          control displays a single <see
          cref="T:System.Web.UI.WebControls.WizardStep" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          control and its associated <see
          cref="T:System.Web.UI.WebControls.WizardStep" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
           
 
+          
+
            control in a <see
            cref="T:System.Web.UI.WebControls.WizardStep" />
+
+          
 
           
 
@@ -77,13 +93,19 @@
 
           
 
+          
+
            in a Page_Load event handler if the user is authenticated. The <see
            cref="T:System.Web.UI.WebControls.Wizard" />
 
           
 
+          
+
            control does not automatically advance to the next <see
            cref="T:System.Web.UI.WebControls.WizardStep" />
+
+          
 
           
 
@@ -96,8 +118,12 @@
 
         
 
+        
+
          but you can apply a theme to <see
          cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+        
 
         
 
@@ -110,6 +136,8 @@
 
           
 
+          
+
            in the Page_Load event handler, you must add the navigation to that step prior to the page loading.</para
         >
       </block>
@@ -119,6 +147,8 @@
       <para
         >Represents a basic step that is displayed in a <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -139,6 +169,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WizardStep" />
+
+            
 
             
 

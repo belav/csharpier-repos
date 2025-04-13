@@ -41,6 +41,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -73,6 +75,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -81,6 +85,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+            
 
             
 
@@ -156,6 +162,8 @@
 
           
 
+          
+
           The name of the random number generator implementation to use. </param
         >
       </Docs>
@@ -183,8 +191,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+            
 
             
 
@@ -193,8 +205,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+            
 
             
 
@@ -208,10 +224,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -224,8 +244,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+              
 
               
 
@@ -238,6 +262,8 @@
           <para
             >When overridden in a derived class, releases all resources used by the current instance of the <see
              cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+            
 
             
 
@@ -271,8 +297,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -284,8 +314,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+            
 
             
 
@@ -300,11 +334,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,6 +382,8 @@
 
           
 
+          
+
           The array to fill with cryptographically strong random bytes. </param
         >
       </Docs>
@@ -377,6 +417,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

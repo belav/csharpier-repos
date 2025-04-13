@@ -39,13 +39,19 @@
 
         
 
+        
+
         ) or if you are using a non-standard format or file type for storing resources. Otherwise, use the default <see
          cref="T:System.Resources.ResourceReader" />
 
         
 
+        
+
          class, which reads resource information from binary .resources files, or the <see
          cref="T:System.Resources.ResXResourceReader" />
+
+        
 
         
 
@@ -113,8 +119,12 @@
 
             
 
+            
+
              inherits the <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -123,13 +133,19 @@
 
             
 
+            
+
              method, which returns an <see
              cref="T:System.Collections.IEnumerator" />
 
             
 
+            
+
              object that can be used to enumerate a collection. Typically, <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 

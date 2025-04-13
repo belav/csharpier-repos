@@ -26,8 +26,12 @@
 
         
 
+        
+
          structure to enumerate the mandatory and optional arguments in an argument list. The <see
          cref="T:System.ArgIterator" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          structure is typically hidden in the syntax of a specific programming language. For example, in the C++ programming language you declare a variable-length argument list by specifying an ellipsis ("...") at the end of the argument list. The <see
          cref="T:System.ArgIterator" />
+
+        
 
         
 
@@ -78,6 +86,8 @@
 
             
 
+            
+
              object enumerates the argument list starting from the first optional argument.</para
           >
         </remarks>
@@ -89,11 +99,15 @@
 
             
 
+            
+
              structure using the specified argument list.</para
           >
         </summary>
         <param name="arglist">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,13 +149,19 @@
 
             
 
+            
+
              object enumerates the argument list starting from the argument specified by <paramref
              name="ptr" />
 
             
 
+            
+
             , or the first mandatory argument if <paramref
              name="ptr" />
+
+            
 
             
 
@@ -156,11 +176,15 @@
 
             
 
+            
+
              structure using the specified argument list and a pointer to an item in the list.</para
           >
         </summary>
         <param name="arglist">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,8 +195,12 @@
 
           
 
+          
+
           A pointer to the argument in <paramref
            name="arglist" />
+
+          
 
           
 
@@ -181,8 +209,12 @@
 
           
 
+          
+
            if <paramref
            name="ptr" />
+
+          
 
           
 
@@ -215,8 +247,12 @@
 
             
 
+            
+
              concludes the processing of a variable-length argument list. However, this method has no actual implementation; the <see
              cref="M:System.ArgIterator.End" />
+
+            
 
             
 
@@ -225,6 +261,8 @@
           <para
             >The <see
              cref="M:System.ArgIterator.End" />
+
+            
 
             
 
@@ -265,6 +303,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -274,6 +314,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -347,6 +389,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -395,11 +439,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="rth">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,8 +480,12 @@
 
             
 
+            
+
              returns the type of the argument as specified in the calling function. For example, if an argument is type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -442,13 +494,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.ArgIterator.GetNextArgType" />
 
             
 
+            
+
              reports the argument as type <see
              cref="T:System.Object" />
+
+            
 
             
 

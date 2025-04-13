@@ -25,8 +25,12 @@
 
         
 
+        
+
          control is a container for server controls on a Web Forms page. All server controls that post back to the server must be placed between the opening and closing tags of an <see
          cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
           
 
+          
+
            control to be active on a Web Forms page. If there is more than one active <see
            cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+          
 
           
 
@@ -49,8 +57,12 @@
 
           
 
+          
+
            exception when you request the page. You can, however, use a <see
            cref="T:System.Web.UI.WebControls.MultiView" />
+
+          
 
           
 
@@ -59,13 +71,19 @@
 
           
 
+          
+
            object contains one <see
            cref="T:System.Web.UI.HtmlControls.HtmlForm" />
 
           
 
+          
+
            control, because only one <see
            cref="T:System.Web.UI.WebControls.View" />
+
+          
 
           
 
@@ -78,13 +96,19 @@
 
         
 
+        
+
          control by setting its properties. To specify the encoding type for the form's data, set the <see
          cref="P:System.Web.UI.HtmlControls.HtmlForm.Enctype" />
 
         
 
+        
+
          property. The method (GET or POST) that a browser uses to post form data to the server for processing is specified by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlForm.Method" />
+
+        
 
         
 
@@ -97,12 +121,16 @@
 
           
 
+          
+
            property is set to POST. You can modify the value of this property to GET, but this might break the built-in state and postback services provided by the ASP.NET page framework.</para
         >
       </block>
       <para
         >You can configure controls that implement the <see
          cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+        
 
         
 
@@ -115,6 +143,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -123,8 +153,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlForm.#ctor" />
+
+        
 
         
 
@@ -151,11 +185,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -192,6 +230,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -224,8 +264,12 @@
 
             
 
+            
+
              collection for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -240,8 +284,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -274,8 +322,12 @@
 
             
 
+            
+
              property lets you specify that users can cause a postback by pressing ENTER in an input control in the form (such as a text box). You can specify as a default button any control that derives from the <see
              cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+            
 
             
 
@@ -284,8 +336,12 @@
 
             
 
+            
+
              control. If the control that is referenced by the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultButton" />
+
+            
 
             
 
@@ -294,8 +350,12 @@
 
             
 
+            
+
             , an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -307,13 +367,19 @@
 
             
 
+            
+
              property from a content page, use the <see
              cref="P:System.Web.UI.Control.UniqueID" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+            
 
             
 
@@ -324,11 +390,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultButton" />
+
+            
 
             
 
@@ -345,6 +415,8 @@
 
                 
 
+                
+
                  property collection to add client script for the onKeyPress event.</para
               >
             </item>
@@ -355,13 +427,19 @@
 
                 
 
+                
+
                  control as a default button. Only <see
                  cref="T:System.Web.UI.WebControls.Button" />
 
                 
 
+                
+
                  and <see
                  cref="T:System.Web.UI.WebControls.ImageButton" />
+
+                
 
                 
 
@@ -375,8 +453,12 @@
 
                 
 
+                
+
                  property programmatically during an asynchronous postback. Asynchronous postbacks can be enabled on a page by adding one or more <see
                  cref="T:System.Web.UI.UpdatePanel" />
+
+                
 
                 
 
@@ -387,10 +469,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
                 </format>
+
+                
 
                 
 
@@ -404,6 +490,8 @@
           <para
             >Gets or sets the child control of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -436,13 +524,19 @@
 
             
 
+            
+
              property to access the control on the form to display as the control with input focus when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
 
             
 
+            
+
              control is loaded. Controls that can be selected are displayed with a visual cue indicating that they have the focus. For example, a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -454,8 +548,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.Page.SetFocus(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -464,8 +562,12 @@
 
             
 
+            
+
              property. If either of these methods are called to set the control with focus, the value of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" />
+
+            
 
             
 
@@ -477,6 +579,8 @@
           <para
             >Gets or sets the control on the form to display as the control with input focus when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -499,6 +603,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.Enctype" />
+
+            
 
             
 
@@ -546,6 +652,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C Web site</see
             >
+
+            
 
             
 
@@ -621,8 +729,12 @@
 
             
 
+            
+
              property to determine the unique identifier name for an <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -631,13 +743,19 @@
 
             
 
+            
+
              property. However, setting the property does not assign a value to the property. Setting the property does not assign a value to this property because the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.Name" />
 
             
 
+            
+
              property must have the same value as the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.UniqueID" />
+
+            
 
             
 
@@ -652,6 +770,8 @@
           <para
             >Gets the identifier name for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -690,6 +810,8 @@
 
             
 
+            
+
              method, Web server controls must perform any initialization steps that are required to create and set up an instance. In this stage of the server control's life cycle, the control's view state has yet to be populated. Additionally, you cannot access other server controls when this method is called, regardless of whether it is a child or parent to this control. Other server controls are not guaranteed to be created and ready for access.</para
           >
           <para
@@ -697,6 +819,8 @@
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -708,6 +832,8 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
@@ -716,8 +842,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -732,8 +862,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -745,8 +879,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -779,8 +917,12 @@
 
             
 
+            
+
              method is called just prior to rendering the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -789,8 +931,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="M:System.Web.UI.HtmlControls.HtmlForm.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -800,6 +946,8 @@
             <para
               >The <see
                cref="P:System.Web.UI.Page.SmartNavigation" />
+
+              
 
               
 
@@ -815,8 +963,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -828,8 +980,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -862,8 +1018,12 @@
 
             
 
+            
+
              method renders an HTML &lt;iframe&gt; element if the <see
              cref="P:System.Web.UI.Page.SmartNavigation" />
+
+            
 
             
 
@@ -872,8 +1032,12 @@
 
             
 
+            
+
              method calls the base <see
              cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -885,8 +1049,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -901,8 +1069,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -940,13 +1112,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
 
             
 
+            
+
              method to check the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -958,8 +1136,12 @@
 
             
 
+            
+
              method renders the method, action, and onsubmit attributes of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -968,13 +1150,19 @@
 
             
 
+            
+
              property does not implement the <see
              cref="T:System.Web.UI.WebControls.IButtonControl" />
 
             
 
+            
+
              interface, an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -986,8 +1174,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -1002,8 +1194,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1041,8 +1237,12 @@
 
             
 
+            
+
              method renders client script to ensure that the browser focus is set to the control specified in the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" />
+
+            
 
             
 
@@ -1055,8 +1255,12 @@
 
               
 
+              
+
                property takes precedence over a control specified by the <see
                cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" />
+
+              
 
               
 
@@ -1069,6 +1273,8 @@
           <para
             >Renders the child controls of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -1107,8 +1313,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1144,13 +1354,19 @@
 
             
 
+            
+
              property to specify whether to force controls disabled on the client to submit their values when the page posts back. This allows the disabled controls to preserve their values after the page posts back to the server. When the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.SubmitDisabledControls" />
 
             
 
+            
+
              property is set to false, controls on the form that have been disabled using client script will not be submitted to the server the next time the page posts back. As a result, any values stored by the disabled controls are lost. To allow the disabled controls to preserve their values after the page posts back to the server, set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.SubmitDisabledControls" />
+
+            
 
             
 
@@ -1180,6 +1396,8 @@
 
             
 
+            
+
              property to specify the target window or frame that displays the results of the information that is posted to the server. Redirecting the results of the information posted to the server is an advanced task. Using this property simply to post back is not recommended.</para
           >
           <block subset="none" type="note">
@@ -1189,8 +1407,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on form elements is not allowed in XHTML 1.1. Therefore, if the rendered markup must conform to XHTML standards or must conform to accessibility standards, do not set the <see
                cref="P:System.Web.UI.HtmlControls.HtmlForm.Target" />
+
+              
 
               
 
@@ -1198,6 +1420,8 @@
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -1210,12 +1434,16 @@
 
               
 
+              
+
               . </para
             >
           </block>
           <para
             >The <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.Target" />
+
+            
 
             
 
@@ -1315,8 +1543,12 @@
 
             
 
+            
+
              property to get the unique programmatic identifier assigned to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -1325,13 +1557,19 @@
 
             
 
+            
+
             -implemented object other than a page, such as a custom server control. If the naming container is a page, the value of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -1343,8 +1581,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.Name" />
+
+            
 
             
 
@@ -1353,8 +1595,12 @@
 
             
 
+            
+
              control is rendered on a browser that requires the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -1363,8 +1609,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.Name" />
+
+            
 
             
 
@@ -1373,8 +1623,12 @@
 
             
 
+            
+
              property always returns the value of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.UniqueID" />
+
+            
 
             
 
@@ -1389,6 +1643,8 @@
           <para
             >Gets the unique programmatic identifier assigned to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 

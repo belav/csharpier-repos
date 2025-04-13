@@ -29,8 +29,12 @@
 
         
 
+        
+
          is the <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
         . A subset of the hosted control's properties and events are exposed at the <see
          cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          control is fully accessible through the <see
          cref="P:System.Windows.Forms.ToolStripComboBox.ComboBox" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          displays an editing field combined with a <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -72,13 +88,19 @@
 
         
 
+        
+
          displays an edit field with a hidden drop-down list. The <see
          cref="P:System.Windows.Forms.ToolStripComboBox.DropDownStyle" />
 
         
 
+        
+
          property determines the style of combo box to display. You can enter a value that allows for a simple drop-down, where the list always displays, a drop-down list box, where the text portion is not editable and you must select an arrow to view the drop-down list box, or the default drop-down list box, where the text portion is editable and the user must press the arrow key to view the list. To always display a list that the user cannot edit, use a <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -90,8 +112,12 @@
 
         
 
+        
+
          method. The list then displays the default string value for each object. You can add individual objects with the <see
          cref="Overload:System.Windows.Forms.ToolStripItemCollection.Add" />
+
+        
 
         
 
@@ -103,8 +129,12 @@
 
         
 
+        
+
          also provides features that enable you to efficiently add items to the <see
          cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+        
 
         
 
@@ -113,8 +143,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ToolStripComboBox.EndUpdate" />
+
+        
 
         
 
@@ -123,13 +157,19 @@
 
         
 
+        
+
          without the control being repainted each time an item is added to the list. The <see
          cref="M:System.Windows.Forms.ToolStripComboBox.FindString(System.String)" />
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ToolStripComboBox.FindStringExact(System.String)" />
+
+        
 
         
 
@@ -141,8 +181,12 @@
 
         
 
+        
+
          property to get or set the current item in the drop-down list, and use the <see
          cref="P:System.Windows.Forms.ToolStripComboBox.SelectedItem" />
+
+        
 
         
 
@@ -157,8 +201,12 @@
 
         
 
+        
+
          that is properly rendered in a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -179,6 +227,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -207,6 +257,8 @@
 
             
 
+            
+
              class with the specified name. </para
           >
         </summary>
@@ -215,8 +267,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+          
 
           
 
@@ -247,11 +303,15 @@
 
             
 
+            
+
              class derived from a base control.</para
           >
         </summary>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,8 +366,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripComboBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -316,13 +380,19 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -334,8 +404,12 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -344,8 +418,12 @@
 
             
 
+            
+
              in order to use <see
              cref="P:System.Windows.Forms.ToolStripComboBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -357,8 +435,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -373,8 +455,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.AutoCompleteSource.CustomSource" />
+
+            
 
             
 
@@ -416,6 +502,8 @@
 
             
 
+            
+
              property to get or set the behavior of automatic completion.</para
           >
         </remarks>
@@ -424,6 +512,8 @@
           <para
             >Gets or sets a value that indicates the text completion behavior of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -462,6 +552,8 @@
           <para
             >Use the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -561,6 +653,8 @@
 
             
 
+            
+
              method is called.</para
           >
           <para
@@ -569,8 +663,12 @@
 
             
 
+            
+
              is to use the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItemCollection)" />
+
+            
 
             
 
@@ -579,8 +677,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -589,8 +691,12 @@
 
             
 
+            
+
              method, you can use the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.BeginUpdate" />
+
+            
 
             
 
@@ -599,8 +705,12 @@
 
             
 
+            
+
              each time an item is added to the list. Once you have completed the task of adding items to the list, call the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.EndUpdate" />
+
+            
 
             
 
@@ -609,8 +719,12 @@
 
             
 
+            
+
              to repaint. This way of adding items can prevent flicker during the drawing of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -622,6 +736,8 @@
           <para
             >Maintains performance when items are added to the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -661,13 +777,19 @@
 
             
 
+            
+
              property to get <see
              cref="T:System.Windows.Forms.ComboBox" />
 
             
 
+            
+
              properties, methods, and events that have not been wrapped into <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -679,6 +801,8 @@
           <para
             >Gets a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -712,8 +836,12 @@
 
             
 
+            
+
              property to configure a default size for your <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -725,6 +853,8 @@
           <para
             >Gets the default spacing, in pixels, between the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -754,13 +884,19 @@
 
               
 
+              
+
                of a <see
                cref="T:System.Windows.Forms.ToolStripComboBox" />
 
               
 
+              
+
                in its constructor. The preferred method is to override the <see
                cref="P:System.Windows.Forms.ToolStripComboBox.DefaultSize" />
+
+              
 
               
 
@@ -773,6 +909,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -831,6 +969,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -839,6 +979,8 @@
           <para
             >Occurs when the drop-down portion of a <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -868,6 +1010,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -876,6 +1020,8 @@
           <para
             >Occurs when the drop-down portion of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -915,8 +1061,12 @@
 
             
 
+            
+
              property resets the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.IntegralHeight" />
+
+            
 
             
 
@@ -928,6 +1078,8 @@
           <para
             >Gets or sets the height, in pixels, of the drop-down portion box of a <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -967,8 +1119,12 @@
 
             
 
+            
+
              property controls the interface that is presented to the user. You can enter a value that allows for a simple drop-down list box, where the list always displays, a drop-down list box, where the text portion is not editable and you must select an arrow to view the drop-down, or the default drop-down list box, where the text portion is editable and the user must press the arrow key to view the list. To always display a list that the user cannot edit, use a <see
              cref="T:System.Windows.Forms.ListBox" />
+
+            
 
             
 
@@ -980,6 +1136,8 @@
           <para
             >Gets or sets a value specifying the style of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1009,6 +1167,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1017,6 +1177,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.DropDownStyle" />
+
+            
 
             
 
@@ -1045,8 +1207,12 @@
 
             
 
+            
+
              property to get or set the width of the drop-down portion of a <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1058,6 +1224,8 @@
           <para
             >Gets or sets the width, in pixels, of the drop-down portion of a <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1095,6 +1263,8 @@
 
             
 
+            
+
              currently displays its drop-down portion.</para
           >
         </summary>
@@ -1120,8 +1290,12 @@
 
             
 
+            
+
              is to use the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
+
+            
 
             
 
@@ -1130,8 +1304,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1140,8 +1318,12 @@
 
             
 
+            
+
              method, you can use the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.BeginUpdate" />
+
+            
 
             
 
@@ -1150,8 +1332,12 @@
 
             
 
+            
+
              each time an item is added to the list. Once you have completed the task of adding items to the list, call the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.EndUpdate" />
+
+            
 
             
 
@@ -1160,8 +1346,12 @@
 
             
 
+            
+
              to repaint. This way of adding items can prevent flicker during the drawing of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1176,8 +1366,12 @@
 
             
 
+            
+
              control after painting is suspended by the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.BeginUpdate" />
+
+            
 
             
 
@@ -1208,8 +1402,12 @@
 
             
 
+            
+
              parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, and returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1218,13 +1416,19 @@
 
             
 
+            
+
              method to specify a starting index within the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
 
             
 
+            
+
             . If you want to perform a search for an exact word match instead of a partial match, use the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.FindStringExact(System.String)" />
+
+            
 
             
 
@@ -1236,6 +1440,8 @@
           <para
             >Finds the first item in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1251,8 +1457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1283,8 +1493,12 @@
 
             
 
+            
+
              parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text at the specified index, and returns the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1293,8 +1507,12 @@
 
             
 
+            
+
             . If you want to perform a search for an exact word match instead of a partial match, use the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.FindStringExact(System.String)" />
+
+            
 
             
 
@@ -1314,8 +1532,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1323,6 +1545,8 @@
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1352,8 +1576,12 @@
 
             
 
+            
+
              parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text at the specified index, and returns the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1362,13 +1590,19 @@
 
             
 
+            
+
              method to specify a starting index within the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
 
             
 
+            
+
             . If you want to search for a partial match instead of the exact word, use the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.FindString(System.String)" />
+
+            
 
             
 
@@ -1380,6 +1614,8 @@
           <para
             >Finds the first item in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1395,8 +1631,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1430,8 +1670,12 @@
 
             
 
+            
+
              parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text at the specified index, and returns the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text or changing the item's text. Once you have found the specified text, if you want to search for other instances of exact text in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1440,8 +1684,12 @@
 
             
 
+            
+
             . If you want to search for a partial match instead of the exact word, use the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.FindString(System.String,System.Int32)" />
+
+            
 
             
 
@@ -1461,8 +1709,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1470,6 +1722,8 @@
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1510,8 +1764,12 @@
 
             
 
+            
+
              property to get or set the display of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1523,6 +1781,8 @@
           <para
             >Gets or sets the appearance of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1551,6 +1811,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1560,6 +1822,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1597,11 +1861,15 @@
 
             
 
+            
+
              representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="constrainingSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1637,8 +1905,12 @@
 
             
 
+            
+
              based on the space requirements of your form, set this property to false. If the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1650,8 +1922,12 @@
 
             
 
+            
+
              property resets the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.IntegralHeight" />
+
+            
 
             
 
@@ -1663,6 +1939,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1706,6 +1984,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1739,8 +2019,12 @@
 
             
 
+            
+
              property to get or set the maximum number of items to show in the drop-down portion of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1752,6 +2036,8 @@
           <para
             >Gets or sets the maximum number of items to be shown in the drop-down portion of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -1811,11 +2097,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnDropDown(System.EventArgs)" />
+
+            
 
             
 
@@ -1830,6 +2120,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1838,8 +2130,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1874,11 +2170,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnDropDownClosed(System.EventArgs)" />
+
+            
 
             
 
@@ -1893,6 +2193,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1901,8 +2203,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1937,11 +2243,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnDropDownStyleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1956,6 +2266,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1964,8 +2276,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2000,11 +2316,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2019,6 +2339,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2027,8 +2349,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2060,8 +2386,12 @@
 
             
 
+            
+
              is raised only when the user changes the combo box selection. Do not use <see
              cref="E:System.Windows.Forms.ToolStripComboBox.SelectedIndexChanged" />
+
+            
 
             
 
@@ -2070,8 +2400,12 @@
 
             
 
+            
+
              to capture user changes, because those events are also raised when the selection changes programmatically. This event is also raised when you set <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -2085,11 +2419,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnSelectionChangeCommitted(System.EventArgs)" />
+
+            
 
             
 
@@ -2104,6 +2442,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2112,8 +2452,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2146,11 +2490,15 @@
 
             
 
+            
+
              method to add or prevent the synchronizing of control events.</para
           >
           <para
             >If you override and hook up events here, unhook them by using the <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnUnsubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -2164,11 +2512,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnSubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -2181,6 +2533,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2212,11 +2566,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnTextUpdate(System.EventArgs)" />
+
+            
 
             
 
@@ -2231,6 +2589,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2239,8 +2599,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2273,8 +2637,12 @@
 
             
 
+            
+
              method to unsubscribe events subscribed in <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnSubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -2288,11 +2656,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripComboBox.OnUnsubscribeControlEvents(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -2305,6 +2677,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2335,6 +2709,8 @@
 
             
 
+            
+
              parameter to zero. You can use this method to select a substring of text, such as when searching through the text of the control and replacing information.</para
           >
         </remarks>
@@ -2346,6 +2722,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2354,10 +2732,14 @@
 
           
 
+          
+
           The position of the first character in the current text selection within the text box.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2383,6 +2765,8 @@
           <para
             >Selects all the text in the editable portion of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2419,11 +2803,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >Note   To deselect the currently selected item, set the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -2457,6 +2845,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2465,6 +2855,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -2504,8 +2896,12 @@
 
             
 
+            
+
              property to an object, the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2514,13 +2910,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectedIndex" />
 
             
 
+            
+
              property is set to the corresponding index. If the object does not exist in the list, the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -2532,6 +2934,8 @@
           <para
             >Gets or sets currently selected item in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2572,6 +2976,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2605,8 +3011,12 @@
 
             
 
+            
+
              property is set to a value that is larger than the number of characters within the text of the control, the value of the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectionLength" />
+
+            
 
             
 
@@ -2615,8 +3025,12 @@
 
             
 
+            
+
              property (if any value is specified for the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectionStart" />
+
+            
 
             
 
@@ -2628,6 +3042,8 @@
           <para
             >Gets or sets the number of characters selected in the editable portion of the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2664,8 +3080,12 @@
 
             
 
+            
+
              property. If the remaining text in the control after the position indicated by the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectionStart" />
+
+            
 
             
 
@@ -2674,8 +3094,12 @@
 
             
 
+            
+
              property, the value of the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectionLength" />
+
+            
 
             
 
@@ -2684,8 +3108,12 @@
 
             
 
+            
+
              property never causes an increase in the <see
              cref="P:System.Windows.Forms.ToolStripComboBox.SelectionLength" />
+
+            
 
             
 
@@ -2697,6 +3125,8 @@
           <para
             >Gets or sets the starting index of text selected in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2730,13 +3160,19 @@
 
             
 
+            
+
              sorts existing entries and add new entries to the appropriate sorted position in the list. You can use this property to automatically sort items in a <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
 
             
 
+            
+
             . As items are added to a sorted <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2748,6 +3184,8 @@
           <para
             >Gets or sets a value indicating whether the items in the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2777,6 +3215,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2785,6 +3225,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 
@@ -2814,6 +3256,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2822,6 +3266,8 @@
           <para
             >A string that represents the <see
              cref="T:System.Windows.Forms.ToolStripComboBox" />
+
+            
 
             
 

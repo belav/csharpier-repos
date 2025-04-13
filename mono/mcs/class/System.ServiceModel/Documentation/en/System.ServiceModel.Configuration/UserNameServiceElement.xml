@@ -48,6 +48,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -219,6 +221,8 @@
           <para
             >When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see
              cref="T:System.Web.Security.MembershipProvider" />
+
+            
 
             
 

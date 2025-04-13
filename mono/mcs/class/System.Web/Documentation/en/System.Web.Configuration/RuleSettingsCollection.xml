@@ -26,6 +26,8 @@
 
         
 
+        
+
          objects are used to define event rules.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >A collection of <see
          cref="T:System.Web.Configuration.RuleSettings" />
+
+        
 
         
 
@@ -56,13 +60,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
+            
+
              class always contains an instance of the <see
              cref="T:System.Web.Configuration.RuleSettingsCollection" />
+
+            
 
             
 
@@ -74,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.RuleSettingsCollection" />
+
+            
 
             
 
@@ -107,6 +119,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -118,6 +132,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -126,8 +142,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -156,6 +176,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Configuration.RuleSettings" />
+
+            
 
             
 
@@ -190,6 +212,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </summary>
@@ -201,6 +225,8 @@
 
             
 
+            
+
              object with the specified name; otherwise, false.</para
           >
         </returns>
@@ -209,8 +235,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -240,6 +270,8 @@
           <para
             >Creates a new <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -275,6 +307,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -283,8 +317,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -314,6 +352,8 @@
 
             
 
+            
+
              object with the specified name is not in the collection.</para
           >
         </remarks>
@@ -322,6 +362,8 @@
           <para
             >Finds the index of a <see
              cref="T:System.Web.Configuration.RuleSettings" />
+
+            
 
             
 
@@ -336,6 +378,8 @@
 
             
 
+            
+
              object in the collection with the specified name.</para
           >
         </returns>
@@ -344,8 +388,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -383,6 +431,8 @@
 
             
 
+            
+
              object to the specified index point in the collection.</para
           >
         </summary>
@@ -391,8 +441,12 @@
 
           
 
+          
+
           A valid index of a <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -403,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -503,6 +561,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -511,8 +571,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -546,6 +610,8 @@
 
             
 
+            
+
              object at the specified index location from the collection.</para
           >
         </summary>
@@ -554,8 +620,12 @@
 
           
 
+          
+
           A valid index of a <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 

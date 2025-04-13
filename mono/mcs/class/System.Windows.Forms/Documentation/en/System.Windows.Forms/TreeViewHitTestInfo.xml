@@ -18,13 +18,19 @@
 
         
 
+        
+
          is returned by the <see
          cref="T:System.Windows.Forms.TreeView" />
 
         
 
+        
+
          class when the <see
          cref="Overload:System.Windows.Forms.TreeView.HitTest" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          control or a <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
             
 
+            
+
             parameter can be null.</para
           >
         </remarks>
@@ -82,11 +94,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="hitNode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,8 +113,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TreeViewHitTestLocations" />
+
+          
 
           
 
@@ -129,8 +149,12 @@
 
             
 
+            
+
              control, in relation to the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -158,8 +182,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.TreeViewHitTestInfo.Node" />
+
+            
 
             
 
@@ -174,8 +202,12 @@
 
             
 
+            
+
              at the position indicated by a hit test of a <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 

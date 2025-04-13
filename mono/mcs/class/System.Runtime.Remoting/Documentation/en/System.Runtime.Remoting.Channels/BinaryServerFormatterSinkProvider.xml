@@ -33,8 +33,12 @@
 
         
 
+        
+
          interface. All the remoting server channels provide constructors that take a <see
          cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          provides a property called <see
          cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
 
         
 
+        
+
          call.</para
       >
       <para
@@ -67,8 +77,12 @@
 
         
 
+        
+
         . In a configuration file all values are represented by strings, but when building a property <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -102,6 +116,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -111,6 +127,8 @@
       <para
         >Provides the implementation for the server formatter channel sink provider that uses the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 
@@ -131,6 +149,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+
+            
 
             
 
@@ -164,6 +184,8 @@
 
             
 
+            
+
              class with the provided properties and provider data.</para
           >
         </summary>
@@ -172,13 +194,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            of configuration properties to use with the new instance of <see
            cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+
+          
 
           
 
@@ -189,8 +217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -199,8 +231,12 @@
 
           
 
+          
+
            to use with the new instance of <see
            cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+
+          
 
           
 
@@ -239,6 +275,8 @@
 
           
 
+          
+
           The channel for which to create the channel sink chain. </param
         >
       </Docs>
@@ -270,8 +308,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
+
+          
 
           
 
@@ -301,6 +343,8 @@
           <para
             >Gets or sets the next <see
              cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+            
 
             
 
@@ -342,6 +386,8 @@
                 >Automatic Deserialization in .NET Remoting</a
               >
             </format>
+
+            
 
             
 

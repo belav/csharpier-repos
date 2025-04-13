@@ -48,6 +48,8 @@
         
 
         
+
+        
       security action indicates that this is the minimum permission required for the
       target assembly to be able to execute.</para
       >
@@ -72,6 +74,8 @@
 
         
 
+        
+
          that is used.</para
       >
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
@@ -81,6 +85,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.ReflectionPermission" />
+
+        
 
         
 
@@ -119,8 +125,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -134,8 +144,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -147,8 +161,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -194,6 +212,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -202,6 +222,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 
@@ -242,6 +264,8 @@
 
             
 
+            
+
              values. </para
           >
         </value>
@@ -251,6 +275,8 @@
               >To specify multiple
    <see
                cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+
+              
 
               
 
@@ -315,13 +341,19 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
 
               
 
+              
+
                flag. Some features of reflection emit, such as emitting debug symbols, still require the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -331,6 +363,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -344,6 +378,8 @@
           <para
             >Gets or sets a value that indicates whether use of certain features in <see
              cref="N:System.Reflection.Emit" />
+
+            
 
             
 
@@ -401,6 +437,8 @@
           <para
             >This property is now obsolete. Reflecting on the metadata of members that are not visible no longer requires <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 

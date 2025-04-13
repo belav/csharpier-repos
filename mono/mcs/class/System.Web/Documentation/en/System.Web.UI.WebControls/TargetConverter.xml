@@ -25,13 +25,19 @@
 
         
 
+        
+
          class creates a collection of values that can be used to specify the location in which to display content resulting from a Web navigation, such as the page navigated to when a <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
+        
+
          control is clicked. This collection is commonly used in a designer to display a list of values that can be used for the Target property of a navigation control, such as the <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -56,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TargetConverter" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              containing a standard set of valid values, or null if the data type does not support a standard set of values.</para
           >
         </returns>
@@ -105,8 +115,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -143,6 +157,8 @@
 
             
 
+            
+
              method is an exclusive list.</para
           >
         </summary>
@@ -154,8 +170,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -167,8 +187,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -209,6 +233,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports; otherwise, false.</para
           >
         </returns>
@@ -217,8 +243,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

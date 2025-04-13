@@ -22,8 +22,12 @@
 
         
 
+        
+
          objects returned by this class are immutable, meaning their properties cannot be changed. To see the colors represented by pens in this class, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -60,6 +66,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -99,6 +109,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -135,6 +149,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -163,6 +179,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -171,6 +189,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -199,6 +219,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -207,6 +229,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -235,6 +259,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -243,6 +269,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -271,6 +299,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -279,6 +309,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -307,6 +339,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -315,6 +349,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -346,6 +382,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -354,6 +392,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -382,6 +422,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -390,6 +432,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -418,6 +462,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -426,6 +472,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -454,6 +502,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -462,6 +512,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -490,6 +542,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -498,6 +552,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -526,6 +582,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -534,6 +592,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -562,6 +622,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -570,6 +632,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -598,6 +662,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -606,6 +672,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -634,6 +702,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -642,6 +712,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -673,6 +745,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -681,6 +755,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -709,6 +785,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -717,6 +795,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -745,6 +825,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -753,6 +835,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -781,6 +865,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -789,6 +875,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -817,6 +905,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -825,6 +915,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -853,6 +945,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -861,6 +955,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -892,6 +988,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -900,6 +998,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -928,6 +1028,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -936,6 +1038,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -964,6 +1068,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -972,6 +1078,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1000,6 +1108,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1008,6 +1118,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1039,6 +1151,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1047,6 +1161,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1078,6 +1194,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1086,6 +1204,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1114,6 +1234,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1122,6 +1244,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1150,6 +1274,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1158,6 +1284,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1186,6 +1314,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1194,6 +1324,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1222,6 +1354,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1230,6 +1364,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1261,6 +1397,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1269,6 +1407,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1300,6 +1440,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1308,6 +1450,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1339,6 +1483,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1347,6 +1493,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1378,6 +1526,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1386,6 +1536,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1414,6 +1566,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1422,6 +1576,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1450,6 +1606,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1458,6 +1616,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1489,6 +1649,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1497,6 +1659,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1525,6 +1689,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1533,6 +1699,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1561,6 +1729,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1569,6 +1739,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1597,6 +1769,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1605,6 +1779,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1636,6 +1812,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1644,6 +1822,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1675,6 +1855,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1683,6 +1865,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1711,6 +1895,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1719,6 +1905,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1747,6 +1935,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1755,6 +1945,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1783,6 +1975,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1791,6 +1985,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1819,6 +2015,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1827,6 +2025,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1855,6 +2055,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1863,6 +2065,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1891,6 +2095,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1899,6 +2105,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1927,6 +2135,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1935,6 +2145,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1966,6 +2178,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1974,6 +2188,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2002,6 +2218,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2010,6 +2228,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2038,6 +2258,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2046,6 +2268,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2074,6 +2298,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2082,6 +2308,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2110,6 +2338,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2118,6 +2348,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2146,6 +2378,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2154,6 +2388,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2182,6 +2418,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2190,6 +2428,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2218,6 +2458,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2226,6 +2468,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2257,6 +2501,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2265,6 +2511,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2293,6 +2541,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2301,6 +2551,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2332,6 +2584,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2340,6 +2594,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2368,6 +2624,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2376,6 +2634,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2404,6 +2664,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2412,6 +2674,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2440,6 +2704,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2448,6 +2714,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2479,6 +2747,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2487,6 +2757,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2515,6 +2787,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2523,6 +2797,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2551,6 +2827,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2559,6 +2837,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2587,6 +2867,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2595,6 +2877,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2626,6 +2910,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2634,6 +2920,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2665,6 +2953,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2673,6 +2963,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2704,6 +2996,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2712,6 +3006,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2743,6 +3039,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2751,6 +3049,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2782,6 +3082,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2790,6 +3092,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2821,6 +3125,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2829,6 +3135,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2857,6 +3165,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2865,6 +3175,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2893,6 +3205,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2901,6 +3215,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2929,6 +3245,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2937,6 +3255,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -2965,6 +3285,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2973,6 +3295,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3001,6 +3325,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3009,6 +3335,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3040,6 +3368,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3048,6 +3378,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3076,6 +3408,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3084,6 +3418,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3115,6 +3451,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3123,6 +3461,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3154,6 +3494,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3162,6 +3504,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3193,6 +3537,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3201,6 +3547,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3232,6 +3580,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3240,6 +3590,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3271,6 +3623,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3279,6 +3633,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3310,6 +3666,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3318,6 +3676,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3349,6 +3709,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3357,6 +3719,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3388,6 +3752,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3396,6 +3762,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3424,6 +3792,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3432,6 +3802,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3460,6 +3832,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3468,6 +3842,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3496,6 +3872,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3504,6 +3882,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3535,6 +3915,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3543,6 +3925,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3571,6 +3955,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3579,6 +3965,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3607,6 +3995,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3615,6 +4005,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3643,6 +4035,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3651,6 +4045,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3679,6 +4075,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3687,6 +4085,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3715,6 +4115,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3723,6 +4125,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3751,6 +4155,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3759,6 +4165,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3787,6 +4195,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3795,6 +4205,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3826,6 +4238,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3834,6 +4248,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3862,6 +4278,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3870,6 +4288,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3901,6 +4321,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3909,6 +4331,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3940,6 +4364,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3948,6 +4374,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -3976,6 +4404,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3984,6 +4414,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4012,6 +4444,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4020,6 +4454,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4048,6 +4484,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4056,6 +4494,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4084,6 +4524,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4092,6 +4534,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4120,6 +4564,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4128,6 +4574,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4156,6 +4604,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4164,6 +4614,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4192,6 +4644,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4200,6 +4654,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4228,6 +4684,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4236,6 +4694,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4264,6 +4724,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4272,6 +4734,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4300,6 +4764,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4308,6 +4774,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4339,6 +4807,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4347,6 +4817,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4375,6 +4847,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4383,6 +4857,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4411,6 +4887,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4419,6 +4897,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4447,6 +4927,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4455,6 +4937,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4483,6 +4967,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4491,6 +4977,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4519,6 +5007,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4527,6 +5017,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4555,6 +5047,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4563,6 +5057,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4591,6 +5087,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4599,6 +5097,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4627,6 +5127,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4635,6 +5137,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4663,6 +5167,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4671,6 +5177,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4699,6 +5207,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4707,6 +5217,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4738,6 +5250,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4746,6 +5260,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4774,6 +5290,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4782,6 +5300,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4810,6 +5330,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4818,6 +5340,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4846,6 +5370,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4854,6 +5380,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4882,6 +5410,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4890,6 +5420,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4918,6 +5450,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4926,6 +5460,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4957,6 +5493,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4965,6 +5503,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4993,6 +5533,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5001,6 +5543,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5029,6 +5573,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5037,6 +5583,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5065,6 +5613,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5073,6 +5623,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5101,6 +5653,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5109,6 +5663,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5137,6 +5693,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5145,6 +5703,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5173,6 +5733,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5181,6 +5743,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5212,6 +5776,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5220,6 +5786,8 @@
           <para
             >A system-defined <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 

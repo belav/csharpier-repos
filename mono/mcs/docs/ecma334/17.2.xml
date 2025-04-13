@@ -6,6 +6,8 @@
 
     
 
+    
+
     s and the members inherited from the direct base class. <grammar_production
     >
       <name>
@@ -13,8 +15,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -31,6 +37,8 @@
       <name>
         <non_terminal where="17.2">class-member-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -79,11 +87,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > Fields, which are the variables of that class (<hyperlink
         >17.4</hyperlink>
+
+        
 
         
 
@@ -95,11 +107,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > Properties, which define named characteristics and the actions associated with reading and writing those characteristics (<hyperlink
         >17.6</hyperlink>
+
+        
 
         
 
@@ -111,11 +127,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > Indexers, which permit instances of that class to be indexed in the same way as arrays (<hyperlink
         >17.8</hyperlink>
+
+        
 
         
 
@@ -127,11 +147,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > Instance constructors, which implement the actions required to initialize instances of that class (<hyperlink
         >17.10</hyperlink>
+
+        
 
         
 
@@ -143,6 +167,8 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
@@ -151,11 +177,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > Types, which represent the types that are local to that class (<hyperlink
         >16.5</hyperlink>
+
+        
 
         
 
@@ -170,8 +200,12 @@
 
     
 
+    
+
      creates a new declaration space (<hyperlink
     >10.3</hyperlink>
+
+    
 
     
 
@@ -180,8 +214,12 @@
 
     
 
+    
+
     s immediately contained by the <non_terminal
      where="17.1">class-declaration</non_terminal>
+
+    
 
     
 
@@ -195,6 +233,8 @@
 
         
 
+        
+
         ) of a method must differ from the signatures of all other methods declared in the same class. </list_item
       >
       <list_item> The signature of an instance constructor must differ from the signatures of all other instance constructors declared in the same class. </list_item>
@@ -205,6 +245,8 @@
   <paragraph
     >The inherited members of a class (<hyperlink
     >17.2.1</hyperlink>
+
+    
 
     
 

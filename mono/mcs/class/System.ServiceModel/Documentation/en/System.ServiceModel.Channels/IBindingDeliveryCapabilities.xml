@@ -22,6 +22,8 @@
 
         
 
+        
+
          interface must be implemented by a binding if clients and services are to be able to stipulate, as part of their contract, that the features they require are provided by the binding. </para
       >
     </remarks>
@@ -51,8 +53,12 @@
 
             
 
+            
+
              property is consumed by the <see
              cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+
+            
 
             
 
@@ -82,6 +88,8 @@
           <para
             >The value of this <see
              cref="P:System.ServiceModel.Channels.IBindingDeliveryCapabilities.QueuedDelivery" />
+
+            
 
             
 

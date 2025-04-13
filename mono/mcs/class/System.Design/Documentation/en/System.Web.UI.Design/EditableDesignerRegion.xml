@@ -21,13 +21,19 @@
 
         
 
+        
+
          class to help manage templates at design time. A <see
          cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
+        
+
          will use an instance of this class with its <see
          cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
 
             
 
+            
+
              class using the given owner and name.</para
           >
         </summary>
@@ -71,8 +79,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
+
+          
 
           
 
@@ -81,10 +93,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,8 +132,12 @@
 
             
 
+            
+
              class using the given owner and name and the initial value of the <see
              cref="P:System.Web.UI.Design.EditableDesignerRegion.ServerControlsOnly" />
+
+            
 
             
 
@@ -129,13 +149,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
 
           
 
+          
+
            object, or a designer that derives from <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
+
+          
 
           
 
@@ -146,10 +172,14 @@
 
           
 
+          
+
           The name of the region.</param
         >
         <param name="serverControlsOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,6 +230,8 @@
 
             
 
+            
+
              object containing the design-time HTML markup for the given control.</para
           >
         </summary>
@@ -211,6 +243,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -219,8 +253,12 @@
 
           
 
+          
+
           The control for which to get the <see
            cref="T:System.Web.UI.Design.ViewRendering" />
+
+          
 
           
 

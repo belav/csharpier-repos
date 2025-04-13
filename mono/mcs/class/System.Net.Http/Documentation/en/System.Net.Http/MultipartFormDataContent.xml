@@ -25,8 +25,12 @@
 
         
 
+        
+
          type. All <see
          cref="T:System.Net.Http.MultipartFormDataContent" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -88,11 +94,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="boundary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,11 +139,15 @@
 
             
 
+            
+
              objects that get serialized to multipart/form-data MIME type.</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,6 +185,8 @@
 
             
 
+            
+
              objects that get serialized to multipart/form-data MIME type.</para
           >
         </summary>
@@ -179,10 +195,14 @@
 
           
 
+          
+
           The HTTP content to add to the collection.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,11 +241,15 @@
 
             
 
+            
+
              objects that get serialized to multipart/form-data MIME type.</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,10 +260,14 @@
 
           
 
+          
+
           The name for the HTTP content to add.</param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11.2">class-type</non_terminal>
@@ -27,6 +29,8 @@
       <name>
         <non_terminal where="11.2">class-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -48,6 +52,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="10.8">type-name</non_terminal>
@@ -57,6 +63,8 @@
       <name>
         <non_terminal where="19.1">array-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -73,6 +81,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -84,8 +94,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -102,6 +116,8 @@
       <name>
         <non_terminal where="19.1">rank-specifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -120,6 +136,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>,</terminal>
@@ -133,6 +151,8 @@
       <name>
         <non_terminal where="11.2">delegate-type</non_terminal>
       </name>
+
+      
 
       
 

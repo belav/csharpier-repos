@@ -21,8 +21,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >Specifies the type of fill a <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 

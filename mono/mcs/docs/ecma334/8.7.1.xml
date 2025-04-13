@@ -6,6 +6,8 @@
 
     
 
+    
+
     . The example <code_example
     >
       <![CDATA[
@@ -16,6 +18,8 @@ class Constants
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -34,6 +38,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

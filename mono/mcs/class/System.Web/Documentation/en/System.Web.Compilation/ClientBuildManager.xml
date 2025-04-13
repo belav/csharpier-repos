@@ -26,11 +26,15 @@
 
         
 
+        
+
          class offers methods and properties for compiling ASP.NET Web applications, and retrieving the generated assemblies or generated source code. Instances of the class are established in the client's application domain and provide access to the ASP.NET build system outside of Microsoft Internet Information Services (IIS). The class can be used to develop customized tools for compiling Web applications. </para
       >
       <para
         >The command-line tool aspnet_compiler uses the <see
          cref="T:System.Web.Compilation.ClientBuildManager" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              class without a specified target directory or precompilation flags. </para
           >
         </summary>
@@ -72,10 +78,14 @@
 
           
 
+          
+
           The virtual path to the application root.</param
         >
         <param name="appPhysicalSourceDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -111,11 +121,15 @@
 
             
 
+            
+
              class with the specified target directory. </para
           >
         </summary>
         <param name="appVirtualDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,10 +140,14 @@
 
           
 
+          
+
           The physical path to the application root.</param
         >
         <param name="appPhysicalTargetDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,11 +184,15 @@
 
             
 
+            
+
              class with the specified target directory and compilation parameter.</para
           >
         </summary>
         <param name="appVirtualDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,6 +203,8 @@
 
           
 
+          
+
           The physical path to the application root.</param
         >
         <param name="appPhysicalTargetDir">
@@ -188,10 +212,14 @@
 
           
 
+          
+
           The target directory for precompilation.</param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,6 +329,8 @@
 
             
 
+            
+
              method ensures that resources, Web references, files in the App_Code directory, .browser files in the App_Browsers directory, and the Global.asax file are compiled. </para
           >
         </remarks>
@@ -331,6 +361,8 @@
         </summary>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -366,10 +398,14 @@
 
           
 
+          
+
           The path to the file to be compiled.</param
         >
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,10 +445,14 @@
 
           
 
+          
+
           The type of object to be created.</param
         >
         <param name="failIfExists">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,6 +595,8 @@
 
             
 
+            
+
              array containing the top-level directory names.</para
           >
         </returns>
@@ -583,13 +625,19 @@
 
             
 
+            
+
              object contains browser names for the keys and <see
              cref="T:System.Web.UI.Triplet" />
 
             
 
+            
+
              objects for the values. The <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -605,6 +653,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -672,11 +722,15 @@
 
             
 
+            
+
              of the compiled file.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -744,8 +798,12 @@
 
             
 
+            
+
              containing the virtual path for <paramref
              name="filePath" />
+
+            
 
             
 
@@ -754,6 +812,8 @@
         </returns>
         <param name="filePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,11 +851,15 @@
 
             
 
+            
+
              that contains the physical path to the generated file.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,11 +897,15 @@
 
             
 
+            
+
              array containing paths to code bases in the Bin directory and the &lt;assembly&gt; section of the Web configuration file. </para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -870,6 +938,8 @@
 
             
 
+            
+
              array containing all the virtual paths to code directories in an application.</para
           >
         </returns>
@@ -892,6 +962,8 @@
           <para
             >This method overrides the <see
              cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
+
+            
 
             
 
@@ -935,11 +1007,15 @@
 
             
 
+            
+
              parameter matches one of the generated code assemblies; otherwise, false.</para
           >
         </returns>
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -988,8 +1064,12 @@
 
             
 
+            
+
              constructor. The <see
              cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+
+            
 
             
 
@@ -998,11 +1078,15 @@
 
             
 
+            
+
              constructor defines which of the three forms of precompilation to perform.</para
           >
           <para
             >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see
              cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication" />
+
+            
 
             
 
@@ -1040,6 +1124,8 @@
 
             
 
+            
+
              parameter contains the method to call when reporting the result of compilation.</para
           >
           <para>The two other forms of precompilation are used for deployment. In either form, a layout of the site is generated that can be deployed to a production computer. One of these forms includes the markup pages so some amount of updating can be performed on the compiled site. The other form does not contain the markup pages and therefore cannot be updated without recompiling the original site. No source code is deployed to the target environment in either of these forms of precompilation.</para>
@@ -1049,8 +1135,12 @@
 
             
 
+            
+
              constructor. The <see
              cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+
+            
 
             
 
@@ -1059,11 +1149,15 @@
 
             
 
+            
+
              constructor defines which of the three forms of precompilation to perform.</para
           >
           <para
             >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see
              cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication(System.Web.Compilation.ClientBuildManagerCallback)" />
+
+            
 
             
 
@@ -1079,8 +1173,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
+
+          
 
           
 
@@ -1114,6 +1212,8 @@
 
             
 
+            
+
              parameter contains the method to call when reporting the result of compilation.</para
           >
           <para>The two other forms of precompilation are used for deployment. In either form, a layout of the site is generated that can be deployed to a production computer. One of these forms includes the markup pages so some amount of updating can be performed on the compiled site. The other form does not contain the markup pages and therefore cannot be updated without recompiling the original site. No source code is deployed to the target environment in either of these forms of precompilation.</para>
@@ -1123,8 +1223,12 @@
 
             
 
+            
+
              constructor. The <see
              cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+
+            
 
             
 
@@ -1133,11 +1237,15 @@
 
             
 
+            
+
              constructor defines which of the three forms of precompilation to perform.</para
           >
           <para
             >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see
              cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication(System.Web.Compilation.ClientBuildManagerCallback)" />
+
+            
 
             
 
@@ -1153,8 +1261,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
+
+          
 
           
 
@@ -1162,6 +1274,8 @@
         >
         <param name="forceCleanBuild">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

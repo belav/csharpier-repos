@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the authorization section of a configuration file.</para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
         
 
+        
+
         , and the <see
          cref="T:System.Web.Configuration.AuthorizationRuleAction" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
 
           
 
+          
+
            can update the configuration information at any level in the configuration hierarchy.</para
         >
       </block>
@@ -58,6 +68,8 @@
       <para
         >The <see
          cref="T:System.Web.Configuration.AuthorizationRule" />
+
+        
 
         
 
@@ -85,6 +97,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. </para
           >
         </remarks>
@@ -96,6 +110,8 @@
 
             
 
+            
+
              class using the passed object. </para
           >
         </summary>
@@ -104,8 +120,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.AuthorizationRule" />
+
+          
 
           
 
@@ -140,6 +160,8 @@
 
             
 
+            
+
              action.</para
           >
         </summary>
@@ -170,6 +192,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,6 +309,8 @@
 
             
 
+            
+
              properties.</para
           >
         </summary>
@@ -359,13 +385,19 @@
 
             
 
+            
+
              property is a list of roles that are granted or denied access to the resource. There must be at least one value in either the <see
              cref="P:System.Web.Configuration.AuthorizationRule.Users" />
 
             
 
+            
+
              property collection or the <see
              cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+
+            
 
             
 
@@ -476,13 +508,19 @@
 
             
 
+            
+
              property is a list of users that are granted or denied access to the resource. There must be at least one value in either the <see
              cref="P:System.Web.Configuration.AuthorizationRule.Users" />
 
             
 
+            
+
              property collection or the <see
              cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+
+            
 
             
 
@@ -523,6 +561,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
+
+            
 
             
 

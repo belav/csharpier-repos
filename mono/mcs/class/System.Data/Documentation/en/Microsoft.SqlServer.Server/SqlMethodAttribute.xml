@@ -27,10 +27,14 @@
 
         
 
+        
+
          should be used on the setter or the getter directly. </para
       >
       <para>
         <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+
+        
 
         
 
@@ -39,13 +43,19 @@
 
         
 
+        
+
         , so <see
          cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
 
         
 
+        
+
          inherits the FillRowMethodName and TableDefinition fields from <see
          cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
+
+        
 
         
 
@@ -91,11 +101,15 @@
 
             
 
+            
+
              property is set to true and the return type of the method is void, SQL Server marks the method as a mutator. A mutator method is one that causes a state change in the UDT instance. Mutator methods can be called in assignment statements or data modification statements, but cannot be used in queries. If a method is marked as a mutator but does not return void, then CREATE TYPE does not fail with an error. Even though a returned value other than void does not raise an error, the returned value is not accessible and cannot be used. </para
           >
           <para
             >The default value of the <see
              cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
+
+            
 
             
 
@@ -107,8 +121,12 @@
 
             
 
+            
+
              is used on the setter and <see
              cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
+
+            
 
             
 
@@ -117,8 +135,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+
+            
 
             
 
@@ -148,6 +170,8 @@
           <para
             >The default value of the <see
              cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.OnNullCall" />
+
+            
 
             
 

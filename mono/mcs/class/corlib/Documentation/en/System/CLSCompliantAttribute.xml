@@ -44,12 +44,16 @@
 
         
 
+        
+
          attribute is used to indicate whether a particular program element complies with the Common Language Specification (CLS), which defines the features that any language that targets the .NET Framework must support. CLS compliance is primarily of concern to library developers who want to ensure that their libraries are accessible in any language that targets the .NET Framework. For more information, See <format
          type="text/html">
           <a href="4f0b77d0-4844-464f-af73-6e06bedeafc6"
             >Language Independence and Language-Independent Components</a
           >
         </format>
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          attribute to the following program elements: assembly, module, class, struct, enum, constructor, method, property, field, event, interface, delegate, parameter, and return value. However, the notion of CLS compliance is only meaningful for assemblies, modules, types, and members of types, not parts of a member signature. Consequently, <see
          cref="T:System.CLSCompliantAttribute" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
       <para
         >If no <see
          cref="T:System.CLSCompliantAttribute" />
+
+        
 
         
 
@@ -93,6 +103,8 @@
 
         
 
+        
+
          using a false argument. Similarly, if a class is marked as CLS-compliant, you must individually mark all members that are not CLS-compliant. All non-compliant members must provide corresponding CLS-compliant alternatives.</para
       >
       <para>Attributes that are applied to assemblies or modules must occur after the C# using (Imports in Visual Basic) clauses and before the code.</para>
@@ -103,6 +115,8 @@
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -148,11 +162,15 @@
 
             
 
+            
+
              class with a Boolean value indicating whether the indicated program element is CLS-compliant.</para
           >
         </summary>
         <param name="isCompliant">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,11 +203,15 @@
 
             
 
+            
+
             if the target 
  of
  the current instance complies with
  the CLS; otherwise, <see
              langword="false" />
+
+            
 
             
 

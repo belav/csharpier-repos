@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) of the field's type. It is not possible to observe the value of a field before this default initialization has occurred, and a field is thus never "uninitialized". <example
 
       >[Example: The example <code_example
@@ -26,12 +28,16 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
         <![CDATA[
 b = False, i = 0  
 ]]>
       </code_example>
+
+      
 
       
 

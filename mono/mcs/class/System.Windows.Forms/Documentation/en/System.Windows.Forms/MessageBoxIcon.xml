@@ -18,6 +18,8 @@
 
         
 
+        
+
          class. The description of each member of this enumeration contains a typical representation of the symbol. The actual graphic displayed is a function of the operating system constants. In current implementations there are four unique symbols with multiple values assigned to them.</para
       >
     </remarks>

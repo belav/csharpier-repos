@@ -48,6 +48,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -79,11 +81,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,6 +124,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -126,8 +134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -138,8 +150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -174,11 +190,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,8 +209,12 @@
 
           
 
+          
+
           The inner <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -230,8 +254,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 

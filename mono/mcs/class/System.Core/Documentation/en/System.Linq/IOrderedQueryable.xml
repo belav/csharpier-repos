@@ -30,6 +30,8 @@
 
         
 
+        
+
          interface is intended for implementation by query providers.</para
       >
       <para
@@ -38,8 +40,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Linq.Queryable.OrderByDescending" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Linq.Queryable.ThenByDescending" />
+
+        
 
         
 
@@ -58,13 +68,19 @@
 
         
 
+        
+
          is called and passed an expression tree that represents a sorting query, the resulting <see
          cref="T:System.Linq.IQueryable" />
 
         
 
+        
+
          object must be of a type that implements <see
          cref="T:System.Linq.IOrderedQueryable" />
+
+        
 
         
 
@@ -75,6 +91,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
+
+        
 
         
 

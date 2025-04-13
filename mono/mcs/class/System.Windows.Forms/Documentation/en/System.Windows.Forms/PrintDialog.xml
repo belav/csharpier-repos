@@ -30,8 +30,12 @@
 
         
 
+        
+
         , the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Windows.Forms.PrintDialog.#ctor" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
         , use the <see
          cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -184,6 +198,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -210,6 +226,8 @@
 
             
 
+            
+
              property has no effect.</para
           >
         </remarks>
@@ -218,6 +236,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Current Page</ui>
+
+            
 
             
 
@@ -256,6 +276,8 @@
 
             
 
+            
+
              check box is enabled.</para
           >
         </summary>
@@ -287,6 +309,8 @@
 
             
 
+            
+
              option button is enabled.</para
           >
         </summary>
@@ -315,6 +339,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Pages</ui>
+
+            
 
             
 
@@ -352,8 +378,12 @@
 
             
 
+            
+
              used to obtain <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            
 
             
 
@@ -396,8 +426,12 @@
 
             
 
+            
+
              property must be set before you call <see
              cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+            
 
             
 
@@ -433,6 +467,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Print to file</ui>
+
+            
 
             
 
@@ -512,6 +548,8 @@
 
             
 
+            
+
              button is displayed.</para
           >
         </summary>
@@ -543,6 +581,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Network</ui>
+
+            
 
             
 
@@ -579,8 +619,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" />
+
+            
 
             
 

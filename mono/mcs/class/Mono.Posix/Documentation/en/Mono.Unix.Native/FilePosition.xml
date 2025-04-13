@@ -35,11 +35,15 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
       <para>
         <c>FilePosition</c>
+
+        
 
         
 
@@ -50,9 +54,13 @@
 
         
 
+        
+
          stream differences.  It exists to support platforms for which
     file positions can exceed the size of <see
          langword="long" />
+
+        
 
         
 
@@ -63,9 +71,13 @@
 
         
 
+        
+
          wraps unmanaged memory.  It contains a finalizer
     to free this memory, but using <see
          cref="M:Mono.Unix.Native.FilePosition.Dispose" />
+
+        
 
         
 
@@ -120,11 +132,15 @@
 
           
 
+          
+
            instance.</summary
         >
         <remarks
           >This method should be called whenever a <c
           >FilePosition</c>
+
+          
 
           
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          object provides a replacement string that is substituted for the original input character. The replacement string initializes the value of the <see
          cref="T:System.Text.EncoderReplacementFallback" />
+
+        
 
         
 
@@ -41,13 +45,19 @@
 
         
 
+        
+
          object initializes the value of an <see
          cref="T:System.Text.EncoderReplacementFallbackBuffer" />
 
         
 
+        
+
          object. The value of an <see
          cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
             
 
+            
+
              class using the value of a <see
              cref="T:System.Text.EncoderReplacementFallback" />
+
+            
 
             
 
@@ -101,8 +115,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Text.EncoderReplacementFallback" />
+
+          
 
           
 
@@ -141,8 +159,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Text.Encoder.Convert" />
+
+            
 
             
 
@@ -151,13 +173,19 @@
 
             
 
+            
+
              if they encounter an unknown character in their input. If the return value of <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Int32)" />
 
             
 
+            
+
              is true, the calling method can invoke the <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -177,10 +205,14 @@
 
           
 
+          
+
           An input character. This parameter is ignored in this operation unless an exception is thrown.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,8 +252,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Text.Encoder.Convert" />
+
+            
 
             
 
@@ -230,13 +266,19 @@
 
             
 
+            
+
              if they encounter an unknown character in their input. If the return value of <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" />
 
             
 
+            
+
              is true, the calling method can invoke the <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -256,6 +298,8 @@
 
           
 
+          
+
           The high surrogate of the input pair.</param
         >
         <param name="charUnknownLow">
@@ -263,10 +307,14 @@
 
           
 
+          
+
           The low surrogate of the input pair.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,8 +347,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Text.Encoder.Convert" />
+
+            
 
             
 
@@ -309,13 +361,19 @@
 
             
 
+            
+
              if they encounter an unknown surrogate pair or character in their input. If the return value of <see
              cref="Overload:System.Text.EncoderReplacementFallbackBuffer.Fallback" />
 
             
 
+            
+
              is true, the calling method can invoke <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -358,6 +416,8 @@
 
             
 
+            
+
              method to access the character position in the replacement fallback buffer prior to the current character position. </para
           >
         </summary>
@@ -366,6 +426,8 @@
           <para
             >true if the <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.MovePrevious" />
+
+            
 
             
 
@@ -396,8 +458,12 @@
 
             
 
+            
+
              method returns true if the <see
              cref="P:System.Text.EncoderReplacementFallbackBuffer.Remaining" />
+
+            
 
             
 
@@ -435,8 +501,12 @@
 
             
 
+            
+
              method discards any persisted state information and data that govern emitting a replacement string. Unpredictable results occur if the encoding operation continues after the <see
              cref="M:System.Text.EncoderReplacementFallbackBuffer.Reset" />
+
+            
 
             
 
@@ -448,6 +518,8 @@
           <para
             >Initializes all internal state information and data in this instance of <see
              cref="T:System.Text.EncoderReplacementFallbackBuffer" />
+
+            
 
             
 

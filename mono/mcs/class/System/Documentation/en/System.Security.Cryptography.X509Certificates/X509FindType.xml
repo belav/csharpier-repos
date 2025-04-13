@@ -22,8 +22,12 @@
 
         
 
+        
+
          identifies the type of value provided in the <paramref
          name="findValue" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          method. You can use <see
          cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
 
         
 
+        
+
          to search an <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+        
 
         
 
@@ -50,13 +60,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByTimeNotYetValid" />
 
         
 
+        
+
         , and <see
          cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByTimeExpired" />
+
+        
 
         
 
@@ -68,6 +84,8 @@
       <para
         >Specifies the type of value the <see
          cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+        
 
         
 
@@ -100,13 +118,19 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
+            
+
              method must be a string representing either the application policy friendly name or the object identifier (OID, or <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -139,13 +163,19 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
+            
+
              method must be a string representing either the friendly name or the object identifier (OID, or <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -178,13 +208,19 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
+            
+
              method must be a string describing the extension to find. The object identifier (OID) is most commonly used to direct the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -217,8 +253,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -227,13 +267,19 @@
 
             
 
+            
+
              enumeration value. Using the <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByIssuerDistinguishedName" />
 
             
 
+            
+
              value, the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -266,8 +312,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -276,8 +326,12 @@
 
             
 
+            
+
              enumeration value. Using the <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByIssuerName" />
+
+            
 
             
 
@@ -286,8 +340,12 @@
 
             
 
+            
+
              method performs a case-insensitive string comparison using the supplied value. For example, if you pass "MyCA" to the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -320,8 +378,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -330,13 +392,19 @@
 
             
 
+            
+
              method can be used in a cascading sequence to get the intersection of the requested usages. For example, the <paramref
              name="findValue" />
 
             
 
+            
+
              parameter can be set to "KeyEncipherment" or an integer (0x30 indicates "KeyEncipherment" and "DataEncipherment"). Values of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+
+            
 
             
 
@@ -369,13 +437,19 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
+            
+
              method must be a string that represents the serial number of the certificate as displayed by the certificate dialog box, but without the spaces, or as returned by the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate.GetSerialNumberString" />
+
+            
 
             
 
@@ -408,8 +482,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -418,13 +496,19 @@
 
             
 
+            
+
              enumeration value. Using the <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectDistinguishedName" />
 
             
 
+            
+
              value, the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -457,8 +541,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -491,8 +579,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -501,8 +593,12 @@
 
             
 
+            
+
              enumeration value. Using the <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindBySubjectName" />
+
+            
 
             
 
@@ -511,8 +607,12 @@
 
             
 
+            
+
              method performs a case-insensitive string comparison using the supplied value. For example, if you pass "MyCert" to the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -545,8 +645,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -579,8 +683,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -613,8 +721,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -623,8 +735,12 @@
 
             
 
+            
+
              value in local time. For example, you can find all the certificates that will be valid until the end of the year by eliminating the results of a <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -633,13 +749,19 @@
 
             
 
+            
+
              of the last day of the year from the results of a <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
+            
+
              operation for <see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 
@@ -672,8 +794,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -682,8 +808,12 @@
 
             
 
+            
+
              value in local time. The value does not have to be in the future. For example, you can use <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByTimeNotYetValid" />
+
+            
 
             
 
@@ -692,8 +822,12 @@
 
             
 
+            
+
              operation for <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByTimeNotYetValid" />
+
+            
 
             
 
@@ -702,13 +836,19 @@
 
             
 
+            
+
              operation for <see
              cref="F:System.Security.Cryptography.X509Certificates.X509FindType.FindByTimeValid" />
 
             
 
+            
+
              of <see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 
@@ -741,8 +881,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -751,8 +895,12 @@
 
             
 
+            
+
              value in local time. You can use <see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 

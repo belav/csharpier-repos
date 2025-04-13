@@ -26,8 +26,12 @@
 
         
 
+        
+
          class to create a scope for a specific <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -36,13 +40,19 @@
 
         
 
+        
+
          object using a specified <see
          cref="T:System.ServiceModel.IContextChannel" />
 
         
 
+        
+
          object. An <see
          cref="T:System.ServiceModel.OperationContextScope" />
+
+        
 
         
 
@@ -54,8 +64,12 @@
 
         
 
+        
+
          object has established the current operation context, you can use the <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
             
 
+            
+
              object or (if the channel implements <see
              cref="T:System.ServiceModel.Channels.ISession" />
+
+            
 
             
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
          is created, the current <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -103,8 +125,12 @@
 
         
 
+        
+
          becomes the one returned by the <see
          cref="P:System.ServiceModel.OperationContext.Current" />
+
+        
 
         
 
@@ -113,8 +139,12 @@
 
         
 
+        
+
          is disposed, the original <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -129,6 +159,8 @@
       <para
         >Creates a block within which an <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -162,13 +194,19 @@
 
             
 
+            
+
              constructor to create a new <see
              cref="T:System.ServiceModel.OperationContext" />
 
             
 
+            
+
              for a client channel that can be used to add or modify outbound message headers, read incoming message headers, or access other run-time properties of the <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -180,13 +218,19 @@
 
             
 
+            
+
              property of the newly created <see
              cref="T:System.ServiceModel.OperationContext" />
 
             
 
+            
+
              apply only to the channel that was passed to the <see
              cref="Overload:System.ServiceModel.OperationContextScope.#ctor" />
+
+            
 
             
 
@@ -201,13 +245,19 @@
 
             
 
+            
+
              class that uses the specified <see
              cref="T:System.ServiceModel.IContextChannel" />
 
             
 
+            
+
              to create a new <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -219,8 +269,12 @@
 
           
 
+          
+
           The channel to use when creating the scope for a new <see
            cref="T:System.ServiceModel.OperationContext" />
+
+          
 
           
 
@@ -253,8 +307,12 @@
 
             
 
+            
+
              constructor to create a code block within which the specified <see
              cref="T:System.ServiceModel.OperationContextScope" />
+
+            
 
             
 
@@ -269,8 +327,12 @@
 
             
 
+            
+
              class to create a scope for the specified <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -282,8 +344,12 @@
 
           
 
+          
+
           The active <see
            cref="T:System.ServiceModel.OperationContext" />
+
+          
 
           
 
@@ -315,8 +381,12 @@
 
             
 
+            
+
              to the active context and recycles the <see
              cref="T:System.ServiceModel.OperationContextScope" />
+
+            
 
             
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides data for the following events:</para
       >
       <list type="bullet">
@@ -108,8 +110,12 @@
 
         
 
+        
+
          in the <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 
@@ -139,13 +145,19 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
+            
+
              and using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -157,8 +169,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -169,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -196,6 +216,8 @@
           <para
             >Gets the graphics used to paint the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -228,6 +250,8 @@
 
             
 
+            
+
              to paint.</para
           >
         </summary>
@@ -256,13 +280,19 @@
 
             
 
+            
+
              is in the overflow area of the <see
              cref="T:System.Windows.Forms.Form" />
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.ToolStripItemRenderEventArgs.ToolStrip" />
+
+            
 
             
 
@@ -277,8 +307,12 @@
 
             
 
+            
+
              property for the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 

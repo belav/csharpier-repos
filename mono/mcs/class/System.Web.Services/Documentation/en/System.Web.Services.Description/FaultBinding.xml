@@ -30,6 +30,8 @@
 
         
 
+        
+
          class. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.FaultBinding" />
+
+            
 
             
 
@@ -84,6 +88,8 @@
           <para
             >Gets the collection of extensibility elements associated with the current <see
              cref="T:System.Web.Services.Description.FaultBinding" />
+
+            
 
             
 

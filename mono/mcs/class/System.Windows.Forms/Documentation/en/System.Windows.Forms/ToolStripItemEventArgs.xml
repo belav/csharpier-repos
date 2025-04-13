@@ -20,6 +20,8 @@
 
         
 
+        
+
          events.</para
       >
     </summary>
@@ -45,8 +47,12 @@
 
             
 
+            
+
              class, specifying a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -58,8 +64,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -88,6 +98,8 @@
           <para
             >Gets a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 

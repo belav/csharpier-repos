@@ -23,6 +23,8 @@ public class Trig
 
     
 
+    
+
      At least one instance constructor must be declared to suppress the automatic generation of a default constructor. </paragraph
   >
 </clause>

@@ -24,8 +24,12 @@
 
         
 
+        
+
          class to determine whether a <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          in the machine configuration file contains the language provider and compiler configuration settings. Each configured language provider has a corresponding compiler configuration element. Each element defines the <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          implementation.</para
       >
       <para
@@ -60,8 +70,12 @@
 
         
 
+        
+
          class provides read-only access to these settings in the machine configuration file. Use the <see
          cref="M:System.CodeDom.Compiler.CompilerInfo.GetLanguages" />
+
+        
 
         
 
@@ -70,13 +84,19 @@
 
         
 
+        
+
         , and <see
          cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
 
         
 
+        
+
          members to examine the corresponding configuration attributes for a language provider. Use the <see
          cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
+
+        
 
         
 
@@ -92,6 +112,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -101,10 +123,14 @@
 
           
 
+          
+
            is thrown when the immediate caller does not have full-trust permission. For details about link demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
+
+          
 
           
 
@@ -143,13 +169,19 @@
 
             
 
+            
+
              implementation on the computer. The <see
              cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
 
             
 
+            
+
              property value is a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -161,6 +193,8 @@
           <para
             >Gets the type of the configured <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              method to examine the compiler settings of the <see
              cref="T:System.CodeDom.Compiler.CompilerInfo" />
+
+            
 
             
 
@@ -207,8 +245,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+
+            
 
             
 
@@ -222,8 +264,12 @@
 
             
 
+            
+
              in the machine configuration file contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -232,8 +278,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
+
+            
 
             
 
@@ -245,8 +295,12 @@
 
             
 
+            
+
              property value is an empty string (""). If the language provider configuration element does not define the warningLevel attribute, the <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
+
+            
 
             
 
@@ -262,6 +316,8 @@
           <para
             >A read-only <see
              cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+            
 
             
 
@@ -298,8 +354,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -311,8 +371,12 @@
 
             
 
+            
+
              method to get a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -321,13 +385,19 @@
 
             
 
+            
+
              instance returned by the <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
 
             
 
+            
+
              or <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+
+            
 
             
 
@@ -339,6 +409,8 @@
           <para
             >Returns a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -382,8 +454,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -395,8 +471,12 @@
 
             
 
+            
+
              method to get a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -405,13 +485,19 @@
 
             
 
+            
+
              instance returned by the <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
 
             
 
+            
+
              or <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+
+            
 
             
 
@@ -426,6 +512,8 @@
 
             
 
+            
+
              instance for the current language provider settings and specified options.</para
           >
         </summary>
@@ -435,6 +523,8 @@
         </returns>
         <param name="providerOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,6 +559,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>The two instances are considered equal if the values of the following properties are equal:</para>
@@ -477,6 +569,8 @@
               <para
                 >The <see
                  cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
+
+                
 
                 
 
@@ -490,8 +584,12 @@
 
                 
 
+                
+
                 , <see
                  cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
+
+                
 
                 
 
@@ -500,13 +598,19 @@
 
                 
 
+                
+
                  properties of the <see
                  cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
                 
 
+                
+
                  instance returned by the <see
                  cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
+
+                
 
                 
 
@@ -523,6 +627,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -534,8 +640,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.CodeDom.Compiler.CompilerInfo" />
+
+            
 
             
 
@@ -547,8 +657,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.CodeDom.Compiler.CompilerInfo" />
+
+          
 
           
 
@@ -583,13 +697,19 @@
 
             
 
+            
+
              in the machine configuration file contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
+            
+
              implementation on the computer. Each configured language provider supports one or more file name extensions. For example, a <see
              cref="T:Microsoft.CSharp.CSharpCodeProvider" />
+
+            
 
             
 
@@ -631,11 +751,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This method generates the same hash code for two objects that are equal according to the <see
              cref="M:System.CodeDom.Compiler.CompilerInfo.Equals(System.Object)" />
+
+            
 
             
 
@@ -651,6 +775,8 @@
           <para
             >A 32-bit signed integer hash code for the current <see
              cref="T:System.CodeDom.Compiler.CompilerInfo" />
+
+            
 
             
 
@@ -686,8 +812,12 @@
 
             
 
+            
+
              in the machine configuration file contains the language provider and compiler configuration settings for each <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -696,8 +826,12 @@
 
             
 
+            
+
              object for a <see
              cref="T:Microsoft.CSharp.CSharpCodeProvider" />
+
+            
 
             
 
@@ -739,8 +873,12 @@
 
             
 
+            
+
              property to check the <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -749,8 +887,12 @@
 
             
 
+            
+
              method, use the <see
              cref="P:System.CodeDom.Compiler.CompilerInfo.IsCodeDomProviderTypeValid" />
+
+            
 
             
 
@@ -759,8 +901,12 @@
 
             
 
+            
+
              method or using the <see
              cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
+
+            
 
             
 

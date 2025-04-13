@@ -48,6 +48,8 @@ class Test
 
       
 
+      
+
       the class A is decorated with the Obsolete attribute. Each use of A in Main results in a warning that includes the specified message, "This class is obsolete; use class B instead." end example]</example
     >
     <table_line />

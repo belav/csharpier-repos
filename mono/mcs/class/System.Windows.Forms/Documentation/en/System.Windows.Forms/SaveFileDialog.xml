@@ -28,6 +28,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -97,8 +99,12 @@
 
               
 
+              
+
                class to open the file using the file name returned in the <see
                cref="P:System.Windows.Forms.FileDialog.FileName" />
+
+              
 
               
 

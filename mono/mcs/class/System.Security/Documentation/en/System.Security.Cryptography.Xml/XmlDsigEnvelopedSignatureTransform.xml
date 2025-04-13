@@ -25,6 +25,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -40,12 +42,16 @@
 
         
 
+        
+
          class removes the &lt;Signature&gt; element from an XML document before the digest is computed. With this transform, you can sign and verify all elements of an XML document except the XML digital signature elements.</para
       >
       <para>Although you can create and insert a signature into an XML document, verifying the modified document using the embedded signature will fail because the document now has additional elements.  This transform removes the &lt;Signature&gt; element and allows you to verify the document using its original form.</para>
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+        
 
         
 
@@ -83,6 +89,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -117,11 +125,15 @@
 
             
 
+            
+
              class with comments, if specified.</para
           >
         </summary>
         <param name="includeComments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,6 +170,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -166,6 +180,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+            
 
             
 
@@ -199,6 +215,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -210,6 +228,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -218,6 +238,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+            
 
             
 
@@ -253,6 +275,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -264,8 +288,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -280,8 +308,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -293,8 +325,12 @@
 
           
 
+          
+
           The type of the output to return. <see
            cref="T:System.Xml.XmlNodeList" />
+
+          
 
           
 
@@ -328,8 +364,12 @@
 
             
 
+            
+
              are <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -338,8 +378,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -354,8 +398,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+            
 
             
 
@@ -394,6 +442,8 @@
 
             
 
+            
+
             , a call to this method does not change the state of the transform.</para
           >
         </remarks>
@@ -405,8 +455,12 @@
 
             
 
+            
+
              as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+            
 
             
 
@@ -418,13 +472,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
           
 
+          
+
            to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+          
 
           
 
@@ -459,6 +519,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -470,6 +532,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -478,8 +542,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+          
 
           
 
@@ -516,13 +584,19 @@
 
             
 
+            
+
              are <see
              cref="T:System.Xml.XmlNodeList" />
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -537,8 +611,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+
+            
 
             
 

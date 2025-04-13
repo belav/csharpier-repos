@@ -17,8 +17,12 @@
 
           
 
+          
+
            interface is obsolete. Use the <see
            cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+          
 
           
 
@@ -84,6 +88,8 @@
 
           
 
+          
+
           The undo unit to discard. </param
         >
       </Docs>
@@ -109,13 +115,19 @@
 
               
 
+              
+
                interface property is obsolete. Use the <see
                cref="P:System.Web.UI.Design.WebFormsRootDesigner.DocumentUrl" />
 
               
 
+              
+
                property on the <see
                cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+              
 
               
 
@@ -156,6 +168,8 @@
 
           
 
+          
+
           true if actions should be undoable; otherwise, false. </param
         >
       </Docs>
@@ -181,13 +195,19 @@
 
               
 
+              
+
                interface property is obsolete. Use the <see
                cref="P:System.Web.UI.Design.WebFormsRootDesigner.IsLoading" />
 
               
 
+              
+
                property on the <see
                cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+              
 
               
 
@@ -221,13 +241,19 @@
 
               
 
+              
+
                interface event is obsolete. Use the <see
                cref="E:System.Web.UI.Design.WebFormsRootDesigner.LoadComplete" />
 
               
 
+              
+
                event on the <see
                cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+              
 
               
 

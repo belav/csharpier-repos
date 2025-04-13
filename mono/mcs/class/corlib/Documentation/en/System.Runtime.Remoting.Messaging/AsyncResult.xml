@@ -42,8 +42,12 @@
 
         
 
+        
+
          class is used in conjunction with asynchronous method calls made using delegates. The <see
          cref="T:System.IAsyncResult" />
+
+        
 
         
 
@@ -52,13 +56,19 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
         
 
+        
+
          has the <see
          cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncDelegate" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
             >Asynchronous Programming Using Delegates</a
           >
         </format>
+
+        
 
         
 
@@ -102,6 +114,8 @@
           <para
             >The <see
              cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncDelegate" />
+
+            
 
             
 
@@ -146,8 +160,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+
+            
 
             
 
@@ -156,8 +174,12 @@
 
             
 
+            
+
              class. Implementation by <see
              cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+
+            
 
             
 
@@ -166,13 +188,19 @@
 
             
 
+            
+
             . Instead, obtain an <see
              cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
             
 
+            
+
              by casting the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -184,6 +212,8 @@
           <para
             >Implements the <see
              cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+
+            
 
             
 
@@ -199,8 +229,12 @@
 
           
 
+          
+
           The request <see
            cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+
+          
 
           
 
@@ -211,8 +245,12 @@
 
           
 
+          
+
           The response <see
            cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+
+          
 
           
 
@@ -243,6 +281,8 @@
                 >[&lt;topic://cpovrasynchronousdelegates&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -283,11 +323,15 @@
 
             
 
+            
+
              returned by this method is automatically signaled when the asynchronous operation has completed.</para
           >
           <para
             >The wait handle is not closed automatically when you call EndInvoke on the delegate that was used to make the asynchronous method call. If you release all references to the wait handle, system resources are freed when garbage collection reclaims the wait handle. To free the system resources as soon as you are finished using the wait handle, call the <see
              cref="M:System.Threading.WaitHandle.Close" />
+
+            
 
             
 
@@ -300,8 +344,12 @@
 
               
 
+              
+
                contained in the <see
                cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncWaitHandle" />
+
+              
 
               
 
@@ -310,8 +358,12 @@
 
               
 
+              
+
                will ignore the <see
                cref="T:System.AsyncCallback" />
+
+              
 
               
 
@@ -320,8 +372,12 @@
 
               
 
+              
+
                has finished executing, even if a <see
                cref="T:System.Threading.WaitHandle" />
+
+              
 
               
 
@@ -330,8 +386,12 @@
 
               
 
+              
+
                class, and remove the <see
                cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+
+              
 
               
 
@@ -344,6 +404,8 @@
           <para
             >Gets a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -374,8 +436,12 @@
 
             
 
+            
+
              delegate, it is probable that the thread that called BeginInvoke is the current thread. Most providers of the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -384,6 +450,8 @@
           <para
             >Current implementation of <see
              cref="P:System.Runtime.Remoting.Messaging.AsyncResult.CompletedSynchronously" />
+
+            
 
             
 
@@ -416,6 +484,8 @@
           <para
             >Gets or sets a value indicating whether EndInvoke has been called on the current <see
              cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+
+            
 
             
 
@@ -452,8 +522,12 @@
 
             
 
+            
+
              method can return an object after the <see
              cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
+
+            
 
             
 
@@ -462,8 +536,12 @@
 
             
 
+            
+
              return value can be cast to an <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+            
 
             
 
@@ -503,8 +581,12 @@
 
             
 
+            
+
              property to true. Thus, it is safe for the client to destroy the resources after the <see
              cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
+
+            
 
             
 
@@ -542,6 +624,8 @@
           <para
             >The current implementation of <see
              cref="P:System.Runtime.Remoting.Messaging.AsyncResult.NextSink" />
+
+            
 
             
 
@@ -584,6 +668,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -595,6 +681,8 @@
 
             
 
+            
+
              for the current remote method call, which provides a way to control asynchronous messages after they have been dispatched.</para
           >
         </summary>
@@ -603,8 +691,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
+
+          
 
           
 
@@ -642,8 +734,12 @@
 
             
 
+            
+
              method implements the <see
              cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+
+            
 
             
 
@@ -654,8 +750,12 @@
 
             
 
+            
+
              invokes the consumer code's <see
              cref="T:System.AsyncCallback" />
+
+            
 
             
 
@@ -664,8 +764,12 @@
 
             
 
+            
+
              instance returned by the <see
              cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
+
+            
 
             
 
@@ -674,13 +778,19 @@
 
             
 
+            
+
              parameter is of type <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
+            
+
             , the same object is returned by <see
              cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
+
+            
 
             
 
@@ -691,8 +801,12 @@
 
             
 
+            
+
              also modifies the value returned by the <see
              cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
+
+            
 
             
 
@@ -709,6 +823,8 @@
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

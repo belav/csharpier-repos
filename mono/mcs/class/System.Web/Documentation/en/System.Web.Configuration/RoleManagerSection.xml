@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the content of the roleManager section of the configuration file.</para
       >
     </remarks>
@@ -45,8 +47,12 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.RoleManagerSection" />
+
+            
 
             
 
@@ -55,11 +61,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The following table shows the default settings that are used for the <see
              cref="M:System.Web.Configuration.RoleManagerSection.#ctor" />
+
+            
 
             
 
@@ -206,6 +216,8 @@
 
             
 
+            
+
              class by using default settings.</para
           >
         </summary>
@@ -236,11 +248,15 @@
 
             
 
+            
+
              property returns a Boolean value indicating whether cookie storage for role names is enabled.</para
           >
           <para
             >When the <see
              cref="P:System.Web.Configuration.RoleManagerSection.CacheRolesInCookie" />
+
+            
 
             
 
@@ -252,8 +268,12 @@
 
             
 
+            
+
              property when you configure the roleManager section of the configuration file. The default <see
              cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" />
+
+            
 
             
 
@@ -297,6 +317,8 @@
 
             
 
+            
+
              property returns the name of the cookie that is used to cache role names. You can specify the name of the cookie where roles are cached for your application by setting the cookieName attribute in the Web.config file for your ASP.NET application. This is useful when you want to uniquely identify a cookie for your application or when a cookie is shared across multiple applications.</para
           >
         </remarks>
@@ -337,6 +359,8 @@
 
             
 
+            
+
              property returns the value of the cookiePath attribute from the Web.config file. The path is case sensitive.</para
           >
         </remarks>
@@ -374,8 +398,12 @@
 
             
 
+            
+
              property describes how information in a cookie is securely stored. You can specify the security type of the cookie where roles are cached for your application by setting the cookieProtection attribute in the Web.config file for your ASP.NET application. The cookieProtection attribute takes a <see
              cref="T:System.Web.Security.CookieProtection" />
+
+            
 
             
 
@@ -384,8 +412,12 @@
 
             
 
+            
+
              property if you want both data validation and encryption to help protect the cookie. To improve the protection of your cookie, you can also set the <see
              cref="P:System.Web.Configuration.RoleManagerSection.CookieRequireSSL" />
+
+            
 
             
 
@@ -450,8 +482,12 @@
 
             
 
+            
+
              property, in minutes. While the user continues to actively use the ASP.NET application, the expiration date and time of the cookie is automatically refreshed, if there is less than half of the <see
              cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" />
+
+            
 
             
 
@@ -495,13 +531,19 @@
 
             
 
+            
+
              property sets a value specifying the number of minutes before the role names cookie expires. The default is 30 minutes. If the <see
              cref="P:System.Web.Configuration.RoleManagerSection.CookieSlidingExpiration" />
 
             
 
+            
+
              property is false, the <see
              cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" />
+
+            
 
             
 
@@ -536,6 +578,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.RoleManagerSection.CreatePersistentCookie" />
+
+            
 
             
 
@@ -579,8 +623,12 @@
 
             
 
+            
+
              property must match a named value in the providers subsection of the roleManager section of a configuration file. An empty string ("") is not a valid value for the <see
              cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" />
+
+            
 
             
 
@@ -618,13 +666,19 @@
 
             
 
+            
+
              property is set in the configuration for an ASP.NET application by using the domain attribute of the roleManager configuration element. If no value is specified in the configuration for the domain attribute, the <see
              cref="P:System.Web.Configuration.RoleManagerSection.Domain" />
 
             
 
+            
+
              property returns null and the role names cookie domain defaults to the behavior of the <see
              cref="P:System.Web.HttpCookie.Domain" />
+
+            
 
             
 
@@ -662,6 +716,8 @@
 
             
 
+            
+
              property returns a Boolean value indicating whether or not the ASP.NET role management feature can be accessed at run time.</para
           >
         </remarks>
@@ -693,6 +749,8 @@
           <para
             >The <see
              cref="P:System.Web.Security.Roles.MaxCachedResults" />
+
+            
 
             
 
@@ -753,6 +811,8 @@
 
             
 
+            
+
              property specifies the provider that is used by default.</para
           >
         </remarks>
@@ -764,8 +824,12 @@
 
             
 
+            
+
              object of <see
              cref="T:System.Configuration.ProviderSettings" />
+
+            
 
             
 

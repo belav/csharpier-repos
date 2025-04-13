@@ -26,6 +26,8 @@
 
         
 
+        
+
          component.</para
       >
     </summary>
@@ -42,6 +44,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.PerformanceCounterInstaller" />
+
+            
 
             
 
@@ -135,6 +139,8 @@
 
             
 
+            
+
              property specifies whether the performance counter category can have multiple instances.  </para
           >
         </remarks>
@@ -164,6 +170,8 @@
 
             
 
+            
+
              can only install multiple counters in the same category.</para
           >
         </remarks>
@@ -173,6 +181,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,8 +249,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -275,8 +289,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -311,8 +329,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

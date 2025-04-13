@@ -26,6 +26,8 @@
 
         
 
+        
+
          object.</para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              class with the specified location and size.</para
           >
         </summary>
@@ -60,8 +64,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -72,8 +80,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -108,11 +120,15 @@
 
             
 
+            
+
              class with the specified location and size.</para
           >
         </summary>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +139,8 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of the rectangle. </param
         >
         <param name="width">
@@ -130,10 +148,14 @@
 
           
 
+          
+
           The width of the rectangle. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +183,8 @@
 
             
 
+            
+
              value represents the y-coordinate of the first point at the bottom edge of the rectangle that is not contained in the rectangle.</para
           >
         </remarks>
@@ -172,13 +196,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.RectangleF.Height" />
 
             
 
+            
+
              of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -215,6 +245,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -226,8 +258,12 @@
 
             
 
+            
+
              parameter is contained within this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -239,8 +275,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -274,8 +314,12 @@
 
             
 
+            
+
              is entirely contained within this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -290,8 +334,12 @@
 
             
 
+            
+
              is entirely contained within the rectangular region represented by this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -303,8 +351,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -336,6 +388,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -347,13 +401,19 @@
 
             
 
+            
+
              and <paramref
              name="y" />
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -365,10 +425,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,6 +463,8 @@
 
             
 
+            
+
              are left uninitialized.</para
           >
         </remarks>
@@ -407,6 +473,8 @@
           <para
             >Represents an instance of the <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -438,13 +506,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.RectangleF" />
 
             
 
+            
+
              with the same location and size of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -459,13 +533,19 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.RectangleF" />
 
             
 
+            
+
              and its X, Y, Width, and Height properties are equal to the corresponding properties of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -477,8 +557,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -514,6 +598,8 @@
 
             
 
+            
+
              with the specified upper-left and lower-right corners.</para
           >
         </remarks>
@@ -522,6 +608,8 @@
           <para
             >Creates a <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -536,11 +624,15 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
         <param name="left">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -551,6 +643,8 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of the rectangular region. </param
         >
         <param name="right">
@@ -558,10 +652,14 @@
 
           
 
+          
+
           The x-coordinate of the lower-right corner of the rectangular region. </param
         >
         <param name="bottom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -590,6 +688,8 @@
 
             
 
+            
+
              structure. For information about the use of hash codes, see Object.GetHashCode.</para
           >
         </summary>
@@ -598,6 +698,8 @@
           <para
             >The hash code for this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -625,6 +727,8 @@
           <para
             >Gets or sets the height of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -659,11 +763,15 @@
 
             
 
+            
+
              by the specified amount.</para
           >
         </summary>
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -695,13 +803,19 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
             
 
+            
+
              is negative, the <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -716,6 +830,8 @@
 
             
 
+            
+
              structure by the specified amount.</para
           >
         </summary>
@@ -724,8 +840,12 @@
 
           
 
+          
+
           The amount to inflate this <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -736,8 +856,12 @@
 
           
 
+          
+
           The amount to inflate this <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -772,6 +896,8 @@
 
             
 
+            
+
             , enlarges the copy, and then returns the enlarged copy. The rectangle is enlarged in both directions along an axis. For example, if a 50 by 50 rectangle is inflated by 50 in the x-axis, the resultant rectangle will be 150 units long (the original 50, the 50 in the minus direction, and the 50 in the plus direction) maintaining the rectangle's geometric center.</para
           >
         </remarks>
@@ -780,6 +906,8 @@
           <para
             >Creates and returns an enlarged copy of the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -794,6 +922,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -802,8 +932,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -814,10 +948,14 @@
 
           
 
+          
+
           The amount to enlarge the copy of the rectangle horizontally. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -851,8 +989,12 @@
 
             
 
+            
+
              structure with the intersection of itself and the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -865,6 +1007,8 @@
         </returns>
         <param name="rect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -899,8 +1043,12 @@
 
             
 
+            
+
              structure that represents the intersection of two rectangles. If there is no intersection, and empty <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -915,6 +1063,8 @@
 
             
 
+            
+
              structure the size of which represents the overlapped area of the two specified rectangles.</para
           >
         </returns>
@@ -923,10 +1073,14 @@
 
           
 
+          
+
           A rectangle to intersect. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -960,6 +1114,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -969,6 +1125,8 @@
         </returns>
         <param name="rect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -997,13 +1155,19 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.RectangleF.Height" />
 
             
 
+            
+
              property of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1038,6 +1202,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -1067,6 +1233,8 @@
           <para
             >Gets or sets the coordinates of the upper-left corner of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1108,6 +1276,8 @@
 
           
 
+          
+
           The amount to offset the location. </param
         >
       </Docs>
@@ -1141,10 +1311,14 @@
 
           
 
+          
+
           The amount to offset the location horizontally. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1179,6 +1353,8 @@
 
             
 
+            
+
              structures have equal location and size.</para
           >
         </summary>
@@ -1190,8 +1366,12 @@
 
             
 
+            
+
              structures have equal <see
              cref="P:System.Drawing.RectangleF.X" />
+
+            
 
             
 
@@ -1200,13 +1380,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.RectangleF.Width" />
 
             
 
+            
+
             , and <see
              cref="P:System.Drawing.RectangleF.Height" />
+
+            
 
             
 
@@ -1218,8 +1404,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -1230,8 +1420,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -1289,6 +1483,8 @@
 
             
 
+            
+
              structures differ in location or size.</para
           >
         </summary>
@@ -1300,8 +1496,12 @@
 
             
 
+            
+
              , <see
              cref="P:System.Drawing.RectangleF.Y" />
+
+            
 
             
 
@@ -1310,13 +1510,19 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Drawing.RectangleF.Height" />
 
             
 
+            
+
              properties of the two <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1328,8 +1534,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -1340,8 +1550,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -1369,6 +1583,8 @@
 
             
 
+            
+
              value represents the x-coordinate of the first point at the right edge of the rectangle that is not contained in the rectangle.</para
           >
         </remarks>
@@ -1380,13 +1596,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.RectangleF.Width" />
 
             
 
+            
+
              of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1422,6 +1644,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1450,6 +1674,8 @@
           <para
             >Gets the y-coordinate of the top edge of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1484,8 +1710,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1497,6 +1727,8 @@
           <para
             >A string that contains the position, width, and height of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1531,6 +1763,8 @@
 
             
 
+            
+
              method returns a rectangle with a starting point of (0, 0), and the height and width of the non-empty rectangle. For example, if you have two rectangles A = (0, 0; 0, 0) and B = (1, 1; 2, 2), then the union of A and B is (0, 0; 2, 2).</para
           >
         </remarks>
@@ -1546,6 +1780,8 @@
 
             
 
+            
+
              structure that contains both of the two rectangles that form the union.</para
           >
         </returns>
@@ -1554,10 +1790,14 @@
 
           
 
+          
+
           A rectangle to union. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1584,6 +1824,8 @@
           <para
             >Gets or sets the width of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1614,6 +1856,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -1638,6 +1882,8 @@
           <para
             >Gets or sets the y-coordinate of the upper-left corner of this <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 

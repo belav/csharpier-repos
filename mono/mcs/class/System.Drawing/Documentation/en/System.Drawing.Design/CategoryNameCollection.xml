@@ -48,6 +48,8 @@
 
             
 
+            
+
              class using the specified collection.</para
           >
         </summary>
@@ -56,8 +58,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.CategoryNameCollection" />
+
+          
 
           
 
@@ -86,11 +92,15 @@
 
             
 
+            
+
              class using the specified array of names.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,6 +136,8 @@
 
           
 
+          
+
           The string to check for in the collection. </param
         >
       </Docs>
@@ -155,10 +167,14 @@
 
           
 
+          
+
           The array to copy to. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,6 +207,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

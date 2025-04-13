@@ -28,6 +28,8 @@
 
         
 
+        
+
          objects.</para
       >
       <para>Note   Basic authentication requires the exchange of a password and should therefore be avoided except in the case of secure, encrypted connections.</para>
@@ -81,6 +83,8 @@
           <para
             >For additional information, see RFC2617 – HTTP Authentication: Basic and Digest Authentication. This document is available at <see
              cref="http://www.rfc-editor.org/">http://www.rfc-editor.org</see>
+
+            
 
             
 
@@ -187,6 +191,8 @@
           <para
             >No authentication is allowed. A client requesting an <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 

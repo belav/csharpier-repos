@@ -26,8 +26,12 @@
 
         
 
+        
+
          that represents a class of recoverable errors that may be thrown during communication between endpoints and that robust client and service indigo1 applications are expected to handle. To prevent a handler for the <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
         , catch this exception prior to handling <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -100,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.EndpointNotFoundException" />
+
+            
 
             
 
@@ -138,6 +150,8 @@
 
             
 
+            
+
              class with data that specifies the source and destination of the stream and the information required to serialize the exception.</para
           >
         </summary>
@@ -146,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -158,8 +176,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -196,13 +218,19 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -214,6 +242,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.EndpointNotFoundException" />
+
+            
 
             
 

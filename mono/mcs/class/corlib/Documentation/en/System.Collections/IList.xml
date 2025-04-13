@@ -40,8 +40,12 @@
 
         
 
+        
+
          is a descendant of the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          implementations fall into three categories: read-only, fixed-size, and variable-size. A read-only <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          does not allow the addition or removal of elements, but it allows the modification of existing elements. A variable-size <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
       <para
         >For the generic version of this interface, see <see
          cref="T:System.Collections.Generic.IList`1" />
+
+        
 
         
 
@@ -117,6 +131,8 @@
 
               
 
+              
+
                method to add another element to the
       current instance. The index into which that element is
       added is implementation-dependent. </block
@@ -134,6 +150,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -146,8 +164,12 @@
 
           
 
+          
+
           The object to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -188,6 +210,8 @@
 
             
 
+            
+
              and the capacity of a collection. Typically, the count is set to zero, and references to other objects from elements of the collection are also released. The capacity can be set to zero or a default value, or it can remain unchanged.</para
           >
         </remarks>
@@ -196,6 +220,8 @@
           <para
             >Removes all items from the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -236,8 +262,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -246,8 +276,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -256,8 +290,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -272,6 +310,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -283,8 +323,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -296,8 +340,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -337,8 +385,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -347,8 +399,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -357,8 +413,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -373,6 +433,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -384,6 +446,8 @@
 
             
 
+            
+
              if found in the list; otherwise, -1.</para
           >
         </returns>
@@ -392,8 +456,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -431,6 +499,8 @@
 
           
 
+          
+
            is not a valid index in the current instance (i.e. is greater than the number of elements in the current instance).</exception
         >
         <exception cref="T:System.NotSupportedException">
@@ -444,13 +514,19 @@
 
             
 
+            
+
              equals the number of items in the <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
             , then <paramref
              name="value" />
+
+            
 
             
 
@@ -466,6 +542,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -474,8 +552,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -486,8 +568,12 @@
 
           
 
+          
+
           The object to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -520,10 +606,14 @@
 
             
 
+            
+
              if the
    current instance has a fixed size; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -539,6 +629,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -572,10 +664,14 @@
 
             
 
+            
+
              if the
    current instance is read-only; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -591,6 +687,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -626,6 +724,8 @@
 
           
 
+          
+
            that specifies the zero-based index of the element to get or set.</param
         >
         <summary>
@@ -647,6 +747,8 @@
 
               
 
+              
+
               .
 </block
             >
@@ -654,6 +756,8 @@
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="index" />
+
+          
 
           
 
@@ -699,13 +803,19 @@
 
             
 
+            
+
              is not found in the <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
             , the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -720,6 +830,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -728,8 +840,12 @@
 
           
 
+          
+
           The object to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -766,6 +882,8 @@
 
           
 
+          
+
            is not a valid index in current instance.</exception
         >
         <exception cref="T:System.NotSupportedException">
@@ -783,11 +901,15 @@
 
             
 
+            
+
              item at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

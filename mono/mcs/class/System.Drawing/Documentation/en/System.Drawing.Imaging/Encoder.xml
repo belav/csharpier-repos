@@ -22,8 +22,12 @@
 
         
 
+        
+
          object. One of the fields of the <see
          cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class to retrieve an <see
          cref="T:System.Drawing.Imaging.Encoder" />
+
+        
 
         
 
@@ -128,6 +136,8 @@
       <para
         >An <see
          cref="T:System.Drawing.Imaging.Encoder" />
+
+        
 
         
 
@@ -238,11 +248,15 @@
 
             
 
+            
+
              class from the specified globally unique identifier (GUID). The GUID specifies an image encoder parameter category.</para
           >
         </summary>
         <param name="guid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,8 +287,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -283,8 +301,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -379,6 +401,8 @@
           <para
             >An <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -410,8 +434,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -420,8 +448,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -516,6 +548,8 @@
           <para
             >An <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -547,8 +581,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -557,8 +595,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -656,6 +698,8 @@
 
             
 
+            
+
              object that is initialized with the globally unique identifier for the compression parameter category.</para
           >
         </summary>
@@ -681,8 +725,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -691,8 +739,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -811,8 +863,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -821,8 +877,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -920,6 +980,8 @@
 
             
 
+            
+
              object that is initialized with the globally unique identifier for the luminance table parameter category.</para
           >
         </summary>
@@ -948,8 +1010,12 @@
 
             
 
+            
+
              category specifies the level of compression for an image. When used to construct an <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -961,8 +1027,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -971,8 +1041,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1070,6 +1144,8 @@
 
             
 
+            
+
              object that is initialized with the globally unique identifier for the quality parameter category.</para
           >
         </summary>
@@ -1098,8 +1174,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1108,8 +1188,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1204,6 +1288,8 @@
           <para
             >Represents an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1235,8 +1321,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1245,8 +1335,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1341,6 +1435,8 @@
           <para
             >Represents an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1372,8 +1468,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1382,8 +1482,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1478,6 +1582,8 @@
           <para
             >Represents an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1509,8 +1615,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1519,8 +1629,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1615,6 +1729,8 @@
           <para
             >Represents an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1646,8 +1762,12 @@
 
             
 
+            
+
              category specifies the level of compression for an image. When used to construct an <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1659,8 +1779,12 @@
 
             
 
+            
+
              object. One of the fields of the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1669,8 +1793,12 @@
 
             
 
+            
+
              class to retrieve an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1765,6 +1893,8 @@
           <para
             >Represents an <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 

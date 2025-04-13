@@ -42,6 +42,8 @@ public class Stack
 
     
 
+    
+
     shows a Stack class implemented as a linked list of Node instances. Node instances are created in the Push method and are garbage collected when no longer needed. A Node instance becomes eligible for garbage collection when it is no longer possible for any code to access it. For instance, when an item is removed from the Stack, the associated Node instance becomes eligible for garbage collection. </paragraph
   >
   <paragraph
@@ -59,6 +61,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -96,6 +100,8 @@ class Test
 
     
 
+    
+
     shows an unsafe block in a method named WriteLocations that fixes an array instance and uses pointer manipulation to iterate over the elements. The index, value, and location of each array element are written to the console. One possible example of output is: <code_example
     >
       <![CDATA[
@@ -106,6 +112,8 @@ arr[3] at 0x8E0363 is 4
 arr[4] at 0x8E0364 is 5  
 ]]>
     </code_example>
+
+    
 
     
 

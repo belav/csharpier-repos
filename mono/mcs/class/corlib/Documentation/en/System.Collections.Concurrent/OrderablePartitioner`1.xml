@@ -37,6 +37,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -77,6 +79,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -88,11 +92,15 @@
 
             
 
+            
+
              class with the specified constraints on the index keys.</para
           >
         </summary>
         <param name="keysOrderedInEachPartition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -103,10 +111,14 @@
 
           
 
+          
+
           Indicates whether elements in an earlier partition always come before elements in a later partition. If true, each element in partition 0 has a smaller order key than any element in partition 1, each element in partition 1 has a smaller order key than any element in partition 2, and so on.</param
         >
         <param name="keysNormalized">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +152,12 @@
 
             
 
+            
+
              interface. Calling <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -153,6 +169,8 @@
 
             
 
+            
+
              except that the returned set of partitions does not provide the keys for the elements.</para
           >
           <para
@@ -161,8 +179,12 @@
 
             
 
+            
+
              method is only supported if the <see
              cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+            
 
             
 
@@ -175,6 +197,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -217,8 +241,12 @@
 
             
 
+            
+
              interface. Calling <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -231,8 +259,12 @@
 
             
 
+            
+
              method is only supported if the <see
              cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+            
 
             
 
@@ -245,6 +277,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -295,6 +329,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -310,11 +346,15 @@
 
             
 
+            
+
              enumerators.</para
           >
         </returns>
         <param name="partitionCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,6 +390,8 @@
 
             
 
+            
+
              except that the returned set of partitions does not provide the keys for the elements.</para
           >
           <para
@@ -359,6 +401,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -377,11 +421,15 @@
 
             
 
+            
+
              enumerators.</para
           >
         </returns>
         <param name="partitionCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,6 +457,8 @@
 
             
 
+            
+
              returns true, all order keys are distinct integers in the range [0 .. numberOfElements-1]. If the property returns false, order keys must still be distinct, but only their relative order is considered, not their absolute values.</para
           >
           <para
@@ -418,6 +468,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -453,6 +505,8 @@
 
             
 
+            
+
              returns true, each element in partition 0 has a smaller order key than any element in partition 1, each element in partition 1 has a smaller order key than any element in partition 2, and so on.</para
           >
           <para
@@ -462,6 +516,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -498,6 +554,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 

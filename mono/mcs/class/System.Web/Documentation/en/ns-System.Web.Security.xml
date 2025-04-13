@@ -14,6 +14,8 @@
 
         
 
+        
+
          namespace contains classes that are used to implement ASP.NET security in Web server applications.</para
       >
     </summary>
@@ -25,8 +27,12 @@
 
         
 
+        
+
          class is used by ASP.NET applications to validate user credentials and manage user settings such as passwords and e-mail addresses. The <see
          cref="T:System.Web.Security.Roles" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.Security.Roles" />
+
+        
 
         
 
@@ -48,8 +58,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Security.SqlRoleProvider" />
+
+        
 
         
 
@@ -58,8 +72,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Security.AuthorizationStoreRoleProvider" />
+
+        
 
         
 
@@ -68,8 +86,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Security.RoleProvider" />
+
+        
 
         
 
@@ -85,8 +107,12 @@
 
         
 
+        
+
         . When an application using membership is accessed, ASP.NET creates an instance of the <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -95,8 +121,12 @@
 
         
 
+        
+
          class contain information about the user accessing the page. You can create custom implementations of the <see
          cref="T:System.Web.Security.MembershipUser" />
+
+        
 
         
 
@@ -112,8 +142,12 @@
 
         
 
+        
+
         . ASP.NET creates an instance of the <see
          cref="T:System.Web.Security.Roles" />
+
+        
 
         
 
@@ -125,8 +159,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.Security.Roles" />
+
+        
 
         
 
@@ -135,8 +173,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -145,13 +187,19 @@
 
         
 
+        
+
          controls work with the <see
          cref="T:System.Web.Security.Membership" />
 
         
 
+        
+
          class to simplify creating an authenticated Web application, and the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 

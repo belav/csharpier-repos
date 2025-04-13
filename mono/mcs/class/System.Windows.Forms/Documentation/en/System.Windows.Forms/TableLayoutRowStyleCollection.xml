@@ -24,8 +24,12 @@
 
         
 
+        
+
          class represents the collection of all the styles used to describe the rows in an associated <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >A collection that stores <see
          cref="T:System.Windows.Forms.RowStyle" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -86,8 +96,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -103,13 +117,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.RowStyle" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+          
 
           
 
@@ -142,6 +162,8 @@
 
             
 
+            
+
              contains a specific style.</para
           >
         </summary>
@@ -153,8 +175,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -166,13 +192,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.RowStyle" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+          
 
           
 
@@ -204,8 +236,12 @@
 
             
 
+            
+
              method begins searching at the first element of the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -220,6 +256,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -231,8 +269,12 @@
 
             
 
+            
+
              if found in the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -244,13 +286,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.RowStyle" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+          
 
           
 
@@ -283,8 +331,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -294,6 +346,8 @@
           <para
             >In collections of contiguous elements, such as the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -308,8 +362,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -321,8 +379,12 @@
 
           
 
+          
+
           The zero-based index at which the <see
            cref="T:System.Windows.Forms.RowStyle" />
+
+          
 
           
 
@@ -333,13 +395,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.RowStyle" />
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+          
 
           
 
@@ -393,8 +461,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -403,6 +475,8 @@
           <para
             >In collections of contiguous elements, such as the <see
              cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+            
 
             
 
@@ -417,6 +491,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -425,13 +501,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.RowStyle" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+          
 
           
 

@@ -41,8 +41,12 @@
 
         
 
+        
+
          exception is thrown when a caller does not have the permissions required to access a resource. The following example instantiates a <see
          cref="T:System.Security.PermissionSet" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          object to allow access to UI objects and the Clipboard and a <see
          cref="T:System.Security.Permissions.RegistryPermission" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          method means that these permissions will apply regardless of the permissions assigned to the caller. As a result, the attempt to create a registry key throws a <see
          cref="T:System.Security.SecurityException" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
 
         
 
+        
+
          uses the HRESULT COR_E_SECURITY, which has the value 0x8013150A.</para
       >
       <para
@@ -82,8 +96,12 @@
 
         
 
+        
+
          class, see a specific <see
          cref="Overload:System.Security.SecurityException.#ctor" />
+
+        
 
         
 
@@ -123,6 +141,8 @@
 
             
 
+            
+
              class.</para
           >
           <list type="table">
@@ -163,6 +183,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -201,6 +223,8 @@
 
             
 
+            
+
              class.</para
           >
           <list type="table">
@@ -244,11 +268,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,6 +311,8 @@
           <para
             >This constructor sets the following property values based on the information in the <paramref
              name="info" />
+
+            
 
             
 
@@ -349,6 +379,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -357,10 +389,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -401,8 +437,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -411,11 +451,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -462,11 +506,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +525,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -534,6 +586,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -551,8 +605,12 @@
 
                   
 
+                  
+
                    of the permission that failed, specified by <paramref
                    name="type" />
+
+                  
 
                   
 
@@ -570,6 +628,8 @@
 
             
 
+            
+
              class with a specified error message and the permission type that caused the exception to be thrown.</para
           >
         </summary>
@@ -578,10 +638,14 @@
 
           
 
+          
+
           The error message that explains the reason for the exception. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -637,6 +701,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -654,8 +720,12 @@
 
                   
 
+                  
+
                    of the permission that failed, specified by <paramref
                    name="type" />
+
+                  
 
                   
 
@@ -683,11 +753,15 @@
 
             
 
+            
+
              class with a specified error message, the permission type that caused the exception to be thrown, and the permission state.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,10 +772,14 @@
 
           
 
+          
+
           The type of the permission that caused the exception to be thrown. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,6 +838,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -774,6 +854,8 @@
                 <para
                   >The first permission in the permission set or permission set collection specified by <paramref
                    name="permThatFailed" />
+
+                  
 
                   
 
@@ -804,6 +886,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -831,6 +915,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -845,6 +931,8 @@
                 <para
                   >The permission, permission set, or permission set collection specified by <paramref
                    name="permitOnly" />
+
+                  
 
                   
 
@@ -875,8 +963,12 @@
 
                   
 
+                  
+
                    specified by <paramref
                    name="method" />
+
+                  
 
                   
 
@@ -893,6 +985,8 @@
               <description>
                 <para>
                   <see cref="F:System.Security.SecurityZone.NoZone" />
+
+                  
 
                   
 
@@ -920,11 +1014,15 @@
 
             
 
+            
+
              class for an exception caused by a Deny on the stack.  </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -935,10 +1033,14 @@
 
           
 
+          
+
           The denied permission or permission set.</param
         >
         <param name="permitOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -949,8 +1051,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -961,6 +1067,8 @@
 
           
 
+          
+
           The demanded permission, permission set, or permission set collection.</param
         >
         <param name="permThatFailed">
@@ -968,8 +1076,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -1032,6 +1144,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1046,6 +1160,8 @@
                 <para
                   >The first permission in the permission set or permission set collection specified by <paramref
                    name="permThatFailed" />
+
+                  
 
                   
 
@@ -1066,8 +1182,12 @@
 
                   
 
+                  
+
                    specified by <paramref
                    name="grant" />
+
+                  
 
                   
 
@@ -1088,6 +1208,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1105,8 +1227,12 @@
 
                   
 
+                  
+
                    specified by <paramref
                    name="refused" />
+
+                  
 
                   
 
@@ -1147,8 +1273,12 @@
 
                   
 
+                  
+
                    specified by <paramref
                    name="assemblyName" />
+
+                  
 
                   
 
@@ -1169,8 +1299,12 @@
 
                   
 
+                  
+
                    specified by <paramref
                    name="method" />
+
+                  
 
                   
 
@@ -1191,13 +1325,19 @@
 
                   
 
+                  
+
                    value  from the <see
                    cref="T:System.Security.Policy.Evidence" />
 
                   
 
+                  
+
                    specified by <paramref
                    name="evidence" />
+
+                  
 
                   
 
@@ -1218,8 +1358,12 @@
 
                   
 
+                  
+
                    specified by <paramref
                    name="evidence" />
+
+                  
 
                   
 
@@ -1237,11 +1381,15 @@
 
             
 
+            
+
              class for an exception caused by an insufficient grant set. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1252,8 +1400,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -1264,8 +1416,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -1276,8 +1432,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -1288,8 +1448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -1300,8 +1464,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -1312,6 +1480,8 @@
 
           
 
+          
+
           The demanded permission, permission set, or permission set collection.</param
         >
         <param name="permThatFailed">
@@ -1319,8 +1489,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -1331,8 +1505,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -1373,8 +1551,12 @@
 
             
 
+            
+
              property contains the security action that caused the security check failure. Many of the security actions can cause a security exception to be thrown. For example, a demand on a permission set checks that all callers on the call stack have the necessary permissions in the permission set. If any caller on the call stack lacks a required permission, the security check fails. Alternatively, a method in the call chain can modify the outcome of the stack walk by placing a stack walk modifier, such as <see
              cref="F:System.Security.Permissions.SecurityAction.Deny" />
+
+            
 
             
 
@@ -1383,8 +1565,12 @@
 
             
 
+            
+
             , on the stack to limit the allowed permissions. For example, a method on the call stack might deny all of its callers a set of permissions named PSET1, such that any demand for a permission that is part of PSET1 fails for those callers. The <see
              cref="P:System.Security.SecurityException.Action" />
+
+            
 
             
 
@@ -1395,13 +1581,19 @@
 
             
 
+            
+
              is an enumeration in the <see
              cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
+            
+
              namespace that provides the security action value for the <see
              cref="P:System.Security.SecurityException.Action" />
+
+            
 
             
 
@@ -1431,6 +1623,8 @@
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -1445,6 +1639,8 @@
                 <para
                   >A link demand against the assembly identified by the <see
                    cref="P:System.Security.SecurityException.FailedAssemblyInfo" />
+
+                  
 
                   
 
@@ -1465,6 +1661,8 @@
 
                   
 
+                  
+
                    property failed to meet an inheritance demand. </para
                 >
               </description>
@@ -1482,13 +1680,19 @@
 
                   
 
+                  
+
                    permission set. The method that placed the <see
                    cref="F:System.Security.Permissions.SecurityAction.PermitOnly" />
 
                   
 
+                  
+
                    on the call stack is identified by the <see
                    cref="P:System.Security.SecurityException.Method" />
+
+                  
 
                   
 
@@ -1509,8 +1713,12 @@
 
                   
 
+                  
+
                    on the call stack is identified by the <see
                    cref="P:System.Security.SecurityException.Method" />
+
+                  
 
                   
 
@@ -1582,8 +1790,12 @@
 
             
 
+            
+
              because it can contain a permission, a permission set, or a permission set collection. To test the run-time type of this property, you can use the <see
              cref="M:System.Object.GetType" />
+
+            
 
             
 
@@ -1594,10 +1806,14 @@
 
             
 
+            
+
              operator in C# or the <format
              type="text/html">
               <a href="33f65296-659a-4b9a-9a29-c2a91cff68b2">TypeOf</a>
             </format>
+
+            
 
             
 
@@ -1643,6 +1859,8 @@
 
             
 
+            
+
              object that identifies the assembly that caused the security check to fail.</para
           >
           <block subset="none" type="note">
@@ -1652,8 +1870,12 @@
 
               
 
+              
+
                or <see
                cref="F:System.Security.Permissions.SecurityAction.PermitOnly" />
+
+              
 
               
 
@@ -1662,8 +1884,12 @@
 
               
 
+              
+
                or <see
                cref="F:System.Security.Permissions.SecurityAction.PermitOnly" />
+
+              
 
               
 
@@ -1702,6 +1928,8 @@
           <para
             >If the demanded object is a permission set or permission set collection, the <see
              cref="P:System.Security.SecurityException.FirstPermissionThatFailed" />
+
+            
 
             
 
@@ -1745,6 +1973,8 @@
 
             
 
+            
+
              with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para
           >
         </remarks>
@@ -1756,8 +1986,12 @@
 
             
 
+            
+
              with information about the <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -1769,8 +2003,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1781,8 +2019,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1812,6 +2054,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1820,6 +2064,8 @@
           <para
             >Gets or sets the granted permission set of the assembly that caused the <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -1867,8 +2113,12 @@
 
                 
 
+                
+
                  or <see
                  cref="F:System.Security.Permissions.SecurityAction.Deny" />
+
+                
 
                 
 
@@ -1877,8 +2127,12 @@
 
                 
 
+                
+
                  or <see
                  cref="F:System.Security.Permissions.SecurityAction.Deny" />
+
+                
 
                 
 
@@ -1892,6 +2146,8 @@
           <para
             >The <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -1976,8 +2232,12 @@
 
             
 
+            
+
              property represents the permitted permission, permission set, or permission set collection contained in the stack frame that caused the security exception. For instance, when a security exception occurs because of a <see
              cref="M:System.Security.PermissionSet.Demand" />
+
+            
 
             
 
@@ -1986,8 +2246,12 @@
 
             
 
+            
+
              is contained in the <see
              cref="P:System.Security.SecurityException.Demanded" />
+
+            
 
             
 
@@ -1999,13 +2263,19 @@
 
             
 
+            
+
              because permissions, permission sets, or permission set collections can all be demanded and <see
              cref="T:System.Object" />
 
             
 
+            
+
              is their common base class.  To test the run-time type of this property, you can use the <see
              cref="M:System.Object.GetType" />
+
+            
 
             
 
@@ -2016,10 +2286,14 @@
 
             
 
+            
+
              operator in C# or the <format
              type="text/html">
               <a href="33f65296-659a-4b9a-9a29-c2a91cff68b2">TypeOf</a>
             </format>
+
+            
 
             
 
@@ -2054,6 +2328,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2062,6 +2338,8 @@
           <para
             >Gets or sets the refused permission set of the assembly that caused the <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -2095,8 +2373,12 @@
 
             
 
+            
+
              method returns the full description of the <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -2111,6 +2393,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2119,6 +2403,8 @@
           <para
             >A string representation of the current <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 

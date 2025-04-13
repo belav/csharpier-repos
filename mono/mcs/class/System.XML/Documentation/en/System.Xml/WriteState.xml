@@ -33,11 +33,15 @@
 
         
 
+        
+
         . While content is written, the write 
    state is set to reflect the type of
    content being written. When the
 <see
          cref="M:System.Xml.XmlWriter.Close" />
+
+        
 
         
 
@@ -47,14 +51,20 @@
 
         
 
+        
+
         . The <see
          cref="M:System.Xml.XmlWriter.WriteEndDocument" />
+
+        
 
         
 
          method resets the write state back to 
 <see
          langword="Start" />
+
+        
 
         
 
@@ -67,6 +77,8 @@
       <para
         >Specifies the state of the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -133,6 +145,8 @@
           <para
             >Indicates that the <see
              cref="M:System.Xml.XmlWriter.Close" />
+
+            
 
             
 
@@ -232,8 +246,12 @@
 
             
 
+            
+
              in an invalid state. You can call the <see
              cref="M:System.Xml.XmlWriter.Close" />
+
+            
 
             
 
@@ -242,8 +260,12 @@
 
             
 
+            
+
              in the <see
              cref="F:System.Xml.WriteState.Closed" />
+
+            
 
             
 
@@ -252,8 +274,12 @@
 
             
 
+            
+
              method calls results in an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 

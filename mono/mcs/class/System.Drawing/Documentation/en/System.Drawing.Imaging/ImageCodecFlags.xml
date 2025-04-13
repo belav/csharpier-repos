@@ -26,13 +26,19 @@
 
         
 
+        
+
          class is used by the <see
          cref="P:System.Drawing.Imaging.ImageCodecInfo.Flags" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+        
 
         
 

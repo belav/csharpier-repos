@@ -6,11 +6,15 @@
 
     
 
+    
+
      evaluates a given expression. The value computed by the expression, if any, is discarded. <grammar_production
     >
       <name>
         <non_terminal where="15.6">expression-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -24,6 +28,8 @@
       <name>
         <non_terminal where="15.6">statement-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -61,8 +67,12 @@
 
     
 
+    
+
      is reachable if that <non_terminal
      where="15.6">expression-statement</non_terminal>
+
+    
 
     
 

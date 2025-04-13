@@ -24,6 +24,8 @@
 
         
 
+        
+
          method.</para
       >
       <para
@@ -32,8 +34,12 @@
 
         
 
+        
+
          method. To access IPv6-specific properties, use the object returned by the <see
          cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -76,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
+
+            
 
             
 
@@ -196,6 +206,8 @@
 
             
 
+            
+
             , and must resolve the unqualified host name "www", the FQDN to query is "www.contoso.com".</para
           >
         </remarks>
@@ -263,6 +275,8 @@
 
             
 
+            
+
              interfaces.</para
           >
           <para
@@ -271,8 +285,12 @@
 
             
 
+            
+
              class documentation. Note that the object returned by the <see
              cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+
+            
 
             
 
@@ -288,6 +306,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+
+            
 
             
 
@@ -324,8 +344,12 @@
 
             
 
+            
+
              documentation. Note that the object returned by the <see
              cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+
+            
 
             
 
@@ -341,6 +365,8 @@
           <para
             >An <see
              cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
+
+            
 
             
 
@@ -375,6 +401,8 @@
 
             
 
+            
+
              value that indicates whether NetBt is configured to use DNS name resolution on this interface.</para
           >
         </summary>
@@ -403,6 +431,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

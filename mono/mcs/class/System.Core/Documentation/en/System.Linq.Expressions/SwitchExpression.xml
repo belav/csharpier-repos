@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -86,6 +88,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Linq.Expressions.SwitchCase" />
+
+            
 
             
 
@@ -171,6 +175,8 @@
 
             
 
+            
+
              when overriding this method.</para
           >
         </summary>
@@ -222,6 +228,8 @@
 
             
 
+            
+
              represents.</para
           >
         </summary>
@@ -266,8 +274,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" />
+
+          
 
           
 
@@ -278,8 +290,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.SwitchExpression.Cases" />
+
+          
 
           
 
@@ -290,8 +306,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.SwitchExpression.DefaultBody" />
+
+          
 
           
 

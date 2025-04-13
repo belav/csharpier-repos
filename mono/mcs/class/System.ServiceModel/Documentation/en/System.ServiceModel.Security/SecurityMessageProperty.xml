@@ -35,8 +35,12 @@
 
         
 
+        
+
         , which is attached to the message using a <see
          cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+
+        
 
         
 
@@ -67,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+
+            
 
             
 
@@ -101,8 +107,12 @@
 
             
 
+            
+
             , such as <see
              cref="P:System.ServiceModel.Security.SecurityMessageProperty.ServiceSecurityContext" />
+
+            
 
             
 
@@ -111,8 +121,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.ServiceModel.Security.SecurityMessageProperty.IncomingSupportingTokens" />
+
+            
 
             
 
@@ -128,6 +142,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.IMessageProperty" />
+
+            
 
             
 
@@ -184,8 +200,12 @@
 
             
 
+            
+
              is called on these authorization policies as part of the process that creates the <see
              cref="T:System.ServiceModel.ServiceSecurityContext" />
+
+            
 
             
 
@@ -229,6 +249,8 @@
           <para
             >An instance of <see
              cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+
+            
 
             
 
@@ -320,6 +342,8 @@
 
             
 
+            
+
              initiator token for this message.</para
           >
         </summary>
@@ -355,6 +379,8 @@
 
             
 
+            
+
              protection token for this message.</para
           >
         </summary>
@@ -387,6 +413,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.Security.SecurityTokenSpecification" />
+
+            
 
             
 
@@ -445,6 +473,8 @@
 
             
 
+            
+
              for this message.</para
           >
         </summary>
@@ -477,6 +507,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.Security.SecurityTokenSpecification" />
+
+            
 
             
 

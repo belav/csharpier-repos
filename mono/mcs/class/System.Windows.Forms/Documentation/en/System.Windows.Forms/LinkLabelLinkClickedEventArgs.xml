@@ -28,6 +28,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -110,6 +112,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+            
 
             
 

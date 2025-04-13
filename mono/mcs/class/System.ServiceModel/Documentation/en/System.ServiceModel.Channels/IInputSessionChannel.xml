@@ -29,13 +29,19 @@
 
         
 
+        
+
          interface indicates that an <see
          cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
+        
+
          implements <see
          cref="T:System.ServiceModel.Channels.IInputSession" />
+
+        
 
         
 
@@ -47,13 +53,19 @@
 
         
 
+        
+
          associated with an <see
          cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
 
         
 
+        
+
          can be retrieved through the <see
          cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+
+        
 
         
 

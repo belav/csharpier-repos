@@ -22,13 +22,19 @@
 
         
 
+        
+
          implementation. You can use the profile providers that are included with the .NET Framework (represented by the classes that derive from the <see
          cref="T:System.Web.Profile.ProfileProvider" />
 
         
 
+        
+
          abstract class), or you can implement your own provider by creating a new class that derives from <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          abstract class inherits from the <see
          cref="T:System.Configuration.SettingsProvider" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          abstract class. Classes that implement <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Configuration.Provider.ProviderBase" />
+
+        
 
         
 
@@ -78,6 +96,8 @@
          type="text/html">
           <a href="58de6e99-31a7-41b9-93ed-51b9b4a67e98">Implementing a Profile Provider</a>
         </format>
+
+        
 
         
 
@@ -104,13 +124,19 @@
 
             
 
+            
+
              abstract class. Initialization values for a <see
              cref="T:System.Web.Profile.ProfileProvider" />
 
             
 
+            
+
              implementation are passed to the <see
              cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -122,6 +148,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -159,8 +187,12 @@
 
             
 
+            
+
              method is used to remove unused profile data from the data source. Only data for the applicationName specified in the configuration file is removed. The <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -169,8 +201,12 @@
 
             
 
+            
+
              occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -190,8 +226,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -202,13 +242,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 
@@ -241,8 +287,12 @@
 
             
 
+            
+
              method deletes the profiles specified in the <paramref
              name="usernames" />
+
+            
 
             
 
@@ -259,6 +309,8 @@
         </returns>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,8 +343,12 @@
 
             
 
+            
+
              method deletes the profiles specified in the <paramref
              name="profiles" />
+
+            
 
             
 
@@ -304,13 +360,19 @@
 
             
 
+            
+
              property of each <see
              cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
+            
+
              object in the supplied <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -330,8 +392,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+          
 
           
 
@@ -504,8 +570,12 @@
 
             
 
+            
+
              method is used to retrieve a count of all unused user profiles. Only data for the applicationName specified in the configuration file is returned. The <paramref
              name="authenticationOption" />
+
+            
 
             
 
@@ -514,8 +584,12 @@
 
             
 
+            
+
              that occurs on or before the specified <paramref
              name="userInactiveSinceDate" />
+
+            
 
             
 
@@ -535,8 +609,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.Profile.ProfileAuthenticationOption" />
+
+          
 
           
 
@@ -547,13 +625,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
 
           
 
+          
+
            that identifies which user profiles are considered inactive. If the <see
            cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />
+
+          
 
           
 

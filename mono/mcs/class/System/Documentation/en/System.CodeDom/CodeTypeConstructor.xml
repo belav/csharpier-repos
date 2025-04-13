@@ -38,6 +38,8 @@
 
         
 
+        
+
          can be used to represent the static constructor for a class. A static constructor is called once when the type is loaded.</para
       >
       <block subset="none" type="note">
@@ -47,8 +49,12 @@
 
           
 
+          
+
            with the <see
            cref="F:System.CodeDom.Compiler.GeneratorSupport.StaticConstructors" />
+
+          
 
           
 
@@ -83,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeConstructor" />
+
+            
 
             
 

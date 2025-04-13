@@ -39,8 +39,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
         <para
           >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
            cref="M:System.Type.Equals(System.Object)" />
+
+          
 
           
 
@@ -91,6 +97,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -120,6 +128,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
@@ -128,13 +138,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.DictionaryBase.Count" />
+
+            
 
             
 
@@ -146,6 +162,8 @@
           <para
             >Clears the contents of the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -182,8 +200,12 @@
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -195,13 +217,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.DictionaryBase.Count" />
+
+            
 
             
 
@@ -216,8 +244,12 @@
 
             
 
+            
+
              elements to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -229,8 +261,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -239,13 +275,19 @@
 
           
 
+          
+
            objects copied from the <see
            cref="T:System.Collections.DictionaryBase" />
 
           
 
+          
+
            instance. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -256,8 +298,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -288,6 +334,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -324,8 +372,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -338,6 +390,8 @@
           <para
             >Gets the list of elements contained in the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -376,8 +430,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -386,8 +444,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -398,8 +460,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -408,13 +474,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -426,8 +498,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -436,8 +512,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -446,8 +526,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -456,8 +540,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -475,8 +563,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -491,8 +583,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -529,8 +625,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -543,6 +643,8 @@
           <para
             >Gets the list of elements contained in the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -577,8 +679,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -591,6 +697,8 @@
           <para
             >Performs additional custom processes before clearing the contents of the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -625,8 +733,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -639,6 +751,8 @@
           <para
             >Performs additional custom processes after clearing the contents of the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -678,6 +792,8 @@
 
             
 
+            
+
             . It is intended to be overridden by a derived class to perform additional action when the specified element is retrieved.</para
           >
           <para
@@ -686,8 +802,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -703,6 +823,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -714,11 +836,15 @@
 
             
 
+            
+
              containing the element with the specified key and value.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -729,8 +855,12 @@
 
           
 
+          
+
           The current value of the element associated with <paramref
            name="key" />
+
+          
 
           
 
@@ -770,8 +900,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -787,6 +921,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -795,10 +931,14 @@
 
           
 
+          
+
           The key of the element to insert. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -838,8 +978,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -855,6 +999,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -863,10 +1009,14 @@
 
           
 
+          
+
           The key of the element to insert. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -906,8 +1056,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -923,6 +1077,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -931,10 +1087,14 @@
 
           
 
+          
+
           The key of the element to remove. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -974,8 +1134,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -991,6 +1155,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -999,10 +1165,14 @@
 
           
 
+          
+
           The key of the element to remove. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1043,8 +1213,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -1060,11 +1234,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,8 +1253,12 @@
 
           
 
+          
+
           The old value of the element associated with <paramref
            name="key" />
+
+          
 
           
 
@@ -1087,8 +1269,12 @@
 
           
 
+          
+
           The new value of the element associated with <paramref
            name="key" />
+
+          
 
           
 
@@ -1129,8 +1315,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -1146,11 +1336,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1161,8 +1355,12 @@
 
           
 
+          
+
           The old value of the element associated with <paramref
            name="key" />
+
+          
 
           
 
@@ -1173,8 +1371,12 @@
 
           
 
+          
+
           The new value of the element associated with <paramref
            name="key" />
+
+          
 
           
 
@@ -1214,8 +1416,12 @@
 
             
 
+            
+
              property, but not on the instance returned by the <see
              cref="P:System.Collections.DictionaryBase.InnerHashtable" />
+
+            
 
             
 
@@ -1232,10 +1438,14 @@
 
           
 
+          
+
           The key of the element to validate. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1271,13 +1481,19 @@
 
             
 
+            
+
              object is not synchronized. Derived classes can provide a synchronized version of the <see
              cref="T:System.Collections.DictionaryBase" />
 
             
 
+            
+
              class using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1290,6 +1506,8 @@
           <para
             >Gets a value indicating whether access to a <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1326,8 +1544,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1336,8 +1558,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1346,8 +1572,12 @@
 
             
 
+            
+
              object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1360,6 +1590,8 @@
           <para
             >Gets an object that can be used to synchronize access to a <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1396,8 +1628,12 @@
 
             
 
+            
+
              objects are better than <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -1409,8 +1645,12 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1419,13 +1659,19 @@
 
             
 
+            
+
             , setting the <see
              cref="P:System.Collections.IDictionary.Item(System.Object)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1441,6 +1687,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1449,10 +1697,14 @@
 
           
 
+          
+
           The key of the element to add.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1488,8 +1740,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1498,8 +1754,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -1508,13 +1768,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
+            
+
              methods of the <paramref
              name="key" />
+
+            
 
             
 
@@ -1529,6 +1795,8 @@
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -1540,6 +1808,8 @@
 
             
 
+            
+
              contains an element with the specified key; otherwise, false.</para
           >
         </returns>
@@ -1548,8 +1818,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.DictionaryBase" />
+
+          
 
           
 
@@ -1591,6 +1865,8 @@
 
             
 
+            
+
              object has a fixed size.</para
           >
         </summary>
@@ -1627,6 +1903,8 @@
           <para
             >Gets a value indicating whether a <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1691,13 +1969,19 @@
 
             
 
+            
+
              object is unspecified, but is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Collections.IDictionary.Values" />
+
+            
 
             
 
@@ -1709,8 +1993,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1719,13 +2007,19 @@
 
             
 
+            
+
              object. Therefore, changes to the <see
              cref="T:System.Collections.DictionaryBase" />
 
             
 
+            
+
              continue to be reflected in the returned <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1741,8 +2035,12 @@
 
             
 
+            
+
              object containing the keys in the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1778,8 +2076,12 @@
 
             
 
+            
+
              does not contain an element with the specified key, the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1795,11 +2097,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1835,13 +2141,19 @@
 
             
 
+            
+
              object is unspecified, but is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Collections.IDictionary.Keys" />
+
+            
 
             
 
@@ -1853,8 +2165,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1863,13 +2179,19 @@
 
             
 
+            
+
              object. Therefore, changes to the <see
              cref="T:System.Collections.DictionaryBase" />
 
             
 
+            
+
              continue to be reflected in the returned <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1885,8 +2207,12 @@
 
             
 
+            
+
              object containing the values in the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -1925,8 +2251,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1935,8 +2265,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1947,8 +2281,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1957,13 +2295,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1975,8 +2319,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1985,8 +2333,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1995,8 +2347,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2005,8 +2361,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2018,8 +2378,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -2028,8 +2392,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2038,8 +2406,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2056,8 +2428,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 
@@ -2072,8 +2448,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.DictionaryBase" />
+
+            
 
             
 

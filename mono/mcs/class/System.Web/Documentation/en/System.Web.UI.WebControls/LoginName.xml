@@ -63,13 +63,19 @@
 
         
 
+        
+
          control displays the name contained in the <see
          cref="P:System.Web.UI.Page.User" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -84,10 +90,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to login controls and membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -100,8 +110,12 @@
 
         
 
+        
+
          control, set the <see
          cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
+
+        
 
         
 
@@ -114,8 +128,12 @@
 
           
 
+          
+
            control cannot be used outside the &lt;form&gt; tag on a Web page. Specifically, the <see
            cref="T:System.Web.UI.WebControls.LoginName" />
+
+          
 
           
 
@@ -138,10 +156,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -163,6 +185,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -172,9 +196,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -184,9 +212,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -196,10 +228,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -211,9 +247,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -235,6 +275,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -263,6 +305,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -271,6 +315,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.UI.WebControls.LoginName" />
+
+            
 
             
 
@@ -304,6 +350,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
+
+            
 
             
 
@@ -341,6 +389,8 @@
 
                   
 
+                  
+
                    property to false. </para
                 >
               </description>
@@ -364,6 +414,8 @@
 
                   
 
+                  
+
                    property is set to a string, the string is displayed when the user is logged in. Because the string does not contain "{0}", the user's name is not displayed. When the user is not logged in, nothing is displayed. </para
                 >
               </description>
@@ -375,12 +427,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -421,8 +477,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -434,8 +494,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -467,8 +531,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -505,8 +573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -538,8 +610,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

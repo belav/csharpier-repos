@@ -45,6 +45,8 @@
 
         
 
+        
+
          is derived.</para
       >
     </summary>
@@ -79,8 +81,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -94,8 +100,12 @@
 
             
 
+            
+
              is used to set the <see
              cref="P:System.Security.Permissions.SecurityAttribute.Action" />
+
+            
 
             
 
@@ -110,8 +120,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -123,8 +137,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -199,6 +217,8 @@
 
             
 
+            
+
              in an assembly's metadata.</para
           >
         </summary>
@@ -233,10 +253,14 @@
 
             
 
+            
+
              if full access
    to the protected resource
    is declared or is being set; otherwise, <see
              langword="false" />
+
+            
 
             
 

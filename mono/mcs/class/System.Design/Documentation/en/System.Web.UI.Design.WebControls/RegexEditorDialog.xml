@@ -20,6 +20,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -128,8 +130,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -138,8 +144,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.Web.UI.Design.WebControls.RegexEditorDialog.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -148,13 +158,19 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -166,8 +182,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
+
+            
 
             
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
@@ -190,8 +212,12 @@
 
           
 
+          
+
           A value indicating to all resources held by any managed objects that this <see
            cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
+
+          
 
           
 
@@ -251,6 +277,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -258,8 +286,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 

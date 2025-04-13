@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -72,6 +74,8 @@
           <para
             >The <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -138,6 +142,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

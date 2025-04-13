@@ -7,6 +7,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3">input-section</non_terminal>
@@ -17,6 +19,8 @@
       <name>
         <non_terminal where="9.3">input-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -33,6 +37,8 @@
       <name>
         <non_terminal where="9.3">input-section-part</non_terminal>
       </name>
+
+      
 
       
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -70,6 +80,8 @@
       <name>
         <non_terminal where="9.3">input-element</non_terminal>
       </name>
+
+      
 
       
 
@@ -91,8 +103,12 @@
 
     
 
+    
+
     ), white space (<hyperlink
     >9.3.3</hyperlink>
+
+    
 
     
 
@@ -101,8 +117,12 @@
 
     
 
+    
+
     ), tokens (<hyperlink
     >9.4</hyperlink>
+
+    
 
     
 
@@ -111,8 +131,12 @@
 
     
 
+    
+
     ). Of these basic elements, only tokens are significant in the syntactic grammar of a C# program (<hyperlink
     >9.2.2</hyperlink>
+
+    
 
     
 

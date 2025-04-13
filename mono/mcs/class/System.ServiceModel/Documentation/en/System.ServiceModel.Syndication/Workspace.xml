@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              class and initializes it with the specified title and collection.</para
           >
         </summary>
@@ -88,10 +92,14 @@
 
           
 
+          
+
           The title of the workspace.</param
         >
         <param name="collections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +137,8 @@
 
             
 
+            
+
              class and initializes it with the specified title and collection.</para
           >
         </summary>
@@ -137,10 +147,14 @@
 
           
 
+          
+
           The workspace title.</param
         >
         <param name="collections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +208,8 @@
           <para
             >Gets and sets the base URI for the <see
              cref="T:System.ServiceModel.Syndication.Workspace" />
+
+            
 
             
 
@@ -254,6 +270,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -263,6 +281,8 @@
             >
 Returns <see
              cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+            
 
             
 
@@ -299,6 +319,8 @@ Returns <see
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -328,6 +350,8 @@ Returns <see
           <para
             >The title of the <see
              cref="T:System.ServiceModel.Syndication.Workspace" />
+
+            
 
             
 
@@ -373,12 +397,16 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -389,6 +417,8 @@ Returns <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
@@ -396,10 +426,14 @@ Returns <see
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,6 +476,8 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
@@ -451,8 +487,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -460,6 +500,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,6 +539,8 @@ Returns <see
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -505,8 +549,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -514,6 +562,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -551,6 +601,8 @@ Returns <see
 
             
 
+            
+
              using the specified syndication version.</para
           >
         </summary>
@@ -559,8 +611,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -568,6 +624,8 @@ Returns <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

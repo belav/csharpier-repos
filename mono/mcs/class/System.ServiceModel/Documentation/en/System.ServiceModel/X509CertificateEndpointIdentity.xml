@@ -56,6 +56,8 @@
 
             
 
+            
+
              is added to a collection of certificates.</para
           >
         </remarks>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of a <see
              cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
+
+            
 
             
 
@@ -104,8 +108,12 @@
 
             
 
+            
+
              and <paramref
              name="supportingCertificates" />
+
+            
 
             
 
@@ -120,6 +128,8 @@
 
             
 
+            
+
              class using the primary (leaf) certificate and certificates that are part of its trust chain.</para
           >
         </summary>
@@ -128,10 +138,14 @@
 
           
 
+          
+
           The primary certificate representing the service's identity.</param
         >
         <param name="supportingCertificates">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,13 +179,19 @@
 
             
 
+            
+
              used to create the <see
              cref="T:System.ServiceModel.X509CertificateEndpointIdentity" />
 
             
 
+            
+
              as well as any <paramref
              name="supportingCertificates" />
+
+            
 
             
 

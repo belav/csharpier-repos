@@ -18,8 +18,12 @@
 
         
 
+        
+
          describes a coordinate pair on the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          property indicates which part of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -41,6 +49,8 @@
       <para
         >Specifies a location in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
           <para
             >A cell in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -89,6 +101,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -110,6 +124,8 @@
           <para
             >The horizontal scroll bar of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -137,6 +153,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -158,6 +176,8 @@
           <para
             >A row header in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -185,6 +205,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -206,6 +228,8 @@
           <para
             >The vertical scroll bar of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 

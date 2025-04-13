@@ -25,11 +25,15 @@
 
         
 
+        
+
          objects.</para
       >
       <para
         >This class is derived from <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >An abstract class that the indigo1 derives from <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -123,6 +129,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -131,6 +139,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -145,6 +155,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -153,10 +165,14 @@
 
           
 
+          
+
           The buffer from which to read.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,6 +209,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -201,6 +219,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -215,6 +235,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -223,10 +245,14 @@
 
           
 
+          
+
           The stream from which to read.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,6 +290,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -272,6 +300,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -286,11 +316,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,10 +336,14 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,6 +382,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -352,6 +392,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -366,11 +408,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,8 +427,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -393,8 +443,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -402,6 +456,8 @@
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -440,6 +496,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -448,6 +506,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -462,11 +522,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,10 +542,14 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -490,6 +558,8 @@
         <param name="session">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Xml.XmlBinaryReaderSession" />
+
+          
 
           
 
@@ -529,6 +599,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -537,6 +609,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -551,11 +625,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,8 +644,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -578,8 +660,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -591,10 +677,14 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,6 +724,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -642,6 +734,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -656,11 +750,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -672,11 +770,15 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -688,10 +790,14 @@
 
           
 
+          
+
            to use.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,6 +838,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -740,6 +848,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -754,11 +864,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,8 +883,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -781,8 +899,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -793,8 +915,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -805,8 +931,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -817,8 +947,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlBinaryReaderSession" />
+
+          
 
           
 
@@ -860,6 +994,8 @@
 
             
 
+            
+
              properties are set to default values or null.</para
           >
         </remarks>
@@ -868,6 +1004,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -882,11 +1020,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -897,8 +1039,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -909,8 +1055,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -921,8 +1071,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -933,8 +1087,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -945,8 +1103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlBinaryReaderSession" />
+
+          
 
           
 
@@ -954,6 +1116,8 @@
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -990,8 +1154,12 @@
 
             
 
+            
+
              from an existing <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1006,6 +1174,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1014,8 +1184,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1053,8 +1227,12 @@
 
             
 
+            
+
             , an instance of <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1069,6 +1247,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1080,11 +1260,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1095,10 +1279,14 @@
 
           
 
+          
+
           The possible character encoding of the stream.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1136,8 +1324,12 @@
 
             
 
+            
+
             , an array of instances of <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1152,6 +1344,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1163,11 +1357,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1178,10 +1376,14 @@
 
           
 
+          
+
           The possible character encodings of the stream.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1220,13 +1422,19 @@
 
             
 
+            
+
             , an array of instances of <see
              cref="T:System.Text.Encoding" />
 
             
 
+            
+
             . The message is of the specified MIME type. If <paramref
              name="contentType" />
+
+            
 
             
 
@@ -1241,6 +1449,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1252,11 +1462,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1267,6 +1481,8 @@
 
           
 
+          
+
           The possible character encodings of the stream.</param
         >
         <param name="contentType">
@@ -1274,10 +1490,14 @@
 
           
 
+          
+
           The Content-Type MIME type of the message.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1317,8 +1537,12 @@
 
             
 
+            
+
             , an instance of <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1333,6 +1557,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1344,11 +1570,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1359,8 +1589,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1371,8 +1605,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1383,10 +1621,14 @@
 
           
 
+          
+
           The possible character encoding of the input.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1426,8 +1668,12 @@
 
             
 
+            
+
             , an array of instances of <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1442,6 +1688,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1453,11 +1701,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1468,8 +1720,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1480,8 +1736,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1492,10 +1752,14 @@
 
           
 
+          
+
           The possible character encodings of the input.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1536,13 +1800,19 @@
 
             
 
+            
+
             , an array of instances of <see
              cref="T:System.Text.Encoding" />
 
             
 
+            
+
             . The message is of the specified MIME type. If <paramref
              name="contentType" />
+
+            
 
             
 
@@ -1557,6 +1827,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1568,11 +1840,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1583,8 +1859,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1595,8 +1875,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1607,6 +1891,8 @@
 
           
 
+          
+
           The possible character encodings of the input.</param
         >
         <param name="contentType">
@@ -1614,10 +1900,14 @@
 
           
 
+          
+
           The Content-Type MIME type of the message.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1658,13 +1948,19 @@
 
             
 
+            
+
             , an array of instances of <see
              cref="T:System.Text.Encoding" />
 
             
 
+            
+
             . The message is of the specified MIME type. If <paramref
              name="contentType" />
+
+            
 
             
 
@@ -1679,6 +1975,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1690,11 +1988,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1705,10 +2007,14 @@
 
           
 
+          
+
           The possible character encodings of the stream.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1719,10 +2025,14 @@
 
           
 
+          
+
           The MIME type of the message.</param
         >
         <param name="maxBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1731,10 +2041,14 @@
 
           
 
+          
+
            to apply to the reader.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1777,13 +2091,19 @@
 
             
 
+            
+
             , an array of instances of <see
              cref="T:System.Text.Encoding" />
 
             
 
+            
+
             . The message is of the specified MIME type. If <paramref
              name="contentType" />
+
+            
 
             
 
@@ -1798,6 +2118,8 @@
 
             
 
+            
+
              that reads XML in the MTOM format.</para
           >
         </summary>
@@ -1809,11 +2131,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1824,8 +2150,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1836,8 +2166,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1848,10 +2182,14 @@
 
           
 
+          
+
           The possible character encodings of the input.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1862,8 +2200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -1874,10 +2216,14 @@
 
           
 
+          
+
           The maximum allowed size of the buffer.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1918,6 +2264,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1929,6 +2277,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1937,10 +2287,14 @@
 
           
 
+          
+
           The buffer from which to read.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1981,6 +2335,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1992,6 +2348,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2000,10 +2358,14 @@
 
           
 
+          
+
           The stream from which to read.</param
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2046,6 +2408,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2057,11 +2421,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2072,8 +2440,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2084,8 +2456,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2093,6 +2469,8 @@
         >
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2135,6 +2513,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2146,11 +2526,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2161,8 +2545,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -2173,8 +2561,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -2182,6 +2574,8 @@
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2226,6 +2620,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2237,11 +2633,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2252,8 +2652,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2264,8 +2668,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2276,8 +2684,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -2288,8 +2700,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -2297,6 +2713,8 @@
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2361,8 +2779,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2373,8 +2795,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2410,8 +2836,12 @@
 
             
 
+            
+
              is an array of strings, and <paramref
              name="namespaceUri" />
+
+            
 
             
 
@@ -2431,10 +2861,14 @@
 
           
 
+          
+
           The string array of local names to be searched.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2470,8 +2904,12 @@
 
             
 
+            
+
              is an array of <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -2480,8 +2918,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -2501,8 +2943,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2510,6 +2956,8 @@
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2566,6 +3014,8 @@
 
             
 
+            
+
             , is the local name of the current node.</para
           >
         </summary>
@@ -2577,11 +3027,15 @@
 
             
 
+            
+
              matches local name of the current node; otherwise false.</para
           >
         </returns>
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2618,6 +3072,8 @@
 
             
 
+            
+
             , is the local name of the current node.</para
           >
         </summary>
@@ -2629,6 +3085,8 @@
 
             
 
+            
+
              matches local name of the current node; otherwise false.</para
           >
         </returns>
@@ -2637,8 +3095,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2675,6 +3137,8 @@
 
             
 
+            
+
             , is the namespace of the current node.</para
           >
         </summary>
@@ -2686,11 +3150,15 @@
 
             
 
+            
+
              matches namespace of the current node; otherwise false.</para
           >
         </returns>
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2727,6 +3195,8 @@
 
             
 
+            
+
             , is the namespace of the current node.</para
           >
         </summary>
@@ -2738,11 +3208,15 @@
 
             
 
+            
+
              matches namespace of the current node; otherwise false.</para
           >
         </returns>
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2807,8 +3281,12 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
+
+            
 
             
 
@@ -2820,8 +3298,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2832,8 +3314,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2874,8 +3360,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Xml.XmlNodetype.Whitespace" />
+
+            
 
             
 
@@ -2884,8 +3374,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Xml.XmlNodetype.CDATA" />
+
+            
 
             
 
@@ -2894,11 +3388,15 @@
 
             
 
+            
+
             ; otherwise false.</para
           >
         </returns>
         <param name="nodeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2957,6 +3455,8 @@
 
             
 
+            
+
              property of the element matches the given argument.</para
           >
         </summary>
@@ -2965,8 +3465,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Xml.XmlReader.Name" />
+
+          
 
           
 
@@ -3004,8 +3508,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -3017,10 +3525,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3058,8 +3570,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -3071,10 +3587,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3141,6 +3661,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3153,10 +3675,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3167,10 +3693,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3212,6 +3742,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3224,10 +3756,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3238,10 +3774,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3283,6 +3823,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3295,10 +3837,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3309,10 +3855,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3354,6 +3904,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3366,10 +3918,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3380,10 +3936,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3425,6 +3985,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3437,10 +3999,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3451,10 +4017,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3501,10 +4071,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3515,10 +4089,14 @@
 
           
 
+          
+
           The array into which the integers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3565,10 +4143,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3579,10 +4161,14 @@
 
           
 
+          
+
           The array into which the integers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3629,10 +4215,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3643,10 +4233,14 @@
 
           
 
+          
+
           The array into which the integers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3693,10 +4287,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3707,10 +4305,14 @@
 
           
 
+          
+
           The array into which the float numbers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3752,6 +4354,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3764,10 +4368,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3778,10 +4386,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3823,6 +4435,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3835,10 +4449,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3849,10 +4467,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3894,6 +4516,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3906,10 +4530,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3920,10 +4548,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3965,6 +4597,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -3977,10 +4611,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3991,10 +4629,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4036,6 +4678,8 @@
 
             
 
+            
+
              nodes type into a typed array.</para
           >
         </summary>
@@ -4048,10 +4692,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4062,10 +4710,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4107,6 +4759,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -4119,10 +4773,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4133,10 +4791,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4183,10 +4845,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4197,10 +4863,14 @@
 
           
 
+          
+
           The array into which the integers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4247,10 +4917,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4261,10 +4935,14 @@
 
           
 
+          
+
           The array into which the integers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4311,10 +4989,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4325,10 +5007,14 @@
 
           
 
+          
+
           The array into which the integers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4375,10 +5061,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4389,10 +5079,14 @@
 
           
 
+          
+
           The array into which the float numbers are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4434,6 +5128,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -4446,10 +5142,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4460,10 +5160,14 @@
 
           
 
+          
+
           The array into which the nodes are put.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4504,6 +5208,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -4515,8 +5221,12 @@
 
             
 
+            
+
              array of the <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -4528,10 +5238,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4572,6 +5286,8 @@
 
             
 
+            
+
              nodes into a typed array.</para
           >
         </summary>
@@ -4583,8 +5299,12 @@
 
             
 
+            
+
              array of the <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -4596,10 +5316,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4643,8 +5367,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4744,6 +5472,8 @@
 
           
 
+          
+
           The maximum array length.</param
         >
       </Docs>
@@ -4784,6 +5514,8 @@
 
           
 
+          
+
           The array into which the characters are put.</param
         >
         <param name="offset">
@@ -4791,10 +5523,14 @@
 
           
 
+          
+
           The starting index in the array.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4973,6 +5709,8 @@
 
           
 
+          
+
           The maximum string length.</param
         >
       </Docs>
@@ -5057,6 +5795,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5064,6 +5804,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -5134,6 +5876,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -5145,6 +5889,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -5153,10 +5899,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5194,6 +5944,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -5205,6 +5957,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -5213,10 +5967,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5257,6 +6015,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -5268,6 +6028,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -5276,10 +6038,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5320,6 +6086,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -5331,6 +6099,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -5339,10 +6109,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5383,6 +6157,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -5394,6 +6170,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -5402,10 +6180,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5446,6 +6228,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -5457,6 +6241,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -5465,10 +6251,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5558,6 +6348,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5566,6 +6358,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -5601,6 +6395,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5609,6 +6405,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -5644,6 +6442,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5652,6 +6452,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5687,6 +6489,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5695,6 +6499,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -5727,6 +6533,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -5735,6 +6543,8 @@
           <para
             >The node's content represented as a floating point number (<see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -5767,6 +6577,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5775,6 +6587,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -5807,6 +6621,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -5815,6 +6631,8 @@
           <para
             >The node's content represented as an integer (<see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -5847,6 +6665,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -5855,6 +6675,8 @@
           <para
             >The node's content represented as a long integer (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -5893,6 +6715,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5901,6 +6725,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -5936,6 +6762,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5944,6 +6772,8 @@
           <para
             >The node's content represented as a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -6032,11 +6862,15 @@
 
             
 
+            
+
              and advances the reader to the next node.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6074,8 +6908,12 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
+
+            
 
             
 
@@ -6087,10 +6925,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6128,8 +6970,12 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
+
+            
 
             
 
@@ -6141,10 +6987,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6185,13 +7035,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -6206,6 +7062,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -6214,10 +7072,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6258,13 +7120,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -6279,6 +7147,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -6287,10 +7157,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6331,13 +7205,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of short integers (<see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -6352,6 +7232,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6360,10 +7242,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6404,13 +7290,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of short integers (<see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -6425,6 +7317,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6433,10 +7327,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6477,13 +7375,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of integers (<see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6498,6 +7402,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6506,10 +7412,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6550,13 +7460,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of integers (<see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6571,6 +7487,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6579,10 +7497,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6623,13 +7545,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of long integers (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -6644,6 +7572,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6652,10 +7582,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6696,13 +7630,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of long integers (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -6717,6 +7657,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6725,10 +7667,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6769,13 +7715,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of float numbers (<see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -6790,6 +7742,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6798,10 +7752,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6842,13 +7800,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into an array of float numbers (<see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -6863,6 +7827,8 @@
 
             
 
+            
+
             ).</para
           >
         </returns>
@@ -6871,10 +7837,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6912,8 +7882,12 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
+
+            
 
             
 
@@ -6925,10 +7899,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6996,6 +7974,8 @@
 
           
 
+          
+
           Maximum allowed string length.</param
         >
       </Docs>
@@ -7033,13 +8013,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -7054,6 +8040,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -7062,10 +8050,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7106,13 +8098,19 @@
 
             
 
+            
+
              and <paramref
              name="namespaceUri" />
 
             
 
+            
+
              into a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -7127,6 +8125,8 @@
 
             
 
+            
+
              array.</para
           >
         </returns>
@@ -7135,10 +8135,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7212,8 +8216,12 @@
 
             
 
+            
+
              defines whether comments are to be included in the canonical input and <paramref
              name="inclusivePrefixes" />
+
+            
 
             
 
@@ -7229,6 +8237,8 @@
 
           
 
+          
+
           The stream to read from.</param
         >
         <param name="includeComments">
@@ -7236,10 +8246,14 @@
 
           
 
+          
+
           Determines whether comments are included.</param
         >
         <param name="inclusivePrefixes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

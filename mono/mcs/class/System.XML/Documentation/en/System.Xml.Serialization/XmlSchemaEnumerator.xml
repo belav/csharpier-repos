@@ -31,13 +31,19 @@
 
         
 
+        
+
          to perform for-each iterations over a collection of <see
          cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
+        
+
          objects contained by an instance of the <see
          cref="T:System.Xml.Serialization.XmlSchemas" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
       <para
         >Enables iteration over a collection of <see
          cref="T:System.Xml.Schema.XmlSchema" />
+
+        
 
         
 
@@ -85,6 +93,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -93,8 +103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -149,6 +163,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Xml.Serialization.XmlSchemaEnumerator" />
+
+            
 
             
 
@@ -214,6 +230,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -242,6 +260,8 @@
           <para
             >Sets the enumerator to its initial position, which is before the first element in the collection of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 

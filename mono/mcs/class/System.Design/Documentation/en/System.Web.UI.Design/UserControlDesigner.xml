@@ -22,13 +22,19 @@
 
         
 
+        
+
         . To enhance the design-time experience for a custom control, derive your control from <see
          cref="T:System.Web.UI.WebControls.CompositeControl" />
 
         
 
+        
+
          and your designer from <see
          cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.UserControlDesigner" />
+
+            
 
             
 
@@ -86,13 +94,19 @@
 
             
 
+            
+
              objects in the collection: <ui
             >Edit User Control</ui>
 
             
 
+            
+
              and <ui
             >Refresh</ui>
+
+            
 
             
 
@@ -164,6 +178,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -193,6 +209,8 @@
           <para
             >This member overrides <see
              cref="P:System.Web.UI.Design.HtmlControlDesigner.ShouldCodeSerialize" />
+
+            
 
             
 

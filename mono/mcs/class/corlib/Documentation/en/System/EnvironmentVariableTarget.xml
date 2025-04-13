@@ -28,8 +28,12 @@
 
         
 
+        
+
          enumeration is used by certain overloads of the <see
          cref="Overload:System.Environment.SetEnvironmentVariable" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Environment.GetEnvironmentVariables" />
+
+        
 
         
 

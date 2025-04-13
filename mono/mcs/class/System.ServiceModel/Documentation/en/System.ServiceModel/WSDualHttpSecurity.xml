@@ -26,6 +26,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -61,6 +63,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -93,6 +97,8 @@
           <para
             >Gets or sets the security mode for the parent <see
              cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+            
 
             
 

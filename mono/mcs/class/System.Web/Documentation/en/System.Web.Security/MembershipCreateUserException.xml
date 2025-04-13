@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is thrown when a <see
          cref="Overload:System.Web.Security.Membership.CreateUser" />
+
+        
 
         
 
@@ -38,10 +42,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -51,6 +59,8 @@
       <para
         >The <see
          cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
             
 
+            
+
              class is thrown by the <see
              cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -90,6 +104,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 
@@ -120,8 +136,12 @@
 
             
 
+            
+
              class is thrown by the <see
              cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -133,8 +153,12 @@
 
             
 
+            
+
              parameter to set the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -149,8 +173,12 @@
 
             
 
+            
+
              class and sets the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -159,11 +187,15 @@
 
             
 
+            
+
              parameter value</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,8 +225,12 @@
 
             
 
+            
+
              class is thrown by the <see
              cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -206,8 +242,12 @@
 
             
 
+            
+
              parameter enables you to indicate why the <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 
@@ -216,8 +256,12 @@
 
             
 
+            
+
              parameter value is exposed by the <see
              cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+
+            
 
             
 
@@ -232,8 +276,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
+
+            
 
             
 
@@ -245,8 +293,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Security.MembershipCreateStatus" />
+
+          
 
           
 
@@ -279,6 +331,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -290,6 +344,8 @@
 
             
 
+            
+
              class with the supplied serialization information and context.</para
           >
         </summary>
@@ -298,8 +354,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -310,8 +370,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -342,8 +406,12 @@
 
             
 
+            
+
              class is thrown by the <see
              cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -352,6 +420,8 @@
           <para
             >You can use this overload of the <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 
@@ -366,8 +436,12 @@
 
             
 
+            
+
              class and sets the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -376,13 +450,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Exception.InnerException" />
 
             
 
+            
+
              property to the supplied <paramref
              name="innerException" />
+
+            
 
             
 
@@ -394,6 +474,8 @@
 
           
 
+          
+
           A description of the reason for the exception.</param
         >
         <param name="innerException">
@@ -401,8 +483,12 @@
 
           
 
+          
+
           The exception that caused the <see
            cref="T:System.Web.Security.MembershipCreateUserException" />
+
+          
 
           
 
@@ -437,6 +523,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -448,6 +536,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -456,8 +546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -488,8 +582,12 @@
 
             
 
+            
+
              property enables you to determine why the <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 

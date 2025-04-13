@@ -22,8 +22,12 @@
 
         
 
+        
+
          interface on an operation behavior (a <see
          cref="T:System.ServiceModel.Description.IOperationBehavior" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          inserts a custom operation behavior into the <see
          cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+        
 
         
 
@@ -87,8 +99,12 @@
 
             
 
+            
+
              inserts a custom operation behavior into the <see
              cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+
+            
 
             
 
@@ -97,8 +113,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+            
 
             
 
@@ -107,6 +127,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
+
+            
 
             
 
@@ -122,8 +144,12 @@
 
           
 
+          
+
           The working context that contains the <see
            cref="N:System.CodeDom" />
+
+          
 
           
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelected(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnInserted(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          methods to provide access to output parameters, return values, and exceptions that are thrown by the method that is called by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.ReturnValue" />
+
+        
 
         
 
@@ -62,8 +78,12 @@
 
         
 
+        
+
          properties, respectively. By adding a delegate to handle the <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Selected" />
+
+        
 
         
 
@@ -72,13 +92,19 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Inserted" />
 
         
 
+        
+
         , or <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+        
 
         
 
@@ -90,8 +116,12 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying business object at various times in its lifecycle. The following table lists the events and the associated <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -118,6 +148,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs immediately before the instance of the business object is created.</para>
@@ -137,6 +169,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
+
+              
 
               
 
@@ -162,6 +196,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs before the data is retrieved.</para>
@@ -184,13 +220,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+
+              
 
               
 
@@ -216,6 +258,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs after the data is retrieved.</para>
@@ -238,13 +282,19 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+              
 
               
 
@@ -267,6 +317,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+              
 
               
 
@@ -295,8 +347,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Inserted" />
+
+        
 
         
 
@@ -305,13 +361,19 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -342,13 +404,19 @@
 
             
 
+            
+
              parameter can be any object that is returned by a call to the business object data method. The <paramref
              name="outputParameters" />
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -360,6 +428,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -395,8 +465,12 @@
 
             
 
+            
+
              parameter can be any object that is returned by a call to the business object data method. The <paramref
              name="outputParameters" />
+
+            
 
             
 
@@ -405,8 +479,12 @@
 
             
 
+            
+
              collection of name/value pairs that match those in the method signature and are passed by reference. The <paramref
              name="exception" />
+
+            
 
             
 
@@ -415,8 +493,12 @@
 
             
 
+            
+
              exception that wraps any exceptions that are thrown by the method that is called by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -425,8 +507,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnUpdated(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -435,13 +521,19 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnDeleted(System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs)" />
 
             
 
+            
+
              method, it is thrown by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -453,6 +545,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -483,6 +577,8 @@
 
             
 
+            
+
              value to verify that the expected number of rows was affected.</para
           >
         </remarks>
@@ -509,8 +605,12 @@
 
             
 
+            
+
              exception does not represent the actual exception that is thrown by the business object data method. You can use the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -522,6 +622,8 @@
           <para
             >Gets a wrapper for any exceptions that are thrown by the method that is called by the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -550,8 +652,12 @@
 
             
 
+            
+
              property is set to false and the exception is wrapped by the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.Exception" />
+
+            
 
             
 
@@ -560,8 +666,12 @@
 
             
 
+            
+
              object, you can check the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.Exception" />
+
+            
 
             
 
@@ -570,8 +680,12 @@
 
             
 
+            
+
              property to true or the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -607,6 +721,8 @@
 
             
 
+            
+
              collection.</para
           >
         </remarks>
@@ -636,13 +752,19 @@
 
             
 
+            
+
              property is set in the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs" />
 
             
 
+            
+
              constructor. The value is set to the return value of the business object method call, which is called using reflection. If the business method returns no value (such as when the business object method returns void), the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.ReturnValue" />
+
+            
 
             
 

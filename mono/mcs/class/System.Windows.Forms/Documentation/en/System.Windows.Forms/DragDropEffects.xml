@@ -23,13 +23,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          to display different mouse pointers for drag-and-drop operations. For example, you can display a plus symbol for a <see
          cref="F:System.Windows.Forms.DragDropEffects.Copy" />
+
+        
 
         
 
@@ -51,8 +61,12 @@
 
         
 
+        
+
          drag-and-drop operation, or a red circle with a line through it symbol for a <see
          cref="F:System.Windows.Forms.DragDropEffects.None" />
+
+        
 
         
 
@@ -89,13 +103,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.DragDropEffects.Move" />
 
             
 
+            
+
             , and <see
              cref="F:System.Windows.Forms.DragDropEffects.Scroll" />
+
+            
 
             
 

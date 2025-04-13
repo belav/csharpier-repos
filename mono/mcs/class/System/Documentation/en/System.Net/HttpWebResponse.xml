@@ -47,8 +47,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Net.HttpWebResponse" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
           
 
+          
+
            with the <see
            cref="T:System.Web.HttpResponse" />
+
+          
 
           
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          class. Instead, use the instance returned by a call to <see
          cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          or the <see
          cref="M:System.Net.HttpWebResponse.Close" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.HttpWebResponse.Close" />
+
+        
 
         
 
@@ -108,11 +128,15 @@
 
         
 
+        
+
          property as name/value pairs.</para
       >
       <para
         >The following table shows the common HTTP headers that are available through properties of the <see
          cref="T:System.Net.HttpWebResponse" />
+
+        
 
         
 
@@ -186,8 +210,12 @@
 
         
 
+        
+
          by calling the <see
          cref="M:System.Net.HttpWebResponse.GetResponseStream" />
+
+        
 
         
 
@@ -199,6 +227,8 @@
       <para
         >Provides an HTTP-specific implementation of the <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -240,8 +270,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -256,13 +290,19 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -274,13 +314,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that contains the information required to serialize the new <see
            cref="T:System.Net.HttpWebRequest" />
+
+          
 
           
 
@@ -291,13 +337,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.Net.HttpWebRequest" />
+
+          
 
           
 
@@ -330,6 +382,8 @@
 
             
 
+            
+
              that
    represents the character set used for the current instance.</para
           >
@@ -342,6 +396,8 @@
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.CharacterSet" />
+
+            
 
             
 
@@ -381,6 +437,8 @@
 
             
 
+            
+
              method closes the response stream and releases the connection to the resource for reuse by other requests.</para
           >
           <para
@@ -389,8 +447,12 @@
 
             
 
+            
+
              or the <see
              cref="M:System.Net.HttpWebResponse.Close" />
+
+            
 
             
 
@@ -399,8 +461,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.HttpWebResponse.Close" />
+
+            
 
             
 
@@ -414,6 +480,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -453,6 +521,8 @@
 
             
 
+            
+
              that describes the method used to encode the body of the response.</para
           >
         </value>
@@ -464,6 +534,8 @@
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.ContentEncoding" />
+
+            
 
             
 
@@ -503,6 +575,8 @@
             
 
             
+
+            
 containing the number of bytes returned from the Internet resource. This
 value does not include header information.</para
           >
@@ -518,8 +592,12 @@ value does not include header information.</para
 
             
 
+            
+
              property contains the value of the Content-Length header returned with the response. If the Content-Length header is not set in the response, <see
              cref="P:System.Net.HttpWebResponse.ContentLength" />
+
+            
 
             
 
@@ -558,6 +636,8 @@ value does not include header information.</para
 
             
 
+            
+
              that
    represents the content type of the response data.</para
           >
@@ -570,6 +650,8 @@ value does not include header information.</para
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.ContentType" />
+
+            
 
             
 
@@ -611,8 +693,12 @@ value does not include header information.</para
 
             
 
+            
+
              property provides an instance of the <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -624,8 +710,12 @@ value does not include header information.</para
 
             
 
+            
+
              property of the associated <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -634,8 +724,12 @@ value does not include header information.</para
 
             
 
+            
+
              property will also be null. Any cookie information sent by the server will be available in the <see
              cref="P:System.Net.HttpWebResponse.Headers" />
+
+            
 
             
 
@@ -678,8 +772,12 @@ value does not include header information.</para
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -688,8 +786,12 @@ value does not include header information.</para
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -701,8 +803,12 @@ value does not include header information.</para
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -719,6 +825,8 @@ value does not include header information.</para
 
               
 
+              
+
               .</para
             >
           </block>
@@ -731,11 +839,15 @@ value does not include header information.</para
 
             
 
+            
+
             , and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -767,6 +879,8 @@ value does not include header information.</para
 
             
 
+            
+
              method returns a hash code of the web response instance. This value can be used as a key in hash tables.</para
           >
         </remarks>
@@ -775,6 +889,8 @@ value does not include header information.</para
           <para
             >Returns a hash value for a <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -821,6 +937,8 @@ value does not include header information.</para
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -832,6 +950,8 @@ value does not include header information.</para
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -840,8 +960,12 @@ value does not include header information.</para
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -852,8 +976,12 @@ value does not include header information.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -895,6 +1023,8 @@ value does not include header information.</para
 
             
 
+            
+
              to retrieve the contents of particular headers. You must specify which header you want to return.</para
           >
         </remarks>
@@ -908,6 +1038,8 @@ value does not include header information.</para
         </returns>
         <param name="headerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -951,6 +1083,8 @@ value does not include header information.</para
 
             
 
+            
+
              method returns the data stream from the requested Internet resource.</para
           >
           <block subset="none" type="note">
@@ -960,8 +1094,12 @@ value does not include header information.</para
 
               
 
+              
+
                or the  <see
                cref="M:System.Net.HttpWebResponse.Close" />
+
+              
 
               
 
@@ -970,8 +1108,12 @@ value does not include header information.</para
 
               
 
+              
+
                and <see
                cref="M:System.Net.HttpWebResponse.Close" />
+
+              
 
               
 
@@ -989,6 +1131,8 @@ value does not include header information.</para
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1002,6 +1146,8 @@ value does not include header information.</para
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1042,6 +1188,8 @@ value does not include header information.</para
 
             
 
+            
+
              containing the header information returned with the
    response.</para
           >
@@ -1057,8 +1205,12 @@ value does not include header information.</para
 
             
 
+            
+
              property is a collection of name/value pairs that contain the HTTP header values returned with the response. Common header information returned from the Internet resource is exposed as properties of the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1163,6 +1315,8 @@ value does not include header information.</para
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1171,6 +1325,8 @@ value does not include header information.</para
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1208,6 +1364,8 @@ value does not include header information.</para
             
 
             
+
+            
 value containing the date and time the contents of the response were
 modified.</para
           >
@@ -1220,6 +1378,8 @@ modified.</para
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.LastModified" />
+
+            
 
             
 
@@ -1258,6 +1418,8 @@ modified.</para
 
             
 
+            
+
              that represents the HTTP method used to return the response.</para
           >
         </value>
@@ -1268,6 +1430,8 @@ modified.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.Net.HttpWebResponse.Method" />
+
+            
 
             
 
@@ -1310,6 +1474,8 @@ modified.</para
             
 
             
+
+            
 that contains the HTTP protocol version of the response.</para
           >
         </value>
@@ -1321,6 +1487,8 @@ that contains the HTTP protocol version of the response.</para
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.ProtocolVersion" />
+
+            
 
             
 
@@ -1360,6 +1528,8 @@ that contains the HTTP protocol version of the response.</para
             
 
             
+
+            
 representing the resource that actually responded to the request.</para
           >
         </value>
@@ -1374,11 +1544,15 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              property contains the URI of the Internet resource that actually responded to the request. This URI might not be the same as the originally requested URI, if the original server redirected the request.</para
           >
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.ResponseUri" />
+
+            
 
             
 
@@ -1390,8 +1564,12 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              should use the <see
              cref="P:System.Net.HttpWebRequest.Address" />
+
+            
 
             
 
@@ -1400,8 +1578,12 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
             , since the use of <see
              cref="P:System.Net.HttpWebResponse.ResponseUri" />
+
+            
 
             
 
@@ -1440,6 +1622,8 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              containing the name of the server that sent the response.</para
           >
         </value>
@@ -1451,6 +1635,8 @@ representing the resource that actually responded to the request.</para
           <para
             >The <see
              cref="P:System.Net.HttpWebResponse.Server" />
+
+            
 
             
 
@@ -1495,6 +1681,8 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              value.</para
           >
         </value>
@@ -1509,8 +1697,12 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              parameter is a number that indicates the status of the HTTP response. The expected values for status are defined in the <see
              cref="T:System.Net.HttpStatusCode" />
+
+            
 
             
 
@@ -1546,6 +1738,8 @@ representing the resource that actually responded to the request.</para
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1591,8 +1785,12 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1601,8 +1799,12 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1611,13 +1813,19 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.HttpWebResponse" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1630,12 +1838,16 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9"
                 >[&lt;topic://cpconImplementingDisposeMethod&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1647,13 +1859,19 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              before you release your last reference to the <see
              cref="T:System.Net.HttpWebResponse" />
 
             
 
+            
+
             . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1665,6 +1883,8 @@ representing the resource that actually responded to the request.</para
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1705,6 +1925,8 @@ representing the resource that actually responded to the request.</para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1713,8 +1935,12 @@ representing the resource that actually responded to the request.</para
 
           
 
+          
+
           The object into which this <see
            cref="T:System.Net.HttpWebResponse" />
+
+          
 
           
 
@@ -1722,6 +1948,8 @@ representing the resource that actually responded to the request.</para
         >
         <param name="streamingContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          object is a stream, it can only be read or written once. This is enforced by maintaining the current state of the <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          object can be read/written/copied when in the <see
          cref="F:System.ServiceModel.Channels.MessageState.Created" />
+
+        
 
         
 
@@ -41,13 +49,19 @@
 
         
 
+        
+
         , <see
          cref="F:System.ServiceModel.Channels.MessageState.Written" />
 
         
 
+        
+
          and <see
          cref="F:System.ServiceModel.Channels.MessageState.Copied" />
+
+        
 
         
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          class represents the user interface (UI) characteristics of a row in a <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          are collected in the <see
          cref="P:System.Windows.Forms.TableLayoutPanel.RowStyles" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+        
 
         
 
@@ -73,13 +85,19 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.SizeType.AutoSize" />
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.RowStyle.Height" />
+
+            
 
             
 
@@ -91,6 +109,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Windows.Forms.RowStyle" />
+
+            
 
             
 
@@ -121,6 +141,8 @@
 
             
 
+            
+
              property to 0.</para
           >
         </remarks>
@@ -132,8 +154,12 @@
 
             
 
+            
+
              class using the supplied <see
              cref="T:System.Windows.Forms.SizeType" />
+
+            
 
             
 
@@ -145,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+          
 
           
 
@@ -177,13 +207,19 @@
 
             
 
+            
+
              parameter will take on different meanings depending on the <paramref
              name="sizeType" />
 
             
 
+            
+
              parameter. For more information, see the <see
              cref="P:System.Windows.Forms.RowStyle.Height" />
+
+            
 
             
 
@@ -198,8 +234,12 @@
 
             
 
+            
+
              class using the supplied <see
              cref="T:System.Windows.Forms.SizeType" />
+
+            
 
             
 
@@ -211,8 +251,12 @@
 
           
 
+          
+
           A <see
            cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+          
 
           
 
@@ -223,13 +267,19 @@
 
           
 
+          
+
           The preferred height in pixels or percentage of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
 
           
 
+          
+
           , depending on <paramref
            name="sizeType" />
+
+          
 
           
 
@@ -257,13 +307,19 @@
 
             
 
+            
+
              property will take on different meanings depending on the <see
              cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
 
             
 
+            
+
              property. The following table describes the possible meanings of <see
              cref="P:System.Windows.Forms.RowStyle.Height" />
+
+            
 
             
 
@@ -300,6 +356,8 @@
                 <para
                   >Not applicable—the <see
                    cref="P:System.Windows.Forms.RowStyle.Height" />
+
+                  
 
                   
 

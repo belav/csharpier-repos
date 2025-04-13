@@ -24,13 +24,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.ControlSkin" />
 
         
 
+        
+
         , or <see
          cref="T:System.Web.UI.PageTheme" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.Control.EnableTheming" />
+
+        
 
         
 
@@ -51,6 +61,8 @@
          type="text/html">
           <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">Introduction to ASP.NET Themes</a>
         </format>
+
+        
 
         
 
@@ -75,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -106,8 +120,12 @@
 
             
 
+            
+
              property is abstract. When compiled, a theme will generate code that overrides the <see
              cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" />
+
+            
 
             
 
@@ -116,8 +134,12 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" />
+
+            
 
             
 
@@ -129,6 +151,8 @@
           <para
             >When overridden a derived class, gets the relative URL of the directory for the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -160,6 +184,8 @@
 
             
 
+            
+
              property is abstract. When compiled, a theme will generate code that overrides this property.</para
           >
         </remarks>
@@ -168,6 +194,8 @@
           <para
             >When overridden in a derived class, gets an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -208,8 +236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -218,10 +250,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="skinID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,8 +287,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
+
+            
 
             
 
@@ -267,13 +307,19 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Web.UI.PageTheme.Page" />
 
             
 
+            
+
              property that the instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -289,8 +335,12 @@
 
           
 
+          
+
           The navigation path from the container to the public property value. For details, see <see
            cref="T:System.Web.UI.DataBinder" />
+
+          
 
           
 
@@ -324,8 +374,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
+
+            
 
             
 
@@ -340,13 +394,19 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Web.UI.PageTheme.Page" />
 
             
 
+            
+
              property that the instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -362,8 +422,12 @@
 
           
 
+          
+
           The navigation path from the container to the public property value. For details, see <see
            cref="T:System.Web.UI.DataBinder" />
+
+          
 
           
 
@@ -374,8 +438,12 @@
 
           
 
+          
+
           A .NET Framework format string. For details, see <see
            cref="T:System.Web.UI.DataBinder" />
+
+          
 
           
 
@@ -403,6 +471,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.PageTheme.LinkedStyleSheets" />
+
+            
 
             
 
@@ -435,8 +505,12 @@
 
             
 
+            
+
              property is read-only and is assigned internally when an instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -451,8 +525,12 @@
 
             
 
+            
+
              object that is associated with the instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -487,8 +565,12 @@
 
             
 
+            
+
              control that the instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -503,11 +585,15 @@
 
             
 
+            
+
              applies to the page; otherwise; false.</para
           >
         </returns>
         <param name="deviceFilterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,13 +623,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -562,6 +654,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -570,8 +664,12 @@
 
           
 
+          
+
           The XPath expression to evaluate. For details, see <see
            cref="T:System.Web.UI.XPathBinder" />
+
+          
 
           
 
@@ -605,13 +703,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -631,8 +735,12 @@
 
           
 
+          
+
           The XPath expression to evaluate. For details, see <see
            cref="T:System.Web.UI.XPathBinder" />
+
+          
 
           
 
@@ -640,6 +748,8 @@
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,13 +783,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -698,6 +814,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -706,8 +824,12 @@
 
           
 
+          
+
           The XPath expression to evaluate. For details, see <see
            cref="T:System.Web.UI.XPathBinder" />
+
+          
 
           
 
@@ -715,6 +837,8 @@
         >
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -749,13 +873,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -770,13 +900,19 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Web.UI.PageTheme.Page" />
 
             
 
+            
+
              control that the instance of the <see
              cref="T:System.Web.UI.PageTheme" />
+
+            
 
             
 
@@ -792,8 +928,12 @@
 
           
 
+          
+
           The XPath expression to evaluate. For details, see <see
            cref="T:System.Web.UI.XPathBinder" />
+
+          
 
           
 
@@ -804,10 +944,14 @@
 
           
 
+          
+
           A .NET Framework format string to apply to the result. </param
         >
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -840,13 +984,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -861,6 +1011,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -872,6 +1024,8 @@
 
             
 
+            
+
              list of nodes.</para
           >
         </returns>
@@ -880,8 +1034,12 @@
 
           
 
+          
+
           The XPath expression to evaluate. For details, see <see
            cref="T:System.Web.UI.XPathBinder" />
+
+          
 
           
 
@@ -915,13 +1073,19 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -936,6 +1100,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -947,6 +1113,8 @@
 
             
 
+            
+
              list of nodes. </para
           >
         </returns>
@@ -955,8 +1123,12 @@
 
           
 
+          
+
           The XPath expression to evaluate. For details, see <see
            cref="T:System.Web.UI.XPathBinder" />
+
+          
 
           
 
@@ -964,6 +1136,8 @@
         >
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

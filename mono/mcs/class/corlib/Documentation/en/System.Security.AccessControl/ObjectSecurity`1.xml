@@ -38,8 +38,12 @@
 
         
 
+        
+
          as the access rights type, and then use the instance normally. In contrast, <see
          cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+        
 
         
 
@@ -80,8 +84,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+          
 
           
 
@@ -89,6 +97,8 @@
         >
         <param name="resourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,8 +139,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+          
 
           
 
@@ -141,6 +155,8 @@
 
           
 
+          
+
           The type of resource.</param
         >
         <param name="safeHandle">
@@ -148,10 +164,14 @@
 
           
 
+          
+
           A handle.</param
         >
         <param name="includeSections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,8 +212,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+          
 
           
 
@@ -204,10 +228,14 @@
 
           
 
+          
+
           The type of resource.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,10 +244,14 @@
 
           
 
+          
+
            object is associated.</param
         >
         <param name="includeSections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,10 +396,14 @@
 
           
 
+          
+
           Represents a user account.</param
         >
         <param name="accessMask">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,10 +414,14 @@
 
           
 
+          
+
           true if the access rule is inherited; otherwise, false.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,10 +432,14 @@
 
           
 
+          
+
           Specifies how to propagate Access Control Entries (ACEs) to child objects.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,6 +553,8 @@
 
             
 
+            
+
              class representing the specified audit rule for the specified user.</para
           >
         </summary>
@@ -521,10 +567,14 @@
 
           
 
+          
+
           Represents a user account. </param
         >
         <param name="accessMask">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -535,10 +585,14 @@
 
           
 
+          
+
           true if the access rule is inherited; otherwise, false.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -549,10 +603,14 @@
 
           
 
+          
+
           Specifies how to propagate Access Control Entries (ACEs) to child objects.</param
         >
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,6 +670,8 @@
 
           
 
+          
+
           The handle of the securable object with which this ObjectSecurity`1 object is associated.</param
         >
       </Docs>
@@ -640,6 +700,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          class corresponds to a Web Services Description Language (WSDL) &lt;part&gt; element enclosed by the &lt;message&gt; element, which is in turn enclosed by the &lt;definitions&gt; root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Represents a collection of instances of the <see
          cref="T:System.Web.Services.Description.MessagePart" />
+
+        
 
         
 
@@ -63,8 +67,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.MessagePartCollection" />
+
+            
 
             
 
@@ -79,6 +87,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -87,8 +97,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -122,6 +136,8 @@
 
             
 
+            
+
              is a member of the MessagePartCollection.</para
           >
         </summary>
@@ -133,8 +149,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.MessagePartCollection" />
+
+            
 
             
 
@@ -146,8 +166,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -182,8 +206,12 @@
 
             
 
+            
+
              to a compatible one-dimensional array of type <see
              cref="T:System.Web.Services.Description.MessagePart" />
+
+            
 
             
 
@@ -195,8 +223,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -204,6 +236,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,6 +297,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -275,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -311,8 +351,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -321,8 +365,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.MessagePartCollection" />
+
+            
 
             
 
@@ -338,8 +386,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.MessagePartCollection" />
+
+            
 
             
 
@@ -351,8 +403,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="messagePart" />
+
+          
 
           
 
@@ -363,8 +419,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -443,11 +503,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.MessagePart" />
+
+            
 
             
 
@@ -462,8 +526,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.MessagePartCollection" />
+
+            
 
             
 
@@ -475,8 +543,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 

@@ -33,9 +33,13 @@
 
             
 
+            
+
             ),
           floating point exception (<see
              cref="F:Mono.Unix.Native.Signum.SIGFPE" />
+
+            
 
             
 
@@ -45,15 +49,21 @@
 
             
 
+            
+
             ),
           invalid memory access (<see
              cref="F:Mono.Unix.Native.Signum.SIGSEGV" />
 
             
 
+            
+
             ),
           I/O is possible (<see
              cref="F:Mono.Unix.Native.Signum.SIGIO" />
+
+            
 
             
 
@@ -71,15 +81,21 @@
 
             
 
+            
+
             ),
           keyboard interrupt (<see
              cref="F:Mono.Unix.Native.Signum.SIGINT" />
 
             
 
+            
+
             ),
           broken pipe (<see
              cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+            
 
             
 
@@ -90,15 +106,21 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.Signum.SIGUSR2" />
 
             
 
+            
+
             ),
           child exit (<see
              cref="F:Mono.Unix.Native.Signum.SIGCHLD" />
+
+            
 
             
 
@@ -129,12 +151,16 @@
 
         
 
+        
+
          is used
         to register a signal handler for a signal, and the registered handler
         is invoked when the signal is generated.  However, due to the
         "hijacking" nature of the signal handling process, what the signal
         handler could do is <i
         >severely</i>
+
+        
 
         
 
@@ -146,9 +172,13 @@
 
         
 
+        
+
          and
         <see
          cref="M:Mono.Unix.Native.Syscall.write" />
+
+        
 
         
 
@@ -164,15 +194,21 @@
 
         
 
+        
+
          be safely and reliably used as a signal
         handler (as would traditionally be done with <c
         >signal</c>
 
         
 
+        
+
         (2)), thus
         the <see
          cref="T:Mono.Unix.UnixSignal" />
+
+        
 
         
 
@@ -186,10 +222,14 @@
 
         
 
+        
+
          instance represents the number
         of times that a Unix signal has been emitted.  That's all.
         <c
         >UnixSignal</c>
+
+        
 
         
 
@@ -207,8 +247,12 @@
             
 
             
+
+            
           and <see
              cref="P:Mono.Unix.UnixSignal.IsSet" />
+
+            
 
             
 
@@ -221,6 +265,8 @@
             >
           Clearing the count with <see
              cref="M:Mono.Unix.UnixSignal.Reset" />
+
+            
 
             
 
@@ -237,9 +283,13 @@
 
             
 
+            
+
              and
           <see
              cref="M:Mono.Unix.UnixSignal.WaitOne" />
+
+            
 
             
 
@@ -259,9 +309,13 @@
 
         
 
+        
+
          or
         <see
          cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
+
+        
 
         
 
@@ -271,15 +325,21 @@
 
         
 
+        
+
          or
         <see
          cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
 
         
 
+        
+
          for the same
         signal as a created <c
         >UnixSignal</c>
+
+        
 
         
 
@@ -291,6 +351,8 @@
         >
         There is currently a limit of 64 concurrent <c
         >UnixSignal</c>
+
+        
 
         
 
@@ -326,6 +388,8 @@
 
           
 
+          
+
            value specifying which
           Unix realtime signal this instance should count.
 		</param
@@ -334,6 +398,8 @@
           >
           Creates and initializes a <see
            cref="T:Mono.Unix.UnixSignal" />
+
+          
 
           
 
@@ -350,9 +416,13 @@
 
             
 
+            
+
              property of the new
             instance using <paramref
              name="signum" />
+
+            
 
             
 
@@ -368,9 +438,13 @@
 
             
 
+            
+
              will be
             counted, updating the <see
              cref="M:Mono.Unix.UnixSignal.Count" />
+
+            
 
             
 
@@ -392,6 +466,8 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="signum" />
+
+          
 
           
 
@@ -423,6 +499,8 @@
 
           
 
+          
+
            value specifying which
           Unix signal this instance should count.
         </param
@@ -431,6 +509,8 @@
           >
           Creates and initializes a <see
            cref="T:Mono.Unix.UnixSignal" />
+
+          
 
           
 
@@ -447,9 +527,13 @@
 
             
 
+            
+
              property of the new
             instance using <paramref
              name="signum" />
+
+            
 
             
 
@@ -465,9 +549,13 @@
 
             
 
+            
+
              will be
             counted, updating the <see
              cref="M:Mono.Unix.UnixSignal.Count" />
+
+            
 
             
 
@@ -483,6 +571,8 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="signum" />
+
+          
 
           
 
@@ -512,9 +602,13 @@
           
 
           
+
+          
           signal has been emitted since construction or the last call to
           <see
            cref="M:Mono.Unix.UnixSignal.Reset" />
+
+          
 
           
 
@@ -528,9 +622,13 @@
 
           
 
+          
+
            containing the number of the
           of times the <see
            cref="P:Mono.Unix.UnixSignal.Signum" />
+
+          
 
           
 
@@ -546,9 +644,13 @@
 
           
 
+          
+
            property or use 
           <see
            cref="M:Mono.Unix.UnixSignal.Reset" />
+
+          
 
           
 
@@ -588,8 +690,12 @@
 
           
 
+          
+
           ; if <see
            langword="true" />
+
+          
 
           
 
@@ -600,9 +706,13 @@
 
           
 
+          
+
            call; 
           if <see
            langword="false" />
+
+          
 
           
 
@@ -622,9 +732,13 @@
 
             
 
+            
+
              is 
             <see
              langword="true" />
+
+            
 
             
 
@@ -632,6 +746,8 @@
             by any managed objects referenced by the current instance.  This
             method invokes the <c
             >Dispose()</c>
+
+            
 
             
 
@@ -647,10 +763,14 @@
 
             
 
+            
+
             .  When
             overriding 
             <see
              cref="M:Mono.Unix.UnixSignal.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -661,14 +781,20 @@
 
             
 
+            
+
              or <c
             >Close</c>
+
+            
 
             
 
             .  
             <c
             >Dispose</c>
+
+            
 
             
 
@@ -684,8 +810,12 @@
             
 
             
+
+            
             method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -695,9 +825,13 @@
 
             
 
+            
+
              invokes this method with the 
             <paramref
              name="disposing" />
+
+            
 
             
 
@@ -707,9 +841,13 @@
 
             
 
+            
+
             . 
             <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -719,14 +857,20 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
              set to 
             <see
              langword="false" />
+
+            
 
             
 
@@ -755,6 +899,8 @@
 
           
 
+          
+
            if the registered signal is realtime.
 		</summary
         >
@@ -762,6 +908,8 @@
           >
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -792,9 +940,13 @@
 
           
 
+          
+
            if 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -808,9 +960,13 @@
 
           
 
+          
+
            specifying whether or not 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -853,6 +1009,8 @@
 
           
 
+          
+
            value specifying which
           RealTime Unix signal this instance is counting.
 		</value
@@ -863,6 +1021,8 @@
             This value is set in the 
             <see
              cref="C:Mono.Unix.UnixSignal(Mono.Unix.Native.RealTimeSignum)" />
+
+            
 
             
 
@@ -907,10 +1067,14 @@
 
           
 
+          
+
            property; the
           return value specifies whether or not 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -925,9 +1089,13 @@
 
           
 
+          
+
            specifying whether or not the 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -937,9 +1105,13 @@
 
           
 
+          
+
            is returned,
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -949,9 +1121,13 @@
 
           
 
+          
+
            is returned, 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -967,10 +1143,14 @@
 
             
 
+            
+
              property, and should
             be preferred over manually checking and clearing the 
             <see
              cref="P:Mono.Unix.UnixSignal.Count" />
+
+            
 
             
 
@@ -1009,6 +1189,8 @@
 
           
 
+          
+
            value specifying which
           Unix signal this instance is counting.
         </value
@@ -1019,6 +1201,8 @@
             This value is set in the 
             <see
              cref="C:Mono.Unix.UnixSignal(Mono.Unix.Native.Signum)" />
+
+            
 
             
 
@@ -1068,9 +1252,13 @@
 
           
 
+          
+
            array containing the 
           <see
            cref="T:Mono.Unix.UnixSignal" />
+
+          
 
           
 
@@ -1085,15 +1273,21 @@
 
           
 
+          
+
            instances within 
           <paramref
            name="signals" />
 
           
 
+          
+
            has a non-zero 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -1107,9 +1301,13 @@
 
           
 
+          
+
            set to the index of the
           element in <paramref
            name="signals" />
+
+          
 
           
 
@@ -1127,8 +1325,12 @@
 
               
 
+              
+
               , -1)</c
             >
+
+            
 
             
 
@@ -1141,8 +1343,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1156,9 +1362,13 @@
 
           
 
+          
+
            instances within
           <paramref
            name="signals" />
+
+          
 
           
 
@@ -1198,9 +1408,13 @@
 
           
 
+          
+
            array containing the 
           <see
            cref="T:Mono.Unix.UnixSignal" />
+
+          
 
           
 
@@ -1214,9 +1428,13 @@
 
           
 
+          
+
            specifying the number of
           milliseconds to wait before the method should return.  <c
           >-1</c>
+
+          
 
           
 
@@ -1232,15 +1450,21 @@
 
           
 
+          
+
            instances within 
           <paramref
            name="signals" />
 
           
 
+          
+
            has a non-zero 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -1255,9 +1479,13 @@
 
           
 
+          
+
            set to the index of the
           element in <paramref
            name="signals" />
+
+          
 
           
 
@@ -1265,6 +1493,8 @@
           If the method does timeout, then 
           <paramref
            name="millisecondsTimeout" />
+
+          
 
           
 
@@ -1277,8 +1507,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1290,8 +1524,12 @@
 
           
 
+          
+
            is less than <c
           >-1</c>
+
+          
 
           
 
@@ -1305,9 +1543,13 @@
 
           
 
+          
+
            instances within
           <paramref
            name="signals" />
+
+          
 
           
 
@@ -1346,9 +1588,13 @@
 
           
 
+          
+
            array containing the 
           <see
            cref="T:Mono.Unix.UnixSignal" />
+
+          
 
           
 
@@ -1362,9 +1608,13 @@
 
           
 
+          
+
            specifying how long the method
           should wait before returning.  Use a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1374,9 +1624,13 @@
 
           
 
+          
+
            value of
           <c
           >-1</c>
+
+          
 
           
 
@@ -1391,15 +1645,21 @@
 
           
 
+          
+
            instances within 
           <paramref
            name="signals" />
 
           
 
+          
+
            has a non-zero 
           <see
            cref="P:Mono.Unix.UnixSignal.Count" />
+
+          
 
           
 
@@ -1414,9 +1674,13 @@
 
           
 
+          
+
            set to the index of the
           element in <paramref
            name="signals" />
+
+          
 
           
 
@@ -1426,15 +1690,21 @@
 
           
 
+          
+
           's 
           <see
            cref="P:System.TimeSpan.TotalMilliseconds" />
 
           
 
+          
+
            value cast to a
           <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1452,9 +1722,13 @@
 
               
 
+              
+
               ,
             timeout.TotalMilliseconds)</c
             >
+
+            
 
             
 
@@ -1467,8 +1741,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1480,9 +1758,13 @@
 
           
 
+          
+
           's 
           <see
            cref="P:System.TimeSpan.TotalMilliseconds" />
+
+          
 
           
 
@@ -1492,8 +1774,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -1507,9 +1793,13 @@
 
           
 
+          
+
            instances within
           <paramref
            name="signals" />
+
+          
 
           
 
@@ -1543,6 +1833,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -1550,6 +1842,8 @@
           >
           Returns <see
            langword="true" />
+
+          
 
           
 
@@ -1566,10 +1860,14 @@
 
             
 
+            
+
              signal is received by
             the current process and the 
             <see
              cref="P:Mono.Unix.UnixSignal.Count" />
+
+            
 
             
 
@@ -1580,6 +1878,8 @@
             >
             This method is equivalent to calling <c
             >WaitOne(-1)</c>
+
+            
 
             
 
@@ -1625,6 +1925,8 @@
 
           
 
+          
+
            containing the maximum number of
           milliseconds the current thread should block before returning.
         </param
@@ -1633,6 +1935,8 @@
           >
           This parameter must be <see
            langword="false" />
+
+          
 
           
 
@@ -1647,6 +1951,8 @@
 
           
 
+          
+
            or the timeout expires.
         </summary
         >
@@ -1657,9 +1963,13 @@
 
           
 
+          
+
            when the current instance receives a
           signal, otherwise <see
            langword="false" />
+
+          
 
           
 
@@ -1676,9 +1986,13 @@
 
             
 
+            
+
              for the 
             <see
              cref="P:Mono.Unix.UnixSignal.Signum" />
+
+            
 
             
 
@@ -1686,6 +2000,8 @@
             by the current process and the 
             <see
              cref="P:Mono.Unix.UnixSignal.Count" />
+
+            
 
             
 
@@ -1699,8 +2015,12 @@
 
           
 
+          
+
            is less than <c
           >-1</c>
+
+          
 
           
 
@@ -1712,8 +2032,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -1757,9 +2081,13 @@
 
           
 
+          
+
            specifying how long the method
           should wait before returning.  Use a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1769,9 +2097,13 @@
 
           
 
+          
+
            value of
           <c
           >-1</c>
+
+          
 
           
 
@@ -1782,6 +2114,8 @@
           >
           This parameter must be <see
            langword="false" />
+
+          
 
           
 
@@ -1796,6 +2130,8 @@
 
           
 
+          
+
            or the timeout expires.
         </summary
         >
@@ -1806,9 +2142,13 @@
 
           
 
+          
+
            when the current instance receives a
           signal, otherwise <see
            langword="false" />
+
+          
 
           
 
@@ -1825,9 +2165,13 @@
 
             
 
+            
+
              milliseconds for the
             <see
              cref="P:Mono.Unix.UnixSignal.Signum" />
+
+            
 
             
 
@@ -1835,6 +2179,8 @@
             by the current process and the 
             <see
              cref="P:Mono.Unix.UnixSignal.Count" />
+
+            
 
             
 
@@ -1848,9 +2194,13 @@
 
           
 
+          
+
           's 
           <see
            cref="P:System.TimeSpan.TotalMilliseconds" />
+
+          
 
           
 
@@ -1860,8 +2210,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -1873,8 +2227,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 

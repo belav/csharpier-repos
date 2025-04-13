@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>while</keyword>
@@ -28,8 +30,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.16</hyperlink>
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
     
 
+    
+
     ) may be used to transfer control to the end point of the while statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink
     >15.9.2</hyperlink>
+
+    
 
     
 

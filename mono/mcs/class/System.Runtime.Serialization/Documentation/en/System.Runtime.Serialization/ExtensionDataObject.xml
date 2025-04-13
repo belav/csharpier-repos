@@ -22,8 +22,12 @@
 
         
 
+        
+
          is the structure that stores extra data encountered by the <see
          cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+
+        
 
         
 

@@ -17,8 +17,12 @@
 
         
 
+        
+
          should not be confused with the concept of a window in Windows Forms or the Win32 API; there is no HWND or similar Windows resource that corresponds directly to an instance of <see
          cref="T:System.Windows.Forms.HtmlWindow" />
+
+        
 
         
 
@@ -27,8 +31,12 @@
 
         
 
+        
+
          provides high-level descriptions of a document's location on a user's screen, as well as methods for interacting with users by way of prompts and dialog boxes. <see
          cref="T:System.Windows.Forms.HtmlWindow" />
+
+        
 
         
 
@@ -40,8 +48,12 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Windows.Forms.HtmlWindow" />
+
+        
 
         
 
@@ -50,8 +62,12 @@
 
         
 
+        
+
          collection, which consists of one or more <see
          cref="T:System.Windows.Forms.HtmlWindow" />
+
+        
 
         
 
@@ -63,8 +79,12 @@
 
         
 
+        
+
          control in a Windows Forms application, you can choose to interact with the user using standard Windows Forms classes, such as <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -73,8 +93,12 @@
 
         
 
+        
+
         , or you can use methods on <see
          cref="T:System.Windows.Forms.HtmlWindow" />
+
+        
 
         
 
@@ -83,8 +107,12 @@
 
         
 
+        
+
          method presents a simple dialog box with custom text and an <ui
         >OK</ui>
+
+        
 
         
 
@@ -93,8 +121,12 @@
 
         
 
+        
+
          presents a line of custom text and a text input field to the user; and <see
          cref="M:System.Windows.Forms.HtmlWindow.Confirm(System.String)" />
+
+        
 
         
 
@@ -103,8 +135,12 @@
 
         
 
+        
+
          and <ui
         >Cancel</ui>
+
+        
 
         
 
@@ -116,13 +152,19 @@
 
         
 
+        
+
          to open new windows containing new documents. <see
          cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
 
         
 
+        
+
          loads the specified URL into the named window, creating it if it does not already exist, while <see
          cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
+
+        
 
         
 
@@ -134,6 +176,8 @@
       <para
         >Represents the logical window that contains one or more instances of <see
          cref="T:System.Windows.Forms.HtmlDocument" />
+
+        
 
         
 
@@ -163,8 +207,12 @@
 
             
 
+            
+
              class offers a more powerful version of the <see
              cref="M:System.Windows.Forms.HtmlWindow.Alert(System.String)" />
+
+            
 
             
 
@@ -176,10 +224,14 @@
 
             
 
+            
+
              accepts Unicode text as input, the Internet Explorer script prompt will not display non-Latin language text appropriately on Windows 95, Windows 98, Windows ME or Windows NT due to operating system limitations. For more information, see <see
              cref="http://support.microsoft.com/default.aspx?scid=kb;en-us;211147"
               >INFO: Internet Explorer Script Prompts and MBCS/Unicode</see
             >
+
+            
 
             
 
@@ -195,8 +247,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -229,8 +285,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -246,10 +306,14 @@
 
           
 
+          
+
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,6 +340,8 @@
 
             
 
+            
+
              property to determine if the window is already closed. If the window is already closed, this method will have no effect. </para
           >
           <para
@@ -284,8 +350,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
+
+            
 
             
 
@@ -294,8 +364,12 @@
 
             
 
+            
+
              causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see
              cref="M:System.Windows.Forms.HtmlWindow.Close" />
+
+            
 
             
 
@@ -328,6 +402,8 @@
 
             
 
+            
+
              displays a modal dialog box; the user will not be able to access the underlying HTML page without first closing this dialog box. </para
           >
           <para
@@ -336,10 +412,14 @@
 
             
 
+            
+
              accepts Unicode text as input, the Internet Explorer script prompt will not display non-Latin language text appropriately on Windows 95, Windows 98, Windows ME or Windows NT due to operating system limitations. For more information, see <see
              cref="http://support.microsoft.com/default.aspx?scid=kb;en-us;211147"
               >INFO: Internet Explorer Script Prompts and MBCS/Unicode</see
             >
+
+            
 
             
 
@@ -358,8 +438,12 @@
 
             
 
+            
+
             ; false if the user clicked <ui
             >No</ui>
+
+            
 
             
 
@@ -368,6 +452,8 @@
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,10 +488,14 @@
 
           
 
+          
+
           The name of the event you want to handle.</param
         >
         <param name="eventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -435,8 +525,12 @@
 
             
 
+            
+
              through the <see
              cref="P:System.Windows.Forms.WebBrowser.Document" />
+
+            
 
             
 
@@ -445,8 +539,12 @@
 
             
 
+            
+
              control. Use this property when you need to access a document within a FRAME using the <see
              cref="P:System.Windows.Forms.HtmlWindow.Frames" />
+
+            
 
             
 
@@ -478,11 +576,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >You must add a referenced to the unmanaged MSHTML.dll in order to use <see
              cref="P:System.Windows.Forms.HtmlWindow.DomWindow" />
+
+            
 
             
 
@@ -492,6 +594,8 @@
                 >Importing a Type Library as an Assembly</a
               >
             </format>
+
+            
 
             
 
@@ -531,6 +635,8 @@
 
           
 
+          
+
           The object to test.</param
         >
       </Docs>
@@ -556,6 +662,8 @@
 
             
 
+            
+
              occurs whenever a script encounters a run-time error. Because script code is late-bound, which means that calls against the object are not resolved until run-time, errors can include everything from referencing a null object to calling an undefined property or method.</para
           >
           <para
@@ -564,8 +672,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Windows.Forms.HtmlElementErrorEventArgs" />
+
+            
 
             
 
@@ -576,6 +688,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -607,11 +721,15 @@
 
             
 
+            
+
              was called, that window will lose the focus. </para
           >
           <para
             >Do not call focus on an element inside of a window until the window's <see
              cref="E:System.Windows.Forms.HtmlWindow.Load" />
+
+            
 
             
 
@@ -644,6 +762,8 @@
           <para
             >Frames will contain one instance of <see
              cref="T:System.Windows.Forms.HtmlWindow" />
+
+            
 
             
 
@@ -696,6 +816,8 @@
 
             
 
+            
+
              will occur for:</para
           >
           <list type="bullet">
@@ -706,6 +828,8 @@
               <para
                 >The FRAME that last had focus when the window containing the <see
                  cref="T:System.Windows.Forms.WebBrowser" />
+
+                
 
                 
 
@@ -722,10 +846,14 @@
 
             
 
+            
+
              event, or prevent it from bubbling. For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -759,8 +887,12 @@
 
             
 
+            
+
              contains all URLs navigated to within the current window, which is referred to as the <newTerm
             >navigation stack</newTerm>
+
+            
 
             
 
@@ -792,8 +924,12 @@
 
             
 
+            
+
              has been closed by the user or by way of a call to the <see
              cref="M:System.Windows.Forms.HtmlWindow.Close" />
+
+            
 
             
 
@@ -827,13 +963,19 @@
 
             
 
+            
+
              event works similarly to the <see
              cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
 
             
 
+            
+
              event on the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -845,6 +987,8 @@
 
             
 
+            
+
              event. </para
           >
           <para
@@ -852,6 +996,8 @@
              cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
               >About the DHTML Object Model</see
             >
+
+            
 
             
 
@@ -905,10 +1051,14 @@
 
             
 
+            
+
              to move a window off of the visible edge of the screen; this method is also available through script on a Web page, and allowing untrusted script to render windows invisible is not considered secure.</para
           >
           <para>
             <see cref="M:System.Windows.Forms.HtmlWindow.MoveTo(System.Drawing.Point)" />
+
+            
 
             
 
@@ -917,8 +1067,12 @@
 
             
 
+            
+
              if the window you are trying to move and its parent window have different top-level domains. For example, if you are hosting the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -927,13 +1081,19 @@
 
             
 
+            
+
              to display b.adatum.com. In this case, both windows are considered to be part of the same top-level domain, and the exception is not thrown. However, if you call <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
 
             
 
+            
+
              to display www,microsoft.com, the two windows now have different top-level domains, and the <see
              cref="M:System.Windows.Forms.HtmlWindow.MoveTo(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -946,6 +1106,8 @@
         </summary>
         <param name="point">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -975,10 +1137,14 @@
 
             
 
+            
+
              to move a window off of the visible edge of the screen; this method is also available through script on a Web page, and allowing untrusted script to render windows invisible is not considered secure.</para
           >
           <para>
             <see cref="M:System.Windows.Forms.HtmlWindow.MoveTo(System.Drawing.Point)" />
+
+            
 
             
 
@@ -987,8 +1153,12 @@
 
             
 
+            
+
              if the window you are trying to move and its parent window have different top-level domains. For example, if you are hosting the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 
@@ -997,13 +1167,19 @@
 
             
 
+            
+
              to display b.adatum.com. In this case, both windows are considered to be part of the same top-level domain, and the exception is not thrown. However, if you call <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
 
             
 
+            
+
              to display www,microsoft.com, the two windows now have different top-level domains, and the <see
              cref="M:System.Windows.Forms.HtmlWindow.MoveTo(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1019,10 +1195,14 @@
 
           
 
+          
+
           The x-coordinate of the window's upper-left corner.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1069,8 +1249,12 @@
 
             
 
+            
+
              parameter points to an HTML page, the page currently displayed in the window will be destroyed and replaced with the new page; any references your application holds to managed DOM objects in the old page will not be valid. If <paramref
              name="url" />
+
+            
 
             
 
@@ -1083,6 +1267,8 @@
         </summary>
         <param name="urlString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1113,8 +1299,12 @@
 
           
 
+          
+
           The location, specified as a <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1147,6 +1337,8 @@
 
             
 
+            
+
              classes.</para
           >
         </remarks>
@@ -1155,6 +1347,8 @@
           <para
             >Tests the two <see
              cref="T:System.Windows.Forms.HtmlWindow" />
+
+            
 
             
 
@@ -1170,8 +1364,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.HtmlWindow" />
+
+          
 
           
 
@@ -1182,8 +1380,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.HtmlWindow" />
+
+          
 
           
 
@@ -1222,8 +1424,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.HtmlWindow" />
+
+          
 
           
 
@@ -1234,8 +1440,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.HtmlWindow" />
+
+          
 
           
 
@@ -1270,8 +1480,12 @@
 
             
 
+            
+
              parameter can name a window that was created as the result of a previous call to <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1284,13 +1498,19 @@
 
             
 
+            
+
              parameter, any option not included is automatically disabled. In other words, if you only specify by way of <paramref
              name="windowOptions" />
 
             
 
+            
+
              that you want a status bar, then the menu bar, toolbar, title, scroll bars, and so on will not be displayed unless you explicitly enable them by way of <paramref
              name="windowOptions" />
+
+            
 
             
 
@@ -1302,6 +1522,8 @@
 
             
 
+            
+
              is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in the named window. If the file cannot be displayed inside of Internet Explorer, and the window named by target does not already exist, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
@@ -1310,13 +1532,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
 
             
 
+            
+
             , it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see
              cref="M:System.Windows.Forms.HtmlWindow.Close" />
+
+            
 
             
 
@@ -1328,13 +1556,19 @@
 
             
 
+            
+
              to load a URL in an existing window, <paramref
              name="windowOptions" />
 
             
 
+            
+
              will be ignored; the window will retain the dimensions, appearance, and screen location first given it by the initial call to <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1353,8 +1587,12 @@
 
             
 
+            
+
              representing the new window, or the previously created window named by the <paramref
              name="target" />
+
+            
 
             
 
@@ -1366,10 +1604,14 @@
 
           
 
+          
+
           The Uniform Resource Locator that describes the location of the file to load.</param
         >
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1380,8 +1622,12 @@
 
           
 
+          
+
           A comma-delimited string consisting of zero or more of the following options in the form <paramref
            name="name=value" />
+
+          
 
           
 
@@ -1392,13 +1638,19 @@
 
           
 
+          
+
           Whether <paramref
            name="url" />
 
           
 
+          
+
            replaces the current window's URL in the navigation history. This will effect the operation of methods on the <see
            cref="T:System.Windows.Forms.HtmlHistory" />
+
+          
 
           
 
@@ -1433,8 +1685,12 @@
 
             
 
+            
+
              parameter can name a window that was created as the result of a previous call to <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1447,13 +1703,19 @@
 
             
 
+            
+
              parameter, any option not included is automatically disabled. In other words, if you only specify by way of <paramref
              name="windowOptions" />
 
             
 
+            
+
              that you want a status bar, then the menu bar, toolbar, title, scroll bars, and so on will not be displayed unless you explicitly enable them by way of <paramref
              name="windowOptions" />
+
+            
 
             
 
@@ -1465,6 +1727,8 @@
 
             
 
+            
+
              is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in the named window. If the file cannot be displayed inside of Internet Explorer, and the window named by target does not already exist, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
@@ -1473,13 +1737,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.Uri,System.String)" />
 
             
 
+            
+
             , it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see
              cref="M:System.Windows.Forms.HtmlWindow.Close" />
+
+            
 
             
 
@@ -1491,13 +1761,19 @@
 
             
 
+            
+
              to load a URL in an existing window, <paramref
              name="windowOptions" />
 
             
 
+            
+
              will be ignored; the window will retain the dimensions, appearance, and screen location first given it by the initial call to <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1516,8 +1792,12 @@
 
             
 
+            
+
              representing the new window, or the previously created window named by the <paramref
              name="target" />
+
+            
 
             
 
@@ -1529,10 +1809,14 @@
 
           
 
+          
+
           The Uniform Resource Locator that describes the location of the file to load.</param
         >
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1543,8 +1827,12 @@
 
           
 
+          
+
           A comma-delimited string consisting of zero or more of the following options in the form <paramref
            name="name=value" />
+
+          
 
           
 
@@ -1555,13 +1843,19 @@
 
           
 
+          
+
           Whether <paramref
            name="url" />
 
           
 
+          
+
            replaces the current window's URL in the navigation history. This will effect the operation of methods on the <see
            cref="T:System.Windows.Forms.HtmlHistory" />
+
+          
 
           
 
@@ -1615,6 +1909,8 @@
 
             
 
+            
+
              is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in a new window. If the file cannot be displayed inside of Internet Explorer, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
@@ -1623,8 +1919,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
+
+            
 
             
 
@@ -1633,11 +1933,15 @@
 
             
 
+            
+
              on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit. </para
           >
           <para
             >If you want to load a document into a previously opened window, see the <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1656,11 +1960,15 @@
 
             
 
+            
+
              representing the new window. </para
           >
         </returns>
         <param name="urlString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1671,13 +1979,19 @@
 
           
 
+          
+
           A comma-delimited string consisting of zero or more of the following options in the form <paramref
            name="name=value" />
 
           
 
+          
+
           . See <see
            cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
+
+          
 
           
 
@@ -1710,6 +2024,8 @@
 
             
 
+            
+
              is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in a new window. If the file cannot be displayed inside of Internet Explorer, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
@@ -1718,8 +2034,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.Uri,System.String)" />
+
+            
 
             
 
@@ -1728,11 +2048,15 @@
 
             
 
+            
+
              on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit. </para
           >
           <para
             >If you want to load a document into a previously opened window, see the <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1751,11 +2075,15 @@
 
             
 
+            
+
              representing the new window. </para
           >
         </returns>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1766,13 +2094,19 @@
 
           
 
+          
+
           A comma-delimited string consisting of zero or more of the following options in the form <paramref
            name="name=value" />
 
           
 
+          
+
           . See <see
            cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
+
+          
 
           
 
@@ -1823,13 +2157,19 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.WebBrowser" />
 
             
 
+            
+
              control will return the position of the control relative to the upper-left corner of the form. By contrast, <see
              cref="P:System.Windows.Forms.HtmlWindow.Position" />
+
+            
 
             
 
@@ -1866,6 +2206,8 @@
 
             
 
+            
+
              provides a quick, easy way to obtain simple text input from the user.</para
           >
           <para
@@ -1874,10 +2216,14 @@
 
             
 
+            
+
              accepts Unicode text as input, the Internet Explorer script prompt will not display non-Latin language text appropriately on Windows 95, Windows 98, Windows ME or Windows NT due to operating system limitations. For more information, see <see
              cref="http://support.microsoft.com/default.aspx?scid=kb;en-us;211147"
               >INFO: Internet Explorer Script Prompts and MBCS/Unicode</see
             >
+
+            
 
             
 
@@ -1896,6 +2242,8 @@
 
             
 
+            
+
              representing the text entered by the user.</para
           >
         </returns>
@@ -1904,10 +2252,14 @@
 
           
 
+          
+
           The message to display to the user.</param
         >
         <param name="defaultInputValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1931,6 +2283,8 @@
           <para
             >When called on a FRAME window in a FRAMESET, <see
              cref="M:System.Windows.Forms.HtmlWindow.RemoveFocus" />
+
+            
 
             
 
@@ -1986,8 +2340,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Size" />
+
+          
 
           
 
@@ -2019,10 +2377,14 @@
 
           
 
+          
+
           Describes the desired width of the window, in pixels. Must be 100 pixels or more.</param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2070,8 +2432,12 @@
 
             
 
+            
+
              will cause the document to scroll so that the specified coordinate on the document is located in the upper-left corner of the document's window. If the document is not long or wide enough for this to happen, <see
              cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" />
+
+            
 
             
 
@@ -2084,6 +2450,8 @@
         </summary>
         <param name="point">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2112,8 +2480,12 @@
 
             
 
+            
+
              will cause the document to scroll so that the specified coordinate on the document is located in the upper-left corner of the document's window. If the document is not long or wide enough for this to happen, <see
              cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" />
+
+            
 
             
 
@@ -2129,10 +2501,14 @@
 
           
 
+          
+
           The x-coordinate, relative to the top-left corner of the current window, toward which the page should scroll.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2177,13 +2553,19 @@
 
             
 
+            
+
              control does not display a status bar. Any new window that you open with the <see
              cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />
+
+            
 
             
 
@@ -2235,6 +2617,8 @@
 
             
 
+            
+
              method. </para
           >
         </remarks>
@@ -2266,13 +2650,19 @@
 
             
 
+            
+
              collection, it returns an <see
              cref="T:System.Windows.Forms.HtmlWindow" />
 
             
 
+            
+
             . Call <see
              cref="P:System.Windows.Forms.HtmlWindow.WindowFrameElement" />
+
+            
 
             
 

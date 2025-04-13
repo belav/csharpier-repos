@@ -9,6 +9,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -33,6 +35,8 @@
       <name>
         <non_terminal where="9.5.5">pp-message</non_terminal>
       </name>
+
+      
 
       
 
@@ -63,8 +67,12 @@ class Test {...}
 
       
 
+      
+
       always produces a warning ("Code review needed before check-in"), and produces a compile-time error if the pre-processing identifiers Debug and Retail are both defined. Note that a <non_terminal
        where="9.5.5">pp-message</non_terminal>
+
+      
 
       
 

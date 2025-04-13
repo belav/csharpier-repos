@@ -48,6 +48,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -74,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+
+            
 
             
 
@@ -109,13 +113,19 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -127,8 +137,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -139,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -179,6 +197,8 @@
 
             
 
+            
+
              class with a specified error message and a collection of the filters that exceeded the quota of nodes.</para
           >
         </summary>
@@ -187,8 +207,12 @@
 
           
 
+          
+
           The collection of <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -222,6 +246,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterException" />
+
+            
 
             
 
@@ -263,6 +289,8 @@
 
             
 
+            
+
              class, the inner exception that caused the current exception, and a collection of the filters that exceeded the quota of nodes.</para
           >
         </summary>
@@ -271,8 +299,12 @@
 
           
 
+          
+
           The collection of <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -304,6 +336,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 

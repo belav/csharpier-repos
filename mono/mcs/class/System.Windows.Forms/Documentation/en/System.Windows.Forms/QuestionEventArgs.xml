@@ -19,8 +19,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.DataGridView.RowDirtyStateNeeded" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          control. It allows you to specify a response to events that occur when the control needs the answer to a question. The answer to the question is specified by setting the <see
          cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
             
 
+            
+
              class using a default <see
              cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+
+            
 
             
 
@@ -88,8 +100,12 @@
 
             
 
+            
+
              class using the specified default value for the <see
              cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+
+            
 
             
 
@@ -101,8 +117,12 @@
 
           
 
+          
+
           The default value of the <see
            cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+
+          
 
           
 

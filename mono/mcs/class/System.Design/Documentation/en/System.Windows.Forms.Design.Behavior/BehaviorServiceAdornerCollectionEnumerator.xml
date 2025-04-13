@@ -29,6 +29,8 @@
 
         
 
+        
+
         . </para
       >
     </summary>
@@ -59,6 +61,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -67,8 +71,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+          
 
           
 
@@ -99,6 +107,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -121,6 +131,8 @@
           <para
             >Advances the enumerator to the next element of the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -173,8 +185,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -186,6 +202,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -213,8 +231,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -226,6 +248,8 @@
           <para
             >For a description of this member, see the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -257,8 +281,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -270,6 +298,8 @@
           <para
             >For a description of this member, see the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 

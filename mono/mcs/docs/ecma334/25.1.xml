@@ -11,6 +11,8 @@
 
         
 
+        
+
          enables the use of an unsafe context within a block. The entire textual extent of the associated block is considered an unsafe context. </list_item
       >
     </list>
@@ -21,6 +23,8 @@
       <name>
         <non_terminal where="17.1.1">class-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -39,6 +43,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -51,6 +57,8 @@
       <name>
         <non_terminal where="20.1.1">interface-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -69,6 +77,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -81,6 +91,8 @@
       <name>
         <non_terminal where="17.4">field-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -99,6 +111,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -111,6 +125,8 @@
       <name>
         <non_terminal where="17.6">property-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -129,6 +145,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -141,6 +159,8 @@
       <name>
         <non_terminal where="17.8">indexer-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -159,6 +179,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -174,6 +196,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -186,6 +210,8 @@
       <name>
         <non_terminal where="17.12">destructor-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -224,6 +250,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -259,6 +287,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -271,6 +301,8 @@
       <name>
         <non_terminal where="25.1">unsafe-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -294,6 +326,8 @@ public unsafe struct Node
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -335,6 +369,8 @@ public class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

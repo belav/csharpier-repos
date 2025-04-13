@@ -31,6 +31,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -62,11 +64,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="namespaceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,6 +123,8 @@
           <para
             >Gets a collection of assembly file paths; when the event handler for the <see
              cref="E:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.DesignerNamespaceResolve" />
+
+            
 
             
 

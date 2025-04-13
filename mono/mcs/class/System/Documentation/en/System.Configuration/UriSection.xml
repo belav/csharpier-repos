@@ -25,11 +25,15 @@
 
         
 
+        
+
          class has been extended to provide support for International Resource Identifiers (IRI) and Internationalized Domain Names. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI and IDN. This ensures application compatibility with prior versions of the .NET Framework.</para
       >
       <para
         >The configuration settings for IRI and IDN can be retrieved using the <see
          cref="T:System.Configuration.UriSection" />
+
+        
 
         
 
@@ -62,11 +66,15 @@
 
             
 
+            
+
              class has been extended to provide support for International Resource Identifiers (IRI) and Internationalized Domain Names. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI and IDN. This ensures application compatibility with prior versions of the .NET Framework.</para
           >
           <para
             >The configuration settings for IRI and IDN can be retrieved using the <see
              cref="T:System.Configuration.UriSection" />
+
+            
 
             
 
@@ -78,6 +86,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -86,6 +96,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.UriSection" />
+
+            
 
             
 
@@ -122,6 +134,8 @@
 
             
 
+            
+
              class has been extended to provide support for International Resource Identifiers (IRI) and Internationalized Domain Names. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI and IDN. This ensures application compatibility with prior versions of the .NET Framework.</para
           >
           <para
@@ -130,13 +144,19 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Configuration.UriSection.Idn" />
 
             
 
+            
+
              property returns the configuration setting for IDN processing in the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              will be read once when the first <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -160,6 +184,8 @@
           <para
             >For more information on IRI support, see the Remarks section for the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -174,8 +200,12 @@
 
             
 
+            
+
              object that contains the configuration setting for International Domain Name (IDN) processing in the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -215,6 +245,8 @@
 
             
 
+            
+
              class has been extended to provide support for International Resource Identifiers (IRI) and Internationalized Domain Names. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI and IDN. This ensures application compatibility with prior versions of the .NET Framework.</para
           >
           <para
@@ -223,13 +255,19 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Configuration.UriSection.IriParsing" />
 
             
 
+            
+
              property returns the configuration setting for IRI parsing in the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -243,8 +281,12 @@
 
             
 
+            
+
              will be read once when the first <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -253,6 +295,8 @@
           <para
             >For more information on IRI support, see the Remarks section for the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -267,8 +311,12 @@
 
             
 
+            
+
              object that contains the configuration setting for International Resource Identifiers (IRI) parsing in the <see
              cref="T:System.Uri" />
+
+            
 
             
 

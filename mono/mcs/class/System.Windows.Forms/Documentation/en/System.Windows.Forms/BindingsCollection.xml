@@ -27,8 +27,12 @@
 
         
 
+        
+
          objects to a <see
          cref="T:System.Windows.Forms.BindingsCollection" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class can access the <see
          cref="T:System.Windows.Forms.BindingsCollection" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          property. For a list of Windows controls that support data binding, see the <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -60,6 +72,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -95,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -126,6 +144,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -134,8 +154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              event occurs when you invoke the <see
              cref="M:System.Windows.Forms.BindingsCollection.Clear" />
+
+            
 
             
 
@@ -222,6 +250,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -255,6 +285,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -356,11 +388,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingsCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+
+            
 
             
 
@@ -375,6 +411,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -383,8 +421,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -420,6 +462,8 @@
 
             
 
+            
+
              event occurs when the event is about to change.</para
           >
           <para
@@ -430,11 +474,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingsCollection.OnCollectionChanging(System.ComponentModel.CollectionChangeEventArgs)" />
+
+            
 
             
 
@@ -449,6 +497,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -457,8 +507,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -493,6 +547,8 @@
 
           
 
+          
+
           The Binding to remove from the collection. </param
         >
       </Docs>
@@ -521,8 +577,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -552,6 +612,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -560,8 +622,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 

@@ -34,13 +34,19 @@
 
         
 
+        
+
          class is the base class for all column types of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
+        
+
          control. It defines the properties and methods that are common to all column types. An instance of the <see
          cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
       <para
         >Serves as the base class for the different column types of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -85,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -113,11 +125,15 @@
 
             
 
+            
+
              property to programmatically determine whether the column is in design mode.</para
           >
           <para
             >For more information about design mode, see <see
              cref="P:System.ComponentModel.ISite.DesignMode" />
+
+            
 
             
 
@@ -150,6 +166,8 @@
           <para
             >Use this property to provide a custom style for the footer section of the column. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the column in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -194,6 +212,8 @@
 
             
 
+            
+
              property to specify or determine the text displayed in the footer section of the column.</para
           >
           <block subset="none" type="note">
@@ -232,12 +252,16 @@
 
             
 
+            
+
              property to specify the URL of an image to display in the header section of the column. You can use a relative or an absolute URL. A relative URL relates the location of the image to the location of the Web page without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the image in code. An absolute URL provides the complete path, so moving the site to another directory requires updating the code.</para
           >
           <block subset="none" type="note">
             <para
               >If you want to display text instead of an image in the header section of the column, set the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.HeaderText" />
+
+              
 
               
 
@@ -282,6 +306,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -323,8 +349,12 @@
 
             
 
+            
+
              property to specify or determine the text displayed in the header section of the column. If you want to display an image instead of text in the header section of the column, set the <see
              cref="P:System.Web.UI.WebControls.DataGridColumn.HeaderImageUrl" />
+
+            
 
             
 
@@ -365,8 +395,12 @@
 
             
 
+            
+
              method provides the base implementation to reset a column derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -375,8 +409,12 @@
 
             
 
+            
+
              method is often called from the overridden method to reset properties common to all column types derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -385,11 +423,15 @@
 
             
 
+            
+
              method is usually called during data binding, prior to the first row being bound.</para
           >
           <para
             >When the <see
              cref="M:System.Web.UI.WebControls.DataGridColumn.Initialize" />
+
+            
 
             
 
@@ -404,6 +446,8 @@
           <para
             >Provides the base implementation to reset a column derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -439,8 +483,12 @@
 
             
 
+            
+
              method provides the base implementation to reset the specified cell from a column derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -449,8 +497,12 @@
 
             
 
+            
+
              method is often called from the overridden method to reset properties common to all cells in columns derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -462,6 +514,8 @@
 
             
 
+            
+
              method resets only the header and footer cells. Other types of cells are not affected by this method.</para
           >
           <para
@@ -470,8 +524,12 @@
 
             
 
+            
+
              property to true), a <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -480,13 +538,19 @@
 
             
 
+            
+
              control is clicked. If you specify an image for the header cell (by setting the <see
              cref="P:System.Web.UI.WebControls.DataGridColumn.HeaderImageUrl" />
 
             
 
+            
+
              property), an <see
              cref="T:System.Web.UI.WebControls.ImageButton" />
+
+            
 
             
 
@@ -498,13 +562,19 @@
 
             
 
+            
+
              property is displayed in the header cell. If you specify an image for the header cell (by setting the <see
              cref="P:System.Web.UI.WebControls.DataGridColumn.HeaderImageUrl" />
 
             
 
+            
+
              property), an <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -516,8 +586,12 @@
 
             
 
+            
+
              property is not set, a nonbreaking space HTML entity (&amp;nbsp;) is displayed in the header cell. Similarly, if the footer cell does not have any content (if the <see
              cref="P:System.Web.UI.WebControls.DataGridColumn.FooterText" />
+
+            
 
             
 
@@ -535,6 +609,8 @@
 
             
 
+            
+
              class to its initial state.</para
           >
         </summary>
@@ -543,8 +619,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -555,6 +635,8 @@
 
           
 
+          
+
           The column number where the cell is located. </param
         >
         <param name="itemType">
@@ -562,8 +644,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -592,6 +678,8 @@
 
             
 
+            
+
              object is marked to save its state.</para
           >
         </summary>
@@ -617,6 +705,8 @@
           <para
             >Use this property to provide a custom style for the item cells of the column. Common style attributes that can be adjusted include foreground color, background color, font, and content alignment within the cell. Providing a different style enhances the appearance of the column in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -667,6 +757,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -675,8 +767,12 @@
 
             
 
+            
+
              method to load the state of the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -691,6 +787,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -699,13 +797,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
           
 
+          
+
            that contains the saved state of the <see
            cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+          
 
           
 
@@ -733,8 +837,12 @@
 
             
 
+            
+
              class change, the <see
              cref="M:System.Web.UI.Design.WebControls.DataGridDesigner.OnColumnsChanged" />
+
+            
 
             
 
@@ -746,6 +854,8 @@
           <para
             >Calls the <see
              cref="M:System.Web.UI.Design.WebControls.DataGridDesigner.OnColumnsChanged" />
+
+            
 
             
 
@@ -777,8 +887,12 @@
 
             
 
+            
+
              property to programmatically determine the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -790,6 +904,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -818,8 +934,12 @@
 
             
 
+            
+
              method to save the state of the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -834,6 +954,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -845,8 +967,12 @@
 
             
 
+            
+
              that contains the saved state of the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -876,8 +1002,12 @@
 
             
 
+            
+
              property to specify or determine the name of the field to pass to the <see
              cref="M:System.Web.UI.WebControls.DataGrid.OnSortCommand(System.Web.UI.WebControls.DataGridSortCommandEventArgs)" />
+
+            
 
             
 
@@ -892,8 +1022,12 @@
 
             
 
+            
+
              controls are rendered in the heading section of each column where the <see
              cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+
+            
 
             
 
@@ -906,8 +1040,12 @@
 
               
 
+              
+
                property is set to true, the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+
+              
 
               
 
@@ -916,13 +1054,19 @@
 
               
 
+              
+
                control that supports data binding is automatically set with the field name bound to the column. If the <see
                cref="P:System.Web.UI.WebControls.DataGrid.AutoGenerateColumns" />
 
               
 
+              
+
                property is set to false, you need to manually set the <see
                cref="P:System.Web.UI.WebControls.DataGridColumn.SortExpression" />
+
+              
 
               
 
@@ -935,8 +1079,12 @@
 
             
 
+            
+
              controls allow you to sort the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -945,8 +1093,12 @@
 
             
 
+            
+
              control for a column is clicked, the <see
              cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />
+
+            
 
             
 
@@ -955,13 +1107,19 @@
 
             
 
+            
+
              property for the selected column is passed to the <see
              cref="M:System.Web.UI.WebControls.DataGrid.OnSortCommand(System.Web.UI.WebControls.DataGridSortCommandEventArgs)" />
 
             
 
+            
+
              event handler as part of the <see
              cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" />
+
+            
 
             
 
@@ -973,6 +1131,8 @@
           <para
             >Gets or sets the name of the field or expression to pass to the <see
              cref="M:System.Web.UI.WebControls.DataGrid.OnSortCommand(System.Web.UI.WebControls.DataGridSortCommandEventArgs)" />
+
+            
 
             
 
@@ -1013,8 +1173,12 @@
 
             
 
+            
+
              member is used primarily by control developers when deriving a custom implementation from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -1077,6 +1241,8 @@
 
             
 
+            
+
              that contains the view state changes.</para
           >
         </returns>
@@ -1117,6 +1283,8 @@
 
             
 
+            
+
              method to get the string representation of the column.</para
           >
           <block subset="none" type="note">
@@ -1126,8 +1294,12 @@
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+              
 
               
 
@@ -1144,6 +1316,8 @@
           <para
             >Returns <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1172,8 +1346,12 @@
 
             
 
+            
+
              method to track view-state changes on the server control so they can be stored in the server control's <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1185,6 +1363,8 @@
           <para
             >Causes tracking of view-state changes to the server control so they can be stored in the server control's <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1217,13 +1397,19 @@
 
             
 
+            
+
              property to retrieve the <see
              cref="T:System.Web.UI.StateBag" />
 
             
 
+            
+
              object that allows a column derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -1238,8 +1424,12 @@
 
             
 
+            
+
              object that allows a column derived from the <see
              cref="T:System.Web.UI.WebControls.DataGridColumn" />
+
+            
 
             
 
@@ -1269,8 +1459,12 @@
 
             
 
+            
+
              property to programmatically control whether the column is visible in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -1282,6 +1476,8 @@
           <para
             >Gets or sets a value that indicates whether the column is visible in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

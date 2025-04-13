@@ -21,6 +21,8 @@
 
         
 
+        
+
          will be thrown when an attempt to use the resolver is made.</para
       >
     </remarks>
@@ -52,8 +54,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings.Binding" />
+
+            
 
             
 

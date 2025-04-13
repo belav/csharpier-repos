@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is an abstract class that adapts a Web page for a specific class of browsers, defined by the markup language that the browser uses (for example, HTML or XHTML). Much of the adaptability in rendering behavior can be encapsulated in the specialized text writer classes that derive from the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          class or from control adapters. First, the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >The members of the <see
          cref="T:System.Web.UI.Adapters.PageAdapter" />
+
+        
 
         
 
@@ -58,13 +68,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Adapters.PageAdapter.CacheVaryByParams" />
 
             
 
+            
+
              properties define additional HTTP headers and HTTP GET and POST parameters that can be used to vary caching. They are called during cache initialization from the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -78,8 +94,12 @@
 
             
 
+            
+
              method returns an object that can be used to persist the combined view and control states of the page. It is referenced from the <see
              cref="P:System.Web.UI.Page.PageStatePersister" />
+
+            
 
             
 
@@ -93,6 +113,8 @@
 
             
 
+            
+
              method provides a DHTML code fragment that can be used to reference forms in scripts.</para
           >
         </item>
@@ -103,8 +125,12 @@
 
             
 
+            
+
              method returns a collection of the postback variables if the page is in postback. It is called by the .NET Framework instead of the <see
              cref="M:System.Web.UI.Page.DeterminePostBackMode" />
+
+            
 
             
 
@@ -118,8 +144,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.PageAdapter.RenderEndHyperlink(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -133,6 +163,8 @@
 
             
 
+            
+
              method renders a hyperlink or postback client tag that can submit the form. </para
           >
         </item>
@@ -143,13 +175,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.PageAdapter.GetRadioButtonsByGroup(System.String)" />
 
             
 
+            
+
              methods are used by radio button control adapters to reference the other <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -163,13 +201,19 @@
 
             
 
+            
+
              property provides access to the combined control and view states of the <see
              cref="T:System.Web.UI.Page" />
 
             
 
+            
+
              object through the internal ClientState property of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -180,6 +224,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Adapters.PageAdapter.TransformText(System.String)" />
+
+            
 
             
 
@@ -208,6 +254,8 @@
 
             
 
+            
+
              class or derived class.</para
           >
         </remarks>
@@ -216,6 +264,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Adapters.PageAdapter" />
+
+            
 
             
 
@@ -246,6 +296,8 @@
           <para
             >The header names returned by the <see
              cref="P:System.Web.UI.Adapters.PageAdapter.CacheVaryByHeaders" />
+
+            
 
             
 
@@ -304,8 +356,12 @@
 
             
 
+            
+
              property provides access to the internal ClientState property of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -317,8 +373,12 @@
 
             
 
+            
+
              object in the internal ClientState property of <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -354,6 +414,8 @@
 
             
 
+            
+
              method returns one of the following collections: </para
           >
           <list type="bullet">
@@ -374,6 +436,8 @@
           <para
             >A <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -410,11 +474,15 @@
 
             
 
+            
+
              method provides a DHTML reference to the postback form. The code fragment has the following format: </para
           >
           <para
             >document.forms['<paramref
              name="formID" />
+
+            
 
             
 
@@ -430,6 +498,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -460,13 +530,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.PageAdapter.RegisterRadioButton(System.Web.UI.WebControls.RadioButton)" />
 
             
 
+            
+
              methods to reference the other <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -481,6 +557,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -492,13 +570,19 @@
 
             
 
+            
+
              of <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
+            
+
              controls that make up <paramref
              name="groupName" />
+
+            
 
             
 
@@ -510,13 +594,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
           
 
+          
+
            that is the name of the <see
            cref="T:System.Web.UI.WebControls.RadioButton" />
+
+          
 
           
 
@@ -547,8 +637,12 @@
 
             
 
+            
+
              property uses the <see
              cref="M:System.Web.UI.Adapters.PageAdapter.GetStatePersister" />
+
+            
 
             
 
@@ -557,8 +651,12 @@
 
             
 
+            
+
              class, that forms and extracts the combined control and view states for the page. If there is no derived page adapter attached to the page, a <see
              cref="T:System.Web.UI.HiddenFieldPageStatePersister" />
+
+            
 
             
 
@@ -629,8 +727,12 @@
 
             
 
+            
+
              that supports creating and extracting the combined control and view states for the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -664,8 +766,12 @@
 
             
 
+            
+
              class uses a <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -674,8 +780,12 @@
 
             
 
+            
+
              is a collection of the <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -684,8 +794,12 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -694,8 +808,12 @@
 
             
 
+            
+
              if there are no previously registered <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -707,13 +825,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Adapters.PageAdapter.GetRadioButtonsByGroup(System.String)" />
 
             
 
+            
+
              methods to reference the other <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -729,8 +853,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.RadioButton" />
+
+          
 
           
 
@@ -768,8 +896,12 @@
 
             
 
+            
+
              method writes an opening hyperlink tag. When <paramref
              name="writer" />
+
+            
 
             
 
@@ -778,11 +910,15 @@
 
             
 
+            
+
             , this tag has the following format: </para
           >
           <para
             >&lt;a href="<paramref
              name="targetUrl" />
+
+            
 
             
 
@@ -798,8 +934,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -810,8 +950,12 @@
 
           
 
+          
+
           true to use <see
            cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+
+          
 
           
 
@@ -850,13 +994,19 @@
 
             
 
+            
+
              method writes an opening hyperlink tag. When <paramref
              name="writer" />
 
             
 
+            
+
              is an <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -868,8 +1018,12 @@
 
             
 
+            
+
             " accessKey="<paramref
              name="accessKey" />
+
+            
 
             
 
@@ -885,8 +1039,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -897,8 +1055,12 @@
 
           
 
+          
+
           true to use <see
            cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+
+          
 
           
 
@@ -909,8 +1071,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -944,8 +1110,12 @@
 
             
 
+            
+
              method writes a closing hyperlink tag. When the text writer is an <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -990,6 +1160,8 @@
 
             
 
+            
+
              method writes a postback event as a scriptless hyperlink.</para
           >
         </remarks>
@@ -1002,8 +1174,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1014,8 +1190,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1026,8 +1206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1068,8 +1252,12 @@
 
             
 
+            
+
              method writes a postback event as a scriptless hyperlink, including the possibly chunked <see
              cref="M:System.Web.HttpUtility.UrlEncode(System.String)" />
+
+            
 
             
 
@@ -1078,8 +1266,12 @@
 
             
 
+            
+
             , __EVENTARGUMENT<paramref
              name="=argument" />
+
+            
 
             
 
@@ -1088,8 +1280,12 @@
 
             
 
+            
+
              parameters, and an accessKey="<paramref
              name="accessKey" />
+
+            
 
             
 
@@ -1100,6 +1296,8 @@
              type="text/html">
               <a href="4123bb66-3fe4-4d62-b70e-33758656b458">&lt;pages&gt;</a>
             </format>
+
+            
 
             
 
@@ -1115,8 +1313,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1127,8 +1329,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1139,8 +1345,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1151,8 +1361,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1163,8 +1377,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1206,8 +1424,12 @@
 
             
 
+            
+
              method writes a postback event as a scriptless hyperlink, including the possibly chunked <see
              cref="M:System.Web.HttpUtility.UrlEncode(System.String)" />
+
+            
 
             
 
@@ -1216,8 +1438,12 @@
 
             
 
+            
+
             , __EVENTARGUMENT=<paramref
              name="argument" />
+
+            
 
             
 
@@ -1226,8 +1452,12 @@
 
             
 
+            
+
              parameters, and an accessKey="<paramref
              name="accessKey" />
+
+            
 
             
 
@@ -1243,8 +1473,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1255,8 +1489,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1267,8 +1505,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1279,8 +1521,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1291,8 +1537,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1300,6 +1550,8 @@
         >
         <param name="encode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1329,6 +1581,8 @@
 
             
 
+            
+
              method can be used, for example, to transform tab characters (\t) into line breaks (\n).</para
           >
           <para
@@ -1337,8 +1591,12 @@
 
             
 
+            
+
              base method returns <paramref
              name="text" />
+
+            
 
             
 
@@ -1357,6 +1615,8 @@
 
             
 
+            
+
              that contains the transformed text.</para
           >
         </returns>
@@ -1365,8 +1625,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 

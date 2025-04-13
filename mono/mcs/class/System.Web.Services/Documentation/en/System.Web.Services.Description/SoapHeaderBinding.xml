@@ -34,6 +34,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -45,8 +47,12 @@
 
         
 
+        
+
          or an <see
          cref="T:System.Web.Services.Description.OutputBinding" />
+
+        
 
         
 
@@ -67,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+
+            
 
             
 
@@ -93,6 +101,8 @@
           <para
             >The value of this property should be set only if the value of the <see
              cref="P:System.Web.Services.Description.SoapHeaderBinding.Use" />
+
+            
 
             
 
@@ -165,6 +175,8 @@
 
             
 
+            
+
              instance is mapped to a specific property in generated proxy classes.</para
           >
         </summary>
@@ -206,8 +218,12 @@
 
             
 
+            
+
              within the XML Web service to which the <see
              cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+
+            
 
             
 
@@ -242,6 +258,8 @@
 
             
 
+            
+
              property is Encoded. Otherwise the XML Web service will exhibit unexpected behavior.</para
           >
         </remarks>
@@ -250,6 +268,8 @@
           <para
             >Get or sets the URI representing the location of the specification for encoding of content not specifically defined by the <see
              cref="P:System.Web.Services.Description.SoapHeaderBinding.Encoding" />
+
+            
 
             
 
@@ -288,8 +308,12 @@
 
             
 
+            
+
              within the XML Web service the <see
              cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+
+            
 
             
 
@@ -325,6 +349,8 @@
           <para
             >Specifies whether the header is encoded using rules specified by the <see
              cref="P:System.Web.Services.Description.SoapHeaderBinding.Encoding" />
+
+            
 
             
 

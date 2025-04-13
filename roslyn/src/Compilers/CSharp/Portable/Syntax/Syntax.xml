@@ -516,6 +516,8 @@
 
       
 
+      
+
       "
       <PropertyComment
       >
@@ -2027,8 +2029,12 @@
 
           
 
+          
+
            or <c
           >$@"</c>
+
+          
 
           
 
@@ -2254,6 +2260,8 @@
 
           
 
+          
+
            or multiple in a row (in the case of an interpolation in a raw interpolated string).</summary
         >
       </PropertyComment>
@@ -2268,6 +2276,8 @@
           >
           This could be a single <c
           >}</c>
+
+          
 
           
 

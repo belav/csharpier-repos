@@ -38,6 +38,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -66,8 +68,12 @@
 
             
 
+            
+
              is not supported, it modifies the Web Services Description Language (WSDL) file corresponding to the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -83,8 +89,12 @@
 
             
 
+            
+
              including the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -96,8 +106,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -105,6 +119,8 @@
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,8 +155,12 @@
 
             
 
+            
+
              of zero. Any members must be explicitly added using the collection's <see
              cref="M:System.Xml.Serialization.XmlSchemas.Add(System.Xml.Schema.XmlSchema)" />
+
+            
 
             
 
@@ -153,6 +173,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Xml.Serialization.XmlSchemas" />
+
+            
 
             
 
@@ -184,8 +206,12 @@
 
             
 
+            
+
              of zero. Any members must be explicitly added using the collection's <see
              cref="M:System.Web.Services.Description.ServiceDescriptionCollection.Add(System.Web.Services.Description.ServiceDescription)" />
+
+            
 
             
 
@@ -198,6 +224,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 

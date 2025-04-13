@@ -26,6 +26,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -57,6 +59,8 @@
 
             
 
+            
+
              class with the specified text and text properties. </para
           >
         </summary>
@@ -65,8 +69,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -77,8 +85,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -89,6 +101,8 @@
 
           
 
+          
+
           The text to be drawn.</param
         >
         <param name="textRectangle">
@@ -96,8 +110,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -108,8 +126,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -120,8 +142,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -132,8 +158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.ContentAlignment" />
+
+          
 
           
 
@@ -170,6 +200,8 @@
 
             
 
+            
+
              class with the specified text and text properties format.</para
           >
         </summary>
@@ -178,8 +210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -190,8 +226,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -202,6 +242,8 @@
 
           
 
+          
+
           The text to be drawn.</param
         >
         <param name="textRectangle">
@@ -209,8 +251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -221,8 +267,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -233,8 +283,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -242,6 +296,8 @@
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,6 +326,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -293,6 +351,8 @@
           <para
             >Gets or sets the color of the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -344,6 +404,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -370,6 +432,8 @@
           <para
             >Gets or sets the display and layout information of the text drawn on the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 

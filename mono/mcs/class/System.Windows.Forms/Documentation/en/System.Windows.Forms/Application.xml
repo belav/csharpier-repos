@@ -19,12 +19,16 @@
 
         
 
+        
+
          class has methods to start and stop applications and threads, and to process Windows messages, as follows: </para
       >
       <list type="bullet">
         <item>
           <para>
             <see cref="M:System.Windows.Forms.Application.Run" />
+
+            
 
             
 
@@ -37,8 +41,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.Application.ExitThread" />
+
+            
 
             
 
@@ -51,6 +59,8 @@
 
             
 
+            
+
              processes messages while your program is in a loop. </para
           >
         </item>
@@ -60,12 +70,16 @@
 
             
 
+            
+
              adds a message filter to the application message pump to monitor Windows messages. </para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Windows.Forms.IMessageFilter" />
+
+            
 
             
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Application.CurrentInputLanguage" />
+
+        
 
         
 
@@ -116,8 +134,12 @@
 
             
 
+            
+
              parameter instance that you pass to this method must override the <see
              cref="M:System.Windows.Forms.IMessageFilter.PreFilterMessage(System.Windows.Forms.Message@)" />
+
+            
 
             
 
@@ -136,8 +158,12 @@
 
           
 
+          
+
           The implementation of the <see
            cref="T:System.Windows.Forms.IMessageFilter" />
+
+          
 
           
 
@@ -165,13 +191,19 @@
 
             
 
+            
+
              being hosted within a Web browser. Thus, the <see
              cref="T:System.Windows.Forms.Control" />
 
             
 
+            
+
              cannot quit the <see
              cref="T:System.Windows.Forms.Application" />
+
+            
 
             
 
@@ -203,11 +235,15 @@
 
             
 
+            
+
              event to perform unhandled, required tasks before the application stops running. You can close files opened by this application, or dispose of objects that garbage collection did not reclaim.</para
           >
           <para
             >Because this is a static event, you must detach any event handlers attached to this event in the <see
              cref="E:System.Windows.Forms.Application.ApplicationExit" />
+
+            
 
             
 
@@ -241,8 +277,12 @@
 
             
 
+            
+
             \<see
              cref="P:System.Windows.Forms.Application.ProductName" />
+
+            
 
             
 
@@ -254,13 +294,19 @@
 
             
 
+            
+
              first looks to see if the assembly containing the main executable has the AssemblyInformationalVersion attribute on it. If this attribute exists, it is used for both <see
              cref="P:System.Windows.Forms.Application.ProductVersion" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Application.CommonAppDataPath" />
+
+            
 
             
 
@@ -273,6 +319,8 @@
                 >Accessing Local and Remote Data in ClickOnce Applications</a
               >
             </format>
+
+            
 
             
 
@@ -309,8 +357,12 @@
 
             
 
+            
+
             \<see
              cref="P:System.Windows.Forms.Application.ProductName" />
+
+            
 
             
 
@@ -408,8 +460,12 @@
 
             
 
+            
+
              in your code, your application can handle the other events. For example, if you have a form that adds data to a <see
              cref="T:System.Windows.Forms.ListBox" />
+
+            
 
             
 
@@ -418,8 +474,12 @@
 
             
 
+            
+
              to your code, your form repaints when another window is dragged over it. If you remove <see
              cref="M:System.Windows.Forms.Application.DoEvents" />
+
+            
 
             
 
@@ -427,6 +487,8 @@
              type="text/html">
               <a href="1486075f-1e06-4c9e-82c6-f948331db6d6">User Input in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -438,8 +500,12 @@
 
             
 
+            
+
              method does not call the <see
              cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+
+            
 
             
 
@@ -452,6 +518,8 @@
                type="text/html">
                 <a href="c9b3501e-6bc6-40f9-8efd-4b6d9e39ccf0">Asynchronous Programming Overview</a>
               </format>
+
+              
 
               
 
@@ -485,13 +553,19 @@
 
             
 
+            
+
              must be called before creating any controls in the application; typically, <see
              cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
 
             
 
+            
+
              is the first line in the Main function. A separate manifest is not required to enable visual styles when calling <see
              cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+            
 
             
 
@@ -504,8 +578,12 @@
 
               
 
+              
+
               , had to be set to <see
                cref="F:System.Windows.Forms.FlatStyle.System" />
+
+              
 
               
 
@@ -588,8 +666,12 @@
 
             
 
+            
+
              method stops all running message loops on all threads and closes all windows of the application. This method does not necessarily force the application to exit. The <see
              cref="M:System.Windows.Forms.Application.Exit" />
+
+            
 
             
 
@@ -598,8 +680,12 @@
 
             
 
+            
+
              to return. To exit a message loop for the current thread only, call <see
              cref="M:System.Windows.Forms.Application.ExitThread" />
+
+            
 
             
 
@@ -607,6 +693,8 @@
           >
           <para>
             <see cref="M:System.Windows.Forms.Application.Exit" />
+
+            
 
             
 
@@ -620,8 +708,12 @@
 
                 
 
+                
+
                  event is raised for every form represented by the <see
                  cref="P:System.Windows.Forms.Application.OpenForms" />
+
+                
 
                 
 
@@ -630,8 +722,12 @@
 
                 
 
+                
+
                  property of their <see
                  cref="T:System.Windows.Forms.FormClosingEventArgs" />
+
+                
 
                 
 
@@ -645,8 +741,12 @@
 
                 
 
+                
+
                  returns without further action. Otherwise, a <see
                  cref="E:System.Windows.Forms.Form.FormClosed" />
+
+                
 
                 
 
@@ -661,13 +761,19 @@
 
               
 
+              
+
                method does not raise the <see
                cref="E:System.Windows.Forms.Form.Closed" />
 
               
 
+              
+
                and <see
                cref="E:System.Windows.Forms.Form.Closing" />
+
+              
 
               
 
@@ -716,8 +822,12 @@
 
           
 
+          
+
           Returns whether any <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -741,8 +851,12 @@
 
             
 
+            
+
              for the current thread to return. To exit the entire application, call <see
              cref="M:System.Windows.Forms.Application.Exit" />
+
+            
 
             
 
@@ -855,8 +969,12 @@
 
             
 
+            
+
             \<see
              cref="P:System.Windows.Forms.Application.ProductName" />
+
+            
 
             
 
@@ -870,6 +988,8 @@
                 >Accessing Local and Remote Data in ClickOnce Applications</a
               >
             </format>
+
+            
 
             
 
@@ -899,6 +1019,8 @@
           <para
             >When hosting Windows Forms in other environments, such as unmanaged applications, this property will always return false. Use <see
              cref="M:System.Windows.Forms.Application.RegisterMessageLoop(System.Windows.Forms.Application.MessageLoopCallback)" />
+
+            
 
             
 
@@ -934,6 +1056,8 @@
 
             
 
+            
+
              first checks to see if OLE has been initialized on the current thread. If not, it initializes the thread for OLE.</para
           >
           <block subset="none" type="note">
@@ -949,6 +1073,8 @@
           <para
             >One of the <see
              cref="T:System.Threading.ApartmentState" />
+
+            
 
             
 
@@ -979,6 +1105,8 @@
 
             
 
+            
+
              to raise an exception that will halt processing of the application.</para
           >
           <para
@@ -987,13 +1115,19 @@
 
             
 
+            
+
              class has a <see
              cref="E:System.Windows.Forms.Application.ThreadException" />
 
             
 
+            
+
              event. You can attach an event handler to this event to do whatever custom processing you need for unhandled exceptions. If you do not attach an event handler, <see
              cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" />
+
+            
 
             
 
@@ -1004,8 +1138,12 @@
 
             
 
+            
+
              only implements default exception behavior for unhandled exceptions that occur on threads owned by Windows Forms. Unhandled exceptions on other threads are handled by the <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -1020,6 +1158,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1028,8 +1168,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -1061,13 +1205,19 @@
 
             
 
+            
+
              property represents a read-only collection of forms owned by the application. This collection can be searched by index position or by the <see
              cref="P:System.Windows.Forms.Control.Name" />
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -1099,10 +1249,14 @@
 
             
 
+            
+
              inside of your assembly manifest. For more information, see <format
              type="text/html">
               <a href="8e40fab9-549d-4731-aec2-ffa47a382de0">Assembly Manifest</a>
             </format>
+
+            
 
             
 
@@ -1137,10 +1291,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="P:System.Windows.Forms.Application.ProductVersion" />
+
+            
 
             
 
@@ -1149,8 +1307,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Application.CommonAppDataPath" />
+
+            
 
             
 
@@ -1193,6 +1355,8 @@
 
             
 
+            
+
              when the hosting application enters an idle state. This enables some Windows Forms controls and components to do important background work while the user is not interacting with the application. </para
           >
         </remarks>
@@ -1204,6 +1368,8 @@
 
             
 
+            
+
              event in hosted scenarios.</para
           >
         </summary>
@@ -1212,13 +1378,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
 
           
 
+          
+
            objects to pass to the <see
            cref="E:System.Windows.Forms.Application.Idle" />
+
+          
 
           
 
@@ -1278,8 +1450,12 @@
 
           
 
+          
+
           The implementation of the <see
            cref="T:System.Windows.Forms.IMessageFilter" />
+
+          
 
           
 
@@ -1309,6 +1485,8 @@
 
             
 
+            
+
              to return true.</para
           >
           <list type="table">
@@ -1333,8 +1511,12 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.VisualStyles.VisualStyleInformation" />
+
+                  
 
                   
 
@@ -1353,8 +1535,12 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.VisualStyles.VisualStyleInformation" />
+
+                  
 
                   
 
@@ -1373,6 +1559,8 @@
 
                   
 
+                  
+
                    method or by using an application manifest that specifies that ComCtl32.dll version 6 or later will be used to draw controls.</para
                 >
               </description>
@@ -1388,8 +1576,12 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.Application" />
+
+                  
 
                   
 
@@ -1398,8 +1590,12 @@
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled" />
+
+                  
 
                   
 
@@ -1439,6 +1635,8 @@
 
             
 
+            
+
              will launch the application again with the same options.</para
           >
         </remarks>
@@ -1464,8 +1662,12 @@
 
             
 
+            
+
              method is called, or when the <see
              cref="M:System.Windows.Forms.Application.ExitThread" />
+
+            
 
             
 
@@ -1477,13 +1679,19 @@
 
             
 
+            
+
              overload to start an application with a main form, so that the application terminates when the main form is closed. For all other situations, use the <see
              cref="M:System.Windows.Forms.Application.Run(System.Windows.Forms.ApplicationContext)" />
 
             
 
+            
+
              overload, which supports supplying an <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -1521,13 +1729,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.Application.ExitThread" />
 
             
 
+            
+
              is called or the <see
              cref="E:System.Windows.Forms.Application.ThreadExit" />
+
+            
 
             
 
@@ -1542,6 +1756,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1550,8 +1766,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ApplicationContext" />
+
+          
 
           
 
@@ -1585,13 +1805,19 @@
 
             
 
+            
+
              parameter for the <see
              cref="E:System.Windows.Forms.Form.Closed" />
 
             
 
+            
+
              event. The event handler calls <see
              cref="M:System.Windows.Forms.Application.ExitThread" />
+
+            
 
             
 
@@ -1604,8 +1830,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -1622,8 +1852,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -1679,13 +1913,19 @@
 
             
 
+            
+
              class, which is based on the ndptecgdi graphics library, or the <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
              class, which is based on the ndptecgdiplus graphics library. This change was made in the dnprdnlong because of performance and localization issues with ndptecgdiplus. Use <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -1697,8 +1937,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1710,8 +1954,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1720,13 +1968,19 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -1743,13 +1997,19 @@
 
           
 
+          
+
           The default value to use for new controls. If true, new controls that support UseCompatibleTextRendering use the ndptecgdiplus based <see
            cref="T:System.Drawing.Graphics" />
 
           
 
+          
+
            class for text rendering; if false, new controls use the ndptecgdi based <see
            cref="T:System.Windows.Forms.TextRenderer" />
+
+          
 
           
 
@@ -1795,8 +2055,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PowerState" />
+
+          
 
           
 
@@ -1807,10 +2071,14 @@
 
           
 
+          
+
           true to force the suspended mode immediately; false to cause Windows to send a suspend request to every application. </param
         >
         <param name="disableWakeEvent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1843,8 +2111,12 @@
 
             
 
+            
+
              before you instantiate the main form of your application using the <see
              cref="Overload:System.Windows.Forms.Application.Run" />
+
+            
 
             
 
@@ -1853,6 +2125,8 @@
           <para
             >To catch exceptions that occur in threads not created and owned by Windows Forms, use the <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -1868,8 +2142,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.UnhandledExceptionMode" />
+
+          
 
           
 
@@ -1903,8 +2181,12 @@
 
             
 
+            
+
              before you instantiate the main form of your application using the <see
              cref="Overload:System.Windows.Forms.Application.Run" />
+
+            
 
             
 
@@ -1916,13 +2198,19 @@
 
             
 
+            
+
              is true, the thread exception mode is set. The thread exception mode overrides the application exception mode if <paramref
              name="mode" />
 
             
 
+            
+
              is not set to <see
              cref="F:System.Windows.Forms.UnhandledExceptionMode.Automatic" />
+
+            
 
             
 
@@ -1934,8 +2222,12 @@
 
             
 
+            
+
              is false, the application exception mode is set. The application exception mode is used for all threads that have the <see
              cref="F:System.Windows.Forms.UnhandledExceptionMode.Automatic" />
+
+            
 
             
 
@@ -1944,6 +2236,8 @@
           <para
             >To catch exceptions that occur in threads not created and owned by Windows Forms, use the <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -1959,8 +2253,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.UnhandledExceptionMode" />
+
+          
 
           
 
@@ -1968,6 +2266,8 @@
         >
         <param name="threadScope">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2012,6 +2312,8 @@
 
             
 
+            
+
              event to deal with these exceptions, which will leave your application in an unknown state. Where possible, exceptions should be handled by a structured exception handling block.</para
           >
           <para
@@ -2020,8 +2322,12 @@
 
             
 
+            
+
             . To catch exceptions that occur in threads not created and owned by Windows Forms, use the <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -2031,6 +2337,8 @@
             <para
               >To guarantee that no activations of this event are missed, you must attach a handler before you call <see
                cref="Overload:System.Windows.Application.Run" />
+
+              
 
               
 
@@ -2066,6 +2374,8 @@
 
             
 
+            
+
              event to perform any unhandled, required tasks before the thread stops running. Close files opened by this thread, or dispose of objects that the garbage collector did not reclaim.</para
           >
           <block subset="none" type="note">
@@ -2077,6 +2387,8 @@
           <para
             >Occurs when a thread is about to shut down. When the main thread for an application is about to be shut down, this event is raised first, followed by an <see
              cref="E:System.Windows.Forms.Application.ApplicationExit" />
+
+            
 
             
 
@@ -2114,6 +2426,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2136,8 +2450,12 @@
 
             
 
+            
+
             \<see
              cref="P:System.Windows.Forms.Application.ProductName" />
+
+            
 
             
 
@@ -2152,6 +2470,8 @@
                 >Accessing Local and Remote Data in ClickOnce Applications</a
               >
             </format>
+
+            
 
             
 
@@ -2188,8 +2508,12 @@
 
             
 
+            
+
             \<see
              cref="P:System.Windows.Forms.Application.ProductName" />
+
+            
 
             
 
@@ -2227,6 +2551,8 @@
 
             
 
+            
+
              property of all open forms in the application will be set to true. This call will not return until this property has been set on all forms. Use this property when you have a long-running operation, and want to indicate in all application forms that the operation is still processing.</para
           >
         </remarks>
@@ -2256,8 +2582,12 @@
 
             
 
+            
+
              property determines whether visual styles are enabled in client areas or nonclient areas of application windows. Generally, this property should be set within the main form's constructor or <see
              cref="E:System.Windows.Forms.Form.Load" />
+
+            
 
             
 

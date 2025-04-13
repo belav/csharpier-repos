@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is the base class from which Web controls inherit. It defines many properties common to all Web controls. For more information, see <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -35,13 +39,19 @@
 
         
 
+        
+
          object is a component that substitutes certain <see
          cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
+        
+
          class or inherited methods and events in its execution life cycle to allow browser- or markup-specific handling. The .NET Framework maps a single control adapter to a derived <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          class. Therefore, it is likely that a single adapter can be used for a number of browser class behaviors or that inclusion of the adaptability in the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -67,13 +81,19 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
+        
+
          uses the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -85,6 +105,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -93,13 +115,19 @@
 
         
 
+        
+
          typically consists of a beginning and ending tag, and some inner markup between the beginning and ending tags. The tags are defined when the <see
          cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
+        
+
          is created. For more information, see <see
          cref="Overload:System.Web.UI.WebControls.WebControl.#ctor" />
+
+        
 
         
 
@@ -111,8 +139,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -121,11 +153,15 @@
 
         
 
+        
+
          method. </para
       >
       <para
         >The <see
          cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -138,6 +174,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -147,12 +185,16 @@
 
             
 
+            
+
             .</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -166,8 +208,12 @@
 
         
 
+        
+
          property returns true only if the <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -176,8 +222,12 @@
 
         
 
+        
+
          property returns a strongly typed reference to the <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -204,8 +254,12 @@
 
             
 
+            
+
              class when it creates the corresponding <see
              cref="T:System.Web.UI.WebControls.WebControl" />
+
+            
 
             
 
@@ -217,6 +271,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Adapters.WebControlAdapter" />
+
+            
 
             
 
@@ -248,13 +304,19 @@
 
             
 
+            
+
              object is attached to a <see
              cref="T:System.Web.UI.WebControls.WebControl" />
 
             
 
+            
+
              object, the .NET Framework calls on the adapter life-cycle methods instead of the control methods. For more information, see <see
              cref="T:System.Web.UI.Adapters.ControlAdapter" />
+
+            
 
             
 
@@ -287,13 +349,19 @@
 
             
 
+            
+
              property provides access for the adapter and any of its derived classes to the <see
              cref="P:System.Web.UI.WebControls.WebControl.IsEnabled" />
 
             
 
+            
+
              property. <see
              cref="P:System.Web.UI.WebControls.WebControl.IsEnabled" />
+
+            
 
             
 
@@ -333,8 +401,12 @@
 
             
 
+            
+
              method generates target-specific markup to send to the client browser. <see
              cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -343,13 +415,19 @@
 
             
 
+            
+
              method if a <see
              cref="T:System.Web.UI.WebControls.Adapters.WebControlAdapter" />
 
             
 
+            
+
              object is attached to a <see
              cref="T:System.Web.UI.WebControls.WebControl" />
+
+            
 
             
 
@@ -365,8 +443,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -396,8 +478,12 @@
 
             
 
+            
+
              method to write additional markup tags or add attributes to the beginning tag for the <see
              cref="T:System.Web.UI.WebControls.WebControl" />
+
+            
 
             
 
@@ -406,8 +492,12 @@
 
             
 
+            
+
              in conjunction with the <see
              cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -423,8 +513,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -457,8 +551,12 @@
 
             
 
+            
+
              method generates the inner markup, between the beginning and ending tags for the control. Typically, markup is generated by <see
              cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -471,6 +569,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -480,12 +580,16 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+                
 
                 
 
@@ -499,6 +603,8 @@
 
             
 
+            
+
              to generate target-specific inner markup to send to the client browser. </para
           >
           <para
@@ -507,8 +613,12 @@
 
             
 
+            
+
              base method calls <see
              cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -517,8 +627,12 @@
 
             
 
+            
+
              base method calls <see
              cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -527,8 +641,12 @@
 
             
 
+            
+
             . Thus, overrides of <see
              cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -537,8 +655,12 @@
 
             
 
+            
+
              base method only if its processing is in addition to, rather than instead of, <see
              cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -554,8 +676,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -588,8 +714,12 @@
 
             
 
+            
+
              method to write additional markup tags or add attributes to the ending tag for the <see
              cref="T:System.Web.UI.WebControls.WebControl" />
+
+            
 
             
 
@@ -598,8 +728,12 @@
 
             
 
+            
+
              in conjunction with the <see
              cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -615,8 +749,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

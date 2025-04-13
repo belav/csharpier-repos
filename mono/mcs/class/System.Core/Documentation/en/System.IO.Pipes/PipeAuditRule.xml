@@ -26,11 +26,15 @@
 
         
 
+        
+
          class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to perform auditing. This class can specify how audit rules are inherited from and propagated to objects.</para
       >
       <para
         >To allow file auditing on computers that are running Windows NT or later operating systems, the Audit Access Security policy must be enabled; by default, this policy is set to <ui
         >No Auditing</ui>
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
             
 
+            
+
              button and then point to <ui
             >All Programs</ui>
+
+            
 
             
 
@@ -55,8 +63,12 @@
 
             
 
+            
+
              and then click <ui
             >Local Security Policy</ui>
+
+            
 
             
 
@@ -73,8 +85,12 @@
 
             
 
+            
+
              entry in the right pane of the Local Security Settings window to display the <ui
             >Audit object access Properties</ui>
+
+            
 
             
 
@@ -88,8 +104,12 @@
 
             
 
+            
+
              or <ui
             >Failure</ui>
+
+            
 
             
 
@@ -104,8 +124,12 @@
 
         
 
+        
+
          class to create a new audit rule. You can persist this rule using the <see
          cref="T:System.IO.Pipes.PipeSecurity" />
+
+        
 
         
 
@@ -145,6 +169,8 @@
 
             
 
+            
+
              class. Audit rules determine when and how actions performed on system objects are logged.</para
           >
         </remarks>
@@ -156,8 +182,12 @@
 
             
 
+            
+
              class for a user account specified in a <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -169,8 +199,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -181,8 +215,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeAccessRights" />
+
+          
 
           
 
@@ -193,8 +231,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -229,6 +271,8 @@
 
             
 
+            
+
              class. Audit rules determine when and how actions performed on system objects are logged.</para
           >
         </remarks>
@@ -240,11 +284,15 @@
 
             
 
+            
+
              class for a named user account.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,8 +303,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.Pipes.PipeAccessRights" />
+
+          
 
           
 
@@ -267,8 +319,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -303,8 +359,12 @@
 
             
 
+            
+
              flags that are associated with the current <see
              cref="T:System.IO.Pipes.PipeAuditRule" />
+
+            
 
             
 

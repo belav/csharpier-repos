@@ -40,8 +40,12 @@
 
         
 
+        
+
          grouping feature lets you create visual groups of logically related <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          control appear whenever the <see
          cref="P:System.Windows.Forms.ListView.View" />
+
+        
 
         
 
@@ -60,10 +68,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          objects to the <see
          cref="P:System.Windows.Forms.ListView.Groups" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
          control. Set the group header text and header alignment in the <see
          cref="M:System.Windows.Forms.ListViewGroup.#ctor" />
+
+        
 
         
 
@@ -95,8 +115,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ListViewGroup.HeaderAlignment" />
+
+        
 
         
 
@@ -108,8 +132,12 @@
 
         
 
+        
+
          constructor, by setting the <see
          cref="P:System.Windows.Forms.ListViewItem.Group" />
+
+        
 
         
 
@@ -118,8 +146,12 @@
 
         
 
+        
+
          collection of a group. All items should be assigned to groups before they are displayed. Any items that are not assigned to a group will appear in the default group, which has the header label "DefaultGroup{0}". The default group is not contained in the <see
          cref="P:System.Windows.Forms.ListView.Groups" />
+
+        
 
         
 
@@ -131,8 +163,12 @@
 
         
 
+        
+
          property at run time or by adding it to the <see
          cref="P:System.Windows.Forms.ListViewGroup.Items" />
+
+        
 
         
 
@@ -145,6 +181,8 @@
 
           
 
+          
+
            control that does not already order its items.</para
         >
       </block>
@@ -154,8 +192,12 @@
 
           
 
+          
+
            groups are available only on Windows XP and the Windows Server 2003 family when your application calls the <see
            cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+          
 
           
 
@@ -167,8 +209,12 @@
 
           
 
+          
+
            method overload and pass in the <see
            cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+          
 
           
 
@@ -181,6 +227,8 @@
       <para
         >Represents a group of items displayed within a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -201,6 +249,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -229,8 +279,12 @@
 
             
 
+            
+
              class using the specified value to initialize the <see
              cref="P:System.Windows.Forms.ListViewGroup.Header" />
+
+            
 
             
 
@@ -239,6 +293,8 @@
         </summary>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,13 +326,19 @@
 
             
 
+            
+
              class using the specified values to initialize the <see
              cref="P:System.Windows.Forms.ListViewGroup.Name" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewGroup.Header" />
+
+            
 
             
 
@@ -288,8 +350,12 @@
 
           
 
+          
+
           The initial value of the <see
            cref="P:System.Windows.Forms.ListViewGroup.Name" />
+
+          
 
           
 
@@ -300,8 +366,12 @@
 
           
 
+          
+
           The initial value of the <see
            cref="P:System.Windows.Forms.ListViewGroup.Header" />
+
+          
 
           
 
@@ -333,11 +403,15 @@
 
             
 
+            
+
              class using the specified header text and the specified header alignment.</para
           >
         </summary>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -348,8 +422,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.HorizontalAlignment" />
+
+          
 
           
 
@@ -374,6 +452,8 @@
           <para
             >Use this property to retrieve the header text or to change the header value at run time. You can also set the header text in the <see
              cref="M:System.Windows.Forms.ListViewGroup.#ctor" />
+
+            
 
             
 
@@ -414,6 +494,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </remarks>
@@ -451,8 +533,12 @@
 
             
 
+            
+
              constructor, by setting the <see
              cref="P:System.Windows.Forms.ListViewItem.Group" />
+
+            
 
             
 
@@ -461,8 +547,12 @@
 
             
 
+            
+
              collection of a group. All items should be assigned to groups before they are displayed. Any items that are not assigned to a group will appear in the default group, which has the header label "DefaultGroup{0}". The default group is not contained in the <see
              cref="P:System.Windows.Forms.ListView.Groups" />
+
+            
 
             
 
@@ -474,8 +564,12 @@
 
             
 
+            
+
              property at run time or by adding it to the <see
              cref="P:System.Windows.Forms.ListViewGroup.Items" />
+
+            
 
             
 
@@ -488,13 +582,19 @@
 
               
 
+              
+
                collection of a group, but if it is not also present within the <see
                cref="P:System.Windows.Forms.ListView.Items" />
 
               
 
+              
+
                collection of the <see
                cref="T:System.Windows.Forms.ListView" />
+
+              
 
               
 
@@ -537,6 +637,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -601,6 +703,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -609,8 +713,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -621,8 +729,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -658,6 +770,8 @@
           <para
             >Any type derived from the <see
              cref="T:System.Object" />
+
+            
 
             
 

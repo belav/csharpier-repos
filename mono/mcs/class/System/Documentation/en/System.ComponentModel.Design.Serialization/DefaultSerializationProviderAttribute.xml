@@ -34,6 +34,8 @@
 
         
 
+        
+
          interface and have an empty constructor. The class itself can be internal to the assembly. This class cannot be inherited.</para
       >
     </remarks>
@@ -42,6 +44,8 @@
       <para
         >The <see
          cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+
+        
 
         
 
@@ -77,11 +81,15 @@
 
             
 
+            
+
              class with the named provider type.</para
           >
         </summary>
         <param name="providerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,6 +124,8 @@
 
             
 
+            
+
              class with the given provider type.</para
           >
         </summary>
@@ -124,8 +134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

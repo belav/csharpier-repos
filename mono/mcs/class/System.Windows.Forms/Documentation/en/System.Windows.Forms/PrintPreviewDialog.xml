@@ -45,8 +45,12 @@
 
         
 
+        
+
          class, some of the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Windows.Forms.PrintPreviewDialog.#ctor" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
       <para
         >Represents a dialog box form that contains a <see
          cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+        
 
         
 
@@ -92,8 +102,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Document" />
+
+            
 
             
 
@@ -105,6 +119,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -142,6 +158,8 @@
           <para
             >This property allows you to designate a default action that occurs when the user presses the ENTER key in your application. The button assigned to this property must be an <see
              cref="T:System.Windows.Forms.IButtonControl" />
+
+            
 
             
 
@@ -341,8 +359,12 @@
 
             
 
+            
+
              property. If you want to determine the size the form will auto scale to based on a specific font, use the <see
              cref="M:System.Windows.Forms.Form.GetAutoScaleSize(System.Drawing.Font)" />
+
+            
 
             
 
@@ -393,8 +415,12 @@
 
             
 
+            
+
              class does not support the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.AutoScaleBaseSize" />
+
+            
 
             
 
@@ -498,6 +524,8 @@
 
             
 
+            
+
              property is used to manage the screen size allocated to the automatic scroll bars.</para
           >
         </remarks>
@@ -542,8 +570,12 @@
 
             
 
+            
+
              property has no affect on the appearance of the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -555,6 +587,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -590,6 +624,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.AutoSize" />
+
+            
 
             
 
@@ -660,6 +696,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -722,6 +760,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.BackColor" />
+
+            
 
             
 
@@ -794,6 +834,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -833,8 +875,12 @@
 
             
 
+            
+
              property has no affect on the appearance of the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -846,6 +892,8 @@
           <para
             >Gets or sets the layout of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImage" />
+
+            
 
             
 
@@ -887,6 +935,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -920,6 +970,8 @@
           <para
             >Gets or sets the cancel button for the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -983,6 +1035,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.CausesValidation" />
+
+            
 
             
 
@@ -1052,6 +1106,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.ContextMenu" />
+
+            
 
             
 
@@ -1126,6 +1182,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1152,6 +1210,8 @@
           <para
             >If the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.ControlBox" />
+
+            
 
             
 
@@ -1187,8 +1247,12 @@
 
             
 
+            
+
              method, see the <see
              cref="M:System.Windows.Forms.Control.CreateHandle" />
+
+            
 
             
 
@@ -1200,6 +1264,8 @@
           <para
             >Creates the handle for the form that encapsulates the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -1272,6 +1338,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1309,13 +1377,19 @@
 
             
 
+            
+
              property to access the <see
              cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
             
 
+            
+
             . By adding <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1354,8 +1428,12 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -1364,8 +1442,12 @@
 
             
 
+            
+
              of 370 pixels and a <see
              cref="P:System.Drawing.Size.Height" />
+
+            
 
             
 
@@ -1377,6 +1459,8 @@
           <para
             >Gets the default minimum size, in pixels, of the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -1445,6 +1529,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1485,6 +1571,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -1515,6 +1603,8 @@
           <para
             >This property is equivalent to <see
              cref="P:System.Windows.Forms.PrintPreviewControl.Document" />
+
+            
 
             
 
@@ -1586,6 +1676,8 @@
 
             
 
+            
+
             . </para
           >
           <para>This event is not relevant for this class.</para>
@@ -1595,6 +1687,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Enabled" />
+
+            
 
             
 
@@ -1667,6 +1761,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1734,6 +1830,8 @@
 
             
 
+            
+
             . </para
           >
           <para>This event is not relevant for this class.</para>
@@ -1743,6 +1841,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.ForeColor" />
+
+            
 
             
 
@@ -1780,6 +1880,8 @@
           <para
             >The border style of the form determines how the outer edge of the form appears. In addition to changing the border display for a form, certain border styles prevent the form from being sized. For example, the <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+
+            
 
             
 
@@ -1821,8 +1923,12 @@
 
             
 
+            
+
              button. You can use this button to display Help for your application. You can create an event handler for the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1831,8 +1937,12 @@
 
             
 
+            
+
              class to display Help information to the user when the <ui
             >Help</ui>
+
+            
 
             
 
@@ -1844,6 +1954,8 @@
 
             
 
+            
+
              property is ignored if the maximize or minimize boxes are shown.</para
           >
         </remarks>
@@ -1852,6 +1964,8 @@
           <para
             >Gets or sets a value indicating whether a <ui
             >Help</ui>
+
+            
 
             
 
@@ -1954,6 +2068,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1962,6 +2078,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.ImeMode" />
+
+            
 
             
 
@@ -2030,13 +2148,19 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.KeyDown" />
 
             
 
+            
+
             , and <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -2117,6 +2241,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2188,6 +2314,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2218,8 +2346,12 @@
 
             
 
+            
+
              property to either <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedSingle" />
+
+            
 
             
 
@@ -2228,13 +2360,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.FormBorderStyle.Fixed3D" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+
+            
 
             
 
@@ -2248,8 +2386,12 @@
 
               
 
+              
+
                event. The <see
                cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
+
+              
 
               
 
@@ -2258,8 +2400,12 @@
 
               
 
+              
+
                property to <see
                cref="F:System.Windows.Forms.FormWindowState.Maximized" />
+
+              
 
               
 
@@ -2268,8 +2414,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
+
+              
 
               
 
@@ -2344,6 +2494,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2352,6 +2504,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.MaximumSize" />
+
+            
 
             
 
@@ -2392,13 +2546,19 @@
 
             
 
+            
+
              to be displayed when your multiple document interface (MDI) form has no active MDI child forms and another <see
              cref="T:System.Windows.Forms.MainMenu" />
 
             
 
+            
+
              to display when a child window is displayed. You can also use a different <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -2410,6 +2570,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -2450,8 +2612,12 @@
 
             
 
+            
+
              property to either <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedSingle" />
+
+            
 
             
 
@@ -2460,13 +2626,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.FormBorderStyle.Fixed3D" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+
+            
 
             
 
@@ -2479,8 +2651,12 @@
 
               
 
+              
+
                event. The <see
                cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
+
+              
 
               
 
@@ -2489,8 +2665,12 @@
 
               
 
+              
+
                property to <see
                cref="F:System.Windows.Forms.FormWindowState.Minimized" />
+
+              
 
               
 
@@ -2499,8 +2679,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
+
+              
 
               
 
@@ -2578,6 +2762,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2586,6 +2772,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.MinimumSize" />
+
+            
 
             
 
@@ -2620,6 +2808,8 @@
 
             
 
+            
+
              method invalidates the preview so it is regenerated when the dialog is reopened.</para
           >
           <para
@@ -2630,11 +2820,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PrintPreviewDialog.OnClosing(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -2649,11 +2843,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2690,8 +2888,12 @@
 
             
 
+            
+
              class does not use the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Opacity" />
+
+            
 
             
 
@@ -2770,6 +2972,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -2797,6 +3001,8 @@
           <para
             >Gets a value indicating the <see
              cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+            
 
             
 
@@ -2833,8 +3039,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.Keys.Down" />
+
+            
 
             
 
@@ -2843,13 +3053,19 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Windows.Forms.Keys.Left" />
 
             
 
+            
+
              key values will return false; otherwise, processing is passed to the base class's <see
              cref="M:System.Windows.Forms.Form.ProcessDialogKey(System.Windows.Forms.Keys)" />
+
+            
 
             
 
@@ -2869,8 +3085,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -2905,6 +3125,8 @@
         </returns>
         <param name="forward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2971,6 +3193,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2979,6 +3203,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeft" />
+
+            
 
             
 
@@ -3019,13 +3245,19 @@
 
             
 
+            
+
              property is used for applications where the language is written from right to left. When both the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeft" />
+
+            
 
             
 
@@ -3037,6 +3269,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+            
 
             
 
@@ -3074,6 +3308,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3082,6 +3318,8 @@
           <para
             >Occurs when value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
+
+            
 
             
 
@@ -3119,8 +3357,12 @@
 
             
 
+            
+
              tool window in your application, you might want to prevent that window from being selected through the Windows taskbar, since you would need both the application's main window and the <ui
             >Find and Replace</ui>
+
+            
 
             
 
@@ -3162,8 +3404,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -3172,13 +3418,19 @@
 
             
 
+            
+
              property to size and locate the form based on desktop coordinates or use the <see
              cref="P:System.Windows.Forms.Control.Bounds" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -3221,6 +3473,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3229,6 +3483,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Size" />
+
+            
 
             
 
@@ -3335,8 +3591,12 @@
 
             
 
+            
+
              property value of false are not included in the collection of controls in the tab order. The tab order can be manipulated by setting the control's <see
              cref="P:System.Windows.Forms.Form.TabIndex" />
+
+            
 
             
 
@@ -3379,6 +3639,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3387,6 +3649,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.TabStop" />
+
+            
 
             
 
@@ -3486,6 +3750,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3494,6 +3760,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Text" />
+
+            
 
             
 
@@ -3528,6 +3796,8 @@
           <para
             >A topmost form is a form that overlaps all the other forms even if it is not the active or foreground form. Topmost forms are always displayed at the highest point in the z-order of an application. You can use this method to create a form that is always displayed in your application, such as a <ui
             >Find and Replace</ui>
+
+            
 
             
 
@@ -3572,8 +3842,12 @@
 
             
 
+            
+
              property is assigned a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -3582,8 +3856,12 @@
 
             
 
+            
+
              will be displayed transparently. Any mouse actions, such as the click of the mouse, that are performed on the transparent areas of the form will be transferred to the windows below the transparent area. For example, if the client region of a form is made transparent, clicking the mouse on that area will send the event notification of the click to any window that is below it. If the color assigned to the <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
+
+            
 
             
 
@@ -3592,8 +3870,12 @@
 
             
 
+            
+
              control on a form that has its <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
+
+            
 
             
 
@@ -3602,13 +3884,19 @@
 
             
 
+            
+
             , the control will be displayed transparently unless the <see
              cref="P:System.Windows.Forms.Control.BackColor" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -3647,8 +3935,12 @@
 
             
 
+            
+
              setting the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Document" />
+
+            
 
             
 
@@ -3657,8 +3949,12 @@
 
             
 
+            
+
              properties. The example assumes the form contains a <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3667,8 +3963,12 @@
 
             
 
+            
+
              objects. The <see
              cref="P:System.Windows.Forms.Control.Tag" />
+
+            
 
             
 
@@ -3677,8 +3977,12 @@
 
             
 
+            
+
              object must be set to a fully qualified document name that can be accessed by the machine running the example. Set each <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -3687,13 +3991,19 @@
 
             
 
+            
+
              property. For example, you could set TreeNode1.Tag to "c:\myDocuments\recipe.doc" and TreeNode1.Text to "recipe.doc". The example also assumes the form contains a <see
              cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
+            
+
              named PrintPreviewDialog1 and a button named Button1. To run this example, call the InitializePrintPreviewDialog method in the form's constructor or <see
              cref="E:System.Windows.Forms.Form.Load" />
+
+            
 
             
 
@@ -3793,6 +4103,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3801,6 +4113,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PrintPreviewDialog.Visible" />
+
+            
 
             
 
@@ -3840,8 +4154,12 @@
 
             
 
+            
+
              property is always set to <see
              cref="F:System.Windows.Forms.FormWindowState.Normal" />
+
+            
 
             
 
@@ -3850,8 +4168,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Control.Left" />
+
+            
 
             
 
@@ -3860,13 +4182,19 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.Control.Width" />
 
             
 
+            
+
              property settings. If a form is hidden after it has been shown, these properties reflect the previous state until the form is shown again, regardless of any changes made to the <see
              cref="P:System.Windows.Forms.Form.WindowState" />
+
+            
 
             
 

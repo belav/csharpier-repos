@@ -24,13 +24,19 @@
 
         
 
+        
+
          class attempts to send an Internet Control Message Protocol (ICMP) echo request to a remote computer and receive information back from the computer via an ICMP echo reply message. The <see
          cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
+        
+
          class uses instances of the <see
          cref="T:System.Net.NetworkInformation.PingReply" />
+
+        
 
         
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          methods return instances of the <see
          cref="T:System.Net.NetworkInformation.PingReply" />
+
+        
 
         
 
@@ -52,8 +62,12 @@
 
         
 
+        
+
          methods return a <see
          cref="T:System.Net.NetworkInformation.PingReply" />
+
+        
 
         
 
@@ -62,8 +76,12 @@
 
         
 
+        
+
          method's <see
          cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+        
 
         
 
@@ -72,8 +90,12 @@
 
         
 
+        
+
          is accessed through the <see
          cref="P:System.Net.NetworkInformation.PingCompletedEventArgs.Reply" />
+
+        
 
         
 
@@ -85,8 +107,12 @@
 
         
 
+        
+
          is not <see
          cref="F:System.Net.NetworkInformation.IPStatus.Success" />
+
+        
 
         
 
@@ -95,8 +121,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+        
 
         
 
@@ -105,8 +135,12 @@
 
         
 
+        
+
          properties. The <see
          cref="P:System.Net.NetworkInformation.PingReply.RoundtripTime" />
+
+        
 
         
 
@@ -115,8 +149,12 @@
 
         
 
+        
+
          property will return an empty array, and the <see
          cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+        
 
         
 
@@ -131,8 +169,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -166,8 +208,12 @@
 
             
 
+            
+
              returned by any of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -202,6 +248,8 @@
 
             
 
+            
+
              option, can be used to discover the maximum transmission unit for the network path between the source and destination computers. For additional information, see "Traceroute" in RFC 1574, Section 3.2, available at http://www.ietf.org.</para
           >
           <para
@@ -210,8 +258,12 @@
 
             
 
+            
+
               and <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -253,13 +305,19 @@
 
             
 
+            
+
              value specified in the ICMP echo request controls packet fragmentation. If <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
 
             
 
+            
+
              is true and the packet size exceeds the maximum transmission unit of the network path taken by the packet, the packet is discarded and the <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -294,8 +352,12 @@
 
             
 
+            
+
              time is reported as 0, which is also a valid value when the request succeeds. You must check the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -336,8 +398,12 @@
 
             
 
+            
+
              is not <see
              cref="F:System.Net.NetworkInformation.IPStatus.Success" />
+
+            
 
             
 
@@ -346,8 +412,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+            
 
             
 
@@ -356,8 +426,12 @@
 
             
 
+            
+
              properties. The <see
              cref="P:System.Net.NetworkInformation.PingReply.RoundtripTime" />
+
+            
 
             
 
@@ -366,8 +440,12 @@
 
             
 
+            
+
              properties will return zero, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+            
 
             
 

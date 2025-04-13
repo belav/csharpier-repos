@@ -24,8 +24,12 @@
 
         
 
+        
+
          object contains the object identifier (<see
          cref="P:System.Security.Cryptography.X509Certificates.PublicKey.Oid" />
+
+        
 
         
 
@@ -68,11 +72,15 @@
 
             
 
+            
+
              class using an object identifier (OID) object of the public key, an ASN.1-encoded representation of the public key parameters, and an ASN.1-encoded representation of the public key value. </para
           >
         </summary>
         <param name="oid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -83,10 +91,14 @@
 
           
 
+          
+
           An ASN.1-encoded representation of the public key parameters.</param
         >
         <param name="keyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,8 +188,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -192,8 +208,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 

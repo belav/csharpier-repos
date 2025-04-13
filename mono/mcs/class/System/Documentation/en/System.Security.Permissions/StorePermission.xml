@@ -30,6 +30,8 @@
 
         
 
+        
+
          controls the access that code is granted to X.509 stores. The permission is based on flags representing the access levels that apply to every store.</para
       >
     </remarks>
@@ -66,6 +68,8 @@
 
             
 
+            
+
              property can then be set to specify the type of access allowed.</para
           >
         </remarks>
@@ -77,6 +81,8 @@
 
             
 
+            
+
              class with either fully restricted or unrestricted permission state.</para
           >
         </summary>
@@ -85,8 +91,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -122,6 +132,8 @@
 
             
 
+            
+
              parameter specifies the permitted access to X.509 stores. The specified permitted access applies to all stores. It is not possible to specify access to an individual store.</para
           >
         </remarks>
@@ -130,6 +142,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.StorePermission" />
+
+            
 
             
 
@@ -197,6 +211,8 @@
 
             
 
+            
+
              property specifies the permitted access to X.509 stores. X.509 stores are physical stores used to persist and manage X.509 certificates.</para
           >
         </remarks>
@@ -205,6 +221,8 @@
           <para
             >Gets or sets the type of <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+            
 
             
 
@@ -244,8 +262,12 @@
 
             
 
+            
+
              method reconstructs a <see
              cref="T:System.Security.Permissions.StorePermission" />
+
+            
 
             
 
@@ -254,13 +276,19 @@
 
             
 
+            
+
              class. Use the <see
              cref="M:System.Security.Permissions.StorePermission.ToXml" />
 
             
 
+            
+
              method to XML-encode the <see
              cref="T:System.Security.Permissions.StorePermission" />
+
+            
 
             
 
@@ -312,6 +340,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be of the same type as the current permission. </param
         >
       </Docs>
@@ -352,6 +382,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -418,8 +450,12 @@
 
             
 
+            
+
              method to restore the state information from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -435,6 +471,8 @@
           <para
             >A <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -473,6 +511,8 @@
 
             
 
+            
+
              is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -486,6 +526,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

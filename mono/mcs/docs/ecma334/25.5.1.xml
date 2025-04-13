@@ -6,8 +6,12 @@
 
     
 
+    
+
      consists of an asterisk (*) followed by a <non_terminal
      where="14.6">unary-expression</non_terminal>
+
+    
 
     
 
@@ -16,6 +20,8 @@
       <name>
         <non_terminal where="25.5.1">pointer-indirection-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -37,12 +43,16 @@
 
       
 
+      
+
       ), and the address of a variable after the end of its lifetime. end note]</note
     >
   </paragraph>
   <paragraph
     >For purposes of definite assignment analysis, a variable produced by evaluating an expression of the form *P is considered initially assigned (<hyperlink
     >12.3.1</hyperlink>
+
+    
 
     
 

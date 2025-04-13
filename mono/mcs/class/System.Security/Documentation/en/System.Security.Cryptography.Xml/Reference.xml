@@ -18,6 +18,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -33,11 +35,15 @@
 
         
 
+        
+
          object represents the &lt;reference&gt; element of an XML digital signature defined by the XML digital signature specification.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.Reference" />
+
+        
 
         
 
@@ -92,6 +98,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -122,8 +130,12 @@
 
             
 
+            
+
              object to the hash value that corresponds to the <paramref
              name="stream" />
+
+            
 
             
 
@@ -138,8 +150,12 @@
 
             
 
+            
+
              class with a hash value of the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -151,13 +167,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            with which to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.Reference" />
+
+          
 
           
 
@@ -190,6 +212,8 @@
 
             
 
+            
+
              object to the data at the URI with special processing for "", #xpointer(/), and #xxxx. </para
           >
         </remarks>
@@ -201,8 +225,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -214,13 +242,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
 
           
 
+          
+
            with which to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.Reference" />
+
+          
 
           
 
@@ -258,6 +292,8 @@
 
             
 
+            
+
              method modifies the &lt;Transform&gt; element and associated subelements of an XML digital signature.  </para
           >
           <para>Transforms are applied in the order in which they were added. If no transforms are specified, the minimum required transforms are added automatically.</para>
@@ -271,11 +307,15 @@
 
             
 
+            
+
              object to the list of transforms to be performed on the data before passing it to the digest algorithm.</para
           >
         </summary>
         <param name="transform">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,6 +349,8 @@
 
             
 
+            
+
              property uses a URI string to represent the &lt;DigestMethod&gt; element of an XML digital signature.</para
           >
           <para
@@ -317,8 +359,12 @@
 
             
 
+            
+
             . The default algorithm is <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -331,6 +377,8 @@
           <para
             >Gets or sets the digest method Uniform Resource Identifier (URI) of the current <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -365,6 +413,8 @@
 
             
 
+            
+
              property uses an array of bytes to represent the &lt;DigestValue&gt; element of an XML digital signature.  </para
           >
           <para
@@ -373,8 +423,12 @@
 
             
 
+            
+
              property contains the Base 64 encoded value of the digest of the object described by the <see
              cref="P:System.Security.Cryptography.Xml.Reference.Uri" />
+
+            
 
             
 
@@ -386,8 +440,12 @@
 
             
 
+            
+
              property is automatically populated with the appropriate value whenever you make a call to <see
              cref="Overload:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature" />
+
+            
 
             
 
@@ -400,6 +458,8 @@
           <para
             >Gets or sets the digest value of the current <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -434,6 +494,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -442,6 +504,8 @@
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -476,13 +540,19 @@
 
             
 
+            
+
              property to add a string ID to the XML representation of the current <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
 
             
 
+            
+
              element. The ID is used to reference the <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -494,6 +564,8 @@
           <para
             >Gets or sets the ID of the current <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -530,6 +602,8 @@
 
             
 
+            
+
              state from an XML element.</para
           >
         </summary>
@@ -538,8 +612,12 @@
 
           
 
+          
+
           The XML element from which to load the <see
            cref="T:System.Security.Cryptography.Xml.Reference" />
+
+          
 
           
 
@@ -584,11 +662,15 @@
 
             
 
+            
+
              property represents the &lt;Transform&gt; element and associated subelements of an XML digital signature.  </para
           >
           <para
             >The transform chain is an ordered list of transforms. The output of these transforms constitutes the input to the hash algorithm specified in the <see
              cref="P:System.Security.Cryptography.Xml.Reference.DigestMethod" />
+
+            
 
             
 
@@ -601,6 +683,8 @@
           <para
             >Gets the transform chain of the current <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 
@@ -660,11 +744,15 @@
 
             
 
+            
+
              property uses a string Uniform Resource Identifier (URI) to represent the &lt;URI&gt; element of an XML digital signature.</para
           >
           <para
             >Use the <see
              cref="P:System.Security.Cryptography.Xml.Reference.Uri" />
+
+            
 
             
 
@@ -676,8 +764,12 @@
 
             
 
+            
+
              property. The following table describes the values that you can pass to the <see
              cref="P:System.Security.Cryptography.Xml.Reference.Uri" />
+
+            
 
             
 
@@ -693,6 +785,8 @@
                   <para
                     >Value passed to the <see
                      cref="P:System.Security.Cryptography.Xml.Reference.Uri" />
+
+                    
 
                     
 
@@ -720,6 +814,8 @@
 
                   
 
+                  
+
                    is the name of a valid attribute name ID:</para
                 >
                 <para>"#Idname"</para>
@@ -744,8 +840,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.Security.Cryptography.Xml.Reference" />
+
+            
 
             
 

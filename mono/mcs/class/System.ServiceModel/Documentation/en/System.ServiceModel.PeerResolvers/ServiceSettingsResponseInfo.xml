@@ -52,6 +52,8 @@
 
             
 
+            
+
              is set to true.</para
           >
         </remarks>
@@ -60,6 +62,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
+
+            
 
             
 
@@ -91,12 +95,16 @@
 
             
 
+            
+
              class with the supplied referral policy value.</para
           >
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Boolean" />
+
+          
 
           
 

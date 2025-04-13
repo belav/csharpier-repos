@@ -14,6 +14,8 @@
 
     
 
+    
+
     ) make it impossible for a derived class to declare an operator with the same signature as an operator in a base class. Thus, operators never hide one another. </paragraph
   >
   <paragraph
@@ -32,6 +34,8 @@ class Derived: Base
 }  
 ]]>
       </code_example>
+
+      
 
       
 

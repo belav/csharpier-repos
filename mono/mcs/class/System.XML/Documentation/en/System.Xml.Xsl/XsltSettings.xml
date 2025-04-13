@@ -24,8 +24,12 @@
 
         
 
+        
+
          class. These features are disabled by default. The <see
          cref="T:System.Xml.Xsl.XsltSettings" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          object is then passed to the <see
          cref="Overload:System.Xml.Xsl.XslCompiledTransform.Load" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
 
             
 
+            
+
              object does not support the XSLT document() function or embedded script blocks.</para
           >
           <block subset="none" type="note">
@@ -82,8 +92,12 @@
 
               
 
+              
+
                object to the <see
                cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+              
 
               
 
@@ -96,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Xsl.XsltSettings" />
+
+            
 
             
 
@@ -133,8 +149,12 @@
 
               
 
+              
+
                object to the <see
                cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+              
 
               
 
@@ -150,6 +170,8 @@
 
             
 
+            
+
              class with the specified settings.</para
           >
         </summary>
@@ -158,10 +180,14 @@
 
           
 
+          
+
           true to enable support for the XSLT document() function; otherwise, false.</param
         >
         <param name="enableScript">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,6 +224,8 @@
 
             
 
+            
+
              object with default settings. Support for the XSLT document() function and embedded script blocks is disabled.</para
           >
         </summary>
@@ -226,8 +254,12 @@
 
               
 
+              
+
                object to the <see
                cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+              
 
               
 
@@ -296,8 +328,12 @@
 
               
 
+              
+
                object to the <see
                cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" />
+
+              
 
               
 
@@ -310,6 +346,8 @@
           <para
             >Gets an <see
              cref="T:System.Xml.Xsl.XsltSettings" />
+
+            
 
             
 

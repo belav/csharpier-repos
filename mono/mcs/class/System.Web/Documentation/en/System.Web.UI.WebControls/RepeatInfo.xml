@@ -21,8 +21,12 @@
 
         
 
+        
+
          class encapsulates the information used to render a list control that repeats a list of items, such as <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.RepeatInfo.#ctor" />
+
+        
 
         
 
@@ -72,11 +84,15 @@
 
             
 
+            
+
              class using default values.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+            
 
             
 
@@ -139,6 +155,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -169,8 +187,12 @@
 
             
 
+            
+
              property if the control is rendered as a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -207,8 +229,12 @@
 
             
 
+            
+
              property of the rendered <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -223,8 +249,12 @@
 
             
 
+            
+
              is rendered as a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -247,6 +277,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.RepeatInfo.OuterTableImplied" />
+
+            
 
             
 
@@ -288,6 +320,8 @@
 
             
 
+            
+
              method to render a list control that repeats a list of items, using the specified information.</para
           >
         </remarks>
@@ -300,8 +334,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+          
 
           
 
@@ -312,8 +350,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -321,6 +363,8 @@
         >
         <param name="baseControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,6 +390,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+
+            
 
             
 
@@ -382,6 +428,8 @@
 
             
 
+            
+
              property to specify the direction that the items are rendered.</para
           >
           <block subset="none" type="note">
@@ -391,12 +439,16 @@
 
               
 
+              
+
                property.</para
             >
           </block>
           <para
             >If this property is set to RepeatDirection.Vertical, the items in the list are displayed in columns loaded top to bottom, then left to right, until all items are rendered. For example, if the <see
              cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+
+            
 
             
 
@@ -440,6 +492,8 @@
           <para
             >If this property is set to RepeatDirection.Horizontal, the items in the list are displayed in rows loaded left to right, then top to bottom, until all items are rendered. For example, if the <see
              cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+
+            
 
             
 
@@ -511,13 +565,19 @@
 
             
 
+            
+
              property to specify whether the items are displayed in a table. If this property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
 
             
 
+            
+
             , the items in the list are displayed in a table. If this property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
+
+            
 
             
 
@@ -559,8 +619,12 @@
 
             
 
+            
+
             , a "scope" attribute with value "col" is added and a table header cell (&lt;th&gt;) is rendered instead of a table cell (&lt;td&gt;) for the header cells when the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -575,8 +639,12 @@
 
             
 
+            
+
              attribute when the control is rendered as a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 

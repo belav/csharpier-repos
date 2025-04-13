@@ -30,6 +30,8 @@
 
         
 
+        
+
          class transports messages using the TCP protocol.</para
       >
       <para>Channels are used by the .NET Framework remoting infrastructure to transport remote calls. When a client makes a call to a remote object, the call is serialized into a message that is sent by a client channel and received by a server channel. It is then deserialized and processed. Any returned values are transmitted by the server channel and received by the client channel.</para>
@@ -39,8 +41,12 @@
 
         
 
+        
+
          interface through which all messages processed by the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
 
         
 
+        
+
          instance accepts messages serialized in either binary or SOAP format.</para
       >
       <para
@@ -60,8 +68,12 @@
 
         
 
+        
+
          object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          collection to the <see
          cref="M:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
+
+        
 
         
 
@@ -84,12 +100,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >If the server computer is running Windows 95/98/Me, the <see
            cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+          
 
           
 
@@ -119,6 +139,8 @@
 
             
 
+            
+
              parameter to 0 (zero).</para
           >
         </remarks>
@@ -130,11 +152,15 @@
 
             
 
+            
+
              class that listens on the specified port.</para
           >
         </summary>
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -174,6 +200,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -183,12 +211,16 @@
 
               
 
+              
+
                cannot be specified as secure.</para
             >
           </block>
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -203,6 +235,8 @@
 
             
 
+            
+
              class with the specified channel properties and sink.</para
           >
         </summary>
@@ -211,8 +245,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -241,8 +279,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -251,6 +293,8 @@
           <para
             >To request that an available port be dynamically assigned, set the <paramref
              name="port" />
+
+            
 
             
 
@@ -265,6 +309,8 @@
 
             
 
+            
+
              class with the given name and that listens on the specified port.</para
           >
         </summary>
@@ -273,10 +319,14 @@
 
           
 
+          
+
           The name of the channel. </param
         >
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +363,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -326,11 +380,15 @@
 
             
 
+            
+
              parameter to 0 (zero).</para
           >
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -345,6 +403,8 @@
 
             
 
+            
+
              class with the given name, which listens on the specified port, and uses the specified sink.</para
           >
         </summary>
@@ -353,10 +413,14 @@
 
           
 
+          
+
           The name of the channel. </param
         >
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,13 +448,19 @@
 
             
 
+            
+
             , the value of this property can be cast to an instance of <see
              cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
             
 
+            
+
              describing the channel to which the <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+            
 
             
 
@@ -423,6 +493,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -452,8 +524,12 @@
 
             
 
+            
+
              instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -512,6 +588,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -523,6 +601,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -531,6 +611,8 @@
           <para
             >An array of the URLs for an object with the specified URI, hosted on the current <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+            
 
             
 
@@ -587,12 +669,16 @@
 
             
 
+            
+
              method has been called to stop listening on the channel.</para
           >
           <para>If your channel uses a dynamically assigned port number, your port number might change when you restart listening.</para>
           <para
             >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, set <paramref
              name="data" />
+
+            
 
             
 
@@ -605,6 +691,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,12 +722,16 @@
 
             
 
+            
+
              method.</para
           >
           <para>If your channel uses a dynamically assigned port number, your port number might change when you restart listening.</para>
           <para
             >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, set <paramref
              name="data" />
+
+            
 
             
 
@@ -652,6 +744,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

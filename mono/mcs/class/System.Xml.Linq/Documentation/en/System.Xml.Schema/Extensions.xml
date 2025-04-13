@@ -23,8 +23,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Xml.Linq.XElement" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
         , you can also optionally populate the XML tree with the post-schema-validation infoset. PSVI information is added as an annotation of type <see
          cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
             
 
+            
+
              returned by this method to determine certain characteristics of a validated attribute. For example, you can determine if the attribute came from a default attribute value in an XSD.</para
           >
           <para
@@ -83,8 +93,12 @@
 
             
 
+            
+
              property to get a partial validation type (<see
              cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+            
 
             
 
@@ -93,6 +107,8 @@
           <para
             >For an example of this property, see <see
              cref="Overload:System.Xml.Schema.Extensions.Validate" />
+
+            
 
             
 
@@ -111,8 +127,12 @@
 
             
 
+            
+
              that contains the post-schema-validation infoset for an <see
              cref="T:System.Xml.Linq.XAttribute" />
+
+            
 
             
 
@@ -124,8 +144,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XAttribute" />
+
+          
 
           
 
@@ -161,6 +185,8 @@
 
             
 
+            
+
              returned by this method to determine certain characteristics of a validated element. For example, you can determine the dynamic schema type of the element.</para
           >
           <para
@@ -169,8 +195,12 @@
 
             
 
+            
+
              property to get a partial validation type (<see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -179,6 +209,8 @@
           <para
             >For an example of this property, see <see
              cref="Overload:System.Xml.Schema.Extensions.Validate" />
+
+            
 
             
 
@@ -197,8 +229,12 @@
 
             
 
+            
+
              that contains the post-schema-validation infoset (PSVI) for an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -210,8 +246,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -249,8 +289,12 @@
 
             
 
+            
+
              conforms to the schema content model in <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -265,8 +309,12 @@
 
             
 
+            
+
              conforms to an XSD in an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -278,8 +326,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -290,8 +342,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -302,8 +358,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -342,6 +402,8 @@
 
             
 
+            
+
              conforms to a schema. You typically use this method when you have modified an attribute, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate just the attribute.</para
           >
           <para
@@ -350,11 +412,15 @@
 
             
 
+            
+
             , this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
             >To validate an attribute, you use an instance of <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -371,6 +437,8 @@
 
                 
 
+                
+
                  extension method. </para
               >
             </item>
@@ -381,13 +449,19 @@
 
                 
 
+                
+
                  extension method to retrieve an object that implements <see
                  cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
+                
+
                 . From the retrieved object, you can get an <see
                  cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+                
 
                 
 
@@ -401,13 +475,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XElement" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+                    
 
                     
 
@@ -421,13 +501,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+                    
 
                     
 
@@ -443,6 +529,8 @@
 
             
 
+            
+
             , you can use this method to validate an attribute.</para
           >
         </remarks>
@@ -454,13 +542,19 @@
 
             
 
+            
+
              conforms to a specified <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
+            
+
              and an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -472,8 +566,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XAttribute" />
+
+          
 
           
 
@@ -484,8 +582,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -496,8 +598,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -508,8 +614,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -548,8 +658,12 @@
 
             
 
+            
+
              conforms to the schema content model in <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -558,6 +672,8 @@
           <para
             >If <paramref
              name="addSchemaInfo" />
+
+            
 
             
 
@@ -572,8 +688,12 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XElement)" />
+
+                
 
                 
 
@@ -584,6 +704,8 @@
               <para
                 >Second, default elements and attributes defined in the XSD are added to the XML tree. By calling one of the <see
                  cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+
+                
 
                 
 
@@ -600,8 +722,12 @@
 
             
 
+            
+
              conforms to an XSD in an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -613,8 +739,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -625,8 +755,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -637,8 +771,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -649,8 +787,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -689,6 +831,8 @@
 
             
 
+            
+
              at its root) conforms to a schema. You typically use this method when you have modified a sub-tree, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate a just a sub-tree.</para
           >
           <para
@@ -697,11 +841,15 @@
 
             
 
+            
+
             , then this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
             >To validate a sub-tree, you use an instance of <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -718,6 +866,8 @@
 
                 
 
+                
+
                  extension method. </para
               >
             </item>
@@ -728,13 +878,19 @@
 
                 
 
+                
+
                  extension method to retrieve an object that implements <see
                  cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
+                
+
                 . From the retrieved object, you can get an <see
                  cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+                
 
                 
 
@@ -748,13 +904,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XElement" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+                    
 
                     
 
@@ -768,13 +930,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+                    
 
                     
 
@@ -790,6 +958,8 @@
 
             
 
+            
+
             , you can use this method to validate an sub-tree.</para
           >
         </remarks>
@@ -801,13 +971,19 @@
 
             
 
+            
+
              sub-tree conforms to a specified <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
+            
+
              and an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -819,8 +995,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -831,8 +1011,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -843,8 +1027,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -855,8 +1043,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -896,6 +1088,8 @@
 
             
 
+            
+
              conforms to a schema. You typically use this method when you have modified an attribute, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate just the attribute.</para
           >
           <para
@@ -904,13 +1098,19 @@
 
             
 
+            
+
              is true, this method populates the attribute with the post-schema-validation infoset (PSVI). After you have populated the XML tree with the PSVI, you can call <see
              cref="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)" />
 
             
 
+            
+
              on the validated attribute. This is useful if you are writing code that relies on data returned by <see
              cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+
+            
 
             
 
@@ -922,11 +1122,15 @@
 
             
 
+            
+
             , then this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
             >To validate an attribute, you use an instance of <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -943,6 +1147,8 @@
 
                 
 
+                
+
                  extension method. </para
               >
             </item>
@@ -953,13 +1159,19 @@
 
                 
 
+                
+
                  extension method to retrieve an object that implements <see
                  cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
+                
+
                 . From the retrieved object, you can get an <see
                  cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+                
 
                 
 
@@ -973,13 +1185,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XElement" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+                    
 
                     
 
@@ -993,13 +1211,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+                    
 
                     
 
@@ -1015,6 +1239,8 @@
 
             
 
+            
+
             , you can use this method to validate an attribute.</para
           >
         </remarks>
@@ -1026,13 +1252,19 @@
 
             
 
+            
+
              conforms to a specified <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
+            
+
              and an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1044,8 +1276,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XAttribute" />
+
+          
 
           
 
@@ -1056,8 +1292,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -1068,8 +1308,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1080,8 +1324,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -1092,8 +1340,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -1133,11 +1385,15 @@
 
             
 
+            
+
              at the root of the sub-tree) conforms to a schema. You typically use this method when you have modified a sub-tree, and you want to make sure that it still conforms to its schema. You could validate the entire document, but it takes less processing time to validate a just a sub-tree.</para
           >
           <para
             >If <paramref
              name="addSchemaInfo" />
+
+            
 
             
 
@@ -1150,11 +1406,15 @@
 
             
 
+            
+
              on an element or attribute in the tree.</para
           >
           <para
             >Second, default elements and attributes defined in the XSD are added to the XML tree. By calling one of the <see
              cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" />
+
+            
 
             
 
@@ -1166,11 +1426,15 @@
 
             
 
+            
+
             , then this method raises an exception upon validation errors. Validation warnings will not raise an exception.</para
           >
           <para
             >To validate a sub-tree, you use an instance of <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -1187,6 +1451,8 @@
 
                 
 
+                
+
                  extension method. </para
               >
             </item>
@@ -1197,13 +1463,19 @@
 
                 
 
+                
+
                  extension method to retrieve an object that implements <see
                  cref="T:System.Xml.Schema.IXmlSchemaInfo" />
 
                 
 
+                
+
                 . From the retrieved object, you can get an <see
                  cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+                
 
                 
 
@@ -1217,13 +1489,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XElement" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+                    
 
                     
 
@@ -1237,13 +1515,19 @@
 
                     
 
+                    
+
                      for an <see
                      cref="T:System.Xml.Linq.XAttribute" />
 
                     
 
+                    
+
                     , the type will be <see
                      cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+                    
 
                     
 
@@ -1259,6 +1543,8 @@
 
             
 
+            
+
             , you can use this method to validate a sub-tree..</para
           >
         </remarks>
@@ -1270,13 +1556,19 @@
 
             
 
+            
+
              sub-tree conforms to a specified <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
+            
+
              and an <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1288,8 +1580,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -1300,8 +1596,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -1312,8 +1612,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1324,8 +1628,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -1336,8 +1644,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 

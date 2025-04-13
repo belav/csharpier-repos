@@ -22,13 +22,19 @@
 
         
 
+        
+
          interface and add it to the <see
          cref="P:System.ServiceModel.Dispatcher.ClientRuntime.MessageInspectors" />
 
         
 
+        
+
          collection to inspect or modify messages as they pass through a indigo2 client object. For details, see <see
          cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+        
 
         
 
@@ -40,6 +46,8 @@
       <para
         >Defines a message inspector object that can be added to the <see
          cref="P:System.ServiceModel.Dispatcher.ClientRuntime.MessageInspectors" />
+
+        
 
         
 

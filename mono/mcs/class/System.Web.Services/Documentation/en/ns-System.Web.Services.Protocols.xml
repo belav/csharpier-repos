@@ -17,6 +17,8 @@
 
         
 
+        
+
          namespace consists of the classes that define the protocols used to transmit data across the wire during the communication between XML Web service clients and XML Web services created using ASP.NET.</para
       >
     </summary>

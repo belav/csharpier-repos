@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration represents a set of point properties that describe visual style elements. The <see
          cref="T:System.Windows.Forms.VisualStyles.PointProperty" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
          method to specify which property value to retrieve for the element that the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
             
 
+            
+
              value was designed for.</para
           >
         </summary>
@@ -79,6 +89,8 @@
           <para
             >The smallest bounds that the image specified by the <see
              cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile1" />
+
+            
 
             
 
@@ -106,6 +118,8 @@
 
             
 
+            
+
              value was designed for.</para
           >
         </summary>
@@ -127,6 +141,8 @@
           <para
             >The smallest bounds that the image specified by the <see
              cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile3" />
+
+            
 
             
 
@@ -154,6 +170,8 @@
 
             
 
+            
+
              value was designed for.</para
           >
         </summary>
@@ -175,6 +193,8 @@
           <para
             >The smallest bounds that the image specified by the <see
              cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile5" />
+
+            
 
             
 

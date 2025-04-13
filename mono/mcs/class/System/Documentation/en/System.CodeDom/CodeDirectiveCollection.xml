@@ -35,8 +35,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeDirective" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeDirective" />
+
+        
 
         
 
@@ -76,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeDirectiveCollection" />
+
+            
 
             
 
@@ -112,6 +120,8 @@
 
             
 
+            
+
              class with the code directive objects in the specified array. </para
           >
         </summary>
@@ -120,8 +130,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -157,6 +171,8 @@
 
             
 
+            
+
              class with the elements in the specified code directive collection.</para
           >
         </summary>
@@ -165,8 +181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeDirectiveCollection" />
+
+          
 
           
 
@@ -202,6 +222,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -214,8 +236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -254,6 +280,8 @@
 
             
 
+            
+
              objects to the end of the collection.</para
           >
         </summary>
@@ -262,8 +290,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -302,6 +334,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -310,13 +344,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeDirectiveCollection" />
 
           
 
+          
+
            object containing the <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -355,6 +395,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -367,8 +409,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -409,8 +455,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -418,6 +468,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,6 +508,8 @@
 
             
 
+            
+
              object, if it exists in the collection.</para
           >
         </summary>
@@ -468,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -509,11 +567,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -524,8 +586,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 
@@ -592,6 +658,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -600,8 +668,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeDirective" />
+
+          
 
           
 

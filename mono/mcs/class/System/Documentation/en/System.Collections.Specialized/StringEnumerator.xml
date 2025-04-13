@@ -29,8 +29,12 @@
 
         
 
+        
+
          also brings the enumerator back to this position. At this position, calling <see
          cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          to advance the enumerator to the first element of the collection before reading the value of <see
          cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          returns the same object until either <see
          cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+        
 
         
 
@@ -61,13 +73,19 @@
 
         
 
+        
+
          is called. <see
          cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
 
         
 
+        
+
          sets <see
          cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+        
 
         
 
@@ -79,8 +97,12 @@
 
         
 
+        
+
          passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
          cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+        
 
         
 
@@ -89,8 +111,12 @@
 
         
 
+        
+
          also return false. If the last call to <see
          cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+        
 
         
 
@@ -99,8 +125,12 @@
 
         
 
+        
+
          throws an exception. To set <see
          cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+        
 
         
 
@@ -109,8 +139,12 @@
 
         
 
+        
+
          followed by <see
          cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+        
 
         
 
@@ -122,8 +156,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+
+        
 
         
 
@@ -132,8 +170,12 @@
 
         
 
+        
+
         . If the collection is modified between <see
          cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+        
 
         
 
@@ -142,8 +184,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+        
 
         
 
@@ -156,6 +202,8 @@
       <para
         >Supports a simple iteration over a <see
          cref="T:System.Collections.Specialized.StringCollection" />
+
+        
 
         
 
@@ -186,8 +234,12 @@
 
             
 
+            
+
              is called, <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -196,8 +248,12 @@
 
             
 
+            
+
             ; otherwise, <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 
@@ -208,8 +264,12 @@
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -220,8 +280,12 @@
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 
@@ -230,8 +294,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+
+            
 
             
 
@@ -243,8 +311,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -253,8 +325,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -263,8 +339,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -302,8 +382,12 @@
 
             
 
+            
+
              is called, an enumerator is positioned before the first element of the collection, and the first call to <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -315,8 +399,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.Specialized.StringEnumerator.MoveNext" />
+
+            
 
             
 
@@ -325,8 +413,12 @@
 
             
 
+            
+
              also return false until <see
              cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+
+            
 
             
 
@@ -338,8 +430,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -348,8 +444,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -358,8 +458,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -400,8 +504,12 @@
 
             
 
+            
+
              moves the enumerator to the beginning of the collection, before the first element. After <see
              cref="M:System.Collections.Specialized.StringEnumerator.Reset" />
+
+            
 
             
 
@@ -410,8 +518,12 @@
 
             
 
+            
+
              must be called to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.Specialized.StringEnumerator.Current" />
+
+            
 
             
 

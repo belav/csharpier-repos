@@ -22,6 +22,8 @@
 
         
 
+        
+
          control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to the markup source code and edited into the markup for the Web page. </para
       >
     </remarks>
@@ -30,6 +32,8 @@
       <para
         >Used to provide design-time support in a visual designer for the <see
          cref="T:System.Web.UI.WebControls.Button" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
             
 
+            
+
              class when it creates the associated <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -64,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.ButtonDesigner" />
+
+            
 
             
 
@@ -92,8 +102,12 @@
 
             
 
+            
+
              method replaces the <see
              cref="P:System.Web.UI.WebControls.Button.Text" />
+
+            
 
             
 
@@ -102,8 +116,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -112,8 +130,12 @@
 
             
 
+            
+
              contains no displayable characters. Then, the <see
              cref="M:System.Web.UI.Design.WebControls.ButtonDesigner.GetDesignTimeHtml" />
+
+            
 
             
 
@@ -122,8 +144,12 @@
 
             
 
+            
+
             , which calls into the <see
              cref="M:System.Web.UI.Control.RenderControl(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -142,8 +168,12 @@
 
             
 
+            
+
              containing the markup used to render the <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 

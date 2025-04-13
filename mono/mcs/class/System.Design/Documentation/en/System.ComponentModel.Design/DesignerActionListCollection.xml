@@ -29,8 +29,12 @@
 
         
 
+        
+
          class represents the aggregation of all the items in a smart tag panel. The <see
          cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          objects. Each of these lists contains zero or more objects that represent the actual items in the panel and are derived from the <see
          cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
       <para
         >The following table shows the two techniques for supplying a <see
          cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+        
 
         
 
@@ -76,8 +86,12 @@
 
               
 
+              
+
                class, supplies this collection through the <see
                cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+              
 
               
 
@@ -96,8 +110,12 @@
 
               
 
+              
+
                or <see
                cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+              
 
               
 
@@ -106,8 +124,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+              
 
               
 
@@ -122,6 +144,8 @@
 
         
 
+        
+
         . The collections of lists, which contain the pulled and pushed items, are merged into one panel.</para
       >
       <para
@@ -130,8 +154,12 @@
 
         
 
+        
+
          class, <see
          cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+        
 
         
 
@@ -140,8 +168,12 @@
 
         
 
+        
+
          to store its collection of <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -153,6 +185,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -177,8 +211,12 @@
 
             
 
+            
+
              constructor creates an empty collection, containing zero <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -190,6 +228,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+            
 
             
 
@@ -219,8 +259,12 @@
 
             
 
+            
+
              constructor creates a collection that contains the supplied <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -235,6 +279,8 @@
 
             
 
+            
+
              class with the specified panel items.</para
           >
         </summary>
@@ -243,8 +289,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -280,6 +330,8 @@
 
             
 
+            
+
              to the current collection.</para
           >
         </summary>
@@ -292,8 +344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -326,13 +382,19 @@
 
             
 
+            
+
              parameter, the <see
              cref="M:System.ComponentModel.Design.DesignerActionListCollection.AddRange(System.ComponentModel.Design.DesignerActionList[])" />
 
             
 
+            
+
              method makes a series of calls to the <see
              cref="M:System.ComponentModel.Design.DesignerActionListCollection.Add(System.ComponentModel.Design.DesignerActionList)" />
+
+            
 
             
 
@@ -347,6 +409,8 @@
 
             
 
+            
+
              array to the end of the current collection.</para
           >
         </summary>
@@ -355,8 +419,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -389,13 +457,19 @@
 
             
 
+            
+
              parameter, the <see
              cref="M:System.ComponentModel.Design.DesignerActionListCollection.AddRange(System.ComponentModel.Design.DesignerActionListCollection)" />
 
             
 
+            
+
             method makes a series of calls to the <see
              cref="M:System.ComponentModel.Design.DesignerActionListCollection.Add(System.ComponentModel.Design.DesignerActionList)" />
+
+            
 
             
 
@@ -410,6 +484,8 @@
 
             
 
+            
+
              to the end of the current collection.</para
           >
         </summary>
@@ -418,8 +494,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+          
 
           
 
@@ -460,8 +540,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -494,13 +578,19 @@
 
             
 
+            
+
              method throws an exception while copying, the state of the destination array is undefined. For example, if an <see
              cref="T:System.ArgumentException" />
 
             
 
+            
+
              or <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -516,8 +606,12 @@
 
           
 
+          
+
           The one-dimensional array of type <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -528,8 +622,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -561,13 +659,19 @@
 
             
 
+            
+
              class uses a <see
              cref="T:System.Collections.ArrayList" />
 
             
 
+            
+
              to contain its collection of <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -586,6 +690,8 @@
 
             
 
+            
+
              if found in the internal list; otherwise, -1.</para
           >
         </returns>
@@ -594,8 +700,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -628,8 +738,12 @@
 
             
 
+            
+
              parameter is equal to the value of the <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -641,13 +755,19 @@
 
             
 
+            
+
              class uses a <see
              cref="T:System.Collections.ArrayList" />
 
             
 
+            
+
              to contain its collection of <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -662,6 +782,8 @@
 
             
 
+            
+
              into the collection at the specified position.</para
           >
         </summary>
@@ -670,8 +792,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -682,8 +808,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -754,6 +884,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -762,8 +894,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -774,8 +910,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -809,6 +949,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -817,8 +959,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -829,8 +975,12 @@
 
           
 
+          
+
           The value of the element to remove from <paramref
            name="index" />
+
+          
 
           
 
@@ -865,6 +1015,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -873,8 +1025,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="oldValue" />
+
+          
 
           
 
@@ -885,8 +1041,12 @@
 
           
 
+          
+
           The value to replace with <paramref
            name="newValue" />
+
+          
 
           
 
@@ -897,8 +1057,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -926,6 +1090,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -957,13 +1123,19 @@
 
             
 
+            
+
              class uses a <see
              cref="T:System.Collections.ArrayList" />
 
             
 
+            
+
              to contain its collection of <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -978,6 +1150,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -986,8 +1160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 

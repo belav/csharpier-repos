@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides library-based data parallel replacements for common operations such as for loops, for each loops, and execution of a set of statements.</para
       >
     </remarks>
@@ -64,8 +66,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -74,13 +80,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int32" />
 
             
 
+            
+
             ), and a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -92,11 +104,15 @@
 
             
 
+            
+
              method informs the for operation that iterations after the current one don't have to execute. However, all iterations before the current one will still have to be executed if they haven't already.</para
           >
           <para
             >Therefore, calling <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -108,8 +124,12 @@
 
             
 
+            
+
              method instead of using <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -118,8 +138,12 @@
 
             
 
+            
+
              informs the for loop that it may abandon all remaining iterations, regardless of whether they're before or after the current iteration, because all required work will have already been completed. However, as with <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -131,6 +155,8 @@
 
             
 
+            
+
              structure that is returned will contain relevant information about the loop's completion.</para
           >
           <para
@@ -139,8 +165,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -160,6 +190,8 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
@@ -167,10 +199,14 @@
 
           
 
+          
+
           The end index, exclusive.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,8 +244,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -218,8 +258,12 @@
 
             
 
+            
+
             ). It is provided with the iteration count (<see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -231,8 +275,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -252,6 +300,8 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
@@ -259,10 +309,14 @@
 
           
 
+          
+
           The end index, exclusive.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,8 +357,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -313,8 +371,12 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -323,11 +385,15 @@
 
             
 
+            
+
              instance that may be used to break out of the loop prematurely.</para
           >
           <para
             >Calling the <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -340,8 +406,12 @@
 
             
 
+            
+
              method instead of using <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -350,8 +420,12 @@
 
             
 
+            
+
              informs the for loop that it may abandon all remaining iterations, regardless of whether they're before or after the current iteration, because all required work will have already been completed. However, as with <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -363,6 +437,8 @@
 
             
 
+            
+
              structure that is returned will contain relevant information about the loop's completion.</para
           >
           <para
@@ -371,8 +447,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -391,11 +471,15 @@
 
             
 
+            
+
              structure that contains information on what portion of the loop completed.</para
           >
         </returns>
         <param name="fromInclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,10 +490,14 @@
 
           
 
+          
+
           The end index, exclusive.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,8 +535,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -457,8 +549,12 @@
 
             
 
+            
+
             ). It is provided with the iteration count (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -470,8 +566,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -491,6 +591,8 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
@@ -498,10 +600,14 @@
 
           
 
+          
+
           The end index, exclusive.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,8 +649,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -553,13 +663,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int32" />
 
             
 
+            
+
             ), and a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -571,8 +687,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -592,10 +712,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,10 +730,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -648,8 +776,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -658,8 +790,12 @@
 
             
 
+            
+
             ). It is provided with the iteration count (<see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -671,8 +807,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -692,10 +832,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,10 +850,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -751,8 +899,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -761,13 +913,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int64" />
 
             
 
+            
+
             ), and a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -779,8 +937,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -800,10 +962,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -814,10 +980,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -856,8 +1026,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -866,8 +1040,12 @@
 
             
 
+            
+
             ). It is provided with the iteration count (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -879,8 +1057,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -900,10 +1082,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,10 +1100,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -963,8 +1153,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -973,13 +1167,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int32" />
 
             
 
+            
+
             ), a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -991,8 +1191,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -1001,8 +1205,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -1014,8 +1222,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -1027,8 +1239,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -1041,6 +1257,8 @@
                 >How to: Write a Parallel.For Loop That Has Thread-Local Variables</a
               >
             </format>
+
+            
 
             
 
@@ -1060,10 +1278,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1074,10 +1296,14 @@
 
           
 
+          
+
           The function delegate that returns the initial state of the local data for each task.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1088,10 +1314,14 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1137,8 +1367,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -1147,13 +1381,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int64" />
 
             
 
+            
+
             ), a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -1165,8 +1405,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -1175,8 +1419,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -1188,8 +1436,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -1201,8 +1453,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -1215,6 +1471,8 @@
                 >How to: Write a Parallel.For Loop That Has Thread-Local Variables</a
               >
             </format>
+
+            
 
             
 
@@ -1234,10 +1492,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1248,10 +1510,14 @@
 
           
 
+          
+
           The function delegate that returns the initial state of the local data for each task.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1262,10 +1528,14 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1312,8 +1582,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -1322,13 +1596,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int32" />
 
             
 
+            
+
             ), a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -1340,8 +1620,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -1350,8 +1634,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -1363,8 +1651,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -1376,8 +1668,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -1397,10 +1693,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1411,10 +1711,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="localInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1425,6 +1729,8 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <param name="localFinally">
@@ -1432,10 +1738,14 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1482,8 +1792,12 @@
 
             
 
+            
+
              delegate is invoked once for each value in the iteration range (<paramref
              name="fromInclusive" />
+
+            
 
             
 
@@ -1492,13 +1806,19 @@
 
             
 
+            
+
             ). It is provided with the following parameters: the iteration count (<see
              cref="T:System.Int64" />
 
             
 
+            
+
             ), a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -1510,8 +1830,12 @@
 
             
 
+            
+
              delegate is invoked once for each thread that participates in the loop's execution and returns the initial local state for each of those threads. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -1520,8 +1844,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -1533,8 +1861,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -1546,8 +1878,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="toExclusive" />
+
+            
 
             
 
@@ -1567,10 +1903,14 @@
 
           
 
+          
+
           The start index, inclusive.</param
         >
         <param name="toExclusive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1581,10 +1921,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="localInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1595,6 +1939,8 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <param name="localFinally">
@@ -1602,10 +1948,14 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each thread.</param
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1651,12 +2001,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -1669,6 +2023,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1677,6 +2033,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on a <see
              cref="T:System.Collections.Concurrent.OrderablePartitioner`1" />
+
+            
 
             
 
@@ -1692,10 +2050,14 @@
 
           
 
+          
+
           The orderable partitioner that contains the original data source.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1706,8 +2068,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -1750,12 +2116,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -1768,6 +2138,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1776,6 +2148,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on a <see
              cref="T:System.Collections.Concurrent.Partitioner" />
+
+            
 
             
 
@@ -1791,10 +2165,14 @@
 
           
 
+          
+
           The partitioner that contains the original data source.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1805,8 +2183,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -1846,12 +2228,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -1864,6 +2250,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1872,6 +2260,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on a <see
              cref="T:System.Collections.Concurrent.Partitioner" />
+
+            
 
             
 
@@ -1887,10 +2277,14 @@
 
           
 
+          
+
           The partitioner that contains the original data source.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1901,8 +2295,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -1945,8 +2343,12 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
+
+            
 
             
 
@@ -1955,8 +2357,12 @@
 
             
 
+            
+
              instance that may be used to break out of the loop prematurely, and the current element's index (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -1968,6 +2374,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with 64-bit indexes on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1983,6 +2391,8 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="body">
@@ -1990,10 +2400,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2036,13 +2450,19 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
 
             
 
+            
+
              enumerable. It is provided with the following parameters: the current element, and a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -2054,6 +2474,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -2069,6 +2491,8 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="body">
@@ -2076,10 +2500,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2119,8 +2547,12 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
+
+            
 
             
 
@@ -2132,6 +2564,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -2147,6 +2581,8 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="body">
@@ -2154,10 +2590,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2204,12 +2644,16 @@
 
             
 
+            
+
             method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -2222,6 +2666,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2230,6 +2676,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on a <see
              cref="T:System.Collections.Concurrent.OrderablePartitioner`1" />
+
+            
 
             
 
@@ -2245,10 +2693,14 @@
 
           
 
+          
+
           The orderable partitioner that contains the original data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2259,6 +2711,8 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
@@ -2266,8 +2720,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -2311,12 +2769,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -2329,6 +2791,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2337,6 +2801,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on a <see
              cref="T:System.Collections.Concurrent.Partitioner" />
+
+            
 
             
 
@@ -2352,10 +2818,14 @@
 
           
 
+          
+
           The partitioner that contains the original data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2366,6 +2836,8 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
@@ -2373,8 +2845,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -2415,12 +2891,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -2433,6 +2913,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2441,6 +2923,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on a <see
              cref="T:System.Collections.Concurrent.Partitioner" />
+
+            
 
             
 
@@ -2456,10 +2940,14 @@
 
           
 
+          
+
           The partitioner that contains the original data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2470,6 +2958,8 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
@@ -2477,8 +2967,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -2522,8 +3016,12 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
+
+            
 
             
 
@@ -2532,8 +3030,12 @@
 
             
 
+            
+
              instance that may be used to break out of the loop prematurely, and the current element's index (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -2545,6 +3047,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with 64-bit indexes on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -2560,10 +3064,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2574,10 +3082,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2621,13 +3133,19 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
 
             
 
+            
+
              enumerable. It is provided with the following parameters: the current element, and a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -2639,6 +3157,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -2654,10 +3174,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2668,10 +3192,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2712,8 +3240,12 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
+
+            
 
             
 
@@ -2725,6 +3257,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -2740,10 +3274,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2754,10 +3292,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2806,12 +3348,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -2824,6 +3370,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2832,8 +3380,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -2842,8 +3394,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -2855,8 +3411,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -2868,6 +3428,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with thread-local data on a <see
              cref="T:System.Collections.Concurrent.OrderablePartitioner`1" />
+
+            
 
             
 
@@ -2883,10 +3445,14 @@
 
           
 
+          
+
           The orderable partitioner that contains the original data source.</param
         >
         <param name="localInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2897,10 +3463,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <param name="localFinally">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2911,8 +3481,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -2920,6 +3494,8 @@
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2965,12 +3541,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -2983,6 +3563,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2991,8 +3573,12 @@
 
             
 
+            
+
              delegate is invoked once for each thread that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3001,8 +3587,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3014,8 +3604,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3027,6 +3621,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with thread-local data on a <see
              cref="T:System.Collections.Concurrent.Partitioner" />
+
+            
 
             
 
@@ -3042,10 +3638,14 @@
 
           
 
+          
+
           The partitioner that contains the original data source.</param
         >
         <param name="localInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3056,10 +3656,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <param name="localFinally">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3070,8 +3674,12 @@
 
           
 
+          
+
           The type of the elements in <paramref
            name="source" />
+
+          
 
           
 
@@ -3079,6 +3687,8 @@
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3124,8 +3734,12 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
+
+            
 
             
 
@@ -3134,8 +3748,12 @@
 
             
 
+            
+
              instance that may be used to break out of the loop prematurely, the current element's index (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -3147,8 +3765,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3157,8 +3779,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3170,8 +3796,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3183,6 +3813,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with thread-local data on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -3198,10 +3830,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="localInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3212,10 +3848,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <param name="localFinally">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3226,10 +3866,14 @@
 
           
 
+          
+
           The type of the data in the source.</typeparam
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3275,13 +3919,19 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
 
             
 
+            
+
              enumerable. It is provided with the following parameters: the current element, a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -3293,8 +3943,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3303,8 +3957,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3316,8 +3974,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3329,6 +3991,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with thread-local data on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -3344,10 +4008,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="localInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3358,10 +4026,14 @@
 
           
 
+          
+
           The delegate that is invoked once per iteration.</param
         >
         <param name="localFinally">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3372,10 +4044,14 @@
 
           
 
+          
+
           The type of the data in the source.</typeparam
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3425,12 +4101,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -3443,6 +4123,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3451,8 +4133,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3461,8 +4147,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3474,8 +4164,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3487,6 +4181,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with 64-bit indexes and  with thread-local data on a <see
              cref="T:System.Collections.Concurrent.OrderablePartitioner`1" />
+
+            
 
             
 
@@ -3502,10 +4198,14 @@
 
           
 
+          
+
           The orderable partitioner that contains the original data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3516,10 +4216,14 @@
 
           
 
+          
+
           The function delegate that returns the initial state of the local data for each task.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3530,10 +4234,14 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3542,10 +4250,14 @@
 
           
 
+          
+
           .</typeparam
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3592,12 +4304,16 @@
 
             
 
+            
+
              method expects custom partitioners to support dynamic partitioning. This overload is provided for scenarios with small loop bodies that might benefit from static range partitioning. Partitioners must support dynamic partitions.  For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -3610,6 +4326,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3618,8 +4336,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3628,8 +4350,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3641,8 +4367,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3654,6 +4384,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation  with thread-local data on a <see
              cref="T:System.Collections.Concurrent.Partitioner" />
+
+            
 
             
 
@@ -3669,10 +4401,14 @@
 
           
 
+          
+
           The partitioner that contains the original data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3683,10 +4419,14 @@
 
           
 
+          
+
           The function delegate that returns the initial state of the local data for each task.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3697,10 +4437,14 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3709,10 +4453,14 @@
 
           
 
+          
+
           .</typeparam
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3759,8 +4507,12 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
+
+            
 
             
 
@@ -3769,8 +4521,12 @@
 
             
 
+            
+
              instance that may be used to break out of the loop prematurely, the current element's index (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -3782,8 +4538,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3792,8 +4552,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3805,8 +4569,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3818,6 +4586,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with thread-local data and 64-bit indexes on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -3833,10 +4603,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3847,10 +4621,14 @@
 
           
 
+          
+
           The function delegate that returns the initial state of the local data for each task.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3861,6 +4639,8 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TSource">
@@ -3868,10 +4648,14 @@
 
           
 
+          
+
           The type of the data in the source.</typeparam
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3918,13 +4702,19 @@
 
             
 
+            
+
              delegate is invoked once for each element in the <paramref
              name="source" />
 
             
 
+            
+
              enumerable. It is provided with the following parameters: the current element, a <see
              cref="T:System.Threading.Tasks.ParallelLoopState" />
+
+            
 
             
 
@@ -3936,8 +4726,12 @@
 
             
 
+            
+
              delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref
              name="body" />
+
+            
 
             
 
@@ -3946,8 +4740,12 @@
 
             
 
+            
+
              delegate. The <paramref
              name="localFinally" />
+
+            
 
             
 
@@ -3959,8 +4757,12 @@
 
             
 
+            
+
              method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -3972,6 +4774,8 @@
           <para
             >Executes a foreach (For Each in Visual Basic) operation with thread-local data on an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -3987,10 +4791,14 @@
 
           
 
+          
+
           An enumerable data source.</param
         >
         <param name="parallelOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4001,10 +4809,14 @@
 
           
 
+          
+
           The function delegate that returns the initial state of the local data for each task.</param
         >
         <param name="body">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4015,6 +4827,8 @@
 
           
 
+          
+
           The delegate that performs a final action on the local state of each task.</param
         >
         <typeparam name="TSource">
@@ -4022,10 +4836,14 @@
 
           
 
+          
+
           The type of the data in the source.</typeparam
         >
         <typeparam name="TLocal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4070,6 +4888,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4082,8 +4902,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Action" />
+
+          
 
           
 
@@ -4126,10 +4950,14 @@
 
             
 
+            
+
              structure enables the caller to cancel the entire operation. For more information, see <format
              type="text/html">
               <a href="eea11fe5-d8b0-4314-bb5d-8a58166fb1c3">Cancellation</a>
             </format>
+
+            
 
             
 
@@ -4146,6 +4974,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4158,10 +4988,14 @@
 
           
 
+          
+
           An object that configures the behavior of this operation.</param
         >
         <param name="actions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

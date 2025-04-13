@@ -26,8 +26,12 @@
 
         
 
+        
+
          property set to <see
          cref="F:System.Windows.Forms.AnchorStyles.None" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          has its <see
          cref="P:System.Windows.Forms.Control.Anchor" />
+
+        
 
         
 
@@ -46,8 +54,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 

@@ -6,11 +6,15 @@
 
     
 
+    
+
     ) is used to describe how an attribute class can be used. </paragraph
   >
   <paragraph
     >AttributeUsage has a positional parameter (<hyperlink
     >24.1.2</hyperlink>
+
+    
 
     
 
@@ -28,13 +32,19 @@ public class SimpleAttribute: Attribute
 
       
 
+      
+
       defines an attribute class named SimpleAttribute that can be placed on <non_terminal
        where="17.1">class-declaration</non_terminal>
 
       
 
+      
+
       s and  <non_terminal
        where="20.1">interface-declaration</non_terminal>
+
+      
 
       
 
@@ -48,8 +58,12 @@ public class SimpleAttribute: Attribute
 
       
 
+      
+
       shows several uses of the Simple attribute. Although this attribute is defined with the name SimpleAttribute, when this attribute is used, the Attribute suffix may be omitted, resulting in the <keyword
       >short</keyword>
+
+      
 
       
 
@@ -63,12 +77,16 @@ public class SimpleAttribute: Attribute
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
   <paragraph
     >AttributeUsage has a named parameter (<hyperlink
     >24.1.2</hyperlink>
+
+    
 
     
 
@@ -93,6 +111,8 @@ public class AuthorAttribute: Attribute {
 
       
 
+      
+
       defines a multi-use attribute class named AuthorAttribute. The example <code_example
       >
         <![CDATA[
@@ -103,12 +123,16 @@ class Class1 {...}
 
       
 
+      
+
       shows a class declaration with two uses of the Author attribute. end example]</example
     >
   </paragraph>
   <paragraph
     >AttributeUsage has another named parameter (<hyperlink
     >24.1.2</hyperlink>
+
+    
 
     
 
@@ -122,6 +146,8 @@ using System;
 class X: Attribute { ... }  
 ]]>
     </code_example>
+
+    
 
     
 

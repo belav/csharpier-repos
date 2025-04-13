@@ -19,8 +19,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.CheckedListBox.CheckedIndexCollection" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          method. The list then displays the default string value for each object. You can add individual items to the list with the <see
          cref="M:System.Windows.Forms.CheckedListBox.ObjectCollection.Add(System.Object,System.Boolean)" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          object supports three states through the <see
          cref="T:System.Windows.Forms.CheckState" />
+
+        
 
         
 
@@ -55,8 +67,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+
+        
 
         
 
@@ -65,13 +81,19 @@
 
         
 
+        
+
         . You must set the state of <see
          cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
         
 
+        
+
          in the code because the user interface for a <see
          cref="T:System.Windows.Forms.CheckedListBox" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          is true, the <see
          cref="T:System.Windows.Forms.CheckedListBox" />
+
+        
 
         
 
@@ -93,13 +119,19 @@
 
         
 
+        
+
          to false, set <see
          cref="P:System.Windows.Forms.ListBox.UseCustomTabOffsets" />
 
         
 
+        
+
          to true, and add the custom values to the <see
          cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" />
+
+        
 
         
 
@@ -112,8 +144,12 @@
 
           
 
+          
+
            property is false, the <see
            cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" />
+
+          
 
           
 
@@ -123,6 +159,8 @@
       <para
         >The <see
          cref="T:System.Windows.Forms.CheckedListBox" />
+
+        
 
         
 
@@ -147,6 +185,8 @@
 
               
 
+              
+
                control. </para
             >
           </term>
@@ -161,6 +201,8 @@
             <para
               >Checked items (including items in an indeterminate state), which is a subset of the items contained in the <see
                cref="T:System.Windows.Forms.CheckedListBox" />
+
+              
 
               
 
@@ -187,6 +229,8 @@
       <para
         >The following three tables are examples of the three indexed collections that the <see
          cref="T:System.Windows.Forms.CheckedListBox" />
+
+        
 
         
 
@@ -356,6 +400,8 @@
 
         
 
+        
+
          in which a check box is displayed to the left of each item.</para
       >
     </summary>
@@ -374,13 +420,19 @@
 
             
 
+            
+
              uses <see
              cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
             
 
+            
+
              and the ResizeRedraw value of <see
              cref="T:System.Windows.Forms.ControlStyles" />
+
+            
 
             
 
@@ -392,6 +444,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -431,6 +485,8 @@
 
             
 
+            
+
              control. These indexes specify items in a checked or indeterminate state.</para
           >
         </remarks>
@@ -439,6 +495,8 @@
           <para
             >Collection of checked indexes in this <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -478,8 +536,12 @@
 
             
 
+            
+
              collection, representing only those items whose <see
              cref="T:System.Windows.Forms.CheckState" />
+
+            
 
             
 
@@ -491,6 +553,8 @@
           <para
             >Collection of checked items in this <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -520,6 +584,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.Windows.Forms.CheckedListBox.CheckOnClick" />
+
+            
 
             
 
@@ -559,8 +625,12 @@
 
             
 
+            
+
              event passes an <see
              cref="T:System.EventArgs" />
+
+            
 
             
 
@@ -569,13 +639,19 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
+            
+
              events, which pass a <see
              cref="T:System.Windows.Forms.MouseEventArgs" />
+
+            
 
             
 
@@ -587,8 +663,12 @@
 
             
 
+            
+
              event is raised every time the user double-clicks a control. For example, if you have event-handling methods for the <see
              cref="E:System.Windows.Forms.CheckedListBox.Click" />
+
+            
 
             
 
@@ -597,13 +677,19 @@
 
             
 
+            
+
              events of a form, the events are raised when the form is double-clicked and both event-handling methods are called. If the user double-clicks a control that does not support the <see
              cref="E:System.Windows.Forms.Control.DoubleClick" />
 
             
 
+            
+
              event, the <see
              cref="E:System.Windows.Forms.CheckedListBox.Click" />
+
+            
 
             
 
@@ -615,6 +701,8 @@
           <para
             >Occurs when the user clicks the <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -646,8 +734,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -657,6 +749,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -672,6 +766,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -680,6 +776,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -731,8 +829,12 @@
 
             
 
+            
+
              property should not be overridden and used to adjust the properties of your derived control. Properties such as the <see
              cref="P:System.Windows.Forms.CreateParams.Caption" />
+
+            
 
             
 
@@ -741,8 +843,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.CreateParams.Height" />
+
+            
 
             
 
@@ -751,8 +857,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -761,8 +871,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Windows.Forms.CreateParams" />
+
+            
 
             
 
@@ -830,6 +944,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -863,8 +979,12 @@
 
             
 
+            
+
              displays the default string for the items it contains. However, the <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -873,8 +993,12 @@
 
             
 
+            
+
              property. If the specified property does not exist, or the value of the <see
              cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
+
+            
 
             
 
@@ -883,11 +1007,15 @@
 
             
 
+            
+
              method are displayed instead.</para
           >
           <para
             >If the new value of the <see
              cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
+
+            
 
             
 
@@ -928,6 +1056,8 @@
 
             
 
+            
+
              property changes. </para
           >
         </summary>
@@ -963,8 +1093,12 @@
 
             
 
+            
+
             . The event is raised only when the <see
              cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
+
+            
 
             
 
@@ -973,8 +1107,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
+
+            
 
             
 
@@ -983,8 +1121,12 @@
 
             
 
+            
+
             . If you have a variable-sized item (that is, <see
              cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
+
+            
 
             
 
@@ -993,8 +1135,12 @@
 
             
 
+            
+
             ), the <see
              cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
+
+            
 
             
 
@@ -1003,8 +1149,12 @@
 
             
 
+            
+
              event to specify the size for the item that you are going to draw in your event handler for the <see
              cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
+
+            
 
             
 
@@ -1017,6 +1167,8 @@
           <para
             >Occurs when a visual aspect of an owner-drawn <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -1063,6 +1215,8 @@
 
             
 
+            
+
             . This property is not relevant to this class.</para
           >
         </summary>
@@ -1089,13 +1243,19 @@
 
             
 
+            
+
              returns true if the value of <see
              cref="T:System.Windows.Forms.CheckState" />
 
             
 
+            
+
              is Checked or Indeterminate for the item. To determine the specific state the item is in, use the <see
              cref="M:System.Windows.Forms.CheckedListBox.GetItemCheckState(System.Int32)" />
+
+            
 
             
 
@@ -1112,6 +1272,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1144,13 +1306,19 @@
 
             
 
+            
+
              method provides the ability to get the <see
              cref="T:System.Windows.Forms.CheckState" />
 
             
 
+            
+
              value of an item, given the index. If you never set the check state of an item to Indeterminate, then use the <see
              cref="M:System.Windows.Forms.CheckedListBox.GetItemChecked(System.Int32)" />
+
+            
 
             
 
@@ -1169,11 +1337,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1200,6 +1372,8 @@
           <para
             >The check state is not updated until after the <see
              cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
+
+            
 
             
 
@@ -1244,8 +1418,12 @@
 
             
 
+            
+
              and override <see
              cref="P:System.Windows.Forms.CheckedListBox.ItemHeight" />
+
+            
 
             
 
@@ -1292,13 +1470,19 @@
 
             
 
+            
+
              property enables you to obtain a reference to the list of items that are currently stored in a <see
              cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
+            
+
              control. With this reference, you can add items, remove items, and obtain a count of the items in the collection. For more information on the tasks that can be performed with the item collection, see the <see
              cref="T:System.Windows.Forms.CheckedListBox.ObjectCollection" />
+
+            
 
             
 
@@ -1310,6 +1494,8 @@
           <para
             >Gets the collection of items in this <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -1348,8 +1534,12 @@
 
             
 
+            
+
              event. The event is raised only when the <see
              cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
+
+            
 
             
 
@@ -1358,11 +1548,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The maximum height of a <see
              cref="T:System.Windows.Forms.ListBox" />
+
+            
 
             
 
@@ -1375,6 +1569,8 @@
           <para
             >Occurs when an owner-drawn <see
              cref="T:System.Windows.Forms.ListBox" />
+
+            
 
             
 
@@ -1418,6 +1614,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1426,6 +1624,8 @@
           <para
             >Occurs when the user clicks the <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -1474,8 +1674,12 @@
 
             
 
+            
+
              method selects or clears the check box of the item that is clicked. If the <see
              cref="P:System.Windows.Forms.CheckedListBox.CheckOnClick" />
+
+            
 
             
 
@@ -1489,11 +1693,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1508,6 +1716,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1516,8 +1726,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1552,11 +1766,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" />
+
+            
 
             
 
@@ -1571,6 +1789,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1579,8 +1799,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DrawItemEventArgs" />
+
+          
 
           
 
@@ -1612,11 +1836,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1631,6 +1859,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1639,8 +1869,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1675,11 +1909,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -1694,6 +1932,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1702,8 +1942,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1738,11 +1982,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnItemCheck(System.Windows.Forms.ItemCheckEventArgs)" />
+
+            
 
             
 
@@ -1757,6 +2005,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1765,8 +2015,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ItemCheckEventArgs" />
+
+          
 
           
 
@@ -1799,13 +2053,19 @@
 
             
 
+            
+
              property is not set to <see
              cref="F:System.Windows.Forms.SelectionMode.None" />
 
             
 
+            
+
             , the <see
              cref="M:System.Windows.Forms.CheckedListBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -1819,11 +2079,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -1838,6 +2102,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1846,8 +2112,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -1882,11 +2152,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" />
+
+            
 
             
 
@@ -1901,6 +2175,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1909,8 +2185,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MeasureItemEventArgs" />
+
+          
 
           
 
@@ -1945,11 +2225,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.CheckedListBox.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1964,6 +2248,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1972,8 +2258,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2018,6 +2308,8 @@
 
             
 
+            
+
              that are reasonably close to Windows user interface guidelines. Some adjustments might still be necessary for particular applications. </para
           >
           <para>This property is not relevant to this class.</para>
@@ -2027,6 +2319,8 @@
           <para
             >Gets or sets padding within the <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -2055,6 +2349,8 @@
 
             
 
+            
+
              items again and gets new text strings for the items.</para
           >
         </summary>
@@ -2079,8 +2375,12 @@
 
             
 
+            
+
              property determines whether one item in the list box can be selected or no items can be selected. For <see
              cref="T:System.Windows.Forms.CheckedListBox" />
+
+            
 
             
 
@@ -2116,8 +2416,12 @@
 
             
 
+            
+
              value to Checked. A value of false sets <see
              cref="T:System.Windows.Forms.CheckState" />
+
+            
 
             
 
@@ -2132,6 +2436,8 @@
 
             
 
+            
+
              for the item at the specified index to Checked.</para
           >
         </summary>
@@ -2140,10 +2446,14 @@
 
           
 
+          
+
           The index of the item to set the check state for. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2177,8 +2487,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
+
+            
 
             
 
@@ -2187,6 +2501,8 @@
           <para
             >Items whose <see
              cref="T:System.Windows.Forms.CheckState" />
+
+            
 
             
 
@@ -2202,6 +2518,8 @@
 
           
 
+          
+
           The index of the item to set the state for. </param
         >
         <param name="value">
@@ -2209,8 +2527,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.CheckState" />
+
+          
 
           
 
@@ -2244,6 +2566,8 @@
 
             
 
+            
+
              of Flat or Normal.</para
           >
         </summary>
@@ -2270,8 +2594,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2283,8 +2611,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2293,13 +2625,19 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -2314,8 +2652,12 @@
 
             
 
+            
+
              class (ndptecgdiplus) or the <see
              cref="T:System.Windows.Forms.TextRenderer" />
+
+            
 
             
 
@@ -2356,11 +2698,15 @@
 
             
 
+            
+
              property in cases where you bind data.</para
           >
           <para
             >You can clear the <see
              cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
+
+            
 
             
 
@@ -2372,13 +2718,19 @@
 
             
 
+            
+
              property raises the <see
              cref="E:System.Windows.Forms.CheckedListBox.ValueMemberChanged" />
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+
+            
 
             
 
@@ -2416,6 +2768,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
+
+            
 
             
 

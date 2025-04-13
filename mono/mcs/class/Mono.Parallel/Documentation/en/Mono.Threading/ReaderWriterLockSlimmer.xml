@@ -19,8 +19,12 @@
 
       
 
+      
+
        that provide only the bare functionnality of a reader-writer lock with no thread tracking and no heavy wait mechanism. In summary, it's what <see
        cref="T:System.Threading.SpinLock" />
+
+      
 
       
 
@@ -29,11 +33,15 @@
 
       
 
+      
+
       .</summary
     >
     <remarks
       >The Enter methods of this class use <see
        cref="T:System.Threading.SpinWait" />
+
+      
 
       
 
@@ -66,6 +74,8 @@ Must be set to false prior calling this method.
             >
 If value is <see
              langword="true" />
+
+            
 
             
 
@@ -105,6 +115,8 @@ If value is <see
 
             
 
+            
+
              lock has been taken. This value is safe to trust even under exceptional situations.
 </para
           >
@@ -135,8 +147,12 @@ If value is <see
 
           
 
+          
+
            or <see
            cref="M:Mono.Threading.ReaderWriterLockSlimmer.TryEnterReadLock()" />
+
+          
 
           
 
@@ -166,8 +182,12 @@ If value is <see
 
           
 
+          
+
            or <see
            cref="M:Mono.Threading.ReaderWriterLockSlimmer.TryEnterWriteLock()" />
+
+          
 
           
 
@@ -203,6 +223,8 @@ If value is <see
 
             
 
+            
+
              lock has been taken. This value is safe to trust even under exceptional situations.
 </para
           >
@@ -210,6 +232,8 @@ If value is <see
         <summary
           >Non-blocking equivalent of <see
            cref="m:Mono.Threading.EnterReadLock(System.Boolean@)" />
+
+          
 
           
 
@@ -246,6 +270,8 @@ If value is <see
 
             
 
+            
+
              lock has been taken. This value is safe to trust even under exceptional situations.
 </para
           >
@@ -253,6 +279,8 @@ If value is <see
         <summary
           >Non-blocking equivalent of <see
            cref="m:Mono.Threading.EnterWriteLock(System.Boolean@)" />
+
+          
 
           
 

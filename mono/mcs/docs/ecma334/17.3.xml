@@ -6,11 +6,15 @@
 
     
 
+    
+
      introduces one or more constants of a given type. <grammar_production
     >
       <name>
         <non_terminal where="17.3">constant-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -50,6 +58,8 @@
       <name>
         <non_terminal where="17.3">constant-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -76,8 +86,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -98,6 +112,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -112,8 +128,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -122,8 +142,12 @@
 
     
 
+    
+
     ), and a valid combination of the four access modifiers (<hyperlink
     >17.2.3</hyperlink>
+
+    
 
     
 
@@ -132,8 +156,12 @@
 
     
 
+    
+
     . Even though constants are considered static members, a  <non_terminal
      where="17.3">constant-declaration</non_terminal>
+
+    
 
     
 
@@ -145,8 +173,12 @@
 
     
 
+    
+
      specifies the type of the members introduced by the declaration. The type is followed by a list of <non_terminal
      where="17.3">constant-declarator</non_terminal>
+
+    
 
     
 
@@ -155,13 +187,19 @@
 
     
 
+    
+
      consists of an identifier that names themember, followed by an "=" token, followed by a  <non_terminal
      where="14.15">constant-expression</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >14.15</hyperlink>
+
+    
 
     
 
@@ -173,8 +211,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -183,8 +225,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -193,8 +239,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -203,8 +253,12 @@
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -213,8 +267,12 @@
 
     
 
+    
+
     , <keyword
     >float</keyword>
+
+    
 
     
 
@@ -223,8 +281,12 @@
 
     
 
+    
+
     , <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -233,8 +295,12 @@
 
     
 
+    
+
     , string, an <non_terminal
      where="11.1">enum-type</non_terminal>
+
+    
 
     
 
@@ -243,13 +309,19 @@
 
     
 
+    
+
     . Each  <non_terminal
      where="14.15">constant-expression</non_terminal>
 
     
 
+    
+
      must yield a value of the target type or of a type that can be converted to the target type by an implicit conversion (<hyperlink
     >13.1</hyperlink>
+
+    
 
     
 
@@ -261,6 +333,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -269,8 +343,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -279,8 +357,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.4</hyperlink>
+
+    
 
     
 
@@ -292,8 +374,12 @@
 
     
 
+    
+
     . Thus, a constant may be used in any construct that requires a <non_terminal
      where="14.15">constant-expression</non_terminal>
+
+    
 
     
 
@@ -307,8 +393,12 @@
 
       
 
+      
+
       , a <non_terminal
        where="14.15">constant-expression</non_terminal>
+
+      
 
       
 
@@ -317,13 +407,19 @@
 
       
 
+      
+
        other than string is to apply the new operator, and since the new operator is not permitted in a <non_terminal
        where="14.15">constant-expression</non_terminal>
 
       
 
+      
+
       , the only possible value for constants of <non_terminal
        where="11.2">reference-type</non_terminal>
+
+      
 
       
 
@@ -336,8 +432,12 @@
 
     
 
+    
+
     , a readonly field (<hyperlink
     >17.4.2</hyperlink>
+
+    
 
     
 
@@ -345,6 +445,8 @@
 
       >[Note: The versioning semantics of const and readonly differ (<hyperlink
       >17.4.2.2</hyperlink>
+
+      
 
       
 
@@ -366,6 +468,8 @@ class A
 
       
 
+      
+
       is equivalent to <code_example
       >
         <![CDATA[
@@ -380,12 +484,16 @@ class A
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
   <paragraph
     >Constants are permitted to depend on other constants within the same program as <keyword
     >long</keyword>
+
+    
 
     
 
@@ -408,8 +516,12 @@ class B
 
       
 
+      
+
       the compiler first evaluates A.Y, then evaluates B.Z, and finally evaluates A.X, producing the values 10, 11, and 12. end example]</example
     >
+
+    
 
     
 

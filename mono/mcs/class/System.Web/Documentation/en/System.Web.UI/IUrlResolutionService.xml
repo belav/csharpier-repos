@@ -16,6 +16,8 @@
 
         
 
+        
+
          interface is used for resolving relative paths and paths that contain the ~ operator. Server controls that reference resources can define the paths to the resources through the ~ operator, which represents the root of the current application. A path containing the ~ operator will not work if passed to the browser. The server control must convert the path to an absolute or relative path before passing it to the browser. </para
       >
       <para>
@@ -23,8 +25,12 @@
 
         
 
+        
+
          implements this interface. A control that derives from <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

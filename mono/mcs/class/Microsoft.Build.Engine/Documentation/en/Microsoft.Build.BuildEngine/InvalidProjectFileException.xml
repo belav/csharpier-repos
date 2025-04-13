@@ -39,6 +39,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -64,11 +66,15 @@
 
             
 
+            
+
              class using the specified message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -100,11 +106,15 @@
 
             
 
+            
+
              class using the specified error message and inner exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -115,8 +125,12 @@
 
           
 
+          
+
           The exception that is the cause of the current excpetion. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -154,11 +168,15 @@
 
             
 
+            
+
              class using rich error information.</para
           >
         </summary>
         <param name="xmlNode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,10 +187,14 @@
 
           
 
+          
+
           The error message text for the exception.</param
         >
         <param name="errorSubcategory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,10 +205,14 @@
 
           
 
+          
+
           The error code. This parameter can be a null reference (Nothing).</param
         >
         <param name="helpKeyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,11 +254,15 @@
 
             
 
+            
+
              class using rich error information.</para
           >
         </summary>
         <param name="projectFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,10 +273,14 @@
 
           
 
+          
+
           The invalid line number in the project. Set to zero if not available.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,10 +291,14 @@
 
           
 
+          
+
           The end of a range of invalid lines in the project. Set to zero if not available.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,10 +309,14 @@
 
           
 
+          
+
           The error message text for the exception.</param
         >
         <param name="errorSubcategory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,10 +327,14 @@
 
           
 
+          
+
           The error code. This parameter can be a null reference (Nothing).</param
         >
         <param name="helpKeyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,6 +485,8 @@
 
             
 
+            
+
              with information about the exception.</para
           >
         </summary>
@@ -447,8 +495,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -459,8 +511,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

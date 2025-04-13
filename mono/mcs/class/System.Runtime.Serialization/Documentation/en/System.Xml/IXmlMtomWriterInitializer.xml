@@ -55,10 +55,14 @@
 
           
 
+          
+
           The stream to write to.</param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -69,10 +73,14 @@
 
           
 
+          
+
           The maximum number of bytes that are buffered in the writer.</param
         >
         <param name="startInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -83,10 +91,14 @@
 
           
 
+          
+
           The MIME boundary string.</param
         >
         <param name="startUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,10 +109,14 @@
 
           
 
+          
+
           If true, write message headers.</param
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

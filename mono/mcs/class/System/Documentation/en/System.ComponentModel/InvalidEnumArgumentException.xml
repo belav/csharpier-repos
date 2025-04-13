@@ -60,6 +60,8 @@
 
             
 
+            
+
              class without a message.</para
           >
         </summary>
@@ -94,11 +96,15 @@
 
             
 
+            
+
              class with the specified message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,6 +140,8 @@
 
             
 
+            
+
              class using the specified serialization data and context.</para
           >
         </summary>
@@ -142,8 +150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -151,6 +163,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,6 +200,8 @@
 
             
 
+            
+
              class with the specified detailed description and the specified exception. </para
           >
         </summary>
@@ -194,10 +210,14 @@
 
           
 
+          
+
           A detailed description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,6 +255,8 @@
 
             
 
+            
+
              parameter was invalid because the value passed in was invalid, and that the value should be one of the values in the enumeration class.</para
           >
         </remarks>
@@ -246,11 +268,15 @@
 
             
 
+            
+
              class with a message generated from the argument, the invalid value, and an enumeration class.</para
           >
         </summary>
         <param name="argumentName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +287,8 @@
 
           
 
+          
+
           The value of the argument that failed. </param
         >
         <param name="enumClass">
@@ -268,8 +296,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 

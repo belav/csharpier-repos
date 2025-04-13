@@ -25,9 +25,13 @@
 
         
 
+        
+
          type is a FxDG-compliant
         wrapper over the <see
          cref="T:Mono.Unix.Native.Group" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
         It represents a single entry from the local group database, typically
         <c
         >/etc/group</c>
+
+        
 
         
 
@@ -52,6 +58,8 @@
 
         
 
+        
+
         )
         is controlled by the file system access permissions, 
         <see
@@ -59,9 +67,13 @@
 
         
 
+        
+
         .
         <see
          cref="T:Mono.Unix.FileAccessPermissions" />
+
+        
 
         
 
@@ -82,14 +94,20 @@
           
 
           
+
+          
         &amp; 
         <see
            cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
 
           
 
+          
+
           )</c
         >
+
+        
 
         
 
@@ -124,6 +142,8 @@
 
           
 
+          
+
            containing the 
           group to get information about.
         </param
@@ -136,9 +156,13 @@
 
           
 
+          
+
            by using the specified 
           <see
            cref="T:Mono.Unix.Native.Group" />
+
+          
 
           
 
@@ -152,10 +176,14 @@
 
           
 
+          
+
           ,
           providing framework-compliant naming conventions over the native 
           <see
            cref="T:Mono.Unix.Native.Group" />
+
+          
 
           
 
@@ -187,6 +215,8 @@
 
           
 
+          
+
            containing the group id to get
           information about.
         </param
@@ -196,6 +226,8 @@
           Constructs and initializes a new instance of 
           <see
            cref="T:Mono.Unix.UnixGroupInfo" />
+
+          
 
           
 
@@ -211,6 +243,8 @@
           >
           The group id <paramref
            name="group" />
+
+          
 
           
 
@@ -244,6 +278,8 @@
 
           
 
+          
+
            containing the group to get
           information about.
         </param
@@ -253,6 +289,8 @@
           Constructs and initializes a new instance of 
           <see
            cref="T:Mono.Unix.UnixGroupInfo" />
+
+          
 
           
 
@@ -268,6 +306,8 @@
           >
           The group name <paramref
            name="group" />
+
+          
 
           
 
@@ -353,6 +393,8 @@
 
           
 
+          
+
            array containing
           information about all the local groups.
         </returns
@@ -363,6 +405,8 @@
             >An I/O error occurred.
           [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -378,6 +422,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -386,6 +432,8 @@
             >Too many files are currently open in the system.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -398,6 +446,8 @@
           structure.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+
+            
 
             
 
@@ -434,6 +484,8 @@
 
           
 
+          
+
            array containing the names of all
           group members.
         </returns
@@ -445,6 +497,8 @@
             valid users on the system, i.e. that 
             <c
             >GetMemberNames().Select(m =&gt; new UnixUserInfo(m)).ToArray()</c>
+
+            
 
             
 
@@ -481,6 +535,8 @@
 
           
 
+          
+
            array containing
           information about all the group members.
         </returns
@@ -493,9 +549,13 @@
 
           
 
+          
+
            instance over each name
           returned by <see
            cref="M:Mono.Unix.UnixGroupInfo.GetMemberNames" />
+
+          
 
           
 
@@ -527,6 +587,8 @@
 
           
 
+          
+
            containing the group's id.
         </value
         >
@@ -555,6 +617,8 @@
 
           
 
+          
+
            containing the group name.
         </value
         >
@@ -580,6 +644,8 @@
           >
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -616,9 +682,13 @@
 
           
 
+          
+
            instance into
           an equivalent <see
            cref="T:Mono.Unix.Native.Group" />
+
+          
 
           
 
@@ -629,6 +699,8 @@
           >
           A <see
            cref="T:Mono.Unix.Native.Group" />
+
+          
 
           
 

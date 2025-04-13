@@ -26,13 +26,19 @@
 
         
 
+        
+
          needs to be created for the XML Web service you want to call. When the XML Web service client calls the XML Web service using HTTP, derive the proxy class from <see
          cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
 
         
 
+        
+
         , which in turn derives from <see
          cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+
+        
 
         
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
         , providing the support for calling an XML Web service method using the HTTP-GET and HTTP-POST protocols respectively. Clients calling an XML Web service using SOAP should derive from <see
          cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+
+        
 
         
 
@@ -67,6 +81,8 @@
             >[&lt;topic://cpconcreatingwebserviceproxy&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -91,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HttpGetClientProtocol" />
+
+            
 
             
 
@@ -124,8 +142,12 @@
 
             
 
+            
+
              to specify that the HTTP request to the XML Web service is made using HTTP-GET. By overriding this method, additional customizations can be made to the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -140,6 +162,8 @@
 
             
 
+            
+
              instance for the specified URI.</para
           >
         </summary>
@@ -151,6 +175,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -159,13 +185,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
 
           
 
+          
+
            to use when creating the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 

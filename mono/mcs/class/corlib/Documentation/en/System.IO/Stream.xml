@@ -42,8 +42,12 @@
 
         
 
+        
+
          is the abstract base class of all streams. A stream is an abstraction of a sequence of bytes, such as a file, an input/output device, an inter-process communication pipe, or a TCP/IP socket. The <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -67,13 +71,19 @@
 
         
 
+        
+
          are <see
          cref="T:System.IO.FileStream" />
 
         
 
+        
+
         , and <see
          cref="T:System.IO.MemoryStream" />
+
+        
 
         
 
@@ -85,8 +95,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.IO.Stream.CanWrite" />
+
+        
 
         
 
@@ -95,8 +109,12 @@
 
         
 
+        
+
          properties of the <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -108,8 +126,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -118,8 +140,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.IO.Stream.SetLength(System.Int64)" />
+
+        
 
         
 
@@ -128,8 +154,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.IO.Stream.Length" />
+
+        
 
         
 
@@ -141,8 +171,12 @@
 
         
 
+        
+
          class includes async methods to simplify asynchronous operations. An async method contains Async in its name, such as <see
          cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -151,13 +185,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.IO.Stream.CopyToAsync(System.IO.Stream)" />
 
         
 
+        
+
         , and <see
          cref="M:System.IO.Stream.FlushAsync(System.Threading.CancellationToken)" />
+
+        
 
         
 
@@ -169,8 +209,12 @@
 
         
 
+        
+
          includes two extension methods: <see
          cref="M:System.IO.WindowsRuntimeStreamExtensions.AsInputStream(System.IO.Stream)" />
+
+        
 
         
 
@@ -179,8 +223,12 @@
 
         
 
+        
+
         . These methods convert a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -189,13 +237,19 @@
 
         
 
+        
+
          object by using the <see
          cref="M:System.IO.WindowsRuntimeStreamExtensions.AsStreamForRead(Windows.Storage.Streams.IInputStream)" />
 
         
 
+        
+
          and <see
          cref="M:System.IO.WindowsRuntimeStreamExtensions.AsStreamForWrite(Windows.Storage.Streams.IOutputStream)" />
+
+        
 
         
 
@@ -212,8 +266,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.IO.Stream.FlushAsync" />
+
+        
 
         
 
@@ -225,8 +283,12 @@
 
         
 
+        
+
          object flushes any buffered data, and essentially calls the <see
          cref="M:System.IO.Stream.Flush" />
+
+        
 
         
 
@@ -235,8 +297,12 @@
 
         
 
+        
+
          also releases operating system resources such as file handles, network connections, or memory used for any internal buffering. The <see
          cref="T:System.IO.BufferedStream" />
+
+        
 
         
 
@@ -245,6 +311,8 @@
       <para
         >If you need a stream with no backing store (also known as a bit bucket), use the <see
          cref="F:System.IO.Stream.Null" />
+
+        
 
         
 
@@ -280,6 +348,8 @@
 
             
 
+            
+
              is the abstract base class of all streams. </para
           >
           <para
@@ -288,13 +358,19 @@
 
             
 
+            
+
              are <see
              cref="T:System.IO.FileStream" />
 
             
 
+            
+
             , and <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -306,6 +382,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -352,6 +430,8 @@
 
           
 
+          
+
            does not support reading.</exception
         >
         <exception cref="T:System.ObjectDisposedException">The stream is closed.</exception>
@@ -363,8 +443,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Stream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -373,8 +457,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -383,8 +471,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.Stream.FlushAsync" />
+
+            
 
             
 
@@ -396,6 +488,8 @@
 
             
 
+            
+
              method synchronously, which means that Read might block on some streams. However, instances of classes such as FileStream and NetworkStream fully support asynchronous operations if the instances have been opened asynchronously. Therefore, calls to BeginRead will not block on those streams. You can override BeginRead (by using async delegates, for example) to provide asynchronous behavior.</para
           >
           <para
@@ -404,13 +498,19 @@
 
             
 
+            
+
              method of the stream to determine how many bytes were read and to release operating system resources used for reading. <see
              cref="M:System.IO.Stream.EndRead(System.IAsyncResult)" />
 
             
 
+            
+
              must be called once for every call to <see
              cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -421,6 +521,8 @@
           <para
             >Use the <see
              cref="P:System.IO.Stream.CanRead" />
+
+            
 
             
 
@@ -436,6 +538,8 @@
 
             
 
+            
+
              instead; see the Remarks section.)</para
           >
         </summary>
@@ -447,11 +551,15 @@
 
             
 
+            
+
              that represents the asynchronous read, which could still be pending.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +570,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -474,6 +586,8 @@
 
           
 
+          
+
           The maximum number of bytes to read. </param
         >
         <param name="callback">
@@ -481,10 +595,14 @@
 
           
 
+          
+
           An optional asynchronous callback, to be called when the read is complete. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +647,8 @@
 
           
 
+          
+
            does not support writing.</exception
         >
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
@@ -541,8 +661,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Stream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -551,8 +675,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -561,8 +689,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.Stream.FlushAsync" />
+
+            
 
             
 
@@ -574,6 +706,8 @@
 
             
 
+            
+
              method synchronously, which means that Write might block on some streams. However, instances of classes such as FileStream and NetworkStream fully support asynchronous operations if the instances have been opened asynchronously. Therefore, calls to BeginWrite will not block on those streams. You can override BeginWrite (by using async delegates, for example) to provide asynchronous behavior.</para
           >
           <para
@@ -582,13 +716,19 @@
 
             
 
+            
+
              to ensure that the write completes and frees resources appropriately. <see
              cref="M:System.IO.Stream.EndWrite(System.IAsyncResult)" />
 
             
 
+            
+
              must be called once for every call to <see
              cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -599,6 +739,8 @@
           <para
             >Use the <see
              cref="P:System.IO.Stream.CanWrite" />
+
+            
 
             
 
@@ -614,6 +756,8 @@
 
             
 
+            
+
              instead; see the Remarks section.)</para
           >
         </summary>
@@ -626,6 +770,8 @@
 
           
 
+          
+
           The buffer to write data from. </param
         >
         <param name="offset">
@@ -633,8 +779,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -645,6 +795,8 @@
 
           
 
+          
+
           The maximum number of bytes to write. </param
         >
         <param name="callback">
@@ -652,10 +804,14 @@
 
           
 
+          
+
           An optional asynchronous callback, to be called when the write is complete. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -688,9 +844,13 @@
 
             
 
+            
+
              if the stream supports reading;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -705,8 +865,12 @@
 
             
 
+            
+
              does not support reading, calls to the <see
              cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -715,13 +879,19 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
+            
+
              methods throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -760,9 +930,13 @@
 
             
 
+            
+
              if the stream supports seeking;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -777,8 +951,12 @@
 
             
 
+            
+
              does not support seeking, calls to <see
              cref="P:System.IO.Stream.Length" />
+
+            
 
             
 
@@ -787,8 +965,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.Stream.Position" />
+
+            
 
             
 
@@ -797,8 +979,12 @@
 
             
 
+            
+
              throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -840,8 +1026,12 @@
 
             
 
+            
+
              property always returns false. Some stream implementations require different behavior, such as <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -878,9 +1068,13 @@
 
             
 
+            
+
              if the stream supports writing;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -895,8 +1089,12 @@
 
             
 
+            
+
              does not support writing, a call to <see
              cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -905,13 +1103,19 @@
 
             
 
+            
+
             , or <see
              cref="M:System.IO.Stream.WriteByte(System.Byte)" />
 
             
 
+            
+
              throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -952,8 +1156,12 @@
 
             
 
+            
+
             , specifying true to release all resources. You do not have to specifically call the <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -962,13 +1170,19 @@
 
             
 
+            
+
              object is properly disposed. You can declare <see
              cref="T:System.IO.Stream" />
 
             
 
+            
+
              objects within a using block (or Using block in Visual Basic) to ensure that the stream and all of its resources are disposed, or you can explicitly call the <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -980,8 +1194,12 @@
 
             
 
+            
+
              or Close. Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -990,6 +1208,8 @@
           <para
             >Attempts to manipulate the stream after the stream has been closed might throw an <see
              cref="T:System.ObjectDisposedException" />
+
+            
 
             
 
@@ -1033,6 +1253,8 @@
 
           
 
+          
+
           The stream to which the contents of the current stream will be copied.</param
         >
       </Docs>
@@ -1071,10 +1293,14 @@
 
           
 
+          
+
           The stream to which the contents of the current stream will be copied.</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1110,6 +1336,8 @@
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para>Copying begins at the current position in the current stream.</para>
@@ -1124,6 +1352,8 @@
         </returns>
         <param name="destination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1160,12 +1390,16 @@
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para>Copying begins at the current position in the current stream.</para>
           <para
             >For an example of copying between two streams, see the <see
              cref="M:System.IO.Stream.CopyToAsync(System.IO.Stream)" />
+
+            
 
             
 
@@ -1185,10 +1419,14 @@
 
           
 
+          
+
           The stream to which the contents of the current stream will be copied.</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1226,6 +1464,8 @@
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
@@ -1234,8 +1474,12 @@
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -1245,6 +1489,8 @@
           <para
             >For an example of copying between two streams, see the <see
              cref="M:System.IO.Stream.CopyToAsync(System.IO.Stream)" />
+
+            
 
             
 
@@ -1264,10 +1510,14 @@
 
           
 
+          
+
           The stream to which the contents of the current stream will be copied.</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1278,8 +1528,12 @@
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -1325,8 +1579,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Stream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1338,6 +1596,8 @@
           <para
             >Allocates a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -1377,10 +1637,14 @@
 
             
 
+            
+
              to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -1392,6 +1656,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1427,8 +1693,12 @@
 
             
 
+            
+
             . When <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1440,6 +1710,8 @@
 
             
 
+            
+
              for this purpose. </para
           >
           <para
@@ -1448,8 +1720,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1458,8 +1734,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.Stream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1468,8 +1748,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1478,8 +1762,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1494,11 +1782,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1537,8 +1829,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1549,8 +1845,12 @@
 
           
 
+          
+
           did not originate from a <see
            cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1564,8 +1864,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Stream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1574,8 +1878,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1584,8 +1892,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.Stream.FlushAsync" />
+
+            
 
             
 
@@ -1598,8 +1910,12 @@
 
             
 
+            
+
              from <see
              cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1615,6 +1931,8 @@
 
             
 
+            
+
              instead; see the Remarks section.)</para
           >
         </summary>
@@ -1624,6 +1942,8 @@
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1664,8 +1984,12 @@
 
           
 
+          
+
            parameter is <see
            langword="null" />
+
+          
 
           
 
@@ -1676,8 +2000,12 @@
 
           
 
+          
+
           did not originate from a <see
            cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1691,8 +2019,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Stream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1701,8 +2033,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1711,8 +2047,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.Stream.FlushAsync" />
+
+            
 
             
 
@@ -1724,8 +2064,12 @@
 
             
 
+            
+
              from <see
              cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1741,11 +2085,15 @@
 
             
 
+            
+
              instead; see the Remarks section.)</para
           >
         </summary>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1785,6 +2133,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1793,8 +2143,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IO.BinaryWriter" />
+
+            
 
             
 
@@ -1803,13 +2157,19 @@
 
             
 
+            
+
              object. Instead, use the class's <see
              cref="M:System.IO.Stream.Flush" />
 
             
 
+            
+
              or <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -1846,8 +2206,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IO.Compression.GZipStream" />
+
+            
 
             
 
@@ -1856,8 +2220,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.IO.Stream.FlushAsync" />
+
+            
 
             
 
@@ -1902,8 +2270,12 @@
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -1915,8 +2287,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.IO.Compression.GZipStream" />
+
+            
 
             
 
@@ -1925,8 +2301,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.IO.Stream.FlushAsync(System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -1946,8 +2326,12 @@
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -1980,6 +2364,8 @@
 
             
 
+            
+
              value representing the length of the stream in
    bytes.</para
           >
@@ -1989,6 +2375,8 @@
             <block subset="none" type="note"
               >Use the <see
                cref="P:System.IO.Stream.CanSeek" />
+
+              
 
               
 
@@ -2074,6 +2462,8 @@ seeking.</block
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2104,6 +2494,8 @@ seeking.</block
 
             
 
+            
+
              that specifies the current position within the stream.</para
           >
         </value>
@@ -2117,6 +2509,8 @@ seeking.</block
           <para
             >The stream must support seeking to get or set the position. Use the <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -2166,13 +2560,19 @@ seeking.</block
 
           
 
+          
+
            + <paramref
            name="count" />
 
           
 
+          
+
            - 1) is greater than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2183,8 +2583,12 @@ seeking.</block
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2195,8 +2599,12 @@ seeking.</block
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -2215,8 +2623,12 @@ seeking.</block
 
             
 
+            
+
              property to determine whether the current instance supports reading. Use the <see
              cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2228,8 +2640,12 @@ seeking.</block
 
             
 
+            
+
              bytes from the current stream and store them in <paramref
              name="buffer" />
+
+            
 
             
 
@@ -2238,11 +2654,15 @@ seeking.</block
 
             
 
+            
+
             . The current position within the stream is advanced by the number of bytes read; however, if an exception occurs, the current position within the stream remains unchanged. Implementations return the number of bytes read. The implementation will block until at least one byte of data can be read, in the event that no data is available. Read returns 0 only when there is no more data in the stream and no more is expected (such as a closed socket or end of file). An implementation is free to return fewer bytes than requested even if the end of the stream has not been reached.</para
           >
           <para
             >Use <see
              cref="T:System.IO.BinaryReader" />
+
+            
 
             
 
@@ -2262,8 +2682,12 @@ seeking.</block
 
           
 
+          
+
           An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref
            name="offset" />
+
+          
 
           
 
@@ -2272,8 +2696,12 @@ seeking.</block
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -2284,8 +2712,12 @@ seeking.</block
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2293,6 +2725,8 @@ seeking.</block
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2331,11 +2765,15 @@ seeking.</block
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
             >Use the <see
              cref="P:System.IO.Stream.CanRead" />
+
+            
 
             
 
@@ -2354,11 +2792,15 @@ seeking.</block
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2369,8 +2811,12 @@ seeking.</block
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2378,6 +2824,8 @@ seeking.</block
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2416,11 +2864,15 @@ seeking.</block
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
             >Use the <see
              cref="P:System.IO.Stream.CanRead" />
+
+            
 
             
 
@@ -2432,8 +2884,12 @@ seeking.</block
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -2442,6 +2898,8 @@ seeking.</block
           <para
             >For an example, see the <see
              cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2460,11 +2918,15 @@ seeking.</block
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2475,8 +2937,12 @@ seeking.</block
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2487,6 +2953,8 @@ seeking.</block
 
           
 
+          
+
           The maximum number of bytes to read.</param
         >
         <param name="cancellationToken">
@@ -2494,8 +2962,12 @@ seeking.</block
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -2534,11 +3006,15 @@ seeking.</block
 
             
 
+            
+
              property to determine whether the current instance supports reading.</para
           >
           <para
             >Attempts to manipulate the stream after the stream has been closed could throw an <see
              cref="T:System.ObjectDisposedException" />
+
+            
 
             
 
@@ -2622,6 +3098,8 @@ seeking.</block
 
             
 
+            
+
              property to determine whether the current instance supports seeking.</para
           >
           <para
@@ -2630,8 +3108,12 @@ seeking.</block
 
             
 
+            
+
              is negative, the new position is required to precede the position specified by <paramref
              name="origin" />
+
+            
 
             
 
@@ -2640,8 +3122,12 @@ seeking.</block
 
             
 
+            
+
             . If <paramref
              name="offset" />
+
+            
 
             
 
@@ -2650,8 +3136,12 @@ seeking.</block
 
             
 
+            
+
             . If <paramref
              name="offset" />
+
+            
 
             
 
@@ -2660,8 +3150,12 @@ seeking.</block
 
             
 
+            
+
              by the number of bytes specified by <paramref
              name="offset" />
+
+            
 
             
 
@@ -2683,8 +3177,12 @@ seeking.</block
 
           
 
+          
+
           A byte offset relative to the <paramref
            name="origin" />
+
+          
 
           
 
@@ -2695,8 +3193,12 @@ seeking.</block
 
           
 
+          
+
           A value of type <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -2743,8 +3245,12 @@ seeking.</block
 
             
 
+            
+
              property to determine whether the current instance supports writing, and the <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -2757,6 +3263,8 @@ seeking.</block
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2795,8 +3303,12 @@ seeking.</block
 
             
 
+            
+
              object and restricts access to it from multiple threads. All access to the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2811,6 +3323,8 @@ seeking.</block
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2822,6 +3336,8 @@ seeking.</block
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -2830,8 +3346,12 @@ seeking.</block
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -2853,8 +3373,12 @@ seeking.</block
 
           
 
+          
+
            interface. [Note: For more information, see <see
            cref="M:System.IDisposable.Dispose" />
+
+          
 
           
 
@@ -2900,13 +3424,19 @@ seeking.</block
 
           
 
+          
+
            + <paramref
            name="count" />
 
           
 
+          
+
            ) is greater than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2917,8 +3447,12 @@ seeking.</block
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2929,8 +3463,12 @@ seeking.</block
 
           
 
+          
+
           or <paramref
            name="count" />
+
+          
 
           
 
@@ -2949,8 +3487,12 @@ seeking.</block
 
             
 
+            
+
              property to determine whether the current instance supports writing. Use the <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2967,13 +3509,19 @@ seeking.</block
 
           
 
+          
+
           An array of bytes. This method copies <paramref
            name="count" />
 
           
 
+          
+
            bytes from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2984,8 +3532,12 @@ seeking.</block
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2993,6 +3545,8 @@ seeking.</block
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3031,11 +3585,15 @@ seeking.</block
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
             >Use the <see
              cref="P:System.IO.Stream.CanWrite" />
+
+            
 
             
 
@@ -3055,10 +3613,14 @@ seeking.</block
 
           
 
+          
+
           The buffer to write data from.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3067,10 +3629,14 @@ seeking.</block
 
           
 
+          
+
            from which to begin copying bytes to the stream.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3109,11 +3675,15 @@ seeking.</block
 
             
 
+            
+
              method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
             >Use the <see
              cref="P:System.IO.Stream.CanWrite" />
+
+            
 
             
 
@@ -3125,8 +3695,12 @@ seeking.</block
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -3135,6 +3709,8 @@ seeking.</block
           <para
             >For an example, see the <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3154,6 +3730,8 @@ seeking.</block
 
           
 
+          
+
           The buffer to write data from.</param
         >
         <param name="offset">
@@ -3161,8 +3739,12 @@ seeking.</block
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3173,6 +3755,8 @@ seeking.</block
 
           
 
+          
+
           The maximum number of bytes to write.</param
         >
         <param name="cancellationToken">
@@ -3180,8 +3764,12 @@ seeking.</block
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -3225,6 +3813,8 @@ seeking.</block
 
             
 
+            
+
              property to determine whether the current instance supports writing.</para
           >
         </remarks>
@@ -3234,6 +3824,8 @@ seeking.</block
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

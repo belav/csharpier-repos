@@ -31,6 +31,8 @@
 
         
 
+        
+
          enumeration can be used to indicate the scope and access attributes of a class member. </para
       >
       <block subset="none" type="note">
@@ -40,8 +42,12 @@
 
           
 
+          
+
            (property1.Attributes = MemberAttributes.Public) without specifying it as <see
            cref="F:System.CodeDom.MemberAttributes.Final" />
+
+          
 
           
 
@@ -50,8 +56,12 @@
 
           
 
+          
+
            flag makes a member virtual in C# (public virtual), overrideable in Visual Basic (Public Overrideable). To avoid declaring the member as virtual or overrideable, set both the <see
            cref="F:System.CodeDom.MemberAttributes.Public" />
+
+          
 
           
 
@@ -60,13 +70,19 @@
 
           
 
+          
+
            flags in the <see
            cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
           
 
+          
+
            property. See the <see
            cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+          
 
           
 
@@ -80,8 +96,12 @@
 
           
 
+          
+
            mask and then set the desired access flag. For example, the code statement to identify a constructor (named constructor1) as public is constructor1.Attributes = (constructor1.Attributes &amp; ~MemberAttributes.AccessMask) | MemberAttributes.Public;. Setting the <see
            cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+          
 
           
 
@@ -90,8 +110,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.CodeDom.MemberAttributes.Final" />
+
+          
 
           
 
@@ -100,8 +124,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.CodeDom.MemberAttributes.Override" />
+
+          
 
           
 
@@ -110,8 +138,12 @@
 
           
 
+          
+
           ) using the <see
            cref="F:System.CodeDom.MemberAttributes.ScopeMask" />
+
+          
 
           
 

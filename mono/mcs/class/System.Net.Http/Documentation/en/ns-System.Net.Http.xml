@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace provides a programming interface for modern HTTP applications.</para
       >
     </summary>
@@ -17,6 +19,8 @@
       <para
         >The <see
          cref="N:System.Net.Http" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          namespace and the related <see
          cref="N:System.Net.Http.Headers" />
+
+        
 
         
 
@@ -50,6 +58,8 @@
 
             
 
+            
+
              - the primary class used to send and receive requests over HTTP. </para
           >
         </item>
@@ -59,8 +69,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Net.Http.HttpResponseMessage" />
+
+            
 
             
 
@@ -73,12 +87,16 @@
 
             
 
+            
+
              - HTTP headers as defined in RFC 2616 by the IETF. </para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Net.Http.HttpClientHandler" />
+
+            
 
             
 
@@ -94,12 +112,16 @@
 
             
 
+            
+
              - A class used to plug a handler into a handler chain.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Net.Http.HttpMessageHandler" />
+
+            
 
             
 
@@ -112,6 +134,8 @@
 
             
 
+            
+
              - A class that operates at the bottom of the handler chain that actually handles the HTTP transport operations.</para
           >
         </item>
@@ -121,8 +145,12 @@
 
             
 
+            
+
              - A specialty class that operates at the bottom of the handler chain class that handles HTTP transport operations with options that are specific to the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -139,12 +167,16 @@
 
             
 
+            
+
              - HTTP content based on a byte array.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Net.Http.FormUrlEncodedContent" />
+
+            
 
             
 
@@ -157,12 +189,16 @@
 
             
 
+            
+
              - HTTP content that gets serialized using the multipart/* content type specification. </para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Net.Http.MultipartFormDataContent" />
+
+            
 
             
 
@@ -175,12 +211,16 @@
 
             
 
+            
+
              - HTTP content based on a stream. </para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Net.Http.StringContent" />
+
+            
 
             
 
@@ -194,8 +234,12 @@
 
         
 
+        
+
          and <see
          cref="N:System.Net.Http.Headers" />
+
+        
 
         
 
@@ -207,8 +251,12 @@
 
         
 
+        
+
          and <see
          cref="N:System.Net.Http.Headers" />
+
+        
 
         
 
@@ -217,8 +265,12 @@
 
         
 
+        
+
          and <see
          cref="N:System.Net.Http.Headers" />
+
+        
 
         
 
@@ -228,6 +280,8 @@
             >Network Isolation for Windows Store Apps</a
           >
         </format>
+
+        
 
         
 

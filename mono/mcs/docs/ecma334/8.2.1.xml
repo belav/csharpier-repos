@@ -8,8 +8,12 @@
 
     
 
+    
+
     , <keyword
     >char</keyword>
+
+    
 
     
 
@@ -18,8 +22,12 @@
 
     
 
+    
+
     . The signed integral types are <keyword
     >sbyte</keyword>
+
+    
 
     
 
@@ -28,8 +36,12 @@
 
     
 
+    
+
     , <keyword
     >int</keyword>
+
+    
 
     
 
@@ -38,8 +50,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -48,13 +64,19 @@
 
     
 
+    
+
     , and ulong; and the floating-point types are <keyword
     >float</keyword>
 
     
 
+    
+
      and <keyword
     >double</keyword>
+
+    
 
     
 
@@ -66,8 +88,12 @@
 
     
 
+    
+
      type is used to represent boolean values: values that are either true or false. The inclusion of <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -83,13 +109,19 @@ G();
 
     
 
+    
+
     results in a compile-time error because the expression i = 0 is of type <keyword
     >int</keyword>
 
     
 
+    
+
     , and if statements require an expression of type <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -101,8 +133,12 @@ G();
 
     
 
+    
+
      type is used to represent Unicode characters. A variable of type <keyword
     >char</keyword>
+
+    
 
     
 
@@ -114,8 +150,12 @@ G();
 
     
 
+    
+
      type is appropriate for calculations in which rounding errors caused by floating point representations are unacceptable. Common examples include financial calculations such as tax computations and currency conversions. The <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -133,8 +173,12 @@ G();
 
       
 
+      
+
        8-bit signed integral type <keyword
       >sbyte</keyword>
+
+      
 
       
 
@@ -145,8 +189,12 @@ G();
 
       
 
+      
+
        16-bit signed integral type <keyword
       >short</keyword>
+
+      
 
       
 
@@ -157,8 +205,12 @@ G();
 
       
 
+      
+
        32-bit signed integral type <keyword
       >int</keyword>
+
+      
 
       
 
@@ -169,8 +221,12 @@ G();
 
       
 
+      
+
        64-bit signed integral type <keyword
       >long</keyword>
+
+      
 
       
 
@@ -181,6 +237,8 @@ G();
 
       
 
+      
+
        val2 = 34L; </table_line
     >
     <table_line>
@@ -188,8 +246,12 @@ G();
 
       
 
+      
+
        8-bit unsigned integral type <keyword
       >byte</keyword>
+
+      
 
       
 
@@ -200,8 +262,12 @@ G();
 
       
 
+      
+
        16-bit unsigned integral type <keyword
       >ushort</keyword>
+
+      
 
       
 
@@ -209,6 +275,8 @@ G();
     >
     <table_line>
       <keyword>uint</keyword>
+
+      
 
       
 
@@ -217,6 +285,8 @@ G();
 
       
 
+      
+
        val1 = 12; </table_line
     >
     <table_line>
@@ -224,10 +294,14 @@ G();
 
       
 
+      
+
        val2 = 34U; </table_line
     >
     <table_line>
       <keyword>ulong</keyword>
+
+      
 
       
 
@@ -236,6 +310,8 @@ G();
 
       
 
+      
+
        val1 = 12; </table_line
     >
     <table_line>
@@ -243,10 +319,14 @@ G();
 
       
 
+      
+
        val2 = 34U; </table_line
     >
     <table_line>
       <keyword>ulong</keyword>
+
+      
 
       
 
@@ -257,6 +337,8 @@ G();
 
       
 
+      
+
        val4 = 78UL; </table_line
     >
     <table_line>
@@ -264,8 +346,12 @@ G();
 
       
 
+      
+
        Single-precision floating point type <keyword
       >float</keyword>
+
+      
 
       
 
@@ -276,8 +362,12 @@ G();
 
       
 
+      
+
        Double-precision floating point type <keyword
       >double</keyword>
+
+      
 
       
 
@@ -288,10 +378,14 @@ G();
 
       
 
+      
+
        val2 = 4.56D; </table_line
     >
     <table_line>
       <keyword>bool</keyword>
+
+      
 
       
 
@@ -300,8 +394,12 @@ G();
 
       
 
+      
+
        value is either true or false <keyword
       >bool</keyword>
+
+      
 
       
 
@@ -312,10 +410,14 @@ G();
 
       
 
+      
+
        val2 = false; </table_line
     >
     <table_line>
       <keyword>char</keyword>
+
+      
 
       
 
@@ -324,8 +426,12 @@ G();
 
       
 
+      
+
        value is a Unicode character <keyword
       >char</keyword>
+
+      
 
       
 
@@ -336,13 +442,19 @@ G();
 
       
 
+      
+
        Precise <keyword
       >decimal</keyword>
 
       
 
+      
+
        type with 28 significant digits <keyword
       >decimal</keyword>
+
+      
 
       
 
@@ -355,11 +467,15 @@ G();
 
     
 
+    
+
      refers to the struct System.Int32. As a matter of style, use of the keyword is favored over use of the complete system type name. </paragraph
   >
   <paragraph
     >Predefined value types such as <keyword
     >int</keyword>
+
+    
 
     
 
@@ -371,6 +487,8 @@ G();
       <list_item
         > Two expressions of type <keyword
         >int</keyword>
+
+        
 
         
 
@@ -399,6 +517,8 @@ class Test
 
     
 
+    
+
     produces the output <code_example
     >
       <![CDATA[
@@ -406,6 +526,8 @@ True
 False  
 ]]>
     </code_example>
+
+    
 
     
 

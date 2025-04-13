@@ -6,11 +6,15 @@
 
     
 
+    
+
      is used to explicitly convert an expression to a given type. <grammar_production
     >
       <name>
         <non_terminal where="14.6.6">cast-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -29,13 +33,19 @@
 
     
 
+    
+
      of the form (T)E, where T is a type and E is a <non_terminal
      where="14.6">unary-expression</non_terminal>
 
     
 
+    
+
     , performs an explicit conversion (<hyperlink
     >13.2</hyperlink>
+
+    
 
     
 
@@ -47,8 +57,12 @@
 
     
 
+    
+
      leads to certain syntactic ambiguities. For example, the expression  (x)-y could either be interpreted as a <non_terminal
      where="14.6.6">cast-expression</non_terminal>
+
+    
 
     
 
@@ -57,8 +71,12 @@
 
     
 
+    
+
      combined with a <non_terminal
      where="14.5.3">parenthesized-expression</non_terminal>
+
+    
 
     
 
@@ -70,13 +88,19 @@
 
     
 
+    
+
      ambiguities, the following rule exists: A sequence of one or more tokens (<hyperlink
     >9.4</hyperlink>
 
     
 
+    
+
     ) enclosed in parentheses is considered the start of a <non_terminal
      where="14.6.6">cast-expression</non_terminal>
+
+    
 
     
 
@@ -89,13 +113,19 @@
 
         
 
+        
+
         ), a literal (<hyperlink
         >9.4.4</hyperlink>
 
         
 
+        
+
         ), or any keyword (<hyperlink
         >9.4.3</hyperlink>
+
+        
 
         
 
@@ -110,8 +140,12 @@
 
       
 
+      
+
        is it considered a <non_terminal
        where="14.6.6">cast-expression</non_terminal>
+
+      
 
       
 
@@ -126,13 +160,19 @@
 
       
 
+      
+
       s, but (x)-y is not, even if x identifies a type. However, if x is a keyword that identifies a predefined type (such as <keyword
       >int</keyword>
 
       
 
+      
+
       ), then all four forms are <non_terminal
        where="14.6.6">cast-expression</non_terminal>
+
+      
 
       
 

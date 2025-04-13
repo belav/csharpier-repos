@@ -20,6 +20,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -41,6 +43,8 @@
 
             
 
+            
+
              parameter is reset on each call to any one of the SqlBulkCopy.WriteToServer methods.</para
           >
         </remarks>
@@ -52,6 +56,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -60,8 +66,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -89,8 +99,12 @@
 
             
 
+            
+
              property to cancel a bulk copy operation. Set <see
              cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
+
+            
 
             
 
@@ -102,8 +116,12 @@
 
             
 
+            
+
             , an exception is generated, and the <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -115,13 +133,19 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
+            
+
              constructor, the transaction is not rolled back. The application is responsible for determining whether it is required to rollback the operation, and if so, it must call the <see
              cref="M:System.Data.SqlClient.SqlTransaction.Rollback" />
+
+            
 
             
 
@@ -151,6 +175,8 @@
           <para
             >The value in the <see
              cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.RowsCopied" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          object enables navigation between related parent/child <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          object by defining it as a property of either the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
         , instead of by directly using a constructor. (Use the <see
          cref="P:System.Data.DataSet.Relations" />
+
+        
 
         
 
@@ -70,13 +82,19 @@
 
         
 
+        
+
         , or the <see
          cref="P:System.Data.DataTable.ParentRelations" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -88,8 +106,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -101,13 +123,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.Data.DataRelationCollection.Clear" />
 
         
 
+        
+
         , and <see
          cref="M:System.Data.DataRelationCollection.Remove(System.Data.DataRelation)" />
+
+        
 
         
 
@@ -122,8 +150,12 @@
 
         
 
+        
+
          objects for this <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -144,6 +176,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DataRelationCollection" />
+
+            
 
             
 
@@ -174,6 +208,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -182,13 +218,19 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -203,8 +245,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.DataRelationCollection" />
+
+            
 
             
 
@@ -213,6 +259,8 @@
         </summary>
         <param name="relation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,13 +294,19 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -264,6 +318,8 @@
           <para
             >Creates a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -279,10 +335,14 @@
 
           
 
+          
+
           The parent column of the relation. </param
         >
         <param name="childColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,13 +376,19 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -334,6 +400,8 @@
           <para
             >Creates a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -349,10 +417,14 @@
 
           
 
+          
+
           The parent columns of the relation. </param
         >
         <param name="childColumns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,13 +459,19 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -405,6 +483,8 @@
           <para
             >Creates a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -420,6 +500,8 @@
 
           
 
+          
+
           The name of the relation. </param
         >
         <param name="parentColumn">
@@ -427,10 +509,14 @@
 
           
 
+          
+
           The parent column of the relation. </param
         >
         <param name="childColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -465,6 +551,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -473,13 +561,19 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -491,6 +585,8 @@
           <para
             >Creates a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -506,10 +602,14 @@
 
           
 
+          
+
           The name of the DataRelation to create. </param
         >
         <param name="parentColumns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -518,10 +618,14 @@
 
           
 
+          
+
            objects. </param
         >
         <param name="childColumns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -557,8 +661,12 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -567,8 +675,12 @@
 
             
 
+            
+
              objects are created by default if they do not already exist. To prevent this, you can set <paramref
              name="createConstraints" />
+
+            
 
             
 
@@ -583,8 +695,12 @@
 
             
 
+            
+
              with the specified name, parent and child columns, with optional constraints according to the value of the <paramref
              name="createConstraints" />
+
+            
 
             
 
@@ -600,10 +716,14 @@
 
           
 
+          
+
           The name of the relation. </param
         >
         <param name="parentColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,10 +734,14 @@
 
           
 
+          
+
           The child column of the relation. </param
         >
         <param name="createConstraints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -653,13 +777,19 @@
 
             
 
+            
+
              object is added to the collection, <see
              cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
+            
+
              and <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -671,6 +801,8 @@
           <para
             >Creates a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -686,6 +818,8 @@
 
           
 
+          
+
           The name of the DataRelation to create. </param
         >
         <param name="parentColumns">
@@ -693,8 +827,12 @@
 
           
 
+          
+
           An array of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -705,10 +843,14 @@
 
           
 
+          
+
           An array of child DataColumn objects. </param
         >
         <param name="createConstraints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -743,6 +885,8 @@
 
           
 
+          
+
           The relation to check.</param
         >
       </Docs>
@@ -772,8 +916,12 @@
 
             
 
+            
+
              has been called, AddRange does not add any objects to the collection until <see
              cref="M:System.Data.DataSet.EndInit" />
+
+            
 
             
 
@@ -788,6 +936,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -796,8 +946,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataRelation" />
+
+          
 
           
 
@@ -831,6 +985,8 @@
 
             
 
+            
+
              can be removed from the collection.</para
           >
         </summary>
@@ -842,11 +998,15 @@
 
             
 
+            
+
              can be removed; otherwise, false.</para
           >
         </returns>
         <param name="relation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -918,6 +1078,8 @@
 
             
 
+            
+
              with the specific name (case insensitive) exists in the collection.</para
           >
         </summary>
@@ -927,6 +1089,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -964,6 +1128,8 @@
 
             
 
+            
+
              objects starting at the specified index.</para
           >
         </summary>
@@ -972,8 +1138,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataRelation" />
+
+          
 
           
 
@@ -981,6 +1151,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1036,6 +1208,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1045,6 +1219,8 @@
         </returns>
         <param name="relation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,6 +1251,8 @@
 
             
 
+            
+
              specified by name.</para
           >
         </summary>
@@ -1084,6 +1262,8 @@
         </returns>
         <param name="relationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1164,6 +1344,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1175,6 +1357,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1183,8 +1367,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1223,6 +1411,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1234,6 +1424,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1242,8 +1434,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1272,6 +1468,8 @@
 
             
 
+            
+
              event is fired if the remove operation succeeds. Note that removing the relation does not remove any associated constraint objects.</para
           >
         </remarks>
@@ -1281,6 +1479,8 @@
         </summary>
         <param name="relation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1310,6 +1510,8 @@
 
             
 
+            
+
              event is fired if the remove operation succeeds.</para
           >
         </remarks>
@@ -1319,6 +1521,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1348,6 +1552,8 @@
 
             
 
+            
+
              event is fired if the remove operation succeeds.</para
           >
         </remarks>
@@ -1357,6 +1563,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1390,11 +1598,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="relation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

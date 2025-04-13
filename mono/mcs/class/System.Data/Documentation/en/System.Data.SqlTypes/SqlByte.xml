@@ -52,6 +52,8 @@
 
             
 
+            
+
              structure using the specified byte value.</para
           >
         </summary>
@@ -60,13 +62,19 @@
 
           
 
+          
+
           A byte value to be stored in the <see
            cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
           
 
+          
+
            property of the new <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -101,6 +109,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -112,6 +122,8 @@
 
             
 
+            
+
              structure whose Value property contains the results of the addition.</para
           >
         </returns>
@@ -120,8 +132,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -132,8 +148,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -168,6 +188,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -180,8 +202,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -192,8 +218,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -228,6 +258,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -240,8 +272,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -252,8 +288,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -287,6 +327,8 @@
           <para
             >Compares this instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -340,8 +382,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -365,6 +411,8 @@
           <para
             >Compares this instance to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -418,8 +466,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -454,6 +506,8 @@
 
             
 
+            
+
              operand by its second.</para
           >
         </summary>
@@ -465,8 +519,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -478,8 +536,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -490,8 +552,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -522,13 +588,19 @@
 
             
 
+            
+
              parameter to the <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -543,6 +615,8 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
@@ -551,8 +625,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -587,6 +665,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -599,8 +679,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -611,8 +695,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -672,6 +760,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -683,6 +773,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -691,8 +783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -723,6 +819,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -734,8 +832,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -744,8 +846,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -754,13 +860,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -772,8 +884,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -784,8 +900,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -820,6 +940,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -831,8 +953,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -841,8 +967,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -851,13 +981,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -869,8 +1005,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -881,8 +1021,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -912,6 +1056,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -920,6 +1066,8 @@
           <para
             >Gets a Boolean value that indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -955,6 +1103,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -966,8 +1116,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -976,8 +1130,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -986,13 +1144,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1004,8 +1168,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1016,8 +1184,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1052,6 +1224,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1063,8 +1237,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1073,8 +1251,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -1083,13 +1265,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1101,8 +1289,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1113,8 +1305,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1146,6 +1342,8 @@
           <para
             >A constant representing the largest possible value of a <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -1181,6 +1379,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1213,6 +1413,8 @@
 
             
 
+            
+
              operand by its second.</para
           >
         </summary>
@@ -1224,8 +1426,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -1237,8 +1443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1249,8 +1459,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1287,8 +1501,12 @@
 
             
 
+            
+
              or <paramref
              name="y" />
+
+            
 
             
 
@@ -1303,6 +1521,8 @@
 
             
 
+            
+
              values and returns the remainder.</para
           >
         </summary>
@@ -1314,8 +1534,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1327,8 +1551,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1339,8 +1567,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1371,6 +1603,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1382,8 +1616,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -1395,8 +1633,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1407,8 +1649,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1443,6 +1689,8 @@
 
             
 
+            
+
              to determine whether they are not equal.</para
           >
         </summary>
@@ -1454,8 +1702,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1464,8 +1716,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -1474,13 +1730,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1492,8 +1754,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1504,8 +1770,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1536,10 +1806,14 @@
 
             
 
+            
+
              structure. For more information, see <format
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1554,8 +1828,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -1590,6 +1868,8 @@
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -1601,13 +1881,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
+            
+
              property contains the ones complement of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -1619,8 +1905,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1659,6 +1949,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -1670,8 +1962,12 @@
 
             
 
+            
+
              whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -1683,8 +1979,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1695,8 +1995,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1731,6 +2035,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1743,8 +2049,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1755,8 +2065,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1791,6 +2105,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -1803,8 +2119,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1815,8 +2135,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1851,6 +2175,8 @@
 
             
 
+            
+
              operand by its second.</para
           >
         </summary>
@@ -1862,8 +2188,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -1875,8 +2205,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1887,8 +2221,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1923,6 +2261,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -1934,8 +2274,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1944,8 +2288,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -1954,13 +2302,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1972,8 +2326,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -1984,8 +2342,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2025,8 +2387,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2037,8 +2403,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2303,6 +2673,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -2314,8 +2686,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2324,8 +2700,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2334,13 +2714,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2352,8 +2738,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2364,8 +2754,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2400,6 +2794,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -2411,8 +2807,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2421,8 +2821,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2431,8 +2835,12 @@
 
             
 
+            
+
              of the SqlBoolean will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2444,8 +2852,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2456,8 +2868,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2515,6 +2931,8 @@
 
             
 
+            
+
              to determine whether they are not equal.</para
           >
         </summary>
@@ -2526,8 +2944,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2536,8 +2958,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2546,13 +2972,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2564,8 +2996,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2576,8 +3012,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2612,6 +3052,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2623,8 +3065,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2633,8 +3079,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2643,13 +3093,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2661,8 +3117,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2673,8 +3133,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2709,6 +3173,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2720,8 +3186,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2730,8 +3200,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2740,13 +3214,19 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2758,8 +3238,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2770,8 +3254,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2806,6 +3294,8 @@
 
             
 
+            
+
              operand by its second.</para
           >
         </summary>
@@ -2817,8 +3307,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -2830,8 +3324,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2842,8 +3340,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2878,6 +3380,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -2889,8 +3393,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -2902,8 +3410,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2914,8 +3426,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -2949,6 +3465,8 @@
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -2960,13 +3478,19 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
+            
+
              property contains the ones complement of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2978,8 +3502,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3014,6 +3542,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </summary>
@@ -3025,6 +3555,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </returns>
@@ -3033,8 +3565,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3045,8 +3581,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3076,6 +3616,8 @@
 
             
 
+            
+
              representation of a number to its 8-bit unsigned integer equivalent.</para
           >
         </summary>
@@ -3087,11 +3629,15 @@
 
             
 
+            
+
              structure that contains the 8-bit number represented by the String parameter.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3126,6 +3672,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </summary>
@@ -3137,6 +3685,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </returns>
@@ -3145,8 +3695,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3157,8 +3711,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3221,6 +3779,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -3251,6 +3811,8 @@
 
           
 
+          
+
           XmlWriter </param
         >
       </Docs>
@@ -3275,8 +3837,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3288,6 +3854,8 @@
           <para
             >true if the <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -3320,8 +3888,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3336,13 +3908,19 @@
 
             
 
+            
+
              equals the <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3375,8 +3953,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3388,6 +3970,8 @@
           <para
             >A SqlDouble structure with the same value as this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3417,8 +4001,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3430,6 +4018,8 @@
           <para
             >A SqlInt16 structure with the same value as this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3459,8 +4049,12 @@
 
             
 
+            
+
              to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -3472,6 +4066,8 @@
           <para
             >A SqlInt32 structure with the same value as this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3501,8 +4097,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3517,13 +4117,19 @@
 
             
 
+            
+
              equals the <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3553,8 +4159,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -3569,13 +4179,19 @@
 
             
 
+            
+
              equals the <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3608,8 +4224,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3624,8 +4244,12 @@
 
             
 
+            
+
              as this <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3658,8 +4282,12 @@
 
             
 
+            
+
              to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3674,8 +4302,12 @@
 
             
 
+            
+
              structure's <see
              cref="P:System.Data.SqlTypes.SqlByte.Value" />
+
+            
 
             
 
@@ -3705,8 +4337,12 @@
 
             
 
+            
+
              structure to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3721,8 +4357,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3749,6 +4389,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3789,8 +4431,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3801,8 +4447,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlByte" />
+
+          
 
           
 
@@ -3833,8 +4483,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3849,8 +4503,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 

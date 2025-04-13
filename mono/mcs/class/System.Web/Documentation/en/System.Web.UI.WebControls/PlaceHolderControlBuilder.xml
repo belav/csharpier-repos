@@ -29,6 +29,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -46,6 +48,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.PlaceHolderControlBuilder" />
+
+            
 
             
 
@@ -74,8 +78,12 @@
 
             
 
+            
+
              method to ignore white spaces in the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 

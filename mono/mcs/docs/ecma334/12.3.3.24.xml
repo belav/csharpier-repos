@@ -38,6 +38,8 @@ class A
 
       
 
+      
+
       the variable i is considered definitely assigned in one of the embedded statements of an if statement but not in the other. In the if statement in method G, the variable i is definitely assigned in the second embedded statement because execution of the expression (i = y) always precedes execution of this embedded statement. In contrast, the variable i is not definitely assigned in the first embedded statement, since x &gt;= 0 might have tested false, resulting in the variable i's being unassigned. end example]</example
     >
   </paragraph>

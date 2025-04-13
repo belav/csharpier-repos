@@ -28,8 +28,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.SByte" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int16" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -58,8 +70,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int64" />
+
+        
 
         
 
@@ -68,8 +84,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Single" />
+
+        
 
         
 
@@ -78,8 +98,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -88,13 +112,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.Char" />
 
         
 
+        
+
         , and <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -106,13 +136,19 @@
 
         
 
+        
+
         . For example, if this interface is implemented on a Boolean type, the implementation of the <see
          cref="M:System.IConvertible.ToDateTime(System.IFormatProvider)" />
 
         
 
+        
+
          method throws an exception because there is no meaningful <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -124,8 +160,12 @@
 
         
 
+        
+
          interface through the <see
          cref="T:System.Convert" />
+
+        
 
         
 
@@ -134,8 +174,12 @@
 
         
 
+        
+
          interface internally, in explicit interface implementations, to simplify the code used to support conversions in the <see
          cref="T:System.Convert" />
+
+        
 
         
 
@@ -147,10 +191,14 @@
 
         
 
+        
+
          interface, the .NET Framework provides classes called type converters for converting user-defined data types to other data types. For more information, see the <format
          type="text/html">
           <a href="49253AE6-7657-4810-82AB-1176A6FEEADA">Generalized Type Conversion</a>
         </format>
+
+        
 
         
 
@@ -189,6 +237,8 @@
 
             
 
+            
+
              for this instance.</para
           >
         </summary>
@@ -197,6 +247,8 @@
           <para
             >The enumerated constant that is the <see
              cref="T:System.TypeCode" />
+
+            
 
             
 
@@ -238,8 +290,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -280,8 +336,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -322,8 +382,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -362,6 +426,8 @@
 
             
 
+            
+
              using the specified culture-specific formatting information.</para
           >
         </summary>
@@ -373,6 +439,8 @@
 
             
 
+            
+
              instance equivalent to the value of this instance.</para
           >
         </returns>
@@ -381,8 +449,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -418,6 +490,8 @@
 
             
 
+            
+
              number using the specified culture-specific formatting information.</para
           >
         </summary>
@@ -429,6 +503,8 @@
 
             
 
+            
+
              number equivalent to the value of this instance.</para
           >
         </returns>
@@ -437,8 +513,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -479,8 +559,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -521,8 +605,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -563,8 +651,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -605,8 +697,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -647,8 +743,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -689,8 +789,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -726,6 +830,8 @@
 
             
 
+            
+
              using the specified culture-specific formatting information.</para
           >
         </summary>
@@ -737,6 +843,8 @@
 
             
 
+            
+
              instance equivalent to the value of this instance.</para
           >
         </returns>
@@ -745,8 +853,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -786,8 +898,12 @@
 
             
 
+            
+
              of the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -802,8 +918,12 @@
 
             
 
+            
+
              instance of type <paramref
              name="conversionType" />
+
+            
 
             
 
@@ -815,8 +935,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -827,8 +951,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -869,8 +997,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -911,8 +1043,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -953,8 +1089,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 

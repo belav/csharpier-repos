@@ -14,6 +14,8 @@
 
         
 
+        
+
          interface, which
     	provides basic functionality for iterating through the elements of a collection.
     	Collections that support index-based access into their elements and the ability to add and
@@ -22,8 +24,12 @@
 
         
 
+        
+
         , implement the <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -33,9 +39,13 @@
 
         
 
+        
+
         ,
     	 implement the <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -47,6 +57,8 @@
       <para
         >The <see
          cref="N:System.Collections" />
+
+        
 
         
 

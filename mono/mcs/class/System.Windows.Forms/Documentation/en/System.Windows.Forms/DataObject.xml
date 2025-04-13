@@ -33,8 +33,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          is typically used with the <see
          cref="T:System.Windows.Forms.Clipboard" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          class provides the recommended implementation of the <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          class rather than implementing <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -79,8 +95,12 @@
 
         
 
+        
+
         . Data is retrieved from a <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 
@@ -89,13 +109,19 @@
 
         
 
+        
+
          in multiple formats. See <see
          cref="T:System.Windows.Forms.DataFormats" />
 
         
 
+        
+
          for the predefined formats. You can implement your own format by creating an instance of the <see
          cref="T:System.Windows.Forms.DataFormats.Format" />
+
+        
 
         
 
@@ -107,8 +133,12 @@
 
         
 
+        
+
         , pass the data to the constructor or call <see
          cref="Overload:System.Windows.Forms.DataObject.SetData" />
+
+        
 
         
 
@@ -117,13 +147,19 @@
 
         
 
+        
+
         . If you want the data you add to be retrieved in its native format only, call <see
          cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
         
 
+        
+
          with the <paramref
          name="autoConvert" />
+
+        
 
         
 
@@ -135,8 +171,12 @@
 
         
 
+        
+
          in any format which is compatible with <see
          cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+        
 
         
 
@@ -145,8 +185,12 @@
 
         
 
+        
+
          with the <paramref
          name="autoConvert" />
+
+        
 
         
 
@@ -158,8 +202,12 @@
 
         
 
+        
+
         . To determine if a format is available, call <see
          cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+        
 
         
 
@@ -171,8 +219,12 @@
 
         
 
+        
+
          class provides additional methods that make it easier to work with data in common formats. To add data of a particular format to the <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 
@@ -181,8 +233,12 @@
 
         
 
+        
+
         . To retrieve data of a particular format from the <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 
@@ -191,8 +247,12 @@
 
         
 
+        
+
         ) to determine whether the <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 
@@ -201,8 +261,12 @@
 
         
 
+        
+
         ) to retrieve the data if the <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 
@@ -215,6 +279,8 @@
 
           
 
+          
+
            class, the metafile format used by the .NET Framework may not be recognized by applications that use an older metafile format. In this case, you must interoperate with the Win32 Clipboard application programming interfaces (APIs). For more information, see article 323530, "Metafiles on Clipboard Are Not Visible to All Applications," in the Microsoft Knowledge Base at http://support.microsoft.com.</para
         >
         <para
@@ -223,8 +289,12 @@
 
           
 
+          
+
            for more information on serialization. If your target application requires a very specific data format, the headers added to the data in the serialization process may prevent the application from recognizing your data. To preserve your data format, add your data as a <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -233,13 +303,19 @@
 
           
 
+          
+
            and pass the <see
            cref="T:System.IO.MemoryStream" />
 
           
 
+          
+
            to the <see
            cref="M:System.Windows.Forms.DataObject.SetData(System.Object)" />
+
+          
 
           
 
@@ -267,6 +343,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -291,8 +369,12 @@
 
             
 
+            
+
              when you use this constructor, or you can add data as an <see
              cref="T:System.Windows.Forms.IDataObject" />
+
+            
 
             
 
@@ -307,11 +389,15 @@
 
             
 
+            
+
              class and adds the specified object to it.</para
           >
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,6 +426,8 @@
 
             
 
+            
+
              class and adds the specified object in the specified format.</para
           >
         </summary>
@@ -348,8 +436,12 @@
 
           
 
+          
+
           The format of the specified data. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -357,6 +449,8 @@
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,6 +481,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -395,6 +491,8 @@
           <para
             >Indicates whether the data object contains data in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+
+            
 
             
 
@@ -427,6 +525,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -435,6 +535,8 @@
           <para
             >Indicates whether the data object contains data that is in the <see
              cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+
+            
 
             
 
@@ -466,6 +568,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -474,6 +578,8 @@
           <para
             >Indicates whether the data object contains data that is in the <see
              cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+
+            
 
             
 
@@ -505,6 +611,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -513,6 +621,8 @@
           <para
             >Indicates whether the data object contains data in the <see
              cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+
+            
 
             
 
@@ -549,6 +659,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -557,6 +669,8 @@
           <para
             >Indicates whether the data object contains text data in the format indicated by the specified <see
              cref="T:System.Windows.Forms.TextDataFormat" />
+
+            
 
             
 
@@ -572,8 +686,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TextDataFormat" />
+
+          
 
           
 
@@ -600,11 +718,15 @@
 
             
 
+            
+
              method to determine whether the data object contains audio data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="Overload:System.Windows.Forms.DataObject.SetAudio" />
+
+            
 
             
 
@@ -623,8 +745,12 @@
 
             
 
+            
+
              containing audio data or null if the data object does not contain any data in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+
+            
 
             
 
@@ -652,8 +778,12 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -662,8 +792,12 @@
 
             
 
+            
+
              for a list of valid formats for the data stored in this <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -686,8 +820,12 @@
 
           
 
+          
+
           The format of the data to retrieve. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -718,8 +856,12 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -728,8 +870,12 @@
 
             
 
+            
+
              for a list of valid formats for the data stored in this <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -752,8 +898,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -787,11 +937,15 @@
 
             
 
+            
+
              parameter is true and this method cannot find data in the specified format, it attempts to convert the data to the format. If the data cannot be converted to the specified format, or if the data was stored with the automatic conversion set to false, this method returns null.</para
           >
           <para
             >If the <paramref
              name="autoConvert" />
+
+            
 
             
 
@@ -803,8 +957,12 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -813,8 +971,12 @@
 
             
 
+            
+
              for a list of valid formats for the data stored in this <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -837,8 +999,12 @@
 
           
 
+          
+
           The format of the data to retrieve. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -846,6 +1012,8 @@
         >
         <param name="autoConvert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -875,13 +1043,19 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
+            
+
              for the formats that are available in this <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -902,6 +1076,8 @@
 
             
 
+            
+
              is associated with, or can be converted to, the specified format.</para
           >
         </summary>
@@ -913,6 +1089,8 @@
 
             
 
+            
+
              is associated with, or can be converted to, the specified format; otherwise, false.</para
           >
         </returns>
@@ -921,8 +1099,12 @@
 
           
 
+          
+
           The format to check for. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -952,13 +1134,19 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
+            
+
              for the formats that are available in this <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -979,6 +1167,8 @@
 
             
 
+            
+
              is associated with, or can be converted to, the specified format.</para
           >
         </summary>
@@ -990,6 +1180,8 @@
 
             
 
+            
+
              is associated with, or can be converted to, the specified format; otherwise, false.</para
           >
         </returns>
@@ -998,8 +1190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1033,13 +1229,19 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
 
             
 
+            
+
              for the formats that are available in this <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1054,6 +1256,8 @@
 
                 
 
+                
+
                  parameter is true and the data is in a format that can be converted to the appropriate format.</para
               >
             </item>
@@ -1061,6 +1265,8 @@
               <para
                 >The <paramref
                  name="autoConvert" />
+
+                
 
                 
 
@@ -1077,6 +1283,8 @@
 
                 
 
+                
+
                  parameter is true and this method cannot find data in the specified format, and it cannot convert data to the specified format, or the data was stored with automatic conversion set to false.</para
               >
             </item>
@@ -1087,8 +1295,12 @@
 
                 
 
+                
+
                  parameter is false and data does not exist in this <see
                  cref="T:System.Windows.Forms.DataObject" />
+
+                
 
                 
 
@@ -1111,6 +1323,8 @@
 
             
 
+            
+
              contains data in the specified format or, optionally, contains data that can be converted to the specified format.</para
           >
         </summary>
@@ -1123,8 +1337,12 @@
 
           
 
+          
+
           The format to check for. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -1135,8 +1353,12 @@
 
           
 
+          
+
           true to determine whether data stored in this <see
            cref="T:System.Windows.Forms.DataObject" />
+
+          
 
           
 
@@ -1171,8 +1393,12 @@
 
             
 
+            
+
              array. This method converts this array to a <see
              cref="T:System.Collections.Specialized.StringCollection" />
+
+            
 
             
 
@@ -1184,11 +1410,15 @@
 
             
 
+            
+
              method to determine whether the data object contains a file drop list before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="M:System.Windows.Forms.DataObject.SetFileDropList(System.Collections.Specialized.StringCollection)" />
+
+            
 
             
 
@@ -1207,8 +1437,12 @@
 
             
 
+            
+
              containing file names or null if the data object does not contain any data that is in the <see
              cref="F:System.Windows.Forms.DataFormats.FileDrop" />
+
+            
 
             
 
@@ -1233,8 +1467,12 @@
 
             
 
+            
+
             . See <see
              cref="T:System.Windows.Forms.DataFormats" />
+
+            
 
             
 
@@ -1252,6 +1490,8 @@
 
             
 
+            
+
              is associated with or can be converted to.</para
           >
         </summary>
@@ -1260,6 +1500,8 @@
           <para
             >An array of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1293,8 +1535,12 @@
 
             
 
+            
+
             . See <see
              cref="T:System.Windows.Forms.DataFormats" />
+
+            
 
             
 
@@ -1312,6 +1558,8 @@
 
             
 
+            
+
              is associated with or can be converted to, using an automatic conversion parameter to determine whether to retrieve only native data formats or all formats that the data can be converted to.</para
           >
         </summary>
@@ -1323,6 +1571,8 @@
 
             
 
+            
+
             , containing a list of all formats that are supported by the data stored in this object.</para
           >
         </returns>
@@ -1331,8 +1581,12 @@
 
           
 
+          
+
           true to retrieve all formats that data stored in this <see
            cref="T:System.Windows.Forms.DataObject" />
+
+          
 
           
 
@@ -1363,11 +1617,15 @@
 
             
 
+            
+
              method to determine whether the data object contains image data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="M:System.Windows.Forms.DataObject.SetImage(System.Drawing.Image)" />
+
+            
 
             
 
@@ -1386,8 +1644,12 @@
 
             
 
+            
+
              representing the image data in the data object or null if the data object does not contain any data that is in the <see
              cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+
+            
 
             
 
@@ -1415,11 +1677,15 @@
 
             
 
+            
+
              method to determine whether the data object contains text data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="Overload:System.Windows.Forms.DataObject.SetText" />
+
+            
 
             
 
@@ -1434,6 +1700,8 @@
 
             
 
+            
+
              format.</para
           >
         </summary>
@@ -1445,8 +1713,12 @@
 
             
 
+            
+
              if the data object does not contain data in the <see
              cref="F:System.Windows.Forms.TextDataFormat.UnicodeText" />
+
+            
 
             
 
@@ -1479,11 +1751,15 @@
 
             
 
+            
+
              method to determine whether the data object contains text data before retrieving it with this method.</para
           >
           <para
             >Use the <see
              cref="Overload:System.Windows.Forms.DataObject.SetText" />
+
+            
 
             
 
@@ -1498,6 +1774,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -1509,6 +1787,8 @@
 
             
 
+            
+
              if the data object does not contain data in the specified format.</para
           >
         </returns>
@@ -1517,8 +1797,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TextDataFormat" />
+
+          
 
           
 
@@ -1547,8 +1831,12 @@
 
             
 
+            
+
              method to determine whether the data object contains audio data before retrieving it with the <see
              cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
+
+            
 
             
 
@@ -1563,13 +1851,19 @@
 
             
 
+            
+
              array to the data object in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
 
             
 
+            
+
              format after converting it to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1581,8 +1875,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1614,8 +1912,12 @@
 
             
 
+            
+
              method to determine whether the data object contains audio data before retrieving it with the <see
              cref="M:System.Windows.Forms.DataObject.GetAudioStream" />
+
+            
 
             
 
@@ -1630,8 +1932,12 @@
 
             
 
+            
+
              to the data object in the <see
              cref="F:System.Windows.Forms.DataFormats.WaveAudio" />
+
+            
 
             
 
@@ -1643,8 +1949,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1671,8 +1981,12 @@
 
             
 
+            
+
              overload stores the <paramref
              name="data" />
+
+            
 
             
 
@@ -1681,8 +1995,12 @@
 
             
 
+            
+
              method. If <paramref
              name="data" />
+
+            
 
             
 
@@ -1691,8 +2009,12 @@
 
             
 
+            
+
              interface, this overload also stores the value in the <see
              cref="F:System.Windows.DataFormats.Serializable" />
+
+            
 
             
 
@@ -1707,11 +2029,15 @@
 
             
 
+            
+
              using the object type as the data format.</para
           >
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1750,6 +2076,8 @@
 
             
 
+            
+
              using the specified format.</para
           >
         </summary>
@@ -1758,8 +2086,12 @@
 
           
 
+          
+
           The format associated with the data. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -1767,6 +2099,8 @@
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1805,6 +2139,8 @@
 
             
 
+            
+
              using the specified type as the format.</para
           >
         </summary>
@@ -1813,8 +2149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1822,6 +2162,8 @@
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1860,6 +2202,8 @@
 
             
 
+            
+
              using the specified format and indicating whether the data can be converted to another format.</para
           >
         </summary>
@@ -1868,8 +2212,12 @@
 
           
 
+          
+
           The format associated with the data. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -1880,10 +2228,14 @@
 
           
 
+          
+
           true to allow the data to be converted to another format; otherwise, false. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1920,13 +2272,19 @@
 
             
 
+            
+
              array. This method converts <paramref
              name="filePaths" />
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1938,8 +2296,12 @@
 
             
 
+            
+
              method to determine whether the data object contains data in that format before retrieving it with the <see
              cref="M:System.Windows.Forms.DataObject.GetFileDropList" />
+
+            
 
             
 
@@ -1954,6 +2316,8 @@
 
             
 
+            
+
              format.</para
           >
         </summary>
@@ -1962,8 +2326,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.StringCollection" />
+
+          
 
           
 
@@ -1995,8 +2363,12 @@
 
             
 
+            
+
              method to determine whether the data object contains image data before retrieving it with the <see
              cref="M:System.Windows.Forms.DataObject.GetImage" />
+
+            
 
             
 
@@ -2011,8 +2383,12 @@
 
             
 
+            
+
              to the data object in the <see
              cref="F:System.Windows.Forms.DataFormats.Bitmap" />
+
+            
 
             
 
@@ -2024,8 +2400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2054,8 +2434,12 @@
 
             
 
+            
+
              method to determine whether the data object contains image data before retrieving it with the <see
              cref="Overload:System.Windows.Forms.DataObject.GetText" />
+
+            
 
             
 
@@ -2070,11 +2454,15 @@
 
             
 
+            
+
              format.</para
           >
         </summary>
         <param name="textData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2107,8 +2495,12 @@
 
             
 
+            
+
              method to determine whether the data object contains image data before retrieving it with the <see
              cref="Overload:System.Windows.Forms.DataObject.GetText" />
+
+            
 
             
 
@@ -2123,11 +2515,15 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
         <param name="textData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2138,8 +2534,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TextDataFormat" />
+
+          
 
           
 
@@ -2201,8 +2601,12 @@
 
             
 
+            
+
              is cast to an <see
              cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
+
+            
 
             
 
@@ -2251,6 +2655,8 @@
                 <para
                   >This <see
                    cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
+
+                  
 
                   
 
@@ -2313,8 +2719,12 @@
 
             
 
+            
+
              is cast to an <see
              cref="T:System.Runtime.InteropServices.ComTypes.IDataObject" />
+
+            
 
             
 
@@ -2329,13 +2739,19 @@
 
             
 
+            
+
              structures for a data object. These structures are used in calls to <see
              cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)" />
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.ComTypes.IDataObject.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)" />
+
+            
 
             
 
@@ -2372,6 +2788,8 @@
                 <para
                   >The direction specified by the <paramref
                    name="direction" />
+
+                  
 
                   
 

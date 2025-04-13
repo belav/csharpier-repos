@@ -17,6 +17,8 @@ enum Color
 
       
 
+      
+
       declares an enum type named Color with members Red, Green, and Blue. end example]</example
     >
   </paragraph>

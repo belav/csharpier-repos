@@ -36,8 +36,12 @@
 
         
 
+        
+
         . The only way to add <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          property of a component in the collection is not null and the <see
          cref="P:System.ComponentModel.ISite.Name" />
+
+        
 
         
 
@@ -59,13 +67,19 @@
 
         
 
+        
+
          property of the component matches the specified string. The integer indexer property returns the <see
          cref="T:System.ComponentModel.IComponent" />
 
         
 
+        
+
          at the specified collection index. The <see
          cref="M:System.ComponentModel.ComponentCollection.CopyTo(System.ComponentModel.IComponent[],System.Int32)" />
+
+        
 
         
 
@@ -77,6 +91,8 @@
       <para
         >Provides a read-only container for a collection of <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -113,8 +129,12 @@
 
             
 
+            
+
              in the specified <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -129,6 +149,8 @@
 
             
 
+            
+
              class using the specified array of components.</para
           >
         </summary>
@@ -137,8 +159,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -179,8 +205,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -191,8 +221,12 @@
 
           
 
+          
+
           The index of the <paramref
            name="array" />
+
+          
 
           
 

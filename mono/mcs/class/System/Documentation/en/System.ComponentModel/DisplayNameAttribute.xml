@@ -29,13 +29,19 @@
 
         
 
+        
+
          uses reflection to search the public properties and public void methods that take no arguments. <see
          cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
+        
+
          searches for the <see
          cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -101,11 +109,15 @@
 
             
 
+            
+
              class using the display name.</para
           >
         </summary>
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,6 +150,8 @@
           <para
             >Specifies the default value for the <see
              cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+            
 
             
 
@@ -216,6 +230,8 @@
 
             
 
+            
+
              instances are equal.</para
           >
         </summary>
@@ -228,8 +244,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+          
 
           
 
@@ -264,6 +284,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+            
 
             
 

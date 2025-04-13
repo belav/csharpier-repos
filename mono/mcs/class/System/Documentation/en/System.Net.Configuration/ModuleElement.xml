@@ -29,6 +29,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
       <para
         >Represents the type information for a custom <see
          cref="T:System.Net.IWebProxy" />
+
+        
 
         
 
@@ -81,13 +89,19 @@
 
             
 
+            
+
              object for the <see
              cref="P:System.Net.Configuration.ModuleElement.Type" />
 
             
 
+            
+
              property to the <see
              cref="P:System.Configuration.ConfigurationElement.Properties" />
+
+            
 
             
 
@@ -99,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.ModuleElement" />
+
+            
 
             
 
@@ -132,6 +148,8 @@
           <para
             >The collection contains one element, which corresponds to the <see
              cref="P:System.Net.Configuration.ModuleElement.Type" />
+
+            
 
             
 

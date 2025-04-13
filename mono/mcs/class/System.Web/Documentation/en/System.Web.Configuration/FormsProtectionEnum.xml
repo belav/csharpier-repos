@@ -20,10 +20,14 @@
 
         
 
+        
+
          value, the system uses the configured data-validation algorithm, based on the <format
          type="text/html">
           <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
         </format>
+
+        
 
         
 
@@ -35,11 +39,15 @@
 
         
 
+        
+
         , cookies might be subject to plaintext attacks.</para
       >
       <para
         >If you select <see
          cref="F:System.Web.Configuration.FormsProtectionEnum.Validation" />
+
+        
 
         
 

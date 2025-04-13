@@ -38,6 +38,8 @@
 
         
 
+        
+
          topic.</para
       >
     </remarks>
@@ -73,8 +75,12 @@
 
             
 
+            
+
              class from the XML data in the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -86,8 +92,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -123,13 +133,19 @@
 
             
 
+            
+
              object has been used to load XML data, the cursor of the <see
              cref="T:System.IO.TextReader" />
 
             
 
+            
+
              object is positioned at the end of the data. The <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -144,8 +160,12 @@
 
             
 
+            
+
              class from the XML data that is contained in the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -157,8 +177,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -191,8 +215,12 @@
 
             
 
+            
+
              constructor that accepts an <see
              cref="T:System.Xml.XmlSpace" />
+
+            
 
             
 
@@ -207,11 +235,15 @@
 
             
 
+            
+
              class from the XML data in the specified file.</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,8 +276,12 @@
 
             
 
+            
+
              object can be used to load a whole XML document or part of an XML document into an <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -254,8 +290,12 @@
 
             
 
+            
+
             , position the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -264,8 +304,12 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -274,8 +318,12 @@
 
             
 
+            
+
              is positioned on the outer scope of the top XML node. Alternatively, you can use the <see
              cref="M:System.XmlReader.ReadSubtree" />
+
+            
 
             
 
@@ -284,11 +332,15 @@
 
             
 
+            
+
              into a particular  element in the XML document.</para
           >
           <para
             >The following are important notes to consider when you use the <see
              cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -302,8 +354,12 @@
 
                 
 
+                
+
                  object with the appropriate associated <see
                  cref="T:System.Xml.XmlResolver" />
+
+                
 
                 
 
@@ -317,13 +373,19 @@
 
                 
 
+                
+
                  object is positioned on a leaf node that is not valid for the root level of a document—for example, a white space or attribute node—the <see
                  cref="T:System.Xml.XmlReader" />
 
                 
 
+                
+
                  object continues to read until it is positioned on a node that can be used for the root. The <see
                  cref="T:System.Xml.XPath.XPathDocument" />
+
+                
 
                 
 
@@ -337,8 +399,12 @@
 
                 
 
+                
+
                  constructor that accepts an <see
                  cref="T:System.Xml.XmlSpace" />
+
+                
 
                 
 
@@ -355,8 +421,12 @@
 
             
 
+            
+
              class from the XML data that is contained in the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -368,8 +438,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -408,8 +482,12 @@
 
                 
 
+                
+
                  object passed as a parameter specifies whether to preserve white space. <see
                  cref="F:System.Xml.XmlSpace.Default" />
+
+                
 
                 
 
@@ -418,13 +496,19 @@
 
                 
 
+                
+
                  preserves all white space. By default, the <see
                  cref="T:System.Xml.XmlSpace" />
 
                 
 
+                
+
                  object is set to <see
                  cref="F:System.Xml.XmlSpace.Default" />
+
+                
 
                 
 
@@ -438,8 +522,12 @@
 
                 
 
+                
+
                  constructor is identical to that of the <see
                  cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String)" />
+
+                
 
                 
 
@@ -456,11 +544,15 @@
 
             
 
+            
+
              class from the XML data in the file specified with the white space handling specified.</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,8 +563,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -511,8 +607,12 @@
 
                 
 
+                
+
                  object passed as a parameter specifies whether to preserve white space. <see
                  cref="F:System.Xml.XmlSpace.Default" />
+
+                
 
                 
 
@@ -521,13 +621,19 @@
 
                 
 
+                
+
                  preserves all white space. By default, the <see
                  cref="T:System.Xml.XmlSpace" />
 
                 
 
+                
+
                  object is set to <see
                  cref="F:System.Xml.XmlSpace.Default" />
+
+                
 
                 
 
@@ -541,8 +647,12 @@
 
                 
 
+                
+
                  constructor is identical to that of the <see
                  cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" />
+
+                
 
                 
 
@@ -559,8 +669,12 @@
 
             
 
+            
+
              class from the XML data that is contained in the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -572,8 +686,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -584,8 +702,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -621,8 +743,12 @@
 
             
 
+            
+
              is positioned on the root element of the <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -631,8 +757,12 @@
 
             
 
+            
+
              is positioned on the first element in the <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -647,8 +777,12 @@
 
             
 
+            
+
              object for navigating through nodes in this <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -660,6 +794,8 @@
           <para
             >A read-only <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 

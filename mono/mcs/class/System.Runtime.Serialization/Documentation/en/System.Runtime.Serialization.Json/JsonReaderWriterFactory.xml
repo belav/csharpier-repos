@@ -25,10 +25,14 @@
 
         
 
+        
+
          class can be used to create the necessary XML readers and writers. Note that not every XML Infoset element can be mapped to JSON. crabout mapping, see <format
          type="text/html">
           <a href="88abc1fb-8196-4ee3-a23b-c6934144d1dd">JSON Serialization</a>
         </format>
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          that can read data encoded with JavaScript Object Notation (JSON) from a stream or buffer and map it to an XML Infoset and instances of <see
          cref="T:System.Xml.XmlDictionaryWriter" />
+
+        
 
         
 
@@ -82,6 +90,8 @@
 
             
 
+            
+
              parameter. The character encoding (UTF-8, Unicode or Big-Endian Unicode) is auto-detected when the data is read.</para
           >
           <para
@@ -90,10 +100,14 @@
 
             
 
+            
+
              to prevent Denial of Service attacks when reading untrusted data, see <format
              type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
+
+            
 
             
 
@@ -108,6 +122,8 @@
 
             
 
+            
+
              that can map buffers encoded with JavaScript Object Notation (JSON) to an XML Infoset.</para
           >
         </summary>
@@ -119,6 +135,8 @@
 
             
 
+            
+
              that can process JavaScript Object Notation (JSON) data.</para
           >
         </returns>
@@ -127,8 +145,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -139,8 +161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -177,6 +203,8 @@
 
             
 
+            
+
              parameter. The character encoding (UTF-8, Unicode or Big-Endian Unicode) is auto-detected when the data is read.</para
           >
           <para
@@ -185,10 +213,14 @@
 
             
 
+            
+
              to prevent Denial of Service attacks when reading untrusted data, see <format
              type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
+
+            
 
             
 
@@ -203,6 +235,8 @@
 
             
 
+            
+
              that can map streams encoded with JavaScript Object Notation (JSON) to an XML Infoset.</para
           >
         </summary>
@@ -214,6 +248,8 @@
 
             
 
+            
+
              that can read JavaScript Object Notation (JSON).</para
           >
         </returns>
@@ -222,8 +258,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -234,8 +274,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -274,6 +318,8 @@
 
             
 
+            
+
              parameter. The character encoding (UTF-8, Unicode or Big-Endian Unicode) is auto-detected when the data is read.</para
           >
           <para
@@ -282,10 +328,14 @@
 
             
 
+            
+
              to prevent Denial of Service attacks when reading untrusted data, see <format
              type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
+
+            
 
             
 
@@ -300,6 +350,8 @@
 
             
 
+            
+
              that can map buffers encoded with JavaScript Object Notation (JSON), of a specified size and offset, to an XML Infoset.</para
           >
         </summary>
@@ -311,6 +363,8 @@
 
             
 
+            
+
              that can read JavaScript Object Notation (JSON).</para
           >
         </returns>
@@ -319,8 +373,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -331,8 +389,12 @@
 
           
 
+          
+
           Starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -343,8 +405,12 @@
 
           
 
+          
+
           Number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -355,8 +421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -395,10 +465,14 @@
 
             
 
+            
+
              to prevent Denial of Service attacks when reading untrusted data, see <format
              type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
+
+            
 
             
 
@@ -413,6 +487,8 @@
 
             
 
+            
+
              that can map streams encoded with JavaScript Object Notation (JSON), of a specified size and offset, to an XML Infoset.</para
           >
         </summary>
@@ -424,6 +500,8 @@
 
             
 
+            
+
              that can read JavaScript Object Notation (JSON).</para
           >
         </returns>
@@ -432,8 +510,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -444,8 +526,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -456,8 +542,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -468,8 +558,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.OnXmlDictionaryReaderClose" />
+
+          
 
           
 
@@ -510,10 +604,14 @@
 
             
 
+            
+
              to prevent Denial of Service attacks when reading untrusted data, see <format
              type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
+
+            
 
             
 
@@ -528,6 +626,8 @@
 
             
 
+            
+
              that can map buffers encoded with JavaScript Object Notation (JSON), with a specified size and offset and character encoding, to an XML Infoset. </para
           >
         </summary>
@@ -539,6 +639,8 @@
 
             
 
+            
+
              that can read JavaScript Object Notation (JSON).</para
           >
         </returns>
@@ -547,8 +649,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -559,8 +665,12 @@
 
           
 
+          
+
           Starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -571,8 +681,12 @@
 
           
 
+          
+
           Number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -583,8 +697,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -595,8 +713,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -607,8 +729,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.OnXmlDictionaryReaderClose" />
+
+          
 
           
 
@@ -648,6 +774,8 @@
 
             
 
+            
+
              that writes data encoded with JSON to a stream.</para
           >
         </summary>
@@ -659,6 +787,8 @@
 
             
 
+            
+
              that writes data encoded with JSON to the stream based on an XML Infoset.</para
           >
         </returns>
@@ -667,8 +797,12 @@
 
           
 
+          
+
           The output <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -709,6 +843,8 @@
 
             
 
+            
+
              that writes data encoded with JSON to a stream with a specified character encoding.</para
           >
         </summary>
@@ -720,6 +856,8 @@
 
             
 
+            
+
              that writes data encoded with JSON to the stream based on an XML Infoset.</para
           >
         </returns>
@@ -728,8 +866,12 @@
 
           
 
+          
+
           The output <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -740,8 +882,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -780,6 +926,8 @@
 
             
 
+            
+
              that writes data encoded with JSON to a stream with a specified character encoding.</para
           >
         </summary>
@@ -791,6 +939,8 @@
 
             
 
+            
+
              that writes data encoded with JSON to the stream based on an XML Infoset.</para
           >
         </returns>
@@ -799,8 +949,12 @@
 
           
 
+          
+
           The output <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -811,8 +965,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -820,6 +978,8 @@
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

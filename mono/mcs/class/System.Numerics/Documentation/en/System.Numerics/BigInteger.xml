@@ -38,8 +38,12 @@
 
         
 
+        
+
          type is an immutable type that represents an arbitrarily large integer whose value in theory has no upper or lower bounds. The members of the <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int16" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int64" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.UInt16" />
+
+        
 
         
 
@@ -78,8 +94,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.UInt64" />
+
+        
 
         
 
@@ -92,10 +112,14 @@
 
           
 
+          
+
            type is immutable (see <format
            type="text/html">
             <a href="#mutability">Mutability and the BigInteger Structure</a>
           </format>
+
+          
 
           
 
@@ -104,8 +128,12 @@
 
           
 
+          
+
            can be thrown for any operation that causes a <see
            cref="T:System.Numerics.BigInteger" />
+
+          
 
           
 
@@ -121,6 +149,8 @@
 
         
 
+        
+
          object in several ways:</para
       >
       <list type="bullet">
@@ -131,13 +161,19 @@
 
             
 
+            
+
              constructor. (Floating-point values are truncated before they are assigned to the <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
             .) The following example illustrates how to use the new keyword to instantiate <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -152,13 +188,19 @@
 
             
 
+            
+
              variable and assign it a value just as you would any numeric type, as long as that value is an integral type. The following example uses assignment to create a <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
              value from an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -173,8 +215,12 @@
 
             
 
+            
+
              object if you cast the value or convert it first. The following example explicitly casts (in C#) or converts (in Visual Basic) a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -183,8 +229,12 @@
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -199,8 +249,12 @@
 
         
 
+        
+
          object whose value is in the range of one of the existing numeric types only. You can instantiate a <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -211,6 +265,8 @@
           <para
             >You can use the new keyword and provide a byte array of any size to the <see
              cref="M:System.Numerics.BigInteger.#ctor(System.Byte[])" />
+
+            
 
             
 
@@ -225,13 +281,19 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Numerics.BigInteger.TryParse" />
 
             
 
+            
+
              methods to convert the string representation of a number to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -246,8 +308,12 @@
 
             
 
+            
+
              method that performs some operation on a numeric expression and returns a calculated <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -256,8 +322,12 @@
 
             
 
+            
+
              and assigning the result to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -272,8 +342,12 @@
 
         
 
+        
+
          is <see
          cref="P:System.Numerics.BigInteger.Zero" />
+
+        
 
         
 
@@ -288,8 +362,12 @@
 
         
 
+        
+
          instance as you would use any other integral type. <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -298,8 +376,12 @@
 
         
 
+        
+
          values with each other. Like the other integral types, <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -308,8 +390,12 @@
 
         
 
+        
+
          structure also provides equivalent methods for performing mathematical operations. These include <see
          cref="M:System.Numerics.BigInteger.Add(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+        
 
         
 
@@ -318,8 +404,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Numerics.BigInteger.Multiply(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+        
 
         
 
@@ -328,8 +418,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Numerics.BigInteger.Subtract(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+        
 
         
 
@@ -341,8 +435,12 @@
 
         
 
+        
+
          structure correspond directly to members of the other integral types. In addition, <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -355,8 +453,12 @@
 
             
 
+            
+
             , which returns a value that indicates the sign of a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -369,8 +471,12 @@
 
             
 
+            
+
             , which returns the absolute value of a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -383,6 +489,8 @@
 
             
 
+            
+
             , which returns both the quotient and remainder of a division operation.</para
           >
         </item>
@@ -392,8 +500,12 @@
 
             
 
+            
+
             , which returns the greatest common divisor of two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -404,6 +516,8 @@
       <para
         >Many of these additional members correspond to the members of the <see
          cref="T:System.Math" />
+
+        
 
         
 
@@ -421,6 +535,8 @@
 
         
 
+        
+
          object and then increments its value by one.</para
       >
       <para>code reference: System.Numerics.BigInteger.Class.Mutability#1</para>
@@ -430,8 +546,12 @@
 
         
 
+        
+
          objects are immutable, which means that internally, the common language runtime actually creates a new <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -444,6 +564,8 @@
 
           
 
+          
+
            type has no upper or lower bounds, its values can grow extremely large and have a measurable impact on performance. </para
         >
       </block>
@@ -453,8 +575,12 @@
 
         
 
+        
+
          values, that performance penalty can be significant. For example, in the following example, an operation is performed repetitively up to a million times, and a <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -467,8 +593,12 @@
 
         
 
+        
+
          variable. The final value of the variable can then be assigned to the <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -484,8 +614,12 @@
 
         
 
+        
+
          values to byte arrays, or if you convert byte arrays to <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -494,8 +628,12 @@
 
         
 
+        
+
          structure expects the individual bytes in a byte array to appear in little-endian order (that is, the lower-order bytes of the value precede the higher-order bytes). You can round-trip a <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -504,8 +642,12 @@
 
         
 
+        
+
          method and then passing the resulting byte array to the <see
          cref="M:System.Numerics.BigInteger.#ctor(System.Byte[])" />
+
+        
 
         
 
@@ -518,8 +660,12 @@
 
         
 
+        
+
          value from a byte array that represents a value of some other integral type, you can pass the integral value to the <see
          cref="M:System.BitConverter.GetBytes(System.UInt16)" />
+
+        
 
         
 
@@ -528,13 +674,19 @@
 
         
 
+        
+
          constructor. The following example instantiates a <see
          cref="T:System.Numerics.BigInteger" />
 
         
 
+        
+
          value from a byte array that represents an <see
          cref="T:System.Int16" />
+
+        
 
         
 
@@ -547,8 +699,12 @@
 
         
 
+        
+
          structure assumes that negative values are stored by using two's complement representation. Because the <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -557,8 +713,12 @@
 
         
 
+        
+
          constructor always interprets the most significant bit of the last byte in the array as a sign bit. To prevent the <see
          cref="M:System.Numerics.BigInteger.#ctor(System.Byte[])" />
+
+        
 
         
 
@@ -567,8 +727,12 @@
 
         
 
+        
+
          constructor as -1,000,000. To instantiate a <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -581,8 +745,12 @@
 
         
 
+        
+
          method from positive values include this extra zero-value byte. Therefore, the <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -595,13 +763,19 @@
 
         
 
+        
+
         , <see
          cref="M:System.BitConverter.GetBytes(System.UInt32)" />
 
         
 
+        
+
         , and <see
          cref="M:System.BitConverter.GetBytes(System.UInt64)" />
+
+        
 
         
 
@@ -613,8 +787,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Numerics.BigInteger.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+        
 
         
 
@@ -623,8 +801,12 @@
 
         
 
+        
+
          method, when they are passed the "X" format string, add a leading zero to the returned hexadecimal string for positive values. This makes it possible to round-trip <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -633,8 +815,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Numerics.BigInteger.Parse(System.String)" />
+
+        
 
         
 
@@ -647,13 +833,19 @@
 
         
 
+        
+
          method that include a <paramref
          name="toBase" />
 
         
 
+        
+
          parameter do not indicate the sign of the value or the source data type from which the hexadecimal string was derived. Successfully instantiating a <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -694,6 +886,8 @@
 
             
 
+            
+
              array should be in little-endian order, from lowest-order byte to highest-order byte. For example, the numeric value 1,000,000,000,000 is represented as shown in the following table:</para
           >
           <list type="table">
@@ -720,8 +914,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.BitConverter.GetBytes(System.Int32)" />
+
+            
 
             
 
@@ -733,8 +931,12 @@
 
             
 
+            
+
              is set, the resulting <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -748,13 +950,19 @@
 
                 
 
+                
+
                  method. Because this method returns a byte array with the highest-order bit of the highest-order byte in the array set to zero for positive values, there is no chance of misinterpreting a positive value as negative. Unmodified byte arrays created by the <see
                  cref="M:System.Numerics.BigInteger.ToByteArray" />
 
                 
 
+                
+
                  method always successfully round-trip when they are passed to the <see
                  cref="M:System.Numerics.BigInteger.#ctor(System.Byte[])" />
+
+                
 
                 
 
@@ -768,6 +976,8 @@
 
                 
 
+                
+
                  method and passing it a signed integer as a parameter. Because signed integers handle both sign-and-magnitude representation and two's complement representation, there is no chance of misinterpreting a positive value as negative.</para
               >
             </item>
@@ -775,6 +985,8 @@
               <para
                 >By calling the <see
                  cref="M:System.BitConverter.GetBytes(System.Int32)" />
+
+                
 
                 
 
@@ -791,8 +1003,12 @@
 
             
 
+            
+
              is an empty <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -801,8 +1017,12 @@
 
             
 
+            
+
              object is initialized to a value of <see
              cref="P:System.Numerics.BigInteger.Zero" />
+
+            
 
             
 
@@ -811,8 +1031,12 @@
 
             
 
+            
+
              is null, the constructor throws an <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -827,11 +1051,15 @@
 
             
 
+            
+
              structure using the values in a byte array.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -861,8 +1089,12 @@
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -874,8 +1106,12 @@
 
             
 
+            
+
              is truncated when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -890,8 +1126,12 @@
 
             
 
+            
+
              structure using a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -900,6 +1140,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,8 +1171,12 @@
 
             
 
+            
+
              parameter is truncated when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -942,6 +1188,8 @@
 
             
 
+            
+
              data type, calling this constructor can cause data loss.</para
           >
           <para
@@ -950,13 +1198,19 @@
 
             
 
+            
+
              value that results from calling this constructor is identical to the value that results from explicitly assigning a <see
              cref="T:System.Double" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -971,11 +1225,15 @@
 
             
 
+            
+
              structure using a double-precision floating-point value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1005,6 +1263,8 @@
 
             
 
+            
+
              object by using this constructor.</para
           >
           <para
@@ -1013,13 +1273,19 @@
 
             
 
+            
+
              value that results from calling this constructor is identical to the value that results from assigning an <see
              cref="T:System.Int32" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1031,8 +1297,12 @@
 
             
 
+            
+
              structure does not include constructors with a parameter of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1041,8 +1311,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.SByte" />
+
+            
 
             
 
@@ -1051,13 +1325,19 @@
 
             
 
+            
+
             . However, the <see
              cref="T:System.Int32" />
 
             
 
+            
+
              type supports the implicit conversion of 8-bit and 16-bit signed and unsigned integers to signed 32-bit integers. As a result, this constructor is called if <paramref
              name="value" />
+
+            
 
             
 
@@ -1072,11 +1352,15 @@
 
             
 
+            
+
              structure using a 32-bit signed integer value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1106,6 +1390,8 @@
 
             
 
+            
+
              object by using this constructor.</para
           >
           <para
@@ -1114,13 +1400,19 @@
 
             
 
+            
+
              value that results from calling this constructor is identical to the value that results from assigning an <see
              cref="T:System.Int64" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1135,11 +1427,15 @@
 
             
 
+            
+
              structure using a 64-bit signed integer value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1169,8 +1465,12 @@
 
             
 
+            
+
              parameter is truncated when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1182,6 +1482,8 @@
 
             
 
+            
+
              data type, calling this constructor can result in data loss.</para
           >
           <para
@@ -1190,13 +1492,19 @@
 
             
 
+            
+
              value that results from calling this constructor is identical to the value that results from explicitly assigning a <see
              cref="T:System.Single" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1211,11 +1519,15 @@
 
             
 
+            
+
              structure using a single-precision floating-point value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1250,6 +1562,8 @@
 
             
 
+            
+
              using this constructor.</para
           >
           <para
@@ -1258,13 +1572,19 @@
 
             
 
+            
+
              value that results from calling this constructor is identical to the value that results from assigning a <see
              cref="T:System.UInt32" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1279,11 +1599,15 @@
 
             
 
+            
+
              structure using an unsigned 32-bit integer value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1318,6 +1642,8 @@
 
             
 
+            
+
              using this constructor.</para
           >
           <para
@@ -1326,13 +1652,19 @@
 
             
 
+            
+
              value that results from calling this constructor is identical to the value that results from assigning a <see
              cref="T:System.UInt64" />
 
             
 
+            
+
              value to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1347,11 +1679,15 @@
 
             
 
+            
+
              structure with an unsigned 64-bit integer value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1391,6 +1727,8 @@
 
                     
 
+                    
+
                      parameter</para
                   >
                 </term>
@@ -1403,6 +1741,8 @@
               <term>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -1422,12 +1762,16 @@
 
                   
 
+                  
+
                    &lt; 0</para
                 >
               </term>
               <description>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -1442,8 +1786,12 @@
 
             
 
+            
+
              method is equivalent to the <see
              cref="M:System.Math.Abs(System.Decimal)" />
+
+            
 
             
 
@@ -1458,6 +1806,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1469,11 +1819,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1510,8 +1864,12 @@
 
             
 
+            
+
              method to perform addition using <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1523,8 +1881,12 @@
 
             
 
+            
+
              method is a useful substitute for the addition operator when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1540,6 +1902,8 @@
 
             
 
+            
+
              values and returns the result.</para
           >
         </summary>
@@ -1551,8 +1915,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -1564,10 +1932,14 @@
 
           
 
+          
+
           The first value to add.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1604,8 +1976,12 @@
 
             
 
+            
+
              type has no fixed range, comparisons of <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -1614,8 +1990,12 @@
 
             
 
+            
+
              values that differ by one and that each have 1,896 digits. The <see
              cref="M:System.Numerics.BigInteger.Compare(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -1631,6 +2011,8 @@
 
             
 
+            
+
              values and returns an integer that indicates whether the first value is less than, equal to, or greater than the second value.</para
           >
         </summary>
@@ -1642,8 +2024,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -1670,8 +2056,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="right" />
+
+                  
 
                   
 
@@ -1689,8 +2079,12 @@
 
                   
 
+                  
+
                    equals <paramref
                    name="right" />
+
+                  
 
                   
 
@@ -1708,8 +2102,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="right" />
+
+                  
 
                   
 
@@ -1724,10 +2122,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1760,8 +2162,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1770,8 +2176,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1780,8 +2190,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -1790,13 +2204,19 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
 
             
 
+            
+
              value when the <see
              cref="M:System.Numerics.BigInteger.CompareTo(System.Int64)" />
+
+            
 
             
 
@@ -1812,6 +2232,8 @@
           <para
             >A signed integer value that indicates the relationship of this instance to <paramref
              name="other" />
+
+            
 
             
 
@@ -1839,6 +2261,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1851,6 +2275,8 @@
                 <para
                   >The current instance equals <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -1869,6 +2295,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1877,6 +2305,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1912,8 +2342,12 @@
 
             
 
+            
+
              method implements the <see
              cref="M:System.IComparable`1.CompareTo(`0)" />
+
+            
 
             
 
@@ -1928,6 +2362,8 @@
 
             
 
+            
+
              and returns an integer that indicates whether the value of this instance is less than, equal to, or greater than the value of the specified object.</para
           >
         </summary>
@@ -1936,6 +2372,8 @@
           <para
             >A signed integer value that indicates the relationship of this instance to <paramref
              name="other" />
+
+            
 
             
 
@@ -1963,6 +2401,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1975,6 +2415,8 @@
                 <para
                   >The current instance equals <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -1993,6 +2435,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2001,6 +2445,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2033,8 +2479,12 @@
 
             
 
+            
+
              method implements the <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2043,6 +2493,8 @@
           <para
             >The <paramref
              name="obj" />
+
+            
 
             
 
@@ -2056,6 +2508,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2066,13 +2520,19 @@
 
                 
 
+                
+
                  variable whose value is null. If the value of the <paramref
                  name="obj" />
 
                 
 
+                
+
                  parameter is null, the method returns 1, which indicates that that the current instance is greater than <paramref
                  name="obj" />
+
+                
 
                 
 
@@ -2090,6 +2550,8 @@
           <para
             >A signed integer that indicates the relationship of the current instance to the <paramref
              name="obj" />
+
+            
 
             
 
@@ -2117,6 +2579,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2129,6 +2593,8 @@
                 <para
                   >The current instance equals <paramref
                    name="obj" />
+
+                  
 
                   
 
@@ -2147,8 +2613,12 @@
 
                   
 
+                  
+
                   , or the <paramref
                    name="obj" />
+
+                  
 
                   
 
@@ -2160,6 +2630,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2202,6 +2674,8 @@
 
             
 
+            
+
             , as shown in the following table.</para
           >
           <list type="table">
@@ -2226,6 +2700,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2238,6 +2714,8 @@
                 <para
                   >The current instance equals <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -2256,6 +2734,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2264,6 +2744,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2300,13 +2782,19 @@
 
             
 
+            
+
              method performs integer division; any remainder that results from the division is discarded. To perform integer division while preserving the remainder, call the <see
              cref="M:System.Numerics.BigInteger.DivRem(System.Numerics.BigInteger,System.Numerics.BigInteger,System.Numerics.BigInteger@)" />
 
             
 
+            
+
              method. To retrieve only the remainder, call the <see
              cref="M:System.Numerics.BigInteger.Remainder(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -2318,6 +2806,8 @@
 
             
 
+            
+
              method can be used by languages that do not support operator overloading. Its behavior is identical to division using the division operator.</para
           >
         </remarks>
@@ -2326,6 +2816,8 @@
           <para
             >Divides one <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2341,10 +2833,14 @@
 
           
 
+          
+
           The value to be divided.</param
         >
         <param name="divisor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2407,8 +2903,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2417,8 +2917,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2427,8 +2931,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -2437,8 +2945,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -2447,6 +2959,8 @@
           <para
             >To determine the relationship between the two objects instead of just testing for equality, call the <see
              cref="M:System.Numerics.BigInteger.CompareTo(System.Int64)" />
+
+            
 
             
 
@@ -2463,6 +2977,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2498,8 +3014,12 @@
 
             
 
+            
+
              interface and performs slightly better than <see
              cref="M:System.Numerics.BigInteger.Equals(System.Object)" />
+
+            
 
             
 
@@ -2508,8 +3028,12 @@
 
             
 
+            
+
              parameter to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2521,8 +3045,12 @@
 
             
 
+            
+
              objects instead of just testing for equality, call the <see
              cref="M:System.Numerics.BigInteger.CompareTo(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -2537,6 +3065,8 @@
 
             
 
+            
+
              object have the same value.</para
           >
         </summary>
@@ -2548,8 +3078,12 @@
 
             
 
+            
+
              object and <paramref
              name="other" />
+
+            
 
             
 
@@ -2558,6 +3092,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2590,8 +3126,12 @@
 
             
 
+            
+
              parameter is not a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2600,13 +3140,19 @@
 
             
 
+            
+
              method converts <paramref
              name="obj" />
 
             
 
+            
+
              to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2615,8 +3161,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2625,8 +3175,12 @@
 
             
 
+            
+
             , the method returns false. If no conversion from <paramref
              name="obj" />
+
+            
 
             
 
@@ -2635,11 +3189,15 @@
 
             
 
+            
+
              value exists, the method does not throw an exception; instead, it returns false.</para
           >
           <para
             >To determine the relationship between the two objects instead of just testing for equality, call the <see
              cref="M:System.Numerics.BigInteger.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2658,8 +3216,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2668,8 +3230,12 @@
 
             
 
+            
+
              value, and its value is equal to the value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2678,6 +3244,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2715,6 +3283,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -2728,6 +3298,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2756,6 +3328,8 @@
           <para
             >Returns the hash code for the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2797,6 +3371,8 @@
 
             
 
+            
+
              values can be divided without returning a remainder.</para
           >
           <para
@@ -2805,8 +3381,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2819,8 +3399,12 @@
 
               
 
+              
+
                and <paramref
                name="right" />
+
+              
 
               
 
@@ -2833,13 +3417,19 @@
 
             
 
+            
+
              method is always positive regardless of the sign of the <paramref
              name="left" />
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2854,6 +3444,8 @@
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -2865,8 +3457,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -2878,10 +3474,14 @@
 
           
 
+          
+
           The first value.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2909,6 +3509,8 @@
 
             
 
+            
+
              value is evenly divisible by two. It is equivalent to the following expression:</para
           >
           <para>[C#]</para>
@@ -2921,8 +3523,12 @@
 
             
 
+            
+
              object is <see
              cref="P:System.Numerics.BigInteger.Zero" />
+
+            
 
             
 
@@ -2934,6 +3540,8 @@
           <para
             >Indicates whether the value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -2966,8 +3574,12 @@
 
             
 
+            
+
              object is <see
              cref="P:System.Numerics.BigInteger.One" />
+
+            
 
             
 
@@ -2996,8 +3608,12 @@
 
             
 
+            
+
              value has a single non-zero bit set. This means that it returns true if the value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -3006,8 +3622,12 @@
 
             
 
+            
+
             ) or any greater power of two. It returns false if the value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -3019,6 +3639,8 @@
           <para
             >Indicates whether the value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -3051,8 +3673,12 @@
 
             
 
+            
+
              object is <see
              cref="P:System.Numerics.BigInteger.Zero" />
+
+            
 
             
 
@@ -3089,11 +3715,15 @@
 
             
 
+            
+
              parameter is specified as a base 10 number.</para
           >
           <para
             >The precise return value of this method depends on the sign of <paramref
              name="value" />
+
+            
 
             
 
@@ -3106,6 +3736,8 @@
                   <para
                     >Sign of <paramref
                      name="value" />
+
+                    
 
                     
 
@@ -3128,14 +3760,20 @@
 
                   
 
+                  
+
                   ; that is, ln <paramref
                    name="value" />
+
+                  
 
                   
 
                   , or log <subscript
                   >e</subscript>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -3153,6 +3791,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -3167,6 +3807,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -3178,13 +3820,19 @@
 
             
 
+            
+
              value, call the <see
              cref="M:System.Numerics.BigInteger.Log10(System.Numerics.BigInteger)" />
 
             
 
+            
+
              method. To calculate the logarithm of a number in another base, call the <see
              cref="M:System.Numerics.BigInteger.Log(System.Numerics.BigInteger,System.Double)" />
+
+            
 
             
 
@@ -3196,8 +3844,12 @@
 
             
 
+            
+
              method along with the <see
              cref="M:System.Math.Exp(System.Double)" />
+
+            
 
             
 
@@ -3206,13 +3858,19 @@
 
             
 
+            
+
              if the result is greater than <see
              cref="F:System.Double.MaxValue" />
 
             
 
+            
+
             . The following example calculates the square root of each element in an array of <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -3222,6 +3880,8 @@
           <para
             >This method corresponds to the <see
              cref="M:System.Math.Log(System.Double)" />
+
+            
 
             
 
@@ -3240,11 +3900,15 @@
 
             
 
+            
+
             , as shown in the table in the Remarks section.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3281,8 +3945,12 @@
 
             
 
+            
+
              and <paramref
              name="baseValue" />
+
+            
 
             
 
@@ -3294,8 +3962,12 @@
 
             
 
+            
+
              and on the sign and value of <paramref
              name="baseValue" />
+
+            
 
             
 
@@ -3310,12 +3982,16 @@
 
                     
 
+                    
+
                      parameter</para
                   >
                 </term>
                 <description>
                   <para>
                     <paramref name="baseValue" />
+
+                    
 
                     
 
@@ -3334,6 +4010,8 @@
 
                   
 
+                  
+
                    &gt; 0</para
                 >
               </term>
@@ -3344,8 +4022,12 @@
 
                   
 
+                  
+
                    &lt; 1) -or-(<paramref
                    name="baseValue" />
+
+                  
 
                   
 
@@ -3359,8 +4041,12 @@
 
                   
 
+                  
+
                   (<paramref
                    name="value" />
+
+                  
 
                   
 
@@ -3375,6 +4061,8 @@
 
                   
 
+                  
+
                    &lt; 0</para
                 >
               </term>
@@ -3394,6 +4082,8 @@
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3413,12 +4103,16 @@
 
                   
 
+                  
+
                    != 1</para
                 >
               </term>
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3438,12 +4132,16 @@
 
                   
 
+                  
+
                    != 1</para
                 >
               </term>
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3464,6 +4162,8 @@
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3487,6 +4187,8 @@
 
                   
 
+                  
+
                    = 1</para
                 >
               </description>
@@ -3503,6 +4205,8 @@
 
                   
 
+                  
+
                    = 0</para
                 >
               </term>
@@ -3510,6 +4214,8 @@
                 <para
                   >0 &lt; <paramref
                    name="baseValue" />
+
+                  
 
                   
 
@@ -3529,12 +4235,16 @@
 
                   
 
+                  
+
                    = 0</para
                 >
               </term>
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3554,12 +4264,16 @@
 
                   
 
+                  
+
                    = 1</para
                 >
               </term>
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3577,12 +4291,16 @@
 
                   
 
+                  
+
                    = 1</para
                 >
               </term>
               <description>
                 <para>
                   <paramref name="baseValue" />
+
+                  
 
                   
 
@@ -3601,8 +4319,12 @@
 
             
 
+            
+
              value, call the <see
              cref="M:System.Numerics.BigInteger.Log10(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -3611,11 +4333,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This method corresponds to the <see
              cref="M:System.Math.Log(System.Double,System.Double)" />
+
+            
 
             
 
@@ -3634,8 +4360,12 @@
 
             
 
+            
+
              logarithm of <paramref
              name="value" />
+
+            
 
             
 
@@ -3647,10 +4377,14 @@
 
           
 
+          
+
           A number whose logarithm is to be found.</param
         >
         <param name="baseValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3686,11 +4420,15 @@
 
             
 
+            
+
              parameter is specified as a base 10 number.</para
           >
           <para
             >The precise return value of the method depends on the sign of <paramref
              name="value" />
+
+            
 
             
 
@@ -3718,9 +4456,13 @@
 
                   
 
+                  
+
                   ; that is, log<subscript
                   >10</subscript>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -3738,6 +4480,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -3752,6 +4496,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -3763,8 +4509,12 @@
 
             
 
+            
+
              value, call the <see
              cref="M:System.Numerics.BigInteger.Log(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -3773,11 +4523,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This method corresponds to the <see
              cref="M:System.Math.Log10(System.Double)" />
+
+            
 
             
 
@@ -3796,11 +4550,15 @@
 
             
 
+            
+
             , as shown in the table in the Remarks section.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3837,6 +4595,8 @@
 
             
 
+            
+
              method for primitive numeric types.</para
           >
         </remarks>
@@ -3845,6 +4605,8 @@
           <para
             >Returns the larger of two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -3859,8 +4621,12 @@
 
             
 
+            
+
              or <paramref
              name="right" />
+
+            
 
             
 
@@ -3872,10 +4638,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3912,6 +4682,8 @@
 
             
 
+            
+
              method for primitive numeric types.</para
           >
         </remarks>
@@ -3920,6 +4692,8 @@
           <para
             >Returns the smaller of two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -3934,8 +4708,12 @@
 
             
 
+            
+
              or <paramref
              name="right" />
+
+            
 
             
 
@@ -3947,10 +4725,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3984,13 +4766,19 @@
 
             
 
+            
+
              property is used to compare a <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
              value to -1 or to assign -1 to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4033,6 +4821,8 @@
 
             
 
+            
+
              method evaluates the following expression:</para
           >
           <para>
@@ -4044,8 +4834,12 @@
 
             
 
+            
+
              values without modulus division, use the <see
              cref="M:System.Numerics.BigInteger.Pow(System.Numerics.BigInteger,System.Int32)" />
+
+            
 
             
 
@@ -4065,8 +4859,12 @@
 
             
 
+            
+
              by <paramref
              name="modulus" />
+
+            
 
             
 
@@ -4078,8 +4876,12 @@
 
           
 
+          
+
           The number to raise to the <paramref
            name="exponent" />
+
+          
 
           
 
@@ -4090,8 +4892,12 @@
 
           
 
+          
+
           The exponent to raise <paramref
            name="value" />
+
+          
 
           
 
@@ -4102,13 +4908,19 @@
 
           
 
+          
+
           The number by which to divide <paramref
            name="value" />
 
           
 
+          
+
            raised to the <paramref
            name="exponent" />
+
+          
 
           
 
@@ -4145,13 +4957,19 @@
 
             
 
+            
+
              method is implemented for languages that do not support operator overloading. Its behavior is identical to multiplication using the multiplication operator. In addition, the <see
              cref="M:System.Numerics.BigInteger.Multiply(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
 
             
 
+            
+
              method is a useful substitute for the multiplication operator when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4164,13 +4982,19 @@
 
             
 
+            
+
              objects. This is illustrated in the example in the next section, where the <see
              cref="M:System.Numerics.BigInteger.Multiply(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
 
             
 
+            
+
              method is passed two <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -4185,6 +5009,8 @@
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -4196,8 +5022,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -4209,10 +5039,14 @@
 
           
 
+          
+
           The first number to multiply.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4249,13 +5083,19 @@
 
             
 
+            
+
              method is implemented for languages that do not support custom operators. Its behavior is identical to negation using the unary negation operator. In addition, the <see
              cref="M:System.Numerics.BigInteger.Negate(System.Numerics.BigInteger)" />
 
             
 
+            
+
              method is a useful substitute for the negation operator when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4271,6 +5111,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -4282,11 +5124,15 @@
 
             
 
+            
+
              parameter multiplied by negative one (-1).</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4320,13 +5166,19 @@
 
             
 
+            
+
              property is usually used to compare a <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
              value to 1 or to assign 1 to a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4368,8 +5220,12 @@
 
             
 
+            
+
              method defines the addition operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4379,6 +5235,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.BigInteger.Add(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -4393,6 +5251,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -4404,8 +5264,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -4417,10 +5281,14 @@
 
           
 
+          
+
           The first value to add.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4457,8 +5325,12 @@
 
             
 
+            
+
              method defines the bitwise And operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4467,8 +5339,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -4545,6 +5421,8 @@
 
             
 
+            
+
              method enables code such as the following:</para
           >
           <para>code reference: System.Numerics.BigInteger.Operators#1</para>
@@ -4554,8 +5432,12 @@
 
             
 
+            
+
              method performs the bitwise And operation on two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4567,6 +5449,8 @@
           <para
             >Performs a bitwise And operation on two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4582,10 +5466,14 @@
 
           
 
+          
+
           The first value.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4622,8 +5510,12 @@
 
             
 
+            
+
              method defines the bitwise Or operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4632,8 +5524,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -4710,6 +5606,8 @@
 
             
 
+            
+
              method enables code such as the following:</para
           >
           <para>code reference: System.Numerics.BigInteger.Operators#2</para>
@@ -4719,8 +5617,12 @@
 
             
 
+            
+
              method performs the bitwise Or operation on two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4732,6 +5634,8 @@
           <para
             >Performs a bitwise Or operation on two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4747,10 +5651,14 @@
 
           
 
+          
+
           The first value.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4786,8 +5694,12 @@
 
             
 
+            
+
              method defines the decrement operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4800,6 +5712,8 @@
 
             
 
+            
+
              method instead. For example:</para
           >
           <para>code reference: System.Numerics.BigInteger.Operators#3</para>
@@ -4809,8 +5723,12 @@
 
             
 
+            
+
              objects are immutable, the <see
              cref="M:System.Numerics.BigInteger.op_Decrement(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -4819,8 +5737,12 @@
 
             
 
+            
+
              object whose value is one less than the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4829,8 +5751,12 @@
 
             
 
+            
+
             . This means that repeated calls to <see
              cref="M:System.Numerics.BigInteger.op_Decrement(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -4845,6 +5771,8 @@
 
             
 
+            
+
              value by 1.</para
           >
         </summary>
@@ -4856,11 +5784,15 @@
 
             
 
+            
+
              parameter decremented by 1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4897,8 +5829,12 @@
 
             
 
+            
+
              method defines the division operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4908,6 +5844,8 @@
           <para
             >Languages that do not support custom operators and operator overloading can call the <see
              cref="M:System.Numerics.BigInteger.Divide(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -4922,8 +5860,12 @@
 
             
 
+            
+
              value by another specified <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4939,10 +5881,14 @@
 
           
 
+          
+
           The value to be divided.</param
         >
         <param name="divisor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4979,8 +5925,12 @@
 
             
 
+            
+
              method defines the equality comparison operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -4993,6 +5943,8 @@
 
             
 
+            
+
              instance method instead.</para
           >
           <para
@@ -5001,8 +5953,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -5011,8 +5967,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -5021,8 +5981,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5031,8 +5995,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -5047,6 +6015,8 @@
 
             
 
+            
+
              value are equal.</para
           >
         </summary>
@@ -5058,8 +6028,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -5071,10 +6045,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5111,8 +6089,12 @@
 
             
 
+            
+
              method defines the equality comparison operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -5125,6 +6107,8 @@
 
             
 
+            
+
              instance method instead.</para
           >
           <para
@@ -5133,8 +6117,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -5143,8 +6131,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -5153,8 +6145,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5163,8 +6159,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -5179,6 +6179,8 @@
 
             
 
+            
+
              value and a signed long integer value are equal.</para
           >
         </summary>
@@ -5190,8 +6192,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -5203,10 +6209,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5243,8 +6253,12 @@
 
             
 
+            
+
              method defines the operation of the equality operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -5254,6 +6268,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.BigInteger.Equals(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -5268,6 +6284,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -5279,8 +6297,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -5292,10 +6314,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5337,8 +6363,12 @@
 
             
 
+            
+
              method defines the equality comparison operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -5348,6 +6378,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.BigInteger.Equals(System.UInt64)" />
+
+            
 
             
 
@@ -5362,6 +6394,8 @@
 
             
 
+            
+
              value and an unsigned long integer value are equal.</para
           >
         </summary>
@@ -5373,8 +6407,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -5386,10 +6424,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5431,8 +6473,12 @@
 
             
 
+            
+
              method defines the equality comparison operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -5442,6 +6488,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.BigInteger.Equals(System.UInt64)" />
+
+            
 
             
 
@@ -5456,6 +6504,8 @@
 
             
 
+            
+
              value are equal.</para
           >
         </summary>
@@ -5467,8 +6517,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -5480,10 +6534,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5586,6 +6644,8 @@
 
             
 
+            
+
              method enables code such as the following:</para
           >
           <para>code reference: System.Numerics.BigInteger.Operators#8</para>
@@ -5595,8 +6655,12 @@
 
             
 
+            
+
              method performs the bitwise exclusive Or operation on two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -5608,6 +6672,8 @@
           <para
             >Performs a bitwise exclusive Or (XOr) operation on two <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -5623,10 +6689,14 @@
 
           
 
+          
+
           The first value.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6047,8 +7117,12 @@
 
             
 
+            
+
              method defines the operation of the greater than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6061,8 +7135,12 @@
 
             
 
+            
+
              instance method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThan(System.Int64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -6075,8 +7153,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -6085,8 +7167,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6095,8 +7181,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -6105,8 +7195,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -6121,6 +7215,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -6132,8 +7228,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6145,10 +7245,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6185,8 +7289,12 @@
 
             
 
+            
+
              method defines the operation of the greater than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6199,8 +7307,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThan(System.Numerics.BigInteger,System.Int64)" />
+
+            
 
             
 
@@ -6213,8 +7325,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -6223,8 +7339,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6233,8 +7353,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -6243,8 +7367,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -6259,6 +7387,8 @@
 
             
 
+            
+
              is greater than a 64-bit signed integer value.</para
           >
         </summary>
@@ -6270,8 +7400,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6283,10 +7417,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6323,8 +7461,12 @@
 
             
 
+            
+
              method defines the operation of the greater than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6337,8 +7479,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThan(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -6354,8 +7500,12 @@
 
             
 
+            
+
              value is greater than another <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6370,8 +7520,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6383,10 +7537,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6428,8 +7586,12 @@
 
             
 
+            
+
              method defines the operation of the greater than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6442,8 +7604,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThan(System.Numerics.BigInteger,System.UInt64)" />
+
+            
 
             
 
@@ -6459,6 +7625,8 @@
 
             
 
+            
+
              value is greater than a 64-bit unsigned integer.</para
           >
         </summary>
@@ -6470,8 +7638,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6483,10 +7655,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6528,8 +7704,12 @@
 
             
 
+            
+
              method defines the operation of the greater than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6542,8 +7722,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThan(System.UInt64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -6559,6 +7743,8 @@
 
             
 
+            
+
              value is greater than a 64-bit unsigned integer.</para
           >
         </summary>
@@ -6570,8 +7756,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6583,10 +7773,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6623,8 +7817,12 @@
 
             
 
+            
+
              method defines the operation of the greater than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6637,8 +7835,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThanOrEqual(System.Int64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -6651,8 +7853,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -6661,8 +7867,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6671,8 +7881,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -6681,8 +7895,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -6697,6 +7915,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -6708,8 +7928,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6721,10 +7945,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6761,8 +7989,12 @@
 
             
 
+            
+
              method defines the operation of the greater than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6775,8 +8007,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThanOrEqual(System.Numerics.BigInteger,System.Int64)" />
+
+            
 
             
 
@@ -6789,8 +8025,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -6799,8 +8039,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6809,8 +8053,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -6819,8 +8067,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -6835,6 +8087,8 @@
 
             
 
+            
+
              value is greater than or equal to a 64-bit signed integer value.</para
           >
         </summary>
@@ -6846,8 +8100,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6859,10 +8117,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6899,8 +8161,12 @@
 
             
 
+            
+
              method defines the operation of the greater than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6913,8 +8179,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThanOrEqual(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -6930,8 +8200,12 @@
 
             
 
+            
+
              value is greater than or equal to another <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -6946,8 +8220,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -6959,10 +8237,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7004,8 +8286,12 @@
 
             
 
+            
+
              method defines the operation of the greater than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7018,8 +8304,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThanOrEqual(System.Numerics.BigInteger,System.UInt64)" />
+
+            
 
             
 
@@ -7035,6 +8325,8 @@
 
             
 
+            
+
              value is greater than or equal to a 64-bit unsigned integer value.</para
           >
         </summary>
@@ -7046,8 +8338,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -7059,10 +8355,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7104,8 +8404,12 @@
 
             
 
+            
+
              method defines the operation of the greater than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7118,8 +8422,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_GreaterThanOrEqual(System.UInt64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -7135,6 +8443,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -7146,8 +8456,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="right" />
+
+            
 
             
 
@@ -7159,10 +8473,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7426,8 +8744,12 @@
 
             
 
+            
+
              method defines the increment operation for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7440,6 +8762,8 @@
 
             
 
+            
+
              method directly, as the following example shows.</para
           >
           <para>code reference: System.Numeric.BigInteger.Class#25</para>
@@ -7449,8 +8773,12 @@
 
             
 
+            
+
              objects are immutable, the <see
              cref="M:System.Numerics.BigInteger.op_Increment(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -7459,8 +8787,12 @@
 
             
 
+            
+
              object whose value is one more than the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7469,8 +8801,12 @@
 
             
 
+            
+
             . Therefore, repeated calls to <see
              cref="M:System.Numerics.BigInteger.op_Increment(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -7485,6 +8821,8 @@
 
             
 
+            
+
              value by 1.</para
           >
         </summary>
@@ -7496,11 +8834,15 @@
 
             
 
+            
+
              parameter incremented by 1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7537,8 +8879,12 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7554,8 +8900,12 @@
 
                 
 
+                
+
                  instance method, which indicates the relationship between a <see
                  cref="T:System.Numerics.BigInteger" />
+
+                
 
                 
 
@@ -7569,6 +8919,8 @@
 
                 
 
+                
+
                  instance method and reversing its value.</para
               >
             </item>
@@ -7579,8 +8931,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -7589,8 +8945,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -7599,8 +8959,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -7609,8 +8973,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -7625,6 +8993,8 @@
 
             
 
+            
+
              value are not equal.</para
           >
         </summary>
@@ -7636,8 +9006,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -7649,10 +9023,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7689,8 +9067,12 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7706,8 +9088,12 @@
 
                 
 
+                
+
                  method, which indicates the relationship between a <see
                  cref="T:System.Numerics.BigInteger" />
+
+                
 
                 
 
@@ -7721,6 +9107,8 @@
 
                 
 
+                
+
                  method and reversing its value.</para
               >
             </item>
@@ -7731,8 +9119,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -7741,8 +9133,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -7751,8 +9147,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -7761,8 +9161,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -7777,6 +9181,8 @@
 
             
 
+            
+
              value and a 64-bit signed integer are not equal.</para
           >
         </summary>
@@ -7788,8 +9194,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -7801,10 +9211,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7841,8 +9255,12 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7858,8 +9276,12 @@
 
                 
 
+                
+
                  method, which indicates the relationship between two <see
                  cref="T:System.Numerics.BigInteger" />
+
+                
 
                 
 
@@ -7870,6 +9292,8 @@
               <para
                 >Calling the <see
                  cref="M:System.Numerics.BigInteger.Equals(System.Numerics.BigInteger)" />
+
+                
 
                 
 
@@ -7886,6 +9310,8 @@
 
             
 
+            
+
              objects have different values.</para
           >
         </summary>
@@ -7897,8 +9323,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -7910,10 +9340,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7955,8 +9389,12 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -7972,8 +9410,12 @@
 
                 
 
+                
+
                  method, which indicates the relationship between a <see
                  cref="T:System.Numerics.BigInteger" />
+
+                
 
                 
 
@@ -7984,6 +9426,8 @@
               <para
                 >Calling the <see
                  cref="M:System.Numerics.BigInteger.Equals(System.UInt64)" />
+
+                
 
                 
 
@@ -8000,6 +9444,8 @@
 
             
 
+            
+
              value and a 64-bit unsigned integer are not equal.</para
           >
         </summary>
@@ -8011,8 +9457,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -8024,10 +9474,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8069,8 +9523,12 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8086,8 +9544,12 @@
 
                 
 
+                
+
                  method, which indicates the relationship between a <see
                  cref="T:System.Numerics.BigInteger" />
+
+                
 
                 
 
@@ -8098,6 +9560,8 @@
               <para
                 >Calling the <see
                  cref="M:System.Numerics.BigInteger.Equals(System.UInt64)" />
+
+                
 
                 
 
@@ -8114,6 +9578,8 @@
 
             
 
+            
+
              value are not equal.</para
           >
         </summary>
@@ -8125,8 +9591,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -8138,10 +9608,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8178,8 +9652,12 @@
 
             
 
+            
+
              method defines the operation of the bitwise left-shift operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8193,8 +9671,12 @@
 
               
 
+              
+
                method preserves the sign of the original <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -8207,8 +9689,12 @@
 
             
 
+            
+
              by BigInteger.Pow(2, <paramref
              name="shift" />
+
+            
 
             
 
@@ -8224,6 +9710,8 @@
 
             
 
+            
+
              value a specified number of bits to the left.</para
           >
         </summary>
@@ -8236,6 +9724,8 @@
 
           
 
+          
+
           The value whose bits are to be shifted.</param
         >
         <param name="shift">
@@ -8243,8 +9733,12 @@
 
           
 
+          
+
           The number of bits to shift <paramref
            name="value" />
+
+          
 
           
 
@@ -8281,8 +9775,12 @@
 
             
 
+            
+
              method defines the operation of the less than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8295,8 +9793,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThan(System.Int64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -8309,8 +9811,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8319,8 +9825,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -8329,8 +9839,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -8339,8 +9853,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -8355,6 +9873,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -8366,8 +9886,12 @@
 
             
 
+            
+
              is less than <paramref
              name="right" />
+
+            
 
             
 
@@ -8379,10 +9903,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8419,8 +9947,12 @@
 
             
 
+            
+
              method defines the operation of the less than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8433,8 +9965,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThan(System.Numerics.BigInteger,System.Int64)" />
+
+            
 
             
 
@@ -8447,8 +9983,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8457,8 +9997,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -8467,8 +10011,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -8477,8 +10025,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -8493,6 +10045,8 @@
 
             
 
+            
+
              value is less than a 64-bit signed integer.</para
           >
         </summary>
@@ -8504,8 +10058,12 @@
 
             
 
+            
+
              is less than <paramref
              name="right" />
+
+            
 
             
 
@@ -8517,10 +10075,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8557,8 +10119,12 @@
 
             
 
+            
+
              method defines the operation of the less than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8571,8 +10137,12 @@
 
             
 
+            
+
              method instead. Some languages can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThan(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -8588,8 +10158,12 @@
 
             
 
+            
+
              value is less than another <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8604,8 +10178,12 @@
 
             
 
+            
+
              is less than <paramref
              name="right" />
+
+            
 
             
 
@@ -8617,10 +10195,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8662,8 +10244,12 @@
 
             
 
+            
+
              method defines the operation of the less than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8676,8 +10262,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThan(System.Numerics.BigInteger,System.UInt64)" />
+
+            
 
             
 
@@ -8693,6 +10283,8 @@
 
             
 
+            
+
              value is less than a 64-bit unsigned integer.</para
           >
         </summary>
@@ -8704,8 +10296,12 @@
 
             
 
+            
+
              is less than <paramref
              name="right" />
+
+            
 
             
 
@@ -8717,10 +10313,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8762,8 +10362,12 @@
 
             
 
+            
+
              method defines the operation of the less than operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8776,8 +10380,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThan(System.UInt64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -8793,6 +10401,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -8804,8 +10414,12 @@
 
             
 
+            
+
              is less than <paramref
              name="right" />
+
+            
 
             
 
@@ -8817,10 +10431,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8857,8 +10475,12 @@
 
             
 
+            
+
              method defines the operation of the less than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -8871,8 +10493,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThanOrEqual(System.Int64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -8885,8 +10511,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -8895,8 +10525,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -8905,8 +10539,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -8915,8 +10553,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -8931,6 +10573,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -8942,8 +10586,12 @@
 
             
 
+            
+
              is less than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -8955,10 +10603,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8995,8 +10647,12 @@
 
             
 
+            
+
              method defines the operation of the less than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9009,8 +10665,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThanOrEqual(System.Numerics.BigInteger,System.Int64)" />
+
+            
 
             
 
@@ -9023,8 +10683,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -9033,8 +10697,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -9043,8 +10711,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -9053,8 +10725,12 @@
 
             
 
+            
+
              value, it is implicitly converted to an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -9069,6 +10745,8 @@
 
             
 
+            
+
              value is less than or equal to a 64-bit signed integer.</para
           >
         </summary>
@@ -9080,8 +10758,12 @@
 
             
 
+            
+
              is less than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -9093,10 +10775,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9133,8 +10819,12 @@
 
             
 
+            
+
              method defines the operation of the less than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9147,8 +10837,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThanOrEqual(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -9164,8 +10858,12 @@
 
             
 
+            
+
              value is less than or equal to another <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9180,8 +10878,12 @@
 
             
 
+            
+
              is less than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -9193,10 +10895,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9238,8 +10944,12 @@
 
             
 
+            
+
              method defines the operation of the less than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9252,8 +10962,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThanOrEqual(System.Numerics.BigInteger,System.UInt64)" />
+
+            
 
             
 
@@ -9269,6 +10983,8 @@
 
             
 
+            
+
              value is less than or equal to a 64-bit unsigned integer.</para
           >
         </summary>
@@ -9280,8 +10996,12 @@
 
             
 
+            
+
              is less than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -9293,10 +11013,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9338,8 +11062,12 @@
 
             
 
+            
+
              method defines the operation of the less than or equal to operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9352,8 +11080,12 @@
 
             
 
+            
+
              method instead. They can also call the <see
              cref="M:System.Numerics.BigInteger.op_LessThanOrEqual(System.UInt64,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -9369,6 +11101,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -9380,8 +11114,12 @@
 
             
 
+            
+
              is less than or equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -9393,10 +11131,14 @@
 
           
 
+          
+
           The first value to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9433,8 +11175,12 @@
 
             
 
+            
+
              method defines the operation of the modulus operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9447,6 +11193,8 @@
 
             
 
+            
+
              method instead.</para
           >
           <para
@@ -9455,13 +11203,19 @@
 
             
 
+            
+
             : If <paramref
              name="dividend" />
 
             
 
+            
+
              is positive, the modulus operation returns a positive result; if it is negative, the modulus operation returns a negative result. The behavior of the modulus operation with <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9473,6 +11227,8 @@
           <para
             >Returns the remainder that results from division with two specified <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9488,10 +11244,14 @@
 
           
 
+          
+
           The value to be divided.</param
         >
         <param name="divisor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9528,8 +11288,12 @@
 
             
 
+            
+
              method defines the operation of the multiplication operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9545,6 +11309,8 @@
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -9556,8 +11322,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -9569,10 +11339,14 @@
 
           
 
+          
+
           The first value to multiply.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9608,8 +11382,12 @@
 
             
 
+            
+
              method defines the operation of the bitwise one's complement operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9618,8 +11396,12 @@
 
             
 
+            
+
              that are 0 are set to 1 in the result, and bits that are 1 are set to 0 in the result. The <see
              cref="M:System.Numerics.BigInteger.op_OnesComplement(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -9629,6 +11411,8 @@
           <para
             >Languages that do not support custom operators may be able to call the <see
              cref="M:System.Numerics.BigInteger.op_OnesComplement(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -9644,6 +11428,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -9655,11 +11441,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9696,8 +11486,12 @@
 
             
 
+            
+
              method defines the operation of the bitwise right-shift operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9710,13 +11504,19 @@
 
             
 
+            
+
              by BigInteger.Pow(2, <paramref
              name="shift" />
 
             
 
+            
+
             ) and subtracting 1 times <paramref
              name="shift" />
+
+            
 
             
 
@@ -9729,8 +11529,12 @@
 
             
 
+            
+
              is greater than or equal to the number of bits in a positive <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9739,8 +11543,12 @@
 
             
 
+            
+
             . If <paramref
              name="shift" />
+
+            
 
             
 
@@ -9749,8 +11557,12 @@
 
             
 
+            
+
              value, the result of the right-shift operation is <see
              cref="P:System.Numerics.BigInteger.MinusOne" />
+
+            
 
             
 
@@ -9762,6 +11574,8 @@
           <para
             >Shifts a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9777,6 +11591,8 @@
 
           
 
+          
+
           The value whose bits are to be shifted.</param
         >
         <param name="shift">
@@ -9784,8 +11600,12 @@
 
           
 
+          
+
           The number of bits to shift <paramref
            name="value" />
+
+          
 
           
 
@@ -9822,8 +11642,12 @@
 
             
 
+            
+
              method defines the operation of the subtraction operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9833,6 +11657,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.BigInteger.Subtract(System.Numerics.BigInteger,System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -9847,8 +11673,12 @@
 
             
 
+            
+
              value from another <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9863,8 +11693,12 @@
 
             
 
+            
+
              from <paramref
              name="left" />
+
+            
 
             
 
@@ -9876,10 +11710,14 @@
 
           
 
+          
+
           The value to subtract from (the minuend).</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9915,13 +11753,19 @@
 
             
 
+            
+
              method defines the operation of the unary negation operator (or the additive inverse operator) for <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
              values. The operation produces a value that results in 0 (zero) when it is added to the original number. Languages that do not support custom operators can call the <see
              cref="M:System.Numerics.BigInteger.Negate(System.Numerics.BigInteger)" />
+
+            
 
             
 
@@ -9940,11 +11784,15 @@
 
             
 
+            
+
              parameter multiplied by negative one (-1).</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9980,8 +11828,12 @@
 
             
 
+            
+
              method defines the operation of the unary positive operator for <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -9996,6 +11848,8 @@
 
             
 
+            
+
              operand. (The sign of the operand is unchanged.)</para
           >
         </summary>
@@ -10007,11 +11861,15 @@
 
             
 
+            
+
              operand.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10044,6 +11902,8 @@
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -10081,8 +11941,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
+
+                  
 
                   
 
@@ -10106,8 +11970,12 @@
 
               
 
+              
+
                parameter is interpreted by using the <see
                cref="F:System.Globalization.NumberStyles.Integer" />
+
+              
 
               
 
@@ -10120,8 +11988,12 @@
 
             
 
+            
+
              parameter is parsed by using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -10130,8 +12002,12 @@
 
             
 
+            
+
             . To parse a string by using the formatting information of a specific culture, use the <see
              cref="M:System.Numerics.BigInteger.Parse(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -10144,8 +12020,12 @@
 
               
 
+              
+
                method to round-trip the string representation of a <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -10154,8 +12034,12 @@
 
               
 
+              
+
                method, you should use the <see
                cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+              
 
               
 
@@ -10164,8 +12048,12 @@
 
               
 
+              
+
                value. Otherwise, the string representation of the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -10174,8 +12062,12 @@
 
               
 
+              
+
                method to restore the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -10191,6 +12083,8 @@
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -10202,11 +12096,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10243,8 +12141,12 @@
 
             
 
+            
+
              parameter defines the style elements (such as white space, the positive or negative sign symbol, the group separator symbol, or the decimal point symbol) that are allowed in the <paramref
              name="value" />
+
+            
 
             
 
@@ -10253,8 +12155,12 @@
 
             
 
+            
+
              must be a combination of bit flags from the <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -10263,8 +12169,12 @@
 
             
 
+            
+
              parameter makes this method overload useful when <paramref
              name="value" />
+
+            
 
             
 
@@ -10273,8 +12183,12 @@
 
             
 
+            
+
              is known only at run time, or when you want to disallow white space or a sign symbol in <paramref
              name="value" />
+
+            
 
             
 
@@ -10286,8 +12200,12 @@
 
             
 
+            
+
             , the <paramref
              name="value" />
+
+            
 
             
 
@@ -10300,13 +12218,19 @@
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
+            
+
             , the <paramref
              name="value" />
+
+            
 
             
 
@@ -10336,8 +12260,12 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -10346,8 +12274,12 @@
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -10356,8 +12288,12 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -10376,8 +12312,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -10386,13 +12326,19 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -10411,8 +12357,12 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -10421,8 +12371,12 @@
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -10431,8 +12385,12 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -10441,13 +12399,19 @@
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -10476,13 +12440,19 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -10501,8 +12471,12 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -10511,8 +12485,12 @@
 
                   
 
+                  
+
                    flag. Only the digit 0 can appear as a fractional digit for the parse operation to succeed; if fractional_digits includes any other digit, a <see
                    cref="T:System.FormatException" />
+
+                  
 
                   
 
@@ -10531,13 +12509,19 @@
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -10560,8 +12544,12 @@
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -10570,8 +12558,12 @@
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="value" />
+
+            
 
             
 
@@ -10587,6 +12579,8 @@
                   <para
                     >Elements permitted in <paramref
                      name="value" />
+
+                    
 
                     
 
@@ -10638,6 +12632,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -10652,6 +12648,8 @@
                 <para
                   >The ws element at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -10672,6 +12670,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -10686,6 +12686,8 @@
                 <para
                   >The sign element at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -10736,6 +12738,8 @@
 
                   
 
+                  
+
                    cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -10753,13 +12757,19 @@
 
                   
 
+                  
+
                   , sign at the start of <paramref
                    name="value" />
 
                   
 
+                  
+
                   , and the decimal point (.) symbol. The <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -10780,8 +12790,12 @@
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -10802,6 +12816,8 @@
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -10814,8 +12830,12 @@
 
               
 
+              
+
                method to round-trip the string representation of a <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -10824,8 +12844,12 @@
 
               
 
+              
+
                method, you should use the <see
                cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+              
 
               
 
@@ -10834,8 +12858,12 @@
 
               
 
+              
+
                value. Otherwise, the string representation of the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -10844,8 +12872,12 @@
 
               
 
+              
+
                method to restore the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -10858,8 +12890,12 @@
 
             
 
+            
+
              values, which allow for, but do not require, the presence of particular style elements in <paramref
              name="value" />
+
+            
 
             
 
@@ -10868,8 +12904,12 @@
 
             
 
+            
+
              style value means that the individual numeric characters in <paramref
              name="value" />
+
+            
 
             
 
@@ -10878,8 +12918,12 @@
 
             
 
+            
+
              parameter are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -10888,13 +12932,19 @@
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -10907,6 +12957,8 @@
 
               
 
+              
+
                is the string representation of a hexadecimal number, it cannot be preceded by any decoration (such as 0x or &amp;h) that differentiates it as a hexadecimal number. This causes the conversion to fail.</para
             >
           </block>
@@ -10916,8 +12968,12 @@
 
             
 
+            
+
              is a hexadecimal string, the <see
              cref="M:System.Numerics.BigInteger.Parse(System.String,System.Globalization.NumberStyles)" />
+
+            
 
             
 
@@ -10926,13 +12982,19 @@
 
             
 
+            
+
              as a negative number stored by using two's complement representation if its first two hexadecimal digits are greater than or equal to 0x80. In other words, the method interprets the highest-order bit of the first byte in <paramref
              name="value" />
 
             
 
+            
+
              as the sign bit. To make sure that a hexadecimal string is correctly interpreted as a positive number, the first digit in <paramref
              name="value" />
+
+            
 
             
 
@@ -10945,13 +13007,19 @@
 
             
 
+            
+
              parameter is parsed by using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
+            
+
              object that is initialized for the current system culture. To specify the culture whose formatting information is used for the parse operation, call the <see
              cref="M:System.Numerics.BigInteger.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -10966,6 +13034,8 @@
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -10977,11 +13047,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10992,8 +13066,12 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that specify the permitted format of <paramref
            name="value" />
+
+          
 
           
 
@@ -11027,6 +13105,8 @@
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -11064,8 +13144,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
+
+                  
 
                   
 
@@ -11074,13 +13158,19 @@
 
                   
 
+                  
+
                    object that is returned by the <paramref
                    name="provider" />
 
                   
 
+                  
+
                    object's <see
                    cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                  
 
                   
 
@@ -11104,8 +13194,12 @@
 
               
 
+              
+
                parameter is interpreted using the <see
                cref="F:System.Globalization.NumberStyles.Integer" />
+
+              
 
               
 
@@ -11119,8 +13213,12 @@
 
               
 
+              
+
                method to round-trip the string representation of a <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -11129,8 +13227,12 @@
 
               
 
+              
+
                method, you should use the <see
                cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+              
 
               
 
@@ -11139,8 +13241,12 @@
 
               
 
+              
+
                value. Otherwise, the string representation of the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -11149,8 +13255,12 @@
 
               
 
+              
+
                method to restore the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -11163,8 +13273,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -11173,8 +13287,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -11183,8 +13301,12 @@
 
             
 
+            
+
              method is invoked, it calls the <paramref
              name="provider" />
+
+            
 
             
 
@@ -11193,8 +13315,12 @@
 
             
 
+            
+
              method and passes it a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -11203,8 +13329,12 @@
 
             
 
+            
+
              type. The <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -11213,13 +13343,19 @@
 
             
 
+            
+
              object that provides information about the format of the <paramref
              name="value" />
 
             
 
+            
+
              parameter. There are three ways to use the <paramref
              name="provider" />
+
+            
 
             
 
@@ -11233,13 +13369,19 @@
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information. Its <see
                  cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -11253,8 +13395,12 @@
 
                 
 
+                
+
                  object that provides numeric formatting information. (Its implementation of <see
                  cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -11268,13 +13414,19 @@
 
                 
 
+                
+
                 . Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method instantiates and returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -11288,13 +13440,19 @@
 
             
 
+            
+
              is null, the formatting of <paramref
              name="value" />
 
             
 
+            
+
              is interpreted based on the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -11309,6 +13467,8 @@
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -11320,11 +13480,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11335,8 +13499,12 @@
 
           
 
+          
+
           An object that provides culture-specific formatting information about <paramref
            name="value" />
+
+          
 
           
 
@@ -11374,8 +13542,12 @@
 
             
 
+            
+
              parameter defines the style elements (such as white space, the positive or negative sign symbol, the group separator symbol, or the decimal point symbol) that are allowed in the <paramref
              name="value" />
+
+            
 
             
 
@@ -11384,8 +13556,12 @@
 
             
 
+            
+
              must be a combination of bit flags from the <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -11394,8 +13570,12 @@
 
             
 
+            
+
              parameter makes this method overload useful when <paramref
              name="value" />
+
+            
 
             
 
@@ -11404,8 +13584,12 @@
 
             
 
+            
+
              is known only at run time, or when you want to disallow white space or a sign symbol in <paramref
              name="value" />
+
+            
 
             
 
@@ -11417,8 +13601,12 @@
 
             
 
+            
+
             , the <paramref
              name="value" />
+
+            
 
             
 
@@ -11431,13 +13619,19 @@
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
+            
+
             , the <paramref
              name="value" />
+
+            
 
             
 
@@ -11467,8 +13661,12 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -11477,8 +13675,12 @@
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11487,8 +13689,12 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -11507,8 +13713,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -11517,8 +13727,12 @@
 
                   
 
+                  
+
                    parameter. The current culture's currency symbol can appear in <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11527,8 +13741,12 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -11547,8 +13765,12 @@
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -11557,8 +13779,12 @@
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11567,8 +13793,12 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -11577,13 +13807,19 @@
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -11612,8 +13848,12 @@
 
                   
 
+                  
+
                    can appear in <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11622,8 +13862,12 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -11642,8 +13886,12 @@
 
                   
 
+                  
+
                    can appear in <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11652,13 +13900,19 @@
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
+                  
+
                    flag. Only the digit 0 can appear as a fractional digit for the parse operation to succeed; if fractional_digits includes any other digit, a <see
                    cref="T:System.FormatException" />
+
+                  
 
                   
 
@@ -11677,13 +13931,19 @@
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -11706,8 +13966,12 @@
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -11716,8 +13980,12 @@
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="value" />
+
+            
 
             
 
@@ -11777,6 +14045,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -11791,6 +14061,8 @@
                 <para
                   >The ws element at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11811,6 +14083,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -11825,6 +14099,8 @@
                 <para
                   >The sign element at the end of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11875,6 +14151,8 @@
 
                   
 
+                  
+
                    cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -11892,13 +14170,19 @@
 
                   
 
+                  
+
                   , sign at the start of <paramref
                    name="value" />
 
                   
 
+                  
+
                   , and the decimal point (.) symbol. The <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -11919,8 +14203,12 @@
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -11941,6 +14229,8 @@
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -11953,8 +14243,12 @@
 
               
 
+              
+
                method to round-trip the string representation of a <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -11963,8 +14257,12 @@
 
               
 
+              
+
                method, you should use the <see
                cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+              
 
               
 
@@ -11973,8 +14271,12 @@
 
               
 
+              
+
                value. Otherwise, the string representation of the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -11983,8 +14285,12 @@
 
               
 
+              
+
                method to restore the <see
                cref="T:System.Numerics.BigInteger" />
+
+              
 
               
 
@@ -11997,8 +14303,12 @@
 
             
 
+            
+
              values, which allow for but do not require the presence of particular style elements in <paramref
              name="value" />
+
+            
 
             
 
@@ -12007,8 +14317,12 @@
 
             
 
+            
+
              style value means that the individual numeric characters in <paramref
              name="value" />
+
+            
 
             
 
@@ -12017,8 +14331,12 @@
 
             
 
+            
+
              parameter are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -12027,13 +14345,19 @@
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -12046,6 +14370,8 @@
 
               
 
+              
+
                is the string representation of a hexadecimal number, it cannot be preceded by any decoration (such as 0x or &amp;h) that differentiates it as a hexadecimal number. This causes the conversion to fail.</para
             >
           </block>
@@ -12055,8 +14381,12 @@
 
             
 
+            
+
              is a hexadecimal string, the <see
              cref="M:System.Numerics.BigInteger.Parse(System.String,System.Globalization.NumberStyles)" />
+
+            
 
             
 
@@ -12065,13 +14395,19 @@
 
             
 
+            
+
              as a negative number stored by using two's complement representation if its first two hexadecimal digits are greater than or equal to 0x80. In other words, the method interprets the highest-order bit of the first byte in <paramref
              name="value" />
 
             
 
+            
+
              as the sign bit. To make sure that a hexadecimal string is correctly interpreted as a positive number, the first digit in <paramref
              name="value" />
+
+            
 
             
 
@@ -12084,8 +14420,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -12094,8 +14434,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -12104,8 +14448,12 @@
 
             
 
+            
+
             . Typically, <paramref
              name="provider" />
+
+            
 
             
 
@@ -12119,13 +14467,19 @@
 
                 
 
+                
+
                  object that represents the culture that provides numeric formatting information. Its <see
                  cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -12139,8 +14493,12 @@
 
                 
 
+                
+
                  object that provides formatting information. (Its implementation of <see
                  cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -12154,13 +14512,19 @@
 
                 
 
+                
+
                  and uses the <see
                  cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method to instantiate and return the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -12174,8 +14538,12 @@
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -12190,6 +14558,8 @@
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -12201,11 +14571,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12216,8 +14590,12 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that specify the permitted format of <paramref
            name="value" />
+
+          
 
           
 
@@ -12228,8 +14606,12 @@
 
           
 
+          
+
           An object that provides culture-specific formatting information about <paramref
            name="value" />
+
+          
 
           
 
@@ -12266,8 +14648,12 @@
 
             
 
+            
+
              method returns 1 if the value of the exponent parameter is 0, or if the values of both the <paramref
              name="value" />
+
+            
 
             
 
@@ -12276,8 +14662,12 @@
 
             
 
+            
+
              parameters are 0. If <paramref
              name="exponent" />
+
+            
 
             
 
@@ -12286,8 +14676,12 @@
 
             
 
+            
+
              method returns <paramref
              name="value" />
+
+            
 
             
 
@@ -12296,11 +14690,15 @@
 
             
 
+            
+
              is negative, the method returns a negative result.</para
           >
           <para
             >This method corresponds to the <see
              cref="M:System.Math.Pow(System.Double,System.Double)" />
+
+            
 
             
 
@@ -12315,6 +14713,8 @@
 
             
 
+            
+
              value to the power of a specified value.</para
           >
         </summary>
@@ -12326,8 +14726,12 @@
 
             
 
+            
+
              to the <paramref
              name="exponent" />
+
+            
 
             
 
@@ -12339,8 +14743,12 @@
 
           
 
+          
+
           The number to raise to the <paramref
            name="exponent" />
+
+          
 
           
 
@@ -12351,8 +14759,12 @@
 
           
 
+          
+
           The exponent to raise <paramref
            name="value" />
+
+          
 
           
 
@@ -12389,6 +14801,8 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
@@ -12397,11 +14811,15 @@
 
             
 
+            
+
              method is implemented for languages that do not support custom operators. Its behavior is identical to division using the modulus operator.</para
           >
           <para
             >If necessary, the method automatically performs implicit conversion of other integral types to <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12416,6 +14834,8 @@
 
             
 
+            
+
              values and returns the remainder.</para
           >
         </summary>
@@ -12427,8 +14847,12 @@
 
             
 
+            
+
              by <paramref
              name="divisor" />
+
+            
 
             
 
@@ -12440,10 +14864,14 @@
 
           
 
+          
+
           The value to be divided.</param
         >
         <param name="divisor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12471,8 +14899,12 @@
 
             
 
+            
+
              property is equivalent to the <see
              cref="M:System.Math.Sign(System.Int32)" />
+
+            
 
             
 
@@ -12484,6 +14916,8 @@
           <para
             >Gets a number that indicates the sign (negative, positive, or zero) of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12521,8 +14955,12 @@
 
             
 
+            
+
              method to perform subtraction using <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12534,8 +14972,12 @@
 
             
 
+            
+
              method is a useful substitute for the subtraction operator when instantiating a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12551,6 +14993,8 @@
 
             
 
+            
+
              value from another and returns the result.</para
           >
         </summary>
@@ -12562,8 +15006,12 @@
 
             
 
+            
+
              from <paramref
              name="left" />
+
+            
 
             
 
@@ -12575,10 +15023,14 @@
 
           
 
+          
+
           The value to subtract from (the minuend).</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12606,6 +15058,8 @@
           <para
             >The individual bytes in the array returned by this method appear in little-endian order. That is, the lower-order bytes of the value precede the higher-order bytes. The first byte of the array reflects the first eight bits of the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12646,6 +15100,8 @@
 
             
 
+            
+
              - 1) as the sign bit, the method returns a byte array with an extra element whose value is zero to disambiguate positive values that could otherwise be interpreted as having their sign bits set. For example, the value 120 or 0x78 is represented as a single-byte array: 0x78. However, 128, or 0x80, is represented as a two-byte array: 0x80, 0x00. </para
           >
           <para
@@ -12654,8 +15110,12 @@
 
             
 
+            
+
              value by storing it to a byte array and then restoring it using the <see
              cref="M:System.Numerics.BigInteger.#ctor(System.Byte[])" />
+
+            
 
             
 
@@ -12673,6 +15133,8 @@
 
             
 
+            
+
              value to a byte array.</para
           >
         </summary>
@@ -12681,6 +15143,8 @@
           <para
             >The value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12712,13 +15176,19 @@
 
             
 
+            
+
              method formats a <see
              cref="T:System.Numerics.BigInteger" />
 
             
 
+            
+
              value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+            
 
             
 
@@ -12785,8 +15255,12 @@
 
             
 
+            
+
              value includes a negative sign if its value is negative, and a sequence of digits ranging from 0 to 9 without leading zeros. The negative sign is defined by the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -12798,8 +15272,12 @@
 
             
 
+            
+
              method supports 50 decimal digits of precision. That is, if the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12814,6 +15292,8 @@
 
             
 
+            
+
              object to its equivalent string representation.</para
           >
         </summary>
@@ -12822,6 +15302,8 @@
           <para
             >The string representation of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12855,8 +15337,12 @@
 
             
 
+            
+
              method formats a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12865,8 +15351,12 @@
 
             
 
+            
+
              object of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+            
 
             
 
@@ -12933,8 +15423,12 @@
 
             
 
+            
+
              method supports 50 decimal digits of precision. That is, if the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12946,8 +15440,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -12956,8 +15454,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -12966,8 +15468,12 @@
 
             
 
+            
+
              is null, the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -12976,8 +15482,12 @@
 
             
 
+            
+
              object of the current culture. The only property of the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -12986,8 +15496,12 @@
 
             
 
+            
+
              value using the general format specifier is <see
              cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+
+            
 
             
 
@@ -12996,6 +15510,8 @@
           <para
             >The <paramref
              name="provider" />
+
+            
 
             
 
@@ -13009,6 +15525,8 @@
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information. </para
               >
             </item>
@@ -13016,6 +15534,8 @@
               <para
                 >The <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -13029,13 +15549,19 @@
 
                 
 
+                
+
                 . Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -13052,6 +15578,8 @@
 
             
 
+            
+
              object to its equivalent string representation by using the specified culture-specific formatting information.</para
           >
         </summary>
@@ -13063,8 +15591,12 @@
 
             
 
+            
+
              value in the format specified by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -13073,6 +15605,8 @@
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13105,8 +15639,12 @@
 
             
 
+            
+
              method formats a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -13115,8 +15653,12 @@
 
             
 
+            
+
              object that represents the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+            
 
             
 
@@ -13183,10 +15725,14 @@
 
             
 
+            
+
              parameter can be any valid <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
+
+            
 
             
 
@@ -13197,8 +15743,12 @@
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -13207,8 +15757,12 @@
 
             
 
+            
+
              or is null, the return value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -13217,8 +15771,12 @@
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -13230,8 +15788,12 @@
 
             
 
+            
+
              method supports 50 decimal digits of precision. That is, if the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -13240,8 +15802,12 @@
 
             
 
+            
+
              supports the "R" standard format specifier, which is intended to round-trip numeric values. The string returned by the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+            
 
             
 
@@ -13250,8 +15816,12 @@
 
             
 
+            
+
              value and can then be parsed with the <see
              cref="Overload:System.Numerics.BigInteger.Parse" />
+
+            
 
             
 
@@ -13260,8 +15830,12 @@
 
             
 
+            
+
              method to restore its original value without any loss of data. The following example illustrates that a string output using the "R" format string can then be parsed by the <see
              cref="Overload:System.Numerics.BigInteger.Parse" />
+
+            
 
             
 
@@ -13279,10 +15853,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -13298,6 +15876,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -13308,13 +15888,19 @@
 
             
 
+            
+
              object for the current culture. Depending on the <paramref
              name="format" />
 
             
 
+            
+
              parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -13329,6 +15915,8 @@
 
             
 
+            
+
              object to its equivalent string representation by using the specified format.</para
           >
         </summary>
@@ -13340,8 +15928,12 @@
 
             
 
+            
+
              value in the format specified by the <paramref
              name="format" />
+
+            
 
             
 
@@ -13350,6 +15942,8 @@
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13386,8 +15980,12 @@
 
             
 
+            
+
              method formats a <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -13396,8 +15994,12 @@
 
             
 
+            
+
              object of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+            
 
             
 
@@ -13464,10 +16066,14 @@
 
             
 
+            
+
              parameter can be any valid <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
+
+            
 
             
 
@@ -13478,8 +16084,12 @@
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -13488,8 +16098,12 @@
 
             
 
+            
+
              or is null, the return value of the current <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -13498,8 +16112,12 @@
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -13511,8 +16129,12 @@
 
             
 
+            
+
              method supports 50 decimal digits of precision. That is, if the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -13521,8 +16143,12 @@
 
             
 
+            
+
              supports the "R" standard format specifier, which is intended to round-trip numeric values. The string returned by the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String)" />
+
+            
 
             
 
@@ -13531,13 +16157,19 @@
 
             
 
+            
+
              value and can then be parsed with the <see
              cref="Overload:System.Numerics.BigInteger.Parse" />
 
             
 
+            
+
              or <see
              cref="Overload:System.Numerics.BigInteger.TryParse" />
+
+            
 
             
 
@@ -13554,10 +16186,14 @@
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -13573,6 +16209,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -13583,8 +16221,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -13593,8 +16235,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -13603,8 +16249,12 @@
 
             
 
+            
+
              method is invoked, it calls the <paramref
              name="provider" />
+
+            
 
             
 
@@ -13613,8 +16263,12 @@
 
             
 
+            
+
              method and passes it a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -13623,8 +16277,12 @@
 
             
 
+            
+
              type. The <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -13633,8 +16291,12 @@
 
             
 
+            
+
              object that provides information for formatting the <paramref
              name="value" />
+
+            
 
             
 
@@ -13643,8 +16305,12 @@
 
             
 
+            
+
              parameter to supply formatting information to the <see
              cref="M:System.Numerics.BigInteger.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -13658,13 +16324,19 @@
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information. Its <see
                  cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -13678,8 +16350,12 @@
 
                 
 
+                
+
                  object that provides numeric formatting information. (Its implementation of <see
                  cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -13693,13 +16369,19 @@
 
                 
 
+                
+
                 . Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
+                
+
                  method instantiates and returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -13713,8 +16395,12 @@
 
             
 
+            
+
              is null, the formatting of the returned string is based on the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -13729,6 +16415,8 @@
 
             
 
+            
+
              object to its equivalent string representation by using the specified format and culture-specific format information.</para
           >
         </summary>
@@ -13740,13 +16428,19 @@
 
             
 
+            
+
              value as specified by the <paramref
              name="format" />
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -13758,10 +16452,14 @@
 
           
 
+          
+
           A standard or custom numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13852,6 +16550,8 @@
           <para
             >The <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 

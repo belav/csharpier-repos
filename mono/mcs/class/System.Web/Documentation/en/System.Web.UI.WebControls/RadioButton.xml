@@ -63,8 +63,12 @@
 
         
 
+        
+
          server control permits you to intersperse the radio buttons in a group with other content in the page. The buttons are grouped logically if they all share the same <see
          cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
+
+        
 
         
 
@@ -77,10 +81,14 @@
 
           
 
+          
+
            control to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
            type="text/html">
             <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
           </format>
+
+          
 
           
 
@@ -101,6 +109,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -117,11 +127,15 @@
 
         
 
+        
+
         "
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
     BorderStyle="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -133,9 +147,13 @@
 
         
 
+        
+
         "
     Checked="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -146,9 +164,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -158,9 +180,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -170,10 +196,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -185,9 +215,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -213,11 +247,15 @@
 
         
 
+        
+
         "
     ToolTip="string"
     ValidationGroup="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -247,6 +285,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -273,8 +313,12 @@
 
             
 
+            
+
              property to specify a grouping of radio buttons to create a mutually exclusive set of controls. You can use the <see
              cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
+
+            
 
             
 
@@ -283,6 +327,8 @@
           <para
             >When this property is set, only one <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -295,10 +341,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -351,13 +401,19 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
+            
+
              method. It is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -372,6 +428,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -383,6 +441,8 @@
 
             
 
+            
+
              has changed; otherwise, false.</para
           >
         </returns>
@@ -391,10 +451,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +484,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -436,6 +504,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -444,8 +514,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -479,13 +553,19 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
+            
+
              method. It is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.RadioButton" />
+
+            
 
             
 
@@ -500,8 +580,12 @@
 
             
 
+            
+
              event, if the <see
              cref="P:System.Windows.Forms.RadioButton.Checked" />
+
+            
 
             
 
@@ -539,8 +623,12 @@
 
             
 
+            
+
              control is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -555,6 +643,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -566,6 +656,8 @@
 
             
 
+            
+
              is checked; otherwise, false. The default is false.</para
           >
         </returns>
@@ -574,10 +666,14 @@
 
           
 
+          
+
           A string.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

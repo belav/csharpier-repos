@@ -31,8 +31,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlGenericControl.#ctor" />
+
+        
 
         
 
@@ -47,12 +51,16 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -80,11 +88,15 @@
 
             
 
+            
+
              class using the default values. It is commonly used to dynamically create a server-side &lt;span&gt; element.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlGenericControl" />
+
+            
 
             
 
@@ -119,6 +131,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -144,11 +158,15 @@
 
             
 
+            
+
              class using the specified tag. This allows you to dynamically create any HTML server control element not directly represented by a .NET Framework class.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlGenericControl" />
+
+            
 
             
 
@@ -176,6 +194,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -188,13 +208,19 @@
 
               
 
+              
+
                parameter is null, the <see
                cref="P:System.Web.UI.HtmlControls.HtmlGenericControl.TagName" />
 
               
 
+              
+
                property is set to <see
                cref="F:System.String.Empty" />
+
+              
 
               
 
@@ -210,11 +236,15 @@
 
             
 
+            
+
              class with the specified tag.</para
           >
         </summary>
         <param name="tag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +273,8 @@
 
             
 
+            
+
              property for a server-side &lt;span id="MySpan" runat= "server"/&gt; element contains the value "span".</para
           >
         </remarks>
@@ -251,6 +283,8 @@
           <para
             >Gets or sets the name of the HTML element represented by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlGenericControl" />
+
+            
 
             
 

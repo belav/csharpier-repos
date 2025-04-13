@@ -34,13 +34,19 @@
 
         
 
+        
+
          attribute to the method whose exception-handling clauses you want to execute. The CLR delivers the corrupted process state exception to applicable exception clauses only in methods that have both the <see
          cref="T:System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptionsAttribute" />
 
         
 
+        
+
          and <see
          cref="T:System.Security.SecurityCriticalAttribute" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          to your application's configuration file. This will ensure that corrupted state exceptions are delivered to your exception handlers without the <see
          cref="T:System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptionsAttribute" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          attribute. This configuration element has no effect on applications that were compiled in versions previous to the net_v40_long but are running in the net_v40_short or later; corrupted state exceptions will continue to be delivered for those applications. The <see
          cref="T:System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptionsAttribute" />
+
+        
 
         
 
@@ -78,6 +92,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=179681"
           >Handling Corrupted State Exceptions</see
         >
+
+        
 
         
 
@@ -111,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptionsAttribute" />
+
+            
 
             
 

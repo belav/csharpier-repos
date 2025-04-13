@@ -61,8 +61,12 @@ Contract.EndContractBlock();
 
         
 
+        
+
         , or <see
          cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
+
+        
 
         
 
@@ -99,8 +103,12 @@ Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
 
         
 
+        
+
          or <see
          cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
+
+        
 
         
 
@@ -131,6 +139,8 @@ Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Contracts.ContractArgumentValidatorAttribute" />
+
+            
 
             
 

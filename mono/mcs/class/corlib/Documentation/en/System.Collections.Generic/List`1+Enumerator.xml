@@ -37,13 +37,19 @@
 
         
 
+        
+
          class is the generic equivalent of the <see
          cref="T:System.Collections.ArrayList" />
 
         
 
+        
+
          class. It implements the <see
          cref="T:System.Collections.Generic.IList`1" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          by using the <see
          cref="M:System.Collections.Generic.List`1.Add(`0)" />
+
+        
 
         
 
@@ -65,11 +75,15 @@
 
         
 
+        
+
          methods.</para
       >
       <para
         >The <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -83,8 +97,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Collections.Generic.List`1.IndexOf(`0)" />
+
+            
 
             
 
@@ -93,8 +111,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Collections.Generic.Dictionary`2.Remove(`0)" />
+
+            
 
             
 
@@ -103,8 +125,12 @@
 
             
 
+            
+
              is determined as follows. If type <paramref
              name="T" />
+
+            
 
             
 
@@ -113,13 +139,19 @@
 
             
 
+            
+
              generic interface, then the equality comparer is the <see
              cref="M:System.IEquatable`1.Equals(`0)" />
 
             
 
+            
+
              method of that interface; otherwise, the default equality comparer is <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -133,8 +165,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Collections.Generic.List`1.Sort" />
+
+            
 
             
 
@@ -143,8 +179,12 @@
 
             
 
+            
+
              is determined as follows.  If type <paramref
              name="T" />
+
+            
 
             
 
@@ -153,8 +193,12 @@
 
             
 
+            
+
              generic interface, then the default comparer is the <see
              cref="M:System.IComparable`1.CompareTo(`0)" />
+
+            
 
             
 
@@ -163,8 +207,12 @@
 
             
 
+            
+
              implements the nongeneric <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -173,8 +221,12 @@
 
             
 
+            
+
              method of that interface. If type <paramref
              name="T" />
+
+            
 
             
 
@@ -188,8 +240,12 @@
 
         
 
+        
+
          is not guaranteed to be sorted.  You must sort the <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -198,8 +254,12 @@
 
         
 
+        
+
         ) that require the <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -212,6 +272,8 @@
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
@@ -219,10 +281,14 @@
 
         
 
+        
+
          configuration element to true in the run-time environment.</para
       >
       <para>
         <see cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -234,8 +300,12 @@
 
         
 
+        
+
          class, see <see
          cref="T:System.Collections.Immutable.ImmutableList`1" />
+
+        
 
         
 
@@ -250,8 +320,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -260,8 +334,12 @@
 
         
 
+        
+
          class performs better in most cases and is type safe. If a reference type is used for type <paramref
          name="T" />
+
+        
 
         
 
@@ -270,8 +348,12 @@
 
         
 
+        
+
          class, the behavior of the two classes is identical. However, if a value type is used for type <paramref
          name="T" />
+
+        
 
         
 
@@ -283,13 +365,19 @@
 
         
 
+        
+
         , the compiler generates an implementation of the <see
          cref="T:System.Collections.Generic.List`1" />
 
         
 
+        
+
          class specifically for that value type. That means a list element of a <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -301,8 +389,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.IEquatable`1" />
+
+        
 
         
 
@@ -311,8 +403,12 @@
 
         
 
+        
+
          must call the <see
          cref="M:System.Object.Equals(System.Object)" />
+
+        
 
         
 
@@ -321,8 +417,12 @@
 
         
 
+        
+
          interface and you own the source code, also implement the <see
          cref="T:System.IComparable`1" />
+
+        
 
         
 
@@ -331,8 +431,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Collections.Generic.List`1.Sort" />
+
+        
 
         
 
@@ -341,13 +445,19 @@
 
         
 
+        
+
          object to the <see
          cref="Overload:System.Collections.Generic.List`1.BinarySearch" />
 
         
 
+        
+
          and <see
          cref="Overload:System.Collections.Generic.List`1.Sort" />
+
+        
 
         
 
@@ -359,8 +469,12 @@
 
         
 
+        
+
          class instead of using the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 

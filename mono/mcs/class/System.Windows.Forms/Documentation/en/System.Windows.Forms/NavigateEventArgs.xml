@@ -26,6 +26,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGrid.Navigate" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
             
 
+            
+
              parameter value is assigned to the <see
              cref="P:System.Windows.Forms.NavigateEventArgs.Forward" />
+
+            
 
             
 
@@ -73,11 +81,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="isForward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

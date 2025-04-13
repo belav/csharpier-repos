@@ -29,6 +29,8 @@
 
         
 
+        
+
          supplied to the binding for each channel.</para
       >
       <para
@@ -37,13 +39,19 @@
 
         
 
+        
+
         , <see
          cref="P:System.ServiceModel.NetPeerTcpBinding.ListenIPAddress" />
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.NetPeerTcpBinding.Resolver" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property on this and subsequent bindings must be less than or equal to the value of <see
          cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+
+        
 
         
 
@@ -226,6 +238,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.String" />
+
+            
 
             
 

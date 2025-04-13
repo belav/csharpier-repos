@@ -67,6 +67,8 @@
 
           
 
+          
+
           The component to test. </param
         >
       </Docs>
@@ -226,6 +228,8 @@
 
             
 
+            
+
              selects the top-level component in the designer.</para
           >
         </remarks>
@@ -235,6 +239,8 @@
         </summary>
         <param name="components">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,6 +279,8 @@
 
             
 
+            
+
              selects the top-level component in the designer.</para
           >
         </remarks>
@@ -285,10 +293,14 @@
 
           
 
+          
+
           The collection of components to select. </param
         >
         <param name="selectionType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,8 +309,12 @@
 
           
 
+          
+
            enumeration. The default is <see
            cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />
+
+          
 
           
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          property or the application or machine configuration files. For more information, see <format
          type="text/html">
           <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
@@ -33,11 +35,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can specify the cache policy for an individual request by using the <see
          cref="P:System.Net.WebRequest.CachePolicy" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
       <para
         >Defines an application's caching requirements for resources obtained by using <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -80,8 +88,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Cache.RequestCacheLevel.Default" />
+
+            
 
             
 
@@ -93,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Cache.RequestCachePolicy" />
+
+            
 
             
 
@@ -128,8 +142,12 @@
 
             
 
+            
+
              property to <paramref
              name="level" />
+
+            
 
             
 
@@ -141,8 +159,12 @@
 
             
 
+            
+
              value controls whether caching is enabled, and when the cache can be used. For additional information, see the <see
              cref="T:System.Net.Cache.RequestCacheLevel" />
+
+            
 
             
 
@@ -157,6 +179,8 @@
 
             
 
+            
+
              class. using the specified cache policy.</para
           >
         </summary>
@@ -165,13 +189,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Cache.RequestCacheLevel" />
 
           
 
+          
+
            that specifies the cache behavior for resources obtained using <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -207,8 +237,12 @@
 
             
 
+            
+
              as their cache policy level. Using the <see
              cref="F:System.Net.Cache.RequestCacheLevel.Default" />
+
+            
 
             
 
@@ -217,11 +251,15 @@
 
             
 
+            
+
              property, if not null, determines the cache policy in effect for a request. </para
           >
           <para
             >The default policy for the application domain can be set using the <see
              cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+
+            
 
             
 
@@ -234,6 +272,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -242,6 +282,8 @@
           <para
             >Gets the <see
              cref="T:System.Net.Cache.RequestCacheLevel" />
+
+            
 
             
 
@@ -285,8 +327,12 @@
 
             
 
+            
+
              containing the <see
              cref="P:System.Net.Cache.RequestCachePolicy.Level" />
+
+            
 
             
 

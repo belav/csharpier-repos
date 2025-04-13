@@ -34,6 +34,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para>This class is used to access information about the number of simultaneous connections allowed between the local computer and a remote computer. </para>
@@ -65,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.ConnectionManagementSection" />
+
+            
 
             
 
@@ -106,8 +110,12 @@
 
             
 
+            
+
              returned by this property contains one <see
              cref="T:System.Net.Configuration.ConnectionManagementElement" />
+
+            
 
             
 

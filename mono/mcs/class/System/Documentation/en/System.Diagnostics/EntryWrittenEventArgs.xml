@@ -32,6 +32,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -58,6 +60,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.EntryWrittenEventArgs" />
+
+            
 
             
 
@@ -95,6 +99,8 @@
 
             
 
+            
+
              class with the specified event log entry.</para
           >
         </summary>
@@ -103,8 +109,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Diagnostics.EventLogEntry" />
+
+          
 
           
 

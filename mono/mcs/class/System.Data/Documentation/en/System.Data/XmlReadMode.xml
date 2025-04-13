@@ -21,8 +21,12 @@
 
         
 
+        
+
          parameter of the <see
          cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
           
 
+          
+
            to an explicit option.</para
         >
       </block>
@@ -44,6 +50,8 @@
       <para
         >Specifies how to read XML data and a relational schema into a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
             
 
+            
+
              to DiffGram.</para
           >
           <para>-or- </para>
@@ -78,12 +88,16 @@
 
             
 
+            
+
              to ReadSchema.</para
           >
           <para>-or- </para>
           <para
             >If the dataset does not already have a schema and the document does not contain an in-line schema, sets <paramref
              name="XmlReadMode" />
+
+            
 
             
 
@@ -116,13 +130,19 @@
 
             
 
+            
+
              must have the same schema as the <see
              cref="T:System.Data.DataSet" />
 
             
 
+            
+
              on which <see
              cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -137,8 +157,12 @@
 
             
 
+            
+
             . The semantics are identical to those of a <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -147,8 +171,12 @@
 
             
 
+            
+
              operation, <see
              cref="P:System.Data.DataRow.RowState" />
+
+            
 
             
 
@@ -157,8 +185,12 @@
 
             
 
+            
+
              with DiffGrams should only be obtained using the output from <see
              cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -188,6 +220,8 @@
 
             
 
+            
+
              is set to Fragment, the default namespace is read as the inline schema.</para
           >
         </summary>
@@ -214,8 +248,12 @@
 
             
 
+            
+
              schema. If any data does not match the existing schema, it is discarded (including data from differing namespaces defined for the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -242,6 +280,8 @@
           <para
             >Ignores any inline schema, infers schema from the data and loads the data. If the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -272,6 +312,8 @@
 
             
 
+            
+
              already contains a schema, the current schema is extended, either by adding new tables or by adding columns to existing tables. An exception is thrown if the inferred table already exists but with a different namespace, or if any of the inferred columns conflict with existing columns.</para
           >
         </summary>
@@ -294,8 +336,12 @@
 
             
 
+            
+
              already contains schema, new tables may be added to the schema, but an exception is thrown if any tables in the inline schema already exist in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

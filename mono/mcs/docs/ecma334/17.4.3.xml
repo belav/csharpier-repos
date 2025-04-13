@@ -6,13 +6,19 @@
 
     
 
+    
+
      includes a volatile modifier, the fields introduced by that declaration are volatile fields. For non-volatile fields, optimization techniques that reorder instructions can lead to unexpected and unpredictable results in multi-threaded programs that access fields without synchronization such as that provided by the <non_terminal
      where="15.12">lock-statement</non_terminal>
 
     
 
+    
+
      (<hyperlink
     >15.12</hyperlink>
+
+    
 
     
 
@@ -31,6 +37,8 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
@@ -39,8 +47,12 @@
 
         
 
+        
+
         , <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -49,8 +61,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -59,8 +75,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -69,13 +89,19 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
 
         
 
+        
+
         , or <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -87,8 +113,12 @@
 
         
 
+        
+
          having an enum base type of <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -97,8 +127,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -107,13 +141,19 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
 
         
 
+        
+
         , or <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -152,6 +192,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

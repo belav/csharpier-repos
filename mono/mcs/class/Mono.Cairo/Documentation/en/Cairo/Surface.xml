@@ -21,8 +21,12 @@
 
       
 
+      
+
        represents an image, either as the destination of a drawing operation or as source when drawing onto another surface. There are different subtypes of Surface for different drawing backends; for example, <see
        cref="T:Cairo.ImageSurface" />
+
+      
 
       
 
@@ -494,6 +498,8 @@
         <summary
           >Writes the contents of the surface to a new file <paramref
            name="filename" />
+
+          
 
           
 

@@ -6,8 +6,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -26,8 +34,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -36,13 +48,19 @@
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
 
     
 
+    
+
     , and <keyword
     >char</keyword>
+
+    
 
     
 
@@ -54,11 +72,15 @@
 
         
 
+        
+
          type represents signed 8-bit integers with values between -128 and 127. </list_item
       >
       <list_item
         > The <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -70,11 +92,15 @@
 
         
 
+        
+
          type represents signed 16-bit integers with values between -32768 and 32767. </list_item
       >
       <list_item
         > The <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -86,11 +112,15 @@
 
         
 
+        
+
          type represents signed 32-bit integers with values between -2147483648 and 2147483647. </list_item
       >
       <list_item
         > The <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -102,11 +132,15 @@
 
         
 
+        
+
          type represents signed 64-bit integers with values between -9223372036854775808 and 9223372036854775807. </list_item
       >
       <list_item
         > The <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -118,8 +152,12 @@
 
         
 
+        
+
          type represents unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the <keyword
         >char</keyword>
+
+        
 
         
 
@@ -130,8 +168,12 @@
 
           
 
+          
+
            has the same representation as <keyword
           >ushort</keyword>
+
+          
 
           
 
@@ -146,6 +188,8 @@
 
     
 
+    
+
      unary and binary operators always operate with signed 32-bit precision, unsigned 32-bit precision, signed 64-bit precision, or unsigned 64-bit precision: <list
     >
       <list_item
@@ -154,8 +198,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -164,8 +212,12 @@
 
         
 
+        
+
         , and <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -177,13 +229,19 @@
 
         
 
+        
+
          and <keyword
         >long</keyword>
 
         
 
+        
+
          that can fully represent all possible values of the operand. The operation is then performed using the precision of type T, and the type of the result is T. The unary  -operator cannot be applied to operands of type <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -195,13 +253,19 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -210,8 +274,12 @@
 
         
 
+        
+
          that can fully represent all possible values of both operands. The operation is then performed using the precision of type T, and the type of the result is T (or <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -220,8 +288,12 @@
 
         
 
+        
+
          and the other to be of type <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -233,8 +305,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -243,8 +319,12 @@
 
         
 
+        
+
         , and <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -258,6 +338,8 @@
 
     
 
+    
+
      type is classified as an integral type, but it differs from the other integral types in two ways: <list
     >
       <list_item
@@ -266,13 +348,19 @@
 
         
 
+        
+
          type. In particular, even though the <keyword
         >sbyte</keyword>
 
         
 
+        
+
         , <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -281,8 +369,12 @@
 
         
 
+        
+
          types have ranges of values that are fully representable using the <keyword
         >char</keyword>
+
+        
 
         
 
@@ -291,8 +383,12 @@
 
         
 
+        
+
         , <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -301,8 +397,12 @@
 
         
 
+        
+
          to <keyword
         >char</keyword>
+
+        
 
         
 
@@ -314,8 +414,12 @@
 
         
 
+        
+
          type must be written as <non_terminal
          where="9.4.4.4">character-literal</non_terminal>
+
+        
 
         
 
@@ -324,8 +428,12 @@
 
         
 
+        
+
         s in combination with a cast to type <keyword
         >char</keyword>
+
+        
 
         
 
@@ -333,6 +441,8 @@
 
           >[Example: For example, (<keyword
           >char</keyword>
+
+          
 
           
 
@@ -347,8 +457,12 @@
 
     
 
+    
+
      arithmetic operations and conversions (<hyperlink
     >14.5.12</hyperlink>
+
+    
 
     
 

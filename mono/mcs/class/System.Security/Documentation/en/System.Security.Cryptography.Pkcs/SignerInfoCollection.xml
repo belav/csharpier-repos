@@ -31,8 +31,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Security.Cryptography.Pkcs.SignerInfo.CounterSignerInfos" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
              method copies the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -109,13 +125,19 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
 
           
 
+          
+
            object to which the <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+          
 
           
 
@@ -126,13 +148,19 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
 
           
 
+          
+
            where the <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+          
 
           
 
@@ -172,13 +200,19 @@
 
             
 
+            
+
              method copies the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
 
             
 
+            
+
              collection to a <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 
@@ -190,13 +224,19 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
           
 
+          
+
            objects where the <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+          
 
           
 
@@ -207,13 +247,19 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
 
           
 
+          
+
            where the <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+          
 
           
 
@@ -244,8 +290,12 @@
 
             
 
+            
+
              property retrieves the number of items in the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -283,13 +333,19 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoEnumerator" />
 
             
 
+            
+
              object for the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -304,8 +360,12 @@
 
             
 
+            
+
              object that can be used to enumerate the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -334,6 +394,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfoCollection.IsSynchronized" />
+
+            
 
             
 
@@ -393,13 +455,19 @@
 
             
 
+            
+
              property retrieves an <see
              cref="T:System.Object" />
 
             
 
+            
+
              object is used to synchronize access to the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -436,13 +504,19 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoEnumerator" />
 
             
 
+            
+
              object for the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -457,8 +531,12 @@
 
             
 
+            
+
              object that can be used to enumerate the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 

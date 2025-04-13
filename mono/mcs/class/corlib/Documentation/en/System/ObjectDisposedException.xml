@@ -45,6 +45,8 @@
 
           
 
+          
+
            interface.</block
         >
       </para>
@@ -53,6 +55,8 @@
       <para
         >The following example demonstrates an error that causes the <see
          cref="T:System.ObjectDisposedException" />
+
+        
 
         
 
@@ -114,6 +118,8 @@ public class ObjectDisposedExceptionTest {
             >The following example displays the error message of a
    <see
              cref="T:System.ObjectDisposedException" />
+
+            
 
             
 
@@ -183,8 +189,12 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              property is initialized to a system-supplied message that describes the error and includes the <paramref
              name="objectName" />
+
+            
 
             
 
@@ -194,6 +204,8 @@ public class ExampleDisposableObject : IDisposable {
           <para
             >If <paramref
              name="objectName" />
+
+            
 
             
 
@@ -208,11 +220,15 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              class with a string containing the name of the disposed object.</para
           >
         </summary>
         <param name="objectName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +266,8 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -258,8 +276,12 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -270,8 +292,12 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -307,8 +333,12 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -323,11 +353,15 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,8 +372,12 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The exception that is the cause of the current exception. If <paramref
            name="innerException" />
+
+          
 
           
 
@@ -376,6 +414,8 @@ public class ExampleDisposableObject : IDisposable {
           <para
             >The following example throws a <see
              cref="T:System.ObjectDisposedException" />
+
+            
 
             
 
@@ -445,6 +485,8 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The error message that explains the reason for the exception. </param
         >
         <remarks>
@@ -453,6 +495,8 @@ public class ExampleDisposableObject : IDisposable {
           <para
             >If <paramref
              name="objectName" />
+
+            
 
             
 
@@ -467,6 +511,8 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              class with the specified object name and message.</para
           >
         </summary>
@@ -475,10 +521,14 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The name of the disposed object. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -519,6 +569,8 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              object with the parameter name and additional exception information.</para
           >
         </summary>
@@ -527,8 +579,12 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -539,8 +595,12 @@ public class ExampleDisposableObject : IDisposable {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -573,6 +633,8 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              that describes
    the error. </para
           >
@@ -585,11 +647,15 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              property is not null, the message includes the name of the object.</para
           >
           <para
             >This property overrides <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -628,6 +694,8 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
              containing the name of the disposed object.</para
           >
         </value>
@@ -639,8 +707,12 @@ public class ExampleDisposableObject : IDisposable {
 
             
 
+            
+
             , the value of this property is included in the string returned by the <see
              cref="P:System.ObjectDisposedException.Message" />
+
+            
 
             
 

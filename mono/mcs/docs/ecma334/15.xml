@@ -8,6 +8,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.4">labeled-statement</non_terminal>
@@ -23,6 +25,8 @@
       <name>
         <non_terminal where="15">embedded-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -68,8 +72,12 @@
 
     
 
+    
+
      nonterminal is used for statements that appear within other statements. The use of <non_terminal
      where="15">embedded-statement</non_terminal>
+
+    
 
     
 
@@ -87,8 +95,12 @@ void F(bool b) {
 
       
 
+      
+
       results in a compile-time error because an if statement requires an <non_terminal
        where="15">embedded-statement</non_terminal>
+
+      
 
       
 

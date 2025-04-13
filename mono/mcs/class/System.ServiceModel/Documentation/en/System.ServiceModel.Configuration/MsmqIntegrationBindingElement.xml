@@ -28,6 +28,8 @@
 
         
 
+        
+
          class has properties for specifying how to address the queue, how to specify transfer assurances, whether messages must be durably stored, and how messages should be protected and authenticated.</para
       >
     </remarks>
@@ -36,6 +38,8 @@
       <para
         >This binding element can be used to enable indigo1 applications to send messages to and receive messages from existing MSMQ applications that use either COM, MSMQ native APIs, or the APIs in <see
          cref="N:System.Messaging" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" />
+
+            
 
             
 
@@ -119,6 +125,8 @@
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +226,8 @@
 
                 
 
+                
+
                  is used to serialize objects.</para
               >
             </item>
@@ -234,6 +244,8 @@
 
                 
 
+                
+
                  is used to serialize objects.</para
               >
             </item>
@@ -245,6 +257,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
+
+            
 
             
 

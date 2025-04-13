@@ -39,11 +39,15 @@
 
         
 
+        
+
         . Keys to the headers are required to be strings, and comparisons are done on a case-insensitive basis.</para
       >
       <para
         >This class makes a link demand and an inheritance demand at the class level. A <see
          cref="T:System.Security.SecurityException" />
+
+        
 
         
 
@@ -54,12 +58,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
             >[&lt;topic://cpconInheritanceDemands&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -93,6 +101,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.TransportHeaders" />
+
+            
 
             
 

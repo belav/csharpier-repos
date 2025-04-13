@@ -26,14 +26,20 @@
 
         
 
+        
+
          looks for arguments which start with
         <c
         >@</c>
 
         
 
+        
+
         , assumes that what follows the <c
         >@</c>
+
+        
 
         
 
@@ -65,6 +71,8 @@
 
           
 
+          
+
            instance.
         </summary
         >
@@ -91,11 +99,15 @@
 
           
 
+          
+
           .
         </summary
         >
         <value>
           <c>"Read response file for more options."</c>
+
+          
 
           
 
@@ -138,6 +150,8 @@
 
           
 
+          
+
            containing the argument to replace
           with additional arguments.
         </param
@@ -150,9 +164,13 @@
           
 
           
+
+          
           which will refer to teh replacement arguments if this method returns
           <see
            langword="true" />
+
+          
 
           
 
@@ -167,6 +185,8 @@
 
           
 
+          
+
            with the contents of
           the specified file.
         </summary
@@ -178,14 +198,20 @@
 
           
 
+          
+
            starts with <c
           >@</c>
+
+          
 
           
 
           , then
           <paramref
            name="replacement" />
+
+          
 
           
 
@@ -196,8 +222,12 @@
 
             
 
+            
+
             .Substring(1)</c
           >
+
+          
 
           
 
@@ -207,9 +237,13 @@
 
           
 
+          
+
            is returned; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -222,8 +256,12 @@
 
           
 
+          
+
            starts with <c
           >@</c>
+
+          
 
           
 
@@ -234,8 +272,12 @@
 
             
 
+            
+
             .Substring(1)</c
           >
+
+          
 
           
 
@@ -269,6 +311,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -279,9 +323,13 @@
 
           
 
+          
+
            array containing
           an element with the value <c
           >"@file"</c>
+
+          
 
           
 

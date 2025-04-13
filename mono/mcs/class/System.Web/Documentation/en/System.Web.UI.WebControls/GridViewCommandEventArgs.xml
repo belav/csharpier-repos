@@ -22,8 +22,12 @@
 
         
 
+        
+
          event is raised when a button within the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -36,13 +40,19 @@
 
           
 
+          
+
            control also raises other specialized events when certain buttons are clicked (buttons with the CommandName property set to "Delete", "Update", and "Page" for example). When using one of these buttons, you should consider handling one of the specialized events provided by the control (such as <see
            cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
 
           
 
+          
+
            or <see
            cref="E:System.Web.UI.WebControls.GridView.RowDeleting" />
+
+          
 
           
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the command name and command argument of the button clicked. To determine the command name and command argument, use the <see
          cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+
+        
 
         
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
          properties, respectively. You can also access the button control that raised the event by using the <see
          cref="P:System.Web.UI.WebControls.GridViewCommandEventArgs.CommandSource" />
+
+        
 
         
 
@@ -80,6 +98,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -88,8 +108,12 @@
 
         
 
+        
+
         , see the <see
          cref="Overload:System.Web.UI.WebControls.GridViewCommandEventArgs.#ctor" />
+
+        
 
         
 
@@ -101,6 +125,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+
+        
 
         
 
@@ -131,11 +157,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+
+            
 
             
 
@@ -165,13 +195,19 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="originalArgs" />
+
+                  
 
                   
 
@@ -192,13 +228,19 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="originalArgs" />
+
+                  
 
                   
 
@@ -219,6 +261,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -233,6 +277,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+
+            
 
             
 
@@ -267,11 +313,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+
+            
 
             
 
@@ -301,13 +351,19 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="originalArgs" />
+
+                  
 
                   
 
@@ -328,13 +384,19 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="originalArgs" />
+
+                  
 
                   
 
@@ -355,6 +417,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -372,6 +436,8 @@
 
             
 
+            
+
              class using the specified row, source of the command, and event arguments.</para
           >
         </summary>
@@ -380,8 +446,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+          
 
           
 
@@ -409,13 +479,19 @@
 
             
 
+            
+
              property to access the properties of the object that represents the source of the command. In the case of a <see
              cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
+            
+
              object, the source of the command is the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 

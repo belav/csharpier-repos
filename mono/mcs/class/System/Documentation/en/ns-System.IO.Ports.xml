@@ -9,13 +9,19 @@
 
         
 
+        
+
          namespace contains classes for controlling serial ports. The most important class, <see
          cref="T:System.IO.Ports.SerialPort" />
 
         
 
+        
+
         , provides a framework for synchronous and event-driven I/O, access to pin and break states, and access to serial driver properties. It can be used to wrap a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -30,8 +36,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.Ports.Parity" />
+
+        
 
         
 
@@ -40,8 +50,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.IO.Ports.StopBits" />
+
+        
 
         
 

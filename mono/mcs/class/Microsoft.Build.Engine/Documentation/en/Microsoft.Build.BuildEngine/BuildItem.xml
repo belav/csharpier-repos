@@ -21,13 +21,19 @@
 
         
 
+        
+
          element in a project can represent multiple items through the use of wildcards. Therefore, each <see
          cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
         
 
+        
+
          object does not necessarily represent an <unmanagedCodeEntityReference
         >Item</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
             
 
+            
+
              class based on an <see
              cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+            
 
             
 
@@ -74,13 +84,19 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
           
 
+          
+
            property of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -91,8 +107,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+          
 
           
 
@@ -101,8 +121,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -134,13 +158,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
             
 
+            
+
              and <see
              cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+
+            
 
             
 
@@ -152,13 +182,19 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
           
 
+          
+
            property of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -169,13 +205,19 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
           
 
+          
+
            property of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -207,6 +249,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -215,6 +259,8 @@
           <para
             >A copy of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+            
 
             
 
@@ -241,6 +287,8 @@
           <para
             >Gets or sets the <unmanagedCodeEntityReference
             >Condition</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -275,8 +323,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+            
 
             
 
@@ -288,8 +340,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -315,6 +371,8 @@
           <para
             >Gets or sets the <unmanagedCodeEntityReference
             >Exclude</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -373,6 +431,8 @@
 
           
 
+          
+
           The item metadata name.</param
         >
       </Docs>
@@ -402,6 +462,8 @@
         </returns>
         <param name="metadataName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,6 +499,8 @@
 
           
 
+          
+
           The item metadata name.</param
         >
       </Docs>
@@ -462,8 +526,12 @@
 
             
 
+            
+
              attribute that created the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+            
 
             
 
@@ -534,6 +602,8 @@
 
           
 
+          
+
           The item metadata name.</param
         >
       </Docs>
@@ -566,10 +636,14 @@
 
           
 
+          
+
           The item metadata name.</param
         >
         <param name="metadataValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,6 +680,8 @@
 
           
 
+          
+
           The item metadata name.</param
         >
         <param name="metadataValue">
@@ -613,10 +689,14 @@
 
           
 
+          
+
           The item metadata value.</param
         >
         <param name="treatMetadataValueAsLiteral">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

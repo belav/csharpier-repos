@@ -38,8 +38,12 @@
 
         
 
+        
+
          wraps the corresponding <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
       <para
         >Wraps the corresponding <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -80,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.ConfigXmlDocument" />
+
+            
 
             
 
@@ -125,11 +133,15 @@
 
             
 
+            
+
              attribute.</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,10 +152,14 @@
 
           
 
+          
+
           The name that is used locally.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,11 +202,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,6 +251,8 @@
           <para
             >The <see
              cref="T:System.Xml.XmlComment" />
+
+            
 
             
 
@@ -276,11 +298,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,10 +317,14 @@
 
           
 
+          
+
           The name used locally.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,11 +367,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,11 +418,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,11 +469,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,6 +556,8 @@
 
           
 
+          
+
           The name of the file.</param
         >
       </Docs>
@@ -551,10 +595,14 @@
 
           
 
+          
+
           The name of the file.</param
         >
         <param name="sourceReader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

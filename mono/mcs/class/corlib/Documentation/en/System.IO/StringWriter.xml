@@ -187,8 +187,12 @@
 
         
 
+        
+
          for writing information to a string. The information is stored in an underlying <see
          cref="T:System.Text.StringBuilder" />
+
+        
 
         
 
@@ -221,6 +225,8 @@
           <para
             >A new <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -375,6 +381,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StringWriter" />
+
+            
 
             
 
@@ -562,6 +570,8 @@
 
             
 
+            
+
              class with the specified format control.</para
           >
         </summary>
@@ -570,8 +580,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -606,8 +620,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -767,8 +785,12 @@
 
             
 
+            
+
              class that writes to the specified <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -777,6 +799,8 @@
         </summary>
         <param name="sb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -815,8 +839,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -827,8 +855,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -988,8 +1020,12 @@
 
             
 
+            
+
              class that writes to the specified <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -1001,6 +1037,8 @@
 
           
 
+          
+
           The StringBuilder to write to. </param
         >
         <param name="formatProvider">
@@ -1008,8 +1046,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1048,12 +1090,16 @@
 
             
 
+            
+
             . For an example of reading text from a file, see <format
              type="text/html">
               <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
                 >[&lt;topic://cpconreadingtextfromfile&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1066,11 +1112,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method overrides <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -1082,11 +1132,15 @@
 
             
 
+            
+
              method passing a true value.</para
           >
           <para
             >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -1098,6 +1152,8 @@
           <para
             >Closes the current <see
              cref="T:System.IO.StringWriter" />
+
+            
 
             
 
@@ -1138,8 +1194,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.StringWriter" />
+
+            
 
             
 
@@ -1154,11 +1214,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1195,6 +1259,8 @@
           <para
             >The <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1265,6 +1331,8 @@
           <para
             >Gets the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1391,6 +1459,8 @@
           <para
             >Returns the underlying <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -1523,6 +1593,8 @@
           <para
             >This method overrides <see
              cref="M:System.IO.TextWriter.Write(System.Char)" />
+
+            
 
             
 
@@ -1681,6 +1753,8 @@
 
           
 
+          
+
           The character to write. </param
         >
       </Docs>
@@ -1715,6 +1789,8 @@
           <para
             >This method overrides <see
              cref="M:System.IO.TextWriter.Write(System.Char)" />
+
+            
 
             
 
@@ -1874,6 +1950,8 @@
 
           
 
+          
+
           The string to write. </param
         >
       </Docs>
@@ -1912,8 +1990,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1925,11 +2007,15 @@
 
             
 
+            
+
              &lt; 0</para
           >
           <para> -or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -1942,14 +2028,20 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
            ) &gt; <paramref
            name="buffer" />
           <see langword="." />
+
+          
 
           
 
@@ -1964,6 +2056,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1972,13 +2066,19 @@
 
             
 
+            
+
              characters of data to this StringWriter from <paramref
              name="buffer" />
 
             
 
+            
+
             , starting at position <paramref
              name="index" />
+
+            
 
             
 
@@ -2137,6 +2237,8 @@
 
           
 
+          
+
           The character array to write data from. </param
         >
         <param name="index">
@@ -2144,10 +2246,14 @@
 
           
 
+          
+
           The position in the buffer at which to start reading data.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2190,6 +2296,8 @@
 
           
 
+          
+
           The character to write to the string.</param
         >
       </Docs>
@@ -2228,8 +2336,12 @@
 
           
 
+          
+
           The string to write. If <paramref
            name="value" />
+
+          
 
           
 
@@ -2273,6 +2385,8 @@
 
           
 
+          
+
           The character array to write data from.</param
         >
         <param name="index">
@@ -2280,10 +2394,14 @@
 
           
 
+          
+
           The position in the buffer at which to start reading data.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2319,6 +2437,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -2332,6 +2452,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2367,6 +2489,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -2380,6 +2504,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2417,6 +2543,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -2433,6 +2561,8 @@
 
           
 
+          
+
           The character array to write data from.</param
         >
         <param name="index">
@@ -2440,10 +2570,14 @@
 
           
 
+          
+
           The position in the buffer at which to start reading data.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

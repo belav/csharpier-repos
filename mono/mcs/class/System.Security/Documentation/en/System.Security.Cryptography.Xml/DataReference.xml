@@ -27,6 +27,8 @@
 
         
 
+        
+
          class represents the &lt;DataReference&gt; element that contains the location of encrypted data used with XML encryption. </para
       >
       <para>&lt;DataReference&gt; elements are used to refer to &lt;EncryptedData&gt; elements that were encrypted using the key defined in the enclosing &lt;EncryptedKey&gt; element. Multiple &lt;DataReference&gt; elements can occur if multiple &lt;EncryptedData&gt; elements exist that are encrypted using the same key.</para>
@@ -60,6 +62,8 @@
 
             
 
+            
+
              class that represents the &lt;DataReference&gt; element. &lt;DataReference&gt; is a child element of the &lt;ReferenceList&gt; element.</para
           >
           <para>For more information about XML encryption standards, see http://www.w3.org/TR/xmlenc-core/.</para>
@@ -69,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+            
 
             
 
@@ -101,6 +107,8 @@
 
             
 
+            
+
              class, which represents the &lt;DataReference&gt; element. The URI indicates the location of encrypted data. The &lt;DataReference&gt; element is a child element of the &lt;ReferenceList&gt; element.</para
           >
           <para>For more information about XML encryption standards, see http://www.w3.org/TR/xmlenc-core/.</para>
@@ -113,11 +121,15 @@
 
             
 
+            
+
              class using the specified Uniform Resource Identifier (URI).</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,6 +166,8 @@
 
             
 
+            
+
              class, which represents the &lt;DataReference&gt; element. The URI indicates the location of encrypted data, and the transform chain can contain XPath transforms, decompression transforms, or information on how to retrieve the encrypted data from a document storage facility. &lt;DataReference&gt; is a child element of the &lt;ReferenceList&gt; element.</para
           >
           <para>For more information about XML encryption standards, see http://www.w3.org/TR/xmlenc-core/.</para>
@@ -166,8 +180,12 @@
 
             
 
+            
+
              class using the specified Uniform Resource Identifier (URI) and a <see
              cref="T:System.Security.Cryptography.Xml.TransformChain" />
+
+            
 
             
 
@@ -176,6 +194,8 @@
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

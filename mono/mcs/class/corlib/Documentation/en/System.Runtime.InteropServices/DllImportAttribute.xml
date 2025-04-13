@@ -43,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
       <para>
@@ -50,6 +52,8 @@
           >The non-standard
 <see
            langword="GetLocalTime" />
+
+          
 
           
 
@@ -104,6 +108,8 @@ public class DllImportAttributeTest {
 
         
 
+        
+
          attribute provides the information needed to call a function exported from an unmanaged DLL. As a minimum requirement, you must supply the name of the DLL containing the entry point.</para
       >
       <para
@@ -112,8 +118,12 @@ public class DllImportAttributeTest {
 
         
 
+        
+
         , <see
          cref="F:System.Runtime.InteropServices.DllImportAttribute.CallingConvention" />
+
+        
 
         
 
@@ -122,8 +132,12 @@ public class DllImportAttributeTest {
 
         
 
+        
+
         , <see
          cref="F:System.Runtime.InteropServices.DllImportAttribute.PreserveSig" />
+
+        
 
         
 
@@ -132,8 +146,12 @@ public class DllImportAttributeTest {
 
         
 
+        
+
         , or <see
          cref="F:System.Runtime.InteropServices.DllImportAttribute.ThrowOnUnmappableChar" />
+
+        
 
         
 
@@ -150,12 +168,16 @@ public class DllImportAttributeTest {
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           > The <see
            cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+          
 
           
 
@@ -198,6 +220,8 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             . For example, if an unmanaged DLL named unmanaged.dll is included in a managed assembly named MyAssembly, the attribute might be specified as shown in the following code.</para
           >
           <para>code reference: System.Runtime.InteropServices.DllImportAttribute#2</para>
@@ -210,11 +234,15 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              class with the name of the DLL containing the method to import.</para
           >
         </summary>
         <param name="dllName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,8 +272,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field is true by default. Settings for this field override the any level settings for the <see
              cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
+
+            
 
             
 
@@ -259,6 +291,8 @@ public class DllImportAttributeTest {
 
               
 
+              
+
                field to true, you can signal the presence of an unmappable character to the caller by throwing an exception.</para
             >
           </block>
@@ -269,8 +303,12 @@ public class DllImportAttributeTest {
 
               
 
+              
+
                and <see
                cref="F:System.Runtime.InteropServices.DllImportAttribute.ThrowOnUnmappableChar" />
+
+              
 
               
 
@@ -316,8 +354,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              enumeration members. The default value for the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.CallingConvention" />
+
+            
 
             
 
@@ -326,8 +368,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             , which in turn defaults to <see
              cref="F:System.Runtime.InteropServices.CallingConvention.StdCall" />
+
+            
 
             
 
@@ -374,6 +420,8 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              enumeration to specify the marshaling behavior of string parameters and to specify which entry-point name to invoke (the exact name given or a name ending with "A" or "W"). The default enumeration member for C# and Visual Basic is CharSet.Ansi and the default enumeration member for C++ is CharSet.None, which is equivalent to CharSet.Ansi. In Visual Basic, you use the Declare statement to specify the CharSet field.</para
           >
           <para
@@ -382,10 +430,14 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field influences the behavior of the CharSet field in determining which entry-point name to invoke. For a detailed description and examples of the string marshaling and name matching behavior associated with the CharSet field, see <format
              type="text/html">
               <a href="A8347EB1-295F-46B9-8A78-63331F9ECC50">Specifying a Character Set</a>
             </format>
+
+            
 
             
 
@@ -422,6 +474,8 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             .</para
           >
           <para
@@ -434,8 +488,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             . For examples showing how to use the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.EntryPoint" />
+
+            
 
             
 
@@ -443,6 +501,8 @@ public class DllImportAttributeTest {
              type="text/html">
               <a href="D1247F08-0965-416A-B978-E0B50652DFE3">Specifying an Entry Point</a>
             </format>
+
+            
 
             
 
@@ -479,8 +539,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field is set to CharSet.Ansi, and the entry-point name appended with the letter W is invoked when the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+
+            
 
             
 
@@ -492,8 +556,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.ExactSpelling" />
+
+            
 
             
 
@@ -568,6 +636,8 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field causes the common language runtime to search an unmanaged DLL for entry-point names other than the one specified.</para
           >
         </summary>
@@ -595,8 +665,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field to true to directly translate unmanaged signatures with HRESULT or retval values; set it to false to automatically convert HRESULT or retval values to exceptions. By default, the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.PreserveSig" />
+
+            
 
             
 
@@ -609,8 +683,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field to false, the resulting method signature contains a void return type instead of an integer (HRESULT) return type.  When the unmanaged method produces an HRESULT, the runtime automatically ignores a return value of S_OK (or 0) and does not throw an exception.  For HRESULTs other than S_OK, the runtime automatically throws an exception that corresponds to the HRESULT.  Note that the <see
              cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+            
 
             
 
@@ -623,8 +701,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             ; however, in contrast to the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.PreserveSig" />
+
+            
 
             
 
@@ -636,8 +718,12 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             , instead of using the Declare statement, to define a DLL function in managed code. Setting the <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.PreserveSig" />
+
+            
 
             
 
@@ -672,6 +758,8 @@ public class DllImportAttributeTest {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -702,6 +790,8 @@ public class DllImportAttributeTest {
 
             
 
+            
+
              field is disabled. This field is false by default.</para
           >
           <para>The common language runtime converts to ANSI characters any managed Unicode characters passed to an unmanaged method executing on Windows 98 or Windows Me. Best-fit mapping enables the interop marshaler to provide a close-matching character when no exact match exists. For example, the marshaler converts the Unicode copyright character to 'c' for unmanaged methods that accept ANSI characters. Some characters lack a best-fit representation; these characters are called unmappable. Unmappable characters are usually converted to the default '?' ANSI character.</para>
@@ -709,6 +799,8 @@ public class DllImportAttributeTest {
             <para
               >Certain Unicode characters are converted to dangerous characters, such as the backslash '\' character, which can inadvertently change a path. By setting the <see
                cref="F:System.Runtime.InteropServices.DllImportAttribute.ThrowOnUnmappableChar" />
+
+              
 
               
 
@@ -722,8 +814,12 @@ public class DllImportAttributeTest {
 
               
 
+              
+
                and <see
                cref="F:System.Runtime.InteropServices.DllImportAttribute.ThrowOnUnmappableChar" />
+
+              
 
               
 
@@ -759,6 +855,8 @@ public class DllImportAttributeTest {
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

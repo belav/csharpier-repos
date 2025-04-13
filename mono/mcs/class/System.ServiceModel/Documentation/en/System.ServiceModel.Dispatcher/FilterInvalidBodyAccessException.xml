@@ -28,6 +28,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -55,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+
+            
 
             
 
@@ -90,6 +94,8 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -122,6 +128,8 @@
 
             
 
+            
+
              class with data that specifies the source and destination of the stream and the information required to serialize the exception.</para
           >
         </summary>
@@ -130,8 +138,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -142,8 +154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -182,6 +198,8 @@
 
             
 
+            
+
              with a specified error message and the filters that attempted to inspect the body of the message.</para
           >
         </summary>
@@ -190,8 +208,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -225,6 +247,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+
+            
 
             
 
@@ -266,6 +290,8 @@
 
             
 
+            
+
              class with a specified error message, the inner exception that caused the current exception, and the collection that contains the filter that attempted to inspect the body. </para
           >
         </summary>
@@ -274,13 +300,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ObjectModel.Collection`1" />
 
           
 
+          
+
            of type <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 

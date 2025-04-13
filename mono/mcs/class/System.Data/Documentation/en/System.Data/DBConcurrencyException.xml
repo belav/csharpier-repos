@@ -26,6 +26,8 @@
 
         
 
+        
+
          examines the number of rows affected by the execution of each insert, update, or delete operation, and throws this exception if the number equals zero. This exception is generally caused by a concurrency violation.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >The exception that is thrown by the <see
          cref="T:System.Data.Common.DataAdapter" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -85,11 +91,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,6 +135,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -133,10 +145,14 @@
 
           
 
+          
+
           The text string describing the details of the exception. </param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -172,11 +188,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,6 +207,8 @@
 
           
 
+          
+
           The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param
         >
         <param name="dataRows">
@@ -194,8 +216,12 @@
 
           
 
+          
+
           An array containing the <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -227,8 +253,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.Common.DataAdapter" />
+
+            
 
             
 
@@ -237,8 +267,12 @@
 
             
 
+            
+
              contains <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -247,8 +281,12 @@
 
             
 
+            
+
              object in <see
              cref="P:System.Data.DBConcurrencyException.Row" />
+
+            
 
             
 
@@ -257,8 +295,12 @@
 
             
 
+            
+
              objects can be retrieved by calling <see
              cref="Overload:System.Data.DBConcurrencyException.CopyToRows" />
+
+            
 
             
 
@@ -273,8 +315,12 @@
 
             
 
+            
+
              objects whose update failure generated this exception, to the specified array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -286,13 +332,19 @@
 
           
 
+          
+
           The one-dimensional array of <see
            cref="T:System.Data.DataRow" />
 
           
 
+          
+
            objects to copy the <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -326,8 +378,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.Common.DataAdapter" />
+
+            
 
             
 
@@ -336,8 +392,12 @@
 
             
 
+            
+
              contains <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -346,8 +406,12 @@
 
             
 
+            
+
              object in <see
              cref="P:System.Data.DBConcurrencyException.Row" />
+
+            
 
             
 
@@ -356,8 +420,12 @@
 
             
 
+            
+
              objects can be retrieved by calling <see
              cref="Overload:System.Data.DBConcurrencyException.CopyToRows" />
+
+            
 
             
 
@@ -372,8 +440,12 @@
 
             
 
+            
+
              objects whose update failure generated this exception, to the specified array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -385,13 +457,19 @@
 
           
 
+          
+
           The one-dimensional array of <see
            cref="T:System.Data.DataRow" />
 
           
 
+          
+
            objects to copy the <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -422,6 +500,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -430,13 +510,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
+          
+
            that holds the serialized data associated with the <see
            cref="T:System.Data.DBConcurrencyException" />
+
+          
 
           
 
@@ -447,13 +533,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
+          
+
            that contains the source and destination of the serialized stream associated with the <see
            cref="T:System.Data.DBConcurrencyException" />
+
+          
 
           
 
@@ -482,8 +574,12 @@
 
             
 
+            
+
              to retrieve the value of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -492,8 +588,12 @@
 
             
 
+            
+
             . Setting the value of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -505,8 +605,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.Common.DataAdapter" />
+
+            
 
             
 
@@ -515,8 +619,12 @@
 
             
 
+            
+
              contains <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -525,8 +633,12 @@
 
             
 
+            
+
              object in <see
              cref="P:System.Data.DBConcurrencyException.Row" />
+
+            
 
             
 
@@ -535,8 +647,12 @@
 
             
 
+            
+
              objects can be retrieved by calling <see
              cref="Overload:System.Data.DBConcurrencyException.CopyToRows" />
+
+            
 
             
 
@@ -548,13 +664,19 @@
 
             
 
+            
+
              objects. Therefore, if you serialize a <see
              cref="T:System.Data.DBConcurrencyException" />
 
             
 
+            
+
              object, the value of the <see
              cref="P:System.Data.DBConcurrencyException.Row" />
+
+            
 
             
 
@@ -569,8 +691,12 @@
 
             
 
+            
+
              that generated the <see
              cref="T:System.Data.DBConcurrencyException" />
+
+            
 
             
 

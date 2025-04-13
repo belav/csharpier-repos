@@ -24,6 +24,8 @@
 
         
 
+        
+
          class uses the zlib library. As a result, it provides a better compression algorithm and, in most cases, a smaller compressed file than it provides in earlier versions of the .NET Framework.  </para
       >
       <para
@@ -32,8 +34,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.IO.Compression.ZipArchiveEntry" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          class uses the same compression algorithm as the gzip data format used by the <see
          cref="T:System.IO.Compression.GZipStream" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.Compression.GZipStream" />
+
+        
 
         
 
@@ -68,8 +82,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.Compression.GZipStream" />
+
+        
 
         
 
@@ -113,6 +131,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -121,13 +141,19 @@
 
             
 
+            
+
             . To set the compression mode to another value, use the <see
              cref="M:System.IO.Compression.DeflateStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
 
             
 
+            
+
              or <see
              cref="M:System.IO.Compression.DeflateStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
+
+            
 
             
 
@@ -142,6 +168,8 @@
 
             
 
+            
+
              class by using the specified stream and compression level.</para
           >
         </summary>
@@ -150,10 +178,14 @@
 
           
 
+          
+
           The stream to compress.</param
         >
         <param name="compressionLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +222,8 @@
 
             
 
+            
+
              owns the underlying stream, so closing the stream also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
@@ -198,8 +232,12 @@
 
             
 
+            
+
              class is created with the <paramref
              name="mode" />
+
+            
 
             
 
@@ -211,6 +249,8 @@
 
             
 
+            
+
              class to compress a file larger than 4 GB raises an exception.</para
           >
           <para
@@ -219,8 +259,12 @@
 
             
 
+            
+
              when the compression mode is <see
              cref="F:System.IO.Compression.CompressionMode.Compress" />
+
+            
 
             
 
@@ -235,11 +279,15 @@
 
             
 
+            
+
              class by using the specified stream and compression mode.</para
           >
         </summary>
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -279,8 +327,12 @@
 
             
 
+            
+
              class, and whether to leave the stream object open after disposing the <see
              cref="T:System.IO.Compression.DeflateStream" />
+
+            
 
             
 
@@ -292,13 +344,19 @@
 
             
 
+            
+
             . To set the compression mode to another value, use the <see
              cref="M:System.IO.Compression.DeflateStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
 
             
 
+            
+
              or <see
              cref="M:System.IO.Compression.DeflateStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
+
+            
 
             
 
@@ -313,11 +371,15 @@
 
             
 
+            
+
              class by using the specified stream and compression level, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,6 +390,8 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing the stream.</param
         >
         <param name="leaveOpen">
@@ -335,8 +399,12 @@
 
           
 
+          
+
           true to leave the stream object open after disposing the <see
            cref="T:System.IO.Compression.DeflateStream" />
+
+          
 
           
 
@@ -374,6 +442,8 @@
 
             
 
+            
+
              owns the underlying stream, so closing the stream also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
@@ -382,8 +452,12 @@
 
             
 
+            
+
              class is created with the <paramref
              name="mode" />
+
+            
 
             
 
@@ -395,6 +469,8 @@
 
             
 
+            
+
              class to compress a file larger than 4 GB raises an exception.</para
           >
           <para
@@ -403,8 +479,12 @@
 
             
 
+            
+
              when the compression mode is <see
              cref="F:System.IO.Compression.CompressionMode.Compress" />
+
+            
 
             
 
@@ -419,11 +499,15 @@
 
             
 
+            
+
              class by using the specified stream and compression mode, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,8 +518,12 @@
 
           
 
+          
+
           true to leave the stream open after disposing the <see
            cref="T:System.IO.Compression.DeflateStream" />
+
+          
 
           
 
@@ -504,8 +592,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.DeflateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -513,6 +605,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -524,8 +618,12 @@
 
             
 
+            
+
              return value to the <see
              cref="M:System.IO.Compression.DeflateStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -534,8 +632,12 @@
 
             
 
+            
+
              or in a callback passed to <see
              cref="M:System.IO.Compression.DeflateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -549,8 +651,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Compression.DeflateStream" />
+
+            
 
             
 
@@ -562,8 +668,12 @@
 
             
 
+            
+
             . Errors that occur during an asynchronous read request, such as a disk failure during the I/O request, occur on the thread pool thread and throw exceptions when calling <see
              cref="M:System.IO.Compression.DeflateStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -575,6 +685,8 @@
           <para
             >Begins an asynchronous read operation. (Consider using the <see
              cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -590,8 +702,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="array" />
+
+          
 
           
 
@@ -599,6 +715,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -643,8 +761,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.DeflateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -652,6 +774,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -663,8 +787,12 @@
 
             
 
+            
+
              object returned by the current method to <see
              cref="M:System.IO.Compression.DeflateStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -673,8 +801,12 @@
 
             
 
+            
+
              or in a callback passed to <see
              cref="M:System.IO.Compression.DeflateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -683,8 +815,12 @@
 
             
 
+            
+
              is called with the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -698,8 +834,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Compression.DeflateStream" />
+
+            
 
             
 
@@ -711,8 +851,12 @@
 
             
 
+            
+
             . Errors that occur during an asynchronous write request, such as a disk failure during the I/O request, occur on the thread pool thread and throw exceptions when calling <see
              cref="M:System.IO.Compression.DeflateStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -724,6 +868,8 @@
           <para
             >Begins an asynchronous write operation. (Consider using the <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -739,8 +885,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -748,6 +898,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,8 +997,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -855,8 +1011,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.Compression.DeflateStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -865,8 +1025,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -875,8 +1039,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -888,13 +1056,19 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.Compression.DeflateStream" />
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -909,11 +1083,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -952,8 +1130,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.DeflateStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -961,6 +1143,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -972,8 +1156,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Compression.DeflateStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -989,6 +1177,8 @@
 
             
 
+            
+
              method instead; see the Remarks section.)</para
           >
         </summary>
@@ -997,6 +1187,8 @@
           <para
             >The number of bytes read from the stream, between 0 (zero) and the number of bytes you requested. <see
              cref="T:System.IO.Compression.DeflateStream" />
+
+            
 
             
 
@@ -1036,8 +1228,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.DeflateStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1048,6 +1244,8 @@
 
             
 
+            
+
             .</para
           >
           <para>
@@ -1055,8 +1253,12 @@
 
             
 
+            
+
              must be called only once for every call to the <see
              cref="M:System.IO.Compression.DeflateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1068,8 +1270,12 @@
 
             
 
+            
+
             . Exceptions thrown by the thread pool thread will not be visible when calling <see
              cref="M:System.IO.Compression.DeflateStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1081,6 +1287,8 @@
           <para
             >Ends an asynchronous write operation. (Consider using the <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1139,6 +1347,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1164,6 +1374,8 @@
           <para
             >This property is not supported and always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1212,6 +1424,8 @@
 
           
 
+          
+
           The maximum number of decompressed bytes to read.</param
         >
       </Docs>
@@ -1248,6 +1462,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1260,6 +1476,8 @@
 
           
 
+          
+
           The location in the stream.</param
         >
         <param name="origin">
@@ -1267,8 +1485,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -1304,11 +1526,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1349,6 +1575,8 @@
         </summary>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

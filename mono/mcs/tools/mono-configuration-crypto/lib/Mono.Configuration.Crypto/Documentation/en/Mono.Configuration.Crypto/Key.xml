@@ -31,8 +31,12 @@
 
           
 
+          
+
            was <see
            langword="null" />
+
+          
 
           
 
@@ -73,8 +77,12 @@ File must be in the format written by <see
 
                 
 
+                
+
                  was <see
                  langword="null" />
+
+                
 
                 
 
@@ -87,8 +95,12 @@ File must be in the format written by <see
 
                 
 
+                
+
                  was <see
                  langword="null" />
+
+                
 
                 
 
@@ -106,9 +118,13 @@ container. If the container doesn't exist, it will be created when <see
 
             
 
+            
+
              is called. If container exists, its first key will
 be modified with the specified key value. The key value must follow the format used by <see
              cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+
+            
 
             
 
@@ -119,8 +135,12 @@ be modified with the specified key value. The key value must follow the format u
 
             
 
+            
+
              is not checked for correctness but an attempt is made to determine the <see
              cref="P:ProviderType" />
+
+            
 
             
 
@@ -152,8 +172,12 @@ be modified with the specified key value. The key value must follow the format u
 
           
 
+          
+
            was <see
            langword="null" />
+
+          
 
           
 
@@ -167,14 +191,20 @@ be modified with the specified key value. The key value must follow the format u
 
           
 
+          
+
           . When the <see
            cref="M:Save" />
+
+          
 
           
 
            method is called, the keypair will be placed in the container named by
 <paramref
            name="containerName" />
+
+          
 
           
 
@@ -198,11 +228,15 @@ be modified with the specified key value. The key value must follow the format u
 
           
 
+          
+
            or container name</value
         >
         <remarks
           >Name of the container in which the key lives. Note that <see
            cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+
+          
 
           
 
@@ -230,6 +264,8 @@ to disk it will end up in a different container.
 
           
 
+          
+
            or <see
            langword="false" />
         </value>
@@ -254,6 +290,8 @@ to disk it will end up in a different container.
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -271,6 +309,8 @@ to disk it will end up in a different container.
         <summary>Whether the key lives in local or global (machine) store.</summary>
         <value>
           <see langword="true" />
+
+          
 
           
 
@@ -313,9 +353,13 @@ to disk it will end up in a different container.
 
           
 
+          
+
            property. Saved data follows the format used by
 <see
            cref="T:Mono.Security.Cryptography.KeyPairPersistence" />
+
+          
 
           
 

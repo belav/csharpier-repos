@@ -29,8 +29,12 @@
 
         
 
+        
+
          object represents an item (row) in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          control are stored in a <see
          cref="T:System.Web.UI.WebControls.DataGridItemCollection" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          object to programmatically access the properties of an item in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -78,6 +94,8 @@
       <para
         >Represents an item (row) in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -107,6 +125,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -118,6 +138,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -126,13 +148,19 @@
 
           
 
+          
+
           The index of the item from the <see
            cref="P:System.Web.UI.WebControls.DataGrid.Items" />
 
           
 
+          
+
            collection in the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -143,8 +171,12 @@
 
           
 
+          
+
           The index number of the item, from the bound data source, that appears in the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -155,8 +187,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -185,13 +221,19 @@
 
             
 
+            
+
              property to specify or determine the properties of a data item represented by the <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -204,8 +246,12 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
+
+              
 
               
 
@@ -221,8 +267,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -251,8 +301,12 @@
 
             
 
+            
+
              property to get the index of the <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -265,13 +319,19 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+              
 
               
 
@@ -284,6 +344,8 @@
           <para
             >Gets the index of the <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -312,8 +374,12 @@
 
             
 
+            
+
              property to determine the index of the <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -322,8 +388,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -336,13 +406,19 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.DataGridItem.ItemType" />
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+              
 
               
 
@@ -358,13 +434,19 @@
 
             
 
+            
+
              object from the <see
              cref="P:System.Web.UI.WebControls.DataGrid.Items" />
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -424,8 +506,12 @@ List items contains one of this types.
 
             
 
+            
+
              property to determine the type of an item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -453,6 +539,8 @@ List items contains one of this types.
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -465,6 +553,8 @@ List items contains one of this types.
                 <para
                   >The footer section of the <see
                    cref="T:System.Web.UI.WebControls.DataGrid" />
+
+                  
 
                   
 
@@ -483,6 +573,8 @@ List items contains one of this types.
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -495,6 +587,8 @@ List items contains one of this types.
                 <para
                   >An alternating item in the <see
                    cref="T:System.Web.UI.WebControls.DataGrid" />
+
+                  
 
                   
 
@@ -513,6 +607,8 @@ List items contains one of this types.
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -525,6 +621,8 @@ List items contains one of this types.
                 <para
                   >The item selected for editing in the <see
                    cref="T:System.Web.UI.WebControls.DataGrid" />
+
+                  
 
                   
 
@@ -543,6 +641,8 @@ List items contains one of this types.
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -555,6 +655,8 @@ List items contains one of this types.
                 <para
                   >The page selection section of the <see
                    cref="T:System.Web.UI.WebControls.DataGrid" />
+
+                  
 
                   
 
@@ -572,8 +674,12 @@ List items contains one of this types.
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -610,6 +716,8 @@ List items contains one of this types.
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -619,6 +727,8 @@ List items contains one of this types.
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -656,6 +766,8 @@ List items contains one of this types.
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -664,8 +776,12 @@ List items contains one of this types.
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -695,8 +811,12 @@ List items contains one of this types.
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -708,6 +828,8 @@ List items contains one of this types.
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+
+            
 
             
 
@@ -738,8 +860,12 @@ List items contains one of this types.
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -751,6 +877,8 @@ List items contains one of this types.
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+            
 
             
 
@@ -781,8 +909,12 @@ List items contains one of this types.
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -794,6 +926,8 @@ List items contains one of this types.
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+            
 
             
 

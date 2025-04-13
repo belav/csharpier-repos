@@ -18,6 +18,8 @@
 
         
 
+        
+
          interface in your custom HTTP handler to identify that your handler requires read and write access to session-state values.</para
       >
     </remarks>

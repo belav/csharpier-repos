@@ -24,8 +24,12 @@
 
         
 
+        
+
          specifies the text of the link that is clicked in the <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
 
             
 
+            
+
              parameter can be a URL, file path, or other data that you want specified for the link being clicked.</para
           >
         </remarks>
@@ -71,6 +79,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -79,8 +89,12 @@
 
           
 
+          
+
           The text of the link that is clicked in the <see
            cref="T:System.Windows.Forms.RichTextBox" />
+
+          
 
           
 

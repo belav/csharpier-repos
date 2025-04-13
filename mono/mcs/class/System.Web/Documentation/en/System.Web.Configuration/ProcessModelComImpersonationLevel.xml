@@ -21,8 +21,12 @@
 
         
 
+        
+
          class enumerates the values to use when you set the <see
          cref="P:System.Web.Configuration.ProcessModelSection.ComImpersonationLevel" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >The default value is <see
          cref="F:System.Web.Configuration.ProcessModelComImpersonationLevel.Impersonate" />
+
+        
 
         
 

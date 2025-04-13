@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 
@@ -75,6 +79,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -83,8 +89,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -92,6 +102,8 @@
         >
         <param name="ownsHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

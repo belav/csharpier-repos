@@ -52,8 +52,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -66,8 +70,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -80,12 +88,16 @@
 
                 
 
+                
+
                  is set to true.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters.RequireCancellation" />
+
+                
 
                 
 
@@ -99,6 +111,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters" />
+
+            
 
             
 
@@ -134,8 +148,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -148,8 +166,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -162,6 +184,8 @@
 
             
 
+            
+
              is set to true.</para
           >
           <para>
@@ -169,8 +193,12 @@
 
             
 
+            
+
              is set to <paramref
              name="requireCancellation" />
+
+            
 
             
 
@@ -185,11 +213,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,10 +258,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="P:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters.RequireCancellation" />
+
+            
 
             
 
@@ -241,6 +277,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters" />
+
+            
 
             
 
@@ -275,8 +313,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -287,8 +329,12 @@
 
             
 
+            
+
              is an abstract class that is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -300,8 +346,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters)" />
+
+            
 
             
 
@@ -317,6 +367,8 @@
           <para
             >A new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -363,6 +415,8 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
@@ -370,8 +424,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+
+          
 
           
 
@@ -432,6 +490,8 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
@@ -441,8 +501,12 @@
 
                 
 
+                
+
                  = <see
                  cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.Spnego" />
+
+                
 
                 
 
@@ -452,6 +516,8 @@
             <item>
               <para>
                 <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" />
+
+                
 
                 
 
@@ -465,8 +531,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="P:System.ServiceModel.Security.Tokens.SspiSecurityTokenParameters.RequireCancellation" />
+
+                
 
                 
 
@@ -480,6 +550,8 @@
 
                 
 
+                
+
                  is set to a clone of the current instance.</para
               >
             </item>
@@ -489,8 +561,12 @@
 
                 
 
+                
+
                  = <see
                  cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+
+                
 
                 
 
@@ -508,8 +584,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+          
 
           
 

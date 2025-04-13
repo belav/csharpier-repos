@@ -6,13 +6,19 @@
 
     
 
+    
+
      to another <non_terminal
      where="11.1">numeric-type</non_terminal>
 
     
 
+    
+
      for which an implicit numeric conversion (<hyperlink
     >13.1.2</hyperlink>
+
+    
 
     
 
@@ -24,8 +30,12 @@
 
         
 
+        
+
          to <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -34,8 +44,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -44,8 +58,12 @@
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -57,8 +75,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -67,6 +89,8 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
@@ -75,8 +99,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -85,8 +113,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -95,13 +127,19 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -113,8 +151,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -123,13 +165,19 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -141,8 +189,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -151,8 +203,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -161,8 +217,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -171,8 +231,12 @@
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -184,8 +248,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -194,8 +262,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -204,13 +276,19 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -222,8 +300,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -232,8 +314,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -242,8 +328,12 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
+
+        
 
         
 
@@ -252,13 +342,19 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -270,8 +366,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -280,8 +380,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -290,13 +394,19 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -305,8 +415,12 @@
 
         
 
+        
+
         , or <keyword
         >char</keyword>
+
+        
 
         
 
@@ -318,8 +432,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -328,8 +446,12 @@
 
         
 
+        
+
         , or <keyword
         >short</keyword>
+
+        
 
         
 
@@ -341,8 +463,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -351,8 +477,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -361,8 +491,12 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
+
+        
 
         
 
@@ -371,8 +505,12 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -381,13 +519,19 @@
 
         
 
+        
+
         , <keyword
         >char</keyword>
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -399,8 +543,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -409,8 +557,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -419,8 +571,12 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
+
+        
 
         
 
@@ -429,8 +585,12 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -439,8 +599,12 @@
 
         
 
+        
+
         , <keyword
         >char</keyword>
+
+        
 
         
 
@@ -449,8 +613,12 @@
 
         
 
+        
+
         , or <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -462,8 +630,12 @@
 
         
 
+        
+
          to <keyword
         >sbyte</keyword>
+
+        
 
         
 
@@ -472,8 +644,12 @@
 
         
 
+        
+
         , <keyword
         >short</keyword>
+
+        
 
         
 
@@ -482,8 +658,12 @@
 
         
 
+        
+
         , <keyword
         >int</keyword>
+
+        
 
         
 
@@ -492,8 +672,12 @@
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -502,8 +686,12 @@
 
         
 
+        
+
         , <keyword
         >char</keyword>
+
+        
 
         
 
@@ -512,8 +700,12 @@
 
         
 
+        
+
         , or <keyword
         >double</keyword>
+
+        
 
         
 
@@ -527,13 +719,19 @@
 
     
 
+    
+
      to any other <non_terminal
      where="11.1">numeric-type</non_terminal>
 
     
 
+    
+
      using a cast expression (<hyperlink
     >14.6.6</hyperlink>
+
+    
 
     
 
@@ -545,6 +743,8 @@
       <list_item
         > For a conversion from an integral type to another integral type, the processing depends on the overflow checking context (<hyperlink
         >14.5.12</hyperlink>
+
+        
 
         
 
@@ -565,6 +765,8 @@
 
         
 
+        
+
          to an integral type, the source value is rounded towards zero to the nearest integral value, and this integral value becomes the result of the conversion. If the resulting integral value is outside the range of the destination type, a System.OverflowException is thrown. </list_item
       >
       <list_item
@@ -573,13 +775,19 @@
 
         
 
+        
+
          or <keyword
         >double</keyword>
 
         
 
+        
+
          to an integral type, the processing depends on the  overflow-checking context (<hyperlink
         >14.5.12</hyperlink>
+
+        
 
         
 
@@ -603,8 +811,12 @@
 
         
 
+        
+
          to <keyword
         >float</keyword>
+
+        
 
         
 
@@ -613,8 +825,12 @@
 
         
 
+        
+
          value is rounded to the nearest <keyword
         >float</keyword>
+
+        
 
         
 
@@ -623,8 +839,12 @@
 
         
 
+        
+
          value is too small to represent as a <keyword
         >float</keyword>
+
+        
 
         
 
@@ -633,13 +853,19 @@
 
         
 
+        
+
          value is too large to represent as a <keyword
         >float</keyword>
 
         
 
+        
+
         , the result becomes positive infinity or negative infinity. If the <keyword
         >double</keyword>
+
+        
 
         
 
@@ -651,8 +877,12 @@
 
         
 
+        
+
          or <keyword
         >double</keyword>
+
+        
 
         
 
@@ -661,8 +891,12 @@
 
         
 
+        
+
         , the source value is converted to <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -671,8 +905,12 @@
 
         
 
+        
+
          place if required (<hyperlink
         >11.1.6</hyperlink>
+
+        
 
         
 
@@ -681,8 +919,12 @@
 
         
 
+        
+
         , the result becomes zero. If the source value is NaN, infinity, or too large to represent as a <keyword
         >decimal</keyword>
+
+        
 
         
 
@@ -694,13 +936,19 @@
 
         
 
+        
+
          to <keyword
         >float</keyword>
 
         
 
+        
+
          or <keyword
         >double</keyword>
+
+        
 
         
 
@@ -709,13 +957,19 @@
 
         
 
+        
+
          value is rounded to the nearest <keyword
         >double</keyword>
 
         
 
+        
+
          or <keyword
         >float</keyword>
+
+        
 
         
 

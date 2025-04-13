@@ -25,13 +25,19 @@
 
         
 
+        
+
          methods of the intrinsic <see
          cref="T:System.Web.HttpResponse" />
 
         
 
+        
+
          object make internal calls to an <see
          cref="T:System.Web.HttpWriter" />
+
+        
 
         
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          object that is accessed through the intrinsic <see
          cref="T:System.Web.HttpResponse" />
+
+        
 
         
 
@@ -99,8 +109,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -153,8 +167,12 @@
 
             
 
+            
+
              object to enable HTTP output directly from the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -187,6 +205,8 @@
 
           
 
+          
+
           The character to send to the HTTP output stream. </param
         >
       </Docs>
@@ -214,6 +234,8 @@
 
             
 
+            
+
              to the HTTP output stream.</para
           >
         </summary>
@@ -222,8 +244,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -252,6 +278,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,10 +316,14 @@
 
           
 
+          
+
           The memory buffer containing the characters to send to the HTTP output stream </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,8 +334,12 @@
 
           
 
+          
+
           The number of characters to send beginning at the position specified by <paramref
            name="index" />
+
+          
 
           
 
@@ -340,10 +376,14 @@
 
           
 
+          
+
           The memory buffer containing the bytes to send to the HTTP output stream. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,8 +394,12 @@
 
           
 
+          
+
           The number of bytes to send, beginning at the byte position specified by <paramref
            name="index" />
+
+          
 
           
 
@@ -411,10 +455,14 @@
 
           
 
+          
+
           The string to send to the HTTP output stream. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,8 +473,12 @@
 
           
 
+          
+
           The number of characters to send, beginning at the character position specified by <paramref
            name="index" />
+
+          
 
           
 

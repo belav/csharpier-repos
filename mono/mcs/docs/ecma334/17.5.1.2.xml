@@ -7,8 +7,12 @@
 
     
 
+    
+
      (<hyperlink
     >12.3.3</hyperlink>
+
+    
 
     
 
@@ -36,6 +40,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -70,6 +76,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

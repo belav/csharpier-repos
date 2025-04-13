@@ -30,13 +30,19 @@
 
         
 
+        
+
          collection allows access to the <see
          cref="T:System.Web.Configuration.HttpModuleAction" />
 
         
 
+        
+
          elements of the <see
          cref="T:System.Web.Configuration.HttpModulesSection" />
+
+        
 
         
 
@@ -48,6 +54,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.HttpModuleAction" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -78,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+
+            
 
             
 
@@ -112,6 +124,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </remarks>
@@ -120,6 +134,8 @@
           <para
             >Adds an <see
              cref="T:System.Web.Configuration.HttpModuleAction" />
+
+            
 
             
 
@@ -149,6 +165,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Configuration.HttpModuleAction" />
+
+            
 
             
 
@@ -184,6 +202,8 @@
 
             
 
+            
+
              object for the collection.</para
           >
         </summary>
@@ -192,6 +212,8 @@
           <para
             >A new <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -229,6 +251,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -240,8 +264,12 @@
 
             
 
+            
+
             , which acts as the key for the specified <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -253,8 +281,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -287,6 +319,8 @@
 
             
 
+            
+
              module with the proper name and type. You can then use this module object to get its collection index.</para
           >
         </remarks>
@@ -295,6 +329,8 @@
           <para
             >Gets the collection index of the specified <see
              cref="T:System.Web.Configuration.HttpModuleAction" />
+
+            
 
             
 
@@ -310,8 +346,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.HttpModuleAction" />
+
+          
 
           
 
@@ -353,8 +393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -430,6 +474,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -438,8 +484,12 @@
 
           
 
+          
+
           The key that identifies the <see
            cref="T:System.Web.Configuration.HttpModuleAction" />
+
+          
 
           
 
@@ -476,6 +526,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -484,8 +536,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.HttpModuleAction" />
+
+          
 
           
 
@@ -519,6 +575,8 @@
 
             
 
+            
+
              module at the specified index from the collection.</para
           >
         </summary>
@@ -527,8 +585,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.HttpModuleAction" />
+
+          
 
           
 

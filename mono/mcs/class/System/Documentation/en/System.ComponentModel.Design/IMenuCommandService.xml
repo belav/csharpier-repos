@@ -41,6 +41,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -51,8 +53,12 @@
 
         
 
+        
+
         . A designer can provide designer verbs through its <see
          cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+
+        
 
         
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
          method, and you can remove a global designer verb using the <see
          cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveVerb(System.ComponentModel.Design.DesignerVerb)" />
+
+        
 
         
 
@@ -74,13 +84,19 @@
 
         
 
+        
+
          method if you know the <see
          cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
+        
+
          of the verb. The <see
          cref="P:System.ComponentModel.Design.IMenuCommandService.Verbs" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.Design.MenuCommands" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          method, and remove a standard menu command using the <see
          cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveCommand(System.ComponentModel.Design.MenuCommand)" />
+
+        
 
         
 
@@ -115,8 +139,12 @@
 
         
 
+        
+
          method. You can retrieve a menu command by <see
          cref="T:System.ComponentModel.Design.CommandID" />
+
+        
 
         
 
@@ -125,13 +153,19 @@
 
         
 
+        
+
          method. You can invoke a menu command or designer verb command by <see
          cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
+        
+
          using the <see
          cref="M:System.ComponentModel.Design.IMenuCommandService.GlobalInvoke(System.ComponentModel.Design.CommandID)" />
+
+        
 
         
 
@@ -144,13 +178,19 @@
 
           
 
+          
+
            will throw an <see
            cref="T:System.InvalidOperationException" />
 
           
 
+          
+
           . When adding a menu command, be sure to check that it is not already on a menu using the <see
            cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+
+          
 
           
 
@@ -164,8 +204,12 @@
 
           
 
+          
+
            or <see
            cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
+
+          
 
           
 
@@ -175,6 +219,8 @@
       <para
         >You can show certain standard shortcut menus containing menu commands at a specified location using the <see
          cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -217,13 +263,19 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.Design.StandardCommands" />
 
             
 
+            
+
              enumerations contain <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -236,13 +288,19 @@
 
               
 
+              
+
                will throw an <see
                cref="T:System.InvalidOperationException" />
 
               
 
+              
+
               . When adding a menu command, be sure to check that it is not already on a menu using the <see
                cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+
+              
 
               
 
@@ -258,6 +316,8 @@
 
                 
 
+                
+
                  method, consider whether you wish to restore this menu command later, and whether you want to invoke the current event handler from your new event handler. If your code might restore the menu command or chain the invocation of event handlers, be sure to store a reference to the menu command somewhere.</para
               >
             </item>
@@ -268,8 +328,12 @@
 
                 
 
+                
+
                  has been removed from the menu using the <see
                  cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveCommand(System.ComponentModel.Design.MenuCommand)" />
+
+                
 
                 
 
@@ -283,8 +347,12 @@
 
                 
 
+                
+
                  and specify your event handler in the constructor, along with a <see
                  cref="T:System.ComponentModel.Design.CommandID" />
+
+                
 
                 
 
@@ -293,8 +361,12 @@
 
                 
 
+                
+
                  and <see
                  cref="T:System.Windows.Forms.Design.MenuCommands" />
+
+                
 
                 
 
@@ -305,6 +377,8 @@
               <para
                 >If you want to invoke any preexisting event handler for the menu command, call the <see
                  cref="M:System.ComponentModel.Design.MenuCommand.Invoke" />
+
+                
 
                 
 
@@ -325,8 +399,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.MenuCommand" />
+
+          
 
           
 
@@ -364,6 +442,8 @@
 
             
 
+            
+
              property of their designer rather than calling this method. This method adds a global designer verb that can be accessed from the right-click shortcut menu in design mode regardless of the currently selected component.</para
           >
         </remarks>
@@ -376,8 +456,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+          
 
           
 
@@ -420,6 +504,8 @@
 
             
 
+            
+
              associated with the command ID, or null if no command is found.</para
           >
         </returns>
@@ -428,8 +514,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.CommandID" />
+
+          
 
           
 
@@ -467,8 +557,12 @@
 
             
 
+            
+
              matching the specified <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -488,8 +582,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.CommandID" />
+
+          
 
           
 
@@ -527,8 +625,12 @@
 
             
 
+            
+
              if it is found. This method does not raise an exception or return a value if the specified <see
              cref="T:System.ComponentModel.Design.MenuCommand" />
+
+            
 
             
 
@@ -537,13 +639,19 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
+            
+
              matching a specified <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -559,8 +667,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.MenuCommand" />
+
+          
 
           
 
@@ -598,6 +710,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -610,8 +724,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+          
 
           
 
@@ -648,6 +766,8 @@
           <para
             >The <see
              cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -716,8 +836,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.CommandID" />
+
+          
 
           
 
@@ -728,10 +852,14 @@
 
           
 
+          
+
           The x-coordinate at which to display the menu, in screen coordinates. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -767,8 +895,12 @@
 
             
 
+            
+
              method on this interface, and individual designer verbs, which are offered by the <see
              cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+
+            
 
             
 

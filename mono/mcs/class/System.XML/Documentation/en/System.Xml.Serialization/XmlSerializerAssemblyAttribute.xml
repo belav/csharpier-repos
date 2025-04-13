@@ -35,6 +35,8 @@
 
         
 
+        
+
          to increase the performance of a Web service client application. </para
       >
       <para>A typical method of using this attribute is as follows:</para>
@@ -66,6 +68,8 @@
 
             
 
+            
+
              to cache files. </para
           >
           <code>cd %temp%</code>
@@ -77,8 +81,12 @@
 
             
 
+            
+
              command with the <system
             >/OD</system>
+
+            
 
             
 
@@ -93,6 +101,8 @@
           <para
             >Edit the original proxy code by applying the <see
              cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+            
 
             
 
@@ -139,6 +149,8 @@ End Class</code>
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -172,11 +184,15 @@ End Class</code>
 
             
 
+            
+
              class with the specified assembly name.</para
           >
         </summary>
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,6 +229,8 @@ End Class</code>
 
             
 
+            
+
              class with the specified assembly name and location of the assembly.</para
           >
         </summary>
@@ -221,10 +239,14 @@ End Class</code>
 
           
 
+          
+
           The simple, unencrypted name of the assembly. </param
         >
         <param name="codeBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

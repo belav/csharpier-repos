@@ -28,8 +28,12 @@
 
         
 
+        
+
          object includes a URI and an optional collection of addressing headers. The addressing and message headers are canonicalized in order to be compared for equality. If a parameter appears more than once in an <see
          cref="T:System.ServiceModel.EndpointAddress" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              class with a specified address against which to test a message.</para
           >
         </summary>
@@ -77,8 +83,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -127,6 +137,8 @@
 
             
 
+            
+
              parameter is false, the above URIs all resolve to the same endpoint. </para
           >
         </remarks>
@@ -138,6 +150,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -146,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -155,6 +173,8 @@
         >
         <param name="includeHostNameInComparison">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,6 +206,8 @@
           <para
             >Gets the address that the <see
              cref="T:System.ServiceModel.Dispatcher.EndpointAddressMessageFilter" />
+
+            
 
             
 
@@ -223,6 +245,8 @@
 
             
 
+            
+
              that is optimized to test for specific message endpoints.</para
           >
           <para
@@ -231,8 +255,12 @@
 
             
 
+            
+
             . Use <see
              cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+            
 
             
 
@@ -251,8 +279,12 @@
 
             
 
+            
+
              interface that can contain <see
              cref="T:System.ServiceModel.Dispatcher.EndpointAddressMessageFilter" />
+
+            
 
             
 
@@ -261,11 +293,15 @@
 
             
 
+            
+
             . </para
           >
         </returns>
         <typeparam name="FilterData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +385,8 @@
 
             
 
+            
+
              object satisfies the endpoint address specified in the filter; otherwise, false. </para
           >
         </returns>
@@ -357,8 +395,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -394,8 +436,12 @@
 
             
 
+            
+
              available and not a message, because this method converts the <paramref
              name="messageBuffer" />
+
+            
 
             
 
@@ -414,6 +460,8 @@
 
             
 
+            
+
              object satisfies the endpoint address; otherwise, false. </para
           >
         </returns>
@@ -422,8 +470,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+          
 
           
 

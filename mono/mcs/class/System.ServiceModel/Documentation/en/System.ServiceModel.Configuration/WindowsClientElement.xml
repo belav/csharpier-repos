@@ -45,6 +45,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -78,6 +80,8 @@
           <para
             >See <see
              cref="T:System.Security.Principal.TokenImpersonationLevel" />
+
+            
 
             
 

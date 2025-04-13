@@ -31,6 +31,8 @@
 
         
 
+        
+
          and extends it by adding an old name field and an old full path field to specify the previous name and full path of the affected file or directory.</para
       >
     </remarks>
@@ -39,6 +41,8 @@
       <para
         >Provides data for the <see
          cref="E:System.IO.FileSystemWatcher.Renamed" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              class and extends it by adding an old name field to specify the previous name of the file or directory affected.</para
           >
         </remarks>
@@ -89,6 +95,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -97,8 +105,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.WatcherChangeTypes" />
+
+          
 
           
 
@@ -109,6 +121,8 @@
 
           
 
+          
+
           The name of the affected file or directory. </param
         >
         <param name="name">
@@ -116,10 +130,14 @@
 
           
 
+          
+
           The name of the affected file or directory. </param
         >
         <param name="oldName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

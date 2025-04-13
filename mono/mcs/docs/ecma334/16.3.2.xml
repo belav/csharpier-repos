@@ -6,11 +6,15 @@
 
     
 
+    
+
      imports the types contained in a namespace into the immediately enclosing compilation unit or namespace body, enabling the identifier of each type to be used without qualification. <grammar_production
     >
       <name>
         <non_terminal where="16.3.2">using-namespace-directive</non_terminal>
       </name>
+
+      
 
       
 
@@ -25,6 +29,8 @@
   <paragraph
     >Within member declarations in a compilation unit or namespace body that contains a  <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -55,6 +61,8 @@ namespace N3
 
     
 
+    
+
      imports the types contained in the given namespace, but specifically does not import nested namespaces. <example
 
       >[Example: In the example <code_example
@@ -74,8 +82,12 @@ namespace N3
 
       
 
+      
+
       the <non_terminal
        where="16.3.2">using-namespace-directive</non_terminal>
+
+      
 
       
 
@@ -88,13 +100,19 @@ namespace N3
 
     
 
+    
+
     , a <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
 
     
 
+    
+
      may import types whose identifiers are already defined within the enclosing compilation unit or namespace body. In effect, names imported by a  <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -126,6 +144,8 @@ namespace N3
 
     
 
+    
+
     s in the same compilation unit or namespace body contain types by the same name, references to that name are considered ambiguous. </paragraph
   >
   <paragraph>
@@ -152,13 +172,19 @@ namespace N3
 
       
 
+      
+
       both N1 and N2 contain a member A, and because N3 imports both, referencing A in N3 is a compile-time error. end example]</example
     >
 
     
 
+    
+
      In this situation, the conflict can be resolved either through qualification of references to A, or by introducing a <non_terminal
      where="16.3.1">using-alias-directive</non_terminal>
+
+    
 
     
 
@@ -179,6 +205,8 @@ namespace N3
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -188,8 +216,12 @@ namespace N3
 
     
 
+    
+
     , a <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -201,8 +233,12 @@ namespace N3
 
     
 
+    
+
      referenced by a <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -211,13 +247,19 @@ namespace N3
 
     
 
+    
+
      referenced by a <non_terminal
      where="16.3.1">using-alias-directive</non_terminal>
 
     
 
+    
+
     . Thus, <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 

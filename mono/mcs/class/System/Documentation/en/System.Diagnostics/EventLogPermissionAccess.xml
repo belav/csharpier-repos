@@ -32,6 +32,8 @@
 
         
 
+        
+
          permission classes.</para
       >
     </summary>
@@ -57,6 +59,8 @@
           <para
             >The <see
              cref="T:System.Diagnostics.EventLog" />
+
+            
 
             
 
@@ -96,8 +100,12 @@
 
             
 
+            
+
              can read existing logs, delete event sources or logs, respond to entries, clear an event log, listen to events, and access a collection of all event logs. Note This member is now obsolete, use <see
              cref="F:System.Diagnostics.EventLogPermissionAccess.Administer" />
+
+            
 
             
 
@@ -137,8 +145,12 @@
 
             
 
+            
+
              can read existing logs. Note This member is now obsolete, use <see
              cref="F:System.Diagnostics.EventLogPermissionAccess.Administer" />
+
+            
 
             
 
@@ -178,8 +190,12 @@
 
             
 
+            
+
              can read or write to existing logs, and create event sources and logs. Note This member is now obsolete, use <see
              cref="F:System.Diagnostics.EventLogPermissionAccess.Write" />
+
+            
 
             
 
@@ -214,6 +230,8 @@
 
             
 
+            
+
              has no permissions.</para
           >
         </summary>
@@ -239,6 +257,8 @@
           <para
             >The <see
              cref="T:System.Diagnostics.EventLog" />
+
+            
 
             
 

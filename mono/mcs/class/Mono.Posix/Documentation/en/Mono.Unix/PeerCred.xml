@@ -21,8 +21,12 @@
 
       
 
+      
+
        or <see
        cref="T:Mono.Unix.UnixClient" />
+
+      
 
       
 
@@ -35,13 +39,19 @@
 
       
 
+      
+
       , <see
        cref="P:Mono.Unix.PeerCred.ProcessID" />
 
       
 
+      
+
       , and <see
        cref="P:Mono.Unix.PeerCred.UserID" />
+
+      
 
       
 
@@ -71,6 +81,8 @@
 
           
 
+          
+
           , but this must be a Unix domain socket.</param
         >
         <summary>Reads the peer credentials from a Unix domain socket.</summary>
@@ -80,8 +92,12 @@
 
           
 
+          
+
            passed in is not a Unix domain socket, <see
            cref="T:System.ArgumentException" />
+
+          
 
           
 

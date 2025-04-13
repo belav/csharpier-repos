@@ -19,8 +19,12 @@
 
         
 
+        
+
          class. To display a message box, call the static method <see
          cref="M:System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions,System.Boolean)" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
             
 
+            
+
              button. The message box does not contain a caption in the title.</para
           >
         </remarks>
@@ -69,11 +75,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -107,6 +117,8 @@
 
             
 
+            
+
              button.</para
           >
         </remarks>
@@ -122,6 +134,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -130,10 +144,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,8 +185,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -177,6 +199,8 @@
           <para
             >By default, the message box displays an <ui
             >OK</ui>
+
+            
 
             
 
@@ -195,6 +219,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -203,8 +229,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -212,6 +242,8 @@
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -254,11 +286,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -269,6 +305,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -276,8 +314,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -312,8 +354,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -322,6 +368,8 @@
           <para
             >By default, the message box displays an <ui
             >OK</ui>
+
+            
 
             
 
@@ -340,6 +388,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -348,8 +398,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -360,10 +414,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,11 +465,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -422,6 +484,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -429,8 +493,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -441,8 +509,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -478,8 +550,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -499,6 +575,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -507,8 +585,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -519,10 +601,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,8 +619,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -579,11 +669,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,6 +688,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -601,8 +697,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -613,8 +713,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -625,8 +729,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -663,8 +771,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -684,6 +796,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -692,8 +806,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -704,10 +822,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -718,8 +840,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -730,8 +856,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -777,11 +907,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -792,6 +926,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -799,8 +935,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -811,8 +951,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -823,8 +967,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -835,8 +983,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -874,8 +1026,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -895,6 +1051,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -903,8 +1061,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -915,10 +1077,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,8 +1095,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -941,8 +1111,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -953,8 +1127,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -997,8 +1175,12 @@
 
             
 
+            
+
              event. Handle the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1017,11 +1199,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1032,6 +1218,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -1039,8 +1227,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -1051,8 +1243,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -1063,8 +1259,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -1075,8 +1275,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -1084,6 +1288,8 @@
         >
         <param name="displayHelpButton">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1122,8 +1328,12 @@
 
             
 
+            
+
              parameter is opened. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1132,6 +1342,8 @@
           <para
             >The <paramref
              name="helpFilePath" />
+
+            
 
             
 
@@ -1150,11 +1362,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1165,6 +1381,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -1172,8 +1390,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -1184,8 +1406,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -1196,8 +1422,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -1208,8 +1438,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -1217,6 +1451,8 @@
         >
         <param name="helpFilePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1251,8 +1487,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -1272,6 +1512,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -1280,8 +1522,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -1292,10 +1538,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1306,8 +1556,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -1318,8 +1572,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -1330,8 +1588,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -1342,8 +1604,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -1387,13 +1653,19 @@
 
             
 
+            
+
              parameter is opened and the Help keyword topic identified by the <paramref
              name="keyword" />
 
             
 
+            
+
              parameter is displayed. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1412,11 +1684,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1427,6 +1703,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -1434,8 +1712,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -1446,8 +1728,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -1458,8 +1744,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -1470,8 +1760,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -1482,10 +1776,14 @@
 
           
 
+          
+
           The path and name of the Help file to display when the user clicks the Help button. </param
         >
         <param name="keyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1525,13 +1823,19 @@
 
             
 
+            
+
              parameter is opened and the Help content identified by the <paramref
              name="navigator" />
 
             
 
+            
+
              parameter is displayed. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1543,8 +1847,12 @@
 
             
 
+            
+
             : <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -1553,8 +1861,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            
 
             
 
@@ -1563,11 +1875,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="helpFilePath" />
+
+            
 
             
 
@@ -1586,11 +1902,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1601,6 +1921,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -1608,8 +1930,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -1620,8 +1946,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -1632,8 +1962,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -1644,8 +1978,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -1656,6 +1994,8 @@
 
           
 
+          
+
           The path and name of the Help file to display when the user clicks the Help button. </param
         >
         <param name="navigator">
@@ -1663,8 +2003,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.HelpNavigator" />
+
+          
 
           
 
@@ -1703,8 +2047,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -1716,8 +2064,12 @@
 
             
 
+            
+
              parameter is opened. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1726,6 +2078,8 @@
           <para
             >The <paramref
              name="helpFilePath" />
+
+            
 
             
 
@@ -1744,6 +2098,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -1752,8 +2108,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -1764,10 +2124,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1778,8 +2142,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -1790,8 +2158,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -1802,8 +2174,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -1814,8 +2190,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -1823,6 +2203,8 @@
         >
         <param name="helpFilePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1863,13 +2245,19 @@
 
             
 
+            
+
              parameter is opened and the Help content identified by the <paramref
              name="navigator" />
 
             
 
+            
+
              parameter is displayed. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -1881,8 +2269,12 @@
 
             
 
+            
+
             : <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -1891,13 +2283,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.Index" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -1909,8 +2307,12 @@
 
             
 
+            
+
              to provide further refinement of the <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -1919,8 +2321,12 @@
 
             
 
+            
+
              parameter is <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -1929,8 +2335,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            
 
             
 
@@ -1939,8 +2349,12 @@
 
             
 
+            
+
              parameter references <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -1949,6 +2363,8 @@
           <para
             >The <paramref
              name="helpFilePath" />
+
+            
 
             
 
@@ -1967,11 +2383,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1982,6 +2402,8 @@
 
           
 
+          
+
           The text to display in the title bar of the message box. </param
         >
         <param name="buttons">
@@ -1989,8 +2411,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -2001,8 +2427,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -2013,8 +2443,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -2025,8 +2459,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -2037,10 +2475,14 @@
 
           
 
+          
+
           The path and name of the Help file to display when the user clicks the Help button. </param
         >
         <param name="navigator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2049,10 +2491,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="param">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2092,8 +2538,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -2105,13 +2555,19 @@
 
             
 
+            
+
              parameter is opened and the Help keyword topic identified by the <paramref
              name="keyword" />
 
             
 
+            
+
              parameter is displayed. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -2130,6 +2586,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -2138,8 +2596,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -2150,10 +2612,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2164,8 +2630,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -2176,8 +2646,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -2188,8 +2662,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -2200,8 +2678,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -2212,10 +2694,14 @@
 
           
 
+          
+
           The path and name of the Help file to display when the user clicks the Help button. </param
         >
         <param name="keyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2255,8 +2741,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -2268,13 +2758,19 @@
 
             
 
+            
+
              parameter is opened and the Help content identified by the <paramref
              name="navigator" />
 
             
 
+            
+
              parameter is displayed. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -2286,8 +2782,12 @@
 
             
 
+            
+
             : <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -2296,8 +2796,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            
 
             
 
@@ -2306,11 +2810,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="helpFilePath" />
+
+            
 
             
 
@@ -2329,6 +2837,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -2337,8 +2847,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -2349,10 +2863,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2363,8 +2881,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -2375,8 +2897,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -2387,8 +2913,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -2399,8 +2929,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -2411,6 +2945,8 @@
 
           
 
+          
+
           The path and name of the Help file to display when the user clicks the Help button. </param
         >
         <param name="navigator">
@@ -2418,8 +2954,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.HelpNavigator" />
+
+          
 
           
 
@@ -2460,8 +3000,12 @@
 
             
 
+            
+
              parameter to specify a particular object, which implements the <see
              cref="T:System.Windows.Forms.IWin32Window" />
+
+            
 
             
 
@@ -2473,13 +3017,19 @@
 
             
 
+            
+
              parameter is opened and the Help content identified by the <paramref
              name="navigator" />
 
             
 
+            
+
              parameter is displayed. The form that owns the message box (or the active form) also receives the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+            
 
             
 
@@ -2491,8 +3041,12 @@
 
             
 
+            
+
             : <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -2501,13 +3055,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.HelpNavigator.Index" />
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -2519,8 +3079,12 @@
 
             
 
+            
+
              to provide further refinement of the <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -2529,8 +3093,12 @@
 
             
 
+            
+
              parameter is <see
              cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            
 
             
 
@@ -2539,8 +3107,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            
 
             
 
@@ -2549,8 +3121,12 @@
 
             
 
+            
+
              parameter references <see
              cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            
 
             
 
@@ -2559,6 +3135,8 @@
           <para
             >The <paramref
              name="helpFilePath" />
+
+            
 
             
 
@@ -2577,6 +3155,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -2585,8 +3165,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -2597,10 +3181,14 @@
 
           
 
+          
+
           The text to display in the message box. </param
         >
         <param name="caption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2611,8 +3199,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+          
 
           
 
@@ -2623,8 +3215,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+          
 
           
 
@@ -2635,8 +3231,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+          
 
           
 
@@ -2647,8 +3247,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+          
 
           
 
@@ -2659,10 +3263,14 @@
 
           
 
+          
+
           The path and name of the Help file to display when the user clicks the Help button. </param
         >
         <param name="navigator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2671,10 +3279,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="param">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

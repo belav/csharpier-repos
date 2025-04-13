@@ -33,13 +33,19 @@
 
         
 
+        
+
          configuration nodes. All sink providers must have a constructor that accepts a <see
          cref="T:System.Collections.IDictionary" />
 
         
 
+        
+
          of properties and a <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -78,6 +84,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -86,8 +94,12 @@
 
           
 
+          
+
           The name of the sink provider that the data in the current <see
            cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+
+          
 
           
 
@@ -121,6 +133,8 @@
 
             
 
+            
+
              nodes.</para
           >
         </summary>
@@ -146,6 +160,8 @@
           <para
             >Gets the name of the sink provider that the data in the current <see
              cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+
+            
 
             
 

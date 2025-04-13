@@ -16,6 +16,8 @@
 
         
 
+        
+
          class implements this interface internally.</para
       >
     </remarks>
@@ -43,6 +45,8 @@
 
             
 
+            
+
              method is called when the window handle of the control has changed.</para
           >
         </remarks>
@@ -54,6 +58,8 @@
 
             
 
+            
+
              to the specified handle.</para
           >
         </summary>
@@ -62,8 +68,12 @@
 
           
 
+          
+
           The new handle of the <see
            cref="T:System.Windows.Forms.IWindowTarget" />
+
+          
 
           
 

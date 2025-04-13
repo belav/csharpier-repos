@@ -20,6 +20,8 @@
 
         
 
+        
+
          Web site. In particular, for complete details, see Section 14.9 "Cache-Control" and Section 13, "Caching in HTTP."</para
       >
       <block subset="none" type="note">
@@ -106,8 +108,12 @@
 
             
 
+            
+
              option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see
              cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
+
+            
 
             
 
@@ -137,8 +143,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.HttpCacheability.NoCache" />
+
+            
 
             
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          class represents a configuration element for a service name used in a <see
          cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" />
+
+            
 
             
 
@@ -72,8 +80,12 @@
 
             
 
+            
+
              property should be set to an appropriate value for the application before calling the <see
              cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+
+            
 
             
 
@@ -82,8 +94,12 @@
 
             
 
+            
+
              instance to the <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+
+            
 
             
 
@@ -95,6 +111,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+
+            
 
             
 
@@ -126,6 +144,8 @@
           <para
             >Gets or sets the Service Provider Name (SPN) for this <see
              cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+
+            
 
             
 

@@ -7,12 +7,16 @@
 
     
 
+    
+
      simply consists of a semicolon. </paragraph
   >
   <paragraph>A property declaration that includes both the abstract and override modifiers specifies that the property is abstract and overrides a base property. The accessors of such a property are also abstract. </paragraph>
   <paragraph
     >Abstract property declarations are only permitted in abstract classes (<hyperlink
     >17.1.1.1</hyperlink>
+
+    
 
     
 
@@ -26,8 +30,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.5.4</hyperlink>
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
     , and <hyperlink
     >17.5.6</hyperlink>
+
+    
 
     
 
@@ -47,6 +59,8 @@
       <list_item
         > A set accessor corresponds to a method with a single value parameter of the property type, a <keyword
         >void</keyword>
+
+        
 
         
 

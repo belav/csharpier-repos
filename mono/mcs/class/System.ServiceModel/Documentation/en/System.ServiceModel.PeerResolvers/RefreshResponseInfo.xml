@@ -27,13 +27,19 @@
 
         
 
+        
+
          or an implementation of  <see
          cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
 
         
 
+        
+
          is called, this object is returned to the client. It contains the refreshed registration entry with the new expiry timestamp, and is returned when a previous <see
          cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
+
+            
 
             
 
@@ -100,6 +108,8 @@
 
             
 
+            
+
              class with the provided registration lifetime and refresh results.</para
           >
         </summary>
@@ -109,11 +119,15 @@
 
           
 
+          
+
            that specifies the new lifetime of the peer's registration.</param
         >
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.RefreshResult" />
+
+          
 
           
 

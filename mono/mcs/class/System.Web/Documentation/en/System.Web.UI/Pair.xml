@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used as a basic structure to store two related objects. It is a utility class that is used in various ways throughout ASP.NET, such as during page state management tasks or in configuration section handlers. You can use the <see
          cref="T:System.Web.UI.Pair" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          class does not encapsulate its object references, <see
          cref="F:System.Web.UI.Pair.First" />
 
         
 
+        
+
          and <see
          cref="F:System.Web.UI.Pair.Second" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          class can be used in several ways in page state persistence implementations. The most common use is as a container for both the <see
          cref="P:System.Web.UI.Control.ViewState" />
+
+        
 
         
 
@@ -59,8 +73,12 @@
 
         
 
+        
+
          collections. In this case, the <see
          cref="F:System.Web.UI.Pair.First" />
+
+        
 
         
 
@@ -69,13 +87,19 @@
 
         
 
+        
+
         , and the <see
          cref="F:System.Web.UI.Pair.Second" />
 
         
 
+        
+
          for <see
          cref="P:System.Web.UI.PageStatePersister.ControlState" />
+
+        
 
         
 
@@ -100,6 +124,8 @@
           <para
             >Creates a new, uninitialized instance of the <see
              cref="T:System.Web.UI.Pair" />
+
+            
 
             
 
@@ -135,6 +161,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Pair" />
+
+            
 
             
 

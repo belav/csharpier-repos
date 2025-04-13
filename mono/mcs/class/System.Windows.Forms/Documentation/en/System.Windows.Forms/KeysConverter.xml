@@ -26,13 +26,19 @@
 
         
 
+        
+
          type converter is used to convert <see
          cref="T:System.Windows.Forms.Keys" />
 
         
 
+        
+
          instances to and from their corresponding localized <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          to convert <see
          cref="T:System.Windows.Forms.Keys" />
+
+        
 
         
 
@@ -70,6 +80,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -78,8 +90,12 @@
 
             
 
+            
+
             . Instead, call the <see
              cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+            
 
             
 
@@ -88,8 +104,12 @@
 
             
 
+            
+
              class. For more information, see the examples in the <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -101,6 +121,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Windows.Forms.KeysConverter" />
+
+            
 
             
 
@@ -135,8 +157,12 @@
 
             
 
+            
+
              method is specialized to return true if the <paramref
              name="sourceType" />
+
+            
 
             
 
@@ -145,8 +171,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -166,8 +196,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -178,8 +212,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -216,13 +254,19 @@
 
             
 
+            
+
              method is specialized to return true if the <paramref
              name="destinationType" />
 
             
 
+            
+
              parameter is of type <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -242,8 +286,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -254,8 +302,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -279,6 +331,8 @@
           <para
             >This method uses <see
              cref="M:System.String.Compare(System.String,System.String)" />
+
+            
 
             
 
@@ -313,8 +367,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -332,8 +390,12 @@
 
                   
 
+                  
+
                    equals <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -351,8 +413,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -367,8 +433,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -379,8 +449,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -415,8 +489,12 @@
 
             
 
+            
+
              method is specialized to convert objects of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -425,8 +503,12 @@
 
             
 
+            
+
              array. In this case, it will return an object of type <see
              cref="T:System.Windows.Forms.Keys" />
+
+            
 
             
 
@@ -445,11 +527,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,10 +546,14 @@
 
           
 
+          
+
           A CultureInfo object to provide locale information. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -499,8 +589,12 @@
 
             
 
+            
+
              method is specialized to convert objects of type <see
              cref="T:System.Windows.Forms.Keys" />
+
+            
 
             
 
@@ -509,8 +603,12 @@
 
             
 
+            
+
             . In this case, it will return an object of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -529,8 +627,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -542,8 +644,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -554,8 +660,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -566,8 +676,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -578,8 +692,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -620,6 +738,8 @@
 
             
 
+            
+
              that holds a standard set of valid values, which can be empty if the data type does not support a standard set of values.</para
           >
         </returns>
@@ -628,8 +748,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -662,6 +786,8 @@
 
             
 
+            
+
              parameter is not used in the standard implementation of this method.</para
           >
           <para
@@ -670,8 +796,12 @@
 
             
 
+            
+
              data type. If the list is not exclusive, then there are other valid values besides the list of standard values <see
              cref="Overload:System.Windows.Forms.KeysConverter.GetStandardValues" />
+
+            
 
             
 
@@ -686,6 +816,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -697,11 +829,15 @@
 
             
 
+            
+
              is an exhaustive list of possible values; otherwise, false if other values are possible. The default implementation for this method always returns false. </para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -734,6 +870,8 @@
 
             
 
+            
+
              parameter is not used in the standard implementation of this method.</para
           >
         </remarks>
@@ -750,8 +888,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

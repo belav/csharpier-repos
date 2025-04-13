@@ -21,8 +21,12 @@
 
         
 
+        
+
         . For computers with 64-bit integers, use <see
          cref="F:System.Drawing.Imaging.ColorMode.Argb64Mode" />
+
+        
 
         
 

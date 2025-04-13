@@ -22,12 +22,16 @@
 
         
 
+        
+
          specifies three quotas:</para
       >
       <list type="bullet">
         <item>
           <para>
             <see cref="P:System.ServiceModel.Channels.ChannelPoolSettings.IdleTimeout" />
+
+            
 
             
 
@@ -40,12 +44,16 @@
 
             
 
+            
+
              to specify the interval of time after which a channel, when returned to the pool, is closed.</para
           >
         </item>
         <item>
           <para>
             <see cref="P:System.ServiceModel.Channels.ChannelPoolSettings.MaxOutboundChannelsPerEndpoint" />
+
+            
 
             
 
@@ -82,6 +90,8 @@
 
                 
 
+                
+
                 : 2 minutes.</para
               >
             </item>
@@ -91,12 +101,16 @@
 
                 
 
+                
+
                 : 10 minutes.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Channels.ChannelPoolSettings.MaxOutboundChannelsPerEndpoint" />
+
+                
 
                 
 
@@ -111,6 +125,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelPoolSettings" />
+
+            
 
             
 
@@ -139,6 +155,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Channels.ChannelPoolSettings.IdleTimeout" />
+
+            
 
             
 
@@ -174,6 +192,8 @@
 
             
 
+            
+
              quota is used to for integration with load balancers and for improving reliability. The default value is based on a conservative allocation of resources. It is suitable for a development environment and small installation scenarios. Service administrators should review the value if an installation is running out of resources or if connections are being limited despite the availability of additional resources.</para
           >
         </remarks>
@@ -206,6 +226,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Channels.ChannelPoolSettings.MaxOutboundChannelsPerEndpoint" />
+
+            
 
             
 

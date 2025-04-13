@@ -6,8 +6,12 @@
 
     
 
+    
+
     ) may be a <non_terminal
      where="25.2">pointer-type</non_terminal>
+
+    
 
     
 
@@ -16,14 +20,20 @@
 
     
 
+    
+
      or a <non_terminal
      where="11.2">reference-type</non_terminal>
+
+    
 
     
 
     . <grammar_production
     >
       <name>type</name>
+
+      
 
       
 
@@ -39,8 +49,12 @@
 
     
 
+    
+
      A <non_terminal
      where="25.2">pointer-type</non_terminal>
+
+    
 
     
 
@@ -49,8 +63,12 @@
 
     
 
+    
+
      or the keyword <keyword
     >void</keyword>
+
+    
 
     
 
@@ -59,6 +77,8 @@
       <name>
         <non_terminal where="25.2">pointer-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -79,6 +99,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11">type</non_terminal>
@@ -92,6 +114,8 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
@@ -100,8 +124,12 @@
 
     
 
+    
+
      is any type that isn't a <non_terminal
      where="11.2">reference-type</non_terminal>
+
+    
 
     
 
@@ -110,8 +138,12 @@
 
     
 
+    
+
      fields at any level of nesting. In other words, an <non_terminal
      where="25.2">unmanaged-type</non_terminal>
+
+    
 
     
 
@@ -122,8 +154,12 @@
 
         
 
+        
+
         , <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -132,8 +168,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -142,8 +182,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -152,8 +196,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -162,8 +210,12 @@
 
         
 
+        
+
         , <keyword
         >float</keyword>
+
+        
 
         
 
@@ -172,13 +224,19 @@
 
         
 
+        
+
         , <keyword
         >decimal</keyword>
 
         
 
+        
+
         , or <keyword
         >bool</keyword>
+
+        
 
         
 
@@ -190,11 +248,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > Any <non_terminal
          where="25.2">pointer-type</non_terminal>
+
+        
 
         
 
@@ -206,8 +268,12 @@
 
         
 
+        
+
          that contains fields of <non_terminal
          where="25.2">unmanaged-type</non_terminal>
+
+        
 
         
 
@@ -241,6 +307,8 @@
       
 
       
+
+      
 end example]</example
     >
   </paragraph>
@@ -256,6 +324,8 @@ int* pi, pj;  // NOT as int *pi, *pj;
 
       
 
+      
+
       end note]</note
     >
   </paragraph>
@@ -265,8 +335,12 @@ int* pi, pj;  // NOT as int *pi, *pj;
 
     
 
+    
+
     ) may be used to access this variable. For example, given a variable P of type int*, the expression *P denotes the <keyword
     >int</keyword>
+
+    
 
     
 
@@ -280,8 +354,12 @@ int* pi, pj;  // NOT as int *pi, *pj;
 
     
 
+    
+
     ) are not supported for pointers. However, conversions are permitted between different pointer types and between pointer types and the integral types. This is described in <hyperlink
     >25.4</hyperlink>
+
+    
 
     
 
@@ -293,8 +371,12 @@ int* pi, pj;  // NOT as int *pi, *pj;
 
     
 
+    
+
      may be used as the type of a volatile field (<hyperlink
     >17.4.3</hyperlink>
+
+    
 
     
 
@@ -337,6 +419,8 @@ class Test
 
       
 
+      
+
       end note]</note
     >
   </paragraph>
@@ -345,6 +429,8 @@ class Test
 
       >[Example: For example, when given a pointer to a contiguous sequence of ints, that sequence's element count, and some other <keyword
       >int</keyword>
+
+      
 
       
 
@@ -365,6 +451,8 @@ unsafe static int* Find(int* pi, int size, int value) {
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -377,11 +465,15 @@ unsafe static int* Find(int* pi, int size, int value) {
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The -&gt; operator may be used to access a member of a struct through a pointer (<hyperlink
         >25.5.2</hyperlink>
+
+        
 
         
 
@@ -393,11 +485,15 @@ unsafe static int* Find(int* pi, int size, int value) {
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The &amp; operator may be used to obtain the address of a variable (<hyperlink
         >25.5.4</hyperlink>
+
+        
 
         
 
@@ -409,11 +505,15 @@ unsafe static int* Find(int* pi, int size, int value) {
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The + and  -operators may be used to perform pointer arithmetic (<hyperlink
         >25.5.6</hyperlink>
+
+        
 
         
 
@@ -425,6 +525,8 @@ unsafe static int* Find(int* pi, int size, int value) {
 
         
 
+        
+
         ). </list_item
       >
       <list_item
@@ -433,11 +535,15 @@ unsafe static int* Find(int* pi, int size, int value) {
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The fixed statement may be used to temporarily fix a variable so its address can be obtained (<hyperlink
         >25.6</hyperlink>
+
+        
 
         
 

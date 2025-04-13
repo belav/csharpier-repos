@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the content of the configuration file siteMap section.</para
       >
     </remarks>
@@ -45,13 +47,19 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.SiteMapSection" />
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -63,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.SiteMapSection" />
+
+            
 
             
 
@@ -126,6 +136,8 @@
 
             
 
+            
+
              property returns a Boolean value indicating whether or not the ASP.NET navigation feature can be accessed at run time.</para
           >
         </remarks>
@@ -183,6 +195,8 @@
 
             
 
+            
+
              property names which provider is used by default.</para
           >
         </remarks>
@@ -194,8 +208,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Configuration.ProviderSettings" />
+
+            
 
             
 

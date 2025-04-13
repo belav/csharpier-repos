@@ -22,8 +22,12 @@
 
         
 
+        
+
          controls how a <see
          cref="T:System.Drawing.Printing.PrintDocument" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          invokes the print controller's <see
          cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+        
 
         
 
@@ -52,13 +64,19 @@
 
         
 
+        
+
          methods, which in turn tell the printer how to print the document. Print preview uses a specialized <see
          cref="T:System.Drawing.Printing.PrintController" />
 
         
 
+        
+
         . For an example of a print controller that is specialized for print preview, see the <see
          cref="T:System.Drawing.Printing.PreviewPrintController" />
+
+        
 
         
 
@@ -69,8 +87,12 @@
 
         
 
+        
+
          is used by <see
          cref="T:System.Drawing.Printing.PrintDocument" />
+
+        
 
         
 
@@ -82,8 +104,12 @@
 
         
 
+        
+
          that help accomplish common tasks. The <see
          cref="T:System.Drawing.Printing.StandardPrintController" />
+
+        
 
         
 
@@ -92,8 +118,12 @@
 
         
 
+        
+
          generates a preview of what the document will look like when printed and is used by the <see
          cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+        
 
         
 
@@ -102,8 +132,12 @@
 
         
 
+        
+
          classes. The <see
          cref="T:System.Windows.Forms.PrintControllerWithStatusDialog" />
+
+        
 
         
 
@@ -115,8 +149,12 @@
 
         
 
+        
+
          namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -141,6 +179,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PrintController" />
+
+            
 
             
 
@@ -173,6 +213,8 @@
 
             
 
+            
+
              is used for print preview.</para
           >
         </summary>
@@ -199,8 +241,12 @@
 
             
 
+            
+
              is called immediately after the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -209,8 +255,12 @@
 
             
 
+            
+
              event. If an exception is thrown inside a <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -219,8 +269,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -231,8 +285,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -241,8 +299,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -251,8 +313,12 @@
 
             
 
+            
+
              to a graphic of a single page. (Use the <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -261,13 +327,19 @@
 
             
 
+            
+
              method clears the <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -283,8 +355,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -295,8 +371,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+          
 
           
 
@@ -329,13 +409,19 @@
 
             
 
+            
+
              is called immediately after the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
+
+            
 
             
 
@@ -346,8 +432,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -356,8 +446,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -366,8 +460,12 @@
 
             
 
+            
+
              to a graphic of a single page. (Use the <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -376,13 +474,19 @@
 
             
 
+            
+
              method clears the <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -398,8 +502,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -410,8 +518,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 
@@ -444,13 +556,19 @@
 
             
 
+            
+
              is called immediately before the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -461,8 +579,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -471,8 +593,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -481,8 +607,12 @@
 
             
 
+            
+
              to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.PrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -491,8 +621,12 @@
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -501,6 +635,8 @@
           <para
             >Use the <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -519,8 +655,12 @@
 
             
 
+            
+
              that represents a page from a <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -532,8 +672,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -544,8 +688,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+          
 
           
 
@@ -578,13 +726,19 @@
 
             
 
+            
+
              is called immediately after the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
+
+            
 
             
 
@@ -596,8 +750,12 @@
 
             
 
+            
+
              method to determine when and how to print a document. For example, you can delay printing for 30 minutes or adjust the printer settings for the document. <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -606,8 +764,12 @@
 
             
 
+            
+
              that is sent to the printer. After <see
              cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -616,8 +778,12 @@
 
             
 
+            
+
              method sets the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -626,13 +792,19 @@
 
             
 
+            
+
              method clears the <see
              cref="T:System.Drawing.Graphics" />
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -644,8 +816,12 @@
 
             
 
+            
+
              method is a good place to verify that <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            
 
             
 
@@ -661,8 +837,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -673,8 +853,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 

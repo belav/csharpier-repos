@@ -17,8 +17,12 @@
 
         
 
+        
+
          is ideal for caching scenarios, where your ASP.NET application or middle-tier service needs to keep certain information cached in memory. <see
          cref="T:System.Data.SqlClient.SqlDependency" />
+
+        
 
         
 
@@ -30,13 +34,19 @@
 
         
 
+        
+
          object to one or more <see
          cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
+        
+
          objects. To receive notifications, you need to subscribe to the <see
          cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
+
+        
 
         
 
@@ -48,13 +58,19 @@
 
           
 
+          
+
            was designed to be used in ASP.NET or middle-tier services where there is a relatively small number of servers having dependencies active against the database. It was not designed for use in client applications, where hundreds or thousands of client computers would have <see
            cref="T:System.Data.SqlClient.SqlDependency" />
 
           
 
+          
+
            objects set up for a single database server. If you are developing an application where you need reliable sub-second notifications when data changes, review the sections Planning an Efficient Query Notifications Strategy and Alternatives to Query Notifications in the <see
            cref="http://go.microsoft.com/fwlink/?LinkId=211984">Planning for Notifications</see>
+
+          
 
           
 
@@ -69,12 +85,16 @@
 
         
 
+        
+
          and "Building Notification Solutions" in SQL Server Books Online.</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
+
+          
 
           
 
@@ -157,13 +177,19 @@
 
         
 
+        
+
          object represents a query notification dependency between an application and an instance of SQL Server. An application can create a <see
          cref="T:System.Data.SqlClient.SqlDependency" />
 
         
 
+        
+
          object and register to receive notifications via the <see
          cref="T:System.Data.SqlClient.OnChangeEventHandler" />
+
+        
 
         
 
@@ -188,13 +214,19 @@
 
             
 
+            
+
              object using the default Service Broker service name and time-out. At some point after construction, you must use the <see
              cref="M:System.Data.SqlClient.SqlDependency.AddCommandDependency(System.Data.SqlClient.SqlCommand)" />
 
             
 
+            
+
              method to associate one or more commands to this <see
              cref="T:System.Data.SqlClient.SqlDependency" />
+
+            
 
             
 
@@ -273,6 +305,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Data.SqlClient.SqlDependency" />
+
+            
 
             
 
@@ -302,8 +336,12 @@
 
             
 
+            
+
              class, and binds it to a <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -385,8 +423,12 @@
 
             
 
+            
+
              class and associates it with the <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -398,8 +440,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlCommand" />
+
+          
 
           
 
@@ -408,8 +454,12 @@
 
           
 
+          
+
            object. The constructor will set up a <see
            cref="T:System.Data.Sql.SqlNotificationRequest" />
+
+          
 
           
 
@@ -510,8 +560,12 @@
 
             
 
+            
+
              class, associates it with the <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -523,8 +577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlCommand" />
+
+          
 
           
 
@@ -533,8 +591,12 @@
 
           
 
+          
+
            object. The constructor sets up a <see
            cref="T:System.Data.Sql.SqlNotificationRequest" />
+
+          
 
           
 
@@ -545,8 +607,12 @@
 
           
 
+          
+
           The notification request options to be used by this dependency.  <paramref
            name="null" />
+
+          
 
           
 
@@ -554,6 +620,8 @@
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -655,8 +723,12 @@
 
             
 
+            
+
              object with this <see
              cref="T:System.Data.SqlClient.SqlDependency" />
+
+            
 
             
 
@@ -668,8 +740,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlClient.SqlCommand" />
+
+          
 
           
 
@@ -696,8 +772,12 @@
 
             
 
+            
+
              event, you can check the <see
              cref="P:System.Data.SqlClient.SqlDependency.HasChanges" />
+
+            
 
             
 
@@ -706,6 +786,8 @@
           <para
             >The <see
              cref="P:System.Data.SqlClient.SqlDependency.HasChanges" />
+
+            
 
             
 
@@ -737,8 +819,12 @@
 
             
 
+            
+
              property is used to uniquely identify a given <see
              cref="T:System.Data.SqlClient.SqlDependency" />
+
+            
 
             
 
@@ -750,6 +836,8 @@
           <para
             >Gets a value that uniquely identifies this instance of the <see
              cref="T:System.Data.SqlClient.SqlDependency" />
+
+            
 
             
 
@@ -778,13 +866,19 @@
 
             
 
+            
+
              occurs when the results for the associated command change. If you are not using <see
              cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
 
             
 
+            
+
             , you can check the <see
              cref="P:System.Data.SqlClient.SqlDependency.HasChanges" />
+
+            
 
             
 
@@ -796,8 +890,12 @@
 
             
 
+            
+
              event does not necessarily imply a change in the data. Other circumstances, such as time-out expired and failure to set the notification request, also generate <see
              cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
+
+            
 
             
 
@@ -809,6 +907,8 @@
           <para
             >Occurs when a notification is received for any of the commands associated with this <see
              cref="T:System.Data.SqlClient.SqlDependency" />
+
+            
 
             
 
@@ -838,8 +938,12 @@
 
             
 
+            
+
              for receiving dependency notifications from the instance of ssNoVersion specified by the <paramref
              name="connectionString" />
+
+            
 
             
 
@@ -848,6 +952,8 @@
           <para
             >For additional remarks, see <see
              cref="Overload:System.Data.SqlClient.SqlDependency.Start" />
+
+            
 
             
 
@@ -864,6 +970,8 @@
         </returns>
         <param name="connectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -896,8 +1004,12 @@
 
             
 
+            
+
              for receiving dependency notifications from the instance of SQL Server specified by the <paramref
              name="connectionString" />
+
+            
 
             
 
@@ -909,8 +1021,12 @@
 
             
 
+            
+
              creates a temporary queue and service in the server that is used for the entire process, even if the process involves more than one <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -919,6 +1035,8 @@
           <para
             >For additional remarks, see <see
              cref="Overload:System.Data.SqlClient.SqlDependency.Start" />
+
+            
 
             
 
@@ -938,10 +1056,14 @@
 
           
 
+          
+
           The connection string for the instance of SQL Server from which to obtain change notifications.</param
         >
         <param name="queue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -970,8 +1092,12 @@
 
             
 
+            
+
              method must be called for each <see
              cref="Overload:System.Data.SqlClient.SqlDependency.Start" />
+
+            
 
             
 
@@ -980,8 +1106,12 @@
 
             
 
+            
+
              requests as <see
              cref="Overload:System.Data.SqlClient.SqlDependency.Start" />
+
+            
 
             
 
@@ -996,6 +1126,8 @@
 
             
 
+            
+
              call.</para
           >
         </summary>
@@ -1007,8 +1139,12 @@
 
             
 
+            
+
              was unbound from the listener, but there are is at least one other <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -1020,8 +1156,12 @@
 
           
 
+          
+
           Connection string for the instance of SQL Server that was used in a previous <see
            cref="M:System.Data.SqlClient.SqlDependency.Start(System.String)" />
+
+          
 
           
 
@@ -1054,8 +1194,12 @@
 
             
 
+            
+
              method must be called for each <see
              cref="Overload:System.Data.SqlClient.SqlDependency.Start" />
+
+            
 
             
 
@@ -1064,8 +1208,12 @@
 
             
 
+            
+
              requests as <see
              cref="Overload:System.Data.SqlClient.SqlDependency.Start" />
+
+            
 
             
 
@@ -1080,6 +1228,8 @@
 
             
 
+            
+
              call.</para
           >
         </summary>
@@ -1091,8 +1241,12 @@
 
             
 
+            
+
              was unbound from the listener, but there is at least one other <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -1104,8 +1258,12 @@
 
           
 
+          
+
           Connection string for the instance of SQL Server that was used in a previous <see
            cref="M:System.Data.SqlClient.SqlDependency.Start(System.String,System.String)" />
+
+          
 
           
 
@@ -1116,8 +1274,12 @@
 
           
 
+          
+
           The SQL Server Service Broker queue that was used in a previous <see
            cref="M:System.Data.SqlClient.SqlDependency.Start(System.String,System.String)" />
+
+          
 
           
 

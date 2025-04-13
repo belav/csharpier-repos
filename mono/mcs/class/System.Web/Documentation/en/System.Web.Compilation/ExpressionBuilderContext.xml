@@ -19,13 +19,19 @@
 
         
 
+        
+
          object is typically used to obtain a virtual path or a <see
          cref="P:System.Web.UI.Control.TemplateControl" />
 
         
 
+        
+
          property for use with an expression builder. For more information, see <see
          cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+        
 
         
 
@@ -37,6 +43,8 @@
       <para
         >Provides the context for an <see
          cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
 
             
 
+            
+
              class using the specified virtual path.</para
           >
         </summary>
@@ -73,8 +83,12 @@
 
           
 
+          
+
           The virtual path of the file associated with the specified <see
            cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+          
 
           
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
              class using the specified template control.</para
           >
         </summary>
@@ -113,13 +129,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.TemplateControl" />
 
           
 
+          
+
            to use with the specified <see
            cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+          
 
           
 
@@ -151,13 +173,19 @@
 
             
 
+            
+
              object with information regarding the page that might be required. When an instance of a control is part of a control template, the <see
              cref="P:System.Web.Compilation.ExpressionBuilderContext.TemplateControl" />
 
             
 
+            
+
              property contains a reference to the containing control. For more information, see <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -172,8 +200,12 @@
 
             
 
+            
+
              object with a reference to a <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -200,6 +232,8 @@
           <para
             >Returns a virtual path to the file associated with the <see
              cref="T:System.Web.Compilation.ExpressionBuilderContext" />
+
+            
 
             
 

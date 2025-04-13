@@ -26,6 +26,8 @@
 
         
 
+        
+
          property contains a list of the references contained within the discovery document.</para
       >
     </remarks>
@@ -47,6 +49,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -81,8 +85,12 @@
 
             
 
+            
+
              can be deserialized into a <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -97,8 +105,12 @@
 
             
 
+            
+
              can be deserialized into a <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -110,13 +122,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            that is tested whether it can be deserialized into a <see
            cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+          
 
           
 
@@ -141,6 +159,8 @@
           <para
             >A discovery document contains references to documents describing Web Services. These references are XML elements contained within a discovery XML element. That discovery XML element is a member of the XML namespace specified by the <see
              cref="F:System.Web.Services.Discovery.DiscoveryDocument.Namespace" />
+
+            
 
             
 
@@ -179,8 +199,12 @@
 
             
 
+            
+
              from the passed <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -195,8 +219,12 @@
 
             
 
+            
+
              containing the contents of a discovery document from the passed <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -208,13 +236,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            from which to read the <see
            cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+          
 
           
 
@@ -252,8 +286,12 @@
 
             
 
+            
+
              from the passed <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -268,8 +306,12 @@
 
             
 
+            
+
              containing the contents of a discovery document from the passed <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -304,8 +346,12 @@
 
             
 
+            
+
              from the passed <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -320,8 +366,12 @@
 
             
 
+            
+
              containing the contents of a discovery document from the passed <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -333,13 +383,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            from which to read the <see
            cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+          
 
           
 
@@ -368,6 +424,8 @@
           <para
             >A discovery document contains references to information about the existence of XML Web services. These references can refer to service descriptions, XSD schemas, or other discovery documents. The <see
              cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
+
+            
 
             
 
@@ -408,8 +466,12 @@
 
             
 
+            
+
              into the passed <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -421,13 +483,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
 
           
 
+          
+
            into which this <see
            cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+          
 
           
 
@@ -462,8 +530,12 @@
 
             
 
+            
+
              into the passed <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -499,8 +571,12 @@
 
             
 
+            
+
              into the passed <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 

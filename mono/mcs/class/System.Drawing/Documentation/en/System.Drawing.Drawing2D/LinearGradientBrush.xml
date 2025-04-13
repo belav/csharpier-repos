@@ -28,8 +28,12 @@
 
         
 
+        
+
          class, the <see
          cref="Overload:System.Drawing.Drawing2D.LinearGradientBrush.SetSigmaBellShape" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          methods. Customize the direction of the gradient by specifying the <see
          cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
+
+        
 
         
 
@@ -51,11 +59,15 @@
 
         
 
+        
+
          property to create a multicolor gradient.</para
       >
       <para
         >The <see
          cref="P:System.Drawing.Drawing2D.LinearGradientBrush.Transform" />
+
+        
 
         
 
@@ -67,6 +79,8 @@
       <para
         >Encapsulates a <see
          cref="T:System.Drawing.Brush" />
+
+        
 
         
 
@@ -98,6 +112,8 @@
 
             
 
+            
+
              class with the specified points and colors.</para
           >
         </summary>
@@ -106,8 +122,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -118,8 +138,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -130,8 +154,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -142,8 +170,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -178,6 +210,8 @@
 
             
 
+            
+
              class with the specified points and colors.</para
           >
         </summary>
@@ -186,8 +220,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -198,8 +236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -210,8 +252,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -222,8 +268,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -258,6 +308,8 @@
 
             
 
+            
+
              class based on a rectangle, starting and ending colors, and orientation.</para
           >
         </summary>
@@ -266,8 +318,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -278,8 +334,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -290,8 +350,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -302,8 +366,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
+
+          
 
           
 
@@ -343,6 +411,8 @@
 
             
 
+            
+
              class based on a rectangle, starting and ending colors, and an orientation angle.</para
           >
         </summary>
@@ -351,8 +421,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -363,8 +437,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -375,8 +453,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -384,6 +466,8 @@
         >
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -418,6 +502,8 @@
 
             
 
+            
+
              based on a rectangle, starting and ending colors, and an orientation mode.</para
           >
         </summary>
@@ -426,8 +512,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -438,8 +528,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -450,8 +544,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -462,8 +560,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.LinearGradientMode" />
+
+          
 
           
 
@@ -503,6 +605,8 @@
 
             
 
+            
+
              class based on a rectangle, starting and ending colors, and an orientation angle.</para
           >
         </summary>
@@ -511,8 +615,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -523,8 +631,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -535,8 +647,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -544,6 +660,8 @@
         >
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,6 +702,8 @@
 
             
 
+            
+
              class based on a rectangle, starting and ending colors, and an orientation angle.</para
           >
         </summary>
@@ -592,8 +712,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -604,8 +728,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -616,8 +744,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -628,6 +760,8 @@
 
           
 
+          
+
           The angle, measured in degrees clockwise from the x-axis, of the gradient's orientation line. </param
         >
         <param name="isAngleScaleable">
@@ -635,8 +769,12 @@
 
           
 
+          
+
           Set to true to specify that the angle is affected by the transform associated with this <see
            cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+          
 
           
 
@@ -677,6 +815,8 @@
 
             
 
+            
+
              class based on a rectangle, starting and ending colors, and an orientation angle.</para
           >
         </summary>
@@ -685,8 +825,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -697,8 +841,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -709,8 +857,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -721,6 +873,8 @@
 
           
 
+          
+
           The angle, measured in degrees clockwise from the x-axis, of the gradient's orientation line. </param
         >
         <param name="isAngleScaleable">
@@ -728,8 +882,12 @@
 
           
 
+          
+
           Set to true to specify that the angle is affected by the transform associated with this <see
            cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+          
 
           
 
@@ -761,6 +919,8 @@
 
             
 
+            
+
              contains corresponding arrays of blend factors and positions. The blend factors specify the percentages of the starting color and ending color to use at the corresponding position. The positions are given as a percentage of distance along the gradient line.</para
           >
         </remarks>
@@ -769,6 +929,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Drawing.Drawing2D.Blend" />
+
+            
 
             
 
@@ -798,6 +960,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -806,6 +970,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+            
 
             
 
@@ -833,6 +999,8 @@
           <para
             >Gets or sets a value indicating whether gamma correction is enabled for this <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+            
 
             
 
@@ -865,11 +1033,15 @@
 
             
 
+            
+
              contains corresponding arrays of colors and positions. The positions are values from 0 through 1 that specify the percentage of the distance along the gradient line where the corresponding color is located.</para
           >
           <para
             >Setting this property creates a multicolor gradient with one color at each position along the gradient line. Setting this property nullifies all previous color, position, and falloff settings for this <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+            
 
             
 
@@ -881,6 +1053,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Drawing.Drawing2D.ColorBlend" />
+
+            
 
             
 
@@ -938,8 +1112,12 @@
 
             
 
+            
+
              that represents the local geometric transform of this <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+            
 
             
 
@@ -948,8 +1126,12 @@
 
             
 
+            
+
              by prepending the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -961,8 +1143,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -997,13 +1183,19 @@
 
             
 
+            
+
              that represents the local geometric transform of this <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
             
 
+            
+
              by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1015,8 +1207,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1027,8 +1223,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1079,6 +1279,8 @@
 
             
 
+            
+
              property to identity.</para
           >
         </summary>
@@ -1105,6 +1307,8 @@
         </summary>
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1140,6 +1344,8 @@
 
           
 
+          
+
           The angle of rotation. </param
         >
         <param name="order">
@@ -1147,8 +1353,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1181,10 +1391,14 @@
 
           
 
+          
+
           The amount by which to scale the transform in the x-axis direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1221,10 +1435,14 @@
 
           
 
+          
+
           The amount by which to scale the transform in the x-axis direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1235,8 +1453,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1266,8 +1488,12 @@
 
             
 
+            
+
             , which is the point where the gradient is composed only of the ending color. The <paramref
              name="focus" />
+
+            
 
             
 
@@ -1280,6 +1506,8 @@
         </summary>
         <param name="focus">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1313,8 +1541,12 @@
 
             
 
+            
+
             , which is the point where the gradient is composed only of the ending color. The <paramref
              name="focus" />
+
+            
 
             
 
@@ -1330,6 +1562,8 @@
 
           
 
+          
+
           A value from 0 through 1 that specifies the center of the gradient (the point where the gradient is composed of only the ending color). </param
         >
         <param name="scale">
@@ -1337,8 +1571,12 @@
 
           
 
+          
+
           A value from 0 through1 that specifies how fast the colors falloff from the starting color to <paramref
            name="focus" />
+
+          
 
           
 
@@ -1368,8 +1606,12 @@
 
             
 
+            
+
             , which is the point where the gradient is composed only of the ending color. The <paramref
              name="focus" />
+
+            
 
             
 
@@ -1382,6 +1624,8 @@
         </summary>
         <param name="focus">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1415,8 +1659,12 @@
 
             
 
+            
+
             , which is the point where the gradient is composed only of the ending color. The <paramref
              name="focus" />
+
+            
 
             
 
@@ -1432,6 +1680,8 @@
 
           
 
+          
+
           A value from 0 through 1 that specifies the center of the gradient (the point where the gradient is composed of only the ending color). </param
         >
         <param name="scale">
@@ -1439,8 +1689,12 @@
 
           
 
+          
+
           A value from 0 through 1 that specifies how fast the colors falloff from the <paramref
            name="focus" />
+
+          
 
           
 
@@ -1472,6 +1726,8 @@
 
             
 
+            
+
              property is a copy of the brush's geometric transform, you should dispose of the matrix when you no longer need it.</para
           >
         </remarks>
@@ -1483,8 +1739,12 @@
 
             
 
+            
+
              that defines a local geometric transform for this <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+            
 
             
 
@@ -1518,10 +1778,14 @@
 
           
 
+          
+
           The value of the translation in x. </param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1558,6 +1822,8 @@
 
           
 
+          
+
           The value of the translation in x. </param
         >
         <param name="dy">
@@ -1565,10 +1831,14 @@
 
           
 
+          
+
           The value of the translation in y. </param
         >
         <param name="order">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1601,8 +1871,12 @@
 
             
 
+            
+
              enumeration that indicates the wrap mode for this <see
              cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+
+            
 
             
 

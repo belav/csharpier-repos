@@ -34,11 +34,15 @@
 
         
 
+        
+
          to generate native assembly images.  </para
       >
       <para
         >Apply the <see
          cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
 
         
 
+        
+
         ) will cause Ngen.exe to bind to that dependency.  Using this hint allows Ngen.exe to generate code that will result in a reduced working set and improved throughput but at the cost of always loading the dependency when the parent assembly is loaded. </para
       >
       <para
@@ -58,13 +64,19 @@
 
         
 
+        
+
          attribute to an assembly with a value of <see
          cref="F:System.Runtime.CompilerServices.LoadHint.Default" />
 
         
 
+        
+
         , the native image generation service consults the dependent assembly for its preferred default binding, which is specified by the <see
          cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
       <para
         >Provides a hint to the common language runtime (CLR) indicating how likely a dependency is to be loaded. This class is used in a dependent assembly to indicate what hint should be used when the parent does not specify the <see
          cref="T:System.Runtime.CompilerServices.DependencyAttribute" />
+
+        
 
         
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.CompilerServices.LoadHint" />
+
+            
 
             
 
@@ -125,8 +143,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.CompilerServices.LoadHint" />
+
+          
 
           
 
@@ -162,8 +184,12 @@
 
             
 
+            
+
              enumeration used by the <see
              cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+
+            
 
             
 
@@ -175,6 +201,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.CompilerServices.LoadHint" />
+
+            
 
             
 

@@ -27,13 +27,19 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Drawing.Graphics" />
 
         
 
+        
+
          object used to do the drawing. Areas filled using a <see
          cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          object that fills the interior of a <see
          cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+        
 
         
 
@@ -78,6 +88,8 @@
 
             
 
+            
+
              class with the specified path.</para
           >
         </summary>
@@ -86,13 +98,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
           
 
+          
+
            that defines the area filled by this <see
            cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+          
 
           
 
@@ -124,6 +142,8 @@
 
             
 
+            
+
              class with the specified points.</para
           >
         </summary>
@@ -132,8 +152,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              class with the specified points.</para
           >
         </summary>
@@ -173,8 +199,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -207,6 +237,8 @@
 
             
 
+            
+
              class with the specified points and wrap mode.</para
           >
         </summary>
@@ -215,8 +247,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -227,13 +263,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
+          
+
            that specifies how fills drawn with this <see
            cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+          
 
           
 
@@ -266,6 +308,8 @@
 
             
 
+            
+
              class with the specified points and wrap mode.</para
           >
         </summary>
@@ -274,8 +318,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -286,13 +334,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WrapMode" />
 
           
 
+          
+
            that specifies how fills drawn with this <see
            cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+          
 
           
 
@@ -324,6 +378,8 @@
 
             
 
+            
+
              contains corresponding arrays of blend factors and positions. The blend factors specify the percentages of the starting color and ending color to use at the corresponding position. The positions are given as a percentage of distance along the gradient path.</para
           >
         </remarks>
@@ -332,6 +388,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Drawing.Drawing2D.Blend" />
+
+            
 
             
 
@@ -407,6 +465,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -415,6 +475,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+            
 
             
 
@@ -470,6 +532,8 @@
 
             
 
+            
+
              contains corresponding arrays of colors and positions. The positions are values from 0 through 1 that specify the percentage of the distance along the gradient path where the corresponding color is located.</para
           >
         </remarks>
@@ -478,6 +542,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Drawing.Drawing2D.ColorBlend" />
+
+            
 
             
 
@@ -513,8 +579,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -550,8 +620,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -562,8 +636,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -589,6 +667,8 @@
           <para
             >Gets a bounding rectangle for this <see
              cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+            
 
             
 
@@ -618,6 +698,8 @@
 
             
 
+            
+
              property to identity.</para
           >
         </summary>
@@ -644,6 +726,8 @@
         </summary>
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -679,6 +763,8 @@
 
           
 
+          
+
           The angle (extent) of rotation. </param
         >
         <param name="order">
@@ -686,8 +772,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -720,10 +810,14 @@
 
           
 
+          
+
           The transform scale factor in the x-axis direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,10 +854,14 @@
 
           
 
+          
+
           The transform scale factor in the x-axis direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -774,8 +872,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -805,6 +907,8 @@
 
             
 
+            
+
              array, the first color in the array is used for the ending color. The colors specified in this array are used for discrete points on the brush's boundary path.</para
           >
         </remarks>
@@ -814,6 +918,8 @@
         </summary>
         <param name="focus">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -847,6 +953,8 @@
 
             
 
+            
+
              array, the first color in the array is used for the ending color. The colors specified in this array are colors used for discrete points on the brush's boundary path.</para
           >
           <para>By default, as you move from the boundary of a path gradient to the center point, the color changes gradually from the boundary color to the center color. You can customize the positioning and blending of the boundary and center colors by calling this method.</para>
@@ -860,10 +968,14 @@
 
           
 
+          
+
           A value from 0 through 1 that specifies where, along any radial from the center of the path to the path's boundary, the center color will be at its highest intensity. A value of 1 (the default) places the highest intensity at the center of the path. </param
         >
         <param name="scale">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -893,6 +1005,8 @@
 
             
 
+            
+
              array, the first color in the array is used for the ending color. The colors specified in this array are colors used for discrete points on the brush's boundary path.</para
           >
           <para>By default, as you move from the boundary of a path gradient to the center point, the color changes gradually from the boundary color to the center color. You can customize the positioning and blending of the boundary and center colors by calling this method.</para>
@@ -903,6 +1017,8 @@
         </summary>
         <param name="focus">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -936,6 +1052,8 @@
 
             
 
+            
+
              array, the first color in the array is used for the ending color. The colors specified in this array are colors used for discrete points on the brush's boundary path.</para
           >
           <para>By default, as you move from the boundary of a path gradient to the center point, the color changes gradually from the boundary color to the center color. You can customize the positioning and blending of the boundary and center colors by calling this method.</para>
@@ -949,10 +1067,14 @@
 
           
 
+          
+
           A value from 0 through 1 that specifies where, along any radial from the center of the path to the path's boundary, the center color will be at its highest intensity. A value of 1 (the default) places the highest intensity at the center of the path. </param
         >
         <param name="scale">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -984,8 +1106,12 @@
 
             
 
+            
+
              in the <see
              cref="P:System.Drawing.Drawing2D.PathGradientBrush.SurroundColors" />
+
+            
 
             
 
@@ -997,6 +1123,8 @@
           <para
             >Gets or sets an array of colors that correspond to the points in the path this <see
              cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+            
 
             
 
@@ -1029,6 +1157,8 @@
 
             
 
+            
+
              property is a copy of the brush's geometric transform, you should dispose of the matrix when you no longer need it.</para
           >
         </remarks>
@@ -1040,8 +1170,12 @@
 
             
 
+            
+
              that defines a local geometric transform for this <see
              cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+            
 
             
 
@@ -1075,10 +1209,14 @@
 
           
 
+          
+
           The value of the translation in x. </param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1115,6 +1253,8 @@
 
           
 
+          
+
           The value of the translation in x. </param
         >
         <param name="dy">
@@ -1122,10 +1262,14 @@
 
           
 
+          
+
           The value of the translation in y. </param
         >
         <param name="order">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1158,8 +1302,12 @@
 
             
 
+            
+
              that indicates the wrap mode for this <see
              cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+            
 
             
 

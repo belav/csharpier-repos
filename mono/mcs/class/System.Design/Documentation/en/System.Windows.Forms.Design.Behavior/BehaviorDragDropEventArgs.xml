@@ -22,8 +22,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -62,13 +68,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
 
           
 
+          
+
            of <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -96,6 +108,8 @@
           <para
             >Gets the list of <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 

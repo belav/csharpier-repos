@@ -29,6 +29,8 @@
 
         
 
+        
+
          from within a service operation to access the current operation execution environment. In particular, the operation context is used to access callback channels in duplex services, to store extra state data across portions of the operations, and to access incoming message headers and properties as well as add outgoing message headers and properties.</para
       >
       <para
@@ -39,11 +41,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.OperationContext" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -72,6 +82,8 @@
 
             
 
+            
+
              property returns the security environment under which the method executes.</para
           >
         </item>
@@ -82,8 +94,12 @@
 
             
 
+            
+
              property gets the operation's <see
              cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+            
 
             
 
@@ -97,8 +113,12 @@
 
             
 
+            
+
              property returns an extension collection for the current <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -112,8 +132,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.ServiceModel.ServiceHostBase" />
+
+            
 
             
 
@@ -127,8 +151,12 @@
 
             
 
+            
+
              property returns a value that indicates whether the method has supporting tokens, if so, the <see
              cref="P:System.ServiceModel.OperationContext.SupportingTokens" />
+
+            
 
             
 
@@ -142,13 +170,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.OperationContext.IncomingMessageProperties" />
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.OperationContext.IncomingMessageVersion" />
+
+            
 
             
 
@@ -162,6 +196,8 @@
 
             
 
+            
+
              event is fired when the operation has completed.</para
           >
         </item>
@@ -172,8 +208,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.OperationContext.OutgoingMessageProperties" />
+
+            
 
             
 
@@ -187,8 +227,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.ServiceModel.Channels.RequestContext" />
+
+            
 
             
 
@@ -202,8 +246,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -217,6 +265,8 @@
 
             
 
+            
+
              property returns the session identifier for the current channel and object.</para
           >
         </item>
@@ -227,6 +277,8 @@
 
             
 
+            
+
              method returns a callback channel to the caller in the case of duplex communication.</para
           >
         </item>
@@ -234,6 +286,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.OperationContext.SetTransactionComplete" />
+
+            
 
             
 
@@ -274,6 +328,8 @@
 
             
 
+            
+
              constructor to create a new operation context within the scope of which the proxy is associated in order to modify outbound items such as headers.</para
           >
         </remarks>
@@ -285,8 +341,12 @@
 
             
 
+            
+
              class that uses the specified <see
              cref="T:System.ServiceModel.IContextChannel" />
+
+            
 
             
 
@@ -298,13 +358,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IContextChannel" />
 
           
 
+          
+
            used to create a new client <see
            cref="T:System.ServiceModel.OperationContext" />
+
+          
 
           
 
@@ -339,6 +405,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -367,6 +435,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.OperationContext.Current" />
+
+            
 
             
 
@@ -430,8 +500,12 @@
 
             
 
+            
+
              property to obtain a collection of all extensions of the <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -439,6 +513,8 @@
              type="text/html">
               <a href="bc88cefc-31fb-428e-9447-6d20a7d452af">Extensible Objects</a>
             </format>
+
+            
 
             
 
@@ -477,6 +553,8 @@
 
             
 
+            
+
              property to obtain a channel that you can use to call operations on the client instance that called the service. </para
           >
         </remarks>
@@ -492,11 +570,15 @@
 
             
 
+            
+
              property.</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -550,6 +632,8 @@
 
             
 
+            
+
              for the current service object.</para
           >
         </summary>
@@ -582,6 +666,8 @@
           <para
             >Gets the incoming message headers for the <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -620,6 +706,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -655,6 +743,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -686,6 +776,8 @@
 
             
 
+            
+
              property to access the run-time object that manages the current service object.</para
           >
         </remarks>
@@ -694,6 +786,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -743,8 +837,12 @@
 
             
 
+            
+
              event to dispose parameters or a return value if you set <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
+
+            
 
             
 
@@ -753,8 +851,12 @@
 
             
 
+            
+
              to false to prevent indigo2 from calling <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -768,13 +870,19 @@
 
               
 
+              
+
                event for an <see
                cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
 
               
 
+              
+
                operation, it is possible to block when the response is received. The proper way to handle this is to schedule work on another thread when <see
                cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+
+              
 
               
 
@@ -818,6 +926,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -850,6 +960,8 @@
           <para
             >Gets the message properties for the outbound message in the active <see
              cref="T:System.ServiceModel.OperationContext" />
+
+            
 
             
 
@@ -888,6 +1000,8 @@
 
             
 
+            
+
              implementation for this method.</para
           >
         </summary>
@@ -920,6 +1034,8 @@
 
             
 
+            
+
              within which this method executes.</para
           >
         </summary>
@@ -943,6 +1059,8 @@
           <para
             >Gets the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -974,13 +1092,19 @@
 
             
 
+            
+
              to false. Typically, services do this on some but not all operations. When <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
 
             
 
+            
+
              is false the transaction completes automatically. Use <see
              cref="M:System.ServiceModel.OperationContext.SetTransactionComplete" />
+
+            
 
             
 
@@ -1020,8 +1144,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.IdentityModel.Tokens.SecurityToken" />
+
+            
 
             
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
          is used to specify the properties used with complex data binding, such as binding based on <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -47,11 +51,15 @@
 
         
 
+        
+
          attribute is specified at the class level. It is inheritable and does not allow multiple attributes on the same class. </para
       >
       <para
         >A control can support both simple binding, with <see
          cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -95,8 +105,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" />
+
+            
 
             
 
@@ -108,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -142,13 +158,19 @@
 
             
 
+            
+
              property to <paramref
              name="dataSource" />
 
             
 
+            
+
              and the <see
              cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" />
+
+            
 
             
 
@@ -163,11 +185,15 @@
 
             
 
+            
+
              class using the specified data source. </para
           >
         </summary>
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,8 +228,12 @@
 
             
 
+            
+
              property to <paramref
              name="dataSource" />
+
+            
 
             
 
@@ -212,8 +242,12 @@
 
             
 
+            
+
              property to <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -228,6 +262,8 @@
 
             
 
+            
+
              class using the specified data source and data member. </para
           >
         </summary>
@@ -236,10 +272,14 @@
 
           
 
+          
+
           The name of the property to be used as the data source.</param
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,6 +308,8 @@
 
             
 
+            
+
              property is set in the constructors for this class.</para
           >
         </remarks>
@@ -276,6 +318,8 @@
           <para
             >Gets the name of the data member property for the component to which the <see
              cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -305,6 +349,8 @@
 
             
 
+            
+
              property is set in the constructors for this class.</para
           >
         </remarks>
@@ -313,6 +359,8 @@
           <para
             >Gets the name of the data source property for the component to which the <see
              cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -347,8 +395,12 @@
 
             
 
+            
+
              member is a static, read-only field that defines an instance of the <see
              cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -360,6 +412,8 @@
           <para
             >Represents the default value for the <see
              cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -394,8 +448,12 @@
 
             
 
+            
+
              method returns true if <paramref
              name="obj" />
+
+            
 
             
 
@@ -404,13 +462,19 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" />
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" />
+
+            
 
             
 
@@ -425,8 +489,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -442,13 +510,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" />
+
+          
 
           
 

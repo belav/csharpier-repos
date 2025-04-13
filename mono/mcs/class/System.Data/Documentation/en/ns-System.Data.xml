@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace provides access to classes that represent the ADO.NET architecture. ADO.NET lets you build components that efficiently manage data from multiple data sources.</para
       >
     </summary>
@@ -21,8 +23,12 @@
 
         
 
+        
+
          class. Each <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -31,8 +37,12 @@
 
         
 
+        
+
          objects, with each <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -44,8 +54,12 @@
 
         
 
+        
+
          contains a <see
          cref="T:System.Data.DataColumnCollection" />
+
+        
 
         
 
@@ -54,8 +68,12 @@
 
         
 
+        
+
          objects--that determines the schema of each <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -64,8 +82,12 @@
 
         
 
+        
+
          property determines the type of data held by the <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -74,13 +96,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Data.DataColumn.AllowDBNull" />
 
         
 
+        
+
          properties let you further guarantee data integrity. The <see
          cref="P:System.Data.DataColumn.Expression" />
+
+        
 
         
 
@@ -92,8 +120,12 @@
 
         
 
+        
+
          participates in a parent/child relationship with another <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -102,8 +134,12 @@
 
         
 
+        
+
          to the <see
          cref="T:System.Data.DataRelationCollection" />
+
+        
 
         
 
@@ -112,8 +148,12 @@
 
         
 
+        
+
          object. When such a relation is added, a <see
          cref="T:System.Data.UniqueConstraint" />
+
+        
 
         
 
@@ -122,13 +162,19 @@
 
         
 
+        
+
          are both created automatically, depending on the parameter settings for the constructor. The <see
          cref="T:System.Data.UniqueConstraint" />
 
         
 
+        
+
          guarantees that values that are contained in a column are unique. The <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 
@@ -140,8 +186,12 @@
 
         
 
+        
+
          namespace (the.NET Framework Data Provider for SQL Server), the <see
          cref="N:System.Data.Odbc" />
+
+        
 
         
 
@@ -150,8 +200,12 @@
 
         
 
+        
+
          namespace (the.NET Framework Data Provider for OLE DB), or the <see
          cref="N:System.Data.OracleClient" />
+
+        
 
         
 
@@ -160,8 +214,12 @@
 
         
 
+        
+
         . Each.NET Framework data provider has a corresponding DataAdapter that you use as a bridge between a data source and a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 

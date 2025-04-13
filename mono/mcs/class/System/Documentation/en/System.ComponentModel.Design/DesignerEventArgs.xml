@@ -31,8 +31,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerDisposed" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerDisposed" />
+
+        
 
         
 
@@ -86,6 +94,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -94,8 +104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 

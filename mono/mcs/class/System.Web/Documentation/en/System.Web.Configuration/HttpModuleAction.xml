@@ -22,6 +22,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the add element of the httpModules section of a configuration file.</para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
          type is part of a group that includes the <see
          cref="T:System.Web.Configuration.HttpModuleActionCollection" />
 
         
 
+        
+
         , collection, and the <see
          cref="T:System.Web.Configuration.HttpModulesSection" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
       <para
         >Configures the <see
          cref="T:System.Web.Configuration.HttpModulesSection" />
+
+        
 
         
 
@@ -77,6 +87,8 @@
 
             
 
+            
+
              class using the passed parameters.</para
           >
         </summary>
@@ -85,10 +97,14 @@
 
           
 
+          
+
           The module name.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +159,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -193,6 +211,8 @@
           <para
             >To find the assembly defined by the <see
              cref="P:System.Web.Configuration.HttpModuleAction.Type" />
+
+            
 
             
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          control, it is possible to modify the content and formatting of the individual date cells. Before the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          event is raised when each date cell in the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
+        
+
          control is created. You can control the contents and formatting of a date cell when it is created by providing code in the event handler for the <see
          cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          object that contains event data. Use the <see
          cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
+
+        
 
         
 
@@ -59,8 +73,12 @@
 
         
 
+        
+
          property. When customizing the content for a cell, you might want to preserve the postback behavior when the user selects the date being rendered. This is typically done by rendering the script used to post the page as part of the custom content. To retrieve the script used to post the page back to the server, use the <see
          cref="P:System.Web.UI.WebControls.DayRenderEventArgs.SelectUrl" />
+
+        
 
         
 
@@ -72,8 +90,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DayRenderEventArgs.#ctor(System.Web.UI.WebControls.TableCell,System.Web.UI.WebControls.CalendarDay)" />
+
+        
 
         
 
@@ -84,6 +106,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -98,8 +122,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -128,11 +156,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+
+            
 
             
 
@@ -162,6 +194,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -176,6 +210,8 @@
                 <para
                   >The value of the <paramref
                    name="day" />
+
+                  
 
                   
 
@@ -196,6 +232,8 @@
 
             
 
+            
+
              class using the specified cell and calendar day.</para
           >
         </summary>
@@ -204,13 +242,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
+          
+
            that represents a cell in the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -221,13 +265,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.CalendarDay" />
 
           
 
+          
+
            that represents the day to render in the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -262,11 +312,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+
+            
 
             
 
@@ -296,6 +350,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -310,6 +366,8 @@
                 <para
                   >The value of the <paramref
                    name="day" />
+
+                  
 
                   
 
@@ -330,6 +388,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -347,6 +407,8 @@
 
             
 
+            
+
              class using the specified cell, calendar day, and selection URL.</para
           >
         </summary>
@@ -355,13 +417,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
+          
+
            that represents a cell in the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -372,8 +440,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.CalendarDay" />
+
+          
 
           
 
@@ -382,10 +454,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="selectUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,8 +488,12 @@
 
             
 
+            
+
              property to programmatically control the cell being rendered in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -425,8 +505,12 @@
 
             
 
+            
+
              collection of the <see
              cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
+
+            
 
             
 
@@ -439,8 +523,12 @@
 
               
 
+              
+
                event is raised while the <see
                cref="T:System.Web.UI.WebControls.Calendar" />
+
+              
 
               
 
@@ -449,8 +537,12 @@
 
               
 
+              
+
               . You can add only static controls, such as <see
                cref="T:System.Web.UI.LiteralControl" />
+
+              
 
               
 
@@ -459,13 +551,19 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.Image" />
 
               
 
+              
+
               , and <see
                cref="T:System.Web.UI.WebControls.HyperLink" />
+
+              
 
               
 
@@ -481,8 +579,12 @@
 
             
 
+            
+
              object that represents the cell being rendered in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -514,8 +616,12 @@
 
             
 
+            
+
              property to get information about the day being rendered in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -530,8 +636,12 @@
 
             
 
+            
+
              object that represents the day being rendered in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -563,8 +673,12 @@
 
             
 
+            
+
              property to retrieve the script used to post the page back to the server when the date being rendered is selected in a <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -576,6 +690,8 @@
           <para
             >Gets the script used to post the page back to the server when the date being rendered is selected in a <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 

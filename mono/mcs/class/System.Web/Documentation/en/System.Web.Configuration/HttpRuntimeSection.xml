@@ -22,6 +22,8 @@
 
         
 
+        
+
          allows you to handle those parameters that affect the behavior of the ASP.NET runtime. </para
       >
       <para
@@ -32,11 +34,15 @@
 
         
 
+        
+
          element and can be used at any level in the configuration hierarchy.</para
       >
       <para
         >The <see
          cref="T:System.Web.Configuration.HttpRuntimeSection" />
+
+        
 
         
 
@@ -76,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.HttpRuntimeSection" />
+
+            
 
             
 
@@ -175,6 +183,8 @@
 
             
 
+            
+
              property. </para
           >
           <block subset="none" type="note">
@@ -245,6 +255,8 @@
 
               
 
+              
+
                can be set at any level, this property is only applicable at the machine and application level.</para
             >
           </block>
@@ -253,6 +265,8 @@
             <para
               >HTTP header continuations rely on headers spanning multiple lines and require new lines in them. If you need to use header continuations, you need to set the <see
                cref="P:System.Web.Configuration.HttpRuntimeSection.EnableHeaderChecking" />
+
+              
 
               
 
@@ -368,10 +382,14 @@
 
             
 
+            
+
              property indicates the maximum number of seconds a request is allowed to execute before being automatically shut down by ASP.NET. The default is 110 seconds. This time-out applies only if the debug attribute in the <format
              type="text/html">
               <a href="7c319582-074a-4d2a-a787-03b9d4541c12">&lt;compilation&gt;</a>
             </format>
+
+            
 
             
 
@@ -382,6 +400,8 @@
              type="text/html">
               <a href="956dd91b-448e-4a50-b526-961b244d02f8">&lt;healthMonitoring&gt;</a>
             </format>
+
+            
 
             
 
@@ -422,11 +442,15 @@
 
             
 
+            
+
              property specifies the limit for the buffering threshold of the input stream. For example, this limit can be used to prevent denial of service attacks that are caused by users who post large files to the server. </para
           >
           <para
             >The value assigned to this property should be greater or equal to value assigned to the <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
+
+            
 
             
 
@@ -464,6 +488,8 @@
           <para
             >A suggested value for the <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.MaxWaitChangeNotification" />
+
+            
 
             
 
@@ -507,6 +533,8 @@
 
             
 
+            
+
              property defines the minimum number of free threads to execute a request. If a sufficient number of threads are not available, the request will remain queued and periodic checks for thread availability will continue until the required amount of threads are present. The default value is 8.</para
           >
           <block subset="none" type="note">
@@ -544,6 +572,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.MinLocalRequestFreeThreads" />
+
+            
 
             
 
@@ -603,8 +633,12 @@
 
             
 
+            
+
              property specifies the input-stream buffering threshold limit in number of bytes. Its value should not exceed the <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+
+            
 
             
 
@@ -642,11 +676,15 @@
 
             
 
+            
+
              property specifies whether the file name argument to SaveAs methods must be a rooted path. The ASP.NET process must have permission to create files in the specified location. </para
           >
           <para
             >For more information, see the save methods defined in the <see
              cref="T:System.Configuration.Configuration" />
+
+            
 
             
 
@@ -684,13 +722,19 @@
 
             
 
+            
+
              class checks both the <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.SendCacheControlHeader" />
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" />
+
+            
 
             
 
@@ -702,13 +746,19 @@
 
             
 
+            
+
              property in the <see
              cref="T:System.Web.Configuration.HttpRuntimeSection" />
 
             
 
+            
+
              class is provided for compatibility with legacy applications; this property is obsolete in the .NET Framework version 2.0. For more information, see the <see
              cref="T:System.Web.Configuration.OutputCacheSection" />
+
+            
 
             
 
@@ -749,6 +799,8 @@
 
             
 
+            
+
              property indicates the amount of time before an application is shut down gracefully. The default is 90 seconds.</para
           >
         </remarks>
@@ -783,6 +835,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.UseFullyQualifiedRedirectUrl" />
+
+            
 
             
 
@@ -823,6 +877,8 @@
           <para
             >A suggested value for <see
              cref="P:System.Web.Configuration.HttpRuntimeSection.WaitChangeNotification" />
+
+            
 
             
 

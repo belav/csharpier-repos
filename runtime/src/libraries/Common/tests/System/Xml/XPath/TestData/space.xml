@@ -9,6 +9,8 @@
     
 
     
+
+    
    <Para
 
       >First paragraph <Para
@@ -18,13 +20,19 @@
 
         
 
+        
+
          Paragraph </Para
       >
 
       
 
+      
+
        End of first paragraph </Para
     >
+
+    
 
     
 
@@ -35,10 +43,14 @@
     
 
     
+
+    
  </Chap
   >
   <Chap>
     <Title>XPath test</Title>
+
+    
 
     
 

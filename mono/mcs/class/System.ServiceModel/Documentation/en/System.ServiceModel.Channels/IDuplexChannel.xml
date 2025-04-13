@@ -29,13 +29,19 @@
 
         
 
+        
+
          interface is the union of the <see
          cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          interface does not mandate any correlation between the <see
          cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+        
 
         
 
@@ -54,13 +64,19 @@
 
         
 
+        
+
          when implemented. This means, in particular, that the contract does not mandate that the sender of messages that are received through the <see
          cref="T:System.ServiceModel.Channels.IInputChannel" />
 
         
 
+        
+
          is equal to the recipient of messages sent through the <see
          cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+        
 
         
 

@@ -19,6 +19,8 @@
 
         
 
+        
+
          interface to modify, examine, or extend some aspect of endpoint-wide execution at the application level for either client or service applications.</para
       >
       <list type="bullet">
@@ -26,6 +28,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
+
+            
 
             
 
@@ -39,6 +43,8 @@
 
             
 
+            
+
              method to modify, examine, or insert extensions to an endpoint in a client application.</para
           >
         </item>
@@ -46,6 +52,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" />
+
+            
 
             
 
@@ -59,8 +67,12 @@
 
             
 
+            
+
              method to confirm that a <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -73,6 +85,8 @@
 
         
 
+        
+
          objects can make use of any of these methods, but often only one is important; in such cases, the unused methods can return, performing no action.</para
       >
       <block subset="none" type="note">
@@ -82,13 +96,19 @@
 
           
 
+          
+
            methods pass a <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
+          
+
            object as a parameter. This parameter is for examination only; if you modify the <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          objects are typically used to access the various properties of the <see
          cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+        
 
         
 
@@ -110,8 +134,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+        
 
         
 
@@ -120,8 +148,12 @@
 
         
 
+        
+
          objects in a service application and the <see
          cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+        
 
         
 
@@ -130,13 +162,19 @@
 
         
 
+        
+
          in a client application. In addition, you can access the properties of duplex clients and services using the <see
          cref="P:System.ServiceModel.Dispatcher.ClientRuntime.CallbackDispatchRuntime" />
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.CallbackClientRuntime" />
+
+        
 
         
 
@@ -152,6 +190,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -160,8 +200,12 @@
 
         
 
+        
+
          has been decided is the appropriate scope of customization, the customization must be inserted into the indigo1 runtime by implementing <see
          cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+
+        
 
         
 
@@ -173,6 +217,8 @@
           <para
             >Programmatically add the custom endpoint behavior to the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+
+            
 
             
 
@@ -188,6 +234,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -198,8 +246,12 @@
 
         
 
+        
+
          object must be added to the <see
          cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+
+        
 
         
 
@@ -208,8 +260,12 @@
 
         
 
+        
+
          method is called on <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -218,8 +274,12 @@
 
         
 
+        
+
          object must be added to the <see
          cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+
+        
 
         
 
@@ -228,13 +288,19 @@
 
         
 
+        
+
          method or the <see
          cref="Overload:System.ServiceModel.ICommunicationObject.Open" />
 
         
 
+        
+
          method on <see
          cref="T:System.ServiceModel.ChannelFactory`1" />
+
+        
 
         
 
@@ -280,8 +346,12 @@
 
             
 
+            
+
              method to provide binding elements with the extra objects they require to support the endpoint behavior. When binding parameters are added here the binding can locate these objects when the channel listener or channel factory is created. Typically, you implement the <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
+
+            
 
             
 
@@ -294,6 +364,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,13 +404,19 @@
 
             
 
+            
+
              method to view, modify, or add custom extension to the client runtime across all messages used with an endpoint or for specific operations. For details about what customizations you can do with a client run-time object, see <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+            
 
             
 
@@ -350,8 +428,12 @@
 
             
 
+            
+
              method throw a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -363,8 +445,12 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
+
+            
 
             
 
@@ -408,13 +494,19 @@
 
             
 
+            
+
              method to view, modify, or extend the service runtime across all messages or for specific operations in an endpoint. For details about what customizations you can do in a service application, see <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -426,8 +518,12 @@
 
             
 
+            
+
              method throw a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -439,8 +535,12 @@
 
             
 
+            
+
              and what is returned by the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.CallbackClientRuntime" />
+
+            
 
             
 
@@ -452,8 +552,12 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
+
+            
 
             
 
@@ -495,8 +599,12 @@
 
             
 
+            
+
              method to examine the structure to confirm any set of criteria. It is not necessary to perform any customizations in <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
+
+            
 
             
 
@@ -505,11 +613,15 @@
 
             
 
+            
+
              to make use of this method. If the endpoint passes validation, return; otherwise, throw an exception.</para
           >
           <para
             >For example, the <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)" />
+
+            
 
             
 

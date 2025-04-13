@@ -25,6 +25,8 @@
 
         
 
+        
+
          objects do not exactly correspond to item elements in project files. If they did, then tasks would have access to data that was not explicitly passed into the task through the project file. This is not a security issue, but rather an issue with project file clarity and transparency.</para
       >
       <para>This class has to be sealed since the build engine instantiates its own copy of this type. If a third party were to extend this class, then the build engine will yield an undesired behavior.</para>
@@ -50,6 +52,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Utilities.TaskItem" />
+
+            
 
             
 
@@ -81,8 +85,12 @@
 
             
 
+            
+
              class using the specified source <see
              cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+            
 
             
 
@@ -91,6 +99,8 @@
         </summary>
         <param name="sourceItem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,11 +128,15 @@
 
             
 
+            
+
              class using the specified item-specification string.</para
           >
         </summary>
         <param name="itemSpec">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,6 +168,8 @@
 
             
 
+            
+
              class using the specified item-specification string and its metadata.</para
           >
         </summary>
@@ -162,10 +178,14 @@
 
           
 
+          
+
           The item specification.</param
         >
         <param name="itemMetadata">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,6 +221,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -240,6 +262,8 @@
 
           
 
+          
+
           The item that this method will copy metadata to.</param
         >
       </Docs>
@@ -271,11 +295,15 @@
 
             
 
+            
+
              that represents the metadata value.</para
           >
         </returns>
         <param name="metadataName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -325,6 +353,8 @@
           <para
             >The <see
              cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+
+            
 
             
 
@@ -428,6 +458,8 @@
 
           
 
+          
+
           The name of metadata to remove.</param
         >
       </Docs>
@@ -460,10 +492,14 @@
 
           
 
+          
+
           The name of metadata to set or modify.</param
         >
         <param name="metadataValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +531,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

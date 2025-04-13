@@ -26,6 +26,8 @@
 
         
 
+        
+
          interface.</para
       >
       <para>This class can only be instantiated in a derived form.</para>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Utilities.Task" />
+
+            
 
             
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="P:Microsoft.Build.Utilities.Task.TaskResources" />
+
+            
 
             
 
@@ -92,6 +100,8 @@
         </summary>
         <param name="taskResources">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,6 +132,8 @@
 
             
 
+            
+
              is an empty string, string resource names will be used verbatim as help keywords.</para
           >
         </remarks>
@@ -133,13 +145,19 @@
 
             
 
+            
+
              class with the specified <see
              cref="P:Microsoft.Build.Utilities.Task.TaskResources" />
 
             
 
+            
+
              and <see
              cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+            
 
             
 
@@ -151,10 +169,14 @@
 
           
 
+          
+
           The task resources.</param
         >
         <param name="helpKeywordPrefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,6 +208,8 @@
           <para
             >Gets or sets the instance of the <see
              cref="T:Microsoft.Build.Framework.IBuildEngine" />
+
+            
 
             
 
@@ -240,6 +264,8 @@
 
             
 
+            
+
             , resource names will be used verbatim as Help keywords.</para
           >
         </remarks>
@@ -273,8 +299,12 @@
 
             
 
+            
+
             . Visual Studio determines the host object via a system registry key. For more information, see <see
              cref="T:Microsoft.VisualStudio.Shell.Interop.IVsMSBuildHostObject" />
+
+            
 
             
 
@@ -308,6 +338,8 @@
           <para
             >Gets an instance of a <see
              cref="T:Microsoft.Build.Utilities.TaskLoggingHelper" />
+
+            
 
             
 

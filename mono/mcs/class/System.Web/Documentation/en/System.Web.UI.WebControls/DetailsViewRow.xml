@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is used to represent an individual row in a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          control has a designated row type. The following table lists the row types that are valid for the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -80,8 +90,12 @@
 
               
 
+              
+
                control. The empty data row is displayed in a <see
                cref="T:System.Web.UI.WebControls.DetailsView" />
+
+              
 
               
 
@@ -102,6 +116,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -116,6 +132,8 @@
             <para
               >The header row in the <see
                cref="T:System.Web.UI.WebControls.DetailsView" />
+
+              
 
               
 
@@ -136,6 +154,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -147,13 +167,19 @@
 
         
 
+        
+
          object, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewRow.RowType" />
 
         
 
+        
+
          property. A <see
          cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+        
 
         
 
@@ -183,8 +209,12 @@
 
               
 
+              
+
                object is an alternate row in the <see
                cref="T:System.Web.UI.WebControls.DetailsView" />
+
+              
 
               
 
@@ -205,6 +235,8 @@
 
               
 
+              
+
                object is in edit mode.</para
             >
           </description>
@@ -219,6 +251,8 @@
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+              
 
               
 
@@ -239,6 +273,8 @@
 
               
 
+              
+
                object is in its normal (default) state.</para
             >
           </description>
@@ -250,8 +286,12 @@
 
         
 
+        
+
          object, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewRow.RowState" />
+
+        
 
         
 
@@ -263,8 +303,12 @@
 
         
 
+        
+
          control stores all its data rows in the <see
          cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
+
+        
 
         
 
@@ -273,13 +317,19 @@
 
         
 
+        
+
          object in the <see
          cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
 
         
 
+        
+
          collection, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewRow.RowIndex" />
+
+        
 
         
 
@@ -291,8 +341,12 @@
 
         
 
+        
+
          object by using the <see
          cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+
+        
 
         
 
@@ -301,13 +355,19 @@
 
         
 
+        
+
          collection of the cell. You can also use the <see
          cref="M:System.Web.UI.Control.FindControl(System.String)" />
 
         
 
+        
+
          method of the cell to find the control, if the control has an <see
          cref="P:System.Web.UI.Control.ID" />
+
+        
 
         
 
@@ -319,8 +379,12 @@
 
         
 
+        
+
          field column or an automatically generated field column, use the <see
          cref="P:System.Web.UI.WebControls.TableCell.Text" />
+
+        
 
         
 
@@ -333,8 +397,12 @@
 
           
 
+          
+
            field column without binding the value to a property of a control. In this case, the field value is automatically placed in a <see
            cref="T:System.Web.UI.DataBoundLiteralControl" />
+
+          
 
           
 
@@ -343,8 +411,12 @@
 
           
 
+          
+
            control from the appropriate cell and then use its <see
            cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+
+          
 
           
 
@@ -357,8 +429,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.DetailsViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+        
 
         
 
@@ -370,6 +446,8 @@
       <para
         >Represents a row within a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -399,11 +477,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 
@@ -433,6 +515,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -447,6 +531,8 @@
                 <para
                   >The value specified by the <paramref
                    name="rowType" />
+
+                  
 
                   
 
@@ -467,6 +553,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -481,6 +569,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -489,13 +579,19 @@
 
           
 
+          
+
           The index of the row in the <see
            cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
 
           
 
+          
+
            collection of the <see
            cref="T:System.Web.UI.WebControls.DetailsView" />
+
+          
 
           
 
@@ -506,8 +602,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+          
 
           
 
@@ -518,8 +618,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -559,6 +663,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -566,8 +672,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -595,8 +705,12 @@
 
             
 
+            
+
              property to determine the index of a <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 
@@ -605,8 +719,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -624,13 +742,19 @@
 
             
 
+            
+
              object in the <see
              cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -662,6 +786,8 @@
 
             
 
+            
+
              property to determine the state of the row. The state can be a bitwise combination of the values in the following table.</para
           >
           <list type="table">
@@ -686,8 +812,12 @@
 
                   
 
+                  
+
                    object is an alternate row in the <see
                    cref="T:System.Web.UI.WebControls.DetailsView" />
+
+                  
 
                   
 
@@ -706,6 +836,8 @@
 
                   
 
+                  
+
                    object is in edit mode.</para
                 >
               </description>
@@ -718,6 +850,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+                  
 
                   
 
@@ -736,6 +870,8 @@
 
                   
 
+                  
+
                    object is in its normal (default) state.</para
                 >
               </description>
@@ -748,6 +884,8 @@
           <para
             >Gets the state of the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 
@@ -779,8 +917,12 @@
 
             
 
+            
+
              property to determine the type of row that the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 
@@ -808,6 +950,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -823,8 +967,12 @@
 
                   
 
+                  
+
                    control. The empty data row is displayed in a <see
                    cref="T:System.Web.UI.WebControls.DetailsView" />
+
+                  
 
                   
 
@@ -843,6 +991,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -855,6 +1005,8 @@
                 <para
                   >The header row in the <see
                    cref="T:System.Web.UI.WebControls.DetailsView" />
+
+                  
 
                   
 
@@ -873,6 +1025,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -885,6 +1039,8 @@
           <para
             >Gets the row type of the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 

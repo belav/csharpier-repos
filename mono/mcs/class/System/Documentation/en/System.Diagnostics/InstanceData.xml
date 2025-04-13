@@ -57,10 +57,14 @@
 
           
 
+          
+
           The name of an instance associated with the performance counter. </param
         >
         <param name="sample">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -69,8 +73,12 @@
 
           
 
+          
+
            taken from the instance specified by the <paramref
            name="instanceName" />
+
+          
 
           
 

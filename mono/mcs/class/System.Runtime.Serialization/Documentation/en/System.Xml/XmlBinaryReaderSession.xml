@@ -29,13 +29,19 @@
 
         
 
+        
+
         ) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries of <see
          cref="T:System.Xml.XmlDictionaryString" />
 
         
 
+        
+
          instances. For more information about dynamic dictionaries see <see
          cref="T:System.Xml.XmlDictionary" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlBinaryReaderSession" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
              from the input parameters and adds it to an internal collection.</para
           >
         </summary>
@@ -118,6 +128,8 @@
 
             
 
+            
+
              that is added to an internal collection.</para
           >
         </returns>
@@ -126,10 +138,14 @@
 
           
 
+          
+
           The key value.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

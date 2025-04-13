@@ -43,8 +43,12 @@
 
         
 
+        
+
          class is associated with files that have an .aspx extension. These files are compiled at run time as <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          object serves as the naming container for all server controls in a page, except those that implement the <see
          cref="T:System.Web.UI.INamingContainer" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -79,10 +89,14 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="d49bc4d5-efb7-4caa-a2fe-e4d3cec63c05">Security Policy Best Practices</a>
         </format>
+
+        
 
         
 
@@ -93,6 +107,8 @@
 
         
 
+        
+
         . For more specific information, see <format
          type="text/html">
           <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
@@ -100,10 +116,14 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="6f70ac33-6e11-4e98-ab7d-bae9c0e7eefa">How to: Display Safe Error Messages</a>
         </format>
+
+        
 
         
 
@@ -116,10 +136,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="3c0e7514-cff2-4bed-936d-ee3f7b740190">Introduction to the Validation Controls</a>
         </format>
+
+        
 
         
 
@@ -147,6 +171,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -191,10 +217,14 @@
 
           
 
+          
+
           The name of the content template to add.</param
         >
         <param name="template">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,11 +257,15 @@
 
             
 
+            
+
              method to add handlers to an asynchronous Web page. </para
           >
           <para
             >You can register multiple asynchronous handlers; however, only one handler runs at a time. If you want to process multiple asynchronous methods simultaneously, you should use a single <see
              cref="T:System.Web.BeginEventHandler" />
+
+            
 
             
 
@@ -243,8 +277,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.Page.PreRenderComplete" />
+
+            
 
             
 
@@ -256,8 +294,12 @@
 
             
 
+            
+
              events (through the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -266,8 +308,12 @@
 
             
 
+            
+
              method is called. When the handler completes, the corresponding <see
              cref="T:System.Web.EndEventHandler" />
+
+            
 
             
 
@@ -276,6 +322,8 @@
           <para
             >After the registered asynchronous event handlers have been called, the rest of the page events are called, beginning with the <see
              cref="E:System.Web.UI.Page.PreRenderComplete" />
+
+            
 
             
 
@@ -291,8 +339,12 @@
 
           
 
+          
+
           The delegate for the <see
            cref="T:System.Web.BeginEventHandler" />
+
+          
 
           
 
@@ -303,8 +355,12 @@
 
           
 
+          
+
           The delegate for the <see
            cref="T:System.Web.EndEventHandler" />
+
+          
 
           
 
@@ -338,8 +394,12 @@
 
             
 
+            
+
              method to add handlers that require state information to an asynchronous Web page. The object passed in the <paramref
              name="state" />
+
+            
 
             
 
@@ -348,8 +408,12 @@
 
             
 
+            
+
              and the <paramref
              name="endHandler" />
+
+            
 
             
 
@@ -361,6 +425,8 @@
 
             
 
+            
+
              method and launch multiple asynchronous operations from that handler.</para
           >
           <para
@@ -369,8 +435,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.Page.PreRenderComplete" />
+
+            
 
             
 
@@ -382,8 +452,12 @@
 
             
 
+            
+
              events (through the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -392,8 +466,12 @@
 
             
 
+            
+
              method is called. When the handler completes, the corresponding <see
              cref="T:System.Web.EndEventHandler" />
+
+            
 
             
 
@@ -402,6 +480,8 @@
           <para
             >After the registered asynchronous event handlers have been called, the rest of the page events are called, beginning with the <see
              cref="E:System.Web.UI.Page.PreRenderComplete" />
+
+            
 
             
 
@@ -417,8 +497,12 @@
 
           
 
+          
+
           The delegate for the <see
            cref="T:System.Web.BeginEventHandler" />
+
+          
 
           
 
@@ -429,8 +513,12 @@
 
           
 
+          
+
           The delegate for the <see
            cref="T:System.Web.EndEventHandler" />
+
+          
 
           
 
@@ -438,6 +526,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,6 +559,8 @@
 
             
 
+            
+
              method adds a list of files, such as user control files, that make up the current page. If any of these pages is modified, the entire page is compiled the next time it is requested. This method supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para
           >
         </remarks>
@@ -481,8 +573,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -511,6 +607,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpApplicationState" />
+
+            
 
             
 
@@ -562,6 +660,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -570,8 +670,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -582,10 +686,14 @@
 
           
 
+          
+
           The callback method. </param
         >
         <param name="extraData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -628,6 +736,8 @@
 
           
 
+          
+
           The ASP page generated by the request. </param
         >
       </Docs>
@@ -657,6 +767,8 @@
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -697,8 +809,12 @@
 
             
 
+            
+
              property is set by the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -709,6 +825,8 @@
 
             
 
+            
+
              directive to set this value. </para
           >
           <para
@@ -716,6 +834,8 @@
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -759,6 +879,8 @@
 
             
 
+            
+
              that references the asynchronous request.</para
           >
         </returns>
@@ -767,8 +889,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -779,10 +905,14 @@
 
           
 
+          
+
           The callback method to notify when the process is complete.</param
         >
         <param name="extraData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -816,8 +946,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -846,10 +980,14 @@
 
             
 
+            
+
              of the Web configuration file or in the <format
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -858,6 +996,8 @@
           <para
             >Define your asynchronous task using the <see
              cref="T:System.Web.UI.PageAsyncTask" />
+
+            
 
             
 
@@ -886,10 +1026,14 @@
 
             
 
+            
+
              attribute to true using the <format
              type="text/html">
               <a href="F06CF9E5-22BB-461D-8B8F-549E53FF40A4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -902,8 +1046,12 @@
 
               
 
+              
+
                property sets and gets the <see
                cref="P:System.Web.HttpResponse.BufferOutput" />
+
+              
 
               
 
@@ -952,6 +1100,8 @@
 
             
 
+            
+
              object allows you to store and retrieve arbitrary data on subsequent requests. The cache is not specifically associated with a page or user session. It is used primarily to enhance application performance. For more information, see <format
              type="text/html">
               <a href="206f977d-7860-4d20-bdd5-c3b3d8479f3d">Caching Application Data</a>
@@ -959,10 +1109,14 @@
 
             
 
+            
+
             . For more information on the difference between application caching and page output caching, see <format
              type="text/html">
               <a href="5ec28012-4972-4dc3-b3e8-9d20401fe11d">Introduction to Caching in ASP.NET</a>
             </format>
+
+            
 
             
 
@@ -974,6 +1128,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -1013,8 +1169,12 @@
 
             
 
+            
+
              property contains the query string portion of the URL requested by the browser. For example, if the requested URL is "http://www.contoso.com/default.aspx?id=100", the <see
              cref="P:System.Web.UI.Page.ClientQueryString" />
+
+            
 
             
 
@@ -1023,8 +1183,12 @@
 
             
 
+            
+
              property is encoded; use the <see
              cref="M:System.Web.HttpServerUtility.UrlDecode(System.String)" />
+
+            
 
             
 
@@ -1059,13 +1223,19 @@
 
             
 
+            
+
              property to get a <see
              cref="T:System.Web.UI.ClientScriptManager" />
 
             
 
+            
+
              object that can be used to manage, register, and add script to a Web page. For more information, see the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -1077,8 +1247,12 @@
 
             
 
+            
+
              class is new in vstecasplong and replaces <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -1090,6 +1264,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -1115,13 +1291,19 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Web.HttpBrowserCapabilities" />
 
             
 
+            
+
              object associated with the <see
              cref="P:System.Web.UI.Page.Request" />
+
+            
 
             
 
@@ -1144,6 +1326,8 @@
 
             
 
+            
+
              directive.</para
           >
           <para
@@ -1153,6 +1337,8 @@
                 >clientTarget Element (ASP.NET Settings Schema)</a
               >
             </format>
+
+            
 
             
 
@@ -1201,6 +1387,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -1209,6 +1397,8 @@
           <para
             >Sets the code page identifier for the current <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -1250,6 +1440,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -1258,6 +1450,8 @@
           <para
             >Sets the HTTP MIME type for the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -1308,6 +1502,8 @@
 
             
 
+            
+
              object associated with the page.</para
           >
         </summary>
@@ -1338,8 +1534,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -1348,8 +1548,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -1358,8 +1562,12 @@
 
             
 
+            
+
              in the browserCaps configuration section. Override the <see
              cref="M:System.Web.UI.Page.CreateHtmlTextWriter(System.IO.TextWriter)" />
+
+            
 
             
 
@@ -1374,6 +1582,8 @@
 
             
 
+            
+
              object to render the page's content.</para
           >
         </summary>
@@ -1385,8 +1595,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.Html32TextWriter" />
+
+            
 
             
 
@@ -1398,13 +1612,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
 
           
 
+          
+
            used to create the <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1450,6 +1670,8 @@
 
             
 
+            
+
              object to render the page's content.</para
           >
         </summary>
@@ -1461,6 +1683,8 @@
 
             
 
+            
+
              that renders the content of the page.</para
           >
         </returns>
@@ -1469,8 +1693,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1479,10 +1707,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="writerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1508,8 +1740,12 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the value of this property. In addition, you can also explicitly set the value of the <see
              cref="P:System.Web.UI.Page.Culture" />
+
+            
 
             
 
@@ -1517,6 +1753,8 @@
              type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7">globalization</a>
             </format>
+
+            
 
             
 
@@ -1528,11 +1766,15 @@
 
             
 
+            
+
              property is used to help localize page content. You can set it to any valid culture ID. For example, the en-us culture ID sets the page to American English, while the fr culture ID sets the page to French. You can also set the value to auto which will perform automatic detection of the browser's preferred language and set it. The automatic language detection can be qualified with a default value such as auto:en-us.</para
           >
           <para
             >For more information, see the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1544,6 +1786,8 @@
           <para
             >Sets the culture ID for the <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -1584,6 +1828,8 @@
 
             
 
+            
+
              class that is required by RAD designers. This method is used only at design time.</para
           >
         </summary>
@@ -1617,8 +1863,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -1627,8 +1877,12 @@
 
             
 
+            
+
              property is set when the <see
              cref="M:System.Web.UI.Page.DeterminePostBackMode" />
+
+            
 
             
 
@@ -1643,6 +1897,8 @@
 
             
 
+            
+
              of data posted back to the page using either a POST or a GET command. </para
           >
         </summary>
@@ -1654,8 +1910,12 @@
 
             
 
+            
+
              object that contains the form data. If the postback used the POST command, the form information is returned from the <see
              cref="P:System.Web.UI.Page.Context" />
+
+            
 
             
 
@@ -1695,11 +1955,15 @@
 
             
 
+            
+
              property is set to true, ASP.NET validates that a control event originated from the user interface that was rendered by that control. A control registers its events during rendering and then validates the events during postback or callback handling. For example, if a list control includes options numbered 1, 2, or 3 when the page is rendered, and if a postback request is received specifying option number 4, ASP.NET raises an exception. All event-driven controls in ASP.NET use this feature by default.</para
           >
           <para
             >If you write client script that changes a control in the client at run time, you might have to use the <see
              cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String)" />
+
+            
 
             
 
@@ -1714,6 +1978,8 @@
 
             
 
+            
+
              property by setting the enableEventValidation attribute of the <format
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
@@ -1721,10 +1987,14 @@
 
             
 
+            
+
              directive or the enableEventValidation attribute of the <format
              type="text/html">
               <a href="4123bb66-3fe4-4d62-b70e-33758656b458">pages</a>
             </format>
+
+            
 
             
 
@@ -1757,11 +2027,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >Even if <see
              cref="P:System.Web.UI.Page.EnableViewState" />
+
+            
 
             
 
@@ -1799,6 +2073,8 @@
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -1879,13 +2155,19 @@
 
             
 
+            
+
              class. After the task is defined, and is registered with the page using the <see
              cref="M:System.Web.UI.Page.RegisterAsyncTask(System.Web.UI.PageAsyncTask)" />
 
             
 
+            
+
              method, the <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+            
 
             
 
@@ -1897,8 +2179,12 @@
 
             
 
+            
+
              method is automatically called at the point in the page processing when any registered asynchronous tasks, if they exist, are invoked for a non-asynchronous page. This automatic call to <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+            
 
             
 
@@ -1907,13 +2193,19 @@
 
             
 
+            
+
              event. Call the <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
 
             
 
+            
+
              method for tasks you want to be invoked at times other than the automatic call to this method. Note, asynchronous tasks will be executed only once even though <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+            
 
             
 
@@ -1925,8 +2217,12 @@
 
             
 
+            
+
              property is reset on every call to the <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+            
 
             
 
@@ -1935,8 +2231,12 @@
 
             
 
+            
+
              prior to invoking the <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+            
 
             
 
@@ -1945,8 +2245,12 @@
 
             
 
+            
+
             , subsequent tasks invoked during that <see
              cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+            
 
             
 
@@ -1981,13 +2285,19 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Web.HttpResponse.AddFileDependency(System.String)" />
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -2001,6 +2311,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -2009,6 +2321,8 @@
           <para
             >Sets an array of files that the current <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -2053,8 +2367,12 @@
 
             
 
+            
+
              method can be used to access a control whose <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -2071,6 +2389,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2100,8 +2420,12 @@
 
             
 
+            
+
              property to access the methods and properties of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -2134,8 +2458,12 @@
 
             
 
+            
+
              method initializes the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2144,13 +2472,19 @@
 
             
 
+            
+
              method is overridden by the page parsing and code generation for the <see
              cref="T:System.Web.UI.Page" />
 
             
 
+            
+
              class for a declarative page. Ordinarily, you should not over need to override this method. If overriding, be sure to call the base class's <see
              cref="M:System.Web.UI.Page.FrameworkInitialize" />
+
+            
 
             
 
@@ -2207,6 +2541,8 @@
 
             
 
+            
+
              class for alternatives to this deprecated member.</para
           >
         </remarks>
@@ -2223,10 +2559,14 @@
 
           
 
+          
+
           The server control that receives the client event postback. </param
         >
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2235,8 +2575,12 @@
 
           
 
+          
+
            that is passed to <see
            cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+
+          
 
           
 
@@ -2278,6 +2622,8 @@
 
             
 
+            
+
              method for an alternative to this deprecated member.</para
           >
         </remarks>
@@ -2294,10 +2640,14 @@
 
           
 
+          
+
           The server control to process the postback. </param
         >
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2338,8 +2688,12 @@
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -2354,6 +2708,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2363,6 +2719,8 @@
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2404,8 +2762,12 @@
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -2425,10 +2787,14 @@
 
           
 
+          
+
           The server control to process the postback. </param
         >
         <param name="argument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2468,8 +2834,12 @@
 
             
 
+            
+
              objects that are generated at run time. This hash code is unique to the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2515,8 +2885,12 @@
 
             
 
+            
+
              method returns all the validation objects associated with a specific validation group. You can return the default validation group (all validation controls associated with controls without the ValidationGroup property set) by setting the <paramref
              name="validationGroup" />
+
+            
 
             
 
@@ -2525,6 +2899,8 @@
           <para
             >To validate the members of the validation group, you can enumerate over the collection and call the <see
              cref="M:System.Web.UI.IValidator.Validate" />
+
+            
 
             
 
@@ -2543,11 +2919,15 @@
 
             
 
+            
+
              that contains the control validators for the specified validation group.</para
           >
         </returns>
         <param name="validationGroup">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2577,6 +2957,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Page.GetWrappedFileDependencies(System.String[])" />
+
+            
 
             
 
@@ -2623,13 +3005,19 @@
 
             
 
+            
+
              property gets a reference to an <see
              cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 
+            
+
              object that you can use to set document header information for the page. The <see
              cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+
+            
 
             
 
@@ -2642,10 +3030,14 @@
 
               
 
+              
+
                interface during asynchronous postbacks is not supported. When you add AJAX capabilities to a Web page, asynchronous postbacks update regions of the page without updating the whole page. For more information, see <format
                type="text/html">
                 <a href="be84d9b3-b7cd-47d7-8494-be4abfaad9cb">ASP.NET AJAX Overview</a>
               </format>
+
+              
 
               
 
@@ -2677,6 +3069,8 @@
           <para
             >Gets or sets an identifier for a particular instance of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2738,6 +3132,8 @@
 
             
 
+            
+
              event is called at the end of the page's initialization stage. At this stage of the page's life cycle, all declared controls on the page are initialized, but the page's state is not yet populated. You can access server controls, but they will not yet contain information returned from the user. </para
           >
           <para
@@ -2745,6 +3141,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2776,8 +3174,12 @@
 
             
 
+            
+
              method contains no coding logic. Control developers extending the functionality of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -2786,13 +3188,19 @@
 
             
 
+            
+
              method to initialize the <see
              cref="P:System.Web.UI.Page.Culture" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Page.UICulture" />
+
+            
 
             
 
@@ -2807,8 +3215,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Page.UICulture" />
+
+            
 
             
 
@@ -2843,8 +3255,12 @@
 
             
 
+            
+
              directive in the .aspx file, or the methods and properties of the <see
              cref="T:System.Web.HttpCachePolicy" />
+
+            
 
             
 
@@ -2852,6 +3268,8 @@
              type="text/html">
               <a href="E9666A1B-88DF-4931-AF0B-A754FC65660B">Caching ASP.NET Pages</a>
             </format>
+
+            
 
             
 
@@ -2866,6 +3284,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2874,8 +3294,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.OutputCacheParameters" />
+
+          
 
           
 
@@ -2910,8 +3334,12 @@
 
             
 
+            
+
              directive in the .aspx file, or the methods and properties of the <see
              cref="T:System.Web.HttpCachePolicy" />
+
+            
 
             
 
@@ -2919,6 +3347,8 @@
              type="text/html">
               <a href="e9666a1b-88df-4931-af0b-a754fc65660b">Caching ASP.NET Pages</a>
             </format>
+
+            
 
             
 
@@ -2934,10 +3364,14 @@
 
           
 
+          
+
           The amount of time that objects stored in the output cache are valid. </param
         >
         <param name="varyByHeader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2948,10 +3382,14 @@
 
           
 
+          
+
           The Vary HTTP header. </param
         >
         <param name="location">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2960,10 +3398,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="varyByParam">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3011,8 +3453,12 @@
 
             
 
+            
+
              directive in the .aspx file, or methods and properties of the <see
              cref="T:System.Web.HttpCachePolicy" />
+
+            
 
             
 
@@ -3020,6 +3466,8 @@
              type="text/html">
               <a href="e9666a1b-88df-4931-af0b-a754fc65660b">Caching ASP.NET Pages</a>
             </format>
+
+            
 
             
 
@@ -3035,10 +3483,14 @@
 
           
 
+          
+
           The amount of time that objects stored in the output cache are valid.</param
         >
         <param name="varyByContentEncoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3049,10 +3501,14 @@
 
           
 
+          
+
           A semicolon-separated list of headers that content from the output cache will vary by.</param
         >
         <param name="varyByCustom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3063,8 +3519,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.OutputCacheLocation" />
+
+          
 
           
 
@@ -3072,6 +3532,8 @@
         >
         <param name="varyByParam">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3098,10 +3560,14 @@
 
             
 
+            
+
              property to determine whether the Web page is running in asynchronous mode. This information is useful if controls or code on the page need to modify their behavior depending on whether the page is asynchronous. For more information about asynchronous programming, see <format
              type="text/html">
               <a href="e7d32c3c-bf78-4bfc-a357-c9e82e4a4b3c">Performing Asynchronous Operations</a>
             </format>
+
+            
 
             
 
@@ -3145,6 +3611,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3175,6 +3643,8 @@
 
             
 
+            
+
              to avoid unnecessarily assembling the client-side script. This is particularly important if the script requires a large amount of server resources to create.</para
           >
           <para
@@ -3183,13 +3653,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -3206,6 +3682,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3249,13 +3727,19 @@
 
             
 
+            
+
              method to transfer processing between pages, or you can make a cross-page request by assigning a page URL to the <see
              cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" />
 
             
 
+            
+
              property of a button control that implements the <see
              cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+            
 
             
 
@@ -3267,8 +3751,12 @@
 
             
 
+            
+
              page property will contain an object that represents the previous or originator page. If, for example, Page A posts to Page B, Page A's <see
              cref="P:System.Web.UI.Page.IsCrossPagePostBack" />
+
+            
 
             
 
@@ -3277,8 +3765,12 @@
 
             
 
+            
+
              property) will be true and Page B's <see
              cref="P:System.Web.UI.Page.PreviousPage" />
+
+            
 
             
 
@@ -3308,6 +3800,8 @@
                 >Implementing Client Callbacks Programmatically Without Postbacks in ASP.NET Web Pages</a
               >
             </format>
+
+            
 
             
 
@@ -3349,6 +3843,8 @@
 
             
 
+            
+
              object can be reused.</para
           >
         </summary>
@@ -3384,6 +3880,8 @@
 
             
 
+            
+
              to avoid unnecessarily assembling the client-side script. This is particularly important if the script requires a large amount of server resources to create.</para
           >
           <para
@@ -3392,13 +3890,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -3413,6 +3917,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -3422,6 +3928,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3454,8 +3962,12 @@
 
             
 
+            
+
              method, or set the CausesValidation property to true in the OnServerClick event handler for an ASP.NET server control that initiates form processing. These server controls include the <see
              cref="T:System.Web.UI.WebControls.Button" />
+
+            
 
             
 
@@ -3464,8 +3976,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -3474,8 +3990,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.ImageButton" />
+
+            
 
             
 
@@ -3484,11 +4004,15 @@
 
             
 
+            
+
              classes.</para
           >
           <para
             >If you force validation of a validation group using the <see
              cref="M:System.Web.UI.Page.Validate(System.String)" />
+
+            
 
             
 
@@ -3532,8 +4056,12 @@
 
             
 
+            
+
              property to store objects with the same lifetime as the page request. This property is read-only; however, you can add objects to the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -3545,8 +4073,12 @@
 
             
 
+            
+
              property are available throughout the lifetime of the page, so you can add objects to the <see
              cref="P:System.Web.UI.Page.Items" />
+
+            
 
             
 
@@ -3577,13 +4109,19 @@
 
             
 
+            
+
              directive of the .aspx file, however, the preferred method of setting the locale identifier is through the use of the <see
              cref="P:System.Web.UI.Page.Culture" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Page.UICulture" />
+
+            
 
             
 
@@ -3595,6 +4133,8 @@
           <para
             >Sets the locale identifier for the <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -3641,8 +4181,12 @@
 
             
 
+            
+
              event occurs after all postback data and view-state data is loaded into the page and after the <see
              cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -3653,6 +4197,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3684,8 +4230,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.PageStatePersister.Load" />
+
+            
 
             
 
@@ -3694,13 +4244,19 @@
 
             
 
+            
+
              object referenced by the <see
              cref="P:System.Web.UI.Page.PageStatePersister" />
 
             
 
+            
+
              property to load any saved view-state information for the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -3712,8 +4268,12 @@
 
             
 
+            
+
              class, the <see
              cref="T:System.Web.UI.HiddenFieldPageStatePersister" />
+
+            
 
             
 
@@ -3722,8 +4282,12 @@
 
             
 
+            
+
              class that saves state in the <see
              cref="P:System.Web.UI.Page.Session" />
+
+            
 
             
 
@@ -3735,13 +4299,19 @@
 
             
 
+            
+
              class that saves and loads state to the persistence medium of your choice. For an example of creating a new <see
              cref="T:System.Web.UI.PageStatePersister" />
 
             
 
+            
+
              object, see the <see
              cref="T:System.Web.UI.PageStatePersister" />
+
+            
 
             
 
@@ -3753,8 +4323,12 @@
 
             
 
+            
+
              state from anything other than a hidden field. If you choose to do so, you must also override the <see
              cref="M:System.Web.UI.Page.SavePageStateToPersistenceMedium(System.Object)" />
+
+            
 
             
 
@@ -3766,6 +4340,8 @@
           <para
             >Loads any saved view-state information to the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -3818,6 +4394,8 @@
 
             
 
+            
+
              property is set to true, the user is instead returned to the last position on the page.</para
           >
           <para
@@ -3826,10 +4404,14 @@
 
             
 
+            
+
              property in the <format
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -3841,6 +4423,8 @@
           <para
             >Gets or sets a value indicating whether to return the user to the same position in the client browser after postback. This property replaces the obsolete <see
              cref="P:System.Web.UI.Page.SmartNavigation" />
+
+            
 
             
 
@@ -3868,6 +4452,8 @@
 
               
 
+              
+
                property can potentially contain sensitive information about the hosting environment. The return value should not be displayed to users.</para
             >
           </block>
@@ -3885,8 +4471,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3925,13 +4515,19 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.Web.UI.MasterPage" />
 
             
 
+            
+
              object associated with this page. This property is read-only; however, you can set properties on the <see
              cref="T:System.Web.UI.MasterPage" />
+
+            
 
             
 
@@ -3943,8 +4539,12 @@
 
             
 
+            
+
              property is valid only on pages that reference a master page in the <see
              cref="P:System.Web.UI.Page.MasterPageFile" />
+
+            
 
             
 
@@ -3953,8 +4553,12 @@
 
             
 
+            
+
              property on a page that does not reference a master page, null is returned. The contents of a master page are not available until after the <see
              cref="E:System.Web.UI.Page.PreInit" />
+
+            
 
             
 
@@ -3991,8 +4595,12 @@
 
             
 
+            
+
              property is a virtual path (from the root of the application) of the master page file associated with this page. The <see
              cref="P:System.Web.UI.Page.MasterPageFile" />
+
+            
 
             
 
@@ -4001,8 +4609,12 @@
 
             
 
+            
+
              event; attempting to set the <see
              cref="P:System.Web.UI.Page.MasterPageFile" />
+
+            
 
             
 
@@ -4011,8 +4623,12 @@
 
             
 
+            
+
              event will throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -4021,13 +4637,19 @@
 
             
 
+            
+
              property is not valid, an exception of type <see
              cref="T:System.Web.HttpException" />
 
             
 
+            
+
              is thrown later in the page life cycle, but no exception is thrown when the property is set in the <see
              cref="E:System.Web.UI.Page.PreInit" />
+
+            
 
             
 
@@ -4039,8 +4661,12 @@
 
             
 
+            
+
              property set are content pages, and therefore can contain only top-level controls that are <see
              cref="T:System.Web.UI.WebControls.Content" />
+
+            
 
             
 
@@ -4072,8 +4698,12 @@
 
             
 
+            
+
              property is set to a positive number, the view state sent to the client browser is broken into multiple hidden fields, and each field's value is less than the size specified in the <see
              cref="P:System.Web.UI.Page.MaxPageStateFieldLength" />
+
+            
 
             
 
@@ -4085,8 +4715,12 @@
 
             
 
+            
+
              property to a negative number (the default) indicates that the view-state field should not be separated into chunks. Setting the <see
              cref="P:System.Web.UI.Page.MaxPageStateFieldLength" />
+
+            
 
             
 
@@ -4098,10 +4732,14 @@
 
             
 
+            
+
              property in the <format
              type="text/html">
               <a href="4123bb66-3fe4-4d62-b70e-33758656b458">pages element</a>
             </format>
+
+            
 
             
 
@@ -4135,8 +4773,12 @@
 
             
 
+            
+
              method performs the initialization and setup steps required to create a <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -4148,13 +4790,19 @@
 
             
 
+            
+
              method is called after the <see
              cref="M:System.Web.UI.Page.OnPreInit(System.EventArgs)" />
 
             
 
+            
+
              method and before the <see
              cref="M:System.Web.UI.Page.OnInitComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -4168,11 +4816,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -4187,6 +4839,8 @@
 
             
 
+            
+
              event to initialize the page.</para
           >
         </summary>
@@ -4195,8 +4849,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4225,6 +4883,8 @@
 
             
 
+            
+
              method is called after page initialization is complete. In this stage of the page's life cycle, all declared controls on the page are initialized, but the page's view state is not yet populated. You can access server controls, but they will not yet contain information returned from the user.</para
           >
           <para
@@ -4233,8 +4893,12 @@
 
             
 
+            
+
              method occurs at the end of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -4248,11 +4912,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnInitComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -4267,6 +4935,8 @@
 
             
 
+            
+
              event after page initialization.</para
           >
         </summary>
@@ -4275,8 +4945,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4305,6 +4979,8 @@
 
             
 
+            
+
              method is called at the end of the page load stage. At this point in the page life cycle, all postback data and view-state data is loaded into controls on the page. </para
           >
           <para
@@ -4315,11 +4991,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnLoadComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -4334,6 +5014,8 @@
 
             
 
+            
+
              event at the end of the page load stage.</para
           >
         </summary>
@@ -4342,8 +5024,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4372,6 +5058,8 @@
 
             
 
+            
+
              method is called at the beginning of the page initialization stage. </para
           >
           <para
@@ -4380,13 +5068,19 @@
 
             
 
+            
+
              method is called, personalization information is loaded and the page theme, if any, is initialized. This is also the preferred stage to dynamically define a <see
              cref="T:System.Web.UI.PageTheme" />
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.MasterPage" />
+
+            
 
             
 
@@ -4400,11 +5094,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnPreInit(System.EventArgs)" />
+
+            
 
             
 
@@ -4419,6 +5117,8 @@
 
             
 
+            
+
              event at the beginning of page initialization.</para
           >
         </summary>
@@ -4427,8 +5127,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4457,11 +5161,15 @@
 
             
 
+            
+
              method is called after all postback data returned from the user is loaded. At this stage in the page's life cycle, view-state information and postback data for declared controls and controls created during the initialization stage are loaded into the page's controls.</para
           >
           <para
             >Controls created in the <see
              cref="M:System.Web.UI.Page.OnPreLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -4475,11 +5183,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnPreLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -4494,8 +5206,12 @@
 
             
 
+            
+
              event after postback data is loaded into the page server controls but before the <see
              cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -4507,8 +5223,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4540,6 +5260,8 @@
 
             
 
+            
+
              method is called when the prerendering stage of the page life cycle is complete. At this stage of the page life cycle, all controls are created and the page is ready to render the output.</para
           >
           <para>This is the last event called before the page's view state is saved.</para>
@@ -4551,11 +5273,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnPreRenderComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -4570,8 +5296,12 @@
 
             
 
+            
+
              event after the <see
              cref="M:System.Web.UI.Page.OnPreRenderComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -4583,8 +5313,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4616,8 +5350,12 @@
 
             
 
+            
+
              method is called when the state information for the control has been written to the persistence medium for the page. State information is written to the persistence medium by calling the <see
              cref="M:System.Web.UI.Page.SavePageStateToPersistenceMedium(System.Object)" />
+
+            
 
             
 
@@ -4631,11 +5369,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.OnSaveStateComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -4650,6 +5392,8 @@
 
             
 
+            
+
              event after the page state has been saved to the persistence medium.</para
           >
         </summary>
@@ -4658,8 +5402,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4689,13 +5437,19 @@
 
             
 
+            
+
              property returns the specific <see
              cref="T:System.Web.UI.Adapters.PageAdapter" />
 
             
 
+            
+
              object that modifies the behavior of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -4707,8 +5461,12 @@
 
             
 
+            
+
              object is determined by examining characteristics of the incoming <see
              cref="P:System.Web.UI.Page.Request" />
+
+            
 
             
 
@@ -4717,8 +5475,12 @@
 
             
 
+            
+
              object override the corresponding events on the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -4753,8 +5515,12 @@
 
             
 
+            
+
              state. This state, called view state, consists of page and control settings and data that make the page and controls appear as if they are the same ones that the user saw and interacted with on their last round trip to the page. Several mechanisms exist to store view state between successive requests to the same page. The abstract <see
              cref="T:System.Web.UI.PageStatePersister" />
+
+            
 
             
 
@@ -4766,13 +5532,19 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.UI.Page.PageStatePersister" />
 
             
 
+            
+
              property is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -4784,6 +5556,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.PageStatePersister" />
+
+            
 
             
 
@@ -4860,12 +5634,16 @@
 
             
 
+            
+
              event fits into the ASP.NET life cycle, see <format
              type="text/html">
               <a href="7949d756-1a79-464e-891f-904b1cfc7991"
                 >Introduction to the ASP.NET Page Life Cycle</a
               >
             </format>
+
+            
 
             
 
@@ -4901,8 +5679,12 @@
 
             
 
+            
+
              event is raised after all postback data processing and before the <see
              cref="E:System.Web.UI.Control.Load" />
+
+            
 
             
 
@@ -4911,10 +5693,14 @@
 
             
 
+            
+
              event. For more information about handling events, see <format
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4926,6 +5712,8 @@
           <para
             >Occurs before the page <see
              cref="E:System.Web.UI.Control.Load" />
+
+            
 
             
 
@@ -4957,6 +5745,8 @@
 
             
 
+            
+
              event is raised when the pre-render stage of the page life cycle is complete. At this stage of the page life cycle, all controls are created, any pagination required is completed, and the page is ready to render to the output.</para
           >
           <para>This is the last event raised before the page's view state is saved.</para>
@@ -4965,6 +5755,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5004,8 +5796,12 @@
 
             
 
+            
+
              method or use cross-page posting to transfer processing from one ASP.NET page to another, the originating page contains request information that might be required for the destination page. You can use the <see
              cref="P:System.Web.UI.Page.PreviousPage" />
+
+            
 
             
 
@@ -5014,6 +5810,8 @@
           <para
             >If the current page is being rendered as a result of a direct request (not a transfer or cross-post from another page), the <see
              cref="P:System.Web.UI.Page.PreviousPage" />
+
+            
 
             
 
@@ -5051,8 +5849,12 @@
 
             
 
+            
+
              object, such as the <see
              cref="P:System.Web.UI.Page.Context" />
+
+            
 
             
 
@@ -5061,13 +5863,19 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.Page.Response" />
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.Page.Application" />
+
+            
 
             
 
@@ -5079,8 +5887,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -5089,13 +5901,19 @@
 
           
 
+          
+
           , <see
            cref="P:System.Web.HttpContext.Response" />
 
           
 
+          
+
           , and <see
            cref="P:System.Web.HttpContext.Session" />
+
+          
 
           
 
@@ -5134,8 +5952,12 @@
 
             
 
+            
+
              object calls the <see
              cref="M:System.Web.UI.Page.RaisePostBackEvent(System.Web.UI.IPostBackEventHandler,System.String)" />
+
+            
 
             
 
@@ -5151,8 +5973,12 @@
 
           
 
+          
+
           The ASP.NET server control that caused the postback. This control must implement the <see
            cref="T:System.Web.UI.IPostBackEventHandler" />
+
+          
 
           
 
@@ -5160,6 +5986,8 @@
         >
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5199,13 +6027,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="M:System.Web.UI.ClientScriptManager.RegisterArrayDeclaration(System.String,System.String)" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -5221,10 +6055,14 @@
 
           
 
+          
+
           The name of the array in which to declare the value. </param
         >
         <param name="arrayValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5268,8 +6106,12 @@
 
             
 
+            
+
              class. When the task is defined, use the <see
              cref="M:System.Web.UI.Page.RegisterAsyncTask(System.Web.UI.PageAsyncTask)" />
+
+            
 
             
 
@@ -5278,11 +6120,15 @@
 
             
 
+            
+
              method to begin the asynchronous task.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.Page.RegisterAsyncTask(System.Web.UI.PageAsyncTask)" />
+
+            
 
             
 
@@ -5298,8 +6144,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.PageAsyncTask" />
+
+          
 
           
 
@@ -5329,8 +6179,12 @@
 
             
 
+            
+
              object's &lt;form runat= server&gt; element. Be sure to include opening and closing &lt;script&gt; elements around the script block string specified in the <paramref
              name="script" />
+
+            
 
             
 
@@ -5340,6 +6194,8 @@
           <para
             >Any script blocks with the same <paramref
              name="key" />
+
+            
 
             
 
@@ -5354,13 +6210,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -5376,10 +6238,14 @@
 
           
 
+          
+
           Unique key that identifies a script block. </param
         >
         <param name="script">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5421,13 +6287,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="M:System.Web.UI.ClientScriptManager.RegisterHiddenField(System.String,System.String)" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -5442,8 +6314,12 @@
 
             
 
+            
+
              object when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -5455,10 +6331,14 @@
 
           
 
+          
+
           The unique name of the hidden field to be rendered. </param
         >
         <param name="hiddenFieldInitialValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5500,13 +6380,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -5522,10 +6408,14 @@
 
           
 
+          
+
           Unique key that identifies a script block. </param
         >
         <param name="script">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5574,8 +6464,12 @@
 
             
 
+            
+
              method on each request because registration for control state is not carried over from request to request during a postback event. It is recommended that registration occur in the <see
              cref="E:System.Web.UI.Control.Init" />
+
+            
 
             
 
@@ -5588,6 +6482,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5616,8 +6512,12 @@
 
             
 
+            
+
              interface or an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -5626,10 +6526,14 @@
 
             
 
+            
+
              interface enables handling of post back data and raising of any post back data changed events. For more information on the server control event model, see <format
              type="text/html">
               <a href="6304bff7-1b0e-4641-8acb-6d3b0badc4a3">ASP.NET Server Control Event Model</a>
             </format>
+
+            
 
             
 
@@ -5643,6 +6547,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5680,8 +6586,12 @@
 
             
 
+            
+
              must be used when the control does not include its control ID in the form post data. Also, the control that is registered must implement the <see
              cref="T:System.Web.UI.IPostBackEventHandler" />
+
+            
 
             
 
@@ -5696,11 +6606,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5736,6 +6650,8 @@
 
             
 
+            
+
              method to register the control with the page and ensure view state for the control is encrypted.</para
           >
           <para
@@ -5744,13 +6660,19 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.UI.ViewStateEncryptionMode.Auto" />
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.ViewStateEncryptionMode.Always" />
+
+            
 
             
 
@@ -5785,8 +6707,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Web.UI.Page.RegisterStartupScript(System.String,System.String)" />
+
+            
 
             
 
@@ -5795,8 +6721,12 @@
 
             
 
+            
+
              object's &lt;form runat= server&gt; element. Be sure to include opening and closing &lt;script&gt; elements around the script block string specified in the <paramref
              name="script" />
+
+            
 
             
 
@@ -5806,6 +6736,8 @@
           <para
             >Any script blocks with the same <paramref
              name="key" />
+
+            
 
             
 
@@ -5820,13 +6752,19 @@
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
+            
+
              method in the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -5842,10 +6780,14 @@
 
           
 
+          
+
           Unique key that identifies a script block. </param
         >
         <param name="script">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5881,8 +6823,12 @@
 
             
 
+            
+
              method is automatically called through the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -5892,6 +6838,8 @@
             <para
               >Typically, only the <see
                cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+              
 
               
 
@@ -5938,13 +6886,19 @@
 
             
 
+            
+
              method is responsible for creating the text and markup that is sent to the client browser. The default <see
              cref="M:System.Web.UI.Page.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
+            
+
              method calls <see
              cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -5959,8 +6913,12 @@
 
             
 
+            
+
              object and calls on the child controls of the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -5972,8 +6930,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -6001,6 +6963,8 @@
 
             
 
+            
+
              object contains information about the current HTTP request.</para
           >
         </remarks>
@@ -6009,6 +6973,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -6054,8 +7020,12 @@
 
             
 
+            
+
              method before saving control state. Use the <see
              cref="M:System.Web.UI.Page.RequiresControlState(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -6070,6 +7040,8 @@
 
             
 
+            
+
              object is registered to participate in control state management.</para
           >
         </summary>
@@ -6081,6 +7053,8 @@
 
             
 
+            
+
              requires control state; otherwise, false</para
           >
         </returns>
@@ -6089,8 +7063,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -6119,8 +7097,12 @@
 
             
 
+            
+
              object associated with the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -6159,6 +7141,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -6167,6 +7151,8 @@
           <para
             >Sets the encoding language for the current <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -6212,8 +7198,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.PageStatePersister.Save" />
+
+            
 
             
 
@@ -6222,8 +7212,12 @@
 
             
 
+            
+
              object referenced by the <see
              cref="P:System.Web.UI.Page.PageStatePersister" />
+
+            
 
             
 
@@ -6235,8 +7229,12 @@
 
             
 
+            
+
              class, the <see
              cref="T:System.Web.UI.HiddenFieldPageStatePersister" />
+
+            
 
             
 
@@ -6245,13 +7243,19 @@
 
             
 
+            
+
              class that saves state in the <see
              cref="P:System.Web.UI.Page.Session" />
 
             
 
+            
+
              object associated with the request. Note that when using the <see
              cref="T:System.Web.UI.SessionPageStatePersister" />
+
+            
 
             
 
@@ -6263,13 +7267,19 @@
 
             
 
+            
+
              class that saves and loads state to the persistence medium of your choice. For an example of creating a new <see
              cref="T:System.Web.UI.PageStatePersister" />
 
             
 
+            
+
              object, see the <see
              cref="T:System.Web.UI.PageStatePersister" />
+
+            
 
             
 
@@ -6281,8 +7291,12 @@
 
             
 
+            
+
              state in anything other than a hidden field. If you choose to do so, you must also override the <see
              cref="M:System.Web.UI.Page.LoadPageStateFromPersistenceMedium" />
+
+            
 
             
 
@@ -6327,8 +7341,12 @@
 
             
 
+            
+
              event. The <see
              cref="E:System.Web.UI.Page.SaveStateComplete" />
+
+            
 
             
 
@@ -6340,6 +7358,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 
@@ -6372,8 +7392,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpServerUtility.MapPath(System.String)" />
+
+            
 
             
 
@@ -6385,6 +7409,8 @@
           <para
             >Gets the Server object, which is an instance of the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -6430,6 +7456,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6472,13 +7500,19 @@
 
             
 
+            
+
              method to make the control with the specified ID string the active control in the Web page displayed by the browser. The <see
              cref="M:System.Web.UI.Page.SetFocus(System.String)" />
 
             
 
+            
+
              method must be called before the page is prepared for rendering to the client in the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -6488,6 +7522,8 @@
             <para
               >The <see
                cref="M:System.Web.UI.Page.SetFocus(System.String)" />
+
+              
 
               
 
@@ -6501,6 +7537,8 @@
         </summary>
         <param name="clientID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6532,13 +7570,19 @@
 
             
 
+            
+
              method to make the specified control the active control on the Web page displayed by the browser. The <see
              cref="M:System.Web.UI.Page.SetFocus(System.Web.UI.Control)" />
 
             
 
+            
+
              method must be called before the page is prepared for rendering to the client in the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -6548,6 +7592,8 @@
             <para
               >The <see
                cref="M:System.Web.UI.Page.SetFocus(System.Web.UI.Control)" />
+
+              
 
               
 
@@ -6561,6 +7607,8 @@
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6587,6 +7635,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets this property.</para
           >
           <block subset="none" type="note">
@@ -6596,13 +7646,19 @@
 
               
 
+              
+
                property is deprecated. Use the <see
                cref="Overload:System.Web.UI.Page.SetFocus" />
 
               
 
+              
+
                method and the <see
                cref="P:System.Web.UI.Page.MaintainScrollPositionOnPostback" />
+
+              
 
               
 
@@ -6678,8 +7734,12 @@
 
             
 
+            
+
              property specifies the name of a theme that is applied to a page early in the page life cycle, whereas the <see
              cref="P:System.Web.UI.Page.Theme" />
+
+            
 
             
 
@@ -6687,6 +7747,8 @@
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes and Skins Overview</a>
             </format>
+
+            
 
             
 
@@ -6708,6 +7770,8 @@
                     >How to: Apply ASP.NET Themes Programmatically</a
                   >
                 </format>
+
+                
 
                 
 
@@ -6749,8 +7813,12 @@
 
             
 
+            
+
              property sets the name of the theme used for the page. If you want the settings on the page to take precedence over the settings in the theme, use the <see
              cref="P:System.Web.UI.Page.StyleSheetTheme" />
+
+            
 
             
 
@@ -6758,6 +7826,8 @@
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes and Skins Overview</a>
             </format>
+
+            
 
             
 
@@ -6769,8 +7839,12 @@
 
             
 
+            
+
              property must be set prior to the <see
              cref="E:System.Web.UI.Page.PreInit" />
+
+            
 
             
 
@@ -6779,8 +7853,12 @@
 
             
 
+            
+
              property after the <see
              cref="E:System.Web.UI.Page.PreInit" />
+
+            
 
             
 
@@ -6789,11 +7867,15 @@
 
             
 
+            
+
              exception.</para
           >
           <para
             >The specified theme must exist as either an application or a global theme. If the theme does not exist, an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -6836,6 +7918,8 @@
 
             
 
+            
+
              property to set the page title in the HTML header sent to the requesting browser.</para
           >
           <block subset="none" type="note">
@@ -6871,10 +7955,14 @@
 
             
 
+            
+
              directive &lt;% @ Page trace="true" %&gt;. To enable tracing for an entire application, you must enable it in the application's configuration file, Web.config, which resides in the root directory of the application. For more information, see <format
              type="text/html">
               <a href="1552561d-887c-4002-8770-f92662cdf416">ASP.NET Tracing Overview</a>
             </format>
+
+            
 
             
 
@@ -6886,6 +7974,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -6924,6 +8014,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -6932,6 +8024,8 @@
           <para
             >Sets a value indicating whether tracing is enabled for the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -6979,6 +8073,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -7021,6 +8117,8 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the property.</para
           >
         </remarks>
@@ -7055,6 +8153,8 @@
 
             
 
+            
+
              property. The culture is a property of the executing thread </para
           >
           <para
@@ -7065,8 +8165,12 @@
 
             
 
+            
+
              directive in the .aspx file. When the page is requested, the dynamically generated class sets the value of this property. In addition, you can also explicitly set the value of the <see
              cref="P:System.Web.UI.Page.UICulture" />
+
+            
 
             
 
@@ -7074,6 +8178,8 @@
              type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7">globalization element</a>
             </format>
+
+            
 
             
 
@@ -7085,6 +8191,8 @@
           <para
             >Sets the user interface (UI) ID for the <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -7130,6 +8238,8 @@
 
             
 
+            
+
              property returns a string that is appended to the end of a file path when required for caching browsers. The string is used to identify the file path associated with a specific request.</para
           >
         </remarks>
@@ -7168,8 +8278,12 @@
 
             
 
+            
+
              on each request during before the state is persisted. Registration for control state is not carried over from request to request during a postback. Use the <see
              cref="M:System.Web.UI.Page.UnregisterRequiresControlState(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -7181,8 +8295,12 @@
 
             
 
+            
+
              method is invoked when using the <see
              cref="M:System.Web.UI.Control.RemovedControl(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -7198,8 +8316,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -7230,6 +8352,8 @@
 
             
 
+            
+
              object represents the security context of the user on whose behalf the code is running, including that user's identity and any roles to which they belong.</para
           >
           <para
@@ -7238,8 +8362,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -7280,8 +8408,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.ImageButton" />
+
+            
 
             
 
@@ -7290,8 +8422,12 @@
 
             
 
+            
+
              Web server controls, the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -7300,8 +8436,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -7310,8 +8450,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -7320,8 +8464,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -7334,8 +8482,12 @@
 
             
 
+            
+
              object associated with the <see
              cref="P:System.Web.UI.Page.Validators" />
+
+            
 
             
 
@@ -7348,13 +8500,19 @@
 
               
 
+              
+
                method; they use the <see
                cref="M:System.Web.UI.Page.Validate(System.String)" />
 
               
 
+              
+
                method instead. If you use the <see
                cref="M:System.Web.UI.Page.Validate" />
+
+              
 
               
 
@@ -7396,8 +8554,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.ImageButton" />
+
+            
 
             
 
@@ -7406,8 +8568,12 @@
 
             
 
+            
+
              Web server controls, the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+            
 
             
 
@@ -7416,8 +8582,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+            
 
             
 
@@ -7426,8 +8596,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.CheckBox" />
+
+            
 
             
 
@@ -7436,8 +8610,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -7450,13 +8628,19 @@
 
             
 
+            
+
              method validates the specified validation group. After calling the <see
              cref="M:System.Web.UI.Page.Validate(System.String)" />
 
             
 
+            
+
              method on a validation group, the <see
              cref="P:System.Web.UI.Page.IsValid" />
+
+            
 
             
 
@@ -7469,6 +8653,8 @@
         </summary>
         <param name="validationGroup">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7495,8 +8681,12 @@
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -7508,8 +8698,12 @@
 
             
 
+            
+
              method causes validation logic to be executed for each validation server control in the current validation group. If any of these controls do not pass, the <see
              cref="P:System.Web.UI.Page.IsValid" />
+
+            
 
             
 
@@ -7520,6 +8714,8 @@
              type="text/html">
               <a href="fa2aa14d-a461-492e-9a79-c990904613ef">Validation ASP.NET Controls</a>
             </format>
+
+            
 
             
 
@@ -7565,6 +8761,8 @@
 
             
 
+            
+
              method. Pages that have a different way of rendering the server form element can override this method to throw an exception under different conditions.</para
           >
           <para
@@ -7573,8 +8771,12 @@
 
             
 
+            
+
              server control (&lt;form runat="server"&gt;) tags. These controls can call this method when they render to provide a clear error message when they are not enclosed in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+            
 
             
 
@@ -7583,6 +8785,8 @@
           <para
             >When you develop a custom server control, it is common to call this method when you override the Render method for any kind of input tag. This is particularly important if the input control calls <see
              cref="M:System.Web.UI.Page.GetPostBackEventReference(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -7597,6 +8801,8 @@
 
             
 
+            
+
              control is rendered for the specified ASP.NET server control at run time.</para
           >
         </summary>
@@ -7605,8 +8811,12 @@
 
           
 
+          
+
           The ASP.NET server control that is required in the <see
            cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+          
 
           
 
@@ -7645,10 +8855,14 @@
 
             
 
+            
+
              property cannot be set in code. It can only be set in the <format
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -7659,10 +8873,14 @@
 
             
 
+            
+
              element of the configuration file. Values set in the <format
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -7673,6 +8891,8 @@
              type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
+
+            
 
             
 
@@ -7718,10 +8938,14 @@
 
             
 
+            
+
              property can help you prevent attacks on your application from malicious users. It does this by allowing you to assign an identifier to the view-state variable for individual users so that they cannot use the variable to generate an attack. For more information about Web attacks and about what you can do to help prevent them, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=163557"
               >Take Advantage of ASP.NET Built-in Features to Fend Off Web Attacks</see
             >
+
+            
 
             
 
@@ -7730,6 +8954,8 @@
           <para
             >You can set this property to any string value, such as the user's authenticated name or the <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -7767,6 +8993,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 

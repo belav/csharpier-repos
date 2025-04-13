@@ -23,8 +23,12 @@
 
         
 
+        
+
          interface extends the <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -33,13 +37,19 @@
 
         
 
+        
+
         , which is a method used to retrieve an <see
          cref="T:System.Web.UI.IHierarchyData" />
 
         
 
+        
+
          object from an enumerated item, in addition to the <see
          cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+        
 
         
 
@@ -51,8 +61,12 @@
 
         
 
+        
+
          collections retrieve an <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -61,13 +75,19 @@
 
         
 
+        
+
          method, then iterate through the enumeration and call the <see
          cref="M:System.Web.UI.IHierarchicalEnumerable.GetHierarchyData(System.Object)" />
 
         
 
+        
+
          on each enumerated item to retrieve an <see
          cref="T:System.Web.UI.IHierarchyData" />
+
+        
 
         
 
@@ -82,8 +102,12 @@
 
         
 
+        
+
          interface. Collections that implement the <see
          cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
             
 
+            
+
              collections retrieve an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -124,13 +152,19 @@
 
             
 
+            
+
              method, then iterate through the enumeration and call the <see
              cref="M:System.Web.UI.IHierarchicalEnumerable.GetHierarchyData(System.Object)" />
 
             
 
+            
+
              method on each enumerated item to retrieve an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -149,13 +183,19 @@
 
             
 
+            
+
              instance that represents the <see
              cref="T:System.Object" />
 
             
 
+            
+
              passed to the <see
              cref="M:System.Web.UI.IHierarchicalEnumerable.GetHierarchyData(System.Object)" />
+
+            
 
             
 
@@ -167,13 +207,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            for which to return an <see
            cref="T:System.Web.UI.IHierarchyData" />
+
+          
 
           
 

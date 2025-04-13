@@ -25,8 +25,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+
+            
 
             
 
@@ -82,6 +88,8 @@
 
             
 
+            
+
              class with the specified collection. </para
           >
         </summary>
@@ -90,8 +98,12 @@
 
           
 
+          
+
           A collection of objects to convert into a <see
            cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+
+          
 
           
 
@@ -126,6 +138,8 @@
 
             
 
+            
+
              class by combining the two specified collections. </para
           >
         </summary>
@@ -134,13 +148,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
 
           
 
+          
+
            to combine with the <paramref
            name="connectionInterfaces" />
+
+          
 
           
 
@@ -151,8 +171,12 @@
 
           
 
+          
+
           A collection to combine with the <paramref
            name="existingConnectionInterfaces" />
+
+          
 
           
 
@@ -184,6 +208,8 @@
 
             
 
+            
+
              object contains a specific value.</para
           >
         </summary>
@@ -195,8 +221,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+
+            
 
             
 
@@ -229,8 +259,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -242,8 +276,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -252,8 +290,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -264,8 +306,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -293,6 +339,8 @@
           <para
             >References a static, read-only instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+
+            
 
             
 
@@ -325,6 +373,8 @@
 
             
 
+            
+
              collection. </para
           >
         </summary>
@@ -336,8 +386,12 @@
 
             
 
+            
+
              within the entire <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" />
+
+            
 
             
 

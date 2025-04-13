@@ -23,8 +23,12 @@
 
         
 
+        
+
          class dynamically extends the type information associated with a type or object by adding, modifying, or hiding characteristics such as attributes, properties, and events. There can be multiple type description provider classes that offer metadata to a single <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          with a <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
 
             
 
+            
+
              tag.</para
           >
         </item>
@@ -61,8 +71,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          class relies on a parent object of the same type, supplied during construction. This allows classes that derive from <see
          cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+        
 
         
 
@@ -86,6 +104,8 @@
       <para
         >Instances of <see
          cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+        
 
         
 
@@ -98,6 +118,8 @@
       <para
         >Provides supplemental metadata to the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -127,6 +149,8 @@
 
             
 
+            
+
              constructor with a parameter value that is null.</para
           >
         </remarks>
@@ -135,6 +159,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -169,8 +195,12 @@
 
             
 
+            
+
              parameter is null, all <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -179,8 +209,12 @@
 
             
 
+            
+
              methods will delegate to the methods of <paramref
              name="parent" />
+
+            
 
             
 
@@ -189,6 +223,8 @@
           <para
             >The following table shows the default return values for <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -228,6 +264,8 @@
 
                   
 
+                  
+
                    method.</para
                 >
               </description>
@@ -242,6 +280,8 @@
                 <para
                   >A default instance of a <see
                    cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+                  
 
                   
 
@@ -262,6 +302,8 @@
 
                   
 
+                  
+
                    class.</para
                 >
               </description>
@@ -279,6 +321,8 @@
 
                   
 
+                  
+
                    first parameter.</para
                 >
               </description>
@@ -293,11 +337,15 @@
 
             
 
+            
+
              class using a parent type description provider.</para
           >
         </summary>
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,8 +385,12 @@
 
             
 
+            
+
              specified by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -347,13 +399,19 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
+            
+
              class. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -365,8 +423,12 @@
 
             
 
+            
+
              method is virtual and, by default, returns the result of the <see
              cref="Overload:System.Activator.CreateInstance" />
+
+            
 
             
 
@@ -375,13 +437,19 @@
 
             
 
+            
+
              is null. If <paramref
              name="provider" />
 
             
 
+            
+
              is null, this method will invoke the <see
              cref="M:System.ComponentModel.TypeDescriptionProvider.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])" />
+
+            
 
             
 
@@ -400,11 +468,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,6 +487,8 @@
 
           
 
+          
+
           The type of object to create. This parameter is never null.</param
         >
         <param name="argTypes">
@@ -422,10 +496,14 @@
 
           
 
+          
+
           An optional array of types that represent the parameter types to be passed to the object's constructor. This array can be null or of zero length.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +540,12 @@
 
             
 
+            
+
              may need to perform complex operations on collections of metadata. Because types are not unloaded for the life of a domain, the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -472,8 +554,12 @@
 
             
 
+            
+
              class because caching them would prevent the object from being garbage collected. Instead, the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -482,13 +568,19 @@
 
             
 
+            
+
              of key/value pairs, to exist on an object. The <see
              cref="M:System.ComponentModel.TypeDescriptionProvider.GetCache(System.Object)" />
 
             
 
+            
+
              method returns an instance of this cache. The <see
              cref="M:System.ComponentModel.TypeDescriptionProvider.GetCache(System.Object)" />
+
+            
 
             
 
@@ -500,8 +592,12 @@
 
             
 
+            
+
              used by <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -510,8 +606,12 @@
 
             
 
+            
+
              interface. If the object is, it uses the dictionary service to store the object's cache. Otherwise, the object it returns null. Other type description providers may provide their own implementation here. For example, dependency objects can just attach a property of type <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -526,6 +626,8 @@
 
             
 
+            
+
              of key/value pairs.</para
           >
         </summary>
@@ -537,11 +639,15 @@
 
             
 
+            
+
              if the provided object supports caching; otherwise, null.</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,8 +684,12 @@
 
             
 
+            
+
              interface can attach properties to other objects that reside in the same logical container. The overloaded <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
+
+            
 
             
 
@@ -588,13 +698,19 @@
 
             
 
+            
+
              method returns the set of these extended properties. The <see
              cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
+            
+
              will automatically merge the results of these two property collections. While the dnprdnshort component model supports only extended properties, <see
              cref="M:System.ComponentModel.TypeDescriptionProvider.GetExtendedTypeDescriptor(System.Object)" />
+
+            
 
             
 
@@ -605,8 +721,12 @@
 
             
 
+            
+
              is virtual and, by default, returns a custom type descriptor that returns empty results if no parent provider was passed. If a parent provider was passed, this method will invoke the parent provider's <see
              cref="M:System.ComponentModel.TypeDescriptionProvider.GetExtendedTypeDescriptor(System.Object)" />
+
+            
 
             
 
@@ -625,11 +745,15 @@
 
             
 
+            
+
              that can provide extended metadata for the object.</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -670,11 +794,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -717,6 +845,8 @@
 
           
 
+          
+
           The specified component.</param
         >
       </Docs>
@@ -747,13 +877,19 @@
 
             
 
+            
+
              method is a lower-level version of the <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
 
             
 
+            
+
              method. If no custom type descriptor can be located for an object, <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetReflectionType" />
+
+            
 
             
 
@@ -773,11 +909,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,13 +951,19 @@
 
             
 
+            
+
              method is a lower-level version of the <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
 
             
 
+            
+
              method. If no custom type descriptor can be located for an object, <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetReflectionType" />
+
+            
 
             
 
@@ -837,6 +983,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -845,8 +993,12 @@
 
           
 
+          
+
           The type of object for which to retrieve the <see
            cref="T:System.Reflection.IReflect" />
+
+          
 
           
 
@@ -884,13 +1036,19 @@
 
             
 
+            
+
              method is a lower-level version of the <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
 
             
 
+            
+
              method. If no custom type descriptor can be located for an object, <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetReflectionType" />
+
+            
 
             
 
@@ -909,6 +1067,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -917,8 +1077,12 @@
 
           
 
+          
+
           The type of object for which to retrieve the <see
            cref="T:System.Reflection.IReflect" />
+
+          
 
           
 
@@ -926,6 +1090,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -961,8 +1127,12 @@
 
             
 
+            
+
              method reverses the <see
              cref="M:System.ComponentModel.TypeDescriptionProvider.GetReflectionType(System.Type)" />
+
+            
 
             
 
@@ -971,8 +1141,12 @@
 
             
 
+            
+
              method is preferred over using the <see
              cref="P:System.Type.UnderlyingSystemType" />
+
+            
 
             
 
@@ -991,8 +1165,12 @@
 
             
 
+            
+
              that represents the runtime equivalent of <paramref
              name="reflectionType" />
+
+            
 
             
 
@@ -1001,6 +1179,8 @@
         </returns>
         <param name="reflectionType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1042,6 +1222,8 @@
 
             
 
+            
+
              that can provide metadata for the type.</para
           >
         </returns>
@@ -1050,8 +1232,12 @@
 
           
 
+          
+
           An instance of the type. Can be null if no instance was passed to the <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -1093,11 +1279,15 @@
 
             
 
+            
+
              that can provide metadata for the type.</para
           >
         </returns>
         <param name="objectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1135,6 +1325,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1150,11 +1342,15 @@
 
             
 
+            
+
              that can provide metadata for the type.</para
           >
         </returns>
         <param name="objectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1165,8 +1361,12 @@
 
           
 
+          
+
           An instance of the type. Can be null if no instance was passed to the <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -1204,11 +1404,15 @@
 
             
 
+            
+
              is compatible with the type description and its chain of type description providers; otherwise, false. </para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

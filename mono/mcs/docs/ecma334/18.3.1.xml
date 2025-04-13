@@ -6,8 +6,12 @@
 
     
 
+    
+
     ) and are said to have value semantics. Classes, on the other hand, are reference types (<hyperlink
     >11.2</hyperlink>
+
+    
 
     
 
@@ -33,6 +37,8 @@ struct Point
 
       
 
+      
+
       the code fragment <code_example
       >
         <![CDATA[
@@ -42,6 +48,8 @@ a.x = 100;
 System.Console.WriteLine(b.x);  
 ]]>
       </code_example>
+
+      
 
       
 

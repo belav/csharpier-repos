@@ -30,8 +30,12 @@
 
         
 
+        
+
          object inherits from the <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          object is used to describe a configuration object, such as the <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >Represents a collection of key/value pairs used to describe a configuration object as well as a <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -81,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsAttributeDictionary" />
+
+            
 
             
 
@@ -117,11 +129,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -33,11 +33,15 @@
 
         
 
+        
+
          is the base interface for all non-generic enumerators.</para
       >
       <para
         >For the generic version of this interface see <see
          cref="T:System.Collections.Generic.IEnumerator`1" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          method also brings the enumerator back to this position. After an enumerator is created or the <see
          cref="M:System.Collections.IEnumerator.Reset" />
+
+        
 
         
 
@@ -61,13 +69,19 @@
 
         
 
+        
+
          method to advance the enumerator to the first element of the collection before reading the value of <see
          cref="P:System.Collections.IEnumerator.Current" />
 
         
 
+        
+
         ; otherwise, <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          returns the same object until either <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -88,13 +106,19 @@
 
         
 
+        
+
          is called. <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
+        
+
          sets <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -106,8 +130,12 @@
 
         
 
+        
+
          passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -116,8 +144,12 @@
 
         
 
+        
+
          also return false. If the last call to <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -126,8 +158,12 @@
 
         
 
+        
+
          throws an exception. To set <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -136,8 +172,12 @@
 
         
 
+        
+
          followed by <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -149,8 +189,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Collections.IEnumerator.Reset" />
+
+        
 
         
 
@@ -159,8 +203,12 @@
 
         
 
+        
+
         . If the collection is modified between <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -169,8 +217,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -217,8 +269,12 @@
 
             
 
+            
+
              method is called, the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -227,8 +283,12 @@
 
             
 
+            
+
              property; otherwise, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -239,8 +299,12 @@
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -251,8 +315,12 @@
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -261,8 +329,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -274,8 +346,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -284,8 +360,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -294,8 +374,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -341,8 +425,12 @@
 
             
 
+            
+
              method is called, an enumerator is positioned before the first element of the collection, and the first call to the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -354,8 +442,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -364,8 +456,12 @@
 
             
 
+            
+
              also return false until <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -377,13 +473,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -433,13 +535,19 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -451,8 +559,12 @@
 
             
 
+            
+
              method is provided for COM interoperability. It does not necessarily need to be implemented; instead, the implementer can simply throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 

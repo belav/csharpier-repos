@@ -35,13 +35,19 @@
 
         
 
+        
+
          attribute and the <see
          cref="T:System.Security.SecurityTreatAsSafeAttribute" />
 
         
 
+        
+
          attribute can be accessed by types and members within the assembly that are marked with the <see
          cref="T:System.Security.SecurityTransparentAttribute" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
       <para
         >Identifies which of the nonpublic <see
          cref="T:System.Security.SecurityCriticalAttribute" />
+
+        
 
         
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.SecurityTreatAsSafeAttribute" />
+
+            
 
             
 

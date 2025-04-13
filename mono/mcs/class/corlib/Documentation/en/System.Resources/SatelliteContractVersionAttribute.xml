@@ -44,8 +44,12 @@
 
         
 
+        
+
          attribute establishes a contract between a main assembly and all its satellites. You apply this  attribute to your main assembly, and pass it the version number of the satellite assemblies that will work with this version of the main assembly. When the resource manager (<see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
       <para
         >If you want to revise a satellite assembly but not the main assembly, increment the version number on your satellite. In this case, ship a publisher policy assembly along with your satellite assembly stating that your new satellite assembly has backward compatibility with your old satellite assembly. The resource manager will still use the old contract number written into your main assembly based on the <see
          cref="T:System.Resources.SatelliteContractVersionAttribute" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
         
 
+        
+
         . The publisher policy is generated from an XML configuration file (see the <format
          type="text/html">
           <a href="67784ecd-9663-434e-bd6a-26975e447ac0">&lt;bindingRedirect&gt; element</a>
@@ -75,10 +83,14 @@
 
         
 
+        
+
         ) by using the <format
          type="text/html">
           <a href="b5382965-0053-47cf-b92f-862860275a01">Al.exe (Assembly Linker)</a>
         </format>
+
+        
 
         
 
@@ -94,6 +106,8 @@
       <para
         >Instructs a <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -130,8 +144,12 @@
 
             
 
+            
+
              property with the <paramref
              name="version" />
+
+            
 
             
 
@@ -146,11 +164,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

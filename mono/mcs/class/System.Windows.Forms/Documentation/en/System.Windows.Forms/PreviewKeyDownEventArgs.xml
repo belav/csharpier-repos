@@ -21,6 +21,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -29,6 +31,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.PreviewKeyDown" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
             
 
+            
+
              class with the specified key. </para
           >
         </summary>
@@ -65,8 +71,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -152,8 +162,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -183,8 +197,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -214,8 +232,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -245,8 +267,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 

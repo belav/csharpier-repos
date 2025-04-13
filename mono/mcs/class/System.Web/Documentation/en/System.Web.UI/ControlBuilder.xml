@@ -21,8 +21,12 @@
 
         
 
+        
+
          class. During parsing, the ASP.NET page framework builds a tree of <see
          cref="T:System.Web.UI.ControlBuilder" />
+
+        
 
         
 
@@ -31,13 +35,19 @@
 
         
 
+        
+
          tree is then used to generate page code to create the control tree. In addition to child controls, the <see
          cref="T:System.Web.UI.ControlBuilder" />
 
         
 
+        
+
          defines the behavior of how the content within control tags is parsed. You can override this default behavior by defining your own custom control builder class. This is done by applying a <see
          cref="T:System.Web.UI.ControlBuilderAttribute" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -76,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -101,6 +115,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
+
+            
 
             
 
@@ -140,6 +156,8 @@
 
             
 
+            
+
              method to control how literal content between the control's opening and closing tags is processed. Literal content can be any text that is passed by the browser to the server control. For example, any HTML elements and text, between their opening and closing tags, are literal content.</para
           >
         </remarks>
@@ -149,6 +167,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              object for any child controls that belong to the container control.</para
           >
         </summary>
@@ -190,8 +212,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 
@@ -241,6 +267,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -263,6 +291,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.ControlBuilder.CloseControl" />
+
+            
 
             
 
@@ -293,6 +323,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -334,6 +366,8 @@
 
             
 
+            
+
              object from the specified tag name and object type, as well as other parameters defining the builder.</para
           >
         </summary>
@@ -346,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.TemplateParser" />
+
+          
 
           
 
@@ -358,8 +396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 
@@ -370,8 +412,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -382,6 +428,8 @@
 
           
 
+          
+
           The name of the tag to be built. This allows the builder to support multiple tag types. </param
         >
         <param name="id">
@@ -389,8 +437,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.UI.ControlBuilder.ID" />
+
+          
 
           
 
@@ -401,8 +453,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -413,10 +469,14 @@
 
           
 
+          
+
           The source file line number for the specified control. </param
         >
         <param name="sourceFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +505,12 @@
 
             
 
+            
+
              with <see
              cref="P:System.Web.UI.ParseChildrenAttribute.ChildrenAsProperties" />
+
+            
 
             
 
@@ -473,6 +537,8 @@
           <para
             >Gets a value that determines whether the control implements the <see
              cref="T:System.Web.UI.IParserAccessor" />
+
+            
 
             
 
@@ -511,6 +577,8 @@
 
             
 
+            
+
              of the control type corresponding to a child tag. This method is called by the ASP.NET page framework.</para
           >
         </summary>
@@ -522,6 +590,8 @@
 
             
 
+            
+
              of the specified control's child.</para
           >
         </returns>
@@ -530,10 +600,14 @@
 
           
 
+          
+
           The tag name of the child. </param
         >
         <param name="attribs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -607,6 +681,8 @@
 
             
 
+            
+
              method is called by the ASP.NET page framework during parsing and is not intended to be called directly in you code.</para
           >
         </remarks>
@@ -661,6 +737,8 @@
 
             
 
+            
+
              is running in the designer.</para
           >
         </summary>
@@ -700,6 +778,8 @@
 
             
 
+            
+
              for use after it is instantiated. This method is called by the ASP.NET page framework.</para
           >
         </summary>
@@ -708,8 +788,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.TemplateParser" />
+
+          
 
           
 
@@ -720,8 +804,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 
@@ -732,8 +820,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -744,6 +836,8 @@
 
           
 
+          
+
           The name of the tag to be built. This allows the builder to support multiple tag types. </param
         >
         <param name="id">
@@ -751,8 +845,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.UI.ControlBuilder.ID" />
+
+          
 
           
 
@@ -763,8 +861,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -816,6 +918,8 @@
 
             
 
+            
+
              method must be called. This method is called by the ASP.NET page framework.</para
           >
         </summary>
@@ -851,6 +955,8 @@
 
             
 
+            
+
              that it is being added to a parent control builder.</para
           >
         </summary>
@@ -859,8 +965,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 
@@ -891,6 +1001,8 @@
 
             
 
+            
+
              responsible for parsing the control.</para
           >
         </remarks>
@@ -899,6 +1011,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.TemplateParser" />
+
+            
 
             
 
@@ -929,6 +1043,8 @@
 
             
 
+            
+
              previously returned true.</para
           >
         </remarks>
@@ -940,11 +1056,15 @@
 
             
 
+            
+
              with the inner text of the control tag.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

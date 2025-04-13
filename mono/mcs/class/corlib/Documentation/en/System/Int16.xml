@@ -55,12 +55,16 @@
 
         
 
+        
+
          value type represents signed integers with values ranging from negative 32768 through positive 32767.</para
       >
       <para>This type provides methods to convert the value of an instance of this type to its string representation, to convert the string representation of a number to an instance of this type, and to compare instances of this type.</para>
       <para
         >You can also call the members of the <see
          cref="T:System.Math" />
+
+        
 
         
 
@@ -71,6 +75,8 @@
          type="text/html">
           <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Types</a>
         </format>
+
+        
 
         
 
@@ -110,13 +116,19 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.Int16.CompareTo(System.Object)" />
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -128,6 +140,8 @@
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
@@ -136,8 +150,12 @@
 
             
 
+            
+
              and the parameter type is <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -146,8 +164,12 @@
 
             
 
+            
+
              object, then generates a <see
              cref="M:System.Int32.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -156,8 +178,12 @@
 
             
 
+            
+
              instance and the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -174,6 +200,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -201,6 +229,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -213,6 +243,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -231,6 +263,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -239,6 +273,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,8 +310,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.Int16" />
+
+          
 
           
 
@@ -289,6 +329,8 @@
 
             
 
+            
+
             , regardless of its value, is considered greater than a null reference.</para
           >
           <para
@@ -297,8 +339,12 @@
 
             
 
+            
+
              parameter must be null or an instance of <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -314,6 +360,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -341,6 +389,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -353,6 +403,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -371,11 +423,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -387,6 +443,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -422,13 +480,19 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.Int16.Equals(System.Object)" />
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="obj" />
+
+            
 
             
 
@@ -443,6 +507,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -454,6 +520,8 @@
 
             
 
+            
+
              has the same value as this instance; otherwise, false.</para
           >
         </returns>
@@ -462,8 +530,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int16" />
+
+          
 
           
 
@@ -503,6 +575,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -519,8 +593,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -529,6 +607,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,6 +646,8 @@
               >This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -610,8 +692,12 @@
 
             
 
+            
+
              for value type <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -623,6 +709,8 @@
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.Int16" />
+
+            
 
             
 
@@ -662,8 +750,12 @@
 
             
 
+            
+
              property is typically used to prevent an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -672,13 +764,19 @@
 
             
 
+            
+
              or a <see
              cref="T:System.Int32" />
 
             
 
+            
+
             ) to an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -690,6 +788,8 @@
           <para
             >Represents the largest possible value of an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -730,8 +830,12 @@
 
             
 
+            
+
              property is typically used to prevent an <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -740,13 +844,19 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Int64" />
 
             
 
+            
+
             ) to an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -758,6 +868,8 @@
           <para
             >Represents the smallest possible value of <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -795,10 +907,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -809,13 +925,19 @@
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Int16.MaxValue" />
 
           
 
+          
+
            or less than <see
            cref="F:System.Int16.MinValue" />
+
+          
 
           
 
@@ -825,6 +947,8 @@
           <para
             >This example demonstrates parsing a string to a <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -851,6 +975,8 @@ public class Int16ParseClass {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -900,8 +1026,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is interpreted using the <see
              cref="F:System.Globalization.NumberStyles.Integer" />
+
+            
 
             
 
@@ -910,13 +1040,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             , use either the <see
              cref="M:System.Int16.Parse(System.String,System.Globalization.NumberStyles)" />
 
             
 
+            
+
              or the <see
              cref="M:System.Int16.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -928,8 +1064,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -938,13 +1078,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             . To parse a string using the formatting information of some other culture, use the <see
              cref="M:System.Int16.Parse(System.String,System.IFormatProvider)" />
 
             
 
+            
+
              or the <see
              cref="M:System.Int16.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -963,11 +1109,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1008,10 +1158,14 @@ public class Int16ParseClass {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1022,13 +1176,19 @@ public class Int16ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Int16.MaxValue" />
 
           
 
+          
+
            or less than <see
            cref="F:System.Int16.MinValue" />
+
+          
 
           
 
@@ -1039,10 +1199,14 @@ public class Int16ParseClass {
 
           
 
+          
+
           A string containing a number to convert. </param
         >
         <param name="style">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1051,8 +1215,12 @@ public class Int16ParseClass {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1066,8 +1234,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter defines the style elements (such as white space or a sign symbol) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -1076,13 +1248,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              enumeration. Depending on the value of <paramref
              name="style" />
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1095,8 +1273,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -1126,8 +1308,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1136,8 +1322,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    flag, or at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1146,8 +1336,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -1166,8 +1360,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
+
+                  
 
                   
 
@@ -1176,13 +1374,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -1201,8 +1405,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1211,8 +1419,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1221,8 +1433,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -1231,13 +1447,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -1264,13 +1486,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -1289,13 +1517,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -1314,8 +1548,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1324,8 +1562,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    flag. If any digit other than 0 appears in fractional_digits, the method throws an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -1344,8 +1586,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    can be represented in exponential notation. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1354,8 +1600,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -1364,8 +1614,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    parameter must represent a number in the range of the <see
                    cref="T:System.Int16" />
+
+                  
 
                   
 
@@ -1388,8 +1642,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -1398,8 +1656,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -1439,6 +1701,8 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1453,6 +1717,8 @@ public class Int16ParseClass {
                 <para
                   >The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1473,6 +1739,8 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1487,6 +1755,8 @@ public class Int16ParseClass {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1551,8 +1821,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              flag is used, <paramref
              name="s" />
+
+            
 
             
 
@@ -1561,8 +1835,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -1571,13 +1849,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
             
 
+            
+
              enumeration has a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -1589,8 +1873,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -1599,13 +1887,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             . To parse <paramref
              name="s" />
 
             
 
+            
+
              using the formatting information of a specific culture, call the <see
              cref="M:System.Int16.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1624,11 +1918,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1639,13 +1937,19 @@ public class Int16ParseClass {
 
           
 
+          
+
           A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1686,10 +1990,14 @@ public class Int16ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1700,13 +2008,19 @@ public class Int16ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Int16.MaxValue" />
 
           
 
+          
+
            or less than <see
            cref="F:System.Int16.MinValue" />
+
+          
 
           
 
@@ -1717,6 +2031,8 @@ public class Int16ParseClass {
 
           
 
+          
+
           A string containing a number to convert. </param
         >
         <remarks>
@@ -1724,6 +2040,8 @@ public class Int16ParseClass {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -1773,8 +2091,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is interpreted using the <see
              cref="F:System.Globalization.NumberStyles.Integer" />
+
+            
 
             
 
@@ -1783,13 +2105,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             . To explicitly define the style elements together with the culture-specific formatting information that can be present in <paramref
              name="s" />
 
             
 
+            
+
             , use the <see
              cref="M:System.Int16.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1801,8 +2129,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -1811,8 +2143,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              object. The <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -1821,13 +2157,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             . If <paramref
              name="provider" />
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -1846,11 +2188,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1861,13 +2207,19 @@ public class Int16ParseClass {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
 
           
 
+          
+
            that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -1909,10 +2261,14 @@ public class Int16ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1923,13 +2279,19 @@ public class Int16ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Int16.MaxValue" />
 
           
 
+          
+
            or less than <see
            cref="F:System.Int16.MinValue" />
+
+          
 
           
 
@@ -1940,10 +2302,14 @@ public class Int16ParseClass {
 
           
 
+          
+
           A string containing a number to convert. </param
         >
         <param name="style">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1952,8 +2318,12 @@ public class Int16ParseClass {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1967,8 +2337,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter defines the style elements (such as white space or the positive sign) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -1977,13 +2351,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              enumeration. Depending on the value of <paramref
              name="style" />
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1996,8 +2376,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -2027,8 +2411,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2037,8 +2425,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    flag, or at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2047,8 +2439,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -2067,8 +2463,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
+
+                  
 
                   
 
@@ -2077,13 +2477,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -2102,8 +2508,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2112,8 +2522,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2122,8 +2536,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -2132,13 +2550,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -2165,13 +2589,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -2190,13 +2620,19 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -2215,8 +2651,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2225,8 +2665,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    flag. If any digit other than 0 appears in fractional_digits, the method throws an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -2245,8 +2689,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    can be represented in exponential notation. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2255,8 +2703,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -2265,8 +2717,12 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    parameter must represent a number in the range of the <see
                    cref="T:System.Int16" />
+
+                  
 
                   
 
@@ -2289,8 +2745,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -2299,8 +2759,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -2340,6 +2804,8 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -2354,6 +2820,8 @@ public class Int16ParseClass {
                 <para
                   >The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2374,6 +2842,8 @@ public class Int16ParseClass {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2388,6 +2858,8 @@ public class Int16ParseClass {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2452,8 +2924,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              flag is used, <paramref
              name="s" />
+
+            
 
             
 
@@ -2462,8 +2938,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -2472,13 +2952,19 @@ public class Int16ParseClass {
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
             
 
+            
+
              enumeration has a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -2490,8 +2976,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -2500,8 +2990,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              method obtains a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2510,8 +3004,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              object provides culture-specific information about the format of <paramref
              name="s" />
+
+            
 
             
 
@@ -2520,8 +3018,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2540,11 +3042,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2555,13 +3061,19 @@ public class Int16ParseClass {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2572,13 +3084,19 @@ public class Int16ParseClass {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
 
           
 
+          
+
            that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -2617,13 +3135,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToBoolean(System.Int16)" />
+
+            
 
             
 
@@ -2638,6 +3162,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2647,6 +3173,8 @@ public class Int16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2681,13 +3209,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToByte(System.Int16)" />
+
+            
 
             
 
@@ -2702,6 +3236,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2713,11 +3249,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2752,13 +3292,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToChar(System.Int16)" />
+
+            
 
             
 
@@ -2773,6 +3319,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2784,11 +3332,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2827,6 +3379,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2836,6 +3390,8 @@ public class Int16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2873,13 +3429,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDecimal(System.Int16)" />
+
+            
 
             
 
@@ -2894,6 +3456,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2905,11 +3469,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2947,13 +3515,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDouble(System.Int16)" />
+
+            
 
             
 
@@ -2968,6 +3542,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2979,11 +3555,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3021,8 +3601,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -3037,6 +3621,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3046,6 +3632,8 @@ public class Int16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3080,13 +3668,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.Int16)" />
+
+            
 
             
 
@@ -3101,6 +3695,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3112,11 +3708,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3154,13 +3754,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.Int16)" />
+
+            
 
             
 
@@ -3175,6 +3781,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3186,11 +3794,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3228,13 +3840,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.Int16)" />
+
+            
 
             
 
@@ -3249,6 +3867,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3260,11 +3880,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3302,13 +3926,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSingle(System.Int16)" />
+
+            
 
             
 
@@ -3323,6 +3953,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3334,11 +3966,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3378,13 +4014,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -3399,6 +4041,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3410,6 +4054,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3418,8 +4064,12 @@ public class Int16ParseClass {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -3457,13 +4107,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt16(System.Int16)" />
+
+            
 
             
 
@@ -3478,6 +4134,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3487,6 +4145,8 @@ public class Int16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3524,13 +4184,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.Int16)" />
+
+            
 
             
 
@@ -3545,6 +4211,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3556,11 +4224,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3598,13 +4270,19 @@ public class Int16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt64(System.Int16)" />
+
+            
 
             
 
@@ -3619,6 +4297,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3630,11 +4310,15 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3671,8 +4355,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              method formats an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -3681,8 +4369,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              object of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Int16.ToString(System.String)" />
+
+            
 
             
 
@@ -3754,10 +4446,14 @@ public class Int16ParseClass {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -3770,6 +4466,8 @@ public class Int16ParseClass {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -3820,8 +4518,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              method formats an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -3830,8 +4532,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              object of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
              cref="M:System.Int16.ToString(System.String)" />
+
+            
 
             
 
@@ -3902,10 +4608,14 @@ public class Int16ParseClass {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -3921,6 +4631,8 @@ public class Int16ParseClass {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -3931,8 +4643,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -3941,8 +4657,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -3951,8 +4671,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              is a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -3961,8 +4685,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              object. The <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -3971,8 +4699,12 @@ public class Int16ParseClass {
 
             
 
+            
+
              is null, this instance is formatted with the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -3991,6 +4723,8 @@ public class Int16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3999,8 +4733,12 @@ public class Int16ParseClass {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -4037,12 +4775,16 @@ public class Int16ParseClass {
 
           
 
+          
+
            is invalid.</exception
         >
         <example>
           <para
             >This example demonstrates converting a <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4082,8 +4824,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              method formats an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4092,8 +4838,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              object that represents the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
              cref="M:System.Int16.ToString(System.String)" />
+
+            
 
             
 
@@ -4159,8 +4909,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              parameter can be either a standard or a custom numeric format string. All standard numeric format strings other than "R" (or "r") are supported, as are all custom numeric format characters. If <paramref
              name="format" />
+
+            
 
             
 
@@ -4177,10 +4931,14 @@ public class Int16ToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4196,6 +4954,8 @@ public class Int16ToStringExample {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -4203,6 +4963,8 @@ public class Int16ToStringExample {
           <para
             >The return value of this instance is formatted with the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4221,11 +4983,15 @@ public class Int16ToStringExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4266,10 +5032,14 @@ public class Int16ToStringExample {
 
           
 
+          
+
            is invalid.</exception
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4283,8 +5053,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              method formats an <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4293,8 +5067,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              object of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
              cref="M:System.Int16.ToString(System.String)" />
+
+            
 
             
 
@@ -4360,8 +5138,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              parameter can be either a standard or a custom numeric format string. All standard numeric format strings other than "R" (or "r") are supported, as are all custom numeric format characters. If <paramref
              name="format" />
+
+            
 
             
 
@@ -4378,10 +5160,14 @@ public class Int16ToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4397,6 +5183,8 @@ public class Int16ToStringExample {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -4407,8 +5195,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4417,13 +5209,19 @@ public class Int16ToStringExample {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
+            
+
              object that provides culture-specific information about the format of the string that is returned by this method. The object that implements <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4437,6 +5235,8 @@ public class Int16ToStringExample {
 
                 
 
+                
+
                  object that represents the culture whose formatting rules are to be used.</para
               >
             </item>
@@ -4444,6 +5244,8 @@ public class Int16ToStringExample {
               <para
                 >A <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4457,6 +5259,8 @@ public class Int16ToStringExample {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4467,8 +5271,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              is null, or a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4477,8 +5285,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
             , the return value is formatted with the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4497,8 +5309,12 @@ public class Int16ToStringExample {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -4510,10 +5326,14 @@ public class Int16ToStringExample {
 
           
 
+          
+
           A numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

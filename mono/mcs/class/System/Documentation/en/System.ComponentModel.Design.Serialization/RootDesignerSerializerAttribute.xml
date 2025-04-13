@@ -41,6 +41,8 @@
 
         
 
+        
+
          indicates the serializer to use when the serialization manager serializes the design document, and whether the specified serializer supports automatic reloading of the design document without first completely disposing of the document.</para
       >
       <para>This attribute contains the following significant members: </para>
@@ -48,6 +50,8 @@
         <item>
           <para>
             <see cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.SerializerTypeName" />
+
+            
 
             
 
@@ -60,12 +64,16 @@
 
             
 
+            
+
              indicates the fully qualified name of the serialization object's base type.</para
           >
         </item>
         <item>
           <para>
             <see cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.Reloadable" />
+
+            
 
             
 
@@ -114,11 +122,15 @@
 
             
 
+            
+
              class using the specified attributes.</para
           >
         </summary>
         <param name="serializerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,10 +141,14 @@
 
           
 
+          
+
           The name of the base type of the serializer. A class can include multiple serializers as they all have different base types. </param
         >
         <param name="reloadable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -174,11 +190,15 @@
 
             
 
+            
+
              class using the specified attributes.</para
           >
         </summary>
         <param name="serializerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,10 +209,14 @@
 
           
 
+          
+
           The name of the base type of the serializer. A class can include multiple serializers, as they all have different base types. </param
         >
         <param name="reloadable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,11 +258,15 @@
 
             
 
+            
+
              class using the specified attributes.</para
           >
         </summary>
         <param name="serializerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,10 +277,14 @@
 
           
 
+          
+
           The base type of the serializer. A class can include multiple serializers as they all have different base types. </param
         >
         <param name="reloadable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,8 +315,12 @@
 
             
 
+            
+
              will be set to false, and the designer host must be recreated by user interaction (launching the designer for the document) after the design document is disposed. The events and services that were connected to the designer host, except through deserialization, do not remain and may need to be set again. If <see
              cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.Reloadable" />
+
+            
 
             
 
@@ -361,8 +397,12 @@
 
             
 
+            
+
              instance for the attribute. <see
              cref="T:System.ComponentModel.EditorAttribute" />
+
+            
 
             
 

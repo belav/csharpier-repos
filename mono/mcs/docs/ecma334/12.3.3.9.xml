@@ -10,6 +10,8 @@ for (for-initializer; for-condition; for-iterator) embedded-statement
 
     
 
+    
+
     is done as if the statement were written: <code_example
     >
       <![CDATA[
@@ -29,8 +31,12 @@ for (for-initializer; for-condition; for-iterator) embedded-statement
 
     
 
+    
+
      is omitted from the for statement, then evaluation of definite assignment proceeds as if <non_terminal
      where="15.8.3">for-condition</non_terminal>
+
+    
 
     
 

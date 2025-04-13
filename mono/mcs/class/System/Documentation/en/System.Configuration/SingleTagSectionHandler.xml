@@ -58,6 +58,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -101,10 +103,14 @@
 
           
 
+          
+
           The parent of this object.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -115,8 +121,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 

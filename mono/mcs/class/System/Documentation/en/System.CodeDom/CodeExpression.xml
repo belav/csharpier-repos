@@ -38,13 +38,19 @@
 
         
 
+        
+
          provides a base class for code expressions within the <see
          cref="N:System.CodeDom" />
 
         
 
+        
+
          namespace. <see
          cref="T:System.CodeDom.CodeExpression" />
+
+        
 
         
 
@@ -78,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeExpression" />
+
+            
 
             
 

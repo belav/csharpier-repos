@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute is primarily emitted by compilers. It serves two purposes: </para
       >
       <list type="bullet">
@@ -43,8 +45,12 @@
 
             
 
+            
+
              and <paramref
              name="identifier" />
+
+            
 
             
 
@@ -55,6 +61,8 @@
       <para
         >Type equivalence is discussed in the <see
          cref="M:System.Type.IsEquivalentTo(System.Type)" />
+
+        
 
         
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -122,8 +132,12 @@
 
             
 
+            
+
              and <paramref
              name="identifier" />
+
+            
 
             
 
@@ -135,13 +149,19 @@
 
             
 
+            
+
              class internally maintains the <paramref
              name="scope" />
 
             
 
+            
+
              and <paramref
              name="identifier" />
+
+            
 
             
 
@@ -156,6 +176,8 @@
 
             
 
+            
+
              class with the specified scope and identifier. </para
           >
         </summary>
@@ -164,10 +186,14 @@
 
           
 
+          
+
           The first type equivalence string.</param
         >
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -196,8 +222,12 @@
 
             
 
+            
+
              parameter that was passed to the <see
              cref="M:System.Runtime.InteropServices.TypeIdentifierAttribute.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -227,8 +257,12 @@
 
             
 
+            
+
              parameter that was passed to the <see
              cref="M:System.Runtime.InteropServices.TypeIdentifierAttribute.#ctor(System.String,System.String)" />
+
+            
 
             
 

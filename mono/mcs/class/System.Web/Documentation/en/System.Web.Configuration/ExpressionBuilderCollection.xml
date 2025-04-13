@@ -30,6 +30,8 @@
 
         
 
+        
+
          class does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the compilation information it contains.</para
       >
     </remarks>
@@ -38,6 +40,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+
+            
 
             
 
@@ -91,6 +97,8 @@
 
             
 
+            
+
              object to the collection. If the assembly object is not initialized with assembly information, an exception is thrown. If the assembly object already exists in the collection, the statement is ignored.</para
           >
         </remarks>
@@ -102,8 +110,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+
+            
 
             
 
@@ -115,8 +127,12 @@
 
           
 
+          
+
           A string value specifying the <see
            cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+          
 
           
 
@@ -145,8 +161,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+
+            
 
             
 
@@ -289,8 +309,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+
+            
 
             
 
@@ -302,8 +326,12 @@
 
           
 
+          
+
           A string value specifying the <see
            cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+          
 
           
 
@@ -337,8 +365,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+
+            
 
             
 
@@ -350,13 +382,19 @@
 
           
 
+          
+
           An integer value specifying a specific <see
            cref="T:System.Web.Configuration.ExpressionBuilder" />
 
           
 
+          
+
            object within the <see
            cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+
+          
 
           
 

@@ -7,6 +7,8 @@
 
     
 
+    
+
     ), which controls the regions of program text that are able to access the member. There are five possible forms of accessibility. These are summarized in the table below. <table_line
     >Form Intuitive meaning </table_line>
     <table_line>public Access not limited </table_line>
@@ -67,6 +69,8 @@ class MyClass
 
     
 
+    
+
     shows a class that contains each kind of member. The example <code_example
     >
       <![CDATA[
@@ -102,6 +106,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

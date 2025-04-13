@@ -26,8 +26,12 @@
 
         
 
+        
+
          interface defines the collection of session items exposed to application code by the <see
          cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          interface is the <see
          cref="T:System.Web.SessionState.SessionStateItemCollection" />
+
+        
 
         
 
@@ -52,13 +60,19 @@
 
         
 
+        
+
          class to store session data, you can either use the <see
          cref="T:System.Web.SessionState.SessionStateItemCollection" />
 
         
 
+        
+
          class to manage the stored objects or implement the <see
          cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+        
 
         
 
@@ -70,13 +84,19 @@
 
         
 
+        
+
          interface, you must also create a class that inherits the <see
          cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
 
         
 
+        
+
          class in order to make use of your <see
          cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+        
 
         
 
@@ -88,8 +108,12 @@
 
         
 
+        
+
          implementation must also implement the members of the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -119,13 +143,19 @@
 
             
 
+            
+
              method, you should set the <see
              cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
+            
+
              property to true to indicate that values in the <see
              cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+            
 
             
 
@@ -158,13 +188,19 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
+            
+
              to determine whether the values in an <see
              cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+            
 
             
 
@@ -176,8 +212,12 @@
 
             
 
+            
+
              interface, you should initialize the <see
              cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+
+            
 
             
 
@@ -186,8 +226,12 @@
 
             
 
+            
+
              property to true in the implementations of the <see
              cref="M:System.Web.SessionState.ISessionStateItemCollection.Remove(System.String)" />
+
+            
 
             
 
@@ -196,8 +240,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.SessionState.ISessionStateItemCollection.Clear" />
+
+            
 
             
 
@@ -295,13 +343,19 @@
 
             
 
+            
+
              method, you should set the <see
              cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
+            
+
              property to true to indicate values in the <see
              cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+            
 
             
 
@@ -313,8 +367,12 @@
 
             
 
+            
+
              implementation does not contain an element with the specified <paramref
              name="name" />
+
+            
 
             
 
@@ -349,13 +407,19 @@
 
             
 
+            
+
              method, you should set the <see
              cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
+            
+
              property to true to indicate values in the <see
              cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+            
 
             
 
@@ -367,8 +431,12 @@
 
             
 
+            
+
              method should throw an <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -377,8 +445,12 @@
 
             
 
+            
+
              is less than zero or is equal to or greater than <see
              cref="P:System.Collections.ICollection.Count" />
+
+            
 
             
 
@@ -391,6 +463,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

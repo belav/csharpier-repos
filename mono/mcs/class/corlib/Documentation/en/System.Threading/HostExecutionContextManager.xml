@@ -24,8 +24,12 @@
 
         
 
+        
+
          has a reference to a <see
          cref="T:System.Threading.HostExecutionContextManager" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          property, then the common language runtime calls the manager every time a call to the <see
          cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.HostExecutionContextManager" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
 
             
 
+            
+
              is created using a safe handle containing the IUnknown pointer for the host executing the current thread.</para
           >
         </remarks>
@@ -116,6 +128,8 @@
           <para
             >A <see
              cref="T:System.Threading.HostExecutionContext" />
+
+            
 
             
 
@@ -155,8 +169,12 @@
 
             
 
+            
+
              must be the object returned by the <see
              cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" />
+
+            
 
             
 
@@ -169,6 +187,8 @@
         </summary>
         <param name="previousState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,8 +226,12 @@
 
             
 
+            
+
              method sets the host execution context for the current <see
              cref="T:System.Threading.HostExecutionContext" />
+
+            
 
             
 
@@ -216,8 +240,12 @@
 
             
 
+            
+
              that has been used as the argument to another <see
              cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" />
+
+            
 
             
 
@@ -226,8 +254,12 @@
 
             
 
+            
+
              method to create a copy of a <see
              cref="T:System.Threading.HostExecutionContext" />
+
+            
 
             
 
@@ -239,8 +271,12 @@
 
             
 
+            
+
              method using the object returned by this method to restore the <see
              cref="T:System.Threading.HostExecutionContext" />
+
+            
 
             
 
@@ -259,6 +295,8 @@
 
             
 
+            
+
              to its previous state.</para
           >
         </returns>
@@ -267,8 +305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.HostExecutionContext" />
+
+          
 
           
 

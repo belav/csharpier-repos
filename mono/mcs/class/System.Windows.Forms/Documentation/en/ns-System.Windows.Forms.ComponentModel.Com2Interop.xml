@@ -10,6 +10,8 @@
 
         
 
+        
+
          namespace contains helper classes that Visual Studio uses to display property pages while in design mode.</para
       >
     </summary>

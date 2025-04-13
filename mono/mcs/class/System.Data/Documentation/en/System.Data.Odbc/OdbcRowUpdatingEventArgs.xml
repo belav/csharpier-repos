@@ -22,6 +22,8 @@
 
         
 
+        
+
          event is raised before an update to a row.</para
       >
       <para
@@ -30,8 +32,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdated" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
 
             
 
+            
+
              are moved to the parameter values.</para
           >
         </item>
@@ -52,6 +60,8 @@
           <para
             >The <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+            
 
             
 
@@ -68,6 +78,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -75,6 +87,8 @@
           <para
             >If there are output parameters, they are placed in the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -88,12 +102,16 @@
 
             
 
+            
+
              event is raised.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 
@@ -107,6 +125,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+
+        
 
         
 
@@ -137,6 +157,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -145,8 +167,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -157,8 +183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Odbc.OdbcCommand" />
+
+          
 
           
 
@@ -169,8 +199,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.StatementType" />
+
+          
 
           
 
@@ -181,13 +215,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataTableMapping" />
 
           
 
+          
+
            sent through <see
            cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+          
 
           
 
@@ -237,8 +277,12 @@
 
             
 
+            
+
              to execute when <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 

@@ -39,8 +39,12 @@
 
         
 
+        
+
         , you can use an instance of <see
          cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+        
 
         
 
@@ -49,13 +53,19 @@
 
         
 
+        
+
          might otherwise be used, such as to construct a <see
          cref="T:System.IO.StreamReader" />
 
         
 
+        
+
          or <see
          cref="T:System.IO.StreamWriter" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
         <para
           >Isolated storage is not available for win8_appname_long apps. Instead, use the application data classes in the Windows.Storage namespaces included in the wrt API to store local data and files. For more information, see <see
            cref="http://go.microsoft.com/fwlink/?LinkId=229175">Application data</see>
+
+          
 
           
 
@@ -107,8 +119,12 @@
 
             
 
+            
+
              object. To specify a different isolated storage scope, or to allow the store to remain open (so multiple <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -117,11 +133,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >The <paramref
              name="mode" />
+
+            
 
             
 
@@ -139,13 +159,19 @@
 
             
 
+            
+
              object giving access to the file designated by <paramref
              name="path" />
 
             
 
+            
+
              in the specified <paramref
              name="mode" />
+
+            
 
             
 
@@ -157,6 +183,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -164,8 +192,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -203,13 +235,19 @@
 
             
 
+            
+
              object. To specify a different isolated storage scope, or to allow the store to remain open (so multiple <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
             
 
+            
+
              objects can be opened from it), use the form of the constructor that accepts an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+
+            
 
             
 
@@ -221,8 +259,12 @@
 
             
 
+            
+
              parameter indicates whether a new file should be created or an existing one used. The <paramref
              name="access" />
+
+            
 
             
 
@@ -240,8 +282,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -250,8 +296,12 @@
 
             
 
+            
+
             , with the kind of <paramref
              name="access" />
+
+            
 
             
 
@@ -263,6 +313,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -270,8 +322,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -282,8 +338,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -321,6 +381,8 @@
 
             
 
+            
+
              parameter indicates whether a new file should be created, an existing one used, and so on.</para
           >
           <block subset="none" type="note">
@@ -335,8 +397,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -345,13 +411,19 @@
 
             
 
+            
+
             , and in the context of the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
+            
+
              specified by <paramref
              name="isf" />
+
+            
 
             
 
@@ -363,6 +435,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -370,8 +444,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -382,13 +460,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
           
 
+          
+
            in which to open the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+          
 
           
 
@@ -427,13 +511,19 @@
 
             
 
+            
+
              object. To specify a different isolated storage scope, or to allow the store to remain open (so multiple <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
             
 
+            
+
              objects can be opened from it), use the form of the constructor that accepts an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+
+            
 
             
 
@@ -451,8 +541,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -461,13 +555,19 @@
 
             
 
+            
+
             , with the specified file <paramref
              name="access" />
 
             
 
+            
+
             , using the file sharing mode specified by <paramref
              name="share" />
+
+            
 
             
 
@@ -479,6 +579,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -486,8 +588,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -498,8 +604,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -510,8 +620,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -550,8 +664,12 @@
 
             
 
+            
+
              parameter indicates whether a new file should be created or an existing one used. The <paramref
              name="access" />
+
+            
 
             
 
@@ -569,8 +687,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -579,8 +701,12 @@
 
             
 
+            
+
             , with the specified file <paramref
              name="access" />
+
+            
 
             
 
@@ -589,8 +715,12 @@
 
             
 
+            
+
              specified by <paramref
              name="isf" />
+
+            
 
             
 
@@ -602,6 +732,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -609,8 +741,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -621,8 +757,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -633,13 +773,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
           
 
+          
+
            in which to open the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+          
 
           
 
@@ -679,13 +825,19 @@
 
             
 
+            
+
              object. To specify a different isolated storage scope, or to allow the store to remain open (so multiple <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
             
 
+            
+
              objects can be opened from it), use the form of the constructor that accepts an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
+
+            
 
             
 
@@ -697,8 +849,12 @@
 
             
 
+            
+
              parameter indicates whether a new file should be created or an existing one used. The <paramref
              name="access" />
+
+            
 
             
 
@@ -716,8 +872,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -726,8 +886,12 @@
 
             
 
+            
+
             , with the specified file <paramref
              name="access" />
+
+            
 
             
 
@@ -736,8 +900,12 @@
 
             
 
+            
+
             , with the <paramref
              name="buffersize" />
+
+            
 
             
 
@@ -749,6 +917,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -756,8 +926,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -768,8 +942,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -780,8 +958,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -792,8 +974,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.FileStream" />
+
+          
 
           
 
@@ -833,8 +1019,12 @@
 
             
 
+            
+
              parameter indicates whether a new file should be created or an existing one used. The <paramref
              name="access" />
+
+            
 
             
 
@@ -852,8 +1042,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -862,8 +1056,12 @@
 
             
 
+            
+
             , with the specified file <paramref
              name="access" />
+
+            
 
             
 
@@ -872,13 +1070,19 @@
 
             
 
+            
+
             , and in the context of the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
             
 
+            
+
              specified by <paramref
              name="isf" />
+
+            
 
             
 
@@ -890,6 +1094,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -897,8 +1103,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -909,8 +1119,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -921,8 +1135,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -933,13 +1151,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
           
 
+          
+
            in which to open the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+          
 
           
 
@@ -980,8 +1204,12 @@
 
             
 
+            
+
              parameter indicates whether a new file should be created or an existing one used. The <paramref
              name="access" />
+
+            
 
             
 
@@ -999,8 +1227,12 @@
 
             
 
+            
+
              class giving access to the file designated by <paramref
              name="path" />
+
+            
 
             
 
@@ -1009,8 +1241,12 @@
 
             
 
+            
+
             , with the specified file <paramref
              name="access" />
+
+            
 
             
 
@@ -1019,8 +1255,12 @@
 
             
 
+            
+
             , with the <paramref
              name="buffersize" />
+
+            
 
             
 
@@ -1029,8 +1269,12 @@
 
             
 
+            
+
              specified by <paramref
              name="isf" />
+
+            
 
             
 
@@ -1042,6 +1286,8 @@
 
           
 
+          
+
           The relative path of the file within isolated storage. </param
         >
         <param name="mode">
@@ -1049,8 +1295,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -1061,8 +1311,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -1073,8 +1327,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -1085,8 +1343,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.FileStream" />
+
+          
 
           
 
@@ -1097,13 +1359,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" />
 
           
 
+          
+
            in which to open the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+          
 
           
 
@@ -1146,8 +1414,12 @@
 
             
 
+            
+
              with this <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1166,8 +1438,12 @@
 
             
 
+            
+
              object that represents the asynchronous read, which is possibly still pending. This <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1176,13 +1452,19 @@
 
             
 
+            
+
              method to determine how many bytes were read. This can be done either by the same code that called <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
+            
+
              or in a callback passed to <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1194,6 +1476,8 @@
 
           
 
+          
+
           The buffer to read data into. </param
         >
         <param name="offset">
@@ -1201,8 +1485,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1213,6 +1501,8 @@
 
           
 
+          
+
           The maximum number of bytes to read. </param
         >
         <param name="userCallback">
@@ -1220,10 +1510,14 @@
 
           
 
+          
+
           The method to call when the asynchronous read operation is completed. This parameter is optional. </param
         >
         <param name="stateObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1265,6 +1559,8 @@
 
             
 
+            
+
              object is writable, writing at the end of the stream expands the stream.</para
           >
           <para>The current position in the stream is updated when you issue the asynchronous read or write, not when the I/O operation completes.</para>
@@ -1274,8 +1570,12 @@
 
             
 
+            
+
              with the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1294,8 +1594,12 @@
 
             
 
+            
+
              that represents the asynchronous write, which is possibly still pending. This <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1304,13 +1608,19 @@
 
             
 
+            
+
              method to ensure that the write is complete, then frees resources appropriately. This can be done either by the same code that called <see
              cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
+            
+
              or in a callback passed to <see
              cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1322,6 +1632,8 @@
 
           
 
+          
+
           The buffer to write data to. </param
         >
         <param name="offset">
@@ -1329,8 +1641,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1341,6 +1657,8 @@
 
           
 
+          
+
           The maximum number of bytes to write. </param
         >
         <param name="userCallback">
@@ -1348,10 +1666,14 @@
 
           
 
+          
+
           The method to call when the asynchronous write operation is completed. This parameter is optional. </param
         >
         <param name="stateObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1378,6 +1700,8 @@
           <para
             >Use this property to determine whether the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -1412,6 +1736,8 @@
 
             
 
+            
+
              object supports seek operations.</para
           >
         </remarks>
@@ -1440,6 +1766,8 @@
           <para
             >Use this property to determine whether the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -1495,8 +1823,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1505,8 +1837,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1515,8 +1851,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1525,8 +1865,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1538,13 +1882,19 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -1559,11 +1909,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1601,8 +1955,12 @@
 
             
 
+            
+
              must be called exactly once on every <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1611,8 +1969,12 @@
 
             
 
+            
+
             , and calling <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1621,8 +1983,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1639,6 +2005,8 @@
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1676,8 +2044,12 @@
 
             
 
+            
+
              must be called exactly once on every <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1686,10 +2058,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1702,6 +2078,8 @@
         </summary>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1735,8 +2113,12 @@
 
             
 
+            
+
              performs two functions. First, any data previously written to the buffer is copied to the file and the buffer is cleared. Second, if <see
              cref="P:System.IO.IsolatedStorage.IsolatedStorageFileStream.CanSeek" />
+
+            
 
             
 
@@ -1745,6 +2127,8 @@
           <para
             >Use the <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.Flush(System.Boolean)" />
+
+            
 
             
 
@@ -1787,6 +2171,8 @@
 
           
 
+          
+
           true to flush all intermediate file buffers; otherwise, false.</param
         >
       </Docs>
@@ -1819,6 +2205,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1830,13 +2218,19 @@
 
             
 
+            
+
              object encapsulates. Accessing this property is not permitted on an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
 
             
 
+            
+
              object, and throws an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+
+            
 
             
 
@@ -1868,8 +2262,12 @@
 
             
 
+            
+
              objects cannot be created, unlike <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1878,8 +2276,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1888,8 +2290,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1901,6 +2307,8 @@
           <para
             >Gets a Boolean value indicating whether the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -1931,6 +2339,8 @@
 
             
 
+            
+
              represents the number of bytes currently in the file. It is not affected by isolated storage quota.</para
           >
         </remarks>
@@ -1939,6 +2349,8 @@
           <para
             >Gets the length of the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -1970,6 +2382,8 @@
 
             
 
+            
+
              property is true.</para
           >
         </remarks>
@@ -1978,6 +2392,8 @@
           <para
             >Gets or sets the current position of the current <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2019,8 +2435,12 @@
 
             
 
+            
+
              parameter can be an instance of the <see
              cref="T:System.Buffer" />
+
+            
 
             
 
@@ -2029,8 +2449,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.SByte" />
+
+            
 
             
 
@@ -2039,8 +2463,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -2049,8 +2477,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -2059,8 +2491,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.UInt32" />
+
+            
 
             
 
@@ -2069,8 +2505,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -2079,13 +2519,19 @@
 
             
 
+            
+
             . The <paramref
              name="offset" />
 
             
 
+            
+
              parameter gives the offset of the byte in buffer at which to begin writing (index in the buffer), and the <paramref
              name="count" />
+
+            
 
             
 
@@ -2097,8 +2543,12 @@
 
             
 
+            
+
              method treats the <paramref
              name="buffer" />
+
+            
 
             
 
@@ -2107,8 +2557,12 @@
 
             
 
+            
+
              and <paramref
              name="count" />
+
+            
 
             
 
@@ -2117,13 +2571,19 @@
 
             
 
+            
+
              parameters other than byte arrays, this means that an element index must be multiplied by the element size in bytes to form a correct value for <paramref
              name="offset" />
 
             
 
+            
+
              or <paramref
              name="count" />
+
+            
 
             
 
@@ -2135,8 +2595,12 @@
 
             
 
+            
+
              method will return zero only if the end of the stream is reached. In all other cases, <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2145,8 +2609,12 @@
 
             
 
+            
+
              object upon a call to <see
              cref="M:System.IO.IsolatedStorage.IsolatedStorageFileStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2161,6 +2629,8 @@
 
             
 
+            
+
              object to an array.</para
           >
         </summary>
@@ -2172,11 +2642,15 @@
 
             
 
+            
+
             . This can be less than the number of bytes requested if that many bytes are not currently available, or zero if the end of the stream is reached.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2187,10 +2661,14 @@
 
           
 
+          
+
           The offset in the buffer at which to begin writing. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2222,6 +2700,8 @@
           <para
             >Reads a single byte from the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2262,8 +2742,12 @@
 
             
 
+            
+
              property is not supported and always generates an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+
+            
 
             
 
@@ -2278,8 +2762,12 @@
 
             
 
+            
+
              object that represents the operating system file handle for the file that the current <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2320,6 +2808,8 @@
 
             
 
+            
+
              objects support positioning beyond the length of the stream, others will throw an exception in this case.</para
           >
         </remarks>
@@ -2328,6 +2818,8 @@
           <para
             >Sets the current position of this <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2342,6 +2834,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -2350,8 +2844,12 @@
 
           
 
+          
+
           The new position of the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+          
 
           
 
@@ -2362,8 +2860,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -2399,8 +2901,12 @@
 
             
 
+            
+
              is less than the current length of the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2409,8 +2915,12 @@
 
             
 
+            
+
              is larger than the current length of the stream, the stream is expanded. If the stream is expanded, the contents of the stream between the old and the new length are undefined. In order to use this method, an <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2425,8 +2935,12 @@
 
             
 
+            
+
              object to the specified <paramref
              name="value" />
+
+            
 
             
 
@@ -2438,8 +2952,12 @@
 
           
 
+          
+
           The new length of the <see
            cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+          
 
           
 
@@ -2480,8 +2998,12 @@
 
             
 
+            
+
              parameter gives the offset of the byte in the <paramref
              name="buffer" />
+
+            
 
             
 
@@ -2490,8 +3012,12 @@
 
             
 
+            
+
              parameter gives the number of bytes that will be written to this <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2500,8 +3026,12 @@
 
             
 
+            
+
              object is advanced by the number of bytes written. If an exception occurs, the current position of the <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+            
 
             
 
@@ -2516,11 +3046,15 @@
 
             
 
+            
+
              object using data read from a byte array.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2531,10 +3065,14 @@
 
           
 
+          
+
           The byte offset in buffer from which to begin. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2571,11 +3109,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

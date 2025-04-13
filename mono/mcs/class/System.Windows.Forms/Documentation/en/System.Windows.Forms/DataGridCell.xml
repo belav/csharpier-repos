@@ -19,13 +19,19 @@
 
         
 
+        
+
          can be used in conjunction with the <see
          cref="T:System.Windows.Forms.DataGrid" />
 
         
 
+        
+
          control's <see
          cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
+
+        
 
         
 
@@ -34,8 +40,12 @@
 
         
 
+        
+
          control's <see
          cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
+
+        
 
         
 
@@ -44,8 +54,12 @@
 
         
 
+        
+
          causes the focus to move to the cell specified by the <see
          cref="T:System.Windows.Forms.DataGridCell" />
+
+        
 
         
 
@@ -75,6 +89,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -83,8 +99,12 @@
 
           
 
+          
+
           The number of a row in the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -95,8 +115,12 @@
 
           
 
+          
+
           The number of a column in the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -124,8 +148,12 @@
 
             
 
+            
+
              value to specify a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -134,8 +162,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -147,6 +179,8 @@
           <para
             >Gets or sets the number of a column in the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -178,8 +212,12 @@
 
             
 
+            
+
              is identical to a second <see
              cref="T:System.Windows.Forms.DataGridCell" />
+
+            
 
             
 
@@ -192,6 +230,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +260,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -231,8 +273,12 @@
 
             
 
+            
+
              in a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -261,8 +307,12 @@
 
             
 
+            
+
              value to specify a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -271,8 +321,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -284,6 +338,8 @@
           <para
             >Gets or sets the number of a row in the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          attribute on a data field indicates whether the user should be able to change the field's value.</para
       >
       <para>This class neither enforces nor guarantees that a field is editable. The underlying data store might allow the field to be changed regardless of the presence of this attribute.</para>
@@ -60,11 +62,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="allowEdit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,6 +114,8 @@
           <para
             >This property defaults to the value that is specified in the <see
              cref="M:System.ComponentModel.DataAnnotations.EditableAttribute.#ctor(System.Boolean)" />
+
+            
 
             
 

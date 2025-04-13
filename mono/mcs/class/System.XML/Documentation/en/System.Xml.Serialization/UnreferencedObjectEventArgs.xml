@@ -33,13 +33,19 @@
 
         
 
+        
+
          class, see the <see
          cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
 
         
 
+        
+
          event of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          event occurs only when you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -101,6 +111,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -112,6 +124,8 @@
 
             
 
+            
+
              that contains information about the unreferenced object.</para
           >
         </returns>
@@ -120,10 +134,14 @@
 
           
 
+          
+
           The unreferenced object. </param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,6 +171,8 @@
 
             
 
+            
+
              property when you need to know when more than one object raises the event. The property allows you to distinguish between multiple instances of unreferenced objects.</para
           >
           <para
@@ -161,8 +181,12 @@
 
             
 
+            
+
              property, see the <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
+
+            
 
             
 
@@ -197,6 +221,8 @@
 
             
 
+            
+
              can be cast to the known type if examining its properties is required.</para
           >
           <para
@@ -205,8 +231,12 @@
 
             
 
+            
+
              event for more information about the <see
              cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" />
+
+            
 
             
 

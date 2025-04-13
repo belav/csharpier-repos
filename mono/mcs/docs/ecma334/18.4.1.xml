@@ -6,6 +6,8 @@
 
     
 
+    
+
      type, plus an additional state that indicates an unknown value. A type with these characteristics is commonly used in databases. <code_example
     >
       <![CDATA[

@@ -23,6 +23,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -48,8 +50,12 @@
 
             
 
+            
+
              class, specifying the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -61,8 +67,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -91,6 +101,8 @@
           <para
             >Gets the item that was clicked on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

@@ -27,12 +27,16 @@
 
         
 
+        
+
          interface allows an inheriting class to implement a Transaction class, which represents the transaction to be performed at a data source. For more information about Transaction classes, see <format
          type="text/html">
           <a href="F46570DE-9E50-4FE6-8710-A8C31FA8569B"
             >[&lt;topic://cpconperformingtransactions&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDbTransaction" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IDbTransaction" />
+
+        
 
         
 
@@ -67,13 +79,19 @@
 
         
 
+        
+
          method. In turn, the <see
          cref="T:System.Data.OleDb.OleDbTransaction" />
 
         
 
+        
+
          class inherits this property, and also defines the <see
          cref="M:System.Data.OleDb.OleDbTransaction.Begin(System.Data.IsolationLevel)" />
+
+        
 
         
 
@@ -146,6 +164,8 @@
 
             
 
+            
+
              applies to the entire transaction.</para
           >
         </remarks>
@@ -154,6 +174,8 @@
           <para
             >Specifies the <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -182,8 +204,12 @@
 
             
 
+            
+
              has been called, but before <see
              cref="M:System.Data.IDbTransaction.Commit" />
+
+            
 
             
 

@@ -65,6 +65,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -96,6 +98,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,8 +108,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -140,6 +148,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -179,8 +189,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary" />
+
+            
 
             
 
@@ -195,8 +209,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -205,6 +223,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,8 +258,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -254,8 +278,12 @@
 
             
 
+            
+
              that is obtained from <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary.Value" />
+
+            
 
             
 

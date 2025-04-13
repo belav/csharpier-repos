@@ -25,6 +25,8 @@
 
         
 
+        
+
          class and classes derived from it enable developers to configure a variety of options ranging from proxies to authentication.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >The default message handler used by <see
          cref="T:System.Net.Http.HttpClient" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -87,8 +93,12 @@
 
             
 
+            
+
              to true if you want the handler to automatically follow HTTP redirection headers to the new location of the resource. The maximum number of redirections to follow is set by the <see
              cref="P:System.Net.Http.HttpClientHandler.MaxAutomaticRedirections" />
+
+            
 
             
 
@@ -97,6 +107,8 @@
           <para
             >If <see
              cref="P:System.Net.Http.HttpClientHandler.AllowAutoRedirect" />
+
+            
 
             
 
@@ -186,8 +198,12 @@
 
             
 
+            
+
              property provides an instance of the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -199,8 +215,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="P:System.Net.Http.HttpClientHandler.CookieContainer" />
+
+            
 
             
 
@@ -209,13 +229,19 @@
 
             
 
+            
+
              property is false and the user adds cookies to <see
              cref="P:System.Net.Http.HttpClientHandler.CookieContainer" />
 
             
 
+            
+
             , cookies are ignored and not sent to the server. Setting the <see
              cref="P:System.Net.Http.HttpClientHandler.CookieContainer" />
+
+            
 
             
 
@@ -278,8 +304,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -288,8 +318,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -301,8 +335,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Http.HttpClientHandler" />
+
+            
 
             
 
@@ -317,11 +355,15 @@
 
             
 
+            
+
              and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +391,12 @@
 
             
 
+            
+
              property sets the maximum number of redirections for the request to follow if the <see
              cref="P:System.Net.Http.HttpClientHandler.AllowAutoRedirect" />
+
+            
 
             
 
@@ -389,8 +435,12 @@
 
             
 
+            
+
              property to a lower value to limit the size of the request buffer. If the size of the request content is greater than the <see
              cref="P:System.Net.Http.HttpClientHandler.MaxRequestContentBufferSize" />
+
+            
 
             
 
@@ -423,8 +473,12 @@
 
             
 
+            
+
              is successfully authenticated, if the <see
              cref="P:System.Net.Http.HttpClientHandler.PreAuthenticate" />
+
+            
 
             
 
@@ -433,8 +487,12 @@
 
             
 
+            
+
              matches against the credential list supplied in the  <see
              cref="P:System.Net.Http.HttpClientHandler.Credentials" />
+
+            
 
             
 
@@ -443,8 +501,12 @@
 
             
 
+            
+
              that matches the specific <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -456,6 +518,8 @@
 
             
 
+            
+
              is not successfully authenticated, the request uses standard authentication procedures. </para
           >
           <para
@@ -464,13 +528,19 @@
 
             
 
+            
+
              property indicates whether to send authentication information with subsequent requests to a <see
              cref="T:System.Uri" />
 
             
 
+            
+
              that matches the specific <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -506,8 +576,12 @@
 
             
 
+            
+
               property identifies the <see
              cref="T:System.Net.WebProxy" />
+
+            
 
             
 
@@ -516,8 +590,12 @@
 
             
 
+            
+
              property to the proxy instance returned by the <see
              cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" />
+
+            
 
             
 
@@ -529,13 +607,19 @@
 
             
 
+            
+
              property is specified, then the proxy settings from the <see
              cref="P:System.Net.Http.HttpClientHandler.Proxy" />
 
             
 
+            
+
              property override the local computer or application config file and the handler will use the proxy settings specified. If no proxy is specified in a config file and the <see
              cref="P:System.Net.Http.HttpClientHandler.Proxy" />
+
+            
 
             
 
@@ -547,8 +631,12 @@
 
             
 
+            
+
              class parses a proxy bypass list with wildcard characters inherited from Internet Explorer the same as the bypass list is parsed directly by Internet Explorer. For example, the <see
              cref="T:System.Net.Http.HttpClientHandler" />
+
+            
 
             
 
@@ -557,11 +645,15 @@
 
             
 
+            
+
               class and using Internet Explorer.</para
           >
           <para
             >The <see
              cref="T:System.Net.Http.HttpClientHandler" />
+
+            
 
             
 
@@ -578,13 +670,19 @@
 
                 
 
+                
+
                  or <see
                  cref="F:System.Net.IPAddress.IPv6Loopback" />
 
                 
 
+                
+
                 ) or the destination contains an <see
                  cref="T:System.Net.IPAddress" />
+
+                
 
                 
 
@@ -595,6 +693,8 @@
               <para
                 >The domain suffix of the destination matches the local computer's domain suffix (<see
                  cref="P:System.Net.NetworkInformation.IPGlobalProperties.DomainName" />
+
+                
 
                 
 
@@ -646,8 +746,12 @@
 
             
 
+            
+
              to represent the asynchronous operation. When the operation completes, <see
              cref="P:System.Threading.Tasks.Task`1.Result" />
+
+            
 
             
 
@@ -662,8 +766,12 @@
 
             
 
+            
+
              based on the information provided in the <see
              cref="T:System.Net.Http.HttpRequestMessage" />
+
+            
 
             
 
@@ -678,6 +786,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -687,10 +797,14 @@
 
           
 
+          
+
           The HTTP request message.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,8 +883,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Http.HttpClientHandler.MaxAutomaticRedirections" />
+
+            
 
             
 
@@ -800,6 +918,8 @@
 
             
 
+            
+
              property  to store server cookies and uses these cookies when sending requests.</para
           >
         </summary>
@@ -825,8 +945,12 @@
 
             
 
+            
+
              object should, if requested by the server, be authenticated using the credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. For middle-tier applications, such as ASP.NET applications, instead of using this property, you would typically set the <see
              cref="P:System.Net.Http.HttpClientHandler.Credentials" />
+
+            
 
             
 

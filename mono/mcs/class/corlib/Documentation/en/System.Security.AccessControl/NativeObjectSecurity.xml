@@ -28,6 +28,8 @@
 
         
 
+        
+
          enumeration.</para
       >
     </summary>
@@ -62,6 +64,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -70,8 +74,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -82,8 +90,12 @@
 
           
 
+          
+
           The type of securable object with which the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -124,8 +136,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -134,8 +150,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -144,8 +164,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -154,8 +178,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -164,8 +192,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -174,8 +206,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -190,8 +226,12 @@
 
             
 
+            
+
              class with the specified values. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -203,8 +243,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -215,8 +259,12 @@
 
           
 
+          
+
           The type of securable object with which the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -227,8 +275,12 @@
 
           
 
+          
+
           The handle of the securable object with which the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -239,13 +291,19 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
+          
+
            enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to include in this <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -319,8 +377,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -329,8 +391,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -339,8 +405,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -349,8 +419,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -359,8 +433,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -369,8 +447,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -385,8 +467,12 @@
 
             
 
+            
+
              class with the specified values. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -398,8 +484,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.NativObjectSecurity" />
+
+          
 
           
 
@@ -410,8 +500,12 @@
 
           
 
+          
+
           The type of securable object with which the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -422,8 +516,12 @@
 
           
 
+          
+
           The name of the securable object with which the new <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -434,13 +532,19 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
+          
+
            enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to include in this <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -562,8 +666,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -572,8 +680,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -582,8 +694,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -592,8 +708,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -602,8 +722,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -612,8 +736,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -628,8 +756,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -641,8 +773,12 @@
 
           
 
+          
+
           The handle of the securable object with which this <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -653,8 +789,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -696,8 +836,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -706,8 +850,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -716,8 +864,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -726,8 +878,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -736,8 +892,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -746,8 +906,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -762,8 +926,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -775,8 +943,12 @@
 
           
 
+          
+
           The name of the securable object with which this <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -787,8 +959,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -831,8 +1007,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -841,8 +1021,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -851,8 +1035,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -861,8 +1049,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -871,8 +1063,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -881,8 +1077,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -897,8 +1097,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -910,8 +1114,12 @@
 
           
 
+          
+
           The handle of the securable object with which this <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -922,8 +1130,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -931,6 +1143,8 @@
         >
         <param name="exceptionContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -973,8 +1187,12 @@
 
             
 
+            
+
              object, if the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -983,8 +1201,12 @@
 
             
 
+            
+
              method is not identical to the value of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -993,8 +1215,12 @@
 
             
 
+            
+
              object, sections of the persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -1003,8 +1229,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -1013,8 +1243,12 @@
 
             
 
+            
+
              method is called on that object with an <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1023,8 +1257,12 @@
 
             
 
+            
+
             , the resulting persisted <see
              cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+            
 
             
 
@@ -1039,8 +1277,12 @@
 
             
 
+            
+
              object to permanent storage. We recommend that the values of the <paramref
              name="includeSections" />
+
+            
 
             
 
@@ -1052,8 +1294,12 @@
 
           
 
+          
+
           The name of the securable object with which this <see
            cref="T:System.Security.AccessControl.NativeObjectSecurity" />
+
+          
 
           
 
@@ -1064,8 +1310,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -1073,6 +1323,8 @@
         >
         <param name="exceptionContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

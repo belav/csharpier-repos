@@ -6,8 +6,12 @@
 
     
 
+    
+
     , <keyword
     >char</keyword>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     , <keyword
     >sbyte</keyword>
+
+    
 
     
 
@@ -26,8 +34,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -36,8 +48,12 @@
 
     
 
+    
+
     , <keyword
     >int</keyword>
+
+    
 
     
 
@@ -46,8 +62,12 @@
 
     
 
+    
+
     , and reference types. In addition, reads and writes of enum types with an underlying type in the previous list shall also be atomic. Reads and writes of other types, including <keyword
     >long</keyword>
+
+    
 
     
 
@@ -56,13 +76,19 @@
 
     
 
+    
+
     , <keyword
     >double</keyword>
 
     
 
+    
+
     , and <keyword
     >decimal</keyword>
+
+    
 
     
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          class provides access to the <see
          cref="T:System.Web.Mail.MailMessage" />
+
+        
 
         
 
@@ -32,13 +36,19 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
 
         
 
+        
+
          class, you can cancel sending an e-mail message in your event handler by setting the <see
          cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
             
 
+            
+
              class when you want to pass a <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -86,6 +100,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -94,8 +110,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Mail.MailMessage" />
+
+          
 
           
 
@@ -123,8 +143,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.Web.Mail.MailMessage" />
+
+            
 
             
 
@@ -133,8 +157,12 @@
 
             
 
+            
+
              property is read-only; however, you can use the <see
              cref="T:System.Web.Mail.MailMessage" />
+
+            
 
             
 

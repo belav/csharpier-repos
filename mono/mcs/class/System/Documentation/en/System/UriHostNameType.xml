@@ -35,8 +35,12 @@
 
         
 
+        
+
          enumeration defines the values that the <see
          cref="M:System.Uri.CheckHostName(System.String)" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
       <para
         >Defines host name types for the <see
          cref="M:System.Uri.CheckHostName(System.String)" />
+
+        
 
         
 

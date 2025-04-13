@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -108,8 +110,12 @@
 
             
 
+            
+
              property indicates if SSL is used to access an SMTP mail server. The <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -176,13 +182,19 @@
 
             
 
+            
+
              takes precedence over setting <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
 
             
 
+            
+
              and <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+
+            
 
             
 
@@ -191,13 +203,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
 
             
 
+            
+
              are used only if <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+
+            
 
             
 
@@ -304,8 +322,12 @@
 
             
 
+            
+
              property allows an application to get or set the SPN to use for authentication when integrated Windows authentication with extended protection. If the <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
+
+            
 
             
 
@@ -346,13 +368,19 @@
 
             
 
+            
+
              takes precedence over setting <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
 
             
 
+            
+
              and <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+
+            
 
             
 
@@ -361,13 +389,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
 
             
 
+            
+
              are used only if <see
              cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+
+            
 
             
 

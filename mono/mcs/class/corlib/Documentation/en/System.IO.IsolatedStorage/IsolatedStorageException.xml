@@ -42,6 +42,8 @@
 
             
 
+            
+
              operations are not supported for isolated storage.</para
           >
         </item>
@@ -49,6 +51,8 @@
       <para
         >For a list of initial property values for an instance of IsolatedStorageException, see the <see
          cref="M:System.IO.IsolatedStorage.IsolatedStorageException.#ctor" />
+
+        
 
         
 
@@ -81,6 +85,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+
+            
 
             
 
@@ -127,6 +133,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -154,6 +162,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+
+            
 
             
 
@@ -200,11 +210,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +259,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -253,10 +269,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,8 +313,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -303,11 +327,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.IsolatedStorage.IsolatedStorageException" />
+
+            
 
             
 
@@ -354,11 +382,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,8 +401,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          property. Use the <see
          cref="M:System.Reflection.MethodBase.GetMethodBody" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          for a <see
          cref="T:System.Reflection.MethodInfo" />
+
+        
 
         
 
@@ -76,6 +84,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -84,6 +94,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.LocalVariableInfo" />
+
+            
 
             
 
@@ -115,6 +127,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

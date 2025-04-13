@@ -34,6 +34,8 @@
 
         
 
+        
+
          server control to handle uploading binary or text files from a browser client to the server. File upload works with Microsoft Internet Explorer version 3.02 or later.</para
       >
       <block subset="none" type="note">
@@ -43,8 +45,12 @@
 
           
 
+          
+
            control is designed to be used only in postback scenarios and not in asynchronous postback scenarios during partial-page rendering. When you use a <see
            cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+          
 
           
 
@@ -53,13 +59,19 @@
 
           
 
+          
+
            control, the file must be uploaded by using a control that is a <see
            cref="T:System.Web.UI.PostBackTrigger" />
 
           
 
+          
+
            object for the panel. <see
            cref="T:System.Web.UI.UpdatePanel" />
+
+          
 
           
 
@@ -70,10 +82,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
+
+          
 
           
 
@@ -86,8 +102,12 @@
 
         
 
+        
+
          button and then locating it in the <ui
         >Choose file</ui>
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
           
 
+          
+
            property of an <see
            cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+
+          
 
           
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          control does not have a built-in way to post back to the server. To upload the file to the server, use the <see
          cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+
+        
 
         
 
@@ -124,8 +152,12 @@
 
         
 
+        
+
          object contained in the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputFile.PostedFile" />
+
+        
 
         
 
@@ -138,13 +170,19 @@
 
           
 
+          
+
            method of the <see
            cref="T:System.Web.HttpPostedFile" />
 
           
 
+          
+
            class, make sure to specify a rooted path (for example, "C:\MyFiles\Test.txt"). The behavior of the <see
            cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+
+          
 
           
 
@@ -157,13 +195,19 @@
 
           
 
+          
+
            configuration section with the requireRootedSaveAsPath attribute. The default value of this attribute is true. If you set this attribute to false, then using the <see
            cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
 
           
 
+          
+
            method with no path specified will attempt to place the file in the <paramref
            name="systemroot" />
+
+          
 
           
 
@@ -178,6 +222,8 @@
 
         
 
+        
+
          element to increase the maximum allowable file size. A DNS error is generated in the browser when the file exceeds the specified size. You might also receive the following error message when uploading large files: </para
       >
       <para>aspnet_wp.exe (PID: 1520) was recycled because memory consumption exceeded 460 MB (60 percent of available RAM).</para>
@@ -189,6 +235,8 @@
 
         
 
+        
+
          element of the Machine.config file.</para
       >
       <para
@@ -197,8 +245,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputFile.#ctor" />
+
+        
 
         
 
@@ -225,11 +277,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -263,6 +319,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -337,8 +395,12 @@
 
             
 
+            
+
              control implements the <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -347,8 +409,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -357,13 +423,19 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputFile.System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
+            
+
              method and always returns false, indicating that the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -375,8 +447,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -388,6 +464,8 @@
           <para
             >Processes the postback data for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -403,10 +481,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,8 +552,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlForm.Enctype" />
+
+            
 
             
 
@@ -486,8 +572,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -499,8 +589,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -561,8 +655,12 @@
 
             
 
+            
+
              control implements the <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -571,8 +669,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -581,8 +683,12 @@
 
             
 
+            
+
              method does not participate in the processing of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -594,8 +700,12 @@
 
             
 
+            
+
              method is used primarily by control developers to extend the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -607,6 +717,8 @@
           <para
             >Notifies the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+            
 
             
 
@@ -675,8 +787,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -691,6 +807,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -702,6 +820,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -710,10 +830,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -744,8 +868,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -757,6 +885,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -790,6 +920,8 @@
 
             
 
+            
+
              property retrieves the full path of the file on the client's computer (for example "C:\MyFiles\Test.txt"). This is useful when you need to know where the file is stored on the computer submitting the file. This property is also commonly used to determine the original file name. To get the original file name, parse the value of this property.</para
           >
           <block subset="none" type="note">
@@ -799,8 +931,12 @@
 
               
 
+              
+
                property is read-only. If you attempt to assign a value to this property, a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 

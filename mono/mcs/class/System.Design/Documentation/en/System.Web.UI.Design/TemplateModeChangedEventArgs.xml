@@ -21,6 +21,8 @@
 
         
 
+        
+
          event is raised by a designer host, such as vsprvslong, for certain actions on a control on the design surface. For example, an event is raised when you enter or exit template editing mode for a control.</para
       >
       <para
@@ -29,8 +31,12 @@
 
         
 
+        
+
          class supplies a default delegate to handle the <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          object for a <see
          cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+
+        
 
         
 
@@ -49,8 +59,12 @@
 
         
 
+        
+
          property with a <see
          cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+
+        
 
         
 
@@ -62,13 +76,19 @@
 
         
 
+        
+
          object indicates that the template mode has changed, the default delegate in the <see
          cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
+        
+
          class updates the value for the <see
          cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+
+        
 
         
 
@@ -80,8 +100,12 @@
 
         
 
+        
+
          class can override the <see
          cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+        
 
         
 
@@ -95,6 +119,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -103,6 +129,8 @@
       <para
         >Provides data for a <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -132,8 +160,12 @@
 
             
 
+            
+
              delegate method uses the <see
              cref="M:System.Web.UI.Design.TemplateModeChangedEventArgs.#ctor(System.Web.UI.Design.TemplateGroup)" />
+
+            
 
             
 
@@ -142,8 +174,12 @@
 
             
 
+            
+
              object for use with a <see
              cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+            
 
             
 
@@ -155,8 +191,12 @@
 
             
 
+            
+
              object for a <see
              cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+
+            
 
             
 
@@ -165,8 +205,12 @@
 
             
 
+            
+
              property with a <see
              cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+
+            
 
             
 
@@ -175,8 +219,12 @@
 
             
 
+            
+
              parameter specifies a new template group when you enter template editing mode. The <paramref
              name="newTemplateGroup" />
+
+            
 
             
 
@@ -191,6 +239,8 @@
 
             
 
+            
+
              class with the specified template group.</para
           >
         </summary>
@@ -199,8 +249,12 @@
 
           
 
+          
+
           A new template group that is used to initialize the <see
            cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
+
+          
 
           
 
@@ -230,8 +284,12 @@
 
             
 
+            
+
              property specifies a new template group when you enter template editing mode. <see
              cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
+
+            
 
             
 

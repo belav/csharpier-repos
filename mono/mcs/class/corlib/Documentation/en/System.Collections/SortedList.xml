@@ -48,6 +48,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -56,13 +58,19 @@
 
         
 
+        
+
          element can be accessed by its key, like an element in any <see
          cref="T:System.Collections.IDictionary" />
 
         
 
+        
+
          implementation, or by its index, like an element in any <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
          object internally maintains two arrays to store the elements of the list; that is, one array for the keys and another array for the associated values. Each element is a key/value pair that can be accessed as a <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -87,8 +99,12 @@
 
         
 
+        
+
          object is the number of elements the <see
          cref="T:System.Collections.SortedList" />
+
+        
 
         
 
@@ -97,13 +113,19 @@
 
         
 
+        
+
         , the capacity is automatically increased as required through reallocation. The capacity can be decreased by calling <see
          cref="M:System.Collections.SortedList.TrimToSize" />
 
         
 
+        
+
          or by setting the <see
          cref="P:System.Collections.SortedList.Capacity" />
+
+        
 
         
 
@@ -115,10 +137,14 @@
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
+
+        
 
         
 
@@ -130,8 +156,12 @@
 
         
 
+        
+
          object are sorted by the keys either according to a specific <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -140,13 +170,19 @@
 
         
 
+        
+
          is created or according to the <see
          cref="T:System.IComparable" />
 
         
 
+        
+
          implementation provided by the keys themselves. In either case, a <see
          cref="T:System.Collections.SortedList" />
+
+        
 
         
 
@@ -158,8 +194,12 @@
 
         
 
+        
+
          in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
          cref="T:System.Collections.SortedList" />
+
+        
 
         
 
@@ -171,13 +211,19 @@
 
         
 
+        
+
          object tend to be slower than operations on a <see
          cref="T:System.Collections.Hashtable" />
 
         
 
+        
+
          object because of the sorting. However, the <see
          cref="T:System.Collections.SortedList" />
+
+        
 
         
 
@@ -190,8 +236,12 @@
 
         
 
+        
+
          object is a key/value pair, the element type is not the type of the key or the type of the value. Rather, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -229,8 +279,12 @@
 
             
 
+            
+
              interface to be capable of comparisons with every other key in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -239,8 +293,12 @@
 
             
 
+            
+
              implementation of each key added to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -252,8 +310,12 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -262,11 +324,15 @@
 
             
 
+            
+
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
             >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -282,13 +348,19 @@
 
             
 
+            
+
              class that is empty, has the default initial capacity, and is sorted according to the <see
              cref="T:System.IComparable" />
 
             
 
+            
+
              interface implemented by each key added to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -325,8 +397,12 @@
 
             
 
+            
+
              implementation. If the <paramref
              name="comparer" />
+
+            
 
             
 
@@ -335,13 +411,19 @@
 
             
 
+            
+
              implementation of each key is used; therefore, each key must implement the <see
              cref="T:System.IComparable" />
 
             
 
+            
+
              interface to be capable of comparisons with every other key in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -353,8 +435,12 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -363,11 +449,15 @@
 
             
 
+            
+
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
             >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -383,8 +473,12 @@
 
             
 
+            
+
              class that is empty, has the default initial capacity, and is sorted according to the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -396,8 +490,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -433,8 +531,12 @@
 
             
 
+            
+
              interface to be capable of comparisons with every other key in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -443,8 +545,12 @@
 
             
 
+            
+
              implementation of each key added to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -456,8 +562,12 @@
 
             
 
+            
+
              object is an example of an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -466,8 +576,12 @@
 
             
 
+            
+
              object contains a copy of the keys and values stored in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -479,13 +593,19 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -497,6 +617,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -505,13 +627,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in <paramref
              name="d" />
+
+            
 
             
 
@@ -526,8 +654,12 @@
 
             
 
+            
+
              class that contains elements copied from the specified dictionary, has the same initial capacity as the number of elements copied, and is sorted according to the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -539,13 +671,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            implementation to copy to a new <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -578,8 +716,12 @@
 
             
 
+            
+
              interface to be capable of comparisons with every other key in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -588,8 +730,12 @@
 
             
 
+            
+
              implementation of each key added to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -601,13 +747,19 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -619,6 +771,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -627,13 +781,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="initialCapacity" />
+
+            
 
             
 
@@ -648,13 +808,19 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and is sorted according to the <see
              cref="T:System.IComparable" />
 
             
 
+            
+
              interface implemented by each key added to the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -666,8 +832,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -704,8 +874,12 @@
 
             
 
+            
+
              implementation. If the <paramref
              name="comparer" />
+
+            
 
             
 
@@ -714,13 +888,19 @@
 
             
 
+            
+
              implementation of each key is used; therefore, each key must implement the <see
              cref="T:System.IComparable" />
 
             
 
+            
+
              interface to be capable of comparisons with every other key in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -732,13 +912,19 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -750,6 +936,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -758,13 +946,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -779,8 +973,12 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and is sorted according to the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -792,8 +990,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -804,8 +1006,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -842,8 +1048,12 @@
 
             
 
+            
+
              implementation. If the <paramref
              name="comparer" />
+
+            
 
             
 
@@ -852,13 +1062,19 @@
 
             
 
+            
+
              implementation of each key is used; therefore, each key must implement the <see
              cref="T:System.IComparable" />
 
             
 
+            
+
              interface to be capable of comparisons with every other key in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -870,8 +1086,12 @@
 
             
 
+            
+
              object is an example of an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -880,8 +1100,12 @@
 
             
 
+            
+
              object contains a copy of the keys and values stored in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -893,13 +1117,19 @@
 
             
 
+            
+
              object is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -911,6 +1141,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -919,13 +1151,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is the number of elements in <paramref
              name="d" />
+
+            
 
             
 
@@ -940,8 +1178,12 @@
 
             
 
+            
+
              class that contains elements copied from the specified dictionary, has the same initial capacity as the number of elements copied, and is sorted according to the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -953,13 +1195,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
           
 
+          
+
            implementation to copy to a new <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -970,8 +1218,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -1007,6 +1259,8 @@
 
             
 
+            
+
              object was created.</para
           >
           <para
@@ -1015,13 +1269,19 @@
 
             
 
+            
+
              already equals <see
              cref="P:System.Collections.SortedList.Capacity" />
 
             
 
+            
+
             , the capacity of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1033,8 +1293,12 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1043,13 +1307,19 @@
 
             
 
+            
+
             , setting the <see
              cref="P:System.Collections.SortedList.Item(System.Object)" />
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1061,8 +1331,12 @@
 
             
 
+            
+
              object are sorted by the keys either according to a specific <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1071,8 +1345,12 @@
 
             
 
+            
+
              is created or according to the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1085,8 +1363,12 @@
 
             
 
+            
+
             ) operation for unsorted data, where <paramref
              name="n" />
+
+            
 
             
 
@@ -1095,13 +1377,19 @@
 
             
 
+            
+
             . It is an O(log <paramref
              name="n" />
 
             
 
+            
+
             ) operation if the new element is added at the end of the list. If insertion causes a resize, the operation is O(<paramref
              name="n" />
+
+            
 
             
 
@@ -1116,6 +1404,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1124,10 +1414,14 @@
 
           
 
+          
+
           The key of the element to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1157,8 +1451,12 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1167,8 +1465,12 @@
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1179,8 +1481,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1189,8 +1495,12 @@
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.SortedList.Capacity" />
+
+            
 
             
 
@@ -1202,13 +1512,19 @@
 
             
 
+            
+
              or by setting the <see
              cref="P:System.Collections.SortedList.Capacity" />
 
             
 
+            
+
              property explicitly. When the value of <see
              cref="P:System.Collections.SortedList.Capacity" />
+
+            
 
             
 
@@ -1220,8 +1536,12 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -1233,6 +1553,8 @@
           <para
             >Gets or sets the capacity of a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1265,10 +1587,14 @@
 
             
 
+            
+
              is set to zero and references to other objects from elements of the collection are also released.</para
           >
           <para>
             <see cref="P:System.Collections.SortedList.Capacity" />
+
+            
 
             
 
@@ -1277,8 +1603,12 @@
 
             
 
+            
+
              object, call <see
              cref="M:System.Collections.SortedList.TrimToSize" />
+
+            
 
             
 
@@ -1287,13 +1617,19 @@
 
             
 
+            
+
              property directly. Trimming an empty <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1305,13 +1641,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1323,6 +1665,8 @@
           <para
             >Removes all elements from a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1358,13 +1702,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1379,6 +1729,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1387,6 +1739,8 @@
           <para
             >A shallow copy of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1422,8 +1776,12 @@
 
             
 
+            
+
              object are sorted by the keys either according to a specific <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1432,8 +1790,12 @@
 
             
 
+            
+
              is created or according to the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1444,13 +1806,19 @@
 
             
 
+            
+
              implements <see
              cref="M:System.Collections.IDictionary.Contains(System.Object)" />
 
             
 
+            
+
             . It behaves exactly as <see
              cref="M:System.Collections.SortedList.ContainsKey(System.Object)" />
+
+            
 
             
 
@@ -1462,13 +1830,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1480,8 +1854,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1490,8 +1868,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1500,8 +1882,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -1516,6 +1902,8 @@
 
             
 
+            
+
              object contains a specific key.</para
           >
         </summary>
@@ -1527,8 +1915,12 @@
 
             
 
+            
+
              object contains an element with the specified <paramref
              name="key" />
+
+            
 
             
 
@@ -1540,8 +1932,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -1576,8 +1972,12 @@
 
             
 
+            
+
              object are sorted by the keys either according to a specific <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1586,8 +1986,12 @@
 
             
 
+            
+
              is created or according to the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1599,6 +2003,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1607,13 +2013,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1625,8 +2037,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1635,8 +2051,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1645,8 +2065,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -1661,6 +2085,8 @@
 
             
 
+            
+
              object contains a specific key.</para
           >
         </summary>
@@ -1672,8 +2098,12 @@
 
             
 
+            
+
              object contains an element with the specified <paramref
              name="key" />
+
+            
 
             
 
@@ -1685,8 +2115,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -1721,8 +2155,12 @@
 
             
 
+            
+
              object are compared to the specified value using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1734,8 +2172,12 @@
 
             
 
+            
+
             . That is, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -1744,8 +2186,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1757,8 +2203,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -1767,8 +2217,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1777,8 +2231,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -1793,6 +2251,8 @@
 
             
 
+            
+
              object contains a specific value.</para
           >
         </summary>
@@ -1804,8 +2264,12 @@
 
             
 
+            
+
              object contains an element with the specified <paramref
              name="value" />
+
+            
 
             
 
@@ -1817,8 +2281,12 @@
 
           
 
+          
+
           The value to locate in the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -1857,8 +2325,12 @@
 
             
 
+            
+
              object in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1870,11 +2342,15 @@
 
             
 
+            
+
             , use SortedList.Keys.CopyTo.</para
           >
           <para
             >To copy only the values in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -1886,13 +2362,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -1907,8 +2389,12 @@
 
             
 
+            
+
              elements to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1920,8 +2406,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1930,13 +2420,19 @@
 
           
 
+          
+
            objects copied from <see
            cref="T:System.Collections.SortedList" />
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1947,8 +2443,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1978,10 +2478,14 @@
 
             
 
+            
+
              object.</para
           >
           <para>
             <see cref="P:System.Collections.SortedList.Capacity" />
+
+            
 
             
 
@@ -1990,13 +2494,19 @@
 
             
 
+            
+
              object can store. <see
              cref="P:System.Collections.SortedList.Count" />
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2007,8 +2517,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -2017,8 +2531,12 @@
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.SortedList.Capacity" />
+
+            
 
             
 
@@ -2031,6 +2549,8 @@
           <para
             >Gets the number of elements contained in a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2066,8 +2586,12 @@
 
             
 
+            
+
              in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2083,6 +2607,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2094,11 +2620,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2136,8 +2666,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2146,8 +2680,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2158,8 +2696,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2168,13 +2710,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2186,8 +2734,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2196,8 +2748,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2206,8 +2762,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2216,8 +2776,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2235,8 +2799,12 @@
 
             
 
+            
+
              object that iterates through a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2251,8 +2819,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2288,8 +2860,12 @@
 
             
 
+            
+
              in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2305,6 +2881,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2316,11 +2894,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2356,8 +2938,12 @@
 
             
 
+            
+
              object is a read-only view of the keys of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2366,8 +2952,12 @@
 
             
 
+            
+
              are immediately reflected in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2379,8 +2969,12 @@
 
             
 
+            
+
              are sorted in the same order as the keys of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2392,13 +2986,19 @@
 
             
 
+            
+
              property, but returns an <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
              object instead of an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2414,6 +3014,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2425,8 +3027,12 @@
 
             
 
+            
+
              object containing the keys in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2463,8 +3069,12 @@
 
             
 
+            
+
              object is a read-only view of the values of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2473,8 +3083,12 @@
 
             
 
+            
+
              are immediately reflected in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2486,8 +3100,12 @@
 
             
 
+            
+
              are sorted in the same order as the values of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2499,13 +3117,19 @@
 
             
 
+            
+
              property, but returns an <see
              cref="T:System.Collections.IList" />
 
             
 
+            
+
              object instead of an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2521,6 +3145,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2532,8 +3158,12 @@
 
             
 
+            
+
              object containing the values in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2569,8 +3199,12 @@
 
             
 
+            
+
              object are sorted by the keys either according to a specific <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -2579,8 +3213,12 @@
 
             
 
+            
+
              is created, or according to the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -2592,8 +3230,12 @@
 
             
 
+            
+
              in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2605,13 +3247,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -2623,8 +3271,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2633,8 +3285,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2643,8 +3299,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -2659,6 +3319,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2670,13 +3332,19 @@
 
             
 
+            
+
              parameter, if <paramref
              name="key" />
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2688,8 +3356,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -2724,8 +3396,12 @@
 
             
 
+            
+
              in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2737,8 +3413,12 @@
 
             
 
+            
+
              are compared to the specified value using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2750,13 +3430,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -2768,8 +3454,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2778,8 +3468,12 @@
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2788,8 +3482,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -2804,6 +3502,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2815,13 +3515,19 @@
 
             
 
+            
+
              parameter, if <paramref
              name="value" />
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2833,8 +3539,12 @@
 
           
 
+          
+
           The value to locate in the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -2867,6 +3577,8 @@
           <para
             >Gets a value indicating whether a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -2903,6 +3615,8 @@
 
             
 
+            
+
              object is read-only.</para
           >
         </summary>
@@ -2930,8 +3644,12 @@
 
             
 
+            
+
              object, all operations must be done through the wrapper returned by the <see
              cref="M:System.Collections.SortedList.Synchronized(System.Collections.SortedList)" />
+
+            
 
             
 
@@ -2944,6 +3662,8 @@
           <para
             >Gets a value indicating whether access to a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3002,8 +3722,12 @@
 
             
 
+            
+
              object is a read-only view of the keys of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3012,8 +3736,12 @@
 
             
 
+            
+
              are immediately reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -3025,8 +3753,12 @@
 
             
 
+            
+
              are sorted in the same order as the keys of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3038,13 +3770,19 @@
 
             
 
+            
+
              method, but returns an <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              object instead of an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3057,6 +3795,8 @@
           <para
             >Gets the keys in a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3092,8 +3832,12 @@
 
             
 
+            
+
              object does not contain an element with the specified key, the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3106,13 +3850,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -3127,11 +3877,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3166,8 +3920,12 @@
 
             
 
+            
+
              in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3180,13 +3938,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -3201,11 +3965,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3244,8 +4012,12 @@
 
             
 
+            
+
              in the correct sort order, and the indexing adjusts accordingly. When an element is removed, the indexing also adjusts accordingly. Therefore, the index of a specific key/value pair might change as elements are added or removed from the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3261,6 +4033,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -3269,8 +4043,12 @@
 
           
 
+          
+
           The zero-based index at which to save <paramref
            name="value" />
+
+          
 
           
 
@@ -3281,13 +4059,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to save into the <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -3325,6 +4109,8 @@
 
             
 
+            
+
              object, all operations must be done through this wrapper only.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
@@ -3334,6 +4120,8 @@
           <para
             >Returns a synchronized (thread-safe) wrapper for a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3348,6 +4136,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -3356,8 +4146,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.SortedList" />
+
+          
 
           
 
@@ -3387,8 +4181,12 @@
 
             
 
+            
+
              object, use the <see
              cref="M:System.Collections.SortedList.Synchronized(System.Collections.SortedList)" />
+
+            
 
             
 
@@ -3397,8 +4195,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.SortedList.SyncRoot" />
+
+            
 
             
 
@@ -3407,8 +4209,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3417,8 +4223,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3431,6 +4241,8 @@
           <para
             >Gets an object that can be used to synchronize access to a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3470,8 +4282,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3480,8 +4296,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3492,8 +4312,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3502,13 +4326,19 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3520,8 +4350,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3530,8 +4364,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3540,8 +4378,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3550,8 +4392,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3563,8 +4409,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -3573,8 +4423,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3583,8 +4437,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3601,8 +4459,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3617,8 +4479,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3653,8 +4519,12 @@
 
             
 
+            
+
              object to its initial state, call the <see
              cref="M:System.Collections.SortedList.Clear" />
+
+            
 
             
 
@@ -3663,13 +4533,19 @@
 
             
 
+            
+
             . Trimming an empty <see
              cref="T:System.Collections.SortedList" />
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3681,13 +4557,19 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
             
 
+            
+
              is <see
              cref="P:System.Collections.SortedList.Count" />
+
+            
 
             
 
@@ -3699,6 +4581,8 @@
           <para
             >Sets the capacity to the actual number of elements in a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3735,8 +4619,12 @@
 
             
 
+            
+
              object is a read-only view of the values of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3745,8 +4633,12 @@
 
             
 
+            
+
              are immediately reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -3758,8 +4650,12 @@
 
             
 
+            
+
              are sorted in the same order as the values of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 
@@ -3771,13 +4667,19 @@
 
             
 
+            
+
              method, but returns an <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              object instead of an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3790,6 +4692,8 @@
           <para
             >Gets the values in a <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 

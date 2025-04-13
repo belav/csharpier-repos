@@ -6,8 +6,12 @@
 
     
 
+    
+
     , which may occur in a block, a <non_terminal
      where="15.8.3">for-statement</non_terminal>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     , or a <non_terminal
      where="15.13">using-statement</non_terminal>
+
+    
 
     
 
@@ -29,13 +37,19 @@
 
     
 
+    
+
     , <non_terminal
      where="15.7.2">switch-statement</non_terminal>
 
     
 
+    
+
     , or  <non_terminal
      where="15.13">using-statement</non_terminal>
+
+    
 
     
 
@@ -44,8 +58,12 @@
 
     
 
+    
+
     , <non_terminal
      where="15.7.2">switch-statement</non_terminal>
+
+    
 
     
 
@@ -54,8 +72,12 @@
 
     
 
+    
+
      ends in any way. (Entering an enclosed block or calling a method suspends, but does not end, execution of the current block, <non_terminal
      where="15.8.3">for-statement</non_terminal>
+
+    
 
     
 
@@ -64,8 +86,12 @@
 
     
 
+    
+
     , or <non_terminal
      where="15.13">using-statement</non_terminal>
+
+    
 
     
 
@@ -74,8 +100,12 @@
 
     
 
+    
+
     , <non_terminal
      where="15.7.2">switch-statement</non_terminal>
+
+    
 
     
 
@@ -84,8 +114,12 @@
 
     
 
+    
+
      is entered recursively, a new instance of the local variable is created each time, and its <non_terminal
      where="15.5.1">local-variable-initializer</non_terminal>
+
+    
 
     
 
@@ -97,8 +131,12 @@
 
     
 
+    
+
      may include a <non_terminal
      where="15.5.1">local-variable-initializer</non_terminal>
+
+    
 
     
 
@@ -107,11 +145,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >Within the scope of a local variable, it is a compile-time error to refer to that local variable in a textual position that precedes its <non_terminal
      where="15.5.1">local-variable-declarator</non_terminal>
+
+    
 
     
 
@@ -127,6 +169,8 @@
 
       
 
+      
+
       ). end note]</note
     >
   </paragraph>
@@ -136,8 +180,12 @@
 
     
 
+    
+
      and by a <non_terminal
      where="15.10">specific-catch-clause</non_terminal>
+
+    
 
     
 
@@ -146,8 +194,12 @@
 
     
 
+    
+
     . For a <non_terminal
      where="15.8.4">foreach-statement</non_terminal>
+
+    
 
     
 
@@ -156,8 +208,12 @@
 
     
 
+    
+
     ). For a <non_terminal
      where="15.10">specific-catch-clause</non_terminal>
+
+    
 
     
 
@@ -166,13 +222,19 @@
 
     
 
+    
+
     ). A local variable declared by a <non_terminal
      where="15.8.4">foreach-statement</non_terminal>
 
     
 
+    
+
      or  <non_terminal
      where="15.10">specific-catch-clause</non_terminal>
+
+    
 
     
 

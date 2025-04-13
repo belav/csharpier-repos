@@ -21,6 +21,8 @@
 
         
 
+        
+
          is placed on every control and is sized to the exact bounds of each control.</para
       >
     </remarks>
@@ -29,6 +31,8 @@
       <para
         >Associates a <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -70,13 +76,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the bounds of the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -87,13 +99,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Cursor" />
 
           
 
+          
+
            that represents the cursor to display when the mouse pointer is over the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -104,8 +122,12 @@
 
           
 
+          
+
           The component with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -116,13 +138,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
+          
+
            with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -155,6 +183,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -163,13 +193,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the bounds of the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -180,13 +216,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Cursor" />
 
           
 
+          
+
            that represents the cursor to display when the mouse pointer is over the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -197,8 +239,12 @@
 
           
 
+          
+
           The component with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -209,13 +255,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
           
 
+          
+
            with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -243,6 +295,8 @@
           <para
             >Gets the bounds of the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -276,6 +330,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -287,8 +343,12 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -297,11 +357,15 @@
 
             
 
+            
+
             ; otherwise, null.</para
           >
         </returns>
         <param name="p">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

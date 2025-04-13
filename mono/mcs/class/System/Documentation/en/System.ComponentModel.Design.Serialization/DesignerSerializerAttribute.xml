@@ -38,6 +38,8 @@
 
         
 
+        
+
          provides a way to indicate to the designer serialization manager that a specific type of serializer should be used when serializing the values of an object. This allows you to specify a serializer that is capable of serializing a custom type, for instance. Place this attribute on a class to indicate the serialization object to use when serializing the class.</para
       >
     </remarks>
@@ -77,6 +79,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -85,10 +89,14 @@
 
           
 
+          
+
           The fully qualified name of the data type of the serializer. </param
         >
         <param name="baseSerializerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,6 +134,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -134,10 +144,14 @@
 
           
 
+          
+
           The fully qualified name of the data type of the serializer. </param
         >
         <param name="baseSerializerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,6 +189,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -183,10 +199,14 @@
 
           
 
+          
+
           The data type of the serializer. </param
         >
         <param name="baseSerializerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,8 +278,12 @@
 
             
 
+            
+
              instance for the attribute. <see
              cref="T:System.ComponentModel.EditorAttribute" />
+
+            
 
             
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          event enables you to customize (or owner-draw) the appearance of a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          event is raised by a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -44,8 +52,12 @@
 
         
 
+        
+
          property is set to true and its <see
          cref="P:System.Windows.Forms.ListView.View" />
+
+        
 
         
 
@@ -54,13 +66,19 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Windows.Forms.DrawListViewSubItemEventArgs" />
 
         
 
+        
+
          passed to the event handler contains information about the <see
          cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+        
 
         
 
@@ -72,8 +90,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.Item" />
+
+        
 
         
 
@@ -82,8 +104,12 @@
 
         
 
+        
+
          itself, use the <see
          cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.SubItem" />
+
+        
 
         
 
@@ -92,8 +118,12 @@
 
         
 
+        
+
          property to retrieve the <see
          cref="T:System.Windows.Forms.ColumnHeader" />
+
+        
 
         
 
@@ -105,8 +135,12 @@
 
         
 
+        
+
          property to do the actual drawing within the area specified by the <see
          cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.Bounds" />
+
+        
 
         
 
@@ -115,8 +149,12 @@
 
         
 
+        
+
          elements that do not need customization, use the <see
          cref="M:System.Windows.Forms.DrawListViewSubItemEventArgs.DrawBackground" />
+
+        
 
         
 
@@ -125,8 +163,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.DrawListViewSubItemEventArgs.DrawFocusRectangle(System.Drawing.Rectangle)" />
+
+        
 
         
 
@@ -135,6 +177,8 @@
       <para
         >Use the <see
          cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.DrawDefault" />
+
+        
 
         
 
@@ -147,13 +191,19 @@
 
           
 
+          
+
            control and set the <see
            cref="P:System.Windows.Forms.ListView.DoubleBuffered" />
 
           
 
+          
+
            property to true. This feature is available only on Windows XP and the Windows Server 2003 family when your application calls the <see
            cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+          
 
           
 
@@ -166,6 +216,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+        
 
         
 
@@ -225,6 +277,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -233,6 +287,8 @@
           <para
             >Gets the size and location of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -261,8 +317,12 @@
 
             
 
+            
+
              column in which the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -290,8 +350,12 @@
 
             
 
+            
+
              property. The background is drawn to fill the area specified by the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Bounds" />
+
+            
 
             
 
@@ -304,13 +368,19 @@
 
               
 
+              
+
                property of the parent <see
                cref="T:System.Windows.Forms.ListViewItem" />
 
               
 
+              
+
                must be set to false to prevent the <see
                cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+
+              
 
               
 
@@ -323,6 +393,8 @@
           <para
             >Draws the background of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -350,8 +422,12 @@
 
             
 
+            
+
              event for subitems that you do not want to customize. If you set this property to true, the subitem will be drawn normally using the current values of the <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.BackColor" />
+
+            
 
             
 
@@ -360,8 +436,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" />
+
+            
 
             
 
@@ -374,13 +454,19 @@
 
               
 
+              
+
                property of the parent <see
                cref="T:System.Windows.Forms.ListViewItem" />
 
               
 
+              
+
                must be set to false to prevent the <see
                cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+
+              
 
               
 
@@ -393,6 +479,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -425,6 +513,8 @@
 
             
 
+            
+
              parameter. It is drawn only when the parent item has focus, so you do not need to check the focus state of the item before you call this method.</para
           >
           <para
@@ -433,8 +523,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Windows.Forms.ListView.FullRowSelect" />
+
+            
 
             
 
@@ -443,8 +537,12 @@
 
             
 
+            
+
              method only when the <see
              cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ColumnIndex" />
+
+            
 
             
 
@@ -453,6 +551,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -467,8 +567,12 @@
 
             
 
+            
+
              if the parent <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -477,6 +581,8 @@
         </summary>
         <param name="bounds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,13 +609,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" />
 
             
 
+            
+
              properties. The text is drawn within the area specified by the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Bounds" />
+
+            
 
             
 
@@ -522,8 +634,12 @@
 
               
 
+              
+
                property of the parent <see
                cref="T:System.Windows.Forms.ListViewItem" />
+
+              
 
               
 
@@ -532,8 +648,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.ListViewItem.Font" />
+
+              
 
               
 
@@ -546,6 +666,8 @@
           <para
             >Draws the text of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -578,8 +700,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" />
+
+            
 
             
 
@@ -588,13 +714,19 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Windows.Forms.TextFormatFlags" />
 
             
 
+            
+
              values specified in the <paramref
              name="flags" />
+
+            
 
             
 
@@ -607,8 +739,12 @@
 
               
 
+              
+
                property of the parent <see
                cref="T:System.Windows.Forms.ListViewItem" />
+
+              
 
               
 
@@ -617,8 +753,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.ListViewItem.Font" />
+
+              
 
               
 
@@ -634,8 +774,12 @@
 
             
 
+            
+
              using its current foreground color and formatting it with the specified <see
              cref="T:System.Windows.Forms.TextFormatFlags" />
+
+            
 
             
 
@@ -647,8 +791,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -675,6 +823,8 @@
 
             
 
+            
+
              class provides properties and methods useful for drawing on the display device.</para
           >
         </remarks>
@@ -686,8 +836,12 @@
 
             
 
+            
+
              used to draw the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -719,8 +873,12 @@
 
             
 
+            
+
              column in which the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -751,8 +909,12 @@
 
             
 
+            
+
              parent of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -761,8 +923,12 @@
 
             
 
+            
+
              property does not provide adequate information to meet your needs. The <see
              cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" />
+
+            
 
             
 
@@ -771,8 +937,12 @@
 
             
 
+            
+
              property, on the other hand, allows you to access all members of the parent <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -784,8 +954,12 @@
 
             
 
+            
+
              being drawn, use the <see
              cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.SubItem" />
+
+            
 
             
 
@@ -800,8 +974,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -830,8 +1008,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -862,13 +1044,19 @@
 
             
 
+            
+
              parent of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
 
             
 
+            
+
              to draw is in a particular state. This property provides only basic state information about the parent item. You can use this property, for example, to determine whether the parent item is selected, checked, or focused. If you need to know more, retrieve the parent item through the <see
              cref="P:System.Windows.Forms.DrawListViewItemEventArgs.Item" />
+
+            
 
             
 
@@ -883,8 +1071,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 
@@ -915,8 +1107,12 @@
 
             
 
+            
+
              properties do not provide adequate information to meet your needs. The <see
              cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.SubItem" />
+
+            
 
             
 
@@ -925,13 +1121,19 @@
 
             
 
+            
+
              being drawn. You must access this object directly, for example, to draw the <see
              cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Text" />
 
             
 
+            
+
              value yourself rather than using the <see
              cref="Overload:System.Windows.Forms.DrawListViewSubItemEventArgs.DrawText" />
+
+            
 
             
 
@@ -943,6 +1145,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+
+            
 
             
 

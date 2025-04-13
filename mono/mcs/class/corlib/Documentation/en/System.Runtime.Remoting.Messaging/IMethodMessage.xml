@@ -36,6 +36,8 @@
 
         
 
+        
+
          interface.</para
       >
     </remarks>
@@ -88,13 +90,19 @@
 
             
 
+            
+
              property is redundant since the same functionality can be achieved through the <see
              cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.ArgCount" />
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.Messaging.IMethodMessage.GetArg(System.Int32)" />
+
+            
 
             
 
@@ -135,6 +143,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -144,6 +154,8 @@
         </returns>
         <param name="argNum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,6 +193,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,6 +252,8 @@
 
             
 
+            
+
              for the current method call.</para
           >
         </summary>
@@ -272,6 +288,8 @@
           <para
             >Gets the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -323,8 +341,12 @@
 
             
 
+            
+
              return an array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -357,6 +379,8 @@
           <para
             >Gets the full <see
              cref="T:System.Type" />
+
+            
 
             
 

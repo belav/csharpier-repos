@@ -29,6 +29,8 @@
 
         
 
+        
+
          is the managed counterpart of the unmanaged <unmanagedCodeEntityReference
         >ISymUnmanagedBinder</unmanagedCodeEntityReference>
       </para>
@@ -72,8 +74,12 @@
 
             
 
+            
+
              method returns the <see
              cref="T:System.Diagnostics.SymbolStore.ISymbolReader" />
+
+            
 
             
 
@@ -92,6 +98,8 @@
 
             
 
+            
+
              interface that reads the debugging symbols.</para
           >
         </returns>
@@ -100,8 +108,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -112,10 +124,14 @@
 
           
 
+          
+
           The name of the file for which the reader interface is required. </param
         >
         <param name="searchPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

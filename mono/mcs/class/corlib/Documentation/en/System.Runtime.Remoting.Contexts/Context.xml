@@ -32,8 +32,12 @@
 
         
 
+        
+
          class, which provides the usage rules. Whenever a new object is instantiated, the .NET Framework finds a compatible or creates a new instance of the <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
             >[&lt;topic://cpconboundariesprocessesapplicationdomainscontexts&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -80,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+            
 
             
 
@@ -158,6 +166,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,8 +283,12 @@
 
             
 
+            
+
              method on it by passing in a delegate. The delegate is used to request a callback. The delegate must be a <see
              cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
+
+            
 
             
 
@@ -287,6 +301,8 @@
         </summary>
         <param name="deleg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,6 +332,8 @@
           <para
             >For default contexts, backing objects are cleaned up during shut down of the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -357,6 +375,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,11 +446,15 @@
 
             
 
+            
+
             . </para
           >
         </returns>
         <param name="slot">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,6 +501,8 @@
 
           
 
+          
+
           The data slot name. </param
         >
       </Docs>
@@ -517,6 +543,8 @@
 
           
 
+          
+
           The name of the property. </param
         >
       </Docs>
@@ -553,13 +581,19 @@
 
             
 
+            
+
              and <paramref
              name="ctx" />
 
             
 
+            
+
             , <paramref
              name="prop" />
+
+            
 
             
 
@@ -571,13 +605,19 @@
 
             
 
+            
+
              is not null, and then if it is a proxy, all calls made on the proxy are intercepted. Otherwise, if <paramref
              name="obj" />
 
             
 
+            
+
              is a real object, all calls on the object are intercepted. The <paramref
              name="ctx" />
+
+            
 
             
 
@@ -589,8 +629,12 @@
 
             
 
+            
+
              is not null, <paramref
              name="obj" />
+
+            
 
             
 
@@ -602,8 +646,12 @@
 
             
 
+            
+
              and <paramref
              name="obj" />
+
+            
 
             
 
@@ -615,6 +663,8 @@
           <para
             >Registers a dynamic property implementing the <see
              cref="T:System.Runtime.Remoting.Contexts.IDynamicProperty" />
+
+            
 
             
 
@@ -630,6 +680,8 @@
 
           
 
+          
+
           The dynamic property to register. </param
         >
         <param name="obj">
@@ -637,8 +689,12 @@
 
           
 
+          
+
           The object/proxy for which the <paramref
            name="property" />
+
+          
 
           
 
@@ -649,8 +705,12 @@
 
           
 
+          
+
           The context for which the <paramref
            name="property" />
+
+          
 
           
 
@@ -691,10 +751,14 @@
 
           
 
+          
+
           The data slot where the data is to be added. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,6 +801,8 @@
 
           
 
+          
+
           The actual context property. </param
         >
       </Docs>
@@ -767,6 +833,8 @@
 
             
 
+            
+
              class representation of the current context.</para
           >
         </summary>
@@ -775,6 +843,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -816,6 +886,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -828,6 +900,8 @@
 
           
 
+          
+
           The name of the dynamic property to unregister. </param
         >
         <param name="obj">
@@ -835,8 +909,12 @@
 
           
 
+          
+
           The object/proxy for which the <paramref
            name="property" />
+
+          
 
           
 
@@ -847,8 +925,12 @@
 
           
 
+          
+
           The context for which the <paramref
            name="property" />
+
+          
 
           
 

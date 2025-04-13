@@ -22,8 +22,12 @@
 
         
 
+        
+
          objects, use an implementation of the <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          implementation generates metadata that is encapsulated in a <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
+
+        
 
         
 
@@ -45,13 +53,19 @@
 
         
 
+        
+
          class provides a framework for generating policy expressions that describe the capabilities and requirements of an endpoint binding and its associated operations, messages and faults. These policy expressions are captured in a <see
          cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
         
 
+        
+
          instance. A <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+        
 
         
 
@@ -63,8 +77,12 @@
 
         
 
+        
+
          calls into each <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -73,8 +91,12 @@
 
         
 
+        
+
          interface in the binding of a <see
          cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+        
 
         
 
@@ -83,8 +105,12 @@
 
         
 
+        
+
          object for the <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+        
 
         
 
@@ -93,8 +119,12 @@
 
         
 
+        
+
          interface on your custom implementations of the <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -106,13 +136,19 @@
 
         
 
+        
+
          type is the implementation of the <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
 
         
 
+        
+
          class included with indigo1. The <see
          cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+        
 
         
 
@@ -124,8 +160,12 @@
 
         
 
+        
+
          interface. The <see
          cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+        
 
         
 
@@ -161,6 +201,8 @@
           <para
             >This property is populated with errors that occurred during the metadata export process. Users of derived classes should check the <see
              cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
+
+            
 
             
 
@@ -201,6 +243,8 @@
 
             
 
+            
+
              to convert a contract description into metadata.</para
           >
         </remarks>
@@ -210,6 +254,8 @@
         </summary>
         <param name="contract">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +291,8 @@
 
             
 
+            
+
              to convert a contract description into metadata.</para
           >
         </remarks>
@@ -254,6 +302,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,6 +340,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -299,6 +351,8 @@
         </returns>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,8 +386,12 @@
 
             
 
+            
+
              method to retrieve the metadata generated from earlier calls. Check the <see
              cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
+
+            
 
             
 
@@ -348,13 +406,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.MetadataExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.MetadataExporter.ExportPolicy(System.ServiceModel.Description.ServiceEndpoint)" />
+
+            
 
             
 
@@ -366,6 +430,8 @@
           <para
             >An enumerable collection of <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -397,6 +463,8 @@
           <para
             >Use the State property to pass a <see
              cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+            
 
             
 

@@ -83,6 +83,8 @@
 
           
 
+          
+
           .
         </remarks
         >
@@ -108,6 +110,8 @@
           >
           Locals declared within the switch operation with scope spanning across all <see
            cref="Cases" />
+
+          
 
           
 
@@ -252,14 +256,20 @@
 
           
 
+          
+
           ,
           <see
            cref="ILoopOperation.Body" />
 
           
 
+          
+
            and <see
            cref="AtLoopBottom" />
+
+          
 
           
 
@@ -327,6 +337,8 @@
 
           
 
+          
+
            if arithmetic operations behind this loop are 'checked'.</summary
         >
       </Comments>
@@ -370,6 +382,8 @@
 
           
 
+          
+
            is evaluated at start of each loop iteration.
           False if it is evaluated at the end of each loop iteration.
         </summary
@@ -381,6 +395,8 @@
         <summary
           >True if the loop has 'Until' loop semantics and the loop is executed while <see
            cref="Condition" />
+
+          
 
           
 
@@ -396,6 +412,8 @@
           For example, for VB 'Do While' or 'Do Until' loop with syntax errors where both the top and bottom conditions are provided.
           The top condition is preferred and exposed as <see
            cref="Condition" />
+
+          
 
           
 
@@ -500,8 +518,12 @@
 
         
 
+        
+
          of operations that are executed while holding a lock onto the <see
          cref="LockedValue" />
+
+        
 
         
 
@@ -569,8 +591,12 @@
 
         
 
+        
+
          of operations that are executed while using disposable <see
          cref="Resources" />
+
+        
 
         
 
@@ -602,8 +628,12 @@
 
           
 
+          
+
            with scope spanning across this entire <see
            cref="IUsingOperation" />
+
+          
 
           
 
@@ -628,6 +658,8 @@
 
           
 
+          
+
            when pattern based disposal is used.</summary
         >
       </Comments>
@@ -639,6 +671,8 @@
         >
         Represents an operation that drops the resulting value and the type of the underlying wrapped <see
          cref="Operation" />
+
+        
 
         
 
@@ -786,9 +820,13 @@
 
           
 
+          
+
           , if any.
           Null if <see
            cref="OperatorMethod" />
+
+          
 
           
 
@@ -808,9 +846,13 @@
 
           
 
+          
+
            or
           <see
            cref="T:Microsoft.CodeAnalysis.VisualBasic.VisualBasicExtensions.GetConversion(IConversionOperation)" />
+
+          
 
           
 
@@ -828,14 +870,20 @@
 
           
 
+          
+
            at runtime if the cast fails. This is true for C#'s
           <c
           >as</c>
 
           
 
+          
+
            operator and for VB's <c
           >TryCast</c>
+
+          
 
           
 
@@ -871,9 +919,13 @@
 
           
 
+          
+
           , we will have
              3 <see
            cref="IInvocationOperation" />
+
+          
 
           
 
@@ -886,8 +938,12 @@
 
           
 
+          
+
            will have 3 <see
            cref="IInvocationOperation" />
+
+          
 
           
 
@@ -911,9 +967,13 @@
 
           
 
+          
+
           .
           Null if <see
            cref="TargetMethod" />
+
+          
 
           
 
@@ -1049,9 +1109,13 @@
 
           
 
+          
+
           .
           Null if <see
            cref="Member" />
+
+          
 
           
 
@@ -1218,10 +1282,14 @@
 
           
 
+          
+
            if this is a 'lifted' unary operator.  When there is an
           operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see
            cref="System.Nullable{T}" />
+
+          
 
           
 
@@ -1235,6 +1303,8 @@
       <Comments>
         <summary>
           <see langword="true" />
+
+          
 
           
 
@@ -1257,9 +1327,13 @@
 
           
 
+          
+
           , if any.
           Null if <see
            cref="OperatorMethod" />
+
+          
 
           
 
@@ -1320,10 +1394,14 @@
 
           
 
+          
+
            if this is a 'lifted' binary operator.  When there is an
           operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see
            cref="System.Nullable{T}" />
+
+          
 
           
 
@@ -1340,6 +1418,8 @@
 
           
 
+          
+
            if this is a 'checked' binary operator.
         </summary
         >
@@ -1349,6 +1429,8 @@
       <Comments>
         <summary>
           <see langword="true" />
+
+          
 
           
 
@@ -1368,6 +1450,8 @@
           >
           Type parameter which runtime type will be used to resolve virtual invocation of the <see
            cref="OperatorMethod" />
+
+          
 
           
 
@@ -1403,14 +1487,20 @@
 
         
 
+        
+
          to be tested,
         (2) <see
          cref="WhenTrue" />
 
         
 
+        
+
          operation to be executed when <see
          cref="Condition" />
+
+        
 
         
 
@@ -1420,8 +1510,12 @@
 
         
 
+        
+
          operation to be executed when the <see
          cref="Condition" />
+
+        
 
         
 
@@ -1448,6 +1542,8 @@
 
           
 
+          
+
            is true.
         </summary
         >
@@ -1459,6 +1555,8 @@
           >
           Operation to be executed if the <see
            cref="Condition" />
+
+          
 
           
 
@@ -1489,14 +1587,20 @@
 
         
 
+        
+
         , which is the first operand that is unconditionally evaluated and is the result of the operation if non null.
         (2) <see
          cref="WhenNull" />
 
         
 
+        
+
         , which is the second operand that is conditionally evaluated and is the result of the operation if <see
          cref="Value" />
+
+        
 
         
 
@@ -1523,6 +1627,8 @@
 
           
 
+          
+
            evaluates to null/Nothing.
         </summary
         >
@@ -1537,10 +1643,14 @@
 
           
 
+          
+
            when it is not null/Nothing.
 
           Identity if result type of the operation is the same as type of <see
            cref="Value" />
+
+          
 
           
 
@@ -1550,14 +1660,20 @@
 
           
 
+          
+
            is nullable, then conversion is applied to an
           unwrapped <see
            cref="Value" />
 
           
 
+          
+
           , otherwise to the <see
            cref="Value" />
+
+          
 
           
 
@@ -1831,6 +1947,8 @@
 
           
 
+          
+
            before the operation occurs.
         </summary
         >
@@ -1843,6 +1961,8 @@
           Conversion applied to the result of the binary operation, before it is assigned back to
           <see
            cref="IAssignmentOperation.Target" />
+
+          
 
           
 
@@ -1863,6 +1983,8 @@
 
           
 
+          
+
            if this assignment contains a 'lifted' binary operation.
         </summary
         >
@@ -1872,6 +1994,8 @@
       <Comments>
         <summary>
           <see langword="true" />
+
+          
 
           
 
@@ -1894,9 +2018,13 @@
 
           
 
+          
+
           , if any.
           Null if <see
            cref="OperatorMethod" />
+
+          
 
           
 
@@ -1972,14 +2100,20 @@
 
         
 
+        
+
          is used to refer to the value
         of <see
          cref="Operation" />
 
         
 
+        
+
          within <see
          cref="WhenNotNull" />
+
+        
 
         
 
@@ -2006,6 +2140,8 @@
 
           
 
+          
+
            is non null.
         </summary
         >
@@ -2021,14 +2157,20 @@
 
         
 
+        
+
         .
         For a conditional access operation of the form <c
         >someExpr?.Member</c>
 
         
 
+        
+
         , this operation is used as the InstanceReceiver for the right operation <c
         >Member</c>
+
+        
 
         
 
@@ -2070,6 +2212,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -2099,8 +2243,12 @@
 
           
 
+          
+
           , with an <see
            cref="IPropertyReferenceOperation" />
+
+          
 
           
 
@@ -2110,8 +2258,12 @@
 
           
 
+          
+
            with <see
            cref="InstanceReferenceKind.ImplicitReceiver" />
+
+          
 
           
 
@@ -2170,6 +2322,8 @@
 
           
 
+          
+
            or an invalid operation for error cases.
         </summary
         >
@@ -2194,8 +2348,12 @@
 
         
 
+        
+
          and <see
          cref="IDynamicInvocationOperation" />
+
+        
 
         
 
@@ -2209,8 +2367,12 @@
 
           
 
+          
+
            and <see
            cref="IDynamicInvocationOperation" />
+
+          
 
           
 
@@ -2229,6 +2391,8 @@
         >
         Represents an operation that gets a string value for the <see
          cref="Argument" />
+
+        
 
         
 
@@ -2272,6 +2436,8 @@
           Natural type of the tuple, or null if tuple doesn't have a natural type.
           Natural type can be different from <see
            cref="IOperation.Type" />
+
+          
 
           
 
@@ -2343,6 +2509,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -2365,9 +2533,13 @@
 
           
 
+          
+
            where
              the doX objects are of type dynamic, we'll have 3 <see
            cref="IDynamicInvocationOperation" />
+
+          
 
           
 
@@ -2380,8 +2552,12 @@
 
           
 
+          
+
            will generate 3 <see
            cref="IDynamicInvocationOperation" />
+
+          
 
           
 
@@ -2490,8 +2666,12 @@
 
         
 
+        
+
          for the given <see
          cref="TypeOperand" />
+
+        
 
         
 
@@ -2590,8 +2770,12 @@
 
         
 
+        
+
          or <see
          cref="OperationKind.Decrement" />
+
+        
 
         
 
@@ -2601,8 +2785,12 @@
 
         
 
+        
+
          as it mutates the <see
          cref="Target" />
+
+        
 
         
 
@@ -2622,8 +2810,12 @@
 
           
 
+          
+
            if this is a postfix expression. <see
            langword="false" />
+
+          
 
           
 
@@ -2639,10 +2831,14 @@
 
           
 
+          
+
            if this is a 'lifted' increment operator.  When there
           is an operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see
            cref="System.Nullable{T}" />
+
+          
 
           
 
@@ -2656,6 +2852,8 @@
       <Comments>
         <summary>
           <see langword="true" />
+
+          
 
           
 
@@ -2683,9 +2881,13 @@
 
           
 
+          
+
           , if any.
           Null if <see
            cref="OperatorMethod" />
+
+          
 
           
 
@@ -2742,8 +2944,12 @@
 
         
 
+        
+
          and <see
          cref="IVariableDeclarationOperation" />
+
+        
 
         
 
@@ -2796,6 +3002,8 @@
           >
           Local declared in and scoped to the <see
            cref="Value" />
+
+          
 
           
 
@@ -2934,9 +3142,13 @@
 
           
 
+          
+
           , the initializer may be located
           in the parent operation. Call <see
            cref="OperationExtensions.GetVariableInitializer(IVariableDeclaratorOperation)" />
+
+          
 
           
 
@@ -2976,6 +3188,8 @@
 
         
 
+        
+
         . There cannot
         be initializers in both locations except in invalid code scenarios.
         In C#, this node will never have an initializer.
@@ -2993,8 +3207,12 @@
 
           
 
+          
+
            will have at least 1 <see
            cref="IVariableDeclarationOperation" />
+
+          
 
           
 
@@ -3100,8 +3318,12 @@
 
           
 
+          
+
            and/or <see
            cref="Filter" />
+
+          
 
           
 
@@ -3158,9 +3380,13 @@
 
           
 
+          
+
           .
           An instance of <see
            cref="IPlaceholderOperation" />
+
+          
 
           
 
@@ -3170,8 +3396,12 @@
           
 
           
+
+          
           is used to refer to the <see
            cref="ISwitchOperation.Value" />
+
+          
 
           
 
@@ -3181,14 +3411,20 @@
 
           
 
+          
+
            list and likely contains duplicate nodes for
           nodes exposed by <see
            cref="Clauses" />
 
           
 
+          
+
           , like <see
            cref="ISingleValueCaseClauseOperation.Value" />
+
+          
 
           
 
@@ -3479,6 +3715,8 @@
 
           
 
+          
+
            in C#).
         </summary
         >
@@ -3626,6 +3864,8 @@
 
           
 
+          
+
           .</summary
         >
       </Comments>
@@ -3668,6 +3908,8 @@
 
         
 
+        
+
         .
       </summary
       >
@@ -3699,9 +3941,13 @@
 
         
 
+        
+
         .
         This node is produced only as part of a <see
          cref="ControlFlowGraph" />
+
+        
 
         
 
@@ -3719,6 +3965,8 @@
         <summary
           >True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code
           >out</code>
+
+          
 
           
 
@@ -3743,15 +3991,21 @@
 
         
 
+        
+
          is null.
         For reference types this checks if the <see
          cref="Operand" />
 
         
 
+        
+
          is a null reference,
         for nullable types this checks if the <see
          cref="Operand" />
+
+        
 
         
 
@@ -3762,8 +4016,12 @@
         
 
         
+
+        
         and <see
          cref="IConditionalAccessOperation" />
+
+        
 
         
 
@@ -3793,6 +4051,8 @@
 
         
 
+        
+
         .
       </summary
       >
@@ -3813,6 +4073,8 @@
         false, then the local has already been initialized, and the static local initializer region will be skipped.
         This node is produced only as part of a <see
          cref="ControlFlowGraph" />
+
+        
 
         
 
@@ -3840,6 +4102,8 @@
 
         
 
+        
+
         .
         <para
         >
@@ -3851,14 +4115,20 @@
         
 
         
+
+        
         A <see
          cref="ControlFlowGraph" />
+
+        
 
         
 
          for the body of the anonymous function is available from
         the enclosing <see
          cref="ControlFlowGraph" />
+
+        
 
         
 
@@ -3887,8 +4157,12 @@
 
         
 
+        
+
          is evaluated for null. If it is null, <see
          cref="IAssignmentOperation.Value" />
+
+        
 
         
 
@@ -3898,8 +4172,12 @@
 
         
 
+        
+
          is conditionally evaluated if <see
          cref="IAssignmentOperation.Target" />
+
+        
 
         
 
@@ -3908,9 +4186,13 @@
 
         
 
+        
+
         .
         The result of the entire expression is<see
          cref="IAssignmentOperation.Target" />
+
+        
 
         
 
@@ -3921,6 +4203,8 @@
         Current usage:
          (1) C# null-coalescing assignment operation <code
           >Target ??= Value</code>
+
+          
 
           
 
@@ -3965,10 +4249,14 @@
 
           
 
+          
+
            if this is a 'lifted' range operation.  When there is an
           operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see
            cref="System.Nullable{T}" />
+
+          
 
           
 
@@ -4019,6 +4307,8 @@
 
         
 
+        
+
          to re-allocate storage space for a single array variable.
         <para
         >
@@ -4061,8 +4351,12 @@
           
 
           
+
+          
           method, the type <code
           >System.Runtime.CompilerServices.ITuple</code>
+
+          
 
           
 
@@ -4175,8 +4469,12 @@
           
 
           
+
+          
           in non-error cases, or an <see
            cref="IInvalidOperation" />
+
+          
 
           
 
@@ -4292,8 +4590,12 @@
 
         
 
+        
+
          of operations that are executed with implicit reference to the <see
          cref="Value" />
+
+        
 
         
 
@@ -4322,6 +4624,8 @@
         >
         Represents using variable declaration, with scope spanning across the parent <see
          cref="IBlockOperation" />
+
+        
 
         
 
@@ -4392,8 +4696,12 @@
 
           
 
+          
+
            or <see
            cref="BinaryOperatorKind.Or" />
+
+          
 
           
 
@@ -4430,6 +4738,8 @@
           >
           The type explicitly specified, or null if it was inferred (e.g. using <code
           >var</code>
+
+          
 
           
 
@@ -4508,14 +4818,20 @@
 
           
 
+          
+
            for valid code, and
           <see
            cref="IDynamicObjectCreationOperation" />
 
           
 
+          
+
            or <see
            cref="IInvalidOperation" />
+
+          
 
           
 
@@ -4533,14 +4849,20 @@
 
           
 
+          
+
            is an out <see
            langword="bool" />
+
+          
 
           
 
            parameter that will be checked before executing the code in
           <see
            cref="Content" />
+
+          
 
           
 
@@ -4558,8 +4880,12 @@
 
           
 
+          
+
            return <see
            langword="bool" />
+
+          
 
           
 
@@ -4574,8 +4900,12 @@
 
           
 
+          
+
            is true, then the first part in nested <see
            cref="IInterpolatedStringOperation.Parts" />
+
+          
 
           
 
@@ -4585,9 +4915,13 @@
 
           
 
+          
+
            is false, then the first part is unconditionally run.
           <br
            />
+
+          
 
           
 
@@ -4608,8 +4942,12 @@
           
 
           
+
+          
           or an <see
            cref="IInterpolatedStringAdditionOperation" />
+
+          
 
           
 
@@ -4635,8 +4973,12 @@
           
 
           
+
+          
           or an <see
            cref="IInterpolatedStringAdditionOperation" />
+
+          
 
           
 
@@ -4655,8 +4997,12 @@
           
 
           
+
+          
           or an <see
            cref="IInterpolatedStringAdditionOperation" />
+
+          
 
           
 
@@ -4697,13 +5043,19 @@
 
           
 
+          
+
             or <see
            cref="IDynamicInvocationOperation" />
 
           
 
+          
+
            for valid code, and <see
            cref="IInvalidOperation" />
+
+          
 
           
 
@@ -4730,8 +5082,12 @@
 
           
 
+          
+
            is anything other than <see
            cref="InterpolatedStringArgumentPlaceholderKind.CallsiteArgument" />
+
+          
 
           
 
@@ -4783,14 +5139,20 @@
 
           
 
+          
+
            or <c
           >Count</c>
+
+          
 
           
 
            property that is used to fetch the length value.
           Returns <c
           >null</c>
+
+          
 
           
 
@@ -4806,6 +5168,8 @@
           The indexer that is used to fetch elements.
           Returns <c
           >null</c>
+
+          
 
           
 
@@ -4839,6 +5203,8 @@
           >
           The range indexer or the <c
           >Slice</c>
+
+          
 
           
 
@@ -4891,8 +5257,12 @@
 
           
 
+          
+
            or <c
           >Count</c>
+
+          
 
           
 
@@ -4948,8 +5318,12 @@
 
           
 
+          
+
            in non-error cases, or an <see
            cref="IInvalidOperation" />
+
+          
 
           
 

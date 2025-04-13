@@ -46,8 +46,12 @@ interface ITest
 
       
 
+      
+
       ) are part of a signature. Thus, F(<keyword
       >int</keyword>
+
+      
 
       
 
@@ -56,13 +60,19 @@ interface ITest
 
       
 
+      
+
       ), and F(out <keyword
       >int</keyword>
 
       
 
+      
+
       ) are all unique signatures. Also, note that the return type and the params modifier are not part of a signature, so it is not possible to overload solely based on return type or on the inclusion or exclusion of the params modifier. As such, the declarations of the methods F(<keyword
       >int</keyword>
+
+      
 
       
 

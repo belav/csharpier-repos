@@ -25,6 +25,8 @@
 
         
 
+        
+
          objects in a strongly typed collection.</para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              class with the given array.</para
           >
         </summary>
@@ -60,8 +64,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+          
 
           
 
@@ -94,8 +102,12 @@
 
             
 
+            
+
              class with the given <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -107,8 +119,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+          
 
           
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
              class from an existing <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -154,8 +174,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+          
 
           
 
@@ -188,8 +212,12 @@
 
             
 
+            
+
              with the specified value to the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -205,8 +233,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+          
 
           
 
@@ -239,6 +271,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -247,8 +281,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+          
 
           
 
@@ -284,6 +322,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -292,8 +332,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+          
 
           
 
@@ -326,8 +370,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+            
 
             
 
@@ -342,6 +390,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false</para
           >
         </returns>
@@ -350,8 +400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+          
 
           
 
@@ -385,8 +439,12 @@
 
             
 
+            
+
              values to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -398,13 +456,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+          
 
           
 
@@ -415,8 +479,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -447,6 +515,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -458,8 +528,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -493,8 +567,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -509,13 +587,19 @@
 
             
 
+            
+
              of <paramref
              name="value" />
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -527,8 +611,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+          
 
           
 
@@ -562,8 +650,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -575,8 +667,12 @@
 
           
 
+          
+
           The zero-based index where <paramref
            name="value" />
+
+          
 
           
 
@@ -587,8 +683,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+          
 
           
 
@@ -643,8 +743,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            
 
             
 
@@ -656,13 +760,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+          
 
           
 

@@ -9,6 +9,8 @@
 
         
 
+        
+
          namespace contains classes for rendering controls and other Windows user interface (UI) elements with visual styles in operating systems that support them. </para
       >
     </summary>
@@ -17,6 +19,8 @@
       <para
         >The <see
          cref="N:System.Windows.Forms.VisualStyles" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
             
 
+            
+
              is a foundation class for identifying any control or UI element supported by visual styles. In addition to <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -39,8 +47,12 @@
 
             
 
+            
+
              namespace includes many nested classes of <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -49,8 +61,12 @@
 
             
 
+            
+
              for every state of a control, control part, or other UI element supported by visual styles. For example, the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton.Pressed" />
+
+            
 
             
 
@@ -59,8 +75,12 @@
 
             
 
+            
+
              class returns a <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -73,8 +93,12 @@
 
             
 
+            
+
              provides methods that draw and get information about each <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -84,6 +108,8 @@
         <item>
           <para>
             <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleInformation" />
+
+            
 
             
 
@@ -97,8 +123,12 @@
 
         
 
+        
+
          namespace also includes a set of enumerations. Some of these enumerations, such as <see
          cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+        
 
         
 
@@ -107,8 +137,12 @@
 
         
 
+        
+
         , provide state definitions for related visual style elements. Most of the other enumerations support <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 
@@ -117,13 +151,19 @@
 
         
 
+        
+
          enumeration provides the possible argument values for the <see
          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
         
 
+        
+
          method. Finally, the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleState" />
+
+        
 
         
 

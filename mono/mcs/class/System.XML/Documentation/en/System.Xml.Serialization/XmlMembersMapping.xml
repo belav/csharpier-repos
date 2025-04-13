@@ -30,6 +30,8 @@
 
         
 
+        
+
          class is not used directly. Instead, it is used: </para
       >
       <list type="bullet">
@@ -37,6 +39,8 @@
           <para
             >By the Wsdl.exe tool, or the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -50,6 +54,8 @@
 
             
 
+            
+
              objects while the .NET Framework is initializing a SOAP Web service or client.</para
           >
         </item>
@@ -60,8 +66,12 @@
 
             
 
+            
+
              class while creating <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          class is a substitute for the <see
          cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+        
 
         
 
@@ -105,8 +119,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+
+            
 
             
 
@@ -115,8 +133,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+
+            
 
             
 
@@ -130,8 +152,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
+
+            
 
             
 
@@ -140,13 +166,19 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Serialization.XmlTypeMapping.TypeName" />
 
             
 
+            
+
              properties pertain to a parent, wrapper element; the parts are represented by the <see
              cref="P:System.Xml.Serialization.XmlMembersMapping.Count" />
+
+            
 
             
 
@@ -198,6 +230,8 @@
 
             
 
+            
+
              class for the conditions under which these entities translate to part elements in a Web Services Description Language (WSDL) document.</para
           >
         </remarks>
@@ -224,8 +258,12 @@
 
             
 
+            
+
              class for the conditions under which the <see
              cref="P:System.Xml.Serialization.XmlMapping.ElementName" />
+
+            
 
             
 
@@ -315,8 +353,12 @@
 
             
 
+            
+
              class for the conditions under which the <see
              cref="P:System.Xml.Serialization.XmlMembersMapping.TypeName" />
+
+            
 
             
 

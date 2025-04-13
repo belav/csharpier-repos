@@ -25,13 +25,19 @@
 
         
 
+        
+
          class implements what the user perceives as a designer. <see
          cref="T:System.ComponentModel.Design.DesignSurface" />
 
         
 
+        
+
          is the user interface the user manipulates to change design-time features. <see
          cref="T:System.ComponentModel.Design.DesignSurface" />
+
+        
 
         
 
@@ -43,13 +49,19 @@
 
         
 
+        
+
          class may be used as a stand-alone designer, or it may be coupled with the <see
          cref="T:System.ComponentModel.Design.DesignSurfaceManager" />
 
         
 
+        
+
          class to provide a common implementation for an application that hosts multiple <see
          cref="T:System.ComponentModel.Design.DesignSurface" />
+
+        
 
         
 
@@ -61,6 +73,8 @@
 
         
 
+        
+
          class can be used by itself, or the user can derive a new class from it and augment the behavior.</para
       >
       <para
@@ -69,8 +83,12 @@
 
         
 
+        
+
          class provides several design-time services automatically. The <see
          cref="T:System.ComponentModel.Design.DesignSurface" />
+
+        
 
         
 
@@ -79,8 +97,12 @@
 
         
 
+        
+
          property. To replace a service, override the constructor, call base, and make any changes through the protected <see
          cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
+
+        
 
         
 
@@ -89,8 +111,12 @@
 
         
 
+        
+
          are disposed when the design surface is disposed. The default set of replaceable services that the <see
          cref="T:System.ComponentModel.Design.DesignSurface" />
+
+        
 
         
 
@@ -127,6 +153,8 @@
             <para
               >Used by <see
                cref="T:System.ComponentModel.TypeDescriptor" />
+
+              
 
               
 
@@ -230,6 +258,8 @@
 
               
 
+              
+
                that owns the components.</para
             >
           </description>
@@ -247,6 +277,8 @@
 
               
 
+              
+
                and provides a way to add and remove services from the designer.</para
             >
           </description>
@@ -255,6 +287,8 @@
       <para
         >In addition to these services, the <see
          cref="T:System.ComponentModel.Design.DesignSurface" />
+
+        
 
         
 
@@ -298,6 +332,8 @@
 
         
 
+        
+
         , the site also implements the following interfaces. </para
       >
       <block subset="none" type="note">
@@ -324,6 +360,8 @@
             <para
               >Provides a way to get to the container of site-specific services. For example, <see
                cref="T:System.ComponentModel.Design.IDictionaryService" />
+
+              
 
               
 
@@ -356,6 +394,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -382,6 +422,8 @@
 
             
 
+            
+
             is present, designers contained within the surface can retrieve services from the application.</para
           >
         </remarks>
@@ -393,11 +435,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="parentProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,8 +469,12 @@
 
             
 
+            
+
              constructor, it creates a simple designer loader that, in turn, creates a component of the given type and then ends the loading process. This is a straightforward way to create a designer, under the assumption that all saving of state will be done externally. Internally, this calls <see
              cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+
+            
 
             
 
@@ -437,8 +487,12 @@
 
               
 
+              
+
                overload is not affected by <see
                cref="T:System.Windows.Forms.Design.DesignerOptions" />
+
+              
 
               
 
@@ -447,8 +501,12 @@
 
               
 
+              
+
                must be in the service container before the design surface loads. If you need access to <see
                cref="T:System.Windows.Forms.Design.DesignerOptions" />
+
+              
 
               
 
@@ -457,8 +515,12 @@
 
               
 
+              
+
                to the <see
                cref="P:System.ComponentModel.Design.DesignSurface.ServiceContainer" />
+
+              
 
               
 
@@ -467,8 +529,12 @@
 
               
 
+              
+
                with <paramref
                name="rootComponentType" />
+
+              
 
               
 
@@ -484,11 +550,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="rootComponentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -518,8 +588,12 @@
 
             
 
+            
+
              constructor creates a simple designer loader that creates a component of the given type and then ends the loading process. This is a straightforward way to create a designer, under the assumption that all saving of state will be done externally. Internally, this calls <see
              cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+
+            
 
             
 
@@ -534,6 +608,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -542,10 +618,14 @@
 
           
 
+          
+
           The parent service provider, or null if there is no parent used to resolve services.</param
         >
         <param name="rootComponentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -577,11 +657,15 @@
 
             
 
+            
+
              event to be notified when the design surface has completed loading.</para
           >
           <para
             >After <see
              cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+
+            
 
             
 
@@ -594,6 +678,8 @@
         </summary>
         <param name="loader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -622,8 +708,12 @@
 
             
 
+            
+
              is specified, a default designer loader that simply creates an instance of <paramref
              name="rootComponentType" />
+
+            
 
             
 
@@ -632,11 +722,15 @@
 
             
 
+            
+
              event to be notified when the design surface has completed loading.</para
           >
           <para
             >After <see
              cref="M:System.ComponentModel.Design.DesignSurface.BeginLoad(System.Type)" />
+
+            
 
             
 
@@ -649,8 +743,12 @@
 
               
 
+              
+
                method creates an instance of the component type and initializes a designer for this instance. The <see
                cref="E:System.ComponentModel.Design.DesignSurface.Loaded" />
+
+              
 
               
 
@@ -664,6 +762,8 @@
         </summary>
         <param name="rootComponentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -693,8 +793,12 @@
 
             
 
+            
+
              property holds all objects that are currently in design mode. When components are added to <see
              cref="P:System.ComponentModel.Design.DesignSurface.ComponentContainer" />
+
+            
 
             
 
@@ -706,6 +810,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -743,8 +849,12 @@
 
             
 
+            
+
              method is called by the design surface’s <see
              cref="Overload:System.ComponentModel.Design.IDesignerHost.CreateComponent" />
+
+            
 
             
 
@@ -761,6 +871,8 @@
         </returns>
         <param name="componentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -793,8 +905,12 @@
 
             
 
+            
+
              method is called by the design surface’s <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -802,6 +918,8 @@
           >
           <para>
             <see cref="M:System.ComponentModel.Design.DesignSurface.CreateDesigner(System.ComponentModel.IComponent,System.Boolean)" />
+
+            
 
             
 
@@ -813,13 +931,19 @@
 
             
 
+            
+
             , passing in <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
 
             
 
+            
+
              as the designer type for root designers, or <see
              cref="T:System.ComponentModel.Design.IDesigner" />
+
+            
 
             
 
@@ -839,10 +963,14 @@
 
           
 
+          
+
           The component for which the designer should be created.</param
         >
         <param name="rootDesigner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,8 +999,12 @@
 
             
 
+            
+
              is an <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -881,8 +1013,12 @@
 
             
 
+            
+
              searches for a constructor of type <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -899,6 +1035,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -939,6 +1077,8 @@
 
           
 
+          
+
           The component that manages the nested container.</param
         >
       </Docs>
@@ -969,8 +1109,12 @@
 
             
 
+            
+
              method by passing a value into <paramref
              name="containerName" />
+
+            
 
             
 
@@ -990,10 +1134,14 @@
 
           
 
+          
+
           The component that manages the nested container.</param
         >
         <param name="containerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1020,13 +1168,19 @@
 
             
 
+            
+
              method follows the standard <see
              cref="T:System.IDisposable" />
 
             
 
+            
+
              pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1039,13 +1193,19 @@
 
               
 
+              
+
                does not have any native code to clean up, it does not have a finalizer that calls <see
                cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
 
               
 
+              
+
               . If you need to call <see
                cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
+
+              
 
               
 
@@ -1058,8 +1218,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1068,8 +1232,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1078,13 +1246,19 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1095,10 +1269,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1111,13 +1289,19 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.DesignSurface" />
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.DesignSurface" />
+
+              
 
               
 
@@ -1130,6 +1314,8 @@
           <para
             >Releases the resources used by the <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1159,13 +1345,19 @@
 
             
 
+            
+
              method follows the standard <see
              cref="T:System.IDisposable" />
 
             
 
+            
+
              pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1178,13 +1370,19 @@
 
               
 
+              
+
                does not have any native code to clean up, it does not have a finalizer that calls <see
                cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
 
               
 
+              
+
               . If you need to call <see
                cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />
+
+              
 
               
 
@@ -1197,8 +1395,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1207,8 +1409,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1220,8 +1426,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1236,11 +1446,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1266,8 +1480,12 @@
 
             
 
+            
+
              method on <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1299,13 +1517,19 @@
 
             
 
+            
+
              method can be called to push changes made to the design surface down to the serializer. This ensures that the design surface and its serialized state are synchronized. The actual implementation of this method is forwarded to the designer loader associated with design surface. The designer loader may choose to defer changes until <see
              cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
 
             
 
+            
+
              is called, or it may choose to keep the serialized data up to date with all user changes. The <see
              cref="M:System.ComponentModel.Design.DesignSurface.Flush" />
+
+            
 
             
 
@@ -1336,6 +1560,8 @@
 
             
 
+            
+
              event is raised.</para
           >
         </remarks>
@@ -1347,8 +1573,12 @@
 
             
 
+            
+
              method of <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1378,6 +1608,8 @@
 
             
 
+            
+
              method retrieves a service in the design surface’s service container. In addition, this will forward to any service provider that was given to the design surface at construction time.</para
           >
         </remarks>
@@ -1393,11 +1625,15 @@
 
             
 
+            
+
             , or null if the service does not exist in the service container.</para
           >
         </returns>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1444,11 +1680,15 @@
 
             
 
+            
+
              event is raised for successful loads as well as unsuccessful ones. If code in this event handler throws an exception, the designer is unloaded.</para
           >
           <para
             >The <see
              cref="T:System.ComponentModel.Design.LoadedEventArgs" />
+
+            
 
             
 
@@ -1527,6 +1767,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1535,8 +1777,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.LoadedEventArgs" />
+
+          
 
           
 
@@ -1566,6 +1812,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1574,8 +1822,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1605,6 +1857,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1613,8 +1867,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1644,6 +1902,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1652,8 +1912,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1683,6 +1947,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1691,8 +1957,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1719,6 +1989,8 @@
           <para
             >At construction time, <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -1787,8 +2059,12 @@
 
             
 
+            
+
              method must be called beforehand to start the loading process. It is possible to return a view before the designer loader finishes loading because the root designer, which supplies the view, is the first object created by the designer loader. If a view is unavailable, <see
              cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" />
+
+            
 
             
 
@@ -1800,8 +2076,12 @@
 
             
 
+            
+
              objects. The <see
              cref="P:System.ComponentModel.Design.DesignSurface.View" />
+
+            
 
             
 
@@ -1832,6 +2112,8 @@
 
             
 
+            
+
              method, your event handler should activate the window for this design surface.</para
           >
         </remarks>
@@ -1843,8 +2125,12 @@
 
             
 
+            
+
              method has been called on <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 

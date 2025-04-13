@@ -36,11 +36,15 @@
 
         
 
+        
+
          represents the binding element that specifies the character encoding and message versioning and other settings used for messages using a Message Transmission Optimization Mechanism (MTOM) encoding. MTOM is an efficient technology for transmitting binary data in indigo2 messages. The MTOM encoder attempts to create a balance between efficiency and interoperability. The MTOM encoding transmits most XML in textual form, but optimizes large blocks of binary data by transmitting them as-is, without conversion to their base64 encoded format.</para
       >
       <para
         >crabout the binding element that specifies that messages are encoded using a textual representation of XML, see <see
          cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />
+
+        
 
         
 
@@ -52,11 +56,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >To implement a custom message encoder, use the <see
          cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              used consists of the version of WS-Addressing 1.0 and SOAP1.2. The default character encoding is UTF-8.</para
           >
         </remarks>
@@ -97,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -133,6 +145,8 @@
 
             
 
+            
+
              used consists of the version of WS-Addressing 1.0 and SOAP1.2. The default character encoding is UTF-8. The character encodings supported by default are UTF-8, Unicode, and Big Endian Unicode.</para
           >
         </remarks>
@@ -141,6 +155,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -185,8 +201,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -198,8 +218,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -207,6 +231,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,8 +281,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -268,8 +298,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -277,6 +311,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,8 +362,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -335,6 +375,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -372,6 +414,8 @@
 
             
 
+            
+
              object initialized from the current one.</para
           >
         </summary>
@@ -380,6 +424,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -416,6 +462,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+            
 
             
 
@@ -494,6 +542,8 @@
 
             
 
+            
+
             requested if it is present or null if it is not.</para
           >
         </returns>
@@ -502,8 +552,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -511,6 +565,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -535,6 +591,8 @@
           <para
             >Message Transmission Optimization Mechanism (MTOM) messages in indigo1 can consist of multiple MIME parts. The message always includes a Multipurpose Internet Mail Extensions (MIME) part that contains the infoset portion of the message. In addition, if the message contains binary data that is optimized, it may contain additional MIME parts that contain binary data. There are no requirements imposed about what order these MIME parts must appear in the message. The message reading process sometimes must buffer MIME parts if they appear out of order. The message reading process also may have to buffer relevant MIME header information in each part. This <see
              cref="P:System.ServiceModel.Channels.MtomMessageEncodingBindingElement.MaxBufferSize" />
+
+            
 
             
 
@@ -617,6 +675,8 @@
 
             
 
+            
+
              used consists of the version of WS-Addressing 1.0 and SOAP1.2.</para
           >
         </remarks>
@@ -685,12 +745,16 @@
 
                 
 
+                
+
                  = 32</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" />
+
+                
 
                 
 
@@ -703,12 +767,16 @@
 
                 
 
+                
+
                  = 16384</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" />
+
+                
 
                 
 
@@ -721,6 +789,8 @@
 
                 
 
+                
+
                  = 16384</para
               >
             </item>
@@ -728,6 +798,8 @@
           <para
             >crdefault <see
              cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+            
 
             
 
@@ -772,6 +844,8 @@
 
             
 
+            
+
              method puts the SOAP message version into the WSDL.</para
           >
         </remarks>
@@ -784,8 +858,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -796,8 +874,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 
@@ -842,8 +924,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -854,8 +940,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 

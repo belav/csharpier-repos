@@ -58,6 +58,8 @@
 
             
 
+            
+
              should be unique among all security context tokens issued by the service.</para
           >
         </remarks>
@@ -69,6 +71,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -77,8 +81,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -89,6 +97,8 @@
 
           
 
+          
+
           A byte array that represents the key.</param
         >
         <param name="validFrom">
@@ -96,10 +106,14 @@
 
           
 
+          
+
           The effective start time.</param
         >
         <param name="validTo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,6 +150,8 @@
 
             
 
+            
+
              should be unique among all security context tokens issued by the service.</para
           >
         </remarks>
@@ -147,6 +163,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -155,8 +173,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -167,10 +189,14 @@
 
           
 
+          
+
           The token id.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,10 +207,14 @@
 
           
 
+          
+
           The effective start time.</param
         >
         <param name="validTo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,6 +255,8 @@
 
             
 
+            
+
              should be unique among all security context tokens issued by the service.</para
           >
         </remarks>
@@ -236,6 +268,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -244,8 +278,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -256,10 +294,14 @@
 
           
 
+          
+
           The token id.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,10 +312,14 @@
 
           
 
+          
+
           The effective start time.</param
         >
         <param name="validTo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,8 +330,12 @@
 
           
 
+          
+
           A read-only collection of <see
            cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+          
 
           
 
@@ -329,6 +379,8 @@
 
             
 
+            
+
              should be unique among all security context tokens issued by the service.</para
           >
         </remarks>
@@ -340,6 +392,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -348,8 +402,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -360,10 +418,14 @@
 
           
 
+          
+
           The token id.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -374,10 +436,14 @@
 
           
 
+          
+
           The effective start time.</param
         >
         <param name="validTo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,8 +454,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -400,10 +470,14 @@
 
           
 
+          
+
           The key effective start time.</param
         >
         <param name="keyExpirationTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,8 +488,12 @@
 
           
 
+          
+
           A read-only collection of <see
            cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+          
 
           
 
@@ -484,6 +562,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -559,8 +639,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -571,10 +655,14 @@
 
           
 
+          
+
           The token id.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -585,10 +673,14 @@
 
           
 
+          
+
           The effective start time.</param
         >
         <param name="validTo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,8 +691,12 @@
 
           
 
+          
+
           A read-only collection of <see
            cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+          
 
           
 
@@ -608,6 +704,8 @@
         >
         <param name="securityStateEncoder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,8 +762,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -676,10 +778,14 @@
 
           
 
+          
+
           The token id.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -690,10 +796,14 @@
 
           
 
+          
+
           The effective start time.</param
         >
         <param name="validTo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -704,8 +814,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.UniqueId" />
+
+          
 
           
 
@@ -716,10 +830,14 @@
 
           
 
+          
+
           The key effective start time.</param
         >
         <param name="keyExpirationTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -730,8 +848,12 @@
 
           
 
+          
+
           A read-only collection of <see
            cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+          
 
           
 
@@ -739,6 +861,8 @@
         >
         <param name="securityStateEncoder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -784,8 +908,12 @@
 
             
 
+            
+
              cast to type <paramref
              name="T" />
+
+            
 
             
 
@@ -794,6 +922,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

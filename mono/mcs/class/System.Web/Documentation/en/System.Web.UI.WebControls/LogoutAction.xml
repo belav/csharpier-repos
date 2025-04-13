@@ -18,8 +18,12 @@
 
         
 
+        
+
          enumeration members indicate the action taken when the user logs out of the Web site using the <see
          cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+        
 
         
 

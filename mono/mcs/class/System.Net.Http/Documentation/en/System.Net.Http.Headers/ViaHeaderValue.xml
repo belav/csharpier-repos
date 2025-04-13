@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -60,10 +62,14 @@
 
           
 
+          
+
           The protocol version of the received protocol.</param
         >
         <param name="receivedBy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -99,11 +105,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="protocolVersion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,10 +124,14 @@
 
           
 
+          
+
           The host and port that the request or response was received by.</param
         >
         <param name="protocolName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,11 +168,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="protocolVersion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,6 +187,8 @@
 
           
 
+          
+
           The host and port that the request or response was received by.</param
         >
         <param name="protocolName">
@@ -176,10 +196,14 @@
 
           
 
+          
+
           The protocol name of the received protocol.</param
         >
         <param name="comment">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -232,8 +256,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+            
 
             
 
@@ -248,6 +276,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -256,11 +286,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,6 +326,8 @@
 
             
 
+            
+
              method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -303,6 +339,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -311,6 +349,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -349,6 +389,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -360,6 +402,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -368,11 +412,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,6 +512,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -472,6 +522,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -505,6 +557,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -513,6 +567,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

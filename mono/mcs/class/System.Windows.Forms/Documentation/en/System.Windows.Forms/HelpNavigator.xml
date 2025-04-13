@@ -18,8 +18,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.HelpProvider" />
+
+        
 
         
 
@@ -28,13 +32,19 @@
 
         
 
+        
+
          component that provides F1 Help, the <see
          cref="F:System.Windows.Forms.HelpNavigator.TopicId" />
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+        
 
         
 

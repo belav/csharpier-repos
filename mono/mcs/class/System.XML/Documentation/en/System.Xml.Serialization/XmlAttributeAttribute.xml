@@ -35,8 +35,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -57,13 +63,19 @@
 
         
 
+        
+
          informs the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
+        
+
          to serialize the member as an XML attribute. By default, the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          only to public fields or public properties that return a value (or array of values) that can be mapped to one of the XML Schema definition language (XSD) simple types (including all built-in datatypes derived from the XSD anySimpleType type). The possible types include any that can be mapped to the XSD simple types, including <see
          cref="T:System.Guid" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
         , and enumerations. See the <see
          cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+
+        
 
         
 
@@ -95,6 +115,8 @@
       <para
         >There are two special attributes that can be set with the <see
          cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+        
 
         
 
@@ -121,12 +143,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlAttribute in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+          
 
           
 
@@ -139,6 +165,8 @@
       <para
         >Specifies that the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -168,6 +196,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+            
 
             
 
@@ -202,6 +232,8 @@
 
             
 
+            
+
              class and specifies the name of the generated XML attribute.</para
           >
         </summary>
@@ -210,8 +242,12 @@
 
           
 
+          
+
           The name of the XML attribute that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -245,6 +281,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -253,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -292,11 +334,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="attributeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,8 +353,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -339,8 +389,12 @@
 
             
 
+            
+
              property to specify an XML attribute name when the default value cannot be used. For example, if the XML attribute name is invalid as a member identifier, you can use a valid name for the identifier while setting the <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
+
+            
 
             
 
@@ -377,13 +431,19 @@
 
             
 
+            
+
              structures, and apply a <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+
+            
 
             
 
@@ -392,13 +452,19 @@
 
             
 
+            
+
              type and apply the <see
              cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+
+            
 
             
 
@@ -410,8 +476,12 @@
 
             
 
+            
+
              with its <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.DataType" />
+
+            
 
             
 
@@ -453,6 +523,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -608,6 +680,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -895,6 +969,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -929,13 +1005,19 @@
 
             
 
+            
+
              property determines whether an XML element is qualified or unqualified. The <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
 
             
 
+            
+
              property conforms to the 1999 http://www.w3.org specification <paramref
              name="Namespaces in XML" />
+
+            
 
             
 
@@ -947,8 +1029,12 @@
 
             
 
+            
+
              property is set to any value, attempting to set the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
+
+            
 
             
 
@@ -960,8 +1046,12 @@
 
             
 
+            
+
              to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -978,8 +1068,12 @@
 
             
 
+            
+
              reads the schema, the <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+
+            
 
             
 
@@ -991,6 +1085,8 @@
           <para
             >Gets or sets a value that indicates whether the XML attribute name generated by the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1022,8 +1118,12 @@
 
             
 
+            
+
              property conforms to the http://www.w3.org specification <paramref
              name="Namespaces in XML" />
+
+            
 
             
 
@@ -1035,8 +1135,12 @@
 
             
 
+            
+
              object that contains the namespaces and prefixes used in the XML document. The namespace you set for each <see
              cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+            
 
             
 
@@ -1045,8 +1149,12 @@
 
             
 
+            
+
              object. When the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

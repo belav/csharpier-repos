@@ -15,6 +15,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -144,6 +146,8 @@
         <summary
           >Returns the context namespace. This namespace is filled when read through <see
            cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" />
+
+          
 
           
 

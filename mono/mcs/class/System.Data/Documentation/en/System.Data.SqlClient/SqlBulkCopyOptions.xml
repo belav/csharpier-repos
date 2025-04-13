@@ -23,13 +23,19 @@
 
         
 
+        
+
          enumeration when you construct a <see
          cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
+        
+
          instance to change how the <see
          cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+        
 
         
 
@@ -41,6 +47,8 @@
       <para
         >Bitwise flag that specifies one or more options to use with an instance of <see
          cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+        
 
         
 
@@ -167,8 +175,12 @@
 
             
 
+            
+
              object to the constructor, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 

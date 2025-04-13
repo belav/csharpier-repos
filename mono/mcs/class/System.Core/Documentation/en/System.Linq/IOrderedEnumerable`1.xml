@@ -34,6 +34,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Linq.Enumerable.ThenByDescending" />
+
+        
 
         
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
         . An object of type <see
          cref="T:System.Linq.IOrderedEnumerable`1" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Linq.Enumerable.OrderByDescending" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
         . <see
          cref="Overload:System.Linq.Enumerable.ThenBy" />
+
+        
 
         
 
@@ -82,8 +100,12 @@
 
         
 
+        
+
         , the subordinate sort methods, in turn also return an object of type <see
          cref="T:System.Linq.IOrderedEnumerable`1" />
+
+        
 
         
 
@@ -92,8 +114,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Linq.Enumerable.ThenByDescending" />
+
+        
 
         
 

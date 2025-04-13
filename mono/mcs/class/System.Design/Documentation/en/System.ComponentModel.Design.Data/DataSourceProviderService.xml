@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -75,8 +77,12 @@
 
             
 
+            
+
              method on data sources that are designable for example, if the<see
              cref="P:System.ComponentModel.Design.Data.DataSourceDescriptor.IsDesignable" />
+
+            
 
             
 
@@ -96,6 +102,8 @@
 
             
 
+            
+
              representing an instance of the added data source.</para
           >
         </returns>
@@ -104,10 +112,14 @@
 
           
 
+          
+
           The designer host.</param
         >
         <param name="dataSourceDescriptor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,6 +154,8 @@
 
             
 
+            
+
             , or null if there are no data sources at the EnvDTE.Project level.</para
           >
         </returns>
@@ -173,6 +187,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -184,6 +200,8 @@
 
             
 
+            
+
              collection of newly added data sources, or null if no data sources are added.</para
           >
         </returns>
@@ -192,10 +210,14 @@
 
           
 
+          
+
           The parent window.</param
         >
         <param name="startPosition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -233,6 +255,8 @@
 
             
 
+            
+
              dialog box on the specified data source.</para
           >
         </summary>
@@ -245,6 +269,8 @@
 
           
 
+          
+
           The parent window.</param
         >
         <param name="startPosition">
@@ -252,10 +278,14 @@
 
           
 
+          
+
           The initial position of a form.</param
         >
         <param name="dataSourceDescriptor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,6 +319,8 @@
 
           
 
+          
+
           The data source component.</param
         >
       </Docs>
@@ -313,6 +345,8 @@
           <para
             >When overridden in a derived class, gets the value indicating whether the service supports adding a new data source using <see
              cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.InvokeAddNewDataSource(System.Windows.Forms.IWin32Window,System.Windows.Forms.FormStartPosition)" />
+
+            
 
             
 
@@ -341,6 +375,8 @@
           <para
             >When overridden in a derived class, gets the value indicating whether the service supports configuring data sources using <see
              cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.InvokeConfigureDataSource(System.Windows.Forms.IWin32Window,System.Windows.Forms.FormStartPosition,System.ComponentModel.Design.Data.DataSourceDescriptor)" />
+
+            
 
             
 

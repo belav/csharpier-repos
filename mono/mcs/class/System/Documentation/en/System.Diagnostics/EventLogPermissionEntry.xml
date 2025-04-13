@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -37,6 +39,8 @@
       <para
         >Defines the smallest unit of a code access security permission that is set for an <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -86,13 +92,19 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Diagnostics.EventLogPermissionAccess" />
 
           
 
+          
+
            values. The <see
            cref="P:System.Diagnostics.EventLogPermissionEntry.PermissionAccess" />
+
+          
 
           
 
@@ -103,8 +115,12 @@
 
           
 
+          
+
           The name of the computer on which to read or write events. The <see
            cref="P:System.Diagnostics.EventLogPermissionEntry.MachineName" />
+
+          
 
           
 

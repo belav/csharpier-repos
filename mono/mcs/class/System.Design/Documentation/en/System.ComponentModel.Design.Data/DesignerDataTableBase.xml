@@ -21,13 +21,19 @@
 
         
 
+        
+
          class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see
          cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
         
 
+        
+
          interface. Controls access schema objects by calling the <see
          cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+        
 
         
 
@@ -39,6 +45,8 @@
 
         
 
+        
+
          class provides the properties and methods shared between data tables in a data store and views defined on those data tables. </para
       >
       <para
@@ -47,8 +55,12 @@
 
         
 
+        
+
          class, you must override the <see
          cref="M:System.ComponentModel.Design.Data.DesignerDataTableBase.CreateColumns" />
+
+        
 
         
 
@@ -83,11 +95,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -121,6 +137,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -129,10 +147,14 @@
 
           
 
+          
+
           The name of the table or view.</param
         >
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,13 +184,19 @@
 
             
 
+            
+
              property is populated by the <see
              cref="M:System.ComponentModel.Design.Data.DesignerDataTableBase.CreateColumns" />
 
             
 
+            
+
              method the first time the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataTableBase.Columns" />
+
+            
 
             
 
@@ -203,8 +231,12 @@
 
             
 
+            
+
              method is called the first time the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataTableBase.Columns" />
+
+            
 
             
 
@@ -220,6 +252,8 @@
           <para
             >A collection of <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+
+            
 
             
 

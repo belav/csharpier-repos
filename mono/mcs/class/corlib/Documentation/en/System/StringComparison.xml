@@ -28,6 +28,8 @@
 
         
 
+        
+
          enumeration is used to specify whether a string comparison should use the current culture or the invariant culture, word or ordinal sort rules, and be case-sensitive or case-insensitive.</para
       >
       <block subset="none" type="note">
@@ -37,8 +39,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.String.Equals(System.String)" />
+
+          
 
           
 
@@ -47,8 +53,12 @@
 
           
 
+          
+
           , you should always call an overload that includes a parameter of type <see
            cref="T:System.StringComparison" />
+
+          
 
           
 
@@ -58,6 +68,8 @@
               >Best Practices for Using Strings in the .NET Framework</a
             >
           </format>
+
+          
 
           
 
@@ -71,6 +83,8 @@
 
         
 
+        
+
          in the string. An ordinal comparison is fast but culture-insensitive. When you use ordinal sort rules to sort strings that start with Unicode characters (U+), the string U+xxxx comes before the string U+yyyy if the value of xxxx is numerically less than yyyy.</para
       >
       <para
@@ -79,8 +93,12 @@
 
         
 
+        
+
          class remarks. For more information about culture, see the <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -90,6 +108,8 @@
             >Best Practices for Using Strings in the .NET Framework</a
           >
         </format>
+
+        
 
         
 
@@ -104,8 +124,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.String.Equals(System.Object)" />
+
+        
 
         
 

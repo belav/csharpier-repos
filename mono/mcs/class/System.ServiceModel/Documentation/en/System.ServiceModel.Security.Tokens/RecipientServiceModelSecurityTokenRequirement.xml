@@ -54,8 +54,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.IsInitiatorProperty" />
+
+            
 
             
 
@@ -67,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement" />
+
+            
 
             
 
@@ -101,12 +107,16 @@
 
             
 
+            
+
              is an enumeration with the following members:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLogLocation.Application" />
+
+                
 
                 
 
@@ -119,12 +129,16 @@
 
                 
 
+                
+
                 : The default location, which is determined by the operating system.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLogLocation.Security" />
+
+                
 
                 
 
@@ -184,12 +198,16 @@
 
             
 
+            
+
              is an enumeration with the following members:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLevel.Failure" />
+
+                
 
                 
 
@@ -202,6 +220,8 @@
 
                 
 
+                
+
                 : No events are recorded.</para
               >
             </item>
@@ -211,12 +231,16 @@
 
                 
 
+                
+
                 : Only successful security-related events are recorded.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
+
+                
 
                 
 

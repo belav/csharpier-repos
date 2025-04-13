@@ -10,6 +10,8 @@
 
         
 
+        
+
         ) from the source type to the operand type of the operator, and it must be possible to perform a standard conversion from the result type of the operator to the target type. </list_item
       >
       <list_item> From the set of applicable user-defined operators, determining which operator is unambiguously the most specific. In general terms, the most specific operator is the operator whose operand type is "closest" to the source type and whose result type is "closest" to the target type. The exact rules for establishing the most specific user-defined conversion operator are defined in the following sections. </list_item>
@@ -33,8 +35,12 @@
 
         
 
+        
+
         ) exists from a type A to a type B, and if neither A nor B are <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 

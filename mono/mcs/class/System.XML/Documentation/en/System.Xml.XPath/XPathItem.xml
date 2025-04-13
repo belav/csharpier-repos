@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -100,8 +102,12 @@
 
             
 
+            
+
              property is equivalent to the value of the <see
              cref="P:System.Xml.XPath.XPathItem.Value" />
+
+            
 
             
 
@@ -113,12 +119,16 @@
 
             
 
+            
+
              namespace, see <format
              type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
             </format>
+
+            
 
             
 
@@ -179,6 +189,8 @@
 
             
 
+            
+
              method attempts to convert the value of the item to the dnprdnext type specified.</para
           >
         </remarks>
@@ -192,6 +204,8 @@
         </returns>
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,6 +244,8 @@
 
             
 
+            
+
              method attempts to convert the value of the item to the dnprdnext type specified.</para
           >
           <para
@@ -238,11 +254,15 @@
 
             
 
+            
+
              object is used to resolve namespace prefixes related to type conversions. For example, when converting an xs:QName to an xs:string.</para
           >
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -255,6 +275,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -263,6 +285,8 @@
           <para
             >When overridden in a derived class, returns the item's value as the type specified using the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -278,6 +302,8 @@
 
           
 
+          
+
           The type to return the item's value as.</param
         >
         <param name="nsResolver">
@@ -285,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -316,8 +346,12 @@
 
             
 
+            
+
              property attempts to convert the value of the item to the dnprdnext <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -326,6 +360,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -338,6 +374,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -346,6 +384,8 @@
           <para
             >When overridden in a derived class, gets the item's value as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -379,8 +419,12 @@
 
             
 
+            
+
              property attempts to convert the value of the item to the dnprdnext <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -389,6 +433,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -401,6 +447,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -409,6 +457,8 @@
           <para
             >When overridden in a derived class, gets the item's value as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -439,8 +489,12 @@
 
             
 
+            
+
              property attempts to convert the value of the item to the dnprdnext <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -449,6 +503,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -461,6 +517,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -469,6 +527,8 @@
           <para
             >When overridden in a derived class, gets the item's value as a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -499,8 +559,12 @@
 
             
 
+            
+
              property attempts to convert the value of the item to the dnprdnext <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -509,6 +573,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -521,6 +587,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -529,6 +597,8 @@
           <para
             >When overridden in a derived class, gets the item's value as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -559,8 +629,12 @@
 
             
 
+            
+
              property attempts to convert the value of the item to the dnprdnext <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -569,6 +643,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -581,6 +657,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -589,6 +667,8 @@
           <para
             >When overridden in a derived class, gets the item's value as an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -619,6 +699,8 @@
 
             
 
+            
+
              property gets the dnprdnshort type of the typed value of the item.</para
           >
           <para
@@ -627,8 +709,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -637,13 +723,19 @@
 
             
 
+            
+
              could be any one of the valid types that can be mapped to xs:int, such as <see
              cref="T:System.Int16" />
 
             
 
+            
+
              or <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -655,12 +747,16 @@
 
             
 
+            
+
              namespace, see <format
              type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
             </format>
+
+            
 
             
 
@@ -701,8 +797,12 @@
 
             
 
+            
+
              property gets the <see
              cref="T:System.Xml.Schema.XmlSchemaType" />
+
+            
 
             
 
@@ -711,8 +811,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+            
 
             
 
@@ -724,6 +828,8 @@
           <para
             >When overridden in a derived class, gets the <see
              cref="T:System.Xml.Schema.XmlSchemaType" />
+
+            
 
             
 

@@ -51,8 +51,12 @@
 
             
 
+            
+
              values and how it affects the whether or not the default and built-in namespaces are returned by the <see
              cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+
+            
 
             
 
@@ -137,6 +141,8 @@
 
             
 
+            
+
              that contains the current in-scope namespaces.</para
           >
         </returns>
@@ -145,8 +151,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceScope" />
+
+          
 
           
 
@@ -181,6 +191,8 @@
           <para
             >The following table describes how the default and built-in namespaces are handled by the <see
              cref="M:System.Xml.IXmlNamespaceResolver.LookupNamespace(System.String)" />
+
+            
 
             
 
@@ -244,6 +256,8 @@
 
           
 
+          
+
           The prefix whose namespace URI you wish to find.</param
         >
       </Docs>
@@ -276,6 +290,8 @@
           <para
             >The following table describes how the default and built-in namespaces are handled by the <see
              cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
+
+            
 
             
 
@@ -328,6 +344,8 @@
         </returns>
         <param name="namespaceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

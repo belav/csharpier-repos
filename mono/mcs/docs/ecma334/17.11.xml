@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -27,6 +29,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>extern</keyword>
@@ -46,6 +50,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.2">block</non_terminal>
@@ -61,13 +67,19 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
 
     
 
+    
+
     ) and an extern modifier (<hyperlink
     >17.5.7</hyperlink>
+
+    
 
     
 
@@ -79,6 +91,8 @@
 
     
 
+    
+
      must name the class in which the static constructor is declared. If any other name is specified, a compile-time error occurs. </paragraph
   >
   <paragraph
@@ -87,8 +101,12 @@
 
     
 
+    
+
      consists of a semicolon. For all other static constructor declarations, the <non_terminal
      where="17.11">static-constructor-body</non_terminal>
+
+    
 
     
 
@@ -97,13 +115,19 @@
 
     
 
+    
+
      of a static method with a <keyword
     >void</keyword>
 
     
 
+    
+
      return type (<hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -120,6 +144,8 @@
   <paragraph
     >If a class contains the Main method (<hyperlink
     >10.1</hyperlink>
+
+    
 
     
 
@@ -161,6 +187,8 @@ class B
 
       
 
+      
+
       must produce the output: <code_example
       >
         <![CDATA[
@@ -170,6 +198,8 @@ Init B
 B.F  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -198,6 +228,8 @@ class B
 }  
 ]]>
       </code_example>
+
+      
 
       
 

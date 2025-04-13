@@ -6,8 +6,12 @@
 
     
 
+    
+
     ) and  -operator (<hyperlink
     >14.7.5</hyperlink>
+
+    
 
     
 
@@ -36,8 +40,12 @@ long operator -(T* x, T* y);
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -46,8 +54,12 @@ long operator -(T* x, T* y);
 
     
 
+    
+
     , or <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -59,13 +71,19 @@ long operator -(T* x, T* y);
 
     
 
+    
+
     . In effect, P  -Q is computed as ((<keyword
     >long</keyword>
 
     
 
+    
+
     )(P)  -(<keyword
     >long</keyword>
+
+    
 
     
 
@@ -96,6 +114,8 @@ class Test
 
       
 
+      
+
       which produces the output: <code_example
       >
         <![CDATA[
@@ -103,6 +123,8 @@ p - q = -14
 q - p = 14  
 ]]>
       </code_example>
+
+      
 
       
 

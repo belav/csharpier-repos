@@ -32,10 +32,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
         </format>
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          event occurs only when you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+
+        
 
         
 
@@ -135,8 +145,12 @@
 
             
 
+            
+
              property returns a value only if the underlying XML reader is an <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -148,6 +162,8 @@
           <para
             >Gets the line number where the unknown element was encountered if the XML reader is an <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -179,6 +195,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -204,6 +222,8 @@
           <para
             >Gets the object the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

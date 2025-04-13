@@ -42,6 +42,8 @@
 
         
 
+        
+
          class.</para
       >
       <block subset="none" type="note">
@@ -51,8 +53,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.AllAccess" />
+
+          
 
           
 
@@ -61,13 +67,19 @@
 
           
 
+          
+
           , they are not valid for use as the parameter for <see
            cref="M:System.Security.Permissions.FileIOPermission.GetPathList(System.Security.Permissions.FileIOPermissionAccess)" />
 
           
 
+          
+
            because they describe no file access types or all file access types, respectively, and <see
            cref="M:System.Security.Permissions.FileIOPermission.GetPathList(System.Security.Permissions.FileIOPermissionAccess)" />
+
+          
 
           
 
@@ -81,8 +93,12 @@
 
           
 
+          
+
            access to an assembly is similar to granting it Full Trust. If an application should not write to the file system it should not have <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+          
 
           
 
@@ -126,8 +142,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+
+            
 
             
 
@@ -136,8 +156,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+
+            
 
             
 
@@ -146,8 +170,12 @@
 
             
 
+            
+
              represents multiple <see
              cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+            
 
             
 
@@ -156,13 +184,19 @@
 
             
 
+            
+
              when used as the <paramref
              name="access" />
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Permissions.FileIOPermission.GetPathList(System.Security.Permissions.FileIOPermissionAccess)" />
+
+            
 
             
 
@@ -203,8 +237,12 @@
 
               
 
+              
+
                and either <see
                cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+              
 
               
 
@@ -213,8 +251,12 @@
 
               
 
+              
+
                access. For more detail see <see
                cref="T:System.IO.FileMode" />
+
+              
 
               
 
@@ -227,6 +269,8 @@
           <para
             >Access to append material to a file or directory. <see
              cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" />
+
+            
 
             
 
@@ -267,8 +311,12 @@
 
             
 
+            
+
              represents no valid <see
              cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+            
 
             
 
@@ -277,8 +325,12 @@
 
             
 
+            
+
              when used as the parameter for <see
              cref="M:System.Security.Permissions.FileIOPermission.GetPathList(System.Security.Permissions.FileIOPermissionAccess)" />
+
+            
 
             
 
@@ -381,6 +433,8 @@
           <para
             >Access to write to or delete a file or directory. <see
              cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+            
 
             
 

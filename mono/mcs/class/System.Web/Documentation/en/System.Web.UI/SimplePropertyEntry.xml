@@ -22,8 +22,12 @@
 
         
 
+        
+
          class represents simple properties or those properties that are not collections. The <see
          cref="T:System.Web.UI.ComplexPropertyEntry" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
+
+            
 
             
 

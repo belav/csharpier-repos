@@ -43,12 +43,16 @@
 
         
 
+        
+
         . For an example of reading text from a file, see <format
          type="text/html">
           <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
             >[&lt;topic://cpconreadingtextfromfile&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -69,8 +75,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+        
 
         
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.FileInfo" />
+
+        
 
         
 
@@ -125,13 +139,19 @@
 
             
 
+            
+
              permission. FileMode.Append can be used only in conjunction with FileAccess.Write. Trying to seek to a position before the end of the file throws an <see
              cref="T:System.IO.IOException" />
 
             
 
+            
+
              exception, and any attempt to read fails and throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -172,8 +192,12 @@
 
             
 
+            
+
              permission. FileMode.Create is equivalent to requesting that if the file does not exist, use <see
              cref="F:System.IO.FileMode.CreateNew" />
+
+            
 
             
 
@@ -182,8 +206,12 @@
 
             
 
+            
+
             . If the file already exists but is a hidden file, an <see
              cref="T:System.UnauthorizedAccessException" />
+
+            
 
             
 
@@ -224,8 +252,12 @@
 
             
 
+            
+
              permission. If the file already exists, an <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -266,8 +298,12 @@
 
             
 
+            
+
              enumeration. A <see
              cref="T:System.IO.FileNotFoundException" />
+
+            
 
             
 
@@ -308,8 +344,12 @@
 
             
 
+            
+
              permission is required. If the file access is FileAccess.Write, <see
              cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+            
 
             
 
@@ -318,8 +358,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+            
 
             
 
@@ -360,8 +404,12 @@
 
             
 
+            
+
              permission. Attempts to read from a file opened with FileMode.Truncate cause an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 

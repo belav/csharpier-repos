@@ -111,6 +111,8 @@
 
             
 
+            
+
              for the property if the expression represents an indexed property, returns null otherwise.</para
           >
         </summary>
@@ -140,6 +142,8 @@
           <para
             >Returns the node type of this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -242,6 +246,8 @@
 
             
 
+            
+
              represents.</para
           >
         </summary>
@@ -285,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.IndexExpression.Object" />
+
+          
 
           
 
@@ -297,8 +307,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.IndexExpression.Arguments" />
+
+          
 
           
 

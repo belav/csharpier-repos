@@ -37,6 +37,8 @@
 
         
 
+        
+
          class provides common properties inherited by all HTML server control classes. A new instance of the class is not created directly.</para
       >
     </remarks>
@@ -60,6 +62,8 @@
 
             
 
+            
+
              class using default values.</para
           >
           <block subset="none" type="note">
@@ -68,6 +72,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -104,6 +110,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -129,6 +137,8 @@
 
             
 
+            
+
              class using the specified tag.</para
           >
           <block subset="none" type="note">
@@ -137,6 +147,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -166,6 +178,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -180,11 +194,15 @@
 
             
 
+            
+
              class using the specified tag.</para
           >
         </summary>
         <param name="tag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,12 +237,16 @@
 
             
 
+            
+
              property.</para
           >
           <para>HTML attributes are treated by the .NET Framework as properties on the HTML server control to which they belong.</para>
           <para
             >For additional information on the attributes collection, see the <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -270,8 +292,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -339,8 +365,12 @@
 
             
 
+            
+
              method to access an attribute on the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -349,13 +379,19 @@
 
             
 
+            
+
              property. HTML attributes are treated by the ASP.NET page framework as properties on the HTML server control to which they belong. The <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
 
             
 
+            
+
              method's <paramref
              name="name" />
+
+            
 
             
 
@@ -370,6 +406,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -381,11 +419,15 @@
 
             
 
+            
+
              value. If the specified attribute does not exist on this element, returns an empty string ("").</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,13 +456,19 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
+            
+
              method and passes the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -435,6 +483,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -443,8 +493,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -477,13 +531,19 @@
 
             
 
+            
+
              method writes the <see
              cref="P:System.Web.UI.Control.ID" />
 
             
 
+            
+
              attribute of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -495,8 +555,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -511,8 +575,12 @@
 
             
 
+            
+
              control's attributes into the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -524,8 +592,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -558,6 +630,8 @@
 
             
 
+            
+
              method renders the opening angle bracket (&lt;), followed by the control's tag name, attributes, and a closing angle bracket (&gt;).</para
           >
           <para
@@ -566,8 +640,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -582,6 +660,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -590,8 +670,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -628,13 +712,19 @@
 
             
 
+            
+
              method to set an attribute on the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
 
             
 
+            
+
              server control. All HTML server controls store their attributes in the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -646,8 +736,12 @@
 
             
 
+            
+
              method's <paramref
              name="name" />
+
+            
 
             
 
@@ -662,6 +756,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -670,10 +766,14 @@
 
           
 
+          
+
           The name of the attribute to set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -702,6 +802,8 @@
           <para
             >For additional information on the CSS style collection, see the <see
              cref="T:System.Web.UI.CssStyleCollection" />
+
+            
 
             
 
@@ -751,8 +853,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.GetAttribute(System.String)" />
+
+            
 
             
 
@@ -764,8 +870,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IAttributeAccessor" />
+
+            
 
             
 
@@ -780,6 +890,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -791,11 +903,15 @@
 
             
 
+            
+
              value. If the specified attribute does not exist on this element, returns an empty string ("").</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,8 +945,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.SetAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -842,8 +962,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IAttributeAccessor" />
+
+            
 
             
 
@@ -858,6 +982,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -866,10 +992,14 @@
 
           
 
+          
+
           The name of the attribute to set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -890,6 +1020,8 @@
           <para
             >Use this property to programmatically determine the element name of the HTML server control. For example, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlControl.TagName" />
+
+            
 
             
 
@@ -937,13 +1069,19 @@
 
             
 
+            
+
              property overrides the base class's <see
              cref="P:System.Web.UI.Control.ViewStateIgnoresCase" />
 
             
 
+            
+
              property to always return true, indicating that the controls that inherit from <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 
@@ -955,6 +1093,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Web.UI.HtmlControls.HtmlControl" />
+
+            
 
             
 

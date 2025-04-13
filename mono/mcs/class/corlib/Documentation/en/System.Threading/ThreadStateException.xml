@@ -41,6 +41,8 @@
 
         
 
+        
+
          exception to be thrown.</para
       >
       <code lang="C#"
@@ -85,8 +87,12 @@ class ThreadStateTest{
 
         
 
+        
+
          states until it terminates. ThreadStateException is thrown by methods that cannot perform the requested operation due to the current state of a thread. For example, trying to restart an aborted thread by calling <see
          cref="M:System.Threading.Thread.Start" />
+
+        
 
         
 
@@ -95,10 +101,14 @@ class ThreadStateTest{
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.Threading.ThreadStateException" />
+
+        
 
         
 
@@ -110,8 +120,12 @@ class ThreadStateTest{
 
         
 
+        
+
         , see the <see
          cref="M:System.Threading.ThreadStateException.#ctor" />
+
+        
 
         
 
@@ -126,8 +140,12 @@ class ThreadStateTest{
 
         
 
+        
+
          is in an invalid <see
          cref="P:System.Threading.Thread.ThreadState" />
+
+        
 
         
 
@@ -161,6 +179,8 @@ class ThreadStateTest{
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.ThreadStateException" />
+
+            
 
             
 
@@ -207,6 +227,8 @@ class ThreadStateTest{
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -242,11 +264,15 @@ class ThreadStateTest{
 
             
 
+            
+
              parameter.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.ThreadStateException" />
+
+            
 
             
 
@@ -293,11 +319,15 @@ class ThreadStateTest{
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,6 +368,8 @@ class ThreadStateTest{
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -349,6 +381,8 @@ class ThreadStateTest{
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -357,8 +391,12 @@ class ThreadStateTest{
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -369,8 +407,12 @@ class ThreadStateTest{
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -411,8 +453,12 @@ class ThreadStateTest{
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -421,11 +467,15 @@ class ThreadStateTest{
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.ThreadStateException" />
+
+            
 
             
 
@@ -472,11 +522,15 @@ class ThreadStateTest{
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -487,8 +541,12 @@ class ThreadStateTest{
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

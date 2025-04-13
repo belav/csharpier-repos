@@ -26,6 +26,8 @@
 
         
 
+        
+
          property. The delimiter is used to terminate each field in a line of output. For example, to display the trace output in a Microsoft Excel spreadsheet, you might specify a comma (",") as a delimiter and create a comma-separated value (CSV) file.</para
       >
       <para
@@ -34,13 +36,19 @@
 
         
 
+        
+
          through the application configuration file and then use the configured <see
          cref="T:System.Diagnostics.DelimitedListTraceListener" />
 
         
 
+        
+
          in your application. Alternately, you can create a <see
          cref="T:System.Diagnostics.DelimitedListTraceListener" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
           
 
+          
+
            delimits only text that is emitted by using the methods that have names starting with the word Trace, such as <see
            cref="Overload:System.Diagnostics.DelimitedListTraceListener.TraceEvent" />
+
+          
 
           
 
@@ -63,13 +75,19 @@
 
           
 
+          
+
           . Trace data that is emitted by using the <see
            cref="Overload:System.Diagnostics.Debug.Write" />
 
           
 
+          
+
            and <see
            cref="Overload:System.Diagnostics.TextWriterTraceListener.WriteLine" />
+
+          
 
           
 
@@ -79,6 +97,8 @@
       <para
         >To configure a <see
          cref="T:System.Diagnostics.DelimitedListTraceListener" />
+
+        
 
         
 
@@ -107,13 +127,19 @@
 
           
 
+          
+
           , <see
            cref="T:System.Diagnostics.Trace" />
 
           
 
+          
+
           , and <see
            cref="T:System.Diagnostics.TraceSource" />
+
+          
 
           
 
@@ -153,6 +179,8 @@
 
             
 
+            
+
              property to an empty string ("").</para
           >
         </remarks>
@@ -164,6 +192,8 @@
 
             
 
+            
+
              class that writes to the specified output stream. </para
           >
         </summary>
@@ -172,8 +202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -207,6 +241,8 @@
 
             
 
+            
+
              property to an empty string ("").</para
           >
         </remarks>
@@ -218,6 +254,8 @@
 
             
 
+            
+
              class that writes to the specified text writer. </para
           >
         </summary>
@@ -226,8 +264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -258,6 +300,8 @@
 
             
 
+            
+
              property to an empty string ("").</para
           >
         </remarks>
@@ -269,11 +313,15 @@
 
             
 
+            
+
              class that writes to the specified file.  </para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,8 +356,12 @@
 
             
 
+            
+
              property to the value of the <paramref
              name="name" />
+
+            
 
             
 
@@ -318,8 +370,12 @@
 
             
 
+            
+
              parameter is null.  The <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -328,8 +384,12 @@
 
             
 
+            
+
              property for the instance of <see
              cref="T:System.Diagnostics.DelimitedListTraceListener" />
+
+            
 
             
 
@@ -345,6 +405,8 @@
 
             
 
+            
+
              class that writes to the specified output stream and has the specified name. </para
           >
         </summary>
@@ -353,8 +415,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -362,6 +428,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,8 +464,12 @@
 
             
 
+            
+
              property to the value of the <paramref
              name="name" />
+
+            
 
             
 
@@ -406,8 +478,12 @@
 
             
 
+            
+
              parameter is null. The <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -416,8 +492,12 @@
 
             
 
+            
+
              property for the instance of <see
              cref="T:System.Diagnostics.DelimitedListTraceListener" />
+
+            
 
             
 
@@ -433,6 +513,8 @@
 
             
 
+            
+
              class that writes to the specified text writer and has the specified name. </para
           >
         </summary>
@@ -441,8 +523,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -450,6 +536,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -484,8 +572,12 @@
 
             
 
+            
+
              class for the specified file on the specified path, using <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -500,8 +592,12 @@
 
             
 
+            
+
              property is set to the value of the <paramref
              name="name" />
+
+            
 
             
 
@@ -510,8 +606,12 @@
 
             
 
+            
+
              parameter is null. The <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -520,8 +620,12 @@
 
             
 
+            
+
              property for the instance of <see
              cref="T:System.Diagnostics.DelimitedListTraceListener" />
+
+            
 
             
 
@@ -537,6 +641,8 @@
 
             
 
+            
+
              class that writes to the specified file and has the specified name. </para
           >
         </summary>
@@ -545,10 +651,14 @@
 
           
 
+          
+
           The name of the file to receive the output. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,6 +684,8 @@
           <para
             >The default delimiter is ";" (semicolon). The following configuration file example shows the setting of the <see
              cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" />
+
+            
 
             
 
@@ -628,13 +740,19 @@
 
             
 
+            
+
              is used to set the <see
              cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" />
 
             
 
+            
+
              property. The following configuration file example shows the use of the delimiter attribute to set the <see
              cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" />
+
+            
 
             
 
@@ -649,6 +767,8 @@
           type="System.Diagnostics.DelimitedListTraceListener" 
 <codeFeaturedElement
             >          delimiter=":" </codeFeaturedElement>
+
+            
 
             
 
@@ -705,8 +825,12 @@
 
             
 
+            
+
             , <paramref
              name="eventType" />
+
+            
 
             
 
@@ -715,13 +839,19 @@
 
             
 
+            
+
              parameters are written as a header. The data object is converted to a string using the ToString method of the object. The <paramref
              name="eventCache" />
 
             
 
+            
+
              data is written as a footer whose content depends on the value of the <see
              cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+            
 
             
 
@@ -734,8 +864,12 @@
 
               
 
+              
+
                method is not intended to be called by application code. It is called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -744,8 +878,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -762,8 +900,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -774,6 +916,8 @@
 
           
 
+          
+
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
@@ -781,8 +925,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -793,10 +941,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -843,8 +995,12 @@
 
             
 
+            
+
             , <paramref
              name="eventType" />
+
+            
 
             
 
@@ -853,13 +1009,19 @@
 
             
 
+            
+
              parameters are written as a header. The data objects are converted to strings using the ToString method of each object. The <paramref
              name="eventCache" />
 
             
 
+            
+
              data is written as a footer whose content depends on the value of the <see
              cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+            
 
             
 
@@ -872,8 +1034,12 @@
 
               
 
+              
+
                method is not intended to be called by application code. It is called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -882,8 +1048,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -900,8 +1070,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -912,6 +1086,8 @@
 
           
 
+          
+
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
@@ -919,8 +1095,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -931,10 +1111,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -975,8 +1159,12 @@
 
             
 
+            
+
             , <paramref
              name="eventType" />
+
+            
 
             
 
@@ -985,8 +1173,12 @@
 
             
 
+            
+
              parameters are written as a header, followed by the <paramref
              name="message" />
+
+            
 
             
 
@@ -995,8 +1187,12 @@
 
             
 
+            
+
              data is written as a footer whose content depends on the value of the <see
              cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+            
 
             
 
@@ -1009,8 +1205,12 @@
 
               
 
+              
+
                method is not intended to be called by application code. It is called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -1019,8 +1219,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -1037,8 +1241,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -1049,6 +1257,8 @@
 
           
 
+          
+
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
@@ -1056,8 +1266,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -1068,10 +1282,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1119,8 +1337,12 @@
 
             
 
+            
+
             , <paramref
              name="eventType" />
+
+            
 
             
 
@@ -1129,8 +1351,12 @@
 
             
 
+            
+
              parameters are written as a header. The <paramref
              name="args" />
+
+            
 
             
 
@@ -1139,8 +1365,12 @@
 
             
 
+            
+
              method, passing the <paramref
              name="format" />
+
+            
 
             
 
@@ -1149,13 +1379,19 @@
 
             
 
+            
+
              array to format the string as the message portion of the trace. The <paramref
              name="eventCache" />
 
             
 
+            
+
              data is written as a footer whose content depends on the value of the <see
              cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+            
 
             
 
@@ -1168,8 +1404,12 @@
 
               
 
+              
+
                method is not intended to be called by application code. It is called by methods of the <see
                cref="T:System.Diagnostics.Debug" />
+
+              
 
               
 
@@ -1178,8 +1418,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -1196,8 +1440,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -1208,6 +1456,8 @@
 
           
 
+          
+
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
@@ -1215,8 +1465,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -1227,10 +1481,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1239,10 +1497,14 @@
 
           
 
+          
+
            array.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

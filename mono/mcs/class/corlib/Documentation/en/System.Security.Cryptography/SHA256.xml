@@ -36,11 +36,15 @@
 
         
 
+        
+
          algorithm is 256 bits.</para
       >
       <para
         >This is an abstract class. The only implementation of this class is <see
          cref="T:System.Security.Cryptography.SHA256Managed" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.SHA256" />
+
+        
 
         
 
@@ -84,6 +90,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.SHA256" />
+
+            
 
             
 
@@ -121,6 +129,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -129,6 +139,8 @@
           <para
             >A new instance of <see
              cref="T:System.Security.Cryptography.SHA256" />
+
+            
 
             
 
@@ -168,6 +180,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -179,6 +193,8 @@
 
             
 
+            
+
              using the specified implementation.</para
           >
         </returns>
@@ -187,8 +203,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.SHA256" />
+
+          
 
           
 

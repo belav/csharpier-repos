@@ -68,8 +68,12 @@
 
             
 
+            
+
              to establish the key before calling an implementation of <see
              cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />
+
+            
 
             
 
@@ -81,6 +85,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter" />
+
+            
 
             
 
@@ -125,6 +131,8 @@
         </returns>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +191,8 @@
 
             
 
+            
+
              implementation.</para
           >
         </remarks>
@@ -195,8 +205,12 @@
 
           
 
+          
+
           The instance of the implementation of <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+          
 
           
 

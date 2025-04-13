@@ -16,6 +16,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -92,6 +94,8 @@
 
           
 
+          
+
            representing the domain name of the current computer.</value
         >
         <remarks
@@ -100,8 +104,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Environment.UserDomainName" />
+
+          
 
           
 
@@ -145,6 +153,8 @@
 
           
 
+          
+
            representing the current (NetBIOS) host name of the computer.</value
         >
         <remarks
@@ -153,8 +163,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Environment.MachineName" />
+
+          
 
           
 

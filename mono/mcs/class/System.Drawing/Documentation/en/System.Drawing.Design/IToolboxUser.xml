@@ -19,8 +19,12 @@
 
         
 
+        
+
          method indicates whether the specified <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -29,8 +33,12 @@
 
         
 
+        
+
          method selects the specified <see
          cref="T:System.Drawing.Design.ToolboxItem" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
 
             
 
+            
+
              interface, then the tool will be enabled in the toolbox when this designer has focus. Otherwise, it will be disabled. Once a tool is marked as enabled or disabled, it may not be tested for support with the same designer again.</para
           >
         </remarks>
@@ -80,8 +90,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -113,8 +127,12 @@
 
             
 
+            
+
              is called when the user double-clicks on a toolbox item. The document designer should create a component for the specified tool. The Visual Studio integrated development environment will only call <see
              cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
+
+            
 
             
 
@@ -130,8 +148,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 

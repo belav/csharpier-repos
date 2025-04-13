@@ -6,6 +6,8 @@
 
     
 
+    
+
     ) of type T, the following signatures are reserved: <code_example
     >
       <![CDATA[
@@ -48,6 +50,8 @@ class Test
 
       
 
+      
+
       a class A defines a read-only property P, thus reserving signatures for get_P and set_P methods. A class B derives from A and hides both of these reserved signatures. The example produces the output: <code_example
       >
         <![CDATA[
@@ -56,6 +60,8 @@ class Test
 456  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -81,13 +83,19 @@
 
             
 
+            
+
              if the <see
              cref="P:System.ServiceModel.Configuration.PeerResolverElement.Mode" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.ServiceModel.PeerResolvers.PeerResolverMode.Custom" />
+
+            
 
             
 

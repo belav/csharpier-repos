@@ -29,13 +29,19 @@
 
         
 
+        
+
          property or by setting the property to a <see
          cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
+        
+
         . The print job can also be canceled by setting the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -47,6 +53,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
+
+        
 
         
 
@@ -75,11 +83,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="pageSettings">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -111,13 +123,19 @@
 
             
 
+            
+
              property or by setting the property to a <see
              cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
+            
+
             . The print job can also be canceled by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 

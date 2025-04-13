@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          control or the <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -46,13 +54,19 @@
 
         
 
+        
+
          control uses the <see
          cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
         
 
+        
+
          class for its <see
          cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
+
+        
 
         
 
@@ -64,8 +78,12 @@
 
         
 
+        
+
         -derived objects in the <see
          cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+        
 
         
 
@@ -79,8 +97,12 @@
 
             
 
+            
+
              property to directly access a <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -94,6 +116,8 @@
 
             
 
+            
+
              method to create an enumerator that can be used to iterate through the collection.</para
           >
         </item>
@@ -104,13 +128,19 @@
 
             
 
+            
+
              method to copy the contents of the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
+            
+
              collection into an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -124,6 +154,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+        
 
         
 
@@ -154,8 +186,12 @@
 
             
 
+            
+
              method adds the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -164,13 +200,19 @@
 
             
 
+            
+
              collection. To add a <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
+            
+
             -derived object to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+
+            
 
             
 
@@ -185,6 +227,8 @@
 
             
 
+            
+
             -derived object to the end of the collection.</para
           >
         </summary>
@@ -193,13 +237,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
+          
+
           -derived object to append to the <see
            cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+          
 
           
 
@@ -233,8 +283,12 @@
 
             
 
+            
+
              method adds the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -246,13 +300,19 @@
 
             
 
+            
+
             -derived object to the end of the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
+            
+
              collection, use the <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
+
+            
 
             
 
@@ -267,6 +327,8 @@
 
             
 
+            
+
             -derived object to the collection at the specified index location.</para
           >
         </summary>
@@ -275,8 +337,12 @@
 
           
 
+          
+
           The index location at which to insert <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+          
 
           
 
@@ -287,13 +353,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
+          
+
           -derived object to append to the <see
            cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+          
 
           
 
@@ -321,13 +393,19 @@
 
             
 
+            
+
              method to remove all the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
+            
+
             -derived objects from the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -340,8 +418,12 @@
 
               
 
+              
+
                method removes the <see
                cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+              
 
               
 
@@ -350,8 +432,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+              
 
               
 
@@ -364,6 +450,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -397,8 +485,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -407,8 +499,12 @@
 
             
 
+            
+
             -derived object before performing a task, such as removing a <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -423,8 +519,12 @@
 
             
 
+            
+
              collection contains a specific <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -439,8 +539,12 @@
 
             
 
+            
+
             -derived object is found in the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -452,13 +556,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
+          
+
           -derived object to find in the <see
            cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+          
 
           
 
@@ -492,8 +602,12 @@
 
             
 
+            
+
              method to copy the contents of the collection into the specified zero-based array. Items are copied starting at the specified index of the target array. After the items are in an array, you can use array syntax to access the items in the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -502,6 +616,8 @@
           <para
             >As an alternative, you can also use the <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.GetEnumerator" />
+
+            
 
             
 
@@ -516,8 +632,12 @@
 
             
 
+            
+
              collection to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -529,8 +649,12 @@
 
           
 
+          
+
           A zero-based array of <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+          
 
           
 
@@ -538,6 +662,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -565,8 +691,12 @@
 
             
 
+            
+
              property to determine the number of <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -575,8 +705,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" />
+
+            
 
             
 
@@ -591,13 +725,19 @@
 
             
 
+            
+
             -derived objects in the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
+            
+
              control's <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -630,8 +770,12 @@
 
             
 
+            
+
             -implemented object that can be used to iterate through the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -646,13 +790,19 @@
 
             
 
+            
+
             -implemented object that contains all the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
+            
+
             -derived objects in the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -686,8 +836,12 @@
 
             
 
+            
+
              method to determine the index of the specified <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -696,8 +850,12 @@
 
             
 
+            
+
              collection. If the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -712,6 +870,8 @@
 
             
 
+            
+
             -derived object in the collection.</para
           >
         </summary>
@@ -723,8 +883,12 @@
 
             
 
+            
+
             -derived object passed in within the current <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -736,13 +900,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
+          
+
           -derived object to search for in the <see
            cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+          
 
           
 
@@ -776,8 +946,12 @@
 
             
 
+            
+
              method adds the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -789,8 +963,12 @@
 
             
 
+            
+
              method to add the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -799,13 +977,19 @@
 
             
 
+            
+
             -derived object to the end of the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
+            
+
              collection, use the <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Add(System.Web.UI.WebControls.WizardStepBase)" />
+
+            
 
             
 
@@ -818,8 +1002,12 @@
 
               
 
+              
+
                method and the <see
                cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+
+              
 
               
 
@@ -828,8 +1016,12 @@
 
               
 
+              
+
                method is called, it simply passes the wizardStep and index parameters to the <see
                cref="M:System.Web.UI.WebControls.WizardStepCollection.AddAt(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
+
+              
 
               
 
@@ -845,6 +1037,8 @@
 
             
 
+            
+
             -derived object into the collection at the specified index location.</para
           >
         </summary>
@@ -853,8 +1047,12 @@
 
           
 
+          
+
           The index location at which to insert the <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+          
 
           
 
@@ -865,13 +1063,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
           
 
+          
+
           -derived object to insert into the <see
            cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+          
 
           
 
@@ -900,6 +1104,8 @@
 
             
 
+            
+
             -derived objects in the collection can be modified.</para
           >
         </summary>
@@ -925,6 +1131,8 @@
 
             
 
+            
+
              interface and is overridden to always return false.</para
           >
           <para
@@ -933,13 +1141,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1000,8 +1214,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1010,8 +1228,12 @@
 
             
 
+            
+
              collection. Alternatively, you can use the <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -1020,8 +1242,12 @@
 
             
 
+            
+
             -derived object from a specified location in the <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -1036,6 +1262,8 @@
 
             
 
+            
+
             -derived object from the collection.</para
           >
         </summary>
@@ -1044,8 +1272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+          
 
           
 
@@ -1075,8 +1307,12 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1085,13 +1321,19 @@
 
             
 
+            
+
              collection at the specified index location. Alternatively, you can remove a specific <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
+            
+
             -derived object from the collection using the <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
+
+            
 
             
 
@@ -1106,6 +1348,8 @@
 
             
 
+            
+
             -derived object from the collection at the specified location.</para
           >
         </summary>
@@ -1114,8 +1358,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+          
 
           
 
@@ -1143,6 +1391,8 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
@@ -1151,13 +1401,19 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1196,6 +1452,8 @@
 
             
 
+            
+
              collection to a one-dimensional array, starting at the specified index in the target array.</para
           >
         </summary>
@@ -1204,8 +1462,12 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1214,10 +1476,14 @@
 
           
 
+          
+
            collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1277,8 +1543,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1334,6 +1604,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

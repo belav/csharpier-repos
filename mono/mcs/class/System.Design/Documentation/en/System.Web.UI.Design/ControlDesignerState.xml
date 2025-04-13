@@ -18,8 +18,12 @@
 
         
 
+        
+
          class is a wrapper for the <see
          cref="T:System.ComponentModel.Design.IComponentDesignerStateService" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Provides access to the state of the control designer in the design host through the <see
          cref="T:System.ComponentModel.Design.IComponentDesignerStateService" />
+
+        
 
         
 

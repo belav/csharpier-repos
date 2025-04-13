@@ -53,6 +53,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -64,6 +66,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -72,8 +76,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -105,6 +113,8 @@
 
             
 
+            
+
              object that is configured according to the attribute properties.</para
           >
         </summary>
@@ -113,6 +123,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlClient.SqlClientPermission" />
+
+            
 
             
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          element in a project. </para
       >
     </summary>
@@ -53,8 +55,12 @@
 
             
 
+            
+
              element with the specified <unmanagedCodeEntityReference
             >TaskParameter</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -63,10 +69,14 @@
 
             
 
+            
+
              attributes to the <format
              type="text/html">
               <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
             </format>
+
+            
 
             
 
@@ -78,10 +88,14 @@
 
           
 
+          
+
           The value of the TaskParameter attribute of the Output element.</param
         >
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,8 +132,12 @@
 
             
 
+            
+
              element with the specified <unmanagedCodeEntityReference
             >TaskParameter</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -128,10 +146,14 @@
 
             
 
+            
+
              attributes to the <format
              type="text/html">
               <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
             </format>
+
+            
 
             
 
@@ -143,10 +165,14 @@
 
           
 
+          
+
           The value of the TaskParameter attribute of the Output element.</param
         >
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,10 +201,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
             </format>
+
+            
 
             
 
@@ -208,10 +238,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
             </format>
+
+            
 
             
 
@@ -238,6 +272,8 @@
           <para
             >Runs the task represented by this <see
              cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+            
 
             
 
@@ -270,8 +306,12 @@
 
             
 
+            
+
              and <unmanagedCodeEntityReference
             >ContinueOnError</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -317,6 +357,8 @@
         </returns>
         <param name="attributeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -393,6 +435,8 @@
 
           
 
+          
+
           The parameter name to set.</param
         >
         <param name="parameterValue">
@@ -400,8 +444,12 @@
 
           
 
+          
+
           The value to assign to <paramref
            name="parameterName" />
+
+          
 
           
 
@@ -438,6 +486,8 @@
 
           
 
+          
+
           The parameter name to set.</param
         >
         <param name="parameterValue">
@@ -445,8 +495,12 @@
 
           
 
+          
+
           The value to assign to <paramref
            name="parameterName" />
+
+          
 
           
 
@@ -457,8 +511,12 @@
 
           
 
+          
+
           true to treat <paramref
            name="parameterValue" />
+
+          
 
           
 
@@ -484,6 +542,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

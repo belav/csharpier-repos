@@ -21,6 +21,8 @@
 
         
 
+        
+
          class does not allow a thread to enter the lock in write mode if it already entered the lock in read mode, regardless of the lock policy setting, in order to reduce the chance of deadlocks. </para
       >
       <para>Currently only one lock uses this enumeration:</para>
@@ -31,8 +33,12 @@
 
             
 
+            
+
             . For more information, see the <see
              cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" />
+
+            
 
             
 

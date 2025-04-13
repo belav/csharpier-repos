@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used with the <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -34,13 +38,19 @@
 
         
 
+        
+
         , which contains the content of the message. In addition to the body, you might want to send additional files. These are sent as attachments and are represented as <see
          cref="T:System.Net.Mail.Attachment" />
 
         
 
+        
+
          instances. To add an attachment to a mail message, add it to the <see
          cref="P:System.Net.Mail.MailMessage.Attachments" />
+
+        
 
         
 
@@ -52,13 +62,19 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.Stream" />
 
         
 
+        
+
         , or file name. You can specify the content in an attachment by using any of the <see
          cref="Overload:System.Net.Mail.Attachment.#ctor" />
+
+        
 
         
 
@@ -70,8 +86,12 @@
 
         
 
+        
+
          property. The Content-Type header specifies the media type and subtype and any associated parameters. Use <see
          cref="P:System.Net.Mail.AttachmentBase.ContentType" />
+
+        
 
         
 
@@ -83,8 +103,12 @@
 
         
 
+        
+
          property. The Content-Disposition header specifies the presentation and file time stamps for an attachment. A Content-Disposition header is sent only if the attachment is a file. Use the <see
          cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+
+        
 
         
 
@@ -93,6 +117,8 @@
       <para
         >The MIME Content-Transfer-Encoding header is represented by the <see
          cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" />
+
+        
 
         
 
@@ -147,6 +173,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -160,6 +188,8 @@
               <description>
                 <para>
                   <see cref="F:System.Net.Mime.TransferEncoding.QuotedPrintable" />
+
+                  
 
                   
 
@@ -177,6 +207,8 @@
 
             
 
+            
+
              class with the specified content string. </para
           >
         </summary>
@@ -185,8 +217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -222,8 +258,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.Mime.TransferEncoding.Base64" />
+
+            
 
             
 
@@ -235,8 +275,12 @@
 
             
 
+            
+
              property is false, the attachment and the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -251,6 +295,8 @@
 
             
 
+            
+
              class with the specified stream and content type. </para
           >
         </summary>
@@ -259,8 +305,12 @@
 
           
 
+          
+
           A readable <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -271,13 +321,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mime.ContentType" />
 
           
 
+          
+
            that describes the data in <paramref
            name="stream" />
+
+          
 
           
 
@@ -313,8 +369,12 @@
 
             
 
+            
+
              is not null or equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -323,8 +383,12 @@
 
             
 
+            
+
              for this attachment is constructed with the <see
              cref="P:System.Net.Mime.ContentType.Name" />
+
+            
 
             
 
@@ -333,13 +397,19 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" />
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.Mime.TransferEncoding.Base64" />
+
+            
 
             
 
@@ -351,8 +421,12 @@
 
             
 
+            
+
              property is false, the attachment and the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -367,6 +441,8 @@
 
             
 
+            
+
              class with the specified stream and name.</para
           >
         </summary>
@@ -375,8 +451,12 @@
 
           
 
+          
+
           A readable <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -387,8 +467,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -397,8 +481,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Net.Mime.ContentType" />
+
+          
 
           
 
@@ -435,8 +523,12 @@
 
             
 
+            
+
              class with the specified content string and <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -448,8 +540,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -460,13 +556,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mime.ContentType" />
 
           
 
+          
+
            that describes the data in <paramref
            name="string" />
+
+          
 
           
 
@@ -502,8 +604,12 @@
 
             
 
+            
+
              is null or equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -512,8 +618,12 @@
 
             
 
+            
+
              property for this attachment is set to <see
              cref="F:System.Net.Mime.MediaTypeNames.Text.Plain" />
+
+            
 
             
 
@@ -522,8 +632,12 @@
 
             
 
+            
+
              is not null and is not a zero-length string, it is used to construct the <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -538,6 +652,8 @@
 
             
 
+            
+
              class with the specified content string and MIME type information. </para
           >
         </summary>
@@ -546,8 +662,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -558,8 +678,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -596,13 +720,19 @@
 
             
 
+            
+
              is not null or equal to <see
              cref="F:System.String.Empty" />
 
             
 
+            
+
              (""), it is used to construct the <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -614,8 +744,12 @@
 
             
 
+            
+
              and <paramref
              name="name" />
+
+            
 
             
 
@@ -624,8 +758,12 @@
 
             
 
+            
+
              information, the value specified in <paramref
              name="name" />
+
+            
 
             
 
@@ -634,8 +772,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.Mime.TransferEncoding.Base64" />
+
+            
 
             
 
@@ -647,8 +789,12 @@
 
             
 
+            
+
              property is false, the attachment and the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -663,6 +809,8 @@
 
             
 
+            
+
              class with the specified stream, name, and MIME type information. </para
           >
         </summary>
@@ -671,8 +819,12 @@
 
           
 
+          
+
           A readable <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -683,8 +835,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -693,8 +849,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Net.Mime.ContentType" />
+
+          
 
           
 
@@ -705,8 +865,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -742,8 +906,12 @@
 
             
 
+            
+
              class represents the MIME Content-Disposition header. This header is described in RFC 2183, available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -788,6 +956,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -799,6 +969,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -807,8 +979,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -819,8 +995,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mime.ContentType" />
+
+          
 
           
 
@@ -868,6 +1048,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -876,8 +1058,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -885,6 +1071,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -930,6 +1118,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -938,8 +1128,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -950,6 +1144,8 @@
 
           
 
+          
+
           The MIME content type name value in the content type associated with this attachment.</param
         >
         <param name="contentEncoding">
@@ -957,8 +1153,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -969,8 +1169,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1000,13 +1204,19 @@
 
             
 
+            
+
              property is used in the Content-Type header generated for this attachment. The <see
              cref="P:System.Net.Mail.Attachment.Name" />
 
             
 
+            
+
              is displayed as the attachment’s name when the email with the attachment is received. A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information about MIME media types and their parameters. These RFCs are available at <see
              cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            
 
             
 
@@ -1046,6 +1256,8 @@
             >Specifies the encoding for the <see
              cref="T:System.Net.Mail.Attachment" />
             <see cref="P:System.Net.Mail.Attachment.Name" />
+
+            
 
             
 

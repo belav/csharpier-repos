@@ -22,8 +22,12 @@
 
         
 
+        
+
          inherits from the <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+
+        
 
         
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
          has no effect. Similarly, the <see
          cref="M:System.Windows.Forms.BindingManagerBase.AddNew" />
+
+        
 
         
 
@@ -52,8 +64,12 @@
 
         
 
+        
+
          methods are not supported because there is no underlying list of data to add to or delete from. In addition, a call to <see
          cref="P:System.Windows.Forms.BindingManagerBase.IsBindingSuspended" />
+
+        
 
         
 
@@ -62,8 +78,12 @@
 
         
 
+        
+
          has a data source, regardless of whether <see
          cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
+
+        
 
         
 
@@ -75,6 +95,8 @@
       <para
         >Maintains a <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -94,6 +116,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.PropertyManager" />
+
+            
 
             
 
@@ -167,6 +191,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.PropertyManager.Current" />
+
+            
 
             
 
@@ -267,6 +293,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -275,8 +303,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -310,6 +342,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -321,6 +355,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -329,8 +365,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -404,8 +444,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.PropertyManager.ResumeBinding" />
+
+            
 
             
 
@@ -414,13 +458,19 @@
 
             
 
+            
+
              will always return false if the <see
              cref="T:System.Windows.Forms.PropertyManager" />
 
             
 
+            
+
              has a data source, regardless of whether <see
              cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
+
+            
 
             
 
@@ -451,6 +501,8 @@
           <para
             >Updates the current <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Represents a user principal name (UPN) for an identity which is used when the binding utilizes the <newTerm
         >SSPINegotiate</newTerm>
+
+        
 
         
 
@@ -67,8 +71,12 @@
 
             
 
+            
+
              using <paramref
              name="identity" />
+
+            
 
             
 
@@ -83,6 +91,8 @@
 
             
 
+            
+
              class from a claim.</para
           >
         </summary>
@@ -91,8 +101,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Claims.Claim" />
+
+          
 
           
 
@@ -123,8 +137,12 @@
 
             
 
+            
+
              and then calls <see
              cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
+
+            
 
             
 
@@ -136,6 +154,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.UpnEndpointIdentity" />
+
+            
 
             
 

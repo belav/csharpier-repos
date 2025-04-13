@@ -6,11 +6,15 @@
 
     
 
+    
+
      of a method declaration consists of either a block or a semicolon. </paragraph
   >
   <paragraph
     >Abstract and external method declarations do not provide a method implementation, so their method bodies simply consist of a semicolon. For any other method, the method body is a block (<hyperlink
     >15.2</hyperlink>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     , return statements (<hyperlink
     >15.9.4</hyperlink>
+
+    
 
     
 
@@ -32,11 +40,15 @@
 
     
 
+    
+
      method completes normally (that is, control flows off the end of the method body), that method simply returns to its caller. </paragraph
   >
   <paragraph
     >When the return type of a method is not <keyword
     >void</keyword>
+
+    
 
     
 
@@ -64,6 +76,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

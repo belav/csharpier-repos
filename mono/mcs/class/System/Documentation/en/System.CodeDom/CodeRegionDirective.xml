@@ -35,6 +35,8 @@
 
         
 
+        
+
          property specifies whether an instance represents the start or end of the region.</para
       >
       <block subset="none" type="note">
@@ -69,8 +71,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.CodeDom.CodeRegionDirective.RegionText" />
+
+            
 
             
 
@@ -82,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeRegionDirective" />
+
+            
 
             
 
@@ -119,6 +127,8 @@
 
             
 
+            
+
              class, specifying its mode and name. </para
           >
         </summary>
@@ -127,8 +137,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.CodeDom.CodeRegionMode" />
+
+          
 
           
 
@@ -136,6 +150,8 @@
         >
         <param name="regionText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

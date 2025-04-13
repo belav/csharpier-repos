@@ -24,8 +24,12 @@
 
         
 
+        
+
          class. If you pass the <see
          cref="P:System.ServiceModel.MessageSecurityVersion.Default" />
+
+        
 
         
 
@@ -91,6 +95,8 @@
           <para
             >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -186,6 +192,8 @@
 
             
 
+            
+
              for a token serializer instance capable of serializing tokens.</para
           >
         </remarks>
@@ -277,6 +285,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -309,6 +319,8 @@
           <para
             >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -347,6 +359,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -379,6 +393,8 @@
           <para
             >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -417,6 +433,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -449,6 +467,8 @@
           <para
             >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 

@@ -19,13 +19,19 @@
 
         
 
+        
+
          event occurs when a new area of a <see
          cref="T:System.Windows.Forms.ListView" />
 
         
 
+        
+
          in virtual mode is exposed and the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -37,6 +43,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
             
 
+            
+
              class with the specified starting and ending indices.</para
           >
         </summary>
@@ -74,13 +84,19 @@
 
           
 
+          
+
           The starting index of a range of items needed by the <see
            cref="T:System.Windows.Forms.ListView" />
 
           
 
+          
+
            for the next <see
            cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+          
 
           
 
@@ -91,13 +107,19 @@
 
           
 
+          
+
           The ending index of a range of items needed by the <see
            cref="T:System.Windows.Forms.ListView" />
 
           
 
+          
+
            for the next <see
            cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+          
 
           
 
@@ -125,8 +147,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
+
+            
 
             
 
@@ -135,8 +161,12 @@
 
             
 
+            
+
              control for the next occurrence of a <see
              cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+            
 
             
 
@@ -148,6 +178,8 @@
           <para
             >Gets the ending index for the range of values needed by a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -176,8 +208,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
+
+            
 
             
 
@@ -186,8 +222,12 @@
 
             
 
+            
+
              control for the next occurrence of a <see
              cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+            
 
             
 
@@ -199,6 +239,8 @@
           <para
             >Gets the starting index for a range of values needed by a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          class to transform <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          objects into metadata represented by <see
          cref="T:System.ServiceModel.Description.MetadataSection" />
+
+        
 
         
 
@@ -45,6 +53,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+        
 
         
 
@@ -58,13 +68,19 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -78,6 +94,8 @@
 
             
 
+            
+
              property. </para
           >
         </item>
@@ -88,8 +106,12 @@
 
             
 
+            
+
              to get a collection of <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -98,8 +120,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedXmlSchemas" />
+
+            
 
             
 
@@ -113,8 +139,12 @@
 
         
 
+        
+
          interface and custom policy assertions by implementing the <see
          cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+
+        
 
         
 
@@ -150,6 +180,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -158,6 +190,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+            
 
             
 
@@ -194,6 +228,8 @@
 
             
 
+            
+
              method to export metadata from only one contract.</para
           >
         </remarks>
@@ -206,8 +242,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
+
+          
 
           
 
@@ -243,6 +283,8 @@
 
             
 
+            
+
              method to create metadata about a single endpoint.</para
           >
         </remarks>
@@ -255,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -297,6 +343,8 @@
 
             
 
+            
+
              method to create metadata about a set of endpoints from a specified service.</para
           >
         </remarks>
@@ -309,8 +357,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -344,8 +396,12 @@
 
             
 
+            
+
              property returns documents only as a result of calls to either <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+
+            
 
             
 
@@ -354,8 +410,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -367,6 +427,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -401,8 +463,12 @@
 
             
 
+            
+
              property returns documents only as a result of calls to either <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+
+            
 
             
 
@@ -411,8 +477,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -424,6 +494,8 @@
           <para
             >Gets a set of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -458,8 +530,12 @@
 
             
 
+            
+
              property to get a collection of all the metadata generated as a result of any number of calls to <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+
+            
 
             
 
@@ -468,8 +544,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+
+            
 
             
 
@@ -478,6 +558,8 @@
           <para
             >It is recommended that you check the base <see
              cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
+
+            
 
             
 
@@ -492,6 +574,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -503,8 +587,12 @@
 
             
 
+            
+
              objects that represents the metadata generated as a result of calls to <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+
+            
 
             
 
@@ -513,8 +601,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+
+            
 
             
 

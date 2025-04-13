@@ -30,11 +30,15 @@
 
         
 
+        
+
          class to build and modify connection strings. The class also makes it easy to manage connection strings stored in an application configuration file.</para
       >
       <para
         >The <see
          cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          method. See the <see
          cref="P:System.Data.SqlClient.SqlConnection.ConnectionString" />
+
+        
 
         
 
@@ -80,6 +88,8 @@ Integrated Security=True</code>
 
         
 
+        
+
          class. </para
       >
     </summary>
@@ -97,6 +107,8 @@ Integrated Security=True</code>
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+            
 
             
 
@@ -127,6 +139,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              class provides a fixed internal collection of key/value pairs. Even if you supply only a small subset of the possible connection string values in the constructor, the object always provides default values for each key/value pair. When the ConnectionString property of the object is retrieved, the string contains only key/value pairs in which the value is not the default value for the item.</para
           >
         </remarks>
@@ -138,6 +152,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              class. The provided connection string provides the data for the instance's internal connection information.</para
           >
         </summary>
@@ -146,8 +162,12 @@ Integrated Security=True</code>
 
           
 
+          
+
           The basis for the object's internal connection information. Parsed into name/value pairs. Invalid key names raise <see
            cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+          
 
           
 
@@ -205,8 +225,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              object, this key/value pair must be included within the connection string of the associated <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -282,8 +306,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              method removes all key/value pairs from the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+            
 
             
 
@@ -292,8 +320,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              property to 0, and setting the <see
              cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+
+            
 
             
 
@@ -305,6 +337,8 @@ Integrated Security=True</code>
           <para
             >Clears the contents of the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+            
 
             
 
@@ -330,6 +364,8 @@ Integrated Security=True</code>
           <para
             >This property corresponds to the "Connection Reset" key within the <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -403,8 +439,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              contains a fixed-size collection of key/value pairs, the <see
              cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
+
+            
 
             
 
@@ -419,6 +459,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -430,6 +472,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              contains an element that has the specified key; otherwise, false.</para
           >
         </returns>
@@ -438,8 +482,12 @@ Integrated Security=True</code>
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+          
 
           
 
@@ -479,8 +527,12 @@ Integrated Security=True</code>
 
               
 
+              
+
                property returns null if the connection string for the <see
                cref="T:System.Data.SqlClient.SqlConnection" />
+
+              
 
               
 
@@ -728,6 +780,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -779,13 +833,19 @@ Integrated Security=True</code>
 
             
 
+            
+
              is unspecified, but it is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
             
 
+            
+
              returned by the <see
              cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Values" />
+
+            
 
             
 
@@ -800,8 +860,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              that contains the keys in the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+            
 
             
 
@@ -927,6 +991,8 @@ Integrated Security=True</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1025,8 +1091,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              has not been set and you retrieve the value, the return value is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1132,13 +1202,19 @@ Integrated Security=True</code>
 
             
 
+            
+
              instance. Because the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
+            
+
              maintains a fixed-size collection of key/value pairs, calling the <see
              cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
+
+            
 
             
 
@@ -1150,13 +1226,19 @@ Integrated Security=True</code>
 
             
 
+            
+
              is fixed, every item within the collection has a known default value. The following table lists the keys, and the value for each when the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
+            
+
              is first initialized, or after the <see
              cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
+
+            
 
             
 
@@ -1391,6 +1473,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1403,8 +1487,12 @@ Integrated Security=True</code>
 
           
 
+          
+
           The key of the key/value pair to be removed from the connection string in this <see
            cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+          
 
           
 
@@ -1467,6 +1555,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1475,6 +1565,8 @@ Integrated Security=True</code>
           <para
             >Indicates whether the specified key exists in this <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+            
 
             
 
@@ -1489,6 +1581,8 @@ Integrated Security=True</code>
 
             
 
+            
+
              contains an entry with the specified key; otherwise, false.</para
           >
         </returns>
@@ -1497,8 +1591,12 @@ Integrated Security=True</code>
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+          
 
           
 
@@ -1654,6 +1752,8 @@ Integrated Security=True</code>
 
               
 
+              
+
                and "User Instances for Non-Administrators" in ssNoVersion Books Online.</para
             >
           </block>
@@ -1684,8 +1784,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              is unspecified, but it is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1694,13 +1798,19 @@ Integrated Security=True</code>
 
             
 
+            
+
              property. Because each instance of the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
+            
+
              always contains the same fixed set of keys, the <see
              cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Values" />
+
+            
 
             
 
@@ -1715,8 +1825,12 @@ Integrated Security=True</code>
 
             
 
+            
+
              that contains the values in the <see
              cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+
+            
 
             
 

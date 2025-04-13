@@ -42,6 +42,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -73,8 +75,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+
+            
 
             
 
@@ -89,8 +95,12 @@
 
             
 
+            
+
              was inserted in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+
+            
 
             
 
@@ -102,13 +112,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+
+          
 
           
 
@@ -142,8 +158,12 @@
 
             
 
+            
+
              contains a specific <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -158,8 +178,12 @@
 
             
 
+            
+
              contains the <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -171,13 +195,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
+          
+
            to locate within the <see
            cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+
+          
 
           
 
@@ -234,8 +264,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+
+            
 
             
 
@@ -247,13 +281,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.Services.Discovery.DiscoveryReferenceCollection" />
+
+          
 
           
 

@@ -50,13 +50,19 @@
 
           
 
+          
+
            namespace, and the other in the <see
            cref="N:System.EnterpriseServices" />
 
           
 
+          
+
            namespace. The <see
            cref="T:System.EnterpriseServices.SynchronizationAttribute" />
+
+          
 
           
 
@@ -69,13 +75,19 @@
 
           
 
+          
+
           .) The <see
            cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
           
 
+          
+
            supports both synchronous and asynchronous calls, and can be used only with context bound objects. (For more information on context bound objects, see the <see
            cref="T:System.ContextBoundObject" />
+
+          
 
           
 
@@ -89,10 +101,14 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -102,6 +118,8 @@
               >[&lt;topic://cpconInheritanceDemands&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -139,6 +157,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -169,6 +189,8 @@
 
             
 
+            
+
              to which the current attribute is applied must be intercepted and serialized.</para
           >
         </remarks>
@@ -180,11 +202,15 @@
 
             
 
+            
+
              class with a Boolean value indicating whether reentry is required.</para
           >
         </summary>
         <param name="reEntrant">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,8 +243,12 @@
 
             
 
+            
+
              parameter must be either <see
              cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.NOT_SUPPORTED" />
+
+            
 
             
 
@@ -227,13 +257,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRED" />
 
             
 
+            
+
             , or <see
              cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRES_NEW" />
+
+            
 
             
 
@@ -248,11 +284,15 @@
 
             
 
+            
+
              class with a flag indicating the behavior of the object to which this attribute is applied.</para
           >
         </summary>
         <param name="flag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,8 +329,12 @@
 
             
 
+            
+
              parameter must be either <see
              cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.NOT_SUPPORTED" />
+
+            
 
             
 
@@ -299,13 +343,19 @@
 
             
 
+            
+
             , <see
              cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRED" />
 
             
 
+            
+
             , or <see
              cref="F:System.Runtime.Remoting.Contexts.SynchronizationAttribute.REQUIRES_NEW" />
+
+            
 
             
 
@@ -320,6 +370,8 @@
 
             
 
+            
+
              class with a flag indicating the behavior of the object to which this attribute is applied, and a Boolean value indicating whether reentry is required.</para
           >
         </summary>
@@ -328,10 +380,14 @@
 
           
 
+          
+
           An integer value indicating the behavior of the object to which this attribute is applied. </param
         >
         <param name="reEntrant">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,6 +425,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -382,6 +440,8 @@
         </returns>
         <param name="nextSink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,6 +488,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -436,8 +498,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -475,6 +541,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -488,6 +556,8 @@
         </returns>
         <param name="nextSink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,6 +607,8 @@
 
           
 
+          
+
           The context to check. </param
         >
         <param name="msg">
@@ -544,8 +616,12 @@
 
           
 
+          
+
           Information gathered at construction time of the context bound object marked by this attribute. The <see
            cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+
+          
 
           
 
@@ -572,6 +648,8 @@
           <para
             >If reentry is required, callouts out of the <see
              cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+            
 
             
 
@@ -606,8 +684,12 @@
 
             
 
+            
+
              is locked, only the thread currently executing in it has access to objects in the <see
              cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+            
 
             
 
@@ -622,8 +704,12 @@
 
             
 
+            
+
              implementing this instance of <see
              cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+
+            
 
             
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          objects created by one of the <see
          cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          object to read other JSON-encoded data, then the reader must be initialized to the second dataset to be read by using one of the <see
          cref="Overload:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput" />
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
             
 
+            
+
              object that reads JSON-encoded streams can be reused by calling the <see
              cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+
+            
 
             
 
@@ -91,8 +103,12 @@
 
             
 
+            
+
              value set as part of the <paramref
              name="quotas" />
+
+            
 
             
 
@@ -101,8 +117,12 @@
 
             
 
+            
+
              method and is not enforced when the <see
              cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+
+            
 
             
 
@@ -118,8 +138,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -130,8 +154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -143,10 +171,14 @@
 
           
 
+          
+
            to apply.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,13 +219,19 @@
 
             
 
+            
+
              object that reads a JSON-encoded buffered <see
              cref="T:System.Byte" />
 
             
 
+            
+
              can be reused by calling the <see
              cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+
+            
 
             
 
@@ -206,8 +244,12 @@
 
             
 
+            
+
              value set as part of the <paramref
              name="quotas" />
+
+            
 
             
 
@@ -216,8 +258,12 @@
 
             
 
+            
+
              method and is not enforced when the <see
              cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+
+            
 
             
 
@@ -233,8 +279,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -245,8 +295,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -257,8 +311,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -269,8 +327,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -281,8 +343,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -293,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.OnXmlDictionaryReaderClose" />
+
+          
 
           
 

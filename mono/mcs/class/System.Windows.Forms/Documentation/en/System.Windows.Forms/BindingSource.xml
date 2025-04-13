@@ -51,8 +51,12 @@
 
         
 
+        
+
          component serves many purposes. First, it simplifies binding controls on a form to data by providing currency management, change notification, and other services between Windows Forms controls and data sources. This is accomplished by attaching the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          property. For complex binding scenarios you can optionally set the <see
          cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+        
 
         
 
@@ -71,13 +79,19 @@
 
         
 
+        
+
         . All further interaction with the data is accomplished with calls to the <see
          cref="T:System.Windows.Forms.BindingSource" />
 
         
 
+        
+
          component. For examples on how the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -90,6 +104,8 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="eddc5bad-9513-47df-ab28-f02d8dff7892"
@@ -99,8 +115,12 @@
 
         
 
+        
+
         . Navigation and updating of the data source is accomplished through methods such as <see
          cref="M:System.Windows.Forms.BindingSource.MoveNext" />
+
+        
 
         
 
@@ -109,8 +129,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.BindingSource.Remove(System.Object)" />
+
+        
 
         
 
@@ -119,13 +143,19 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.BindingSource.Filter" />
 
         
 
+        
+
          properties. For more information on using sorting and filtering with the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -138,11 +168,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >In addition, the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -156,8 +190,12 @@
 
             
 
+            
+
              method to add an item to the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -171,6 +209,8 @@
 
             
 
+            
+
              property to a list, single object, or type.</para
           >
         </item>
@@ -178,6 +218,8 @@
       <para
         >Both of these mechanisms create a strongly-typed list. For more information on how to use the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -190,8 +232,12 @@
 
         
 
+        
+
         . You can also use the <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -204,6 +250,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -213,8 +261,12 @@
 
           
 
+          
+
            handles both simple and complex data sources, terminology is problematic. Within this class documentation, the term <newTerm
           >list</newTerm>
+
+          
 
           
 
@@ -223,13 +275,19 @@
 
           
 
+          
+
            denotes a single element. When discussing functionality associated with complex data sources, the equivalent terms <newTerm
           >table</newTerm>
 
           
 
+          
+
            and <newTerm
           >row</newTerm>
+
+          
 
           
 
@@ -241,8 +299,12 @@
 
         
 
+        
+
          provides members for accessing the underlying data. The current item can be retrieved through the <see
          cref="P:System.Windows.Forms.BindingSource.Current" />
+
+        
 
         
 
@@ -251,8 +313,12 @@
 
         
 
+        
+
          property. Editing operations are supported on the current item through <see
          cref="P:System.Windows.Forms.BindingSource.Current" />
+
+        
 
         
 
@@ -261,8 +327,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.BindingSource.EndEdit" />
+
+        
 
         
 
@@ -271,8 +341,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.BindingSource.Add(System.Object)" />
+
+        
 
         
 
@@ -281,13 +355,19 @@
 
         
 
+        
+
          methods. Although currency management is handled automatically for all underlying data source types, this class exposes a number of events, such as <see
          cref="E:System.Windows.Forms.BindingSource.CurrentItemChanged" />
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
+
+        
 
         
 
@@ -299,8 +379,12 @@
 
         
 
+        
+
          component can also be navigated and managed with the <see
          cref="T:System.Windows.Forms.BindingNavigator" />
+
+        
 
         
 
@@ -309,13 +393,19 @@
 
         
 
+        
+
          can be bound to any data source, it was designed to integrate with a <see
          cref="T:System.Windows.Forms.BindingSource" />
 
         
 
+        
+
          component through its <see
          cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+
+        
 
         
 
@@ -327,13 +417,19 @@
 
         
 
+        
+
          class is <see
          cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
         
 
+        
+
         . The default event is <see
          cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
+
+        
 
         
 
@@ -346,8 +442,12 @@
 
           
 
+          
+
            class operate on the underlying list represented by the <see
            cref="P:System.Windows.Forms.BindingSource.List" />
+
+          
 
           
 
@@ -356,8 +456,12 @@
 
           
 
+          
+
            is bound to a custom implementation of <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -366,8 +470,12 @@
 
           
 
+          
+
            method calls <see
            cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+
+          
 
           
 
@@ -376,8 +484,12 @@
 
           
 
+          
+
            documentation describes the <see
            cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
+
+          
 
           
 
@@ -386,8 +498,12 @@
 
           
 
+          
+
            method for the underlying <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -414,6 +530,8 @@
           <para
             >The following table shows the default <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -492,6 +610,8 @@
 
             
 
+            
+
              class to the default property values.</para
           >
         </summary>
@@ -518,6 +638,8 @@
 
             
 
+            
+
              to the specified container. It is not typically used by the solutions programmer, but instead by authors of design-time environments.</para
           >
         </remarks>
@@ -529,8 +651,12 @@
 
             
 
+            
+
              class and adds the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -542,13 +668,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IContainer" />
 
           
 
+          
+
            to add the current <see
            cref="T:System.Windows.Forms.BindingSource" />
+
+          
 
           
 
@@ -579,6 +711,8 @@
 
             
 
+            
+
              class with the specified data source and data member.</para
           >
         </summary>
@@ -587,8 +721,12 @@
 
           
 
+          
+
           The data source for the <see
            cref="T:System.Windows.Forms.BindingSource" />
+
+          
 
           
 
@@ -596,6 +734,8 @@
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -624,6 +764,8 @@
 
             
 
+            
+
              method refers the call to the underlying list's Add method.</para
           >
           <para
@@ -632,11 +774,15 @@
 
             
 
+            
+
              property has not already been set, then the first object added to the list defines the type for the list.</para
           >
           <para
             >This method raises the <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -655,8 +801,12 @@
 
             
 
+            
+
              was added to the underlying list represented by the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -668,8 +818,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -698,8 +852,12 @@
 
             
 
+            
+
              event occurs before a new object is added to the underlying list represented by the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -708,8 +866,12 @@
 
             
 
+            
+
              method is called, but before the new item is created and added to the underlying list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -718,8 +880,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.AddingNewEventArgs" />
+
+            
 
             
 
@@ -728,8 +894,12 @@
 
             
 
+            
+
              event must be of the same type as the type contained in the list or an exception will occur. You cannot set the <see
              cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+
+            
 
             
 
@@ -738,13 +908,19 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataTable" />
 
             
 
+            
+
              because you cannot add a new <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -756,10 +932,14 @@
 
             
 
+            
+
              method. For more information about handling events, see <format
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -791,8 +971,12 @@
 
             
 
+            
+
              method adds a new item to the underlying list represented by the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -806,6 +990,8 @@
 
                 
 
+                
+
                  method is automatically called to commit any pending edit operations.</para
               >
             </item>
@@ -816,8 +1002,12 @@
 
                 
 
+                
+
                  event is automatically raised. This event can be programmatically handled to construct the new item. This is accomplished in the event handler by setting the <see
                  cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
+
+                
 
                 
 
@@ -826,8 +1016,12 @@
 
                 
 
+                
+
                  parameter to the new item. The new object created in the <see
                  cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+
+                
 
                 
 
@@ -839,8 +1033,12 @@
 
                 
 
+                
+
                  event is not handled, and the underlying list is an <see
                  cref="T:System.ComponentModel.IBindingList" />
+
+                
 
                 
 
@@ -849,8 +1047,12 @@
 
                 
 
+                
+
                  method. If the underlying list is not an <see
                  cref="T:System.ComponentModel.IBindingList" />
+
+                
 
                 
 
@@ -864,13 +1066,19 @@
 
                 
 
+                
+
                  interface. In this case, the new item is not committed until an explicit call to <see
                  cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" />
 
                 
 
+                
+
                  is made or until a new list operation is initiated. Before it is committed, the new item can be rolled back by calling <see
                  cref="M:System.Windows.Forms.BindingSource.CancelEdit" />
+
+                
 
                 
 
@@ -881,6 +1089,8 @@
           <para
             >This method raises the <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -896,6 +1106,8 @@
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -928,6 +1140,8 @@
 
             
 
+            
+
              property is typically used by other components to determine if editing of items in the list is allowed.</para
           >
         </remarks>
@@ -956,8 +1170,12 @@
 
             
 
+            
+
              property depends on the underlying data source type. If the underlying list implements the <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -971,6 +1189,8 @@
 
                 
 
+                
+
                  property. </para
               >
             </item>
@@ -978,6 +1198,8 @@
               <para
                 >It is read-only, as determined by the <see
                  cref="P:System.Collections.IList.IsReadOnly" />
+
+                
 
                 
 
@@ -995,6 +1217,8 @@
 
               
 
+              
+
                method is called.</para
             >
           </block>
@@ -1004,13 +1228,19 @@
 
             
 
+            
+
              event with <see
              cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
             
 
+            
+
              set to <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -1022,8 +1252,12 @@
 
             
 
+            
+
              property to true and the underlying list type does not have a default constructor, you must handle the <see
              cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+
+            
 
             
 
@@ -1035,6 +1269,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="M:System.Windows.Forms.BindingSource.AddNew" />
+
+            
 
             
 
@@ -1064,6 +1300,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.BindingSource.AllowRemove" />
+
+            
 
             
 
@@ -1104,6 +1342,8 @@
 
             
 
+            
+
              implements multi-column sorting as a set of property descriptor-direction pairs.</para
           >
         </remarks>
@@ -1116,8 +1356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+          
 
           
 
@@ -1155,13 +1399,19 @@
 
             
 
+            
+
              implements single column sorting using a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
+            
+
              to indicate a property to sort by and a <see
              cref="T:System.ComponentModel.ListSortDirection" />
+
+            
 
             
 
@@ -1177,8 +1427,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1189,8 +1443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListSortDirection" />
+
+          
 
           
 
@@ -1219,8 +1477,12 @@
 
             
 
+            
+
              event occurs after all the clients, typically controls, have been bound to the current <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -1229,8 +1491,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+            
 
             
 
@@ -1244,6 +1510,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1252,6 +1520,8 @@
           <para
             >Occurs when all the clients have been bound to this <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -1282,6 +1552,8 @@
 
                 
 
+                
+
                  interface. </para
               >
             </item>
@@ -1289,6 +1561,8 @@
               <para
                 >The <see
                  cref="M:System.Windows.Forms.BindingSource.EndEdit" />
+
+                
 
                 
 
@@ -1302,8 +1576,12 @@
 
             
 
+            
+
              method of the underlying <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -1335,8 +1613,12 @@
 
             
 
+            
+
              method removes all elements from the underlying list represented by the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -1345,11 +1627,15 @@
 
             
 
+            
+
              property to zero. </para
           >
           <para
             >This method raises the <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -1385,6 +1671,8 @@
 
                 
 
+                
+
                  is searched starting at the first element and ending at the last element.</para
               >
             </item>
@@ -1395,6 +1683,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -1402,6 +1692,8 @@
               <para
                 >The underlying method determines equality by calling the <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -1422,8 +1714,12 @@
 
             
 
+            
+
              parameter is found in the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -1435,13 +1731,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the underlying list represented by the <see
            cref="P:System.Windows.Forms.BindingSource.List" />
+
+          
 
           
 
@@ -1475,6 +1777,8 @@
 
             
 
+            
+
              to the specified array, starting at the specified index value.</para
           >
         </summary>
@@ -1483,10 +1787,14 @@
 
           
 
+          
+
           The destination array.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1518,13 +1826,19 @@
 
             
 
+            
+
              property gets the number of items in the underlying list represented by the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
+            
+
              property as modified by the value of the <see
              cref="P:System.Windows.Forms.BindingSource.Filter" />
+
+            
 
             
 
@@ -1536,6 +1850,8 @@
           <para
             >Gets the total number of items in the underlying list, taking the current <see
              cref="P:System.Windows.Forms.BindingSource.Filter" />
+
+            
 
             
 
@@ -1571,6 +1887,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1579,6 +1897,8 @@
           <para
             >Gets the currency manager associated with this <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -1611,8 +1931,12 @@
 
             
 
+            
+
              property to access the current item, but use the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -1621,8 +1945,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -1634,8 +1962,12 @@
 
             
 
+            
+
              property to a new integral value, or use one of the navigation methods such as <see
              cref="M:System.Windows.Forms.BindingSource.MoveNext" />
+
+            
 
             
 
@@ -1666,8 +1998,12 @@
 
             
 
+            
+
              event is raised whenever the <see
              cref="P:System.Windows.Forms.BindingSource.Current" />
+
+            
 
             
 
@@ -1681,6 +2017,8 @@
 
                 
 
+                
+
                  changes.</para
               >
             </item>
@@ -1691,8 +2029,12 @@
 
                 
 
+                
+
                  or <see
                  cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+                
 
                 
 
@@ -1706,8 +2048,12 @@
 
                 
 
+                
+
                  changes, which causes <see
                  cref="P:System.Windows.Forms.BindingSource.Position" />
+
+                
 
                 
 
@@ -1724,6 +2070,8 @@
 
             
 
+            
+
              property will already contain its new value.</para
           >
           <para>
@@ -1731,8 +2079,12 @@
 
             
 
+            
+
              is the default event for the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -1743,6 +2095,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1773,8 +2127,12 @@
 
             
 
+            
+
              event is raised in response to all of the circumstances that raise the <see
              cref="E:System.Windows.Forms.BindingSource.CurrentChanged" />
+
+            
 
             
 
@@ -1783,8 +2141,12 @@
 
             
 
+            
+
              is also fired whenever the value of one of the properties of <see
              cref="P:System.Windows.Forms.BindingSource.Current" />
+
+            
 
             
 
@@ -1798,6 +2160,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1806,6 +2170,8 @@
           <para
             >Occurs when a property value of the <see
              cref="P:System.Windows.Forms.BindingSource.Current" />
+
+            
 
             
 
@@ -1835,8 +2201,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+
+            
 
             
 
@@ -1850,6 +2220,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1858,6 +2230,8 @@
           <para
             >Occurs when a currency-related exception is silently handled by the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -1896,8 +2270,12 @@
 
             
 
+            
+
              contains multiple lists (or tables) of data, you should set the <see
              cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+            
 
             
 
@@ -1906,6 +2284,8 @@
           <para
             >Setting this property raises the <see
              cref="E:System.Windows.Forms.BindingSource.DataMemberChanged" />
+
+            
 
             
 
@@ -1936,8 +2316,12 @@
 
             
 
+            
+
              event occurs after the <see
              cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+            
 
             
 
@@ -1951,6 +2335,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1959,6 +2345,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+            
 
             
 
@@ -1997,6 +2385,8 @@
 
             
 
+            
+
              property can be set to a number of data sources, including types, objects, and lists of types. The resulting data source will be exposed as a list. The following table shows some of the common data sources and the resulting list evaluation.</para
           >
           <list type="table">
@@ -2021,6 +2411,8 @@
 
                   
 
+                  
+
                    of objects. Adding an item sets the list to the type of the added item. </para
                 >
               </description>
@@ -2033,6 +2425,8 @@
 
                   
 
+                  
+
                    set</para
                 >
               </term>
@@ -2040,6 +2434,8 @@
                 <para
                   >Not supported, raises <see
                    cref="T:System.ArgumentException" />
+
+                  
 
                   
 
@@ -2058,6 +2454,8 @@
 
                   
 
+                  
+
                    of type "T".</para
                 >
               </description>
@@ -2072,6 +2470,8 @@
 
                   
 
+                  
+
                    containing the array elements.</para
                 >
               </description>
@@ -2080,6 +2480,8 @@
               <term>
                 <para>
                   <see cref="T:System.Collections.IEnumerable" />
+
+                  
 
                   
 
@@ -2093,8 +2495,12 @@
 
                   
 
+                  
+
                    containing the <see
                    cref="T:System.Collections.IEnumerable" />
+
+                  
 
                   
 
@@ -2112,6 +2518,8 @@
 
                   
 
+                  
+
                    instance containing type "T".</para
                 >
               </description>
@@ -2123,8 +2531,12 @@
 
             
 
+            
+
              can be set to other list types such as <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -2133,8 +2545,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -2146,8 +2562,12 @@
 
             
 
+            
+
              property to a string that specifies the list to bind to. Setting this property raises the <see
              cref="E:System.Windows.Forms.BindingSource.DataSourceChanged" />
+
+            
 
             
 
@@ -2160,6 +2580,8 @@
 
               
 
+              
+
                property value, you should do so on the user interface (UI) thread to ensure that the UI reflects the changes.</para
             >
           </block>
@@ -2169,8 +2591,12 @@
 
             
 
+            
+
              property is the default property for the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -2201,8 +2627,12 @@
 
             
 
+            
+
              event occurs after the <see
              cref="P:System.Windows.Forms.BindingSource.DataSource" />
+
+            
 
             
 
@@ -2216,6 +2646,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2224,6 +2656,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.BindingSource.DataSource" />
+
+            
 
             
 
@@ -2253,8 +2687,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2263,8 +2701,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2276,8 +2718,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -2292,11 +2738,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2323,6 +2773,8 @@
 
             
 
+            
+
              method is called, all pending changes are applied to the underlying data source.</para
           >
           <para
@@ -2331,8 +2783,12 @@
 
             
 
+            
+
              interface. If the objects do not implement the <see
              cref="T:System.ComponentModel.IEditableObject" />
+
+            
 
             
 
@@ -2341,6 +2797,8 @@
           <para
             >This method raises the <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -2377,13 +2835,19 @@
 
             
 
+            
+
              property allows you to view a subset of the <see
              cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
+            
+
             . Only underlying lists that implement the <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -2395,8 +2859,12 @@
 
             
 
+            
+
              is not null, the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -2408,8 +2876,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2418,8 +2890,12 @@
 
             
 
+            
+
             , you can specify Boolean expressions using the syntax documented for the <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -2431,8 +2907,12 @@
 
             
 
+            
+
              property affects the value of the <see
              cref="P:System.Windows.Forms.BindingSource.Count" />
+
+            
 
             
 
@@ -2441,13 +2921,19 @@
 
             
 
+            
+
              value will persist when the data source changes. To stop filtering the <see
              cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
+            
+
             , call the <see
              cref="M:System.Windows.Forms.BindingSource.RemoveFilter" />
+
+            
 
             
 
@@ -2485,8 +2971,12 @@
 
             
 
+            
+
              parameter equals the value of the <paramref
              name="key" />
+
+            
 
             
 
@@ -2498,8 +2988,12 @@
 
             
 
+            
+
              method. For example, if the underlying data source is a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2508,8 +3002,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -2518,8 +3016,12 @@
 
             
 
+            
+
              method. The behavior of <see
              cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+
+            
 
             
 
@@ -2538,6 +3040,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2546,8 +3050,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2558,8 +3066,12 @@
 
           
 
+          
+
           The value of <paramref
            name="prop" />
+
+          
 
           
 
@@ -2589,8 +3101,12 @@
 
             
 
+            
+
              method can only be used when the underlying list is an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2599,8 +3115,12 @@
 
             
 
+            
+
              method. For example, if the underlying data source is a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2609,8 +3129,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -2619,8 +3143,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -2629,8 +3157,12 @@
 
             
 
+            
+
              method. The behavior of <see
              cref="M:System.Windows.Forms.BindingSource.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+
+            
 
             
 
@@ -2651,6 +3183,8 @@
 
           
 
+          
+
           The name of the property to search for.</param
         >
         <param name="key">
@@ -2658,8 +3192,12 @@
 
           
 
+          
+
           The value of the item with the specified <paramref
            name="propertyName" />
+
+          
 
           
 
@@ -2690,6 +3228,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2701,8 +3241,12 @@
 
             
 
+            
+
              for the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -2736,6 +3280,8 @@
 
             
 
+            
+
              objects representing the bindable properties of the data source list type.</para
           >
         </summary>
@@ -2747,6 +3293,8 @@
 
             
 
+            
+
              objects that represents the properties on this list type used to bind data.</para
           >
         </returns>
@@ -2755,8 +3303,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2794,8 +3346,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2827,13 +3383,19 @@
 
             
 
+            
+
              is null or an empty string (""), <see
              cref="M:System.Windows.Forms.BindingSource.GetRelatedCurrencyManager(System.String)" />
 
             
 
+            
+
              returns the main currency manager; otherwise, it checks for another <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -2852,11 +3414,15 @@
 
             
 
+            
+
              for the specified data member.</para
           >
         </returns>
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2888,6 +3454,8 @@
 
                 
 
+                
+
                  is searched starting at the first element and ending at the last element.</para
               >
             </item>
@@ -2898,6 +3466,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -2905,6 +3475,8 @@
               <para
                 >The underlying method determines equality by calling the <see
                  cref="M:System.Object.Equals(System.Object)" />
+
+                
 
                 
 
@@ -2925,8 +3497,12 @@
 
             
 
+            
+
              parameter; otherwise, -1 if <paramref
              name="value" />
+
+            
 
             
 
@@ -2938,13 +3514,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
           
 
+          
+
            to locate in the underlying list represented by the <see
            cref="P:System.Windows.Forms.BindingSource.List" />
+
+          
 
           
 
@@ -2977,6 +3559,8 @@
 
             
 
+            
+
              event.</para
           >
         </remarks>
@@ -2989,8 +3573,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -3001,8 +3589,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3108,8 +3700,12 @@
 
             
 
+            
+
              always returns false if the list is not an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3193,13 +3789,19 @@
 
             
 
+            
+
              class uniformly handles different data sources. Ideally the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
+            
+
              property should be set to a general <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3223,8 +3825,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+                  
 
                   
 
@@ -3235,6 +3841,8 @@
                 <para
                   >An empty <see
                    cref="T:System.Collections.ArrayList" />
+
+                  
 
                   
 
@@ -3249,8 +3857,12 @@
 
                   
 
+                  
+
                    is null, but <see
                    cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+                  
 
                   
 
@@ -3264,8 +3876,12 @@
 
                   
 
+                  
+
                    will throw an <see
                    cref="T:System.ArgumentException" />
+
+                  
 
                   
 
@@ -3278,6 +3894,8 @@
                 <para
                   >An <see
                    cref="T:System.Array" />
+
+                  
 
                   
 
@@ -3291,6 +3909,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -3300,6 +3920,8 @@
                 <para
                   >An <see
                    cref="T:System.ComponentModel.IListSource" />
+
+                  
 
                   
 
@@ -3313,8 +3935,12 @@
 
                   
 
+                  
+
                    method of this <see
                    cref="T:System.ComponentModel.IListSource" />
+
+                  
 
                   
 
@@ -3330,6 +3956,8 @@
 
                   
 
+                  
+
                    instance</para
                 >
               </term>
@@ -3337,6 +3965,8 @@
                 <para
                   >An <see
                    cref="T:System.ComponentModel.IBindingList" />
+
+                  
 
                   
 
@@ -3352,6 +3982,8 @@
 
                   
 
+                  
+
                    instance</para
                 >
               </term>
@@ -3359,6 +3991,8 @@
                 <para
                   >An <see
                    cref="T:System.Collections.IList" />
+
+                  
 
                   
 
@@ -3374,6 +4008,8 @@
 
                   
 
+                  
+
                    instance of type "T"</para
                 >
               </term>
@@ -3381,6 +4017,8 @@
                 <para
                   >A <see
                    cref="T:System.ComponentModel.BindingList`1" />
+
+                  
 
                   
 
@@ -3396,6 +4034,8 @@
 
                   
 
+                  
+
                    instance</para
                 >
               </term>
@@ -3403,6 +4043,8 @@
                 <para
                   >An <see
                    cref="T:System.Collections.ArrayList" />
+
+                  
 
                   
 
@@ -3424,6 +4066,8 @@
 
                   
 
+                  
+
                    with the elements copied over.</para
                 >
               </description>
@@ -3436,8 +4080,12 @@
 
                   
 
+                  
+
                    type with <see
                    cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+                  
 
                   
 
@@ -3448,6 +4096,8 @@
                 <para
                   >A <see
                    cref="T:System.ComponentModel.BindingList`1" />
+
+                  
 
                   
 
@@ -3463,8 +4113,12 @@
 
                   
 
+                  
+
                    that represents an <see
                    cref="T:System.ComponentModel.IListSource" />
+
+                  
 
                   
 
@@ -3479,13 +4133,19 @@
 
                   
 
+                  
+
                    method of the <see
                    cref="T:System.Activator" />
 
                   
 
+                  
+
                    class. A <see
                    cref="T:System.NotSupportedException" />
+
+                  
 
                   
 
@@ -3501,8 +4161,12 @@
 
                   
 
+                  
+
                    type with <see
                    cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+                  
 
                   
 
@@ -3515,6 +4179,8 @@
 
                   
 
+                  
+
                    type</para
                 >
               </term>
@@ -3522,6 +4188,8 @@
                 <para
                   >A <see
                    cref="T:System.ComponentModel.BindingList`1" />
+
+                  
 
                   
 
@@ -3537,6 +4205,8 @@
 
                   
 
+                  
+
                    type</para
                 >
               </term>
@@ -3547,8 +4217,12 @@
 
                   
 
+                  
+
                    will throw an <see
                    cref="T:System.NotSupportedException" />
+
+                  
 
                   
 
@@ -3563,13 +4237,19 @@
 
             
 
+            
+
              interface, the underlying collection may be more complex, such as an <see
              cref="T:System.Collections.ArrayList" />
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -3603,8 +4283,12 @@
 
             
 
+            
+
              event occurs when there is a change to the membership or metadata of the underlying list represented by the <see
              cref="P:System.Windows.Forms.BindingSource.List" />
+
+            
 
             
 
@@ -3613,8 +4297,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+            
 
             
 
@@ -3623,8 +4311,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.BindingSource.Filter" />
+
+            
 
             
 
@@ -3636,10 +4328,14 @@
 
             
 
+            
+
              property to false. For more information about handling events, see <format
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3671,6 +4367,8 @@
 
             
 
+            
+
              property to 0, the first item in the underlying data source.</para
           >
         </remarks>
@@ -3699,8 +4397,12 @@
 
             
 
+            
+
              property to the index of the last item in the underlying data source, which is equal to the value of the <see
              cref="P:System.Windows.Forms.BindingSource.Count" />
+
+            
 
             
 
@@ -3732,6 +4434,8 @@
 
             
 
+            
+
              property to the next item in the underlying data source.</para
           >
         </remarks>
@@ -3757,6 +4461,8 @@
           <para
             >This method changes the current value of the <see
              cref="P:System.Windows.Forms.BindingSource.Position" />
+
+            
 
             
 
@@ -3795,11 +4501,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnAddingNew(System.ComponentModel.AddingNewEventArgs)" />
+
+            
 
             
 
@@ -3814,6 +4524,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3822,8 +4534,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3857,11 +4573,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" />
+
+            
 
             
 
@@ -3876,6 +4596,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3884,8 +4606,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+          
 
           
 
@@ -3919,6 +4645,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3929,11 +4657,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnCurrentChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3948,6 +4680,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3956,8 +4690,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3991,11 +4729,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnCurrentItemChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4010,6 +4752,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4018,8 +4762,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4053,11 +4801,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnDataError(System.Windows.Forms.BindingManagerDataErrorEventArgs)" />
+
+            
 
             
 
@@ -4072,6 +4824,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4080,8 +4834,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+
+          
 
           
 
@@ -4115,11 +4873,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnDataMemberChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4134,6 +4896,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4142,8 +4906,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4177,11 +4945,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnDataSourceChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4196,6 +4968,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4204,8 +4978,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4239,11 +5017,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnListChanged(System.ComponentModel.ListChangedEventArgs)" />
+
+            
 
             
 
@@ -4258,6 +5040,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4266,8 +5050,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4301,11 +5089,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingSource.OnPositionChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4320,6 +5112,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4328,8 +5122,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+          
 
           
 
@@ -4364,6 +5162,8 @@
 
             
 
+            
+
              property, out-of-range values are treated in the following manner:</para
           >
           <list type="bullet">
@@ -4377,8 +5177,12 @@
 
                 
 
+                
+
                  are treated as <see
                  cref="P:System.Windows.Forms.BindingSource.Count" />
+
+                
 
                 
 
@@ -4392,8 +5196,12 @@
 
             
 
+            
+
              property will adjust the <see
              cref="P:System.Windows.Forms.BindingSource.Current" />
+
+            
 
             
 
@@ -4424,8 +5232,12 @@
 
             
 
+            
+
              event occurs after the <see
              cref="P:System.Windows.Forms.BindingSource.Position" />
+
+            
 
             
 
@@ -4439,6 +5251,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4447,6 +5261,8 @@
           <para
             >Occurs after the value of the <see
              cref="P:System.Windows.Forms.BindingSource.Position" />
+
+            
 
             
 
@@ -4482,8 +5298,12 @@
 
             
 
+            
+
              property is false, it suspends the raising of <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -4495,6 +5315,8 @@
           <para
             >Gets or sets a value indicating whether <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -4524,8 +5346,12 @@
 
             
 
+            
+
              method causes the list to be searched for the <paramref
              name="value" />
+
+            
 
             
 
@@ -4534,8 +5360,12 @@
 
             
 
+            
+
             . This attempt will fail if the list has a fixed size or is read-only. These two conditions can be tested with the <see
              cref="P:System.Windows.Forms.BindingSource.IsFixedSize" />
+
+            
 
             
 
@@ -4544,11 +5374,15 @@
 
             
 
+            
+
              properties, respectively.</para
           >
           <para
             >This method raises the <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -4564,8 +5398,12 @@
 
           
 
+          
+
           The item to remove from the underlying list represented by the <see
            cref="P:System.Windows.Forms.BindingSource.List" />
+
+          
 
           
 
@@ -4594,8 +5432,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.BindingSource.IsReadOnly" />
+
+            
 
             
 
@@ -4604,6 +5446,8 @@
           <para
             >This method raises the <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -4616,6 +5460,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4642,8 +5488,12 @@
 
             
 
+            
+
              method is equivalent to the <see
              cref="M:System.Windows.Forms.BindingSource.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -4675,13 +5525,19 @@
 
             
 
+            
+
              method refers the request to the underlying list's <see
              cref="M:System.ComponentModel.IBindingListView.RemoveFilter" />
 
             
 
+            
+
              method. Only lists that implement <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -4693,6 +5549,8 @@
 
             
 
+            
+
              property to null.</para
           >
         </remarks>
@@ -4701,6 +5559,8 @@
           <para
             >Removes the filter associated with the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -4728,13 +5588,19 @@
 
             
 
+            
+
              method refers the request to the underlying list's <see
              cref="M:System.ComponentModel.IBindingList.RemoveSort" />
 
             
 
+            
+
              method. Only lists that implement <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -4746,6 +5612,8 @@
 
             
 
+            
+
              property to null.</para
           >
         </remarks>
@@ -4754,6 +5622,8 @@
           <para
             >Removes the sort associated with the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -4786,13 +5656,19 @@
 
             
 
+            
+
              method reinitializes the <see
              cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
+            
+
              property to reflect the value of the corresponding <see
              cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+
+            
 
             
 
@@ -4804,6 +5680,8 @@
           <para
             >Reinitializes the <see
              cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+
+            
 
             
 
@@ -4833,8 +5711,12 @@
 
             
 
+            
+
              method informs all controls bound to the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -4843,8 +5725,12 @@
 
             
 
+            
+
              event at least once; the <paramref
              name="metaDataChanged" />
+
+            
 
             
 
@@ -4858,8 +5744,12 @@
 
                 
 
+                
+
                  value of true indicates that the data schema of <see
                  cref="T:System.Windows.Forms.BindingSource" />
+
+                
 
                 
 
@@ -4868,13 +5758,19 @@
 
                 
 
+                
+
                  event is raised with <see
                  cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
                 
 
+                
+
                  set to <see
                  cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorChanged" />
+
+                
 
                 
 
@@ -4888,6 +5784,8 @@
 
                 
 
+                
+
                  value of false indicates that only the values of one or more items have changed. </para
               >
             </item>
@@ -4898,8 +5796,12 @@
 
             
 
+            
+
             , a <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -4908,8 +5810,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -4918,8 +5824,12 @@
 
             
 
+            
+
              with a parameter of true will raise two <see
              cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+
+            
 
             
 
@@ -4930,13 +5840,19 @@
 
             
 
+            
+
              is automatically called whenever another member makes major changes to the data-binding, such as setting the <see
              cref="P:System.Windows.Forms.BindingSource.DataSource" />
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.BindingSource.DataMember" />
+
+            
 
             
 
@@ -4951,11 +5867,15 @@
 
             
 
+            
+
              to reread all the items in the list and refresh their displayed values. </para
           >
         </summary>
         <param name="metadataChanged">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4982,6 +5902,8 @@
 
             
 
+            
+
              event to occur, specifying the item changed at the current position.</para
           >
         </remarks>
@@ -4990,6 +5912,8 @@
           <para
             >Causes a control bound to the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -5019,8 +5943,12 @@
 
             
 
+            
+
              method notifies all controls bound to the item at the specified <see
              cref="P:System.Windows.Forms.BindingSource.Position" />
+
+            
 
             
 
@@ -5029,8 +5957,12 @@
 
             
 
+            
+
              event with <see
              cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+
+            
 
             
 
@@ -5039,10 +5971,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.Windows.Forms.BindingSource.ResetItem(System.Int32)" />
+
+            
 
             
 
@@ -5057,11 +5993,15 @@
 
             
 
+            
+
              to reread the item at the specified index, and refresh its displayed value. </para
           >
         </summary>
         <param name="itemIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5087,8 +6027,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+
+            
 
             
 
@@ -5101,8 +6045,12 @@
 
               
 
+              
+
                prevents changes from being pushed into the data source until <see
                cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+
+              
 
               
 
@@ -5111,8 +6059,12 @@
 
               
 
+              
+
                control, update their values based on change events such as the <see
                cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+
+              
 
               
 
@@ -5121,8 +6073,12 @@
 
               
 
+              
+
                will not prevent them from receiving changes to the data source. For this reason, this <see
                cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+
+              
 
               
 
@@ -5131,8 +6087,12 @@
 
               
 
+              
+
                are designed for use with simple-bound controls, such as the <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -5141,8 +6101,12 @@
 
               
 
+              
+
                events by setting the <see
                cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+
+              
 
               
 
@@ -5180,6 +6144,8 @@
 
             
 
+            
+
              property is a case-sensitive string that specifies the column names used to sort the rows, along with the sort direction. Columns are sorted ascending by default. Multiple columns can be separated by commas, such as "State, ZipCode DESC".</para
           >
           <para
@@ -5188,8 +6154,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.IBindingListView" />
+
+            
 
             
 
@@ -5198,8 +6168,12 @@
 
             
 
+            
+
              property. Multicolumn sorting is available when the <see
              cref="P:System.Windows.Forms.BindingSource.SupportsAdvancedSorting" />
+
+            
 
             
 
@@ -5208,6 +6182,8 @@
           <para
             >Setting the <see
              cref="P:System.Windows.Forms.BindingSource.Sort" />
+
+            
 
             
 
@@ -5221,13 +6197,19 @@
 
                 
 
+                
+
                 , the <see
                  cref="P:System.ComponentModel.IBindingList.SortProperty" />
 
                 
 
+                
+
                  and <see
                  cref="P:System.ComponentModel.IBindingList.SortDirection" />
+
+                
 
                 
 
@@ -5241,8 +6223,12 @@
 
                 
 
+                
+
                 , the <see
                  cref="P:System.ComponentModel.IBindingListView.SortDescriptions" />
+
+                
 
                 
 
@@ -5253,6 +6239,8 @@
           <para
             >The internal list's sort properties are only changed when the sort string is not null. The get accessor for this property will not retrieve the sort value of the internal list; instead, it will return the set accessor value. The value of the <see
              cref="P:System.Windows.Forms.BindingSource.Sort" />
+
+            
 
             
 
@@ -5295,8 +6283,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.BindingSource.SortDescriptions" />
+
+            
 
             
 
@@ -5305,6 +6297,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -5347,13 +6341,19 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.BindingSource.SortDirection" />
 
             
 
+            
+
              property will always return <see
              cref="F:System.ComponentModel.ListSortDirection.Ascending" />
+
+            
 
             
 
@@ -5396,8 +6396,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.BindingSource.SortProperty" />
+
+            
 
             
 
@@ -5409,6 +6413,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -5441,8 +6447,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.BindingSource.SupportsAdvancedSorting" />
+
+            
 
             
 
@@ -5505,8 +6515,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.BindingSource.SupportsFiltering" />
+
+            
 
             
 
@@ -5543,8 +6557,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.BindingSource.SupportsSearching" />
+
+            
 
             
 
@@ -5556,6 +6574,8 @@
           <para
             >Gets a value indicating whether the data source supports searching with the <see
              cref="M:System.Windows.Forms.BindingSource.Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+
+            
 
             
 
@@ -5588,8 +6608,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.BindingSource.SupportsSorting" />
+
+            
 
             
 
@@ -5620,8 +6644,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+
+            
 
             
 
@@ -5634,8 +6662,12 @@
 
               
 
+              
+
                and prevents changes from being pushed into the data source until <see
                cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+
+              
 
               
 
@@ -5644,8 +6676,12 @@
 
               
 
+              
+
                control, update their values based on change events such as the <see
                cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+
+              
 
               
 
@@ -5654,8 +6690,12 @@
 
               
 
+              
+
                will not prevent them from receiving changes to the data source. For this reason, this <see
                cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+
+              
 
               
 
@@ -5664,8 +6704,12 @@
 
               
 
+              
+
                are designed for use with simple-bound controls, such as the <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -5674,8 +6718,12 @@
 
               
 
+              
+
                events by setting the <see
                cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+
+              
 
               
 
@@ -5736,13 +6784,19 @@
 
             
 
+            
+
              type, this method will add the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
+            
+
              to the indexes; otherwise, calling this method will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5757,6 +6811,8 @@
 
             
 
+            
+
              to the indexes used for searching.</para
           >
         </summary>
@@ -5765,8 +6821,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -5798,8 +6858,12 @@
 
             
 
+            
+
             , this method will always throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5814,6 +6878,8 @@
 
             
 
+            
+
              from the indexes used for searching.</para
           >
         </summary>
@@ -5822,8 +6888,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -5852,13 +6922,19 @@
 
             
 
+            
+
              method rolls back a pending addition of an item previously added to the collection at the index specified by <paramref
              name="position" />
 
             
 
+            
+
             . The <paramref
              name="position" />
+
+            
 
             
 
@@ -5871,6 +6947,8 @@
         </summary>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5899,13 +6977,19 @@
 
             
 
+            
+
              method commits a pending addition of an item previously added to the collection at the index specified by <paramref
              name="position" />
 
             
 
+            
+
             . The <paramref
              name="position" />
+
+            
 
             
 
@@ -5918,6 +7002,8 @@
         </summary>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5945,6 +7031,8 @@
 
             
 
+            
+
              that initialization is starting.</para
           >
         </summary>
@@ -5967,6 +7055,8 @@
           <para
             >Signals the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 
@@ -5997,8 +7087,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ISupportInitializeNotification" />
+
+            
 
             
 
@@ -6010,6 +7104,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.BindingSource" />
+
+            
 
             
 

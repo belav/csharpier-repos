@@ -23,6 +23,8 @@
       
 
       
+
+      
       processing.
     </summary
     >
@@ -31,6 +33,8 @@
         >
         The <see
          cref="T:Mono.Options.ArgumentSource" />
+
+        
 
         
 
@@ -46,14 +50,20 @@
 
         
 
+        
+
         , as used by
         <c
         >CSC.EXE</c>
 
         
 
+        
+
         , <c
         >CL.EXE</c>
+
+        
 
         
 
@@ -73,9 +83,13 @@
         
 
         
+
+        
         before calling 
         <see
          cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+
+        
 
         
 
@@ -129,6 +143,8 @@
 
           
 
+          
+
            instance.
         </summary
         >
@@ -155,6 +171,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -165,10 +183,14 @@
 
           
 
+          
+
            containing
           the description to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+
+          
 
           
 
@@ -206,6 +228,8 @@
 
           
 
+          
+
            to extract arguments from.
         </param
         >
@@ -213,6 +237,8 @@
           >
           Extract arguments from a <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -227,8 +253,12 @@
           
 
           
+
+          
           which will provide arguments extracted from <paramref
            name="reader" />
+
+          
 
           
 
@@ -243,10 +273,14 @@
 
             
 
+            
+
              by
             splitting on newlines and spaces but maintaining the contents of
             single-quoted and double-quoted strings.  Thus, <c
             >A B</c>
+
+            
 
             
 
@@ -256,9 +290,13 @@
 
             
 
+            
+
             , while 
             <c
             >"A B"</c>
+
+            
 
             
 
@@ -270,9 +308,13 @@
 
             
 
+            
+
              is not 
             <see
              cref="M:System.IO&gt;TextReader.Close" />
+
+            
 
             
 
@@ -315,6 +357,8 @@
 
           
 
+          
+
            containing the argument to replace
           with additional arguments.
         </param
@@ -327,9 +371,13 @@
           
 
           
+
+          
           which will refer to teh replacement arguments if this method returns
           <see
            langword="true" />
+
+          
 
           
 
@@ -344,6 +392,8 @@
 
           
 
+          
+
            with a set of
           replacement arguments.
         </summary
@@ -353,9 +403,13 @@
 
           
 
+          
+
            if this 
           <see
            cref="T:Mono.Options.ArgumentSource" />
+
+          
 
           
 
@@ -365,15 +419,21 @@
 
           
 
+          
+
            with a set of replacement strings and
           <paramref
            name="replacement" />
 
           
 
+          
+
            contains the replacement strings;
           otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -390,9 +450,13 @@
             
 
             
+
+            
             attempts to parse an argument as an option (or option value), all
             registered <see
              cref="T:Mono.Options.OptionSet.ArgumentSources" />
+
+            
 
             
 
@@ -403,10 +467,14 @@
 
             
 
+            
+
              "supports" the
             argument via 
             <see
              cref="M:Mono.Options.ArgumentSource.GetArguments(System.Int32, System.Collections.Generic.IEnumerable{System.String}@)" />
+
+            
 
             
 
@@ -416,8 +484,12 @@
 
             
 
+            
+
              to return <see
              langword="true" />
+
+            
 
             
 
@@ -427,9 +499,13 @@
 
             
 
+            
+
              may provide the replacement tokens, and
             no later <c
             >ArgumentSource</c>
+
+            
 
             
 
@@ -468,6 +544,8 @@
 
           
 
+          
+
            containing the file to extract
           arguments from.
         </param
@@ -483,8 +561,12 @@
           
 
           
+
+          
           which will provide arguments extracted from <paramref
            name="file" />
+
+          
 
           
 
@@ -494,6 +576,8 @@
         <remarks></remarks>
         <exception cref="T:System.IO.IOException">
           <paramref name="file" />
+
+          
 
           
 
@@ -527,6 +611,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -537,10 +623,14 @@
 
           
 
+          
+
            array containing
           the names to provide for the argument source within 
           <see
            cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+
+          
 
           
 

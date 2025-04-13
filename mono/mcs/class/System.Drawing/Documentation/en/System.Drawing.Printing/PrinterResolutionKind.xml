@@ -22,8 +22,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Drawing.Printing.PrinterSettings" />
+
+        
 
         
 
@@ -32,11 +36,15 @@
 
         
 
+        
+
          classes.</para
       >
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 

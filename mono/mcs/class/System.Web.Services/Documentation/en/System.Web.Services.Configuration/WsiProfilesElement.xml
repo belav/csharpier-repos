@@ -39,6 +39,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -67,8 +69,12 @@
 
             
 
+            
+
              class, using the specified <see
              cref="T:System.Web.Services.WsiProfiles" />
+
+            
 
             
 
@@ -80,8 +86,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.WsiProfiles" />
+
+          
 
           
 

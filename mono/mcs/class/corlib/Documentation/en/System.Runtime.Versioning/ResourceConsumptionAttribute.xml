@@ -38,8 +38,12 @@
 
         
 
+        
+
          attribute is applied to a member, the <see
          cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          parameter should be used to specify how the resource is consumed. For example, a resource may be exposed as a <see
          cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+
+        
 
         
 
@@ -71,13 +83,19 @@
 
         
 
+        
+
          parameter is set to <see
          cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
         
 
+        
+
          | <see
          cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          parameter in the constructor must specify a <see
          cref="T:System.Runtime.Versioning.ResourceScope" />
+
+        
 
         
 
@@ -99,8 +121,12 @@
 
         
 
+        
+
          resources and one <see
          cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+
+        
 
         
 
@@ -109,8 +135,12 @@
 
         
 
+        
+
          and a <see
          cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+
+        
 
         
 
@@ -119,13 +149,19 @@
 
         
 
+        
+
          to <see
          cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
 
         
 
+        
+
          | <see
          cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+
+        
 
         
 
@@ -137,8 +173,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Runtime.Versioning.ResourceScope.Private" />
+
+        
 
         
 
@@ -147,8 +187,12 @@
 
         
 
+        
+
          members cannot expose <see
          cref="F:System.Runtime.Versioning.ResourceScope.Private" />
+
+        
 
         
 
@@ -160,8 +204,12 @@
 
         
 
+        
+
          attribute with a resource scope of <see
          cref="F:System.Runtime.Versioning.ResourceScope.None" />
+
+        
 
         
 
@@ -202,6 +250,8 @@
 
             
 
+            
+
              class specifying the scope of the consumed resource. </para
           >
         </summary>
@@ -210,8 +260,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Versioning.ResourceScope" />
+
+          
 
           
 
@@ -247,8 +301,12 @@
 
             
 
+            
+
              attribute specifies a scope of <see
              cref="F:System.Runtime.Versioning.ResourceScope.None" />
+
+            
 
             
 
@@ -257,8 +315,12 @@
 
             
 
+            
+
              attribute must specify a resource it consumes and how it consumes it, by specifying a value for the <paramref
              name="consumptionScope" />
+
+            
 
             
 
@@ -270,8 +332,12 @@
 
             
 
+            
+
              should be less than or equal to the scope specified by <paramref
              name="resourceScope" />
+
+            
 
             
 
@@ -280,8 +346,12 @@
 
             
 
+            
+
              scope can be consumed as a <see
              cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+
+            
 
             
 
@@ -290,8 +360,12 @@
 
             
 
+            
+
              scope, but not as a <see
              cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+
+            
 
             
 
@@ -306,6 +380,8 @@
 
             
 
+            
+
              class specifying the scope of the consumed resource and the scope of how it is consumed.</para
           >
         </summary>
@@ -314,8 +390,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Versioning.ResourceScope" />
+
+          
 
           
 
@@ -326,8 +406,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Versioning.ResourceScope" />
+
+          
 
           
 

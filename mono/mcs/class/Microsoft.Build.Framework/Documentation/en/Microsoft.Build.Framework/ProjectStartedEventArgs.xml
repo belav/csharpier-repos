@@ -26,6 +26,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -43,6 +45,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Framework.ProjectStartedEventArgs" />
+
+            
 
             
 
@@ -79,11 +83,15 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -94,10 +102,14 @@
 
           
 
+          
+
           The Help keyword associated with the event.</param
         >
         <param name="projectFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,6 +120,8 @@
 
           
 
+          
+
           The targets to be built.</param
         >
         <param name="properties">
@@ -115,10 +129,14 @@
 
           
 
+          
+
           A list of properties</param
         >
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +161,8 @@
           <para
             >The items and metadata accessed through <see
              cref="P:Microsoft.Build.Framework.ProjectStartedEventArgs.Items" />
+
+            
 
             
 
@@ -200,6 +220,8 @@
 
             
 
+            
+
              are kept up-to-date and can be enumerated throughout the build of the project. However, changing a property in this list will not affect the build process.</para
           >
           <block subset="none" type="note">
@@ -210,6 +232,8 @@
                   >How To: Use Environment Variables in a Build</a
                 >
               </format>
+
+              
 
               
 

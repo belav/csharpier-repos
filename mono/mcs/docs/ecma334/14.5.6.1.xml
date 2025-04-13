@@ -6,8 +6,12 @@
 
     
 
+    
+
      of the <non_terminal
      where="14.5.6">element-access</non_terminal>
+
+    
 
     
 
@@ -16,8 +20,12 @@
 
     
 
+    
+
     . The number of expressions in the <non_terminal
      where="14.5.6">expression-list</non_terminal>
+
+    
 
     
 
@@ -26,8 +34,12 @@
 
     
 
+    
+
     , and each expression must be of type <keyword
     >int</keyword>
+
+    
 
     
 
@@ -36,13 +48,19 @@
 
     
 
+    
+
     , <keyword
     >long</keyword>
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -54,6 +72,8 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
@@ -62,13 +82,19 @@
 
     
 
+    
+
      of an <non_terminal
      where="19.1">array-type</non_terminal>
 
     
 
+    
+
      and A is an <non_terminal
      where="14.5.6">expression-list</non_terminal>
+
+    
 
     
 
@@ -81,8 +107,12 @@
 
         
 
+        
+
          are evaluated in order, from left to right. Following evaluation of each index expression, an implicit conversion (<hyperlink
         >13.1</hyperlink>
+
+        
 
         
 
@@ -91,13 +121,19 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
 
         
 
+        
+
         , <keyword
         >long</keyword>
+
+        
 
         
 
@@ -106,8 +142,12 @@
 
         
 
+        
+
         . The first type in this list for which an implicit conversion exists is chosen. For instance, if the index expression is of type <keyword
         >short</keyword>
+
+        
 
         
 
@@ -116,8 +156,12 @@
 
         
 
+        
+
          is performed, since implicit conversions from <keyword
         >short</keyword>
+
+        
 
         
 
@@ -126,13 +170,19 @@
 
         
 
+        
+
          and from <keyword
         >short</keyword>
 
         
 
+        
+
          to <keyword
         >long</keyword>
+
+        
 
         
 
@@ -142,6 +192,8 @@
       <list_item
         > The value of each expression in the <non_terminal
          where="14.5.6">expression-list</non_terminal>
+
+        
 
         
 

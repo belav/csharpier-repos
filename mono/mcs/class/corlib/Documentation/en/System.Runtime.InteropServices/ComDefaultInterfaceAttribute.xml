@@ -40,8 +40,12 @@
 
         
 
+        
+
          class with [ClassInterface(ClassInterfaceType.None)] to expose an explicit interface as the default interface. Regardless of the specified ClassInterfaceType, use the <see
          cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >Note that the type decorated by the <see
          cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
+
+        
 
         
 
@@ -89,6 +95,8 @@
 
             
 
+            
+
              type passed to the constructor must be visible to COM.</para
           >
         </remarks>
@@ -100,8 +108,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -113,8 +125,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -142,6 +158,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

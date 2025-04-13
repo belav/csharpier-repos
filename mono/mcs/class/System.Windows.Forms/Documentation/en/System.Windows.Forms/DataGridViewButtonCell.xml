@@ -22,8 +22,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          is the column type specialized to hold cells of this type. By default, the <see
          cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" />
+
+        
 
         
 
@@ -44,13 +52,19 @@
 
         
 
+        
+
         . To pattern the cells within a column after an existing <see
          cref="T:System.Windows.Forms.DataGridViewButtonCell" />
 
         
 
+        
+
         , set the column's <see
          cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" />
+
+        
 
         
 
@@ -62,8 +76,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
+
+        
 
         
 
@@ -72,8 +90,12 @@
 
         
 
+        
+
          property to determine whether the click occurred a the button column. You can use the <see
          cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" />
+
+        
 
         
 
@@ -87,8 +109,12 @@
 
           
 
+          
+
           , and cell styles specified through properties such as <see
            cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" />
+
+          
 
           
 
@@ -101,6 +127,8 @@
       <para
         >Displays a button-like user interface (UI) for use in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -121,6 +149,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+            
 
             
 
@@ -149,8 +179,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+            
 
             
 
@@ -169,8 +203,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+            
 
             
 
@@ -202,8 +240,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+            
 
             
 
@@ -213,6 +255,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+              
 
               
 
@@ -228,6 +272,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -239,8 +285,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+            
 
             
 
@@ -294,8 +344,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewButtonCell.FlatStyle" />
+
+            
 
             
 
@@ -438,6 +492,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -453,8 +509,12 @@
 
             
 
+            
+
              or the <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" />
+
+            
 
             
 
@@ -463,11 +523,15 @@
 
             
 
+            
+
              is true. </para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,8 +565,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -511,13 +579,19 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Windows.Forms.KeyEventArgs" />
 
             
 
+            
+
              argument has the effect of unsharing the row <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -530,6 +604,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -549,8 +625,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -558,6 +638,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,8 +673,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -601,13 +687,19 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Windows.Forms.KeyEventArgs" />
 
             
 
+            
+
              argument has the effect of unsharing the row <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -620,6 +712,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -639,8 +733,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -648,6 +746,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -680,8 +780,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -690,8 +794,12 @@
 
             
 
+            
+
              has the effect of unsharing the row <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -704,6 +812,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -723,8 +833,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -757,8 +871,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
+
+            
 
             
 
@@ -767,8 +885,12 @@
 
             
 
+            
+
              has the effect of unsharing the row <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -781,6 +903,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -797,6 +921,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,8 +955,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnMouseLeave(System.Int32)" />
+
+            
 
             
 
@@ -839,13 +969,19 @@
 
             
 
+            
+
              must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnMouseLeave(System.Int32)" />
 
             
 
+            
+
              has the effect of unsharing the row specified by <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -858,6 +994,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -874,6 +1012,8 @@
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -906,13 +1046,19 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewButtonCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -925,6 +1071,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -944,8 +1092,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -980,8 +1132,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyDown" />
+
+            
 
             
 
@@ -997,8 +1153,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1006,6 +1166,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,13 +1201,19 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataGridView.OnCellContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
+            
+
              events on the owning <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1057,8 +1225,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -1074,8 +1246,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1083,6 +1259,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1116,8 +1294,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.Leave" />
+
+            
 
             
 
@@ -1133,10 +1315,14 @@
 
           
 
+          
+
           The row index of the current cell, or -1 if the cell is not owned by a row.</param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1170,8 +1356,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseDown" />
+
+            
 
             
 
@@ -1187,8 +1377,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1219,8 +1413,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseLeave" />
+
+            
 
             
 
@@ -1233,6 +1431,8 @@
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1267,8 +1467,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseMove" />
+
+            
 
             
 
@@ -1284,8 +1488,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1316,8 +1524,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseUp" />
+
+            
 
             
 
@@ -1333,8 +1545,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -1381,6 +1597,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1389,8 +1607,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1401,13 +1623,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -1418,8 +1646,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1430,6 +1662,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="elementState">
@@ -1437,8 +1671,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1449,10 +1687,14 @@
 
           
 
+          
+
           The data of the cell that is being painted.</param
         >
         <param name="formattedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1463,6 +1705,8 @@
 
           
 
+          
+
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
@@ -1470,8 +1714,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -1482,8 +1730,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -1494,8 +1746,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -1531,6 +1787,8 @@
 
             
 
+            
+
              that represents the current cell.</para
           >
         </returns>
@@ -1559,13 +1817,19 @@
 
             
 
+            
+
              of a button cell is displayed as text on the button. The <see
              cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" />
 
             
 
+            
+
              property allows you to either set the button text for each cell, or to use the <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" />
+
+            
 
             
 
@@ -1577,8 +1841,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" />
+
+            
 
             
 

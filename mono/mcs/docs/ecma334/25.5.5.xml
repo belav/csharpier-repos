@@ -6,8 +6,12 @@
 
     
 
+    
+
      and <hyperlink
     >14.6.5</hyperlink>
+
+    
 
     
 
@@ -22,6 +26,8 @@ T* operator --(T* x);
   <paragraph
     >The operators produce the same results as x+1 and x-1, respectively (<hyperlink
     >25.5.6</hyperlink>
+
+    
 
     
 

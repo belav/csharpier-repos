@@ -24,8 +24,12 @@
 
         
 
+        
+
          class represents the collection of all the styles used to describe the columns in an associated <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >A collection that stores <see
          cref="T:System.Windows.Forms.ColumnStyle" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -86,6 +96,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -98,13 +110,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+          
 
           
 
@@ -137,6 +155,8 @@
 
             
 
+            
+
              is in the collection.</para
           >
         </summary>
@@ -148,8 +168,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -161,13 +185,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+          
 
           
 
@@ -199,8 +229,12 @@
 
             
 
+            
+
              method begins searching at the first element of the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -215,6 +249,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -226,8 +262,12 @@
 
             
 
+            
+
              if found in the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -239,13 +279,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+          
 
           
 
@@ -278,8 +324,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -289,6 +339,8 @@
           <para
             >In collections of contiguous elements, such as the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -303,8 +355,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -316,8 +372,12 @@
 
           
 
+          
+
           The zero-based index at which <see
            cref="T:System.Windows.Forms.ColumnStyle" />
+
+          
 
           
 
@@ -328,13 +388,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+          
 
           
 
@@ -388,8 +454,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -398,6 +468,8 @@
           <para
             >In collections of contiguous elements, such as the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -412,8 +484,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+            
 
             
 
@@ -425,13 +501,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+
+          
 
           
 

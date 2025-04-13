@@ -39,8 +39,12 @@
 
         
 
+        
+
          provides data about a <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
       <para
         >A <see
          cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
 
             
 
+            
+
              property that references the component being renamed.</para
           >
         </item>
@@ -69,6 +77,8 @@
           <para
             >An <see
              cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.OldName" />
+
+            
 
             
 
@@ -82,6 +92,8 @@
 
             
 
+            
+
              property that indicates the new name of the component.</para
           >
         </item>
@@ -92,6 +104,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
+
+        
 
         
 
@@ -131,11 +145,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,10 +164,14 @@
 
           
 
+          
+
           The old name of the component. </param
         >
         <param name="newName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

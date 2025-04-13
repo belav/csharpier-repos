@@ -36,8 +36,12 @@
 
         
 
+        
+
          class is the predecessor of the <see
          cref="T:System.Security.Cryptography.Aes" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          algorithm instead of <see
          cref="T:System.Security.Cryptography.Rijndael" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkId=200932"
           >The Differences Between Rijndael and AES</see
         >
+
+        
 
         
 
@@ -66,6 +76,8 @@
       <para
         >Represents the base class from which all implementations of the <see
          cref="T:System.Security.Cryptography.Rijndael" />
+
+        
 
         
 
@@ -95,6 +107,8 @@
           <para
             >This method initializes the protected fields of <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -151,6 +165,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -184,8 +200,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.Security.Cryptography.RijndaelManaged" />
+
+            
 
             
 
@@ -197,6 +217,8 @@
           <para
             >Creates a cryptographic object to perform the <see
              cref="T:System.Security.Cryptography.Rijndael" />
+
+            
 
             
 
@@ -239,6 +261,8 @@
 
             
 
+            
+
              parameter are Rijndael and System.Security.Cryptography.RijndaelManaged.</para
           >
         </remarks>
@@ -247,6 +271,8 @@
           <para
             >Creates a cryptographic object to perform the specified implementation of the <see
              cref="T:System.Security.Cryptography.Rijndael" />
+
+            
 
             
 
@@ -262,8 +288,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.Rijndael" />
+
+          
 
           
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          control interacts with the page parser to build an <see
          cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          control to customize the parsing of an <see
          cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+        
 
         
 
@@ -45,13 +53,19 @@
 
         
 
+        
+
          property is set to false so that white space is always ignored. Use the <see
          cref="M:System.Web.UI.HtmlControls.HtmlSelectBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
 
         
 
+        
+
          method to determine the type of the <see
          cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+        
 
         
 
@@ -63,6 +77,8 @@
       <para
         >Interacts with the parser to build an <see
          cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -115,8 +133,12 @@
 
             
 
+            
+
              method to always ignore white space in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -131,6 +153,8 @@
 
             
 
+            
+
              control are to be processed or ignored.</para
           >
         </summary>
@@ -139,6 +163,8 @@
           <para
             >This method always returns false, indicating that white space in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -172,13 +198,19 @@
 
             
 
+            
+
              method to return the <see
              cref="T:System.Type" />
 
             
 
+            
+
              of a specified child control in an <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -193,8 +225,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -209,8 +245,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlSelect" />
+
+            
 
             
 
@@ -222,10 +262,14 @@
 
           
 
+          
+
           The tag name of the child control. </param
         >
         <param name="attribs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

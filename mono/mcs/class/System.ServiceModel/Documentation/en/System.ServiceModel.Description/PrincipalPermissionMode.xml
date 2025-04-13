@@ -24,6 +24,8 @@
 
         
 
+        
+
          to a method, this mode specifies which set of roles to use when authorizing access. By default, the attribute uses Windows groups (such as Administrator or Users) to specify the role to which the user must belong.</para
       >
       <para
@@ -32,13 +34,19 @@
 
         
 
+        
+
          in its collection of behaviors, and set the <see
          cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.PrincipalPermissionMode" />
 
         
 
+        
+
          to the appropriate enumeration. The following example sets the property to <see
          cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />
+
+        
 
         
 
@@ -53,10 +61,14 @@
 
         
 
+        
+
          to the <format
          type="text/html">
           <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">serviceBehaviors section</a>
         </format>
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          attribute authorizes a user when it is applied to a method. The following example applies the attribute to a method and demands that the user belong to the Users group on the computer. This code works only when the <see
          cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.PrincipalPermissionMode" />
+
+        
 
         
 
@@ -86,11 +102,15 @@
 
         
 
+        
+
          value is used for all credential types. This mode enables indigo1 to use the ASP.NET role provider to make authorization decisions. </para
       >
       <para
         >When the credential for a service is an X.509 certificate, you can set the Name property of the <see
          cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          property to a role in the database. By default, the database is represented by the <see
          cref="T:System.Web.Security.SqlRoleProvider" />
+
+        
 
         
 
@@ -116,8 +140,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+
+        
 
         
 
@@ -132,6 +160,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -139,6 +169,8 @@
          type="text/html">
           <a href="88d33a81-8ac7-48de-978c-5c5b1257951e">How To: Use the ASP.NET Role Provider</a>
         </format>
+
+        
 
         
 
@@ -153,13 +185,19 @@
 
         
 
+        
+
         , you must also provide a custom class that implements the <see
          cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
 
         
 
+        
+
          class. This class is responsible for providing the caller's IPrincipal representation inside the <see
          cref="P:System.IdentityModel.Policy.EvaluationContext.Properties" />
+
+        
 
         
 
@@ -175,8 +213,12 @@
 
         
 
+        
+
          demand, the <see
          cref="P:System.Threading.Thread.CurrentPrincipal" />
+
+        
 
         
 
@@ -185,13 +227,19 @@
 
         
 
+        
+
          selections to specify the <see
          cref="P:System.Threading.Thread.CurrentPrincipal" />
 
         
 
+        
+
          based on <see
          cref="T:System.Security.SecurityContext" />
+
+        
 
         
 
@@ -203,6 +251,8 @@
       <para
         >Sets the mode for authorization checks when using the <see
          cref="T:System.Security.Permissions.PrincipalPermissionAttribute" />
+
+        
 
         
 
@@ -233,8 +283,12 @@
 
             
 
+            
+
              class for <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
+
+            
 
             
 
@@ -264,6 +318,8 @@
 
             
 
+            
+
              is not set.</para
           >
         </summary>
@@ -290,8 +346,12 @@
 
             
 
+            
+
              is set based on the vstecasp role provider (<see
              cref="T:System.Web.Security.RoleProvider" />
+
+            
 
             
 
@@ -321,8 +381,12 @@
 
             
 
+            
+
              is set based on Windows (<see
              cref="T:System.Security.Principal.WindowsPrincipal" />
+
+            
 
             
 

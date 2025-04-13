@@ -39,6 +39,8 @@
 
             
 
+            
+
              method enables a designer to assert on a condition inside a design-time environment.</para
           >
         </remarks>
@@ -51,8 +53,12 @@
 
           
 
+          
+
           true to prevent <paramref
            name="message" />
+
+          
 
           
 
@@ -60,6 +66,8 @@
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
              method enables a designer to log failure messages inside a design-time environment.</para
           >
         </remarks>
@@ -97,6 +107,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,6 +132,8 @@
           <para
             >The <see
              cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.IndentLevel" />
+
+            
 
             
 
@@ -154,6 +168,8 @@
 
             
 
+            
+
              property enables objects to monitor design-time debugging output.</para
           >
         </remarks>
@@ -185,6 +201,8 @@
 
             
 
+            
+
              method enables a designer to log debug messages inside a design-time environment.</para
           >
         </remarks>
@@ -197,6 +215,8 @@
 
           
 
+          
+
           The message to log.</param
         >
         <param name="category">
@@ -204,8 +224,12 @@
 
           
 
+          
+
           The category of <paramref
            name="message" />
+
+          
 
           
 

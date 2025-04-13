@@ -40,6 +40,8 @@
 
           
 
+          
+
           The property from which the value is retrieved.</param
         >
       </Docs>
@@ -72,8 +74,12 @@
 
           
 
+          
+
           The property for which <paramref
            name="value" />
+
+          
 
           
 
@@ -81,6 +87,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -18,6 +18,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -33,8 +35,12 @@
 
         
 
+        
+
          class contains a list of <see
          cref="T:System.Security.Cryptography.Xml.Transform" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
 
         
 
+        
+
          class whenever you need to add one or more transform objects to an encrypted XML document or to a signed XML document. </para
       >
       <para
@@ -54,8 +62,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+
+        
 
         
 
@@ -64,8 +76,12 @@
 
         
 
+        
+
          object.  You can add a <see
          cref="T:System.Security.Cryptography.Xml.Transform" />
+
+        
 
         
 
@@ -74,8 +90,12 @@
 
         
 
+        
+
          class by calling the <see
          cref="M:System.Security.Cryptography.Xml.Reference.AddTransform(System.Security.Cryptography.Xml.Transform)" />
+
+        
 
         
 
@@ -84,8 +104,12 @@
 
         
 
+        
+
          object to the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+
+        
 
         
 
@@ -94,8 +118,12 @@
 
         
 
+        
+
          method.  You can also create a <see
          cref="T:System.Security.Cryptography.Xml.TransformChain" />
+
+        
 
         
 
@@ -104,8 +132,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Security.Cryptography.Xml.EncryptedReference.TransformChain" />
+
+        
 
         
 
@@ -117,8 +149,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.Security.Cryptography.Xml.EncryptedReference.Uri" />
+
+        
 
         
 
@@ -131,6 +167,8 @@
       <para
         >Defines an ordered list of <see
          cref="T:System.Security.Cryptography.Xml.Transform" />
+
+        
 
         
 
@@ -160,6 +198,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.TransformChain" />
+
+            
 
             
 
@@ -198,6 +238,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -207,6 +249,8 @@
         </summary>
         <param name="transform">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,6 +282,8 @@
           <para
             >Gets the number of transforms in the <see
              cref="T:System.Security.Cryptography.Xml.TransformChain" />
+
+            
 
             
 
@@ -275,6 +321,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -283,6 +331,8 @@
           <para
             >An enumerator of the transforms in the <see
              cref="T:System.Security.Cryptography.Xml.TransformChain" />
+
+            
 
             
 

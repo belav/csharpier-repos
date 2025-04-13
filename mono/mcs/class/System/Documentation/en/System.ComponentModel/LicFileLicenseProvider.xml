@@ -31,8 +31,12 @@
 
         
 
+        
+
          offers <see
          cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          methods. The <see
          cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
+
+        
 
         
 
@@ -51,13 +59,19 @@
 
         
 
+        
+
          retrieved by the <see
          cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
 
         
 
+        
+
          method is valid. When you inherit from this class, you can override the <see
          cref="M:System.ComponentModel.LicFileLicenseProvider.IsKeyValid(System.String,System.Type)" />
+
+        
 
         
 
@@ -72,6 +86,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -80,6 +96,8 @@
       <para
         >Provides an implementation of a <see
          cref="T:System.ComponentModel.LicenseProvider" />
+
+        
 
         
 
@@ -109,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.LicFileLicenseProvider" />
+
+            
 
             
 
@@ -149,11 +169,15 @@
 
             
 
+            
+
              parameter is licensed.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,8 +218,12 @@
 
             
 
+            
+
              method looks for a license file named myClassName.LIC, where myClassName is the <see
              cref="P:System.Type.FullName" />
+
+            
 
             
 
@@ -207,8 +235,12 @@
 
             
 
+            
+
              method. If the key is valid, this line is used as the <see
              cref="P:System.ComponentModel.License.LicenseKey" />
+
+            
 
             
 
@@ -227,13 +259,19 @@
 
             
 
+            
+
             . If this method cannot find a valid <see
              cref="T:System.ComponentModel.License" />
 
             
 
+            
+
              or a valid <paramref
              name="context" />
+
+            
 
             
 
@@ -245,8 +283,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.LicenseContext" />
+
+          
 
           
 
@@ -257,13 +299,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
           
 
+          
+
            that represents the component requesting the <see
            cref="T:System.ComponentModel.License" />
+
+          
 
           
 
@@ -274,8 +322,12 @@
 
           
 
+          
+
           An object that requests the <see
            cref="T:System.ComponentModel.License" />
+
+          
 
           
 
@@ -286,8 +338,12 @@
 
           
 
+          
+
           true if a <see
            cref="T:System.ComponentModel.LicenseException" />
+
+          
 
           
 
@@ -326,6 +382,8 @@
 
             
 
+            
+
              of the component you want to create.</para
           >
         </remarks>
@@ -334,6 +392,8 @@
           <para
             >Determines whether the key that the <see
              cref="M:System.ComponentModel.LicFileLicenseProvider.GetLicense(System.ComponentModel.LicenseContext,System.Type,System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -348,6 +408,8 @@
 
             
 
+            
+
              for the specified type; otherwise, false.</para
           >
         </returns>
@@ -356,8 +418,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.ComponentModel.License.LicenseKey" />
+
+          
 
           
 
@@ -368,13 +434,19 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
           
 
+          
+
            that represents the component requesting the <see
            cref="T:System.ComponentModel.License" />
+
+          
 
           
 

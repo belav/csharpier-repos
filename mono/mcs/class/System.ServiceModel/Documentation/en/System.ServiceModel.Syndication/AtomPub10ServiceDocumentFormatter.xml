@@ -37,8 +37,12 @@
 
         
 
+        
+
          to XML and to generate instances of <see
          cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         , use the <see
          cref="T:System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter`1" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
       <para
         >A formatter that serializes a <see
          cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+        
 
         
 
@@ -86,6 +96,8 @@
           <para
             >Creates a new instance of the Atom 1.0-based <see
              cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
+
+            
 
             
 
@@ -119,6 +131,8 @@
 
             
 
+            
+
              can be serialized to an XML representation or deserialized from an XML representation by the formatter using Atom 1.0 formats.</para
           >
         </remarks>
@@ -130,6 +144,8 @@
 
             
 
+            
+
              class to serialize a specified service document.</para
           >
         </summary>
@@ -138,8 +154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -172,6 +192,8 @@
 
             
 
+            
+
              can be serialized to an XML representation or deserialized from an XML representation by the formatter using Atom 1.0 formats.</para
           >
         </remarks>
@@ -183,6 +205,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -191,8 +215,12 @@
 
           
 
+          
+
           The instance of an object that is derived from a <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -236,6 +264,8 @@ true if the XML reader does contain a valid service document; otherwise false.
 
           
 
+          
+
           The XML reader.</param
         >
       </Docs>
@@ -267,6 +297,8 @@ true if the XML reader does contain a valid service document; otherwise false.
 
             
 
+            
+
              instance associated with the Atom 1.0 formatter.</para
           >
         </summary>
@@ -276,6 +308,8 @@ true if the XML reader does contain a valid service document; otherwise false.
             >
 Returns an instance of a <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 
@@ -314,11 +348,15 @@ Returns an instance of a <see
 
             
 
+            
+
              object from a specified XML reader.</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +387,8 @@ Returns an instance of a <see
           <para
             >Explicitly implements the <see
              cref="T:System.Xml.Serialization.ISerialization.GetSchema" />
+
+            
 
             
 
@@ -395,6 +435,8 @@ Returns null.
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -406,6 +448,8 @@ Returns null.
 
             
 
+            
+
              from its XML representation.</para
           >
         </summary>
@@ -414,13 +458,19 @@ Returns null.
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
 
           
 
+          
+
            stream from which the <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -456,6 +506,8 @@ Returns null.
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -467,6 +519,8 @@ Returns null.
 
             
 
+            
+
              into its XML representation.</para
           >
         </summary>
@@ -475,8 +529,12 @@ Returns null.
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -532,11 +590,15 @@ Returns null.
 
             
 
+            
+
              object associated with the formatter to a specified XML writer.</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

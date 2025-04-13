@@ -34,6 +34,8 @@
 
         
 
+        
+
         ).</para
       >
     </summary>
@@ -57,6 +59,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -91,8 +95,12 @@
 
             
 
+            
+
              must have a <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -101,8 +109,12 @@
 
             
 
+            
+
              can then write out the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -111,13 +123,19 @@
 
             
 
+            
+
             . The only way to associate a <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
+            
+
              with a <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -132,8 +150,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -175,6 +197,8 @@
 
             
 
+            
+
              contains a valid syndication feed.</para
           >
         </summary>
@@ -213,8 +237,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -229,8 +257,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -242,6 +274,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -279,8 +313,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -295,8 +333,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -308,6 +350,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -342,8 +386,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -358,6 +406,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -366,6 +416,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -403,8 +455,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -419,8 +475,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -432,6 +492,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -469,8 +531,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -485,8 +551,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -498,6 +568,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -535,8 +607,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -551,8 +627,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -564,6 +644,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -601,8 +683,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -617,8 +703,12 @@
 
             
 
+            
+
              instance with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -630,6 +720,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -667,8 +759,12 @@
 
             
 
+            
+
              instance is not automatically added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -683,8 +779,12 @@
 
             
 
+            
+
              instance with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -696,6 +796,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -730,8 +832,12 @@
 
             
 
+            
+
              is associated with the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -740,8 +846,12 @@
 
             
 
+            
+
              instance to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -753,6 +863,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -794,6 +906,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -805,8 +919,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -848,6 +966,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -859,8 +979,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -902,6 +1026,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -913,8 +1039,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -956,6 +1086,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -967,8 +1099,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1010,6 +1146,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1021,8 +1159,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1060,13 +1202,19 @@
 
             
 
+            
+
             , associates it with the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
+            
+
              and reads the feed into the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1081,8 +1229,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1120,8 +1272,12 @@
 
             
 
+            
+
              instance with a <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -1130,8 +1286,12 @@
 
             
 
+            
+
              instance and pass the constructor a <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1140,13 +1300,19 @@
 
             
 
+            
+
              instance into the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
+            
+
              by calling the <see
              cref="M:System.ServiceModel.Syndication.SyndicationFeedFormatter.ReadFrom(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -1161,8 +1327,12 @@
 
             
 
+            
+
              instance with the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -1195,6 +1365,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1203,6 +1375,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+
+            
 
             
 
@@ -1248,8 +1422,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationCategory.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -1261,6 +1439,8 @@
           <para
             >Attempts to parse an attribute extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -1310,8 +1490,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationFeed.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -1323,6 +1507,8 @@
           <para
             >Attempts to parse an attribute extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1372,8 +1558,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationItem.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -1385,6 +1575,8 @@
           <para
             >Attempts to parse an attribute extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -1434,8 +1626,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationLink.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -1447,6 +1643,8 @@
           <para
             >Attempts to parse an attribute extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -1496,8 +1694,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationPerson.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -1509,6 +1711,8 @@
           <para
             >Attempts to parse an attribute extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -1592,8 +1796,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationCategory.TryParseElement(System.Xml.XmlReader,System.String)" />
+
+            
 
             
 
@@ -1605,6 +1813,8 @@
           <para
             >Attempts to parse an element extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -1650,8 +1860,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationFeed.TryParseElement(System.Xml.XmlReader,System.String)" />
+
+            
 
             
 
@@ -1663,6 +1877,8 @@
           <para
             >Attempts to parse an element extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1708,8 +1924,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationItem.TryParseElement(System.Xml.XmlReader,System.String)" />
+
+            
 
             
 
@@ -1721,6 +1941,8 @@
           <para
             >Attempts to parse an element extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -1766,8 +1988,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationLink.TryParseElement(System.Xml.XmlReader,System.String)" />
+
+            
 
             
 
@@ -1779,6 +2005,8 @@
           <para
             >Attempts to parse an element extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -1824,8 +2052,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationPerson.TryParseElement(System.Xml.XmlReader,System.String)" />
+
+            
 
             
 
@@ -1837,6 +2069,8 @@
           <para
             >Attempts to parse an element extension using the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -1904,13 +2138,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -1925,8 +2165,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1968,13 +2212,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationFeed.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -1989,8 +2239,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2032,13 +2286,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationItem.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2053,8 +2313,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2096,13 +2360,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationLink.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2117,8 +2387,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2160,13 +2434,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2181,8 +2461,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2224,13 +2508,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2245,8 +2535,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2288,13 +2582,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationFeed.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2309,8 +2609,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2352,13 +2656,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationItem.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2373,8 +2683,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2416,13 +2730,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationLink.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2437,8 +2757,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2480,13 +2804,19 @@
 
             
 
+            
+
             , derive a class from <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
+            
+
              and override the <see
              cref="M:System.ServiceModel.Syndication.SyndicationPerson.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+
+            
 
             
 
@@ -2501,8 +2831,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2541,8 +2875,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 

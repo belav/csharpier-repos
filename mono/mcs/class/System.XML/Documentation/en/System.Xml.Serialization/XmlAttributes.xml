@@ -26,13 +26,19 @@
 
         
 
+        
+
          is part of a process that overrides the default way the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
+        
+
          serializes class instances. For example, suppose you want to serialize an object that is created from a DLL which has an inaccessible source. By using the <see
          cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          class correspond directly to a family of attribute classes that control serialization. For example, the <see
          cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
+
+        
 
         
 
@@ -54,13 +64,19 @@
 
         
 
+        
+
         , which allows you to override serialization of a field or property by instructing the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
+        
+
          to serialize the property value as XML text. For a complete list of attributes that control serialization, see the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -72,8 +88,12 @@
 
         
 
+        
+
          with the <see
          cref="T:System.Xml.Serialization.XmlAttributes" />
+
+        
 
         
 
@@ -86,6 +106,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -94,6 +116,8 @@
       <para
         >Represents a collection of attribute objects that control how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -123,6 +147,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -159,6 +185,8 @@
 
             
 
+            
+
              class, rather than using this constructor.</para
           >
         </remarks>
@@ -170,8 +198,12 @@
 
             
 
+            
+
              class and customizes how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -180,6 +212,8 @@
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,8 +250,12 @@
 
             
 
+            
+
              can be applied to a member that returns an array of <see
              cref="T:System.Xml.XmlAttribute" />
+
+            
 
             
 
@@ -226,8 +264,12 @@
 
             
 
+            
+
              to deserialize any attributes that do not have a corresponding member in the object being deserialized--thus those elements are "unknown" to the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -239,8 +281,12 @@
 
             
 
+            
+
              property allows you to override the serialization of a member to which the <see
              cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+            
 
             
 
@@ -252,6 +298,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+            
 
             
 
@@ -288,8 +336,12 @@
 
             
 
+            
+
              can be applied to a member that returns an array of <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -298,8 +350,12 @@
 
             
 
+            
+
              to deserialize any elements that do not have a corresponding member in the object being deserialized--thus those elements are "unknown" to the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -311,8 +367,12 @@
 
             
 
+            
+
              property allows you to override the serialization of a member to function as a member to which the <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+            
 
             
 
@@ -324,6 +384,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+            
 
             
 
@@ -361,6 +423,8 @@
 
             
 
+            
+
             : the default serialization, and the controlled serialization.</para
           >
           <para>In the default serialization, no attribute is applied to the member. When serialized, the array is serialized as a nested sequence of XML elements with the XML element name of the nested sequence taken from the member name.</para>
@@ -370,8 +434,12 @@
 
             
 
+            
+
              to the field or property. For example, you can change the generated XML element name from the default to a different name by setting the <see
              cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
+
+            
 
             
 
@@ -383,8 +451,12 @@
 
             
 
+            
+
              property allows you to override the default serialization, as well as the serialization controlled by applying an <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+            
 
             
 
@@ -393,13 +465,19 @@
 
             
 
+            
+
              to a member, it is overridden by any <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
+            
+
              that is assigned to the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlArray" />
+
+            
 
             
 
@@ -411,6 +489,8 @@
           <para
             >Gets or sets an object that specifies how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -447,8 +527,12 @@
 
             
 
+            
+
              property allows you to specify the derived types that can be inserted into an array returned by a public field or public read/write property. For each new type you want the field or property to accept, create an <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+            
 
             
 
@@ -457,8 +541,12 @@
 
             
 
+            
+
              it to the <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
+
+            
 
             
 
@@ -467,8 +555,12 @@
 
             
 
+            
+
              property. (The new type must be derived from the type already accepted by the field or property.) <see
              cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+
+            
 
             
 
@@ -477,8 +569,12 @@
 
             
 
+            
+
              object to an <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -487,8 +583,12 @@
 
             
 
+            
+
              with the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -497,8 +597,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+            
 
             
 
@@ -510,6 +614,8 @@
           <para
             >Gets or sets a collection of objects that specify how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -547,8 +653,12 @@
 
             
 
+            
+
              to generate an XML attribute by applying an <see
              cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+            
 
             
 
@@ -560,8 +670,12 @@
 
             
 
+            
+
              property allows you to override the default serialization, as well as the serialization controlled by applying an <see
              cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+
+            
 
             
 
@@ -570,8 +684,12 @@
 
             
 
+            
+
              and set its properties (such as <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
+
+            
 
             
 
@@ -580,8 +698,12 @@
 
             
 
+            
+
              property of an <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -590,8 +712,12 @@
 
             
 
+            
+
              object to an <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -600,8 +726,12 @@
 
             
 
+            
+
              using the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -610,8 +740,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+            
 
             
 
@@ -623,6 +757,8 @@
           <para
             >Gets or sets an object that specifies how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -681,6 +817,8 @@
 
             
 
+            
+
              to a member. To examine the result of applying the value, compile the application into a DLL or executable, and pass the resulting file as an argument to the XML Schema Definition tool (XSD.exe). In the XML schema document, a default value is assigned to the default attribute. In the following example, the default for the &lt;Animal&gt; element is "Dogs." </para
           >
           <code>&lt;?xml version="1.0"?&gt;
@@ -701,8 +839,12 @@
 
             
 
+            
+
              and assign it to the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlDefaultValue" />
+
+            
 
             
 
@@ -714,8 +856,12 @@
 
             
 
+            
+
              does not serialize the value to the XML-instance. This is because the assigned value can be recovered from the XML schema. In other words, setting a field or property to its own default value is equivalent of not setting it at all. Likewise, if no value is set for the field or property, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -757,8 +903,12 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Xml.Serialization.XmlElementAttributes" />
+
+            
 
             
 
@@ -767,13 +917,19 @@
 
             
 
+            
+
              method. By default, an <see
              cref="T:System.Xml.Serialization.XmlElementAttributes" />
 
             
 
+            
+
              object is created and assigned to the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
+
+            
 
             
 
@@ -785,6 +941,8 @@
           <para
             >Gets a collection of objects that specify how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -822,8 +980,12 @@
 
             
 
+            
+
              object, and set the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlEnum" />
+
+            
 
             
 
@@ -832,8 +994,12 @@
 
             
 
+            
+
              that overrides the identifier. Add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -842,8 +1008,12 @@
 
             
 
+            
+
              object and specify both the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -855,6 +1025,8 @@
           <para
             >Gets or sets an object that specifies how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -886,6 +1058,8 @@
 
             
 
+            
+
             . That is, the value of each public field or property is persisted as an XML element or XML attribute in an XML-document instance.</para
           >
           <para
@@ -894,8 +1068,12 @@
 
             
 
+            
+
              object, and set its <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlIgnore" />
+
+            
 
             
 
@@ -904,8 +1082,12 @@
 
             
 
+            
+
              the object to an <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -917,8 +1099,12 @@
 
             
 
+            
+
              is applied to a field or property, the field or property is ignored. However you can override that behavior by creating an <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -927,8 +1113,12 @@
 
             
 
+            
+
              property to false, adding it to an <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -940,6 +1130,8 @@
           <para
             >Gets or sets a value that specifies whether or not the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -969,6 +1161,8 @@
           <para
             >Gets or sets a value that specifies whether to keep all namespace declarations when an object containing a member that returns an <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -1007,6 +1201,8 @@
 
             
 
+            
+
              serializes a class as an XML root element.</para
           >
         </summary>
@@ -1041,8 +1237,12 @@
 
             
 
+            
+
             . However, it can force the field or property to be serialized as XML text by applying an <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+            
 
             
 
@@ -1055,6 +1255,8 @@
 
               
 
+              
+
                cannot be applied to a field or property that returns an array.</para
             >
           </block>
@@ -1064,8 +1266,12 @@
 
             
 
+            
+
              and assign it to the <see
              cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
+
+            
 
             
 
@@ -1074,13 +1280,19 @@
 
             
 
+            
+
              object. Add the <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
+            
+
              object to an <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -1092,6 +1304,8 @@
           <para
             >Gets or sets an object that instructs the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1129,8 +1343,12 @@
 
             
 
+            
+
              can be used to control how a type is serialized by the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1139,8 +1357,12 @@
 
             
 
+            
+
              uses the class name as the XML element name. By creating an <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 
@@ -1149,8 +1371,12 @@
 
             
 
+            
+
              property to it, and creating an <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -1165,8 +1391,12 @@
 
             
 
+            
+
              serializes a class to which the <see
              cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+
+            
 
             
 

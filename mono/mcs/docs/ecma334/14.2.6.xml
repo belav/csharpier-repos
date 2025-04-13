@@ -22,10 +22,14 @@ decimal operator *(decimal x, decimal y);
 
     
 
+    
+
     ) are applied to this set of operators, the effect is to select the first of the operators for which implicit conversions exist from the operand types. <example
 
       >[Example: For example, for the operation b * s, where b is a <keyword
       >byte</keyword>
+
+      
 
       
 
@@ -34,13 +38,19 @@ decimal operator *(decimal x, decimal y);
 
       
 
+      
+
       , overload resolution selects operator *(<keyword
       >int</keyword>
 
       
 
+      
+
       , <keyword
       >int</keyword>
+
+      
 
       
 
@@ -49,8 +59,12 @@ decimal operator *(decimal x, decimal y);
 
       
 
+      
+
       , and the type of the result is <keyword
       >int</keyword>
+
+      
 
       
 
@@ -59,8 +73,12 @@ decimal operator *(decimal x, decimal y);
 
       
 
+      
+
        and d is a <keyword
       >double</keyword>
+
+      
 
       
 
@@ -69,8 +87,12 @@ decimal operator *(decimal x, decimal y);
 
       
 
+      
+
       , <keyword
       >double</keyword>
+
+      
 
       
 

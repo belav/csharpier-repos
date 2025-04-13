@@ -28,6 +28,8 @@
 
       
 
+      
+
        property of the SqliteConnection class can contain the following parameter(s), delimited with a semi-colon:
       <list
        type="table">
@@ -66,9 +68,13 @@
 
             
 
+            
+
              - Use DateTime.Ticks<br
              />
             <b>ISO8601</b>
+
+            
 
             
 
@@ -84,9 +90,13 @@
 
             
 
+            
+
              - Store GUID columns in binary form<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -109,15 +119,21 @@
 
             
 
+            
+
              - Normal file flushing behavior<br
              />
             <b>Full</b>
 
             
 
+            
+
              - Full flushing after all writes<br
              />
             <b>Off</b>
+
+            
 
             
 
@@ -146,9 +162,13 @@
 
             
 
+            
+
              - Automatically enlist in distributed transactions<br
              />
             <b>N</b>
+
+            
 
             
 
@@ -165,9 +185,13 @@
 
             
 
+            
+
              - Use connection pooling<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -184,9 +208,13 @@
 
             
 
+            
+
              - Don't create the database if it does not exist, throw an error instead<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -209,9 +237,13 @@
 
             
 
+            
+
              - Use the more compatible legacy 3.x database format<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -229,6 +261,8 @@
 
             
 
+            
+
             The default command timeout</description
           >
           <description>N</description>
@@ -241,15 +275,21 @@
 
             
 
+            
+
              - Delete the journal file after a commit<br
              />
             <b>Persist</b>
 
             
 
+            
+
              - Zero out and leave the journal file on disk after a commit<br
              />
             <b>Off</b>
+
+            
 
             
 
@@ -266,9 +306,13 @@
 
             
 
+            
+
              - Open the database for read only access<br
              />
             <b>False</b>
+
+            
 
             
 
@@ -819,15 +863,21 @@
 
                 
 
+                
+
                  - Use DateTime.Ticks<br
                  />
                 <b>ISO8601</b>
 
                 
 
+                
+
                  - Use ISO8601 DateTime format<br
                  />
                 <b>JulianDay</b>
+
+                
 
                 
 
@@ -843,9 +893,13 @@
 
                 
 
+                
+
                  - Store GUID columns in binary form<br
                  />
                 <b>No/Off/0</b>
+
+                
 
                 
 
@@ -867,15 +921,21 @@
 
                 
 
+                
+
                  - Normal file flushing behavior<br
                  />
                 <b>Full</b>
 
                 
 
+                
+
                  - Full flushing after all writes<br
                  />
                 <b>Off</b>
+
+                
 
                 
 
@@ -903,9 +963,13 @@
 
                 
 
+                
+
                  - Automatically enlist in distributed transactions<br
                  />
                 <b>N</b>
+
+                
 
                 
 
@@ -921,9 +985,13 @@
 
                 
 
+                
+
                  - Use connection pooling<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -939,9 +1007,13 @@
 
                 
 
+                
+
                  - Don't create the database if it does not exist, throw an error instead<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -963,9 +1035,13 @@
 
                 
 
+                
+
                  - Use the more compatible legacy 3.x database format<br
                  />
                 <b>False</b>
+
+                
 
                 
 
@@ -982,6 +1058,8 @@
 
                 
 
+                
+
                 The default command timeout</description
               >
               <description>N</description>
@@ -994,15 +1072,21 @@
 
                 
 
+                
+
                  - Delete the journal file after a commit<br
                  />
                 <b>Persist</b>
 
                 
 
+                
+
                  - Zero out and leave the journal file on disk after a commit<br
                  />
                 <b>Off</b>
+
+                
 
                 
 
@@ -1018,9 +1102,13 @@
 
                 
 
+                
+
                  - Open the database for read only access<br
                  />
                 <b>False</b>
+
+                
 
                 
 

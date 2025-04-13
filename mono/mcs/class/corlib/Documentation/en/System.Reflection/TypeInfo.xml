@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is included in the net_win8_profile subset for use in creating Windows Store apps. <see
          cref="T:System.Reflection.TypeInfo" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
          cref="http://msdn.microsoft.com/library/windows/apps/hh441595(v=vs.110).aspx"
           >System.Reflection namespaces</see
         >
+
+        
 
         
 
@@ -50,10 +56,14 @@
 
         
 
+        
+
          in the MSDN Library.</para
       >
       <para>
         <see cref="T:System.Reflection.TypeInfo" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          class, and many of the reflection properties in the net_win8_profile return collections of <see
          cref="T:System.Reflection.TypeInfo" />
+
+        
 
         
 
@@ -72,13 +86,19 @@
 
         
 
+        
+
          object from a <see
          cref="T:System.Type" />
 
         
 
+        
+
          object, use the <see
          cref="M:System.Reflection.IReflectableType.GetTypeInfo" />
+
+        
 
         
 
@@ -90,8 +110,12 @@
 
         
 
+        
+
          object represents the type definition itself, whereas a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -100,8 +124,12 @@
 
         
 
+        
+
          object forces the assembly that contains that type to load. In comparison, you can manipulate <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -113,8 +141,12 @@
 
         
 
+        
+
          that return <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -123,8 +155,12 @@
 
         
 
+        
+
          property to get all declared members, or the <see
          cref="P:System.Reflection.TypeInfo.DeclaredProperties" />
+
+        
 
         
 
@@ -133,8 +169,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Reflection.TypeInfo.GetDeclaredProperty(System.String)" />
+
+        
 
         
 
@@ -146,8 +186,12 @@
 
         
 
+        
+
          properties, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
          cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+        
 
         
 
@@ -181,6 +225,8 @@
           <para
             >Returns the current type as a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -219,8 +265,12 @@
 
             
 
+            
+
              property, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
              cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+            
 
             
 
@@ -259,8 +309,12 @@
 
             
 
+            
+
              property, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
              cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+            
 
             
 
@@ -299,8 +353,12 @@
 
             
 
+            
+
              property, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
              cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+            
 
             
 
@@ -339,8 +397,12 @@
 
             
 
+            
+
              property, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
              cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+            
 
             
 
@@ -379,8 +441,12 @@
 
             
 
+            
+
              property, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
              cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+            
 
             
 
@@ -419,8 +485,12 @@
 
             
 
+            
+
              property, use LINQ queries. For reflection objects that originate with the runtime (for example, as the result of typeof(Object)), you can traverse the inheritance tree by using the methods in the <see
              cref="T:System.Reflection.RuntimeReflectionExtensions" />
+
+            
 
             
 
@@ -514,6 +584,8 @@
 
           
 
+          
+
           The name of the event.</param
         >
       </Docs>
@@ -549,6 +621,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -590,6 +664,8 @@
 
           
 
+          
+
           The name of the method.</param
         >
       </Docs>
@@ -627,11 +703,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +753,8 @@
 
           
 
+          
+
           The name of the nested type.</param
         >
       </Docs>
@@ -708,6 +790,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -774,6 +858,8 @@
 
           
 
+          
+
           The type to check.</param
         >
       </Docs>
@@ -804,8 +890,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflectableType" />
+
+            
 
             
 
@@ -817,6 +907,8 @@
           <para
             >Returns a representation of the current type as a <see
              cref="T:System.Reflection.TypeInfo" />
+
+            
 
             
 

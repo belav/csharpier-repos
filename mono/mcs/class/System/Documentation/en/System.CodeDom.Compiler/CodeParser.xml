@@ -37,6 +37,8 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -44,10 +46,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -60,6 +66,8 @@
       <para
         >Provides an empty implementation of the <see
          cref="T:System.CodeDom.Compiler.ICodeParser" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.Compiler.CodeParser" />
+
+            
 
             
 
@@ -128,6 +138,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -139,6 +151,8 @@
 
             
 
+            
+
              containing the code model produced from parsing the code.</para
           >
         </returns>
@@ -147,8 +161,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 

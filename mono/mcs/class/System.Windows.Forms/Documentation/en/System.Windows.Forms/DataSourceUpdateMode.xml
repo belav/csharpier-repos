@@ -18,8 +18,12 @@
 
         
 
+        
+
          object, you can specify when an update to the data source will occur using the <see
          cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         , you can force the data source to be updated by using the <see
          cref="M:System.Windows.Forms.Binding.WriteValue" />
+
+        
 
         
 
@@ -42,6 +50,8 @@
         <para
           >Even when the update mode is set to <see
            cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />
+
+          
 
           
 

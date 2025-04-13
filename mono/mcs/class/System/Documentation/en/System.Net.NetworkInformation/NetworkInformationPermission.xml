@@ -34,11 +34,15 @@
 
         
 
+        
+
          namespace.</para
       >
       <para
         >For declarative security, use the <see
          cref="T:System.Net.NetworkInformation.NetworkInformationPermissionAttribute" />
+
+        
 
         
 
@@ -87,8 +91,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Net.NetworkInformation.NetworkInformationAccess" />
+
+            
 
             
 
@@ -100,8 +108,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.NetworkInformation.NetworkInformationAccess" />
+
+          
 
           
 
@@ -145,8 +157,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -158,8 +174,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -200,8 +220,12 @@
 
             
 
+            
+
              created with <see
              cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+            
 
             
 
@@ -210,8 +234,12 @@
 
             
 
+            
+
              | <see
              cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Read" />
+
+            
 
             
 
@@ -220,13 +248,19 @@
 
             
 
+            
+
              created with <see
              cref="F:System.Security.Permissions.PermissionState.None" />
 
             
 
+            
+
              is given <see
              cref="F:System.Net.NetworkInformation.NetworkInformationAccess.None" />
+
+            
 
             
 
@@ -279,8 +313,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.NetworkInformation.NetworkInformationAccess" />
+
+          
 
           
 
@@ -323,6 +361,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+            
 
             
 
@@ -371,8 +411,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -423,8 +467,12 @@
 
             
 
+            
+
              that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty or <paramref
              name="target" />
+
+            
 
             
 
@@ -436,8 +484,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -489,8 +541,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -525,6 +581,8 @@
           <para
             >An unrestricted permission is created using the <see
              cref="M:System.Net.NetworkInformation.NetworkInformationPermission.#ctor(System.Security.Permissions.PermissionState)" />
+
+            
 
             
 
@@ -582,6 +640,8 @@
 
             
 
+            
+
              that contains the XML encoding of the current permission.</para
           >
         </returns>
@@ -622,6 +682,8 @@
 
             
 
+            
+
              method returns a permission that represents all the states represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -638,8 +700,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+          
 
           
 

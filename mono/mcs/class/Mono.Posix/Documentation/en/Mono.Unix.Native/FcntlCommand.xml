@@ -26,6 +26,8 @@
 
       
 
+      
+
        values.</summary
     >
     <remarks></remarks>
@@ -60,6 +62,8 @@
 
                 
 
+                
+
                 .</term
               >
             </item>
@@ -79,6 +83,8 @@
               <term
                 >The close-on-exec flag associated with the new file descriptor is set to remain open across <see
                  cref="M:Mono.Unix.Native.Syscall.execve" />
+
+                
 
                 
 
@@ -130,6 +136,8 @@
 
           
 
+          
+
            is ignored).</summary
         >
       </Docs>
@@ -175,8 +183,12 @@
 
           
 
+          
+
           , taken as a reference to a <see
            cref="T:Mono.Unix.Native.Flock" />
+
+          
 
           
 
@@ -185,8 +197,12 @@
 
           
 
+          
+
            in the flock structure.  If no lock is found that would prevent this lock from being created, the structure is left unchanged by this system call except for the lock type which is set to <see
            cref="F:Mono.Unix.Native.LockType.F_UNLCK" />
+
+          
 
           
 
@@ -216,13 +232,19 @@
 
           
 
+          
+
            and <see
            cref="F:Mono.Unix.Native.Signum.SIGURG" />
 
           
 
+          
+
            signals; process groups are returned as negative values (<paramref
            name="arg" />
+
+          
 
           
 
@@ -309,6 +331,8 @@
 
           
 
+          
+
           .</summary
         >
       </Docs>
@@ -354,8 +378,12 @@
 
           
 
+          
+
           , taken as a pointer to a <see
            cref="T:Mono.Unix.Native.Flock" />
+
+          
 
           
 
@@ -364,8 +392,12 @@
 
           
 
+          
+
            is used to establish shared (or read) locks (<see
            cref="F:Mono.Unix.Native.LockType.F_RDLCK" />
+
+          
 
           
 
@@ -374,8 +406,12 @@
 
           
 
+          
+
           ), as well as remove either type of lock (<see
            cref="F:Mono.Unix.Native.LockType.F_UNLCK" />
+
+          
 
           
 
@@ -384,8 +420,12 @@
 
           
 
+          
+
            returns immediately with <see
            cref="F:Mono.Unix.Native.Error.EAGAIN" />
+
+          
 
           
 
@@ -415,8 +455,12 @@
 
           
 
+          
+
            except that if a shared or exclusive lock is blocked by other locks, the process waits until the request can be satisfied.  If a signal that is to be caught is received while <see
            cref="M:Mono.Unix.Native.Syscall.fcntl" />
+
+          
 
           
 
@@ -425,8 +469,12 @@
 
           
 
+          
+
            will be interrupted if the signal handler has not specified the SA_RESTART (see <see
            cref="M:Mono.Unix.Native.Syscall.sigaction" />
+
+          
 
           
 
@@ -456,8 +504,12 @@
 
           
 
+          
+
            and <see
            cref="F:Mono.Unix.Native.Signum.SIGURG" />
+
+          
 
           
 

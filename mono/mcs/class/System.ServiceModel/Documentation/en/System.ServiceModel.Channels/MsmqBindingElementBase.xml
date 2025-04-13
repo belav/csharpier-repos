@@ -36,8 +36,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
+
+        
 
         
 
@@ -69,11 +73,15 @@
 
             
 
+            
+
              property allows you to specify a custom dead-letter queue rather than using the default system-wide dead-letter queue.</para
           >
           <para
             >The URI that is specified by <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.CustomDeadLetterQueue" />
+
+            
 
             
 
@@ -85,8 +93,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.DeadLetterQueue.None" />
+
+            
 
             
 
@@ -95,8 +107,12 @@
 
             
 
+            
+
             , then <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.CustomDeadLetterQueue" />
+
+            
 
             
 
@@ -105,13 +121,19 @@
 
             
 
+            
+
              is not null, then <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.DeadLetterQueue" />
 
             
 
+            
+
              must be set to <see
              cref="F:System.ServiceModel.DeadLetterQueue.Custom" />
+
+            
 
             
 
@@ -123,6 +145,8 @@
 
             
 
+            
+
              property can be set only on operating systems starting with wv.</para
           >
         </remarks>
@@ -131,6 +155,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -186,6 +212,8 @@
 
                 
 
+                
+
                  required to place the message in the destination queue.</para
               >
             </item>
@@ -205,6 +233,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.DeadLetterQueue" />
+
+            
 
             
 
@@ -230,6 +260,8 @@
           <para
             >If this property is set to true, messages are durable; otherwise, messages are volatile. Durable messages are not lost if the queue manager crashes. The default value for this property is true. When exactly once assurances are required (<see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.ExactlyOnce" />
+
+            
 
             
 
@@ -261,8 +293,12 @@
 
             
 
+            
+
             , when set to true, indicates that Message Queuing (MSMQ) ensures that a sent message is delivered to the receiving message queue once and only once, and, if delivery fails, the message is sent to the dead-letter queue, depending on the DeadLetterQueue property setting. Setting <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.ExactlyOnce" />
+
+            
 
             
 
@@ -318,6 +354,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -326,8 +364,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -335,6 +377,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +403,8 @@
           <para
             >A retry cycle is when a message is transferred from the retry queue to the application queue to attempt delivery to the application. Messages are placed in the retry queue after failing a number of immediate retries as specified by <see
              cref="P:System.ServiceModel.Configuration.MsmqBindingElementBase.ReceiveRetryCount" />
+
+            
 
             
 
@@ -396,8 +442,12 @@
 
             
 
+            
+
              encapsulates the security settings for the MSMQ integration transport. The settings are the same for both the MSMQ integration and queued transports. <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -409,6 +459,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -443,8 +495,12 @@
 
             
 
+            
+
             , the channel listener is faulted and a <see
              cref="T:System.ServiceModel.ProtocolException" />
+
+            
 
             
 
@@ -453,13 +509,19 @@
 
             
 
+            
+
             ) is traced and thrown. The message is left in the queue and must be removed by some manual method. The <see
              cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
             
 
+            
+
              contains a <see
              cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" />
+
+            
 
             
 
@@ -471,6 +533,8 @@
 
             
 
+            
+
             , the message is dropped.</para
           >
           <para
@@ -479,11 +543,15 @@
 
             
 
+            
+
             , a negative acknowledgment is sent to the client and the message is removed from the poison-message queue. This option is available only on Message Queuing 4.0.</para
           >
           <para
             >When set to <see
              cref="F:System.ServiceModel.ReceiveErrorHandling.Move" />
+
+            
 
             
 
@@ -516,8 +584,12 @@
 
             
 
+            
+
             . If retry cycles reach the MaxRetryCycles value, then the message is dispatched based on the value of the <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.ReceiveErrorHandling" />
+
+            
 
             
 
@@ -529,8 +601,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.RetryCycleDelay" />
+
+            
 
             
 
@@ -563,6 +639,8 @@
           <para
             >A single retry cycle makes repeated attempts to deliver a message to the receiving application (specified by the <see
              cref="P:System.ServiceModel.Configuration.MsmqBindingElementBase.MaxRetryCycles" />
+
+            
 
             
 
@@ -604,6 +682,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -616,8 +696,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -628,8 +712,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 
@@ -669,6 +757,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -681,8 +771,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -690,6 +784,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -729,6 +825,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -741,8 +839,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -750,6 +852,8 @@
         >
         <param name="endpointContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -777,6 +881,8 @@
           <para
             >Queued applications work in a disconnected manner. This means that the sending and receiving applications may not be running at the same time; therefore, a message sent by the sending application may not be processed immediately by the receiving application. Some messages contain information that is valid only for a certain period of time. If such a message is not delivered within that period of time, it no longer contains useful information and should be dropped. This property enables you to specify a time limit for how long a message is kept prior to delivery to the application queue. If this time limit elapses prior to the message being delivered to the application queue, the message is placed in the dead-letter queue if one is available (determined by the <see
              cref="P:System.ServiceModel.Configuration.MsmqBindingElementBase.DeadLetterQueue" />
+
+            
 
             
 
@@ -810,6 +916,8 @@
 
             
 
+            
+
              is set to true.</para
           >
         </remarks>
@@ -836,6 +944,8 @@
           <para
             >When <see
              cref="P:System.ServiceModel.Configuration.MsmqBindingElementBase.UseMsmqTracing" />
+
+            
 
             
 

@@ -35,8 +35,12 @@
 
         
 
+        
+
          class provides methods that simplify writing primitive data types to a stream. For example, you can use the <see
          cref="M:System.IO.BinaryWriter.Write(System.Boolean)" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class, you provide the stream to write to, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see
          cref="T:System.IO.BinaryWriter" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -96,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.BinaryWriter" />
+
+            
 
             
 
@@ -131,6 +143,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -142,11 +156,15 @@
 
             
 
+            
+
              class based on the specified stream and using UTF-8 encoding.</para
           >
         </summary>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,6 +203,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -196,6 +216,8 @@
 
             
 
+            
+
              class based on the specified stream and character encoding.</para
           >
         </summary>
@@ -204,10 +226,14 @@
 
           
 
+          
+
           The output stream. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,11 +269,15 @@
 
             
 
+            
+
              class based on the specified stream and character encoding, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +288,8 @@
 
           
 
+          
+
           The character encoding to use.</param
         >
         <param name="leaveOpen">
@@ -265,8 +297,12 @@
 
           
 
+          
+
           true to leave the stream open after the <see
            cref="T:System.IO.BinaryWriter" />
+
+          
 
           
 
@@ -301,6 +337,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -309,6 +347,8 @@
           <para
             >Gets the underlying stream of the <see
              cref="T:System.IO.BinaryWriter" />
+
+            
 
             
 
@@ -342,6 +382,8 @@
 
             
 
+            
+
              method passing a true value.</para
           >
           <para
@@ -350,8 +392,12 @@
 
             
 
+            
+
              or Close. Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -363,6 +409,8 @@
           <para
             >Closes the current <see
              cref="T:System.IO.BinaryWriter" />
+
+            
 
             
 
@@ -392,6 +440,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.IO.BinaryWriter" />
+
+            
 
             
 
@@ -428,11 +478,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -466,8 +520,12 @@
 
             
 
+            
+
             . Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -478,6 +536,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -517,6 +577,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -525,6 +587,8 @@
           <para
             >Specifies a <see
              cref="T:System.IO.BinaryWriter" />
+
+            
 
             
 
@@ -554,6 +618,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -599,6 +665,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -615,8 +683,12 @@
 
           
 
+          
+
           A byte offset relative to <paramref
            name="origin" />
+
+          
 
           
 
@@ -627,8 +699,12 @@
 
           
 
+          
+
           A field of <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -652,8 +728,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -699,6 +779,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -708,6 +790,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -756,6 +840,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -765,6 +851,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -801,6 +889,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -810,6 +900,8 @@
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -858,11 +950,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Unicode surrogate characters must be written out as pairs together in the same call, not individually. If you require support for surrogate pairs in your application, consider using a character array and the <see
              cref="M:System.IO.BinaryWriter.Write(System.Char[])" />
+
+            
 
             
 
@@ -875,6 +971,8 @@
         </summary>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1056,6 +1154,8 @@
 
           
 
+          
+
           A character array containing the data to write. </param
         >
       </Docs>
@@ -1234,6 +1334,8 @@
 
           
 
+          
+
           The decimal value to write. </param
         >
       </Docs>
@@ -1267,6 +1369,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1276,6 +1380,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1458,6 +1564,8 @@
 
           
 
+          
+
           The two-byte signed integer to write. </param
         >
       </Docs>
@@ -1492,6 +1600,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1501,6 +1611,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1538,6 +1650,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1547,6 +1661,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1588,6 +1704,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1597,6 +1715,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1634,6 +1754,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1643,6 +1765,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1677,6 +1801,8 @@
 
             
 
+            
+
              instance's current encoding to the stream. This value is written as an unsigned integer. This method then writes that many bytes to the stream.</para
           >
           <para>For example, the string “A” has a length of 1, but when encoded with UTF-16; the length is 2 bytes, so the value written in the prefix is 2, and 3 bytes are written to the stream, including the prefix.</para>
@@ -1685,6 +1811,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1699,11 +1827,15 @@
 
             
 
+            
+
             , and advances the current position of the stream in accordance with the encoding used and the specific characters being written to the stream.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1746,6 +1878,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1755,6 +1889,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1797,6 +1933,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1806,6 +1944,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1848,6 +1988,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1857,6 +1999,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1898,6 +2042,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1910,10 +2056,14 @@
 
           
 
+          
+
           A byte array containing the data to write. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1922,10 +2072,14 @@
 
           
 
+          
+
            at which to begin writing. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1967,6 +2121,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1979,10 +2135,14 @@
 
           
 
+          
+
           A character array containing the data to write. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1991,10 +2151,14 @@
 
           
 
+          
+
            from which to begin writing. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2029,6 +2193,8 @@
 
             
 
+            
+
              parameter is written out seven bits at a time, starting with the seven least-significant bits. The high bit of a byte indicates whether there are more bytes to be written after this one.</para
           >
           <para
@@ -2037,13 +2203,19 @@
 
             
 
+            
+
              will fit in seven bits, it takes only one byte of space. If <paramref
              name="value" />
 
             
 
+            
+
              will not fit in seven bits, the high bit is set on the first byte and written out. <paramref
              name="value" />
+
+            
 
             
 
@@ -2057,6 +2229,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2066,6 +2240,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

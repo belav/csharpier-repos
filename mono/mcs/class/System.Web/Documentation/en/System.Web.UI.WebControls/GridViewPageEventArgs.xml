@@ -22,13 +22,19 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
 
         
 
+        
+
          event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -41,6 +47,8 @@
 
           
 
+          
+
            control.</para
         >
       </block>
@@ -50,13 +58,19 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the index of the page selected by the user and to indicate that the paging operation should be canceled. To cancel the paging operation, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+
+        
 
         
 
@@ -70,6 +84,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -78,8 +94,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewPageEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -91,6 +111,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.GridView.PageIndexChanging" />
+
+        
 
         
 
@@ -116,11 +138,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+
+            
 
             
 
@@ -150,6 +176,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -164,6 +192,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" />
+
+            
 
             
 
@@ -192,8 +222,12 @@
 
             
 
+            
+
              event occurs before the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -202,8 +236,12 @@
 
             
 
+            
+
              property of the control cannot be used to determine the index of the page selected by the user. Use the <see
              cref="P:System.Web.UI.WebControls.GridViewPageEventArgs.NewPageIndex" />
+
+            
 
             
 
@@ -216,8 +254,12 @@
 
               
 
+              
+
                event, the <see
                cref="P:System.Web.UI.WebControls.GridView.PageIndex" />
+
+              
 
               
 
@@ -231,6 +273,8 @@
           <para
             >Gets or sets the index of the new page to display in the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 

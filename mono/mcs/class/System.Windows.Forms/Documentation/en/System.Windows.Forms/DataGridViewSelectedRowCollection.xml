@@ -38,8 +38,12 @@
 
         
 
+        
+
          objects that are selected in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -65,13 +69,19 @@
 
             
 
+            
+
              class directly. To clear the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+            
 
             
 
@@ -119,6 +129,8 @@
 
             
 
+            
+
              is in the collection; otherwise, false.</para
           >
         </returns>
@@ -127,13 +139,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
+
+          
 
           
 
@@ -169,10 +187,14 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,13 +228,19 @@
 
             
 
+            
+
              class directly. To insert a row into the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -228,8 +256,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="dataGridViewRow" />
+
+          
 
           
 
@@ -240,13 +272,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
+
+          
 
           
 
@@ -325,13 +363,19 @@
 
             
 
+            
+
              class directly. To add a row to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -343,8 +387,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -359,8 +407,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -375,6 +427,8 @@
 
             
 
+            
+
              was inserted.</para
           >
         </returns>
@@ -383,8 +437,12 @@
 
           
 
+          
+
           The item to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
+
+          
 
           
 
@@ -411,13 +469,19 @@
 
             
 
+            
+
              class directly. To clear the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+            
 
             
 
@@ -429,8 +493,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -445,8 +513,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -476,8 +548,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -496,6 +572,8 @@
 
             
 
+            
+
              parameter is in the collection; otherwise, false.</para
           >
         </returns>
@@ -504,8 +582,12 @@
 
           
 
+          
+
           An object to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
+
+          
 
           
 
@@ -534,8 +616,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -554,11 +640,15 @@
 
             
 
+            
+
              parameter if it is found in the collection; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,13 +678,19 @@
 
             
 
+            
+
              class directly. To add a row to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -606,8 +702,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -622,8 +722,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -635,8 +739,12 @@
 
           
 
+          
+
           The index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -647,8 +755,12 @@
 
           
 
+          
+
           The object to add to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
+
+          
 
           
 
@@ -675,8 +787,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -732,13 +848,19 @@
 
             
 
+            
+
              class directly. To remove a row from the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -750,8 +872,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -766,8 +892,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -779,8 +909,12 @@
 
           
 
+          
+
           The object to remove from the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
+
+          
 
           
 
@@ -809,13 +943,19 @@
 
             
 
+            
+
              class directly. To remove a row from the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedRowCollection" />
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -827,8 +967,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -843,8 +987,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -853,6 +1001,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

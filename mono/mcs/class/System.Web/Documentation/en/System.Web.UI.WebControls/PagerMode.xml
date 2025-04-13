@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the different display modes for the pager of a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -30,8 +34,12 @@
 
         
 
+        
+
          displays the pager controls using Next and Previous buttons; <see
          cref="F:System.Web.UI.WebControls.PagerMode.NumericPages" />
+
+        
 
         
 
@@ -43,6 +51,8 @@
       <para
         >Represents the mode of the pager for accessing various pages within the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 

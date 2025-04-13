@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >Defines a new <see
          cref="T:System.Configuration.ConfigurationSection" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.WindowsFormsSection" />
+
+            
 
             
 

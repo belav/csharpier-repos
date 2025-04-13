@@ -18,8 +18,12 @@
 
         
 
+        
+
          class rather than implement the <see
          cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" />
+
+        
 
         
 
@@ -31,6 +35,8 @@
       <para
         >Provides design-time support in a visual designer for a class that is derived from the <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
             
 
+            
+
              property is used by a design host, such as vsprvslong, to determine whether to display a <ui
             >Configure</ui>
+
+            
 
             
 
@@ -71,6 +81,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.Configure" />
+
+            
 
             
 
@@ -98,8 +110,12 @@
 
             
 
+            
+
              property is used by a design host, such as vsprvslong, to determine whether to display a <ui
             >Refresh Schema</ui>
+
+            
 
             
 
@@ -111,6 +127,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -184,6 +202,8 @@
 
           
 
+          
+
           The XPath for the part of the data source to retrieve.</param
         >
       </Docs>
@@ -211,6 +231,8 @@
 
           
 
+          
+
           true to suppress events raised while refreshing the schema; otherwise false.</param
         >
       </Docs>
@@ -232,6 +254,8 @@
           <para
             >Restores events after calling the <see
              cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
+
+            
 
             
 
@@ -273,6 +297,8 @@
           <para
             >You can restore events with the <see
              cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.ResumeDataSourceEvents" />
+
+            
 
             
 

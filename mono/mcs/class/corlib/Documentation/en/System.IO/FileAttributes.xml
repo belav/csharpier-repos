@@ -33,8 +33,12 @@
 
         
 
+        
+
          method, and you can set them by calling the <see
          cref="M:System.IO.File.SetAttributes(System.String,System.IO.FileAttributes)" />
+
+        
 
         
 
@@ -46,13 +50,19 @@
 
         
 
+        
+
          object by using the <see
          cref="M:System.IO.File.SetAttributes(System.String,System.IO.FileAttributes)" />
 
         
 
+        
+
          method. Instead, you must actually compress the file using either a compression tool or one of the classes in the <see
          cref="N:System.IO.Compression" />
+
+        
 
         
 

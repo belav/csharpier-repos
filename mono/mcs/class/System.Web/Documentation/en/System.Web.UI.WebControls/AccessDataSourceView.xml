@@ -22,6 +22,8 @@
 
         
 
+        
+
          class is intended primarily to be used by data-bound controls and not as a programmable object in page code.</para
       >
       <para
@@ -30,13 +32,19 @@
 
         
 
+        
+
          class is provided because Microsoft Access is a file-based database system and has several unique characteristics that set it apart from other SQL-based relational database products that the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
+        
+
          control and <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
       <para
         >Supports the <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
             
 
+            
+
              object is used by the <see
              cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+            
 
             
 
@@ -87,8 +101,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -103,8 +121,12 @@
 
             
 
+            
+
              class setting the specified <see
              cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+            
 
             
 
@@ -116,8 +138,12 @@
 
           
 
+          
+
           The data source control with which the <see
            cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
+
+          
 
           
 
@@ -128,6 +154,8 @@
 
           
 
+          
+
           A unique name for the data source view, within the scope of the data source control that owns it. </param
         >
         <param name="context">
@@ -135,8 +163,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -171,8 +203,12 @@
 
             
 
+            
+
              object overrides the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -181,8 +217,12 @@
 
             
 
+            
+
              property of its associated <see
              cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+            
 
             
 
@@ -194,8 +234,12 @@
 
             
 
+            
+
              method is performed, the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnSelecting(System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs)" />
+
+            
 
             
 
@@ -204,8 +248,12 @@
 
             
 
+            
+
              event. You can handle the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Selecting" />
+
+            
 
             
 
@@ -217,8 +265,12 @@
 
             
 
+            
+
              object builds an <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -227,8 +279,12 @@
 
             
 
+            
+
              text and any associated <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" />
+
+            
 
             
 
@@ -237,8 +293,12 @@
 
             
 
+            
+
              object executes the <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -247,13 +307,19 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
 
             
 
+            
+
              event. You can handle the <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+            
 
             
 
@@ -265,8 +331,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+
+            
 
             
 
@@ -275,13 +345,19 @@
 
             
 
+            
+
              retrieves data from and saves data to the cache during the data retrieval operation. The cache is created, discarded, or refreshed, based on the caching behavior that is specified by the combination of the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.CacheDuration" />
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.CacheExpirationPolicy" />
+
+            
 
             
 
@@ -293,8 +369,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+
+            
 
             
 
@@ -303,8 +383,12 @@
 
             
 
+            
+
              property has been specified, the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+
+            
 
             
 
@@ -313,8 +397,12 @@
 
             
 
+            
+
              properties and the resulting filter is applied to the list of data during the <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -329,8 +417,12 @@
 
             
 
+            
+
              property and any parameters in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -345,6 +437,8 @@
 
             
 
+            
+
              of data rows.</para
           >
         </returns>
@@ -353,8 +447,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 

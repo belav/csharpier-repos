@@ -22,6 +22,8 @@
 
         
 
+        
+
          objects in a strongly typed collection.</para
       >
     </summary>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -71,8 +75,12 @@
 
             
 
+            
+
              class with the given <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -84,8 +92,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -115,8 +127,12 @@
 
             
 
+            
+
              class based on another <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -128,8 +144,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+          
 
           
 
@@ -162,8 +182,12 @@
 
             
 
+            
+
              with the specified value to the <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -179,8 +203,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -213,6 +241,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -221,8 +251,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -255,6 +289,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -263,8 +299,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+          
 
           
 
@@ -297,8 +337,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -313,6 +357,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
@@ -321,8 +367,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -356,8 +406,12 @@
 
             
 
+            
+
              values to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -369,13 +423,19 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+          
 
           
 
@@ -386,8 +446,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -420,8 +484,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -436,13 +504,19 @@
 
             
 
+            
+
              of <paramref
              name="value" />
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -454,8 +528,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -489,8 +567,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -502,8 +584,12 @@
 
           
 
+          
+
           The zero-based index where <paramref
            name="value" />
+
+          
 
           
 
@@ -514,8 +600,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -570,8 +660,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+            
 
             
 
@@ -583,13 +677,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphCollection" />
+
+          
 
           
 

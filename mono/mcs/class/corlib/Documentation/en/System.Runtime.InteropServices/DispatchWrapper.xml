@@ -61,6 +61,8 @@
 
             
 
+            
+
              class with the object being wrapped.</para
           >
         </summary>
@@ -69,8 +71,12 @@
 
           
 
+          
+
           The object to be wrapped and converted to <see
            cref="F:System.Runtime.InteropServices.VarEnum.VT_DISPATCH" />
+
+          
 
           
 
@@ -98,6 +104,8 @@
           <para
             >Gets the object wrapped by the <see
              cref="T:System.Runtime.InteropServices.DispatchWrapper" />
+
+            
 
             
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+
+        
 
         
 
@@ -51,13 +55,19 @@
 
         
 
+        
+
          contract allows users to accept multiple channels of a given type without having to specify the channel type each time. In other words, defining the channel type as a generic parameter for the <see
          cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
         
 
+        
+
          interface means that it is not necessary to pass the type into the <see
          cref="Overload:System.ServiceModel.Channels.IChannelListener`1.AcceptChannel" />
+
+        
 
         
 
@@ -93,8 +103,12 @@
 
             
 
+            
+
              overload with the explicit timeout be used. The <paramref
              name="timeout" />
+
+            
 
             
 
@@ -110,6 +124,8 @@
           <para
             >A channel of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -143,8 +159,12 @@
 
             
 
+            
+
             . The <paramref
              name="timeout" />
+
+            
 
             
 
@@ -163,6 +183,8 @@
 
             
 
+            
+
              accepted by the listener.</para
           >
         </returns>
@@ -171,8 +193,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -209,8 +235,12 @@
 
             
 
+            
+
              overload with the explicit timeout be used. The <paramref
              name="timeout" />
+
+            
 
             
 
@@ -229,6 +259,8 @@
 
             
 
+            
+
              that references the asynchronous acceptance of a channel operation. </para
           >
         </returns>
@@ -237,8 +269,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -246,6 +282,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,8 +321,12 @@
 
             
 
+            
+
             . The <paramref
              name="timeout" />
+
+            
 
             
 
@@ -303,6 +345,8 @@
 
             
 
+            
+
              that references the asynchronous acceptance of a channel operation. </para
           >
         </returns>
@@ -311,8 +355,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -323,8 +371,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -332,6 +384,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -372,6 +426,8 @@
 
             
 
+            
+
              accepted by the listener.</para
           >
         </returns>
@@ -380,13 +436,19 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
           
 
+          
+
            returned by a call to the <see
            cref="Overload:System.ServiceModel.Channels.IChannelListener`1.BeginAcceptChannel" />
+
+          
 
           
 

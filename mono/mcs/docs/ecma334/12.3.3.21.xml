@@ -10,6 +10,8 @@ primary-expression (arg1, arg2, ..., argn)
 
     
 
+    
+
     or an object creation expression of the form: <code_example
     >
       <![CDATA[
@@ -23,6 +25,8 @@ new type (arg1, arg2, ..., argn)
 
         
 
+        
+
          is the same as the state of v before expr. </list_item
       >
       <list_item
@@ -31,8 +35,12 @@ new type (arg1, arg2, ..., argn)
 
         
 
+        
+
          is the same as the state of v after <non_terminal
          where="14.5">primary-expression</non_terminal>
+
+        
 
         
 
@@ -44,6 +52,8 @@ new type (arg1, arg2, ..., argn)
 
         
 
+        
+
          is the same as the state of v before expr. </list_item
       >
       <list_item
@@ -52,8 +62,12 @@ new type (arg1, arg2, ..., argn)
 
         
 
+        
+
         , the definite assignment state of v after arg<sub
         >i</sub>
+
+        
 
         
 
@@ -65,8 +79,12 @@ new type (arg1, arg2, ..., argn)
 
         
 
+        
+
          for any i greater than one, the definite assignment state of v before arg<sub
         >i</sub>
+
+        
 
         
 
@@ -75,11 +93,15 @@ new type (arg1, arg2, ..., argn)
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > If the variable v is passed as an out argument (i.e., an argument of the form "out v") in any of the arguments, then the state of v after expr is definitely assigned. Otherwise; the state of v after expr is the same as the state of v after arg<sub
         >n</sub>
+
+        
 
         
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Net.Mail.SmtpPermission" />
+
+        
 
         
 
@@ -33,13 +37,19 @@
 
         
 
+        
+
          classes to specify a level of access to an SMTP host computer. The <see
          cref="T:System.Net.Mail.SmtpClient" />
 
         
 
+        
+
          class demands an <see
          cref="T:System.Net.Mail.SmtpPermission" />
+
+        
 
         
 

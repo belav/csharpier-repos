@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -38,8 +40,12 @@
 
         
 
+        
+
          structure, <see
          cref="T:System.Runtime.InteropServices.VARDESC" />
+
+        
 
         
 
@@ -70,6 +76,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -97,6 +105,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -121,6 +131,8 @@
           <para
             >Represents a pointer to a <see
              cref="T:System.Runtime.InteropServices.VARDESC" />
+
+            
 
             
 

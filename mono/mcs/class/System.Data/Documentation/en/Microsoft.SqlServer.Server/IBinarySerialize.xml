@@ -16,8 +16,12 @@
 
         
 
+        
+
         .Native or <see
          cref="T:Microsoft.SqlServer.Server.Format" />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
         
 
+        
+
         .Native allows SQL Server to handle serialization and deserialization automatically, but the format has restrictions on the kind of types it can handle. <see
          cref="T:Microsoft.SqlServer.Server.Format" />
+
+        
 
         
 
@@ -38,8 +46,12 @@
 
         
 
+        
+
         .UserDefined in the SqlUserDefinedType or SqlUserDefinedAggregate attribute, and must implement the <see
          cref="T:Microsoft.SqlServer.Server.IBinarySerialize" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
             
 
+            
+
              method must reconstitute your object using the information written by the <see
              cref="M:Microsoft.SqlServer.Server.IBinarySerialize.Write(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -89,8 +105,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.BinaryReader" />
+
+          
 
           
 
@@ -118,6 +138,8 @@
           <para
             >Write sufficient information to the binary stream to allow the <see
              cref="M:Microsoft.SqlServer.Server.IBinarySerialize.Read(System.IO.BinaryReader)" />
+
+            
 
             
 
