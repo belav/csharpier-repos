@@ -16,7 +16,7 @@ namespace SharedTypes.ComInterfaces
         Point GetPoint();
 
         [PreserveSig]
-        [return:MarshalAs(UnmanagedType.Error)]
+        [return: MarshalAs(UnmanagedType.Error)]
         HResult SetPoint(Point point);
     }
 

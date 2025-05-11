@@ -13,24 +13,24 @@ public class ValidationProblemDetailsWrapperTest
     public void ReadXml_ReadsValidationProblemDetailsXml()
     {
         // Arrange
-        var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<title>Some title</title>" +
-            "<status>400</status>" +
-            "<instance>Some instance</instance>" +
-            "<key1>Test Value 1</key1>" +
-            "<_x005B_key2_x005D_>Test Value 2</_x005B_key2_x005D_>" +
-            "<MVC-Errors>" +
-            "<error1>Test error 1 Test error 2</error1>" +
-            "<_x005B_error2_x005D_>Test error 3</_x005B_error2_x005D_>" +
-            "<MVC-Empty>Test error 4</MVC-Empty>" +
-            "</MVC-Errors>" +
-            "</problem>";
+        var xml =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<title>Some title</title>"
+            + "<status>400</status>"
+            + "<instance>Some instance</instance>"
+            + "<key1>Test Value 1</key1>"
+            + "<_x005B_key2_x005D_>Test Value 2</_x005B_key2_x005D_>"
+            + "<MVC-Errors>"
+            + "<error1>Test error 1 Test error 2</error1>"
+            + "<_x005B_error2_x005D_>Test error 3</_x005B_error2_x005D_>"
+            + "<MVC-Empty>Test error 4</MVC-Empty>"
+            + "</MVC-Errors>"
+            + "</problem>";
         var serializer = new DataContractSerializer(typeof(ValidationProblemDetailsWrapper));
 
         // Act
-        var value = serializer.ReadObject(
-            new MemoryStream(Encoding.UTF8.GetBytes(xml)));
+        var value = serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
         // Assert
         var problemDetails = Assert.IsType<ValidationProblemDetailsWrapper>(value).ProblemDetails;
@@ -49,7 +49,8 @@ public class ValidationProblemDetailsWrapperTest
             {
                 Assert.Equal("key1", kvp.Key);
                 Assert.Equal("Test Value 1", kvp.Value);
-            });
+            }
+        );
 
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
@@ -67,26 +68,27 @@ public class ValidationProblemDetailsWrapperTest
             {
                 Assert.Equal("error1", kvp.Key);
                 Assert.Equal(new[] { "Test error 1 Test error 2" }, kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
     public void ReadXml_ReadsValidationProblemDetailsXml_WithNoErrors()
     {
         // Arrange
-        var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<title>Some title</title>" +
-            "<status>400</status>" +
-            "<instance>Some instance</instance>" +
-            "<key1>Test Value 1</key1>" +
-            "<_x005B_key2_x005D_>Test Value 2</_x005B_key2_x005D_>" +
-            "</problem>";
+        var xml =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<title>Some title</title>"
+            + "<status>400</status>"
+            + "<instance>Some instance</instance>"
+            + "<key1>Test Value 1</key1>"
+            + "<_x005B_key2_x005D_>Test Value 2</_x005B_key2_x005D_>"
+            + "</problem>";
         var serializer = new DataContractSerializer(typeof(ValidationProblemDetailsWrapper));
 
         // Act
-        var value = serializer.ReadObject(
-            new MemoryStream(Encoding.UTF8.GetBytes(xml)));
+        var value = serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
         // Assert
         var problemDetails = Assert.IsType<ValidationProblemDetailsWrapper>(value).ProblemDetails;
@@ -105,7 +107,8 @@ public class ValidationProblemDetailsWrapperTest
             {
                 Assert.Equal("[key2]", kvp.Key);
                 Assert.Equal("Test Value 2", kvp.Value);
-            });
+            }
+        );
 
         Assert.Empty(problemDetails.Errors);
     }
@@ -114,17 +117,17 @@ public class ValidationProblemDetailsWrapperTest
     public void ReadXml_ReadsValidationProblemDetailsXml_WithEmptyErrorsElement()
     {
         // Arrange
-        var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<title>Some title</title>" +
-            "<status>400</status>" +
-            "<MVC-Errors />" +
-            "</problem>";
+        var xml =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<title>Some title</title>"
+            + "<status>400</status>"
+            + "<MVC-Errors />"
+            + "</problem>";
         var serializer = new DataContractSerializer(typeof(ValidationProblemDetailsWrapper));
 
         // Act
-        var value = serializer.ReadObject(
-            new MemoryStream(Encoding.UTF8.GetBytes(xml)));
+        var value = serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
         // Assert
         var problemDetails = Assert.IsType<ValidationProblemDetailsWrapper>(value).ProblemDetails;
@@ -141,33 +144,30 @@ public class ValidationProblemDetailsWrapperTest
         {
             Title = "Some title",
             Detail = "Some detail",
-            Extensions =
-                {
-                    ["key1"] = "Test Value 1",
-                    ["[Key2]"] = "Test Value 2"
-                },
+            Extensions = { ["key1"] = "Test Value 1", ["[Key2]"] = "Test Value 2" },
             Errors =
-                {
-                    { "error1", new[] {"Test error 1", "Test error 2" } },
-                    { "[error2]", new[] {"Test error 3" } },
-                    { "", new[] { "Test error 4" } },
-                }
+            {
+                { "error1", new[] { "Test error 1", "Test error 2" } },
+                { "[error2]", new[] { "Test error 3" } },
+                { "", new[] { "Test error 4" } },
+            },
         };
 
         var wrapper = new ValidationProblemDetailsWrapper(problemDetails);
         var outputStream = new MemoryStream();
-        var expectedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<detail>Some detail</detail>" +
-            "<title>Some title</title>" +
-            "<key1>Test Value 1</key1>" +
-            "<_x005B_Key2_x005D_>Test Value 2</_x005B_Key2_x005D_>" +
-            "<MVC-Errors>" +
-            "<error1>Test error 1 Test error 2</error1>" +
-            "<_x005B_error2_x005D_>Test error 3</_x005B_error2_x005D_>" +
-            "<MVC-Empty>Test error 4</MVC-Empty>" +
-            "</MVC-Errors>" +
-            "</problem>";
+        var expectedContent =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<detail>Some detail</detail>"
+            + "<title>Some title</title>"
+            + "<key1>Test Value 1</key1>"
+            + "<_x005B_Key2_x005D_>Test Value 2</_x005B_Key2_x005D_>"
+            + "<MVC-Errors>"
+            + "<error1>Test error 1 Test error 2</error1>"
+            + "<_x005B_error2_x005D_>Test error 3</_x005B_error2_x005D_>"
+            + "<MVC-Empty>Test error 4</MVC-Empty>"
+            + "</MVC-Errors>"
+            + "</problem>";
 
         // Act
         using (var xmlWriter = XmlWriter.Create(outputStream))
@@ -190,22 +190,19 @@ public class ValidationProblemDetailsWrapperTest
         {
             Title = "Some title",
             Detail = "Some detail",
-            Extensions =
-                {
-                    ["key1"] = "Test Value 1",
-                    ["[Key2]"] = "Test Value 2"
-                },
+            Extensions = { ["key1"] = "Test Value 1", ["[Key2]"] = "Test Value 2" },
         };
 
         var wrapper = new ValidationProblemDetailsWrapper(problemDetails);
         var outputStream = new MemoryStream();
-        var expectedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<detail>Some detail</detail>" +
-            "<title>Some title</title>" +
-            "<key1>Test Value 1</key1>" +
-            "<_x005B_Key2_x005D_>Test Value 2</_x005B_Key2_x005D_>" +
-            "</problem>";
+        var expectedContent =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<detail>Some detail</detail>"
+            + "<title>Some title</title>"
+            + "<key1>Test Value 1</key1>"
+            + "<_x005B_Key2_x005D_>Test Value 2</_x005B_Key2_x005D_>"
+            + "</problem>";
 
         // Act
         using (var xmlWriter = XmlWriter.Create(outputStream))

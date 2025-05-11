@@ -98,9 +98,16 @@ namespace System.Security.Cryptography.Xml
             {
                 if (_canonicalizationMethodTransform == null)
                 {
-                    _canonicalizationMethodTransform = CryptoHelpers.CreateFromName<Transform>(CanonicalizationMethod);
+                    _canonicalizationMethodTransform = CryptoHelpers.CreateFromName<Transform>(
+                        CanonicalizationMethod
+                    );
                     if (_canonicalizationMethodTransform == null)
-                        throw new CryptographicException(SR.Format(SR.Cryptography_Xml_CreateTransformFailed, CanonicalizationMethod));
+                        throw new CryptographicException(
+                            SR.Format(
+                                SR.Cryptography_Xml_CreateTransformFailed,
+                                CanonicalizationMethod
+                            )
+                        );
                     _canonicalizationMethodTransform.SignedXml = SignedXml;
                     _canonicalizationMethodTransform.Reference = null;
                 }
@@ -138,11 +145,13 @@ namespace System.Security.Cryptography.Xml
         {
             get
             {
-                if (_cachedXml == null) return false;
+                if (_cachedXml == null)
+                    return false;
                 // now check all the references
                 foreach (Reference reference in References)
                 {
-                    if (!reference.CacheValid) return false;
+                    if (!reference.CacheValid)
+                        return false;
                 }
                 return true;
             }
@@ -154,7 +163,8 @@ namespace System.Security.Cryptography.Xml
 
         public XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -164,24 +174,37 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the root element
-            XmlElement signedInfoElement = document.CreateElement("SignedInfo", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement signedInfoElement = document.CreateElement(
+                "SignedInfo",
+                SignedXml.XmlDsigNamespaceUrl
+            );
             if (!string.IsNullOrEmpty(_id))
                 signedInfoElement.SetAttribute("Id", _id);
 
             // Add the canonicalization method, defaults to SignedXml.XmlDsigNamespaceUrl
-            XmlElement canonicalizationMethodElement = CanonicalizationMethodObject.GetXml(document, "CanonicalizationMethod");
+            XmlElement canonicalizationMethodElement = CanonicalizationMethodObject.GetXml(
+                document,
+                "CanonicalizationMethod"
+            );
             signedInfoElement.AppendChild(canonicalizationMethodElement);
 
             // Add the signature method
             if (string.IsNullOrEmpty(_signatureMethod))
                 throw new CryptographicException(SR.Cryptography_Xml_SignatureMethodRequired);
 
-            XmlElement signatureMethodElement = document.CreateElement("SignatureMethod", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement signatureMethodElement = document.CreateElement(
+                "SignatureMethod",
+                SignedXml.XmlDsigNamespaceUrl
+            );
             signatureMethodElement.SetAttribute("Algorithm", _signatureMethod);
             // Add HMACOutputLength tag if we have one
             if (_signatureLength != null)
             {
-                XmlElement hmacLengthElement = document.CreateElement(null, "HMACOutputLength", SignedXml.XmlDsigNamespaceUrl);
+                XmlElement hmacLengthElement = document.CreateElement(
+                    null,
+                    "HMACOutputLength",
+                    SignedXml.XmlDsigNamespaceUrl
+                );
                 XmlText outputLength = document.CreateTextNode(_signatureLength);
                 hmacLengthElement.AppendChild(outputLength);
                 signatureMethodElement.AppendChild(hmacLengthElement);
@@ -224,30 +247,73 @@ namespace System.Security.Cryptography.Xml
                 throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo");
 
             // CanonicalizationMethod -- must be present
-            XmlNodeList? canonicalizationMethodNodes = signedInfoElement.SelectNodes("ds:CanonicalizationMethod", nsm);
-            if (canonicalizationMethodNodes == null || canonicalizationMethodNodes.Count == 0 || canonicalizationMethodNodes.Count > 1)
-                throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo/CanonicalizationMethod");
-            XmlElement canonicalizationMethodElement = (canonicalizationMethodNodes.Item(0) as XmlElement)!;
+            XmlNodeList? canonicalizationMethodNodes = signedInfoElement.SelectNodes(
+                "ds:CanonicalizationMethod",
+                nsm
+            );
+            if (
+                canonicalizationMethodNodes == null
+                || canonicalizationMethodNodes.Count == 0
+                || canonicalizationMethodNodes.Count > 1
+            )
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_InvalidElement,
+                    "SignedInfo/CanonicalizationMethod"
+                );
+            XmlElement canonicalizationMethodElement = (
+                canonicalizationMethodNodes.Item(0) as XmlElement
+            )!;
             expectedChildNodes += canonicalizationMethodNodes.Count;
-            _canonicalizationMethod = Utils.GetAttribute(canonicalizationMethodElement, "Algorithm", SignedXml.XmlDsigNamespaceUrl);
-            if (_canonicalizationMethod == null || !Utils.VerifyAttributes(canonicalizationMethodElement, "Algorithm"))
-                throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo/CanonicalizationMethod");
+            _canonicalizationMethod = Utils.GetAttribute(
+                canonicalizationMethodElement,
+                "Algorithm",
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            if (
+                _canonicalizationMethod == null
+                || !Utils.VerifyAttributes(canonicalizationMethodElement, "Algorithm")
+            )
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_InvalidElement,
+                    "SignedInfo/CanonicalizationMethod"
+                );
             _canonicalizationMethodTransform = null;
             if (canonicalizationMethodElement.ChildNodes.Count > 0)
                 CanonicalizationMethodObject.LoadInnerXml(canonicalizationMethodElement.ChildNodes);
 
             // SignatureMethod -- must be present
-            XmlNodeList? signatureMethodNodes = signedInfoElement.SelectNodes("ds:SignatureMethod", nsm);
-            if (signatureMethodNodes == null || signatureMethodNodes.Count == 0 || signatureMethodNodes.Count > 1)
-                throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo/SignatureMethod");
+            XmlNodeList? signatureMethodNodes = signedInfoElement.SelectNodes(
+                "ds:SignatureMethod",
+                nsm
+            );
+            if (
+                signatureMethodNodes == null
+                || signatureMethodNodes.Count == 0
+                || signatureMethodNodes.Count > 1
+            )
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_InvalidElement,
+                    "SignedInfo/SignatureMethod"
+                );
             XmlElement signatureMethodElement = (signatureMethodNodes.Item(0) as XmlElement)!;
             expectedChildNodes += signatureMethodNodes.Count;
-            _signatureMethod = Utils.GetAttribute(signatureMethodElement, "Algorithm", SignedXml.XmlDsigNamespaceUrl);
-            if (_signatureMethod == null || !Utils.VerifyAttributes(signatureMethodElement, "Algorithm"))
-                throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo/SignatureMethod");
+            _signatureMethod = Utils.GetAttribute(
+                signatureMethodElement,
+                "Algorithm",
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            if (
+                _signatureMethod == null
+                || !Utils.VerifyAttributes(signatureMethodElement, "Algorithm")
+            )
+                throw new CryptographicException(
+                    SR.Cryptography_Xml_InvalidElement,
+                    "SignedInfo/SignatureMethod"
+                );
 
             // Now get the output length if we are using a MAC algorithm
-            XmlElement? signatureLengthElement = signatureMethodElement.SelectSingleNode("ds:HMACOutputLength", nsm) as XmlElement;
+            XmlElement? signatureLengthElement =
+                signatureMethodElement.SelectSingleNode("ds:HMACOutputLength", nsm) as XmlElement;
             if (signatureLengthElement != null)
                 _signatureLength = signatureLengthElement.InnerXml;
 
@@ -260,7 +326,10 @@ namespace System.Security.Cryptography.Xml
             {
                 if (referenceNodes.Count > Utils.MaxReferencesPerSignedInfo)
                 {
-                    throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo/Reference");
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_InvalidElement,
+                        "SignedInfo/Reference"
+                    );
                 }
                 foreach (XmlNode node in referenceNodes)
                 {
@@ -273,7 +342,10 @@ namespace System.Security.Cryptography.Xml
                 // Verify that there aren't any extra nodes that aren't allowed
                 if (signedInfoElement.SelectNodes("*")!.Count != expectedChildNodes)
                 {
-                    throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "SignedInfo");
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_InvalidElement,
+                        "SignedInfo"
+                    );
                 }
             }
 

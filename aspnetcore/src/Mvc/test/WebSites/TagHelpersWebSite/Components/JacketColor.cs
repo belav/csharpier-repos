@@ -10,5 +10,5 @@ public enum JacketColor
     Green,
     Navy,
     Brown,
-    Purple
+    Purple,
 }

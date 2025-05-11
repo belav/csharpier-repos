@@ -18,16 +18,38 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 {
     private static readonly TimeSpan Timeout = TimeSpan.FromMinutes(1);
 
-    public OleTxTests(OleTxFixture fixture)
-    {
-    }
+    public OleTxTests(OleTxFixture fixture) { }
 
     [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-    [InlineData(Phase1Vote.Prepared, Phase1Vote.Prepared, EnlistmentOutcome.Committed, EnlistmentOutcome.Committed, TransactionStatus.Committed)]
-    [InlineData(Phase1Vote.Prepared, Phase1Vote.ForceRollback, EnlistmentOutcome.Aborted, EnlistmentOutcome.Aborted, TransactionStatus.Aborted)]
-    [InlineData(Phase1Vote.ForceRollback, Phase1Vote.Prepared, EnlistmentOutcome.Aborted, EnlistmentOutcome.Aborted, TransactionStatus.Aborted)]
-    public void Two_durable_enlistments_commit(Phase1Vote vote1, Phase1Vote vote2, EnlistmentOutcome expectedOutcome1, EnlistmentOutcome expectedOutcome2, TransactionStatus expectedTxStatus)
-        => Test(() =>
+    [InlineData(
+        Phase1Vote.Prepared,
+        Phase1Vote.Prepared,
+        EnlistmentOutcome.Committed,
+        EnlistmentOutcome.Committed,
+        TransactionStatus.Committed
+    )]
+    [InlineData(
+        Phase1Vote.Prepared,
+        Phase1Vote.ForceRollback,
+        EnlistmentOutcome.Aborted,
+        EnlistmentOutcome.Aborted,
+        TransactionStatus.Aborted
+    )]
+    [InlineData(
+        Phase1Vote.ForceRollback,
+        Phase1Vote.Prepared,
+        EnlistmentOutcome.Aborted,
+        EnlistmentOutcome.Aborted,
+        TransactionStatus.Aborted
+    )]
+    public void Two_durable_enlistments_commit(
+        Phase1Vote vote1,
+        Phase1Vote vote2,
+        EnlistmentOutcome expectedOutcome1,
+        EnlistmentOutcome expectedOutcome2,
+        TransactionStatus expectedTxStatus
+    ) =>
+        Test(() =>
         {
             using var tx = new CommittableTransaction();
 
@@ -55,8 +77,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
         });
 
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-    public void Two_durable_enlistments_rollback()
-        => Test(() =>
+    public void Two_durable_enlistments_rollback() =>
+        Test(() =>
         {
             using var tx = new CommittableTransaction();
 
@@ -79,8 +101,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
-    public void Volatile_and_durable_enlistments(int volatileCount)
-        => Test(() =>
+    public void Volatile_and_durable_enlistments(int volatileCount) =>
+        Test(() =>
         {
             using var tx = new CommittableTransaction();
 
@@ -90,7 +112,10 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 for (int i = 0; i < volatileCount; i++)
                 {
                     // It doesn't matter what we specify for SinglePhaseVote.
-                    volatiles[i] = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Committed);
+                    volatiles[i] = new TestEnlistment(
+                        Phase1Vote.Prepared,
+                        EnlistmentOutcome.Committed
+                    );
                     tx.EnlistVolatile(volatiles[i], EnlistmentOptions.None);
                 }
             }
@@ -102,14 +127,15 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             tx.Commit();
 
-            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status));
+            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+            );
         });
 
-    protected static bool IsRemoteExecutorSupportedAndNotNano => RemoteExecutor.IsSupported && PlatformDetection.IsNotWindowsNanoServer;
+    protected static bool IsRemoteExecutorSupportedAndNotNano =>
+        RemoteExecutor.IsSupported && PlatformDetection.IsNotWindowsNanoServer;
 
     [ConditionalFact(nameof(IsRemoteExecutorSupportedAndNotNano))]
-    public void Promotion()
-        => PromotionCore();
+    public void Promotion() => PromotionCore();
 
     // #76010
     [ConditionalFact(nameof(IsRemoteExecutorSupportedAndNotNano))]
@@ -135,15 +161,32 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             string propagationTokenFilePath = Path.GetTempFileName();
             string exportCookieFilePath = Path.GetTempFileName();
-            using var waitHandle1 = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Promotion1");
-            using var waitHandle2 = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Promotion2");
-            using var waitHandle3 = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Promotion3");
+            using var waitHandle1 = new EventWaitHandle(
+                initialState: false,
+                EventResetMode.ManualReset,
+                "System.Transactions.Tests.OleTxTests.Promotion1"
+            );
+            using var waitHandle2 = new EventWaitHandle(
+                initialState: false,
+                EventResetMode.ManualReset,
+                "System.Transactions.Tests.OleTxTests.Promotion2"
+            );
+            using var waitHandle3 = new EventWaitHandle(
+                initialState: false,
+                EventResetMode.ManualReset,
+                "System.Transactions.Tests.OleTxTests.Promotion3"
+            );
 
-            RemoteInvokeHandle? remote1 = null, remote2 = null;
+            RemoteInvokeHandle? remote1 = null,
+                remote2 = null;
 
             try
             {
-                remote1 = RemoteExecutor.Invoke(Remote1, propagationTokenFilePath, new RemoteInvokeOptions { ExpectedExitCode = 42 });
+                remote1 = RemoteExecutor.Invoke(
+                    Remote1,
+                    propagationTokenFilePath,
+                    new RemoteInvokeOptions { ExpectedExitCode = 42 }
+                );
 
                 // Wait for the external process to start a transaction and save its propagation token
                 Assert.True(waitHandle1.WaitOne(Timeout));
@@ -175,7 +218,11 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 // Write the export cookie and start the 2nd external process, which will read the cookie and enlist in the transaction.
                 // Wait for it to complete.
                 File.WriteAllBytes(exportCookieFilePath, exportCookie);
-                remote2 = RemoteExecutor.Invoke(Remote2, exportCookieFilePath, new RemoteInvokeOptions { ExpectedExitCode = 42 });
+                remote2 = RemoteExecutor.Invoke(
+                    Remote2,
+                    exportCookieFilePath,
+                    new RemoteInvokeOptions { ExpectedExitCode = 42 }
+                );
                 Assert.True(waitHandle2.WaitOne(Timeout));
 
                 // We now have two external processes with enlistments to our distributed transaction. Commit.
@@ -185,7 +232,9 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 Assert.True(pspe1.WasSinglePhaseCommitCalled);
                 waitHandle3.Set();
 
-                Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status));
+                Retry(() =>
+                    Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+                );
             }
             catch
             {
@@ -194,9 +243,7 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                     remote1?.Process.Kill();
                     remote2?.Process.Kill();
                 }
-                catch
-                {
-                }
+                catch { }
 
                 throw;
             }
@@ -211,14 +258,18 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             remote2?.Dispose();
         });
 
-        static void Remote1(string propagationTokenFilePath)
-            => Test(() =>
+        static void Remote1(string propagationTokenFilePath) =>
+            Test(() =>
             {
                 var outcomeEvent = new AutoResetEvent(false);
 
                 using (var tx = new CommittableTransaction())
                 {
-                    var enlistment = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Committed, outcomeReceived: outcomeEvent);
+                    var enlistment = new TestEnlistment(
+                        Phase1Vote.Prepared,
+                        EnlistmentOutcome.Committed,
+                        outcomeReceived: outcomeEvent
+                    );
                     tx.EnlistDurable(Guid.NewGuid(), enlistment, EnlistmentOptions.None);
 
                     // We now have an OleTx transaction. Save its propagation token to disk so that the main process can read it when promoting.
@@ -226,14 +277,22 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                     File.WriteAllBytes(propagationTokenFilePath, propagationToken);
 
                     // Signal to the main process that the propagation token is ready to be read
-                    using var waitHandle1 = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Promotion1");
+                    using var waitHandle1 = new EventWaitHandle(
+                        initialState: false,
+                        EventResetMode.ManualReset,
+                        "System.Transactions.Tests.OleTxTests.Promotion1"
+                    );
                     waitHandle1.Set();
 
                     // The main process will now import our transaction via the propagation token, and propagate it to a 2nd process.
                     // In the main process the transaction is delegated; we're the one who started it, and so we're the one who need to Commit.
                     // When Commit() is called in the main process, that will trigger a SinglePhaseCommit on the PSPE which represents us. In SQL Server this
                     // contacts the DB to actually commit the transaction with MSDTC. In this simulation we'll just use the wait handle again to trigger this.
-                    using var waitHandle3 = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Promotion3");
+                    using var waitHandle3 = new EventWaitHandle(
+                        initialState: false,
+                        EventResetMode.ManualReset,
+                        "System.Transactions.Tests.OleTxTests.Promotion3"
+                    );
                     Assert.True(waitHandle3.WaitOne(Timeout));
 
                     tx.Commit();
@@ -244,8 +303,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 Environment.Exit(42); // 42 is error code expected by RemoteExecutor
             });
 
-        static void Remote2(string exportCookieFilePath)
-            => Test(() =>
+        static void Remote2(string exportCookieFilePath) =>
+            Test(() =>
             {
                 var outcomeEvent = new AutoResetEvent(false);
 
@@ -254,11 +313,19 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 using (var tx = TransactionInterop.GetTransactionFromExportCookie(exportCookie))
                 {
                     // Now enlist durably. This triggers promotion of the first PSPE, reading the propagation token.
-                    var enlistment = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Committed, outcomeReceived: outcomeEvent);
+                    var enlistment = new TestEnlistment(
+                        Phase1Vote.Prepared,
+                        EnlistmentOutcome.Committed,
+                        outcomeReceived: outcomeEvent
+                    );
                     tx.EnlistDurable(Guid.NewGuid(), enlistment, EnlistmentOptions.None);
 
                     // Signal to the main process that we're enlisted and ready to commit
-                    using var waitHandle = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Promotion2");
+                    using var waitHandle = new EventWaitHandle(
+                        initialState: false,
+                        EventResetMode.ManualReset,
+                        "System.Transactions.Tests.OleTxTests.Promotion2"
+                    );
                     waitHandle.Set();
                 }
 
@@ -272,16 +339,15 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
     {
         private string _propagationTokenFilePath;
 
-        public TestPromotableSinglePhaseNotification(string propagationTokenFilePath)
-            => _propagationTokenFilePath = propagationTokenFilePath;
+        public TestPromotableSinglePhaseNotification(string propagationTokenFilePath) =>
+            _propagationTokenFilePath = propagationTokenFilePath;
 
         public bool WasInitializedCalled { get; private set; }
         public bool WasPromoteCalled { get; private set; }
         public bool WasRollbackCalled { get; private set; }
         public bool WasSinglePhaseCommitCalled { get; private set; }
 
-        public void Initialize()
-            => WasInitializedCalled = true;
+        public void Initialize() => WasInitializedCalled = true;
 
         public byte[] Promote()
         {
@@ -290,8 +356,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             return File.ReadAllBytes(_propagationTokenFilePath);
         }
 
-        public void Rollback(SinglePhaseEnlistment singlePhaseEnlistment)
-            => WasRollbackCalled = true;
+        public void Rollback(SinglePhaseEnlistment singlePhaseEnlistment) =>
+            WasRollbackCalled = true;
 
         public void SinglePhaseCommit(SinglePhaseEnlistment singlePhaseEnlistment)
         {
@@ -312,7 +378,11 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             using var tx = new CommittableTransaction();
 
             var outcomeEvent1 = new AutoResetEvent(false);
-            var enlistment1 = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Committed, outcomeReceived: outcomeEvent1);
+            var enlistment1 = new TestEnlistment(
+                Phase1Vote.Prepared,
+                EnlistmentOutcome.Committed,
+                outcomeReceived: outcomeEvent1
+            );
             var guid1 = Guid.NewGuid();
             tx.EnlistDurable(guid1, enlistment1, EnlistmentOptions.None);
 
@@ -328,14 +398,20 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             using var waitHandle = new EventWaitHandle(
                 initialState: false,
                 EventResetMode.ManualReset,
-                "System.Transactions.Tests.OleTxTests.Recovery");
+                "System.Transactions.Tests.OleTxTests.Recovery"
+            );
 
             try
             {
-                using (RemoteExecutor.Invoke(
-                           EnlistAndCrash,
-                           propagationTokenText, guid2.ToString(), secondEnlistmentRecoveryFilePath,
-                           new RemoteInvokeOptions { ExpectedExitCode = 42 }))
+                using (
+                    RemoteExecutor.Invoke(
+                        EnlistAndCrash,
+                        propagationTokenText,
+                        guid2.ToString(),
+                        secondEnlistmentRecoveryFilePath,
+                        new RemoteInvokeOptions { ExpectedExitCode = 42 }
+                    )
+                )
                 {
                     // Wait for the external process to enlist in the transaction, it will signal this EventWaitHandle.
                     Assert.True(waitHandle.WaitOne(Timeout));
@@ -347,8 +423,14 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 // Load the recovery information the other process has written to disk for us and reenlist with
                 // the failed RM's Guid to commit.
                 var outcomeEvent3 = new AutoResetEvent(false);
-                var enlistment3 = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Committed, outcomeReceived: outcomeEvent3);
-                byte[] secondRecoveryInformation = File.ReadAllBytes(secondEnlistmentRecoveryFilePath);
+                var enlistment3 = new TestEnlistment(
+                    Phase1Vote.Prepared,
+                    EnlistmentOutcome.Committed,
+                    outcomeReceived: outcomeEvent3
+                );
+                byte[] secondRecoveryInformation = File.ReadAllBytes(
+                    secondEnlistmentRecoveryFilePath
+                );
                 _ = TransactionManager.Reenlist(guid2, secondRecoveryInformation, enlistment3);
                 TransactionManager.RecoveryComplete(guid2);
 
@@ -369,17 +451,31 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             }
         });
 
-        static void EnlistAndCrash(string propagationTokenText, string resourceManagerIdentifierGuid, string recoveryInformationFilePath)
-            => Test(() =>
+        static void EnlistAndCrash(
+            string propagationTokenText,
+            string resourceManagerIdentifierGuid,
+            string recoveryInformationFilePath
+        ) =>
+            Test(() =>
             {
                 byte[] propagationToken = Convert.FromBase64String(propagationTokenText);
-                using var tx = TransactionInterop.GetTransactionFromTransmitterPropagationToken(propagationToken);
+                using var tx = TransactionInterop.GetTransactionFromTransmitterPropagationToken(
+                    propagationToken
+                );
 
                 var crashingEnlistment = new CrashingEnlistment(recoveryInformationFilePath);
-                tx.EnlistDurable(Guid.Parse(resourceManagerIdentifierGuid), crashingEnlistment, EnlistmentOptions.None);
+                tx.EnlistDurable(
+                    Guid.Parse(resourceManagerIdentifierGuid),
+                    crashingEnlistment,
+                    EnlistmentOptions.None
+                );
 
                 // Signal to the main process that we've enlisted and are ready to accept prepare/commit.
-                using var waitHandle = new EventWaitHandle(initialState: false, EventResetMode.ManualReset, "System.Transactions.Tests.OleTxTests.Recovery");
+                using var waitHandle = new EventWaitHandle(
+                    initialState: false,
+                    EventResetMode.ManualReset,
+                    "System.Transactions.Tests.OleTxTests.Recovery"
+                );
                 waitHandle.Set();
 
                 // We've enlisted, and set it up so that when the MSDTC tells us to commit, the process will crash.
@@ -391,30 +487,30 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
     {
         private string _recoveryInformationFilePath;
 
-        public CrashingEnlistment(string recoveryInformationFilePath)
-            => _recoveryInformationFilePath = recoveryInformationFilePath;
+        public CrashingEnlistment(string recoveryInformationFilePath) =>
+            _recoveryInformationFilePath = recoveryInformationFilePath;
 
         public void Prepare(PreparingEnlistment preparingEnlistment)
         {
             // Received a prepare notification from MSDTC, persist the recovery information so that the main process can perform recovery for it.
-            File.WriteAllBytes(_recoveryInformationFilePath, preparingEnlistment.RecoveryInformation());
+            File.WriteAllBytes(
+                _recoveryInformationFilePath,
+                preparingEnlistment.RecoveryInformation()
+            );
 
             preparingEnlistment.Prepared();
         }
 
-        public void Commit(Enlistment enlistment)
-            => Environment.Exit(42); // 42 is error code expected by RemoteExecutor
+        public void Commit(Enlistment enlistment) => Environment.Exit(42); // 42 is error code expected by RemoteExecutor
 
-        public void Rollback(Enlistment enlistment)
-            => Environment.Exit(1);
+        public void Rollback(Enlistment enlistment) => Environment.Exit(1);
 
-        public void InDoubt(Enlistment enlistment)
-            => Environment.Exit(1);
+        public void InDoubt(Enlistment enlistment) => Environment.Exit(1);
     }
 
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-    public void TransmitterPropagationToken()
-        => Test(() =>
+    public void TransmitterPropagationToken() =>
+        Test(() =>
         {
             using var tx = new CommittableTransaction();
 
@@ -424,30 +520,38 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             Assert.NotEqual(Guid.Empty, tx.TransactionInformation.DistributedIdentifier);
 
-            var tx2 = TransactionInterop.GetTransactionFromTransmitterPropagationToken(propagationToken);
+            var tx2 = TransactionInterop.GetTransactionFromTransmitterPropagationToken(
+                propagationToken
+            );
 
-            Assert.Equal(tx.TransactionInformation.DistributedIdentifier, tx2.TransactionInformation.DistributedIdentifier);
+            Assert.Equal(
+                tx.TransactionInformation.DistributedIdentifier,
+                tx2.TransactionInformation.DistributedIdentifier
+            );
         });
 
     // #76010
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-    public void TransactionScope_with_DependentTransaction()
-    => Test(() =>
-    {
-        using var committableTransaction = new CommittableTransaction();
-        var propagationToken = TransactionInterop.GetTransmitterPropagationToken(committableTransaction);
-
-        var dependentTransaction = TransactionInterop.GetTransactionFromTransmitterPropagationToken(propagationToken);
-
-        using (var scope = new TransactionScope(dependentTransaction))
+    public void TransactionScope_with_DependentTransaction() =>
+        Test(() =>
         {
-            scope.Complete();
-        }
-    });
+            using var committableTransaction = new CommittableTransaction();
+            var propagationToken = TransactionInterop.GetTransmitterPropagationToken(
+                committableTransaction
+            );
+
+            var dependentTransaction =
+                TransactionInterop.GetTransactionFromTransmitterPropagationToken(propagationToken);
+
+            using (var scope = new TransactionScope(dependentTransaction))
+            {
+                scope.Complete();
+            }
+        });
 
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-    public void GetExportCookie()
-        => Test(() =>
+    public void GetExportCookie() =>
+        Test(() =>
         {
             using var tx = new CommittableTransaction();
 
@@ -461,19 +565,25 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             var tx2 = TransactionInterop.GetTransactionFromExportCookie(exportCookie);
 
-            Assert.Equal(tx.TransactionInformation.DistributedIdentifier, tx2.TransactionInformation.DistributedIdentifier);
+            Assert.Equal(
+                tx.TransactionInformation.DistributedIdentifier,
+                tx2.TransactionInformation.DistributedIdentifier
+            );
         });
 
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
-    public void GetDtcTransaction()
-        => Test(() =>
+    public void GetDtcTransaction() =>
+        Test(() =>
         {
             using var tx = new CommittableTransaction();
 
             var outcomeReceived = new AutoResetEvent(false);
 
             var enlistment = new TestEnlistment(
-                Phase1Vote.Prepared, EnlistmentOutcome.Committed, outcomeReceived: outcomeReceived);
+                Phase1Vote.Prepared,
+                EnlistmentOutcome.Committed,
+                outcomeReceived: outcomeReceived
+            );
 
             Assert.Equal(Guid.Empty, tx.PromoterType);
 
@@ -489,7 +599,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             Assert.True(outcomeReceived.WaitOne(Timeout));
             Assert.Equal(EnlistmentOutcome.Committed, enlistment.Outcome);
-            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status));
+            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+            );
         });
 
     [ConditionalFact(nameof(IsRemoteExecutorSupportedAndNotNano))]
@@ -524,7 +635,9 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
         {
             TransactionManager.ImplicitDistributedTransactions = true;
 
-            Assert.Throws<InvalidOperationException>(() => TransactionManager.ImplicitDistributedTransactions = false);
+            Assert.Throws<InvalidOperationException>(() =>
+                TransactionManager.ImplicitDistributedTransactions = false
+            );
         });
     }
 
@@ -544,7 +657,9 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             Test(MinimalOleTxScenario);
 
-            Assert.Throws<InvalidOperationException>(() => TransactionManager.ImplicitDistributedTransactions = false);
+            Assert.Throws<InvalidOperationException>(() =>
+                TransactionManager.ImplicitDistributedTransactions = false
+            );
             TransactionManager.ImplicitDistributedTransactions = true;
         });
     }
@@ -562,7 +677,9 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
         {
             Assert.Throws<NotSupportedException>(MinimalOleTxScenario);
 
-            Assert.Throws<InvalidOperationException>(() => TransactionManager.ImplicitDistributedTransactions = true);
+            Assert.Throws<InvalidOperationException>(() =>
+                TransactionManager.ImplicitDistributedTransactions = true
+            );
             TransactionManager.ImplicitDistributedTransactions = false;
         });
     }
@@ -594,7 +711,14 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
                 action();
                 return;
             }
-            catch (Exception e) when (e is TransactionManagerCommunicationException or TransactionException { InnerException: TransactionManagerCommunicationException })
+            catch (Exception e)
+                when (e
+                        is TransactionManagerCommunicationException
+                            or TransactionException
+                            {
+                                InnerException: TransactionManagerCommunicationException
+                            }
+                )
             {
                 if (--nRetries > 0)
                 {
@@ -605,9 +729,13 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
                 // We've continuously gotten XACT_E_TMNOTAVAILABLE for the entire retry window - MSDTC is unavailable in some way.
                 // We don't want this to make our CI flaky, so we swallow the exception and skip all subsequent tests.
-                if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_CI")) ||
-                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")) ||
-                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_OS")))
+                if (
+                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_CI"))
+                    || !string.IsNullOrEmpty(
+                        Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")
+                    )
+                    || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_OS"))
+                )
                 {
                     s_isTestSuiteDisabled = true;
 
@@ -662,8 +790,7 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
         // In CI, we sometimes get XACT_E_TMNOTAVAILABLE on the very first attempt to connect to MSDTC;
         // this is likely due to on-demand slow startup of MSDTC. Perform pre-test connecting with retry
         // to ensure that MSDTC is properly up when the first test runs.
-        public OleTxFixture()
-            => Test(MinimalOleTxScenario);
+        public OleTxFixture() => Test(MinimalOleTxScenario);
     }
 
     private static bool s_isTestSuiteDisabled;

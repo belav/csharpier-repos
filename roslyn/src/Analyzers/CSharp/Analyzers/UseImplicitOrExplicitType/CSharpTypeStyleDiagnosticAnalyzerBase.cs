@@ -16,21 +16,31 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
 {
-    internal abstract partial class CSharpTypeStyleDiagnosticAnalyzerBase :
-        AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract partial class CSharpTypeStyleDiagnosticAnalyzerBase
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         protected abstract CSharpTypeStyleHelper Helper { get; }
 
         protected CSharpTypeStyleDiagnosticAnalyzerBase(
-            string diagnosticId, EnforceOnBuild enforceOnBuild, LocalizableString title, LocalizableString message)
-            : base(diagnosticId,
-                   enforceOnBuild,
-                   ImmutableHashSet.Create<IOption2>(CSharpCodeStyleOptions.VarForBuiltInTypes, CSharpCodeStyleOptions.VarWhenTypeIsApparent, CSharpCodeStyleOptions.VarElsewhere),
-                   title, message)
-        {
-        }
+            string diagnosticId,
+            EnforceOnBuild enforceOnBuild,
+            LocalizableString title,
+            LocalizableString message
+        )
+            : base(
+                diagnosticId,
+                enforceOnBuild,
+                ImmutableHashSet.Create<IOption2>(
+                    CSharpCodeStyleOptions.VarForBuiltInTypes,
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CSharpCodeStyleOptions.VarElsewhere
+                ),
+                title,
+                message
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         public override bool OpenFileOnly(SimplifierOptions? options)
         {
@@ -38,14 +48,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
             Contract.ThrowIfNull(options);
 
             var csOptions = (CSharpSimplifierOptions)options;
-            return !(csOptions.VarForBuiltInTypes.Notification.Severity is ReportDiagnostic.Warn or ReportDiagnostic.Error ||
-                     csOptions.VarWhenTypeIsApparent.Notification.Severity is ReportDiagnostic.Warn or ReportDiagnostic.Error ||
-                     csOptions.VarElsewhere.Notification.Severity is ReportDiagnostic.Warn or ReportDiagnostic.Error);
+            return !(
+                csOptions.VarForBuiltInTypes.Notification.Severity
+                    is ReportDiagnostic.Warn
+                        or ReportDiagnostic.Error
+                || csOptions.VarWhenTypeIsApparent.Notification.Severity
+                    is ReportDiagnostic.Warn
+                        or ReportDiagnostic.Error
+                || csOptions.VarElsewhere.Notification.Severity
+                    is ReportDiagnostic.Warn
+                        or ReportDiagnostic.Error
+            );
         }
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(
-                HandleVariableDeclaration, SyntaxKind.VariableDeclaration, SyntaxKind.ForEachStatement, SyntaxKind.DeclarationExpression);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                HandleVariableDeclaration,
+                SyntaxKind.VariableDeclaration,
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.DeclarationExpression
+            );
 
         private void HandleVariableDeclaration(SyntaxNodeAnalysisContext context)
         {
@@ -53,7 +75,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
             var cancellationToken = context.CancellationToken;
 
             var semanticModel = context.SemanticModel;
-            var declaredType = Helper.FindAnalyzableType(declarationStatement, semanticModel, cancellationToken);
+            var declaredType = Helper.FindAnalyzableType(
+                declarationStatement,
+                semanticModel,
+                cancellationToken
+            );
             if (declaredType == null)
             {
                 return;
@@ -62,20 +88,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
             var simplifierOptions = context.GetCSharpAnalyzerOptions().GetSimplifierOptions();
 
             var typeStyle = Helper.AnalyzeTypeName(
-                declaredType, semanticModel, simplifierOptions, cancellationToken);
-            if (!typeStyle.IsStylePreferred
+                declaredType,
+                semanticModel,
+                simplifierOptions,
+                cancellationToken
+            );
+            if (
+                !typeStyle.IsStylePreferred
                 || ShouldSkipAnalysis(context, typeStyle.Notification)
-                || !typeStyle.CanConvert())
+                || !typeStyle.CanConvert()
+            )
             {
                 return;
             }
 
             // The severity preference is not Hidden, as indicated by IsStylePreferred.
             var descriptor = Descriptor;
-            context.ReportDiagnostic(CreateDiagnostic(descriptor, declarationStatement, declaredType.StripRefIfNeeded().Span, typeStyle.Notification));
+            context.ReportDiagnostic(
+                CreateDiagnostic(
+                    descriptor,
+                    declarationStatement,
+                    declaredType.StripRefIfNeeded().Span,
+                    typeStyle.Notification
+                )
+            );
         }
 
-        private static Diagnostic CreateDiagnostic(DiagnosticDescriptor descriptor, SyntaxNode declaration, TextSpan diagnosticSpan, NotificationOption2 notificationOption)
-            => DiagnosticHelper.Create(descriptor, declaration.SyntaxTree.GetLocation(diagnosticSpan), notificationOption, additionalLocations: null, properties: null);
+        private static Diagnostic CreateDiagnostic(
+            DiagnosticDescriptor descriptor,
+            SyntaxNode declaration,
+            TextSpan diagnosticSpan,
+            NotificationOption2 notificationOption
+        ) =>
+            DiagnosticHelper.Create(
+                descriptor,
+                declaration.SyntaxTree.GetLocation(diagnosticSpan),
+                notificationOption,
+                additionalLocations: null,
+                properties: null
+            );
     }
 }

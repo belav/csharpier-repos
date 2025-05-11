@@ -47,7 +47,8 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
         IDistributedCacheTagHelperStorage storage,
         IDistributedCacheTagHelperFormatter formatter,
         HtmlEncoder HtmlEncoder,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(storage);
         ArgumentNullException.ThrowIfNull(formatter);
@@ -62,7 +63,11 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
     }
 
     /// <inheritdoc />
-    public async Task<IHtmlContent> ProcessContentAsync(TagHelperOutput output, CacheTagKey key, DistributedCacheEntryOptions options)
+    public async Task<IHtmlContent> ProcessContentAsync(
+        TagHelperOutput output,
+        CacheTagKey key,
+        DistributedCacheEntryOptions options
+    )
     {
         IHtmlContent content = null;
 
@@ -74,7 +79,9 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
                 // There is a small race condition here between TryGetValue and TryAdd that might cause the
                 // content to be computed more than once. We don't care about this race as the probability of
                 // happening is very small and the impact is not critical.
-                var tcs = new TaskCompletionSource<IHtmlContent>(creationOptions: TaskCreationOptions.RunContinuationsAsynchronously);
+                var tcs = new TaskCompletionSource<IHtmlContent>(
+                    creationOptions: TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 _workers.TryAdd(key, tcs.Task);
 
@@ -97,7 +104,7 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
 
                         var formattingContext = new DistributedCacheTagHelperFormattingContext
                         {
-                            Html = new HtmlString(stringBuilder.ToString())
+                            Html = new HtmlString(stringBuilder.ToString()),
                         };
 
                         // Then cache the result
@@ -124,7 +131,11 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
                         }
                         catch (Exception e)
                         {
-                            Log.DistributedFormatterDeserializationException(_logger, storageKey, e);
+                            Log.DistributedFormatterDeserializationException(
+                                _logger,
+                                storageKey,
+                                e
+                            );
                         }
                         finally
                         {
@@ -191,7 +202,9 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
             // Ensure we are reading the expected key before continuing
             if (serializedKeyBuffer.SequenceEqual(expectedKey))
             {
-                decoded = new byte[value.Length - keyLengthBuffer.Length - serializedKeyBuffer.Length];
+                decoded = new byte[
+                    value.Length - keyLengthBuffer.Length - serializedKeyBuffer.Length
+                ];
                 buffer.Read(decoded, 0, decoded.Length);
             }
         }
@@ -201,7 +214,16 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Error, "Couldn't deserialize cached value for key {Key}.", EventName = "DistributedFormatterDeserializationException")]
-        public static partial void DistributedFormatterDeserializationException(ILogger logger, string key, Exception exception);
+        [LoggerMessage(
+            1,
+            LogLevel.Error,
+            "Couldn't deserialize cached value for key {Key}.",
+            EventName = "DistributedFormatterDeserializationException"
+        )]
+        public static partial void DistributedFormatterDeserializationException(
+            ILogger logger,
+            string key,
+            Exception exception
+        );
     }
 }

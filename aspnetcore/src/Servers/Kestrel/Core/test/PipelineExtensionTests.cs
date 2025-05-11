@@ -21,7 +21,14 @@ public class PipelineExtensionTests : IDisposable
 
     public PipelineExtensionTests()
     {
-        _pipe = new Pipe(new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+        _pipe = new Pipe(
+            new PipeOptions(
+                _memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            )
+        );
     }
 
     public void Dispose()
@@ -97,9 +104,7 @@ public class PipelineExtensionTests : IDisposable
 
         if (expected.Length > 0)
         {
-            AssertExtensions.Equal(
-                expected,
-                reader.Buffer.ToArray());
+            AssertExtensions.Equal(expected, reader.Buffer.ToArray());
         }
         else
         {

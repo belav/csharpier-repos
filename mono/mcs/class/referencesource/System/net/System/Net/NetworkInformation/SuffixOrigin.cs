@@ -1,9 +1,7 @@
-
 using System;
 
 namespace System.Net.NetworkInformation
 {
-
     /// Specifies how an IP address host suffix was located.
     public enum SuffixOrigin
     {
@@ -15,4 +13,3 @@ namespace System.Net.NetworkInformation
         Random,
     }
 }
-

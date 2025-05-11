@@ -4,12 +4,16 @@
 
 namespace System.ServiceModel
 {
-    using System.Reflection;
-    using System.ServiceModel.Security;
     using System.Net.Security;
+    using System.Reflection;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
-    [AttributeUsage(ServiceModelAttributeTargets.OperationContract, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        ServiceModelAttributeTargets.OperationContract,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class FaultContractAttribute : Attribute
     {
         string action;
@@ -22,7 +26,9 @@ namespace System.ServiceModel
         public FaultContractAttribute(Type detailType)
         {
             if (detailType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("detailType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("detailType")
+                );
 
             this.type = detailType;
         }
@@ -51,8 +57,12 @@ namespace System.ServiceModel
                 if (value == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 if (value == string.Empty)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxNameCannotBeEmpty)
+                        )
+                    );
                 this.name = value;
             }
         }
@@ -71,14 +81,13 @@ namespace System.ServiceModel
         internal const string ProtectionLevelPropertyName = "ProtectionLevel";
         public ProtectionLevel ProtectionLevel
         {
-            get
-            {
-                return this.protectionLevel;
-            }
+            get { return this.protectionLevel; }
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -90,4 +99,3 @@ namespace System.ServiceModel
         }
     }
 }
-

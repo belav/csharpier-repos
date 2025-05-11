@@ -17,9 +17,25 @@ internal struct ServerComponent
         string typeName,
         IList<ComponentParameter> parametersDefinitions,
         IList<object?> parameterValues,
-        Guid invocationId) =>
-        (Sequence, Key, AssemblyName, TypeName, ParameterDefinitions, ParameterValues, InvocationId) =
-        (sequence, key, assemblyName, typeName, parametersDefinitions, parameterValues, invocationId);
+        Guid invocationId
+    ) =>
+        (
+            Sequence,
+            Key,
+            AssemblyName,
+            TypeName,
+            ParameterDefinitions,
+            ParameterValues,
+            InvocationId
+        ) = (
+            sequence,
+            key,
+            assemblyName,
+            typeName,
+            parametersDefinitions,
+            parameterValues,
+            invocationId
+        );
 
     // The order in which this component was rendered
     public int Sequence { get; set; }

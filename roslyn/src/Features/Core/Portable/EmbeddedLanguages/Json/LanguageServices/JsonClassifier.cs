@@ -14,30 +14,34 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageServices
 {
     using static EmbeddedSyntaxHelpers;
-
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonTrivia = EmbeddedSyntaxTrivia<JsonKind>;
 
     /// <summary>
     /// Classifier impl for embedded json strings.
     /// </summary>
-    [ExportEmbeddedLanguageClassifier(
-        PredefinedEmbeddedLanguageNames.Json,
-        new[] { LanguageNames.CSharp, LanguageNames.VisualBasic },
-        supportsUnannotatedAPIs: true, "Json"), Shared]
+    [
+        ExportEmbeddedLanguageClassifier(
+            PredefinedEmbeddedLanguageNames.Json,
+            new[] { LanguageNames.CSharp, LanguageNames.VisualBasic },
+            supportsUnannotatedAPIs: true,
+            "Json"
+        ),
+        Shared
+    ]
     internal sealed class JsonClassifier : IEmbeddedLanguageClassifier
     {
         private static readonly ObjectPool<Visitor> s_visitorPool = new(() => new Visitor());
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public JsonClassifier()
-        {
-        }
+        public JsonClassifier() { }
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {
-            var info = context.Project.GetRequiredLanguageService<IEmbeddedLanguagesProvider>().EmbeddedLanguageInfo;
+            var info = context
+                .Project.GetRequiredLanguageService<IEmbeddedLanguagesProvider>()
+                .EmbeddedLanguageInfo;
 
             var token = context.SyntaxToken;
             if (!info.IsAnyStringLiteral(token.RawKind))
@@ -51,7 +55,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
 
             // We do support json classification in strings that look very likely to be json, even if we aren't 100%
             // certain if it truly is json.
-            var tree = detector.TryParseString(token, semanticModel, includeProbableStrings: true, context.CancellationToken);
+            var tree = detector.TryParseString(
+                token,
+                semanticModel,
+                includeProbableStrings: true,
+                context.CancellationToken
+            );
             if (tree == null)
                 return;
 
@@ -68,7 +77,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
             }
         }
 
-        private static void AddClassifications(JsonNode node, Visitor visitor, EmbeddedLanguageClassificationContext context)
+        private static void AddClassifications(
+            JsonNode node,
+            Visitor visitor,
+            EmbeddedLanguageClassificationContext context
+        )
         {
             node.Accept(visitor);
 
@@ -85,7 +98,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
             }
         }
 
-        private static void AddTokenClassifications(JsonToken token, EmbeddedLanguageClassificationContext context)
+        private static void AddTokenClassifications(
+            JsonToken token,
+            EmbeddedLanguageClassificationContext context
+        )
         {
             foreach (var trivia in token.LeadingTrivia)
                 AddTriviaClassifications(trivia, context);
@@ -95,7 +111,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
                 switch (token.Kind)
                 {
                     case JsonKind.CommaToken:
-                        context.AddClassification(ClassificationTypeNames.JsonPunctuation, token.GetSpan());
+                        context.AddClassification(
+                            ClassificationTypeNames.JsonPunctuation,
+                            token.GetSpan()
+                        );
                         break;
                 }
             }
@@ -104,12 +123,20 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
                 AddTriviaClassifications(trivia, context);
         }
 
-        private static void AddTriviaClassifications(JsonTrivia trivia, EmbeddedLanguageClassificationContext context)
+        private static void AddTriviaClassifications(
+            JsonTrivia trivia,
+            EmbeddedLanguageClassificationContext context
+        )
         {
-            if (trivia.Kind is JsonKind.MultiLineCommentTrivia or JsonKind.SingleLineCommentTrivia &&
-                trivia.VirtualChars.Length > 0)
+            if (
+                trivia.Kind is JsonKind.MultiLineCommentTrivia or JsonKind.SingleLineCommentTrivia
+                && trivia.VirtualChars.Length > 0
+            )
             {
-                context.AddClassification(ClassificationTypeNames.JsonComment, GetSpan(trivia.VirtualChars));
+                context.AddClassification(
+                    ClassificationTypeNames.JsonComment,
+                    GetSpan(trivia.VirtualChars)
+                );
             }
         }
 
@@ -154,8 +181,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
                 AddClassification(node.CloseParenToken, ClassificationTypeNames.JsonPunctuation);
             }
 
-            public void Visit(JsonLiteralNode node)
-                => VisitLiteral(node.LiteralToken);
+            public void Visit(JsonLiteralNode node) => VisitLiteral(node.LiteralToken);
 
             private void VisitLiteral(JsonToken literalToken)
             {

@@ -70,7 +70,9 @@ namespace Microsoft.Extensions.Caching.Memory
                 if (_absoluteExpirationTicks < 0)
                     return null;
 
-                var offset = new TimeSpan(_absoluteExpirationOffsetMinutes * TimeSpan.TicksPerMinute);
+                var offset = new TimeSpan(
+                    _absoluteExpirationOffsetMinutes * TimeSpan.TicksPerMinute
+                );
                 return new DateTimeOffset(_absoluteExpirationTicks + offset.Ticks, offset);
             }
             set
@@ -84,7 +86,9 @@ namespace Microsoft.Extensions.Caching.Memory
                 {
                     DateTimeOffset expiration = value.GetValueOrDefault();
                     _absoluteExpirationTicks = expiration.UtcTicks;
-                    _absoluteExpirationOffsetMinutes = (short)(expiration.Offset.Ticks / TimeSpan.TicksPerMinute);
+                    _absoluteExpirationOffsetMinutes = (short)(
+                        expiration.Offset.Ticks / TimeSpan.TicksPerMinute
+                    );
                 }
             }
         }
@@ -93,7 +97,10 @@ namespace Microsoft.Extensions.Caching.Memory
 
         TimeSpan? ICacheEntry.AbsoluteExpirationRelativeToNow
         {
-            get => _absoluteExpirationRelativeToNow.Ticks == 0 ? null : _absoluteExpirationRelativeToNow;
+            get =>
+                _absoluteExpirationRelativeToNow.Ticks == 0
+                    ? null
+                    : _absoluteExpirationRelativeToNow;
             set
             {
                 // this method does not set AbsoluteExpiration as it would require calling Clock.UtcNow twice:
@@ -104,7 +111,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     throw new ArgumentOutOfRangeException(
                         nameof(AbsoluteExpirationRelativeToNow),
                         value,
-                        "The relative expiration value must be positive.");
+                        "The relative expiration value must be positive."
+                    );
                 }
 
                 _absoluteExpirationRelativeToNow = value.GetValueOrDefault();
@@ -125,7 +133,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     throw new ArgumentOutOfRangeException(
                         nameof(SlidingExpiration),
                         value,
-                        "The sliding expiration value must be positive.");
+                        "The sliding expiration value must be positive."
+                    );
                 }
 
                 _slidingExpiration = value.GetValueOrDefault();
@@ -142,13 +151,18 @@ namespace Microsoft.Extensions.Caching.Memory
         /// Gets or sets the callbacks will be fired after the cache entry is evicted from the cache.
         /// </summary>
         [MemberNotNull(nameof(_tokens))]
-        public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks => GetOrCreateTokens().PostEvictionCallbacks;
+        public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks =>
+            GetOrCreateTokens().PostEvictionCallbacks;
 
         /// <summary>
         /// Gets or sets the priority for keeping the cache entry in the cache during a
         /// memory pressure triggered cleanup. The default is <see cref="CacheItemPriority.Normal"/>.
         /// </summary>
-        public CacheItemPriority Priority { get => (CacheItemPriority)_priority; set => _priority = (byte)value; }
+        public CacheItemPriority Priority
+        {
+            get => (CacheItemPriority)_priority;
+            set => _priority = (byte)value;
+        }
 
         internal long Size => _size;
 
@@ -159,7 +173,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be non-negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be non-negative."
+                    );
                 }
 
                 _size = value ?? NotSet;
@@ -180,7 +198,11 @@ namespace Microsoft.Extensions.Caching.Memory
 
         internal DateTime LastAccessed { get; set; }
 
-        internal EvictionReason EvictionReason { get => (EvictionReason)_evictionReason; private set => _evictionReason = (byte)value; }
+        internal EvictionReason EvictionReason
+        {
+            get => (EvictionReason)_evictionReason;
+            private set => _evictionReason = (byte)value;
+        }
 
         public void Dispose()
         {
@@ -227,10 +249,10 @@ namespace Microsoft.Extensions.Caching.Memory
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // added based on profiling
-        internal bool CheckExpired(DateTime utcNow)
-            => _isExpired
-                || CheckForExpiredTime(utcNow)
-                || (_tokens != null && _tokens.CheckForExpiredTokens(this));
+        internal bool CheckExpired(DateTime utcNow) =>
+            _isExpired
+            || CheckForExpiredTime(utcNow)
+            || (_tokens != null && _tokens.CheckForExpiredTokens(this));
 
         internal void SetExpired(EvictionReason reason)
         {
@@ -260,8 +282,7 @@ namespace Microsoft.Extensions.Caching.Memory
                     return true;
                 }
 
-                if (_slidingExpiration.Ticks > 0
-                    && (utcNow - LastAccessed) >= _slidingExpiration)
+                if (_slidingExpiration.Ticks > 0 && (utcNow - LastAccessed) >= _slidingExpiration)
                 {
                     SetExpired(EvictionReason.Expired);
                     return true;
@@ -276,19 +297,28 @@ namespace Microsoft.Extensions.Caching.Memory
         private static void ExpirationTokensExpired(object obj)
         {
             // start a new thread to avoid issues with callbacks called from RegisterChangeCallback
-            Task.Factory.StartNew(state =>
-            {
-                var entry = (CacheEntry)state!;
-                entry.SetExpired(EvictionReason.TokenExpired);
-                entry._cache.EntryExpired(entry);
-            }, obj, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                state =>
+                {
+                    var entry = (CacheEntry)state!;
+                    entry.SetExpired(EvictionReason.TokenExpired);
+                    entry._cache.EntryExpired(entry);
+                },
+                obj,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         internal void InvokeEvictionCallbacks() => _tokens?.InvokeEvictionCallbacks(this);
 
         internal void PropagateOptionsToCurrent()
         {
-            if ((_tokens == null || !_tokens.CanPropagateTokens()) && _absoluteExpirationTicks < 0 || _current.Value is not CacheEntry parent)
+            if (
+                (_tokens == null || !_tokens.CanPropagateTokens()) && _absoluteExpirationTicks < 0
+                || _current.Value is not CacheEntry parent
+            )
             {
                 return;
             }

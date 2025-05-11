@@ -8,8 +8,7 @@ public class Startup
     // Set up application services
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers()
-            .AddNewtonsoftJson();
+        services.AddControllers().AddNewtonsoftJson();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -23,8 +22,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }

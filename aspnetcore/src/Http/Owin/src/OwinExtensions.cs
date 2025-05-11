@@ -7,15 +7,14 @@ using Microsoft.AspNetCore.Owin;
 
 namespace Microsoft.AspNetCore.Builder;
 
-using AddMiddleware = Action<Func<
-      Func<IDictionary<string, object>, Task>,
-      Func<IDictionary<string, object>, Task>
-    >>;
+using AddMiddleware = Action<
+    Func<Func<IDictionary<string, object>, Task>, Func<IDictionary<string, object>, Task>>
+>;
 using AppFunc = Func<IDictionary<string, object>, Task>;
 using CreateMiddleware = Func<
-      Func<IDictionary<string, object>, Task>,
-      Func<IDictionary<string, object>, Task>
-    >;
+    Func<IDictionary<string, object>, Task>,
+    Func<IDictionary<string, object>, Task>
+>;
 
 /// <summary>
 /// Extension methods to add OWIN to an HTTP application pipeline.
@@ -70,7 +69,10 @@ public static class OwinExtensions
     /// <param name="builder">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
     /// <param name="pipeline">A delegate which can specify the OWIN pipeline.</param>
     /// <returns>The original <see cref="IApplicationBuilder"/>.</returns>
-    public static IApplicationBuilder UseOwin(this IApplicationBuilder builder, Action<AddMiddleware> pipeline)
+    public static IApplicationBuilder UseOwin(
+        this IApplicationBuilder builder,
+        Action<AddMiddleware> pipeline
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(pipeline);
@@ -95,7 +97,10 @@ public static class OwinExtensions
     /// <param name="app">The OWIN pipeline.</param>
     /// <param name="serviceProvider">A service provider for <see cref="IApplicationBuilder.ApplicationServices"/>.</param>
     /// <returns>An <see cref="IApplicationBuilder"/>.</returns>
-    public static IApplicationBuilder UseBuilder(this AddMiddleware app, IServiceProvider serviceProvider)
+    public static IApplicationBuilder UseBuilder(
+        this AddMiddleware app,
+        IServiceProvider serviceProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
 
@@ -110,17 +115,23 @@ public static class OwinExtensions
         app(OwinWebSocketAcceptAdapter.AdaptWebSockets);
         var builder = new ApplicationBuilder(serviceProvider: serviceProvider);
 
-        var middleware = CreateMiddlewareFactory(exit =>
-        {
-            builder.Use(ignored => exit);
-            return builder.Build();
-        }, builder.ApplicationServices);
+        var middleware = CreateMiddlewareFactory(
+            exit =>
+            {
+                builder.Use(ignored => exit);
+                return builder.Build();
+            },
+            builder.ApplicationServices
+        );
 
         app(middleware);
         return builder;
     }
 
-    private static CreateMiddleware CreateMiddlewareFactory(Func<RequestDelegate, RequestDelegate> middleware, IServiceProvider services)
+    private static CreateMiddleware CreateMiddlewareFactory(
+        Func<RequestDelegate, RequestDelegate> middleware,
+        IServiceProvider services
+    )
     {
         return next =>
         {
@@ -137,13 +148,15 @@ public static class OwinExtensions
                 if (env.TryGetValue(typeof(HttpContext).FullName, out obj))
                 {
                     context = (HttpContext)obj;
-                    context.Features.Set<IOwinEnvironmentFeature>(new OwinEnvironmentFeature() { Environment = env });
+                    context.Features.Set<IOwinEnvironmentFeature>(
+                        new OwinEnvironmentFeature() { Environment = env }
+                    );
                 }
                 else
                 {
                     context = new DefaultHttpContext(
-                                new FeatureCollection(
-                                    new OwinFeatureCollection(env)));
+                        new FeatureCollection(new OwinFeatureCollection(env))
+                    );
                     context.RequestServices = services;
                 }
 
@@ -158,7 +171,10 @@ public static class OwinExtensions
     /// <param name="app">The OWIN pipeline.</param>
     /// <param name="pipeline">A delegate used to configure a middleware pipeline.</param>
     /// <returns>An <see cref="IApplicationBuilder"/>.</returns>
-    public static AddMiddleware UseBuilder(this AddMiddleware app, Action<IApplicationBuilder> pipeline)
+    public static AddMiddleware UseBuilder(
+        this AddMiddleware app,
+        Action<IApplicationBuilder> pipeline
+    )
     {
         return app.UseBuilder(pipeline, serviceProvider: null);
     }
@@ -170,7 +186,11 @@ public static class OwinExtensions
     /// <param name="pipeline">A delegate used to configure a middleware pipeline.</param>
     /// <param name="serviceProvider">A service provider for <see cref="IApplicationBuilder.ApplicationServices"/>.</param>
     /// <returns>An <see cref="IApplicationBuilder"/>.</returns>
-    public static AddMiddleware UseBuilder(this AddMiddleware app, Action<IApplicationBuilder> pipeline, IServiceProvider serviceProvider)
+    public static AddMiddleware UseBuilder(
+        this AddMiddleware app,
+        Action<IApplicationBuilder> pipeline,
+        IServiceProvider serviceProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(pipeline);

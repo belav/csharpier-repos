@@ -19,22 +19,33 @@ namespace Microsoft.CodeAnalysis.Classification
         /// performed as quickly as possible, and should process the text in a lexical fashion.
         /// This allows classification results to be shown to the user when a file is opened before
         /// any additional compiler information is available for the text.
-        /// 
+        ///
         /// Important: The classification should not consider the context the text exists in, and how
         /// that may affect the final classifications.  This may result in incorrect classification
         /// (i.e. identifiers being classified as keywords).  These incorrect results will be patched
         /// up when the lexical results are superseded by the calls to AddSyntacticClassifications.
         /// </summary>
-        void AddLexicalClassifications(SourceText text, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="AddSyntacticClassificationsAsync"/>
         /// <remarks>This method is optional and only should be implemented by languages that support
         /// syntax.  If the language does not support syntax, callers should use
         /// <see cref="AddSyntacticClassificationsAsync"/> instead.</remarks>
-        void AddSyntacticClassifications(SolutionServices services, SyntaxNode? root, ImmutableArray<TextSpan> textSpans, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddSyntacticClassifications(
+            SolutionServices services,
+            SyntaxNode? root,
+            ImmutableArray<TextSpan> textSpans,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
-        /// Produce the classifications for the span of text specified.  The syntax of the document 
+        /// Produce the classifications for the span of text specified.  The syntax of the document
         /// can be accessed to provide more correct classifications.  For example, the syntax can
         /// be used to determine if a piece of text that looks like a keyword should actually be
         /// considered an identifier in its current context.
@@ -43,7 +54,12 @@ namespace Microsoft.CodeAnalysis.Classification
         /// <param name="textSpans">The non-intersecting portions of the document to add classified spans for.</param>
         /// <param name="result">The list to add the spans to.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        Task AddSyntacticClassificationsAsync(Document document, ImmutableArray<TextSpan> textSpans, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        Task AddSyntacticClassificationsAsync(
+            Document document,
+            ImmutableArray<TextSpan> textSpans,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Produce the classifications for the span of text specified.  Semantics of the language can be used to
@@ -60,7 +76,13 @@ namespace Microsoft.CodeAnalysis.Classification
         /// This will not include classifications for embedded language constructs in string literals.  For that use
         /// <see cref="AddEmbeddedLanguageClassificationsAsync"/>.
         /// </remarks>
-        Task AddSemanticClassificationsAsync(Document document, ImmutableArray<TextSpan> textSpans, ClassificationOptions options, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        Task AddSemanticClassificationsAsync(
+            Document document,
+            ImmutableArray<TextSpan> textSpans,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Produce the classifications for embedded language string literals (e.g. Regex/Json strings) in the span of
@@ -71,7 +93,13 @@ namespace Microsoft.CodeAnalysis.Classification
         /// <param name="options">The options to use when adding spans.</param>
         /// <param name="result">The list to add the spans to.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        Task AddEmbeddedLanguageClassificationsAsync(Document document, ImmutableArray<TextSpan> textSpans, ClassificationOptions options, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        Task AddEmbeddedLanguageClassificationsAsync(
+            Document document,
+            ImmutableArray<TextSpan> textSpans,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Adjust a classification from a previous version of text accordingly based on the current
@@ -101,15 +129,22 @@ namespace Microsoft.CodeAnalysis.Classification
         /// </para>
         /// </summary>
         ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
-            Document oldDocument, Document newDocument,
-            TimeSpan timeout, CancellationToken cancellationToken);
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="ComputeSyntacticChangeRangeAsync"/>
         /// <remarks>This method is optional and only should be implemented by languages that support
         /// syntax.  If the language does not support syntax, callers should use
         /// <see cref="ComputeSyntacticChangeRangeAsync"/> instead.</remarks>
         TextChangeRange? ComputeSyntacticChangeRange(
-            SolutionServices workspace, SyntaxNode oldRoot, SyntaxNode newRoot,
-            TimeSpan timeout, CancellationToken cancellationToken);
+            SolutionServices workspace,
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        );
     }
 }

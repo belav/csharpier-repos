@@ -38,10 +38,7 @@ namespace System.Collections
         // GetKey with no intervening calls to GetNext will return
         // the same object.
         //
-        object Key
-        {
-            get;
-        }
+        object Key { get; }
 
         // Returns the value of the current element of the enumeration. The
         // returned value is undefined before the first call to GetNext and
@@ -49,19 +46,13 @@ namespace System.Collections
         // to GetValue with no intervening calls to GetNext will
         // return the same object.
         //
-        object? Value
-        {
-            get;
-        }
+        object? Value { get; }
 
         // GetBlock will copy dictionary values into the given Array.  It will either
         // fill up the array, or if there aren't enough elements, it will
         // copy as much as possible into the Array.  The number of elements
         // copied is returned.
         //
-        DictionaryEntry Entry
-        {
-            get;
-        }
+        DictionaryEntry Entry { get; }
     }
 }

@@ -54,20 +54,29 @@ internal static class ContainerUtils
 
             var fields = line.Split(new[] { '\t', ' ' });
 
-            if (fields.Length < 2 // line had too few fields
+            if (
+                fields.Length < 2 // line had too few fields
                 || fields[1].Length <= 1 // fs_file empty or is the root directory '/'
-                || fields[1][0] != '/') // fs_file was not a file path
+                || fields[1][0] != '/'
+            ) // fs_file was not a file path
             {
                 continue;
             }
 
             // check if directory is a subdirectory of this location
-            var fs_file = new DirectoryInfo(fields[1].TrimEnd(Path.DirectorySeparatorChar)).FullName;
+            var fs_file = new DirectoryInfo(
+                fields[1].TrimEnd(Path.DirectorySeparatorChar)
+            ).FullName;
             var dir = directory;
             while (dir != null)
             {
                 // filesystems on Linux are case sensitive
-                if (fs_file.Equals(dir.FullName.TrimEnd(Path.DirectorySeparatorChar), StringComparison.Ordinal))
+                if (
+                    fs_file.Equals(
+                        dir.FullName.TrimEnd(Path.DirectorySeparatorChar),
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     return true;
                 }
@@ -83,7 +92,10 @@ internal static class ContainerUtils
     {
         // Official .NET Core images (Windows and Linux) set this. So trust it if it's there.
         // We check both DOTNET_RUNNING_IN_CONTAINER (the current name) and DOTNET_RUNNING_IN_CONTAINERS (a deprecated name used in some images).
-        if (GetBooleanEnvVar(RunningInContainerVariableName) || GetBooleanEnvVar(DeprecatedRunningInContainerVariableName))
+        if (
+            GetBooleanEnvVar(RunningInContainerVariableName)
+            || GetBooleanEnvVar(DeprecatedRunningInContainerVariableName)
+        )
         {
             return true;
         }
@@ -103,13 +115,15 @@ internal static class ContainerUtils
 
         var lines = File.ReadAllLines(procFile);
         // typically the last line in the file is "1:name=openrc:/docker"
-        return lines.Reverse().Any(l => l.EndsWith("name=openrc:/docker", StringComparison.Ordinal));
+        return lines
+            .Reverse()
+            .Any(l => l.EndsWith("name=openrc:/docker", StringComparison.Ordinal));
     }
 
     private static bool GetBooleanEnvVar(string envVarName)
     {
         var value = Environment.GetEnvironmentVariable(envVarName);
-        return string.Equals(value, "1", StringComparison.Ordinal) ||
-            string.Equals(value, "true", StringComparison.OrdinalIgnoreCase);
+        return string.Equals(value, "1", StringComparison.Ordinal)
+            || string.Equals(value, "true", StringComparison.OrdinalIgnoreCase);
     }
 }

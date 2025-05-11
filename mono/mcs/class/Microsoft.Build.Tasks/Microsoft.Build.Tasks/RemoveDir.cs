@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -25,67 +25,62 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class RemoveDir : TaskExtension {
-	
-		ITaskItem[]	directories;
-		ITaskItem[]	removedDirectories;
-	
-		public RemoveDir ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class RemoveDir : TaskExtension
+    {
+        ITaskItem[] directories;
+        ITaskItem[] removedDirectories;
 
-		public override bool Execute ()
-		{
-			if (directories.Length == 0)
-				return true;
+        public RemoveDir() { }
 
-			List <ITaskItem> temporaryRemovedDirectories = new List <ITaskItem> ();
-			
-			foreach (ITaskItem directory in directories) {
-				try {
-					string fullpath = directory.GetMetadata ("FullPath");
-					if (Directory.Exists (fullpath)) {
-						Directory.Delete (fullpath, true);
-						temporaryRemovedDirectories.Add (directory);
-					}
-				}
-				catch (Exception ex) {
-					Log.LogErrorFromException (ex);
-				}
-			}
-			
-			removedDirectories = temporaryRemovedDirectories.ToArray ();
-			
-			return true;
-		}
-		
-		[Required]
-		public ITaskItem[] Directories {
-			get {
-				return directories;
-			}
-			set {
-				directories = value;
-			}
-		}
+        public override bool Execute()
+        {
+            if (directories.Length == 0)
+                return true;
 
-		[Output]
-		public ITaskItem[] RemovedDirectories {
-			get {
-				return removedDirectories;
-			}
-			set {
-				removedDirectories = value;
-			}
-		}
-	}
+            List<ITaskItem> temporaryRemovedDirectories = new List<ITaskItem>();
+
+            foreach (ITaskItem directory in directories)
+            {
+                try
+                {
+                    string fullpath = directory.GetMetadata("FullPath");
+                    if (Directory.Exists(fullpath))
+                    {
+                        Directory.Delete(fullpath, true);
+                        temporaryRemovedDirectories.Add(directory);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.LogErrorFromException(ex);
+                }
+            }
+
+            removedDirectories = temporaryRemovedDirectories.ToArray();
+
+            return true;
+        }
+
+        [Required]
+        public ITaskItem[] Directories
+        {
+            get { return directories; }
+            set { directories = value; }
+        }
+
+        [Output]
+        public ITaskItem[] RemovedDirectories
+        {
+            get { return removedDirectories; }
+            set { removedDirectories = value; }
+        }
+    }
 }
-

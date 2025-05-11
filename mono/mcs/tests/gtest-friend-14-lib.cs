@@ -7,16 +7,14 @@ using System.Runtime.CompilerServices;
 
 namespace N
 {
-	internal class C
-	{
-		internal struct S
-		{
-			public string sa;
-			public string sb;
-		}
-		
-		internal static void Init (IList<C.S> arg)
-		{
-		}
-	}
+    internal class C
+    {
+        internal struct S
+        {
+            public string sa;
+            public string sb;
+        }
+
+        internal static void Init(IList<C.S> arg) { }
+    }
 }

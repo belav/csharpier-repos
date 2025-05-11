@@ -13,14 +13,20 @@ internal sealed class FileExtensionsAttributeAdapter : AttributeAdapterBase<File
     private readonly string _extensions;
     private readonly string _formattedExtensions;
 
-    public FileExtensionsAttributeAdapter(FileExtensionsAttribute attribute, IStringLocalizer? stringLocalizer)
+    public FileExtensionsAttributeAdapter(
+        FileExtensionsAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    )
         : base(attribute, stringLocalizer)
     {
         // Build the extension list based on how the JQuery Validation's 'extension' method expects it
         // https://jqueryvalidation.org/extension-method/
 
         // These lines follow the same approach as the FileExtensionsAttribute.
-        var normalizedExtensions = Attribute.Extensions.Replace(" ", string.Empty).Replace(".", string.Empty).ToLowerInvariant();
+        var normalizedExtensions = Attribute
+            .Extensions.Replace(" ", string.Empty)
+            .Replace(".", string.Empty)
+            .ToLowerInvariant();
         var parsedExtensions = normalizedExtensions.Split(',').Select(e => "." + e);
         _formattedExtensions = string.Join(", ", parsedExtensions);
         _extensions = string.Join(",", parsedExtensions);
@@ -44,6 +50,7 @@ internal sealed class FileExtensionsAttributeAdapter : AttributeAdapterBase<File
         return GetErrorMessage(
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
-            _formattedExtensions);
+            _formattedExtensions
+        );
     }
 }

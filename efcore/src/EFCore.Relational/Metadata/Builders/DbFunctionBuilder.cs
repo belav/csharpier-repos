@@ -21,9 +21,7 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     /// </summary>
     [EntityFrameworkInternal]
     public DbFunctionBuilder(IMutableDbFunction function)
-        : base(function)
-    {
-    }
+        : base(function) { }
 
     /// <summary>
     ///     Sets the name of the database function.
@@ -33,8 +31,8 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     /// </remarks>
     /// <param name="name">The name of the function in the database.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual DbFunctionBuilder HasName(string name)
-        => (DbFunctionBuilder)base.HasName(name);
+    public new virtual DbFunctionBuilder HasName(string name) =>
+        (DbFunctionBuilder)base.HasName(name);
 
     /// <summary>
     ///     Sets the schema of the database function.
@@ -44,8 +42,8 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     /// </remarks>
     /// <param name="schema">The schema of the function in the database.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual DbFunctionBuilder HasSchema(string? schema)
-        => (DbFunctionBuilder)base.HasSchema(schema);
+    public new virtual DbFunctionBuilder HasSchema(string? schema) =>
+        (DbFunctionBuilder)base.HasSchema(schema);
 
     /// <summary>
     ///     Marks whether the database function is built-in.
@@ -55,8 +53,8 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     /// </remarks>
     /// <param name="builtIn">The value indicating whether the database function is built-in.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual DbFunctionBuilder IsBuiltIn(bool builtIn = true)
-        => (DbFunctionBuilder)base.IsBuiltIn(builtIn);
+    public new virtual DbFunctionBuilder IsBuiltIn(bool builtIn = true) =>
+        (DbFunctionBuilder)base.IsBuiltIn(builtIn);
 
     /// <summary>
     ///     Marks whether the database function can return null value.
@@ -99,7 +97,9 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     /// </remarks>
     /// <param name="translation">The translation to use.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual DbFunctionBuilder HasTranslation(Func<IReadOnlyList<SqlExpression>, SqlExpression> translation)
+    public virtual DbFunctionBuilder HasTranslation(
+        Func<IReadOnlyList<SqlExpression>, SqlExpression> translation
+    )
     {
         Builder.HasTranslation(translation, ConfigurationSource.Explicit);
 
@@ -117,8 +117,10 @@ public class DbFunctionBuilder : DbFunctionBuilderBase
     /// <param name="buildAction">An action that performs configuration of the parameter.</param>
     /// <returns>The builder to use for further parameter configuration.</returns>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual DbFunctionBuilder HasParameter(string name, Action<DbFunctionParameterBuilder> buildAction)
-        => (DbFunctionBuilder)base.HasParameter(name, buildAction);
+    public new virtual DbFunctionBuilder HasParameter(
+        string name,
+        Action<DbFunctionParameterBuilder> buildAction
+    ) => (DbFunctionBuilder)base.HasParameter(name, buildAction);
 
     /// <summary>
     ///     Adds or updates an annotation on the database function. If an annotation with the key specified in

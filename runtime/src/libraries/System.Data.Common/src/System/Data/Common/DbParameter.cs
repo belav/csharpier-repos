@@ -8,7 +8,8 @@ namespace System.Data.Common
 {
     public abstract class DbParameter : MarshalByRefObject, IDbDataParameter
     {
-        protected DbParameter() : base() { }
+        protected DbParameter()
+            : base() { }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

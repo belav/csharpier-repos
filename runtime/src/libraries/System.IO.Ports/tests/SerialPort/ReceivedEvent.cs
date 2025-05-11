@@ -21,8 +21,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedEvent_Chars()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
 
@@ -34,7 +42,11 @@ namespace System.IO.Ports.Tests
 
                 for (int i = 0; i < NUM_TRYS; i++)
                 {
-                    com2.Write(new byte[com1.ReceivedBytesThreshold], 0, com1.ReceivedBytesThreshold);
+                    com2.Write(
+                        new byte[com1.ReceivedBytesThreshold],
+                        0,
+                        com1.ReceivedBytesThreshold
+                    );
                     rcvEventHandler.WaitForEvent(MAX_TIME_WAIT, 1);
 
                     rcvEventHandler.Validate(SerialData.Chars, com1.ReceivedBytesThreshold);
@@ -57,14 +69,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedEvent_NoDuplicateEvents()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 com1.Open();
                 com2.Open();
 
                 int n = 0;
-                com2.DataReceived += (a,b) => {
+                com2.DataReceived += (a, b) =>
+                {
                     n++;
                 };
 
@@ -86,15 +103,20 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedEvent_OneEventPerByte()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 com1.Open();
                 com2.Open();
 
                 var ar = new AutoResetEvent(false);
                 int n = 0;
-                com2.DataReceived += (a,b) => {
+                com2.DataReceived += (a, b) =>
+                {
                     n++;
                     com2.ReadByte();
                     ar.Set();
@@ -115,8 +137,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedEvent_Eof()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
 
@@ -156,8 +186,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedEvent_CharsEof()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReceivedEventHandler rcvEventHandler = new ReceivedEventHandler(com1);
 
@@ -181,12 +219,18 @@ namespace System.IO.Ports.Tests
 
                     rcvEventHandler.Validate(SerialData.Eof, i * xmitBytes.Length);
 
-                    rcvEventHandler.Validate(SerialData.Chars, (i * xmitBytes.Length) + com1.ReceivedBytesThreshold);
+                    rcvEventHandler.Validate(
+                        SerialData.Chars,
+                        (i * xmitBytes.Length) + com1.ReceivedBytesThreshold
+                    );
 
                     if (0 != rcvEventHandler.NumberOfOccurrencesOfType(SerialData.Eof))
                     {
-                        Fail("Err_20712asdfhow!!! Unexpected EofReceived event fired {0} iteration:{1}",
-                            rcvEventHandler.NumberOfOccurrencesOfType(SerialData.Eof), i);
+                        Fail(
+                            "Err_20712asdfhow!!! Unexpected EofReceived event fired {0} iteration:{1}",
+                            rcvEventHandler.NumberOfOccurrencesOfType(SerialData.Eof),
+                            i
+                        );
                     }
 
                     rcvEventHandler.Clear();
@@ -198,14 +242,23 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReceivedEvent_CharsEof_ReadAllChars()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ReadInReceivedEventHandler rcvEventHandler = new ReadInReceivedEventHandler(com1);
                 byte[] xmitBytes = new byte[3];
 
                 Debug.WriteLine(
-                    "Verifying EofReceived and ReceivedChars events where all chars are read in the ReceivedChars event");
+                    "Verifying EofReceived and ReceivedChars events where all chars are read in the ReceivedChars event"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -227,8 +280,11 @@ namespace System.IO.Ports.Tests
 
                     if (0 != rcvEventHandler.NumberOfOccurrencesOfType(SerialData.Eof))
                     {
-                        Fail("Err_20712asdfhow!!! Unexpected EofReceived event fired {0} iteration:{1}",
-                            rcvEventHandler.NumberOfOccurrencesOfType(SerialData.Eof), i);
+                        Fail(
+                            "Err_20712asdfhow!!! Unexpected EofReceived event fired {0} iteration:{1}",
+                            rcvEventHandler.NumberOfOccurrencesOfType(SerialData.Eof),
+                            i
+                        );
                     }
 
                     rcvEventHandler.Clear();
@@ -236,8 +292,11 @@ namespace System.IO.Ports.Tests
 
                 if (rcvEventHandler.NumBytesRead != NUM_TRYS * xmitBytes.Length)
                 {
-                    Fail("Err_1298129ahnied!!! Expected to read {0} chars actually read {1}",
-                        NUM_TRYS * xmitBytes.Length, rcvEventHandler.NumBytesRead);
+                    Fail(
+                        "Err_1298129ahnied!!! Expected to read {0} chars actually read {1}",
+                        NUM_TRYS * xmitBytes.Length,
+                        rcvEventHandler.NumBytesRead
+                    );
                 }
                 else
                 {
@@ -245,10 +304,16 @@ namespace System.IO.Ports.Tests
                     {
                         for (int j = 0; j < xmitBytes.Length; ++j)
                         {
-                            if (xmitBytes[j] != rcvEventHandler.BytesRead[(i * xmitBytes.Length) + j])
+                            if (
+                                xmitBytes[j]
+                                != rcvEventHandler.BytesRead[(i * xmitBytes.Length) + j]
+                            )
                             {
-                                Fail("Err_2829aneid Expected to Read '{0}'({0:X}) actually read {1}'({1:X})",
-                                    xmitBytes[j], rcvEventHandler.BytesRead[(i * xmitBytes.Length) + j]);
+                                Fail(
+                                    "Err_2829aneid Expected to Read '{0}'({0:X}) actually read {1}'({1:X})",
+                                    xmitBytes[j],
+                                    rcvEventHandler.BytesRead[(i * xmitBytes.Length) + j]
+                                );
                             }
                         }
                     }
@@ -292,7 +357,6 @@ namespace System.IO.Ports.Tests
                 }
             }
 
-
             public void Clear()
             {
                 lock (this)
@@ -304,7 +368,6 @@ namespace System.IO.Ports.Tests
                 }
             }
 
-
             public void WaitForEvent(int maxMilliseconds, int totalNumberOfEvents)
             {
                 Stopwatch sw = new Stopwatch();
@@ -313,7 +376,10 @@ namespace System.IO.Ports.Tests
                 {
                     sw.Start();
 
-                    while (maxMilliseconds > sw.ElapsedMilliseconds && NumEventsHandled < totalNumberOfEvents)
+                    while (
+                        maxMilliseconds > sw.ElapsedMilliseconds
+                        && NumEventsHandled < totalNumberOfEvents
+                    )
                     {
                         Monitor.Wait(this, (int)(maxMilliseconds - sw.ElapsedMilliseconds));
                     }
@@ -356,7 +422,11 @@ namespace System.IO.Ports.Tests
                 {
                     for (int i = 0; i < EventType.Count; i++)
                     {
-                        if (eventType == (SerialData)EventType[i] && bytesToRead <= (int)BytesToRead[i] && (SerialPort)Source[i] == com)
+                        if (
+                            eventType == (SerialData)EventType[i]
+                            && bytesToRead <= (int)BytesToRead[i]
+                            && (SerialPort)Source[i] == com
+                        )
                         {
                             EventType.RemoveAt(i);
                             BytesToRead.RemoveAt(i);
@@ -404,18 +474,12 @@ namespace System.IO.Ports.Tests
 
             public int NumBytesRead
             {
-                get
-                {
-                    return _numBytesRead;
-                }
+                get { return _numBytesRead; }
             }
 
             public byte[] BytesRead
             {
-                get
-                {
-                    return _bytesRead;
-                }
+                get { return _bytesRead; }
             }
 
             public new void HandleEvent(object source, SerialDataReceivedEventArgs e)
@@ -426,12 +490,18 @@ namespace System.IO.Ports.Tests
                 {
                     if ((_bytesRead.Length - _numBytesRead) < com.BytesToRead)
                     {
-                        byte[] tempByteArray = new byte[Math.Max(_bytesRead.Length * 2, _bytesRead.Length + com.BytesToRead)];
+                        byte[] tempByteArray = new byte[
+                            Math.Max(_bytesRead.Length * 2, _bytesRead.Length + com.BytesToRead)
+                        ];
                         Array.Copy(_bytesRead, tempByteArray, _numBytesRead);
                         _bytesRead = tempByteArray;
                     }
 
-                    _numBytesRead += com.Read(_bytesRead, _numBytesRead, _bytesRead.Length - _numBytesRead);
+                    _numBytesRead += com.Read(
+                        _bytesRead,
+                        _numBytesRead,
+                        _bytesRead.Length - _numBytesRead
+                    );
                 }
             }
         }

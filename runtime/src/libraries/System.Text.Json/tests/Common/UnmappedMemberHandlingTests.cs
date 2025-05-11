@@ -11,12 +11,15 @@ namespace System.Text.Json.Serialization.Tests
 {
     public abstract class UnmappedMemberHandlingTests : SerializerTests
     {
-        public UnmappedMemberHandlingTests(JsonSerializerWrapper serializer) : base(serializer)
-        { }
+        public UnmappedMemberHandlingTests(JsonSerializerWrapper serializer)
+            : base(serializer) { }
 
         [Theory]
         [MemberData(nameof(SkipHandling_JsonWithoutUnmappedMembers_MemberData))]
-        public async Task SkipHandling_JsonWithoutUnmappedMembers_Succeeds(TypeConfiguration typeConfig, JsonInput jsonInput)
+        public async Task SkipHandling_JsonWithoutUnmappedMembers_Succeeds(
+            TypeConfiguration typeConfig,
+            JsonInput jsonInput
+        )
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
 
@@ -25,15 +28,20 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(jsonInput.expectedId, poco.Id);
         }
 
-        public static IEnumerable<object[]> SkipHandling_JsonWithoutUnmappedMembers_MemberData()
-            => GetAllTestConfigurations()
-                .Where(x => x.typeConfig.ExpectedUnmappedMemberHandling is JsonUnmappedMemberHandling.Skip)
+        public static IEnumerable<object[]> SkipHandling_JsonWithoutUnmappedMembers_MemberData() =>
+            GetAllTestConfigurations()
+                .Where(x =>
+                    x.typeConfig.ExpectedUnmappedMemberHandling is JsonUnmappedMemberHandling.Skip
+                )
                 .Where(x => !x.jsonInput.containsUnmappedMember)
                 .Select(x => new object[] { x.typeConfig, x.jsonInput });
 
         [Theory]
         [MemberData(nameof(SkipHandling_JsonWithUnmappedMembers_MemberData))]
-        public async Task SkipHandling_JsonWithUnmappedMembers_Succeeds(TypeConfiguration typeConfig, JsonInput jsonInput)
+        public async Task SkipHandling_JsonWithUnmappedMembers_Succeeds(
+            TypeConfiguration typeConfig,
+            JsonInput jsonInput
+        )
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
 
@@ -43,15 +51,20 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(jsonInput.expectedId, poco.Id);
         }
 
-        public static IEnumerable<object[]> SkipHandling_JsonWithUnmappedMembers_MemberData()
-            => GetAllTestConfigurations()
-                .Where(x => x.typeConfig.ExpectedUnmappedMemberHandling is JsonUnmappedMemberHandling.Skip)
+        public static IEnumerable<object[]> SkipHandling_JsonWithUnmappedMembers_MemberData() =>
+            GetAllTestConfigurations()
+                .Where(x =>
+                    x.typeConfig.ExpectedUnmappedMemberHandling is JsonUnmappedMemberHandling.Skip
+                )
                 .Where(x => x.jsonInput.containsUnmappedMember)
                 .Select(x => new object[] { x.typeConfig, x.jsonInput });
 
         [Theory]
         [MemberData(nameof(DisallowHandling_JsonWithoutUnmappedMembers_MemberData))]
-        public async Task DisallowHandling_JsonWithoutUnmappedMembers_Succeeds(TypeConfiguration typeConfig, JsonInput jsonInput)
+        public async Task DisallowHandling_JsonWithoutUnmappedMembers_Succeeds(
+            TypeConfiguration typeConfig,
+            JsonInput jsonInput
+        )
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
 
@@ -60,23 +73,34 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(jsonInput.expectedId, poco.Id);
         }
 
-        public static IEnumerable<object[]> DisallowHandling_JsonWithoutUnmappedMembers_MemberData()
-            => GetAllTestConfigurations()
-                .Where(x => x.typeConfig.ExpectedUnmappedMemberHandling is JsonUnmappedMemberHandling.Disallow)
+        public static IEnumerable<object[]> DisallowHandling_JsonWithoutUnmappedMembers_MemberData() =>
+            GetAllTestConfigurations()
+                .Where(x =>
+                    x.typeConfig.ExpectedUnmappedMemberHandling
+                    is JsonUnmappedMemberHandling.Disallow
+                )
                 .Where(x => !x.jsonInput.containsUnmappedMember)
                 .Select(x => new object[] { x.typeConfig, x.jsonInput });
 
         [Theory]
         [MemberData(nameof(DisallowHandling_JsonWithUnmappedMembers_MemberData))]
-        public async Task DisallowHandling_JsonWithUnmappedMembers_ThrowsJsonException(TypeConfiguration typeConfig, JsonInput jsonInput)
+        public async Task DisallowHandling_JsonWithUnmappedMembers_ThrowsJsonException(
+            TypeConfiguration typeConfig,
+            JsonInput jsonInput
+        )
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
-            await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper(jsonInput.json, typeInfo));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper(jsonInput.json, typeInfo)
+            );
         }
 
-        public static IEnumerable<object[]> DisallowHandling_JsonWithUnmappedMembers_MemberData()
-            => GetAllTestConfigurations()
-                .Where(x => x.typeConfig.ExpectedUnmappedMemberHandling is JsonUnmappedMemberHandling.Disallow)
+        public static IEnumerable<object[]> DisallowHandling_JsonWithUnmappedMembers_MemberData() =>
+            GetAllTestConfigurations()
+                .Where(x =>
+                    x.typeConfig.ExpectedUnmappedMemberHandling
+                    is JsonUnmappedMemberHandling.Disallow
+                )
                 .Where(x => x.jsonInput.containsUnmappedMember)
                 .Select(x => new object[] { x.typeConfig, x.jsonInput });
 
@@ -86,15 +110,21 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonTypeInfo typeInfo = ResolveTypeInfo(typeConfig);
 
-            Assert.Equal(typeConfig.contractCustomizationOverride ?? typeConfig.attributeAnnotation, typeInfo.UnmappedMemberHandling);
+            Assert.Equal(
+                typeConfig.contractCustomizationOverride ?? typeConfig.attributeAnnotation,
+                typeInfo.UnmappedMemberHandling
+            );
         }
 
-        public static IEnumerable<object[]> JsonTypeInfo_ReturnsExpectedUnmappedMemberHandling_MemberData()
-            => GetTypeConfigurations().Select(x  => new object[] { x });
+        public static IEnumerable<object[]> JsonTypeInfo_ReturnsExpectedUnmappedMemberHandling_MemberData() =>
+            GetTypeConfigurations().Select(x => new object[] { x });
 
         private JsonTypeInfo ResolveTypeInfo(TypeConfiguration typeConfig)
         {
-            var options = new JsonSerializerOptions(Serializer.DefaultOptions) { UnmappedMemberHandling = typeConfig.globalHandling };
+            var options = new JsonSerializerOptions(Serializer.DefaultOptions)
+            {
+                UnmappedMemberHandling = typeConfig.globalHandling,
+            };
             JsonTypeInfo typeInfo = options.GetTypeInfo(typeConfig.type);
 
             if (typeConfig.contractCustomizationOverride != null)
@@ -111,29 +141,53 @@ namespace System.Text.Json.Serialization.Tests
             Type type,
             JsonUnmappedMemberHandling globalHandling,
             JsonUnmappedMemberHandling? attributeAnnotation,
-            JsonUnmappedMemberHandling? contractCustomizationOverride)
+            JsonUnmappedMemberHandling? contractCustomizationOverride
+        )
         {
-            public JsonUnmappedMemberHandling ExpectedUnmappedMemberHandling => contractCustomizationOverride ?? attributeAnnotation ?? globalHandling;
+            public JsonUnmappedMemberHandling ExpectedUnmappedMemberHandling =>
+                contractCustomizationOverride ?? attributeAnnotation ?? globalHandling;
         }
 
-        public record struct JsonInput(string json, bool containsUnmappedMember = false, int expectedId = 0);
+        public record struct JsonInput(
+            string json,
+            bool containsUnmappedMember = false,
+            int expectedId = 0
+        );
 
-        private static IEnumerable<(TypeConfiguration typeConfig, JsonInput jsonInput)> GetAllTestConfigurations()
-            => GetTypeConfigurations().CrossJoin(GetJsonInputs());
+        private static IEnumerable<(
+            TypeConfiguration typeConfig,
+            JsonInput jsonInput
+        )> GetAllTestConfigurations() => GetTypeConfigurations().CrossJoin(GetJsonInputs());
 
-        private static IEnumerable<TypeConfiguration> GetTypeConfigurations()
-            => GetTypesAndAttributeAnnotations().CrossJoin(
+        private static IEnumerable<TypeConfiguration> GetTypeConfigurations() =>
+            GetTypesAndAttributeAnnotations()
+                .CrossJoin(
                     GetGlobalUnmappedMemberConfigurations(),
                     GetContractCustomizationOverrides(),
-                    static (tc, globalConfig, contractOverride) => new TypeConfiguration(tc.type, globalConfig, tc.attributeAnnotation, contractOverride));
+                    static (tc, globalConfig, contractOverride) =>
+                        new TypeConfiguration(
+                            tc.type,
+                            globalConfig,
+                            tc.attributeAnnotation,
+                            contractOverride
+                        )
+                );
 
-        private static IEnumerable<JsonUnmappedMemberHandling> GetGlobalUnmappedMemberConfigurations()
-            => new[] { JsonUnmappedMemberHandling.Skip, JsonUnmappedMemberHandling.Disallow };
+        private static IEnumerable<JsonUnmappedMemberHandling> GetGlobalUnmappedMemberConfigurations() =>
+            new[] { JsonUnmappedMemberHandling.Skip, JsonUnmappedMemberHandling.Disallow };
 
-        private static IEnumerable<JsonUnmappedMemberHandling?> GetContractCustomizationOverrides()
-            => new JsonUnmappedMemberHandling?[] { null, JsonUnmappedMemberHandling.Skip, JsonUnmappedMemberHandling.Disallow };
+        private static IEnumerable<JsonUnmappedMemberHandling?> GetContractCustomizationOverrides() =>
+            new JsonUnmappedMemberHandling?[]
+            {
+                null,
+                JsonUnmappedMemberHandling.Skip,
+                JsonUnmappedMemberHandling.Disallow,
+            };
 
-        private static IEnumerable<(Type type, JsonUnmappedMemberHandling? attributeAnnotation)> GetTypesAndAttributeAnnotations()
+        private static IEnumerable<(
+            Type type,
+            JsonUnmappedMemberHandling? attributeAnnotation
+        )> GetTypesAndAttributeAnnotations()
         {
             yield return (typeof(PocoWithoutAnnotations), null);
             yield return (typeof(PocoWithSkipAnnotation), JsonUnmappedMemberHandling.Skip);
@@ -146,8 +200,16 @@ namespace System.Text.Json.Serialization.Tests
             yield return new("""{}""");
             yield return new("""{"Id": 42}""", expectedId: 42);
             yield return new("""{"UnmappedProperty" : null}""", containsUnmappedMember: true);
-            yield return new("""{"Id": 42, "UnmappedProperty" : null}""", containsUnmappedMember: true, expectedId: 42);
-            yield return new("""{"UnmappedMember" : null, "Id": 42}""", containsUnmappedMember: true, expectedId: 42);
+            yield return new(
+                """{"Id": 42, "UnmappedProperty" : null}""",
+                containsUnmappedMember: true,
+                expectedId: 42
+            );
+            yield return new(
+                """{"UnmappedMember" : null, "Id": 42}""",
+                containsUnmappedMember: true,
+                expectedId: 42
+            );
         }
 
         public interface IPoco
@@ -172,9 +234,7 @@ namespace System.Text.Json.Serialization.Tests
             public int Id { get; set; }
         }
 
-        public class PocoInheritingDisallowAnnotation : PocoWithDisallowAnnotation
-        {
-        }
+        public class PocoInheritingDisallowAnnotation : PocoWithDisallowAnnotation { }
         #endregion
 
         #region JsonExtensionData Interop
@@ -182,8 +242,15 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ClassWithExtensionData_GlobalDisallowHandling_ClassConfigurationOverridesGlobalSetting()
         {
-            var options = new JsonSerializerOptions { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow };
-            ClassWithExtensionData result = await Serializer.DeserializeWrapper<ClassWithExtensionData>("""{"unmappedMember":null}""", options);
+            var options = new JsonSerializerOptions
+            {
+                UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+            };
+            ClassWithExtensionData result =
+                await Serializer.DeserializeWrapper<ClassWithExtensionData>(
+                    """{"unmappedMember":null}""",
+                    options
+                );
 
             Assert.NotNull(result.ExtensionData);
             Assert.True(result.ExtensionData.ContainsKey("unmappedMember"));
@@ -192,16 +259,22 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ClassWithExtensionDataAndDisallowHandling_ThrowsInvalidOperationException()
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.DeserializeWrapper<ClassWithExtensionDataAndDisallowHandling>("{}"));
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<ClassWithExtensionDataAndDisallowHandling>("{}")
+            );
         }
 
         [Fact]
         public async Task ClassWithExtensionDataAndDisallowHandling_DisableUnmappedMemberHandling_Succeeds()
         {
-            JsonTypeInfo<ClassWithExtensionDataAndDisallowHandling> typeInfo = Serializer.GetTypeInfo<ClassWithExtensionDataAndDisallowHandling>(mutable: true);
+            JsonTypeInfo<ClassWithExtensionDataAndDisallowHandling> typeInfo =
+                Serializer.GetTypeInfo<ClassWithExtensionDataAndDisallowHandling>(mutable: true);
 
             typeInfo.UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip;
-            ClassWithExtensionDataAndDisallowHandling result = await Serializer.DeserializeWrapper("""{"ExtensionData":{}}""", typeInfo);
+            ClassWithExtensionDataAndDisallowHandling result = await Serializer.DeserializeWrapper(
+                """{"ExtensionData":{}}""",
+                typeInfo
+            );
 
             Assert.NotNull(result.ExtensionData);
         }

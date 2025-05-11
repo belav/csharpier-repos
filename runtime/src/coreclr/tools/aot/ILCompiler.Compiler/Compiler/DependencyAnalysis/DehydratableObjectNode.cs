@@ -9,9 +9,11 @@ namespace ILCompiler.DependencyAnalysis
         {
             ObjectNodeSection desiredSection = GetDehydratedSection(factory);
 
-            return factory.MetadataManager.IsDataDehydrated
+            return
+                factory.MetadataManager.IsDataDehydrated
                 && desiredSection.Type != SectionType.Uninitialized
-                ? ObjectNodeSection.HydrationTargetSection : desiredSection;
+                ? ObjectNodeSection.HydrationTargetSection
+                : desiredSection;
         }
 
         public sealed override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -36,6 +38,9 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         protected abstract ObjectNodeSection GetDehydratedSection(NodeFactory factory);
-        protected abstract ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly = false);
+        protected abstract ObjectData GetDehydratableData(
+            NodeFactory factory,
+            bool relocsOnly = false
+        );
     }
 }

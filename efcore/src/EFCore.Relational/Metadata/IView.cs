@@ -57,15 +57,11 @@ public interface IView : ITableBase
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("View: ");
+            builder.Append(indentString).Append("View: ");
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);
@@ -75,7 +71,11 @@ public interface IView : ITableBase
                 if (ViewDefinitionSql != null)
                 {
                     builder.AppendLine().Append(indentString).Append("  DefinitionSql: ");
-                    builder.AppendLine().Append(indentString).Append(new string(' ', 4)).Append(ViewDefinitionSql);
+                    builder
+                        .AppendLine()
+                        .Append(indentString)
+                        .Append(new string(' ', 4))
+                        .Append(ViewDefinitionSql);
                 }
 
                 var mappings = EntityTypeMappings.ToList();

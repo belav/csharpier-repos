@@ -4,16 +4,17 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.Security.Permissions;
+    using System.Xml;
 
     /*          <!--
             Configuration for profile:
@@ -85,42 +86,52 @@ namespace System.Web.Configuration {
            </properties>
         </profile>
 */
-    public sealed class ProfileSection : ConfigurationSection {
+    public sealed class ProfileSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled",
-                                        typeof(bool),
-                                        true,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propDefaultProvider =
-            new ConfigurationProperty("defaultProvider",
-                                        typeof(string),
-                                        "AspNetSqlProfileProvider",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty("providers",
-                                        typeof(ProviderSettingsCollection),
-                                        null,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propProfile =
-            new ConfigurationProperty("properties",
-                                        typeof(RootProfilePropertySettingsCollection),
-                                        null,
-                                        ConfigurationPropertyOptions.IsDefaultCollection);
-        private static readonly ConfigurationProperty _propInherits =
-            new ConfigurationProperty("inherits",
-                                        typeof(string),
-                                        String.Empty,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "defaultProvider",
+                typeof(string),
+                "AspNetSqlProfileProvider",
+                null,
+                StdValidatorsAndConverters.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            "providers",
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propProfile = new ConfigurationProperty(
+            "properties",
+            typeof(RootProfilePropertySettingsCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
+        private static readonly ConfigurationProperty _propInherits = new ConfigurationProperty(
+            "inherits",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propAutomaticSaveEnabled =
-            new ConfigurationProperty("automaticSaveEnabled",
-                                        typeof(bool),
-                                        true,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "automaticSaveEnabled",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
 
-        static ProfileSection() {
+        static ProfileSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propEnabled);
@@ -135,9 +146,12 @@ namespace System.Web.Configuration {
 
         private bool _recompilationHashCached;
 
-        internal long RecompilationHash {
-            get {
-                if (!_recompilationHashCached) {
+        internal long RecompilationHash
+        {
+            get
+            {
+                if (!_recompilationHashCached)
+                {
                     _recompilationHash = CalculateHash();
                     _recompilationHashCached = true;
                 }
@@ -146,13 +160,16 @@ namespace System.Web.Configuration {
             }
         }
 
-        private long CalculateHash() {
+        private long CalculateHash()
+        {
             HashCodeCombiner hashCombiner = new HashCodeCombiner();
 
             CalculateProfilePropertySettingsHash(PropertySettings, hashCombiner);
 
-            if (PropertySettings != null) {
-                foreach (ProfileGroupSettings pgs in PropertySettings.GroupSettings) {
+            if (PropertySettings != null)
+            {
+                foreach (ProfileGroupSettings pgs in PropertySettings.GroupSettings)
+                {
                     hashCombiner.AddObject(pgs.Name);
                     CalculateProfilePropertySettingsHash(pgs.PropertySettings, hashCombiner);
                 }
@@ -163,78 +180,63 @@ namespace System.Web.Configuration {
 
         private void CalculateProfilePropertySettingsHash(
             ProfilePropertySettingsCollection settings,
-            HashCodeCombiner hashCombiner) {
-            foreach (ProfilePropertySettings pps in settings) {
+            HashCodeCombiner hashCombiner
+        )
+        {
+            foreach (ProfilePropertySettings pps in settings)
+            {
                 hashCombiner.AddObject(pps.Name);
                 hashCombiner.AddObject(pps.Type);
             }
         }
 
-        public ProfileSection() {
-        }
+        public ProfileSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("automaticSaveEnabled", DefaultValue = true)]
-        public bool AutomaticSaveEnabled {
-            get {
-                return (bool)base[_propAutomaticSaveEnabled];
-            }
-            set {
-                base[_propAutomaticSaveEnabled] = value;
-            }
+        public bool AutomaticSaveEnabled
+        {
+            get { return (bool)base[_propAutomaticSaveEnabled]; }
+            set { base[_propAutomaticSaveEnabled] = value; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = true)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("defaultProvider", DefaultValue = "AspNetSqlProfileProvider")]
         [StringValidator(MinLength = 1)]
-        public string DefaultProvider {
-            get {
-                return (string)base[_propDefaultProvider];
-            }
-            set {
-                base[_propDefaultProvider] = value;
-            }
+        public string DefaultProvider
+        {
+            get { return (string)base[_propDefaultProvider]; }
+            set { base[_propDefaultProvider] = value; }
         }
 
         [ConfigurationProperty("inherits", DefaultValue = "")]
-        public string Inherits {
-            get {
-                return (string)base[_propInherits];
-            }
-            set {
-                base[_propInherits] = value;
-            }
+        public string Inherits
+        {
+            get { return (string)base[_propInherits]; }
+            set { base[_propInherits] = value; }
         }
 
-                [ConfigurationProperty("providers")]
-                public ProviderSettingsCollection Providers                 {
-                    get                     {
-                        return (ProviderSettingsCollection)base[_propProviders];
-                    }
-                }
+        [ConfigurationProperty("providers")]
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base[_propProviders]; }
+        }
 
         // not exposed to the API
         [ConfigurationProperty("properties")]
-        public RootProfilePropertySettingsCollection PropertySettings {
-            get {
-                return (RootProfilePropertySettingsCollection)base[_propProfile];
-            }
+        public RootProfilePropertySettingsCollection PropertySettings
+        {
+            get { return (RootProfilePropertySettingsCollection)base[_propProfile]; }
         }
     }
 }
-
-

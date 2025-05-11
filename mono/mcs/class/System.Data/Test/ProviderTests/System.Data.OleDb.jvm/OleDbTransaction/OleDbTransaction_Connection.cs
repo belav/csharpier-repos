@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,68 +24,90 @@
 using System;
 using System.Data;
 using System.Data.OleDb;
-
 using MonoTests.System.Data.Utils;
-
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-	[TestFixture]
-	public class OleDbTransaction_Connection : ADONetTesterClass
-	{
-		public static void Main()
-		{
-			OleDbTransaction_Connection tc = new OleDbTransaction_Connection();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OleDbTransaction_Connection");
-				tc.run();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+    [TestFixture]
+    public class OleDbTransaction_Connection : ADONetTesterClass
+    {
+        public static void Main()
+        {
+            OleDbTransaction_Connection tc = new OleDbTransaction_Connection();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OleDbTransaction_Connection");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-			con.Open();
-			OleDbTransaction txn = con.BeginTransaction();
+            OleDbConnection con = new OleDbConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
+            con.Open();
+            OleDbTransaction txn = con.BeginTransaction();
 
-			try
-			{
-				BeginCase("check connection");
-				Compare(txn.Connection,con);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("check connection");
+                Compare(txn.Connection, con);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-			//check exception - using a command with the same connection as the transaction
-			OleDbCommand cmd = new OleDbCommand("Select * from Employees",con);
+            //check exception - using a command with the same connection as the transaction
+            OleDbCommand cmd = new OleDbCommand("Select * from Employees", con);
 
-			//Execute requires the command to have a transaction object when the connection assigned to the command is in a pending local transaction.  
-			//The Transaction property of the command has not been initialized.
-			try
-			{
-				BeginCase("Command that uses the transaction connection - exception");
-				try
-				{
-					cmd.ExecuteNonQuery();
-				}
-				catch (Exception ex){exp=ex;}
-				Compare(exp.GetType().FullName ,typeof(InvalidOperationException).FullName);
-				exp = null;
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
+            //Execute requires the command to have a transaction object when the connection assigned to the command is in a pending local transaction.
+            //The Transaction property of the command has not been initialized.
+            try
+            {
+                BeginCase("Command that uses the transaction connection - exception");
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    exp = ex;
+                }
+                Compare(exp.GetType().FullName, typeof(InvalidOperationException).FullName);
+                exp = null;
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-			if (con.State == ConnectionState.Open) con.Close();
-
-		}
-	}
+            if (con.State == ConnectionState.Open)
+                con.Close();
+        }
+    }
 }

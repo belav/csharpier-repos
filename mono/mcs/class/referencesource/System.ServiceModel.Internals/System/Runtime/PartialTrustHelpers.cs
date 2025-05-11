@@ -4,10 +4,10 @@
 
 namespace System.Runtime
 {
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     static class PartialTrustHelpers
     {
@@ -18,6 +18,7 @@ namespace System.Runtime
         [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision")]
         [SecurityCritical]
         static volatile bool checkedForFullTrust;
+
         [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision")]
         [SecurityCritical]
         static bool inFullTrust;
@@ -26,10 +27,7 @@ namespace System.Runtime
         {
             [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision")]
             [SecurityCritical]
-            get
-            {
-                return SecurityManager.CurrentThreadRequiresSecurityContextCapture();
-            }
+            get { return SecurityManager.CurrentThreadRequiresSecurityContextCapture(); }
         }
 
         [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision")]
@@ -55,9 +53,12 @@ namespace System.Runtime
             return true;
 #endif
         }
+
 #if FEATURE_COMPRESSEDSTACK
-        [Fx.Tag.SecurityNote(Critical = "Captures security context with identity flow suppressed, " +
-            "this requires satisfying a LinkDemand for infrastructure.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Captures security context with identity flow suppressed, "
+                + "this requires satisfying a LinkDemand for infrastructure."
+        )]
         [SecurityCritical]
         internal static SecurityContext CaptureSecurityContextNoIdentityFlow()
         {
@@ -75,6 +76,7 @@ namespace System.Runtime
             }
         }
 #endif
+
         [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision")]
         [SecurityCritical]
         internal static bool IsTypeAptca(Type type)
@@ -86,9 +88,7 @@ namespace System.Runtime
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static void DemandForFullTrust()
-        {
-        }
+        internal static void DemandForFullTrust() { }
 
         [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision")]
         [SecurityCritical]
@@ -115,8 +115,8 @@ namespace System.Runtime
         internal static bool CheckAppDomainPermissions(PermissionSet permissions)
         {
 #if MONO_FEATURE_CAS
-            return AppDomain.CurrentDomain.IsHomogenous &&
-                   permissions.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet);
+            return AppDomain.CurrentDomain.IsHomogenous
+                && permissions.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet);
 #else
             return true;
 #endif
@@ -127,7 +127,7 @@ namespace System.Runtime
         internal static bool HasEtwPermissions()
         {
 #if MONO_FEATURE_CAS
-            //Currently unrestricted permissions are required to create Etw provider. 
+            //Currently unrestricted permissions are required to create Etw provider.
             PermissionSet permissions = new PermissionSet(PermissionState.Unrestricted);
             return CheckAppDomainPermissions(permissions);
 #else
@@ -137,8 +137,10 @@ namespace System.Runtime
 
         internal static bool AppDomainFullyTrusted
         {
-            [Fx.Tag.SecurityNote(Critical = "used in a security-sensitive decision",
-                Safe = "Does not leak critical resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "used in a security-sensitive decision",
+                Safe = "Does not leak critical resources"
+            )]
             [SecuritySafeCritical]
             get
             {

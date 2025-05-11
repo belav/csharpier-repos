@@ -28,10 +28,7 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var compiledView = new CompiledViewDescriptor
-        {
-            RelativePath = path,
-        };
+        var compiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(compiledViews: new[] { compiledView });
 
         // Act
@@ -52,10 +49,7 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var precompiledView = new CompiledViewDescriptor
-        {
-            RelativePath = path,
-        };
+        var precompiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(compiledViews: new[] { precompiledView });
 
         // Act
@@ -70,10 +64,7 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var compiledView = new CompiledViewDescriptor
-        {
-            RelativePath = path,
-        };
+        var compiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(compiledViews: new[] { compiledView });
 
         // Act
@@ -88,14 +79,8 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var compiledView = new CompiledViewDescriptor
-        {
-            RelativePath = path,
-        };
-        var compiledViews = new List<CompiledViewDescriptor>
-            {
-                compiledView,
-            };
+        var compiledView = new CompiledViewDescriptor { RelativePath = path };
+        var compiledViews = new List<CompiledViewDescriptor> { compiledView };
         var viewCompiler = GetViewCompiler(compiledViews);
 
         // Act - 1
@@ -115,7 +100,9 @@ public class DefaultViewCompilerTest
         Assert.Same(hotReloaded, result);
     }
 
-    private static TestRazorViewCompiler GetViewCompiler(IList<CompiledViewDescriptor> compiledViews = null)
+    private static TestRazorViewCompiler GetViewCompiler(
+        IList<CompiledViewDescriptor> compiledViews = null
+    )
     {
         compiledViews = compiledViews ?? Array.Empty<CompiledViewDescriptor>();
 
@@ -125,17 +112,23 @@ public class DefaultViewCompilerTest
 
     private class TestRazorViewCompiler : DefaultViewCompiler
     {
-        public TestRazorViewCompiler(IList<CompiledViewDescriptor> compiledViews) :
-            base(GetApplicationPartManager(new TestViewsFeatureProvider { CompiledViews = compiledViews }), NullLogger<DefaultViewCompiler>.Instance)
-        {
-        }
+        public TestRazorViewCompiler(IList<CompiledViewDescriptor> compiledViews)
+            : base(
+                GetApplicationPartManager(
+                    new TestViewsFeatureProvider { CompiledViews = compiledViews }
+                ),
+                NullLogger<DefaultViewCompiler>.Instance
+            ) { }
 
-        public TestRazorViewCompiler(TestViewsFeatureProvider featureProvider) :
-           base(GetApplicationPartManager(featureProvider), NullLogger<DefaultViewCompiler>.Instance)
-        {
-        }
+        public TestRazorViewCompiler(TestViewsFeatureProvider featureProvider)
+            : base(
+                GetApplicationPartManager(featureProvider),
+                NullLogger<DefaultViewCompiler>.Instance
+            ) { }
 
-        private static ApplicationPartManager GetApplicationPartManager(TestViewsFeatureProvider featureProvider)
+        private static ApplicationPartManager GetApplicationPartManager(
+            TestViewsFeatureProvider featureProvider
+        )
         {
             var manager = new ApplicationPartManager();
             manager.FeatureProviders.Add(featureProvider);

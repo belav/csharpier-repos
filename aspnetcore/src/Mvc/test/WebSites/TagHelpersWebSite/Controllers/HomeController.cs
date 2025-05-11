@@ -10,13 +10,15 @@ public class HomeController : Controller
 {
     public IActionResult Index(bool approved = false)
     {
-        return View(new WebsiteContext
-        {
-            Approved = approved,
-            CopyrightYear = 2015,
-            Version = new Version(1, 3, 3, 7),
-            TagsToShow = 20
-        });
+        return View(
+            new WebsiteContext
+            {
+                Approved = approved,
+                CopyrightYear = 2015,
+                Version = new Version(1, 3, 3, 7),
+                TagsToShow = 20,
+            }
+        );
     }
 
     public IActionResult About()
@@ -77,14 +79,16 @@ public class HomeController : Controller
     public IActionResult ViewWithNestedInheritedTagHelperPrefix()
     {
         return View(
-            "/Views/InheritedTagHelperPrefix/NestedInheritedTagHelperPrefix/" +
-            "NestedInheritedTagHelperPrefix.cshtml");
+            "/Views/InheritedTagHelperPrefix/NestedInheritedTagHelperPrefix/"
+                + "NestedInheritedTagHelperPrefix.cshtml"
+        );
     }
 
     public IActionResult ViewWithNestedOverriddenTagHelperPrefix()
     {
         return View(
-            "/Views/InheritedTagHelperPrefix/NestedInheritedTagHelperPrefix/" +
-            "NestedOverriddenTagHelperPrefix.cshtml");
+            "/Views/InheritedTagHelperPrefix/NestedInheritedTagHelperPrefix/"
+                + "NestedOverriddenTagHelperPrefix.cshtml"
+        );
     }
 }

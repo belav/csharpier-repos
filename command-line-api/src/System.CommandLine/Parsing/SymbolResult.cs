@@ -52,7 +52,8 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// The list of tokens associated with this symbol result during parsing.
         /// </summary>
-        public IReadOnlyList<CliToken> Tokens => _tokens is not null ? _tokens : Array.Empty<CliToken>();
+        public IReadOnlyList<CliToken> Tokens =>
+            _tokens is not null ? _tokens : Array.Empty<CliToken>();
 
         internal void AddToken(CliToken token) => (_tokens ??= new()).Add(token);
 
@@ -60,14 +61,16 @@ namespace System.CommandLine.Parsing
         /// Adds an error message for this symbol result to it's parse tree.
         /// </summary>
         /// <remarks>Setting an error will cause the parser to indicate an error for the user and prevent invocation of the command line.</remarks>
-        public virtual void AddError(string errorMessage) => SymbolResultTree.AddError(new ParseError(errorMessage, this));
+        public virtual void AddError(string errorMessage) =>
+            SymbolResultTree.AddError(new ParseError(errorMessage, this));
 
         /// <summary>
         /// Finds a result for the specific argument anywhere in the parse tree, including parent and child symbol results.
         /// </summary>
         /// <param name="argument">The argument for which to find a result.</param>
         /// <returns>An argument result if the argument was matched by the parser or has a default value; otherwise, <c>null</c>.</returns>
-        public ArgumentResult? GetResult(CliArgument argument) => SymbolResultTree.GetResult(argument);
+        public ArgumentResult? GetResult(CliArgument argument) =>
+            SymbolResultTree.GetResult(argument);
 
         /// <summary>
         /// Finds a result for the specific command anywhere in the parse tree, including parent and child symbol results.
@@ -88,21 +91,20 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="directive">The directive for which to find a result.</param>
         /// <returns>A directive result if the directive was matched by the parser, <c>null</c> otherwise.</returns>
-        public DirectiveResult? GetResult(CliDirective directive) => SymbolResultTree.GetResult(directive);
+        public DirectiveResult? GetResult(CliDirective directive) =>
+            SymbolResultTree.GetResult(directive);
 
         /// <summary>
         /// Finds a result for a symbol having the specified name anywhere in the parse tree.
         /// </summary>
         /// <param name="name">The name of the symbol for which to find a result.</param>
         /// <returns>An argument result if the argument was matched by the parser or has a default value; otherwise, <c>null</c>.</returns>
-        public SymbolResult? GetResult(string name) => 
-            SymbolResultTree.GetResult(name);
+        public SymbolResult? GetResult(string name) => SymbolResultTree.GetResult(name);
 
         /// <inheritdoc cref="ParseResult.GetValue{T}(CliArgument{T})"/>
         public T? GetValue<T>(CliArgument<T> argument)
         {
-            if (GetResult(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (GetResult(argument) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -113,8 +115,7 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValue{T}(CliOption{T})"/>
         public T? GetValue<T>(CliOption<T> option)
         {
-            if (GetResult(option) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (GetResult(option) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -131,14 +132,18 @@ namespace System.CommandLine.Parsing
         {
             if (GetResult(name) is { } result)
             {
-                if (result is OptionResult optionResult &&
-                    optionResult.GetValueOrDefault<T>() is { } optionValue)
+                if (
+                    result is OptionResult optionResult
+                    && optionResult.GetValueOrDefault<T>() is { } optionValue
+                )
                 {
                     return optionValue;
                 }
 
-                if (result is ArgumentResult argumentResult &&
-                    argumentResult.GetValueOrDefault<T>() is { } argumentValue)
+                if (
+                    result is ArgumentResult argumentResult
+                    && argumentResult.GetValueOrDefault<T>() is { } argumentValue
+                )
                 {
                     return argumentValue;
                 }

@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * We need to propagate array dimension changes through OPADDs that are already NonNull. 
+ * We need to propagate array dimension changes through OPADDs that are already NonNull.
  * Expected and actual output is at the end of the test.
  * */
 
@@ -37,8 +37,8 @@ public class Test_arrayDim
 }
 
 
-/* 
-Expected: 
+/*
+Expected:
 
 C:\Temp>repro
 j=10
@@ -85,6 +85,6 @@ j=11
 10
 0 1 2 3 4 5 6 7 8 9 10
 Unhandled Exception: System.IndexOutOfRangeException: Index was outside the bounds of the array.
-   at Test_arrayDim.Main() 
+   at Test_arrayDim.Main()
  
 */

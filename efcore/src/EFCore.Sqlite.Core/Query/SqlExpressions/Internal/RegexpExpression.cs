@@ -19,7 +19,11 @@ public class RegexpExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public RegexpExpression(SqlExpression match, SqlExpression pattern, RelationalTypeMapping typeMapping)
+    public RegexpExpression(
+        SqlExpression match,
+        SqlExpression pattern,
+        RelationalTypeMapping typeMapping
+    )
         : base(typeof(bool), typeMapping)
     {
         Match = match;
@@ -32,8 +36,7 @@ public class RegexpExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override RelationalTypeMapping TypeMapping
-        => base.TypeMapping!;
+    public override RelationalTypeMapping TypeMapping => base.TypeMapping!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,8 +74,8 @@ public class RegexpExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual RegexpExpression Update(SqlExpression match, SqlExpression pattern)
-        => match != Match || pattern != Pattern
+    public virtual RegexpExpression Update(SqlExpression match, SqlExpression pattern) =>
+        match != Match || pattern != Pattern
             ? new RegexpExpression(match, pattern, TypeMapping)
             : this;
 
@@ -95,16 +98,17 @@ public class RegexpExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is RegexpExpression regexpExpression
-                && Equals(regexpExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is RegexpExpression regexpExpression && Equals(regexpExpression)
+        );
 
-    private bool Equals(RegexpExpression regexpExpression)
-        => base.Equals(regexpExpression)
-            && Match.Equals(regexpExpression.Match)
-            && Pattern.Equals(regexpExpression.Pattern);
+    private bool Equals(RegexpExpression regexpExpression) =>
+        base.Equals(regexpExpression)
+        && Match.Equals(regexpExpression.Match)
+        && Pattern.Equals(regexpExpression.Pattern);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,6 +116,5 @@ public class RegexpExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Match, Pattern);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Match, Pattern);
 }

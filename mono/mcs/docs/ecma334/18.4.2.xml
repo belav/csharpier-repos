@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <clause number="18.4.2" title="Database boolean type" informative="true">
-  <paragraph>The DBBool struct below implements a three-valued logical type. The possible values of this type are DBBool.True, DBBool.False, and DBBool.Null, where the Null member indicates an unknown value. Such three-valued logical types are commonly used in databases. <code_example><![CDATA[
+  <paragraph
+    >The DBBool struct below implements a three-valued logical type. The possible values of this type are DBBool.True, DBBool.False, and DBBool.Null, where the Null member indicates an unknown value. Such three-valued logical types are commonly used in databases. <code_example
+    >
+      <![CDATA[
 using System;  
 public struct DBBool  
 {  
@@ -76,6 +79,8 @@ public struct DBBool
       return x.value < 0;  
    }  
 }  
-]]></code_example></paragraph>
+]]>
+    </code_example>
+  </paragraph>
   <paragraph>End of informative text. </paragraph>
 </clause>

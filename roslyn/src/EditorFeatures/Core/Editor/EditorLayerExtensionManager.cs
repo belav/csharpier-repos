@@ -30,9 +30,11 @@ namespace Microsoft.CodeAnalysis.Editor;
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed class EditorLayerExtensionManager(
-    [ImportMany] IEnumerable<IExtensionErrorHandler> errorHandlers) : IWorkspaceServiceFactory
+    [ImportMany] IEnumerable<IExtensionErrorHandler> errorHandlers
+) : IWorkspaceServiceFactory
 {
-    private readonly ImmutableArray<IExtensionErrorHandler> _errorHandlers = errorHandlers.ToImmutableArray();
+    private readonly ImmutableArray<IExtensionErrorHandler> _errorHandlers =
+        errorHandlers.ToImmutableArray();
 
     public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
     {
@@ -44,17 +46,21 @@ internal sealed class EditorLayerExtensionManager(
     internal sealed class ExtensionManager(
         IErrorReportingService errorReportingService,
         IErrorLoggerService errorLoggerService,
-        ImmutableArray<IExtensionErrorHandler> errorHandlers) : AbstractExtensionManager
+        ImmutableArray<IExtensionErrorHandler> errorHandlers
+    ) : AbstractExtensionManager
     {
         protected override void HandleNonCancellationException(object provider, Exception exception)
         {
             Debug.Assert(exception is not OperationCanceledException);
 
-            if (provider is CodeFixProvider
-                or CodeRefactoringProvider
-                or CodeRefactorings.FixAllProvider
-                or CodeFixes.FixAllProvider
-                or CompletionProvider)
+            if (
+                provider
+                is CodeFixProvider
+                    or CodeRefactoringProvider
+                    or CodeRefactorings.FixAllProvider
+                    or CodeFixes.FixAllProvider
+                    or CompletionProvider
+            )
             {
                 if (!IsIgnored(provider))
                 {
@@ -63,22 +69,43 @@ internal sealed class EditorLayerExtensionManager(
                     var providerType = provider.GetType();
 
                     errorReportingService?.ShowGlobalErrorInfo(
-                        message: string.Format(WorkspacesResources._0_encountered_an_error_and_has_been_disabled, providerType.Name),
+                        message: string.Format(
+                            WorkspacesResources._0_encountered_an_error_and_has_been_disabled,
+                            providerType.Name
+                        ),
                         TelemetryFeatureName.GetExtensionName(providerType),
                         exception,
-                        new InfoBarUI(WorkspacesResources.Show_Stack_Trace, InfoBarUI.UIKind.HyperLink, () => ShowDetailedErrorInfo(exception), closeAfterAction: false),
-                        new InfoBarUI(WorkspacesResources.Enable, InfoBarUI.UIKind.Button, () =>
-                        {
-                            EnableProvider(provider);
-                            LogEnableProvider(provider);
-                        }),
-                        new InfoBarUI(WorkspacesResources.Enable_and_ignore_future_errors, InfoBarUI.UIKind.Button, () =>
-                        {
-                            EnableProvider(provider);
-                            IgnoreProvider(provider);
-                            LogEnableAndIgnoreProvider(provider);
-                        }),
-                        new InfoBarUI(string.Empty, InfoBarUI.UIKind.Close, () => LogLeaveDisabled(provider)));
+                        new InfoBarUI(
+                            WorkspacesResources.Show_Stack_Trace,
+                            InfoBarUI.UIKind.HyperLink,
+                            () => ShowDetailedErrorInfo(exception),
+                            closeAfterAction: false
+                        ),
+                        new InfoBarUI(
+                            WorkspacesResources.Enable,
+                            InfoBarUI.UIKind.Button,
+                            () =>
+                            {
+                                EnableProvider(provider);
+                                LogEnableProvider(provider);
+                            }
+                        ),
+                        new InfoBarUI(
+                            WorkspacesResources.Enable_and_ignore_future_errors,
+                            InfoBarUI.UIKind.Button,
+                            () =>
+                            {
+                                EnableProvider(provider);
+                                IgnoreProvider(provider);
+                                LogEnableAndIgnoreProvider(provider);
+                            }
+                        ),
+                        new InfoBarUI(
+                            string.Empty,
+                            InfoBarUI.UIKind.Close,
+                            () => LogLeaveDisabled(provider)
+                        )
+                    );
                 }
                 else
                 {
@@ -87,7 +114,6 @@ internal sealed class EditorLayerExtensionManager(
             }
             else
             {
-
                 this.DisableProvider(provider);
                 errorHandlers.Do(h => h.HandleError(provider, exception));
             }
@@ -95,23 +121,26 @@ internal sealed class EditorLayerExtensionManager(
             errorLoggerService?.LogException(provider, exception);
         }
 
-        private void ShowDetailedErrorInfo(Exception exception)
-            => errorReportingService.ShowDetailedErrorInfo(exception);
+        private void ShowDetailedErrorInfo(Exception exception) =>
+            errorReportingService.ShowDetailedErrorInfo(exception);
 
-        private static void LogLeaveDisabled(object provider)
-            => LogAction(CodefixInfobar_LeaveDisabled, provider);
+        private static void LogLeaveDisabled(object provider) =>
+            LogAction(CodefixInfobar_LeaveDisabled, provider);
 
-        private static void LogEnableAndIgnoreProvider(object provider)
-            => LogAction(CodefixInfobar_EnableAndIgnoreFutureErrors, provider);
+        private static void LogEnableAndIgnoreProvider(object provider) =>
+            LogAction(CodefixInfobar_EnableAndIgnoreFutureErrors, provider);
 
-        private static void LogEnableProvider(object provider)
-            => LogAction(CodefixInfobar_Enable, provider);
+        private static void LogEnableProvider(object provider) =>
+            LogAction(CodefixInfobar_Enable, provider);
 
         private static void LogAction(FunctionId functionId, object provider)
         {
             if (IsRoslynCodefix(provider))
             {
-                Log(functionId, $"Name: {provider.GetType().FullName} Assembly Version: {provider.GetType().Assembly.GetName().Version}");
+                Log(
+                    functionId,
+                    $"Name: {provider.GetType().FullName} Assembly Version: {provider.GetType().Assembly.GetName().Version}"
+                );
             }
             else
             {

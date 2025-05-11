@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 public class CircuitHostTest
 {
-    private readonly IDataProtectionProvider _ephemeralDataProtectionProvider = new EphemeralDataProtectionProvider();
+    private readonly IDataProtectionProvider _ephemeralDataProtectionProvider =
+        new EphemeralDataProtectionProvider();
     private readonly ServerComponentInvocationSequence _invocationSequence = new();
 
     [Fact]
@@ -29,7 +30,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         // Act
         await circuitHost.DisposeAsync();
@@ -54,7 +56,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         // Act
         await circuitHost.DisposeAsync();
@@ -79,7 +82,8 @@ public class CircuitHostTest
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
             remoteRenderer: remoteRenderer,
-            handlers: new[] { handler.Object });
+            handlers: new[] { handler.Object }
+        );
 
         var throwOnDisposeComponent = new ThrowOnDisposeComponent();
         circuitHost.Renderer.AssignRootComponentId(throwOnDisposeComponent);
@@ -101,7 +105,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         var component = new DispatcherComponent(circuitHost.Renderer.Dispatcher);
         circuitHost.Renderer.AssignRootComponentId(component);
@@ -131,7 +136,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         var component = new PerformJSInteropOnDisposeComponent(circuitHost.JSRuntime);
         circuitHost.Renderer.AssignRootComponentId(component);
@@ -146,13 +152,18 @@ public class CircuitHostTest
         await circuitHost.DisposeAsync();
 
         // Assert: Component disposal logic sees the exception
-        var componentException = Assert.IsType<JSDisconnectedException>(component.ExceptionDuringDisposeAsync);
+        var componentException = Assert.IsType<JSDisconnectedException>(
+            component.ExceptionDuringDisposeAsync
+        );
 
         // Assert: Circuit host notifies about the exception
-        Assert.Collection(circuitUnhandledExceptions, eventArgs =>
-        {
-            Assert.Same(componentException, eventArgs.ExceptionObject);
-        });
+        Assert.Collection(
+            circuitUnhandledExceptions,
+            eventArgs =>
+            {
+                Assert.Same(componentException, eventArgs.ExceptionObject);
+            }
+        );
     }
 
     [Fact]
@@ -190,10 +201,15 @@ public class CircuitHostTest
             .Returns(Task.CompletedTask)
             .Verifiable();
 
-        var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object });
+        var circuitHost = TestCircuitHost.Create(
+            handlers: new[] { handler1.Object, handler2.Object }
+        );
 
         // Act
-        await circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), cancellationToken);
+        await circuitHost.InitializeAsync(
+            new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+            cancellationToken
+        );
 
         // Assert
         handler1.VerifyAll();
@@ -222,25 +238,35 @@ public class CircuitHostTest
         RenderInParallelComponent.Setup(componentCount);
         for (var i = 0; i < componentCount; i++)
         {
-            descriptors.Add(new()
-            {
-                ComponentType = typeof(RenderInParallelComponent),
-                Parameters = ParameterView.Empty,
-                Sequence = 0
-            });
+            descriptors.Add(
+                new()
+                {
+                    ComponentType = typeof(RenderInParallelComponent),
+                    Parameters = ParameterView.Empty,
+                    Sequence = 0,
+                }
+            );
         }
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            descriptors: descriptors);
+            descriptors: descriptors
+        );
 
         // Act
         object initializeException = null;
-        circuitHost.UnhandledException += (sender, eventArgs) => initializeException = eventArgs.ExceptionObject;
-        var initializeTask = circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), cancellationToken);
+        circuitHost.UnhandledException += (sender, eventArgs) =>
+            initializeException = eventArgs.ExceptionObject;
+        var initializeTask = circuitHost.InitializeAsync(
+            new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+            cancellationToken
+        );
         await initializeTask.WaitAsync(initializeTimeout);
 
         // Assert: This was not reached only because an exception was thrown in InitializeAsync()
-        Assert.True(initializeException is null, $"An exception was thrown in {nameof(TestCircuitHost.InitializeAsync)}(): {initializeException}");
+        Assert.True(
+            initializeException is null,
+            $"An exception was thrown in {nameof(TestCircuitHost.InitializeAsync)}(): {initializeException}"
+        );
     }
 
     [Fact]
@@ -258,7 +284,10 @@ public class CircuitHostTest
             .Returns(tcs.Task)
             .Verifiable();
 
-        var circuitHost = TestCircuitHost.Create(handlers: new[] { handler.Object }, descriptors: [new ComponentDescriptor() ]);
+        var circuitHost = TestCircuitHost.Create(
+            handlers: new[] { handler.Object },
+            descriptors: [new ComponentDescriptor()]
+        );
         circuitHost.UnhandledException += (sender, errorInfo) =>
         {
             Assert.Same(circuitHost, sender);
@@ -266,7 +295,10 @@ public class CircuitHostTest
         };
 
         // Act
-        var initializeAsyncTask = circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), new CancellationToken());
+        var initializeAsyncTask = circuitHost.InitializeAsync(
+            new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+            new CancellationToken()
+        );
 
         // Assert: No synchronous exceptions
         handler.VerifyAll();
@@ -321,7 +353,9 @@ public class CircuitHostTest
             .Returns(Task.CompletedTask)
             .Verifiable();
 
-        var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object });
+        var circuitHost = TestCircuitHost.Create(
+            handlers: new[] { handler1.Object, handler2.Object }
+        );
 
         // Act
         await circuitHost.DisposeAsync();
@@ -345,31 +379,51 @@ public class CircuitHostTest
 
         handler3
             .InSequence(sequence)
-            .Setup(h => h.CreateInboundActivityHandler(It.IsAny<Func<CircuitInboundActivityContext, Task>>()))
-            .Returns((Func<CircuitInboundActivityContext, Task> next) => async (CircuitInboundActivityContext context) =>
-            {
-                asyncLocal3.Value = true;
-                await next(context);
-            })
+            .Setup(h =>
+                h.CreateInboundActivityHandler(
+                    It.IsAny<Func<CircuitInboundActivityContext, Task>>()
+                )
+            )
+            .Returns(
+                (Func<CircuitInboundActivityContext, Task> next) =>
+                    async (CircuitInboundActivityContext context) =>
+                    {
+                        asyncLocal3.Value = true;
+                        await next(context);
+                    }
+            )
             .Verifiable();
 
         handler2
             .InSequence(sequence)
-            .Setup(h => h.CreateInboundActivityHandler(It.IsAny<Func<CircuitInboundActivityContext, Task>>()))
+            .Setup(h =>
+                h.CreateInboundActivityHandler(
+                    It.IsAny<Func<CircuitInboundActivityContext, Task>>()
+                )
+            )
             .Returns((Func<CircuitInboundActivityContext, Task> next) => next)
             .Verifiable();
 
         handler1
             .InSequence(sequence)
-            .Setup(h => h.CreateInboundActivityHandler(It.IsAny<Func<CircuitInboundActivityContext, Task>>()))
-            .Returns((Func<CircuitInboundActivityContext, Task> next) => async (CircuitInboundActivityContext context) =>
-            {
-                asyncLocal1.Value = true;
-                await next(context);
-            })
+            .Setup(h =>
+                h.CreateInboundActivityHandler(
+                    It.IsAny<Func<CircuitInboundActivityContext, Task>>()
+                )
+            )
+            .Returns(
+                (Func<CircuitInboundActivityContext, Task> next) =>
+                    async (CircuitInboundActivityContext context) =>
+                    {
+                        asyncLocal1.Value = true;
+                        await next(context);
+                    }
+            )
             .Verifiable();
 
-        var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object, handler3.Object });
+        var circuitHost = TestCircuitHost.Create(
+            handlers: new[] { handler1.Object, handler2.Object, handler3.Object }
+        );
         var asyncLocal1ValueInHandler = false;
         var asyncLocal3ValueInHandler = false;
 
@@ -417,7 +471,8 @@ public class CircuitHostTest
         // Arrange
         var circuitHost = TestCircuitHost.Create(
             remoteRenderer: GetRemoteRenderer(),
-            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope());
+            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
+        );
         var expectedMessage = "Hello, world!";
         Dictionary<string, object> parameters = new()
         {
@@ -439,7 +494,8 @@ public class CircuitHostTest
         // Arrange
         var circuitHost = TestCircuitHost.Create(
             remoteRenderer: GetRemoteRenderer(),
-            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope());
+            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
+        );
         var componentKey = "mykey";
 
         await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, null, componentKey);
@@ -451,7 +507,12 @@ public class CircuitHostTest
         };
 
         // Act
-        await UpdateComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, parameters, componentKey);
+        await UpdateComponentAsync<DynamicallyAddedComponent>(
+            circuitHost,
+            1,
+            parameters,
+            componentKey
+        );
 
         // Assert
         var componentState = ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0);
@@ -465,7 +526,8 @@ public class CircuitHostTest
         // Arrange
         var circuitHost = TestCircuitHost.Create(
             remoteRenderer: GetRemoteRenderer(),
-            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope());
+            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
+        );
 
         await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1);
 
@@ -480,7 +542,8 @@ public class CircuitHostTest
 
         // Assert
         Assert.Throws<ArgumentException>(() =>
-            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0));
+            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
+        );
         var componentState = ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(1);
         var component = Assert.IsType<DynamicallyAddedComponent>(componentState.Component);
         Assert.Equal(expectedMessage, component.Message);
@@ -492,14 +555,19 @@ public class CircuitHostTest
         // Arrange
         var circuitHost = TestCircuitHost.Create(
             remoteRenderer: GetRemoteRenderer(),
-            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope());
+            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
+        );
 
         // Arrange
         var expectedMessage = "Existing message";
-        await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, new Dictionary<string, object>()
-        {
-            [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
-        });
+        await AddComponentAsync<DynamicallyAddedComponent>(
+            circuitHost,
+            1,
+            new Dictionary<string, object>()
+            {
+                [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
+            }
+        );
 
         await AddComponentAsync<TestComponent>(circuitHost, 2, []);
 
@@ -510,9 +578,14 @@ public class CircuitHostTest
 
         // Act
         var evt = await Assert.RaisesAsync<UnhandledExceptionEventArgs>(
-            handler => circuitHost.UnhandledException += new UnhandledExceptionEventHandler(handler),
-            handler => circuitHost.UnhandledException -= new UnhandledExceptionEventHandler(handler),
-            () => UpdateComponentAsync<TestComponent /* Note the incorrect component type */>(circuitHost, 1, parameters));
+            handler =>
+                circuitHost.UnhandledException += new UnhandledExceptionEventHandler(handler),
+            handler =>
+                circuitHost.UnhandledException -= new UnhandledExceptionEventHandler(handler),
+            () =>
+                UpdateComponentAsync<TestComponent /* Note the incorrect component type */
+                >(circuitHost, 1, parameters)
+        );
 
         // Assert
         var componentState = ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0);
@@ -530,15 +603,21 @@ public class CircuitHostTest
         // Arrange
         var circuitHost = TestCircuitHost.Create(
             remoteRenderer: GetRemoteRenderer(),
-            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope());
+            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
+        );
 
         // Arrange
         var originalKey = "original_key";
         var expectedMessage = "Existing message";
-        await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, new Dictionary<string, object>()
-        {
-            [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
-        }, originalKey);
+        await AddComponentAsync<DynamicallyAddedComponent>(
+            circuitHost,
+            1,
+            new Dictionary<string, object>()
+            {
+                [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
+            },
+            originalKey
+        );
 
         Dictionary<string, object> parameters = new()
         {
@@ -547,9 +626,18 @@ public class CircuitHostTest
 
         // Act
         var evt = await Assert.RaisesAsync<UnhandledExceptionEventArgs>(
-            handler => circuitHost.UnhandledException += new UnhandledExceptionEventHandler(handler),
-            handler => circuitHost.UnhandledException -= new UnhandledExceptionEventHandler(handler),
-            () => UpdateComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, parameters, componentKey: "new_key"));
+            handler =>
+                circuitHost.UnhandledException += new UnhandledExceptionEventHandler(handler),
+            handler =>
+                circuitHost.UnhandledException -= new UnhandledExceptionEventHandler(handler),
+            () =>
+                UpdateComponentAsync<DynamicallyAddedComponent>(
+                    circuitHost,
+                    1,
+                    parameters,
+                    componentKey: "new_key"
+                )
+        );
 
         // Assert
         var componentState = ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0);
@@ -567,7 +655,8 @@ public class CircuitHostTest
         // Arrange
         var circuitHost = TestCircuitHost.Create(
             remoteRenderer: GetRemoteRenderer(),
-            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope());
+            serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
+        );
         var expectedMessage = "Updated message";
 
         Dictionary<string, object> parameters = new()
@@ -581,42 +670,73 @@ public class CircuitHostTest
 
         // Assert
         Assert.Throws<ArgumentException>(() =>
-            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0));
+            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
+        );
     }
 
-    private async Task AddComponentAsync<TComponent>(CircuitHost circuitHost, int ssrComponentId, Dictionary<string, object> parameters = null, string componentKey = "")
+    private async Task AddComponentAsync<TComponent>(
+        CircuitHost circuitHost,
+        int ssrComponentId,
+        Dictionary<string, object> parameters = null,
+        string componentKey = ""
+    )
         where TComponent : IComponent
     {
         var addOperation = new RootComponentOperation
         {
             Type = RootComponentOperationType.Add,
             SsrComponentId = ssrComponentId,
-            Marker = CreateMarker(typeof(TComponent), ssrComponentId.ToString(CultureInfo.InvariantCulture), parameters, componentKey),
+            Marker = CreateMarker(
+                typeof(TComponent),
+                ssrComponentId.ToString(CultureInfo.InvariantCulture),
+                parameters,
+                componentKey
+            ),
             Descriptor = new(
                 componentType: typeof(TComponent),
-                parameters: CreateWebRootComponentParameters(parameters)),
+                parameters: CreateWebRootComponentParameters(parameters)
+            ),
         };
 
         // Add component
         await circuitHost.UpdateRootComponents(
-            new() { Operations = [addOperation] }, null, CreateDeserializer(), CancellationToken.None);
+            new() { Operations = [addOperation] },
+            null,
+            CreateDeserializer(),
+            CancellationToken.None
+        );
     }
 
-    private async Task UpdateComponentAsync<TComponent>(CircuitHost circuitHost, int ssrComponentId, Dictionary<string, object> parameters = null, string componentKey = "")
+    private async Task UpdateComponentAsync<TComponent>(
+        CircuitHost circuitHost,
+        int ssrComponentId,
+        Dictionary<string, object> parameters = null,
+        string componentKey = ""
+    )
     {
         var updateOperation = new RootComponentOperation
         {
             Type = RootComponentOperationType.Update,
             SsrComponentId = ssrComponentId,
-            Marker = CreateMarker(typeof(TComponent), ssrComponentId.ToString(CultureInfo.InvariantCulture), parameters, componentKey),
+            Marker = CreateMarker(
+                typeof(TComponent),
+                ssrComponentId.ToString(CultureInfo.InvariantCulture),
+                parameters,
+                componentKey
+            ),
             Descriptor = new(
                 componentType: typeof(TComponent),
-                parameters: CreateWebRootComponentParameters(parameters)),
+                parameters: CreateWebRootComponentParameters(parameters)
+            ),
         };
 
         // Update component
         await circuitHost.UpdateRootComponents(
-            new() { Operations = [updateOperation] }, null, CreateDeserializer(), CancellationToken.None);
+            new() { Operations = [updateOperation] },
+            null,
+            CreateDeserializer(),
+            CancellationToken.None
+        );
     }
 
     private async Task RemoveComponentAsync(CircuitHost circuitHost, int ssrComponentId)
@@ -629,7 +749,11 @@ public class CircuitHostTest
 
         // Remove component
         await circuitHost.UpdateRootComponents(
-            new() { Operations = [removeOperation] }, null, CreateDeserializer(), CancellationToken.None);
+            new() { Operations = [removeOperation] },
+            null,
+            CreateDeserializer(),
+            CancellationToken.None
+        );
     }
 
     private ProtectedPrerenderComponentApplicationStore CreateStore()
@@ -639,7 +763,15 @@ public class CircuitHostTest
 
     private ServerComponentDeserializer CreateDeserializer()
     {
-        return new ServerComponentDeserializer(_ephemeralDataProtectionProvider, NullLogger<ServerComponentDeserializer>.Instance, new RootComponentTypeCache(), new ComponentParameterDeserializer(NullLogger<ComponentParameterDeserializer>.Instance, new ComponentParametersTypeCache()));
+        return new ServerComponentDeserializer(
+            _ephemeralDataProtectionProvider,
+            NullLogger<ServerComponentDeserializer>.Instance,
+            new RootComponentTypeCache(),
+            new ComponentParameterDeserializer(
+                NullLogger<ComponentParameterDeserializer>.Instance,
+                new ComponentParametersTypeCache()
+            )
+        );
     }
 
     private static TestRemoteRenderer GetRemoteRenderer()
@@ -648,16 +780,24 @@ public class CircuitHostTest
         serviceCollection.AddSingleton(new Mock<IJSRuntime>().Object);
         return new TestRemoteRenderer(
             serviceCollection.BuildServiceProvider(),
-            Mock.Of<IClientProxy>());
+            Mock.Of<IClientProxy>()
+        );
     }
 
-    private static void SetupMockInboundActivityHandlers(MockSequence sequence, params Mock<CircuitHandler>[] circuitHandlers)
+    private static void SetupMockInboundActivityHandlers(
+        MockSequence sequence,
+        params Mock<CircuitHandler>[] circuitHandlers
+    )
     {
         for (var i = circuitHandlers.Length - 1; i >= 0; i--)
         {
             circuitHandlers[i]
                 .InSequence(sequence)
-                .Setup(h => h.CreateInboundActivityHandler(It.IsAny<Func<CircuitInboundActivityContext, Task>>()))
+                .Setup(h =>
+                    h.CreateInboundActivityHandler(
+                        It.IsAny<Func<CircuitInboundActivityContext, Task>>()
+                    )
+                )
                 .Returns((Func<CircuitInboundActivityContext, Task> next) => next)
                 .Verifiable();
         }
@@ -666,12 +806,21 @@ public class CircuitHostTest
     private static void SetupMockInboundActivityHandler(Mock<CircuitHandler> circuitHandler)
     {
         circuitHandler
-            .Setup(h => h.CreateInboundActivityHandler(It.IsAny<Func<CircuitInboundActivityContext, Task>>()))
+            .Setup(h =>
+                h.CreateInboundActivityHandler(
+                    It.IsAny<Func<CircuitInboundActivityContext, Task>>()
+                )
+            )
             .Returns((Func<CircuitInboundActivityContext, Task> next) => next)
             .Verifiable();
     }
 
-    private ComponentMarker CreateMarker(Type type, string locationHash, Dictionary<string, object> parameters = null, string componentKey = "")
+    private ComponentMarker CreateMarker(
+        Type type,
+        string locationHash,
+        Dictionary<string, object> parameters = null,
+        string componentKey = ""
+    )
     {
         var serializer = new ServerComponentSerializer(_ephemeralDataProtectionProvider);
         var key = new ComponentMarkerKey(locationHash, componentKey);
@@ -680,11 +829,14 @@ public class CircuitHostTest
             ref marker,
             _invocationSequence,
             type,
-            parameters is null ? ParameterView.Empty : ParameterView.FromDictionary(parameters));
+            parameters is null ? ParameterView.Empty : ParameterView.FromDictionary(parameters)
+        );
         return marker;
     }
 
-    private static WebRootComponentParameters CreateWebRootComponentParameters(IDictionary<string, object> parameters = null)
+    private static WebRootComponentParameters CreateWebRootComponentParameters(
+        IDictionary<string, object> parameters = null
+    )
     {
         if (parameters is null)
         {
@@ -692,7 +844,9 @@ public class CircuitHostTest
         }
 
         var parameterView = ParameterView.FromDictionary(parameters);
-        var (parameterDefinitions, parameterValues) = ComponentParameter.FromParameterView(parameterView);
+        var (parameterDefinitions, parameterValues) = ComponentParameter.FromParameterView(
+            parameterView
+        );
         for (var i = 0; i < parameterValues.Count; i++)
         {
             // WebRootComponentParameters expects serialized parameter values to be JsonElements.
@@ -702,34 +856,37 @@ public class CircuitHostTest
         return new WebRootComponentParameters(
             parameterView,
             parameterDefinitions.AsReadOnly(),
-            parameterValues.AsReadOnly());
+            parameterValues.AsReadOnly()
+        );
     }
 
     private class TestRemoteRenderer : RemoteRenderer
     {
         public TestRemoteRenderer(IServiceProvider serviceProvider, IClientProxy client)
             : base(
-                  serviceProvider,
-                  NullLoggerFactory.Instance,
-                  new CircuitOptions(),
-                  new CircuitClientProxy(client, "connection"),
-                  new TestServerComponentDeserializer(),
-                  NullLogger.Instance,
-                  CreateJSRuntime(new CircuitOptions()),
-                  new CircuitJSComponentInterop(new CircuitOptions()))
-        {
-        }
+                serviceProvider,
+                NullLoggerFactory.Instance,
+                new CircuitOptions(),
+                new CircuitClientProxy(client, "connection"),
+                new TestServerComponentDeserializer(),
+                NullLogger.Instance,
+                CreateJSRuntime(new CircuitOptions()),
+                new CircuitJSComponentInterop(new CircuitOptions())
+            ) { }
 
-        public ComponentState GetTestComponentState(int id)
-            => base.GetComponentState(id);
+        public ComponentState GetTestComponentState(int id) => base.GetComponentState(id);
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
 
-        private static RemoteJSRuntime CreateJSRuntime(CircuitOptions options)
-            => new RemoteJSRuntime(Options.Create(options), Options.Create(new HubOptions<ComponentHub>()), null);
+        private static RemoteJSRuntime CreateJSRuntime(CircuitOptions options) =>
+            new RemoteJSRuntime(
+                Options.Create(options),
+                Options.Create(new HubOptions<ComponentHub>()),
+                null
+            );
     }
 
     private class DispatcherComponent : ComponentBase, IDisposable
@@ -752,10 +909,10 @@ public class CircuitHostTest
     private class ThrowOnDisposeComponent : IComponent, IDisposable
     {
         public bool DidCallDispose { get; private set; }
+
         public void Attach(RenderHandle renderHandle) { }
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => Task.CompletedTask;
+        public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 
         public void Dispose()
         {
@@ -776,8 +933,9 @@ public class CircuitHostTest
             if (_instanceCount > 0)
             {
                 throw new InvalidOperationException(
-                    $"Cannot call '{nameof(Setup)}' when there are still " +
-                    $"{nameof(RenderInParallelComponent)} instances active.");
+                    $"Cannot call '{nameof(Setup)}' when there are still "
+                        + $"{nameof(RenderInParallelComponent)} instances active."
+                );
             }
 
             _renderTcsArray = new TaskCompletionSource[numComponents];
@@ -792,15 +950,15 @@ public class CircuitHostTest
         {
             if (_instanceCount >= _renderTcsArray.Length)
             {
-                throw new InvalidOperationException("Created more test component instances than expected.");
+                throw new InvalidOperationException(
+                    "Created more test component instances than expected."
+                );
             }
 
             _id = _instanceCount++;
         }
 
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
         public async Task SetParametersAsync(ParameterView parameters)
         {
@@ -825,12 +983,9 @@ public class CircuitHostTest
 
         public Exception ExceptionDuringDisposeAsync { get; private set; }
 
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => Task.CompletedTask;
+        public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 
         public async ValueTask DisposeAsync()
         {
@@ -848,13 +1003,19 @@ public class CircuitHostTest
 
     private class TestServerComponentDeserializer : IServerComponentDeserializer
     {
-        public bool TryDeserializeComponentDescriptorCollection(string serializedComponentRecords, out List<ComponentDescriptor> descriptors)
+        public bool TryDeserializeComponentDescriptorCollection(
+            string serializedComponentRecords,
+            out List<ComponentDescriptor> descriptors
+        )
         {
             descriptors = default;
             return true;
         }
 
-        public bool TryDeserializeRootComponentOperations(string serializedComponentOperations, out RootComponentOperationBatch operationBatch)
+        public bool TryDeserializeRootComponentOperations(
+            string serializedComponentOperations,
+            out RootComponentOperationBatch operationBatch
+        )
         {
             operationBatch = default;
             return true;
@@ -896,8 +1057,7 @@ public class CircuitHostTest
             Assert.True(task.IsCompletedSuccessfully);
         }
 
-        public Task WaitForDisposeAsync()
-            => _disposeTcs.Task;
+        public Task WaitForDisposeAsync() => _disposeTcs.Task;
 
         public void Dispose()
         {
@@ -915,7 +1075,8 @@ public class CircuitHostTest
             builder.CloseElement();
         };
 
-        public TestComponent(RenderFragment renderFragment) : this() => _renderFragment = renderFragment;
+        public TestComponent(RenderFragment renderFragment)
+            : this() => _renderFragment = renderFragment;
 
         public Action OnAfterRenderComplete { get; set; }
 
@@ -935,7 +1096,9 @@ public class CircuitHostTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle.Dispatcher.InvokeAsync(() => _renderHandle.Render(_renderFragment));
+            var task = _renderHandle.Dispatcher.InvokeAsync(() =>
+                _renderHandle.Render(_renderFragment)
+            );
             Assert.True(task.IsCompletedSuccessfully);
         }
     }

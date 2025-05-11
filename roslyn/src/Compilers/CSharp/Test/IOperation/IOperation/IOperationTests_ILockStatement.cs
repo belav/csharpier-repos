@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ILockStatement_ObjectLock_FieldReference()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     object o = new object();
@@ -30,7 +31,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (o) ... }')
   Expression: 
     IFieldReferenceOperation: System.Object C1.o (OperationKind.FieldReference, Type: System.Object) (Syntax: 'o')
@@ -41,14 +43,19 @@ ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (o) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_ObjectLock_LocalReference()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -60,7 +67,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (o) ... }')
   Expression: 
     ILocalReferenceOperation: o (OperationKind.LocalReference, Type: System.Object) (Syntax: 'o')
@@ -69,14 +77,19 @@ ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (o) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_ObjectLock_Null()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -87,7 +100,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (null) ... }')
   Expression: 
     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
@@ -96,14 +110,19 @@ ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (null) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_ObjectLock_NonReferenceType()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -115,27 +134,36 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (i) ... }')
   Expression: 
     ILocalReferenceOperation: i (OperationKind.LocalReference, Type: System.Int32, IsInvalid) (Syntax: 'i')
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0185: 'int' is not a reference type as required by the lock statement
                 //         /*<bind>*/lock (i)
-                Diagnostic(ErrorCode.ERR_LockNeedsReference, "i").WithArguments("int").WithLocation(7, 25)
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "i")
+                    .WithArguments("int")
+                    .WithLocation(7, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_MissingLockExpression()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -146,7 +174,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock () ... }')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
@@ -154,20 +183,28 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock () ...
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ')'
                 //         /*<bind>*/lock ()
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(6, 25)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(6, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_InvalidLockStatement()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C1
@@ -180,7 +217,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (inval ... }')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'invalidReference')
@@ -188,20 +226,28 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (inval
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'invalidReference' does not exist in the current context
                 //         /*<bind>*/lock (invalidReference)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "invalidReference").WithArguments("invalidReference").WithLocation(8, 25)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "invalidReference")
+                    .WithArguments("invalidReference")
+                    .WithLocation(8, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_MissingBody()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -211,7 +257,8 @@ public class C1
 /*</bind>*/    }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (o)')
   Expression: 
     ILocalReferenceOperation: o (OperationKind.LocalReference, Type: System.Object) (Syntax: 'o')
@@ -221,23 +268,31 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (o)')
         IInvalidOperation (OperationKind.Invalid, Type: null) (Syntax: '')
           Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term '}'
                 //         /*<bind>*/lock (o)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "").WithArguments("}").WithLocation(7, 27),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
+                    .WithArguments("}")
+                    .WithLocation(7, 27),
                 // CS1002: ; expected
                 //         /*<bind>*/lock (o)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 27)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_ExpressionLock_ObjectMethodCall()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -249,7 +304,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (o.ToS ... }')
   Expression: 
     IInvocationOperation (virtual System.String System.Object.ToString()) (OperationKind.Invocation, Type: System.String) (Syntax: 'o.ToString()')
@@ -261,14 +317,19 @@ ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (o.ToS ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_ExpressionLock_ClassMethodCall()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -284,7 +345,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (M2()) ... }')
   Expression: 
     IInvocationOperation ( System.Object C1.M2()) (OperationKind.Invocation, Type: System.Object) (Syntax: 'M2()')
@@ -296,14 +358,19 @@ ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (M2()) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_ExpressionCall_VoidMethodCall()
         {
-            string source = @"
+            string source =
+                @"
 public class C1
 {
     public void M()
@@ -316,7 +383,8 @@ public class C1
     public void M2() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (M2()) ... }')
   Expression: 
     IInvocationOperation ( void C1.M2()) (OperationKind.Invocation, Type: System.Void, IsInvalid) (Syntax: 'M2()')
@@ -326,20 +394,28 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (M2())
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0185: 'void' is not a reference type as required by the lock statement
                 //         /*<bind>*/lock (M2())
-                Diagnostic(ErrorCode.ERR_LockNeedsReference, "M2()").WithArguments("void").WithLocation(6, 25)
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "M2()")
+                    .WithArguments("void")
+                    .WithLocation(6, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ILockStatement_NonEmptybody()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C1
@@ -353,7 +429,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (new o ... }')
   Expression: 
     IObjectCreationOperation (Constructor: System.Object..ctor()) (OperationKind.ObjectCreation, Type: System.Object) (Syntax: 'new object()')
@@ -375,14 +452,19 @@ ILockOperation (OperationKind.Lock, Type: null) (Syntax: 'lock (new o ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LockFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(object source1, object source2, object source3)
@@ -392,7 +474,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -530,14 +613,19 @@ Block[B10] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LockFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(string input1, bool input2)
@@ -547,7 +635,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -620,16 +709,21 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics,
-                                                              targetFramework: Roslyn.Test.Utilities.TargetFramework.Empty,
-                                                              references: new[] { MscorlibRef_v20 });
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.Empty,
+                references: new[] { MscorlibRef_v20 }
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LockFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(int input1, bool input2)
@@ -639,7 +733,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -726,20 +821,28 @@ Block[B6] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,15): error CS0185: 'int' is not a reference type as required by the lock statement
                 //         lock (input1)
-                Diagnostic(ErrorCode.ERR_LockNeedsReference, "input1").WithArguments("int").WithLocation(6, 15)
+                Diagnostic(ErrorCode.ERR_LockNeedsReference, "input1")
+                    .WithArguments("int")
+                    .WithLocation(6, 15),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LockFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool input2)
@@ -749,7 +852,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -830,14 +934,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LockFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(P input, bool b)
@@ -851,7 +960,8 @@ class P
             compilation.MakeMemberMissing(WellKnownMember.System_Threading_Monitor__Enter);
             compilation.MakeMemberMissing(WellKnownMember.System_Threading_Monitor__Enter2);
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -919,14 +1029,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LockFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(P input, bool b)
@@ -939,7 +1054,8 @@ class P
             var compilation = CreateCompilationWithMscorlib45(source);
             compilation.MakeMemberMissing(WellKnownMember.System_Threading_Monitor__Exit);
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1023,7 +1139,11 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

@@ -59,7 +59,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void NullString()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying Write with a null string");
                 com.Open();
@@ -68,9 +72,7 @@ namespace System.IO.Ports.Tests
                 {
                     com.WriteLine(null);
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
         }
 
@@ -97,7 +99,9 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                Debug.WriteLine("Verifying Write with an string containing only the null character");
+                Debug.WriteLine(
+                    "Verifying Write with an string containing only the null character"
+                );
 
                 com1.Open();
                 com1.NewLine = GenRandomNewLine(true);
@@ -116,7 +120,6 @@ namespace System.IO.Ports.Tests
             VerifyWrite(new UnicodeEncoding(), LARGE_STRING_SIZE, DEFAULT_NEW_LINE, 1);
         }
 
-
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void StrContains_NewLine_RND()
         {
@@ -124,13 +127,16 @@ namespace System.IO.Ports.Tests
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
                 Random rndGen = new Random(-55);
-                StringBuilder strBldrToWrite = TCSupport.GetRandomStringBuilder(NEWLINE_TESTING_STRING_SIZE,
-                    TCSupport.CharacterOptions.None);
+                StringBuilder strBldrToWrite = TCSupport.GetRandomStringBuilder(
+                    NEWLINE_TESTING_STRING_SIZE,
+                    TCSupport.CharacterOptions.None
+                );
 
                 string newLine = GenRandomNewLine(true);
 
                 Debug.WriteLine(
-                    "Verifying write method with a random NewLine string and writing a string that contains the NewLine");
+                    "Verifying write method with a random NewLine string and writing a string that contains the NewLine"
+                );
 
                 com1.NewLine = newLine;
                 com1.Open();
@@ -151,13 +157,16 @@ namespace System.IO.Ports.Tests
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
                 Random rndGen = new Random(-55);
-                StringBuilder strBldrToWrite = TCSupport.GetRandomStringBuilder(NEWLINE_TESTING_STRING_SIZE,
-                    TCSupport.CharacterOptions.None);
+                StringBuilder strBldrToWrite = TCSupport.GetRandomStringBuilder(
+                    NEWLINE_TESTING_STRING_SIZE,
+                    TCSupport.CharacterOptions.None
+                );
 
                 string newLine = "\r\n";
 
                 Debug.WriteLine(
-                    "Verifying write method with a NewLine=\\r\\n string and writing a string that contains the NewLine");
+                    "Verifying write method with a NewLine=\\r\\n string and writing a string that contains the NewLine"
+                );
 
                 com1.NewLine = newLine;
                 com1.Open();
@@ -178,13 +187,16 @@ namespace System.IO.Ports.Tests
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
                 Random rndGen = new Random(-55);
-                StringBuilder strBldrToWrite = TCSupport.GetRandomStringBuilder(NEWLINE_TESTING_STRING_SIZE,
-                    TCSupport.CharacterOptions.None);
+                StringBuilder strBldrToWrite = TCSupport.GetRandomStringBuilder(
+                    NEWLINE_TESTING_STRING_SIZE,
+                    TCSupport.CharacterOptions.None
+                );
 
                 string newLine = "\0";
 
                 Debug.WriteLine(
-                    "Verifying write method with a NewLine=\\0 string and writing a string that contains the NewLine");
+                    "Verifying write method with a NewLine=\\0 string and writing a string that contains the NewLine"
+                );
 
                 com1.NewLine = newLine;
                 com1.Open();
@@ -211,7 +223,10 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                string stringToWrite = TCSupport.GetRandomString(NEWLINE_TESTING_STRING_SIZE, TCSupport.CharacterOptions.None);
+                string stringToWrite = TCSupport.GetRandomString(
+                    NEWLINE_TESTING_STRING_SIZE,
+                    TCSupport.CharacterOptions.None
+                );
 
                 TCSupport.SetHighSpeed(com1, com2);
 
@@ -225,17 +240,22 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void VerifyWriteLine(SerialPort com1, SerialPort com2, string stringToWrite)
         {
             VerifyWriteLine(com1, com2, stringToWrite, DEFAULT_NUM_WRITES);
         }
 
-
-        private void VerifyWriteLine(SerialPort com1, SerialPort com2, string stringToWrite, int numWrites)
+        private void VerifyWriteLine(
+            SerialPort com1,
+            SerialPort com2,
+            string stringToWrite,
+            int numWrites
+        )
         {
-            char[] expectedChars, actualChars;
-            byte[] expectedBytes, actualBytes;
+            char[] expectedChars,
+                actualChars;
+            byte[] expectedBytes,
+                actualBytes;
             int byteRead;
             int index = 0;
             int numNewLineBytes;
@@ -283,7 +303,11 @@ namespace System.IO.Ports.Tests
 
                 if (actualBytes.Length - index != com2.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", actualBytes.Length - index, com2.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        actualBytes.Length - index,
+                        com2.BytesToRead
+                    );
                 }
             }
 
@@ -299,9 +323,13 @@ namespace System.IO.Ports.Tests
             int newLineLength = rndGen.Next(MIN_NUM_NEWLINE_CHARS, MAX_NUM_NEWLINE_CHARS);
 
             if (validAscii)
-                return new string(TCSupport.GetRandomChars(newLineLength, TCSupport.CharacterOptions.ASCII));
+                return new string(
+                    TCSupport.GetRandomChars(newLineLength, TCSupport.CharacterOptions.ASCII)
+                );
             else
-                return new string(TCSupport.GetRandomChars(newLineLength, TCSupport.CharacterOptions.Surrogates));
+                return new string(
+                    TCSupport.GetRandomChars(newLineLength, TCSupport.CharacterOptions.Surrogates)
+                );
         }
         #endregion
     }

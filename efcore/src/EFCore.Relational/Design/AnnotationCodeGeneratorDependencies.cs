@@ -38,7 +38,8 @@ public sealed record AnnotationCodeGeneratorDependencies
     /// </remarks>
     [EntityFrameworkInternal]
     public AnnotationCodeGeneratorDependencies(
-        IRelationalTypeMappingSource relationalTypeMappingSource)
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
         RelationalTypeMappingSource = relationalTypeMappingSource;
     }

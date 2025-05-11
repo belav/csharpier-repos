@@ -10,6 +10,6 @@ namespace System.Web.Razor.Parser
         BacktrackOnFailure = 1,
         NoErrorOnFailure = 2,
         AllowCommentsAndTemplates = 4,
-        AllowEmbeddedTransitions = 8
+        AllowEmbeddedTransitions = 8,
     }
 }

@@ -64,7 +64,12 @@ namespace System.Reflection.Emit.Tests
         {
             using (TempFile file = TempFile.Create())
             {
-                EnumBuilder enumBuilder = CreateAssemblyAndDefineEnum(out AssemblyBuilder assemblyBuilder, out MethodInfo saveMethod, out TypeBuilder type, underlyingType);
+                EnumBuilder enumBuilder = CreateAssemblyAndDefineEnum(
+                    out AssemblyBuilder assemblyBuilder,
+                    out MethodInfo saveMethod,
+                    out TypeBuilder type,
+                    underlyingType
+                );
                 FieldBuilder literal = enumBuilder.DefineLiteral("FieldOne", literalValue);
                 enumBuilder.CreateTypeInfo();
                 type.CreateTypeInfo();
@@ -80,7 +85,10 @@ namespace System.Reflection.Emit.Tests
 
                 FieldInfo testField = testEnum.GetField("FieldOne");
                 Assert.Equal(enumBuilder.Name, testField.DeclaringType.Name);
-                Assert.Equal(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal, literal.Attributes);
+                Assert.Equal(
+                    FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal,
+                    literal.Attributes
+                );
                 Assert.Equal(enumBuilder.AsType().FullName, testField.FieldType.FullName);
             }
         }
@@ -94,8 +102,13 @@ namespace System.Reflection.Emit.Tests
         {
             using (TempFile file = TempFile.Create())
             {
-                EnumBuilder enumBuilder = CreateAssemblyAndDefineEnum(out AssemblyBuilder ab, out MethodInfo saveMethod, out TypeBuilder tb);
-                Type arrayType = rank == 0 ? enumBuilder.MakeArrayType() : enumBuilder.MakeArrayType(rank);
+                EnumBuilder enumBuilder = CreateAssemblyAndDefineEnum(
+                    out AssemblyBuilder ab,
+                    out MethodInfo saveMethod,
+                    out TypeBuilder tb
+                );
+                Type arrayType =
+                    rank == 0 ? enumBuilder.MakeArrayType() : enumBuilder.MakeArrayType(rank);
                 MethodBuilder mb = tb.DefineMethod("TestMethod", MethodAttributes.Public);
                 mb.SetReturnType(arrayType);
                 mb.SetParameters(new Type[] { typeof(INoMethod), arrayType });
@@ -103,7 +116,10 @@ namespace System.Reflection.Emit.Tests
                 tb.CreateType();
                 saveMethod.Invoke(ab, new object[] { file.Path });
 
-                Type testType = AssemblySaveTools.LoadAssemblyFromPath(file.Path).Modules.First().GetType("TestInterface");
+                Type testType = AssemblySaveTools
+                    .LoadAssemblyFromPath(file.Path)
+                    .Modules.First()
+                    .GetType("TestInterface");
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
 
                 AssertArrayTypeSignature(rank, name, testMethod.ReturnType);
@@ -111,14 +127,29 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        private EnumBuilder CreateAssemblyAndDefineEnum(out AssemblyBuilder assemblyBuilder,
-            out MethodInfo saveMethod, out TypeBuilder type, Type? underlyingType = null)
+        private EnumBuilder CreateAssemblyAndDefineEnum(
+            out AssemblyBuilder assemblyBuilder,
+            out MethodInfo saveMethod,
+            out TypeBuilder type,
+            Type? underlyingType = null
+        )
         {
             assemblyBuilder = AssemblySaveTools.PopulateAssemblyBuilderAndSaveMethod(
-                    PopulateAssemblyName(), null, typeof(string), out saveMethod);
+                PopulateAssemblyName(),
+                null,
+                typeof(string),
+                out saveMethod
+            );
             ModuleBuilder mb = assemblyBuilder.DefineDynamicModule("My Module");
-            type = mb.DefineType("TestInterface", TypeAttributes.Interface | TypeAttributes.Abstract);
-            return mb.DefineEnum("TestEnum", TypeAttributes.Public, underlyingType == null ? typeof(int) : underlyingType);
+            type = mb.DefineType(
+                "TestInterface",
+                TypeAttributes.Interface | TypeAttributes.Abstract
+            );
+            return mb.DefineEnum(
+                "TestEnum",
+                TypeAttributes.Public,
+                underlyingType == null ? typeof(int) : underlyingType
+            );
         }
 
         private static void AssertArrayTypeSignature(int rank, string name, Type arrayType)
@@ -134,7 +165,11 @@ namespace System.Reflection.Emit.Tests
         {
             using (TempFile file = TempFile.Create())
             {
-                EnumBuilder eb = CreateAssemblyAndDefineEnum(out AssemblyBuilder assemblyBuilder, out MethodInfo saveMethod, out TypeBuilder tb);
+                EnumBuilder eb = CreateAssemblyAndDefineEnum(
+                    out AssemblyBuilder assemblyBuilder,
+                    out MethodInfo saveMethod,
+                    out TypeBuilder tb
+                );
                 Type byrefType = eb.MakeByRefType();
                 MethodBuilder mb = tb.DefineMethod("TestMethod", MethodAttributes.Public);
                 mb.SetReturnType(byrefType);
@@ -143,7 +178,10 @@ namespace System.Reflection.Emit.Tests
                 tb.CreateType();
                 saveMethod.Invoke(assemblyBuilder, new object[] { file.Path });
 
-                Type testType = AssemblySaveTools.LoadAssemblyFromPath(file.Path).Modules.First().GetType("TestInterface");
+                Type testType = AssemblySaveTools
+                    .LoadAssemblyFromPath(file.Path)
+                    .Modules.First()
+                    .GetType("TestInterface");
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
 
                 Assert.False(testMethod.GetParameters()[0].ParameterType.IsByRef);
@@ -163,7 +201,11 @@ namespace System.Reflection.Emit.Tests
         {
             using (TempFile file = TempFile.Create())
             {
-                EnumBuilder eb = CreateAssemblyAndDefineEnum(out AssemblyBuilder assemblyBuilder, out MethodInfo saveMethod, out TypeBuilder tb);
+                EnumBuilder eb = CreateAssemblyAndDefineEnum(
+                    out AssemblyBuilder assemblyBuilder,
+                    out MethodInfo saveMethod,
+                    out TypeBuilder tb
+                );
                 Type pointerType = eb.MakePointerType();
                 MethodBuilder mb = tb.DefineMethod("TestMethod", MethodAttributes.Public);
                 mb.SetReturnType(pointerType);
@@ -172,7 +214,10 @@ namespace System.Reflection.Emit.Tests
                 tb.CreateType();
                 saveMethod.Invoke(assemblyBuilder, new object[] { file.Path });
 
-                Type testType = AssemblySaveTools.LoadAssemblyFromPath(file.Path).Modules.First().GetType("TestInterface");
+                Type testType = AssemblySaveTools
+                    .LoadAssemblyFromPath(file.Path)
+                    .Modules.First()
+                    .GetType("TestInterface");
                 MethodInfo testMethod = testType.GetMethod("TestMethod");
 
                 Assert.False(testMethod.GetParameters()[0].ParameterType.IsPointer);

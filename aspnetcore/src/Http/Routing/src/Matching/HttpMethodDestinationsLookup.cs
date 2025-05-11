@@ -20,7 +20,10 @@ internal sealed class HttpMethodDestinationsLookup
     private readonly int _traceDestination;
     private readonly Dictionary<string, int>? _extraDestinations;
 
-    public HttpMethodDestinationsLookup(List<KeyValuePair<string, int>> destinations, int exitDestination)
+    public HttpMethodDestinationsLookup(
+        List<KeyValuePair<string, int>> destinations,
+        int exitDestination
+    )
     {
         _exitDestination = exitDestination;
 
@@ -40,19 +43,24 @@ internal sealed class HttpMethodDestinationsLookup
             {
                 switch (method[0] | 0x20)
                 {
-                    case 'c' when method.Equals(HttpMethods.Connect, StringComparison.OrdinalIgnoreCase):
+                    case 'c'
+                        when method.Equals(HttpMethods.Connect, StringComparison.OrdinalIgnoreCase):
                         connectDestination = destination;
                         continue;
-                    case 'd' when method.Equals(HttpMethods.Delete, StringComparison.OrdinalIgnoreCase):
+                    case 'd'
+                        when method.Equals(HttpMethods.Delete, StringComparison.OrdinalIgnoreCase):
                         deleteDestination = destination;
                         continue;
-                    case 'g' when method.Equals(HttpMethods.Get, StringComparison.OrdinalIgnoreCase):
+                    case 'g'
+                        when method.Equals(HttpMethods.Get, StringComparison.OrdinalIgnoreCase):
                         getDestination = destination;
                         continue;
-                    case 'h' when method.Equals(HttpMethods.Head, StringComparison.OrdinalIgnoreCase):
+                    case 'h'
+                        when method.Equals(HttpMethods.Head, StringComparison.OrdinalIgnoreCase):
                         headDestination = destination;
                         continue;
-                    case 'o' when method.Equals(HttpMethods.Options, StringComparison.OrdinalIgnoreCase):
+                    case 'o'
+                        when method.Equals(HttpMethods.Options, StringComparison.OrdinalIgnoreCase):
                         optionsDestination = destination;
                         continue;
                     case 'p':
@@ -61,18 +69,23 @@ internal sealed class HttpMethodDestinationsLookup
                             putDestination = destination;
                             continue;
                         }
-                        else if (method.Equals(HttpMethods.Post, StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            method.Equals(HttpMethods.Post, StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             postDestination = destination;
                             continue;
                         }
-                        else if (method.Equals(HttpMethods.Patch, StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            method.Equals(HttpMethods.Patch, StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             patchDestination = destination;
                             continue;
                         }
                         break;
-                    case 't' when method.Equals(HttpMethods.Trace, StringComparison.OrdinalIgnoreCase):
+                    case 't'
+                        when method.Equals(HttpMethods.Trace, StringComparison.OrdinalIgnoreCase):
                         traceDestination = destination;
                         continue;
                 }
@@ -115,13 +128,19 @@ internal sealed class HttpMethodDestinationsLookup
                 _ => (null, 0),
             };
 
-            if (matchedMethod is not null && method.Equals(matchedMethod, StringComparison.OrdinalIgnoreCase))
+            if (
+                matchedMethod is not null
+                && method.Equals(matchedMethod, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return destination;
             }
         }
 
-        if (_extraDestinations != null && _extraDestinations.TryGetValue(method, out var extraDestination))
+        if (
+            _extraDestinations != null
+            && _extraDestinations.TryGetValue(method, out var extraDestination)
+        )
         {
             return extraDestination;
         }

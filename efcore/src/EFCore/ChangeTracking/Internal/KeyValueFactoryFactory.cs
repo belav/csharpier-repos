@@ -20,8 +20,8 @@ public class KeyValueFactoryFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IPrincipalKeyValueFactory<TKey> Create<TKey>(IKey key)
-        where TKey : notnull
-        => key.Properties.Count == 1
+        where TKey : notnull =>
+        key.Properties.Count == 1
             ? CreateSimpleFactory<TKey>(key)
             : (IPrincipalKeyValueFactory<TKey>)CreateCompositeFactory(key);
 
@@ -33,12 +33,21 @@ public class KeyValueFactoryFactory
 
         foreach (var foreignKey in key.GetReferencingForeignKeys())
         {
-            var dependentKeyValueFactory = dependentFactory.CreateSimple(foreignKey, principalKeyValueFactory);
+            var dependentKeyValueFactory = dependentFactory.CreateSimple(
+                foreignKey,
+                principalKeyValueFactory
+            );
 
             SetFactories(
                 foreignKey,
                 dependentKeyValueFactory,
-                () => new DependentsMap<TKey>(foreignKey, principalKeyValueFactory, dependentKeyValueFactory));
+                () =>
+                    new DependentsMap<TKey>(
+                        foreignKey,
+                        principalKeyValueFactory,
+                        dependentKeyValueFactory
+                    )
+            );
         }
 
         return principalKeyValueFactory;
@@ -51,12 +60,21 @@ public class KeyValueFactoryFactory
 
         foreach (var foreignKey in key.GetReferencingForeignKeys())
         {
-            var dependentKeyValueFactory = dependentFactory.CreateComposite(foreignKey, principalKeyValueFactory);
+            var dependentKeyValueFactory = dependentFactory.CreateComposite(
+                foreignKey,
+                principalKeyValueFactory
+            );
 
             SetFactories(
                 foreignKey,
                 dependentKeyValueFactory,
-                () => new DependentsMap<IReadOnlyList<object?>>(foreignKey, principalKeyValueFactory, dependentKeyValueFactory));
+                () =>
+                    new DependentsMap<IReadOnlyList<object?>>(
+                        foreignKey,
+                        principalKeyValueFactory,
+                        dependentKeyValueFactory
+                    )
+            );
         }
 
         return principalKeyValueFactory;
@@ -65,7 +83,8 @@ public class KeyValueFactoryFactory
     private static void SetFactories(
         IForeignKey foreignKey,
         IDependentKeyValueFactory dependentKeyValueFactory,
-        Func<IDependentsMap> dependentsMapFactory)
+        Func<IDependentsMap> dependentsMapFactory
+    )
     {
         var concreteForeignKey = (IRuntimeForeignKey)foreignKey;
 

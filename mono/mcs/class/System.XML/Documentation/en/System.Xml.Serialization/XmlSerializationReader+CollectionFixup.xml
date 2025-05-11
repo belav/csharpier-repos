@@ -1,6 +1,12 @@
-<Type Name="XmlSerializationReader+CollectionFixup" FullName="System.Xml.Serialization.XmlSerializationReader+CollectionFixup">
+<Type
+  Name="XmlSerializationReader+CollectionFixup"
+  FullName="System.Xml.Serialization.XmlSerializationReader+CollectionFixup"
+>
   <TypeSignature Language="C#" Value="protected class XmlSerializationReader.CollectionFixup" />
-  <TypeSignature Language="ILAsm" Value=".class nested protected auto ansi beforefieldinit XmlSerializationReader/CollectionFixup extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested protected auto ansi beforefieldinit XmlSerializationReader/CollectionFixup extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -15,15 +21,24 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CollectionFixup (object collection, System.Xml.Serialization.XmlSerializationCollectionFixupCallback callback, string id);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object collection, class System.Xml.Serialization.XmlSerializationCollectionFixupCallback callback, string id) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public CollectionFixup (object collection, System.Xml.Serialization.XmlSerializationCollectionFixupCallback callback, string id);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object collection, class System.Xml.Serialization.XmlSerializationCollectionFixupCallback callback, string id) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="collection" Type="System.Object" />
-        <Parameter Name="callback" Type="System.Xml.Serialization.XmlSerializationCollectionFixupCallback" />
+        <Parameter
+          Name="callback"
+          Type="System.Xml.Serialization.XmlSerializationCollectionFixupCallback"
+        />
         <Parameter Name="id" Type="System.String" />
       </Parameters>
       <Docs>
@@ -35,8 +50,14 @@
       </Docs>
     </Member>
     <Member MemberName="Callback">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSerializationCollectionFixupCallback Callback { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Serialization.XmlSerializationCollectionFixupCallback Callback" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSerializationCollectionFixupCallback Callback { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Serialization.XmlSerializationCollectionFixupCallback Callback"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

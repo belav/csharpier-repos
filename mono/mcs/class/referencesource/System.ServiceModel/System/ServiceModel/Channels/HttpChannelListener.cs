@@ -32,8 +32,7 @@ namespace System.ServiceModel.Channels
     using System.Threading.Tasks;
     using System.Xml;
 
-    abstract class HttpChannelListener : TransportChannelListener,
-        IHttpTransportFactorySettings
+    abstract class HttpChannelListener : TransportChannelListener, IHttpTransportFactorySettings
     {
         AuthenticationSchemes authenticationScheme;
         bool extractGroupsForWindowsAccounts;
@@ -61,69 +60,112 @@ namespace System.ServiceModel.Channels
         static UriPrefixTable<ITransportManagerRegistration> transportManagerTable =
             new UriPrefixTable<ITransportManagerRegistration>(true);
 
-        public HttpChannelListener(HttpTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context, HttpTransportDefaults.GetDefaultMessageEncoderFactory(),
-                bindingElement.HostNameComparisonMode)
+        public HttpChannelListener(
+            HttpTransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(
+                bindingElement,
+                context,
+                HttpTransportDefaults.GetDefaultMessageEncoderFactory(),
+                bindingElement.HostNameComparisonMode
+            )
         {
             if (bindingElement.TransferMode == TransferMode.Buffered)
             {
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("bindingElement.MaxReceivedMessageSize",
-                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)));
+                        new ArgumentOutOfRangeException(
+                            "bindingElement.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
                 }
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
+                    );
                 }
             }
             else
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
+                    );
                 }
             }
 
-            if (bindingElement.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic) &&
-                bindingElement.AuthenticationScheme.IsNotSet(AuthenticationSchemes.Digest | AuthenticationSchemes.Ntlm | AuthenticationSchemes.Negotiate) &&
-                bindingElement.ExtendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Always)
+            if (
+                bindingElement.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic)
+                && bindingElement.AuthenticationScheme.IsNotSet(
+                    AuthenticationSchemes.Digest
+                        | AuthenticationSchemes.Ntlm
+                        | AuthenticationSchemes.Negotiate
+                )
+                && bindingElement.ExtendedProtectionPolicy.PolicyEnforcement
+                    == PolicyEnforcement.Always
+            )
             {
                 //Basic auth + PolicyEnforcement.Always doesn't make sense because basic auth can't support CBT.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ExtendedProtectionPolicyBasicAuthNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.ExtendedProtectionPolicyBasicAuthNotSupported)
+                    )
+                );
             }
 
             this.authenticationScheme = bindingElement.AuthenticationScheme;
             this.keepAliveEnabled = bindingElement.KeepAliveEnabled;
             this.InheritBaseAddressSettings = bindingElement.InheritBaseAddressSettings;
             this.maxBufferSize = bindingElement.MaxBufferSize;
-            this.maxPendingAccepts = HttpTransportDefaults.GetEffectiveMaxPendingAccepts(bindingElement.MaxPendingAccepts);
+            this.maxPendingAccepts = HttpTransportDefaults.GetEffectiveMaxPendingAccepts(
+                bindingElement.MaxPendingAccepts
+            );
             this.method = bindingElement.Method;
             this.realm = bindingElement.Realm;
             this.requestInitializationTimeout = bindingElement.RequestInitializationTimeout;
             this.transferMode = bindingElement.TransferMode;
-            this.unsafeConnectionNtlmAuthentication = bindingElement.UnsafeConnectionNtlmAuthentication;
+            this.unsafeConnectionNtlmAuthentication =
+                bindingElement.UnsafeConnectionNtlmAuthentication;
             this.credentialProvider = context.BindingParameters.Find<SecurityCredentialsManager>();
             this.securityCapabilities = bindingElement.GetProperty<ISecurityCapabilities>(context);
-            this.extendedProtectionPolicy = GetPolicyWithDefaultSpnCollection(bindingElement.ExtendedProtectionPolicy, this.authenticationScheme, this.HostNameComparisonModeInternal, base.Uri, out this.usingDefaultSpnList);
+            this.extendedProtectionPolicy = GetPolicyWithDefaultSpnCollection(
+                bindingElement.ExtendedProtectionPolicy,
+                this.authenticationScheme,
+                this.HostNameComparisonModeInternal,
+                base.Uri,
+                out this.usingDefaultSpnList
+            );
 
-            this.webSocketSettings = WebSocketHelper.GetRuntimeWebSocketSettings(bindingElement.WebSocketSettings);
+            this.webSocketSettings = WebSocketHelper.GetRuntimeWebSocketSettings(
+                bindingElement.WebSocketSettings
+            );
 
             if (bindingElement.AnonymousUriPrefixMatcher != null)
             {
-                this.anonymousUriPrefixMatcher = new HttpAnonymousUriPrefixMatcher(bindingElement.AnonymousUriPrefixMatcher);
+                this.anonymousUriPrefixMatcher = new HttpAnonymousUriPrefixMatcher(
+                    bindingElement.AnonymousUriPrefixMatcher
+                );
             }
 
-            this.httpMessageSettings = context.BindingParameters.Find<HttpMessageSettings>() ?? new HttpMessageSettings();
+            this.httpMessageSettings =
+                context.BindingParameters.Find<HttpMessageSettings>() ?? new HttpMessageSettings();
 
-            if (this.httpMessageSettings.HttpMessagesSupported && this.MessageVersion != MessageVersion.None)
+            if (
+                this.httpMessageSettings.HttpMessagesSupported
+                && this.MessageVersion != MessageVersion.None
+            )
             {
                 throw FxTrace.Exception.AsError(
-                    new NotSupportedException(SR.GetString(
+                    new NotSupportedException(
+                        SR.GetString(
                             SR.MessageVersionNoneRequiredForHttpMessageSupport,
                             typeof(HttpRequestMessage).Name,
                             typeof(HttpResponseMessage).Name,
@@ -131,7 +173,10 @@ namespace System.ServiceModel.Channels
                             typeof(MessageVersion).Name,
                             typeof(MessageEncodingBindingElement).Name,
                             this.MessageVersion.ToString(),
-                            MessageVersion.None.ToString())));
+                            MessageVersion.None.ToString()
+                        )
+                    )
+                );
             }
         }
 
@@ -149,31 +194,22 @@ namespace System.ServiceModel.Channels
         {
             get { return this.httpMessageSettings; }
         }
-        
+
         public ExtendedProtectionPolicy ExtendedProtectionPolicy
         {
-            get
-            {
-                return this.extendedProtectionPolicy;
-            }
+            get { return this.extendedProtectionPolicy; }
         }
 
         public virtual bool IsChannelBindingSupportEnabled
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public abstract bool UseWebSocketTransport { get; }
 
         internal HttpAnonymousUriPrefixMatcher AnonymousUriPrefixMatcher
         {
-            get
-            {
-                return this.anonymousUriPrefixMatcher;
-            }
+            get { return this.anonymousUriPrefixMatcher; }
         }
 
         protected SecurityTokenAuthenticator UserNameTokenAuthenticator
@@ -184,64 +220,50 @@ namespace System.ServiceModel.Channels
         internal override void ApplyHostedContext(string virtualPath, bool isMetadataListener)
         {
             base.ApplyHostedContext(virtualPath, isMetadataListener);
-            AspNetEnvironment.Current.ValidateHttpSettings(virtualPath, isMetadataListener, this.usingDefaultSpnList, ref this.authenticationScheme, ref this.extendedProtectionPolicy, ref this.realm);
+            AspNetEnvironment.Current.ValidateHttpSettings(
+                virtualPath,
+                isMetadataListener,
+                this.usingDefaultSpnList,
+                ref this.authenticationScheme,
+                ref this.extendedProtectionPolicy,
+                ref this.realm
+            );
         }
 
         public AuthenticationSchemes AuthenticationScheme
         {
-            get
-            {
-                return this.authenticationScheme;
-            }
+            get { return this.authenticationScheme; }
         }
 
         public bool KeepAliveEnabled
         {
-            get
-            {
-                return this.keepAliveEnabled;
-            }
+            get { return this.keepAliveEnabled; }
         }
 
         public bool ExtractGroupsForWindowsAccounts
         {
-            get
-            {
-                return this.extractGroupsForWindowsAccounts;
-            }
+            get { return this.extractGroupsForWindowsAccounts; }
         }
 
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get
-            {
-                return this.HostNameComparisonModeInternal;
-            }
+            get { return this.HostNameComparisonModeInternal; }
         }
 
         //Returns true if one of the non-anonymous authentication schemes is set on this.AuthenticationScheme
         protected bool IsAuthenticationSupported
         {
-            get
-            {
-                return this.authenticationScheme != AuthenticationSchemes.Anonymous;
-            }
+            get { return this.authenticationScheme != AuthenticationSchemes.Anonymous; }
         }
 
         bool IsAuthenticationRequired
         {
-            get
-            {
-                return this.AuthenticationScheme.IsNotSet(AuthenticationSchemes.Anonymous);
-            }
+            get { return this.AuthenticationScheme.IsNotSet(AuthenticationSchemes.Anonymous); }
         }
 
         public int MaxBufferSize
         {
-            get
-            {
-                return this.maxBufferSize;
-            }
+            get { return this.maxBufferSize; }
         }
 
         public int MaxPendingAccepts
@@ -251,18 +273,12 @@ namespace System.ServiceModel.Channels
 
         public virtual string Method
         {
-            get
-            {
-                return this.method;
-            }
+            get { return this.method; }
         }
 
         public TransferMode TransferMode
         {
-            get
-            {
-                return transferMode;
-            }
+            get { return transferMode; }
         }
 
         public string Realm
@@ -287,29 +303,22 @@ namespace System.ServiceModel.Channels
 
         internal static UriPrefixTable<ITransportManagerRegistration> StaticTransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
         public bool UnsafeConnectionNtlmAuthentication
         {
-            get
-            {
-                return this.unsafeConnectionNtlmAuthentication;
-            }
+            get { return this.unsafeConnectionNtlmAuthentication; }
         }
 
         internal override UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
-        internal override ITransportManagerRegistration CreateTransportManagerRegistration(Uri listenUri)
+        internal override ITransportManagerRegistration CreateTransportManagerRegistration(
+            Uri listenUri
+        )
         {
             return new SharedHttpTransportManager(listenUri, this);
         }
@@ -337,7 +346,10 @@ namespace System.ServiceModel.Channels
 
         bool IsAuthSchemeValid(string authType)
         {
-            return AuthenticationSchemesHelper.DoesAuthTypeMatch(this.authenticationScheme, authType);
+            return AuthenticationSchemesHelper.DoesAuthTypeMatch(
+                this.authenticationScheme,
+                authType
+            );
         }
 
         internal override int GetMaxBufferSize()
@@ -378,8 +390,10 @@ namespace System.ServiceModel.Channels
             {
                 if (this.identity == null)
                 {
-                    if (this.authenticationScheme.IsSet(AuthenticationSchemes.Negotiate) ||
-                        this.authenticationScheme.IsSet(AuthenticationSchemes.Ntlm))
+                    if (
+                        this.authenticationScheme.IsSet(AuthenticationSchemes.Negotiate)
+                        || this.authenticationScheme.IsSet(AuthenticationSchemes.Ntlm)
+                    )
                     {
                         this.identity = SecurityUtils.CreateWindowsIdentity();
                     }
@@ -387,10 +401,13 @@ namespace System.ServiceModel.Channels
 
                 return (T)(object)this.identity;
             }
-            else if (typeof(T) == typeof(ILogonTokenCacheManager)
-                && (this.userNameTokenAuthenticator != null))
+            else if (
+                typeof(T) == typeof(ILogonTokenCacheManager)
+                && (this.userNameTokenAuthenticator != null)
+            )
             {
-                ILogonTokenCacheManager retVal = this.userNameTokenAuthenticator as ILogonTokenCacheManager;
+                ILogonTokenCacheManager retVal =
+                    this.userNameTokenAuthenticator as ILogonTokenCacheManager;
 
                 if (retVal != null)
                 {
@@ -402,17 +419,21 @@ namespace System.ServiceModel.Channels
         }
 
         internal abstract IAsyncResult BeginHttpContextReceived(
-                                                HttpRequestContext context,
-                                                Action acceptorCallback,
-                                                AsyncCallback callback,
-                                                object state);
+            HttpRequestContext context,
+            Action acceptorCallback,
+            AsyncCallback callback,
+            object state
+        );
 
         internal abstract bool EndHttpContextReceived(IAsyncResult result);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         void InitializeSecurityTokenAuthenticator()
         {
-            Fx.Assert(this.IsAuthenticationSupported, "SecurityTokenAuthenticator should only be initialized when authentication is supported.");
+            Fx.Assert(
+                this.IsAuthenticationSupported,
+                "SecurityTokenAuthenticator should only be initialized when authentication is supported."
+            );
             ServiceCredentials serviceCredentials = this.credentialProvider as ServiceCredentials;
 
             if (serviceCredentials != null)
@@ -420,48 +441,79 @@ namespace System.ServiceModel.Channels
                 if (this.AuthenticationScheme == AuthenticationSchemes.Basic)
                 {
                     // when Basic authentiction is enabled - but Digest and Windows are disabled use the UsernameAuthenticationSetting
-                    this.extractGroupsForWindowsAccounts = serviceCredentials.UserNameAuthentication.IncludeWindowsGroups;
+                    this.extractGroupsForWindowsAccounts = serviceCredentials
+                        .UserNameAuthentication
+                        .IncludeWindowsGroups;
                 }
                 else
                 {
-                    if (this.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic) &&
-                        serviceCredentials.UserNameAuthentication.IncludeWindowsGroups != serviceCredentials.WindowsAuthentication.IncludeWindowsGroups)
+                    if (
+                        this.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic)
+                        && serviceCredentials.UserNameAuthentication.IncludeWindowsGroups
+                            != serviceCredentials.WindowsAuthentication.IncludeWindowsGroups
+                    )
                     {
                         // Ensure there are no inconsistencies when Basic and (Digest and/or Ntlm and/or Negotiate) are both enabled
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SecurityTokenProviderIncludeWindowsGroupsInconsistent,
-                                (AuthenticationSchemes)authenticationScheme - AuthenticationSchemes.Basic,
-                                serviceCredentials.UserNameAuthentication.IncludeWindowsGroups,
-                                serviceCredentials.WindowsAuthentication.IncludeWindowsGroups)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.SecurityTokenProviderIncludeWindowsGroupsInconsistent,
+                                    (AuthenticationSchemes)authenticationScheme
+                                        - AuthenticationSchemes.Basic,
+                                    serviceCredentials.UserNameAuthentication.IncludeWindowsGroups,
+                                    serviceCredentials.WindowsAuthentication.IncludeWindowsGroups
+                                )
+                            )
+                        );
                     }
 
-                    this.extractGroupsForWindowsAccounts = serviceCredentials.WindowsAuthentication.IncludeWindowsGroups;
+                    this.extractGroupsForWindowsAccounts = serviceCredentials
+                        .WindowsAuthentication
+                        .IncludeWindowsGroups;
                 }
 
                 // we will only support custom and windows validation modes, if anything else is specified, we'll fall back to windows user name.
-                if (serviceCredentials.UserNameAuthentication.UserNamePasswordValidationMode == UserNamePasswordValidationMode.Custom)
+                if (
+                    serviceCredentials.UserNameAuthentication.UserNamePasswordValidationMode
+                    == UserNamePasswordValidationMode.Custom
+                )
                 {
-                    this.userNameTokenAuthenticator = new CustomUserNameSecurityTokenAuthenticator(serviceCredentials.UserNameAuthentication.GetUserNamePasswordValidator());
+                    this.userNameTokenAuthenticator = new CustomUserNameSecurityTokenAuthenticator(
+                        serviceCredentials.UserNameAuthentication.GetUserNamePasswordValidator()
+                    );
                 }
                 else
                 {
                     if (serviceCredentials.UserNameAuthentication.CacheLogonTokens)
                     {
-                        this.userNameTokenAuthenticator = new WindowsUserNameCachingSecurityTokenAuthenticator(this.extractGroupsForWindowsAccounts,
-                            serviceCredentials.UserNameAuthentication.MaxCachedLogonTokens, serviceCredentials.UserNameAuthentication.CachedLogonTokenLifetime);
+                        this.userNameTokenAuthenticator =
+                            new WindowsUserNameCachingSecurityTokenAuthenticator(
+                                this.extractGroupsForWindowsAccounts,
+                                serviceCredentials.UserNameAuthentication.MaxCachedLogonTokens,
+                                serviceCredentials.UserNameAuthentication.CachedLogonTokenLifetime
+                            );
                     }
                     else
                     {
-                        this.userNameTokenAuthenticator = new WindowsUserNameSecurityTokenAuthenticator(this.extractGroupsForWindowsAccounts);
+                        this.userNameTokenAuthenticator =
+                            new WindowsUserNameSecurityTokenAuthenticator(
+                                this.extractGroupsForWindowsAccounts
+                            );
                     }
                 }
             }
             else
             {
-                this.extractGroupsForWindowsAccounts = TransportDefaults.ExtractGroupsForWindowsAccounts;
-                this.userNameTokenAuthenticator = new WindowsUserNameSecurityTokenAuthenticator(this.extractGroupsForWindowsAccounts);
+                this.extractGroupsForWindowsAccounts =
+                    TransportDefaults.ExtractGroupsForWindowsAccounts;
+                this.userNameTokenAuthenticator = new WindowsUserNameSecurityTokenAuthenticator(
+                    this.extractGroupsForWindowsAccounts
+                );
             }
 
-            this.windowsTokenAuthenticator = new WindowsSecurityTokenAuthenticator(this.extractGroupsForWindowsAccounts);
+            this.windowsTokenAuthenticator = new WindowsSecurityTokenAuthenticator(
+                this.extractGroupsForWindowsAccounts
+            );
         }
 
         protected override void OnOpened()
@@ -478,7 +530,10 @@ namespace System.ServiceModel.Channels
         [MethodImpl(MethodImplOptions.NoInlining)]
         protected void CloseUserNameTokenAuthenticator(TimeSpan timeout)
         {
-            SecurityUtils.CloseTokenAuthenticatorIfRequired(this.userNameTokenAuthenticator, timeout);
+            SecurityUtils.CloseTokenAuthenticatorIfRequired(
+                this.userNameTokenAuthenticator,
+                timeout
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -489,26 +544,48 @@ namespace System.ServiceModel.Channels
 
         bool ShouldProcessAuthentication(IHttpAuthenticationContext authenticationContext)
         {
-            Fx.Assert(authenticationContext != null, "IsAuthenticated should only be called if authenticationContext != null");
-            Fx.Assert(authenticationContext.LogonUserIdentity != null, "IsAuthenticated should only be called if authenticationContext.LogonUserIdentity != null");
-            return this.IsAuthenticationRequired || (this.IsAuthenticationSupported && authenticationContext.LogonUserIdentity.IsAuthenticated);
+            Fx.Assert(
+                authenticationContext != null,
+                "IsAuthenticated should only be called if authenticationContext != null"
+            );
+            Fx.Assert(
+                authenticationContext.LogonUserIdentity != null,
+                "IsAuthenticated should only be called if authenticationContext.LogonUserIdentity != null"
+            );
+            return this.IsAuthenticationRequired
+                || (
+                    this.IsAuthenticationSupported
+                    && authenticationContext.LogonUserIdentity.IsAuthenticated
+                );
         }
 
         bool ShouldProcessAuthentication(HttpListenerContext listenerContext)
         {
-            Fx.Assert(listenerContext != null, "IsAuthenticated should only be called if listenerContext != null");
-            Fx.Assert(listenerContext.Request != null, "IsAuthenticated should only be called if listenerContext.Request != null");
-            return this.IsAuthenticationRequired || (this.IsAuthenticationSupported && listenerContext.Request.IsAuthenticated);
+            Fx.Assert(
+                listenerContext != null,
+                "IsAuthenticated should only be called if listenerContext != null"
+            );
+            Fx.Assert(
+                listenerContext.Request != null,
+                "IsAuthenticated should only be called if listenerContext.Request != null"
+            );
+            return this.IsAuthenticationRequired
+                || (this.IsAuthenticationSupported && listenerContext.Request.IsAuthenticated);
         }
 
-        public virtual SecurityMessageProperty ProcessAuthentication(IHttpAuthenticationContext authenticationContext)
+        public virtual SecurityMessageProperty ProcessAuthentication(
+            IHttpAuthenticationContext authenticationContext
+        )
         {
             if (this.ShouldProcessAuthentication(authenticationContext))
             {
                 SecurityMessageProperty retValue;
                 try
                 {
-                    retValue = this.ProcessAuthentication(authenticationContext.LogonUserIdentity, GetAuthType(authenticationContext));
+                    retValue = this.ProcessAuthentication(
+                        authenticationContext.LogonUserIdentity,
+                        GetAuthType(authenticationContext)
+                    );
                 }
 #pragma warning suppress 56500 // covered by FXCop
                 catch (Exception exception)
@@ -517,15 +594,33 @@ namespace System.ServiceModel.Channels
                         throw;
 
                     // Audit Authentication failure
-                    if (AuditLevel.Failure == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure))
-                        WriteAuditEvent(AuditLevel.Failure, (authenticationContext.LogonUserIdentity != null) ? authenticationContext.LogonUserIdentity.Name : String.Empty, exception);
+                    if (
+                        AuditLevel.Failure
+                        == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure)
+                    )
+                        WriteAuditEvent(
+                            AuditLevel.Failure,
+                            (authenticationContext.LogonUserIdentity != null)
+                                ? authenticationContext.LogonUserIdentity.Name
+                                : String.Empty,
+                            exception
+                        );
 
                     throw;
                 }
 
                 // Audit Authentication success
-                if (AuditLevel.Success == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Success))
-                    WriteAuditEvent(AuditLevel.Success, (authenticationContext.LogonUserIdentity != null) ? authenticationContext.LogonUserIdentity.Name : String.Empty, null);
+                if (
+                    AuditLevel.Success
+                    == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Success)
+                )
+                    WriteAuditEvent(
+                        AuditLevel.Success,
+                        (authenticationContext.LogonUserIdentity != null)
+                            ? authenticationContext.LogonUserIdentity.Name
+                            : String.Empty,
+                        null
+                    );
 
                 return retValue;
             }
@@ -535,7 +630,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public virtual SecurityMessageProperty ProcessAuthentication(HttpListenerContext listenerContext)
+        public virtual SecurityMessageProperty ProcessAuthentication(
+            HttpListenerContext listenerContext
+        )
         {
             if (this.ShouldProcessAuthentication(listenerContext))
             {
@@ -554,19 +651,27 @@ namespace System.ServiceModel.Channels
             WindowsIdentity wid = null;
             try
             {
-                Fx.Assert(listenerContext.User != null, "HttpListener delivered authenticated request without an IPrincipal.");
+                Fx.Assert(
+                    listenerContext.User != null,
+                    "HttpListener delivered authenticated request without an IPrincipal."
+                );
                 wid = listenerContext.User.Identity as WindowsIdentity;
 
-                if (this.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic)
-                    && wid == null)
+                if (this.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic) && wid == null)
                 {
                     identity = listenerContext.User.Identity as HttpListenerBasicIdentity;
-                    Fx.Assert(identity != null, "HttpListener delivered Basic authenticated request with a non-Basic IIdentity.");
+                    Fx.Assert(
+                        identity != null,
+                        "HttpListener delivered Basic authenticated request with a non-Basic IIdentity."
+                    );
                     retValue = this.ProcessAuthentication(identity);
                 }
                 else
                 {
-                    Fx.Assert(wid != null, "HttpListener delivered non-Basic authenticated request with a non-Windows IIdentity.");
+                    Fx.Assert(
+                        wid != null,
+                        "HttpListener delivered non-Basic authenticated request with a non-Windows IIdentity."
+                    );
                     retValue = this.ProcessAuthentication(wid, GetAuthType(listenerContext));
                 }
             }
@@ -576,27 +681,51 @@ namespace System.ServiceModel.Channels
                 if (!Fx.IsFatal(exception))
                 {
                     // Audit Authentication failure
-                    if (AuditLevel.Failure == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure))
+                    if (
+                        AuditLevel.Failure
+                        == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure)
+                    )
                     {
-                        WriteAuditEvent(AuditLevel.Failure, (identity != null) ? identity.Name : ((wid != null) ? wid.Name : String.Empty), exception);
+                        WriteAuditEvent(
+                            AuditLevel.Failure,
+                            (identity != null)
+                                ? identity.Name
+                                : ((wid != null) ? wid.Name : String.Empty),
+                            exception
+                        );
                     }
                 }
                 throw;
             }
 
             // Audit Authentication success
-            if (AuditLevel.Success == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Success))
+            if (
+                AuditLevel.Success
+                == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Success)
+            )
             {
-                WriteAuditEvent(AuditLevel.Success, (identity != null) ? identity.Name : ((wid != null) ? wid.Name : String.Empty), null);
+                WriteAuditEvent(
+                    AuditLevel.Success,
+                    (identity != null) ? identity.Name : ((wid != null) ? wid.Name : String.Empty),
+                    null
+                );
             }
 
             return retValue;
         }
 
-        protected override bool TryGetTransportManagerRegistration(HostNameComparisonMode hostNameComparisonMode,
-            out ITransportManagerRegistration registration)
+        protected override bool TryGetTransportManagerRegistration(
+            HostNameComparisonMode hostNameComparisonMode,
+            out ITransportManagerRegistration registration
+        )
         {
-            if (this.TransportManagerTable.TryLookupUri(this.Uri, hostNameComparisonMode, out registration))
+            if (
+                this.TransportManagerTable.TryLookupUri(
+                    this.Uri,
+                    hostNameComparisonMode,
+                    out registration
+                )
+            )
             {
                 HttpTransportManager httpTransportManager = registration as HttpTransportManager;
                 if (httpTransportManager != null && httpTransportManager.IsHosted)
@@ -612,19 +741,34 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        protected void WriteAuditEvent(AuditLevel auditLevel, string primaryIdentity, Exception exception)
+        protected void WriteAuditEvent(
+            AuditLevel auditLevel,
+            string primaryIdentity,
+            Exception exception
+        )
         {
             try
             {
                 if (auditLevel == AuditLevel.Success)
                 {
-                    SecurityAuditHelper.WriteTransportAuthenticationSuccessEvent(this.AuditBehavior.AuditLogLocation,
-                        this.AuditBehavior.SuppressAuditFailure, null, this.Uri, primaryIdentity);
+                    SecurityAuditHelper.WriteTransportAuthenticationSuccessEvent(
+                        this.AuditBehavior.AuditLogLocation,
+                        this.AuditBehavior.SuppressAuditFailure,
+                        null,
+                        this.Uri,
+                        primaryIdentity
+                    );
                 }
                 else
                 {
-                    SecurityAuditHelper.WriteTransportAuthenticationFailureEvent(this.AuditBehavior.AuditLogLocation,
-                        this.AuditBehavior.SuppressAuditFailure, null, this.Uri, primaryIdentity, exception);
+                    SecurityAuditHelper.WriteTransportAuthenticationFailureEvent(
+                        this.AuditBehavior.AuditLogLocation,
+                        this.AuditBehavior.SuppressAuditFailure,
+                        null,
+                        this.Uri,
+                        primaryIdentity,
+                        exception
+                    );
                 }
             }
 #pragma warning suppress 56500
@@ -639,21 +783,39 @@ namespace System.ServiceModel.Channels
 
         SecurityMessageProperty ProcessAuthentication(HttpListenerBasicIdentity identity)
         {
-            SecurityToken securityToken = new UserNameSecurityToken(identity.Name, identity.Password);
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = this.userNameTokenAuthenticator.ValidateToken(securityToken);
+            SecurityToken securityToken = new UserNameSecurityToken(
+                identity.Name,
+                identity.Password
+            );
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                this.userNameTokenAuthenticator.ValidateToken(securityToken);
             SecurityMessageProperty security = new SecurityMessageProperty();
-            security.TransportToken = new SecurityTokenSpecification(securityToken, authorizationPolicies);
+            security.TransportToken = new SecurityTokenSpecification(
+                securityToken,
+                authorizationPolicies
+            );
             security.ServiceSecurityContext = new ServiceSecurityContext(authorizationPolicies);
             return security;
         }
 
-        SecurityMessageProperty ProcessAuthentication(WindowsIdentity identity, string authenticationType)
+        SecurityMessageProperty ProcessAuthentication(
+            WindowsIdentity identity,
+            string authenticationType
+        )
         {
             SecurityUtils.ValidateAnonymityConstraint(identity, false);
-            SecurityToken securityToken = new WindowsSecurityToken(identity, SecurityUniqueId.Create().Value, authenticationType);
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = this.windowsTokenAuthenticator.ValidateToken(securityToken);
+            SecurityToken securityToken = new WindowsSecurityToken(
+                identity,
+                SecurityUniqueId.Create().Value,
+                authenticationType
+            );
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                this.windowsTokenAuthenticator.ValidateToken(securityToken);
             SecurityMessageProperty security = new SecurityMessageProperty();
-            security.TransportToken = new SecurityTokenSpecification(securityToken, authorizationPolicies);
+            security.TransportToken = new SecurityTokenSpecification(
+                securityToken,
+                authorizationPolicies
+            );
             security.ServiceSecurityContext = new ServiceSecurityContext(authorizationPolicies);
             return security;
         }
@@ -667,10 +829,19 @@ namespace System.ServiceModel.Channels
             else
             {
                 // Audit Authentication failure
-                if (AuditLevel.Failure == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure))
+                if (
+                    AuditLevel.Failure
+                    == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure)
+                )
                 {
-                    string message = SR.GetString(SR.HttpAuthenticationFailed, this.AuthenticationScheme, HttpStatusCode.Unauthorized);
-                    Exception exception = DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(message));
+                    string message = SR.GetString(
+                        SR.HttpAuthenticationFailed,
+                        this.AuthenticationScheme,
+                        HttpStatusCode.Unauthorized
+                    );
+                    Exception exception = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(message)
+                    );
                     WriteAuditEvent(AuditLevel.Failure, String.Empty, exception);
                 }
 
@@ -678,7 +849,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public virtual HttpStatusCode ValidateAuthentication(IHttpAuthenticationContext authenticationContext)
+        public virtual HttpStatusCode ValidateAuthentication(
+            IHttpAuthenticationContext authenticationContext
+        )
         {
             HttpStatusCode result = HttpStatusCode.OK;
 
@@ -688,14 +861,19 @@ namespace System.ServiceModel.Channels
                 result = ValidateAuthentication(authType);
             }
 
-            if (result == HttpStatusCode.OK &&
-                authenticationContext.LogonUserIdentity != null &&
-                authenticationContext.LogonUserIdentity.IsAuthenticated &&
-                this.ExtendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Always &&
-                !authenticationContext.IISSupportsExtendedProtection)
+            if (
+                result == HttpStatusCode.OK
+                && authenticationContext.LogonUserIdentity != null
+                && authenticationContext.LogonUserIdentity.IsAuthenticated
+                && this.ExtendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Always
+                && !authenticationContext.IISSupportsExtendedProtection
+            )
             {
                 Exception exception = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new PlatformNotSupportedException(SR.GetString(SR.ExtendedProtectionNotSupported)));
+                    new PlatformNotSupportedException(
+                        SR.GetString(SR.ExtendedProtectionNotSupported)
+                    )
+                );
                 WriteAuditEvent(AuditLevel.Failure, String.Empty, exception);
 
                 result = HttpStatusCode.Unauthorized;
@@ -717,23 +895,45 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        static ExtendedProtectionPolicy GetPolicyWithDefaultSpnCollection(ExtendedProtectionPolicy policy, AuthenticationSchemes authenticationScheme, HostNameComparisonMode hostNameComparisonMode, Uri listenUri, out bool usingDefaultSpnList)
+        static ExtendedProtectionPolicy GetPolicyWithDefaultSpnCollection(
+            ExtendedProtectionPolicy policy,
+            AuthenticationSchemes authenticationScheme,
+            HostNameComparisonMode hostNameComparisonMode,
+            Uri listenUri,
+            out bool usingDefaultSpnList
+        )
         {
-            if (policy.PolicyEnforcement != PolicyEnforcement.Never &&
-                policy.CustomServiceNames == null && //null indicates "use default"
-                policy.CustomChannelBinding == null && //not needed if a channel binding is provided.
-                authenticationScheme != AuthenticationSchemes.Anonymous && //SPN list only needed with authentication (mixed mode uses own default list)
-                string.Equals(listenUri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))//SPN list not used for HTTPS (CBT is used instead).
+            if (
+                policy.PolicyEnforcement != PolicyEnforcement.Never
+                && policy.CustomServiceNames == null
+                && //null indicates "use default"
+                policy.CustomChannelBinding == null
+                && //not needed if a channel binding is provided.
+                authenticationScheme != AuthenticationSchemes.Anonymous
+                && //SPN list only needed with authentication (mixed mode uses own default list)
+                string.Equals(
+                    listenUri.Scheme,
+                    Uri.UriSchemeHttp,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) //SPN list not used for HTTPS (CBT is used instead).
             {
                 usingDefaultSpnList = true;
-                return new ExtendedProtectionPolicy(policy.PolicyEnforcement, policy.ProtectionScenario, GetDefaultSpnList(hostNameComparisonMode, listenUri));
+                return new ExtendedProtectionPolicy(
+                    policy.PolicyEnforcement,
+                    policy.ProtectionScenario,
+                    GetDefaultSpnList(hostNameComparisonMode, listenUri)
+                );
             }
 
             usingDefaultSpnList = false;
             return policy;
         }
 
-        static ServiceNameCollection GetDefaultSpnList(HostNameComparisonMode hostNameComparisonMode, Uri listenUri)
+        static ServiceNameCollection GetDefaultSpnList(
+            HostNameComparisonMode hostNameComparisonMode,
+            Uri listenUri
+        )
         {
             //In 3.5 SP1, we started sending the HOST/xyz format, so we have to accept it for compat reasons.
             //with this change, we will be changing our client so that it lets System.Net pick the SPN by default
@@ -752,44 +952,99 @@ namespace System.ServiceModel.Channels
             {
                 case HostNameComparisonMode.Exact:
                     UriHostNameType hostNameType = listenUri.HostNameType;
-                    if (hostNameType == UriHostNameType.IPv4 || hostNameType == UriHostNameType.IPv6)
+                    if (
+                        hostNameType == UriHostNameType.IPv4
+                        || hostNameType == UriHostNameType.IPv6
+                    )
                     {
                         hostName = Dns.GetHostEntry(string.Empty).HostName;
-                        AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, hostSpnFormat, hostName));
-                        AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, httpSpnFormat, hostName));
+                        AddSpn(
+                            serviceNames,
+                            string.Format(CultureInfo.InvariantCulture, hostSpnFormat, hostName)
+                        );
+                        AddSpn(
+                            serviceNames,
+                            string.Format(CultureInfo.InvariantCulture, httpSpnFormat, hostName)
+                        );
                     }
                     else
                     {
                         if (listenUri.DnsSafeHost.Contains("."))
                         {
                             //since we are listening explicitly on the FQDN, we should add only the FQDN SPN
-                            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, hostSpnFormat, dnsSafeHostName));
-                            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, httpSpnFormat, dnsSafeHostName));
+                            AddSpn(
+                                serviceNames,
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    hostSpnFormat,
+                                    dnsSafeHostName
+                                )
+                            );
+                            AddSpn(
+                                serviceNames,
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    httpSpnFormat,
+                                    dnsSafeHostName
+                                )
+                            );
                         }
                         else
                         {
                             hostName = Dns.GetHostEntry(string.Empty).HostName;
                             //add the short name (from the URI) and the FQDN (from Dns)
-                            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, hostSpnFormat, dnsSafeHostName));
-                            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, httpSpnFormat, dnsSafeHostName));
-                            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, hostSpnFormat, hostName));
-                            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, httpSpnFormat, hostName));
+                            AddSpn(
+                                serviceNames,
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    hostSpnFormat,
+                                    dnsSafeHostName
+                                )
+                            );
+                            AddSpn(
+                                serviceNames,
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    httpSpnFormat,
+                                    dnsSafeHostName
+                                )
+                            );
+                            AddSpn(
+                                serviceNames,
+                                string.Format(CultureInfo.InvariantCulture, hostSpnFormat, hostName)
+                            );
+                            AddSpn(
+                                serviceNames,
+                                string.Format(CultureInfo.InvariantCulture, httpSpnFormat, hostName)
+                            );
                         }
                     }
                     break;
                 case HostNameComparisonMode.StrongWildcard:
                 case HostNameComparisonMode.WeakWildcard:
                     hostName = Dns.GetHostEntry(string.Empty).HostName;
-                    AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, hostSpnFormat, hostName));
-                    AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, httpSpnFormat, hostName));
+                    AddSpn(
+                        serviceNames,
+                        string.Format(CultureInfo.InvariantCulture, hostSpnFormat, hostName)
+                    );
+                    AddSpn(
+                        serviceNames,
+                        string.Format(CultureInfo.InvariantCulture, httpSpnFormat, hostName)
+                    );
                     break;
                 default:
                     Fx.Assert("Unhandled HostNameComparisonMode: " + hostNameComparisonMode);
                     break;
             }
 
-            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, hostSpnFormat, localhost));
-            AddSpn(serviceNames, string.Format(CultureInfo.InvariantCulture, httpSpnFormat, localhost));
+            AddSpn(
+                serviceNames,
+                string.Format(CultureInfo.InvariantCulture, hostSpnFormat, localhost)
+            );
+            AddSpn(
+                serviceNames,
+                string.Format(CultureInfo.InvariantCulture, httpSpnFormat, localhost)
+            );
 
             return new ServiceNameCollection(serviceNames.Values);
         }
@@ -804,7 +1059,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public abstract bool CreateWebSocketChannelAndEnqueue(HttpRequestContext httpRequestContext, HttpPipeline httpPipeline, HttpResponseMessage httpResponseMessage, string subProtocol, Action dequeuedCallback);
+        public abstract bool CreateWebSocketChannelAndEnqueue(
+            HttpRequestContext httpRequestContext,
+            HttpPipeline httpPipeline,
+            HttpResponseMessage httpResponseMessage,
+            string subProtocol,
+            Action dequeuedCallback
+        );
 
         public abstract byte[] TakeWebSocketInternalBuffer();
         public abstract void ReturnWebSocketInternalBuffer(byte[] buffer);
@@ -818,8 +1079,8 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    class HttpChannelListener<TChannel> : HttpChannelListener,
-        IChannelListener<TChannel> where TChannel : class, IChannel
+    class HttpChannelListener<TChannel> : HttpChannelListener, IChannelListener<TChannel>
+        where TChannel : class, IChannel
     {
         InputQueueChannelAcceptor<TChannel> acceptor;
         bool useWebSocketTransport;
@@ -828,11 +1089,19 @@ namespace System.ServiceModel.Channels
         ConnectionBufferPool bufferPool;
         string currentWebSocketVersion;
 
-        public HttpChannelListener(HttpTransportBindingElement bindingElement, BindingContext context)
+        public HttpChannelListener(
+            HttpTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
-            this.useWebSocketTransport = bindingElement.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Always
-                || (bindingElement.WebSocketSettings.TransportUsage == WebSocketTransportUsage.WhenDuplex && typeof(TChannel) != typeof(IReplyChannel));
+            this.useWebSocketTransport =
+                bindingElement.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Always
+                || (
+                    bindingElement.WebSocketSettings.TransportUsage
+                        == WebSocketTransportUsage.WhenDuplex
+                    && typeof(TChannel) != typeof(IReplyChannel)
+                );
             if (this.useWebSocketTransport)
             {
                 if (AspNetEnvironment.Enabled)
@@ -842,23 +1111,38 @@ namespace System.ServiceModel.Channels
                     // When IIS hosted, WebSockets can be used if the pipeline mode is integrated
                     if (!env.UsingIntegratedPipeline)
                     {
-                        throw FxTrace.Exception.AsError(new NotSupportedException(SR.GetString(SR.WebSocketsNotSupportedInClassicPipeline)));
+                        throw FxTrace.Exception.AsError(
+                            new NotSupportedException(
+                                SR.GetString(SR.WebSocketsNotSupportedInClassicPipeline)
+                            )
+                        );
                     }
                 }
                 else if (!WebSocketHelper.OSSupportsWebSockets())
                 {
-                    throw FxTrace.Exception.AsError(new PlatformNotSupportedException(SR.GetString(SR.WebSocketsServerSideNotSupported)));
+                    throw FxTrace.Exception.AsError(
+                        new PlatformNotSupportedException(
+                            SR.GetString(SR.WebSocketsServerSideNotSupported)
+                        )
+                    );
                 }
 
                 this.currentWebSocketVersion = WebSocketHelper.GetCurrentVersion();
                 this.acceptor = new InputQueueChannelAcceptor<TChannel>(this);
-                int webSocketBufferSize = WebSocketHelper.ComputeServerBufferSize(bindingElement.MaxReceivedMessageSize);
+                int webSocketBufferSize = WebSocketHelper.ComputeServerBufferSize(
+                    bindingElement.MaxReceivedMessageSize
+                );
                 this.bufferPool = new ConnectionBufferPool(webSocketBufferSize);
-                this.webSocketLifetimeManager = new CommunicationObjectManager<ServerWebSocketTransportDuplexSessionChannel>(this.ThisLock);
+                this.webSocketLifetimeManager =
+                    new CommunicationObjectManager<ServerWebSocketTransportDuplexSessionChannel>(
+                        this.ThisLock
+                    );
             }
             else
             {
-                this.acceptor = (InputQueueChannelAcceptor<TChannel>)(object)(new TransportReplyChannelAcceptor(this));
+                this.acceptor =
+                    (InputQueueChannelAcceptor<TChannel>)
+                        (object)(new TransportReplyChannelAcceptor(this));
             }
 
             this.CreatePipeline(bindingElement.MessageHandlerFactory);
@@ -866,10 +1150,7 @@ namespace System.ServiceModel.Channels
 
         public override bool UseWebSocketTransport
         {
-            get
-            {
-                return this.useWebSocketTransport;
-            }
+            get { return this.useWebSocketTransport; }
         }
 
         public InputQueueChannelAcceptor<TChannel> Acceptor
@@ -905,7 +1186,11 @@ namespace System.ServiceModel.Channels
             return this.Acceptor.AcceptChannel(timeout);
         }
 
-        public IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfNotOpened();
             return this.Acceptor.BeginAcceptChannel(timeout, callback, state);
@@ -917,34 +1202,72 @@ namespace System.ServiceModel.Channels
             return this.Acceptor.EndAcceptChannel(result);
         }
 
-        public override bool CreateWebSocketChannelAndEnqueue(HttpRequestContext httpRequestContext, HttpPipeline pipeline, HttpResponseMessage httpResponseMessage, string subProtocol, Action dequeuedCallback)
+        public override bool CreateWebSocketChannelAndEnqueue(
+            HttpRequestContext httpRequestContext,
+            HttpPipeline pipeline,
+            HttpResponseMessage httpResponseMessage,
+            string subProtocol,
+            Action dequeuedCallback
+        )
         {
-            Fx.Assert(this.WebSocketSettings.MaxPendingConnections > 0, "MaxPendingConnections should be positive.");
+            Fx.Assert(
+                this.WebSocketSettings.MaxPendingConnections > 0,
+                "MaxPendingConnections should be positive."
+            );
             if (this.Acceptor.PendingCount >= this.WebSocketSettings.MaxPendingConnections)
             {
                 if (TD.MaxPendingConnectionsExceededIsEnabled())
                 {
-                    TD.MaxPendingConnectionsExceeded(SR.GetString(SR.WebSocketMaxPendingConnectionsReached, this.WebSocketSettings.MaxPendingConnections, WebSocketHelper.MaxPendingConnectionsString, WebSocketHelper.WebSocketTransportSettingsString));
+                    TD.MaxPendingConnectionsExceeded(
+                        SR.GetString(
+                            SR.WebSocketMaxPendingConnectionsReached,
+                            this.WebSocketSettings.MaxPendingConnections,
+                            WebSocketHelper.MaxPendingConnectionsString,
+                            WebSocketHelper.WebSocketTransportSettingsString
+                        )
+                    );
                 }
 
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning,
-                        TraceCode.MaxPendingConnectionsReached, SR.GetString(SR.WebSocketMaxPendingConnectionsReached, this.WebSocketSettings.MaxPendingConnections, WebSocketHelper.MaxPendingConnectionsString, WebSocketHelper.WebSocketTransportSettingsString),
-                        new StringTraceRecord(WebSocketHelper.MaxPendingConnectionsString, this.WebSocketSettings.MaxPendingConnections.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.MaxPendingConnectionsReached,
+                        SR.GetString(
+                            SR.WebSocketMaxPendingConnectionsReached,
+                            this.WebSocketSettings.MaxPendingConnections,
+                            WebSocketHelper.MaxPendingConnectionsString,
+                            WebSocketHelper.WebSocketTransportSettingsString
+                        ),
+                        new StringTraceRecord(
+                            WebSocketHelper.MaxPendingConnectionsString,
+                            this.WebSocketSettings.MaxPendingConnections.ToString(
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                        ),
                         this,
-                        null);
+                        null
+                    );
                 }
 
                 return false;
             }
 
-            ServerWebSocketTransportDuplexSessionChannel channel = new ServerWebSocketTransportDuplexSessionChannel(this,
-                                    new EndpointAddress(this.Uri), this.Uri, this.bufferPool, httpRequestContext, pipeline, httpResponseMessage, subProtocol);
+            ServerWebSocketTransportDuplexSessionChannel channel =
+                new ServerWebSocketTransportDuplexSessionChannel(
+                    this,
+                    new EndpointAddress(this.Uri),
+                    this.Uri,
+                    this.bufferPool,
+                    httpRequestContext,
+                    pipeline,
+                    httpResponseMessage,
+                    subProtocol
+                );
             httpRequestContext.WebSocketChannel = channel;
 
-            // webSocketLifetimeManager hooks into the channel.Closed event as well and will take care of cleaning itself up OnClosed. 
-            // We want to be called before any user-specified close handlers are called. 
+            // webSocketLifetimeManager hooks into the channel.Closed event as well and will take care of cleaning itself up OnClosed.
+            // We want to be called before any user-specified close handlers are called.
             this.webSocketLifetimeManager.Add(channel);
             this.Acceptor.EnqueueAndDispatch((TChannel)(object)channel, dequeuedCallback, true);
             return true;
@@ -962,9 +1285,20 @@ namespace System.ServiceModel.Channels
             this.bufferPool.Return(buffer);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, this.Acceptor);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                this.Acceptor
+            );
         }
 
         protected override void OnOpen(TimeSpan timeout)
@@ -994,11 +1328,16 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             ICommunicationObject[] communicationObjects;
-            ICommunicationObject communicationObject = this.UserNameTokenAuthenticator as ICommunicationObject;
+            ICommunicationObject communicationObject =
+                this.UserNameTokenAuthenticator as ICommunicationObject;
             if (communicationObject == null)
             {
                 if (this.IsAuthenticationSupported)
@@ -1009,7 +1348,11 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                communicationObjects = new ICommunicationObject[] { this.Acceptor, communicationObject };
+                communicationObjects = new ICommunicationObject[]
+                {
+                    this.Acceptor,
+                    communicationObject,
+                };
             }
 
             if (this.useWebSocketTransport)
@@ -1021,11 +1364,19 @@ namespace System.ServiceModel.Channels
                     this.webSocketLifetimeManager,
                     base.OnBeginClose,
                     base.OnEndClose,
-                    communicationObjects);
+                    communicationObjects
+                );
             }
             else
             {
-                return new ChainedCloseAsyncResult(timeoutHelper.RemainingTime(), callback, state, base.OnBeginClose, base.OnEndClose, communicationObjects);
+                return new ChainedCloseAsyncResult(
+                    timeoutHelper.RemainingTime(),
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    communicationObjects
+                );
             }
         }
 
@@ -1033,7 +1384,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.useWebSocketTransport)
             {
-                LifetimeWrappedCloseAsyncResult<ServerWebSocketTransportDuplexSessionChannel>.End(result);
+                LifetimeWrappedCloseAsyncResult<ServerWebSocketTransportDuplexSessionChannel>.End(
+                    result
+                );
             }
             else
             {
@@ -1077,7 +1430,11 @@ namespace System.ServiceModel.Channels
             return Acceptor.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return Acceptor.BeginWaitForChannel(timeout, callback, state);
         }
@@ -1087,17 +1444,20 @@ namespace System.ServiceModel.Channels
             return Acceptor.EndWaitForChannel(result);
         }
 
-        internal override IAsyncResult BeginHttpContextReceived(HttpRequestContext context,
-                                                        Action acceptorCallback,
-                                                        AsyncCallback callback,
-                                                        object state)
+        internal override IAsyncResult BeginHttpContextReceived(
+            HttpRequestContext context,
+            Action acceptorCallback,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HttpContextReceivedAsyncResult<TChannel>(
                 context,
                 acceptorCallback,
                 this,
                 callback,
-                state);
+                state
+            );
         }
 
         internal override bool EndHttpContextReceived(IAsyncResult result)
@@ -1110,7 +1470,13 @@ namespace System.ServiceModel.Channels
             HttpMessageHandler innerPipeline;
             if (this.UseWebSocketTransport)
             {
-                innerPipeline = new DefaultWebSocketConnectionHandler(this.WebSocketSettings.SubProtocol, this.currentWebSocketVersion, this.MessageVersion, this.MessageEncoderFactory, this.TransferMode);
+                innerPipeline = new DefaultWebSocketConnectionHandler(
+                    this.WebSocketSettings.SubProtocol,
+                    this.currentWebSocketVersion,
+                    this.MessageVersion,
+                    this.MessageEncoderFactory,
+                    this.TransferMode
+                );
                 if (httpMessageHandlerFactory != null)
                 {
                     innerPipeline = httpMessageHandlerFactory.Create(innerPipeline);
@@ -1123,14 +1489,22 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                innerPipeline = httpMessageHandlerFactory.Create(new ChannelModelIntegrationHandler());
+                innerPipeline = httpMessageHandlerFactory.Create(
+                    new ChannelModelIntegrationHandler()
+                );
             }
 
             if (innerPipeline == null)
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.GetString(SR.HttpMessageHandlerChannelFactoryNullPipeline,
-                        httpMessageHandlerFactory.GetType().Name, typeof(HttpRequestContext).Name)));
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpMessageHandlerChannelFactoryNullPipeline,
+                            httpMessageHandlerFactory.GetType().Name,
+                            typeof(HttpRequestContext).Name
+                        )
+                    )
+                );
             }
 
             this.transportIntegrationHandler = new TransportIntegrationHandler(innerPipeline);
@@ -1148,18 +1522,29 @@ namespace System.ServiceModel.Channels
                 ProtocolException protocolException = (ProtocolException)ex;
                 HttpStatusCode statusCode = HttpStatusCode.BadRequest;
                 string statusDescription = string.Empty;
-                if (protocolException.Data.Contains(HttpChannelUtilities.HttpStatusCodeExceptionKey))
+                if (
+                    protocolException.Data.Contains(HttpChannelUtilities.HttpStatusCodeExceptionKey)
+                )
                 {
-                    statusCode = (HttpStatusCode)protocolException.Data[HttpChannelUtilities.HttpStatusCodeExceptionKey];
+                    statusCode = (HttpStatusCode)
+                        protocolException.Data[HttpChannelUtilities.HttpStatusCodeExceptionKey];
                     protocolException.Data.Remove(HttpChannelUtilities.HttpStatusCodeExceptionKey);
                 }
-                if (protocolException.Data.Contains(HttpChannelUtilities.HttpStatusDescriptionExceptionKey))
+                if (
+                    protocolException.Data.Contains(
+                        HttpChannelUtilities.HttpStatusDescriptionExceptionKey
+                    )
+                )
                 {
-                    statusDescription = (string)protocolException.Data[HttpChannelUtilities.HttpStatusDescriptionExceptionKey];
-                    protocolException.Data.Remove(HttpChannelUtilities.HttpStatusDescriptionExceptionKey);
+                    statusDescription = (string)
+                        protocolException.Data[
+                            HttpChannelUtilities.HttpStatusDescriptionExceptionKey
+                        ];
+                    protocolException.Data.Remove(
+                        HttpChannelUtilities.HttpStatusDescriptionExceptionKey
+                    );
                 }
                 context.SendResponseAndClose(statusCode, statusDescription);
-
             }
             else
             {
@@ -1218,20 +1603,24 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        class HttpContextReceivedAsyncResult<TListenerChannel> : TraceAsyncResult where TListenerChannel : class, IChannel
+        class HttpContextReceivedAsyncResult<TListenerChannel> : TraceAsyncResult
+            where TListenerChannel : class, IChannel
         {
-            static AsyncCallback onProcessInboundRequest = Fx.ThunkCallback(OnProcessInboundRequest);
+            static AsyncCallback onProcessInboundRequest = Fx.ThunkCallback(
+                OnProcessInboundRequest
+            );
             bool enqueued;
             HttpRequestContext context;
             Action acceptorCallback;
             HttpChannelListener<TListenerChannel> listener;
 
             public HttpContextReceivedAsyncResult(
-                                                HttpRequestContext requestContext,
-                                                Action acceptorCallback,
-                                                HttpChannelListener<TListenerChannel> listener,
-                                                AsyncCallback callback,
-                                                object state)
+                HttpRequestContext requestContext,
+                Action acceptorCallback,
+                HttpChannelListener<TListenerChannel> listener,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.context = requestContext;
@@ -1246,7 +1635,9 @@ namespace System.ServiceModel.Channels
 
             public static bool End(IAsyncResult result)
             {
-                return AsyncResult.End<HttpContextReceivedAsyncResult<TListenerChannel>>(result).enqueued;
+                return AsyncResult
+                    .End<HttpContextReceivedAsyncResult<TListenerChannel>>(result)
+                    .enqueued;
             }
 
             static void OnProcessInboundRequest(IAsyncResult result)
@@ -1256,7 +1647,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                HttpContextReceivedAsyncResult<TListenerChannel> thisPtr = (HttpContextReceivedAsyncResult<TListenerChannel>)result.AsyncState;
+                HttpContextReceivedAsyncResult<TListenerChannel> thisPtr =
+                    (HttpContextReceivedAsyncResult<TListenerChannel>)result.AsyncState;
                 Exception completionException = null;
 
                 try
@@ -1289,22 +1681,30 @@ namespace System.ServiceModel.Channels
 
                     if (listener.UseWebSocketTransport && !context.IsWebSocketRequest)
                     {
-                        this.context.SendResponseAndClose(HttpStatusCode.BadRequest, SR.GetString(SR.WebSocketEndpointOnlySupportWebSocketError));
+                        this.context.SendResponseAndClose(
+                            HttpStatusCode.BadRequest,
+                            SR.GetString(SR.WebSocketEndpointOnlySupportWebSocketError)
+                        );
                         return AsyncCompletionResult.Completed;
                     }
 
                     if (!listener.UseWebSocketTransport && context.IsWebSocketRequest)
                     {
-                        this.context.SendResponseAndClose(HttpStatusCode.BadRequest, SR.GetString(SR.WebSocketEndpointDoesNotSupportWebSocketError));
+                        this.context.SendResponseAndClose(
+                            HttpStatusCode.BadRequest,
+                            SR.GetString(SR.WebSocketEndpointDoesNotSupportWebSocketError)
+                        );
                         return AsyncCompletionResult.Completed;
                     }
 
                     try
                     {
-                        IAsyncResult result = context.BeginProcessInboundRequest(listener.Acceptor as ReplyChannelAcceptor,
-                                                                                            this.acceptorCallback,
-                                                                                            onProcessInboundRequest,
-                                                                                            this);
+                        IAsyncResult result = context.BeginProcessInboundRequest(
+                            listener.Acceptor as ReplyChannelAcceptor,
+                            this.acceptorCallback,
+                            onProcessInboundRequest,
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             this.EndInboundProcessAndEnqueue(result);
@@ -1319,7 +1719,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception ex)
                 {
-                    // containment -- we abort the context in all error cases, no additional containment action needed                
+                    // containment -- we abort the context in all error cases, no additional containment action needed
                     abort = true;
                     if (!ContextReceiveExceptionHandled(ex))
                     {
@@ -1348,7 +1748,12 @@ namespace System.ServiceModel.Channels
 
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.HttpAuthFailed, SR.GetString(SR.TraceCodeHttpAuthFailed), this);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.HttpAuthFailed,
+                            SR.GetString(SR.TraceCodeHttpAuthFailed),
+                            this
+                        );
                     }
 
                     return false;
@@ -1375,7 +1780,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception ex)
                 {
-                    // containment -- we abort the context in all error cases, no additional containment action needed                                    
+                    // containment -- we abort the context in all error cases, no additional containment action needed
                     if (!ContextReceiveExceptionHandled(ex))
                     {
                         throw;
@@ -1392,7 +1797,10 @@ namespace System.ServiceModel.Channels
 
             void EndInboundProcessAndEnqueue(IAsyncResult result)
             {
-                Fx.Assert(result != null, "Trying to complete without issuing a BeginProcessInboundRequest.");
+                Fx.Assert(
+                    result != null,
+                    "Trying to complete without issuing a BeginProcessInboundRequest."
+                );
                 context.EndProcessInboundRequest(result);
 
                 //We have finally managed to enqueue the message.
@@ -1400,9 +1808,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class LifetimeWrappedCloseAsyncResult<TCommunicationObject> : AsyncResult where TCommunicationObject : CommunicationObject
+        class LifetimeWrappedCloseAsyncResult<TCommunicationObject> : AsyncResult
+            where TCommunicationObject : CommunicationObject
         {
-            static AsyncCompletion handleLifetimeManagerClose = new AsyncCompletion(HandleLifetimeManagerClose);
+            static AsyncCompletion handleLifetimeManagerClose = new AsyncCompletion(
+                HandleLifetimeManagerClose
+            );
             static AsyncCompletion handleChannelClose = new AsyncCompletion(HandleChannelClose);
 
             TimeoutHelper timeoutHelper;
@@ -1412,7 +1823,15 @@ namespace System.ServiceModel.Channels
             ChainedBeginHandler begin1;
             ChainedEndHandler end1;
 
-            public LifetimeWrappedCloseAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, CommunicationObjectManager<TCommunicationObject> communicationObjectManager, ChainedBeginHandler begin1, ChainedEndHandler end1, ICommunicationObject[] communicationObjects)
+            public LifetimeWrappedCloseAsyncResult(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state,
+                CommunicationObjectManager<TCommunicationObject> communicationObjectManager,
+                ChainedBeginHandler begin1,
+                ChainedEndHandler end1,
+                ICommunicationObject[] communicationObjects
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -1424,7 +1843,8 @@ namespace System.ServiceModel.Channels
                 IAsyncResult result = communicationObjectManager.BeginClose(
                     this.timeoutHelper.RemainingTime(),
                     PrepareAsyncCompletion(handleLifetimeManagerClose),
-                    this);
+                    this
+                );
 
                 bool completeSelf = SyncContinue(result);
 
@@ -1441,17 +1861,19 @@ namespace System.ServiceModel.Channels
 
             static bool HandleLifetimeManagerClose(IAsyncResult result)
             {
-                LifetimeWrappedCloseAsyncResult<TCommunicationObject> thisPtr = (LifetimeWrappedCloseAsyncResult<TCommunicationObject>)result.AsyncState;
+                LifetimeWrappedCloseAsyncResult<TCommunicationObject> thisPtr =
+                    (LifetimeWrappedCloseAsyncResult<TCommunicationObject>)result.AsyncState;
                 thisPtr.communicationObjectManager.EndClose(result);
 
-                // begin second step of the close... 
+                // begin second step of the close...
                 ChainedCloseAsyncResult closeResult = new ChainedCloseAsyncResult(
                     thisPtr.timeoutHelper.RemainingTime(),
                     thisPtr.PrepareAsyncCompletion(handleChannelClose),
                     thisPtr,
                     thisPtr.begin1,
                     thisPtr.end1,
-                    thisPtr.communicationObjects);
+                    thisPtr.communicationObjects
+                );
 
                 return thisPtr.SyncContinue(closeResult);
             }
@@ -1475,9 +1897,7 @@ namespace System.ServiceModel.Channels
         /// </summary>
         /// <param name="innerChannel">The inner <see cref="HttpMessageHandler"/> on which we send the <see cref="HttpRequestMessage"/>.</param>
         public TransportIntegrationHandler(HttpMessageHandler innerChannel)
-            : base(innerChannel)
-        {
-        }
+            : base(innerChannel) { }
 
         /// <summary>
         /// Submits an <see cref="HttpRequestMessage"/> on the inner channel asynchronously.
@@ -1485,52 +1905,74 @@ namespace System.ServiceModel.Channels
         /// <param name="request"><see cref="HttpRequestMessage"/> to submit</param>
         /// <param name="cancellationToken">Token used to cancel operation.</param>
         /// <returns>A <see cref="Task&lt;T&gt;"/> representing the operation.</returns>
-        public Task<HttpResponseMessage> ProcessPipelineAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public Task<HttpResponseMessage> ProcessPipelineAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
-            return base.SendAsync(request, cancellationToken).ContinueWith(task =>
-                {
-                    HttpResponseMessage httpResponse;
-                    if (task.IsFaulted) 
+            return base.SendAsync(request, cancellationToken)
+                .ContinueWith(
+                    task =>
                     {
-                        if (Fx.IsFatal(task.Exception))
+                        HttpResponseMessage httpResponse;
+                        if (task.IsFaulted)
                         {
-                            throw task.Exception;
-                        }
+                            if (Fx.IsFatal(task.Exception))
+                            {
+                                throw task.Exception;
+                            }
 
-                        // We must inspect task.Exception -- otherwise it is automatically rethrown.
-                        FxTrace.Exception.AsError<FaultException>(task.Exception);
-                        httpResponse = TraceFaultAndGetResponseMessasge(request);
-                    }
-                    else if (task.IsCanceled)
-                    {
-                        HttpPipeline pipeline = HttpPipeline.GetHttpPipeline(request);
-                        if (TD.HttpPipelineTimeoutExceptionIsEnabled())
-                        {
-                            TD.HttpPipelineTimeoutException(pipeline != null ? pipeline.EventTraceActivity : null);
-                        }
-
-                        FxTrace.Exception.AsError(new TimeoutException(SR.GetString(SR.HttpPipelineOperationCanceledError)));
-                        pipeline.Cancel();
-                        httpResponse = null;
-                    }
-                    else
-                    {
-                        httpResponse = task.Result;
-                        if (httpResponse == null)
-                        {
-                            FxTrace.Exception.AsError(new NotSupportedException(SR.GetString(SR.HttpPipelineNotSupportNullResponseMessage, typeof(DelegatingHandler).Name, typeof(HttpResponseMessage).Name)));
+                            // We must inspect task.Exception -- otherwise it is automatically rethrown.
+                            FxTrace.Exception.AsError<FaultException>(task.Exception);
                             httpResponse = TraceFaultAndGetResponseMessasge(request);
                         }
-                    }
+                        else if (task.IsCanceled)
+                        {
+                            HttpPipeline pipeline = HttpPipeline.GetHttpPipeline(request);
+                            if (TD.HttpPipelineTimeoutExceptionIsEnabled())
+                            {
+                                TD.HttpPipelineTimeoutException(
+                                    pipeline != null ? pipeline.EventTraceActivity : null
+                                );
+                            }
 
-                    return httpResponse;
-                },
-                TaskContinuationOptions.ExecuteSynchronously);
+                            FxTrace.Exception.AsError(
+                                new TimeoutException(
+                                    SR.GetString(SR.HttpPipelineOperationCanceledError)
+                                )
+                            );
+                            pipeline.Cancel();
+                            httpResponse = null;
+                        }
+                        else
+                        {
+                            httpResponse = task.Result;
+                            if (httpResponse == null)
+                            {
+                                FxTrace.Exception.AsError(
+                                    new NotSupportedException(
+                                        SR.GetString(
+                                            SR.HttpPipelineNotSupportNullResponseMessage,
+                                            typeof(DelegatingHandler).Name,
+                                            typeof(HttpResponseMessage).Name
+                                        )
+                                    )
+                                );
+                                httpResponse = TraceFaultAndGetResponseMessasge(request);
+                            }
+                        }
+
+                        return httpResponse;
+                    },
+                    TaskContinuationOptions.ExecuteSynchronously
+                );
         }
 
         static HttpResponseMessage TraceFaultAndGetResponseMessasge(HttpRequestMessage request)
         {
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            HttpResponseMessage response = new HttpResponseMessage(
+                HttpStatusCode.InternalServerError
+            );
             response.RequestMessage = request;
 
             if (TD.HttpPipelineFaultedIsEnabled())
@@ -1555,7 +1997,10 @@ namespace System.ServiceModel.Channels
         /// <param name="request"><see cref="HttpRequestMessage"/> to submit</param>
         /// <param name="cancellationToken">Token used to cancel operation.</param>
         /// <returns>A <see cref="Task&lt;T&gt;"/> representing the operation.</returns>
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {

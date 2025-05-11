@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CoreXml.Test.XLinq;
 using Xunit;
 
@@ -38,16 +38,22 @@ namespace System.Xml.Linq.Tests
         //      - local vs. in-scope
         //      - default redef.
 
-        [InlineData("PI", "click", "PI", "click", true)]        // normal
-        [InlineData("PI", "PI", "PI", "PI", true)]              // target=data
-        [InlineData("PI", "", "PI", "", true)]                  // data = ''
-        [InlineData("PI", "click", "PI", "", false)]            // data1!=data2
+        [InlineData("PI", "click", "PI", "click", true)] // normal
+        [InlineData("PI", "PI", "PI", "PI", true)] // target=data
+        [InlineData("PI", "", "PI", "", true)] // data = ''
+        [InlineData("PI", "click", "PI", "", false)] // data1!=data2
         [InlineData("AAAAP", "click", "AAAAQ", "click", false)] // target1!=target2
-        [InlineData("AAAAP", "AAAAQ", "AAAAP", "AAAAQ", true)]  // hashconflict I
-        [InlineData("PA", "PA", "PI", "PI", false)]             // data=target
+        [InlineData("AAAAP", "AAAAQ", "AAAAP", "AAAAQ", true)] // hashconflict I
+        [InlineData("PA", "PA", "PI", "PI", false)] // data=target
         [InlineData("AAAAP", "AAAAQ", "AAAAQ", "AAAAP", false)] // hashconflict II
         [Theory]
-        public void ProcessingInstruction(string target1, string data1, string target2, string data2, bool checkHashCode)
+        public void ProcessingInstruction(
+            string target1,
+            string data1,
+            string target2,
+            string data2,
+            bool checkHashCode
+        )
         {
             var p1 = new XProcessingInstruction(target1, data1);
             var p2 = new XProcessingInstruction(target2, data2);
@@ -61,10 +67,10 @@ namespace System.Xml.Linq.Tests
         }
 
         [InlineData("AAAAP", "AAAAQ", false)] // not equals, hashconflict
-        [InlineData("AAAAP", "AAAAP", true)]  // equals
-        [InlineData("  ", " ", false)]        // Whitespace (negative)
-        [InlineData(" ", " ", true)]          // Whitespace
-        [InlineData("", "", true)]            // Empty
+        [InlineData("AAAAP", "AAAAP", true)] // equals
+        [InlineData("  ", " ", false)] // Whitespace (negative)
+        [InlineData(" ", " ", true)] // Whitespace
+        [InlineData("", "", true)] // Empty
         [Theory]
         public void Comment(string value1, string value2, bool checkHashCode)
         {
@@ -78,12 +84,16 @@ namespace System.Xml.Linq.Tests
             VerifyComparison(checkHashCode, c1, c2);
         }
 
-        [InlineData(new[] { "root", "a", "b", "c" }, new[] { "root", "a", "b", "c" }, true)]           // all field
-        [InlineData(new[] { "root", null, null, null }, new[] { "root", null, null, null }, true)]     // all nulls
-        [InlineData(new[] { "root", null, null, "data" }, new[] { "root", null, null, "data" }, true)] // internal subset only
-        [InlineData(new[] { "A", "", "", "" }, new[] { "B", "", "", "" }, false)]                      // (negative) : name diff
-        [InlineData(new[] { "A", null, null, "aa" }, new[] { "A", null, null, "bb" }, false)]          // (negative) : subset diff
-        [InlineData(new[] { "A", "", "", "" }, new[] { "A", null, null, null }, false)]                // (negative) : null vs. empty
+        [InlineData(new[] { "root", "a", "b", "c" }, new[] { "root", "a", "b", "c" }, true)] // all field
+        [InlineData(new[] { "root", null, null, null }, new[] { "root", null, null, null }, true)] // all nulls
+        [InlineData(
+            new[] { "root", null, null, "data" },
+            new[] { "root", null, null, "data" },
+            true
+        )] // internal subset only
+        [InlineData(new[] { "A", "", "", "" }, new[] { "B", "", "", "" }, false)] // (negative) : name diff
+        [InlineData(new[] { "A", null, null, "aa" }, new[] { "A", null, null, "bb" }, false)] // (negative) : subset diff
+        [InlineData(new[] { "A", "", "", "" }, new[] { "A", null, null, null }, false)] // (negative) : null vs. empty
         [Theory]
         public void DocumentType(string[] docType1, string[] docType2, bool checkHashCode)
         {
@@ -93,10 +103,10 @@ namespace System.Xml.Linq.Tests
         }
 
         [InlineData("same", "different", false)] // different
-        [InlineData("same", "same", true)]       // same
-        [InlineData("", "", true)]               // Empty
-        [InlineData(" ", " ", true)]             // Whitespace
-        [InlineData("\n", " ", false)]           // Whitespace (negative)
+        [InlineData("same", "same", true)] // same
+        [InlineData("", "", true)] // Empty
+        [InlineData(" ", " ", true)] // Whitespace
+        [InlineData("\n", " ", false)] // Whitespace (negative)
         [Theory]
         public void Text(string value1, string value2, bool checkHashCode)
         {
@@ -110,10 +120,10 @@ namespace System.Xml.Linq.Tests
         }
 
         [InlineData("same", "different", false)] // different
-        [InlineData("same", "same", true)]       // same
-        [InlineData("", "", true)]               // Empty
-        [InlineData(" ", " ", true)]             // Whitespace
-        [InlineData("\n", " ", false)]           // Whitespace (negative)
+        [InlineData("same", "same", true)] // same
+        [InlineData("", "", true)] // Empty
+        [InlineData(" ", " ", true)] // Whitespace
+        [InlineData("\n", " ", false)] // Whitespace (negative)
         [Theory]
         public void CData(string value1, string value2, bool checkHashCode)
         {
@@ -155,17 +165,17 @@ namespace System.Xml.Linq.Tests
             VerifyComparison(false, e.LastNode, together);
         }
 
-        [InlineData("<A/>", "<A></A>", false)]                                            // smoke
-        [InlineData("<A/>", "<A Id='a'/>", false)]                                        // attribute missing
-        [InlineData("<A Id='a'/>", "<A Id='a'/>", true)]                                  // attributes
-        [InlineData("<A at='1' Id='a'/>", "<A Id='a' at='1'/>", false)]                   // attributes (same, different order)
-        [InlineData("<A at='1' Id='a'/>", "<A at='1' Id='a'/>", true)]                    // attributes (same, same order)
-        [InlineData("<A at='1' Id='a'/>", "<A at='1' Id='ab'/>", false)]                  // attributes (same, same order, different value)
-        [InlineData("<A p:at='1' xmlns:p='nsp'/>", "<A p:at='1' xmlns:p='nsp'/>", true)]  // attributes (same, same order, namespace decl)
+        [InlineData("<A/>", "<A></A>", false)] // smoke
+        [InlineData("<A/>", "<A Id='a'/>", false)] // attribute missing
+        [InlineData("<A Id='a'/>", "<A Id='a'/>", true)] // attributes
+        [InlineData("<A at='1' Id='a'/>", "<A Id='a' at='1'/>", false)] // attributes (same, different order)
+        [InlineData("<A at='1' Id='a'/>", "<A at='1' Id='a'/>", true)] // attributes (same, same order)
+        [InlineData("<A at='1' Id='a'/>", "<A at='1' Id='ab'/>", false)] // attributes (same, same order, different value)
+        [InlineData("<A p:at='1' xmlns:p='nsp'/>", "<A p:at='1' xmlns:p='nsp'/>", true)] // attributes (same, same order, namespace decl)
         [InlineData("<A p:at='1' xmlns:p='nsp'/>", "<A q:at='1' xmlns:q='nsp'/>", false)] // attributes (same, same order, namespace decl, different prefix)
-        [InlineData("<A>text</A>", "<A>text</A>", true)]                                  // String content
-        [InlineData("<A>text<?PI click?></A>", "<A><?PI click?>text</A>", false)]         // String + PI content (negative)
-        [InlineData("<A>text<?PI click?></A>", "<A>text<?PI click?></A>", true)]          // String + PI content
+        [InlineData("<A>text</A>", "<A>text</A>", true)] // String content
+        [InlineData("<A>text<?PI click?></A>", "<A><?PI click?>text</A>", false)] // String + PI content (negative)
+        [InlineData("<A>text<?PI click?></A>", "<A>text<?PI click?></A>", true)] // String + PI content
         [Theory]
         public void Element(string text1, string text2, bool checkHashCode)
         {
@@ -196,7 +206,12 @@ namespace System.Xml.Linq.Tests
         {
             XElement e1 = new XElement("A", "string_content");
             XElement e2 = new XElement("A", new XText("string"), new XText("_content"));
-            XElement e3 = new XElement("A", new XText("string"), new XComment("comm"), new XText("_content"));
+            XElement e3 = new XElement(
+                "A",
+                new XText("string"),
+                new XComment("comm"),
+                new XText("_content")
+            );
             XElement e4 = new XElement("A", new XText("string"), new XCData("_content"));
 
             VerifyComparison(true, e1, e2);
@@ -250,8 +265,14 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void Element5()
         {
-            XElement e1 = XElement.Parse("<A xmlns='nsa'><B><!--comm--><C xmlns=''/></B></A>").Elements().First();
-            XElement e2 = XElement.Parse("<A xmlns:p='nsa'><p:B><!--comm--><C xmlns=''/></p:B></A>").Elements().First();
+            XElement e1 = XElement
+                .Parse("<A xmlns='nsa'><B><!--comm--><C xmlns=''/></B></A>")
+                .Elements()
+                .First();
+            XElement e2 = XElement
+                .Parse("<A xmlns:p='nsa'><p:B><!--comm--><C xmlns=''/></p:B></A>")
+                .Elements()
+                .First();
             VerifyComparison(true, e1, e2);
             // Should always be the same ...
             VerifyComparison(true, e1, e1);
@@ -265,17 +286,39 @@ namespace System.Xml.Linq.Tests
 
             object[] content = new object[]
             {
-                "text1", new object[] { new string[] { "t1", null, "t2" }, "t1t2" }, new XProcessingInstruction("PI1", ""),
-                new XProcessingInstruction("PI1", ""), new XProcessingInstruction("PI2", "click"),
-                new object[] { new XElement("X", new XAttribute("id", "a1"), new XText("hula")), new XElement("X", new XText("hula"), new XAttribute("id", "a1")) },
+                "text1",
+                new object[] { new string[] { "t1", null, "t2" }, "t1t2" },
+                new XProcessingInstruction("PI1", ""),
+                new XProcessingInstruction("PI1", ""),
+                new XProcessingInstruction("PI2", "click"),
+                new object[]
+                {
+                    new XElement("X", new XAttribute("id", "a1"), new XText("hula")),
+                    new XElement("X", new XText("hula"), new XAttribute("id", "a1")),
+                },
                 new XElement("{nsp}X", new XAttribute("id", "a1"), "hula"),
                 new object[] { new XText("koho"), helper.Nodes() },
-                new object[] { new XText[] { new XText("hele"), new XText(""), new XCData("youuu") }, new XText[] { new XText("hele"), new XCData("youuu") } },
-                new XComment(""), new XComment("comment"),
-                new XAttribute("id1", "nono"), new XAttribute("id3", "nono2"), new XAttribute("{nsa}id3", "nono2"),
-                new XAttribute("{nsb}id3", "nono2"), new XAttribute("xmlns", "default"),
-                new XAttribute(XNamespace.Xmlns + "a", "nsa"), new XAttribute(XNamespace.Xmlns + "p", "nsp"),
-                new XElement("{nsa}X", new XAttribute("id", "a1"), "hula", new XAttribute("{nsb}aB", "hele"), new XElement("{nsc}C"))
+                new object[]
+                {
+                    new XText[] { new XText("hele"), new XText(""), new XCData("youuu") },
+                    new XText[] { new XText("hele"), new XCData("youuu") },
+                },
+                new XComment(""),
+                new XComment("comment"),
+                new XAttribute("id1", "nono"),
+                new XAttribute("id3", "nono2"),
+                new XAttribute("{nsa}id3", "nono2"),
+                new XAttribute("{nsb}id3", "nono2"),
+                new XAttribute("xmlns", "default"),
+                new XAttribute(XNamespace.Xmlns + "a", "nsa"),
+                new XAttribute(XNamespace.Xmlns + "p", "nsp"),
+                new XElement(
+                    "{nsa}X",
+                    new XAttribute("id", "a1"),
+                    "hula",
+                    new XAttribute("{nsb}aB", "hele"),
+                    new XElement("{nsc}C")
+                ),
             };
 
             foreach (object[] objs in content.NonRecursiveVariations(4))
@@ -288,7 +331,10 @@ namespace System.Xml.Linq.Tests
             }
         }
 
-        private IEnumerable<object> ExpandAndProtectTextNodes(IEnumerable<object> source, int position)
+        private IEnumerable<object> ExpandAndProtectTextNodes(
+            IEnumerable<object> source,
+            int position
+        )
         {
             foreach (object o in source)
             {
@@ -315,13 +361,18 @@ namespace System.Xml.Linq.Tests
                 new object[] { new string[] { " ", null, " " }, "  " },
                 new object[] { new string[] { " ", " \t" }, new XText("  \t") },
                 new object[] { new XText[] { new XText(" "), new XText("\t") }, new XText(" \t") },
-                new XDocumentType("root", "", "", ""), new XProcessingInstruction("PI1", ""), new XText("\n"),
-                new XText("\t"), new XText("       "), new XProcessingInstruction("PI1", ""), new XElement("myroot"),
+                new XDocumentType("root", "", "", ""),
+                new XProcessingInstruction("PI1", ""),
+                new XText("\n"),
+                new XText("\t"),
+                new XText("       "),
+                new XProcessingInstruction("PI1", ""),
+                new XElement("myroot"),
                 new XProcessingInstruction("PI2", "click"),
                 new object[]
                 {
                     new XElement("X", new XAttribute("id", "a1"), new XText("hula")),
-                    new XElement("X", new XText("hula"), new XAttribute("id", "a1"))
+                    new XElement("X", new XText("hula"), new XAttribute("id", "a1")),
                 },
                 new XComment(""),
                 new XComment("comment"),
@@ -335,8 +386,11 @@ namespace System.Xml.Linq.Tests
                 {
                     object[] o1 = ExpandAndProtectTextNodes(objs, 0).ToArray();
                     object[] o2 = ExpandAndProtectTextNodes(objs, 1).ToArray();
-                    if (o1.Select(x => new ExpectedValue(false, x)).IsXDocValid()
-                        || o2.Select(x => new ExpectedValue(false, x)).IsXDocValid()) continue;
+                    if (
+                        o1.Select(x => new ExpectedValue(false, x)).IsXDocValid()
+                        || o2.Select(x => new ExpectedValue(false, x)).IsXDocValid()
+                    )
+                        continue;
                     doc1 = new XDocument(o1);
                     doc2 = new XDocument(o2);
                     VerifyComparison(true, doc1, doc2);
@@ -348,8 +402,10 @@ namespace System.Xml.Linq.Tests
                 }
                 finally
                 {
-                    if (doc1 != null) doc1.RemoveNodes();
-                    if (doc2 != null) doc2.RemoveNodes();
+                    if (doc1 != null)
+                        doc1.RemoveNodes();
+                    if (doc2 != null)
+                        doc2.RemoveNodes();
                 }
             }
         }
@@ -359,21 +415,41 @@ namespace System.Xml.Linq.Tests
         [Theory]
         public void Document4(bool checkHashCode)
         {
-            var doc1 = new XDocument(new object[] { (checkHashCode ? new XDocumentType("root", "", "", "") : null), new XElement("root") });
-            var doc2 = new XDocument(new object[] { new XDocumentType("root", "", "", ""), new XElement("root") });
+            var doc1 = new XDocument(
+                new object[]
+                {
+                    (checkHashCode ? new XDocumentType("root", "", "", "") : null),
+                    new XElement("root"),
+                }
+            );
+            var doc2 = new XDocument(
+                new object[] { new XDocumentType("root", "", "", ""), new XElement("root") }
+            );
             VerifyComparison(checkHashCode, doc1, doc2);
         }
 
         private void VerifyComparison(bool expected, XNode n1, XNode n2)
         {
-            Assert.Equal(XNode.EqualityComparer.Equals(n1, n2), XNode.EqualityComparer.Equals(n2, n1)); // commutative
-            Assert.Equal(((IEqualityComparer)XNode.EqualityComparer).Equals(n1, n2), ((IEqualityComparer)XNode.EqualityComparer).Equals(n2, n1)); // commutative - interface
+            Assert.Equal(
+                XNode.EqualityComparer.Equals(n1, n2),
+                XNode.EqualityComparer.Equals(n2, n1)
+            ); // commutative
+            Assert.Equal(
+                ((IEqualityComparer)XNode.EqualityComparer).Equals(n1, n2),
+                ((IEqualityComparer)XNode.EqualityComparer).Equals(n2, n1)
+            ); // commutative - interface
             Assert.Equal(expected, XNode.EqualityComparer.Equals(n1, n2));
             Assert.Equal(expected, ((IEqualityComparer)XNode.EqualityComparer).Equals(n1, n2));
             if (expected)
             {
-                Assert.Equal(XNode.EqualityComparer.GetHashCode(n1), XNode.EqualityComparer.GetHashCode(n2));
-                Assert.Equal(((IEqualityComparer)XNode.EqualityComparer).GetHashCode(n1), ((IEqualityComparer)XNode.EqualityComparer).GetHashCode(n2));
+                Assert.Equal(
+                    XNode.EqualityComparer.GetHashCode(n1),
+                    XNode.EqualityComparer.GetHashCode(n2)
+                );
+                Assert.Equal(
+                    ((IEqualityComparer)XNode.EqualityComparer).GetHashCode(n1),
+                    ((IEqualityComparer)XNode.EqualityComparer).GetHashCode(n2)
+                );
             }
         }
 

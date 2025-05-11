@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -169,7 +168,6 @@ namespace Moq.Tests
         }
 
         sealed class FilteringVisitor : ExpressionVisitor
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private readonly Func<Expression, bool> predicate;

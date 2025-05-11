@@ -33,271 +33,301 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Utilities {
+namespace MonoTests.Microsoft.Build.Utilities
+{
+    [TestFixture]
+    public class TaskItemTest
+    {
+        ITaskItem item,
+            item1,
+            item2;
+        ICollection metadataNames;
 
-	[TestFixture]
-	public class TaskItemTest {
+        [SetUp]
+        public void SetUp()
+        {
+            string[] temp = new string[]
+            {
+                "FullPath",
+                "RootDir",
+                "Filename",
+                "Extension",
+                "RelativeDir",
+                "Directory",
+                "RecursiveDir",
+                "Identity",
+                "ModifiedTime",
+                "CreatedTime",
+                "AccessedTime",
+            };
+            ArrayList al = new ArrayList();
+            foreach (string s in temp)
+                al.Add(s);
+            metadataNames = al;
+        }
 
-		ITaskItem item,item1,item2;
-		ICollection metadataNames;
+        private bool CompareStringCollections(ICollection compared, ICollection reference)
+        {
+            Hashtable comparedHash;
+            comparedHash = CollectionsUtil.CreateCaseInsensitiveHashtable();
 
-		[SetUp]
-		public void SetUp ()
-		{
-			string[] temp = new string[] {"FullPath", "RootDir", "Filename", "Extension", "RelativeDir", "Directory",
-				"RecursiveDir", "Identity", "ModifiedTime", "CreatedTime", "AccessedTime"};
-			ArrayList al = new ArrayList ();
-			foreach (string s in temp)
-				al.Add (s);
-			metadataNames = al;
-		}
-		
-		private bool CompareStringCollections (ICollection compared, ICollection reference)
-		{
-			Hashtable comparedHash;
-			comparedHash = CollectionsUtil.CreateCaseInsensitiveHashtable ();
-			
-			foreach (string s in compared)
-				comparedHash.Add (s, null);
-			
-			foreach (string s in reference) {
-				if (comparedHash.ContainsKey (s) == false) {
-					return false;
-				}
-			}
-			
-			return true;
-		}
+            foreach (string s in compared)
+                comparedHash.Add(s, null);
 
-		public void TestCloneCustomMetadata ()
-		{
-			item = new TaskItem ();
-			item.SetMetadata ("AAA", "111");
-			item.SetMetadata ("aaa", "222");
-			item.SetMetadata ("BBB", "111");
+            foreach (string s in reference)
+            {
+                if (comparedHash.ContainsKey(s) == false)
+                {
+                    return false;
+                }
+            }
 
-			string [] metakeys = new string [] { "aaa", "BBB" };
-			IDictionary meta = item.CloneCustomMetadata ();
+            return true;
+        }
 
-			Assert.IsTrue (CompareStringCollections (meta.Keys, metakeys), "A1");
-			metakeys [0] = "aAa";
-			Assert.IsTrue (CompareStringCollections (meta.Keys, metakeys), "A2");
-			Assert.AreEqual ("222", meta ["aaa"], "A3");
-			Assert.AreEqual ("222", meta ["AAA"], "A4");
-			Assert.AreEqual ("222", meta ["aAa"], "A5");
-			Assert.AreEqual ("111", meta ["BbB"], "A5");
-		}
+        public void TestCloneCustomMetadata()
+        {
+            item = new TaskItem();
+            item.SetMetadata("AAA", "111");
+            item.SetMetadata("aaa", "222");
+            item.SetMetadata("BBB", "111");
 
-		[Test]
-		[Ignore ("NRE on .NET 2.0")]
-		public void TestCtor1 ()
-		{
-			new TaskItem ((ITaskItem) null);
-		}
+            string[] metakeys = new string[] { "aaa", "BBB" };
+            IDictionary meta = item.CloneCustomMetadata();
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestCtor2 ()
-		{
-			new TaskItem ((string) null);
-		}
+            Assert.IsTrue(CompareStringCollections(meta.Keys, metakeys), "A1");
+            metakeys[0] = "aAa";
+            Assert.IsTrue(CompareStringCollections(meta.Keys, metakeys), "A2");
+            Assert.AreEqual("222", meta["aaa"], "A3");
+            Assert.AreEqual("222", meta["AAA"], "A4");
+            Assert.AreEqual("222", meta["aAa"], "A5");
+            Assert.AreEqual("111", meta["BbB"], "A5");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestCtor3 ()
-		{
-			new TaskItem ((string) null, new Hashtable ());
-		}
+        [Test]
+        [Ignore("NRE on .NET 2.0")]
+        public void TestCtor1()
+        {
+            new TaskItem((ITaskItem)null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestCtor4 ()
-		{
-			new TaskItem ("itemspec", null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCtor2()
+        {
+            new TaskItem((string)null);
+        }
 
-		[Test]
-		public void TestCtor_EscapedSpecialChar ()
-		{
-			// If we instantiate with the *escaped* metadata, it's unescaped automatically
-			var metadata = "foo@2x.png";
-			var escapedMetadata = global::Microsoft.Build.BuildEngine.Utilities.Escape ("foo@2x.png");
-			var item = new TaskItem (escapedMetadata);
-			item.SetMetadata ("mine", escapedMetadata);
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCtor3()
+        {
+            new TaskItem((string)null, new Hashtable());
+        }
 
-			Assert.AreEqual (metadata, item.ItemSpec, "#1");
-			Assert.AreEqual (metadata, item.GetMetadata ("Identity"), "#2");
-			Assert.AreEqual (Path.GetFileNameWithoutExtension (metadata), item.GetMetadata ("FileName"), "#3");
-			Assert.IsTrue (item.GetMetadata ("FullPath").EndsWith (metadata), "#4");
-			Assert.AreEqual (metadata, item.GetMetadata ("mine"), "#5");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCtor4()
+        {
+            new TaskItem("itemspec", null);
+        }
 
-		[Test]
-		public void TestCtor_EscapedSpecialChar_BrokenEscaping ()
-		{
-			// This is badly escaped, but MSBuild does not care.
-			var metadata = "foo%4@2x.png";
-			var item = new TaskItem (metadata);
+        [Test]
+        public void TestCtor_EscapedSpecialChar()
+        {
+            // If we instantiate with the *escaped* metadata, it's unescaped automatically
+            var metadata = "foo@2x.png";
+            var escapedMetadata = global::Microsoft.Build.BuildEngine.Utilities.Escape(
+                "foo@2x.png"
+            );
+            var item = new TaskItem(escapedMetadata);
+            item.SetMetadata("mine", escapedMetadata);
 
-			Assert.AreEqual (metadata, item.ItemSpec, "#1");
-			Assert.AreEqual (metadata, item.GetMetadata ("Identity"), "#2");
-			Assert.AreEqual (Path.GetFileNameWithoutExtension (metadata), item.GetMetadata ("FileName"), "#3");
-			Assert.IsTrue (item.GetMetadata ("FullPath").EndsWith (metadata), "#4");
-		}
+            Assert.AreEqual(metadata, item.ItemSpec, "#1");
+            Assert.AreEqual(metadata, item.GetMetadata("Identity"), "#2");
+            Assert.AreEqual(
+                Path.GetFileNameWithoutExtension(metadata),
+                item.GetMetadata("FileName"),
+                "#3"
+            );
+            Assert.IsTrue(item.GetMetadata("FullPath").EndsWith(metadata), "#4");
+            Assert.AreEqual(metadata, item.GetMetadata("mine"), "#5");
+        }
 
-		[Test]
-		public void TestCtor_UnescapedSpecialChar ()
-		{
-			// If we instantiate with unescaped metadata, we get the same value back
-			var metadata = "foo@2x.png";
-			var item = new TaskItem (metadata);
-			item.SetMetadata ("mine", metadata);
+        [Test]
+        public void TestCtor_EscapedSpecialChar_BrokenEscaping()
+        {
+            // This is badly escaped, but MSBuild does not care.
+            var metadata = "foo%4@2x.png";
+            var item = new TaskItem(metadata);
 
-			Assert.AreEqual (metadata, item.ItemSpec, "#1");
-			Assert.AreEqual (metadata, item.GetMetadata ("Identity"), "#2");
-			Assert.AreEqual (Path.GetFileNameWithoutExtension (metadata), item.GetMetadata ("FileName"), "#3");
-			Assert.IsTrue (item.GetMetadata ("FullPath").EndsWith (metadata), "#4");
-			Assert.AreEqual (metadata, item.GetMetadata ("mine"), "#5");
-		}
+            Assert.AreEqual(metadata, item.ItemSpec, "#1");
+            Assert.AreEqual(metadata, item.GetMetadata("Identity"), "#2");
+            Assert.AreEqual(
+                Path.GetFileNameWithoutExtension(metadata),
+                item.GetMetadata("FileName"),
+                "#3"
+            );
+            Assert.IsTrue(item.GetMetadata("FullPath").EndsWith(metadata), "#4");
+        }
 
-		[Test]
-		public void TestCopyConstructor ()
-		{
-			item1 = new TaskItem ("itemSpec");
-			item1.SetMetadata ("meta1", "val1");
-			item2 = new TaskItem (item1);
-			Assert.AreEqual (item1.GetMetadata ("meta1"), item2.GetMetadata ("meta1"), "A1");
-			item1.SetMetadata ("meta1", "val2");
-			Assert.AreEqual ("val2", item1.GetMetadata ("meta1"), "A2");
-			Assert.AreEqual ("val1", item2.GetMetadata ("meta1"), "A3");
-			item2.SetMetadata ("meta1", "val3");
-			Assert.AreEqual ("val2", item1.GetMetadata ("meta1"), "A4");
-			Assert.AreEqual ("val3", item2.GetMetadata ("meta1"), "A5");
-		}
+        [Test]
+        public void TestCtor_UnescapedSpecialChar()
+        {
+            // If we instantiate with unescaped metadata, we get the same value back
+            var metadata = "foo@2x.png";
+            var item = new TaskItem(metadata);
+            item.SetMetadata("mine", metadata);
 
-		[Test]
-		public void TestCopyMetadataTo ()
-		{
-			item1 = new TaskItem ("itemSpec");
-			item2 = new TaskItem ("itemSpec");
-			item1.SetMetadata ("A", "1");
-			item1.SetMetadata ("B", "1");
-			item1.SetMetadata ("C", "1");
-			item2.SetMetadata ("B", "2");
-			item1.CopyMetadataTo (item2);
-			Assert.AreEqual ("1", item2.GetMetadata ("A"), "1");
-			Assert.AreEqual ("2", item2.GetMetadata ("B"), "2");
-			Assert.AreEqual ("1", item2.GetMetadata ("C"), "3");
-		}
+            Assert.AreEqual(metadata, item.ItemSpec, "#1");
+            Assert.AreEqual(metadata, item.GetMetadata("Identity"), "#2");
+            Assert.AreEqual(
+                Path.GetFileNameWithoutExtension(metadata),
+                item.GetMetadata("FileName"),
+                "#3"
+            );
+            Assert.IsTrue(item.GetMetadata("FullPath").EndsWith(metadata), "#4");
+            Assert.AreEqual(metadata, item.GetMetadata("mine"), "#5");
+        }
 
-		[Test]
-		public void TestGetMetadata ()
-		{
-			item = new TaskItem ("itemSpec");
-			item.SetMetadata ("Metadata", "Value");
-			Assert.AreEqual ("Value", item.GetMetadata ("Metadata"), "A1");
-			Assert.AreEqual (String.Empty, item.GetMetadata ("lala"), "A2");
-			Assert.AreEqual ("itemSpec", item.GetMetadata ("iDentity"), "A3");
-			Assert.AreEqual ("", item.GetMetadata ("extension"), "A4");
-			Assert.AreEqual ("", item.GetMetadata ("ModifiedTime"), "A5");
-			Assert.AreEqual ("", item.GetMetadata ("CreatedTime"), "A6");
-			Assert.AreEqual ("", item.GetMetadata ("ModifiedTime"), "A7");
-			Assert.AreEqual ("", item.GetMetadata ("AccessedTime"), "A8");
-		}
+        [Test]
+        public void TestCopyConstructor()
+        {
+            item1 = new TaskItem("itemSpec");
+            item1.SetMetadata("meta1", "val1");
+            item2 = new TaskItem(item1);
+            Assert.AreEqual(item1.GetMetadata("meta1"), item2.GetMetadata("meta1"), "A1");
+            item1.SetMetadata("meta1", "val2");
+            Assert.AreEqual("val2", item1.GetMetadata("meta1"), "A2");
+            Assert.AreEqual("val1", item2.GetMetadata("meta1"), "A3");
+            item2.SetMetadata("meta1", "val3");
+            Assert.AreEqual("val2", item1.GetMetadata("meta1"), "A4");
+            Assert.AreEqual("val3", item2.GetMetadata("meta1"), "A5");
+        }
 
-		[Test]
-		public void TestMetadataNames ()
-		{
-			item = new TaskItem ("itemSpec");
+        [Test]
+        public void TestCopyMetadataTo()
+        {
+            item1 = new TaskItem("itemSpec");
+            item2 = new TaskItem("itemSpec");
+            item1.SetMetadata("A", "1");
+            item1.SetMetadata("B", "1");
+            item1.SetMetadata("C", "1");
+            item2.SetMetadata("B", "2");
+            item1.CopyMetadataTo(item2);
+            Assert.AreEqual("1", item2.GetMetadata("A"), "1");
+            Assert.AreEqual("2", item2.GetMetadata("B"), "2");
+            Assert.AreEqual("1", item2.GetMetadata("C"), "3");
+        }
 
-			Assert.IsTrue (CompareStringCollections (item.MetadataNames, metadataNames), "A1");
+        [Test]
+        public void TestGetMetadata()
+        {
+            item = new TaskItem("itemSpec");
+            item.SetMetadata("Metadata", "Value");
+            Assert.AreEqual("Value", item.GetMetadata("Metadata"), "A1");
+            Assert.AreEqual(String.Empty, item.GetMetadata("lala"), "A2");
+            Assert.AreEqual("itemSpec", item.GetMetadata("iDentity"), "A3");
+            Assert.AreEqual("", item.GetMetadata("extension"), "A4");
+            Assert.AreEqual("", item.GetMetadata("ModifiedTime"), "A5");
+            Assert.AreEqual("", item.GetMetadata("CreatedTime"), "A6");
+            Assert.AreEqual("", item.GetMetadata("ModifiedTime"), "A7");
+            Assert.AreEqual("", item.GetMetadata("AccessedTime"), "A8");
+        }
 
-			item.SetMetadata ("a", "b");
+        [Test]
+        public void TestMetadataNames()
+        {
+            item = new TaskItem("itemSpec");
 
-			Assert.AreEqual (12, item.MetadataNames.Count, "A2");
-		}
+            Assert.IsTrue(CompareStringCollections(item.MetadataNames, metadataNames), "A1");
 
-		[Test]
-		public void TestOpExplicit ()
-		{
-			TaskItem item = new TaskItem ("itemSpec");
-			item.SetMetadata ("a", "b");
+            item.SetMetadata("a", "b");
 
-			Assert.AreEqual ("itemSpec", (string) item, "A1");
-		}
+            Assert.AreEqual(12, item.MetadataNames.Count, "A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TestRemoveMetadata1 ()
-		{
-			item = new TaskItem ("lalala");
-			item.RemoveMetadata ("EXTension");
-		}
+        [Test]
+        public void TestOpExplicit()
+        {
+            TaskItem item = new TaskItem("itemSpec");
+            item.SetMetadata("a", "b");
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestRemoveMetadata2 ()
-		{
-			item = new TaskItem ("lalala");
-			item.RemoveMetadata (null);
-		}
+            Assert.AreEqual("itemSpec", (string)item, "A1");
+        }
 
-		[Test]
-		public void TestRemoveMetadata3 ()
-		{
-			item = new TaskItem ("lalala");
-			item.SetMetadata ("a", "b");
-			item.RemoveMetadata ("a");
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestRemoveMetadata1()
+        {
+            item = new TaskItem("lalala");
+            item.RemoveMetadata("EXTension");
+        }
 
-			Assert.AreEqual (11, item.MetadataCount, "A1");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestRemoveMetadata2()
+        {
+            item = new TaskItem("lalala");
+            item.RemoveMetadata(null);
+        }
 
-		[Test]
-		public void TestSetMetadata1 ()
-		{
-			item = new TaskItem ("itemSpec");
-			item.SetMetadata ("Metadata", "Value1");
-			item.SetMetadata ("Metadata", "Value2");
-			Assert.AreEqual (item.MetadataCount, 12, "MetadataCount");
-			Assert.AreEqual ("Value2", item.GetMetadata ("Metadata"));
-		}
+        [Test]
+        public void TestRemoveMetadata3()
+        {
+            item = new TaskItem("lalala");
+            item.SetMetadata("a", "b");
+            item.RemoveMetadata("a");
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestSetMetadata2 ()
-		{
-			item = new TaskItem ("itemSpec");
-			item.SetMetadata (null, "value");
-		}
+            Assert.AreEqual(11, item.MetadataCount, "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestSetMetadata3 ()
-		{
-			item = new TaskItem ("itemSpec");
-			item.SetMetadata ("name", null);
-		}
+        [Test]
+        public void TestSetMetadata1()
+        {
+            item = new TaskItem("itemSpec");
+            item.SetMetadata("Metadata", "Value1");
+            item.SetMetadata("Metadata", "Value2");
+            Assert.AreEqual(item.MetadataCount, 12, "MetadataCount");
+            Assert.AreEqual("Value2", item.GetMetadata("Metadata"));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TestSetReservedMetadata ()
-		{
-			item = new TaskItem ("lalala");
-			item.SetMetadata ("Identity", "some value");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestSetMetadata2()
+        {
+            item = new TaskItem("itemSpec");
+            item.SetMetadata(null, "value");
+        }
 
-		[Test]
-		public void TestSetItemSpec ()
-		{
-			var itemSpec = "foo@2x.png";
-			var escapedItemSpec =  global::Microsoft.Build.BuildEngine.Utilities.Escape (itemSpec);
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestSetMetadata3()
+        {
+            item = new TaskItem("itemSpec");
+            item.SetMetadata("name", null);
+        }
 
-			var item = new TaskItem ("foo");
-			item.ItemSpec = itemSpec;
-			Assert.AreEqual (itemSpec, item.ItemSpec, "#1");
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestSetReservedMetadata()
+        {
+            item = new TaskItem("lalala");
+            item.SetMetadata("Identity", "some value");
+        }
 
-			item.ItemSpec = escapedItemSpec;
-			Assert.AreEqual (itemSpec, item.ItemSpec, "#2");
-		}
-	}
+        [Test]
+        public void TestSetItemSpec()
+        {
+            var itemSpec = "foo@2x.png";
+            var escapedItemSpec = global::Microsoft.Build.BuildEngine.Utilities.Escape(itemSpec);
+
+            var item = new TaskItem("foo");
+            item.ItemSpec = itemSpec;
+            Assert.AreEqual(itemSpec, item.ItemSpec, "#1");
+
+            item.ItemSpec = escapedItemSpec;
+            Assert.AreEqual(itemSpec, item.ItemSpec, "#2");
+        }
+    }
 }

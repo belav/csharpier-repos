@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using System.Globalization;
 
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
@@ -13,10 +13,14 @@ public abstract partial class RequestDelegateCreationTests
         get
         {
             var expectedBody = "Test route value";
-            var fromRouteRequiredSource = """app.MapGet("/{routeValue}", ([FromRoute] string routeValue) => routeValue);""";
-            var fromRouteWithNameRequiredSource = """app.MapGet("/{routeValue}", ([FromRoute(Name = "routeValue" )] string parameterName) => parameterName);""";
-            var fromRouteWithNullNameRequiredSource = """app.MapGet("/{routeValue}", ([FromRoute(Name = null )] string routeValue) => routeValue);""";
-            var fromRouteNullableSource = """app.MapGet("/{routeValue}", ([FromRoute] string? routeValue) => routeValue ?? string.Empty);""";
+            var fromRouteRequiredSource =
+                """app.MapGet("/{routeValue}", ([FromRoute] string routeValue) => routeValue);""";
+            var fromRouteWithNameRequiredSource =
+                """app.MapGet("/{routeValue}", ([FromRoute(Name = "routeValue" )] string parameterName) => parameterName);""";
+            var fromRouteWithNullNameRequiredSource =
+                """app.MapGet("/{routeValue}", ([FromRoute(Name = null )] string routeValue) => routeValue);""";
+            var fromRouteNullableSource =
+                """app.MapGet("/{routeValue}", ([FromRoute] string? routeValue) => routeValue ?? string.Empty);""";
             var fromRouteDefaultValueSource = """
 #nullable disable
 string getRouteWithDefault([FromRoute] string routeValue = null) => routeValue ?? string.Empty;
@@ -30,7 +34,13 @@ app.MapGet("/{routeValue}", getRouteWithDefault);
                 new object[] { fromRouteRequiredSource, null, 400, string.Empty },
                 new object[] { fromRouteWithNameRequiredSource, expectedBody, 200, expectedBody },
                 new object[] { fromRouteWithNameRequiredSource, null, 400, string.Empty },
-                new object[] { fromRouteWithNullNameRequiredSource, expectedBody, 200, expectedBody },
+                new object[]
+                {
+                    fromRouteWithNullNameRequiredSource,
+                    expectedBody,
+                    200,
+                    expectedBody,
+                },
                 new object[] { fromRouteWithNullNameRequiredSource, null, 400, string.Empty },
                 new object[] { fromRouteNullableSource, expectedBody, 200, expectedBody },
                 new object[] { fromRouteNullableSource, null, 200, string.Empty },
@@ -42,7 +52,12 @@ app.MapGet("/{routeValue}", getRouteWithDefault);
 
     [Theory]
     [MemberData(nameof(MapAction_ExplicitRouteParam_SimpleReturn_Data))]
-    public async Task MapAction_ExplicitRouteParam_SimpleReturn(string source, string requestData, int expectedStatusCode, string expectedBody)
+    public async Task MapAction_ExplicitRouteParam_SimpleReturn(
+        string source,
+        string requestData,
+        int expectedStatusCode,
+        string expectedBody
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -62,10 +77,13 @@ app.MapGet("/{routeValue}", getRouteWithDefault);
         get
         {
             var expectedBody = "ValueFromRouteOrQuery";
-            var implicitRouteRequiredSource = """app.MapGet("/{value}", (string value) => value);""";
+            var implicitRouteRequiredSource =
+                """app.MapGet("/{value}", (string value) => value);""";
             var implicitQueryRequiredSource = """app.MapGet("", (string value) => value);""";
-            var implicitRouteNullableSource = """app.MapGet("/{value}", (string? value) => value ?? string.Empty);""";
-            var implicitQueryNullableSource = """app.MapGet("/", (string? value) => value ?? string.Empty);""";
+            var implicitRouteNullableSource =
+                """app.MapGet("/{value}", (string? value) => value ?? string.Empty);""";
+            var implicitQueryNullableSource =
+                """app.MapGet("/", (string? value) => value ?? string.Empty);""";
             var implicitRouteDefaultValueSource = """
 #nullable disable
 string getRouteWithDefault(string value = null) => value ?? string.Empty;
@@ -86,12 +104,10 @@ app.MapGet("/", getQueryWithDefault);
                 new object[] { implicitRouteRequiredSource, false, false, 400, string.Empty },
                 new object[] { implicitQueryRequiredSource, false, true, 200, expectedBody },
                 new object[] { implicitQueryRequiredSource, false, false, 400, string.Empty },
-
                 new object[] { implicitRouteNullableSource, true, false, 200, expectedBody },
                 new object[] { implicitRouteNullableSource, false, false, 200, string.Empty },
                 new object[] { implicitQueryNullableSource, false, true, 200, expectedBody },
                 new object[] { implicitQueryNullableSource, false, false, 200, string.Empty },
-
                 new object[] { implicitRouteDefaultValueSource, true, false, 200, expectedBody },
                 new object[] { implicitRouteDefaultValueSource, false, false, 200, string.Empty },
                 new object[] { implicitQueryDefaultValueSource, false, true, 200, expectedBody },
@@ -102,7 +118,13 @@ app.MapGet("/", getQueryWithDefault);
 
     [Theory]
     [MemberData(nameof(MapAction_RouteOrQueryParam_SimpleReturn_Data))]
-    public async Task MapAction_RouteOrQueryParam_SimpleReturn(string source, bool hasRoute, bool hasQuery, int expectedStatusCode, string expectedBody)
+    public async Task MapAction_RouteOrQueryParam_SimpleReturn(
+        string source,
+        bool hasRoute,
+        bool hasQuery,
+        int expectedStatusCode,
+        string expectedBody
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -167,7 +189,7 @@ app.MapGet("/{value}", (string value, HttpContext httpContext) => value);
                 new object[] { "123" },
                 new object[] { "💩" },
                 new object[] { "\r" },
-                new object[] { "\x00E7"  },
+                new object[] { "\x00E7" },
                 new object[] { "!!" },
                 new object[] { "\\" },
                 new object[] { "\'" },
@@ -179,7 +201,9 @@ app.MapGet("/{value}", (string value, HttpContext httpContext) => value);
     [MemberData(nameof(MapAction_ExplicitRouteParam_RouteNames_Data))]
     public async Task MapAction_ExplicitRouteParam_RouteNames(string routeParameterName)
     {
-        var (_, compilation) = await RunGeneratorAsync($$"""app.MapGet(@"/{{{routeParameterName}}}", ([FromRoute(Name=@"{{routeParameterName}}")] string routeValue) => routeValue);""");
+        var (_, compilation) = await RunGeneratorAsync(
+            $$"""app.MapGet(@"/{{{routeParameterName}}}", ([FromRoute(Name=@"{{routeParameterName}}")] string routeValue) => routeValue);"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
@@ -192,14 +216,18 @@ app.MapGet("/{value}", (string value, HttpContext httpContext) => value);
     [Fact]
     public async Task Returns400IfNoMatchingRouteValueForRequiredParam()
     {
-        var (_, compilation) = await RunGeneratorAsync($$"""app.MapGet(@"/{foo}", (int foo) => foo);""");
+        var (_, compilation) = await RunGeneratorAsync(
+            $$"""app.MapGet(@"/{foo}", (int foo) => foo);"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         const string unmatchedName = "value";
         const int unmatchedRouteParam = 42;
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[unmatchedName] = unmatchedRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[unmatchedName] = unmatchedRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var requestDelegate = endpoint.RequestDelegate;
 
@@ -219,11 +247,14 @@ app.MapGet("/{value}", (string value, HttpContext httpContext) => value);
             app.MapGet(@"/{{{paramName}}}", (HttpContext httpContext, [FromRoute] int value) => {
                 httpContext.Items.Add("input", value);
             });
-            """);
+            """
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var requestDelegate = endpoint.RequestDelegate;
 

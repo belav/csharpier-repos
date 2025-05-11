@@ -17,22 +17,16 @@ namespace System.ServiceModel.Dispatcher
             this.Attach(host);
         }
 
-        protected virtual void Attach(ServiceHostBase host)
-        {
-        }
+        protected virtual void Attach(ServiceHostBase host) { }
 
         internal void DetachInternal(ServiceHostBase host)
         {
             this.Detach(host);
         }
 
-        protected virtual void Detach(ServiceHostBase host)
-        {
-        }
+        protected virtual void Detach(ServiceHostBase host) { }
 
-        public virtual void CloseInput()
-        {
-        }
+        public virtual void CloseInput() { }
 
         internal virtual void CloseInput(TimeSpan timeout)
         {

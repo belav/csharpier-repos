@@ -7,6 +7,6 @@ namespace System.Runtime.InteropServices
     {
         Method = 0,
         PropGet = 1,
-        PropSet = 2
+        PropSet = 2,
     }
 }

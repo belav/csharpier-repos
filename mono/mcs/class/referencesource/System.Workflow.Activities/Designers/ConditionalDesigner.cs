@@ -1,33 +1,33 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
-    using System.Diagnostics;
 
     #region Class ConditionalToolboxItem
     [Serializable]
     internal sealed class IfElseToolboxItem : ActivityToolboxItem
     {
         public IfElseToolboxItem(Type type)
-            : base(type)
-        {
-        }
+            : base(type) { }
+
         private IfElseToolboxItem(SerializationInfo info, StreamingContext context)
         {
             Deserialize(info, context);
         }
+
         protected override IComponent[] CreateComponentsCore(IDesignerHost designerHost)
         {
             CompositeActivity conditionalActivity = new IfElseActivity();
@@ -43,7 +43,10 @@ namespace System.Workflow.Activities
     internal sealed class IfElseDesigner : ParallelActivityDesigner
     {
         #region Properties and Methods
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {
@@ -62,7 +65,10 @@ namespace System.Workflow.Activities
             return true;
         }
 
-        public override bool CanMoveActivities(HitTestInfo moveLocation, ReadOnlyCollection<Activity> activitiesToMove)
+        public override bool CanMoveActivities(
+            HitTestInfo moveLocation,
+            ReadOnlyCollection<Activity> activitiesToMove
+        )
         {
             if ((ContainedDesigners.Count - activitiesToMove.Count) < 1)
             {
@@ -85,7 +91,8 @@ namespace System.Workflow.Activities
             if (!Expanded || ContainedDesigners.Count == 0 || this != ActiveView.AssociatedDesigner)
                 return;
 
-            CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+            CompositeDesignerTheme compositeDesignerTheme =
+                e.DesignerTheme as CompositeDesignerTheme;
             Debug.Assert(compositeDesignerTheme != null);
             if (compositeDesignerTheme == null)
                 return;
@@ -95,10 +102,16 @@ namespace System.Workflow.Activities
             Rectangle imageRectangle = ImageRectangle;
 
             Rectangle diamondRectangle = Rectangle.Empty;
-            diamondRectangle.Width = compositeDesignerTheme.ConnectorSize.Height - 2 * e.AmbientTheme.Margin.Height + 2;
+            diamondRectangle.Width =
+                compositeDesignerTheme.ConnectorSize.Height - 2 * e.AmbientTheme.Margin.Height + 2;
             diamondRectangle.Height = diamondRectangle.Width;
             diamondRectangle.X = bounds.Left + bounds.Width / 2 - diamondRectangle.Width / 2;
-            diamondRectangle.Y = bounds.Top + TitleHeight + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - diamondRectangle.Height) / 2 + 1;
+            diamondRectangle.Y =
+                bounds.Top
+                + TitleHeight
+                + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - diamondRectangle.Height)
+                    / 2
+                + 1;
 
             using (GraphicsPath decisionDiamond = GetDiamondPath(diamondRectangle))
             {
@@ -106,7 +119,12 @@ namespace System.Workflow.Activities
                 e.Graphics.DrawPath(compositeDesignerTheme.ForegroundPen, decisionDiamond);
             }
 
-            diamondRectangle.Y = bounds.Bottom - compositeDesignerTheme.ConnectorSize.Height * 3 / 2 + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - diamondRectangle.Height) / 2 + 1;
+            diamondRectangle.Y =
+                bounds.Bottom
+                - compositeDesignerTheme.ConnectorSize.Height * 3 / 2
+                + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - diamondRectangle.Height)
+                    / 2
+                + 1;
             using (GraphicsPath decisionDiamond = GetDiamondPath(diamondRectangle))
             {
                 e.Graphics.FillPath(compositeDesignerTheme.ForegroundBrush, decisionDiamond);
@@ -116,13 +134,13 @@ namespace System.Workflow.Activities
 
         private GraphicsPath GetDiamondPath(Rectangle rectangle)
         {
-            Point[] diamondPoints = 
+            Point[] diamondPoints =
             {
-                new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top), 
+                new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top),
                 new Point(rectangle.Right - 1, rectangle.Top + rectangle.Height / 2),
                 new Point(rectangle.Left + rectangle.Width / 2, rectangle.Bottom - 1),
                 new Point(rectangle.Left, rectangle.Top + rectangle.Height / 2),
-                new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top)
+                new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top),
             };
 
             GraphicsPath diamondPath = new GraphicsPath();

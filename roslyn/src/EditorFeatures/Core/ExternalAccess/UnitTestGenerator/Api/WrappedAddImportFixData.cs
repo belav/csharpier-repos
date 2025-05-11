@@ -13,14 +13,16 @@ internal sealed class WrappedAddImportFixData
 {
     internal readonly AddImportFixData Underlying;
 
-    public WrappedAddImportFixKind Kind => Underlying.Kind switch
-    {
-        AddImportFixKind.ProjectSymbol => WrappedAddImportFixKind.ProjectSymbol,
-        AddImportFixKind.PackageSymbol => WrappedAddImportFixKind.PackageSymbol,
-        AddImportFixKind.MetadataSymbol => WrappedAddImportFixKind.MetadataSymbol,
-        AddImportFixKind.ReferenceAssemblySymbol => WrappedAddImportFixKind.ReferenceAssemblySymbol,
-        _ => throw ExceptionUtilities.UnexpectedValue(Underlying.Kind),
-    };
+    public WrappedAddImportFixKind Kind =>
+        Underlying.Kind switch
+        {
+            AddImportFixKind.ProjectSymbol => WrappedAddImportFixKind.ProjectSymbol,
+            AddImportFixKind.PackageSymbol => WrappedAddImportFixKind.PackageSymbol,
+            AddImportFixKind.MetadataSymbol => WrappedAddImportFixKind.MetadataSymbol,
+            AddImportFixKind.ReferenceAssemblySymbol =>
+                WrappedAddImportFixKind.ReferenceAssemblySymbol,
+            _ => throw ExceptionUtilities.UnexpectedValue(Underlying.Kind),
+        };
 
     public ImmutableArray<TextChange> TextChanges => Underlying.TextChanges;
 
@@ -36,9 +38,11 @@ internal sealed class WrappedAddImportFixData
 
     #region When adding a metadata reference
 
-    public ProjectId PortableExecutableReferenceProjectId => Underlying.PortableExecutableReferenceProjectId;
+    public ProjectId PortableExecutableReferenceProjectId =>
+        Underlying.PortableExecutableReferenceProjectId;
 
-    public string PortableExecutableReferenceFilePathToAdd => Underlying.PortableExecutableReferenceFilePathToAdd;
+    public string PortableExecutableReferenceFilePathToAdd =>
+        Underlying.PortableExecutableReferenceFilePathToAdd;
 
     #endregion
 
@@ -46,7 +50,8 @@ internal sealed class WrappedAddImportFixData
 
     public string AssemblyReferenceAssemblyName => Underlying.AssemblyReferenceAssemblyName;
 
-    public string AssemblyReferenceFullyQualifiedTypeName => Underlying.AssemblyReferenceFullyQualifiedTypeName;
+    public string AssemblyReferenceFullyQualifiedTypeName =>
+        Underlying.AssemblyReferenceFullyQualifiedTypeName;
 
     #endregion
 

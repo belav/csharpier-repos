@@ -45,25 +45,28 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeObject()
         {
-            string json = JsonConvert.SerializeObject(new List<Employee>
-            {
-                new Employee
+            string json = JsonConvert.SerializeObject(
+                new List<Employee>
                 {
-                    BirthDate = new DateTime(1977, 12, 30, 1, 1, 1, DateTimeKind.Utc),
-                    FirstName = "Maurice",
-                    LastName = "Moss",
-                    Department = "IT",
-                    JobTitle = "Support"
+                    new Employee
+                    {
+                        BirthDate = new DateTime(1977, 12, 30, 1, 1, 1, DateTimeKind.Utc),
+                        FirstName = "Maurice",
+                        LastName = "Moss",
+                        Department = "IT",
+                        JobTitle = "Support",
+                    },
+                    new Employee
+                    {
+                        BirthDate = new DateTime(1978, 3, 15, 1, 1, 1, DateTimeKind.Utc),
+                        FirstName = "Jen",
+                        LastName = "Barber",
+                        Department = "IT",
+                        JobTitle = "Manager",
+                    },
                 },
-                new Employee
-                {
-                    BirthDate = new DateTime(1978, 3, 15, 1, 1, 1, DateTimeKind.Utc),
-                    FirstName = "Jen",
-                    LastName = "Barber",
-                    Department = "IT",
-                    JobTitle = "Manager"
-                }
-            }, Formatting.Indented);
+                Formatting.Indented
+            );
 
             //[
             //  {
@@ -82,7 +85,10 @@ namespace Newtonsoft.Json.Tests.Converters
             //  }
             //]
 
-            List<IPerson> people = JsonConvert.DeserializeObject<List<IPerson>>(json, new PersonConverter());
+            List<IPerson> people = JsonConvert.DeserializeObject<List<IPerson>>(
+                json,
+                new PersonConverter()
+            );
 
             IPerson person = people[0];
 
@@ -124,7 +130,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void AssertDoesDeserialize()
         {
-            const string json = @"{
+            const string json =
+                @"{
 ""Value"": ""A value"",
 ""Thing"": {
 ""Number"": 123
@@ -144,7 +151,7 @@ namespace Newtonsoft.Json.Tests.Converters
             MyClass myClass = new MyClass
             {
                 Value = "Foo",
-                Thing = new MyThing { Number = 456, }
+                Thing = new MyThing { Number = 456 },
             };
             string json = JsonConvert.SerializeObject(myClass); // <-- Exception here
 
@@ -200,12 +207,13 @@ namespace Newtonsoft.Json.Tests.Converters
                 Id = new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
                 IntRange = new Range<int> { First = int.MinValue, Last = int.MaxValue },
                 Year = 2010,
-                NullDecimalRange = null
+                NullDecimalRange = null,
             };
 
             string json = JsonConvert.SerializeObject(initial, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Id"": ""00000001-0002-0003-0405-060708090a0b"",
   ""Year"": 2010,
   ""Company"": ""Company!"",
@@ -218,10 +226,16 @@ namespace Newtonsoft.Json.Tests.Converters
     ""Last"": 2147483647
   },
   ""NullDecimalRange"": null
-}", json);
+}",
+                json
+            );
 
-            NullInterfaceTestClass deserialized = JsonConvert.DeserializeObject<NullInterfaceTestClass>(
-                json, new IntRangeConverter(), new DecimalRangeConverter());
+            NullInterfaceTestClass deserialized =
+                JsonConvert.DeserializeObject<NullInterfaceTestClass>(
+                    json,
+                    new IntRangeConverter(),
+                    new DecimalRangeConverter()
+                );
 
             Assert.AreEqual("Company!", deserialized.Company);
             Assert.AreEqual(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), deserialized.Id);

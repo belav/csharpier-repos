@@ -1,4 +1,7 @@
-<Type Name="AxHost+ConnectionPointCookie" FullName="System.Windows.Forms.AxHost+ConnectionPointCookie">
+<Type
+  Name="AxHost+ConnectionPointCookie"
+  FullName="System.Windows.Forms.AxHost+ConnectionPointCookie"
+>
   <TypeSignature Language="C#" Value="public class AxHost.ConnectionPointCookie" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConnectionPointCookie (object source, object sink, Type eventInterface);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConnectionPointCookie (object source, object sink, Type eventInterface);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="source" Type="System.Object" />

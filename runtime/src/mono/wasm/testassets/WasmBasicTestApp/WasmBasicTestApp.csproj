@@ -5,7 +5,6 @@
     <OutputType>Exe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <BlazorWebAssemblyLazyLoad Include="System.Text.Json$(WasmAssemblyExtension)" />
   </ItemGroup>

@@ -15,16 +15,16 @@ using Xunit;
 // Similar to other variants but using an empty (~ 1 byte) struct
 // (which oddly enough currently is returned by ref)
 
-struct S0
-{
-}
+struct S0 { }
 
 struct S1
 {
     public S0 F3;
     public sbyte F4;
     public short F0;
-    public S1(sbyte f4): this()
+
+    public S1(sbyte f4)
+        : this()
     {
         F4 = f4;
     }
@@ -33,7 +33,8 @@ struct S1
 public class GitHub_18522_8
 {
     static S1 s_6;
-    static S1[] s_13 = new S1[]{new S1(-1)};
+    static S1[] s_13 = new S1[] { new S1(-1) };
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -41,7 +42,7 @@ public class GitHub_18522_8
         // incorrectly typing the return type from M16, and so
         // inadvertently overwriting the F4 field of s_13[0] on return
         // from the call.
-        // 
+        //
         // Here we make sure we properly handle the failed inline case.
         s_13[0].F3 = M16();
         return s_13[0].F4 == -1 ? 100 : 0;

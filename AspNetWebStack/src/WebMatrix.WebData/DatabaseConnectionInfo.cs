@@ -13,7 +13,7 @@ namespace WebMatrix.WebData
         private enum ConnectionType
         {
             ConnectionStringName = 0,
-            ConnectionString = 1
+            ConnectionString = 1,
         }
 
         public string ConnectionString

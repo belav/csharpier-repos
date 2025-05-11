@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 /// Implements an <see cref="IAuthorizationHandler"/> and <see cref="IAuthorizationRequirement"/>
 /// which requires at least one role claim whose value must be any of the allowed roles.
 /// </summary>
-public class RolesAuthorizationRequirement : AuthorizationHandler<RolesAuthorizationRequirement>, IAuthorizationRequirement
+public class RolesAuthorizationRequirement
+    : AuthorizationHandler<RolesAuthorizationRequirement>,
+        IAuthorizationRequirement
 {
     /// <summary>
     /// Creates a new instance of <see cref="RolesAuthorizationRequirement"/>.
@@ -40,7 +42,10 @@ public class RolesAuthorizationRequirement : AuthorizationHandler<RolesAuthoriza
     /// </summary>
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, RolesAuthorizationRequirement requirement)
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        RolesAuthorizationRequirement requirement
+    )
     {
         if (context.User != null)
         {
@@ -66,7 +71,8 @@ public class RolesAuthorizationRequirement : AuthorizationHandler<RolesAuthoriza
     /// <inheritdoc />
     public override string ToString()
     {
-        var roles = $"User.IsInRole must be true for one of the following roles: ({string.Join("|", AllowedRoles)})";
+        var roles =
+            $"User.IsInRole must be true for one of the following roles: ({string.Join("|", AllowedRoles)})";
 
         return $"{nameof(RolesAuthorizationRequirement)}:{roles}";
     }

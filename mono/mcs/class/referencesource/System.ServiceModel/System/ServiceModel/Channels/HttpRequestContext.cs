@@ -30,7 +30,11 @@ namespace System.ServiceModel.Channels
         HttpPipeline httpPipeline;
         ServerWebSocketTransportDuplexSessionChannel webSocketChannel;
 
-        protected HttpRequestContext(HttpChannelListener listener, Message requestMessage, EventTraceActivity eventTraceActivity)
+        protected HttpRequestContext(
+            HttpChannelListener listener,
+            Message requestMessage,
+            EventTraceActivity eventTraceActivity
+        )
             : base(requestMessage, listener.InternalCloseTimeout, listener.InternalSendTimeout)
         {
             this.listener = listener;
@@ -39,10 +43,7 @@ namespace System.ServiceModel.Channels
 
         public bool KeepAliveEnabled
         {
-            get
-            {
-                return listener.KeepAliveEnabled;
-            }
+            get { return listener.KeepAliveEnabled; }
         }
 
         public bool HttpMessagesSupported
@@ -55,14 +56,13 @@ namespace System.ServiceModel.Channels
 
         internal ServerWebSocketTransportDuplexSessionChannel WebSocketChannel
         {
-            get
-            {
-                return this.webSocketChannel;
-            }
-
+            get { return this.webSocketChannel; }
             set
             {
-                Fx.Assert(this.webSocketChannel == null, "webSocketChannel should not be set twice.");
+                Fx.Assert(
+                    this.webSocketChannel == null,
+                    "webSocketChannel should not be set twice."
+                );
                 this.webSocketChannel = value;
             }
         }
@@ -74,10 +74,7 @@ namespace System.ServiceModel.Channels
 
         internal EventTraceActivity EventTraceActivity
         {
-            get
-            {
-                return this.eventTraceActivity;
-            }
+            get { return this.eventTraceActivity; }
         }
 
         // Note: This method will return null in the case where throwOnError is false, and a non-fatal error occurs.
@@ -115,7 +112,11 @@ namespace System.ServiceModel.Channels
             return httpInput;
         }
 
-        internal static HttpRequestContext CreateContext(HttpChannelListener listener, HttpListenerContext listenerContext, EventTraceActivity eventTraceActivity)
+        internal static HttpRequestContext CreateContext(
+            HttpChannelListener listener,
+            HttpListenerContext listenerContext,
+            EventTraceActivity eventTraceActivity
+        )
         {
             return new ListenerHttpContext(listener, listenerContext, eventTraceActivity);
         }
@@ -158,7 +159,7 @@ namespace System.ServiceModel.Channels
                 this.Cleanup();
             }
         }
-        
+
         protected virtual void Cleanup()
         {
             if (this.httpPipeline != null)
@@ -169,7 +170,11 @@ namespace System.ServiceModel.Channels
 
         public void InitializeHttpPipeline(TransportIntegrationHandler transportIntegrationHandler)
         {
-            this.httpPipeline = HttpPipeline.CreateHttpPipeline(this, transportIntegrationHandler, this.IsWebSocketRequest);
+            this.httpPipeline = HttpPipeline.CreateHttpPipeline(
+                this,
+                transportIntegrationHandler,
+                this.IsWebSocketRequest
+            );
         }
 
         internal void SetMessage(Message message, Exception requestException)
@@ -177,8 +182,11 @@ namespace System.ServiceModel.Channels
             if ((message == null) && (requestException == null))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.MessageXmlProtocolError),
-                    new XmlException(SR.GetString(SR.MessageIsEmpty))));
+                    new ProtocolException(
+                        SR.GetString(SR.MessageXmlProtocolError),
+                        new XmlException(SR.GetString(SR.MessageIsEmpty))
+                    )
+                );
             }
 
             this.TraceHttpMessageReceived(message);
@@ -190,7 +198,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                message.Properties.Security = (this.securityProperty != null) ? (SecurityMessageProperty)this.securityProperty.CreateCopy() : null;
+                message.Properties.Security =
+                    (this.securityProperty != null)
+                        ? (SecurityMessageProperty)this.securityProperty.CreateCopy()
+                        : null;
                 base.SetRequestMessage(message);
             }
         }
@@ -200,13 +211,21 @@ namespace System.ServiceModel.Channels
             if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled)
             {
                 bool attached = false;
-                Guid relatedId = this.eventTraceActivity != null ? this.eventTraceActivity.ActivityId : Guid.Empty;
+                Guid relatedId =
+                    this.eventTraceActivity != null
+                        ? this.eventTraceActivity.ActivityId
+                        : Guid.Empty;
                 HttpRequestMessageProperty httpProperty;
 
                 // Encoder will always add an activity. We need to remove this and read it
                 // from the web headers for http since correlation might be propogated.
-                if (message.Headers.MessageId == null &&
-                    message.Properties.TryGetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name, out httpProperty))
+                if (
+                    message.Headers.MessageId == null
+                    && message.Properties.TryGetValue<HttpRequestMessageProperty>(
+                        HttpRequestMessageProperty.Name,
+                        out httpProperty
+                    )
+                )
                 {
                     try
                     {
@@ -218,7 +237,8 @@ namespace System.ServiceModel.Channels
                             {
                                 Guid id = new Guid(data);
                                 this.eventTraceActivity = new EventTraceActivity(id, true);
-                                message.Properties[EventTraceActivity.Name] = this.eventTraceActivity;
+                                message.Properties[EventTraceActivity.Name] =
+                                    this.eventTraceActivity;
                                 attached = true;
                             }
                         }
@@ -234,15 +254,21 @@ namespace System.ServiceModel.Channels
 
                 if (!attached)
                 {
-                    this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message, true);
+                    this.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                        message,
+                        true
+                    );
                 }
 
                 if (TD.MessageReceivedByTransportIsEnabled())
                 {
                     TD.MessageReceivedByTransport(
                         this.eventTraceActivity,
-                        this.listener != null && this.listener.Uri != null ? this.listener.Uri.AbsoluteUri : string.Empty,
-                        relatedId);
+                        this.listener != null && this.listener.Uri != null
+                            ? this.listener.Uri.AbsoluteUri
+                            : string.Empty,
+                        relatedId
+                    );
                 }
             }
         }
@@ -257,7 +283,7 @@ namespace System.ServiceModel.Channels
             if (message == null)
             {
                 // A null message means either a one-way request or that the service operation returned null and
-                // hence we can close the HttpOutput. By default we keep the HttpOutput open to allow the writing to the output 
+                // hence we can close the HttpOutput. By default we keep the HttpOutput open to allow the writing to the output
                 // even after the HttpInput EOF is received and the HttpOutput will be closed only on close of the HttpRequestContext.
                 closeOnReceivedEof = true;
                 message = CreateAckMessage(HttpStatusCode.Accepted, string.Empty);
@@ -267,19 +293,29 @@ namespace System.ServiceModel.Channels
             {
                 if (message.Version.Addressing == AddressingVersion.WSAddressingAugust2004)
                 {
-                    if (message.Headers.To == null ||
-                        listener.AnonymousUriPrefixMatcher == null ||
-                        !listener.AnonymousUriPrefixMatcher.IsAnonymousUri(message.Headers.To))
+                    if (
+                        message.Headers.To == null
+                        || listener.AnonymousUriPrefixMatcher == null
+                        || !listener.AnonymousUriPrefixMatcher.IsAnonymousUri(message.Headers.To)
+                    )
                     {
                         message.Headers.To = message.Version.Addressing.AnonymousUri;
                     }
                 }
-                else if (message.Version.Addressing == AddressingVersion.WSAddressing10
-                    || message.Version.Addressing == AddressingVersion.None)
+                else if (
+                    message.Version.Addressing == AddressingVersion.WSAddressing10
+                    || message.Version.Addressing == AddressingVersion.None
+                )
                 {
-                    if (message.Headers.To != null &&
-                        (listener.AnonymousUriPrefixMatcher == null ||
-                        !listener.AnonymousUriPrefixMatcher.IsAnonymousUri(message.Headers.To)))
+                    if (
+                        message.Headers.To != null
+                        && (
+                            listener.AnonymousUriPrefixMatcher == null
+                            || !listener.AnonymousUriPrefixMatcher.IsAnonymousUri(
+                                message.Headers.To
+                            )
+                        )
+                    )
                     {
                         message.Headers.To = null;
                     }
@@ -287,7 +323,13 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.AddressingVersionNotSupported, message.Version.Addressing)));
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.AddressingVersionNotSupported,
+                                message.Version.Addressing
+                            )
+                        )
+                    );
                 }
             }
 
@@ -298,9 +340,13 @@ namespace System.ServiceModel.Channels
             HttpInput input = this.httpPipeline.HttpInput;
             if (input != null)
             {
-                HttpDelayedAcceptStream requestStream = input.GetInputStream(false) as HttpDelayedAcceptStream;
-                if (requestStream != null && TransferModeHelper.IsRequestStreamed(listener.TransferMode)
-                    && requestStream.EnableDelayedAccept(this.httpOutput, closeOnReceivedEof))
+                HttpDelayedAcceptStream requestStream =
+                    input.GetInputStream(false) as HttpDelayedAcceptStream;
+                if (
+                    requestStream != null
+                    && TransferModeHelper.IsRequestStreamed(listener.TransferMode)
+                    && requestStream.EnableDelayedAccept(this.httpOutput, closeOnReceivedEof)
+                )
                 {
                     return false;
                 }
@@ -331,8 +377,7 @@ namespace System.ServiceModel.Channels
             }
             finally
             {
-                if (message != null &&
-                    !object.ReferenceEquals(message, responseMessage))
+                if (message != null && !object.ReferenceEquals(message, responseMessage))
                 {
                     responseMessage.Close();
                 }
@@ -340,7 +385,11 @@ namespace System.ServiceModel.Channels
         }
 
         protected override IAsyncResult OnBeginReply(
-            Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ReplyAsyncResult(this, message, timeout, callback, state);
         }
@@ -380,7 +429,8 @@ namespace System.ServiceModel.Channels
                     {
                         if (e.Data[HttpChannelUtilities.HttpStatusCodeKey] is HttpStatusCode)
                         {
-                            statusCode = (HttpStatusCode)e.Data[HttpChannelUtilities.HttpStatusCodeKey];
+                            statusCode = (HttpStatusCode)
+                                e.Data[HttpChannelUtilities.HttpStatusCodeKey];
                         }
                     }
 
@@ -445,7 +495,7 @@ namespace System.ServiceModel.Channels
                     DiagnosticUtility.TraceHandledException(ex, TraceEventType.Information);
                 }
             }
-            
+
             // Close the request context.
             try
             {
@@ -478,8 +528,11 @@ namespace System.ServiceModel.Channels
             return ackMessage;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104",
-                    Justification = "The exceptions will be traced and thrown by the handling method.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            "Reliability104",
+            Justification = "The exceptions will be traced and thrown by the handling method."
+        )]
         public void AcceptWebSocket(HttpResponseMessage response, string protocol, TimeSpan timeout)
         {
             Task<WebSocketContext> acceptTask;
@@ -492,7 +545,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (!acceptTask.Wait(TimeoutHelper.ToMilliseconds(timeout)))
                     {
-                        throw FxTrace.Exception.AsError(new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError)));
+                        throw FxTrace.Exception.AsError(
+                            new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
+                        );
                     }
                 }
                 catch (Exception ex)
@@ -501,7 +556,7 @@ namespace System.ServiceModel.Channels
                     {
                         throw;
                     }
-                    WebSocketHelper.ThrowCorrectException(ex);               
+                    WebSocketHelper.ThrowCorrectException(ex);
                 }
 
                 success = true;
@@ -518,30 +573,42 @@ namespace System.ServiceModel.Channels
             this.OnAcceptWebSocketSuccess(acceptTask.Result, response.RequestMessage);
         }
 
-        protected abstract Task<WebSocketContext> AcceptWebSocketCore(HttpResponseMessage response, string protocol);
-        protected virtual void OnAcceptWebSocketError()
-        {
-        }
+        protected abstract Task<WebSocketContext> AcceptWebSocketCore(
+            HttpResponseMessage response,
+            string protocol
+        );
 
-        protected abstract void OnAcceptWebSocketSuccess(WebSocketContext context, HttpRequestMessage requestMessage);
+        protected virtual void OnAcceptWebSocketError() { }
+
+        protected abstract void OnAcceptWebSocketSuccess(
+            WebSocketContext context,
+            HttpRequestMessage requestMessage
+        );
 
         protected void OnAcceptWebSocketSuccess(
-            WebSocketContext context, 
-            RemoteEndpointMessageProperty remoteEndpointMessageProperty, 
-            byte[] webSocketInternalBuffer, 
-            bool shouldDisposeWebSocketAfterClose, 
-            HttpRequestMessage requestMessage)
+            WebSocketContext context,
+            RemoteEndpointMessageProperty remoteEndpointMessageProperty,
+            byte[] webSocketInternalBuffer,
+            bool shouldDisposeWebSocketAfterClose,
+            HttpRequestMessage requestMessage
+        )
         {
             this.webSocketChannel.SetWebSocketInfo(
-                context, 
-                remoteEndpointMessageProperty, 
-                this.securityProperty, 
+                context,
+                remoteEndpointMessageProperty,
+                this.securityProperty,
                 webSocketInternalBuffer,
-                shouldDisposeWebSocketAfterClose, 
-                requestMessage);
+                shouldDisposeWebSocketAfterClose,
+                requestMessage
+            );
         }
 
-        public IAsyncResult BeginAcceptWebSocket(HttpResponseMessage response, string protocol, AsyncCallback callback, object state)
+        public IAsyncResult BeginAcceptWebSocket(
+            HttpResponseMessage response,
+            string protocol,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new AcceptWebSocketAsyncResult(this, response, protocol, callback, state);
         }
@@ -562,7 +629,13 @@ namespace System.ServiceModel.Channels
             Message responseMessage;
             TimeoutHelper timeoutHelper;
 
-            public ReplyAsyncResult(HttpRequestContext context, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public ReplyAsyncResult(
+                HttpRequestContext context,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.context = context;
@@ -599,8 +672,10 @@ namespace System.ServiceModel.Channels
                 }
                 finally
                 {
-                    if (this.message != null &&
-                        !object.ReferenceEquals(this.message, this.responseMessage))
+                    if (
+                        this.message != null
+                        && !object.ReferenceEquals(this.message, this.responseMessage)
+                    )
                     {
                         this.responseMessage.Close();
                     }
@@ -633,7 +708,10 @@ namespace System.ServiceModel.Channels
                 thisPtr.Complete(false, completionException);
             }
 
-            static void OnHttpPipelineSendCallback(object target, HttpResponseMessage httpResponseMessage)
+            static void OnHttpPipelineSendCallback(
+                object target,
+                HttpResponseMessage httpResponseMessage
+            )
             {
                 ReplyAsyncResult thisPtr = (ReplyAsyncResult)target;
 
@@ -664,7 +742,9 @@ namespace System.ServiceModel.Channels
             {
                 if (onSendCompleted == null)
                 {
-                    onSendCompleted = Fx.ThunkCallback(new AsyncCallback(OnSendResponseCompletedCallback));
+                    onSendCompleted = Fx.ThunkCallback(
+                        new AsyncCallback(OnSendResponseCompletedCallback)
+                    );
                 }
 
                 bool success = false;
@@ -675,8 +755,11 @@ namespace System.ServiceModel.Channels
                 }
                 finally
                 {
-                    if (!success && this.message != null &&
-                        !object.ReferenceEquals(this.message, this.responseMessage))
+                    if (
+                        !success
+                        && this.message != null
+                        && !object.ReferenceEquals(this.message, this.responseMessage)
+                    )
                     {
                         this.responseMessage.Close();
                     }
@@ -687,7 +770,9 @@ namespace System.ServiceModel.Channels
             {
                 if (onSendCompleted == null)
                 {
-                    onSendCompleted = Fx.ThunkCallback(new AsyncCallback(OnSendResponseCompletedCallback));
+                    onSendCompleted = Fx.ThunkCallback(
+                        new AsyncCallback(OnSendResponseCompletedCallback)
+                    );
                 }
 
                 bool success = false;
@@ -697,10 +782,18 @@ namespace System.ServiceModel.Channels
                     this.closeOutputAfterReply = context.PrepareReply(ref this.responseMessage);
                     if (onHttpPipelineSend == null)
                     {
-                        onHttpPipelineSend = new Action<object, HttpResponseMessage>(OnHttpPipelineSendCallback);
+                        onHttpPipelineSend = new Action<object, HttpResponseMessage>(
+                            OnHttpPipelineSendCallback
+                        );
                     }
 
-                    if (context.httpPipeline.SendAsyncReply(this.responseMessage, onHttpPipelineSend, this) == AsyncCompletionResult.Queued)
+                    if (
+                        context.httpPipeline.SendAsyncReply(
+                            this.responseMessage,
+                            onHttpPipelineSend,
+                            this
+                        ) == AsyncCompletionResult.Queued
+                    )
                     {
                         //// In Async send + HTTP pipeline path, we will send the response back after the result coming out from the pipeline.
                         //// So we don't need to call it here.
@@ -712,15 +805,21 @@ namespace System.ServiceModel.Channels
 
                     if (this.context.HttpMessagesSupported)
                     {
-                        httpResponseMessage = HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(this.responseMessage);
+                        httpResponseMessage =
+                            HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(
+                                this.responseMessage
+                            );
                     }
 
                     return this.SendResponseCore(httpResponseMessage, out success);
                 }
                 finally
                 {
-                    if (!success && this.message != null &&
-                        !object.ReferenceEquals(this.message, this.responseMessage))
+                    if (
+                        !success
+                        && this.message != null
+                        && !object.ReferenceEquals(this.message, this.responseMessage)
+                    )
                     {
                         this.responseMessage.Close();
                     }
@@ -733,11 +832,20 @@ namespace System.ServiceModel.Channels
                 IAsyncResult result;
                 if (httpResponseMessage == null)
                 {
-                    result = context.httpOutput.BeginSend(this.timeoutHelper.RemainingTime(), onSendCompleted, this);
+                    result = context.httpOutput.BeginSend(
+                        this.timeoutHelper.RemainingTime(),
+                        onSendCompleted,
+                        this
+                    );
                 }
                 else
                 {
-                    result = context.httpOutput.BeginSend(httpResponseMessage, this.timeoutHelper.RemainingTime(), onSendCompleted, this);
+                    result = context.httpOutput.BeginSend(
+                        httpResponseMessage,
+                        this.timeoutHelper.RemainingTime(),
+                        onSendCompleted,
+                        this
+                    );
                 }
 
                 success = true;
@@ -752,12 +860,18 @@ namespace System.ServiceModel.Channels
         }
 
         internal IAsyncResult BeginProcessInboundRequest(
-                    ReplyChannelAcceptor replyChannelAcceptor,
-                    Action acceptorCallback,
-                    AsyncCallback callback,
-                    object state)
+            ReplyChannelAcceptor replyChannelAcceptor,
+            Action acceptorCallback,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return this.httpPipeline.BeginProcessInboundRequest(replyChannelAcceptor, acceptorCallback, callback, state);
+            return this.httpPipeline.BeginProcessInboundRequest(
+                replyChannelAcceptor,
+                acceptorCallback,
+                callback,
+                state
+            );
         }
 
         internal void EndProcessInboundRequest(IAsyncResult result)
@@ -765,13 +879,18 @@ namespace System.ServiceModel.Channels
             this.httpPipeline.EndProcessInboundRequest(result);
         }
 
-        class ListenerHttpContext : HttpRequestContext, HttpRequestMessageProperty.IHttpHeaderProvider
+        class ListenerHttpContext
+            : HttpRequestContext,
+                HttpRequestMessageProperty.IHttpHeaderProvider
         {
             HttpListenerContext listenerContext;
             byte[] webSocketInternalBuffer;
 
-            public ListenerHttpContext(HttpChannelListener listener,
-                HttpListenerContext listenerContext, EventTraceActivity eventTraceActivity)
+            public ListenerHttpContext(
+                HttpChannelListener listener,
+                HttpListenerContext listenerContext,
+                EventTraceActivity eventTraceActivity
+            )
                 : base(listener, null, eventTraceActivity)
             {
                 this.listenerContext = listenerContext;
@@ -792,45 +911,72 @@ namespace System.ServiceModel.Channels
                 return new ListenerContextHttpInput(this);
             }
 
-            protected override Task<WebSocketContext> AcceptWebSocketCore(HttpResponseMessage response, string protocol)
+            protected override Task<WebSocketContext> AcceptWebSocketCore(
+                HttpResponseMessage response,
+                string protocol
+            )
             {
                 // CopyHeaders would still throw when the response contains a "WWW-Authenticate"-header
                 // But this is ok in this case because the "WWW-Authenticate"-header doesn't make sense
                 // for a response returning 101 (Switching Protocol)
-                HttpChannelUtilities.CopyHeaders(response, this.listenerContext.Response.Headers.Add);
-                
+                HttpChannelUtilities.CopyHeaders(
+                    response,
+                    this.listenerContext.Response.Headers.Add
+                );
+
                 this.webSocketInternalBuffer = this.Listener.TakeWebSocketInternalBuffer();
-                return this.listenerContext.AcceptWebSocketAsync(
-                                                protocol,
-                                                WebSocketHelper.GetReceiveBufferSize(this.listener.MaxReceivedMessageSize),
-                                                this.Listener.WebSocketSettings.GetEffectiveKeepAliveInterval(),
-                                                new ArraySegment<byte>(this.webSocketInternalBuffer)).Upcast<HttpListenerWebSocketContext, WebSocketContext>();
+                return this
+                    .listenerContext.AcceptWebSocketAsync(
+                        protocol,
+                        WebSocketHelper.GetReceiveBufferSize(this.listener.MaxReceivedMessageSize),
+                        this.Listener.WebSocketSettings.GetEffectiveKeepAliveInterval(),
+                        new ArraySegment<byte>(this.webSocketInternalBuffer)
+                    )
+                    .Upcast<HttpListenerWebSocketContext, WebSocketContext>();
             }
 
             protected override void OnAcceptWebSocketError()
             {
-                byte[] buffer = Interlocked.CompareExchange<byte[]>(ref this.webSocketInternalBuffer, null, this.webSocketInternalBuffer);
+                byte[] buffer = Interlocked.CompareExchange<byte[]>(
+                    ref this.webSocketInternalBuffer,
+                    null,
+                    this.webSocketInternalBuffer
+                );
                 if (buffer != null)
                 {
                     this.Listener.ReturnWebSocketInternalBuffer(buffer);
                 }
             }
 
-            protected override void OnAcceptWebSocketSuccess(WebSocketContext context, HttpRequestMessage requestMessage)
+            protected override void OnAcceptWebSocketSuccess(
+                WebSocketContext context,
+                HttpRequestMessage requestMessage
+            )
             {
                 RemoteEndpointMessageProperty remoteEndpointMessageProperty = null;
                 if (this.listenerContext.Request.RemoteEndPoint != null)
                 {
-                    remoteEndpointMessageProperty = new RemoteEndpointMessageProperty(this.listenerContext.Request.RemoteEndPoint);
+                    remoteEndpointMessageProperty = new RemoteEndpointMessageProperty(
+                        this.listenerContext.Request.RemoteEndPoint
+                    );
                 }
 
-                base.OnAcceptWebSocketSuccess(context, remoteEndpointMessageProperty, this.webSocketInternalBuffer, true, requestMessage);
+                base.OnAcceptWebSocketSuccess(
+                    context,
+                    remoteEndpointMessageProperty,
+                    this.webSocketInternalBuffer,
+                    true,
+                    requestMessage
+                );
             }
 
             public override HttpOutput GetHttpOutput(Message message)
             {
                 // work around http.sys keep alive bug with chunked requests, see MB 49676, this is fixed in Vista
-                if (listenerContext.Request.ContentLength64 == -1 && !OSEnvironmentHelper.IsVistaOrGreater)
+                if (
+                    listenerContext.Request.ContentLength64 == -1
+                    && !OSEnvironmentHelper.IsVistaOrGreater
+                )
                 {
                     listenerContext.Response.KeepAlive = false;
                 }
@@ -838,14 +984,25 @@ namespace System.ServiceModel.Channels
                 {
                     listenerContext.Response.KeepAlive = listener.KeepAliveEnabled;
                 }
-                ICompressedMessageEncoder compressedMessageEncoder = listener.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
+                ICompressedMessageEncoder compressedMessageEncoder =
+                    listener.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
                 if (compressedMessageEncoder != null && compressedMessageEncoder.CompressionEnabled)
                 {
-                    string acceptEncoding = listenerContext.Request.Headers[HttpChannelUtilities.AcceptEncodingHeader];
-                    compressedMessageEncoder.AddCompressedMessageProperties(message, acceptEncoding);
+                    string acceptEncoding = listenerContext.Request.Headers[
+                        HttpChannelUtilities.AcceptEncodingHeader
+                    ];
+                    compressedMessageEncoder.AddCompressedMessageProperties(
+                        message,
+                        acceptEncoding
+                    );
                 }
 
-                return HttpOutput.CreateHttpOutput(listenerContext.Response, Listener, message, this.HttpMethod);
+                return HttpOutput.CreateHttpOutput(
+                    listenerContext.Response,
+                    Listener,
+                    message,
+                    this.HttpMethod
+                );
             }
 
             protected override SecurityMessageProperty OnProcessAuthentication()
@@ -877,17 +1034,23 @@ namespace System.ServiceModel.Channels
                 catch (HttpListenerException listenerException)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        HttpChannelUtilities.CreateCommunicationException(listenerException));
+                        HttpChannelUtilities.CreateCommunicationException(listenerException)
+                    );
                 }
             }
 
-            void HttpRequestMessageProperty.IHttpHeaderProvider.CopyHeaders(WebHeaderCollection headers)
+            void HttpRequestMessageProperty.IHttpHeaderProvider.CopyHeaders(
+                WebHeaderCollection headers
+            )
             {
                 HttpListenerRequest listenerRequest = this.listenerContext.Request;
                 headers.Add(listenerRequest.Headers);
 
                 // MB 57988 - System.Net strips off user-agent from the headers collection
-                if (listenerRequest.UserAgent != null && headers[HttpRequestHeader.UserAgent] == null)
+                if (
+                    listenerRequest.UserAgent != null
+                    && headers[HttpRequestHeader.UserAgent] == null
+                )
                 {
                     headers.Add(HttpRequestHeader.UserAgent, listenerRequest.UserAgent);
                 }
@@ -900,13 +1063,23 @@ namespace System.ServiceModel.Channels
                 byte[] preReadBuffer;
 
                 public ListenerContextHttpInput(ListenerHttpContext listenerHttpContext)
-                    : base(listenerHttpContext.Listener, true, listenerHttpContext.listener.IsChannelBindingSupportEnabled)
+                    : base(
+                        listenerHttpContext.Listener,
+                        true,
+                        listenerHttpContext.listener.IsChannelBindingSupportEnabled
+                    )
                 {
                     this.listenerHttpContext = listenerHttpContext;
                     if (this.listenerHttpContext.listenerContext.Request.ContentLength64 == -1)
                     {
                         this.preReadBuffer = new byte[1];
-                        if (this.listenerHttpContext.listenerContext.Request.InputStream.Read(preReadBuffer, 0, 1) == 0)
+                        if (
+                            this.listenerHttpContext.listenerContext.Request.InputStream.Read(
+                                preReadBuffer,
+                                0,
+                                1
+                            ) == 0
+                        )
                         {
                             this.preReadBuffer = null;
                         }
@@ -915,10 +1088,7 @@ namespace System.ServiceModel.Channels
 
                 public override long ContentLength
                 {
-                    get
-                    {
-                        return this.listenerHttpContext.listenerContext.Request.ContentLength64;
-                    }
+                    get { return this.listenerHttpContext.listenerContext.Request.ContentLength64; }
                 }
 
                 protected override string ContentTypeCore
@@ -927,7 +1097,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.cachedContentType == null)
                         {
-                            this.cachedContentType = this.listenerHttpContext.listenerContext.Request.ContentType;
+                            this.cachedContentType = this.listenerHttpContext
+                                .listenerContext
+                                .Request
+                                .ContentType;
                         }
 
                         return this.cachedContentType;
@@ -943,7 +1116,9 @@ namespace System.ServiceModel.Channels
                 {
                     get
                     {
-                        return this.listenerHttpContext.listenerContext.Request.Headers["SOAPAction"];
+                        return this.listenerHttpContext.listenerContext.Request.Headers[
+                            "SOAPAction"
+                        ];
                     }
                 }
 
@@ -951,37 +1126,67 @@ namespace System.ServiceModel.Channels
                 {
                     get
                     {
-                        return ChannelBindingUtility.GetToken(this.listenerHttpContext.listenerContext.Request.TransportContext);
+                        return ChannelBindingUtility.GetToken(
+                            this.listenerHttpContext.listenerContext.Request.TransportContext
+                        );
                     }
                 }
 
                 protected override void AddProperties(Message message)
                 {
-                    HttpRequestMessageProperty requestProperty = new HttpRequestMessageProperty(this.listenerHttpContext);
-                    requestProperty.Method = this.listenerHttpContext.listenerContext.Request.HttpMethod;
+                    HttpRequestMessageProperty requestProperty = new HttpRequestMessageProperty(
+                        this.listenerHttpContext
+                    );
+                    requestProperty.Method = this.listenerHttpContext
+                        .listenerContext
+                        .Request
+                        .HttpMethod;
 
                     // Uri.Query always includes the '?'
                     if (this.listenerHttpContext.listenerContext.Request.Url.Query.Length > 1)
                     {
-                        requestProperty.QueryString = this.listenerHttpContext.listenerContext.Request.Url.Query.Substring(1);
+                        requestProperty.QueryString =
+                            this.listenerHttpContext.listenerContext.Request.Url.Query.Substring(1);
                     }
 
                     message.Properties.Add(HttpRequestMessageProperty.Name, requestProperty);
                     message.Properties.Via = this.listenerHttpContext.listenerContext.Request.Url;
 
-                    RemoteEndpointMessageProperty remoteEndpointProperty = new RemoteEndpointMessageProperty(this.listenerHttpContext.listenerContext.Request.RemoteEndPoint);
-                    message.Properties.Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
+                    RemoteEndpointMessageProperty remoteEndpointProperty =
+                        new RemoteEndpointMessageProperty(
+                            this.listenerHttpContext.listenerContext.Request.RemoteEndPoint
+                        );
+                    message.Properties.Add(
+                        RemoteEndpointMessageProperty.Name,
+                        remoteEndpointProperty
+                    );
                 }
 
                 public override void ConfigureHttpRequestMessage(HttpRequestMessage message)
                 {
-                    message.Method = new HttpMethod(this.listenerHttpContext.listenerContext.Request.HttpMethod);
+                    message.Method = new HttpMethod(
+                        this.listenerHttpContext.listenerContext.Request.HttpMethod
+                    );
                     message.RequestUri = this.listenerHttpContext.listenerContext.Request.Url;
-                    foreach (string webHeaderKey in this.listenerHttpContext.listenerContext.Request.Headers.Keys)
+                    foreach (
+                        string webHeaderKey in this.listenerHttpContext
+                            .listenerContext
+                            .Request
+                            .Headers
+                            .Keys
+                    )
                     {
-                        message.AddHeader(webHeaderKey, this.listenerHttpContext.listenerContext.Request.Headers[webHeaderKey]);
+                        message.AddHeader(
+                            webHeaderKey,
+                            this.listenerHttpContext.listenerContext.Request.Headers[webHeaderKey]
+                        );
                     }
-                    message.Properties.Add(RemoteEndpointMessageProperty.Name, new RemoteEndpointMessageProperty(this.listenerHttpContext.listenerContext.Request.RemoteEndPoint));
+                    message.Properties.Add(
+                        RemoteEndpointMessageProperty.Name,
+                        new RemoteEndpointMessageProperty(
+                            this.listenerHttpContext.listenerContext.Request.RemoteEndPoint
+                        )
+                    );
                 }
 
                 protected override Stream GetInputStream()
@@ -999,16 +1204,26 @@ namespace System.ServiceModel.Channels
                 class ListenerContextInputStream : HttpDelayedAcceptStream
                 {
                     public ListenerContextInputStream(ListenerHttpContext listenerHttpContext)
-                        : base(listenerHttpContext.listenerContext.Request.InputStream)
-                    {
-                    }
+                        : base(listenerHttpContext.listenerContext.Request.InputStream) { }
 
-                    public ListenerContextInputStream(ListenerHttpContext listenerHttpContext, byte[] preReadBuffer)
-                        : base(new PreReadStream(listenerHttpContext.listenerContext.Request.InputStream, preReadBuffer))
-                    {
-                    }
+                    public ListenerContextInputStream(
+                        ListenerHttpContext listenerHttpContext,
+                        byte[] preReadBuffer
+                    )
+                        : base(
+                            new PreReadStream(
+                                listenerHttpContext.listenerContext.Request.InputStream,
+                                preReadBuffer
+                            )
+                        ) { }
 
-                    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+                    public override IAsyncResult BeginRead(
+                        byte[] buffer,
+                        int offset,
+                        int count,
+                        AsyncCallback callback,
+                        object state
+                    )
                     {
                         try
                         {
@@ -1017,7 +1232,8 @@ namespace System.ServiceModel.Channels
                         catch (HttpListenerException listenerException)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException));
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                         }
                     }
 
@@ -1030,7 +1246,8 @@ namespace System.ServiceModel.Channels
                         catch (HttpListenerException listenerException)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException));
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                         }
                     }
 
@@ -1043,7 +1260,8 @@ namespace System.ServiceModel.Channels
                         catch (HttpListenerException listenerException)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException));
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                         }
                     }
 
@@ -1056,7 +1274,8 @@ namespace System.ServiceModel.Channels
                         catch (HttpListenerException listenerException)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException));
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                         }
                     }
                 }
@@ -1065,20 +1284,30 @@ namespace System.ServiceModel.Channels
 
         class AcceptWebSocketAsyncResult : AsyncResult
         {
-            static AsyncCallback onHandleAcceptWebSocketResult = Fx.ThunkCallback(new AsyncCallback(HandleAcceptWebSocketResult));
+            static AsyncCallback onHandleAcceptWebSocketResult = Fx.ThunkCallback(
+                new AsyncCallback(HandleAcceptWebSocketResult)
+            );
 
             HttpRequestContext context;
             SignalGate gate = new SignalGate();
             HttpResponseMessage response;
 
-            public AcceptWebSocketAsyncResult(HttpRequestContext context, HttpResponseMessage response, string protocol, AsyncCallback callback, object state)
+            public AcceptWebSocketAsyncResult(
+                HttpRequestContext context,
+                HttpResponseMessage response,
+                string protocol,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 Fx.Assert(context != null, "context should not be null.");
                 Fx.Assert(response != null, "response should not be null.");
                 this.context = context;
                 this.response = response;
-                IAsyncResult result = this.context.AcceptWebSocketCore(response, protocol).AsAsyncResult<WebSocketContext>(onHandleAcceptWebSocketResult, this);
+                IAsyncResult result = this
+                    .context.AcceptWebSocketCore(response, protocol)
+                    .AsAsyncResult<WebSocketContext>(onHandleAcceptWebSocketResult, this);
 
                 if (this.gate.Unlock())
                 {
@@ -1132,9 +1361,10 @@ namespace System.ServiceModel.Channels
                 {
                     this.context.OnAcceptWebSocketError();
                     //
-                    throw FxTrace.Exception.AsError(new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError)));
+                    throw FxTrace.Exception.AsError(
+                        new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
+                    );
                 }
-
 
                 this.context.SetReplySent();
                 this.context.OnAcceptWebSocketSuccess(acceptTask.Result, response.RequestMessage);

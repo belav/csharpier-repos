@@ -28,20 +28,20 @@
 
 namespace System.Data.Services
 {
-	[Flags]
-	public enum EntitySetRights
-	{
-		None = 0,
-		All = AllRead | AllWrite,
-		AllRead = ReadSingle | ReadMultiple,
-		AllWrite = WriteAppend | WriteReplace | WriteDelete | WriteMerge,
+    [Flags]
+    public enum EntitySetRights
+    {
+        None = 0,
+        All = AllRead | AllWrite,
+        AllRead = ReadSingle | ReadMultiple,
+        AllWrite = WriteAppend | WriteReplace | WriteDelete | WriteMerge,
 
-		ReadSingle = 1,
-		ReadMultiple = 2,
-		
-		WriteAppend = 4,
-		WriteReplace = 8,
-		WriteDelete = 16,
-		WriteMerge = 32
-	}
+        ReadSingle = 1,
+        ReadMultiple = 2,
+
+        WriteAppend = 4,
+        WriteReplace = 8,
+        WriteDelete = 16,
+        WriteMerge = 32,
+    }
 }

@@ -13,14 +13,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
 internal sealed class NamedPipeConnection : TransportConnection, IConnectionNamedPipeFeature
 {
-    private static readonly ConnectionAbortedException SendGracefullyCompletedException = new ConnectionAbortedException("The named pipe transport's send loop completed gracefully.");
+    private static readonly ConnectionAbortedException SendGracefullyCompletedException =
+        new ConnectionAbortedException(
+            "The named pipe transport's send loop completed gracefully."
+        );
     private const int MinAllocBufferSize = 4096;
     private readonly NamedPipeConnectionListener _connectionListener;
     private readonly NamedPipeServerStream _stream;
     private readonly ILogger _log;
     private readonly IDuplexPipe _originalTransport;
 
-    private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _connectionClosedTokenSource =
+        new CancellationTokenSource();
     private bool _connectionClosed;
     private bool _connectionShutdown;
     private bool _streamDisconnected;
@@ -38,7 +42,8 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         ILogger logger,
         MemoryPool<byte> memoryPool,
         PipeOptions inputOptions,
-        PipeOptions outputOptions)
+        PipeOptions outputOptions
+    )
     {
         _connectionListener = connectionListener;
         _stream = stream;
@@ -70,7 +75,11 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}."
+            );
         }
     }
 
@@ -264,7 +273,11 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(CancelConnectionClosedToken)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(CancelConnectionClosedToken)}."
+            );
         }
     }
 
@@ -290,7 +303,11 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}."
+            );
             _stream.Dispose();
             return;
         }

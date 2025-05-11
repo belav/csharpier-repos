@@ -39,11 +39,26 @@ public class DeploymentResult
     /// </summary>
     public HttpClient HttpClient { get; }
 
-    public DeploymentResult(ILoggerFactory loggerFactory, DeploymentParameters deploymentParameters, string applicationBaseUri)
-        : this(loggerFactory, deploymentParameters: deploymentParameters, applicationBaseUri: applicationBaseUri, contentRoot: string.Empty, hostShutdownToken: CancellationToken.None)
-    { }
+    public DeploymentResult(
+        ILoggerFactory loggerFactory,
+        DeploymentParameters deploymentParameters,
+        string applicationBaseUri
+    )
+        : this(
+            loggerFactory,
+            deploymentParameters: deploymentParameters,
+            applicationBaseUri: applicationBaseUri,
+            contentRoot: string.Empty,
+            hostShutdownToken: CancellationToken.None
+        ) { }
 
-    public DeploymentResult(ILoggerFactory loggerFactory, DeploymentParameters deploymentParameters, string applicationBaseUri, string contentRoot, CancellationToken hostShutdownToken)
+    public DeploymentResult(
+        ILoggerFactory loggerFactory,
+        DeploymentParameters deploymentParameters,
+        string applicationBaseUri,
+        string contentRoot,
+        CancellationToken hostShutdownToken
+    )
     {
         _loggerFactory = loggerFactory;
 

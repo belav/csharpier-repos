@@ -11,9 +11,8 @@ public class InteractiveWebAssemblyRenderMode : IComponentRenderMode
     /// <summary>
     /// Constructs an instance of <see cref="InteractiveWebAssemblyRenderMode"/>.
     /// </summary>
-    public InteractiveWebAssemblyRenderMode() : this(true)
-    {
-    }
+    public InteractiveWebAssemblyRenderMode()
+        : this(true) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="InteractiveWebAssemblyRenderMode"/>

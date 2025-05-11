@@ -18,7 +18,14 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The utility functions provided by the <see cref="T:System.Web.Management.IRegiisUtility" /> interface support the system.web assembly registration.</para>
+      <para
+        >The utility functions provided by the <see
+         cref="T:System.Web.Management.IRegiisUtility" />
+
+        
+
+         interface support the system.web assembly registration.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +34,10 @@
   </Docs>
   <Members>
     <Member MemberName="ProtectedConfigAction">
-      <MemberSignature Language="C#" Value="public void ProtectedConfigAction (long actionToPerform, string firstArgument, string secondArgument, string providerName, string appPath, string site, string cspOrLocation, int keySize, out IntPtr exception);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void ProtectedConfigAction (long actionToPerform, string firstArgument, string secondArgument, string providerName, string appPath, string site, string cspOrLocation, int keySize, out IntPtr exception);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -62,7 +72,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RegisterAsnetMmcAssembly">
-      <MemberSignature Language="C#" Value="public void RegisterAsnetMmcAssembly (int doReg, string assemblyName, string binaryDirectory, out IntPtr exception);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RegisterAsnetMmcAssembly (int doReg, string assemblyName, string binaryDirectory, out IntPtr exception);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -87,7 +100,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RegisterSystemWebAssembly">
-      <MemberSignature Language="C#" Value="public void RegisterSystemWebAssembly (int doReg, out IntPtr exception);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RegisterSystemWebAssembly (int doReg, out IntPtr exception);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -108,7 +124,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemoveBrowserCaps">
-      <MemberSignature Language="C#" Value="public void RemoveBrowserCaps (out IntPtr exception);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemoveBrowserCaps (out IntPtr exception);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

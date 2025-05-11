@@ -23,7 +23,8 @@ public class PropertyActivatorTest
             {
                 invokedWith = val;
                 return val;
-            });
+            }
+        );
 
         // Act
         activator.Activate(instance, 123);
@@ -60,8 +61,9 @@ public class PropertyActivatorTest
         var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
             type: typeof(TestClass),
             activateAttributeType: typeof(TestActivateAttribute),
-            createActivateInfo:
-            (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val + 1));
+            createActivateInfo: (propertyInfo) =>
+                new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val + 1)
+        );
 
         // Assert
         Assert.Collection(
@@ -69,7 +71,8 @@ public class PropertyActivatorTest
             (activator) =>
             {
                 Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -84,8 +87,9 @@ public class PropertyActivatorTest
         var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
             type: typeof(TestClass),
             activateAttributeType: typeof(TestActivateAttribute),
-            createActivateInfo:
-            (propertyInfo) => new PropertyActivator<int>(expectedPropertyInfo, valueAccessor: (val) => val + 1));
+            createActivateInfo: (propertyInfo) =>
+                new PropertyActivator<int>(expectedPropertyInfo, valueAccessor: (val) => val + 1)
+        );
 
         // Assert
         Assert.Collection(
@@ -93,7 +97,8 @@ public class PropertyActivatorTest
             (activator) =>
             {
                 Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -108,7 +113,8 @@ public class PropertyActivatorTest
         var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
             typeof(TestClassWithPropertyVisiblity),
             typeof(TestActivateAttribute),
-            (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val));
+            (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val)
+        );
 
         // Assert
         Assert.Single(propertiesToActivate);
@@ -127,7 +133,8 @@ public class PropertyActivatorTest
             typeof(TestClassWithPropertyVisiblity),
             typeof(TestActivateAttribute),
             (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val),
-            includeNonPublic: true);
+            includeNonPublic: true
+        );
 
         // Assert
         Assert.Equal(5, propertiesToActivate.Length);
@@ -146,10 +153,7 @@ public class PropertyActivatorTest
         [TestActivate]
         public int this[int something] // Not activatable
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         [TestActivate]
@@ -175,9 +179,7 @@ public class PropertyActivatorTest
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    private class TestActivateAttribute : Attribute
-    {
-    }
+    private class TestActivateAttribute : Attribute { }
 
     private class ActivationInfo
     {

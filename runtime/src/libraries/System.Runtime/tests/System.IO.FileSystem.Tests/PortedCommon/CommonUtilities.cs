@@ -8,19 +8,21 @@ This is meant to contain useful utilities for IO related work
 #define TRACE
 #define DEBUG
 using System;
-using System.IO;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 
 //machine information
 public static class FileSystemDebugInfo
 {
     public static string MachineInfo()
     {
-        StringBuilder builder = new StringBuilder(string.Format("{0}/////////Machine Info///////////{0}", Environment.NewLine));
+        StringBuilder builder = new StringBuilder(
+            string.Format("{0}/////////Machine Info///////////{0}", Environment.NewLine)
+        );
         builder.AppendLine(string.Format("CurrentDrive NTFS?: {0}", IsCurrentDriveNTFS()));
         builder.AppendLine(string.Format("////////////////////{0}", Environment.NewLine));
 
@@ -46,7 +48,13 @@ public static class FileSystemDebugInfo
                 dirName = Path.GetDirectoryName(dirName);
             if ((new DirectoryInfo(dirName)).Parent == null)
             {
-                if (Path.GetPathRoot(dirName).StartsWith(systemDriveLetter.ToString(), StringComparison.OrdinalIgnoreCase))
+                if (
+                    Path.GetPathRoot(dirName)
+                        .StartsWith(
+                            systemDriveLetter.ToString(),
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
                     return true;
             }
         }
@@ -72,6 +80,7 @@ public static class FailSafeDirectoryOperations
     /// <param name="path"></param>
     /// <param name="recursive"></param>
     private const int MAX_ATTEMPT = 10;
+
     public static void DeleteDirectory(string path, bool recursive)
     {
         DeleteDirectoryInfo(new DirectoryInfo(path), recursive);
@@ -108,9 +117,10 @@ public static class FailSafeDirectoryOperations
         EnsureDirectoryNotExist(dirInfo.FullName);
         //We want to thrown if the operation failed
         if (Directory.Exists(dirInfo.FullName))
-            throw new ArgumentException("Throwing from FailSafeDirectoryOperations.DeleteDirectoryInfo. Delete unsuccessful");
+            throw new ArgumentException(
+                "Throwing from FailSafeDirectoryOperations.DeleteDirectoryInfo. Delete unsuccessful"
+            );
     }
-
 
     /// <summary>
     /// Moving
@@ -145,7 +155,9 @@ public static class FailSafeDirectoryOperations
         EnsureDirectoryNotExist(originalDirName);
         //We want to thrown if the operation failed
         if (Directory.Exists(originalDirName))
-            throw new ArgumentException("Throwing from FailSafeDirectoryOperations.MoveDirectory. Move unsuccessful");
+            throw new ArgumentException(
+                "Throwing from FailSafeDirectoryOperations.MoveDirectory. Move unsuccessful"
+            );
         return dirInfo;
     }
 
@@ -168,8 +180,6 @@ public static class FailSafeDirectoryOperations
     }
 }
 
-
-
 /// <summary>
 /// This class is meant to create directory and files under it
 /// </summary>
@@ -178,6 +188,7 @@ public class ManageFileSystem : IDisposable
     private const int DefaultDirectoryDepth = 3;
     private const int DefaultNumberofFiles = 100;
     private const int MaxNumberOfSubDirsPerDir = 2;
+
     //@TODO
     public const string DirPrefixName = "Laks_";
 
@@ -191,15 +202,18 @@ public class ManageFileSystem : IDisposable
     private List<string> _listOfAllDirs;
     private Dictionary<int, Dictionary<string, List<string>>> _allDirs;
 
-
     public ManageFileSystem()
     {
-        Init(GetNonExistingDir(Directory.GetCurrentDirectory(), DirPrefixName), DefaultDirectoryDepth, DefaultNumberofFiles);
+        Init(
+            GetNonExistingDir(Directory.GetCurrentDirectory(), DirPrefixName),
+            DefaultDirectoryDepth,
+            DefaultNumberofFiles
+        );
     }
+
     public ManageFileSystem(string startDirName)
-        : this(startDirName, DefaultDirectoryDepth, DefaultNumberofFiles)
-    {
-    }
+        : this(startDirName, DefaultDirectoryDepth, DefaultNumberofFiles) { }
+
     public ManageFileSystem(string startDirName, int dirDepth, int numFiles)
     {
         Init(startDirName, dirDepth, numFiles);
@@ -210,7 +224,14 @@ public class ManageFileSystem : IDisposable
         string tempPath;
         while (true)
         {
-            tempPath = Path.Combine(parentDir, string.Format("{0}{1}", prefix, Path.GetFileNameWithoutExtension(Path.GetRandomFileName())));
+            tempPath = Path.Combine(
+                parentDir,
+                string.Format(
+                    "{0}{1}",
+                    prefix,
+                    Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                )
+            );
             if (!Directory.Exists(tempPath) && !File.Exists(tempPath))
                 break;
         }
@@ -288,7 +309,10 @@ public class ManageFileSystem : IDisposable
                 for (int k = 0; k < numOfDirPerDir; k++)
                 {
                     string dirName = GetNonExistingDir(dir, DirPrefixName);
-                    Debug.Assert(!Directory.Exists(dirName), $"ERR_93472g! Directory exists: {dirName}");
+                    Debug.Assert(
+                        !Directory.Exists(dirName),
+                        $"ERR_93472g! Directory exists: {dirName}"
+                    );
                     tempDirsForOneLevel.Add(dirName, new List<string>());
                     _listOfAllDirs.Add(dirName);
                     Directory.CreateDirectory(dirName);
@@ -355,7 +379,6 @@ public class ManageFileSystem : IDisposable
         return _listOfAllDirs.ToArray();
     }
 
-
     public string[] GetFiles(string dirName, int level)
     {
         string dirFullName = Path.GetFullPath(dirName);
@@ -373,7 +396,6 @@ public class ManageFileSystem : IDisposable
         return _listOfFiles.ToArray();
     }
 }
-
 
 public class TestInfo
 {

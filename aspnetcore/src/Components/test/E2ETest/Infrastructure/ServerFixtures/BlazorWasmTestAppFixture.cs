@@ -14,10 +14,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
 public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
 {
-    public readonly bool TestTrimmedApps = typeof(ToggleExecutionModeServerFixture<>).Assembly
-        .GetCustomAttributes<AssemblyMetadataAttribute>()
-        .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps")
-        .Value == "true";
+    public readonly bool TestTrimmedApps =
+        typeof(ToggleExecutionModeServerFixture<>)
+            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps")
+            .Value == "true";
 
     public string Environment { get; set; }
     public string PathBase { get; set; }
@@ -27,17 +28,22 @@ public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
     {
         if (TestTrimmedApps)
         {
-            var staticFilePath = Path.Combine(AppContext.BaseDirectory, "trimmed", typeof(TProgram).Assembly.GetName().Name);
+            var staticFilePath = Path.Combine(
+                AppContext.BaseDirectory,
+                "trimmed",
+                typeof(TProgram).Assembly.GetName().Name
+            );
             if (!Directory.Exists(staticFilePath))
             {
-                throw new DirectoryNotFoundException($"Test is configured to use trimmed outputs, but trimmed outputs were not found in {staticFilePath}.");
+                throw new DirectoryNotFoundException(
+                    $"Test is configured to use trimmed outputs, but trimmed outputs were not found in {staticFilePath}."
+                );
             }
 
             return CreateStaticWebHost(staticFilePath);
         }
 
-        ContentRoot = FindSampleOrTestSitePath(
-            typeof(TProgram).Assembly.FullName);
+        ContentRoot = FindSampleOrTestSitePath(typeof(TProgram).Assembly.FullName);
 
         var host = "127.0.0.1";
         if (E2ETestOptions.Instance.SauceTest)
@@ -46,12 +52,16 @@ public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
         }
 
         var args = new List<string>
-            {
-                "--urls", $"http://{host}:0",
-                "--contentroot", ContentRoot,
-                "--pathbase", PathBase,
-                "--applicationpath", typeof(TProgram).Assembly.Location,
-            };
+        {
+            "--urls",
+            $"http://{host}:0",
+            "--contentroot",
+            ContentRoot,
+            "--pathbase",
+            PathBase,
+            "--applicationpath",
+            typeof(TProgram).Assembly.Location,
+        };
 
         if (!string.IsNullOrEmpty(Environment))
         {
@@ -66,11 +76,13 @@ public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
     {
         var host = "127.0.0.1";
         return new HostBuilder()
-            .ConfigureWebHost(webHostBuilder => webHostBuilder
-                .UseKestrel()
-                .UseContentRoot(contentRoot)
-                .UseStartup(_ => new StaticSiteStartup { PathBase = PathBase })
-                .UseUrls($"http://{host}:0"))
+            .ConfigureWebHost(webHostBuilder =>
+                webHostBuilder
+                    .UseKestrel()
+                    .UseContentRoot(contentRoot)
+                    .UseStartup(_ => new StaticSiteStartup { PathBase = PathBase })
+                    .UseUrls($"http://{host}:0")
+            )
             .ConfigureLogging((hostingContext, logging) => logging.AddConsole())
             .Build();
     }
@@ -91,10 +103,7 @@ public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
                 app.UsePathBase(PathBase);
             }
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                ServeUnknownFileTypes = true,
-            });
+            app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
 
             app.UseRouting();
 

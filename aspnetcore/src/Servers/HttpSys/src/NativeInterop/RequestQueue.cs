@@ -16,15 +16,17 @@ internal sealed partial class RequestQueue
     private bool _disposed;
 
     internal RequestQueue(string requestQueueName, ILogger logger)
-        : this(requestQueueName, RequestQueueMode.Attach, logger, receiver: true)
-    {
-    }
+        : this(requestQueueName, RequestQueueMode.Attach, logger, receiver: true) { }
 
     internal RequestQueue(string? requestQueueName, RequestQueueMode mode, ILogger logger)
-        : this(requestQueueName, mode, logger, false)
-    { }
+        : this(requestQueueName, mode, logger, false) { }
 
-    private RequestQueue(string? requestQueueName, RequestQueueMode mode, ILogger logger, bool receiver)
+    private RequestQueue(
+        string? requestQueueName,
+        RequestQueueMode mode,
+        ILogger logger,
+        bool receiver
+    )
     {
         _mode = mode;
         _logger = logger;
@@ -43,32 +45,46 @@ internal sealed partial class RequestQueue
         }
 
         var statusCode = PInvoke.HttpCreateRequestQueue(
-                HttpApi.Version,
-                requestQueueName,
-                default,
-                flags,
-                out var requestQueueHandle);
+            HttpApi.Version,
+            requestQueueName,
+            default,
+            flags,
+            out var requestQueueHandle
+        );
 
-        if (_mode == RequestQueueMode.CreateOrAttach && statusCode == ErrorCodes.ERROR_ALREADY_EXISTS)
+        if (
+            _mode == RequestQueueMode.CreateOrAttach
+            && statusCode == ErrorCodes.ERROR_ALREADY_EXISTS
+        )
         {
             // Tried to create, but it already exists so attach to it instead.
             Created = false;
             flags = PInvoke.HTTP_CREATE_REQUEST_QUEUE_FLAG_OPEN_EXISTING;
             statusCode = PInvoke.HttpCreateRequestQueue(
-                    HttpApi.Version,
-                    requestQueueName,
-                    default,
-                    flags,
-                    out requestQueueHandle);
+                HttpApi.Version,
+                requestQueueName,
+                default,
+                flags,
+                out requestQueueHandle
+            );
         }
 
-        if ((flags & PInvoke.HTTP_CREATE_REQUEST_QUEUE_FLAG_OPEN_EXISTING) != 0 && statusCode == ErrorCodes.ERROR_FILE_NOT_FOUND)
+        if (
+            (flags & PInvoke.HTTP_CREATE_REQUEST_QUEUE_FLAG_OPEN_EXISTING) != 0
+            && statusCode == ErrorCodes.ERROR_FILE_NOT_FOUND
+        )
         {
-            throw new HttpSysException((int)statusCode, $"Failed to attach to the given request queue '{requestQueueName}', the queue could not be found.");
+            throw new HttpSysException(
+                (int)statusCode,
+                $"Failed to attach to the given request queue '{requestQueueName}', the queue could not be found."
+            );
         }
         else if (statusCode == ErrorCodes.ERROR_INVALID_NAME)
         {
-            throw new HttpSysException((int)statusCode, $"The given request queue name '{requestQueueName}' is invalid.");
+            throw new HttpSysException(
+                (int)statusCode,
+                $"The given request queue name '{requestQueueName}' is invalid."
+            );
         }
         else if (statusCode != ErrorCodes.ERROR_SUCCESS)
         {
@@ -76,11 +92,16 @@ internal sealed partial class RequestQueue
         }
 
         // Disabling callbacks when IO operation completes synchronously (returns ErrorCodes.ERROR_SUCCESS)
-        if (HttpSysListener.SkipIOCPCallbackOnSuccess &&
-            !PInvoke.SetFileCompletionNotificationModes(
+        if (
+            HttpSysListener.SkipIOCPCallbackOnSuccess
+            && !PInvoke.SetFileCompletionNotificationModes(
                 requestQueueHandle,
-                (byte)(PInvoke.FILE_SKIP_COMPLETION_PORT_ON_SUCCESS |
-                PInvoke.FILE_SKIP_SET_EVENT_ON_HANDLE)))
+                (byte)(
+                    PInvoke.FILE_SKIP_COMPLETION_PORT_ON_SUCCESS
+                    | PInvoke.FILE_SKIP_SET_EVENT_ON_HANDLE
+                )
+            )
+        )
         {
             requestQueueHandle.Dispose();
             throw new HttpSysException(Marshal.GetLastWin32Error());
@@ -109,9 +130,12 @@ internal sealed partial class RequestQueue
         Debug.Assert(Created);
         CheckDisposed();
 
-        var result = PInvoke.HttpSetRequestQueueProperty(Handle,
+        var result = PInvoke.HttpSetRequestQueueProperty(
+            Handle,
             HTTP_SERVER_PROPERTY.HttpServerQueueLengthProperty,
-            &length, (uint)Marshal.SizeOf<long>());
+            &length,
+            (uint)Marshal.SizeOf<long>()
+        );
 
         if (result != 0)
         {
@@ -125,9 +149,12 @@ internal sealed partial class RequestQueue
         Debug.Assert(Created);
         CheckDisposed();
 
-        var result = PInvoke.HttpSetRequestQueueProperty(Handle,
+        var result = PInvoke.HttpSetRequestQueueProperty(
+            Handle,
             HTTP_SERVER_PROPERTY.HttpServer503VerbosityProperty,
-            &verbosity, (uint)Marshal.SizeOf<long>());
+            &verbosity,
+            (uint)Marshal.SizeOf<long>()
+        );
 
         if (result != 0)
         {
@@ -154,7 +181,12 @@ internal sealed partial class RequestQueue
 
     private static partial class Log
     {
-        [LoggerMessage(LoggerEventIds.AttachedToQueue, LogLevel.Information, "Attached to an existing request queue '{RequestQueueName}', some options do not apply.", EventName = "AttachedToQueue")]
+        [LoggerMessage(
+            LoggerEventIds.AttachedToQueue,
+            LogLevel.Information,
+            "Attached to an existing request queue '{RequestQueueName}', some options do not apply.",
+            EventName = "AttachedToQueue"
+        )]
         public static partial void AttachedToQueue(ILogger logger, string? requestQueueName);
     }
 }

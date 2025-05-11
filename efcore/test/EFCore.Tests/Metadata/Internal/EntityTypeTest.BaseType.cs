@@ -18,7 +18,10 @@ public partial class EntityTypeTest
         Assert.Same(a, b.SetBaseType(a));
 
         var finalModel = model.FinalizeModel();
-        Assert.Same(finalModel.FindEntityType(typeof(A).Name), finalModel.FindEntityType(typeof(B).Name).BaseType);
+        Assert.Same(
+            finalModel.FindEntityType(typeof(A).Name),
+            finalModel.FindEntityType(typeof(B).Name).BaseType
+        );
     }
 
     [ConditionalFact]
@@ -43,15 +46,18 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.CircularInheritance(a.DisplayName(), a.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => a.BaseType = a).Message);
+            Assert.Throws<InvalidOperationException>(() => a.BaseType = a).Message
+        );
 
         Assert.Equal(
             CoreStrings.CircularInheritance(a.DisplayName(), b.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => a.BaseType = b).Message);
+            Assert.Throws<InvalidOperationException>(() => a.BaseType = b).Message
+        );
 
         Assert.Equal(
             CoreStrings.CircularInheritance(a.DisplayName(), d.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => a.BaseType = d).Message);
+            Assert.Throws<InvalidOperationException>(() => a.BaseType = d).Message
+        );
     }
 
     [ConditionalFact]
@@ -64,8 +70,13 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.NotAssignableClrBaseType(
-                typeof(B).Name + " (Dictionary<string, object>)", typeof(A).Name, "Dictionary<string, object>", typeof(A).Name),
-            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message);
+                typeof(B).Name + " (Dictionary<string, object>)",
+                typeof(A).Name,
+                "Dictionary<string, object>",
+                typeof(A).Name
+            ),
+            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message
+        );
     }
 
     [ConditionalFact]
@@ -78,8 +89,13 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.NotAssignableClrBaseType(
-                typeof(B).Name, typeof(A).Name + " (Dictionary<string, object>)", typeof(B).Name, "Dictionary<string, object>"),
-            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message);
+                typeof(B).Name,
+                typeof(A).Name + " (Dictionary<string, object>)",
+                typeof(B).Name,
+                "Dictionary<string, object>"
+            ),
+            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message
+        );
     }
 
     [ConditionalFact]
@@ -91,8 +107,14 @@ public partial class EntityTypeTest
         var b = model.AddEntityType(typeof(B));
 
         Assert.Equal(
-            CoreStrings.NotAssignableClrBaseType(typeof(A).Name, typeof(B).Name, typeof(A).Name, typeof(B).Name),
-            Assert.Throws<InvalidOperationException>(() => a.BaseType = b).Message);
+            CoreStrings.NotAssignableClrBaseType(
+                typeof(A).Name,
+                typeof(B).Name,
+                typeof(A).Name,
+                typeof(B).Name
+            ),
+            Assert.Throws<InvalidOperationException>(() => a.BaseType = b).Message
+        );
     }
 
     [ConditionalFact]
@@ -104,10 +126,13 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DerivedEntityOwnershipMismatch(
-                nameof(BaseType), nameof(Customer), nameof(Customer), nameof(BaseType)),
-            Assert.Throws<InvalidOperationException>(
-                    () => entityType.BaseType = baseType)
-                .Message);
+                nameof(BaseType),
+                nameof(Customer),
+                nameof(Customer),
+                nameof(BaseType)
+            ),
+            Assert.Throws<InvalidOperationException>(() => entityType.BaseType = baseType).Message
+        );
     }
 
     [ConditionalFact]
@@ -167,19 +192,20 @@ public partial class EntityTypeTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
         var property = entityType.AddProperty("D", typeof(string));
 
-        var derivedType = modelBuilder
-            .Entity<SpecialCustomer>()
-            .Metadata;
+        var derivedType = modelBuilder.Entity<SpecialCustomer>().Metadata;
         derivedType.BaseType = entityType;
 
         Assert.Equal(
             CoreStrings.DiscriminatorPropertyMustBeOnRoot(nameof(SpecialCustomer)),
-            Assert.Throws<InvalidOperationException>(() => derivedType.SetDiscriminatorProperty(property)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    derivedType.SetDiscriminatorProperty(property)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -187,19 +213,20 @@ public partial class EntityTypeTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
-        var otherType = modelBuilder
-            .Entity<SpecialCustomer>()
-            .Metadata;
+        var otherType = modelBuilder.Entity<SpecialCustomer>().Metadata;
 
         var property = entityType.AddProperty("D", typeof(string));
 
         Assert.Equal(
             CoreStrings.DiscriminatorPropertyNotFound("D", nameof(SpecialCustomer)),
-            Assert.Throws<InvalidOperationException>(() => otherType.SetDiscriminatorProperty(property)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    otherType.SetDiscriminatorProperty(property)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -207,9 +234,7 @@ public partial class EntityTypeTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         var property = entityType.AddProperty("D", typeof(string));
         entityType.SetDiscriminatorProperty(property);
@@ -315,7 +340,10 @@ public partial class EntityTypeTest
         var property3 = childType.AddProperty("A", typeof(int));
         childType.BaseType = parentType;
 
-        Assert.Equal(new[] { property1, property2, property3, property4 }, childType.GetProperties());
+        Assert.Equal(
+            new[] { property1, property2, property3, property4 },
+            childType.GetProperties()
+        );
     }
 
     [ConditionalFact]
@@ -333,7 +361,10 @@ public partial class EntityTypeTest
         dType.BaseType = cType;
 
         Assert.Equal(new[] { "F", "H" }, cType.GetProperties().Select(p => p.Name).ToArray());
-        Assert.Equal(new[] { "F", "H", "E", "G" }, dType.GetProperties().Select(p => p.Name).ToArray());
+        Assert.Equal(
+            new[] { "F", "H", "E", "G" },
+            dType.GetProperties().Select(p => p.Name).ToArray()
+        );
 
         dType.BaseType = null;
 
@@ -372,7 +403,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.ConflictingPropertyOrNavigation("G", typeof(B).Name, typeof(A).Name),
-            Assert.Throws<InvalidOperationException>(() => b.AddProperty("G")).Message);
+            Assert.Throws<InvalidOperationException>(() => b.AddProperty("G")).Message
+        );
     }
 
     [ConditionalFact]
@@ -391,7 +423,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.ConflictingPropertyOrNavigation("G", typeof(D).Name, typeof(A).Name),
-            Assert.Throws<InvalidOperationException>(() => d.AddProperty("G")).Message);
+            Assert.Throws<InvalidOperationException>(() => d.AddProperty("G")).Message
+        );
     }
 
     [ConditionalFact]
@@ -408,7 +441,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.ConflictingPropertyOrNavigation("G", typeof(A).Name, typeof(B).Name),
-            Assert.Throws<InvalidOperationException>(() => a.AddProperty(A.GProperty)).Message);
+            Assert.Throws<InvalidOperationException>(() => a.AddProperty(A.GProperty)).Message
+        );
     }
 
     [ConditionalFact]
@@ -428,7 +462,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.ConflictingPropertyOrNavigation("G", typeof(A).Name, typeof(D).Name),
-            Assert.Throws<InvalidOperationException>(() => a.AddProperty(A.GProperty)).Message);
+            Assert.Throws<InvalidOperationException>(() => a.AddProperty(A.GProperty)).Message
+        );
     }
 
     [ConditionalFact]
@@ -443,8 +478,16 @@ public partial class EntityTypeTest
         b.AddProperty(A.GProperty);
 
         Assert.Equal(
-            CoreStrings.DuplicatePropertiesOnBase(typeof(B).Name, typeof(A).Name, typeof(B).Name, "G", typeof(A).Name, "G"),
-            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message);
+            CoreStrings.DuplicatePropertiesOnBase(
+                typeof(B).Name,
+                typeof(A).Name,
+                typeof(B).Name,
+                "G",
+                typeof(A).Name,
+                "G"
+            ),
+            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message
+        );
     }
 
     [ConditionalFact]
@@ -464,8 +507,16 @@ public partial class EntityTypeTest
         d.AddProperty(A.GProperty);
 
         Assert.Equal(
-            CoreStrings.DuplicatePropertiesOnBase(typeof(D).Name, typeof(C).Name, typeof(D).Name, "E", typeof(A).Name, "E"),
-            Assert.Throws<InvalidOperationException>(() => d.BaseType = c).Message);
+            CoreStrings.DuplicatePropertiesOnBase(
+                typeof(D).Name,
+                typeof(C).Name,
+                typeof(D).Name,
+                "E",
+                typeof(A).Name,
+                "E"
+            ),
+            Assert.Throws<InvalidOperationException>(() => d.BaseType = c).Message
+        );
     }
 
     [ConditionalFact]
@@ -485,8 +536,16 @@ public partial class EntityTypeTest
         d.BaseType = c;
 
         Assert.Equal(
-            CoreStrings.DuplicatePropertiesOnBase(typeof(C).Name, typeof(A).Name, typeof(D).Name, "E", typeof(A).Name, "E"),
-            Assert.Throws<InvalidOperationException>(() => c.BaseType = a).Message);
+            CoreStrings.DuplicatePropertiesOnBase(
+                typeof(C).Name,
+                typeof(A).Name,
+                typeof(D).Name,
+                "E",
+                typeof(A).Name,
+                "E"
+            ),
+            Assert.Throws<InvalidOperationException>(() => c.BaseType = a).Message
+        );
     }
 
     [ConditionalFact]
@@ -507,10 +566,12 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { "E" }, new[] { "G" } },
-            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(
             Array.Empty<string[]>(),
-            bType.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            bType.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(new[] { "G", "E" }, a.GetProperties().Select(p => p.Name).ToArray());
         Assert.Equal(new[] { "F" }, bType.GetProperties().Select(p => p.Name).ToArray());
 
@@ -521,10 +582,12 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { "E" }, new[] { "G" } },
-            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(
             new[] { new[] { "E" }, new[] { "G" } },
-            b.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            b.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(new[] { "G", "E" }, a.GetProperties().Select(p => p.Name).ToArray());
         Assert.Equal(new[] { "G", "E", "F" }, b.GetProperties().Select(p => p.Name).ToArray());
         Assert.Equal(new[] { 0, 1, 2 }, b.GetProperties().Select(p => p.GetIndex()));
@@ -553,10 +616,12 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { "E" }, new[] { "G" } },
-            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(
             new[] { new[] { "E" }, new[] { "G" } },
-            b.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            b.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(new[] { "G", "E" }, a.GetProperties().Select(p => p.Name).ToArray());
         Assert.Equal(new[] { "G", "E", "F" }, b.GetProperties().Select(p => p.Name).ToArray());
     }
@@ -582,10 +647,12 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { "E" }, new[] { "G" } },
-            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            a.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(
             Array.Empty<string[]>(),
-            b.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            b.GetKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray()
+        );
         Assert.Equal(new[] { "G", "E" }, a.GetProperties().Select(p => p.Name).ToArray());
         Assert.Equal(new[] { "F" }, b.GetProperties().Select(p => p.Name).ToArray());
     }
@@ -601,10 +668,14 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DerivedEntityTypeKey(typeof(B).Name, typeof(A).Name),
-            Assert.Throws<InvalidOperationException>(() => b.SetPrimaryKey(b.AddProperty("G"))).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => b.SetPrimaryKey(b.AddProperty("G")))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.DerivedEntityTypeKey(typeof(B).Name, typeof(A).Name),
-            Assert.Throws<InvalidOperationException>(() => b.AddKey(b.AddProperty("E"))).Message);
+            Assert.Throws<InvalidOperationException>(() => b.AddKey(b.AddProperty("E"))).Message
+        );
     }
 
     [ConditionalFact]
@@ -620,7 +691,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DerivedEntityCannotHaveKeys(typeof(B).Name),
-            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message);
+            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message
+        );
 
         b.RemoveKey(key.Properties);
         var f = b.AddProperty(B.FProperty);
@@ -629,7 +701,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DerivedEntityCannotHaveKeys(typeof(B).Name),
-            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message);
+            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message
+        );
     }
 
     [ConditionalFact]
@@ -643,7 +716,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DerivedEntityCannotBeKeyless(typeof(B).Name),
-            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message);
+            Assert.Throws<InvalidOperationException>(() => b.BaseType = a).Message
+        );
     }
 
     [ConditionalFact]
@@ -657,7 +731,8 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DerivedEntityTypeHasNoKey(typeof(B).Name, typeof(A).Name),
-            Assert.Throws<InvalidOperationException>(() => b.IsKeyless = true).Message);
+            Assert.Throws<InvalidOperationException>(() => b.IsKeyless = true).Message
+        );
     }
 
     [ConditionalFact]
@@ -670,29 +745,62 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
 
         customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
         var specialCustomerType = model.AddEntityType(typeof(SpecialCustomer));
 
-        Assert.Equal(new[] { "Orders" }, customerType.GetNavigations().Select(p => p.Name).ToArray());
-        Assert.Equal(Array.Empty<string>(), specialCustomerType.GetNavigations().Select(p => p.Name).ToArray());
+        Assert.Equal(
+            new[] { "Orders" },
+            customerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
+        Assert.Equal(
+            Array.Empty<string>(),
+            specialCustomerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
 
         specialCustomerType.BaseType = customerType;
 
-        Assert.Equal(new[] { "Orders" }, customerType.GetNavigations().Select(p => p.Name).ToArray());
-        Assert.Equal(new[] { "Orders" }, specialCustomerType.GetNavigations().Select(p => p.Name).ToArray());
+        Assert.Equal(
+            new[] { "Orders" },
+            customerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
+        Assert.Equal(
+            new[] { "Orders" },
+            specialCustomerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, specialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetPrincipalToDependent(SpecialCustomer.DerivedOrdersProperty);
-        Assert.Equal(new[] { "Orders" }, customerType.GetNavigations().Select(p => p.Name).ToArray());
-        Assert.Equal(new[] { "Orders", "DerivedOrders" }, specialCustomerType.GetNavigations().Select(p => p.Name).ToArray());
+        Assert.Equal(
+            new[] { "Orders" },
+            customerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
         Assert.Equal(
             new[] { "Orders", "DerivedOrders" },
-            ((IReadOnlyEntityType)specialCustomerType).GetNavigations().Select(p => p.Name).ToArray());
-        Assert.Same(customerType.FindNavigation("Orders"), specialCustomerType.FindNavigation("Orders"));
+            specialCustomerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
+        Assert.Equal(
+            new[] { "Orders", "DerivedOrders" },
+            ((IReadOnlyEntityType)specialCustomerType)
+                .GetNavigations()
+                .Select(p => p.Name)
+                .ToArray()
+        );
+        Assert.Same(
+            customerType.FindNavigation("Orders"),
+            specialCustomerType.FindNavigation("Orders")
+        );
     }
 
     [ConditionalFact]
@@ -705,22 +813,42 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
 
         var specialCustomerType = model.AddEntityType(typeof(SpecialCustomer));
         specialCustomerType.BaseType = customerType;
 
         customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
-        Assert.Equal(new[] { "Orders" }, customerType.GetNavigations().Select(p => p.Name).ToArray());
-        Assert.Equal(new[] { "Orders" }, specialCustomerType.GetNavigations().Select(p => p.Name).ToArray());
+        Assert.Equal(
+            new[] { "Orders" },
+            customerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
+        Assert.Equal(
+            new[] { "Orders" },
+            specialCustomerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, specialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetPrincipalToDependent(SpecialCustomer.DerivedOrdersProperty);
 
-        Assert.Equal(new[] { "Orders" }, customerType.GetNavigations().Select(p => p.Name).ToArray());
-        Assert.Equal(new[] { "Orders", "DerivedOrders" }, specialCustomerType.GetNavigations().Select(p => p.Name).ToArray());
+        Assert.Equal(
+            new[] { "Orders" },
+            customerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
+        Assert.Equal(
+            new[] { "Orders", "DerivedOrders" },
+            specialCustomerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -733,7 +861,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
 
         customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
@@ -741,14 +873,23 @@ public partial class EntityTypeTest
         specialCustomerType.BaseType = customerType;
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, specialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetPrincipalToDependent(SpecialCustomer.DerivedOrdersProperty);
 
         specialCustomerType.BaseType = null;
 
-        Assert.Equal(new[] { nameof(Customer.Orders) }, customerType.GetNavigations().Select(p => p.Name).ToArray());
         Assert.Equal(
-            new[] { nameof(SpecialCustomer.DerivedOrders) }, specialCustomerType.GetNavigations().Select(p => p.Name).ToArray());
+            new[] { nameof(Customer.Orders) },
+            customerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
+        Assert.Equal(
+            new[] { nameof(SpecialCustomer.DerivedOrders) },
+            specialCustomerType.GetNavigations().Select(p => p.Name).ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -761,20 +902,36 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
         customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
         var specialCustomerType = model.AddEntityType(typeof(SpecialCustomer));
         specialCustomerType.BaseType = customerType;
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, specialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            specialCustomerType
+        );
 
         Assert.Equal(
-            CoreStrings.NavigationForWrongForeignKey(nameof(Customer.Orders), typeof(Customer).Name, "{'Id'}", "{'CustomerId'}"),
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)).Message);
+            CoreStrings.NavigationForWrongForeignKey(
+                nameof(Customer.Orders),
+                typeof(Customer).Name,
+                "{'Id'}",
+                "{'CustomerId'}"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -787,7 +944,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
         customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
         var specialCustomerType = model.AddEntityType(typeof(SpecialCustomer));
@@ -797,14 +958,30 @@ public partial class EntityTypeTest
         verySpecialCustomerType.BaseType = specialCustomerType;
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, verySpecialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            verySpecialCustomerType
+        );
 
         Assert.Equal(
-            CoreStrings.NavigationForWrongForeignKey("Orders", typeof(Customer).Name, "{'Id'}", "{'CustomerId'}"),
-            Assert.Throws<InvalidOperationException>(
-                () => specialCustomerForeignKey.SetPrincipalToDependent("Orders")).Message);
+            CoreStrings.NavigationForWrongForeignKey(
+                "Orders",
+                typeof(Customer).Name,
+                "{'Id'}",
+                "{'CustomerId'}"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    specialCustomerForeignKey.SetPrincipalToDependent("Orders")
+                )
+                .Message
+        );
 
-        Assert.Equal("Orders", ((IReadOnlyEntityType)verySpecialCustomerType).GetNavigations().Single().Name);
+        Assert.Equal(
+            "Orders",
+            ((IReadOnlyEntityType)verySpecialCustomerType).GetNavigations().Single().Name
+        );
     }
 
     [ConditionalFact]
@@ -817,20 +994,36 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
 
         var specialCustomerType = model.AddEntityType(typeof(SpecialCustomer));
         specialCustomerType.BaseType = customerType;
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, specialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
         Assert.Equal(
-            CoreStrings.NavigationForWrongForeignKey("Orders", typeof(SpecialCustomer).Name, "{'CustomerId'}", "{'Id'}"),
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    customerForeignKey.SetPrincipalToDependent("Orders")).Message);
+            CoreStrings.NavigationForWrongForeignKey(
+                "Orders",
+                typeof(SpecialCustomer).Name,
+                "{'CustomerId'}",
+                "{'Id'}"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    customerForeignKey.SetPrincipalToDependent("Orders")
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -843,7 +1036,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(SpecialOrder));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
 
         var specialCustomerType = model.AddEntityType(typeof(SpecialCustomer));
         specialCustomerType.BaseType = customerType;
@@ -852,17 +1049,31 @@ public partial class EntityTypeTest
         verySpecialCustomerType.BaseType = specialCustomerType;
 
         var derivedForeignKeyProperty = orderType.AddProperty(Order.IdProperty);
-        var specialCustomerForeignKey = orderType.AddForeignKey(derivedForeignKeyProperty, customerKey, verySpecialCustomerType);
+        var specialCustomerForeignKey = orderType.AddForeignKey(
+            derivedForeignKeyProperty,
+            customerKey,
+            verySpecialCustomerType
+        );
         specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty);
 
         Assert.Equal(
             CoreStrings.NavigationForWrongForeignKey(
-                nameof(Customer.Orders), typeof(VerySpecialCustomer).Name, "{'CustomerId'}", "{'Id'}"),
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)).Message);
+                nameof(Customer.Orders),
+                typeof(VerySpecialCustomer).Name,
+                "{'CustomerId'}",
+                "{'Id'}"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
+                )
+                .Message
+        );
 
-        Assert.Equal(nameof(Customer.Orders), ((IReadOnlyEntityType)verySpecialCustomerType).GetNavigations().Single().Name);
+        Assert.Equal(
+            nameof(Customer.Orders),
+            ((IReadOnlyEntityType)verySpecialCustomerType).GetNavigations().Single().Name
+        );
     }
 
     [ConditionalFact]
@@ -875,7 +1086,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(Order));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
         customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty);
 
         var specialOrderType = model.AddEntityType(typeof(SpecialOrder));
@@ -886,14 +1101,25 @@ public partial class EntityTypeTest
         var property = specialCustomerType.AddProperty("AltId", typeof(int));
         var specialCustomerKey = specialCustomerType.AddKey(property);
         var specialCustomerForeignKey = specialOrderType.AddForeignKey(
-            derivedForeignKeyProperty, specialCustomerKey, specialCustomerType);
+            derivedForeignKeyProperty,
+            specialCustomerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetDependentToPrincipal(Order.CustomerProperty);
 
         Assert.Equal(
             CoreStrings.DuplicatePropertiesOnBase(
-                nameof(SpecialOrder), nameof(Order),
-                nameof(SpecialOrder), nameof(Order.Customer), nameof(Order), nameof(Order.Customer)),
-            Assert.Throws<InvalidOperationException>(() => specialOrderType.BaseType = orderType).Message);
+                nameof(SpecialOrder),
+                nameof(Order),
+                nameof(SpecialOrder),
+                nameof(Order.Customer),
+                nameof(Order),
+                nameof(Order.Customer)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => specialOrderType.BaseType = orderType)
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -906,7 +1132,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(Order));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
         customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty);
 
         var specialOrderType = model.AddEntityType(typeof(SpecialOrder));
@@ -918,15 +1148,26 @@ public partial class EntityTypeTest
         var property = specialCustomerType.AddProperty("AltId", typeof(int));
         var specialCustomerKey = specialCustomerType.AddKey(property);
         var specialCustomerForeignKey = verySpecialOrderType.AddForeignKey(
-            derivedForeignKeyProperty, specialCustomerKey, specialCustomerType);
+            derivedForeignKeyProperty,
+            specialCustomerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetDependentToPrincipal(Order.CustomerProperty);
         verySpecialOrderType.BaseType = specialOrderType;
 
         Assert.Equal(
             CoreStrings.DuplicatePropertiesOnBase(
-                nameof(SpecialOrder), nameof(Order),
-                nameof(VerySpecialOrder), nameof(Order.Customer), nameof(Order), nameof(Order.Customer)),
-            Assert.Throws<InvalidOperationException>(() => specialOrderType.BaseType = orderType).Message);
+                nameof(SpecialOrder),
+                nameof(Order),
+                nameof(VerySpecialOrder),
+                nameof(Order.Customer),
+                nameof(Order),
+                nameof(Order.Customer)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => specialOrderType.BaseType = orderType)
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -939,7 +1180,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(Order));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
         customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty);
 
         var specialOrderType = model.AddEntityType(typeof(SpecialOrder));
@@ -952,14 +1197,27 @@ public partial class EntityTypeTest
         var property = specialCustomerType.AddProperty("AltId", typeof(int));
         var specialCustomerKey = specialCustomerType.AddKey(property);
         var specialCustomerForeignKey = verySpecialOrderType.AddForeignKey(
-            derivedForeignKeyProperty, specialCustomerKey, specialCustomerType);
+            derivedForeignKeyProperty,
+            specialCustomerKey,
+            specialCustomerType
+        );
         specialCustomerForeignKey.SetDependentToPrincipal(Order.CustomerProperty);
 
         Assert.Equal(
             CoreStrings.DuplicatePropertiesOnBase(
-                nameof(VerySpecialOrder), nameof(SpecialOrder),
-                nameof(VerySpecialOrder), nameof(Order.Customer), nameof(Order), nameof(Order.Customer)),
-            Assert.Throws<InvalidOperationException>(() => verySpecialOrderType.BaseType = specialOrderType).Message);
+                nameof(VerySpecialOrder),
+                nameof(SpecialOrder),
+                nameof(VerySpecialOrder),
+                nameof(Order.Customer),
+                nameof(Order),
+                nameof(Order.Customer)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    verySpecialOrderType.BaseType = specialOrderType
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -972,7 +1230,11 @@ public partial class EntityTypeTest
 
         var orderType = model.AddEntityType(typeof(Order));
         var foreignKeyProperty = orderType.AddProperty(Order.CustomerIdProperty);
-        var customerForeignKey = orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType);
+        var customerForeignKey = orderType.AddForeignKey(
+            foreignKeyProperty,
+            customerKey,
+            customerType
+        );
 
         var specialOrderType = model.AddEntityType(typeof(SpecialOrder));
         var derivedForeignKeyProperty = specialOrderType.AddProperty(Order.IdProperty);
@@ -980,20 +1242,39 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.IdProperty.Name } },
-            specialOrderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
 
         specialOrderType.BaseType = orderType;
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name }, new[] { Order.IdProperty.Name } },
-            specialOrderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
-        Assert.Same(customerForeignKey, specialOrderType.FindForeignKey(foreignKeyProperty, customerKey, customerType));
+            specialOrderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
+        Assert.Same(
+            customerForeignKey,
+            specialOrderType.FindForeignKey(foreignKeyProperty, customerKey, customerType)
+        );
     }
 
     [ConditionalFact]
@@ -1014,20 +1295,36 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            specialOrderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
 
         var derivedForeignKeyProperty = specialOrderType.AddProperty(Order.IdProperty);
         specialOrderType.AddForeignKey(derivedForeignKeyProperty, customerKey, customerType);
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name }, new[] { Order.IdProperty.Name } },
-            specialOrderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -1052,10 +1349,18 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.IdProperty.Name } },
-            specialOrderType.GetForeignKeys().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetForeignKeys()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -1104,9 +1409,14 @@ public partial class EntityTypeTest
                 typeof(SpecialOrder).Name,
                 typeof(Order).Name,
                 customerKey.Properties.Format(),
-                typeof(Customer).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => specialOrderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)).Message);
+                typeof(Customer).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    specialOrderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1133,9 +1443,18 @@ public partial class EntityTypeTest
                 typeof(VerySpecialOrder).Name,
                 typeof(Order).Name,
                 customerKey.Properties.Format(),
-                typeof(Customer).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => verySpecialOrderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)).Message);
+                typeof(Customer).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    verySpecialOrderType.AddForeignKey(
+                        foreignKeyProperty,
+                        customerKey,
+                        customerType
+                    )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1159,9 +1478,14 @@ public partial class EntityTypeTest
                 typeof(Order).Name,
                 typeof(SpecialOrder).Name,
                 customerKey.Properties.Format(),
-                typeof(Customer).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)).Message);
+                typeof(Customer).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1188,9 +1512,14 @@ public partial class EntityTypeTest
                 typeof(Order).Name,
                 typeof(VerySpecialOrder).Name,
                 customerKey.Properties.Format(),
-                typeof(Customer).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)).Message);
+                typeof(Customer).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1254,19 +1583,35 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.IdProperty.Name } },
-            specialOrderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
 
         specialOrderType.BaseType = orderType;
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name }, new[] { Order.IdProperty.Name } },
-            specialOrderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Same(index, specialOrderType.FindIndex(indexProperty));
     }
 
@@ -1285,20 +1630,36 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            specialOrderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
 
         var derivedIndexProperty = specialOrderType.AddProperty(Order.IdProperty);
         specialOrderType.AddIndex(derivedIndexProperty);
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name }, new[] { Order.IdProperty.Name } },
-            specialOrderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -1320,10 +1681,18 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             new[] { new[] { Order.CustomerIdProperty.Name } },
-            orderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            orderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
         Assert.Equal(
             new[] { new[] { Order.IdProperty.Name } },
-            specialOrderType.GetIndexes().Select(fk => fk.Properties.Select(p => p.Name).ToArray()).ToArray());
+            specialOrderType
+                .GetIndexes()
+                .Select(fk => fk.Properties.Select(p => p.Name).ToArray())
+                .ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -1335,8 +1704,14 @@ public partial class EntityTypeTest
         entityType.RemoveProperty(idProperty.Name);
 
         Assert.Equal(
-            CoreStrings.IndexPropertiesWrongEntity("{'" + Customer.IdProperty.Name + "'}", typeof(Customer).Name),
-            Assert.Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { idProperty })).Message);
+            CoreStrings.IndexPropertiesWrongEntity(
+                "{'" + Customer.IdProperty.Name + "'}",
+                typeof(Customer).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { idProperty }))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1348,8 +1723,15 @@ public partial class EntityTypeTest
 
         Assert.Equal(
             CoreStrings.DuplicatePropertyInIndex(
-                "{'" + Customer.IdProperty.Name + "', '" + Customer.IdProperty.Name + "'}", Customer.IdProperty.Name),
-            Assert.Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { idProperty, idProperty })).Message);
+                "{'" + Customer.IdProperty.Name + "', '" + Customer.IdProperty.Name + "'}",
+                Customer.IdProperty.Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    entityType.AddIndex(new[] { idProperty, idProperty })
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1365,9 +1747,15 @@ public partial class EntityTypeTest
         specialOrderType.BaseType = orderType;
 
         Assert.Equal(
-            CoreStrings.DuplicateIndex(new[] { indexProperty }.Format(), typeof(SpecialOrder).Name, typeof(Order).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => specialOrderType.AddIndex(indexProperty)).Message);
+            CoreStrings.DuplicateIndex(
+                new[] { indexProperty }.Format(),
+                typeof(SpecialOrder).Name,
+                typeof(Order).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => specialOrderType.AddIndex(indexProperty))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1386,9 +1774,17 @@ public partial class EntityTypeTest
         verySpecialOrderType.BaseType = specialOrderType;
 
         Assert.Equal(
-            CoreStrings.DuplicateIndex(new[] { indexProperty }.Format(), typeof(VerySpecialOrder).Name, typeof(Order).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => verySpecialOrderType.AddIndex(indexProperty)).Message);
+            CoreStrings.DuplicateIndex(
+                new[] { indexProperty }.Format(),
+                typeof(VerySpecialOrder).Name,
+                typeof(Order).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    verySpecialOrderType.AddIndex(indexProperty)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1404,9 +1800,15 @@ public partial class EntityTypeTest
         specialOrderType.AddIndex(indexProperty);
 
         Assert.Equal(
-            CoreStrings.DuplicateIndex(new[] { indexProperty }.Format(), typeof(Order).Name, typeof(SpecialOrder).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => orderType.AddIndex(indexProperty)).Message);
+            CoreStrings.DuplicateIndex(
+                new[] { indexProperty }.Format(),
+                typeof(Order).Name,
+                typeof(SpecialOrder).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => orderType.AddIndex(indexProperty))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1425,11 +1827,16 @@ public partial class EntityTypeTest
         verySpecialOrderType.AddIndex(indexProperty);
 
         Assert.Equal(
-            CoreStrings.DuplicateIndex(new[] { indexProperty }.Format(), typeof(Order).Name, typeof(VerySpecialOrder).Name),
-            Assert.Throws<InvalidOperationException>(
-                () => orderType.AddIndex(indexProperty)).Message);
+            CoreStrings.DuplicateIndex(
+                new[] { indexProperty }.Format(),
+                typeof(Order).Name,
+                typeof(VerySpecialOrder).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => orderType.AddIndex(indexProperty))
+                .Message
+        );
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 }

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ILCompiler.IBC
 {
@@ -19,10 +19,7 @@ namespace ILCompiler.IBC
         #region Stream Functions
         private long CurrentPosition
         {
-            get
-            {
-                return reader.BaseStream.Position;
-            }
+            get { return reader.BaseStream.Position; }
         }
 
         private void SeekTo(long position)
@@ -121,7 +118,12 @@ namespace ILCompiler.IBC
         #endregion
 
         #region File-level Structures
-        void ReadHeader(out Guid mvid, out uint majorVersion, out uint minorVersion, out bool partialNGen)
+        void ReadHeader(
+            out Guid mvid,
+            out uint majorVersion,
+            out uint minorVersion,
+            out bool partialNGen
+        )
         {
             // minified should always be false here, so ReadSizeAndGetStart would
             // work. However, since the header's size is always written in the
@@ -164,7 +166,9 @@ namespace ILCompiler.IBC
 
                 if (minified && (majorVersion < IBC.Constants.LowestMajorVersionSupportingMinify))
                 {
-                    throw new IBCException("Minified flag is set but the file's version should not support it.");
+                    throw new IBCException(
+                        "Minified flag is set but the file's version should not support it."
+                    );
                 }
                 remaining -= sizeof(uint);
             }
@@ -175,18 +179,30 @@ namespace ILCompiler.IBC
             // (Ngen only pays attention to major version, but ideally even a new
             // minor version should be accompanied by a new version of IBCMerge.)
 
-            if ((majorVersion > IBC.Constants.CurrentMajorVersion) ||
-                ((majorVersion == IBC.Constants.CurrentMajorVersion) && (minorVersion > IBC.Constants.CurrentMinorVersion)) ||
-                (majorVersion < IBC.Constants.CompatibleMajorVersion) ||
-                ((majorVersion == IBC.Constants.CompatibleMajorVersion) && (minorVersion < IBC.Constants.CompatibleMinorVersion)))
+            if (
+                (majorVersion > IBC.Constants.CurrentMajorVersion)
+                || (
+                    (majorVersion == IBC.Constants.CurrentMajorVersion)
+                    && (minorVersion > IBC.Constants.CurrentMinorVersion)
+                )
+                || (majorVersion < IBC.Constants.CompatibleMajorVersion)
+                || (
+                    (majorVersion == IBC.Constants.CompatibleMajorVersion)
+                    && (minorVersion < IBC.Constants.CompatibleMinorVersion)
+                )
+            )
             {
-                throw new IBCException(String.Format("Version mismatch: {0}.{1} not between {2}.{3} and {4}.{5}",
-                    majorVersion,
-                    minorVersion,
-                    IBC.Constants.CompatibleMajorVersion,
-                    IBC.Constants.CompatibleMinorVersion,
-                    IBC.Constants.CurrentMajorVersion,
-                    IBC.Constants.CurrentMinorVersion));
+                throw new IBCException(
+                    String.Format(
+                        "Version mismatch: {0}.{1} not between {2}.{3} and {4}.{5}",
+                        majorVersion,
+                        minorVersion,
+                        IBC.Constants.CompatibleMajorVersion,
+                        IBC.Constants.CompatibleMinorVersion,
+                        IBC.Constants.CurrentMajorVersion,
+                        IBC.Constants.CurrentMinorVersion
+                    )
+                );
             }
         }
 
@@ -216,8 +232,10 @@ namespace ILCompiler.IBC
                 SectionInfo sectionInfo;
                 SectionFormat sectionFormat = (SectionFormat)reader.ReadInt32();
 
-                if ((majorVersion == 1) &&
-                    (sectionFormat < SectionFormat.UserStringPoolProfilingData))
+                if (
+                    (majorVersion == 1)
+                    && (sectionFormat < SectionFormat.UserStringPoolProfilingData)
+                )
                 {
                     // The ScenarioInfo section was added in V2 and assigned index
                     // zero. Every other section that existed at that point was
@@ -229,7 +247,10 @@ namespace ILCompiler.IBC
                 sectionInfo.Offset = reader.ReadUInt32();
                 sectionInfo.Length = reader.ReadUInt32();
 
-                highestValidOffset = Math.Max(highestValidOffset, sectionInfo.Offset + sectionInfo.Length);
+                highestValidOffset = Math.Max(
+                    highestValidOffset,
+                    sectionInfo.Offset + sectionInfo.Length
+                );
 
                 result.Add(sectionFormat, sectionInfo);
             }
@@ -306,7 +327,9 @@ namespace ILCompiler.IBC
                 uint ilOffset = ReadSmallUInt();
                 uint hitCount = ReadSmallUInt();
 
-                blockList.Add(new IBC.BasicBlockData { ILOffset = ilOffset, ExecutionCount = hitCount });
+                blockList.Add(
+                    new IBC.BasicBlockData { ILOffset = ilOffset, ExecutionCount = hitCount }
+                );
             }
         }
 
@@ -328,7 +351,9 @@ namespace ILCompiler.IBC
             if (minified)
             {
                 uint firstBlockHitCount = reader.Read7BitEncodedUInt();
-                result.BasicBlocks.Add(new IBC.BasicBlockData { ILOffset = 0, ExecutionCount = firstBlockHitCount });
+                result.BasicBlocks.Add(
+                    new IBC.BasicBlockData { ILOffset = 0, ExecutionCount = firstBlockHitCount }
+                );
             }
 
             uint numberOfBlocks = ReadSmallUInt();
@@ -421,7 +446,14 @@ namespace ILCompiler.IBC
                     scenarioMask = reader.ReadUInt32();
                 }
 
-                result.Add(new IBC.TokenData { Token = token, Flags = flags, ScenarioMask = scenarioMask });
+                result.Add(
+                    new IBC.TokenData
+                    {
+                        Token = token,
+                        Flags = flags,
+                        ScenarioMask = scenarioMask,
+                    }
+                );
             }
 
             return result;
@@ -621,22 +653,26 @@ namespace ILCompiler.IBC
             IBC.BlobEntry blob = null;
 
             Func<IBC.BlobEntry> readFn =
-                (majorVersion == 1) ? (Func<IBC.BlobEntry>)ReadV1BlobEntry :
-                                      (Func<IBC.BlobEntry>)ReadBlobEntry;
+                (majorVersion == 1)
+                    ? (Func<IBC.BlobEntry>)ReadV1BlobEntry
+                    : (Func<IBC.BlobEntry>)ReadBlobEntry;
 
             do
             {
                 blob = readFn();
                 blobs.Add(blob);
-            }
-            while (blob.Type != BlobType.EndOfBlobStream);
+            } while (blob.Type != BlobType.EndOfBlobStream);
 
             return blobs;
         }
         #endregion
 
         #region Top Level
-        private void IfPresent(Dictionary<SectionFormat, SectionInfo> sectionTable, SectionFormat section, Action f)
+        private void IfPresent(
+            Dictionary<SectionFormat, SectionInfo> sectionTable,
+            SectionFormat section,
+            Action f
+        )
         {
             if (sectionTable.ContainsKey(section))
             {
@@ -650,7 +686,12 @@ namespace ILCompiler.IBC
         {
             var result = new IBC.AssemblyData();
 
-            ReadHeader(out result.Mvid, out result.FormatMajorVersion, out result.FormatMinorVersion, out result.PartialNGen);
+            ReadHeader(
+                out result.Mvid,
+                out result.FormatMajorVersion,
+                out result.FormatMinorVersion,
+                out result.PartialNGen
+            );
 
             this.majorVersion = result.FormatMajorVersion;
 
@@ -658,13 +699,33 @@ namespace ILCompiler.IBC
 
             var sectionTable = ReadSectionTable(out highestValidOffset);
 
-            IfPresent(sectionTable, SectionFormat.ScenarioInfo, () => result.Scenarios = ReadScenarioSection(ref result.TotalNumberOfRuns));
-            IfPresent(sectionTable, SectionFormat.BasicBlockInfo, () => result.Methods = ReadBasicBlockSection(ref result.TotalNumberOfRuns));
-            foreach (SectionFormat section in IBCData.SectionIterator(IBCData.SectionIteratorKind.TokenFlags))
+            IfPresent(
+                sectionTable,
+                SectionFormat.ScenarioInfo,
+                () => result.Scenarios = ReadScenarioSection(ref result.TotalNumberOfRuns)
+            );
+            IfPresent(
+                sectionTable,
+                SectionFormat.BasicBlockInfo,
+                () => result.Methods = ReadBasicBlockSection(ref result.TotalNumberOfRuns)
+            );
+            foreach (
+                SectionFormat section in IBCData.SectionIterator(
+                    IBCData.SectionIteratorKind.TokenFlags
+                )
+            )
             {
-                IfPresent(sectionTable, section, () => result.Tokens[section] = ReadTokenSection(section));
+                IfPresent(
+                    sectionTable,
+                    section,
+                    () => result.Tokens[section] = ReadTokenSection(section)
+                );
             }
-            IfPresent(sectionTable, SectionFormat.BlobStream, () => result.BlobStream = ReadBlobStreamSection());
+            IfPresent(
+                sectionTable,
+                SectionFormat.BlobStream,
+                () => result.BlobStream = ReadBlobStreamSection()
+            );
 
             SeekTo(highestValidOffset);
             ReadFooter();

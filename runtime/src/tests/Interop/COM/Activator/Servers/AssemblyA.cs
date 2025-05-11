@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 public class ClassFromA : IGetTypeFromC
 {
     private readonly ClassFromC _fromC;
+
     public ClassFromA()
     {
         this._fromC = new ClassFromC();
@@ -62,11 +63,9 @@ public class ValidRegistrationStringCallbacks : IValidateRegistrationCallbacks
     }
 }
 
-public class InheritedRegistrationTypeCallbacks : RegistrationTypeCallbacksFromB
-{ }
+public class InheritedRegistrationTypeCallbacks : RegistrationTypeCallbacksFromB { }
 
-public class InheritedRegistrationStringCallbacks : RegistrationStringCallbacksFromB
-{ }
+public class InheritedRegistrationStringCallbacks : RegistrationStringCallbacksFromB { }
 
 public class NoRegistrationCallbacks : IValidateRegistrationCallbacks
 {

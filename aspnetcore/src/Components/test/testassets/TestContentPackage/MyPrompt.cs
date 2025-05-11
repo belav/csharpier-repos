@@ -11,6 +11,7 @@ public static class MyPrompt
     {
         return jsRuntime.InvokeAsync<string>(
             "TestContentPackage.showPrompt", // Keep in sync with identifiers in the.js file
-            message);
+            message
+        );
     }
 }

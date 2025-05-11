@@ -7,6 +7,6 @@ namespace System.Data
     {
         WriteSchema = 0,
         IgnoreSchema = 1,
-        DiffGram = 2
+        DiffGram = 2,
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,28 +28,28 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public class ClaimTypeRequirement
-	{
-		public ClaimTypeRequirement (string claimType)
-			: this (claimType, false)
-		{
-		}
+    public class ClaimTypeRequirement
+    {
+        public ClaimTypeRequirement(string claimType)
+            : this(claimType, false) { }
 
-		public ClaimTypeRequirement (string claimType, bool isOptional)
-		{
-			claim_type = claimType;
-			is_optional = isOptional;
-		}
+        public ClaimTypeRequirement(string claimType, bool isOptional)
+        {
+            claim_type = claimType;
+            is_optional = isOptional;
+        }
 
-		public string ClaimType {
-			get { return claim_type; }
-		}
+        public string ClaimType
+        {
+            get { return claim_type; }
+        }
 
-		public bool IsOptional {
-			get { return is_optional; }
-		}
+        public bool IsOptional
+        {
+            get { return is_optional; }
+        }
 
-		string claim_type;
-		bool is_optional;
-	}
+        string claim_type;
+        bool is_optional;
+    }
 }

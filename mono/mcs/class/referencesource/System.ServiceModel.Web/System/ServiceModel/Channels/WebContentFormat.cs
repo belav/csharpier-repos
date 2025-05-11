@@ -9,6 +9,6 @@ namespace System.ServiceModel.Channels
         Default,
         Xml,
         Json,
-        Raw
+        Raw,
     }
 }

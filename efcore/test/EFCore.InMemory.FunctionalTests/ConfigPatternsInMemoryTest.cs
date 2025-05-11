@@ -10,8 +10,7 @@ public class ConfigPatternsInMemoryTest
     {
         using (var context = new ImplicitServicesAndConfigBlogContext())
         {
-            context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             context.SaveChanges();
         }
 
@@ -34,9 +33,8 @@ public class ConfigPatternsInMemoryTest
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Blog> Blogs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseInMemoryDatabase(nameof(ImplicitServicesAndConfigBlogContext));
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(nameof(ImplicitServicesAndConfigBlogContext));
     }
 
     [ConditionalFact]
@@ -47,8 +45,7 @@ public class ConfigPatternsInMemoryTest
 
         using (var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options))
         {
-            context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             context.SaveChanges();
         }
 
@@ -69,9 +66,7 @@ public class ConfigPatternsInMemoryTest
     private class ImplicitServicesExplicitConfigBlogContext : DbContext
     {
         public ImplicitServicesExplicitConfigBlogContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Blog> Blogs { get; set; }
@@ -86,8 +81,7 @@ public class ConfigPatternsInMemoryTest
 
         using (var context = new ExplicitServicesImplicitConfigBlogContext(serviceProvider))
         {
-            context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             context.SaveChanges();
         }
 
@@ -117,8 +111,8 @@ public class ConfigPatternsInMemoryTest
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Blog> Blogs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(ExplicitServicesImplicitConfigBlogContext));
     }
@@ -130,12 +124,13 @@ public class ConfigPatternsInMemoryTest
             .UseInMemoryDatabase(nameof(ExplicitServicesAndConfigBlogContext))
             .UseInternalServiceProvider(
                 new ServiceCollection()
-                    .AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true));
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider(validateScopes: true)
+            );
 
         using (var context = new ExplicitServicesAndConfigBlogContext(optionsBuilder.Options))
         {
-            context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             context.SaveChanges();
         }
 
@@ -156,34 +151,33 @@ public class ConfigPatternsInMemoryTest
     private class ExplicitServicesAndConfigBlogContext : DbContext
     {
         public ExplicitServicesAndConfigBlogContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Blog> Blogs { get; set; }
     }
 
     [ConditionalFact]
-    public void Throws_on_attempt_to_use_context_with_no_store()
-        => Assert.Equal(
+    public void Throws_on_attempt_to_use_context_with_no_store() =>
+        Assert.Equal(
             CoreStrings.NoProviderConfigured,
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert
+                .Throws<InvalidOperationException>(() =>
                 {
                     using var context = new NoServicesAndNoConfigBlogContext();
-                    context.Blogs.Add(
-                        new Blog { Name = "The Waffle Cart" });
+                    context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                     context.SaveChanges();
-                }).Message);
+                })
+                .Message
+        );
 
     private class NoServicesAndNoConfigBlogContext : DbContext
     {
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Blog> Blogs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.EnableServiceProviderCaching(false);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.EnableServiceProviderCaching(false);
     }
 
     [ConditionalFact]
@@ -195,14 +189,15 @@ public class ConfigPatternsInMemoryTest
 
         Assert.Equal(
             CoreStrings.NoProviderConfigured,
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert
+                .Throws<InvalidOperationException>(() =>
                 {
                     using var context = new ImplicitConfigButNoServicesBlogContext(serviceProvider);
-                    context.Blogs.Add(
-                        new Blog { Name = "The Waffle Cart" });
+                    context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                     context.SaveChanges();
-                }).Message);
+                })
+                .Message
+        );
     }
 
     private class ImplicitConfigButNoServicesBlogContext : DbContext
@@ -217,8 +212,8 @@ public class ConfigPatternsInMemoryTest
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Blog> Blogs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(ImplicitConfigButNoServicesBlogContext))
                 .UseInternalServiceProvider(_serviceProvider);
     }
@@ -227,7 +222,8 @@ public class ConfigPatternsInMemoryTest
     public void Can_register_context_with_DI_container_and_have_it_injected()
     {
         var services = new ServiceCollection();
-        services.AddTransient<InjectContextBlogContext>()
+        services
+            .AddTransient<InjectContextBlogContext>()
             .AddTransient<InjectContextController>()
             .AddEntityFrameworkInMemoryDatabase();
 
@@ -249,8 +245,7 @@ public class ConfigPatternsInMemoryTest
 
         public void Test()
         {
-            _context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             _context.SaveChanges();
 
             var blog = _context.Blogs.SingleOrDefault();
@@ -270,8 +265,8 @@ public class ConfigPatternsInMemoryTest
             Assert.NotNull(serviceProvider);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(InjectContextBlogContext))
                 .UseInternalServiceProvider(_serviceProvider);
 
@@ -282,8 +277,9 @@ public class ConfigPatternsInMemoryTest
     [ConditionalFact]
     public void Can_register_context_and_configuration_with_DI_container_and_have_both_injected()
     {
-        var optionsBuilder = new DbContextOptionsBuilder()
-            .UseInMemoryDatabase(nameof(InjectContextAndConfigurationBlogContext));
+        var optionsBuilder = new DbContextOptionsBuilder().UseInMemoryDatabase(
+            nameof(InjectContextAndConfigurationBlogContext)
+        );
 
         var serviceProvider = new ServiceCollection()
             .AddTransient<InjectContextAndConfigurationBlogContext>()
@@ -299,7 +295,9 @@ public class ConfigPatternsInMemoryTest
     {
         private readonly InjectContextAndConfigurationBlogContext _context;
 
-        public InjectContextAndConfigurationController(InjectContextAndConfigurationBlogContext context)
+        public InjectContextAndConfigurationController(
+            InjectContextAndConfigurationBlogContext context
+        )
         {
             Assert.NotNull(context);
 
@@ -308,8 +306,7 @@ public class ConfigPatternsInMemoryTest
 
         public void Test()
         {
-            _context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             _context.SaveChanges();
 
             var blog = _context.Blogs.SingleOrDefault();
@@ -340,7 +337,8 @@ public class ConfigPatternsInMemoryTest
             .UseInMemoryDatabase(nameof(InjectConfigurationBlogContext));
 
         var services = new ServiceCollection();
-        services.AddTransient<InjectConfigurationBlogContext>()
+        services
+            .AddTransient<InjectConfigurationBlogContext>()
             .AddTransient<InjectConfigurationController>()
             .AddSingleton(optionsBuilder.Options)
             .AddEntityFrameworkInMemoryDatabase();
@@ -363,8 +361,7 @@ public class ConfigPatternsInMemoryTest
 
         public void Test()
         {
-            _context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             _context.SaveChanges();
 
             var blog = _context.Blogs.SingleOrDefault();
@@ -392,11 +389,15 @@ public class ConfigPatternsInMemoryTest
     [ConditionalFact]
     public void Can_inject_different_configurations_into_different_contexts()
     {
-        var blogOptions = new DbContextOptionsBuilder<InjectDifferentConfigurationsBlogContext>()
-            .UseInMemoryDatabase(nameof(InjectDifferentConfigurationsBlogContext));
+        var blogOptions =
+            new DbContextOptionsBuilder<InjectDifferentConfigurationsBlogContext>().UseInMemoryDatabase(
+                nameof(InjectDifferentConfigurationsBlogContext)
+            );
 
-        var accountOptions = new DbContextOptionsBuilder<InjectDifferentConfigurationsAccountContext>()
-            .UseInMemoryDatabase(nameof(InjectDifferentConfigurationsAccountContext));
+        var accountOptions =
+            new DbContextOptionsBuilder<InjectDifferentConfigurationsAccountContext>().UseInMemoryDatabase(
+                nameof(InjectDifferentConfigurationsAccountContext)
+            );
 
         var serviceProvider = new ServiceCollection()
             .AddTransient<InjectDifferentConfigurationsBlogContext>()
@@ -416,7 +417,9 @@ public class ConfigPatternsInMemoryTest
     {
         private readonly InjectDifferentConfigurationsBlogContext _context;
 
-        public InjectDifferentConfigurationsBlogController(InjectDifferentConfigurationsBlogContext context)
+        public InjectDifferentConfigurationsBlogController(
+            InjectDifferentConfigurationsBlogContext context
+        )
         {
             Assert.NotNull(context);
 
@@ -426,10 +429,10 @@ public class ConfigPatternsInMemoryTest
         public void Test()
         {
             Assert.IsType<DbContextOptions<InjectDifferentConfigurationsBlogContext>>(
-                _context.GetService<IDbContextOptions>());
+                _context.GetService<IDbContextOptions>()
+            );
 
-            _context.Blogs.Add(
-                new Blog { Name = "The Waffle Cart" });
+            _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
             _context.SaveChanges();
 
             var blog = _context.Blogs.SingleOrDefault();
@@ -443,7 +446,9 @@ public class ConfigPatternsInMemoryTest
     {
         private readonly InjectDifferentConfigurationsAccountContext _context;
 
-        public InjectDifferentConfigurationsAccountController(InjectDifferentConfigurationsAccountContext context)
+        public InjectDifferentConfigurationsAccountController(
+            InjectDifferentConfigurationsAccountContext context
+        )
         {
             Assert.NotNull(context);
 
@@ -453,10 +458,10 @@ public class ConfigPatternsInMemoryTest
         public void Test()
         {
             Assert.IsType<DbContextOptions<InjectDifferentConfigurationsAccountContext>>(
-                _context.GetService<IDbContextOptions>());
+                _context.GetService<IDbContextOptions>()
+            );
 
-            _context.Accounts.Add(
-                new Account { Name = "Eeky Bear" });
+            _context.Accounts.Add(new Account { Name = "Eeky Bear" });
             _context.SaveChanges();
 
             var account = _context.Accounts.SingleOrDefault();
@@ -468,7 +473,9 @@ public class ConfigPatternsInMemoryTest
 
     private class InjectDifferentConfigurationsBlogContext : DbContext
     {
-        public InjectDifferentConfigurationsBlogContext(DbContextOptions<InjectDifferentConfigurationsBlogContext> options)
+        public InjectDifferentConfigurationsBlogContext(
+            DbContextOptions<InjectDifferentConfigurationsBlogContext> options
+        )
             : base(options)
         {
             Assert.NotNull(options);
@@ -480,7 +487,9 @@ public class ConfigPatternsInMemoryTest
 
     private class InjectDifferentConfigurationsAccountContext : DbContext
     {
-        public InjectDifferentConfigurationsAccountContext(DbContextOptions<InjectDifferentConfigurationsAccountContext> options)
+        public InjectDifferentConfigurationsAccountContext(
+            DbContextOptions<InjectDifferentConfigurationsAccountContext> options
+        )
             : base(options)
         {
             Assert.NotNull(options);

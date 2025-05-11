@@ -17,7 +17,8 @@ public class FileContentResultTests : FileContentResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         var result = new FileContentHttpResult(buffer, contentType)
         {
@@ -42,7 +43,12 @@ public class FileContentResultTests : FileContentResultTestBase
         var downloadName = "sample.zip";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IFileHttpResult>(new FileContentHttpResult(Array.Empty<byte>(), contentType) { FileDownloadName = downloadName });
+        var result = Assert.IsAssignableFrom<IFileHttpResult>(
+            new FileContentHttpResult(Array.Empty<byte>(), contentType)
+            {
+                FileDownloadName = downloadName,
+            }
+        );
         Assert.Equal(contentType, result.ContentType);
         Assert.Equal(downloadName, result.FileDownloadName);
     }
@@ -55,7 +61,12 @@ public class FileContentResultTests : FileContentResultTestBase
         var downloadName = "sample.zip";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(new FileContentHttpResult(Array.Empty<byte>(), contentType) { FileDownloadName = downloadName });
+        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(
+            new FileContentHttpResult(Array.Empty<byte>(), contentType)
+            {
+                FileDownloadName = downloadName,
+            }
+        );
         Assert.Equal(contentType, result.ContentType);
     }
 }

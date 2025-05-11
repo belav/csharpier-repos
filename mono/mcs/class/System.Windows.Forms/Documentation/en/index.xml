@@ -1117,8 +1117,7 @@
       <Type Name="Window+VerticalScroll" Kind="Class" />
       <Type Name="Window+VerticalThumb" Kind="Class" />
     </Namespace>
-    <Namespace Name="System.Windows.Forms.X11Internal">
-    </Namespace>
+    <Namespace Name="System.Windows.Forms.X11Internal"></Namespace>
   </Types>
   <Title>System.Windows.Forms</Title>
 </Overview>

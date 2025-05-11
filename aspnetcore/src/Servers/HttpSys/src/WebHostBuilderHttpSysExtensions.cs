@@ -32,7 +32,9 @@ public static class WebHostBuilderHttpSysExtensions
             services.AddSingleton<IServer>(services => services.GetRequiredService<MessagePump>());
             if (HttpApi.SupportsDelegation)
             {
-                services.AddSingleton<IServerDelegationFeature>(services => services.GetRequiredService<MessagePump>());
+                services.AddSingleton<IServerDelegationFeature>(services =>
+                    services.GetRequiredService<MessagePump>()
+                );
             }
             services.AddTransient<AuthenticationHandler>();
             services.AddSingleton<IServerIntegratedAuth>(services =>
@@ -61,11 +63,16 @@ public static class WebHostBuilderHttpSysExtensions
     /// A reference to the <see cref="IWebHostBuilder" /> parameter object.
     /// </returns>
     [SupportedOSPlatform("windows")]
-    public static IWebHostBuilder UseHttpSys(this IWebHostBuilder hostBuilder, Action<HttpSysOptions> options)
+    public static IWebHostBuilder UseHttpSys(
+        this IWebHostBuilder hostBuilder,
+        Action<HttpSysOptions> options
+    )
     {
-        return hostBuilder.UseHttpSys().ConfigureServices(services =>
-        {
-            services.Configure(options);
-        });
+        return hostBuilder
+            .UseHttpSys()
+            .ConfigureServices(services =>
+            {
+                services.Configure(options);
+            });
     }
 }

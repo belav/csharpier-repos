@@ -1,44 +1,38 @@
 using System;
-using System.Globalization;
-using System.Workflow.ComponentModel;
 using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Text;
+using System.Workflow.ComponentModel;
 using System.Xml;
 using System.Xml.Schema;
-    
+
 namespace System.Workflow.Runtime
 {
     #region State Persistence Exceptions
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowOwnershipException : Exception
     {
         private Guid _instanceId;
         public Guid InstanceId
         {
-            get
-            {
-                return _instanceId;
-            }
-            set
-            {
-                _instanceId = value;
-            }
+            get { return _instanceId; }
+            set { _instanceId = value; }
         }
+
         public WorkflowOwnershipException()
-            : base(ExecutionStringManager.WorkflowOwnershipException)
-        { }
+            : base(ExecutionStringManager.WorkflowOwnershipException) { }
 
         public WorkflowOwnershipException(string message)
-            : base(message)
-        { }
+            : base(message) { }
 
         public WorkflowOwnershipException(string message, Exception innerException)
-            : base(message, innerException)
-        { }
+            : base(message, innerException) { }
 
         public WorkflowOwnershipException(Guid instanceId)
             : base(ExecutionStringManager.WorkflowOwnershipException)
@@ -75,7 +69,6 @@ namespace System.Workflow.Runtime
             base.GetObjectData(info, context);
             info.AddValue("__instanceId__", _instanceId);
         }
-
     }
 
     #endregion

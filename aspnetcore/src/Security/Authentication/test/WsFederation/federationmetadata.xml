@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EntityDescriptor ID="_4d16ee22-bedb-4eca-a532-1e5551c7d66e" entityID="https://sts.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+<EntityDescriptor
+  ID="_4d16ee22-bedb-4eca-a532-1e5551c7d66e"
+  entityID="https://sts.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/"
+  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+>
   <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
     <ds:SignedInfo>
       <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
@@ -20,7 +24,12 @@
       </X509Data>
     </KeyInfo>
   </ds:Signature>
-  <RoleDescriptor xsi:type="fed:SecurityTokenServiceType" protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706">
+  <RoleDescriptor
+    xsi:type="fed:SecurityTokenServiceType"
+    protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706"
+  >
     <KeyDescriptor use="signing">
       <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
         <X509Data>
@@ -36,35 +45,67 @@
       </KeyInfo>
     </KeyDescriptor>
     <fed:ClaimTypesOffered>
-      <auth:ClaimType Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>UPN</auth:DisplayName>
         <auth:Description>UPN of the user</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>Name</auth:DisplayName>
         <auth:Description>The display name for the user</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>Given Name</auth:DisplayName>
         <auth:Description>First name of the user</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>Surname</auth:DisplayName>
         <auth:Description>Last name of the user</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationinstant" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationinstant"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>Authentication Instant</auth:DisplayName>
         <auth:Description>The time (UTC) at which the user authenticated to the identity provider</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>Authentication Method</auth:DisplayName>
         <auth:Description>The method of authentication used by the identity provider</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.microsoft.com/identity/claims/tenantid" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.microsoft.com/identity/claims/tenantid"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>TenantId</auth:DisplayName>
         <auth:Description>Identifier for the user's tenant</auth:Description>
       </auth:ClaimType>
-      <auth:ClaimType Uri="http://schemas.microsoft.com/identity/claims/identityprovider" Optional="true" xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706">
+      <auth:ClaimType
+        Uri="http://schemas.microsoft.com/identity/claims/identityprovider"
+        Optional="true"
+        xmlns:auth="http://docs.oasis-open.org/wsfed/authorization/200706"
+      >
         <auth:DisplayName>IdentityProvider</auth:DisplayName>
         <auth:Description>Identity provider for the user.</auth:Description>
       </auth:ClaimType>
@@ -80,7 +121,12 @@
       </EndpointReference>
     </fed:PassiveRequestorEndpoint>
   </RoleDescriptor>
-  <RoleDescriptor xsi:type="fed:ApplicationServiceType" protocolSupportEnumeration="http://docs.oasis-open.org/ws-sx/ws-trust/200512 http://docs.oasis-open.org/wsfed/federation/200706" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706">
+  <RoleDescriptor
+    xsi:type="fed:ApplicationServiceType"
+    protocolSupportEnumeration="http://docs.oasis-open.org/ws-sx/ws-trust/200512 http://docs.oasis-open.org/wsfed/federation/200706"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706"
+  >
     <KeyDescriptor use="signing">
       <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
         <X509Data>
@@ -126,7 +172,13 @@
         </X509Data>
       </KeyInfo>
     </KeyDescriptor>
-    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/saml2" />
-    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/saml2" />
+    <SingleLogoutService
+      Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+      Location="https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/saml2"
+    />
+    <SingleSignOnService
+      Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+      Location="https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/saml2"
+    />
   </IDPSSODescriptor>
 </EntityDescriptor>

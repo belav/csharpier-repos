@@ -5,6 +5,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class ModelBuilding101InMemoryTest : ModelBuilding101TestBase
 {
-    protected override DbContextOptionsBuilder ConfigureContext(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+    protected override DbContextOptionsBuilder ConfigureContext(
+        DbContextOptionsBuilder optionsBuilder
+    ) => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 }

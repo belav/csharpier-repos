@@ -4,11 +4,11 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel;
-    using System.Transactions;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
+    using System.Transactions;
     using SR = System.ServiceModel.SR;
 
     class TransactionProxyBuilder : IProxyCreator
@@ -20,15 +20,15 @@ namespace System.ServiceModel.ComIntegration
         {
             this.txProxy = proxy;
         }
-        void IDisposable.Dispose()
-        {
 
-        }
+        void IDisposable.Dispose() { }
 
         ComProxy IProxyCreator.CreateProxy(IntPtr outer, ref Guid riid)
         {
             if ((riid != typeof(ITransactionProxy).GUID))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidCastException(SR.GetString(SR.NoInterface, riid))
+                );
             if (outer == IntPtr.Zero)
             {
                 // transactions require failfasts to prevent corruption
@@ -39,7 +39,6 @@ namespace System.ServiceModel.ComIntegration
             {
                 comProxy = ComProxy.Create(outer, txProxy, null);
                 return comProxy;
-
             }
             else
                 return comProxy.Clone();
@@ -51,7 +50,6 @@ namespace System.ServiceModel.ComIntegration
                 return false;
             else
                 return true;
-
         }
 
         bool IProxyCreator.SupportsDispatch()
@@ -71,11 +69,9 @@ namespace System.ServiceModel.ComIntegration
             Guid iid = typeof(ITransactionProxy).GUID;
             return OuterProxyWrapper.CreateOuterProxyInstance(proxyManager, ref iid);
         }
-
     }
 
-    class TransactionProxy : ITransactionProxy,
-                             IExtension<InstanceContext>
+    class TransactionProxy : ITransactionProxy, IExtension<InstanceContext>
     {
         Transaction currentTransaction;
         VoterBallot currentVoter;
@@ -93,36 +89,22 @@ namespace System.ServiceModel.ComIntegration
 
         public Transaction CurrentTransaction
         {
-            get
-            {
-                return this.currentTransaction;
-            }
+            get { return this.currentTransaction; }
         }
         public Guid AppId
         {
-            get
-            {
-                return this.appid;
-            }
+            get { return this.appid; }
         }
         public Guid Clsid
         {
-            get
-            {
-                return this.clsid;
-            }
+            get { return this.clsid; }
         }
         public int InstanceID
         {
-            get
-            {
-                return this.instanceID;
-            }
-            set
-            {
-                this.instanceID = value;
-            }
+            get { return this.instanceID; }
+            set { this.instanceID = value; }
         }
+
         public void SetTransaction(Transaction transaction)
         {
             lock (this.syncRoot)
@@ -146,13 +128,16 @@ namespace System.ServiceModel.ComIntegration
                 }
                 else if (this.currentTransaction != transaction)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.TransactionMismatch());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.TransactionMismatch()
+                    );
                 }
             }
         }
 
         // IExtension<ServiceInstance>
         public void Attach(InstanceContext owner) { }
+
         public void Detach(InstanceContext owner) { }
 
         // ITransactionProxy
@@ -173,13 +158,10 @@ namespace System.ServiceModel.ComIntegration
         public IDtcTransaction Promote()
         {
             EnsureTransaction();
-            return TransactionInterop.GetDtcTransaction(
-                this.currentTransaction);
+            return TransactionInterop.GetDtcTransaction(this.currentTransaction);
         }
 
-        public void CreateVoter(
-            ITransactionVoterNotifyAsync2 voterNotification,
-            IntPtr voterBallot)
+        public void CreateVoter(ITransactionVoterNotifyAsync2 voterNotification, IntPtr voterBallot)
         {
             if (IntPtr.Zero == voterBallot)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("voterBallot");
@@ -200,7 +182,10 @@ namespace System.ServiceModel.ComIntegration
 
                 this.currentVoter = voter;
 
-                IntPtr ppv = InterfaceHelper.GetInterfacePtrForObject(typeof(ITransactionVoterBallotAsync2).GUID, this.currentVoter);
+                IntPtr ppv = InterfaceHelper.GetInterfacePtrForObject(
+                    typeof(ITransactionVoterBallotAsync2).GUID,
+                    this.currentVoter
+                );
 
                 Marshal.WriteIntPtr(voterBallot, ppv);
             }
@@ -265,8 +250,9 @@ namespace System.ServiceModel.ComIntegration
             lock (this.syncRoot)
             {
                 if (this.currentTransaction == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(null, HR.CONTEXT_E_NOTRANSACTION));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(null, HR.CONTEXT_E_NOTRANSACTION)
+                    );
             }
         }
 
@@ -275,8 +261,7 @@ namespace System.ServiceModel.ComIntegration
             TransactionProxy proxy;
             Transaction transaction;
 
-            public ProxyEnlistment(TransactionProxy proxy,
-                                   Transaction transaction)
+            public ProxyEnlistment(TransactionProxy proxy, Transaction transaction)
             {
                 this.proxy = proxy;
                 this.transaction = transaction;
@@ -292,7 +277,6 @@ namespace System.ServiceModel.ComIntegration
                 this.proxy.ClearTransaction(this);
                 this.proxy = null;
                 preparingEnlistment.Done();
-
             }
 
             public void Commit(Enlistment enlistment)
@@ -339,11 +323,8 @@ namespace System.ServiceModel.ComIntegration
                     DiagnosticUtility.FailFast("Already have a transaction in the ballot!");
                 }
                 this.transaction = transaction;
-                this.enlistment = transaction.EnlistVolatile(
-                    this,
-                    EnlistmentOptions.None);
+                this.enlistment = transaction.EnlistVolatile(this, EnlistmentOptions.None);
             }
-
 
             public void Prepare(PreparingEnlistment enlistment)
             {
@@ -355,8 +336,15 @@ namespace System.ServiceModel.ComIntegration
             {
                 enlistment.Done();
                 this.notification.Aborted(0, false, 0, S_OK);
-                ComPlusTxProxyTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTxProxyTxAbortedByTM,
-                        SR.TraceCodeComIntegrationTxProxyTxAbortedByTM, proxy.AppId, proxy.Clsid, transaction.TransactionInformation.DistributedIdentifier, proxy.InstanceID);
+                ComPlusTxProxyTrace.Trace(
+                    TraceEventType.Verbose,
+                    TraceCode.ComIntegrationTxProxyTxAbortedByTM,
+                    SR.TraceCodeComIntegrationTxProxyTxAbortedByTM,
+                    proxy.AppId,
+                    proxy.Clsid,
+                    transaction.TransactionInformation.DistributedIdentifier,
+                    proxy.InstanceID
+                );
                 Marshal.ReleaseComObject(this.notification);
                 this.notification = null;
             }
@@ -365,8 +353,15 @@ namespace System.ServiceModel.ComIntegration
             {
                 enlistment.Done();
                 this.notification.Committed(false, 0, S_OK);
-                ComPlusTxProxyTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTxProxyTxCommitted,
-                            SR.TraceCodeComIntegrationTxProxyTxCommitted, proxy.AppId, proxy.Clsid, transaction.TransactionInformation.DistributedIdentifier, proxy.InstanceID);
+                ComPlusTxProxyTrace.Trace(
+                    TraceEventType.Verbose,
+                    TraceCode.ComIntegrationTxProxyTxCommitted,
+                    SR.TraceCodeComIntegrationTxProxyTxCommitted,
+                    proxy.AppId,
+                    proxy.Clsid,
+                    transaction.TransactionInformation.DistributedIdentifier,
+                    proxy.InstanceID
+                );
                 Marshal.ReleaseComObject(this.notification);
                 this.notification = null;
             }
@@ -383,8 +378,9 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (this.preparingEnlistment == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.NoVoteIssued)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NoVoteIssued))
+                    );
                 }
 
                 if (S_OK == hr)
@@ -393,10 +389,16 @@ namespace System.ServiceModel.ComIntegration
                 }
                 else
                 {
-
                     this.preparingEnlistment.ForceRollback();
-                    ComPlusTxProxyTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTxProxyTxAbortedByContext,
-                            SR.TraceCodeComIntegrationTxProxyTxAbortedByContext, proxy.AppId, proxy.Clsid, transaction.TransactionInformation.DistributedIdentifier, proxy.InstanceID);
+                    ComPlusTxProxyTrace.Trace(
+                        TraceEventType.Verbose,
+                        TraceCode.ComIntegrationTxProxyTxAbortedByContext,
+                        SR.TraceCodeComIntegrationTxProxyTxAbortedByContext,
+                        proxy.AppId,
+                        proxy.Clsid,
+                        transaction.TransactionInformation.DistributedIdentifier,
+                        proxy.InstanceID
+                    );
                 }
             }
         }

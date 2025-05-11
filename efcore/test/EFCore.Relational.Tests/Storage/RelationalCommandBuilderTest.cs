@@ -28,7 +28,8 @@ public class RelationalCommandBuilderTest
             "InvariantName",
             "Name",
             new StringTypeMapping("nvarchar(100)", DbType.String),
-            nullable: true);
+            nullable: true
+        );
 
         var command = commandBuilder.Build();
 
@@ -42,8 +43,10 @@ public class RelationalCommandBuilderTest
         var dependencies = new RelationalCommandBuilderDependencies(
             new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()),
-            new ExceptionDetector());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            ),
+            new ExceptionDetector()
+        );
 
         var commandBuilder = new RelationalCommandBuilder(dependencies);
         return commandBuilder;

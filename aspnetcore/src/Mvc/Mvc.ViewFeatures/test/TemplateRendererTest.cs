@@ -14,30 +14,52 @@ public class TemplateRendererTest
         get
         {
             return new TheoryData<Type, string[]>
+            {
+                { typeof(string), new string[] { "String" } },
+                { typeof(bool), new string[] { "Boolean", "String" } },
+                { typeof(DateTime), new string[] { "DateTime", "String" } },
+                { typeof(float), new string[] { "Single", "String" } },
+                { typeof(double), new string[] { "Double", "String" } },
+                { typeof(Guid), new string[] { "Guid", "String" } },
+                { typeof(TimeSpan), new string[] { "TimeSpan", "String" } },
+                { typeof(int), new string[] { "Int32", "String" } },
+                { typeof(ulong), new string[] { "UInt64", "String" } },
+                { typeof(Enum), new string[] { "Enum", "String" } },
+                { typeof(HttpStatusCode), new string[] { "HttpStatusCode", "Enum", "String" } },
+                { typeof(FormFile), new string[] { "FormFile", "IFormFile", "Object" } },
+                { typeof(IFormFile), new string[] { "IFormFile", "Object" } },
                 {
-                    { typeof(string), new string[] { "String" } },
-                    { typeof(bool), new string[] { "Boolean", "String" } },
-                    { typeof(DateTime), new string[] { "DateTime", "String" } },
-                    { typeof(float), new string[] { "Single", "String" } },
-                    { typeof(double), new string[] { "Double", "String" } },
-                    { typeof(Guid), new string[] { "Guid", "String" } },
-                    { typeof(TimeSpan), new string[] { "TimeSpan", "String" } },
-                    { typeof(int), new string[] { "Int32", "String" } },
-                    { typeof(ulong), new string[] { "UInt64", "String" } },
-
-                    { typeof(Enum), new string[] { "Enum", "String" } },
-                    { typeof(HttpStatusCode), new string[] { "HttpStatusCode", "Enum", "String" } },
-
-                    { typeof(FormFile), new string[] { "FormFile", "IFormFile", "Object" } },
-                    { typeof(IFormFile), new string[] { "IFormFile", "Object" } },
-
-                    { typeof(FormFileCollection), new string[] { "FormFileCollection", typeof(List<IFormFile>).Name,
-                        TemplateRenderer.IEnumerableOfIFormFileName, "Collection", "Object" } },
-                    { typeof(IFormFileCollection), new string[] { "IFormFileCollection",
-                        TemplateRenderer.IEnumerableOfIFormFileName, "Collection", "Object" } },
-                    { typeof(IEnumerable<IFormFile>), new string[] { TemplateRenderer.IEnumerableOfIFormFileName,
-                        typeof(IEnumerable<IFormFile>).Name, "Collection", "Object" } },
-                };
+                    typeof(FormFileCollection),
+                    new string[]
+                    {
+                        "FormFileCollection",
+                        typeof(List<IFormFile>).Name,
+                        TemplateRenderer.IEnumerableOfIFormFileName,
+                        "Collection",
+                        "Object",
+                    }
+                },
+                {
+                    typeof(IFormFileCollection),
+                    new string[]
+                    {
+                        "IFormFileCollection",
+                        TemplateRenderer.IEnumerableOfIFormFileName,
+                        "Collection",
+                        "Object",
+                    }
+                },
+                {
+                    typeof(IEnumerable<IFormFile>),
+                    new string[]
+                    {
+                        TemplateRenderer.IEnumerableOfIFormFileName,
+                        typeof(IEnumerable<IFormFile>).Name,
+                        "Collection",
+                        "Object",
+                    }
+                },
+            };
         }
     }
 
@@ -54,7 +76,8 @@ public class TemplateRendererTest
 
         // Assert
         var collectionAssertions = expectedResult.Select<string, Action<string>>(expected =>
-            actual => Assert.Equal(expected, actual));
+            actual => Assert.Equal(expected, actual)
+        );
         Assert.Collection(typeNames, collectionAssertions.ToArray());
     }
 }

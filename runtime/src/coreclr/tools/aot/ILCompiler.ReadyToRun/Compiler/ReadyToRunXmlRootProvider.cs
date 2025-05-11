@@ -26,7 +26,12 @@ namespace ILCompiler
         private readonly ModuleDesc _owningModule;
         private readonly string _xmlDocumentLocation;
 
-        public ReadyToRunXmlRootProvider(Stream documentStream, ManifestResource resource, ModuleDesc owningModule, string xmlDocumentLocation)
+        public ReadyToRunXmlRootProvider(
+            Stream documentStream,
+            ManifestResource resource,
+            ModuleDesc owningModule,
+            string xmlDocumentLocation
+        )
         {
             _context = owningModule.Context;
             _documentStream = documentStream;
@@ -37,17 +42,31 @@ namespace ILCompiler
 
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
-            CompilationRootProvider root = new CompilationRootProvider(rootProvider, _context, _documentStream, _resource, _owningModule, _xmlDocumentLocation);
+            CompilationRootProvider root = new CompilationRootProvider(
+                rootProvider,
+                _context,
+                _documentStream,
+                _resource,
+                _owningModule,
+                _xmlDocumentLocation
+            );
             root.ProcessXml();
         }
 
-        public static bool TryCreateRootProviderFromEmbeddedDescriptorFile(EcmaModule module, out ReadyToRunXmlRootProvider provider)
+        public static bool TryCreateRootProviderFromEmbeddedDescriptorFile(
+            EcmaModule module,
+            out ReadyToRunXmlRootProvider provider
+        )
         {
-            PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+            PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
+                module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
+            );
 
             foreach (var resourceHandle in module.MetadataReader.ManifestResources)
             {
-                ManifestResource resource = module.MetadataReader.GetManifestResource(resourceHandle);
+                ManifestResource resource = module.MetadataReader.GetManifestResource(
+                    resourceHandle
+                );
 
                 // Don't try to process linked resources or resources in other assemblies
                 if (!resource.Implementation.IsNil)
@@ -58,7 +77,10 @@ namespace ILCompiler
                 string resourceName = module.MetadataReader.GetString(resource.Name);
                 if (resourceName == "ILLink.Descriptors.xml")
                 {
-                    BlobReader reader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                    BlobReader reader = resourceDirectory.GetReader(
+                        (int)resource.Offset,
+                        resourceDirectory.Length - (int)resource.Offset
+                    );
                     int length = (int)reader.ReadUInt32();
 
                     UnmanagedMemoryStream ms;
@@ -67,7 +89,12 @@ namespace ILCompiler
                         ms = new UnmanagedMemoryStream(reader.CurrentPointer, length);
                     }
 
-                    provider = new ReadyToRunXmlRootProvider(ms, resource, module, "resource " + resourceName + " in " + module.ToString());
+                    provider = new ReadyToRunXmlRootProvider(
+                        ms,
+                        resource,
+                        module,
+                        "resource " + resourceName + " in " + module.ToString()
+                    );
                     return true;
                 }
             }
@@ -82,16 +109,37 @@ namespace ILCompiler
             private readonly IRootingServiceProvider _rootingServiceProvider;
             private InstructionSetSupport _instructionSetSupport;
 
-            public CompilationRootProvider(IRootingServiceProvider provider, TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc owningModule, string xmlDocumentLocation)
-                : base(null , context, documentStream, resource, owningModule, xmlDocumentLocation, ImmutableDictionary<string, bool>.Empty)
+            public CompilationRootProvider(
+                IRootingServiceProvider provider,
+                TypeSystemContext context,
+                Stream documentStream,
+                ManifestResource resource,
+                ModuleDesc owningModule,
+                string xmlDocumentLocation
+            )
+                : base(
+                    null,
+                    context,
+                    documentStream,
+                    resource,
+                    owningModule,
+                    xmlDocumentLocation,
+                    ImmutableDictionary<string, bool>.Empty
+                )
             {
                 _rootingServiceProvider = provider;
-                _instructionSetSupport = ((ReadyToRunCompilerContext)owningModule.Context).InstructionSetSupport;
+                _instructionSetSupport = (
+                    (ReadyToRunCompilerContext)owningModule.Context
+                ).InstructionSetSupport;
             }
 
             public void ProcessXml() => ProcessXml(false);
 
-            protected override void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+            protected override void ProcessAssembly(
+                ModuleDesc assembly,
+                XPathNavigator nav,
+                bool warnOnUnresolvedTypes
+            )
             {
                 if (GetTypePreserve(nav) == TypePreserve.All)
                 {
@@ -112,7 +160,9 @@ namespace ILCompiler
                 MetadataType typeWithMethods = (MetadataType)type;
                 if (type.HasInstantiation)
                 {
-                    typeWithMethods = ReadyToRunLibraryRootProvider.InstantiateIfPossible(typeWithMethods);
+                    typeWithMethods = ReadyToRunLibraryRootProvider.InstantiateIfPossible(
+                        typeWithMethods
+                    );
                     if (typeWithMethods == null)
                         return;
                 }
@@ -146,7 +196,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(_instructionSetSupport, method))
                     {
                         ReadyToRunLibraryRootProvider.CheckCanGenerateMethod(methodToRoot);
-                        _rootingServiceProvider.AddCompilationRoot(methodToRoot, rootMinimalDependencies: false, reason: "Linker XML descriptor");
+                        _rootingServiceProvider.AddCompilationRoot(
+                            methodToRoot,
+                            rootMinimalDependencies: false,
+                            reason: "Linker XML descriptor"
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -159,7 +213,12 @@ namespace ILCompiler
 
             private void ProcessNamespaces(ModuleDesc assembly, XPathNavigator nav)
             {
-                foreach (XPathNavigator namespaceNav in nav.SelectChildren(NamespaceElementName, XmlNamespace))
+                foreach (
+                    XPathNavigator namespaceNav in nav.SelectChildren(
+                        NamespaceElementName,
+                        XmlNamespace
+                    )
+                )
                 {
                     if (!ShouldProcessElement(namespaceNav))
                         continue;
@@ -188,12 +247,18 @@ namespace ILCompiler
                 }
             }
 
-            protected override void ProcessMethod(TypeDesc type, MethodDesc method, XPathNavigator nav, object customData)
+            protected override void ProcessMethod(
+                TypeDesc type,
+                MethodDesc method,
+                XPathNavigator nav,
+                object customData
+            )
             {
                 MetadataType typeWithMethods = (MetadataType)type;
                 if (type.HasInstantiation)
                 {
-                    InstantiatedType instantiated = ReadyToRunLibraryRootProvider.InstantiateIfPossible(typeWithMethods);
+                    InstantiatedType instantiated =
+                        ReadyToRunLibraryRootProvider.InstantiateIfPossible(typeWithMethods);
                     method = method.Context.GetMethodForInstantiatedType(method, instantiated);
                 }
 

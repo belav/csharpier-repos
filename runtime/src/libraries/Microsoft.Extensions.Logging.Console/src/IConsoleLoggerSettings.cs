@@ -11,7 +11,10 @@ namespace Microsoft.Extensions.Logging.Console
     /// This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Obsolete("This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.", error: true)]
+    [Obsolete(
+        "This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.",
+        error: true
+    )]
     public interface IConsoleLoggerSettings
     {
         /// <summary>

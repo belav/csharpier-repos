@@ -21,7 +21,12 @@ public class FileBufferingReadStreamTests
         using var inner = MakeStream(1024 * 2);
         System.IO.Stream bufferSteam;
         {
-            using var stream = new FileBufferingReadStream(inner, 1024, null, Directory.GetCurrentDirectory());
+            using var stream = new FileBufferingReadStream(
+                inner,
+                1024,
+                null,
+                Directory.GetCurrentDirectory()
+            );
             bufferSteam = stream;
             Assert.True(stream.CanRead);
             Assert.True(stream.CanSeek);
@@ -31,9 +36,9 @@ public class FileBufferingReadStreamTests
             Assert.True(stream.InMemory);
             Assert.Null(stream.TempFileName);
         }
-        Assert.False(bufferSteam.CanRead);  // Buffered Stream now disposed
+        Assert.False(bufferSteam.CanRead); // Buffered Stream now disposed
         Assert.False(bufferSteam.CanSeek);
-        Assert.True(inner.CanRead);         // Inner Stream not disposed
+        Assert.True(inner.CanRead); // Inner Stream not disposed
         Assert.True(inner.CanSeek);
     }
 
@@ -41,7 +46,14 @@ public class FileBufferingReadStreamTests
     public void FileBufferingReadStream_Sync0ByteReadUnderThreshold_DoesntCreateFile()
     {
         var inner = MakeStream(1024);
-        using (var stream = new FileBufferingReadStream(inner, 1024 * 2, null, Directory.GetCurrentDirectory()))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 2,
+                null,
+                Directory.GetCurrentDirectory()
+            )
+        )
         {
             var bytes = new byte[1000];
             var read0 = stream.Read(bytes, 0, 0);
@@ -74,7 +86,14 @@ public class FileBufferingReadStreamTests
     public void FileBufferingReadStream_SyncReadUnderThreshold_DoesntCreateFile()
     {
         var inner = MakeStream(1024 * 2);
-        using (var stream = new FileBufferingReadStream(inner, 1024 * 3, null, Directory.GetCurrentDirectory()))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 3,
+                null,
+                Directory.GetCurrentDirectory()
+            )
+        )
         {
             var bytes = new byte[1000];
             var read0 = stream.Read(bytes, 0, bytes.Length);
@@ -146,7 +165,14 @@ public class FileBufferingReadStreamTests
     public void FileBufferingReadStream_SyncReadWithInMemoryLimit_EnforcesLimit()
     {
         var inner = MakeStream(1024 * 2);
-        using (var stream = new FileBufferingReadStream(inner, 1024, 900, Directory.GetCurrentDirectory()))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024,
+                900,
+                Directory.GetCurrentDirectory()
+            )
+        )
         {
             var bytes = new byte[500];
             var read0 = stream.Read(bytes, 0, bytes.Length);
@@ -203,7 +229,14 @@ public class FileBufferingReadStreamTests
     public async Task FileBufferingReadStream_Async0ByteReadUnderThreshold_DoesntCreateFile()
     {
         var inner = MakeStream(1024);
-        using (var stream = new FileBufferingReadStream(inner, 1024 * 2, null, Directory.GetCurrentDirectory()))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 2,
+                null,
+                Directory.GetCurrentDirectory()
+            )
+        )
         {
             var bytes = new byte[1000];
             var read0 = await stream.ReadAsync(bytes, 0, 0);
@@ -236,7 +269,14 @@ public class FileBufferingReadStreamTests
     public async Task FileBufferingReadStream_AsyncReadUnderThreshold_DoesntCreateFile()
     {
         var inner = MakeStream(1024 * 2);
-        using (var stream = new FileBufferingReadStream(inner, 1024 * 3, null, Directory.GetCurrentDirectory()))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 3,
+                null,
+                Directory.GetCurrentDirectory()
+            )
+        )
         {
             var bytes = new byte[1000];
             var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
@@ -349,7 +389,14 @@ public class FileBufferingReadStreamTests
     public async Task FileBufferingReadStream_AsyncReadWithInMemoryLimit_EnforcesLimit()
     {
         var inner = MakeStream(1024 * 2);
-        using (var stream = new FileBufferingReadStream(inner, 1024, 900, Directory.GetCurrentDirectory()))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024,
+                900,
+                Directory.GetCurrentDirectory()
+            )
+        )
         {
             var bytes = new byte[500];
             var read0 = await stream.ReadAsync(bytes, 0, bytes.Length);
@@ -359,7 +406,9 @@ public class FileBufferingReadStreamTests
             Assert.True(stream.InMemory);
             Assert.Null(stream.TempFileName);
 
-            var exception = await Assert.ThrowsAsync<IOException>(() => stream.ReadAsync(bytes, 0, bytes.Length));
+            var exception = await Assert.ThrowsAsync<IOException>(() =>
+                stream.ReadAsync(bytes, 0, bytes.Length)
+            );
             Assert.Equal("Buffer limit exceeded.", exception.Message);
             Assert.True(stream.InMemory);
             Assert.Null(stream.TempFileName);
@@ -391,7 +440,9 @@ public class FileBufferingReadStreamTests
             tempFileName = stream.TempFileName!;
             Assert.True(File.Exists(tempFileName));
 
-            var exception = await Assert.ThrowsAsync<IOException>(() => stream.ReadAsync(bytes, 0, bytes.Length));
+            var exception = await Assert.ThrowsAsync<IOException>(() =>
+                stream.ReadAsync(bytes, 0, bytes.Length)
+            );
             Assert.Equal("Buffer limit exceeded.", exception.Message);
             Assert.False(stream.InMemory);
             Assert.NotNull(stream.TempFileName);
@@ -406,12 +457,22 @@ public class FileBufferingReadStreamTests
         var inner = MakeStream(1024 * 1024 + 25);
         string tempFileName;
         var arrayPool = new Mock<ArrayPool<byte>>();
-        arrayPool.Setup(p => p.Rent(It.IsAny<int>()))
+        arrayPool
+            .Setup(p => p.Rent(It.IsAny<int>()))
             .Returns((int m) => ArrayPool<byte>.Shared.Rent(m));
-        arrayPool.Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
+        arrayPool
+            .Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
             .Callback((byte[] bytes, bool clear) => ArrayPool<byte>.Shared.Return(bytes, clear));
 
-        using (var stream = new FileBufferingReadStream(inner, 1024 * 1024 + 1, 2 * 1024 * 1024, GetCurrentDirectory(), arrayPool.Object))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024 + 1,
+                2 * 1024 * 1024,
+                GetCurrentDirectory(),
+                arrayPool.Object
+            )
+        )
         {
             arrayPool.Verify(v => v.Rent(It.IsAny<int>()), Times.Never());
 
@@ -435,12 +496,22 @@ public class FileBufferingReadStreamTests
         var inner = MakeStream(1024 * 1024 + 25);
         string tempFileName;
         var arrayPool = new Mock<ArrayPool<byte>>();
-        arrayPool.Setup(p => p.Rent(It.IsAny<int>()))
+        arrayPool
+            .Setup(p => p.Rent(It.IsAny<int>()))
             .Returns((int m) => ArrayPool<byte>.Shared.Rent(m));
-        arrayPool.Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
+        arrayPool
+            .Setup(p => p.Return(It.IsAny<byte[]>(), It.IsAny<bool>()))
             .Callback((byte[] bytes, bool clear) => ArrayPool<byte>.Shared.Return(bytes, clear));
 
-        using (var stream = new FileBufferingReadStream(inner, 1024 * 1024 + 1, 2 * 1024 * 1024, GetCurrentDirectory(), arrayPool.Object))
+        using (
+            var stream = new FileBufferingReadStream(
+                inner,
+                1024 * 1024 + 1,
+                2 * 1024 * 1024,
+                GetCurrentDirectory(),
+                arrayPool.Object
+            )
+        )
         {
             arrayPool.Verify(v => v.Rent(It.IsAny<int>()), Times.Never());
 
@@ -464,10 +535,18 @@ public class FileBufferingReadStreamTests
         // 4K is the lower bound on buffer sizes
         var bufferSize = 4096;
         var mostExpectedWrites = 8;
-        var data = Enumerable.Range(0, bufferSize * mostExpectedWrites).Select(b => (byte)b).ToArray();
+        var data = Enumerable
+            .Range(0, bufferSize * mostExpectedWrites)
+            .Select(b => (byte)b)
+            .ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            1024 * 1024,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new NumberOfWritesMemoryStream();
         await stream.CopyToAsync(withoutBufferMs);
@@ -488,10 +567,19 @@ public class FileBufferingReadStreamTests
         // 4K is the lower bound on buffer sizes
         var bufferSize = 4096;
         var mostExpectedWrites = 8;
-        var data = Enumerable.Range(0, bufferSize * mostExpectedWrites).Select(b => (byte)b).Reverse().ToArray();
+        var data = Enumerable
+            .Range(0, bufferSize * mostExpectedWrites)
+            .Select(b => (byte)b)
+            .Reverse()
+            .ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 100, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            100,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new NumberOfWritesMemoryStream();
         await stream.CopyToAsync(withoutBufferMs);
@@ -512,7 +600,12 @@ public class FileBufferingReadStreamTests
         var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            1024 * 1024,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new MemoryStream();
         var buffer = new byte[100];
@@ -529,7 +622,12 @@ public class FileBufferingReadStreamTests
         var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            1024 * 1024,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new MemoryStream();
         var buffer = new byte[100];
@@ -547,7 +645,12 @@ public class FileBufferingReadStreamTests
         var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            1024 * 1024,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new MemoryStream();
         var buffer = new byte[100];
@@ -566,7 +669,12 @@ public class FileBufferingReadStreamTests
         var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            1024 * 1024,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new MemoryStream();
         var buffer = new byte[100];
@@ -586,7 +694,12 @@ public class FileBufferingReadStreamTests
         var data = Enumerable.Range(0, 1024).Select(b => (byte)b).ToArray();
         var inner = new MemoryStream(data);
 
-        using var stream = new FileBufferingReadStream(inner, 1024 * 1024, bufferLimit: null, GetCurrentDirectory());
+        using var stream = new FileBufferingReadStream(
+            inner,
+            1024 * 1024,
+            bufferLimit: null,
+            GetCurrentDirectory()
+        );
 
         var withoutBufferMs = new MemoryStream();
         var buffer = new byte[100];
@@ -601,7 +714,10 @@ public class FileBufferingReadStreamTests
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "UnixFileMode is not supported on Windows.")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "UnixFileMode is not supported on Windows."
+    )]
     public void Read_BufferingContentToDisk_CreatesFileWithUserOnlyUnixFileMode()
     {
         var inner = MakeStream(1024 * 2);
@@ -621,7 +737,10 @@ public class FileBufferingReadStreamTests
 
             tempFileName = stream.TempFileName!;
             Assert.True(File.Exists(tempFileName));
-            Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite, File.GetUnixFileMode(tempFileName));
+            Assert.Equal(
+                UnixFileMode.UserRead | UnixFileMode.UserWrite,
+                File.GetUnixFileMode(tempFileName)
+            );
         }
 
         Assert.False(File.Exists(tempFileName));

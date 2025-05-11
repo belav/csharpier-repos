@@ -7,7 +7,15 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     [DataContract]
-    internal readonly struct SerializableImportCompletionItem(string symbolKeyData, string name, int arity, Glyph glyph, string containingNamespace, int additionalOverloadCount, bool includedInTargetTypeCompletion)
+    internal readonly struct SerializableImportCompletionItem(
+        string symbolKeyData,
+        string name,
+        int arity,
+        Glyph glyph,
+        string containingNamespace,
+        int additionalOverloadCount,
+        bool includedInTargetTypeCompletion
+    )
     {
         [DataMember(Order = 0)]
         public readonly string SymbolKeyData = symbolKeyData;

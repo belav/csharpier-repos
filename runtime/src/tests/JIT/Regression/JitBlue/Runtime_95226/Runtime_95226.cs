@@ -18,14 +18,16 @@ public class Runtime_95226
     {
         int i = 0;
         goto Bottom;
-Top:;
+        Top:
+        ;
         i++;
         while (true)
         {
             if (AlwaysTrue())
                 break;
         }
-Bottom:;
+        Bottom:
+        ;
         Use(arr[i]);
         if (i < arr.Length)
             goto Top;
@@ -35,7 +37,5 @@ Bottom:;
     private static bool AlwaysTrue() => true;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Use(int x)
-    {
-    }
+    private static void Use(int x) { }
 }

@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'">true</DebuggerSupport>
+    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
+      >true</DebuggerSupport
+    >
   </PropertyGroup>
   <ItemGroup>
     <RdXmlFile Include="default.rd.xml" />
@@ -75,10 +77,14 @@
     <Compile Include="UnionTests.cs" />
     <Compile Include="WhereTests.cs" />
     <Compile Include="ZipTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Linq\SkipTakeData.cs"
-             Link="Common\System\Linq\SkipTakeData.cs" />
-    <Compile Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
-             Link="Common\System\Diagnostics\DebuggerAttributes.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Linq\SkipTakeData.cs"
+      Link="Common\System\Linq\SkipTakeData.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
+      Link="Common\System\Diagnostics\DebuggerAttributes.cs"
+    />
     <Compile Include="GroupByTests.DebuggerAttributes.cs" />
     <Compile Include="ToLookupTests.DebuggerAttributes.cs" />
     <Compile Include="EnumerableDebugViewTests.cs" />

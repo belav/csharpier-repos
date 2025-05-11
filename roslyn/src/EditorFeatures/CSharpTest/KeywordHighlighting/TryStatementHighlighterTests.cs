@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class TryStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(TryStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(TryStatementHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
@@ -41,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -197,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

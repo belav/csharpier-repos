@@ -1,18 +1,17 @@
 namespace Martin
 {
-	public class Foo<T>
-	{ }
+    public class Foo<T> { }
 }
 
 namespace Baulig
 {
-	using M = Martin;
+    using M = Martin;
 
-	class X
-	{
-		public static void Main ()
-		{
-			M.Foo<int> foo;
-		}
-	}
+    class X
+    {
+        public static void Main()
+        {
+            M.Foo<int> foo;
+        }
+    }
 }

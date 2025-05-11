@@ -9,7 +9,11 @@ using System.Transactions.Oletx;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms687604(v=vs.85)
-[GeneratedComInterface, Guid(Guids.IID_ITransactionDispenser), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    GeneratedComInterface,
+    Guid(Guids.IID_ITransactionDispenser),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal partial interface ITransactionDispenser
 {
     void GetOptionsObject([MarshalAs(UnmanagedType.Interface)] out ITransactionOptions ppOptions);
@@ -19,5 +23,6 @@ internal partial interface ITransactionDispenser
         OletxTransactionIsolationLevel isoLevel,
         OletxTransactionIsoFlags isoFlags,
         [MarshalAs(UnmanagedType.Interface)] ITransactionOptions pOptions,
-        [MarshalAs(UnmanagedType.Interface)] out ITransaction ppTransaction);
+        [MarshalAs(UnmanagedType.Interface)] out ITransaction ppTransaction
+    );
 }

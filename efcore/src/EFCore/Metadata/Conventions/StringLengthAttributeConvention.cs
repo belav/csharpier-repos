@@ -11,23 +11,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class StringLengthAttributeConvention : PropertyAttributeConventionBase<StringLengthAttribute>
+public class StringLengthAttributeConvention
+    : PropertyAttributeConventionBase<StringLengthAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="StringLengthAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public StringLengthAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     protected override void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
         StringLengthAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         if (attribute.MaximumLength > 0)
         {

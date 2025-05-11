@@ -14,14 +14,17 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal abstract class AbstractMemberScopedReferenceFinder<TSymbol> : AbstractReferenceFinder<TSymbol>
+    internal abstract class AbstractMemberScopedReferenceFinder<TSymbol>
+        : AbstractReferenceFinder<TSymbol>
         where TSymbol : ISymbol
     {
         protected abstract bool TokensMatch(
-            FindReferencesDocumentState state, SyntaxToken token, string name);
+            FindReferencesDocumentState state,
+            SyntaxToken token,
+            string name
+        );
 
-        protected sealed override bool CanFind(TSymbol symbol)
-            => true;
+        protected sealed override bool CanFind(TSymbol symbol) => true;
 
         protected sealed override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
             TSymbol symbol,
@@ -29,7 +32,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var location = symbol.Locations.FirstOrDefault();
             if (location == null || !location.IsInSource)
@@ -45,20 +49,35 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             return Task.FromResult(ImmutableArray.Create(document));
         }
 
-        protected sealed override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected sealed override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             TSymbol symbol,
             FindReferencesDocumentState state,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var container = GetContainer(symbol);
             if (container != null)
-                return await FindReferencesInContainerAsync(symbol, container, state, cancellationToken).ConfigureAwait(false);
+                return await FindReferencesInContainerAsync(
+                        symbol,
+                        container,
+                        state,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             if (symbol.ContainingType != null && symbol.ContainingType.IsScriptClass)
             {
-                var tokens = await FindMatchingIdentifierTokensAsync(state, symbol.Name, cancellationToken).ConfigureAwait(false);
-                return await FindReferencesInTokensAsync(symbol, state, tokens, cancellationToken).ConfigureAwait(false);
+                var tokens = await FindMatchingIdentifierTokensAsync(
+                        state,
+                        symbol.Name,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                return await FindReferencesInTokensAsync(symbol, state, tokens, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return ImmutableArray<FinderLocation>.Empty;
@@ -74,11 +93,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (current is IPropertySymbol)
                     return current;
 
-                // If this is an initializer for a property's backing field, then we want to 
+                // If this is an initializer for a property's backing field, then we want to
                 // search for results within the property itself.
                 if (current is IFieldSymbol field)
                 {
-                    return field is { IsImplicitlyDeclared: true, AssociatedSymbol.Kind: SymbolKind.Property }
+                    return
+                        field
+                            is {
+                                IsImplicitlyDeclared: true,
+                                AssociatedSymbol.Kind: SymbolKind.Property
+                            }
                         ? field.AssociatedSymbol
                         : field;
                 }
@@ -96,7 +120,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             TSymbol symbol,
             ISymbol container,
             FindReferencesDocumentState state,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var service = state.Document.GetRequiredLanguageService<ISymbolDeclarationService>();
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var tokens);
@@ -114,7 +139,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 }
             }
 
-            return FindReferencesInTokensAsync(symbol, state, tokens.ToImmutable(), cancellationToken);
+            return FindReferencesInTokensAsync(
+                symbol,
+                state,
+                tokens.ToImmutable(),
+                cancellationToken
+            );
         }
     }
 }

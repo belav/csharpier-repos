@@ -1,42 +1,48 @@
 //------------------------------------------------------------------------------
 // <copyright file="ChtmlPageAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls.Adapters;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * ChtmlPageAdapter class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ChtmlPageAdapter : HtmlPageAdapter
     {
         private const int DefaultPageWeight = 800;
         private const String _postedFromOtherFile = ".";
 
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.ChtmlPageAdapter"]/*' />
-        public ChtmlPageAdapter() : base(DefaultPageWeight)
-        {
-        }
+        public ChtmlPageAdapter()
+            : base(DefaultPageWeight) { }
 
         /////////////////////////////////////////////////////////////////////
         //  Static method used for determining if device should use
@@ -48,20 +54,24 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             String type = ((MobileCapabilities)context.Request.Browser).PreferredRenderingType;
             bool javascriptSupported = context.Request.Browser.JavaScript;
-            bool qualifies = (type == MobileCapabilities.PreferredRenderingTypeHtml32 ||
-                              type == MobileCapabilities.PreferredRenderingTypeChtml10)
-                             && !javascriptSupported;
+            bool qualifies =
+                (
+                    type == MobileCapabilities.PreferredRenderingTypeHtml32
+                    || type == MobileCapabilities.PreferredRenderingTypeChtml10
+                ) && !javascriptSupported;
             return qualifies;
         }
-        
+
         /////////////////////////////////////////////////////////////////////
         //  IControlAdapter implementation
         /////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.RenderPostBackEvent"]/*' />
-        public override void RenderPostBackEvent(HtmlMobileTextWriter writer, 
-                                                String target, 
-                                                String argument)
+        public override void RenderPostBackEvent(
+            HtmlMobileTextWriter writer,
+            String target,
+            String argument
+        )
         {
             // Since it doesn't have scripts, the CHTML adapter
             // only supports URL postback events.
@@ -72,19 +82,13 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.EventSourceKey"]/*' />
         protected override String EventSourceKey
         {
-            get
-            {
-                return Constants.EventSourceID;
-            }
+            get { return Constants.EventSourceID; }
         }
 
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.EventArgumentKey"]/*' />
         protected override String EventArgumentKey
         {
-            get
-            {
-                return Constants.EventArgumentID;
-            }
+            get { return Constants.EventArgumentID; }
         }
 
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.RenderPostBackHeader"]/*' />
@@ -122,8 +126,7 @@ namespace System.Web.UI.MobileControls.Adapters
         // the data can be decoded properly here.
         //
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.DeterminePostBackMode"]/*' />
-        public override NameValueCollection DeterminePostBackMode
-        (
+        public override NameValueCollection DeterminePostBackMode(
             HttpRequest request,
             String postEventSourceID,
             String postEventArgumentID,
@@ -138,11 +141,11 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 return baseCollection;
             }
-            else if (String.Compare(request.HttpMethod, "POST", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                String.Compare(request.HttpMethod, "POST", StringComparison.OrdinalIgnoreCase) == 0
+            )
             {
-                return CollectionFromForm(request.Form,
-                                          postEventSourceID,
-                                          postEventArgumentID);
+                return CollectionFromForm(request.Form, postEventSourceID, postEventArgumentID);
             }
             else if (request.QueryString.Count == 0)
             {
@@ -150,9 +153,11 @@ namespace System.Web.UI.MobileControls.Adapters
             }
             else
             {
-                return CollectionFromQueryString(request.QueryString,
-                                                 postEventSourceID,
-                                                 postEventArgumentID);
+                return CollectionFromQueryString(
+                    request.QueryString,
+                    postEventSourceID,
+                    postEventArgumentID
+                );
             }
         }
 
@@ -165,7 +170,8 @@ namespace System.Web.UI.MobileControls.Adapters
         private NameValueCollection CollectionFromQueryString(
             NameValueCollection queryString,
             String postEventSourceID,
-            String postEventArgumentID)
+            String postEventArgumentID
+        )
         {
             NameValueCollection collection = new NameValueCollection();
             bool isPostBack = false;
@@ -212,7 +218,12 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     collection.Add(postEventArgumentID, queryString.Get(i));
                 }
-                else if (Constants.UniqueFilePathSuffixVariable.StartsWith(name, StringComparison.Ordinal))
+                else if (
+                    Constants.UniqueFilePathSuffixVariable.StartsWith(
+                        name,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     // At this point we know that the rest of them is
                     // the custom query string text, so we are done.
@@ -243,7 +254,8 @@ namespace System.Web.UI.MobileControls.Adapters
         private NameValueCollection CollectionFromForm(
             NameValueCollection form,
             String postEventSourceID,
-            String postEventArgumentID)
+            String postEventArgumentID
+        )
         {
             int i;
             int count = form.Count;
@@ -266,7 +278,8 @@ namespace System.Web.UI.MobileControls.Adapters
                 // of the collection work correctly.
                 if (name == null)
                 {
-                    if (AddEmptyStringValues(form.GetValues(i), collection)) {
+                    if (AddEmptyStringValues(form.GetValues(i), collection))
+                    {
                         isPostBack = true;
                     }
                     continue;
@@ -283,11 +296,11 @@ namespace System.Web.UI.MobileControls.Adapters
                     // id and the page number with the event argument id in
                     // order to have the event raised properly by ASP.NET
                     int pageBeginPos = index + Constants.PagePrefix.Length;
-                    collection.Add(postEventSourceID,
-                                   name.Substring(0, index));
-                    collection.Add(postEventArgumentID,
-                                   name.Substring(pageBeginPos,
-                                              name.Length - pageBeginPos));
+                    collection.Add(postEventSourceID, name.Substring(0, index));
+                    collection.Add(
+                        postEventArgumentID,
+                        name.Substring(pageBeginPos, name.Length - pageBeginPos)
+                    );
                     continue;
                 }
 
@@ -297,23 +310,21 @@ namespace System.Web.UI.MobileControls.Adapters
                 // multiple check boxes correctly. or B. Browser requires the
                 // ID of the input element to be unique during postbacks.
                 //
-                // In this case, the control (SelectionList or TextBox) adapter 
+                // In this case, the control (SelectionList or TextBox) adapter
                 // appended special characters as a suffix of the actual control
                 // id. That should be stripped off when detected.
-                if (Device.RequiresUniqueHtmlCheckboxNames ||
-                    Device.RequiresUniqueHtmlInputNames)
+                if (Device.RequiresUniqueHtmlCheckboxNames || Device.RequiresUniqueHtmlInputNames)
                 {
-                    index = name.LastIndexOf(
-                        Constants.SelectionListSpecialCharacter);
+                    index = name.LastIndexOf(Constants.SelectionListSpecialCharacter);
 
                     if (index != -1)
                     {
                         String value = form.Get(i);
                         if (!String.IsNullOrEmpty(value))
                         {
-                            if(Device.RequiresAttributeColonSubstitution)
+                            if (Device.RequiresAttributeColonSubstitution)
                             {
-                                collection.Add(name.Substring(0, index).Replace(',',':'), value);
+                                collection.Add(name.Substring(0, index).Replace(',', ':'), value);
                             }
                             else
                             {
@@ -326,8 +337,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 // 4. This is to determine if the request is a postback from
                 // the same mobile page.
-                if (name == MobilePage.ViewStateID ||
-                    name == EventSourceKey)
+                if (name == MobilePage.ViewStateID || name == EventSourceKey)
                 {
                     isPostBack = true;
                 }
@@ -348,14 +358,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         // Helper function to add empty string as value for the keys
-        private bool AddEmptyStringValues(String [] keys,
-                                        NameValueCollection targetCollection)
+        private bool AddEmptyStringValues(String[] keys, NameValueCollection targetCollection)
         {
             bool result = false;
             foreach (String key in keys)
             {
-                if (key == MobilePage.ViewStateID ||
-                    key == EventSourceKey) {
+                if (key == MobilePage.ViewStateID || key == EventSourceKey)
+                {
                     result = true;
                 }
                 targetCollection.Add(key, String.Empty);
@@ -364,16 +373,18 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         // Helper function to add multiple values for the same key
-        private void AddValues(NameValueCollection sourceCollection,
-                               String sourceKey,
-                               NameValueCollection targetCollection)
+        private void AddValues(
+            NameValueCollection sourceCollection,
+            String sourceKey,
+            NameValueCollection targetCollection
+        )
         {
-            String [] values = sourceCollection.GetValues(sourceKey);
+            String[] values = sourceCollection.GetValues(sourceKey);
             foreach (String value in values)
             {
-                if(Device.RequiresAttributeColonSubstitution)
+                if (Device.RequiresAttributeColonSubstitution)
                 {
-                    targetCollection.Add(sourceKey.Replace(',',':'), value);
+                    targetCollection.Add(sourceKey.Replace(',', ':'), value);
                 }
                 else
                 {

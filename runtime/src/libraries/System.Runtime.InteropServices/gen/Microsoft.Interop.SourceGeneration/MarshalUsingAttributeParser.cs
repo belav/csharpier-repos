@@ -12,24 +12,43 @@ namespace Microsoft.Interop
     /// <summary>
     /// This class suppports parsing a System.Runtime.InteropServices.Marshalling.MarshalUsingAttribute.
     /// </summary>
-    public sealed class MarshalUsingAttributeParser : IMarshallingInfoAttributeParser, IUseSiteAttributeParser
+    public sealed class MarshalUsingAttributeParser
+        : IMarshallingInfoAttributeParser,
+            IUseSiteAttributeParser
     {
         private readonly Compilation _compilation;
         private readonly GeneratorDiagnosticsBag _diagnostics;
 
-        public MarshalUsingAttributeParser(Compilation compilation, GeneratorDiagnosticsBag diagnostics)
+        public MarshalUsingAttributeParser(
+            Compilation compilation,
+            GeneratorDiagnosticsBag diagnostics
+        )
         {
             _compilation = compilation;
             _diagnostics = diagnostics;
         }
 
-        public bool CanParseAttributeType(INamedTypeSymbol attributeType) => attributeType.ToDisplayString() == TypeNames.MarshalUsingAttribute;
+        public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
+            attributeType.ToDisplayString() == TypeNames.MarshalUsingAttribute;
 
-        MarshallingInfo? IMarshallingInfoAttributeParser.ParseAttribute(AttributeData attributeData, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        MarshallingInfo? IMarshallingInfoAttributeParser.ParseAttribute(
+            AttributeData attributeData,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
-            Debug.Assert(attributeData.AttributeClass!.ToDisplayString() == TypeNames.MarshalUsingAttribute);
+            Debug.Assert(
+                attributeData.AttributeClass!.ToDisplayString() == TypeNames.MarshalUsingAttribute
+            );
             CountInfo countInfo = NoCountInfo.Instance;
-            if (useSiteAttributes.TryGetUseSiteAttributeInfo(indirectionDepth, out UseSiteAttributeData useSiteInfo))
+            if (
+                useSiteAttributes.TryGetUseSiteAttributeInfo(
+                    indirectionDepth,
+                    out UseSiteAttributeData useSiteInfo
+                )
+            )
             {
                 countInfo = useSiteInfo.CountInfo;
             }
@@ -58,32 +77,60 @@ namespace Microsoft.Interop
                 countInfo,
                 _diagnostics,
                 _compilation
-                );
+            );
         }
 
-        UseSiteAttributeData IUseSiteAttributeParser.ParseAttribute(AttributeData attributeData, IElementInfoProvider elementInfoProvider, GetMarshallingInfoCallback marshallingInfoCallback)
+        UseSiteAttributeData IUseSiteAttributeParser.ParseAttribute(
+            AttributeData attributeData,
+            IElementInfoProvider elementInfoProvider,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
-            ImmutableDictionary<string, TypedConstant> namedArgs = ImmutableDictionary.CreateRange(attributeData.NamedArguments);
-            CountInfo countInfo = ParseCountInfo(attributeData, elementInfoProvider, marshallingInfoCallback);
-            int elementIndirectionDepth = namedArgs.TryGetValue(ManualTypeMarshallingHelper.MarshalUsingProperties.ElementIndirectionDepth, out TypedConstant value) ? (int)value.Value! : 0;
+            ImmutableDictionary<string, TypedConstant> namedArgs = ImmutableDictionary.CreateRange(
+                attributeData.NamedArguments
+            );
+            CountInfo countInfo = ParseCountInfo(
+                attributeData,
+                elementInfoProvider,
+                marshallingInfoCallback
+            );
+            int elementIndirectionDepth = namedArgs.TryGetValue(
+                ManualTypeMarshallingHelper.MarshalUsingProperties.ElementIndirectionDepth,
+                out TypedConstant value
+            )
+                ? (int)value.Value!
+                : 0;
             return new UseSiteAttributeData(elementIndirectionDepth, countInfo, attributeData);
         }
 
-        private CountInfo ParseCountInfo(AttributeData attributeData, IElementInfoProvider elementInfoProvider, GetMarshallingInfoCallback marshallingInfoCallback)
+        private CountInfo ParseCountInfo(
+            AttributeData attributeData,
+            IElementInfoProvider elementInfoProvider,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             int? constSize = null;
             string? elementName = null;
             foreach (KeyValuePair<string, TypedConstant> arg in attributeData.NamedArguments)
             {
-                if (arg.Key == ManualTypeMarshallingHelper.MarshalUsingProperties.ConstantElementCount)
+                if (
+                    arg.Key
+                    == ManualTypeMarshallingHelper.MarshalUsingProperties.ConstantElementCount
+                )
                 {
                     constSize = (int)arg.Value.Value!;
                 }
-                else if (arg.Key == ManualTypeMarshallingHelper.MarshalUsingProperties.CountElementName)
+                else if (
+                    arg.Key == ManualTypeMarshallingHelper.MarshalUsingProperties.CountElementName
+                )
                 {
                     if (arg.Value.Value is null)
                     {
-                        _diagnostics.ReportConfigurationNotSupported(attributeData, ManualTypeMarshallingHelper.MarshalUsingProperties.CountElementName, "null");
+                        _diagnostics.ReportConfigurationNotSupported(
+                            attributeData,
+                            ManualTypeMarshallingHelper.MarshalUsingProperties.CountElementName,
+                            "null"
+                        );
                         return NoCountInfo.Instance;
                     }
                     elementName = (string)arg.Value.Value!;
@@ -92,7 +139,10 @@ namespace Microsoft.Interop
 
             if (constSize is not null && elementName is not null)
             {
-                _diagnostics.ReportInvalidMarshallingAttributeInfo(attributeData, nameof(SR.ConstantAndElementCountInfoDisallowed));
+                _diagnostics.ReportInvalidMarshallingAttributeInfo(
+                    attributeData,
+                    nameof(SR.ConstantAndElementCountInfoDisallowed)
+                );
             }
             else if (constSize is not null)
             {
@@ -100,9 +150,20 @@ namespace Microsoft.Interop
             }
             else if (elementName is not null)
             {
-                if (!elementInfoProvider.TryGetInfoForElementName(attributeData, elementName, marshallingInfoCallback, out TypePositionInfo elementInfo))
+                if (
+                    !elementInfoProvider.TryGetInfoForElementName(
+                        attributeData,
+                        elementName,
+                        marshallingInfoCallback,
+                        out TypePositionInfo elementInfo
+                    )
+                )
                 {
-                    _diagnostics.ReportConfigurationNotSupported(attributeData, ManualTypeMarshallingHelper.MarshalUsingProperties.CountElementName, elementName);
+                    _diagnostics.ReportConfigurationNotSupported(
+                        attributeData,
+                        ManualTypeMarshallingHelper.MarshalUsingProperties.CountElementName,
+                        elementName
+                    );
                     return NoCountInfo.Instance;
                 }
                 return new CountElementCountInfo(elementInfo);

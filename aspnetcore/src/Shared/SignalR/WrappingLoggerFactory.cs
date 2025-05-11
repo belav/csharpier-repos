@@ -44,9 +44,7 @@ public class WrappingLoggerFactory : ILoggerFactory
     {
         public IExternalScopeProvider ScopeProvider { get; private set; }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public ILogger CreateLogger(string categoryName)
         {
@@ -70,7 +68,13 @@ public class WrappingLoggerFactory : ILoggerFactory
             _logger = logger;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             // Build the message outside of the formatter
             // Serilog doesn't appear to use the formatter and just writes the state
@@ -100,16 +104,27 @@ public class WrappingLoggerFactory : ILoggerFactory
         private string GetConnectionId()
         {
             string connectionId = null;
-            _provider.ScopeProvider?.ForEachScope<object>((scope, s) =>
-            {
-                if (scope is IReadOnlyList<KeyValuePair<string, object>> logScope)
+            _provider.ScopeProvider?.ForEachScope<object>(
+                (scope, s) =>
                 {
-                    if (logScope.FirstOrDefault(kv => kv.Key == "TransportConnectionId" || kv.Key == "ClientConnectionId").Value is string id)
+                    if (scope is IReadOnlyList<KeyValuePair<string, object>> logScope)
                     {
-                        connectionId = id;
+                        if (
+                            logScope
+                                .FirstOrDefault(kv =>
+                                    kv.Key == "TransportConnectionId"
+                                    || kv.Key == "ClientConnectionId"
+                                )
+                                .Value
+                            is string id
+                        )
+                        {
+                            connectionId = id;
+                        }
                     }
-                }
-            }, null);
+                },
+                null
+            );
             return connectionId;
         }
     }

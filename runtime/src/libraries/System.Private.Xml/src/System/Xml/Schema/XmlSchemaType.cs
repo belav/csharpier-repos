@@ -119,7 +119,9 @@ namespace System.Xml.Schema
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        [Obsolete("XmlSchemaType.BaseSchemaType has been deprecated. Use the BaseXmlSchemaType property that returns a strongly typed base schema type instead.")]
+        [Obsolete(
+            "XmlSchemaType.BaseSchemaType has been deprecated. Use the BaseXmlSchemaType property that returns a strongly typed base schema type instead."
+        )]
         public object? BaseSchemaType
         {
             get
@@ -204,7 +206,12 @@ namespace System.Xml.Schema
         }
 
         [return: NotNullIfNotNull(nameof(schemaSet))]
-        internal XmlReader? Validate(XmlReader reader, XmlResolver? resolver, XmlSchemaSet schemaSet, ValidationEventHandler valEventHandler)
+        internal XmlReader? Validate(
+            XmlReader reader,
+            XmlResolver? resolver,
+            XmlSchemaSet schemaSet,
+            ValidationEventHandler valEventHandler
+        )
         {
             if (schemaSet != null)
             {
@@ -220,10 +227,7 @@ namespace System.Xml.Schema
 
         internal XmlSchemaContentType SchemaContentType
         {
-            get
-            {
-                return _contentType;
-            }
+            get { return _contentType; }
         }
 
         internal void SetQualifiedName(XmlQualifiedName value)
@@ -274,7 +278,11 @@ namespace System.Xml.Schema
             _contentType = value;
         }
 
-        public static bool IsDerivedFrom([NotNullWhen(true)] XmlSchemaType? derivedType, [NotNullWhen(true)] XmlSchemaType? baseType, XmlSchemaDerivationMethod except)
+        public static bool IsDerivedFrom(
+            [NotNullWhen(true)] XmlSchemaType? derivedType,
+            [NotNullWhen(true)] XmlSchemaType? baseType,
+            XmlSchemaDerivationMethod except
+        )
         {
             if (derivedType == null || baseType == null)
             {
@@ -302,7 +310,10 @@ namespace System.Xml.Schema
                         return true;
                     }
 
-                    if ((except & derivedType.DerivedBy) != 0 || !dt.Datatype!.IsDerivedFrom(bt.Datatype!))
+                    if (
+                        (except & derivedType.DerivedBy) != 0
+                        || !dt.Datatype!.IsDerivedFrom(bt.Datatype!)
+                    )
                     {
                         return false;
                     }
@@ -326,8 +337,10 @@ namespace System.Xml.Schema
             return false;
         }
 
-
-        internal static bool IsDerivedFromDatatype(XmlSchemaDatatype derivedDataType, XmlSchemaDatatype baseDataType)
+        internal static bool IsDerivedFromDatatype(
+            XmlSchemaDatatype derivedDataType,
+            XmlSchemaDatatype baseDataType
+        )
         {
             if (DatatypeImplementation.AnySimpleType.Datatype == baseDataType)
             {

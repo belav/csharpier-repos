@@ -11,30 +11,24 @@ namespace System.Activities.Statements
     using System.Windows.Markup;
 
     [ContentProperty("Body")]
-    public sealed class HandleScope<THandle> : NativeActivity 
+    public sealed class HandleScope<THandle> : NativeActivity
         where THandle : Handle
     {
         Variable<THandle> declaredHandle;
 
-        public HandleScope()
-        {
-        }
+        public HandleScope() { }
 
-        public InArgument<THandle> Handle
-        {
-            get;
-            set;
-        }
+        public InArgument<THandle> Handle { get; set; }
 
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument handleArgument = new RuntimeArgument("Handle", typeof(THandle), ArgumentDirection.In);
+            RuntimeArgument handleArgument = new RuntimeArgument(
+                "Handle",
+                typeof(THandle),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Handle, handleArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { handleArgument });
 
@@ -75,7 +69,10 @@ namespace System.Activities.Statements
 
             if ((this.Handle == null) || this.Handle.IsEmpty)
             {
-                Fx.Assert(this.declaredHandle != null, "We should have declared the variable if we didn't have the argument set.");
+                Fx.Assert(
+                    this.declaredHandle != null,
+                    "We should have declared the variable if we didn't have the argument set."
+                );
                 scopedHandle = this.declaredHandle.Get(context);
             }
             else

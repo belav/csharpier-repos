@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.IO.Pipes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using System.IO.Pipes;
 
 namespace System.IO.Tests
 {
@@ -15,23 +15,40 @@ namespace System.IO.Tests
         public async Task NullParametersAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await File.WriteAllBytesAsync(null, new byte[0]));
-            await Assert.ThrowsAsync<ArgumentNullException>("bytes", async () => await File.WriteAllBytesAsync(path, null));
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await File.ReadAllBytesAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await File.WriteAllBytesAsync(null, new byte[0])
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "bytes",
+                async () => await File.WriteAllBytesAsync(path, null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await File.ReadAllBytesAsync(null)
+            );
         }
 
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>("path", async () => await File.WriteAllBytesAsync(string.Empty, new byte[0]));
-            await Assert.ThrowsAsync<ArgumentException>("path", async () => await File.ReadAllBytesAsync(string.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "path",
+                async () => await File.WriteAllBytesAsync(string.Empty, new byte[0])
+            );
+            await Assert.ThrowsAsync<ArgumentException>(
+                "path",
+                async () => await File.ReadAllBytesAsync(string.Empty)
+            );
         }
 
         [Fact]
         public Task Read_FileNotFoundAsync()
         {
             string path = GetTestFilePath();
-            return Assert.ThrowsAsync<FileNotFoundException>(async () => await File.ReadAllBytesAsync(path));
+            return Assert.ThrowsAsync<FileNotFoundException>(async () =>
+                await File.ReadAllBytesAsync(path)
+            );
         }
 
         [Fact]
@@ -64,8 +81,9 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.WriteAllBytesAsync(path, new byte[0], token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllBytesAsync(path, new byte[0], token));
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.WriteAllBytesAsync(path, new byte[0], token)
+            );
         }
 
         [Fact]
@@ -86,8 +104,11 @@ namespace System.IO.Tests
             byte[] bytes = Encoding.UTF8.GetBytes(new string('c', 100));
             using (File.Create(path))
             {
-                await Assert.ThrowsAsync<IOException>(async () => await File.WriteAllBytesAsync(path, bytes));
-                await Assert.ThrowsAsync<IOException>(async () => await File.ReadAllBytesAsync(path));
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.WriteAllBytesAsync(path, bytes)
+                );
+                await Assert.ThrowsAsync<IOException>(async () => await File.ReadAllBytesAsync(path)
+                );
             }
         }
 
@@ -110,7 +131,9 @@ namespace System.IO.Tests
                     Assert.Equal("text"u8.ToArray(), await File.ReadAllBytesAsync(path));
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () => await File.WriteAllBytesAsync(path, "text"u8.ToArray()));
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
+                        await File.WriteAllBytesAsync(path, "text"u8.ToArray())
+                    );
             }
             finally
             {
@@ -182,7 +205,11 @@ namespace System.IO.Tests
 
             using (var cts = new CancellationTokenSource())
             {
-                Task writingServerTask = WaitConnectionAndWritePipeStreamAsync(namedPipeWriterStream, contentBytes, cts.Token);
+                Task writingServerTask = WaitConnectionAndWritePipeStreamAsync(
+                    namedPipeWriterStream,
+                    contentBytes,
+                    cts.Token
+                );
                 Task<byte[]> readTask = File.ReadAllBytesAsync(pipePath, cts.Token);
                 cts.CancelAfter(TimeSpan.FromSeconds(50));
 
@@ -191,7 +218,11 @@ namespace System.IO.Tests
                 Assert.Equal<byte>(contentBytes, readBytes);
             }
 
-            static async Task WaitConnectionAndWritePipeStreamAsync(NamedPipeServerStream namedPipeWriterStream, byte[] contentBytes, CancellationToken cancellationToken)
+            static async Task WaitConnectionAndWritePipeStreamAsync(
+                NamedPipeServerStream namedPipeWriterStream,
+                byte[] contentBytes,
+                CancellationToken cancellationToken
+            )
             {
                 await using (namedPipeWriterStream)
                 {
@@ -202,11 +233,22 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser & ~TestPlatforms.iOS & ~TestPlatforms.tvOS)]
+        [PlatformSpecific(
+            TestPlatforms.AnyUnix
+                & ~TestPlatforms.Browser
+                & ~TestPlatforms.iOS
+                & ~TestPlatforms.tvOS
+        )]
         public async Task ReadAllBytesAsync_NonSeekableFileStream_InUnix()
         {
             string fifoPath = GetTestFilePath();
-            Assert.Equal(0, mkfifo(fifoPath, 438 /* 666 in octal */ ));
+            Assert.Equal(
+                0,
+                mkfifo(
+                    fifoPath,
+                    438 /* 666 in octal */
+                )
+            );
 
             var contentBytes = new byte[] { 1, 2, 3 };
 
@@ -218,12 +260,18 @@ namespace System.IO.Tests
                 }),
                 Task.Run(() =>
                 {
-                    using var fs = new FileStream(fifoPath, FileMode.Open, FileAccess.Write, FileShare.Read);
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
                     foreach (byte content in contentBytes)
                     {
                         fs.WriteByte(content);
                     }
-                }));
+                })
+            );
         }
     }
 }

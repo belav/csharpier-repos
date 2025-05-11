@@ -13,7 +13,6 @@ internal static class CacheEntryHelpers
         {
             return 0L;
         }
-
         checked
         {
             // StatusCode
@@ -44,7 +43,6 @@ internal static class CacheEntryHelpers
         {
             return 0L;
         }
-
         checked
         {
             var size = 0L;

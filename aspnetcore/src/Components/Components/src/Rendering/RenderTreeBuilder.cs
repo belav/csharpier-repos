@@ -20,7 +20,8 @@ public sealed class RenderTreeBuilder : IDisposable
 {
     private static readonly object BoxedTrue = true;
     private static readonly object BoxedFalse = false;
-    private static readonly string ComponentReferenceCaptureInvalidParentMessage = $"Component reference captures may only be added as children of frames of type {RenderTreeFrameType.Component}";
+    private static readonly string ComponentReferenceCaptureInvalidParentMessage =
+        $"Component reference captures may only be added as children of frames of type {RenderTreeFrameType.Component}";
 
     private readonly RenderTreeFrameArrayBuilder _entries = new RenderTreeFrameArrayBuilder();
     private readonly Stack<int> _openElementIndices = new Stack<int>();
@@ -71,7 +72,8 @@ public sealed class RenderTreeBuilder : IDisposable
             ProcessDuplicateAttributes(first: indexOfEntryBeingClosed + 1);
         }
 
-        _entries.Buffer[indexOfEntryBeingClosed].ElementSubtreeLengthField = _entries.Count - indexOfEntryBeingClosed;
+        _entries.Buffer[indexOfEntryBeingClosed].ElementSubtreeLengthField =
+            _entries.Count - indexOfEntryBeingClosed;
     }
 
     /// <summary>
@@ -134,24 +136,24 @@ public sealed class RenderTreeBuilder : IDisposable
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="markupContent">Content for the new text frame, or null.</param>
-    public void AddContent(int sequence, MarkupString? markupContent)
-        => AddMarkupContent(sequence, markupContent?.Value);
+    public void AddContent(int sequence, MarkupString? markupContent) =>
+        AddMarkupContent(sequence, markupContent?.Value);
 
     /// <summary>
     /// Appends a frame representing markup content.
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="markupContent">Content for the new markup frame.</param>
-    public void AddContent(int sequence, MarkupString markupContent)
-        => AddMarkupContent(sequence, markupContent.Value);
+    public void AddContent(int sequence, MarkupString markupContent) =>
+        AddMarkupContent(sequence, markupContent.Value);
 
     /// <summary>
     /// Appends a frame representing text content.
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="textContent">Content for the new text frame.</param>
-    public void AddContent(int sequence, object? textContent)
-        => AddContent(sequence, textContent?.ToString());
+    public void AddContent(int sequence, object? textContent) =>
+        AddContent(sequence, textContent?.ToString());
 
     /// <summary>
     /// <para>
@@ -167,7 +169,9 @@ public sealed class RenderTreeBuilder : IDisposable
     {
         if (_lastNonAttributeFrameType != RenderTreeFrameType.Element)
         {
-            throw new InvalidOperationException($"Valueless attributes may only be added immediately after frames of type {RenderTreeFrameType.Element}");
+            throw new InvalidOperationException(
+                $"Valueless attributes may only be added immediately after frames of type {RenderTreeFrameType.Element}"
+            );
         }
 
         _entries.AppendAttribute(sequence, name, BoxedTrue);
@@ -421,7 +425,9 @@ public sealed class RenderTreeBuilder : IDisposable
     {
         if (frame.FrameTypeField != RenderTreeFrameType.Attribute)
         {
-            throw new ArgumentException($"The {nameof(frame.FrameType)} must be {RenderTreeFrameType.Attribute}.");
+            throw new ArgumentException(
+                $"The {nameof(frame.FrameType)} must be {RenderTreeFrameType.Attribute}."
+            );
         }
 
         AssertCanAddAttribute();
@@ -434,7 +440,10 @@ public sealed class RenderTreeBuilder : IDisposable
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="attributes">A collection of key-value pairs representing attributes.</param>
-    public void AddMultipleAttributes(int sequence, IEnumerable<KeyValuePair<string, object>>? attributes)
+    public void AddMultipleAttributes(
+        int sequence,
+        IEnumerable<KeyValuePair<string, object>>? attributes
+    )
     {
         // Calling this up-front just to make sure we validate before mutating anything.
         AssertCanAddAttribute();
@@ -476,7 +485,9 @@ public sealed class RenderTreeBuilder : IDisposable
         ref var prevFrame = ref _entries.Buffer[_entries.Count - 1];
         if (prevFrame.FrameTypeField != RenderTreeFrameType.Attribute)
         {
-            throw new InvalidOperationException($"Incorrect frame type: '{prevFrame.FrameTypeField}'");
+            throw new InvalidOperationException(
+                $"Incorrect frame type: '{prevFrame.FrameTypeField}'"
+            );
         }
 
         prevFrame.AttributeEventUpdatesAttributeNameField = updatesAttributeName;
@@ -487,19 +498,25 @@ public sealed class RenderTreeBuilder : IDisposable
     /// </summary>
     /// <typeparam name="TComponent">The type of the child component.</typeparam>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
-    public void OpenComponent<[DynamicallyAccessedMembers(Component)] TComponent>(int sequence) where TComponent : notnull, IComponent
-        => OpenComponentUnchecked(sequence, typeof(TComponent));
+    public void OpenComponent<[DynamicallyAccessedMembers(Component)] TComponent>(int sequence)
+        where TComponent : notnull, IComponent =>
+        OpenComponentUnchecked(sequence, typeof(TComponent));
 
     /// <summary>
     /// Appends a frame representing a child component.
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="componentType">The type of the child component.</param>
-    public void OpenComponent(int sequence, [DynamicallyAccessedMembers(Component)] Type componentType)
+    public void OpenComponent(
+        int sequence,
+        [DynamicallyAccessedMembers(Component)] Type componentType
+    )
     {
         if (!typeof(IComponent).IsAssignableFrom(componentType))
         {
-            throw new ArgumentException($"The component type must implement {typeof(IComponent).FullName}.");
+            throw new ArgumentException(
+                $"The component type must implement {typeof(IComponent).FullName}."
+            );
         }
 
         OpenComponentUnchecked(sequence, componentType);
@@ -533,7 +550,9 @@ public sealed class RenderTreeBuilder : IDisposable
         var parentFrameIndex = GetCurrentParentFrameIndex();
         if (!parentFrameIndex.HasValue)
         {
-            throw new InvalidOperationException("Cannot set a key outside the scope of a component or element.");
+            throw new InvalidOperationException(
+                "Cannot set a key outside the scope of a component or element."
+            );
         }
 
         var parentFrameIndexValue = parentFrameIndex.Value;
@@ -547,11 +566,16 @@ public sealed class RenderTreeBuilder : IDisposable
                 parentFrame.ComponentKeyField = value; // It's a ref var, so this writes to the array
                 break;
             default:
-                throw new InvalidOperationException($"Cannot set a key on a frame of type {parentFrame.FrameTypeField}.");
+                throw new InvalidOperationException(
+                    $"Cannot set a key on a frame of type {parentFrame.FrameTypeField}."
+                );
         }
     }
 
-    private void OpenComponentUnchecked(int sequence, [DynamicallyAccessedMembers(Component)] Type componentType)
+    private void OpenComponentUnchecked(
+        int sequence,
+        [DynamicallyAccessedMembers(Component)] Type componentType
+    )
     {
         // We are entering a new scope, since we track the "duplicate attributes" per
         // element/component we might need to clean them up now.
@@ -581,7 +605,8 @@ public sealed class RenderTreeBuilder : IDisposable
             ProcessDuplicateAttributes(first: indexOfEntryBeingClosed + 1);
         }
 
-        _entries.Buffer[indexOfEntryBeingClosed].ComponentSubtreeLengthField = _entries.Count - indexOfEntryBeingClosed;
+        _entries.Buffer[indexOfEntryBeingClosed].ComponentSubtreeLengthField =
+            _entries.Count - indexOfEntryBeingClosed;
     }
 
     /// <summary>
@@ -589,11 +614,16 @@ public sealed class RenderTreeBuilder : IDisposable
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="elementReferenceCaptureAction">An action to be invoked whenever the reference value changes.</param>
-    public void AddElementReferenceCapture(int sequence, Action<ElementReference> elementReferenceCaptureAction)
+    public void AddElementReferenceCapture(
+        int sequence,
+        Action<ElementReference> elementReferenceCaptureAction
+    )
     {
         if (GetCurrentParentFrameType() != RenderTreeFrameType.Element)
         {
-            throw new InvalidOperationException($"Element reference captures may only be added as children of frames of type {RenderTreeFrameType.Element}");
+            throw new InvalidOperationException(
+                $"Element reference captures may only be added as children of frames of type {RenderTreeFrameType.Element}"
+            );
         }
 
         _entries.AppendElementReferenceCapture(sequence, elementReferenceCaptureAction);
@@ -605,7 +635,10 @@ public sealed class RenderTreeBuilder : IDisposable
     /// </summary>
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="componentReferenceCaptureAction">An action to be invoked whenever the reference value changes.</param>
-    public void AddComponentReferenceCapture(int sequence, Action<object> componentReferenceCaptureAction)
+    public void AddComponentReferenceCapture(
+        int sequence,
+        Action<object> componentReferenceCaptureAction
+    )
     {
         var parentFrameIndex = GetCurrentParentFrameIndex();
         if (!parentFrameIndex.HasValue)
@@ -619,7 +652,11 @@ public sealed class RenderTreeBuilder : IDisposable
             throw new InvalidOperationException(ComponentReferenceCaptureInvalidParentMessage);
         }
 
-        _entries.AppendComponentReferenceCapture(sequence, componentReferenceCaptureAction, parentFrameIndexValue);
+        _entries.AppendComponentReferenceCapture(
+            sequence,
+            componentReferenceCaptureAction,
+            parentFrameIndexValue
+        );
         _lastNonAttributeFrameType = RenderTreeFrameType.ComponentReferenceCapture;
     }
 
@@ -651,7 +688,9 @@ public sealed class RenderTreeBuilder : IDisposable
         ref var parentFrame = ref _entries.Buffer[parentFrameIndexValue];
         if (parentFrame.FrameTypeField != RenderTreeFrameType.Component)
         {
-            throw new InvalidOperationException($"The enclosing frame is not of the required type '{nameof(RenderTreeFrameType.Component)}'.");
+            throw new InvalidOperationException(
+                $"The enclosing frame is not of the required type '{nameof(RenderTreeFrameType.Component)}'."
+            );
         }
 
         parentFrame.ComponentFrameFlagsField |= ComponentFrameFlags.HasCallerSpecifiedRenderMode;
@@ -676,7 +715,9 @@ public sealed class RenderTreeBuilder : IDisposable
 
         if (GetCurrentParentFrameType() != RenderTreeFrameType.Element)
         {
-            throw new InvalidOperationException($"Named events may only be added as children of frames of type {RenderTreeFrameType.Element}");
+            throw new InvalidOperationException(
+                $"Named events may only be added as children of frames of type {RenderTreeFrameType.Element}"
+            );
         }
 
         _entries.AppendNamedEvent(eventType, assignedName);
@@ -709,15 +750,20 @@ public sealed class RenderTreeBuilder : IDisposable
     public void CloseRegion()
     {
         var indexOfEntryBeingClosed = _openElementIndices.Pop();
-        _entries.Buffer[indexOfEntryBeingClosed].RegionSubtreeLengthField = _entries.Count - indexOfEntryBeingClosed;
+        _entries.Buffer[indexOfEntryBeingClosed].RegionSubtreeLengthField =
+            _entries.Count - indexOfEntryBeingClosed;
     }
 
     private void AssertCanAddAttribute()
     {
-        if (_lastNonAttributeFrameType != RenderTreeFrameType.Element
-            && _lastNonAttributeFrameType != RenderTreeFrameType.Component)
+        if (
+            _lastNonAttributeFrameType != RenderTreeFrameType.Element
+            && _lastNonAttributeFrameType != RenderTreeFrameType.Component
+        )
         {
-            throw new InvalidOperationException($"Attributes may only be added immediately after frames of type {RenderTreeFrameType.Element} or {RenderTreeFrameType.Component}");
+            throw new InvalidOperationException(
+                $"Attributes may only be added immediately after frames of type {RenderTreeFrameType.Element} or {RenderTreeFrameType.Component}"
+            );
         }
     }
 
@@ -725,12 +771,14 @@ public sealed class RenderTreeBuilder : IDisposable
     {
         if (_lastNonAttributeFrameType != RenderTreeFrameType.Component)
         {
-            throw new InvalidOperationException($"Component parameters may only be added immediately after frames of type {RenderTreeFrameType.Component}");
+            throw new InvalidOperationException(
+                $"Component parameters may only be added immediately after frames of type {RenderTreeFrameType.Component}"
+            );
         }
     }
 
-    private int? GetCurrentParentFrameIndex()
-        => _openElementIndices.Count == 0 ? (int?)null : _openElementIndices.Peek();
+    private int? GetCurrentParentFrameIndex() =>
+        _openElementIndices.Count == 0 ? (int?)null : _openElementIndices.Peek();
 
     private RenderTreeFrameType? GetCurrentParentFrameType()
     {
@@ -754,7 +802,12 @@ public sealed class RenderTreeBuilder : IDisposable
 
     // internal because this should only be used during the post-event tree patching logic
     // It's expensive because it involves copying all the subsequent memory in the array
-    internal bool InsertAttributeExpensive(int insertAtIndex, int sequence, string attributeName, object? attributeValue)
+    internal bool InsertAttributeExpensive(
+        int insertAtIndex,
+        int sequence,
+        string attributeName,
+        object? attributeValue
+    )
     {
         // Replicate the same attribute omission logic as used elsewhere
         if ((attributeValue == null) || (attributeValue is bool boolValue && !boolValue))
@@ -762,7 +815,10 @@ public sealed class RenderTreeBuilder : IDisposable
             return false;
         }
 
-        _entries.InsertExpensive(insertAtIndex, RenderTreeFrame.Attribute(sequence, attributeName, attributeValue));
+        _entries.InsertExpensive(
+            insertAtIndex,
+            RenderTreeFrame.Attribute(sequence, attributeName, attributeValue)
+        );
         return true;
     }
 
@@ -770,8 +826,7 @@ public sealed class RenderTreeBuilder : IDisposable
     /// Returns the <see cref="RenderTreeFrame"/> values that have been appended.
     /// </summary>
     /// <returns>An array range of <see cref="RenderTreeFrame"/> values.</returns>
-    public ArrayRange<RenderTreeFrame> GetFrames() =>
-        _entries.ToRange();
+    public ArrayRange<RenderTreeFrame> GetFrames() => _entries.ToRange();
 
     internal void AssertTreeIsValid(IComponent component)
     {
@@ -780,7 +835,9 @@ public sealed class RenderTreeBuilder : IDisposable
             // It's never valid to leave an element/component/region unclosed. Doing so
             // could cause undefined behavior in diffing.
             ref var invalidFrame = ref _entries.Buffer[_openElementIndices.Peek()];
-            throw new InvalidOperationException($"Render output is invalid for component of type '{component.GetType().FullName}'. A frame of type '{invalidFrame.FrameType}' was left unclosed. Do not use try/catch inside rendering logic, because partial output cannot be undone.");
+            throw new InvalidOperationException(
+                $"Render output is invalid for component of type '{component.GetType().FullName}'. A frame of type '{invalidFrame.FrameType}' was left unclosed. Do not use try/catch inside rendering logic, because partial output cannot be undone."
+            );
         }
     }
 
@@ -805,11 +862,18 @@ public sealed class RenderTreeBuilder : IDisposable
         }
 
         // Now that we've found the last attribute, we can iterate backwards and process duplicates.
-        var seenAttributeNames = (_seenAttributeNames ??= new Dictionary<string, int>(SimplifiedStringHashComparer.Instance));
+        var seenAttributeNames = (
+            _seenAttributeNames ??= new Dictionary<string, int>(
+                SimplifiedStringHashComparer.Instance
+            )
+        );
         for (var i = last; i >= first; i--)
         {
             ref var frame = ref buffer[i];
-            Debug.Assert(frame.FrameTypeField == RenderTreeFrameType.Attribute, $"Frame type is {frame.FrameTypeField} at {i}");
+            Debug.Assert(
+                frame.FrameTypeField == RenderTreeFrameType.Attribute,
+                $"Frame type is {frame.FrameTypeField} at {i}"
+            );
 
             if (!seenAttributeNames.TryAdd(frame.AttributeNameField, i))
             {
@@ -877,7 +941,11 @@ public sealed class RenderTreeBuilder : IDisposable
             return;
         }
 
-        var seenAttributeNames = (_seenAttributeNames ??= new Dictionary<string, int>(SimplifiedStringHashComparer.Instance));
+        var seenAttributeNames = (
+            _seenAttributeNames ??= new Dictionary<string, int>(
+                SimplifiedStringHashComparer.Instance
+            )
+        );
         seenAttributeNames[name] = _entries.Count; // See comment in ProcessAttributes for why this is OK.
     }
 

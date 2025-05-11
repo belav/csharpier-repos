@@ -11,15 +11,24 @@ namespace System
 {
     internal static class ThrowHelper
     {
-        internal static AmbiguousMatchException GetAmbiguousMatchException(RoDefinitionType roDefinitionType)
+        internal static AmbiguousMatchException GetAmbiguousMatchException(
+            RoDefinitionType roDefinitionType
+        )
         {
-            return new AmbiguousMatchException(SR.Format(SR.Arg_AmbiguousMatchException_RoDefinitionType, roDefinitionType.FullName));
+            return new AmbiguousMatchException(
+                SR.Format(
+                    SR.Arg_AmbiguousMatchException_RoDefinitionType,
+                    roDefinitionType.FullName
+                )
+            );
         }
 
         internal static AmbiguousMatchException GetAmbiguousMatchException(MemberInfo memberInfo)
         {
             Type? declaringType = memberInfo.DeclaringType;
-            return  new AmbiguousMatchException(SR.Format(SR.Arg_AmbiguousMatchException_MemberInfo, declaringType, memberInfo));
+            return new AmbiguousMatchException(
+                SR.Format(SR.Arg_AmbiguousMatchException_MemberInfo, declaringType, memberInfo)
+            );
         }
     }
 }

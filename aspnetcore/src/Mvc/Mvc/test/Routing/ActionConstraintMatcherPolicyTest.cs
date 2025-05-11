@@ -21,8 +21,8 @@ public class ActionConstraintMatcherPolicyTest
         // Arrange
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor() { DisplayName = "A1" },
-                new ActionDescriptor() { DisplayName = "A2" },
+            new ActionDescriptor() { DisplayName = "A1" },
+            new ActionDescriptor() { DisplayName = "A2" },
         };
 
         var candidateSet = CreateCandidateSet(actions);
@@ -44,9 +44,9 @@ public class ActionConstraintMatcherPolicyTest
         var actionWithConstraints = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, },
-                },
+            {
+                new BooleanConstraint() { Pass = true },
+            },
             Parameters = new List<ParameterDescriptor>(),
         };
 
@@ -77,17 +77,17 @@ public class ActionConstraintMatcherPolicyTest
         var action1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, },
-                },
+            {
+                new BooleanConstraint() { Pass = false },
+            },
         };
 
         var action2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, },
-                },
+            {
+                new BooleanConstraint() { Pass = false },
+            },
         };
 
         var actions = new ActionDescriptor[] { action1, action2 };
@@ -112,19 +112,19 @@ public class ActionConstraintMatcherPolicyTest
         var action1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, Order = 0 },
-                    new BooleanConstraint() { Pass = true, Order = 1 },
-                },
+            {
+                new BooleanConstraint() { Pass = false, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+            },
         };
 
         var action2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0 },
-                    new BooleanConstraint() { Pass = false, Order = 1 },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = false, Order = 1 },
+            },
         };
 
         var actions = new ActionDescriptor[] { action1, action2 };
@@ -149,17 +149,17 @@ public class ActionConstraintMatcherPolicyTest
         var best = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+            },
         };
 
         var worst = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 1 },
+            },
         };
 
         var actions = new ActionDescriptor[] { best, worst };
@@ -183,9 +183,9 @@ public class ActionConstraintMatcherPolicyTest
         var best = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+            },
         };
 
         var another = new ActionDescriptor();
@@ -193,9 +193,9 @@ public class ActionConstraintMatcherPolicyTest
         var worst = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 1 },
+            },
         };
 
         var actions = new ActionDescriptor[] { best, another, worst };
@@ -222,17 +222,17 @@ public class ActionConstraintMatcherPolicyTest
         var action1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, Order = 0, },
-                },
+            {
+                new BooleanConstraint() { Pass = false, Order = 0 },
+            },
         };
 
         var action2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, Order = 1, },
-                },
+            {
+                new BooleanConstraint() { Pass = false, Order = 1 },
+            },
         };
 
         var actions = new ActionDescriptor[] { action1, null, action2 };
@@ -258,21 +258,21 @@ public class ActionConstraintMatcherPolicyTest
         var best = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = true, Order = 2, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = true, Order = 2 },
+            },
         };
 
         var worst = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = true, Order = 3, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = true, Order = 3 },
+            },
         };
 
         var actions = new ActionDescriptor[] { best, worst };
@@ -297,21 +297,21 @@ public class ActionConstraintMatcherPolicyTest
         var nomatch1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = false, Order = 2, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = false, Order = 2 },
+            },
         };
 
         var nomatch2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = false, Order = 3, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = false, Order = 3 },
+            },
         };
 
         var best = new ActionDescriptor();
@@ -338,20 +338,19 @@ public class ActionConstraintMatcherPolicyTest
         // Arrange
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    ActionConstraints = new List<IActionConstraintMetadata>()
-                    {
-                        new ConstraintWithTokens(),
-                    },
-                    EndpointMetadata = new List<object>()
-                    {
-                        new DataTokensMetadata(new Dictionary<string, object>
-                        {
-                            ["DataTokens"] = true
-                        })
-                    }
+                    new ConstraintWithTokens(),
                 },
+                EndpointMetadata = new List<object>()
+                {
+                    new DataTokensMetadata(
+                        new Dictionary<string, object> { ["DataTokens"] = true }
+                    ),
+                },
+            },
         };
 
         var endpoints = actions.Select(CreateEndpoint).ToArray();
@@ -374,24 +373,21 @@ public class ActionConstraintMatcherPolicyTest
         // Arrange
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor() { },
+            new ActionDescriptor()
+            {
+                ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-
+                    new HttpMethodActionConstraint(new[] { "GET" }),
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    ActionConstraints = new List<IActionConstraintMetadata>()
-                    {
-                        new HttpMethodActionConstraint(new[]{ "GET", }),
-                    },
+                    new ConsumesAttribute("text/json"),
                 },
-                new ActionDescriptor()
-                {
-                    ActionConstraints = new List<IActionConstraintMetadata>()
-                    {
-                        new ConsumesAttribute("text/json"),
-                    },
-                },
+            },
         };
         var endpoints = actions.Select(CreateEndpoint).ToArray();
 
@@ -410,17 +406,14 @@ public class ActionConstraintMatcherPolicyTest
         // Arrange
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor() { },
+            new ActionDescriptor()
+            {
+                ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-
+                    new BooleanConstraint(),
                 },
-                new ActionDescriptor()
-                {
-                    ActionConstraints = new List<IActionConstraintMetadata>()
-                    {
-                        new BooleanConstraint(),
-                    },
-                },
+            },
         };
         var endpoints = actions.Select(CreateEndpoint).ToArray();
 
@@ -449,14 +442,15 @@ public class ActionConstraintMatcherPolicyTest
             });
 
         var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
-            new IActionDescriptorProvider[] { actionDescriptorProvider.Object, },
+            new IActionDescriptorProvider[] { actionDescriptorProvider.Object },
             Enumerable.Empty<IActionDescriptorChangeProvider>(),
-            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance);
+            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance
+        );
 
-        var cache = new ActionConstraintCache(actionDescriptorCollectionProvider, new[]
-        {
-                new DefaultActionConstraintProvider(),
-            });
+        var cache = new ActionConstraintCache(
+            actionDescriptorCollectionProvider,
+            new[] { new DefaultActionConstraintProvider() }
+        );
 
         return new ActionConstraintMatcherPolicy(cache);
     }
@@ -470,7 +464,7 @@ public class ActionConstraintMatcherPolicyTest
 
     private static Endpoint CreateEndpoint(ActionDescriptor action)
     {
-        var metadata = new List<object>() { action, };
+        var metadata = new List<object>() { action };
         if (action?.EndpointMetadata != null)
         {
             metadata.AddRange(action.EndpointMetadata);
@@ -479,7 +473,8 @@ public class ActionConstraintMatcherPolicyTest
         return new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(metadata),
-            $"test: {action?.DisplayName}");
+            $"test: {action?.DisplayName}"
+        );
     }
 
     private static CandidateSet CreateCandidateSet(ActionDescriptor[] actions)
@@ -493,7 +488,8 @@ public class ActionConstraintMatcherPolicyTest
         var candidateSet = new CandidateSet(
             actions.Select(CreateEndpoint).ToArray(),
             values,
-            new int[actions.Length]);
+            new int[actions.Length]
+        );
         return candidateSet;
     }
 

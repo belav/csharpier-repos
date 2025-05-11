@@ -138,18 +138,26 @@ public class WellKnownSidTypeTests
     [Theory]
     [InlineData((WellKnownSidType)(-1))]
     [InlineData((WellKnownSidType)((int)WellKnownSidType.WinCapabilityRemovableStorageSid + 1))]
-    public void CreatingSecurityIdentifierOutsideWellKnownSidTypeDefinedRangeThrowsException(WellKnownSidType sidType)
+    public void CreatingSecurityIdentifierOutsideWellKnownSidTypeDefinedRangeThrowsException(
+        WellKnownSidType sidType
+    )
     {
         using WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent();
         var currentDomainSid = currentIdentity.Owner.AccountDomainSid;
-        AssertExtensions.Throws<ArgumentException>("sidType", () => new SecurityIdentifier(sidType, currentDomainSid));
+        AssertExtensions.Throws<ArgumentException>(
+            "sidType",
+            () => new SecurityIdentifier(sidType, currentDomainSid)
+        );
     }
 
     [Fact]
     public void MaxDefinedHasLegacyValue()
     {
 #pragma warning disable 0618
-        Assert.Equal(WellKnownSidType.WinBuiltinTerminalServerLicenseServersSid, WellKnownSidType.MaxDefined);
+        Assert.Equal(
+            WellKnownSidType.WinBuiltinTerminalServerLicenseServersSid,
+            WellKnownSidType.MaxDefined
+        );
 #pragma warning restore 0618
     }
 }

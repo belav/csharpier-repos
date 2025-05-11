@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using NTSTATUS = Interop.BCrypt.NTSTATUS;
 
 namespace Microsoft.Win32.SafeHandles
@@ -11,9 +10,7 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeBCryptHashHandle : SafeBCryptHandle
     {
         public SafeBCryptHashHandle()
-            : base()
-        {
-        }
+            : base() { }
 
         protected sealed override bool ReleaseHandle()
         {

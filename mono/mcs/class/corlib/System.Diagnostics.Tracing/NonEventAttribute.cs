@@ -26,12 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace System.Diagnostics.Tracing
 {
-	[AttributeUsageAttribute (AttributeTargets.Method)]
-	public sealed class NonEventAttribute : Attribute
-	{
-	}
+    [AttributeUsageAttribute(AttributeTargets.Method)]
+    public sealed class NonEventAttribute : Attribute { }
 }
-

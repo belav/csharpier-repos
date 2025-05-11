@@ -31,16 +31,15 @@ public class HeaderModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(Person)
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person),
         };
 
         // Do not add any headers.
         var testContext = GetModelBindingTestContext();
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -70,16 +69,16 @@ public class HeaderModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
-            ParameterType = typeof(Person)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Person),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" }));
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
+        );
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -116,12 +115,15 @@ public class HeaderModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" }));
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
+        );
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -165,9 +167,12 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(ListContainer1),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" }));
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
+        );
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -212,9 +217,12 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(ListContainer2),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request => request.Headers.Add("Header", new[] { "someValue" }));
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var testContext = GetModelBindingTestContext(request =>
+            request.Headers.Add("Header", new[] { "someValue" })
+        );
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -245,7 +253,10 @@ public class HeaderModelBinderIntegrationTest
     [Theory]
     [InlineData(typeof(string[]), "value1, value2, value3")]
     [InlineData(typeof(string), "value")]
-    public async Task BindParameterFromHeader_WithData_WithPrefix_ModelGetsBound(Type modelType, string value)
+    public async Task BindParameterFromHeader_WithData_WithPrefix_ModelGetsBound(
+        Type modelType,
+        string value
+    )
     {
         // Arrange
         string expectedAttemptedValue;
@@ -267,14 +278,17 @@ public class HeaderModelBinderIntegrationTest
             BindingInfo = new BindingInfo
             {
                 BinderModelName = "CustomParameter",
-                BindingSource = BindingSource.Header
+                BindingSource = BindingSource.Header,
             },
-            ParameterType = modelType
+            ParameterType = modelType,
         };
 
-        void action(HttpRequest r) => r.Headers.Add("CustomParameter", new[] { expectedAttemptedValue });
+        void action(HttpRequest r) =>
+            r.Headers.Add("CustomParameter", new[] { expectedAttemptedValue });
         var testContext = GetModelBindingTestContext(action);
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
 
         // Do not add any headers.
         var httpContext = testContext.HttpContext;
@@ -309,26 +323,24 @@ public class HeaderModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
-            ParameterType = typeof(Product)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Product),
         };
 
-        var testContext = GetModelBindingTestContext(
-            request =>
-            {
-                request.Headers.Add("NoCommaString", "someValue");
-                request.Headers.Add("OneCommaSeparatedString", "one, two, three");
-                request.Headers.Add("IntProperty", "10");
-                request.Headers.Add("NullableIntProperty", "300");
-                request.Headers.Add("ArrayOfString", "first, second");
-                request.Headers.Add("EnumerableOfDouble", "10.51, 45.44");
-                request.Headers.Add("ListOfEnum", "Sedan, Coupe");
-                request.Headers.Add("ListOfOrderWithTypeConverter", "10");
-            });
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var testContext = GetModelBindingTestContext(request =>
+        {
+            request.Headers.Add("NoCommaString", "someValue");
+            request.Headers.Add("OneCommaSeparatedString", "one, two, three");
+            request.Headers.Add("IntProperty", "10");
+            request.Headers.Add("NullableIntProperty", "300");
+            request.Headers.Add("ArrayOfString", "first, second");
+            request.Headers.Add("EnumerableOfDouble", "10.51, 45.44");
+            request.Headers.Add("ListOfEnum", "Sedan, Coupe");
+            request.Headers.Add("ListOfOrderWithTypeConverter", "10");
+        });
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -349,9 +361,17 @@ public class HeaderModelBinderIntegrationTest
         Assert.Equal(300, product.Manufacturer.NullableIntProperty);
         Assert.Null(product.Manufacturer.NullableLongProperty);
         Assert.Equal(new[] { "first", "second" }, product.Manufacturer.ArrayOfString);
-        Assert.Equal(new double[] { 10.51, 45.44 }, product.Manufacturer.EnumerableOfDoubleProperty);
-        Assert.Equal(new CarType[] { CarType.Sedan, CarType.Coupe }, product.Manufacturer.ListOfEnum);
-        var orderWithTypeConverter = Assert.Single(product.Manufacturer.ListOfOrderWithTypeConverterProperty);
+        Assert.Equal(
+            new double[] { 10.51, 45.44 },
+            product.Manufacturer.EnumerableOfDoubleProperty
+        );
+        Assert.Equal(
+            new CarType[] { CarType.Sedan, CarType.Coupe },
+            product.Manufacturer.ListOfEnum
+        );
+        var orderWithTypeConverter = Assert.Single(
+            product.Manufacturer.ListOfOrderWithTypeConverterProperty
+        );
         Assert.Equal(10, orderWithTypeConverter.Id);
 
         // ModelState
@@ -429,12 +449,14 @@ public class HeaderModelBinderIntegrationTest
                 Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
                 Assert.Equal("one, two, three", entry.AttemptedValue);
                 Assert.Equal("one, two, three", entry.RawValue);
-            });
+            }
+        );
     }
 
     private ModelBindingTestContext GetModelBindingTestContext(
         Action<HttpRequest> updateRequest = null,
-        Action<MvcOptions> updateOptions = null)
+        Action<MvcOptions> updateOptions = null
+    )
     {
         return ModelBindingTestHelper.GetTestContext(updateRequest, updateOptions);
     }
@@ -477,7 +499,7 @@ public class HeaderModelBinderIntegrationTest
     private enum CarType
     {
         Coupe,
-        Sedan
+        Sedan,
     }
 
     [TypeConverter(typeof(CanConvertFromStringConverter))]
@@ -500,10 +522,17 @@ public class HeaderModelBinderIntegrationTest
             return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             var id = value.ToString();
-            return new OrderWithTypeConverter() { Id = int.Parse(id, CultureInfo.InvariantCulture) };
+            return new OrderWithTypeConverter()
+            {
+                Id = int.Parse(id, CultureInfo.InvariantCulture),
+            };
         }
     }
 }

@@ -18,29 +18,35 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal ComInvokeAction(CallInfo callInfo)
-            : base(callInfo)
-        {
-        }
+            : base(callInfo) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackInvoke(DynamicMetaObject target, DynamicMetaObject[] args, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackInvoke(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args,
+            DynamicMetaObject errorSuggestion
+        )
         {
             if (ComBinder.TryBindInvoke(this, target, args, out DynamicMetaObject res))
             {
                 return res;
             }
 
-            return errorSuggestion ?? new DynamicMetaObject(
-                Expression.Throw(
-                    Expression.New(
-                        typeof(NotSupportedException).GetConstructor(new[] { typeof(string) }),
-                        Expression.Constant(SR.COMCannotPerformCall)
+            return errorSuggestion
+                ?? new DynamicMetaObject(
+                    Expression.Throw(
+                        Expression.New(
+                            typeof(NotSupportedException).GetConstructor(new[] { typeof(string) }),
+                            Expression.Constant(SR.COMCannotPerformCall)
+                        ),
+                        typeof(object)
                     ),
-                    typeof(object)
-                ),
-                target.Restrictions.Merge(BindingRestrictions.Combine(args))
-            );
+                    target.Restrictions.Merge(BindingRestrictions.Combine(args))
+                );
         }
     }
 
@@ -61,9 +67,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private SplatInvokeBinder() { }
 
         // Just splat the args and dispatch through a nested site
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. The only entry-point to this class is through Instance property which is marked as unsafe.")]
-        public override Expression Bind(object[] args, ReadOnlyCollection<ParameterExpression> parameters, LabelTarget returnLabel)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. The only entry-point to this class is through Instance property which is marked as unsafe."
+        )]
+        public override Expression Bind(
+            object[] args,
+            ReadOnlyCollection<ParameterExpression> parameters,
+            LabelTarget returnLabel
+        )
         {
             Debug.Assert(args.Length == 2);
 

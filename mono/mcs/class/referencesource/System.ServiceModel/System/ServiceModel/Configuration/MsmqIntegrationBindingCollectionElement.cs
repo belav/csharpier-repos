@@ -7,12 +7,18 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    public partial class MsmqIntegrationBindingCollectionElement : StandardBindingCollectionElement<System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding, MsmqIntegrationBindingElement>
+    public partial class MsmqIntegrationBindingCollectionElement
+        : StandardBindingCollectionElement<
+            System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding,
+            MsmqIntegrationBindingElement
+        >
     {
         internal static MsmqIntegrationBindingCollectionElement GetBindingCollectionElement()
         {
-            return (MsmqIntegrationBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.MsmqIntegrationBindingCollectionElementName);
+            return (MsmqIntegrationBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.MsmqIntegrationBindingCollectionElementName
+                );
         }
-
     }
 }

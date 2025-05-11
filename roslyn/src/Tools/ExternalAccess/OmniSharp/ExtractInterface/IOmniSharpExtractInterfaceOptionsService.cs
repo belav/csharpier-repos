@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractInterface
         // OmniSharp only uses these two arguments from the full IExtractInterfaceOptionsService
         Task<OmniSharpExtractInterfaceOptionsResult> GetExtractInterfaceOptionsAsync(
             List<ISymbol> extractableMembers,
-            string defaultInterfaceName);
+            string defaultInterfaceName
+        );
     }
 
     internal class OmniSharpExtractInterfaceOptionsResult
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractInterface
         public enum OmniSharpExtractLocation
         {
             SameFile,
-            NewFile
+            NewFile,
         }
 
         public bool IsCancelled { get; }
@@ -30,7 +31,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractInterface
         public string FileName { get; }
         public OmniSharpExtractLocation Location { get; }
 
-        public OmniSharpExtractInterfaceOptionsResult(bool isCancelled, ImmutableArray<ISymbol> includedMembers, string interfaceName, string fileName, OmniSharpExtractLocation location)
+        public OmniSharpExtractInterfaceOptionsResult(
+            bool isCancelled,
+            ImmutableArray<ISymbol> includedMembers,
+            string interfaceName,
+            string fileName,
+            OmniSharpExtractLocation location
+        )
         {
             IsCancelled = isCancelled;
             IncludedMembers = includedMembers;

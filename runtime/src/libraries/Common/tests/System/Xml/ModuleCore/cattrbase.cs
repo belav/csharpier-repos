@@ -31,19 +31,17 @@ namespace OLEDB.Test.ModuleCore
         private string _filter;
 
         //Allows Inheritance (i.e.: object to determine if ever been set)
-        private object _priority;       //Allows Inheritance
-        private object _implemented;    //Allows Inheritance
-        private object _skipped;        //Allows Inheritance
-        private object _error;          //Allows Inheritance
-        private object _security;       //Allows Inheritance
-        private object _filtercriteria;//Allows Inheritance
-        private object[] _languages;        //Allows Inheritance
-        private object _xml;            //Allows Inheritance
+        private object _priority; //Allows Inheritance
+        private object _implemented; //Allows Inheritance
+        private object _skipped; //Allows Inheritance
+        private object _error; //Allows Inheritance
+        private object _security; //Allows Inheritance
+        private object _filtercriteria; //Allows Inheritance
+        private object[] _languages; //Allows Inheritance
+        private object _xml; //Allows Inheritance
 
         //Constructors
-        public CAttrBase()
-        {
-        }
+        public CAttrBase() { }
 
         public CAttrBase(string desc)
         {
@@ -276,7 +274,6 @@ namespace OLEDB.Test.ModuleCore
         }
     }
 
-
     ////////////////////////////////////////////////////////////////
     // TestModule (attribute)
     //
@@ -291,9 +288,7 @@ namespace OLEDB.Test.ModuleCore
 
         //Constructors
         public TestModule()
-            : base()
-        {
-        }
+            : base() { }
 
         public TestModule(string desc)
             : base(desc)
@@ -352,9 +347,7 @@ namespace OLEDB.Test.ModuleCore
     {
         //Constructors
         public TestCase()
-            : base()
-        {
-        }
+            : base() { }
 
         public TestCase(string desc)
             : base(desc)
@@ -363,7 +356,6 @@ namespace OLEDB.Test.ModuleCore
             //[TestCase(Desc="desc", Name="name")]
         }
     }
-
 
     ////////////////////////////////////////////////////////////////
     // Variation (attribute)
@@ -375,9 +367,7 @@ namespace OLEDB.Test.ModuleCore
 
         //Constructors
         public Variation()
-            : base()
-        {
-        }
+            : base() { }
 
         public Variation(string desc)
             : base(desc)
@@ -400,9 +390,7 @@ namespace OLEDB.Test.ModuleCore
         private string _filter;
 
         //Constructors
-        public TestInclude()
-        {
-        }
+        public TestInclude() { }
 
         public virtual string Name
         {

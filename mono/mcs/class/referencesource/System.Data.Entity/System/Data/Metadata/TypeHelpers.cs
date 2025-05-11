@@ -38,7 +38,11 @@ namespace System.Data.Common
             {
                 AssertEdmType(TypeHelpers.GetElementTypeUsage(typeUsage));
             }
-            else if (TypeSemantics.IsStructuralType(typeUsage) && !Helper.IsComplexType(typeUsage.EdmType) && !Helper.IsEntityType(typeUsage.EdmType))
+            else if (
+                TypeSemantics.IsStructuralType(typeUsage)
+                && !Helper.IsComplexType(typeUsage.EdmType)
+                && !Helper.IsEntityType(typeUsage.EdmType)
+            )
             {
                 foreach (EdmMember m in TypeHelpers.GetDeclaredStructuralMembers(typeUsage))
                 {
@@ -51,7 +55,13 @@ namespace System.Data.Common
                 if (null != pType)
                 {
                     if (pType.DataSpace != DataSpace.CSpace)
-                        throw new NotSupportedException(String.Format(CultureInfo.InvariantCulture, "PrimitiveType must be CSpace '{0}'", typeUsage.ToString()));
+                        throw new NotSupportedException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "PrimitiveType must be CSpace '{0}'",
+                                typeUsage.ToString()
+                            )
+                        );
                 }
             }
         }
@@ -128,10 +138,12 @@ namespace System.Data.Common
         /// <returns></returns>
         internal static bool IsSetComparableOpType(TypeUsage typeUsage)
         {
-            if (Helper.IsEntityType(typeUsage.EdmType)    ||
-                Helper.IsPrimitiveType(typeUsage.EdmType) ||
-                Helper.IsEnumType(typeUsage.EdmType)      ||
-                Helper.IsRefType(typeUsage.EdmType)        )
+            if (
+                Helper.IsEntityType(typeUsage.EdmType)
+                || Helper.IsPrimitiveType(typeUsage.EdmType)
+                || Helper.IsEnumType(typeUsage.EdmType)
+                || Helper.IsRefType(typeUsage.EdmType)
+            )
             {
                 return true;
             }
@@ -157,17 +169,16 @@ namespace System.Data.Common
         /// <returns></returns>
         internal static bool IsValidIsNullOpType(TypeUsage typeUsage)
         {
-            return TypeSemantics.IsReferenceType(typeUsage) ||
-                   TypeSemantics.IsEntityType(typeUsage)    ||
-                   TypeSemantics.IsScalarType(typeUsage);
+            return TypeSemantics.IsReferenceType(typeUsage)
+                || TypeSemantics.IsEntityType(typeUsage)
+                || TypeSemantics.IsScalarType(typeUsage);
         }
-
 
         internal static bool IsValidInOpType(TypeUsage typeUsage)
         {
-            return TypeSemantics.IsReferenceType(typeUsage) ||
-                   TypeSemantics.IsEntityType(typeUsage) ||
-                   TypeSemantics.IsScalarType(typeUsage);
+            return TypeSemantics.IsReferenceType(typeUsage)
+                || TypeSemantics.IsEntityType(typeUsage)
+                || TypeSemantics.IsScalarType(typeUsage);
         }
 
         internal static TypeUsage GetCommonTypeUsage(TypeUsage typeUsage1, TypeUsage typeUsage2)
@@ -207,14 +218,18 @@ namespace System.Data.Common
         // Type property extractors
         //
         #region Type property extractors
-        
-        internal static bool TryGetClosestPromotableType(TypeUsage fromType, out TypeUsage promotableType)
+
+        internal static bool TryGetClosestPromotableType(
+            TypeUsage fromType,
+            out TypeUsage promotableType
+        )
         {
             promotableType = null;
             if (Helper.IsPrimitiveType(fromType.EdmType))
             {
                 PrimitiveType fromPrimitiveType = (PrimitiveType)fromType.EdmType;
-                IList<PrimitiveType> promotableTypes = EdmProviderManifest.Instance.GetPromotionTypes(fromPrimitiveType);
+                IList<PrimitiveType> promotableTypes =
+                    EdmProviderManifest.Instance.GetPromotionTypes(fromPrimitiveType);
                 int index = promotableTypes.IndexOf(fromPrimitiveType);
                 if (-1 != index && index + 1 < promotableTypes.Count)
                 {
@@ -224,7 +239,6 @@ namespace System.Data.Common
             return (null != promotableType);
         }
 
-
         #endregion
 
         //
@@ -232,7 +246,11 @@ namespace System.Data.Common
         //
         #region Facet Helpers
 
-        internal static bool TryGetBooleanFacetValue(TypeUsage type, string facetName, out bool boolValue)
+        internal static bool TryGetBooleanFacetValue(
+            TypeUsage type,
+            string facetName,
+            out bool boolValue
+        )
         {
             boolValue = false;
             Facet boolFacet;
@@ -245,11 +263,19 @@ namespace System.Data.Common
             return false;
         }
 
-        internal static bool TryGetByteFacetValue(TypeUsage type, string facetName, out byte byteValue)
+        internal static bool TryGetByteFacetValue(
+            TypeUsage type,
+            string facetName,
+            out byte byteValue
+        )
         {
             byteValue = 0;
             Facet byteFacet;
-            if (type.Facets.TryGetValue(facetName, false, out byteFacet) && byteFacet.Value != null && !Helper.IsUnboundedFacetValue(byteFacet))
+            if (
+                type.Facets.TryGetValue(facetName, false, out byteFacet)
+                && byteFacet.Value != null
+                && !Helper.IsUnboundedFacetValue(byteFacet)
+            )
             {
                 byteValue = (byte)byteFacet.Value;
                 return true;
@@ -262,7 +288,12 @@ namespace System.Data.Common
         {
             intValue = 0;
             Facet intFacet;
-            if (type.Facets.TryGetValue(facetName, false, out intFacet) && intFacet.Value != null && !Helper.IsUnboundedFacetValue(intFacet) && !Helper.IsVariableFacetValue(intFacet))
+            if (
+                type.Facets.TryGetValue(facetName, false, out intFacet)
+                && intFacet.Value != null
+                && !Helper.IsUnboundedFacetValue(intFacet)
+                && !Helper.IsVariableFacetValue(intFacet)
+            )
             {
                 intValue = (int)intFacet.Value;
                 return true;
@@ -273,15 +304,21 @@ namespace System.Data.Common
 
         internal static bool TryGetIsFixedLength(TypeUsage type, out bool isFixedLength)
         {
-            if (!TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String) &&
-                !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.Binary))
+            if (
+                !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String)
+                && !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.Binary)
+            )
             {
                 isFixedLength = false;
                 return false;
             }
 
             // Binary and String MaxLength facets share the same name
-            return TypeHelpers.TryGetBooleanFacetValue(type, DbProviderManifest.FixedLengthFacetName, out isFixedLength);
+            return TypeHelpers.TryGetBooleanFacetValue(
+                type,
+                DbProviderManifest.FixedLengthFacetName,
+                out isFixedLength
+            );
         }
 
         internal static bool TryGetIsUnicode(TypeUsage type, out bool isUnicode)
@@ -292,26 +329,38 @@ namespace System.Data.Common
                 return false;
             }
 
-            return TypeHelpers.TryGetBooleanFacetValue(type, DbProviderManifest.UnicodeFacetName, out isUnicode);
+            return TypeHelpers.TryGetBooleanFacetValue(
+                type,
+                DbProviderManifest.UnicodeFacetName,
+                out isUnicode
+            );
         }
 
         internal static bool IsFacetValueConstant(TypeUsage type, string facetName)
         {
             // Binary and String FixedLength facets share the same name
-            return Helper.GetFacet(((PrimitiveType)type.EdmType).FacetDescriptions, facetName).IsConstant;
+            return Helper
+                .GetFacet(((PrimitiveType)type.EdmType).FacetDescriptions, facetName)
+                .IsConstant;
         }
 
         internal static bool TryGetMaxLength(TypeUsage type, out int maxLength)
         {
-            if (!TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String) &&
-                !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.Binary))
+            if (
+                !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.String)
+                && !TypeSemantics.IsPrimitiveType(type, PrimitiveTypeKind.Binary)
+            )
             {
                 maxLength = 0;
                 return false;
             }
 
             // Binary and String FixedLength facets share the same name
-            return TypeHelpers.TryGetIntFacetValue(type, DbProviderManifest.MaxLengthFacetName, out maxLength);
+            return TypeHelpers.TryGetIntFacetValue(
+                type,
+                DbProviderManifest.MaxLengthFacetName,
+                out maxLength
+            );
         }
 
         internal static bool TryGetPrecision(TypeUsage type, out byte precision)
@@ -322,7 +371,11 @@ namespace System.Data.Common
                 return false;
             }
 
-            return TypeHelpers.TryGetByteFacetValue(type, DbProviderManifest.PrecisionFacetName, out precision);
+            return TypeHelpers.TryGetByteFacetValue(
+                type,
+                DbProviderManifest.PrecisionFacetName,
+                out precision
+            );
         }
 
         internal static bool TryGetScale(TypeUsage type, out byte scale)
@@ -333,12 +386,20 @@ namespace System.Data.Common
                 return false;
             }
 
-            return TypeHelpers.TryGetByteFacetValue(type, DbProviderManifest.ScaleFacetName, out scale);
+            return TypeHelpers.TryGetByteFacetValue(
+                type,
+                DbProviderManifest.ScaleFacetName,
+                out scale
+            );
         }
 
         internal static bool TryGetPrimitiveTypeKind(TypeUsage type, out PrimitiveTypeKind typeKind)
         {
-            if (type != null && type.EdmType != null && type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
+            if (
+                type != null
+                && type.EdmType != null
+                && type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType
+            )
             {
                 typeKind = ((PrimitiveType)type.EdmType).PrimitiveTypeKind;
                 return true;
@@ -361,7 +422,10 @@ namespace System.Data.Common
 
         internal static TypeUsage CreateCollectionTypeUsage(TypeUsage elementType)
         {
-            return CreateCollectionTypeUsage(elementType, false /* readOnly */ );
+            return CreateCollectionTypeUsage(
+                elementType,
+                false /* readOnly */
+            );
         }
 
         internal static TypeUsage CreateCollectionTypeUsage(TypeUsage elementType, bool readOnly)
@@ -374,7 +438,10 @@ namespace System.Data.Common
             return CreateRowType(columns, null);
         }
 
-        internal static RowType CreateRowType(IEnumerable<KeyValuePair<string, TypeUsage>> columns, InitializerMetadata initializerMetadata)
+        internal static RowType CreateRowType(
+            IEnumerable<KeyValuePair<string, TypeUsage>> columns,
+            InitializerMetadata initializerMetadata
+        )
         {
             List<EdmProperty> rowElements = new List<EdmProperty>();
             foreach (KeyValuePair<string, TypeUsage> kvp in columns)
@@ -384,7 +451,10 @@ namespace System.Data.Common
             return new RowType(rowElements, initializerMetadata);
         }
 
-        internal static TypeUsage CreateRowTypeUsage(IEnumerable<KeyValuePair<string, TypeUsage>> columns, bool readOnly)
+        internal static TypeUsage CreateRowTypeUsage(
+            IEnumerable<KeyValuePair<string, TypeUsage>> columns,
+            bool readOnly
+        )
         {
             return TypeUsage.Create(CreateRowType(columns));
         }
@@ -409,20 +479,32 @@ namespace System.Data.Common
             IEnumerable<EdmMember> entityKeys = entityType.KeyMembers;
             if (null == entityKeys)
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Metadata_EntityTypeNullKeyMembersInvalid, "entityType");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_Metadata_EntityTypeNullKeyMembersInvalid,
+                    "entityType"
+                );
             }
 
-            List<KeyValuePair<string, TypeUsage>> resultCols = new List<KeyValuePair<string, TypeUsage>>();
+            List<KeyValuePair<string, TypeUsage>> resultCols =
+                new List<KeyValuePair<string, TypeUsage>>();
             //int idx = 0;
             foreach (EdmProperty keyProperty in entityKeys)
             {
                 //this.CheckMember(keyProperty, "property", CommandTreeUtils.FormatIndex("entityType.KeyMembers", idx++));
-                resultCols.Add(new KeyValuePair<string, TypeUsage>(keyProperty.Name, Helper.GetModelTypeUsage(keyProperty)));
+                resultCols.Add(
+                    new KeyValuePair<string, TypeUsage>(
+                        keyProperty.Name,
+                        Helper.GetModelTypeUsage(keyProperty)
+                    )
+                );
             }
 
             if (resultCols.Count < 1)
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Metadata_EntityTypeEmptyKeyMembersInvalid, "entityType");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_Metadata_EntityTypeEmptyKeyMembersInvalid,
+                    "entityType"
+                );
             }
 
             return TypeHelpers.CreateRowType(resultCols);
@@ -442,11 +524,14 @@ namespace System.Data.Common
         internal static TypeUsage GetPrimitiveTypeUsageForScalar(TypeUsage scalarType)
         {
             Debug.Assert(scalarType != null, "scalarType != null");
-            Debug.Assert(TypeSemantics.IsScalarType(scalarType), "Primitive or enum type expected.");
+            Debug.Assert(
+                TypeSemantics.IsScalarType(scalarType),
+                "Primitive or enum type expected."
+            );
 
-            return TypeSemantics.IsEnumerationType(scalarType) ?
-                CreateEnumUnderlyingTypeUsage(scalarType) :
-                scalarType;
+            return TypeSemantics.IsEnumerationType(scalarType)
+                ? CreateEnumUnderlyingTypeUsage(scalarType)
+                : scalarType;
         }
 
         /// <summary>
@@ -457,9 +542,15 @@ namespace System.Data.Common
         internal static TypeUsage CreateEnumUnderlyingTypeUsage(TypeUsage enumTypeUsage)
         {
             Debug.Assert(enumTypeUsage != null, "enumTypeUsage != null");
-            Debug.Assert(TypeSemantics.IsEnumerationType(enumTypeUsage), "enumTypeUsage is not an enumerated type");
+            Debug.Assert(
+                TypeSemantics.IsEnumerationType(enumTypeUsage),
+                "enumTypeUsage is not an enumerated type"
+            );
 
-            return TypeUsage.Create(Helper.GetUnderlyingEdmTypeForEnumType(enumTypeUsage.EdmType), enumTypeUsage.Facets);
+            return TypeUsage.Create(
+                Helper.GetUnderlyingEdmTypeForEnumType(enumTypeUsage.EdmType),
+                enumTypeUsage.Facets
+            );
         }
 
         /// <summary>
@@ -470,8 +561,14 @@ namespace System.Data.Common
         internal static TypeUsage CreateSpatialUnionTypeUsage(TypeUsage spatialTypeUsage)
         {
             Debug.Assert(spatialTypeUsage != null, "spatialTypeUsage != null");
-            Debug.Assert(TypeSemantics.IsStrongSpatialType(spatialTypeUsage), "spatialTypeUsage is not a strong spatial type");
-            return TypeUsage.Create(Helper.GetSpatialNormalizedPrimitiveType(spatialTypeUsage.EdmType), spatialTypeUsage.Facets);
+            Debug.Assert(
+                TypeSemantics.IsStrongSpatialType(spatialTypeUsage),
+                "spatialTypeUsage is not a strong spatial type"
+            );
+            return TypeUsage.Create(
+                Helper.GetSpatialNormalizedPrimitiveType(spatialTypeUsage.EdmType),
+                spatialTypeUsage.Facets
+            );
         }
 
         #endregion
@@ -529,7 +626,9 @@ namespace System.Data.Common
             switch (edmType.BuiltInTypeKind)
             {
                 case BuiltInTypeKind.AssociationType:
-                    return ((AssociationType)edmType).GetDeclaredOnlyMembers<AssociationEndMember>();
+                    return (
+                        (AssociationType)edmType
+                    ).GetDeclaredOnlyMembers<AssociationEndMember>();
                 case BuiltInTypeKind.ComplexType:
                     return ((ComplexType)edmType).GetDeclaredOnlyMembers<EdmProperty>();
                 case BuiltInTypeKind.EntityType:
@@ -541,8 +640,17 @@ namespace System.Data.Common
             }
         }
 
-        internal static readonly ReadOnlyMetadataCollection<EdmMember> EmptyArrayEdmMember = new ReadOnlyMetadataCollection<EdmMember>(new MetadataCollection<EdmMember>().SetReadOnly());
-        internal static readonly FilteredReadOnlyMetadataCollection<EdmProperty, EdmMember> EmptyArrayEdmProperty = new FilteredReadOnlyMetadataCollection<EdmProperty, EdmMember>(EmptyArrayEdmMember, null);
+        internal static readonly ReadOnlyMetadataCollection<EdmMember> EmptyArrayEdmMember =
+            new ReadOnlyMetadataCollection<EdmMember>(
+                new MetadataCollection<EdmMember>().SetReadOnly()
+            );
+        internal static readonly FilteredReadOnlyMetadataCollection<
+            EdmProperty,
+            EdmMember
+        > EmptyArrayEdmProperty = new FilteredReadOnlyMetadataCollection<EdmProperty, EdmMember>(
+            EmptyArrayEdmMember,
+            null
+        );
 
         internal static ReadOnlyMetadataCollection<EdmProperty> GetProperties(TypeUsage typeUsage)
         {
@@ -583,9 +691,14 @@ namespace System.Data.Common
         /// </summary>
         internal static RowType GetTvfReturnType(EdmFunction tvf)
         {
-            if (tvf.ReturnParameter != null && TypeSemantics.IsCollectionType(tvf.ReturnParameter.TypeUsage))
+            if (
+                tvf.ReturnParameter != null
+                && TypeSemantics.IsCollectionType(tvf.ReturnParameter.TypeUsage)
+            )
             {
-                var expectedElementTypeUsage = ((CollectionType)tvf.ReturnParameter.TypeUsage.EdmType).TypeUsage;
+                var expectedElementTypeUsage = (
+                    (CollectionType)tvf.ReturnParameter.TypeUsage.EdmType
+                ).TypeUsage;
                 if (TypeSemantics.IsRowType(expectedElementTypeUsage))
                 {
                     return (RowType)expectedElementTypeUsage.EdmType;
@@ -617,11 +730,16 @@ namespace System.Data.Common
         /// <param name="type">TypeUsage that may or may not refer to a RefType</param>
         /// <param name="referencedEntityType">Non-null if the TypeUsage refers to a RefType, null otherwise</param>
         /// <returns>True if the TypeUsage refers to a RefType, false otherwise</returns>
-        internal static bool TryGetRefEntityType(TypeUsage type, out EntityType referencedEntityType)
+        internal static bool TryGetRefEntityType(
+            TypeUsage type,
+            out EntityType referencedEntityType
+        )
         {
             RefType refType;
-            if (TryGetEdmType<RefType>(type, out refType) &&
-                Helper.IsEntityType(refType.ElementType))
+            if (
+                TryGetEdmType<RefType>(type, out refType)
+                && Helper.IsEntityType(refType.ElementType)
+            )
             {
                 referencedEntityType = (EntityType)refType.ElementType;
                 return true;
@@ -666,7 +784,7 @@ namespace System.Data.Common
         {
             return type.ToString();
         }
-                
+
         internal static string GetFullName(EdmType type)
         {
             return GetFullName(type.NamespaceName, type.Name);
@@ -677,7 +795,7 @@ namespace System.Data.Common
             Debug.Assert(entitySet.EntityContainer != null, "entitySet.EntityContainer is null");
             return GetFullName(entitySet.EntityContainer.Name, entitySet.Name);
         }
-                
+
         internal static string GetFullName(string qualifier, string name)
         {
             if (string.IsNullOrEmpty(qualifier))
@@ -765,7 +883,11 @@ namespace System.Data.Common
             }
         }
 
-        internal static bool IsIntegerConstant(TypeUsage valueType, object value, long expectedValue)
+        internal static bool IsIntegerConstant(
+            TypeUsage valueType,
+            object value,
+            long expectedValue
+        )
         {
             if (!TypeSemantics.IsIntegerNumericType(valueType))
             {
@@ -796,38 +918,59 @@ namespace System.Data.Common
                     return (expectedValue == (sbyte)value);
 
                 default:
-                    {
-                        Debug.Assert(false, "Integer primitive type was not one of Byte, Int16, Int32, Int64, SByte?");
-                        return false;
-                    }
+                {
+                    Debug.Assert(
+                        false,
+                        "Integer primitive type was not one of Byte, Int16, Int32, Int64, SByte?"
+                    );
+                    return false;
+                }
             }
         }
 
         /// <summary>
-        /// returns a Typeusage 
+        /// returns a Typeusage
         /// </summary>
         /// <param name="primitiveTypeKind"></param>
         /// <returns></returns>
         static internal TypeUsage GetLiteralTypeUsage(PrimitiveTypeKind primitiveTypeKind)
         {
             // all clr strings by default are unicode
-            return GetLiteralTypeUsage(primitiveTypeKind, true /* unicode */);
+            return GetLiteralTypeUsage(
+                primitiveTypeKind,
+                true /* unicode */
+            );
         }
 
-        static internal TypeUsage GetLiteralTypeUsage(PrimitiveTypeKind primitiveTypeKind, bool isUnicode)
+        internal static TypeUsage GetLiteralTypeUsage(
+            PrimitiveTypeKind primitiveTypeKind,
+            bool isUnicode
+        )
         {
             TypeUsage typeusage;
-            PrimitiveType primitiveType = EdmProviderManifest.Instance.GetPrimitiveType(primitiveTypeKind);
+            PrimitiveType primitiveType = EdmProviderManifest.Instance.GetPrimitiveType(
+                primitiveTypeKind
+            );
             switch (primitiveTypeKind)
             {
                 case PrimitiveTypeKind.String:
-                    typeusage = TypeUsage.Create(primitiveType,
-                        new FacetValues{ Unicode = isUnicode, MaxLength = TypeUsage.DefaultMaxLengthFacetValue, FixedLength = false, Nullable = false});
+                    typeusage = TypeUsage.Create(
+                        primitiveType,
+                        new FacetValues
+                        {
+                            Unicode = isUnicode,
+                            MaxLength = TypeUsage.DefaultMaxLengthFacetValue,
+                            FixedLength = false,
+                            Nullable = false,
+                        }
+                    );
                     break;
 
                 default:
-                    typeusage = TypeUsage.Create(primitiveType,
-                        new FacetValues{ Nullable = false });
+                    typeusage = TypeUsage.Create(
+                        primitiveType,
+                        new FacetValues { Nullable = false }
+                    );
                     break;
             }
             return typeusage;
@@ -838,10 +981,15 @@ namespace System.Data.Common
         #region EdmFunction Helpers
         internal static bool IsCanonicalFunction(EdmFunction function)
         {
-            bool isCanonicalFunction = (function.DataSpace == DataSpace.CSpace && function.NamespaceName == EdmConstants.EdmNamespace);
+            bool isCanonicalFunction = (
+                function.DataSpace == DataSpace.CSpace
+                && function.NamespaceName == EdmConstants.EdmNamespace
+            );
 
-            Debug.Assert(!isCanonicalFunction || (isCanonicalFunction && !function.HasUserDefinedBody),
-                "Canonical function '" + function.FullName + "' can not have a user defined body");
+            Debug.Assert(
+                !isCanonicalFunction || (isCanonicalFunction && !function.HasUserDefinedBody),
+                "Canonical function '" + function.FullName + "' can not have a user defined body"
+            );
 
             return isCanonicalFunction;
         }

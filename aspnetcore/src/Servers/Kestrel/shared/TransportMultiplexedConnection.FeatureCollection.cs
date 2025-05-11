@@ -27,5 +27,10 @@ internal partial class TransportMultiplexedConnection
         set => ConnectionClosed = value;
     }
 
-    void IConnectionLifetimeFeature.Abort() => Abort(new ConnectionAbortedException("The connection was aborted by the application via IConnectionLifetimeFeature.Abort()."));
+    void IConnectionLifetimeFeature.Abort() =>
+        Abort(
+            new ConnectionAbortedException(
+                "The connection was aborted by the application via IConnectionLifetimeFeature.Abort()."
+            )
+        );
 }

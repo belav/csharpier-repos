@@ -67,7 +67,6 @@ namespace RabbitMQ.Client
     ///in setting up an SSL connection.</summary>
     public class SslOption
     {
-
         private bool m_enabled;
 
         ///<summary>Flag specifying if Ssl should indeed be
@@ -77,7 +76,6 @@ namespace RabbitMQ.Client
             get { return m_enabled; }
             set { m_enabled = value; }
         }
-
 
         private SslProtocols m_version = SslProtocols.Ssl3;
 
@@ -109,15 +107,18 @@ namespace RabbitMQ.Client
             set { m_certPass = value; }
         }
 
-
         ///<summary>Convenience read-only property to retrieve an X509CertificateCollection
         ///containing the client certificate</summary>
         public X509CertificateCollection Certs
         {
-            get { 
-                if(m_certPath == "") {
+            get
+            {
+                if (m_certPath == "")
+                {
                     return null;
-                } else {
+                }
+                else
+                {
                     X509CertificateCollection c = new X509CertificateCollection();
                     c.Add(new X509Certificate2(m_certPath, m_certPass));
                     return c;
@@ -145,13 +146,12 @@ namespace RabbitMQ.Client
             set { m_acceptablePolicyErrors = value; }
         }
 
-
         ///<summary>Construct an SslOption specifying both the server cannonical name
         ///and the client's certificate path.
         ///</summary>
         public SslOption(string serverName, string certPath, bool enabled)
         {
-            m_serverName= serverName;
+            m_serverName = serverName;
             m_certPath = certPath;
             m_enabled = enabled;
         }
@@ -159,14 +159,11 @@ namespace RabbitMQ.Client
         ///<summary>Construct an SslOption with just the server cannonical name.
         ///The Certificate path is set to an empty string
         ///</summary>
-        public SslOption(string serverName): this(serverName, "", false)
-        {
-        }
+        public SslOption(string serverName)
+            : this(serverName, "", false) { }
 
         ///<summary>Construct an SslOption with no parameters set</summary>
-        public SslOption(): this("", "", false)
-        {
-        }
-
+        public SslOption()
+            : this("", "", false) { }
     }
 }

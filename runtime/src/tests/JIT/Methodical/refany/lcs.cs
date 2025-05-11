@@ -10,26 +10,28 @@ namespace JitTest_lcs_refany_cs
     {
         private const int RANK = 4;
 
-        private static String buildLCS( /*int[,,,]*/TypedReference _b,
-                                /*char[]*/ TypedReference _X,
-                                /*int[]*/ TypedReference _ind)
+        private static String buildLCS( /*int[,,,]*/
+            TypedReference _b,
+            /*char[]*/TypedReference _X,
+            /*int[]*/TypedReference _ind
+        )
         {
             int _i = 0;
-            for (TypedReference i = __makeref(_i);
-                __refvalue(i, int) < RANK; _i++)
-                if (__refvalue(_ind, int[])[__refvalue(i, int)] == 0) return "";
+            for (TypedReference i = __makeref(_i); __refvalue(i, int) < RANK; _i++)
+                if (__refvalue(_ind, int[])[__refvalue(i, int)] == 0)
+                    return "";
 
             int L = __refvalue(_b, int[,,,])[
-                        __refvalue(_ind, int[])[0],
-                        __refvalue(_ind, int[])[1],
-                        __refvalue(_ind, int[])[2],
-                        __refvalue(_ind, int[])[3]];
+                __refvalue(_ind, int[])[0],
+                __refvalue(_ind, int[])[1],
+                __refvalue(_ind, int[])[2],
+                __refvalue(_ind, int[])[3]
+            ];
 
             if (L == RANK)
             {
                 _i = 0;
-                for (TypedReference i = __makeref(_i);
-                    __refvalue(i, int) < RANK; _i++)
+                for (TypedReference i = __makeref(_i); __refvalue(i, int) < RANK; _i++)
                     __refvalue(_ind, int[])[__refvalue(i, int)]--;
                 int idx = __refvalue(_ind, int[])[0];
                 return buildLCS(_b, _X, _ind) + __refvalue(_X, char[])[idx];
@@ -42,10 +44,12 @@ namespace JitTest_lcs_refany_cs
             throw new Exception();
         }
 
-        private static void findLCS(    /*int[,,,]*/ TypedReference _c,
-                                /*int[,,,]*/ TypedReference _b,
-                                /*char[][]*/ TypedReference _seq,
-                                /*int[]*/ TypedReference _len)
+        private static void findLCS( /*int[,,,]*/
+            TypedReference _c,
+            /*int[,,,]*/TypedReference _b,
+            /*char[][]*/TypedReference _seq,
+            /*int[]*/TypedReference _len
+        )
         {
             int[] ind = new int[RANK];
             for (ind[0] = 1; ind[0] < __refvalue(_len, int[])[0]; ind[0]++)
@@ -59,8 +63,10 @@ namespace JitTest_lcs_refany_cs
                             bool eqFlag = true;
                             for (int i = 1; i < RANK; i++)
                             {
-                                if (__refvalue(_seq, char[][])[i][ind[i] - 1] !=
-                                    __refvalue(_seq, char[][])[i - 1][ind[i - 1] - 1])
+                                if (
+                                    __refvalue(_seq, char[][])[i][ind[i] - 1]
+                                    != __refvalue(_seq, char[][])[i - 1][ind[i - 1] - 1]
+                                )
                                 {
                                     eqFlag = false;
                                     break;
@@ -70,7 +76,12 @@ namespace JitTest_lcs_refany_cs
                             if (eqFlag)
                             {
                                 __refvalue(_c, int[,,,])[ind[0], ind[1], ind[2], ind[3]] =
-                                    __refvalue(_c, int[,,,])[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1] + 1;
+                                    __refvalue(_c, int[,,,])[
+                                        ind[0] - 1,
+                                        ind[1] - 1,
+                                        ind[2] - 1,
+                                        ind[3] - 1
+                                    ] + 1;
                                 __refvalue(_b, int[,,,])[ind[0], ind[1], ind[2], ind[3]] = RANK;
                                 continue;
                             }
@@ -101,11 +112,12 @@ namespace JitTest_lcs_refany_cs
         [Fact]
         public static int TestEntryPoint()
         {
-            String[] str = new String[RANK] {
+            String[] str = new String[RANK]
+            {
                 "The Sun has left",
                 "his blackness and",
                 "has found a fresher",
-                "morning and the fair Moon"
+                "morning and the fair Moon",
             };
 
             int[] len = new int[RANK];

@@ -23,7 +23,15 @@ public class FindEntryTest
             context.Attach(new IntKey { Id = 89 }).Entity,
         };
 
-        AssertSingle(context.Set<IntKey>(), nameof(IntKey.Id), entities, 88, 99, keyType, isPk: true);
+        AssertSingle(
+            context.Set<IntKey>(),
+            nameof(IntKey.Id),
+            entities,
+            88,
+            99,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -40,7 +48,14 @@ public class FindEntryTest
             context.Attach(new AlternateIntKey { Id = Guid.NewGuid(), AlternateId = 89 }).Entity,
         };
 
-        AssertSingle(context.Set<AlternateIntKey>(), nameof(AlternateIntKey.AlternateId), entities, 88, 99, keyType);
+        AssertSingle(
+            context.Set<AlternateIntKey>(),
+            nameof(AlternateIntKey.AlternateId),
+            entities,
+            88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -67,7 +82,14 @@ public class FindEntryTest
             context.Attach(new ForeignIntKey { Id = Guid.NewGuid(), IntKeyId = 89 }).Entity,
         };
 
-        AssertMultiple(context.Set<ForeignIntKey>(), nameof(ForeignIntKey.IntKeyId), entities, 88, 99, keyType);
+        AssertMultiple(
+            context.Set<ForeignIntKey>(),
+            nameof(ForeignIntKey.IntKeyId),
+            entities,
+            88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -119,7 +141,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowAlternateIntKey>(context, "AlternateId", 89),
         };
 
-        AssertSingle(context.Set<ShadowAlternateIntKey>(), "AlternateId", entities, 88, 99, keyType);
+        AssertSingle(
+            context.Set<ShadowAlternateIntKey>(),
+            "AlternateId",
+            entities,
+            88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -146,7 +175,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignIntKey>(context, "IntKeyId", 89),
         };
 
-        AssertMultiple(context.Set<ShadowForeignIntKey>(), "IntKeyId", entities, (int?)88, 99, keyType);
+        AssertMultiple(
+            context.Set<ShadowForeignIntKey>(),
+            "IntKeyId",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -212,7 +248,15 @@ public class FindEntryTest
         };
 
         AssertSingle(setA, nameof(AlternateIntKey.AlternateId), entities, 88, 99, keyType);
-        AssertSingle(setB, nameof(AlternateIntKey.AlternateId), entities, 88, 99, keyType, index: 4);
+        AssertSingle(
+            setB,
+            nameof(AlternateIntKey.AlternateId),
+            entities,
+            88,
+            99,
+            keyType,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -293,8 +337,25 @@ public class FindEntryTest
             CreateShadowEntityShared<ShadowIntKey>(context, "ShadowIntKeyB", "Id", 89),
         };
 
-        AssertSingle(context.Set<ShadowIntKey>("ShadowIntKeyA"), "Id", entities, 88, 99, keyType, isPk: true);
-        AssertSingle(context.Set<ShadowIntKey>("ShadowIntKeyB"), "Id", entities, 88, 99, keyType, isPk: true, index: 4);
+        AssertSingle(
+            context.Set<ShadowIntKey>("ShadowIntKeyA"),
+            "Id",
+            entities,
+            88,
+            99,
+            keyType,
+            isPk: true
+        );
+        AssertSingle(
+            context.Set<ShadowIntKey>("ShadowIntKeyB"),
+            "Id",
+            entities,
+            88,
+            99,
+            keyType,
+            isPk: true,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -306,16 +367,61 @@ public class FindEntryTest
         using var context = new FindContextShared();
         var entities = new[]
         {
-            CreateShadowEntityShared<ShadowAlternateIntKey>(context, "ShadowAlternateIntKeyA", "AlternateId", 87),
-            CreateShadowEntityShared<ShadowAlternateIntKey>(context, "ShadowAlternateIntKeyA", "AlternateId", 88),
-            CreateShadowEntityShared<ShadowAlternateIntKey>(context, "ShadowAlternateIntKeyA", "AlternateId", 89),
-            CreateShadowEntityShared<ShadowAlternateIntKey>(context, "ShadowAlternateIntKeyB", "AlternateId", 87),
-            CreateShadowEntityShared<ShadowAlternateIntKey>(context, "ShadowAlternateIntKeyB", "AlternateId", 88),
-            CreateShadowEntityShared<ShadowAlternateIntKey>(context, "ShadowAlternateIntKeyB", "AlternateId", 89),
+            CreateShadowEntityShared<ShadowAlternateIntKey>(
+                context,
+                "ShadowAlternateIntKeyA",
+                "AlternateId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowAlternateIntKey>(
+                context,
+                "ShadowAlternateIntKeyA",
+                "AlternateId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowAlternateIntKey>(
+                context,
+                "ShadowAlternateIntKeyA",
+                "AlternateId",
+                89
+            ),
+            CreateShadowEntityShared<ShadowAlternateIntKey>(
+                context,
+                "ShadowAlternateIntKeyB",
+                "AlternateId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowAlternateIntKey>(
+                context,
+                "ShadowAlternateIntKeyB",
+                "AlternateId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowAlternateIntKey>(
+                context,
+                "ShadowAlternateIntKeyB",
+                "AlternateId",
+                89
+            ),
         };
 
-        AssertSingle(context.Set<ShadowAlternateIntKey>("ShadowAlternateIntKeyA"), "AlternateId", entities, 88, 99, keyType);
-        AssertSingle(context.Set<ShadowAlternateIntKey>("ShadowAlternateIntKeyB"), "AlternateId", entities, 88, 99, keyType, index: 4);
+        AssertSingle(
+            context.Set<ShadowAlternateIntKey>("ShadowAlternateIntKeyA"),
+            "AlternateId",
+            entities,
+            88,
+            99,
+            keyType
+        );
+        AssertSingle(
+            context.Set<ShadowAlternateIntKey>("ShadowAlternateIntKeyB"),
+            "AlternateId",
+            entities,
+            88,
+            99,
+            keyType,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -325,7 +431,10 @@ public class FindEntryTest
     [InlineData(CompositeKeyType.Array, false)]
     [InlineData(CompositeKeyType.List, false)]
     [InlineData(CompositeKeyType.Enumerable, false)]
-    public virtual void Find_shadow_int_foreign_key_shared(CompositeKeyType keyType, bool trackPrincipal)
+    public virtual void Find_shadow_int_foreign_key_shared(
+        CompositeKeyType keyType,
+        bool trackPrincipal
+    )
     {
         using var context = new FindContextShared();
 
@@ -337,18 +446,73 @@ public class FindEntryTest
 
         var entities = new[]
         {
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyA", "IntKeyId", 87),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyA", "IntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyA", "IntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyA", "IntKeyId", 89),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyB", "IntKeyId", 87),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyB", "IntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyB", "IntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignIntKey>(context, "ShadowForeignIntKeyB", "IntKeyId", 89),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyA",
+                "IntKeyId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyA",
+                "IntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyA",
+                "IntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyA",
+                "IntKeyId",
+                89
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyB",
+                "IntKeyId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyB",
+                "IntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyB",
+                "IntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignIntKey>(
+                context,
+                "ShadowForeignIntKeyB",
+                "IntKeyId",
+                89
+            ),
         };
 
-        AssertMultiple(context.Set<ShadowForeignIntKey>("ShadowForeignIntKeyA"), "IntKeyId", entities, (int?)88, 99, keyType);
-        AssertMultiple(context.Set<ShadowForeignIntKey>("ShadowForeignIntKeyB"), "IntKeyId", entities, (int?)88, 99, keyType, index: 5);
+        AssertMultiple(
+            context.Set<ShadowForeignIntKey>("ShadowForeignIntKeyA"),
+            "IntKeyId",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
+        AssertMultiple(
+            context.Set<ShadowForeignIntKey>("ShadowForeignIntKeyB"),
+            "IntKeyId",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 5
+        );
     }
 
     [ConditionalTheory]
@@ -370,8 +534,23 @@ public class FindEntryTest
             CreateShadowEntityShared<ShadowIntNonKey>(context, "ShadowIntNonKeyB", "Int", 89),
         };
 
-        AssertMultiple(context.Set<ShadowIntNonKey>("ShadowIntNonKeyA"), "Int", entities, 88, 99, keyType);
-        AssertMultiple(context.Set<ShadowIntNonKey>("ShadowIntNonKeyB"), "Int", entities, 88, 99, keyType, index: 5);
+        AssertMultiple(
+            context.Set<ShadowIntNonKey>("ShadowIntNonKeyA"),
+            "Int",
+            entities,
+            88,
+            99,
+            keyType
+        );
+        AssertMultiple(
+            context.Set<ShadowIntNonKey>("ShadowIntNonKeyB"),
+            "Int",
+            entities,
+            88,
+            99,
+            keyType,
+            index: 5
+        );
     }
 
     [ConditionalTheory]
@@ -388,7 +567,15 @@ public class FindEntryTest
             context.Attach(new NullableIntKey { Id = 89 }).Entity,
         };
 
-        AssertSingle(context.Set<NullableIntKey>(), nameof(IntKey.Id), entities, (int?)88, 99, keyType, isPk: true);
+        AssertSingle(
+            context.Set<NullableIntKey>(),
+            nameof(IntKey.Id),
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -400,12 +587,25 @@ public class FindEntryTest
         using var context = new FindContext();
         var entities = new[]
         {
-            context.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }).Entity,
-            context.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }).Entity,
-            context.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }).Entity,
+            context
+                .Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 })
+                .Entity,
+            context
+                .Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 })
+                .Entity,
+            context
+                .Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 })
+                .Entity,
         };
 
-        AssertSingle(context.Set<AlternateNullableIntKey>(), nameof(AlternateNullableIntKey.AlternateId), entities, (int?)88, 99, keyType);
+        AssertSingle(
+            context.Set<AlternateNullableIntKey>(),
+            nameof(AlternateNullableIntKey.AlternateId),
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -426,14 +626,28 @@ public class FindEntryTest
 
         var entities = new[]
         {
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }).Entity,
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }).Entity,
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }).Entity,
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }).Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 })
+                .Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 })
+                .Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 })
+                .Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 })
+                .Entity,
         };
 
         AssertMultiple(
-            context.Set<ForeignNullableIntKey>(), nameof(ForeignNullableIntKey.NullableIntKeyId), entities, (int?)88, 99, keyType);
+            context.Set<ForeignNullableIntKey>(),
+            nameof(ForeignNullableIntKey.NullableIntKeyId),
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -451,7 +665,14 @@ public class FindEntryTest
             context.Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = 89 }).Entity,
         };
 
-        AssertMultiple(context.Set<NullableIntNonKey>(), nameof(NullableIntNonKey.NullableInt), entities, (int?)88, 99, keyType);
+        AssertMultiple(
+            context.Set<NullableIntNonKey>(),
+            nameof(NullableIntNonKey.NullableInt),
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -468,7 +689,15 @@ public class FindEntryTest
             CreateShadowEntity<ShadowNullableIntKey>(context, "Id", 89),
         };
 
-        AssertSingle(context.Set<ShadowNullableIntKey>(), "Id", entities, (int?)88, 99, keyType, isPk: true);
+        AssertSingle(
+            context.Set<ShadowNullableIntKey>(),
+            "Id",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -485,7 +714,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowAlternateNullableIntKey>(context, "AlternateId", 89),
         };
 
-        AssertSingle(context.Set<ShadowAlternateNullableIntKey>(), "AlternateId", entities, (int?)88, 99, keyType);
+        AssertSingle(
+            context.Set<ShadowAlternateNullableIntKey>(),
+            "AlternateId",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -495,7 +731,10 @@ public class FindEntryTest
     [InlineData(CompositeKeyType.Array, false)]
     [InlineData(CompositeKeyType.List, false)]
     [InlineData(CompositeKeyType.Enumerable, false)]
-    public virtual void Find_shadow_nullable_int_foreign_key(CompositeKeyType keyType, bool trackPrincipal)
+    public virtual void Find_shadow_nullable_int_foreign_key(
+        CompositeKeyType keyType,
+        bool trackPrincipal
+    )
     {
         using var context = new FindContext();
 
@@ -512,7 +751,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignNullableIntKey>(context, "NullableIntKeyId", 89),
         };
 
-        AssertMultiple(context.Set<ShadowForeignNullableIntKey>(), "NullableIntKeyId", entities, (int?)88, 99, keyType);
+        AssertMultiple(
+            context.Set<ShadowForeignNullableIntKey>(),
+            "NullableIntKeyId",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -530,7 +776,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowNullableIntNonKey>(context, "NullableInt", 89),
         };
 
-        AssertMultiple(context.Set<ShadowNullableIntNonKey>(), "NullableInt", entities, (int?)88, 99, keyType);
+        AssertMultiple(
+            context.Set<ShadowNullableIntNonKey>(),
+            "NullableInt",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -543,14 +796,28 @@ public class FindEntryTest
 
         var entities = new[]
         {
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }).Entity,
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = null }).Entity,
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = null }).Entity,
-            context.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }).Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 })
+                .Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = null })
+                .Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = null })
+                .Entity,
+            context
+                .Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 })
+                .Entity,
         };
 
         AssertMultiple(
-            context.Set<ForeignNullableIntKey>(), nameof(ForeignNullableIntKey.NullableIntKeyId), entities, (int?)null, 99, keyType);
+            context.Set<ForeignNullableIntKey>(),
+            nameof(ForeignNullableIntKey.NullableIntKeyId),
+            entities,
+            (int?)null,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -563,12 +830,23 @@ public class FindEntryTest
         var entities = new[]
         {
             context.Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = 87 }).Entity,
-            context.Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = null }).Entity,
-            context.Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = null }).Entity,
+            context
+                .Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = null })
+                .Entity,
+            context
+                .Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = null })
+                .Entity,
             context.Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = 89 }).Entity,
         };
 
-        AssertMultiple(context.Set<NullableIntNonKey>(), nameof(NullableIntNonKey.NullableInt), entities, (int?)null, 99, keyType);
+        AssertMultiple(
+            context.Set<NullableIntNonKey>(),
+            nameof(NullableIntNonKey.NullableInt),
+            entities,
+            (int?)null,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -587,7 +865,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignNullableIntKey>(context, "NullableIntKeyId", 89),
         };
 
-        AssertMultiple(context.Set<ShadowForeignNullableIntKey>(), "NullableIntKeyId", entities, (int?)null, 99, keyType);
+        AssertMultiple(
+            context.Set<ShadowForeignNullableIntKey>(),
+            "NullableIntKeyId",
+            entities,
+            (int?)null,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -605,7 +890,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowNullableIntNonKey>(context, "NullableInt", 89),
         };
 
-        AssertMultiple(context.Set<ShadowNullableIntNonKey>(), "NullableInt", entities, (int?)null, 99, keyType);
+        AssertMultiple(
+            context.Set<ShadowNullableIntNonKey>(),
+            "NullableInt",
+            entities,
+            (int?)null,
+            99,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -629,7 +921,16 @@ public class FindEntryTest
         };
 
         AssertSingle(setA, nameof(NullableIntKey.Id), entities, (int?)88, 99, keyType, isPk: true);
-        AssertSingle(setB, nameof(NullableIntKey.Id), entities, (int?)88, 99, keyType, isPk: true, index: 4);
+        AssertSingle(
+            setB,
+            nameof(NullableIntKey.Id),
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            isPk: true,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -644,16 +945,43 @@ public class FindEntryTest
 
         var entities = new[]
         {
-            setA.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }).Entity,
-            setA.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }).Entity,
-            setA.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }).Entity,
-            setB.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }).Entity,
-            setB.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }).Entity,
-            setB.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }).Entity,
+            setA.Attach(
+                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }
+            ).Entity,
+            setA.Attach(
+                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }
+            ).Entity,
+            setA.Attach(
+                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }
+            ).Entity,
+            setB.Attach(
+                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }
+            ).Entity,
+            setB.Attach(
+                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }
+            ).Entity,
+            setB.Attach(
+                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }
+            ).Entity,
         };
 
-        AssertSingle(setA, nameof(AlternateNullableIntKey.AlternateId), entities, (int?)88, 99, keyType);
-        AssertSingle(setB, nameof(AlternateNullableIntKey.AlternateId), entities, (int?)88, 99, keyType, index: 4);
+        AssertSingle(
+            setA,
+            nameof(AlternateNullableIntKey.AlternateId),
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
+        AssertSingle(
+            setB,
+            nameof(AlternateNullableIntKey.AlternateId),
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -663,7 +991,10 @@ public class FindEntryTest
     [InlineData(CompositeKeyType.Array, false)]
     [InlineData(CompositeKeyType.List, false)]
     [InlineData(CompositeKeyType.Enumerable, false)]
-    public virtual void Find_nullable_int_foreign_key_shared(CompositeKeyType keyType, bool trackPrincipal)
+    public virtual void Find_nullable_int_foreign_key_shared(
+        CompositeKeyType keyType,
+        bool trackPrincipal
+    )
     {
         using var context = new FindContextShared();
 
@@ -677,18 +1008,49 @@ public class FindEntryTest
         var setB = context.Set<ForeignNullableIntKey>("ForeignNullableIntKeyB");
         var entities = new[]
         {
-            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }).Entity,
-            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }).Entity,
-            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }).Entity,
-            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }).Entity,
-            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }).Entity,
-            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }).Entity,
-            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }).Entity,
-            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }).Entity,
+            setA.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }
+            ).Entity,
+            setA.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
+            ).Entity,
+            setA.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
+            ).Entity,
+            setA.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }
+            ).Entity,
+            setB.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }
+            ).Entity,
+            setB.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
+            ).Entity,
+            setB.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
+            ).Entity,
+            setB.Attach(
+                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }
+            ).Entity,
         };
 
-        AssertMultiple(setA, nameof(ForeignNullableIntKey.NullableIntKeyId), entities, (int?)88, 99, keyType);
-        AssertMultiple(setB, nameof(ForeignNullableIntKey.NullableIntKeyId), entities, (int?)88, 99, keyType, index: 5);
+        AssertMultiple(
+            setA,
+            nameof(ForeignNullableIntKey.NullableIntKeyId),
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
+        AssertMultiple(
+            setB,
+            nameof(ForeignNullableIntKey.NullableIntKeyId),
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 5
+        );
     }
 
     [ConditionalTheory]
@@ -713,8 +1075,23 @@ public class FindEntryTest
             setB.Attach(new NullableIntNonKey { Id = Guid.NewGuid(), NullableInt = 89 }).Entity,
         };
 
-        AssertMultiple(setA, nameof(NullableIntNonKey.NullableInt), entities, (int?)88, 99, keyType);
-        AssertMultiple(setB, nameof(NullableIntNonKey.NullableInt), entities, (int?)88, 99, keyType, index: 5);
+        AssertMultiple(
+            setA,
+            nameof(NullableIntNonKey.NullableInt),
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
+        AssertMultiple(
+            setB,
+            nameof(NullableIntNonKey.NullableInt),
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 5
+        );
     }
 
     [ConditionalTheory]
@@ -726,17 +1103,63 @@ public class FindEntryTest
         using var context = new FindContextShared();
         var entities = new[]
         {
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyA", "Id", 87),
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyA", "Id", 88),
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyA", "Id", 89),
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyB", "Id", 87),
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyB", "Id", 88),
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyB", "Id", 89),
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyA",
+                "Id",
+                87
+            ),
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyA",
+                "Id",
+                88
+            ),
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyA",
+                "Id",
+                89
+            ),
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyB",
+                "Id",
+                87
+            ),
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyB",
+                "Id",
+                88
+            ),
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyB",
+                "Id",
+                89
+            ),
         };
 
-        AssertSingle(context.Set<ShadowNullableIntKey>("ShadowNullableIntKeyA"), "Id", entities, (int?)88, 99, keyType, isPk: true);
         AssertSingle(
-            context.Set<ShadowNullableIntKey>("ShadowNullableIntKeyB"), "Id", entities, (int?)88, 99, keyType, isPk: true, index: 4);
+            context.Set<ShadowNullableIntKey>("ShadowNullableIntKeyA"),
+            "Id",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            isPk: true
+        );
+        AssertSingle(
+            context.Set<ShadowNullableIntKey>("ShadowNullableIntKeyB"),
+            "Id",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            isPk: true,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -748,20 +1171,62 @@ public class FindEntryTest
         using var context = new FindContextShared();
         var entities = new[]
         {
-            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(context, "ShadowAlternateNullableIntKeyA", "AlternateId", 87),
-            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(context, "ShadowAlternateNullableIntKeyA", "AlternateId", 88),
-            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(context, "ShadowAlternateNullableIntKeyA", "AlternateId", 89),
-            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(context, "ShadowAlternateNullableIntKeyB", "AlternateId", 87),
-            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(context, "ShadowAlternateNullableIntKeyB", "AlternateId", 88),
-            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(context, "ShadowAlternateNullableIntKeyB", "AlternateId", 89),
+            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(
+                context,
+                "ShadowAlternateNullableIntKeyA",
+                "AlternateId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(
+                context,
+                "ShadowAlternateNullableIntKeyA",
+                "AlternateId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(
+                context,
+                "ShadowAlternateNullableIntKeyA",
+                "AlternateId",
+                89
+            ),
+            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(
+                context,
+                "ShadowAlternateNullableIntKeyB",
+                "AlternateId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(
+                context,
+                "ShadowAlternateNullableIntKeyB",
+                "AlternateId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowAlternateNullableIntKey>(
+                context,
+                "ShadowAlternateNullableIntKeyB",
+                "AlternateId",
+                89
+            ),
         };
 
         AssertSingle(
-            context.Set<ShadowAlternateNullableIntKey>("ShadowAlternateNullableIntKeyA"), "AlternateId", entities, (int?)88, 99, keyType);
+            context.Set<ShadowAlternateNullableIntKey>("ShadowAlternateNullableIntKeyA"),
+            "AlternateId",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
 
         AssertSingle(
-            context.Set<ShadowAlternateNullableIntKey>("ShadowAlternateNullableIntKeyB"), "AlternateId", entities, (int?)88, 99, keyType,
-            index: 4);
+            context.Set<ShadowAlternateNullableIntKey>("ShadowAlternateNullableIntKeyB"),
+            "AlternateId",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 4
+        );
     }
 
     [ConditionalTheory]
@@ -771,34 +1236,99 @@ public class FindEntryTest
     [InlineData(CompositeKeyType.Array, false)]
     [InlineData(CompositeKeyType.List, false)]
     [InlineData(CompositeKeyType.Enumerable, false)]
-    public virtual void Find_shadow_nullable_int_foreign_key_shared(CompositeKeyType keyType, bool trackPrincipal)
+    public virtual void Find_shadow_nullable_int_foreign_key_shared(
+        CompositeKeyType keyType,
+        bool trackPrincipal
+    )
     {
         using var context = new FindContextShared();
 
         if (trackPrincipal)
         {
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyA", "Id", 88);
-            CreateShadowEntityShared<ShadowNullableIntKey>(context, "ShadowNullableIntKeyB", "Id", 88);
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyA",
+                "Id",
+                88
+            );
+            CreateShadowEntityShared<ShadowNullableIntKey>(
+                context,
+                "ShadowNullableIntKeyB",
+                "Id",
+                88
+            );
         }
 
         var entities = new[]
         {
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyA", "NullableIntKeyId", 87),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyA", "NullableIntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyA", "NullableIntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyA", "NullableIntKeyId", 89),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyB", "NullableIntKeyId", 87),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyB", "NullableIntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyB", "NullableIntKeyId", 88),
-            CreateShadowEntityShared<ShadowForeignNullableIntKey>(context, "ShadowForeignNullableIntKeyB", "NullableIntKeyId", 89),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyA",
+                "NullableIntKeyId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyA",
+                "NullableIntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyA",
+                "NullableIntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyA",
+                "NullableIntKeyId",
+                89
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyB",
+                "NullableIntKeyId",
+                87
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyB",
+                "NullableIntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyB",
+                "NullableIntKeyId",
+                88
+            ),
+            CreateShadowEntityShared<ShadowForeignNullableIntKey>(
+                context,
+                "ShadowForeignNullableIntKeyB",
+                "NullableIntKeyId",
+                89
+            ),
         };
 
         AssertMultiple(
-            context.Set<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyA"), "NullableIntKeyId", entities, (int?)88, 99, keyType);
+            context.Set<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyA"),
+            "NullableIntKeyId",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
 
         AssertMultiple(
-            context.Set<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyB"), "NullableIntKeyId", entities, (int?)88, 99, keyType,
-            index: 5);
+            context.Set<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyB"),
+            "NullableIntKeyId",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 5
+        );
     }
 
     [ConditionalTheory]
@@ -810,21 +1340,74 @@ public class FindEntryTest
         using var context = new FindContextShared();
         var entities = new[]
         {
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyA", "NullableInt", 87),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyA", "NullableInt", 88),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyA", "NullableInt", 88),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyA", "NullableInt", 89),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyB", "NullableInt", 87),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyB", "NullableInt", 88),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyB", "NullableInt", 88),
-            CreateShadowEntityShared<ShadowNullableIntNonKey>(context, "ShadowNullableIntNonKeyB", "NullableInt", 89),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyA",
+                "NullableInt",
+                87
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyA",
+                "NullableInt",
+                88
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyA",
+                "NullableInt",
+                88
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyA",
+                "NullableInt",
+                89
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyB",
+                "NullableInt",
+                87
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyB",
+                "NullableInt",
+                88
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyB",
+                "NullableInt",
+                88
+            ),
+            CreateShadowEntityShared<ShadowNullableIntNonKey>(
+                context,
+                "ShadowNullableIntNonKeyB",
+                "NullableInt",
+                89
+            ),
         };
 
         AssertMultiple(
-            context.Set<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyA"), "NullableInt", entities, (int?)88, 99, keyType);
+            context.Set<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyA"),
+            "NullableInt",
+            entities,
+            (int?)88,
+            99,
+            keyType
+        );
 
         AssertMultiple(
-            context.Set<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyB"), "NullableInt", entities, (int?)88, 99, keyType, index: 5);
+            context.Set<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyB"),
+            "NullableInt",
+            entities,
+            (int?)88,
+            99,
+            keyType,
+            index: 5
+        );
     }
 
     [ConditionalTheory]
@@ -841,7 +1424,15 @@ public class FindEntryTest
             context.Attach(new StringKey { Id = "89" }).Entity,
         };
 
-        AssertSingle(context.Set<StringKey>(), nameof(StringKey.Id), entities, "88", "99", keyType, isPk: true);
+        AssertSingle(
+            context.Set<StringKey>(),
+            nameof(StringKey.Id),
+            entities,
+            "88",
+            "99",
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -853,12 +1444,25 @@ public class FindEntryTest
         using var context = new FindContext();
         var entities = new[]
         {
-            context.Attach(new AlternateStringKey { Id = Guid.NewGuid(), AlternateId = "87" }).Entity,
-            context.Attach(new AlternateStringKey { Id = Guid.NewGuid(), AlternateId = "88" }).Entity,
-            context.Attach(new AlternateStringKey { Id = Guid.NewGuid(), AlternateId = "89" }).Entity,
+            context
+                .Attach(new AlternateStringKey { Id = Guid.NewGuid(), AlternateId = "87" })
+                .Entity,
+            context
+                .Attach(new AlternateStringKey { Id = Guid.NewGuid(), AlternateId = "88" })
+                .Entity,
+            context
+                .Attach(new AlternateStringKey { Id = Guid.NewGuid(), AlternateId = "89" })
+                .Entity,
         };
 
-        AssertSingle(context.Set<AlternateStringKey>(), nameof(AlternateStringKey.AlternateId), entities, "88", "99", keyType);
+        AssertSingle(
+            context.Set<AlternateStringKey>(),
+            nameof(AlternateStringKey.AlternateId),
+            entities,
+            "88",
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -885,7 +1489,14 @@ public class FindEntryTest
             context.Attach(new ForeignStringKey { Id = Guid.NewGuid(), StringKeyId = "89" }).Entity,
         };
 
-        AssertMultiple(context.Set<ForeignStringKey>(), nameof(ForeignStringKey.StringKeyId), entities, "88", "99", keyType);
+        AssertMultiple(
+            context.Set<ForeignStringKey>(),
+            nameof(ForeignStringKey.StringKeyId),
+            entities,
+            "88",
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -903,7 +1514,14 @@ public class FindEntryTest
             context.Attach(new StringNonKey { Id = Guid.NewGuid(), String = "89" }).Entity,
         };
 
-        AssertMultiple(context.Set<StringNonKey>(), nameof(StringNonKey.String), entities, "88", "99", keyType);
+        AssertMultiple(
+            context.Set<StringNonKey>(),
+            nameof(StringNonKey.String),
+            entities,
+            "88",
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -920,7 +1538,15 @@ public class FindEntryTest
             CreateShadowEntity<ShadowStringKey>(context, "Id", "89"),
         };
 
-        AssertSingle(context.Set<ShadowStringKey>(), "Id", entities, "88", "99", keyType, isPk: true);
+        AssertSingle(
+            context.Set<ShadowStringKey>(),
+            "Id",
+            entities,
+            "88",
+            "99",
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -937,7 +1563,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowAlternateStringKey>(context, "AlternateId", "89"),
         };
 
-        AssertSingle(context.Set<ShadowAlternateStringKey>(), "AlternateId", entities, "88", "99", keyType);
+        AssertSingle(
+            context.Set<ShadowAlternateStringKey>(),
+            "AlternateId",
+            entities,
+            "88",
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -947,7 +1580,10 @@ public class FindEntryTest
     [InlineData(CompositeKeyType.Array, false)]
     [InlineData(CompositeKeyType.List, false)]
     [InlineData(CompositeKeyType.Enumerable, false)]
-    public virtual void Find_shadow_string_foreign_key(CompositeKeyType keyType, bool trackPrincipal)
+    public virtual void Find_shadow_string_foreign_key(
+        CompositeKeyType keyType,
+        bool trackPrincipal
+    )
     {
         using var context = new FindContext();
 
@@ -964,7 +1600,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignStringKey>(context, "StringKeyId", "89"),
         };
 
-        AssertMultiple(context.Set<ShadowForeignStringKey>(), "StringKeyId", entities, "88", "99", keyType);
+        AssertMultiple(
+            context.Set<ShadowForeignStringKey>(),
+            "StringKeyId",
+            entities,
+            "88",
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1001,7 +1644,14 @@ public class FindEntryTest
             context.Attach(new ForeignStringKey { Id = Guid.NewGuid(), StringKeyId = "89" }).Entity,
         };
 
-        AssertMultiple(context.Set<ForeignStringKey>(), nameof(ForeignStringKey.StringKeyId), entities, null, "99", keyType);
+        AssertMultiple(
+            context.Set<ForeignStringKey>(),
+            nameof(ForeignStringKey.StringKeyId),
+            entities,
+            null,
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1019,7 +1669,14 @@ public class FindEntryTest
             context.Attach(new StringNonKey { Id = Guid.NewGuid(), String = "89" }).Entity,
         };
 
-        AssertMultiple(context.Set<StringNonKey>(), nameof(StringNonKey.String), entities, null, "99", keyType);
+        AssertMultiple(
+            context.Set<StringNonKey>(),
+            nameof(StringNonKey.String),
+            entities,
+            null,
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1037,7 +1694,14 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignStringKey>(context, "StringKeyId", "89"),
         };
 
-        AssertMultiple(context.Set<ShadowForeignStringKey>(), "StringKeyId", entities, null, "99", keyType);
+        AssertMultiple(
+            context.Set<ShadowForeignStringKey>(),
+            "StringKeyId",
+            entities,
+            null,
+            "99",
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1067,32 +1731,45 @@ public class FindEntryTest
         using var context = new FindContext();
         var entities = new[]
         {
-            context.Attach(
-                new CompositeKey
-                {
-                    Id1 = 1,
-                    Id2 = "87",
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeKey
-                {
-                    Id1 = 1,
-                    Id2 = "88",
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeKey
-                {
-                    Id1 = 1,
-                    Id2 = "89",
-                    Foo = "foo"
-                }).Entity,
+            context
+                .Attach(
+                    new CompositeKey
+                    {
+                        Id1 = 1,
+                        Id2 = "87",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeKey
+                    {
+                        Id1 = 1,
+                        Id2 = "88",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeKey
+                    {
+                        Id1 = 1,
+                        Id2 = "89",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
         };
 
         AssertSingle(
             context.Set<CompositeKey>(),
-            new[] { nameof(CompositeKey.Id1), nameof(CompositeKey.Id2), nameof(CompositeKey.Foo) }, entities, keyType, isPk: true);
+            new[] { nameof(CompositeKey.Id1), nameof(CompositeKey.Id2), nameof(CompositeKey.Foo) },
+            entities,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -1104,30 +1781,39 @@ public class FindEntryTest
         using var context = new FindContext();
         var entities = new[]
         {
-            context.Attach(
-                new AlternateCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    AlternateId1 = 1,
-                    AlternateId2 = "87",
-                    AlternateFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new AlternateCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    AlternateId1 = 1,
-                    AlternateId2 = "88",
-                    AlternateFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new AlternateCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    AlternateId1 = 1,
-                    AlternateId2 = "89",
-                    AlternateFoo = "foo"
-                }).Entity,
+            context
+                .Attach(
+                    new AlternateCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        AlternateId1 = 1,
+                        AlternateId2 = "87",
+                        AlternateFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new AlternateCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        AlternateId1 = 1,
+                        AlternateId2 = "88",
+                        AlternateFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new AlternateCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        AlternateId1 = 1,
+                        AlternateId2 = "89",
+                        AlternateFoo = "foo",
+                    }
+                )
+                .Entity,
         };
 
         AssertSingle(
@@ -1136,9 +1822,11 @@ public class FindEntryTest
             {
                 nameof(AlternateCompositeKey.AlternateId1),
                 nameof(AlternateCompositeKey.AlternateId2),
-                nameof(AlternateCompositeKey.AlternateFoo)
+                nameof(AlternateCompositeKey.AlternateFoo),
             },
-            entities, keyType);
+            entities,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1159,44 +1847,57 @@ public class FindEntryTest
                 {
                     Id1 = 1,
                     Id2 = "88",
-                    Foo = "foo"
-                });
+                    Foo = "foo",
+                }
+            );
         }
 
         var entities = new[]
         {
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = "87",
-                    CompositeKeyFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = "88",
-                    CompositeKeyFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = "88",
-                    CompositeKeyFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = "89",
-                    CompositeKeyFoo = "foo"
-                }).Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = "87",
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = "88",
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = "88",
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = "89",
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
         };
 
         AssertMultiple(
@@ -1205,9 +1906,11 @@ public class FindEntryTest
             {
                 nameof(ForeignCompositeKey.CompositeKeyId1),
                 nameof(ForeignCompositeKey.CompositeKeyId2),
-                nameof(ForeignCompositeKey.CompositeKeyFoo)
+                nameof(ForeignCompositeKey.CompositeKeyFoo),
             },
-            entities, keyType);
+            entities,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1219,44 +1922,63 @@ public class FindEntryTest
         using var context = new FindContext();
         var entities = new[]
         {
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = "87",
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = "88",
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = "88",
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = "89",
-                    Foo = "foo"
-                }).Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = "87",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = "88",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = "88",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = "89",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
         };
 
         AssertMultiple(
             context.Set<CompositeNonKey>(),
-            new[] { nameof(CompositeNonKey.Int), nameof(CompositeNonKey.String), nameof(CompositeNonKey.Foo) },
-            entities, keyType);
+            new[]
+            {
+                nameof(CompositeNonKey.Int),
+                nameof(CompositeNonKey.String),
+                nameof(CompositeNonKey.Foo),
+            },
+            entities,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1271,20 +1993,27 @@ public class FindEntryTest
             CreateShadowEntity<ShadowCompositeKey>(
                 context,
                 new[] { "Id1", "Id2", "Foo" },
-                new object[] { 1, "87", "foo" }),
+                new object[] { 1, "87", "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeKey>(
                 context,
                 new[] { "Id1", "Id2", "Foo" },
-                new object[] { 1, "88", "foo" }),
+                new object[] { 1, "88", "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeKey>(
                 context,
                 new[] { "Id1", "Id2", "Foo" },
-                new object[] { 1, "89", "foo" })
+                new object[] { 1, "89", "foo" }
+            ),
         };
 
         AssertSingle(
             context.Set<ShadowCompositeKey>(),
-            new[] { "Id1", "Id2", "Foo" }, entities, keyType, isPk: true);
+            new[] { "Id1", "Id2", "Foo" },
+            entities,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -1299,20 +2028,26 @@ public class FindEntryTest
             CreateShadowEntity<ShadowAlternateCompositeKey>(
                 context,
                 new[] { "AlternateId1", "AlternateId2", "AlternateFoo" },
-                new object[] { 1, "87", "foo" }),
+                new object[] { 1, "87", "foo" }
+            ),
             CreateShadowEntity<ShadowAlternateCompositeKey>(
                 context,
                 new[] { "AlternateId1", "AlternateId2", "AlternateFoo" },
-                new object[] { 1, "88", "foo" }),
+                new object[] { 1, "88", "foo" }
+            ),
             CreateShadowEntity<ShadowAlternateCompositeKey>(
                 context,
                 new[] { "AlternateId1", "AlternateId2", "AlternateFoo" },
-                new object[] { 1, "89", "foo" })
+                new object[] { 1, "89", "foo" }
+            ),
         };
 
         AssertSingle(
             context.Set<ShadowAlternateCompositeKey>(),
-            new[] { "AlternateId1", "AlternateId2", "AlternateFoo" }, entities, keyType);
+            new[] { "AlternateId1", "AlternateId2", "AlternateFoo" },
+            entities,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1322,7 +2057,10 @@ public class FindEntryTest
     [InlineData(CompositeKeyType.Array, false)]
     [InlineData(CompositeKeyType.List, false)]
     [InlineData(CompositeKeyType.Enumerable, false)]
-    public virtual void Find_shadow_composite_foreign_key(CompositeKeyType keyType, bool trackPrincipal)
+    public virtual void Find_shadow_composite_foreign_key(
+        CompositeKeyType keyType,
+        bool trackPrincipal
+    )
     {
         using var context = new FindContext();
 
@@ -1333,8 +2071,9 @@ public class FindEntryTest
                 {
                     Id1 = 1,
                     Id2 = "88",
-                    Foo = "foo"
-                });
+                    Foo = "foo",
+                }
+            );
         }
 
         var entities = new[]
@@ -1342,24 +2081,31 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object[] { 1, "87", "foo" }),
+                new object[] { 1, "87", "foo" }
+            ),
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object[] { 1, "88", "foo" }),
+                new object[] { 1, "88", "foo" }
+            ),
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object[] { 1, "88", "foo" }),
+                new object[] { 1, "88", "foo" }
+            ),
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object[] { 1, "89", "foo" })
+                new object[] { 1, "89", "foo" }
+            ),
         };
 
         AssertMultiple(
             context.Set<ShadowForeignCompositeKey>(),
-            new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" }, entities, keyType);
+            new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
+            entities,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1374,24 +2120,31 @@ public class FindEntryTest
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object[] { 1, "87", "foo" }),
+                new object[] { 1, "87", "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object[] { 1, "88", "foo" }),
+                new object[] { 1, "88", "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object[] { 1, "88", "foo" }),
+                new object[] { 1, "88", "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object[] { 1, "89", "foo" })
+                new object[] { 1, "89", "foo" }
+            ),
         };
 
         AssertMultiple(
             context.Set<ShadowCompositeNonKey>(),
-            new[] { "Int", "String", "Foo" }, entities, keyType);
+            new[] { "Int", "String", "Foo" },
+            entities,
+            keyType
+        );
     }
 
     [ConditionalTheory]
@@ -1404,38 +2157,50 @@ public class FindEntryTest
 
         var entities = new[]
         {
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = "87",
-                    CompositeKeyFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = null,
-                    CompositeKeyFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = null,
-                    CompositeKeyFoo = "foo"
-                }).Entity,
-            context.Attach(
-                new ForeignCompositeKey
-                {
-                    Id = Guid.NewGuid(),
-                    CompositeKeyId1 = 1,
-                    CompositeKeyId2 = "89",
-                    CompositeKeyFoo = "foo"
-                }).Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = "87",
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = null,
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = null,
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new ForeignCompositeKey
+                    {
+                        Id = Guid.NewGuid(),
+                        CompositeKeyId1 = 1,
+                        CompositeKeyId2 = "89",
+                        CompositeKeyFoo = "foo",
+                    }
+                )
+                .Entity,
         };
 
         AssertMultiple(
@@ -1444,9 +2209,12 @@ public class FindEntryTest
             {
                 nameof(ForeignCompositeKey.CompositeKeyId1),
                 nameof(ForeignCompositeKey.CompositeKeyId2),
-                nameof(ForeignCompositeKey.CompositeKeyFoo)
+                nameof(ForeignCompositeKey.CompositeKeyFoo),
             },
-            entities, keyType, withNulls: true);
+            entities,
+            keyType,
+            withNulls: true
+        );
     }
 
     [ConditionalTheory]
@@ -1458,44 +2226,64 @@ public class FindEntryTest
         using var context = new FindContext();
         var entities = new[]
         {
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = "87",
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = null,
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = null,
-                    Foo = "foo"
-                }).Entity,
-            context.Attach(
-                new CompositeNonKey
-                {
-                    Id = Guid.NewGuid(),
-                    Int = 1,
-                    String = "89",
-                    Foo = "foo"
-                }).Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = "87",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = null,
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = null,
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
+            context
+                .Attach(
+                    new CompositeNonKey
+                    {
+                        Id = Guid.NewGuid(),
+                        Int = 1,
+                        String = "89",
+                        Foo = "foo",
+                    }
+                )
+                .Entity,
         };
 
         AssertMultiple(
             context.Set<CompositeNonKey>(),
-            new[] { nameof(CompositeNonKey.Int), nameof(CompositeNonKey.String), nameof(CompositeNonKey.Foo) },
-            entities, keyType, withNulls: true);
+            new[]
+            {
+                nameof(CompositeNonKey.Int),
+                nameof(CompositeNonKey.String),
+                nameof(CompositeNonKey.Foo),
+            },
+            entities,
+            keyType,
+            withNulls: true
+        );
     }
 
     [ConditionalTheory]
@@ -1511,24 +2299,32 @@ public class FindEntryTest
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object?[] { 1, "87", "foo" }),
+                new object?[] { 1, "87", "foo" }
+            ),
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object?[] { 1, null, "foo" }),
+                new object?[] { 1, null, "foo" }
+            ),
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object?[] { 1, null, "foo" }),
+                new object?[] { 1, null, "foo" }
+            ),
             CreateShadowEntity<ShadowForeignCompositeKey>(
                 context,
                 new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
-                new object?[] { 1, "89", "foo" })
+                new object?[] { 1, "89", "foo" }
+            ),
         };
 
         AssertMultiple(
             context.Set<ShadowForeignCompositeKey>(),
-            new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" }, entities, keyType, withNulls: true);
+            new[] { "CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo" },
+            entities,
+            keyType,
+            withNulls: true
+        );
     }
 
     [ConditionalTheory]
@@ -1543,24 +2339,32 @@ public class FindEntryTest
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object?[] { 1, "87", "foo" }),
+                new object?[] { 1, "87", "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object?[] { 1, null, "foo" }),
+                new object?[] { 1, null, "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object?[] { 1, null, "foo" }),
+                new object?[] { 1, null, "foo" }
+            ),
             CreateShadowEntity<ShadowCompositeNonKey>(
                 context,
                 new[] { "Int", "String", "Foo" },
-                new object?[] { 1, "89", "foo" })
+                new object?[] { 1, "89", "foo" }
+            ),
         };
 
         AssertMultiple(
             context.Set<ShadowCompositeNonKey>(),
-            new[] { "Int", "String", "Foo" }, entities, keyType, withNulls: true);
+            new[] { "Int", "String", "Foo" },
+            entities,
+            keyType,
+            withNulls: true
+        );
     }
 
     [ConditionalTheory]
@@ -1577,7 +2381,15 @@ public class FindEntryTest
             context.Attach(new BaseType { Id = 89 }).Entity,
         };
 
-        AssertSingle(context.Set<BaseType>(), nameof(BaseType.Id), entities, 88, 99, keyType, isPk: true);
+        AssertSingle(
+            context.Set<BaseType>(),
+            nameof(BaseType.Id),
+            entities,
+            88,
+            99,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalTheory]
@@ -1594,7 +2406,15 @@ public class FindEntryTest
             context.Attach(new DerivedType { Id = 89 }).Entity,
         };
 
-        AssertSingle(context.Set<DerivedType>(), nameof(BaseType.Id), entities, 88, 99, keyType, isPk: true);
+        AssertSingle(
+            context.Set<DerivedType>(),
+            nameof(BaseType.Id),
+            entities,
+            88,
+            99,
+            keyType,
+            isPk: true
+        );
     }
 
     [ConditionalFact]
@@ -1613,7 +2433,9 @@ public class FindEntryTest
         using var context = new FindContext();
 
         var local = context.Set<AlternateIntKey>().Local;
-        Assert.Null(local.FindEntry(new[] { nameof(AlternateIntKey.AlternateId) }, new object?[] { null }));
+        Assert.Null(
+            local.FindEntry(new[] { nameof(AlternateIntKey.AlternateId) }, new object?[] { null })
+        );
     }
 
     [ConditionalFact]
@@ -1635,7 +2457,12 @@ public class FindEntryTest
 
         var local = context.Set<AlternateNullableIntKey>().Local;
         Assert.Null(local.FindEntry(nameof(AlternateNullableIntKey.AlternateId), (int?)null));
-        Assert.Null(local.FindEntry(new[] { nameof(AlternateNullableIntKey.AlternateId) }, new object?[] { null }));
+        Assert.Null(
+            local.FindEntry(
+                new[] { nameof(AlternateNullableIntKey.AlternateId) },
+                new object?[] { null }
+            )
+        );
     }
 
     [ConditionalFact]
@@ -1653,7 +2480,9 @@ public class FindEntryTest
         using var context = new FindContext();
 
         var local = context.Set<AlternateIntKey>().Local;
-        Assert.Empty(local.GetEntries(new[] { nameof(AlternateIntKey.AlternateId) }, new object?[] { null }));
+        Assert.Empty(
+            local.GetEntries(new[] { nameof(AlternateIntKey.AlternateId) }, new object?[] { null })
+        );
     }
 
     [ConditionalFact]
@@ -1673,7 +2502,12 @@ public class FindEntryTest
 
         var local = context.Set<AlternateNullableIntKey>().Local;
         Assert.Empty(local.GetEntries(nameof(AlternateNullableIntKey.AlternateId), (int?)null));
-        Assert.Empty(local.GetEntries(new[] { nameof(AlternateNullableIntKey.AlternateId) }, new object?[] { null }));
+        Assert.Empty(
+            local.GetEntries(
+                new[] { nameof(AlternateNullableIntKey.AlternateId) },
+                new object?[] { null }
+            )
+        );
     }
 
     [ConditionalFact]
@@ -1687,8 +2521,15 @@ public class FindEntryTest
 
         Assert.Null(
             local.FindEntry(
-                new[] { nameof(CompositeKey.Id1), nameof(CompositeKey.Id2), nameof(CompositeKey.Foo) },
-                new object?[] { 1, null, "foo" }));
+                new[]
+                {
+                    nameof(CompositeKey.Id1),
+                    nameof(CompositeKey.Id2),
+                    nameof(CompositeKey.Foo),
+                },
+                new object?[] { 1, null, "foo" }
+            )
+        );
     }
 
     [ConditionalFact]
@@ -1704,9 +2545,11 @@ public class FindEntryTest
                 {
                     nameof(AlternateCompositeKey.AlternateId1),
                     nameof(AlternateCompositeKey.AlternateId2),
-                    nameof(AlternateCompositeKey.AlternateFoo)
+                    nameof(AlternateCompositeKey.AlternateFoo),
                 },
-                new object?[] { null, "88", "foo" }));
+                new object?[] { null, "88", "foo" }
+            )
+        );
     }
 
     [ConditionalFact]
@@ -1717,11 +2560,15 @@ public class FindEntryTest
 
         Assert.Equal(
             CoreStrings.FindValueCountMismatch("CompositeKey", 3, 1),
-            Assert.Throws<ArgumentException>(() => local.FindEntry(0)).Message);
+            Assert.Throws<ArgumentException>(() => local.FindEntry(0)).Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(1, 3),
-            Assert.Throws<ArgumentException>(() => local.FindEntryUntyped(new object?[] { 1 })).Message);
+            Assert
+                .Throws<ArgumentException>(() => local.FindEntryUntyped(new object?[] { 1 }))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1731,8 +2578,12 @@ public class FindEntryTest
 
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
-            Assert.Throws<ArgumentException>(
-                () => context.Set<IntKey>().Local.FindEntryUntyped(new object[] { 77, 88 })).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    context.Set<IntKey>().Local.FindEntryUntyped(new object[] { 77, 88 })
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1747,48 +2598,83 @@ public class FindEntryTest
 
         Assert.Equal(
             CoreStrings.FindWrongCount(1, 3),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntryUntyped(new object[] { 77 })).Message);
+            Assert
+                .Throws<ArgumentException>(() => set.Local.FindEntryUntyped(new object[] { 77 }))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(1, 2),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1.Name, property2.Name }, oneValue)).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1.Name, property2.Name }, oneValue)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1.Name }, twoValues)).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1.Name }, twoValues)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(1, 2),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1.Name, property2.Name }, oneValue).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set
+                        .Local.GetEntries(new[] { property1.Name, property2.Name }, oneValue)
+                        .ToList()
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1.Name }, twoValues).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.GetEntries(new[] { property1.Name }, twoValues).ToList()
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(1, 2),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1, property2 }, oneValue)).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1, property2 }, oneValue)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1 }, twoValues)).Message);
+            Assert
+                .Throws<ArgumentException>(() => set.Local.FindEntry(new[] { property1 }, twoValues)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(1, 2),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1, property2 }, oneValue).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.GetEntries(new[] { property1, property2 }, oneValue).ToList()
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1 }, twoValues).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.GetEntries(new[] { property1 }, twoValues).ToList()
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1799,13 +2685,15 @@ public class FindEntryTest
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("Id", "IntKey", "int", "string"),
-            Assert.Throws<ArgumentException>(
-                () => local.FindEntry("77")).Message);
+            Assert.Throws<ArgumentException>(() => local.FindEntry("77")).Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("string", "Id", "int"),
-            Assert.Throws<ArgumentException>(
-                () => local.FindEntryUntyped(new object?[] { "77" })).Message);
+            Assert
+                .Throws<ArgumentException>(() => local.FindEntryUntyped(new object?[] { "77" }))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1818,33 +2706,49 @@ public class FindEntryTest
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("Id1", "CompositeKey", "int", "string"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(property1.Name, "1")).Message);
+            Assert.Throws<ArgumentException>(() => set.Local.FindEntry(property1.Name, "1")).Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("string", "Id1", "int"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1.Name }, new object?[] { "1" })).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1.Name }, new object?[] { "1" })
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("string", "Id1", "int"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1.Name }, new object?[] { "1" }).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.GetEntries(new[] { property1.Name }, new object?[] { "1" }).ToList()
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("string", "Id1", "int"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(property1, "1")).Message);
+            Assert.Throws<ArgumentException>(() => set.Local.FindEntry(property1, "1")).Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("string", "Id1", "int"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1 }, new object?[] { "1" })).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1 }, new object?[] { "1" })
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("string", "Id1", "int"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1 }, new object?[] { "1" }).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.GetEntries(new[] { property1 }, new object?[] { "1" }).ToList()
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1857,29 +2761,58 @@ public class FindEntryTest
 
         Assert.Equal(
             CoreStrings.FindWrongType("int", "Id2", "string"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntryUntyped(new object[] { 77, 88, "X" })).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntryUntyped(new object[] { 77, 88, "X" })
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("int", "Foo", "string"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1.Name, property2.Name }, new object?[] { 1, 2 })).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(
+                        new[] { property1.Name, property2.Name },
+                        new object?[] { 1, 2 }
+                    )
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("int", "Foo", "string"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(
-                    new[] { property1.Name, property2.Name }, new object?[] { 1, 2 }).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set
+                        .Local.GetEntries(
+                            new[] { property1.Name, property2.Name },
+                            new object?[] { 1, 2 }
+                        )
+                        .ToList()
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("int", "Foo", "string"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.FindEntry(new[] { property1, property2 }, new object?[] { 1, 2 })).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1, property2 }, new object?[] { 1, 2 })
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.FindWrongType("int", "Foo", "string"),
-            Assert.Throws<ArgumentException>(
-                () => set.Local.GetEntries(new[] { property1, property2 }, new object?[] { 1, 2 }).ToList()).Message);
+            Assert
+                .Throws<ArgumentException>(() =>
+                    set
+                        .Local.GetEntries(new[] { property1, property2 }, new object?[] { 1, 2 })
+                        .ToList()
+                )
+                .Message
+        );
     }
 
     private static void AssertSingle<TEntity, TProperty>(
@@ -1890,7 +2823,8 @@ public class FindEntryTest
         TProperty notFound,
         CompositeKeyType keyType,
         bool isPk = false,
-        int index = 1)
+        int index = 1
+    )
         where TEntity : class
     {
         var property = set.EntityType.FindProperty(propertyName)!;
@@ -1905,12 +2839,21 @@ public class FindEntryTest
 
         Assert.Same(entities[index], set.Local.FindEntry(propertyName, found)!.Entity);
         Assert.Same(entities[index], set.Local.FindEntry(property, found)!.Entity);
-        Assert.Same(entities[index], set.Local.FindEntry(new[] { propertyName }, foundList)!.Entity);
+        Assert.Same(
+            entities[index],
+            set.Local.FindEntry(new[] { propertyName }, foundList)!.Entity
+        );
         Assert.Same(entities[index], set.Local.FindEntry(new[] { property }, foundList)!.Entity);
         Assert.Same(entities[index], set.Local.GetEntries(propertyName, found).Single().Entity);
         Assert.Same(entities[index], set.Local.GetEntries(property, found).Single().Entity);
-        Assert.Same(entities[index], set.Local.GetEntries(new[] { propertyName }, foundList).Single().Entity);
-        Assert.Same(entities[index], set.Local.GetEntries(new[] { property }, foundList).Single().Entity);
+        Assert.Same(
+            entities[index],
+            set.Local.GetEntries(new[] { propertyName }, foundList).Single().Entity
+        );
+        Assert.Same(
+            entities[index],
+            set.Local.GetEntries(new[] { property }, foundList).Single().Entity
+        );
 
         if (isPk)
         {
@@ -1935,7 +2878,8 @@ public class FindEntryTest
         TProperty found,
         TProperty notFound,
         CompositeKeyType keyType,
-        int index = 1)
+        int index = 1
+    )
         where TEntity : class
     {
         var property = set.EntityType.FindProperty(propertyName)!;
@@ -1957,7 +2901,9 @@ public class FindEntryTest
         Assert.Null(set.Local.FindEntry(new[] { property }, notFoundList));
         Assert.Empty(set.Local.GetEntries(propertyName, notFound).Select(e => e.Entity));
         Assert.Empty(set.Local.GetEntries(property, notFound).Select(e => e.Entity));
-        Assert.Empty(set.Local.GetEntries(new[] { propertyName }, notFoundList).Select(e => e.Entity));
+        Assert.Empty(
+            set.Local.GetEntries(new[] { propertyName }, notFoundList).Select(e => e.Entity)
+        );
         Assert.Empty(set.Local.GetEntries(new[] { property }, notFoundList).Select(e => e.Entity));
 
         void AssertFound(IEnumerable<TEntity> actual)
@@ -1975,7 +2921,8 @@ public class FindEntryTest
         TEntity[] entities,
         CompositeKeyType keyType,
         bool isPk = false,
-        int index = 1)
+        int index = 1
+    )
         where TEntity : class
     {
         var properties = propertyNames.Select(n => set.EntityType.FindProperty(n)!).ToList();
@@ -2009,7 +2956,8 @@ public class FindEntryTest
         TEntity[] entities,
         CompositeKeyType keyType,
         int index = 1,
-        bool withNulls = false)
+        bool withNulls = false
+    )
         where TEntity : class
     {
         var properties = propertyNames.Select(n => set.EntityType.FindProperty(n)!).ToList();
@@ -2035,7 +2983,11 @@ public class FindEntryTest
         }
     }
 
-    private TEntity CreateShadowEntity<TEntity>(FindContext context, string propertyName, object? value)
+    private TEntity CreateShadowEntity<TEntity>(
+        FindContext context,
+        string propertyName,
+        object? value
+    )
         where TEntity : class, new()
     {
         var entry = context.Entry(new TEntity());
@@ -2045,7 +2997,11 @@ public class FindEntryTest
         return entry.Entity;
     }
 
-    private TEntity CreateShadowEntity<TEntity>(FindContext context, string[] propertyNames, object?[] values)
+    private TEntity CreateShadowEntity<TEntity>(
+        FindContext context,
+        string[] propertyNames,
+        object?[] values
+    )
         where TEntity : class, new()
     {
         var entry = context.Entry(new TEntity());
@@ -2063,7 +3019,8 @@ public class FindEntryTest
         FindContextShared context,
         string entityTypeName,
         string propertyName,
-        object value)
+        object value
+    )
         where TEntity : class, new()
     {
         var entry = context.Set<TEntity>(entityTypeName).Entry(new TEntity());
@@ -2077,16 +3034,19 @@ public class FindEntryTest
     {
         Array,
         List,
-        Enumerable
+        Enumerable,
     }
 
-    private static IEnumerable<object?> CreateKeyValues(CompositeKeyType keyType, params object?[] values)
-        => keyType switch
+    private static IEnumerable<object?> CreateKeyValues(
+        CompositeKeyType keyType,
+        params object?[] values
+    ) =>
+        keyType switch
         {
             CompositeKeyType.Array => values,
             CompositeKeyType.List => values.ToList(),
             CompositeKeyType.Enumerable => values.Where(o => true),
-            _ => throw new ArgumentOutOfRangeException(nameof(keyType), keyType, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(keyType), keyType, null),
         };
 
     protected class BaseType
@@ -2127,9 +3087,7 @@ public class FindEntryTest
         public int Int { get; set; }
     }
 
-    protected class ShadowIntKey
-    {
-    }
+    protected class ShadowIntKey { }
 
     protected class ShadowAlternateIntKey
     {
@@ -2172,9 +3130,7 @@ public class FindEntryTest
         public int? NullableInt { get; set; }
     }
 
-    protected class ShadowNullableIntKey
-    {
-    }
+    protected class ShadowNullableIntKey { }
 
     protected class ShadowAlternateNullableIntKey
     {
@@ -2216,9 +3172,7 @@ public class FindEntryTest
         public string? String { get; set; }
     }
 
-    protected class ShadowStringKey
-    {
-    }
+    protected class ShadowStringKey { }
 
     protected class ShadowAlternateStringKey
     {
@@ -2268,9 +3222,7 @@ public class FindEntryTest
         public string? Foo { get; set; }
     }
 
-    protected class ShadowCompositeKey
-    {
-    }
+    protected class ShadowCompositeKey { }
 
     protected class ShadowAlternateCompositeKey
     {
@@ -2305,12 +3257,11 @@ public class FindEntryTest
             modelBuilder.Entity<IntNonKey>();
 
             modelBuilder.Entity<ShadowIntKey>().Property<int>("Id").ValueGeneratedNever();
-            modelBuilder.Entity<ShadowAlternateIntKey>(
-                b =>
-                {
-                    b.Property<int>("AlternateId");
-                    b.HasAlternateKey("AlternateId");
-                });
+            modelBuilder.Entity<ShadowAlternateIntKey>(b =>
+            {
+                b.Property<int>("AlternateId");
+                b.HasAlternateKey("AlternateId");
+            });
             modelBuilder.Entity<ShadowForeignIntKey>();
             modelBuilder.Entity<ShadowIntNonKey>().Property<int>("Int");
 
@@ -2320,12 +3271,11 @@ public class FindEntryTest
             modelBuilder.Entity<NullableIntNonKey>();
 
             modelBuilder.Entity<ShadowNullableIntKey>().Property<int?>("Id").ValueGeneratedNever();
-            modelBuilder.Entity<ShadowAlternateNullableIntKey>(
-                b =>
-                {
-                    b.Property<int?>("AlternateId");
-                    b.HasAlternateKey("AlternateId");
-                });
+            modelBuilder.Entity<ShadowAlternateNullableIntKey>(b =>
+            {
+                b.Property<int?>("AlternateId");
+                b.HasAlternateKey("AlternateId");
+            });
             modelBuilder.Entity<ShadowForeignNullableIntKey>();
             modelBuilder.Entity<ShadowNullableIntNonKey>().Property<int?>("NullableInt");
 
@@ -2335,84 +3285,81 @@ public class FindEntryTest
             modelBuilder.Entity<StringNonKey>();
 
             modelBuilder.Entity<ShadowStringKey>().Property<string>("Id").ValueGeneratedNever();
-            modelBuilder.Entity<ShadowAlternateStringKey>(
-                b =>
-                {
-                    b.Property<string>("AlternateId");
-                    b.HasAlternateKey("AlternateId");
-                });
+            modelBuilder.Entity<ShadowAlternateStringKey>(b =>
+            {
+                b.Property<string>("AlternateId");
+                b.HasAlternateKey("AlternateId");
+            });
             modelBuilder.Entity<ShadowForeignStringKey>();
             modelBuilder.Entity<ShadowStringNonKey>().Property<string>("String");
 
-            modelBuilder.Entity<CompositeKey>()
-                .HasKey(
-                    e => new
-                    {
-                        e.Id1,
-                        e.Id2,
-                        e.Foo
-                    });
+            modelBuilder
+                .Entity<CompositeKey>()
+                .HasKey(e => new
+                {
+                    e.Id1,
+                    e.Id2,
+                    e.Foo,
+                });
 
-            modelBuilder.Entity<AlternateCompositeKey>()
-                .HasAlternateKey(
-                    e => new
-                    {
-                        e.AlternateId1,
-                        e.AlternateId2,
-                        e.AlternateFoo
-                    });
+            modelBuilder
+                .Entity<AlternateCompositeKey>()
+                .HasAlternateKey(e => new
+                {
+                    e.AlternateId1,
+                    e.AlternateId2,
+                    e.AlternateFoo,
+                });
 
-            modelBuilder.Entity<ForeignCompositeKey>()
+            modelBuilder
+                .Entity<ForeignCompositeKey>()
                 .HasOne(e => e.CompositeKey)
                 .WithMany()
-                .HasForeignKey(
-                    e => new
-                    {
-                        e.CompositeKeyId1,
-                        e.CompositeKeyId2,
-                        e.CompositeKeyFoo
-                    });
+                .HasForeignKey(e => new
+                {
+                    e.CompositeKeyId1,
+                    e.CompositeKeyId2,
+                    e.CompositeKeyFoo,
+                });
 
             modelBuilder.Entity<CompositeNonKey>();
 
-            modelBuilder.Entity<ShadowCompositeKey>(
-                b =>
-                {
-                    b.Property<int>("Id1");
-                    b.Property<string>("Id2");
-                    b.Property<string>("Foo");
-                    b.HasKey("Id1", "Id2", "Foo");
-                });
+            modelBuilder.Entity<ShadowCompositeKey>(b =>
+            {
+                b.Property<int>("Id1");
+                b.Property<string>("Id2");
+                b.Property<string>("Foo");
+                b.HasKey("Id1", "Id2", "Foo");
+            });
 
-            modelBuilder.Entity<ShadowAlternateCompositeKey>(
-                b =>
-                {
-                    b.Property<int>("AlternateId1");
-                    b.Property<string>("AlternateId2");
-                    b.Property<string>("AlternateFoo");
-                    b.HasAlternateKey("AlternateId1", "AlternateId2", "AlternateFoo");
-                });
+            modelBuilder.Entity<ShadowAlternateCompositeKey>(b =>
+            {
+                b.Property<int>("AlternateId1");
+                b.Property<string>("AlternateId2");
+                b.Property<string>("AlternateFoo");
+                b.HasAlternateKey("AlternateId1", "AlternateId2", "AlternateFoo");
+            });
 
-            modelBuilder.Entity<ShadowForeignCompositeKey>()
+            modelBuilder
+                .Entity<ShadowForeignCompositeKey>()
                 .HasOne(e => e.CompositeKey)
                 .WithMany()
                 .HasForeignKey("CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo");
 
             modelBuilder.Entity<ShadowCompositeNonKey>().Property<string>("String");
-            modelBuilder.Entity<ShadowCompositeNonKey>(
-                b =>
-                {
-                    b.Property<int?>("Int");
-                    b.Property<string?>("String");
-                    b.Property<string?>("Foo");
-                });
+            modelBuilder.Entity<ShadowCompositeNonKey>(b =>
+            {
+                b.Property<int?>("Int");
+                b.Property<string?>("String");
+                b.Property<string?>("Foo");
+            });
 
             modelBuilder.Entity<BaseType>();
             modelBuilder.Entity<DerivedType>();
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(FindContext));
     }
@@ -2430,17 +3377,33 @@ public class FindEntryTest
         {
             modelBuilder.SharedTypeEntity<IntKey>("IntKeyA");
             modelBuilder.SharedTypeEntity<IntKey>("IntKeyB");
-            modelBuilder.SharedTypeEntity<AlternateIntKey>("AlternateIntKeyA").HasAlternateKey(e => e.AlternateId);
-            modelBuilder.SharedTypeEntity<AlternateIntKey>("AlternateIntKeyB").HasAlternateKey(e => e.AlternateId);
+            modelBuilder
+                .SharedTypeEntity<AlternateIntKey>("AlternateIntKeyA")
+                .HasAlternateKey(e => e.AlternateId);
+            modelBuilder
+                .SharedTypeEntity<AlternateIntKey>("AlternateIntKeyB")
+                .HasAlternateKey(e => e.AlternateId);
 
-            modelBuilder.SharedTypeEntity<ForeignIntKey>("ForeignIntKeyA").HasOne("IntKeyA", "IntKey").WithMany();
-            modelBuilder.SharedTypeEntity<ForeignIntKey>("ForeignIntKeyB").HasOne("IntKeyB", "IntKey").WithMany();
+            modelBuilder
+                .SharedTypeEntity<ForeignIntKey>("ForeignIntKeyA")
+                .HasOne("IntKeyA", "IntKey")
+                .WithMany();
+            modelBuilder
+                .SharedTypeEntity<ForeignIntKey>("ForeignIntKeyB")
+                .HasOne("IntKeyB", "IntKey")
+                .WithMany();
 
             modelBuilder.SharedTypeEntity<IntNonKey>("IntNonKeyA");
             modelBuilder.SharedTypeEntity<IntNonKey>("IntNonKeyB");
 
-            modelBuilder.SharedTypeEntity<ShadowIntKey>("ShadowIntKeyA").Property<int>("Id").ValueGeneratedNever();
-            modelBuilder.SharedTypeEntity<ShadowIntKey>("ShadowIntKeyB").Property<int>("Id").ValueGeneratedNever();
+            modelBuilder
+                .SharedTypeEntity<ShadowIntKey>("ShadowIntKeyA")
+                .Property<int>("Id")
+                .ValueGeneratedNever();
+            modelBuilder
+                .SharedTypeEntity<ShadowIntKey>("ShadowIntKeyB")
+                .Property<int>("Id")
+                .ValueGeneratedNever();
 
             modelBuilder.SharedTypeEntity<ShadowAlternateIntKey>(
                 "ShadowAlternateIntKeyA",
@@ -2448,36 +3411,58 @@ public class FindEntryTest
                 {
                     b.Property<int>("AlternateId");
                     b.HasAlternateKey("AlternateId");
-                });
+                }
+            );
             modelBuilder.SharedTypeEntity<ShadowAlternateIntKey>(
                 "ShadowAlternateIntKeyB",
                 b =>
                 {
                     b.Property<int>("AlternateId");
                     b.HasAlternateKey("AlternateId");
-                });
+                }
+            );
 
-            modelBuilder.SharedTypeEntity<ShadowForeignIntKey>("ShadowForeignIntKeyA").HasOne("ShadowIntKeyA", "IntKey").WithMany();
-            modelBuilder.SharedTypeEntity<ShadowForeignIntKey>("ShadowForeignIntKeyB").HasOne("ShadowIntKeyB", "IntKey").WithMany();
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignIntKey>("ShadowForeignIntKeyA")
+                .HasOne("ShadowIntKeyA", "IntKey")
+                .WithMany();
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignIntKey>("ShadowForeignIntKeyB")
+                .HasOne("ShadowIntKeyB", "IntKey")
+                .WithMany();
 
             modelBuilder.SharedTypeEntity<ShadowIntNonKey>("ShadowIntNonKeyA").Property<int>("Int");
             modelBuilder.SharedTypeEntity<ShadowIntNonKey>("ShadowIntNonKeyB").Property<int>("Int");
 
             modelBuilder.SharedTypeEntity<NullableIntKey>("NullableIntKeyA");
             modelBuilder.SharedTypeEntity<NullableIntKey>("NullableIntKeyB");
-            modelBuilder.SharedTypeEntity<AlternateNullableIntKey>("AlternateNullableIntKeyA").HasAlternateKey(e => e.AlternateId);
-            modelBuilder.SharedTypeEntity<AlternateNullableIntKey>("AlternateNullableIntKeyB").HasAlternateKey(e => e.AlternateId);
+            modelBuilder
+                .SharedTypeEntity<AlternateNullableIntKey>("AlternateNullableIntKeyA")
+                .HasAlternateKey(e => e.AlternateId);
+            modelBuilder
+                .SharedTypeEntity<AlternateNullableIntKey>("AlternateNullableIntKeyB")
+                .HasAlternateKey(e => e.AlternateId);
 
-            modelBuilder.SharedTypeEntity<ForeignNullableIntKey>("ForeignNullableIntKeyA").HasOne("NullableIntKeyA", "NullableIntKey")
+            modelBuilder
+                .SharedTypeEntity<ForeignNullableIntKey>("ForeignNullableIntKeyA")
+                .HasOne("NullableIntKeyA", "NullableIntKey")
                 .WithMany();
-            modelBuilder.SharedTypeEntity<ForeignNullableIntKey>("ForeignNullableIntKeyB").HasOne("NullableIntKeyB", "NullableIntKey")
+            modelBuilder
+                .SharedTypeEntity<ForeignNullableIntKey>("ForeignNullableIntKeyB")
+                .HasOne("NullableIntKeyB", "NullableIntKey")
                 .WithMany();
 
             modelBuilder.SharedTypeEntity<NullableIntNonKey>("NullableIntNonKeyA");
             modelBuilder.SharedTypeEntity<NullableIntNonKey>("NullableIntNonKeyB");
 
-            modelBuilder.SharedTypeEntity<ShadowNullableIntKey>("ShadowNullableIntKeyA").Property<int?>("Id").ValueGeneratedNever();
-            modelBuilder.SharedTypeEntity<ShadowNullableIntKey>("ShadowNullableIntKeyB").Property<int?>("Id").ValueGeneratedNever();
+            modelBuilder
+                .SharedTypeEntity<ShadowNullableIntKey>("ShadowNullableIntKeyA")
+                .Property<int?>("Id")
+                .ValueGeneratedNever();
+            modelBuilder
+                .SharedTypeEntity<ShadowNullableIntKey>("ShadowNullableIntKeyB")
+                .Property<int?>("Id")
+                .ValueGeneratedNever();
 
             modelBuilder.SharedTypeEntity<ShadowAlternateNullableIntKey>(
                 "ShadowAlternateNullableIntKeyA",
@@ -2485,36 +3470,62 @@ public class FindEntryTest
                 {
                     b.Property<int?>("AlternateId");
                     b.HasAlternateKey("AlternateId");
-                });
+                }
+            );
             modelBuilder.SharedTypeEntity<ShadowAlternateNullableIntKey>(
                 "ShadowAlternateNullableIntKeyB",
                 b =>
                 {
                     b.Property<int?>("AlternateId");
                     b.HasAlternateKey("AlternateId");
-                });
+                }
+            );
 
-            modelBuilder.SharedTypeEntity<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyA")
-                .HasOne("ShadowNullableIntKeyA", "NullableIntKey").WithMany();
-            modelBuilder.SharedTypeEntity<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyB")
-                .HasOne("ShadowNullableIntKeyB", "NullableIntKey").WithMany();
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyA")
+                .HasOne("ShadowNullableIntKeyA", "NullableIntKey")
+                .WithMany();
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignNullableIntKey>("ShadowForeignNullableIntKeyB")
+                .HasOne("ShadowNullableIntKeyB", "NullableIntKey")
+                .WithMany();
 
-            modelBuilder.SharedTypeEntity<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyA").Property<int?>("NullableInt");
-            modelBuilder.SharedTypeEntity<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyB").Property<int?>("NullableInt");
+            modelBuilder
+                .SharedTypeEntity<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyA")
+                .Property<int?>("NullableInt");
+            modelBuilder
+                .SharedTypeEntity<ShadowNullableIntNonKey>("ShadowNullableIntNonKeyB")
+                .Property<int?>("NullableInt");
 
             modelBuilder.SharedTypeEntity<StringKey>("StringKeyA");
             modelBuilder.SharedTypeEntity<StringKey>("StringKeyB");
-            modelBuilder.SharedTypeEntity<AlternateStringKey>("AlternateStringKeyA").HasAlternateKey(e => e.AlternateId);
-            modelBuilder.SharedTypeEntity<AlternateStringKey>("AlternateStringKeyB").HasAlternateKey(e => e.AlternateId);
+            modelBuilder
+                .SharedTypeEntity<AlternateStringKey>("AlternateStringKeyA")
+                .HasAlternateKey(e => e.AlternateId);
+            modelBuilder
+                .SharedTypeEntity<AlternateStringKey>("AlternateStringKeyB")
+                .HasAlternateKey(e => e.AlternateId);
 
-            modelBuilder.SharedTypeEntity<ForeignStringKey>("ForeignStringKeyA").HasOne("StringKeyA", "StringKey").WithMany();
-            modelBuilder.SharedTypeEntity<ForeignStringKey>("ForeignStringKeyB").HasOne("StringKeyB", "StringKey").WithMany();
+            modelBuilder
+                .SharedTypeEntity<ForeignStringKey>("ForeignStringKeyA")
+                .HasOne("StringKeyA", "StringKey")
+                .WithMany();
+            modelBuilder
+                .SharedTypeEntity<ForeignStringKey>("ForeignStringKeyB")
+                .HasOne("StringKeyB", "StringKey")
+                .WithMany();
 
             modelBuilder.SharedTypeEntity<StringNonKey>("StringNonKeyA");
             modelBuilder.SharedTypeEntity<StringNonKey>("StringNonKeyB");
 
-            modelBuilder.SharedTypeEntity<ShadowStringKey>("ShadowStringKeyA").Property<string>("Id").ValueGeneratedNever();
-            modelBuilder.SharedTypeEntity<ShadowStringKey>("ShadowStringKeyB").Property<string>("Id").ValueGeneratedNever();
+            modelBuilder
+                .SharedTypeEntity<ShadowStringKey>("ShadowStringKeyA")
+                .Property<string>("Id")
+                .ValueGeneratedNever();
+            modelBuilder
+                .SharedTypeEntity<ShadowStringKey>("ShadowStringKeyB")
+                .Property<string>("Id")
+                .ValueGeneratedNever();
 
             modelBuilder.SharedTypeEntity<ShadowAlternateStringKey>(
                 "ShadowAlternateStringKeyA",
@@ -2522,62 +3533,74 @@ public class FindEntryTest
                 {
                     b.Property<string>("AlternateId");
                     b.HasAlternateKey("AlternateId");
-                });
+                }
+            );
             modelBuilder.SharedTypeEntity<ShadowAlternateStringKey>(
                 "ShadowAlternateStringKeyB",
                 b =>
                 {
                     b.Property<string>("AlternateId");
                     b.HasAlternateKey("AlternateId");
+                }
+            );
+
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignStringKey>("ShadowForeignStringKeyA")
+                .HasOne("ShadowStringKeyA", "StringKey")
+                .WithMany();
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignStringKey>("ShadowForeignStringKeyB")
+                .HasOne("ShadowStringKeyB", "StringKey")
+                .WithMany();
+
+            modelBuilder
+                .SharedTypeEntity<ShadowStringNonKey>("ShadowStringNonKeyA")
+                .Property<string>("String");
+            modelBuilder
+                .SharedTypeEntity<ShadowStringNonKey>("ShadowStringNonKeyB")
+                .Property<string>("String");
+
+            modelBuilder
+                .SharedTypeEntity<CompositeKey>("CompositeKeyA")
+                .HasKey(e => new
+                {
+                    e.Id1,
+                    e.Id2,
+                    e.Foo,
+                });
+            modelBuilder
+                .SharedTypeEntity<CompositeKey>("CompositeKeyB")
+                .HasKey(e => new
+                {
+                    e.Id1,
+                    e.Id2,
+                    e.Foo,
                 });
 
-            modelBuilder.SharedTypeEntity<ShadowForeignStringKey>("ShadowForeignStringKeyA").HasOne("ShadowStringKeyA", "StringKey")
-                .WithMany();
-            modelBuilder.SharedTypeEntity<ShadowForeignStringKey>("ShadowForeignStringKeyB").HasOne("ShadowStringKeyB", "StringKey")
-                .WithMany();
+            modelBuilder
+                .SharedTypeEntity<AlternateCompositeKey>("AlternateCompositeKeyA")
+                .HasAlternateKey(e => new
+                {
+                    e.AlternateId1,
+                    e.AlternateId2,
+                    e.AlternateFoo,
+                });
+            modelBuilder
+                .SharedTypeEntity<AlternateCompositeKey>("AlternateCompositeKeyB")
+                .HasAlternateKey(e => new
+                {
+                    e.AlternateId1,
+                    e.AlternateId2,
+                    e.AlternateFoo,
+                });
 
-            modelBuilder.SharedTypeEntity<ShadowStringNonKey>("ShadowStringNonKeyA").Property<string>("String");
-            modelBuilder.SharedTypeEntity<ShadowStringNonKey>("ShadowStringNonKeyB").Property<string>("String");
-
-            modelBuilder.SharedTypeEntity<CompositeKey>("CompositeKeyA")
-                .HasKey(
-                    e => new
-                    {
-                        e.Id1,
-                        e.Id2,
-                        e.Foo
-                    });
-            modelBuilder.SharedTypeEntity<CompositeKey>("CompositeKeyB")
-                .HasKey(
-                    e => new
-                    {
-                        e.Id1,
-                        e.Id2,
-                        e.Foo
-                    });
-
-            modelBuilder.SharedTypeEntity<AlternateCompositeKey>("AlternateCompositeKeyA")
-                .HasAlternateKey(
-                    e => new
-                    {
-                        e.AlternateId1,
-                        e.AlternateId2,
-                        e.AlternateFoo
-                    });
-            modelBuilder.SharedTypeEntity<AlternateCompositeKey>("AlternateCompositeKeyB")
-                .HasAlternateKey(
-                    e => new
-                    {
-                        e.AlternateId1,
-                        e.AlternateId2,
-                        e.AlternateFoo
-                    });
-
-            modelBuilder.SharedTypeEntity<ForeignCompositeKey>("ForeignCompositeKeyA")
+            modelBuilder
+                .SharedTypeEntity<ForeignCompositeKey>("ForeignCompositeKeyA")
                 .HasOne("CompositeKeyA", "CompositeKey")
                 .WithMany()
                 .HasForeignKey("CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo");
-            modelBuilder.SharedTypeEntity<ForeignCompositeKey>("ForeignCompositeKeyB")
+            modelBuilder
+                .SharedTypeEntity<ForeignCompositeKey>("ForeignCompositeKeyB")
                 .HasOne("CompositeKeyB", "CompositeKey")
                 .WithMany()
                 .HasForeignKey("CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo");
@@ -2593,7 +3616,8 @@ public class FindEntryTest
                     b.Property<string>("Id2");
                     b.Property<string>("Foo");
                     b.HasKey("Id1", "Id2", "Foo");
-                });
+                }
+            );
             modelBuilder.SharedTypeEntity<ShadowCompositeKey>(
                 "ShadowCompositeKeyB",
                 b =>
@@ -2602,7 +3626,8 @@ public class FindEntryTest
                     b.Property<string>("Id2");
                     b.Property<string>("Foo");
                     b.HasKey("Id1", "Id2", "Foo");
-                });
+                }
+            );
 
             modelBuilder.SharedTypeEntity<ShadowAlternateCompositeKey>(
                 "ShadowAlternateCompositeKeyA",
@@ -2612,7 +3637,8 @@ public class FindEntryTest
                     b.Property<string>("AlternateId2");
                     b.Property<string>("AlternateFoo");
                     b.HasAlternateKey("AlternateId1", "AlternateId2", "AlternateFoo");
-                });
+                }
+            );
             modelBuilder.SharedTypeEntity<ShadowAlternateCompositeKey>(
                 "ShadowAlternateCompositeKeyB",
                 b =>
@@ -2621,19 +3647,26 @@ public class FindEntryTest
                     b.Property<string>("AlternateId2");
                     b.Property<string>("AlternateFoo");
                     b.HasAlternateKey("AlternateId1", "AlternateId2", "AlternateFoo");
-                });
+                }
+            );
 
-            modelBuilder.SharedTypeEntity<ShadowForeignCompositeKey>("ShadowForeignCompositeKeyA")
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignCompositeKey>("ShadowForeignCompositeKeyA")
                 .HasOne("ShadowCompositeKeyA", "CompositeKey")
                 .WithMany()
                 .HasForeignKey("CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo");
-            modelBuilder.SharedTypeEntity<ShadowForeignCompositeKey>("ShadowForeignCompositeKeyB")
+            modelBuilder
+                .SharedTypeEntity<ShadowForeignCompositeKey>("ShadowForeignCompositeKeyB")
                 .HasOne("ShadowCompositeKeyB", "CompositeKey")
                 .WithMany()
                 .HasForeignKey("CompositeKeyId1", "CompositeKeyId2", "CompositeKeyFoo");
 
-            modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyA").Property<string>("String");
-            modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyB").Property<string>("String");
+            modelBuilder
+                .SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyA")
+                .Property<string>("String");
+            modelBuilder
+                .SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyB")
+                .Property<string>("String");
 
             modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>(
                 "ShadowCompositeNonKeyA",
@@ -2642,7 +3675,8 @@ public class FindEntryTest
                     b.Property<int?>("Int");
                     b.Property<string?>("String");
                     b.Property<string?>("Foo");
-                });
+                }
+            );
             modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>(
                 "ShadowCompositeNonKeyB",
                 b =>
@@ -2650,11 +3684,12 @@ public class FindEntryTest
                     b.Property<int?>("Int");
                     b.Property<string?>("String");
                     b.Property<string?>("Foo");
-                });
+                }
+            );
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(FindContextShared));
     }

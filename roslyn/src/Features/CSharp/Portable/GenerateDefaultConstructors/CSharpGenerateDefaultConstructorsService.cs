@@ -17,40 +17,76 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.GenerateDefaultConstructors
 {
-    [ExportLanguageService(typeof(IGenerateDefaultConstructorsService), LanguageNames.CSharp), Shared]
-    internal class CSharpGenerateDefaultConstructorsService : AbstractGenerateDefaultConstructorsService<CSharpGenerateDefaultConstructorsService>
+    [
+        ExportLanguageService(typeof(IGenerateDefaultConstructorsService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal class CSharpGenerateDefaultConstructorsService
+        : AbstractGenerateDefaultConstructorsService<CSharpGenerateDefaultConstructorsService>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateDefaultConstructorsService()
-        {
-        }
+        public CSharpGenerateDefaultConstructorsService() { }
 
         protected override bool TryInitializeState(
-            SemanticDocument semanticDocument, TextSpan textSpan, CancellationToken cancellationToken,
-            [NotNullWhen(true)] out INamedTypeSymbol? classType)
+            SemanticDocument semanticDocument,
+            TextSpan textSpan,
+            CancellationToken cancellationToken,
+            [NotNullWhen(true)] out INamedTypeSymbol? classType
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Offer the feature if we're on the header / between members of the class/struct,
             // or if we're on the first base-type of a class
 
-            var helpers = semanticDocument.Document.GetRequiredLanguageService<IRefactoringHelpersService>();
-            if (helpers.IsOnTypeHeader(semanticDocument.Root, textSpan.Start, out var typeDeclaration) ||
-                helpers.IsBetweenTypeMembers(semanticDocument.Text, semanticDocument.Root, textSpan.Start, out typeDeclaration))
+            var helpers =
+                semanticDocument.Document.GetRequiredLanguageService<IRefactoringHelpersService>();
+            if (
+                helpers.IsOnTypeHeader(
+                    semanticDocument.Root,
+                    textSpan.Start,
+                    out var typeDeclaration
+                )
+                || helpers.IsBetweenTypeMembers(
+                    semanticDocument.Text,
+                    semanticDocument.Root,
+                    textSpan.Start,
+                    out typeDeclaration
+                )
+            )
             {
-                classType = semanticDocument.SemanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken) as INamedTypeSymbol;
+                classType =
+                    semanticDocument.SemanticModel.GetDeclaredSymbol(
+                        typeDeclaration,
+                        cancellationToken
+                    ) as INamedTypeSymbol;
                 return classType?.TypeKind is TypeKind.Class or TypeKind.Struct;
             }
 
             var syntaxTree = semanticDocument.SyntaxTree;
             var node = semanticDocument.Root.FindToken(textSpan.Start).GetAncestor<TypeSyntax>();
-            if (node is { Parent: BaseTypeSyntax { Parent: BaseListSyntax { Types: [var firstType, ..] } baseList } })
-            {
-                if (baseList.Parent is TypeDeclarationSyntax(SyntaxKind.ClassDeclaration or SyntaxKind.RecordDeclaration) parentTypeDecl &&
-                    firstType.Type == node)
+            if (
+                node is
                 {
-                    classType = semanticDocument.SemanticModel.GetDeclaredSymbol(parentTypeDecl, cancellationToken);
+                    Parent: BaseTypeSyntax
+                    {
+                        Parent: BaseListSyntax { Types: [var firstType, ..] } baseList
+                    }
+                }
+            )
+            {
+                if (
+                    baseList.Parent
+                        is TypeDeclarationSyntax
+                        (SyntaxKind.ClassDeclaration or SyntaxKind.RecordDeclaration) parentTypeDecl
+                    && firstType.Type == node
+                )
+                {
+                    classType = semanticDocument.SemanticModel.GetDeclaredSymbol(
+                        parentTypeDecl,
+                        cancellationToken
+                    );
                     return classType != null;
                 }
             }

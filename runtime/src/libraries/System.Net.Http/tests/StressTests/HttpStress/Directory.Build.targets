@@ -1,6 +1,5 @@
 <Project>
   <Import Project="$(TargetingPacksTargetsLocation)" />
-
   <PropertyGroup>
     <!--
       Define this here because the SDK resets it

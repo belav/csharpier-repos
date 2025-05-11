@@ -1,4 +1,7 @@
-<Type Name="ExplorerBar+SpecialGroupHead" FullName="System.Windows.Forms.VisualStyles.ExplorerBar+SpecialGroupHead">
+<Type
+  Name="ExplorerBar+SpecialGroupHead"
+  FullName="System.Windows.Forms.VisualStyles.ExplorerBar+SpecialGroupHead"
+>
   <TypeSignature Language="C#" Value="public static class ExplorerBar.SpecialGroupHead" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>

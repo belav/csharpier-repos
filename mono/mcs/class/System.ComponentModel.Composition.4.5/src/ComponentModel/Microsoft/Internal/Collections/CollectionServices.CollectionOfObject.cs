@@ -10,7 +10,10 @@ namespace Microsoft.Internal.Collections
 {
     internal static partial class CollectionServices
     {
-        public static ICollection<object> GetCollectionWrapper(Type itemType, object collectionObject)
+        public static ICollection<object> GetCollectionWrapper(
+            Type itemType,
+            object collectionObject
+        )
         {
             Assumes.NotNull(itemType, collectionObject);
 
@@ -100,7 +103,7 @@ namespace Microsoft.Internal.Collections
 
             public void Add(object item)
             {
-                this._collectionOfT.Add((T) item);
+                this._collectionOfT.Add((T)item);
             }
 
             public void Clear()

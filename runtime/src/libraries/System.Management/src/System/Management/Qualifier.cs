@@ -46,7 +46,7 @@ namespace System.Management
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//
     public class QualifierData
     {
-        private readonly ManagementBaseObject parent;  //need access to IWbemClassObject pointer to be able to refresh qualifiers
+        private readonly ManagementBaseObject parent; //need access to IWbemClassObject pointer to be able to refresh qualifiers
         private readonly string propertyOrMethodName; //remains null for object qualifiers
         private readonly string qualifierName;
         private readonly QualifierType qualifierType;
@@ -54,7 +54,12 @@ namespace System.Management
         private int qualifierFlavor;
         private IWbemQualifierSetFreeThreaded qualifierSet;
 
-        internal QualifierData(ManagementBaseObject parent, string propName, string qualName, QualifierType type)
+        internal QualifierData(
+            ManagementBaseObject parent,
+            string propName,
+            string qualName,
+            QualifierType type
+        )
         {
             this.parent = parent;
             this.propertyOrMethodName = propName;
@@ -69,16 +74,29 @@ namespace System.Management
             qualifierSet = null;
             int status = qualifierType switch
             {
-                QualifierType.ObjectQualifier => parent.wbemObject.GetQualifierSet_(out qualifierSet),
-                QualifierType.PropertyQualifier => parent.wbemObject.GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
-                QualifierType.MethodQualifier => parent.wbemObject.GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
+                QualifierType.ObjectQualifier => parent.wbemObject.GetQualifierSet_(
+                    out qualifierSet
+                ),
+                QualifierType.PropertyQualifier => parent.wbemObject.GetPropertyQualifierSet_(
+                    propertyOrMethodName,
+                    out qualifierSet
+                ),
+                QualifierType.MethodQualifier => parent.wbemObject.GetMethodQualifierSet_(
+                    propertyOrMethodName,
+                    out qualifierSet
+                ),
                 _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), //is this the best fit error ??
             };
             if ((status & 0x80000000) == 0) //success
             {
                 qualifierValue = null; //Make sure it's null so that we don't leak !
                 if (qualifierSet != null)
-                    status = qualifierSet.Get_(qualifierName, 0, ref qualifierValue, ref qualifierFlavor);
+                    status = qualifierSet.Get_(
+                        qualifierName,
+                        0,
+                        ref qualifierValue,
+                        ref qualifierFlavor
+                    );
             }
 
             if ((status & 0xfffff000) == 0x80041000) //WMI error
@@ -86,7 +104,6 @@ namespace System.Management
             else if ((status & 0x80000000) != 0) //any failure
                 Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
         }
-
 
         private static object MapQualValueToWmiValue(object qualVal)
         {
@@ -96,7 +113,12 @@ namespace System.Management
             {
                 if (qualVal is Array)
                 {
-                    if ((qualVal is int[]) || (qualVal is double[]) || (qualVal is string[]) || (qualVal is bool[]))
+                    if (
+                        (qualVal is int[])
+                        || (qualVal is double[])
+                        || (qualVal is string[])
+                        || (qualVal is bool[])
+                    )
                         wmiValue = qualVal;
                     else
                     {
@@ -108,13 +130,21 @@ namespace System.Management
                         {
                             wmiValue = new int[length];
                             for (int i = 0; i < length; i++)
-                                ((int[])(wmiValue))[i] = Convert.ToInt32(valArray.GetValue(i), (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(int)));
+                                ((int[])(wmiValue))[i] = Convert.ToInt32(
+                                    valArray.GetValue(i),
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(int))
+                                );
                         }
                         else if (elementType == typeof(double))
                         {
                             wmiValue = new double[length];
                             for (int i = 0; i < length; i++)
-                                ((double[])(wmiValue))[i] = Convert.ToDouble(valArray.GetValue(i), (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double)));
+                                ((double[])(wmiValue))[i] = Convert.ToDouble(
+                                    valArray.GetValue(i),
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(double))
+                                );
                         }
                         else if (elementType == typeof(string))
                         {
@@ -126,7 +156,11 @@ namespace System.Management
                         {
                             wmiValue = new bool[length];
                             for (int i = 0; i < length; i++)
-                                ((bool[])(wmiValue))[i] = Convert.ToBoolean(valArray.GetValue(i), (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(bool)));
+                                ((bool[])(wmiValue))[i] = Convert.ToBoolean(
+                                    valArray.GetValue(i),
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(bool))
+                                );
                         }
                         else
                             wmiValue = valArray; //should this throw ?
@@ -138,7 +172,6 @@ namespace System.Management
 
             return wmiValue;
         }
-
 
         /// <summary>
         ///    <para>Represents the name of the qualifier.</para>
@@ -179,8 +212,11 @@ namespace System.Management
                 RefreshQualifierInfo();
                 object newValue = MapQualValueToWmiValue(value);
 
-                status = qualifierSet.Put_(qualifierName, ref newValue,
-                    qualifierFlavor & ~(int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_ORIGIN);
+                status = qualifierSet.Put_(
+                    qualifierName,
+                    ref newValue,
+                    qualifierFlavor & ~(int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_ORIGIN
+                );
 
                 if ((status & 0xfffff000) == 0x80041000)
                     ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
@@ -207,8 +243,10 @@ namespace System.Management
             get
             {
                 RefreshQualifierInfo();
-                return ((int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_AMENDED ==
-                    (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_AMENDED));
+                return (
+                    (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_AMENDED
+                    == (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_AMENDED)
+                );
             }
             set
             {
@@ -245,8 +283,10 @@ namespace System.Management
             get
             {
                 RefreshQualifierInfo();
-                return ((int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_ORIGIN_LOCAL ==
-                    (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_ORIGIN));
+                return (
+                    (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_ORIGIN_LOCAL
+                    == (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_ORIGIN)
+                );
             }
         }
 
@@ -263,8 +303,13 @@ namespace System.Management
             get
             {
                 RefreshQualifierInfo();
-                return ((int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE ==
-                    (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE));
+                return (
+                    (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE
+                    == (
+                        qualifierFlavor
+                        & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE
+                    )
+                );
             }
             set
             {
@@ -301,8 +346,13 @@ namespace System.Management
             get
             {
                 RefreshQualifierInfo();
-                return ((int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS ==
-                    (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS));
+                return (
+                    (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS
+                    == (
+                        qualifierFlavor
+                        & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS
+                    )
+                );
             }
             set
             {
@@ -315,7 +365,8 @@ namespace System.Management
                 if (value)
                     flavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
                 else
-                    flavor &= ~(int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
+                    flavor &= ~(int)
+                        tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
 
                 status = qualifierSet.Put_(qualifierName, ref qualifierValue, flavor);
 
@@ -339,8 +390,10 @@ namespace System.Management
             get
             {
                 RefreshQualifierInfo();
-                return ((int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_OVERRIDABLE ==
-                    (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_PERMISSIONS));
+                return (
+                    (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_OVERRIDABLE
+                    == (qualifierFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_MASK_PERMISSIONS)
+                );
             }
             set
             {
@@ -363,6 +416,5 @@ namespace System.Management
                     Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
             }
         }
-
-    }//QualifierData
+    } //QualifierData
 }

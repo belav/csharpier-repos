@@ -8,17 +8,21 @@ using Microsoft.OData.ModelBuilder;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ComplexNavigationsODataQueryTestFixture : ComplexNavigationsQuerySqlServerFixture, IODataQueryTestFixture
+public class ComplexNavigationsODataQueryTestFixture
+    : ComplexNavigationsQuerySqlServerFixture,
+        IODataQueryTestFixture
 {
     private IHost _selfHostServer;
 
-    protected override string StoreName
-        => "ODataComplexNavigations";
+    protected override string StoreName => "ODataComplexNavigations";
 
     public ComplexNavigationsODataQueryTestFixture()
     {
-        (BaseAddress, ClientFactory, _selfHostServer)
-            = ODataQueryTestFixtureInitializer.Initialize<ComplexNavigationsODataContext>(StoreName, GetEdmModel());
+        (BaseAddress, ClientFactory, _selfHostServer) =
+            ODataQueryTestFixtureInitializer.Initialize<ComplexNavigationsODataContext>(
+                StoreName,
+                GetEdmModel()
+            );
     }
 
     private static IEdmModel GetEdmModel()

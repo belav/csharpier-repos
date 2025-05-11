@@ -14,7 +14,8 @@ public partial class DisallowConfigureWebHostBuilderConfigureTest
     public async Task WebApplicationBuilder_WebHostWithoutConfigure_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -32,49 +33,66 @@ builder.WebHost.ConfigureKestrel(options => { });
     public async Task WebApplicationBuilder_WebHostWithConfigure_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder();
 builder.WebHost./*MM*/Configure(webHostBuilder => { });
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Configure cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Configure cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithConfigureWithContext_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder();
 builder.WebHost./*MM*/Configure((context, webHostBuilder) => { });
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Configure cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Configure cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithConfigureOnProperty_ProducesDiagnostics_In_Program_Main()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 public static class Program
@@ -86,22 +104,30 @@ public static class Program
     }
 }
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Configure cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Configure cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithConfigureOnBuilder_ProducesDiagnostics_In_Program_Main()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 public static class Program
@@ -114,22 +140,30 @@ public static class Program
     }
 }
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseConfigureWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Configure cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Configure cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task HostBuilder_WebHostBuilder_Configure_DoesNotProduceDiagnostic()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 var builder = Host.CreateDefaultBuilder();
@@ -146,7 +180,8 @@ builder.ConfigureWebHostDefaults(webHostBuilder => webHostBuilder.Configure(conf
     public async Task WebHostBuilder_Configure_DoesNotProduceDiagnostic()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebHost.CreateDefaultBuilder();

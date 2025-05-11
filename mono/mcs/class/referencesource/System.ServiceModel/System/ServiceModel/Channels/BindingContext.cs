@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
+    using System.ServiceModel.Description;
     using System.Text;
 
     public class BindingContext
@@ -17,14 +17,18 @@ namespace System.ServiceModel.Channels
         Uri listenUriBaseAddress;
         ListenUriMode listenUriMode;
         string listenUriRelativeAddress;
-        BindingElementCollection remainingBindingElements;  // kept to ensure each BE builds itself once
+        BindingElementCollection remainingBindingElements; // kept to ensure each BE builds itself once
 
         public BindingContext(CustomBinding binding, BindingParameterCollection parameters)
-            : this(binding, parameters, null, string.Empty, ListenUriMode.Explicit)
-        {
-        }
+            : this(binding, parameters, null, string.Empty, ListenUriMode.Explicit) { }
 
-        public BindingContext(CustomBinding binding, BindingParameterCollection parameters, Uri listenUriBaseAddress, string listenUriRelativeAddress, ListenUriMode listenUriMode)
+        public BindingContext(
+            CustomBinding binding,
+            BindingParameterCollection parameters,
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode
+        )
         {
             if (binding == null)
             {
@@ -36,28 +40,48 @@ namespace System.ServiceModel.Channels
             }
             if (!ListenUriModeHelper.IsDefined(listenUriMode))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("listenUriMode"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("listenUriMode")
+                );
             }
 
-            Initialize(binding, binding.Elements, parameters, listenUriBaseAddress, listenUriRelativeAddress, listenUriMode);
+            Initialize(
+                binding,
+                binding.Elements,
+                parameters,
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                listenUriMode
+            );
         }
 
-        BindingContext(CustomBinding binding,
-                       BindingElementCollection remainingBindingElements,
-                       BindingParameterCollection parameters,
-                       Uri listenUriBaseAddress,
-                       string listenUriRelativeAddress,
-                       ListenUriMode listenUriMode)
+        BindingContext(
+            CustomBinding binding,
+            BindingElementCollection remainingBindingElements,
+            BindingParameterCollection parameters,
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode
+        )
         {
-            Initialize(binding, remainingBindingElements, parameters, listenUriBaseAddress, listenUriRelativeAddress, listenUriMode);
+            Initialize(
+                binding,
+                remainingBindingElements,
+                parameters,
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                listenUriMode
+            );
         }
 
-        void Initialize(CustomBinding binding,
-                        BindingElementCollection remainingBindingElements,
-                        BindingParameterCollection parameters,
-                        Uri listenUriBaseAddress,
-                        string listenUriRelativeAddress,
-                        ListenUriMode listenUriMode)
+        void Initialize(
+            CustomBinding binding,
+            BindingElementCollection remainingBindingElements,
+            BindingParameterCollection parameters,
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode
+        )
         {
             this.binding = binding;
 
@@ -141,8 +165,14 @@ namespace System.ServiceModel.Channels
 
         public BindingContext Clone()
         {
-            return new BindingContext(this.binding, this.remainingBindingElements, this.bindingParameters,
-                this.listenUriBaseAddress, this.listenUriRelativeAddress, this.listenUriMode);
+            return new BindingContext(
+                this.binding,
+                this.remainingBindingElements,
+                this.bindingParameters,
+                this.listenUriBaseAddress,
+                this.listenUriRelativeAddress,
+                this.listenUriMode
+            );
         }
 
         BindingElement RemoveNextElement()
@@ -150,8 +180,15 @@ namespace System.ServiceModel.Channels
             BindingElement element = this.remainingBindingElements.Remove<BindingElement>();
             if (element != null)
                 return element;
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                SR.NoChannelBuilderAvailable, this.binding.Name, this.binding.Namespace)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.NoChannelBuilderAvailable,
+                        this.binding.Name,
+                        this.binding.Namespace
+                    )
+                )
+            );
         }
 
         internal void ValidateBindingElementsConsumed()
@@ -169,7 +206,11 @@ namespace System.ServiceModel.Channels
                     string typeString = bindingElement.GetType().ToString();
                     builder.Append(typeString.Substring(typeString.LastIndexOf('.') + 1));
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NotAllBindingElementsBuilt, builder.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.NotAllBindingElementsBuilt, builder.ToString())
+                    )
+                );
             }
         }
     }

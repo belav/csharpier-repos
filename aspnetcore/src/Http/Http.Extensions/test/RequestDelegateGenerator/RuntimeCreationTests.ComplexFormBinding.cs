@@ -21,7 +21,14 @@ app.MapPost("/", ([FromForm] Todo todo) => Results.Ok(todo));
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        var content = new FormUrlEncodedContent(new Dictionary<string, string> { ["Id"] = "1", ["Name"] = "Write tests", ["IsComplete"] = "true" });
+        var content = new FormUrlEncodedContent(
+            new Dictionary<string, string>
+            {
+                ["Id"] = "1",
+                ["Name"] = "Write tests",
+                ["IsComplete"] = "true",
+            }
+        );
         var stream = new MemoryStream();
         await content.CopyToAsync(stream);
 
@@ -29,18 +36,23 @@ app.MapPost("/", ([FromForm] Todo todo) => Results.Ok(todo));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.NotNull(endpoint.Metadata.OfType<IAntiforgeryMetadata>().SingleOrDefault());
 
-        await VerifyResponseJsonBodyAsync<Todo>(httpContext, (todo) =>
-        {
-            Assert.Equal(1, todo.Id);
-            Assert.Equal("Write tests", todo.Name);
-            Assert.True(todo.IsComplete);
-        });
+        await VerifyResponseJsonBodyAsync<Todo>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.Equal(1, todo.Id);
+                Assert.Equal("Write tests", todo.Name);
+                Assert.True(todo.IsComplete);
+            }
+        );
     }
 
     [Fact]
@@ -65,18 +77,23 @@ app.MapPost("/", ([FromForm] Todo todo) => Results.Ok(todo));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.NotNull(endpoint.Metadata.OfType<IAntiforgeryMetadata>().SingleOrDefault());
 
-        await VerifyResponseJsonBodyAsync<Todo>(httpContext, (todo) =>
-        {
-            Assert.Equal(1, todo.Id);
-            Assert.Equal("Write tests", todo.Name);
-            Assert.True(todo.IsComplete);
-        });
+        await VerifyResponseJsonBodyAsync<Todo>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.Equal(1, todo.Id);
+                Assert.Equal("Write tests", todo.Name);
+                Assert.True(todo.IsComplete);
+            }
+        );
     }
 
     [Fact]
@@ -89,7 +106,14 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        var content = new FormUrlEncodedContent(new Dictionary<string, string> { ["[foo]"] = "true", ["[bar]"] = "false", ["[baz]"] = "true" });
+        var content = new FormUrlEncodedContent(
+            new Dictionary<string, string>
+            {
+                ["[foo]"] = "true",
+                ["[bar]"] = "false",
+                ["[baz]"] = "true",
+            }
+        );
         var stream = new MemoryStream();
         await content.CopyToAsync(stream);
 
@@ -97,19 +121,24 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.NotNull(endpoint.Metadata.OfType<IAntiforgeryMetadata>().SingleOrDefault());
 
-        await VerifyResponseJsonBodyAsync<Dictionary<string, bool>>(httpContext, (elements) =>
-        {
-            Assert.Equal(3, elements.Count);
-            Assert.True(elements["foo"]);
-            Assert.False(elements["bar"]);
-            Assert.True(elements["baz"]);
-        });
+        await VerifyResponseJsonBodyAsync<Dictionary<string, bool>>(
+            httpContext,
+            (elements) =>
+            {
+                Assert.Equal(3, elements.Count);
+                Assert.True(elements["foo"]);
+                Assert.False(elements["bar"]);
+                Assert.True(elements["baz"]);
+            }
+        );
     }
 
     [Fact]
@@ -134,19 +163,24 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.NotNull(endpoint.Metadata.OfType<IAntiforgeryMetadata>().SingleOrDefault());
 
-        await VerifyResponseJsonBodyAsync<Dictionary<string, bool>>(httpContext, (elements) =>
-        {
-            Assert.Equal(3, elements.Count);
-            Assert.True(elements["foo"]);
-            Assert.False(elements["bar"]);
-            Assert.True(elements["baz"]);
-        });
+        await VerifyResponseJsonBodyAsync<Dictionary<string, bool>>(
+            httpContext,
+            (elements) =>
+            {
+                Assert.Equal(3, elements.Count);
+                Assert.True(elements["foo"]);
+                Assert.False(elements["bar"]);
+                Assert.True(elements["baz"]);
+            }
+        );
     }
 
     [Fact]
@@ -171,7 +205,9 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
         Assert.Equal(StatusCodes.Status400BadRequest, httpContext.Response.StatusCode);
@@ -182,8 +218,13 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         Assert.Equal(new EventId(10, "FormMappingFailed"), log.EventId);
         Assert.Equal(LogLevel.Debug, log.LogLevel);
-        Assert.Equal(@"Failed to bind parameter ""Dictionary<string, bool> elements"" from the request body as form.", log.Message);
-        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(log.State);
+        Assert.Equal(
+            @"Failed to bind parameter ""Dictionary<string, bool> elements"" from the request body as form.",
+            log.Message
+        );
+        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            log.State
+        );
         Assert.Equal("Dictionary<string, bool>", log1Values[0].Value);
         Assert.Equal("elements", log1Values[1].Value);
     }
@@ -198,7 +239,14 @@ app.MapPost("/", ([FromForm] List<int> elements) => Results.Ok(elements));
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        var content = new FormUrlEncodedContent(new Dictionary<string, string> { ["[0]"] = "1", ["[1]"] = "3", ["[2]"] = "5" });
+        var content = new FormUrlEncodedContent(
+            new Dictionary<string, string>
+            {
+                ["[0]"] = "1",
+                ["[1]"] = "3",
+                ["[2]"] = "5",
+            }
+        );
         var stream = new MemoryStream();
         await content.CopyToAsync(stream);
 
@@ -206,19 +254,24 @@ app.MapPost("/", ([FromForm] List<int> elements) => Results.Ok(elements));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.NotNull(endpoint.Metadata.OfType<IAntiforgeryMetadata>().SingleOrDefault());
 
-        await VerifyResponseJsonBodyAsync<List<int>>(httpContext, (elements) =>
-        {
-            Assert.Equal(3, elements.Count);
-            Assert.Equal(1, elements[0]);
-            Assert.Equal(3, elements[1]);
-            Assert.Equal(5, elements[2]);
-        });
+        await VerifyResponseJsonBodyAsync<List<int>>(
+            httpContext,
+            (elements) =>
+            {
+                Assert.Equal(3, elements.Count);
+                Assert.Equal(1, elements[0]);
+                Assert.Equal(3, elements[1]);
+                Assert.Equal(5, elements[2]);
+            }
+        );
     }
 
     [Fact]
@@ -243,18 +296,23 @@ app.MapPost("/", ([FromForm] List<int> elements) => Results.Ok(elements));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.NotNull(endpoint.Metadata.OfType<IAntiforgeryMetadata>().SingleOrDefault());
 
-        await VerifyResponseJsonBodyAsync<List<int>>(httpContext, (elements) =>
-        {
-            Assert.Equal(3, elements.Count);
-            Assert.Equal(1, elements[0]);
-            Assert.Equal(3, elements[1]);
-            Assert.Equal(5, elements[2]);
-        });
+        await VerifyResponseJsonBodyAsync<List<int>>(
+            httpContext,
+            (elements) =>
+            {
+                Assert.Equal(3, elements.Count);
+                Assert.Equal(1, elements[0]);
+                Assert.Equal(3, elements[1]);
+                Assert.Equal(5, elements[2]);
+            }
+        );
     }
 }

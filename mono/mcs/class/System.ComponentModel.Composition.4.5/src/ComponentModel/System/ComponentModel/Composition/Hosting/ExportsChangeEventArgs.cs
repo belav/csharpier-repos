@@ -12,7 +12,7 @@ using Microsoft.Internal.Collections;
 namespace System.ComponentModel.Composition.Hosting
 {
     /// <summary>
-    ///     Provides data for the <see cref="ExportProvider.ExportsChanged"/> and 
+    ///     Provides data for the <see cref="ExportProvider.ExportsChanged"/> and
     ///     <see cref="ExportProvider.ExportsChanging"/> events.
     /// </summary>
     public class ExportsChangeEventArgs : EventArgs
@@ -22,7 +22,7 @@ namespace System.ComponentModel.Composition.Hosting
         private IEnumerable<string> _changedContractNames = null;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ExportsChangeEventArgs"/> class with 
+        ///     Initializes a new instance of the <see cref="ExportsChangeEventArgs"/> class with
         ///     the specified changed export definitions.
         /// </summary>
         /// <param name="addedExports">
@@ -35,15 +35,18 @@ namespace System.ComponentModel.Composition.Hosting
         /// </param>
         /// <param name="atomicComposition">
         ///     A <see cref="AtomicComposition"/> representing all tentative changes that will
-        ///     be completed if the change is successful, or discarded if it is not. 
-        ///     <see langword="null"/> if being applied outside a <see cref="AtomicComposition"/> 
+        ///     be completed if the change is successful, or discarded if it is not.
+        ///     <see langword="null"/> if being applied outside a <see cref="AtomicComposition"/>
         ///     or during a <see cref="ExportProvider.ExportsChanged"/> event.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="addedExports"/> or <paramref name="removedExports"/> is <see langword="null"/>.
         /// </exception>
-        public ExportsChangeEventArgs(IEnumerable<ExportDefinition> addedExports,
-                IEnumerable<ExportDefinition> removedExports, AtomicComposition atomicComposition)
+        public ExportsChangeEventArgs(
+            IEnumerable<ExportDefinition> addedExports,
+            IEnumerable<ExportDefinition> removedExports,
+            AtomicComposition atomicComposition
+        )
         {
             Requires.NotNull(addedExports, "addedExports");
             Requires.NotNull(removedExports, "removedExports");
@@ -57,10 +60,10 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the export definitions for the exports that have been added.
         /// </summary>
         /// <value>
-        ///     A <see cref="IEnumerable{T}"/> of ExportDefinitions representing 
+        ///     A <see cref="IEnumerable{T}"/> of ExportDefinitions representing
         ///     the exports that have been added to the <see cref="CompositionContainer"/>.
         /// </value>
-        public IEnumerable<ExportDefinition> AddedExports 
+        public IEnumerable<ExportDefinition> AddedExports
         {
             get
             {
@@ -74,10 +77,10 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the export definitions for the exports that have been removed.
         /// </summary>
         /// <value>
-        ///     A <see cref="IEnumerable{T}"/> of ExportDefinitions representing 
+        ///     A <see cref="IEnumerable{T}"/> of ExportDefinitions representing
         ///     the exports that have been added to the <see cref="CompositionContainer"/>.
         /// </value>
-        public IEnumerable<ExportDefinition> RemovedExports 
+        public IEnumerable<ExportDefinition> RemovedExports
         {
             get
             {
@@ -91,17 +94,17 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the contract names of the exports that have changed.
         /// </summary>
         /// <value>
-        ///     A <see cref="IEnumerable{T}"/> of strings representing the contract names of 
+        ///     A <see cref="IEnumerable{T}"/> of strings representing the contract names of
         ///     the exports that have changed in the <see cref="CompositionContainer"/>.
         /// </value>
-        public IEnumerable<string> ChangedContractNames 
+        public IEnumerable<string> ChangedContractNames
         {
             get
             {
                 if (this._changedContractNames == null)
                 {
-                    this._changedContractNames = this.AddedExports
-                        .Concat(this.RemovedExports)
+                    this._changedContractNames = this
+                        .AddedExports.Concat(this.RemovedExports)
                         .Select(export => export.ContractName)
                         .Distinct()
                         .ToArray();
@@ -114,12 +117,12 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the atomicComposition, if any, that this change applies to.
         /// </summary>
         /// <value>
-        ///     A <see cref="AtomicComposition"/> that this set of changes applies too. 
-        ///     
-        ///     It can be <see langword="null"/> if the changes are being applied outside a 
-        ///     <see cref="AtomicComposition"/> or during a 
+        ///     A <see cref="AtomicComposition"/> that this set of changes applies too.
+        ///
+        ///     It can be <see langword="null"/> if the changes are being applied outside a
+        ///     <see cref="AtomicComposition"/> or during a
         ///     <see cref="ExportProvider.ExportsChanged"/> event.
-        ///     
+        ///
         ///     When the value is non-null it should be used to record temporary changed state
         ///     and actions that will be executed when the atomicComposition is completeed.
         /// </value>

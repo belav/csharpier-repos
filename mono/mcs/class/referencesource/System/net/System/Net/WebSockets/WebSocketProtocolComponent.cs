@@ -15,9 +15,9 @@ namespace System.Net.WebSockets
     using System.Net.Cache;
     using System.Net.Sockets;
     using System.Net.WebSockets;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
@@ -29,27 +29,29 @@ namespace System.Net.WebSockets
     {
         private const string WEBSOCKET = "websocket.dll";
         private static readonly string s_DllFileName;
-        private static readonly string s_DummyWebsocketKeyBase64 = Convert.ToBase64String(new byte[16]);
+        private static readonly string s_DummyWebsocketKeyBase64 = Convert.ToBase64String(
+            new byte[16]
+        );
         private static readonly SafeLoadLibrary s_WebSocketDllHandle;
         private static readonly string s_SupportedVersion;
 
-        private static readonly HttpHeader[] s_InitialClientRequestHeaders = new HttpHeader[] 
+        private static readonly HttpHeader[] s_InitialClientRequestHeaders = new HttpHeader[]
+        {
+            new HttpHeader()
             {
-                new HttpHeader()
-                { 
-                    Name = HttpKnownHeaderNames.Connection, 
-                    NameLength = (uint)HttpKnownHeaderNames.Connection.Length, 
-                    Value = HttpKnownHeaderNames.Upgrade, 
-                    ValueLength = (uint)HttpKnownHeaderNames.Upgrade.Length 
-                },
-                new HttpHeader()
-                { 
-                    Name = HttpKnownHeaderNames.Upgrade, 
-                    NameLength = (uint)HttpKnownHeaderNames.Upgrade.Length, 
-                    Value = WebSocketHelpers.WebSocketUpgradeToken, 
-                    ValueLength = (uint)WebSocketHelpers.WebSocketUpgradeToken.Length 
-                }
-            };
+                Name = HttpKnownHeaderNames.Connection,
+                NameLength = (uint)HttpKnownHeaderNames.Connection.Length,
+                Value = HttpKnownHeaderNames.Upgrade,
+                ValueLength = (uint)HttpKnownHeaderNames.Upgrade.Length,
+            },
+            new HttpHeader()
+            {
+                Name = HttpKnownHeaderNames.Upgrade,
+                NameLength = (uint)HttpKnownHeaderNames.Upgrade.Length,
+                Value = WebSocketHelpers.WebSocketUpgradeToken,
+                ValueLength = (uint)WebSocketHelpers.WebSocketUpgradeToken.Length,
+            },
+        };
 
         private static readonly HttpHeader[] s_ServerFakeRequestHeaders;
 
@@ -80,7 +82,7 @@ namespace System.Net.WebSockets
             BinaryFragment = 0x80000003,
             Close = 0x80000004,
             PingPong = 0x80000005,
-            UnsolicitedPong = 0x80000006
+            UnsolicitedPong = 0x80000006,
         }
 
         internal enum PropertyType
@@ -112,6 +114,7 @@ namespace System.Net.WebSockets
         {
             [FieldOffset(0)]
             internal DataBuffer Data;
+
             [FieldOffset(0)]
             internal CloseBuffer CloseStatus;
         }
@@ -137,6 +140,7 @@ namespace System.Net.WebSockets
             [MarshalAs(UnmanagedType.LPStr)]
             internal string Name;
             internal uint NameLength;
+
             [MarshalAs(UnmanagedType.LPStr)]
             internal string Value;
             internal uint ValueLength;
@@ -153,43 +157,43 @@ namespace System.Net.WebSockets
             {
                 s_SupportedVersion = GetSupportedVersion();
 
-                s_ServerFakeRequestHeaders = new HttpHeader[] 
+                s_ServerFakeRequestHeaders = new HttpHeader[]
                 {
                     new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.Connection, 
-                        NameLength = (uint)HttpKnownHeaderNames.Connection.Length, 
-                        Value = HttpKnownHeaderNames.Upgrade, 
-                        ValueLength = (uint)HttpKnownHeaderNames.Upgrade.Length 
+                    {
+                        Name = HttpKnownHeaderNames.Connection,
+                        NameLength = (uint)HttpKnownHeaderNames.Connection.Length,
+                        Value = HttpKnownHeaderNames.Upgrade,
+                        ValueLength = (uint)HttpKnownHeaderNames.Upgrade.Length,
                     },
                     new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.Upgrade, 
-                        NameLength = (uint)HttpKnownHeaderNames.Upgrade.Length, 
-                        Value = WebSocketHelpers.WebSocketUpgradeToken, 
-                        ValueLength = (uint)WebSocketHelpers.WebSocketUpgradeToken.Length 
+                    {
+                        Name = HttpKnownHeaderNames.Upgrade,
+                        NameLength = (uint)HttpKnownHeaderNames.Upgrade.Length,
+                        Value = WebSocketHelpers.WebSocketUpgradeToken,
+                        ValueLength = (uint)WebSocketHelpers.WebSocketUpgradeToken.Length,
                     },
                     new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.Host, 
-                        NameLength = (uint)HttpKnownHeaderNames.Host.Length, 
-                        Value = string.Empty, 
-                        ValueLength = 0 
+                    {
+                        Name = HttpKnownHeaderNames.Host,
+                        NameLength = (uint)HttpKnownHeaderNames.Host.Length,
+                        Value = string.Empty,
+                        ValueLength = 0,
                     },
                     new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.SecWebSocketVersion, 
-                        NameLength = (uint)HttpKnownHeaderNames.SecWebSocketVersion.Length, 
-                        Value = s_SupportedVersion, 
-                        ValueLength = (uint)s_SupportedVersion.Length 
+                    {
+                        Name = HttpKnownHeaderNames.SecWebSocketVersion,
+                        NameLength = (uint)HttpKnownHeaderNames.SecWebSocketVersion.Length,
+                        Value = s_SupportedVersion,
+                        ValueLength = (uint)s_SupportedVersion.Length,
                     },
                     new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.SecWebSocketKey, 
-                        NameLength = (uint)HttpKnownHeaderNames.SecWebSocketKey.Length, 
-                        Value = s_DummyWebsocketKeyBase64, 
-                        ValueLength = (uint)s_DummyWebsocketKeyBase64.Length 
-                    }
+                    {
+                        Name = HttpKnownHeaderNames.SecWebSocketKey,
+                        NameLength = (uint)HttpKnownHeaderNames.SecWebSocketKey.Length,
+                        Value = s_DummyWebsocketKeyBase64,
+                        ValueLength = (uint)s_DummyWebsocketKeyBase64.Length,
+                    },
                 };
             }
         }
@@ -209,25 +213,29 @@ namespace System.Net.WebSockets
 
         internal static bool IsSupported
         {
-            get
-            {
-                return !s_WebSocketDllHandle.IsInvalid;
-            }
+            get { return !s_WebSocketDllHandle.IsInvalid; }
         }
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketCreateClientHandle", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", 
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketCreateClientHandle_Raw(
-            [In]Property[] properties,
+            [In] Property[] properties,
             [In] uint propertyCount,
-            [Out] out SafeWebSocketHandle webSocketHandle);
+            [Out] out SafeWebSocketHandle webSocketHandle
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketBeginClientHandshake", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketBeginClientHandshake_Raw(
             [In] SafeHandle webSocketHandle,
             [In] IntPtr subProtocols,
@@ -237,23 +245,32 @@ namespace System.Net.WebSockets
             [In] HttpHeader[] initialHeaders,
             [In] uint initialHeaderCount,
             [Out] out IntPtr additionalHeadersPtr,
-            [Out] out uint additionalHeaderCount);
+            [Out] out uint additionalHeaderCount
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketEndClientHandshake", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
-        private static extern int WebSocketEndClientHandshake_Raw([In] SafeHandle webSocketHandle,
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
+        private static extern int WebSocketEndClientHandshake_Raw(
+            [In] SafeHandle webSocketHandle,
             [In] HttpHeader[] responseHeaders,
             [In] uint responseHeaderCount,
             [In, Out] IntPtr selectedExtensions,
             [In] IntPtr selectedExtensionCount,
-            [In] IntPtr selectedSubProtocol);
+            [In] IntPtr selectedSubProtocol
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketBeginServerHandshake", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketBeginServerHandshake_Raw(
             [In] SafeHandle webSocketHandle,
             [In] IntPtr subProtocol,
@@ -262,70 +279,97 @@ namespace System.Net.WebSockets
             [In] HttpHeader[] requestHeaders,
             [In] uint requestHeaderCount,
             [Out] out IntPtr responseHeadersPtr,
-            [Out] out uint responseHeaderCount);
+            [Out] out uint responseHeaderCount
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketEndServerHandshake", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketEndServerHandshake_Raw([In] SafeHandle webSocketHandle);
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketCreateServerHandle", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketCreateServerHandle_Raw(
-            [In]Property[] properties,
+            [In] Property[] properties,
             [In] uint propertyCount,
-            [Out] out SafeWebSocketHandle webSocketHandle);
+            [Out] out SafeWebSocketHandle webSocketHandle
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketAbortHandle", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
-        private static extern void WebSocketAbortHandle_Raw(
-            [In] SafeHandle webSocketHandle);
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
+        private static extern void WebSocketAbortHandle_Raw([In] SafeHandle webSocketHandle);
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketDeleteHandle", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
-        private static extern void WebSocketDeleteHandle_Raw(
-            [In] IntPtr webSocketHandle);
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
+        private static extern void WebSocketDeleteHandle_Raw([In] IntPtr webSocketHandle);
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketSend", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketSend_Raw(
             [In] SafeHandle webSocketHandle,
             [In] BufferType bufferType,
             [In] ref Buffer buffer,
-            [In] IntPtr applicationContext);
+            [In] IntPtr applicationContext
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketSend", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketSendWithoutBody_Raw(
             [In] SafeHandle webSocketHandle,
             [In] BufferType bufferType,
             [In] IntPtr buffer,
-            [In] IntPtr applicationContext);
+            [In] IntPtr applicationContext
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketReceive", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketReceive_Raw(
             [In] SafeHandle webSocketHandle,
             [In] IntPtr buffers,
-            [In] IntPtr applicationContext);
+            [In] IntPtr applicationContext
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketGetAction", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketGetAction_Raw(
             [In] SafeHandle webSocketHandle,
             [In] ActionQueue actionQueue,
@@ -334,26 +378,35 @@ namespace System.Net.WebSockets
             [Out] out Action action,
             [Out] out BufferType bufferType,
             [Out] out IntPtr applicationContext,
-            [Out] out IntPtr actionContext);
+            [Out] out IntPtr actionContext
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketCompleteAction", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern void WebSocketCompleteAction_Raw(
             [In] SafeHandle webSocketHandle,
             [In] IntPtr actionContext,
-            [In] uint bytesTransferred);
+            [In] uint bytesTransferred
+        );
 
         [DllImport(WEBSOCKET, EntryPoint = "WebSocketGetGlobalProperty", ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
-            Justification = "LinkDemand is enforced by all callers.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage",
+            Justification = "LinkDemand is enforced by all callers."
+        )]
         private static extern int WebSocketGetGlobalProperty_Raw(
             [In] PropertyType property,
             [In, Out] ref uint value,
-            [In, Out] ref uint size);
-        
+            [In, Out] ref uint size
+        );
+
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         internal static string GetSupportedVersion()
         {
@@ -368,8 +421,7 @@ namespace System.Net.WebSockets
                 int errorCode = WebSocketCreateClientHandle_Raw(null, 0, out webSocketHandle);
                 ThrowOnError(errorCode);
 
-                if (webSocketHandle == null ||
-                    webSocketHandle.IsInvalid)
+                if (webSocketHandle == null || webSocketHandle.IsInvalid)
                 {
                     WebSocketHelpers.ThrowPlatformNotSupportedException_WSPC();
                 }
@@ -377,7 +429,8 @@ namespace System.Net.WebSockets
                 IntPtr additionalHeadersPtr;
                 uint additionalHeaderCount;
 
-                errorCode = WebSocketBeginClientHandshake_Raw(webSocketHandle,
+                errorCode = WebSocketBeginClientHandshake_Raw(
+                    webSocketHandle,
                     IntPtr.Zero,
                     0,
                     IntPtr.Zero,
@@ -385,17 +438,25 @@ namespace System.Net.WebSockets
                     s_InitialClientRequestHeaders,
                     (uint)s_InitialClientRequestHeaders.Length,
                     out additionalHeadersPtr,
-                    out additionalHeaderCount);
+                    out additionalHeaderCount
+                );
                 ThrowOnError(errorCode);
 
-                HttpHeader[] additionalHeaders = MarshalHttpHeaders(additionalHeadersPtr, (int)additionalHeaderCount);
+                HttpHeader[] additionalHeaders = MarshalHttpHeaders(
+                    additionalHeadersPtr,
+                    (int)additionalHeaderCount
+                );
 
                 string version = null;
                 foreach (HttpHeader header in additionalHeaders)
                 {
-                    if (string.Compare(header.Name,
+                    if (
+                        string.Compare(
+                            header.Name,
                             HttpKnownHeaderNames.SecWebSocketVersion,
-                            StringComparison.OrdinalIgnoreCase) == 0)
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         version = header.Value;
                         break;
@@ -415,8 +476,10 @@ namespace System.Net.WebSockets
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        internal static void WebSocketCreateClientHandle(Property[] properties,
-            out SafeWebSocketHandle webSocketHandle)
+        internal static void WebSocketCreateClientHandle(
+            Property[] properties,
+            out SafeWebSocketHandle webSocketHandle
+        )
         {
             uint propertyCount = properties == null ? 0 : (uint)properties.Length;
 
@@ -425,11 +488,14 @@ namespace System.Net.WebSockets
                 WebSocketHelpers.ThrowPlatformNotSupportedException_WSPC();
             }
 
-            int errorCode = WebSocketCreateClientHandle_Raw(properties, propertyCount, out webSocketHandle);
+            int errorCode = WebSocketCreateClientHandle_Raw(
+                properties,
+                propertyCount,
+                out webSocketHandle
+            );
             ThrowOnError(errorCode);
 
-            if (webSocketHandle == null ||
-                webSocketHandle.IsInvalid)
+            if (webSocketHandle == null || webSocketHandle.IsInvalid)
             {
                 WebSocketHelpers.ThrowPlatformNotSupportedException_WSPC();
             }
@@ -446,7 +512,8 @@ namespace System.Net.WebSockets
             // just fake an HTTP handshake for the WSPC  calling
             // WebSocketBeginClientHandshake and WebSocketEndClientHandshake
             // with statically defined dummy headers.
-            errorCode = WebSocketBeginClientHandshake_Raw(webSocketHandle,
+            errorCode = WebSocketBeginClientHandshake_Raw(
+                webSocketHandle,
                 IntPtr.Zero,
                 0,
                 IntPtr.Zero,
@@ -454,18 +521,26 @@ namespace System.Net.WebSockets
                 s_InitialClientRequestHeaders,
                 (uint)s_InitialClientRequestHeaders.Length,
                 out additionalHeadersPtr,
-                out additionalHeaderCount);
+                out additionalHeaderCount
+            );
 
             ThrowOnError(errorCode);
 
-            HttpHeader[] additionalHeaders = MarshalHttpHeaders(additionalHeadersPtr, (int)additionalHeaderCount);
+            HttpHeader[] additionalHeaders = MarshalHttpHeaders(
+                additionalHeadersPtr,
+                (int)additionalHeaderCount
+            );
 
             string key = null;
             foreach (HttpHeader header in additionalHeaders)
             {
-                if (string.Compare(header.Name,
+                if (
+                    string.Compare(
+                        header.Name,
                         HttpKnownHeaderNames.SecWebSocketKey,
-                        StringComparison.OrdinalIgnoreCase) == 0)
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     key = header.Value;
                     break;
@@ -474,63 +549,75 @@ namespace System.Net.WebSockets
             Contract.Assert(key != null, "'key' MUST NOT be NULL.");
 
             string acceptValue = WebSocketHelpers.GetSecWebSocketAcceptString(key);
-            HttpHeader[] responseHeaders = new HttpHeader[] 
+            HttpHeader[] responseHeaders = new HttpHeader[]
+            {
+                new HttpHeader()
                 {
-                    new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.Connection, 
-                        NameLength = (uint)HttpKnownHeaderNames.Connection.Length, 
-                        Value = HttpKnownHeaderNames.Upgrade, 
-                        ValueLength = (uint)HttpKnownHeaderNames.Upgrade.Length 
-                    },
-                    new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.Upgrade, 
-                        NameLength = (uint)HttpKnownHeaderNames.Upgrade.Length, 
-                        Value = WebSocketHelpers.WebSocketUpgradeToken, 
-                        ValueLength = (uint)WebSocketHelpers.WebSocketUpgradeToken.Length 
-                    },
-                    new HttpHeader()
-                    { 
-                        Name = HttpKnownHeaderNames.SecWebSocketAccept, 
-                        NameLength = (uint)HttpKnownHeaderNames.SecWebSocketAccept.Length, 
-                        Value = acceptValue, 
-                        ValueLength = (uint)acceptValue.Length 
-                    }
-                };
+                    Name = HttpKnownHeaderNames.Connection,
+                    NameLength = (uint)HttpKnownHeaderNames.Connection.Length,
+                    Value = HttpKnownHeaderNames.Upgrade,
+                    ValueLength = (uint)HttpKnownHeaderNames.Upgrade.Length,
+                },
+                new HttpHeader()
+                {
+                    Name = HttpKnownHeaderNames.Upgrade,
+                    NameLength = (uint)HttpKnownHeaderNames.Upgrade.Length,
+                    Value = WebSocketHelpers.WebSocketUpgradeToken,
+                    ValueLength = (uint)WebSocketHelpers.WebSocketUpgradeToken.Length,
+                },
+                new HttpHeader()
+                {
+                    Name = HttpKnownHeaderNames.SecWebSocketAccept,
+                    NameLength = (uint)HttpKnownHeaderNames.SecWebSocketAccept.Length,
+                    Value = acceptValue,
+                    ValueLength = (uint)acceptValue.Length,
+                },
+            };
 
-            errorCode = WebSocketEndClientHandshake_Raw(webSocketHandle,
+            errorCode = WebSocketEndClientHandshake_Raw(
+                webSocketHandle,
                 responseHeaders,
                 (uint)responseHeaders.Length,
                 IntPtr.Zero,
                 IntPtr.Zero,
-                IntPtr.Zero);
+                IntPtr.Zero
+            );
 
             ThrowOnError(errorCode);
 
-            Contract.Assert(webSocketHandle != null, "'webSocketHandle' MUST NOT be NULL at this point.");
+            Contract.Assert(
+                webSocketHandle != null,
+                "'webSocketHandle' MUST NOT be NULL at this point."
+            );
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        internal static void WebSocketCreateServerHandle(Property[] properties,
+        internal static void WebSocketCreateServerHandle(
+            Property[] properties,
             int propertyCount,
-            out SafeWebSocketHandle webSocketHandle)
+            out SafeWebSocketHandle webSocketHandle
+        )
         {
             Contract.Assert(propertyCount >= 0, "'propertyCount' MUST NOT be negative.");
-            Contract.Assert((properties == null && propertyCount == 0) ||
-                (properties != null && propertyCount == properties.Length),
-                "'propertyCount' MUST MATCH 'properties.Length'.");
+            Contract.Assert(
+                (properties == null && propertyCount == 0)
+                    || (properties != null && propertyCount == properties.Length),
+                "'propertyCount' MUST MATCH 'properties.Length'."
+            );
 
             if (s_WebSocketDllHandle.IsInvalid)
             {
                 WebSocketHelpers.ThrowPlatformNotSupportedException_WSPC();
             }
 
-            int errorCode = WebSocketCreateServerHandle_Raw(properties, (uint)propertyCount, out webSocketHandle);
+            int errorCode = WebSocketCreateServerHandle_Raw(
+                properties,
+                (uint)propertyCount,
+                out webSocketHandle
+            );
             ThrowOnError(errorCode);
 
-            if (webSocketHandle == null ||
-                webSocketHandle.IsInvalid)
+            if (webSocketHandle == null || webSocketHandle.IsInvalid)
             {
                 WebSocketHelpers.ThrowPlatformNotSupportedException_WSPC();
             }
@@ -547,30 +634,40 @@ namespace System.Net.WebSockets
             // just fake an HTTP handshake for the WSPC calling
             // WebSocketBeginServerHandshake and WebSocketEndServerHandshake
             // with statically defined dummy headers.
-            errorCode = WebSocketBeginServerHandshake_Raw(webSocketHandle,
+            errorCode = WebSocketBeginServerHandshake_Raw(
+                webSocketHandle,
                 IntPtr.Zero,
                 IntPtr.Zero,
                 0,
                 s_ServerFakeRequestHeaders,
                 (uint)s_ServerFakeRequestHeaders.Length,
                 out responseHeadersPtr,
-                out responseHeaderCount);
+                out responseHeaderCount
+            );
 
             ThrowOnError(errorCode);
 
-            HttpHeader[] responseHeaders = MarshalHttpHeaders(responseHeadersPtr, (int)responseHeaderCount);
+            HttpHeader[] responseHeaders = MarshalHttpHeaders(
+                responseHeadersPtr,
+                (int)responseHeaderCount
+            );
             errorCode = WebSocketEndServerHandshake_Raw(webSocketHandle);
 
             ThrowOnError(errorCode);
 
-            Contract.Assert(webSocketHandle != null, "'webSocketHandle' MUST NOT be NULL at this point.");
+            Contract.Assert(
+                webSocketHandle != null,
+                "'webSocketHandle' MUST NOT be NULL at this point."
+            );
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         internal static void WebSocketAbortHandle(SafeHandle webSocketHandle)
         {
-            Contract.Assert(webSocketHandle != null && !webSocketHandle.IsInvalid,
-                "'webSocketHandle' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocketHandle != null && !webSocketHandle.IsInvalid,
+                "'webSocketHandle' MUST NOT be NULL or INVALID."
+            );
 
             WebSocketAbortHandle_Raw(webSocketHandle);
 
@@ -587,21 +684,29 @@ namespace System.Net.WebSockets
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        internal static void WebSocketSend(WebSocketBase webSocket,
+        internal static void WebSocketSend(
+            WebSocketBase webSocket,
             BufferType bufferType,
-            Buffer buffer)
+            Buffer buffer
+        )
         {
-            Contract.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Contract.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
 
             ThrowIfSessionHandleClosed(webSocket);
 
             int errorCode;
             try
             {
-                errorCode = WebSocketSend_Raw(webSocket.SessionHandle, bufferType, ref buffer, IntPtr.Zero);
+                errorCode = WebSocketSend_Raw(
+                    webSocket.SessionHandle,
+                    bufferType,
+                    ref buffer,
+                    IntPtr.Zero
+                );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -612,20 +717,28 @@ namespace System.Net.WebSockets
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        internal static void WebSocketSendWithoutBody(WebSocketBase webSocket,
-            BufferType bufferType)
+        internal static void WebSocketSendWithoutBody(
+            WebSocketBase webSocket,
+            BufferType bufferType
+        )
         {
-            Contract.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Contract.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
 
             ThrowIfSessionHandleClosed(webSocket);
 
             int errorCode;
             try
             {
-                errorCode = WebSocketSendWithoutBody_Raw(webSocket.SessionHandle, bufferType, IntPtr.Zero, IntPtr.Zero);
+                errorCode = WebSocketSendWithoutBody_Raw(
+                    webSocket.SessionHandle,
+                    bufferType,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -638,10 +751,11 @@ namespace System.Net.WebSockets
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         internal static void WebSocketReceive(WebSocketBase webSocket)
         {
-            Contract.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Contract.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
 
             ThrowIfSessionHandleClosed(webSocket);
 
@@ -654,27 +768,32 @@ namespace System.Net.WebSockets
             {
                 throw ConvertObjectDisposedException(webSocket, innerException);
             }
-            
+
             ThrowOnError(errorCode);
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        internal static void WebSocketGetAction(WebSocketBase webSocket,
+        internal static void WebSocketGetAction(
+            WebSocketBase webSocket,
             ActionQueue actionQueue,
             Buffer[] dataBuffers,
             ref uint dataBufferCount,
             out Action action,
             out BufferType bufferType,
-            out IntPtr actionContext)
+            out IntPtr actionContext
+        )
         {
-            Contract.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Contract.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
+            Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
             Contract.Assert(dataBufferCount >= 0, "'dataBufferCount' MUST NOT be negative.");
-            Contract.Assert((dataBuffers == null && dataBufferCount == 0) ||
-                (dataBuffers != null && dataBufferCount == dataBuffers.Length),
-                "'dataBufferCount' MUST MATCH 'dataBuffers.Length'.");
+            Contract.Assert(
+                (dataBuffers == null && dataBufferCount == 0)
+                    || (dataBuffers != null && dataBufferCount == dataBuffers.Length),
+                "'dataBufferCount' MUST MATCH 'dataBuffers.Length'."
+            );
 
             action = Action.NoAction;
             bufferType = BufferType.None;
@@ -686,14 +805,16 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = WebSocketGetAction_Raw(webSocket.SessionHandle,
+                errorCode = WebSocketGetAction_Raw(
+                    webSocket.SessionHandle,
                     actionQueue,
                     dataBuffers,
                     ref dataBufferCount,
                     out action,
                     out bufferType,
                     out dummy,
-                    out actionContext);
+                    out actionContext
+                );
             }
             catch (ObjectDisposedException innerException)
             {
@@ -704,20 +825,28 @@ namespace System.Net.WebSockets
             webSocket.ValidateNativeBuffers(action, bufferType, dataBuffers, dataBufferCount);
 
             Contract.Assert(dataBufferCount >= 0);
-            Contract.Assert((dataBufferCount == 0 && dataBuffers == null) ||
-                (dataBufferCount <= dataBuffers.Length));
+            Contract.Assert(
+                (dataBufferCount == 0 && dataBuffers == null)
+                    || (dataBufferCount <= dataBuffers.Length)
+            );
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
-        internal static void WebSocketCompleteAction(WebSocketBase webSocket,
+        internal static void WebSocketCompleteAction(
+            WebSocketBase webSocket,
             IntPtr actionContext,
-            int bytesTransferred)
+            int bytesTransferred
+        )
         {
-            Contract.Assert(webSocket != null,
-                "'webSocket' MUST NOT be NULL or INVALID.");
-            Contract.Assert(webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
-                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID.");
-            Contract.Assert(actionContext != IntPtr.Zero, "'actionContext' MUST NOT be IntPtr.Zero.");
+            Contract.Assert(webSocket != null, "'webSocket' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocket.SessionHandle != null && !webSocket.SessionHandle.IsInvalid,
+                "'webSocket.SessionHandle' MUST NOT be NULL or INVALID."
+            );
+            Contract.Assert(
+                actionContext != IntPtr.Zero,
+                "'actionContext' MUST NOT be IntPtr.Zero."
+            );
             Contract.Assert(bytesTransferred >= 0, "'bytesTransferred' MUST NOT be negative.");
 
             if (webSocket.SessionHandle.IsClosed)
@@ -727,11 +856,13 @@ namespace System.Net.WebSockets
 
             try
             {
-                WebSocketCompleteAction_Raw(webSocket.SessionHandle, actionContext, (uint)bytesTransferred);
+                WebSocketCompleteAction_Raw(
+                    webSocket.SessionHandle,
+                    actionContext,
+                    (uint)bytesTransferred
+                );
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
@@ -739,7 +870,11 @@ namespace System.Net.WebSockets
         {
             uint result = 0;
             uint size = sizeof(uint);
-            int errorCode = WebSocketGetGlobalProperty_Raw(PropertyType.KeepAliveInterval, ref result, ref size);
+            int errorCode = WebSocketGetGlobalProperty_Raw(
+                PropertyType.KeepAliveInterval,
+                ref result,
+                ref size
+            );
             if (!Succeeded(errorCode))
             {
                 Contract.Assert(errorCode == 0, "errorCode: " + errorCode);
@@ -750,8 +885,10 @@ namespace System.Net.WebSockets
 
         private static void DrainActionQueue(SafeHandle webSocketHandle, ActionQueue actionQueue)
         {
-            Contract.Assert(webSocketHandle != null && !webSocketHandle.IsInvalid,
-                "'webSocketHandle' MUST NOT be NULL or INVALID.");
+            Contract.Assert(
+                webSocketHandle != null && !webSocketHandle.IsInvalid,
+                "'webSocketHandle' MUST NOT be NULL or INVALID."
+            );
 
             IntPtr actionContext;
             IntPtr dummy;
@@ -762,14 +899,16 @@ namespace System.Net.WebSockets
             {
                 Buffer[] dataBuffers = new Buffer[1];
                 uint dataBufferCount = 1;
-                int errorCode = WebSocketGetAction_Raw(webSocketHandle,
+                int errorCode = WebSocketGetAction_Raw(
+                    webSocketHandle,
                     actionQueue,
                     dataBuffers,
                     ref dataBufferCount,
                     out action,
                     out bufferType,
                     out dummy,
-                    out actionContext);
+                    out actionContext
+                );
 
                 if (!Succeeded(errorCode))
                 {
@@ -786,10 +925,15 @@ namespace System.Net.WebSockets
             }
         }
 
-        private static void MarshalAndVerifyHttpHeader(IntPtr httpHeaderPtr,
-            ref HttpHeader httpHeader)
+        private static void MarshalAndVerifyHttpHeader(
+            IntPtr httpHeaderPtr,
+            ref HttpHeader httpHeader
+        )
         {
-            Contract.Assert(httpHeaderPtr != IntPtr.Zero, "'currentHttpHeaderPtr' MUST NOT be IntPtr.Zero.");
+            Contract.Assert(
+                httpHeaderPtr != IntPtr.Zero,
+                "'currentHttpHeaderPtr' MUST NOT be IntPtr.Zero."
+            );
 
             IntPtr httpHeaderNamePtr = Marshal.ReadIntPtr(httpHeaderPtr);
             IntPtr lengthPtr = IntPtr.Add(httpHeaderPtr, IntPtr.Size);
@@ -801,8 +945,10 @@ namespace System.Net.WebSockets
                 httpHeader.Name = Marshal.PtrToStringAnsi(httpHeaderNamePtr, length);
             }
 
-            if ((httpHeader.Name == null && length != 0) ||
-                (httpHeader.Name != null && length != httpHeader.Name.Length))
+            if (
+                (httpHeader.Name == null && length != 0)
+                || (httpHeader.Name != null && length != httpHeader.Name.Length)
+            )
             {
                 Contract.Assert(false, "The length of 'httpHeader.Name' MUST MATCH 'length'.");
                 throw new AccessViolationException();
@@ -813,31 +959,36 @@ namespace System.Net.WebSockets
             //   NameLength = uint*
             //   Value = string*
             //   ValueLength = uint*
-            // NOTE - All fields in the object are pointers to the actual value, hence the use of 
-            //        n * IntPtr.Size to get to the correct place in the object. 
+            // NOTE - All fields in the object are pointers to the actual value, hence the use of
+            //        n * IntPtr.Size to get to the correct place in the object.
             int valueOffset = 2 * IntPtr.Size;
-            int lengthOffset = 3 * IntPtr.Size; 
+            int lengthOffset = 3 * IntPtr.Size;
 
-            IntPtr httpHeaderValuePtr =
-                Marshal.ReadIntPtr(IntPtr.Add(httpHeaderPtr, valueOffset));
+            IntPtr httpHeaderValuePtr = Marshal.ReadIntPtr(IntPtr.Add(httpHeaderPtr, valueOffset));
             lengthPtr = IntPtr.Add(httpHeaderPtr, lengthOffset);
             length = Marshal.ReadInt32(lengthPtr);
             httpHeader.Value = Marshal.PtrToStringAnsi(httpHeaderValuePtr, (int)length);
 
-            if ((httpHeader.Value == null && length != 0) ||
-                (httpHeader.Value != null && length != httpHeader.Value.Length))
+            if (
+                (httpHeader.Value == null && length != 0)
+                || (httpHeader.Value != null && length != httpHeader.Value.Length)
+            )
             {
                 Contract.Assert(false, "The length of 'httpHeader.Value' MUST MATCH 'length'.");
                 throw new AccessViolationException();
             }
         }
 
-        private static HttpHeader[] MarshalHttpHeaders(IntPtr nativeHeadersPtr,
-            int nativeHeaderCount)
+        private static HttpHeader[] MarshalHttpHeaders(
+            IntPtr nativeHeadersPtr,
+            int nativeHeaderCount
+        )
         {
             Contract.Assert(nativeHeaderCount >= 0, "'nativeHeaderCount' MUST NOT be negative.");
-            Contract.Assert(nativeHeadersPtr != IntPtr.Zero || nativeHeaderCount == 0,
-                "'nativeHeaderCount' MUST be 0.");
+            Contract.Assert(
+                nativeHeadersPtr != IntPtr.Zero || nativeHeaderCount == 0,
+                "'nativeHeaderCount' MUST be 0."
+            );
 
             HttpHeader[] httpHeaders = new HttpHeader[nativeHeaderCount];
 
@@ -846,8 +997,8 @@ namespace System.Net.WebSockets
             //   NameLength = uint*
             //   Value = string*
             //   ValueLength = uint*
-            // NOTE - All fields in the object are pointers to the actual value, hence the use of 
-            //        4 * IntPtr.Size to get to the next header. 
+            // NOTE - All fields in the object are pointers to the actual value, hence the use of
+            //        4 * IntPtr.Size to get to the next header.
             int httpHeaderStructSize = 4 * IntPtr.Size;
 
             for (int i = 0; i < nativeHeaderCount; i++)
@@ -882,16 +1033,31 @@ namespace System.Net.WebSockets
         {
             if (webSocket.SessionHandle.IsClosed)
             {
-                throw new WebSocketException(WebSocketError.InvalidState,
-                    SR.GetString(SR.net_WebSockets_InvalidState_ClosedOrAborted, webSocket.GetType().FullName, webSocket.State));
+                throw new WebSocketException(
+                    WebSocketError.InvalidState,
+                    SR.GetString(
+                        SR.net_WebSockets_InvalidState_ClosedOrAborted,
+                        webSocket.GetType().FullName,
+                        webSocket.State
+                    )
+                );
             }
         }
 
-        private static WebSocketException ConvertObjectDisposedException(WebSocketBase webSocket, ObjectDisposedException innerException)
+        private static WebSocketException ConvertObjectDisposedException(
+            WebSocketBase webSocket,
+            ObjectDisposedException innerException
+        )
         {
-            return new WebSocketException(WebSocketError.InvalidState,
-                SR.GetString(SR.net_WebSockets_InvalidState_ClosedOrAborted, webSocket.GetType().FullName, webSocket.State),
-                innerException);
+            return new WebSocketException(
+                WebSocketError.InvalidState,
+                SR.GetString(
+                    SR.net_WebSockets_InvalidState_ClosedOrAborted,
+                    webSocket.GetType().FullName,
+                    webSocket.State
+                ),
+                innerException
+            );
         }
     }
 }

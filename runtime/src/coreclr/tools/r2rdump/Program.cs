@@ -29,7 +29,10 @@ namespace R2RDump
         public Program(R2RDumpRootCommand command)
         {
             _command = command;
-            _encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: false);
+            _encoding = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: false
+            );
 
             FileInfo output = Get(command.Out);
             if (output != null)
@@ -62,7 +65,12 @@ namespace R2RDump
             arg = arg.Trim();
             if (arg.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
             {
-                return int.TryParse(arg.Substring(2), System.Globalization.NumberStyles.HexNumber, null, out n);
+                return int.TryParse(
+                    arg.Substring(2),
+                    System.Globalization.NumberStyles.HexNumber,
+                    null,
+                    out n
+                );
             }
             return int.TryParse(arg, out n);
         }
@@ -83,7 +91,12 @@ namespace R2RDump
         /// <param name="title">The title to print, "R2R Methods by Query" or "R2R Methods by Keyword"</param>
         /// <param name="queries">The keywords/ids to search for</param>
         /// <param name="exact">Specifies whether to look for methods with names/signatures/ids matching the method exactly or partially</param>
-        private void QueryMethod(ReadyToRunReader r2r, string title, IReadOnlyList<string> queries, bool exact)
+        private void QueryMethod(
+            ReadyToRunReader r2r,
+            string title,
+            IReadOnlyList<string> queries,
+            bool exact
+        )
         {
             if (queries.Count > 0)
             {
@@ -241,7 +254,13 @@ namespace R2RDump
                     {
                         perfmapPath = Path.ChangeExtension(r2r.Filename, ".r2rmap");
                     }
-                    PerfMapWriter.Write(perfmapPath, Get(_command.PerfmapFormatVersion), ProduceDebugInfoMethods(r2r), ProduceDebugInfoAssemblies(r2r), details);
+                    PerfMapWriter.Write(
+                        perfmapPath,
+                        Get(_command.PerfmapFormatVersion),
+                        ProduceDebugInfoMethods(r2r),
+                        ProduceDebugInfoAssemblies(r2r),
+                        details
+                    );
                 }
 
                 if (standardDump)
@@ -263,10 +282,16 @@ namespace R2RDump
                     Name = method.SignatureString,
                     HotRVA = (uint)method.RuntimeFunctions[0].StartAddress,
                     HotLength = (uint)method.RuntimeFunctions[0].Size,
-                    MethodToken = (uint)MetadataTokens.GetToken(method.ComponentReader.MetadataReader, method.MethodHandle),
-                    AssemblyName = method.ComponentReader.MetadataReader.GetString(method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name),
+                    MethodToken = (uint)
+                        MetadataTokens.GetToken(
+                            method.ComponentReader.MetadataReader,
+                            method.MethodHandle
+                        ),
+                    AssemblyName = method.ComponentReader.MetadataReader.GetString(
+                        method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
+                    ),
                     ColdRVA = 0,
-                    ColdLength = 0
+                    ColdLength = 0,
                 };
             }
         }
@@ -275,9 +300,20 @@ namespace R2RDump
         {
             if (r2r.Composite)
             {
-                foreach (KeyValuePair<string, int> kvpRefAssembly in r2r.ManifestReferenceAssemblies.OrderBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase))
+                foreach (
+                    KeyValuePair<
+                        string,
+                        int
+                    > kvpRefAssembly in r2r.ManifestReferenceAssemblies.OrderBy(
+                        kvp => kvp.Key,
+                        StringComparer.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    yield return new AssemblyInfo(kvpRefAssembly.Key, r2r.GetAssemblyMvid(kvpRefAssembly.Value));
+                    yield return new AssemblyInfo(
+                        kvpRefAssembly.Key,
+                        r2r.GetAssemblyMvid(kvpRefAssembly.Value)
+                    );
                 }
             }
             else
@@ -295,7 +331,15 @@ namespace R2RDump
         {
             int id;
             bool isNum = ArgStringToInt(query, out id);
-            bool idMatch = isNum && (method.Rid == id || MetadataTokens.GetRowNumber(method.ComponentReader.MetadataReader, method.MethodHandle) == id);
+            bool idMatch =
+                isNum
+                && (
+                    method.Rid == id
+                    || MetadataTokens.GetRowNumber(
+                        method.ComponentReader.MetadataReader,
+                        method.MethodHandle
+                    ) == id
+                );
 
             bool sigMatch = false;
             if (exact)
@@ -306,13 +350,22 @@ namespace R2RDump
                     string sig = method.SignatureString.Replace(" ", "");
                     string q = query.Replace(" ", "");
                     int iMatch = sig.IndexOf(q, StringComparison.OrdinalIgnoreCase);
-                    sigMatch = (iMatch == 0 || (iMatch > 0 && iMatch == (sig.Length - q.Length) && sig[iMatch - 1] == '.'));
+                    sigMatch = (
+                        iMatch == 0
+                        || (
+                            iMatch > 0
+                            && iMatch == (sig.Length - q.Length)
+                            && sig[iMatch - 1] == '.'
+                        )
+                    );
                 }
             }
             else
             {
                 string sig = method.Signature.ReturnType + method.SignatureString.Replace(" ", "");
-                sigMatch = (sig.IndexOf(query.Replace(" ", ""), StringComparison.OrdinalIgnoreCase) >= 0);
+                sigMatch = (
+                    sig.IndexOf(query.Replace(" ", ""), StringComparison.OrdinalIgnoreCase) >= 0
+                );
             }
 
             return idMatch || sigMatch;
@@ -328,7 +381,8 @@ namespace R2RDump
             bool isNum = ArgStringToInt(query, out queryInt);
             string typeName = Enum.GetName(typeof(ReadyToRunSectionType), section.Type);
 
-            return (isNum && (int)section.Type == queryInt) || typeName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+            return (isNum && (int)section.Type == queryInt)
+                || typeName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>
@@ -383,7 +437,10 @@ namespace R2RDump
             {
                 foreach (RuntimeFunction rtf in m.RuntimeFunctions)
                 {
-                    if (rtf.Id == rtfQuery || (rtf.StartAddress >= rtfQuery && rtf.StartAddress + rtf.Size < rtfQuery))
+                    if (
+                        rtf.Id == rtfQuery
+                        || (rtf.StartAddress >= rtfQuery && rtf.StartAddress + rtf.Size < rtfQuery)
+                    )
                     {
                         return rtf;
                     }
@@ -421,9 +478,9 @@ namespace R2RDump
                 {
                     InlineSignatureBinary = inlineSignatureBinary,
                     Naked = naked,
-                    SignatureBinary = signatureBinary
+                    SignatureBinary = signatureBinary,
                 },
-                Unwind = Get(_command.Unwind)
+                Unwind = Get(_command.Unwind),
             };
 
             try
@@ -437,7 +494,9 @@ namespace R2RDump
 
                 if (naked && raw)
                 {
-                    throw new ArgumentException("The option '--naked' is incompatible with '--raw'");
+                    throw new ArgumentException(
+                        "The option '--naked' is incompatible with '--raw'"
+                    );
                 }
 
                 Dumper previousDumper = null;
@@ -461,7 +520,12 @@ namespace R2RDump
                     else
                     {
                         string perFileOutput = filename + ".common-methods.r2r";
-                        _dumper = new TextDumper(r2r, new StreamWriter(perFileOutput, append: false, _encoding), disassembler, model);
+                        _dumper = new TextDumper(
+                            r2r,
+                            new StreamWriter(perFileOutput, append: false, _encoding),
+                            disassembler,
+                            model
+                        );
                         if (previousDumper != null)
                         {
                             new R2RDiff(previousDumper, _dumper, _writer).Run();
@@ -469,7 +533,6 @@ namespace R2RDump
                         previousDumper?.Writer?.Flush();
                         previousDumper = _dumper;
                     }
-
                 }
             }
             catch (Exception e)
@@ -500,7 +563,7 @@ namespace R2RDump
         public static int Main(string[] args) =>
             new CliConfiguration(new R2RDumpRootCommand().UseVersion())
             {
-                ResponseFileTokenReplacer = Helpers.TryReadResponseFile
+                ResponseFileTokenReplacer = Helpers.TryReadResponseFile,
             }.Invoke(args);
     }
 }

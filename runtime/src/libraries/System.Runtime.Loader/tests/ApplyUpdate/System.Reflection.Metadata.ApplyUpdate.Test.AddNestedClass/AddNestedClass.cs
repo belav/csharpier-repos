@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 
-
 namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
     public class AddNestedClass
@@ -10,15 +9,17 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
         public static Action<string> X; // make the trimming tools happy
         public static Delegate Y;
         public event Action<string> Evt;
-        public void R () { Evt ("123"); }
-        public AddNestedClass()
+
+        public void R()
         {
+            Evt("123");
         }
+
+        public AddNestedClass() { }
 
         public string TestMethod()
         {
             return "123";
         }
-
     }
 }

@@ -28,14 +28,15 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             private LazyToolTip(
                 IThreadingContext threadingContext,
                 FrameworkElement element,
-                Func<DisposableToolTip> createToolTip)
+                Func<DisposableToolTip> createToolTip
+            )
                 : base(threadingContext, assertIsForeground: true)
             {
                 _element = element;
                 _createToolTip = createToolTip;
 
-                // Set ourselves as the tooltip of this text block.  This will let WPF know that 
-                // it should attempt to show tooltips here.  When WPF wants to show the tooltip 
+                // Set ourselves as the tooltip of this text block.  This will let WPF know that
+                // it should attempt to show tooltips here.  When WPF wants to show the tooltip
                 // though we'll hear about it "ToolTipOpening".  When that happens, we'll swap
                 // out ourselves with a real tooltip that is lazily created.  When that tooltip
                 // is the dismissed, we'll release the resources associated with it and we'll
@@ -46,8 +47,11 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
                 element.ToolTipClosing += this.OnToolTipClosing;
             }
 
-            public static void AttachTo(FrameworkElement element, IThreadingContext threadingContext, Func<DisposableToolTip> createToolTip)
-                => new LazyToolTip(threadingContext, element, createToolTip);
+            public static void AttachTo(
+                FrameworkElement element,
+                IThreadingContext threadingContext,
+                Func<DisposableToolTip> createToolTip
+            ) => new LazyToolTip(threadingContext, element, createToolTip);
 
             private void OnToolTipOpening(object sender, ToolTipEventArgs e)
             {

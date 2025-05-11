@@ -13,7 +13,9 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(BaseViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.BaseProperty));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.BaseProperty));
 
         // Act
         var attributes = ModelAttributes.GetAttributesForProperty(modelType, property);
@@ -31,7 +33,9 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(BaseViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.TestProperty));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.TestProperty));
 
         // Act
         var attributes = ModelAttributes.GetAttributesForProperty(modelType, property);
@@ -61,7 +65,9 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(DerivedViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.BaseProperty));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.BaseProperty));
 
         // Act
         var attributes = ModelAttributes.GetAttributesForProperty(modelType, property);
@@ -79,7 +85,9 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(DerivedViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.TestProperty));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.TestProperty));
 
         // Act
         var attributes = ModelAttributes.GetAttributesForProperty(modelType, property);
@@ -99,7 +107,9 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(DerivedViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.VirtualProperty));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.VirtualProperty));
 
         // Act
         var attributes = ModelAttributes.GetAttributesForProperty(modelType, property);
@@ -117,7 +127,9 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(DerivedViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.RouteValue));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.RouteValue));
 
         // Act
         var attributes = ModelAttributes.GetAttributesForProperty(modelType, property);
@@ -156,10 +168,15 @@ public class ModelAttributesTest
     public void GetAttributesForProperty_MergedAttributes()
     {
         // Arrange
-        var property = typeof(MergedAttributes).GetRuntimeProperty(nameof(MergedAttributes.Property));
+        var property = typeof(MergedAttributes).GetRuntimeProperty(
+            nameof(MergedAttributes.Property)
+        );
 
         // Act
-        var attributes = ModelAttributes.GetAttributesForProperty(typeof(MergedAttributes), property);
+        var attributes = ModelAttributes.GetAttributesForProperty(
+            typeof(MergedAttributes),
+            property
+        );
 
         // Assert
         Assert.Equal(3, attributes.Attributes.Count);
@@ -182,7 +199,8 @@ public class ModelAttributesTest
         var attributes = ModelAttributes.GetAttributesForParameter(
             typeof(MethodWithParamAttributesType)
                 .GetMethod(nameof(MethodWithParamAttributesType.Method))
-                .GetParameters()[0]);
+                .GetParameters()[0]
+        );
 
         // Assert
         // Not exactly "no attributes" due to SerializableAttribute on object.
@@ -199,23 +217,27 @@ public class ModelAttributesTest
         var attributes = ModelAttributes.GetAttributesForParameter(
             typeof(MethodWithParamAttributesType)
                 .GetMethod(nameof(MethodWithParamAttributesType.Method))
-                .GetParameters()[1]);
+                .GetParameters()[1]
+        );
 
         // Assert
         Assert.Collection(
             // Take(2) to ignore ComVisibleAttribute, SerializableAttribute, ... on int.
             attributes.Attributes.Take(2),
             attribute => Assert.IsType<RequiredAttribute>(attribute),
-            attribute => Assert.IsType<RangeAttribute>(attribute));
+            attribute => Assert.IsType<RangeAttribute>(attribute)
+        );
         Assert.Collection(
             attributes.ParameterAttributes,
             attribute => Assert.IsType<RequiredAttribute>(attribute),
-            attribute => Assert.IsType<RangeAttribute>(attribute));
+            attribute => Assert.IsType<RangeAttribute>(attribute)
+        );
         Assert.Null(attributes.PropertyAttributes);
         Assert.Collection(
             // Take(1) because the attribute or attributes after SerializableAttribute are framework-specific.
             attributes.TypeAttributes.Take(1),
-            attribute => Assert.IsType<SerializableAttribute>(attribute));
+            attribute => Assert.IsType<SerializableAttribute>(attribute)
+        );
     }
 
     [Fact]
@@ -230,9 +252,11 @@ public class ModelAttributesTest
         var attributes = ModelAttributes.GetAttributesForParameter(parameters[2]);
 
         // Assert
-        Assert.Collection(attributes.Attributes,
+        Assert.Collection(
+            attributes.Attributes,
             attribute => Assert.IsType<BindRequiredAttribute>(attribute),
-            attribute => Assert.IsType<ClassValidator>(attribute));
+            attribute => Assert.IsType<ClassValidator>(attribute)
+        );
         Assert.IsType<BindRequiredAttribute>(Assert.Single(attributes.ParameterAttributes));
         Assert.Null(attributes.PropertyAttributes);
         Assert.IsType<ClassValidator>(Assert.Single(attributes.TypeAttributes));
@@ -247,44 +271,54 @@ public class ModelAttributesTest
             .GetParameters();
 
         // Act
-        var attributes = ModelAttributes.GetAttributesForParameter(parameters[2], typeof(DerivedModelWithAttributes));
+        var attributes = ModelAttributes.GetAttributesForParameter(
+            parameters[2],
+            typeof(DerivedModelWithAttributes)
+        );
 
         // Assert
         Assert.Collection(
             attributes.Attributes,
             attribute => Assert.IsType<BindRequiredAttribute>(attribute),
             attribute => Assert.IsType<ModelBinderAttribute>(attribute),
-            attribute => Assert.IsType<ClassValidator>(attribute));
+            attribute => Assert.IsType<ClassValidator>(attribute)
+        );
         Assert.IsType<BindRequiredAttribute>(Assert.Single(attributes.ParameterAttributes));
         Assert.Null(attributes.PropertyAttributes);
         Assert.Collection(
             attributes.TypeAttributes,
             attribute => Assert.IsType<ModelBinderAttribute>(attribute),
-            attribute => Assert.IsType<ClassValidator>(attribute));
+            attribute => Assert.IsType<ClassValidator>(attribute)
+        );
     }
 
     [Fact]
     public void GetAttributesForProperty_WithModelType_IncludesTypeAttributes()
     {
         // Arrange
-        var property = typeof(MergedAttributes)
-            .GetProperty(nameof(MergedAttributes.BaseModel));
+        var property = typeof(MergedAttributes).GetProperty(nameof(MergedAttributes.BaseModel));
 
         // Act
-        var attributes = ModelAttributes.GetAttributesForProperty(typeof(MergedAttributes), property, typeof(DerivedModelWithAttributes));
+        var attributes = ModelAttributes.GetAttributesForProperty(
+            typeof(MergedAttributes),
+            property,
+            typeof(DerivedModelWithAttributes)
+        );
 
         // Assert
         Assert.Collection(
             attributes.Attributes,
             attribute => Assert.IsType<BindRequiredAttribute>(attribute),
             attribute => Assert.IsType<ModelBinderAttribute>(attribute),
-            attribute => Assert.IsType<ClassValidator>(attribute));
+            attribute => Assert.IsType<ClassValidator>(attribute)
+        );
         Assert.IsType<BindRequiredAttribute>(Assert.Single(attributes.PropertyAttributes));
         Assert.Null(attributes.ParameterAttributes);
         Assert.Collection(
             attributes.TypeAttributes,
             attribute => Assert.IsType<ModelBinderAttribute>(attribute),
-            attribute => Assert.IsType<ClassValidator>(attribute));
+            attribute => Assert.IsType<ClassValidator>(attribute)
+        );
     }
 
     [Fact]
@@ -292,11 +326,18 @@ public class ModelAttributesTest
     {
         // Arrange
         var modelType = typeof(InvalidBaseViewModel);
-        var property = modelType.GetRuntimeProperties().FirstOrDefault(p => p.Name == nameof(BaseModel.RouteValue));
+        var property = modelType
+            .GetRuntimeProperties()
+            .FirstOrDefault(p => p.Name == nameof(BaseModel.RouteValue));
 
         // Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => ModelAttributes.GetAttributesForProperty(modelType, property));
-        Assert.Equal("Only one ModelMetadataType attribute is permitted per type.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            ModelAttributes.GetAttributesForProperty(modelType, property)
+        );
+        Assert.Equal(
+            "Only one ModelMetadataType attribute is permitted per type.",
+            exception.Message
+        );
     }
 
     [ClassValidator]
@@ -326,13 +367,10 @@ public class ModelAttributesTest
 
         [Range(10, 100)]
         public override int VirtualProperty { get; set; }
-
     }
 
     [ModelBinder(Name = "Custom")]
-    private class DerivedModelWithAttributes : BaseModel
-    {
-    }
+    private class DerivedModelWithAttributes : BaseModel { }
 
     [ModelMetadataType<BaseModel>]
     private class BaseViewModel
@@ -358,7 +396,6 @@ public class ModelAttributesTest
         public new string TestProperty { get; set; }
 
         public int VirtualProperty { get; set; }
-
     }
 
     public interface ICalculator
@@ -391,14 +428,10 @@ public class ModelAttributesTest
     }
 
     [ClassValidator]
-    private class PropertyType
-    {
-    }
+    private class PropertyType { }
 
     [Bind]
-    private class MetadataPropertyType
-    {
-    }
+    private class MetadataPropertyType { }
 
     [IrrelevantAttribute] // We verify this is ignored
     private class MethodWithParamAttributesType
@@ -407,12 +440,9 @@ public class ModelAttributesTest
         public void Method(
             object noAttributes,
             [Required, Range(1, 100)] int validationAttributes,
-            [BindRequired] BaseModel mergedAttributes)
-        {
-        }
+            [BindRequired] BaseModel mergedAttributes
+        ) { }
     }
 
-    private class IrrelevantAttribute : Attribute
-    {
-    }
+    private class IrrelevantAttribute : Attribute { }
 }

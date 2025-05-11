@@ -15,161 +15,180 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAtRoot_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestAfterClass_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalStatement_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestEmptyStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestBeforeStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                $$
-                return true;
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    $$
+                    return true;
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                return true;
-                $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    return true;
+                    $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                if (true) {
-                }
-                $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    if (true) {
+                    }
+                    $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInsideSwitchBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                switch (E) {
-                  case 0:
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    switch (E) {
+                      case 0:
+                        $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterSwitch1()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"switch $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch $$"));
         }
 
         [Fact]
-        public async Task TestAfterExpression()
-            => await VerifyKeywordAsync(AddInsideMethod(@"_ = expr $$"));
+        public async Task TestAfterExpression() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"_ = expr $$"));
 
         [Fact]
         public async Task TestAfterExpression_InMethodWithArrowBody()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     bool M() => this $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task TestAfterForeachVar()
-            => await VerifyAbsenceAsync(AddInsideMethod(@"foreach (var $$)"));
+        public async Task TestAfterForeachVar() =>
+            await VerifyAbsenceAsync(AddInsideMethod(@"foreach (var $$)"));
 
         [Fact]
-        public async Task TestAfterTuple()
-            => await VerifyKeywordAsync(AddInsideMethod(@"_ = (expr, expr) $$"));
+        public async Task TestAfterTuple() =>
+            await VerifyKeywordAsync(AddInsideMethod(@"_ = (expr, expr) $$"));
 
         [Fact]
         public async Task TestNotAfterSwitch2()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"switch ($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"switch ($$"));
         }
 
         [Fact]
         public async Task TestNotInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                   $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterSwitch()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                switch (expr) {
-                   default:
-                }
-                $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    switch (expr) {
+                       default:
+                    }
+                    $$
+                    """
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -182,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         var v = Console.WriteLine $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -195,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         Action a = delegate { } $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -208,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         Action b = (() => 0) $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8319")]
@@ -221,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void M() {
                         Action b = () => {} $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -236,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var x = 1$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -251,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var x = 1.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48573")]
@@ -266,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var x = 1. $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31367")]
@@ -289,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31367")]
@@ -315,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
@@ -20,7 +19,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public MetadataType OwningType => _owningType;
 
-        public SerializedFrozenObjectNode(MetadataType owningType, int allocationSiteId, TypePreinit.ISerializableReference data)
+        public SerializedFrozenObjectNode(
+            MetadataType owningType,
+            int allocationSiteId,
+            TypePreinit.ISerializableReference data
+        )
         {
             _owningType = owningType;
             _allocationSiteId = allocationSiteId;
@@ -29,7 +32,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__FrozenObj_")
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__FrozenObj_")
                 .Append(nameMangler.GetMangledTypeName(_owningType))
                 .Append(_allocationSiteId.ToStringInvariant());
         }
@@ -38,22 +42,32 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsKnownImmutable => _data.IsKnownImmutable;
 
-        protected override int ContentSize
-            => _data.Type.IsArray
-            ? _data.Type.Context.Target.PointerSize * 2 + ((ArrayType)_data.Type).ElementType.GetElementSize().AsInt * _data.ArrayLength
-            : ((DefType)_data.Type).InstanceByteCount.AsInt + (_data.Type.IsValueType ? _data.Type.Context.Target.PointerSize : 0);
+        protected override int ContentSize =>
+            _data.Type.IsArray
+                ? _data.Type.Context.Target.PointerSize * 2
+                    + ((ArrayType)_data.Type).ElementType.GetElementSize().AsInt * _data.ArrayLength
+                : ((DefType)_data.Type).InstanceByteCount.AsInt
+                    + (_data.Type.IsValueType ? _data.Type.Context.Target.PointerSize : 0);
 
         public override int? ArrayLength => _data.Type.IsArray ? _data.ArrayLength : null;
 
-        public override void EncodeContents(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeContents(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             // byte contents
             _data.WriteContent(ref dataBuilder, this, factory);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        public override void GetNonRelocationDependencies(ref DependencyList dependencies, NodeFactory factory)
+        public override void GetNonRelocationDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory
+        )
         {
             _data.GetNonRelocationDependencies(ref dependencies, factory);
         }
@@ -70,6 +84,7 @@ namespace ILCompiler.DependencyAnalysis
             return _allocationSiteId.CompareTo(otherFrozenObjectNode._allocationSiteId);
         }
 
-        public override string ToString() => $"Frozen {_data.Type.GetDisplayNameWithoutNamespace()} object";
+        public override string ToString() =>
+            $"Frozen {_data.Type.GetDisplayNameWithoutNamespace()} object";
     }
 }

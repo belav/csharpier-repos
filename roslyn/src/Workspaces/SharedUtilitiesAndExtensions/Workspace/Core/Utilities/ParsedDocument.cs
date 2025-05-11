@@ -24,26 +24,49 @@ namespace Microsoft.CodeAnalysis;
 /// In exceptional cases such API may be asynchronous as long as it completes synchronously in most common cases and async completion is rare. It is still desirable to improve the design
 /// of such feature to either not be invoked on a UI thread or be entirely synchronous.
 /// </remarks>
-internal readonly record struct ParsedDocument(DocumentId Id, SourceText Text, SyntaxNode Root, HostLanguageServices HostLanguageServices)
+internal readonly record struct ParsedDocument(
+    DocumentId Id,
+    SourceText Text,
+    SyntaxNode Root,
+    HostLanguageServices HostLanguageServices
+)
 {
     public SyntaxTree SyntaxTree => Root.SyntaxTree;
 
     public LanguageServices LanguageServices => HostLanguageServices.LanguageServices;
     public SolutionServices SolutionServices => LanguageServices.SolutionServices;
 
-    public static async ValueTask<ParsedDocument> CreateAsync(Document document, CancellationToken cancellationToken)
+    public static async ValueTask<ParsedDocument> CreateAsync(
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        return new ParsedDocument(document.Id, text, root, document.Project.GetExtendedLanguageServices());
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return new ParsedDocument(
+            document.Id,
+            text,
+            root,
+            document.Project.GetExtendedLanguageServices()
+        );
     }
 
 #if !CODE_STYLE
-    public static ParsedDocument CreateSynchronously(Document document, CancellationToken cancellationToken)
+    public static ParsedDocument CreateSynchronously(
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var text = document.GetTextSynchronously(cancellationToken);
         var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
-        return new ParsedDocument(document.Id, text, root, document.Project.GetExtendedLanguageServices());
+        return new ParsedDocument(
+            document.Id,
+            text,
+            root,
+            document.Project.GetExtendedLanguageServices()
+        );
     }
 #endif
 
@@ -59,11 +82,13 @@ internal readonly record struct ParsedDocument(DocumentId Id, SourceText Text, S
         return new ParsedDocument(Id, text, root, HostLanguageServices);
     }
 
-    public ParsedDocument WithChange(TextChange change, CancellationToken cancellationToken)
-        => WithChangedText(Text.WithChanges(change), cancellationToken);
+    public ParsedDocument WithChange(TextChange change, CancellationToken cancellationToken) =>
+        WithChangedText(Text.WithChanges(change), cancellationToken);
 
-    public ParsedDocument WithChanges(IEnumerable<TextChange> changes, CancellationToken cancellationToken)
-        => WithChangedText(Text.WithChanges(changes), cancellationToken);
+    public ParsedDocument WithChanges(
+        IEnumerable<TextChange> changes,
+        CancellationToken cancellationToken
+    ) => WithChangedText(Text.WithChanges(changes), cancellationToken);
 
     /// <summary>
     /// Equivalent semantics to <see cref="Document.GetTextChangesAsync(Document, CancellationToken)"/>
@@ -80,8 +105,11 @@ internal readonly record struct ParsedDocument(DocumentId Id, SourceText Text, S
         var textChanges = Text.GetTextChanges(oldDocument.Text);
 
         // if changes are significant (not the whole document being replaced) then use these changes
-        if (textChanges.Count > 1 ||
-            textChanges.Count == 1 && textChanges[0].Span != new TextSpan(0, oldDocument.Text.Length))
+        if (
+            textChanges.Count > 1
+            || textChanges.Count == 1
+                && textChanges[0].Span != new TextSpan(0, oldDocument.Text.Length)
+        )
         {
             return textChanges;
         }

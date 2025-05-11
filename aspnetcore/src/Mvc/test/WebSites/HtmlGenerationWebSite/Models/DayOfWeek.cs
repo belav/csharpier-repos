@@ -11,5 +11,5 @@ public enum DayOfWeek
     Thursday,
     Friday,
     Saturday,
-    Sunday
+    Sunday,
 }

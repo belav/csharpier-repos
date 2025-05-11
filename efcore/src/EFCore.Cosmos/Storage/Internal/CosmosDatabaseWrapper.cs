@@ -33,7 +33,8 @@ public class CosmosDatabaseWrapper : Database
     public CosmosDatabaseWrapper(
         DatabaseDependencies dependencies,
         ICosmosClientWrapper cosmosClient,
-        ILoggingOptions loggingOptions)
+        ILoggingOptions loggingOptions
+    )
         : base(dependencies)
     {
         _cosmosClient = cosmosClient;
@@ -70,9 +71,11 @@ public class CosmosDatabaseWrapper : Database
                 // #16707
                 var root = GetRootDocument((InternalEntityEntry)entry);
 #pragma warning restore EF1001 // Internal EF Core API usage.
-                if (!entriesSaved.Contains(root)
+                if (
+                    !entriesSaved.Contains(root)
                     && rootEntriesToSave.Add(root)
-                    && root.EntityState == EntityState.Unchanged)
+                    && root.EntityState == EntityState.Unchanged
+                )
                 {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                     // #16707
@@ -93,14 +96,23 @@ public class CosmosDatabaseWrapper : Database
                     rowsAffected++;
                 }
             }
-            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
+            catch (Exception ex)
+                when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 var errorEntries = new[] { entry };
                 var exception = WrapUpdateException(ex, errorEntries);
 
-                if (exception is not DbUpdateConcurrencyException
-                    || !Dependencies.Logger.OptimisticConcurrencyException(
-                        entry.Context, errorEntries, (DbUpdateConcurrencyException)exception, null).IsSuppressed)
+                if (
+                    exception is not DbUpdateConcurrencyException
+                    || !Dependencies
+                        .Logger.OptimisticConcurrencyException(
+                            entry.Context,
+                            errorEntries,
+                            (DbUpdateConcurrencyException)exception,
+                            null
+                        )
+                        .IsSuppressed
+                )
                 {
                     throw exception;
                 }
@@ -109,8 +121,7 @@ public class CosmosDatabaseWrapper : Database
 
         foreach (var rootEntry in rootEntriesToSave)
         {
-            if (!entriesSaved.Contains(rootEntry)
-                && Save(rootEntry))
+            if (!entriesSaved.Contains(rootEntry) && Save(rootEntry))
             {
                 rowsAffected++;
             }
@@ -127,7 +138,8 @@ public class CosmosDatabaseWrapper : Database
     /// </summary>
     public override async Task<int> SaveChangesAsync(
         IList<IUpdateEntry> entries,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var rowsAffected = 0;
         var entriesSaved = new HashSet<IUpdateEntry>();
@@ -144,9 +156,11 @@ public class CosmosDatabaseWrapper : Database
             if (!entityType.IsDocumentRoot())
             {
                 var root = GetRootDocument((InternalEntityEntry)entry);
-                if (!entriesSaved.Contains(root)
+                if (
+                    !entriesSaved.Contains(root)
                     && rootEntriesToSave.Add(root)
-                    && root.EntityState == EntityState.Unchanged)
+                    && root.EntityState == EntityState.Unchanged
+                )
                 {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                     // #16707
@@ -166,15 +180,26 @@ public class CosmosDatabaseWrapper : Database
                     rowsAffected++;
                 }
             }
-            catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
+            catch (Exception ex)
+                when (ex is not DbUpdateException and not OperationCanceledException)
             {
                 var errorEntries = new[] { entry };
                 var exception = WrapUpdateException(ex, errorEntries);
 
-                if (exception is not DbUpdateConcurrencyException
-                    || !(await Dependencies.Logger.OptimisticConcurrencyExceptionAsync(
-                            entry.Context, errorEntries, (DbUpdateConcurrencyException)exception, null, cancellationToken)
-                        .ConfigureAwait(false)).IsSuppressed)
+                if (
+                    exception is not DbUpdateConcurrencyException
+                    || !(
+                        await Dependencies
+                            .Logger.OptimisticConcurrencyExceptionAsync(
+                                entry.Context,
+                                errorEntries,
+                                (DbUpdateConcurrencyException)exception,
+                                null,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    ).IsSuppressed
+                )
                 {
                     throw exception;
                 }
@@ -183,8 +208,10 @@ public class CosmosDatabaseWrapper : Database
 
         foreach (var rootEntry in rootEntriesToSave)
         {
-            if (!entriesSaved.Contains(rootEntry)
-                && await SaveAsync(rootEntry, cancellationToken).ConfigureAwait(false))
+            if (
+                !entriesSaved.Contains(rootEntry)
+                && await SaveAsync(rootEntry, cancellationToken).ConfigureAwait(false)
+            )
             {
                 rowsAffected++;
             }
@@ -241,16 +268,24 @@ public class CosmosDatabaseWrapper : Database
                 {
                     document = documentSource.CreateDocument(entry);
 
-                    var propertyName = entityType.FindDiscriminatorProperty()?.GetJsonPropertyName();
+                    var propertyName = entityType
+                        .FindDiscriminatorProperty()
+                        ?.GetJsonPropertyName();
                     if (propertyName != null)
                     {
-                        document[propertyName] =
-                            JToken.FromObject(entityType.GetDiscriminatorValue(), CosmosClientWrapper.Serializer);
+                        document[propertyName] = JToken.FromObject(
+                            entityType.GetDiscriminatorValue(),
+                            CosmosClientWrapper.Serializer
+                        );
                     }
                 }
 
                 return _cosmosClient.ReplaceItem(
-                    collectionId, documentSource.GetId(entry.SharedIdentityEntry ?? entry), document, entry);
+                    collectionId,
+                    documentSource.GetId(entry.SharedIdentityEntry ?? entry),
+                    document,
+                    entry
+                );
 
             case EntityState.Deleted:
                 return _cosmosClient.DeleteItem(collectionId, documentSource.GetId(entry), entry);
@@ -294,7 +329,11 @@ public class CosmosDatabaseWrapper : Database
                 }
 
                 return _cosmosClient.CreateItemAsync(
-                    collectionId, newDocument, entry, cancellationToken);
+                    collectionId,
+                    newDocument,
+                    entry,
+                    cancellationToken
+                );
 
             case EntityState.Modified:
                 var document = documentSource.GetCurrentDocument(entry);
@@ -309,11 +348,15 @@ public class CosmosDatabaseWrapper : Database
                 {
                     document = documentSource.CreateDocument(entry);
 
-                    var propertyName = entityType.FindDiscriminatorProperty()?.GetJsonPropertyName();
+                    var propertyName = entityType
+                        .FindDiscriminatorProperty()
+                        ?.GetJsonPropertyName();
                     if (propertyName != null)
                     {
-                        document[propertyName] =
-                            JToken.FromObject(entityType.GetDiscriminatorValue(), CosmosClientWrapper.Serializer);
+                        document[propertyName] = JToken.FromObject(
+                            entityType.GetDiscriminatorValue(),
+                            CosmosClientWrapper.Serializer
+                        );
                     }
                 }
 
@@ -322,11 +365,16 @@ public class CosmosDatabaseWrapper : Database
                     documentSource.GetId(entry.SharedIdentityEntry ?? entry),
                     document,
                     entry,
-                    cancellationToken);
+                    cancellationToken
+                );
 
             case EntityState.Deleted:
                 return _cosmosClient.DeleteItemAsync(
-                    collectionId, documentSource.GetId(entry), entry, cancellationToken);
+                    collectionId,
+                    documentSource.GetId(entry),
+                    entry,
+                    cancellationToken
+                );
 
             default:
                 return Task.FromResult(false);
@@ -344,7 +392,9 @@ public class CosmosDatabaseWrapper : Database
         if (!_documentCollections.TryGetValue(entityType, out var documentSource))
         {
             _documentCollections.Add(
-                entityType, documentSource = new DocumentSource(entityType, this));
+                entityType,
+                documentSource = new DocumentSource(entityType, this)
+            );
         }
 
         return documentSource;
@@ -365,13 +415,19 @@ public class CosmosDatabaseWrapper : Database
                     CosmosStrings.OrphanedNestedDocumentSensitive(
                         entry.EntityType.DisplayName(),
                         ownership.PrincipalEntityType.DisplayName(),
-                        entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties)));
+                        entry.BuildCurrentValuesString(
+                            entry.EntityType.FindPrimaryKey()!.Properties
+                        )
+                    )
+                );
             }
 
             throw new InvalidOperationException(
                 CosmosStrings.OrphanedNestedDocument(
                     entry.EntityType.DisplayName(),
-                    ownership.PrincipalEntityType.DisplayName()));
+                    ownership.PrincipalEntityType.DisplayName()
+                )
+            );
         }
 
         return principal.EntityType.IsDocumentRoot() ? principal : GetRootDocument(principal);
@@ -386,11 +442,18 @@ public class CosmosDatabaseWrapper : Database
 
         return exception switch
         {
-            CosmosException { StatusCode: HttpStatusCode.PreconditionFailed }
-                => new DbUpdateConcurrencyException(CosmosStrings.UpdateConflict(id), exception, entries),
-            CosmosException { StatusCode: HttpStatusCode.Conflict }
-                => new DbUpdateException(CosmosStrings.UpdateConflict(id), exception, entries),
-            _ => new DbUpdateException(CosmosStrings.UpdateStoreException(id), exception, entries)
+            CosmosException { StatusCode: HttpStatusCode.PreconditionFailed } =>
+                new DbUpdateConcurrencyException(
+                    CosmosStrings.UpdateConflict(id),
+                    exception,
+                    entries
+                ),
+            CosmosException { StatusCode: HttpStatusCode.Conflict } => new DbUpdateException(
+                CosmosStrings.UpdateConflict(id),
+                exception,
+                entries
+            ),
+            _ => new DbUpdateException(CosmosStrings.UpdateStoreException(id), exception, entries),
         };
     }
 }

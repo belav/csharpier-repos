@@ -38,7 +38,12 @@ public interface IHttpResponseBodyFeature
     /// <param name="count">The number of bytes to send, or null to send the remainder of the file.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to abort the transmission.</param>
     /// <returns></returns>
-    Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellationToken = default);
+    Task SendFileAsync(
+        string path,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Flush any remaining response headers, data, or trailers.

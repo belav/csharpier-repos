@@ -12,7 +12,12 @@ internal sealed class TestMeterFactory : IMeterFactory
 
     public Meter Create(MeterOptions options)
     {
-        var meter = new Meter(options.Name, options.Version, Array.Empty<KeyValuePair<string, object>>(), scope: this);
+        var meter = new Meter(
+            options.Name,
+            options.Version,
+            Array.Empty<KeyValuePair<string, object>>(),
+            scope: this
+        );
         Meters.Add(meter);
         return meter;
     }

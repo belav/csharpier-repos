@@ -15,12 +15,15 @@ namespace System.Text.RegularExpressions.Symbolic
     /// where it maintains linear construction time in terms of the overall number of AST nodes in a given <see cref="RegexNode"/> input.
     /// Enumeration is performed in reverse of the order added, yielding items from last to first.
     /// </remarks>
-    internal sealed class DoublyLinkedList<T> : IEnumerable<T> where T : notnull
+    internal sealed class DoublyLinkedList<T> : IEnumerable<T>
+        where T : notnull
     {
         /// <summary>First node of the list</summary>
         private Node? _first;
+
         /// <summary>Last node of the list</summary>
         private Node? _last;
+
         /// <summary>The number of elements in the list.</summary>
         private int _size;
 
@@ -137,13 +140,21 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             if (_size == 0)
             {
-
                 Debug.Assert(_first is null && _last is null, "empty list");
             }
             else
             {
-                Debug.Assert(_size > 0, "_size < 0 means that the list has been invalidated after Append");
-                Debug.Assert(_first is not null && _last is not null && _first.Prev is null && _last.Next is null, "non-empty list");
+                Debug.Assert(
+                    _size > 0,
+                    "_size < 0 means that the list has been invalidated after Append"
+                );
+                Debug.Assert(
+                    _first is not null
+                        && _last is not null
+                        && _first.Prev is null
+                        && _last.Next is null,
+                    "non-empty list"
+                );
             }
         }
 
@@ -153,7 +164,10 @@ namespace System.Text.RegularExpressions.Symbolic
             public Node? Prev;
             public readonly T Value;
 
-            public Node(T elem) { Value = elem; }
+            public Node(T elem)
+            {
+                Value = elem;
+            }
 
             public Node(T elem, Node? prev, Node? next)
             {

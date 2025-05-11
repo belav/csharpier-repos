@@ -62,15 +62,11 @@ public interface IOperationReporter
 
             if (error.Line > 0)
             {
-                builder
-                    .Append("(")
-                    .Append(error.Line);
+                builder.Append("(").Append(error.Line);
 
                 if (error.Column > 0)
                 {
-                    builder
-                        .Append(",")
-                        .Append(error.Column);
+                    builder.Append(",").Append(error.Column);
                 }
 
                 builder.Append(")");

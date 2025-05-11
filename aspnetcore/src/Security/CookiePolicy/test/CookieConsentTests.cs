@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
@@ -18,201 +18,241 @@ public class CookieConsentTests
     [Fact]
     public async Task ConsentChecksOffByDefault()
     {
-        var httpContext = await RunTestAsync(options => { }, requestContext => { }, context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.False(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.True(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options => { },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.False(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.True(feature.CanTrack);
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
         Assert.Equal("Test=Value; path=/", httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task ConsentEnabledForTemplateScenario()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { }, context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
         Assert.Empty(httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task NonEssentialCookiesWithOptionsExcluded()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { }, context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value", new CookieOptions() { IsEssential = false });
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = false }
+                );
+                return Task.CompletedTask;
+            }
+        );
         Assert.Empty(httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task NonEssentialCookiesCanBeAllowedViaOnAppendCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.OnAppendCookie = context =>
+        var httpContext = await RunTestAsync(
+            options =>
             {
-                Assert.True(context.IsConsentNeeded);
-                Assert.False(context.HasConsent);
-                Assert.False(context.IssueCookie);
-                context.IssueCookie = true;
-            };
-        },
-        requestContext => { }, context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value", new CookieOptions() { IsEssential = false });
-            return Task.CompletedTask;
-        });
+                options.CheckConsentNeeded = context => true;
+                options.OnAppendCookie = context =>
+                {
+                    Assert.True(context.IsConsentNeeded);
+                    Assert.False(context.HasConsent);
+                    Assert.False(context.IssueCookie);
+                    context.IssueCookie = true;
+                };
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = false }
+                );
+                return Task.CompletedTask;
+            }
+        );
         Assert.Equal("Test=Value; path=/", httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task NeedsConsentDoesNotPreventEssentialCookies()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { }, context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value", new CookieOptions() { IsEssential = true });
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = true }
+                );
+                return Task.CompletedTask;
+            }
+        );
         Assert.Equal("Test=Value; path=/", httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task EssentialCookiesCanBeExcludedByOnAppendCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.OnAppendCookie = context =>
+        var httpContext = await RunTestAsync(
+            options =>
             {
-                Assert.True(context.IsConsentNeeded);
-                Assert.True(context.HasConsent);
-                Assert.True(context.IssueCookie);
-                context.IssueCookie = false;
-            };
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
-        },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value", new CookieOptions() { IsEssential = true });
-            return Task.CompletedTask;
-        });
+                options.CheckConsentNeeded = context => true;
+                options.OnAppendCookie = context =>
+                {
+                    Assert.True(context.IsConsentNeeded);
+                    Assert.True(context.HasConsent);
+                    Assert.True(context.IssueCookie);
+                    context.IssueCookie = false;
+                };
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
+            },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
+                context.Response.Cookies.Append(
+                    "Test",
+                    "Value",
+                    new CookieOptions() { IsEssential = true }
+                );
+                return Task.CompletedTask;
+            }
+        );
         Assert.Empty(httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task HasConsentReadsRequestCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
-        },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
+            },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
         Assert.Equal("Test=Value; path=/", httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task HasConsentIgnoresInvalidRequestCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=IAmATeapot";
-        },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=IAmATeapot";
+            },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
         Assert.Empty(httpContext.Response.Headers.SetCookie);
     }
 
     [Fact]
     public async Task GrantConsentSetsCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(2, cookies.Count);
@@ -233,36 +273,38 @@ public class CookieConsentTests
     [Fact]
     public async Task GrantConsentAppliesPolicyToConsentCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = Http.SameSiteMode.Strict;
-            options.OnAppendCookie = context =>
+        var httpContext = await RunTestAsync(
+            options =>
             {
-                Assert.Equal(".AspNet.Consent", context.CookieName);
-                Assert.Equal("yes", context.CookieValue);
-                Assert.Equal(Http.SameSiteMode.Strict, context.CookieOptions.SameSite);
-                context.CookieName += "1";
-                context.CookieValue += "1";
-                context.CookieOptions.Extensions.Add("extension");
-            };
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Http.SameSiteMode.Strict;
+                options.OnAppendCookie = context =>
+                {
+                    Assert.Equal(".AspNet.Consent", context.CookieName);
+                    Assert.Equal("yes", context.CookieValue);
+                    Assert.Equal(Http.SameSiteMode.Strict, context.CookieOptions.SameSite);
+                    context.CookieName += "1";
+                    context.CookieValue += "1";
+                    context.CookieOptions.Extensions.Add("extension");
+                };
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            return Task.CompletedTask;
-        });
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(1, cookies.Count);
@@ -277,30 +319,32 @@ public class CookieConsentTests
     [Fact]
     public async Task GrantConsentWhenAlreadyHasItDoesNotSetCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
-        },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
+            },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
 
         Assert.Equal("Test=Value; path=/", httpContext.Response.Headers.SetCookie);
     }
@@ -308,30 +352,34 @@ public class CookieConsentTests
     [Fact]
     public async Task GrantConsentAfterResponseStartsSetsHasConsentButDoesNotSetCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { },
-        async context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            async context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            await context.Response.WriteAsync("Started.");
+                await context.Response.WriteAsync("Started.");
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            Assert.Throws<InvalidOperationException>(() => context.Response.Cookies.Append("Test", "Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Cookies.Append("Test", "Value")
+                );
 
-            await context.Response.WriteAsync("Granted.");
-        });
+                await context.Response.WriteAsync("Granted.");
+            }
+        );
 
         var reader = new StreamReader(httpContext.Response.Body);
         Assert.Equal("Started.Granted.", await reader.ReadToEndAsync());
@@ -341,27 +389,29 @@ public class CookieConsentTests
     [Fact]
     public async Task WithdrawConsentWhenNotHasConsentNoOps()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            feature.WithdrawConsent();
+                feature.WithdrawConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            context.Response.Cookies.Append("Test", "Value");
-            return Task.CompletedTask;
-        });
+                context.Response.Cookies.Append("Test", "Value");
+                return Task.CompletedTask;
+            }
+        );
 
         Assert.Empty(httpContext.Response.Headers.SetCookie);
     }
@@ -369,31 +419,33 @@ public class CookieConsentTests
     [Fact]
     public async Task WithdrawConsentDeletesCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
-        },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value1");
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
+            },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
+                context.Response.Cookies.Append("Test", "Value1");
 
-            feature.WithdrawConsent();
+                feature.WithdrawConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            context.Response.Cookies.Append("Test", "Value2");
-            return Task.CompletedTask;
-        });
+                context.Response.Cookies.Append("Test", "Value2");
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(2, cookies.Count);
@@ -412,35 +464,37 @@ public class CookieConsentTests
     [Fact]
     public async Task WithdrawConsentAppliesPolicyToDeleteCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = Http.SameSiteMode.Strict;
-            options.OnDeleteCookie = context =>
+        var httpContext = await RunTestAsync(
+            options =>
             {
-                Assert.Equal(".AspNet.Consent", context.CookieName);
-                context.CookieName += "1";
-            };
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
-        },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Http.SameSiteMode.Strict;
+                options.OnDeleteCookie = context =>
+                {
+                    Assert.Equal(".AspNet.Consent", context.CookieName);
+                    context.CookieName += "1";
+                };
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
+            },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            feature.WithdrawConsent();
+                feature.WithdrawConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            return Task.CompletedTask;
-        });
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(1, cookies.Count);
@@ -454,35 +508,37 @@ public class CookieConsentTests
     [Fact]
     public async Task WithdrawConsentAfterResponseHasStartedDoesNotDeleteCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext =>
-        {
-            requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
-        },
-        async context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
-            context.Response.Cookies.Append("Test", "Value1");
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext =>
+            {
+                requestContext.Request.Headers.Cookie = ".AspNet.Consent=yes";
+            },
+            async context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
+                context.Response.Cookies.Append("Test", "Value1");
 
-            await context.Response.WriteAsync("Started.");
+                await context.Response.WriteAsync("Started.");
 
-            feature.WithdrawConsent();
+                feature.WithdrawConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            // Doesn't throw the normal InvalidOperationException because the cookie is never written
-            context.Response.Cookies.Append("Test", "Value2");
+                // Doesn't throw the normal InvalidOperationException because the cookie is never written
+                context.Response.Cookies.Append("Test", "Value2");
 
-            await context.Response.WriteAsync("Withdrawn.");
-        });
+                await context.Response.WriteAsync("Withdrawn.");
+            }
+        );
 
         var reader = new StreamReader(httpContext.Response.Body);
         Assert.Equal("Started.Withdrawn.", await reader.ReadToEndAsync());
@@ -492,20 +548,22 @@ public class CookieConsentTests
     [Fact]
     public async Task DeleteCookieDoesNotRequireConsent()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Delete("Test");
-            return Task.CompletedTask;
-        });
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Delete("Test");
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(1, cookies.Count);
@@ -519,27 +577,29 @@ public class CookieConsentTests
     [Fact]
     public async Task OnDeleteCookieCanSuppressCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.OnDeleteCookie = context =>
+        var httpContext = await RunTestAsync(
+            options =>
             {
-                Assert.True(context.IsConsentNeeded);
-                Assert.False(context.HasConsent);
-                Assert.True(context.IssueCookie);
-                context.IssueCookie = false;
-            };
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
-            context.Response.Cookies.Delete("Test");
-            return Task.CompletedTask;
-        });
+                options.CheckConsentNeeded = context => true;
+                options.OnDeleteCookie = context =>
+                {
+                    Assert.True(context.IsConsentNeeded);
+                    Assert.False(context.HasConsent);
+                    Assert.True(context.IssueCookie);
+                    context.IssueCookie = false;
+                };
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
+                context.Response.Cookies.Delete("Test");
+                return Task.CompletedTask;
+            }
+        );
 
         Assert.Empty(httpContext.Response.Headers.SetCookie);
     }
@@ -547,29 +607,31 @@ public class CookieConsentTests
     [Fact]
     public async Task CreateConsentCookieMatchesGrantConsentCookie()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            var cookie = feature.CreateConsentCookie();
-            context.Response.Headers["ManualCookie"] = cookie;
+                var cookie = feature.CreateConsentCookie();
+                context.Response.Headers["ManualCookie"] = cookie;
 
-            return Task.CompletedTask;
-        });
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(1, cookies.Count);
@@ -591,38 +653,40 @@ public class CookieConsentTests
     [Fact]
     public async Task CreateConsentCookieAppliesPolicy()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = Http.SameSiteMode.Strict;
-            options.OnAppendCookie = context =>
+        var httpContext = await RunTestAsync(
+            options =>
             {
-                Assert.Equal(".AspNet.Consent", context.CookieName);
-                Assert.Equal("yes", context.CookieValue);
-                Assert.Equal(Http.SameSiteMode.Strict, context.CookieOptions.SameSite);
-                context.CookieName += "1";
-                context.CookieValue += "1";
-            };
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Http.SameSiteMode.Strict;
+                options.OnAppendCookie = context =>
+                {
+                    Assert.Equal(".AspNet.Consent", context.CookieName);
+                    Assert.Equal("yes", context.CookieValue);
+                    Assert.Equal(Http.SameSiteMode.Strict, context.CookieOptions.SameSite);
+                    context.CookieName += "1";
+                    context.CookieValue += "1";
+                };
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            var cookie = feature.CreateConsentCookie();
-            context.Response.Headers["ManualCookie"] = cookie;
+                var cookie = feature.CreateConsentCookie();
+                context.Response.Headers["ManualCookie"] = cookie;
 
-            return Task.CompletedTask;
-        });
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(1, cookies.Count);
@@ -644,30 +708,32 @@ public class CookieConsentTests
     [Fact]
     public async Task CreateConsentCookieMatchesGrantConsentCookieWhenCookieValueIsCustom()
     {
-        var httpContext = await RunTestAsync(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.ConsentCookieValue = "true";
-        },
-        requestContext => { },
-        context =>
-        {
-            var feature = context.Features.Get<ITrackingConsentFeature>();
-            Assert.True(feature.IsConsentNeeded);
-            Assert.False(feature.HasConsent);
-            Assert.False(feature.CanTrack);
+        var httpContext = await RunTestAsync(
+            options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.ConsentCookieValue = "true";
+            },
+            requestContext => { },
+            context =>
+            {
+                var feature = context.Features.Get<ITrackingConsentFeature>();
+                Assert.True(feature.IsConsentNeeded);
+                Assert.False(feature.HasConsent);
+                Assert.False(feature.CanTrack);
 
-            feature.GrantConsent();
+                feature.GrantConsent();
 
-            Assert.True(feature.IsConsentNeeded);
-            Assert.True(feature.HasConsent);
-            Assert.True(feature.CanTrack);
+                Assert.True(feature.IsConsentNeeded);
+                Assert.True(feature.HasConsent);
+                Assert.True(feature.CanTrack);
 
-            var cookie = feature.CreateConsentCookie();
-            context.Response.Headers["ManualCookie"] = cookie;
+                var cookie = feature.CreateConsentCookie();
+                context.Response.Headers["ManualCookie"] = cookie;
 
-            return Task.CompletedTask;
-        });
+                return Task.CompletedTask;
+            }
+        );
 
         var cookies = SetCookieHeaderValue.ParseList(httpContext.Response.Headers.SetCookie);
         Assert.Equal(1, cookies.Count);
@@ -696,10 +762,15 @@ public class CookieConsentTests
         ExceptionAssert.ThrowsArgument(
             () => options.ConsentCookieValue = value,
             "value",
-            "Value cannot be null or empty string.");
+            "Value cannot be null or empty string."
+        );
     }
 
-    private async Task<HttpContext> RunTestAsync(Action<CookiePolicyOptions> configureOptions, Action<HttpContext> configureRequest, RequestDelegate handleRequest)
+    private async Task<HttpContext> RunTestAsync(
+        Action<CookiePolicyOptions> configureOptions,
+        Action<HttpContext> configureRequest,
+        RequestDelegate handleRequest
+    )
     {
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>

@@ -9,7 +9,7 @@ namespace System.DirectoryServices.AccountManagement
     {
         Local = 0,
         Global = 1,
-        Universal = 2
+        Universal = 2,
     }
 
     // The AD "groupType" bit flags corresponding to the above

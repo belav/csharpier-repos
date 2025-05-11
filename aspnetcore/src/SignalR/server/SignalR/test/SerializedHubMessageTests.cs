@@ -4,8 +4,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
-using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Protocol;
 using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
@@ -22,8 +22,10 @@ public class SerializedHubMessageTests
         var serialized = message.GetSerializedMessage(protocol);
 
         Assert.Equal(DummyHubProtocol.DummySerialization, serialized.ToArray());
-        Assert.Collection(protocol.GetWrittenMessages(),
-            actualMessage => Assert.Same(invocation, actualMessage));
+        Assert.Collection(
+            protocol.GetWrittenMessages(),
+            actualMessage => Assert.Same(invocation, actualMessage)
+        );
     }
 
     [Fact]
@@ -42,8 +44,10 @@ public class SerializedHubMessageTests
         Assert.Equal(DummyHubProtocol.DummySerialization, serialized.ToArray());
 
         // We should still only have written one message
-        Assert.Collection(protocol.GetWrittenMessages(),
-            actualMessage => Assert.Same(invocation, actualMessage));
+        Assert.Collection(
+            protocol.GetWrittenMessages(),
+            actualMessage => Assert.Same(invocation, actualMessage)
+        );
     }
 
     [Theory]
@@ -51,7 +55,9 @@ public class SerializedHubMessageTests
     [InlineData(1)]
     [InlineData(2)]
     [InlineData(5)]
-    public async Task SerializingTwoMessagesFromTheSameProtocolSimultaneouslyResultsInOneCachedItemAsync(int numberOfSerializationsToPreCache)
+    public async Task SerializingTwoMessagesFromTheSameProtocolSimultaneouslyResultsInOneCachedItemAsync(
+        int numberOfSerializationsToPreCache
+    )
     {
         var invocation = new InvocationMessage("Foo", new object[0]);
         var message = new SerializedHubMessage(invocation);
@@ -81,11 +87,16 @@ public class SerializedHubMessageTests
         await firstSerialization.DefaultTimeout();
         await secondSerialization.DefaultTimeout();
 
-        Assert.Collection(message.GetAllSerializations().Skip(numberOfSerializationsToPreCache).ToArray(),
+        Assert.Collection(
+            message.GetAllSerializations().Skip(numberOfSerializationsToPreCache).ToArray(),
             serializedMessage =>
             {
                 Assert.Equal("test", serializedMessage.ProtocolName);
-                Assert.Equal(DummyHubProtocol.DummySerialization, serializedMessage.Serialized.ToArray());
-            });
+                Assert.Equal(
+                    DummyHubProtocol.DummySerialization,
+                    serializedMessage.Serialized.ToArray()
+                );
+            }
+        );
     }
 }

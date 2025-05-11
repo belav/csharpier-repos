@@ -41,9 +41,30 @@ namespace System.Net.Tests
             yield return new object[] { "GET {path} HTTP/1.1.1", null, null, null, "Bad Request" };
             yield return new object[] { "GET {path} HTTP/aaa", null, null, null, "Bad Request" };
 
-            yield return new object[] { "GET {path} HTTP/2.2", null, null, null, "Version Not Supported" };
-            yield return new object[] { "GET {path} HTTP/2.0", null, null, null, "Version Not Supported" };
-            yield return new object[] { "GET {path} HTTP/3.0", null, null, null, "Version Not Supported" };
+            yield return new object[]
+            {
+                "GET {path} HTTP/2.2",
+                null,
+                null,
+                null,
+                "Version Not Supported",
+            };
+            yield return new object[]
+            {
+                "GET {path} HTTP/2.0",
+                null,
+                null,
+                null,
+                "Version Not Supported",
+            };
+            yield return new object[]
+            {
+                "GET {path} HTTP/3.0",
+                null,
+                null,
+                null,
+                "Version Not Supported",
+            };
 
             // Invalid verb
             yield return new object[] { "( {path} HTTP/1.1", null, null, null, "Bad Request" };
@@ -68,32 +89,144 @@ namespace System.Net.Tests
             yield return new object[] { "\u1234 {path} HTTP/1.1", null, null, null, "Bad Request" };
 
             // Invalid header
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "Content-Length: -10" }, "\r\n", "Bad Request" };
-            yield return new object[] { "POST {path} HTTP/1.1", null, new string[] { "Content-Length: -10" }, "\r\n", "Bad Request" };
-            yield return new object[] { "POST {path} HTTP/1.1", null, new string[] { "Content-Length: -10" }, "\r\n", "Bad Request" };
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "Content-Length: -9223372036854775809" }, "\r\n", "Bad Request" };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "Content-Length: -10" },
+                "\r\n",
+                "Bad Request",
+            };
+            yield return new object[]
+            {
+                "POST {path} HTTP/1.1",
+                null,
+                new string[] { "Content-Length: -10" },
+                "\r\n",
+                "Bad Request",
+            };
+            yield return new object[]
+            {
+                "POST {path} HTTP/1.1",
+                null,
+                new string[] { "Content-Length: -10" },
+                "\r\n",
+                "Bad Request",
+            };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "Content-Length: -9223372036854775809" },
+                "\r\n",
+                "Bad Request",
+            };
 
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "Content-Length: 1", "Content-Length: 2" }, "\r\n", "Bad Request" };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "Content-Length: 1", "Content-Length: 2" },
+                "\r\n",
+                "Bad Request",
+            };
 
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "Transfer-Encoding: garbage" }, "\r\n", "Not Implemented" };
-            yield return new object[] { "POST {path} HTTP/1.1", null, new string[] { "Transfer-Encoding: garbage" }, "\r\n", "Not Implemented" };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "Transfer-Encoding: garbage" },
+                "\r\n",
+                "Not Implemented",
+            };
+            yield return new object[]
+            {
+                "POST {path} HTTP/1.1",
+                null,
+                new string[] { "Transfer-Encoding: garbage" },
+                "\r\n",
+                "Not Implemented",
+            };
 
-            yield return new object[] { "POST {path} HTTP/1.1", null, new string[] { "Transfer-Encoding: chunked", "Transfer-Encoding: chunked" }, "\r\n", "Not Implemented" };
+            yield return new object[]
+            {
+                "POST {path} HTTP/1.1",
+                null,
+                new string[] { "Transfer-Encoding: chunked", "Transfer-Encoding: chunked" },
+                "\r\n",
+                "Not Implemented",
+            };
 
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "NoValue" }, null, "Bad Request" };
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { ":" }, null, "Bad Request" };
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "\0:value" }, null, "Bad Request" };
-            yield return new object[] { "GET {path} HTTP/1.1", null, new string[] { "value:\0" }, null, "Bad Request" };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "NoValue" },
+                null,
+                "Bad Request",
+            };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { ":" },
+                null,
+                "Bad Request",
+            };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "\0:value" },
+                null,
+                "Bad Request",
+            };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                null,
+                new string[] { "value:\0" },
+                null,
+                "Bad Request",
+            };
 
             yield return new object[] { "GET {path} HTTP/1.1", "", null, null, "Bad Request" };
-            yield return new object[] { "GET {path} HTTP/1.1", "Host: \r\n", null, null, "Bad Request" };
+            yield return new object[]
+            {
+                "GET {path} HTTP/1.1",
+                "Host: \r\n",
+                null,
+                null,
+                "Bad Request",
+            };
 
-            yield return new object[] { "GET /something{path} HTTP/1.1", null, null, null, "Not Found" };
+            yield return new object[]
+            {
+                "GET /something{path} HTTP/1.1",
+                null,
+                null,
+                null,
+                "Not Found",
+            };
             yield return new object[] { "GET {path}../ HTTP/1.1", null, null, null, "Not Found" };
 
             // No body
-            yield return new object[] { "POST {path} HTTP/1.1", null, null, null, "Length Required" };
-            yield return new object[] { "PUT {path} HTTP/1.1", null, null, null, "Length Required" };
+            yield return new object[]
+            {
+                "POST {path} HTTP/1.1",
+                null,
+                null,
+                null,
+                "Length Required",
+            };
+            yield return new object[]
+            {
+                "PUT {path} HTTP/1.1",
+                null,
+                null,
+                null,
+                "Length Required",
+            };
 
             // ? prior to path and query.  This may or may not fail, depending on the OS, but in either case it shouldn't crash.
             yield return new object[] { "GET http://ab?cd{path} HTTP/1.1", null, null, null, "" };
@@ -123,10 +256,14 @@ namespace System.Net.Tests
                     string expectedMessage = (string)testData[4];
 
                     Uri listeningUri = new Uri(Factory.ListeningUrl);
-                    string requestLineWithPathAndQuery = requestLine.Replace("{path}", listeningUri.PathAndQuery);
+                    string requestLineWithPathAndQuery = requestLine.Replace(
+                        "{path}",
+                        listeningUri.PathAndQuery
+                    );
 
                     host = host ?? $"Host: {listeningUri.Host}\r\n";
-                    string fullRequest = $"{requestLineWithPathAndQuery}\r\n{host}{string.Join("\r\n", headers ?? new string[0])}{content}\r\n";
+                    string fullRequest =
+                        $"{requestLineWithPathAndQuery}\r\n{host}{string.Join("\r\n", headers ?? new string[0])}{content}\r\n";
 
                     Task<HttpListenerContext> serverTask = Factory.GetListener().GetContextAsync();
                     client.Send(Encoding.Default.GetBytes(fullRequest));
@@ -138,10 +275,17 @@ namespace System.Net.Tests
 
                     // Ignore the specific error message - just make sure that this failed.
                     Assert.Same(clientTask, completedTask);
-                    string errorMessage = Encoding.Default.GetString(errorMessageBytes, 0, clientTask.Result);
+                    string errorMessage = Encoding.Default.GetString(
+                        errorMessageBytes,
+                        0,
+                        clientTask.Result
+                    );
                     Assert.Contains(expectedMessage, errorMessage);
 
-                    Assert.False(serverTask.IsCompleted, $"Server task was completed: {serverTask.Status}");
+                    Assert.False(
+                        serverTask.IsCompleted,
+                        $"Server task was completed: {serverTask.Status}"
+                    );
                 }
             }
         }

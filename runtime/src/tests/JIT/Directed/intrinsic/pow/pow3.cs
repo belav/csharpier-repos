@@ -14,7 +14,10 @@ public class pow3
     {
         bool pass = true;
 
-        double a, b, y, z;
+        double a,
+            b,
+            y,
+            z;
 
         //Int16
         Int16 x1 = 1;

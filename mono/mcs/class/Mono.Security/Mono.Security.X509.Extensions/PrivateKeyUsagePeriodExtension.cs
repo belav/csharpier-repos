@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,75 +31,78 @@
 using System;
 using System.Globalization;
 using System.Text;
-
 using Mono.Security;
 using Mono.Security.X509;
 
-namespace Mono.Security.X509.Extensions {
+namespace Mono.Security.X509.Extensions
+{
+    /*
+     * id-ce-privateKeyUsagePeriod OBJECT IDENTIFIER ::=  { id-ce 16 }
+     *
+     * PrivateKeyUsagePeriod ::= SEQUENCE {
+     *    notBefore       [0]     GeneralizedTime OPTIONAL,
+     *    notAfter        [1]     GeneralizedTime OPTIONAL
+     * }
+     */
+    public class PrivateKeyUsagePeriodExtension : X509Extension
+    {
+        private DateTime notBefore;
+        private DateTime notAfter;
 
-	/*
-	 * id-ce-privateKeyUsagePeriod OBJECT IDENTIFIER ::=  { id-ce 16 }
-	 * 
-	 * PrivateKeyUsagePeriod ::= SEQUENCE {
-	 *    notBefore       [0]     GeneralizedTime OPTIONAL,
-	 *    notAfter        [1]     GeneralizedTime OPTIONAL 
-	 * }
-	 */
-	public class PrivateKeyUsagePeriodExtension : X509Extension {
+        public PrivateKeyUsagePeriodExtension()
+            : base()
+        {
+            extnOid = "2.5.29.16";
+        }
 
-		private DateTime notBefore;
-		private DateTime notAfter;
+        public PrivateKeyUsagePeriodExtension(ASN1 asn1)
+            : base(asn1) { }
 
-		public PrivateKeyUsagePeriodExtension () : base () 
-		{
-			extnOid = "2.5.29.16";
-		}
+        public PrivateKeyUsagePeriodExtension(X509Extension extension)
+            : base(extension) { }
 
-		public PrivateKeyUsagePeriodExtension (ASN1 asn1) : base (asn1)
-		{
-		}
+        protected override void Decode()
+        {
+            ASN1 sequence = new ASN1(extnValue.Value);
+            if (sequence.Tag != 0x30)
+                throw new ArgumentException("Invalid PrivateKeyUsagePeriod extension");
+            for (int i = 0; i < sequence.Count; i++)
+            {
+                switch (sequence[i].Tag)
+                {
+                    case 0x80:
+                        notBefore = ASN1Convert.ToDateTime(sequence[i]);
+                        break;
+                    case 0x81:
+                        notAfter = ASN1Convert.ToDateTime(sequence[i]);
+                        break;
+                    default:
+                        throw new ArgumentException("Invalid PrivateKeyUsagePeriod extension");
+                }
+            }
+        }
 
-		public PrivateKeyUsagePeriodExtension (X509Extension extension) : base (extension)
-		{
-		}
+        public override string Name
+        {
+            get { return "Private Key Usage Period"; }
+        }
 
-		protected override void Decode () 
-		{
-			ASN1 sequence = new ASN1 (extnValue.Value);
-			if (sequence.Tag != 0x30)
-				throw new ArgumentException ("Invalid PrivateKeyUsagePeriod extension");
-			for (int i=0; i < sequence.Count; i++) {
-				switch (sequence [i].Tag) {
-					case 0x80:
-						notBefore = ASN1Convert.ToDateTime (sequence [i]);
-						break;
-					case 0x81:
-						notAfter = ASN1Convert.ToDateTime (sequence [i]);
-						break;
-					default:
-						throw new ArgumentException ("Invalid PrivateKeyUsagePeriod extension");
-				}
-			}
-		}
-
-		public override string Name {
-			get { return "Private Key Usage Period"; }
-		}
-
-		public override string ToString () 
-		{
-			StringBuilder sb = new StringBuilder ();
-			if (notBefore != DateTime.MinValue) {
-				sb.Append ("Not Before: ");
-				sb.Append (notBefore.ToString (CultureInfo.CurrentUICulture));
-				sb.Append (Environment.NewLine);
-			}
-			if (notAfter != DateTime.MinValue) {
-				sb.Append ("Not After: ");
-				sb.Append (notAfter.ToString (CultureInfo.CurrentUICulture));
-				sb.Append (Environment.NewLine);
-			}
-			return sb.ToString ();
-		}
-	}
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (notBefore != DateTime.MinValue)
+            {
+                sb.Append("Not Before: ");
+                sb.Append(notBefore.ToString(CultureInfo.CurrentUICulture));
+                sb.Append(Environment.NewLine);
+            }
+            if (notAfter != DateTime.MinValue)
+            {
+                sb.Append("Not After: ");
+                sb.Append(notAfter.ToString(CultureInfo.CurrentUICulture));
+                sb.Append(Environment.NewLine);
+            }
+            return sb.ToString();
+        }
+    }
 }

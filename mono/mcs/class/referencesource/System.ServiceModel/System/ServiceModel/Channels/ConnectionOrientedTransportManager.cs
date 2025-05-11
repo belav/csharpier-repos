@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Sockets;
-    using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
 
     abstract class ConnectionOrientedTransportManager<TChannelListener> : TransportManager
         where TChannelListener : ConnectionOrientedTransportChannelListener
@@ -35,10 +35,7 @@ namespace System.ServiceModel.Channels
 
         protected TimeSpan ChannelInitializationTimeout
         {
-            get
-            {
-                return channelInitializationTimeout;
-            }
+            get { return channelInitializationTimeout; }
         }
 
         internal void ApplyListenerSettings(IConnectionOrientedListenerSettings listenerSettings)
@@ -54,34 +51,22 @@ namespace System.ServiceModel.Channels
 
         internal int ConnectionBufferSize
         {
-            get
-            {
-                return this.connectionBufferSize;
-            }
+            get { return this.connectionBufferSize; }
         }
 
         internal int MaxPendingConnections
         {
-            get
-            {
-                return this.maxPendingConnections;
-            }
+            get { return this.maxPendingConnections; }
         }
 
         internal TimeSpan MaxOutputDelay
         {
-            get
-            {
-                return maxOutputDelay;
-            }
+            get { return maxOutputDelay; }
         }
 
         internal int MaxPendingAccepts
         {
-            get
-            {
-                return this.maxPendingAccepts;
-            }
+            get { return this.maxPendingAccepts; }
         }
 
         internal TimeSpan IdleTimeout
@@ -100,20 +85,26 @@ namespace System.ServiceModel.Channels
                 return true;
 
             return (
-                (this.ChannelInitializationTimeout == channelListener.ChannelInitializationTimeout) &&
-                (this.ConnectionBufferSize == channelListener.ConnectionBufferSize) &&
-                (this.MaxPendingConnections == channelListener.MaxPendingConnections) &&
-                (this.MaxOutputDelay == channelListener.MaxOutputDelay) &&
-                (this.MaxPendingAccepts == channelListener.MaxPendingAccepts) &&
-                (this.idleTimeout == channelListener.IdleTimeout) &&
-                (this.maxPooledConnections == channelListener.MaxPooledConnections)
-                );
+                (this.ChannelInitializationTimeout == channelListener.ChannelInitializationTimeout)
+                && (this.ConnectionBufferSize == channelListener.ConnectionBufferSize)
+                && (this.MaxPendingConnections == channelListener.MaxPendingConnections)
+                && (this.MaxOutputDelay == channelListener.MaxOutputDelay)
+                && (this.MaxPendingAccepts == channelListener.MaxPendingAccepts)
+                && (this.idleTimeout == channelListener.IdleTimeout)
+                && (this.maxPooledConnections == channelListener.MaxPooledConnections)
+            );
         }
 
         TChannelListener GetChannelListener(Uri via)
         {
             TChannelListener channelListener = null;
-            if (AddressTable.TryLookupUri(via, HostNameComparisonMode.StrongWildcard, out channelListener))
+            if (
+                AddressTable.TryLookupUri(
+                    via,
+                    HostNameComparisonMode.StrongWildcard,
+                    out channelListener
+                )
+            )
             {
                 return channelListener;
             }
@@ -123,7 +114,11 @@ namespace System.ServiceModel.Channels
                 return channelListener;
             }
 
-            AddressTable.TryLookupUri(via, HostNameComparisonMode.WeakWildcard, out channelListener);
+            AddressTable.TryLookupUri(
+                via,
+                HostNameComparisonMode.WeakWildcard,
+                out channelListener
+            );
             return channelListener;
         }
 
@@ -135,7 +130,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal ISingletonChannelListener OnGetSingletonMessageHandler(ServerSingletonPreambleConnectionReader serverSingletonPreambleReader)
+        internal ISingletonChannelListener OnGetSingletonMessageHandler(
+            ServerSingletonPreambleConnectionReader serverSingletonPreambleReader
+        )
         {
             Uri via = serverSingletonPreambleReader.Via;
             TChannelListener channelListener = GetChannelListener(via);
@@ -149,44 +146,70 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    serverSingletonPreambleReader.SendFault(FramingEncodingString.UnsupportedModeFault);
+                    serverSingletonPreambleReader.SendFault(
+                        FramingEncodingString.UnsupportedModeFault
+                    );
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.FramingModeNotSupported, FramingMode.Singleton)));
+                        new ProtocolException(
+                            SR.GetString(SR.FramingModeNotSupported, FramingMode.Singleton)
+                        )
+                    );
                 }
             }
             else
             {
-                serverSingletonPreambleReader.SendFault(FramingEncodingString.EndpointNotFoundFault);
+                serverSingletonPreambleReader.SendFault(
+                    FramingEncodingString.EndpointNotFoundFault
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, via)));
+                    new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, via))
+                );
             }
         }
 
-        internal void OnHandleServerSessionPreamble(ServerSessionPreambleConnectionReader serverSessionPreambleReader,
-            ConnectionDemuxer connectionDemuxer)
+        internal void OnHandleServerSessionPreamble(
+            ServerSessionPreambleConnectionReader serverSessionPreambleReader,
+            ConnectionDemuxer connectionDemuxer
+        )
         {
             Uri via = serverSessionPreambleReader.Via;
             TChannelListener channelListener = GetChannelListener(via);
 
             if (channelListener != null)
             {
-                ISessionPreambleHandler sessionPreambleHandler = channelListener as ISessionPreambleHandler;
+                ISessionPreambleHandler sessionPreambleHandler =
+                    channelListener as ISessionPreambleHandler;
 
-                if (sessionPreambleHandler != null && channelListener is IChannelListener<IDuplexSessionChannel>)
+                if (
+                    sessionPreambleHandler != null
+                    && channelListener is IChannelListener<IDuplexSessionChannel>
+                )
                 {
-                    sessionPreambleHandler.HandleServerSessionPreamble(serverSessionPreambleReader, connectionDemuxer);
+                    sessionPreambleHandler.HandleServerSessionPreamble(
+                        serverSessionPreambleReader,
+                        connectionDemuxer
+                    );
                 }
                 else
                 {
-                    serverSessionPreambleReader.SendFault(FramingEncodingString.UnsupportedModeFault);
+                    serverSessionPreambleReader.SendFault(
+                        FramingEncodingString.UnsupportedModeFault
+                    );
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.FramingModeNotSupported, FramingMode.Duplex)));
+                        new ProtocolException(
+                            SR.GetString(SR.FramingModeNotSupported, FramingMode.Duplex)
+                        )
+                    );
                 }
             }
             else
             {
                 serverSessionPreambleReader.SendFault(FramingEncodingString.EndpointNotFoundFault);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new EndpointNotFoundException(SR.GetString(SR.DuplexSessionListenerNotFound, via.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new EndpointNotFoundException(
+                        SR.GetString(SR.DuplexSessionListenerNotFound, via.ToString())
+                    )
+                );
             }
         }
 
@@ -197,16 +220,26 @@ namespace System.ServiceModel.Channels
 
         internal override void Register(TransportChannelListener channelListener)
         {
-            AddressTable.RegisterUri(channelListener.Uri, channelListener.HostNameComparisonModeInternal,
-                (TChannelListener)channelListener);
+            AddressTable.RegisterUri(
+                channelListener.Uri,
+                channelListener.HostNameComparisonModeInternal,
+                (TChannelListener)channelListener
+            );
 
             channelListener.SetMessageReceivedCallback(new Action(OnMessageReceived));
         }
 
         internal override void Unregister(TransportChannelListener channelListener)
         {
-            EnsureRegistered(AddressTable, (TChannelListener)channelListener, channelListener.HostNameComparisonModeInternal);
-            AddressTable.UnregisterUri(channelListener.Uri, channelListener.HostNameComparisonModeInternal);
+            EnsureRegistered(
+                AddressTable,
+                (TChannelListener)channelListener,
+                channelListener.HostNameComparisonModeInternal
+            );
+            AddressTable.UnregisterUri(
+                channelListener.Uri,
+                channelListener.HostNameComparisonModeInternal
+            );
             channelListener.SetMessageReceivedCallback(null);
         }
 

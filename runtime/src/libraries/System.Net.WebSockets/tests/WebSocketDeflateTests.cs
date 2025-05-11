@@ -42,13 +42,19 @@ namespace System.Net.WebSockets.Tests
         {
             WebSocketTestStream stream = new();
             stream.Enqueue(0xc1, 0x07, 0xf2, 0x48, 0xcd, 0xc9, 0xc9, 0x07, 0x00);
-            using WebSocket websocket = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
+                {
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             Memory<byte> buffer = new byte[5];
-            ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(buffer, CancellationToken);
+            ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(
+                buffer,
+                CancellationToken
+            );
 
             Assert.True(result.EndOfMessage);
             Assert.Equal(buffer.Length, result.Count);
@@ -71,17 +77,30 @@ namespace System.Net.WebSockets.Tests
         public async Task SendHelloWithContextTakeover()
         {
             WebSocketTestStream stream = new();
-            using WebSocket websocket = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
+                {
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
-            await websocket.SendAsync("Hello"u8.ToArray(), WebSocketMessageType.Text, true, CancellationToken);
+            await websocket.SendAsync(
+                "Hello"u8.ToArray(),
+                WebSocketMessageType.Text,
+                true,
+                CancellationToken
+            );
             Assert.Equal("C107F248CDC9C90700", Convert.ToHexString(stream.NextAvailableBytes));
 
             stream.Clear();
-            await websocket.SendAsync("Hello"u8.ToArray(), WebSocketMessageType.Text, true, CancellationToken);
+            await websocket.SendAsync(
+                "Hello"u8.ToArray(),
+                WebSocketMessageType.Text,
+                true,
+                CancellationToken
+            );
 
             // Because context takeover is set by default if we try to send
             // the same message it should result in fewer bytes.
@@ -92,14 +111,18 @@ namespace System.Net.WebSockets.Tests
         public async Task SendHelloWithDisableCompression()
         {
             WebSocketTestStream stream = new();
-            using WebSocket websocket = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
+                {
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             byte[] bytes = "Hello"u8.ToArray();
-            WebSocketMessageFlags flags = WebSocketMessageFlags.DisableCompression | WebSocketMessageFlags.EndOfMessage;
+            WebSocketMessageFlags flags =
+                WebSocketMessageFlags.DisableCompression | WebSocketMessageFlags.EndOfMessage;
             await websocket.SendAsync(bytes, WebSocketMessageType.Text, flags, CancellationToken);
 
             Assert.Equal(bytes.Length + 2, stream.Available);
@@ -110,23 +133,42 @@ namespace System.Net.WebSockets.Tests
         public async Task SendHelloWithEmptyFrame()
         {
             WebSocketTestStream stream = new();
-            using WebSocket websocket = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
+                {
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             byte[] bytes = "Hello"u8.ToArray();
-            await websocket.SendAsync(Memory<byte>.Empty, WebSocketMessageType.Text, endOfMessage: false, CancellationToken);
-            await websocket.SendAsync(bytes, WebSocketMessageType.Text, endOfMessage: true, CancellationToken);
+            await websocket.SendAsync(
+                Memory<byte>.Empty,
+                WebSocketMessageType.Text,
+                endOfMessage: false,
+                CancellationToken
+            );
+            await websocket.SendAsync(
+                bytes,
+                WebSocketMessageType.Text,
+                endOfMessage: true,
+                CancellationToken
+            );
 
-            using WebSocket client = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = false,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
+                {
+                    IsServer = false,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
-            ValueWebSocketReceiveResult result = await client.ReceiveAsync(bytes.AsMemory(), CancellationToken);
+            ValueWebSocketReceiveResult result = await client.ReceiveAsync(
+                bytes.AsMemory(),
+                CancellationToken
+            );
             Assert.False(result.EndOfMessage);
             Assert.Equal(0, result.Count);
 
@@ -139,13 +181,16 @@ namespace System.Net.WebSockets.Tests
         public async Task ReceiveHelloWithoutContextTakeover()
         {
             WebSocketTestStream stream = new();
-            using WebSocket websocket = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
                 {
-                    ClientContextTakeover = false
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientContextTakeover = false,
+                    },
                 }
-            });
+            );
 
             Memory<byte> buffer = new byte[5];
 
@@ -155,7 +200,10 @@ namespace System.Net.WebSockets.Tests
                 stream.Enqueue(0xc1, 0x07, 0xf2, 0x48, 0xcd, 0xc9, 0xc9, 0x07, 0x00);
                 buffer.Span.Clear();
 
-                ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(buffer, CancellationToken);
+                ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(
+                    buffer,
+                    CancellationToken
+                );
 
                 Assert.True(result.EndOfMessage);
                 Assert.Equal(buffer.Length, result.Count);
@@ -168,20 +216,28 @@ namespace System.Net.WebSockets.Tests
         public async Task SendHelloWithoutContextTakeover()
         {
             WebSocketTestStream stream = new();
-            using WebSocket websocket = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
                 {
-                    ServerContextTakeover = false
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ServerContextTakeover = false,
+                    },
                 }
-            });
+            );
 
             Memory<byte> buffer = new byte[5];
 
             for (var i = 0; i < 100; ++i)
             {
-                await websocket.SendAsync("Hello"u8.ToArray(), WebSocketMessageType.Text, true, CancellationToken);
+                await websocket.SendAsync(
+                    "Hello"u8.ToArray(),
+                    WebSocketMessageType.Text,
+                    true,
+                    CancellationToken
+                );
 
                 // Without context takeover the message should look the same every time
                 Assert.Equal("C107F248CDC9C90700", Convert.ToHexString(stream.NextAvailableBytes));
@@ -194,10 +250,13 @@ namespace System.Net.WebSockets.Tests
         {
             // Two or more DEFLATE blocks may be used in one message.
             WebSocketTestStream stream = new();
-            using WebSocket websocket = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket websocket = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
+                {
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
             // The first 3 octets(0xf2 0x48 0x05) and the least significant two
             // bits of the 4th octet(0x00) constitute one DEFLATE block with
             // "BFINAL" set to 0 and "BTYPE" set to 01 containing "He". The rest of
@@ -210,7 +269,10 @@ namespace System.Net.WebSockets.Tests
             stream.Enqueue(0x80, 0x05, 0xca, 0xc9, 0xc9, 0x07, 0x00);
 
             Memory<byte> buffer = new byte[5];
-            ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(buffer, CancellationToken);
+            ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(
+                buffer,
+                CancellationToken
+            );
 
             Assert.Equal(2, result.Count);
             Assert.False(result.EndOfMessage);
@@ -230,23 +292,29 @@ namespace System.Net.WebSockets.Tests
         public async Task Duplex(bool clientContextTakover, bool serverContextTakover)
         {
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
                 {
-                    ClientContextTakeover = clientContextTakover,
-                    ServerContextTakeover = serverContextTakover
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions
+                    {
+                        ClientContextTakeover = clientContextTakover,
+                        ServerContextTakeover = serverContextTakover,
+                    },
                 }
-            });
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions
+            );
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
                 {
-                    ClientContextTakeover = clientContextTakover,
-                    ServerContextTakeover = serverContextTakover
+                    DangerousDeflateOptions = new WebSocketDeflateOptions
+                    {
+                        ClientContextTakeover = clientContextTakover,
+                        ServerContextTakeover = serverContextTakover,
+                    },
                 }
-            });
+            );
 
             var buffer = new byte[1024];
 
@@ -255,7 +323,10 @@ namespace System.Net.WebSockets.Tests
                 string message = $"Sending number {i} from server.";
                 await SendTextAsync(message, server, disableCompression: i % 2 == 0);
 
-                ValueWebSocketReceiveResult result = await client.ReceiveAsync(buffer.AsMemory(), CancellationToken);
+                ValueWebSocketReceiveResult result = await client.ReceiveAsync(
+                    buffer.AsMemory(),
+                    CancellationToken
+                );
 
                 Assert.True(result.EndOfMessage);
                 Assert.Equal(WebSocketMessageType.Text, result.MessageType);
@@ -268,7 +339,10 @@ namespace System.Net.WebSockets.Tests
                 string message = $"Sending number {i} from client.";
                 await SendTextAsync(message, client, disableCompression: i % 2 == 0);
 
-                ValueWebSocketReceiveResult result = await server.ReceiveAsync(buffer.AsMemory(), CancellationToken);
+                ValueWebSocketReceiveResult result = await server.ReceiveAsync(
+                    buffer.AsMemory(),
+                    CancellationToken
+                );
 
                 Assert.True(result.EndOfMessage);
                 Assert.Equal(WebSocketMessageType.Text, result.MessageType);
@@ -282,21 +356,27 @@ namespace System.Net.WebSockets.Tests
         public async Task LargeMessageSplitInMultipleFrames(int windowBits)
         {
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
                 {
-                    ClientMaxWindowBits = windowBits
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientMaxWindowBits = windowBits,
+                    },
                 }
-            });
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            );
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
                 {
-                    ClientMaxWindowBits = windowBits
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientMaxWindowBits = windowBits,
+                    },
                 }
-            });
+            );
 
             Memory<byte> testData = new byte[ushort.MaxValue];
             Memory<byte> receivedData = new byte[testData.Length];
@@ -316,11 +396,19 @@ namespace System.Net.WebSockets.Tests
                     var currentFrameSize = Math.Min(frameSize, testData.Length - position);
                     var eof = position + currentFrameSize == testData.Length;
 
-                    await server.SendAsync(testData.Slice(position, currentFrameSize), WebSocketMessageType.Binary, eof, CancellationToken);
+                    await server.SendAsync(
+                        testData.Slice(position, currentFrameSize),
+                        WebSocketMessageType.Binary,
+                        eof,
+                        CancellationToken
+                    );
                     position += currentFrameSize;
                 }
 
-                Assert.True(testData.Length < stream.Remote.Available, "The compressed data should be bigger.");
+                Assert.True(
+                    testData.Length < stream.Remote.Available,
+                    "The compressed data should be bigger."
+                );
                 Assert.Equal(testData.Length, position);
 
                 // Receive the data from the client side
@@ -333,7 +421,10 @@ namespace System.Net.WebSockets.Tests
                 while (true)
                 {
                     int currentFrameSize = Math.Min(frameSize, testData.Length - position);
-                    ValueWebSocketReceiveResult result = await client.ReceiveAsync(receivedData.Slice(position, currentFrameSize), CancellationToken);
+                    ValueWebSocketReceiveResult result = await client.ReceiveAsync(
+                        receivedData.Slice(position, currentFrameSize),
+                        CancellationToken
+                    );
 
                     Assert.Equal(WebSocketMessageType.Binary, result.MessageType);
                     position += result.Count;
@@ -354,12 +445,19 @@ namespace System.Net.WebSockets.Tests
             WebSocketTestStream stream = new();
 
             stream.Enqueue(0xc1, 0x07, 0xf2, 0x48, 0xcd, 0xc9, 0xc9, 0x07, 0x00);
-            using WebSocket client = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions());
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions()
+            );
 
             var exception = await Assert.ThrowsAsync<WebSocketException>(() =>
-               client.ReceiveAsync(Memory<byte>.Empty, CancellationToken).AsTask());
+                client.ReceiveAsync(Memory<byte>.Empty, CancellationToken).AsTask()
+            );
 
-            Assert.Equal("The WebSocket received compressed frame when compression is not enabled.", exception.Message);
+            Assert.Equal(
+                "The WebSocket received compressed frame when compression is not enabled.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -368,15 +466,17 @@ namespace System.Net.WebSockets.Tests
             // We should be able to handle the situation where even if we have
             // deflate compression enabled, uncompressed messages are OK
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = null
-            });
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions { IsServer = true, DangerousDeflateOptions = null }
+            );
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
+                {
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             // Server sends uncompressed
             await SendTextAsync("Hello", server);
@@ -387,12 +487,20 @@ namespace System.Net.WebSockets.Tests
 
             // Client sends compressed, but server compression is disabled and should throw on receive
             await SendTextAsync("Hello back", client);
-            var exception = await Assert.ThrowsAsync<WebSocketException>(() => ReceiveTextAsync(server));
-            Assert.Equal("The WebSocket received compressed frame when compression is not enabled.", exception.Message);
+            var exception = await Assert.ThrowsAsync<WebSocketException>(() =>
+                ReceiveTextAsync(server)
+            );
+            Assert.Equal(
+                "The WebSocket received compressed frame when compression is not enabled.",
+                exception.Message
+            );
             Assert.Equal(WebSocketState.Aborted, server.State);
 
             // The client should close if we try to receive
-            ValueWebSocketReceiveResult result = await client.ReceiveAsync(Memory<byte>.Empty, CancellationToken);
+            ValueWebSocketReceiveResult result = await client.ReceiveAsync(
+                Memory<byte>.Empty,
+                CancellationToken
+            );
             Assert.Equal(WebSocketMessageType.Close, result.MessageType);
             Assert.Equal(WebSocketCloseStatus.ProtocolError, client.CloseStatus);
             Assert.Equal(WebSocketState.CloseReceived, client.State);
@@ -402,18 +510,26 @@ namespace System.Net.WebSockets.Tests
         public async Task ReceiveInvalidCompressedData()
         {
             WebSocketTestStream stream = new();
-            using WebSocket client = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
+                {
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             stream.Enqueue(0xc1, 0x07, 0xf2, 0x48, 0xcd, 0xc9, 0xc9, 0x07, 0x00);
             Assert.Equal("Hello", await ReceiveTextAsync(client));
 
             stream.Enqueue(0xc1, 0x07, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00);
-            var exception = await Assert.ThrowsAsync<WebSocketException>(() => ReceiveTextAsync(client));
+            var exception = await Assert.ThrowsAsync<WebSocketException>(() =>
+                ReceiveTextAsync(client)
+            );
 
-            Assert.Equal("The message was compressed using an unsupported compression method.", exception.Message);
+            Assert.Equal(
+                "The message was compressed using an unsupported compression method.",
+                exception.Message
+            );
             Assert.Equal(WebSocketState.Aborted, client.State);
         }
 
@@ -422,13 +538,16 @@ namespace System.Net.WebSockets.Tests
         public async Task PayloadShouldHaveSimilarSizeWhenSplitIntoSegments(int windowBits)
         {
             MemoryStream stream = new();
-            using WebSocket client = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
                 {
-                    ClientMaxWindowBits = windowBits
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientMaxWindowBits = windowBits,
+                    },
                 }
-            });
+            );
 
             // We're using a frame size that is close to the sliding window size for the deflate
             int frameSize = 2 << windowBits;
@@ -448,7 +567,12 @@ namespace System.Net.WebSockets.Tests
 
             for (int i = 0; i < message.Length; i += frameSize)
             {
-                await client.SendAsync(message.AsMemory(i, frameSize), WebSocketMessageType.Binary, i + frameSize == message.Length, CancellationToken);
+                await client.SendAsync(
+                    message.AsMemory(i, frameSize),
+                    WebSocketMessageType.Binary,
+                    i + frameSize == message.Length,
+                    CancellationToken
+                );
             }
 
             double difference = Math.Round(1 - payloadLength * 1.0 / stream.Length, 3);
@@ -460,37 +584,49 @@ namespace System.Net.WebSockets.Tests
         [Theory]
         [InlineData(9, 15)]
         [InlineData(15, 9)]
-        public async Task SendReceiveWithDifferentWindowBits(int clientWindowBits, int serverWindowBits)
+        public async Task SendReceiveWithDifferentWindowBits(
+            int clientWindowBits,
+            int serverWindowBits
+        )
         {
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
                 {
-                    ClientContextTakeover = false,
-                    ClientMaxWindowBits = clientWindowBits,
-                    ServerContextTakeover = false,
-                    ServerMaxWindowBits = serverWindowBits
+                    IsServer = true,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientContextTakeover = false,
+                        ClientMaxWindowBits = clientWindowBits,
+                        ServerContextTakeover = false,
+                        ServerMaxWindowBits = serverWindowBits,
+                    },
                 }
-            });
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            );
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
                 {
-                    ClientContextTakeover = false,
-                    ClientMaxWindowBits = clientWindowBits,
-                    ServerContextTakeover = false,
-                    ServerMaxWindowBits = serverWindowBits
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientContextTakeover = false,
+                        ClientMaxWindowBits = clientWindowBits,
+                        ServerContextTakeover = false,
+                        ServerMaxWindowBits = serverWindowBits,
+                    },
                 }
-            });
+            );
 
             Memory<byte> data = new byte[64 * 1024];
             Memory<byte> buffer = new byte[data.Length];
             new Random(0).NextBytes(data.Span.Slice(0, data.Length / 2));
 
             await server.SendAsync(data, WebSocketMessageType.Binary, true, CancellationToken);
-            ValueWebSocketReceiveResult result = await client.ReceiveAsync(buffer, CancellationToken);
+            ValueWebSocketReceiveResult result = await client.ReceiveAsync(
+                buffer,
+                CancellationToken
+            );
 
             Assert.Equal(data.Length, result.Count);
             Assert.True(result.EndOfMessage);
@@ -514,75 +650,927 @@ namespace System.Net.WebSockets.Tests
             // This test replicates one of the Autobahn tests to make sure this issue doesn't appear again.
             byte[][] messages = new[]
             {
-                new byte[] { 0x7B, 0x0A, 0x20, 0x20, 0x20, 0x22, 0x41, 0x75, 0x74, 0x6F, 0x62, 0x61, 0x68, 0x6E, 0x50, 0x79 },
-                new byte[] { 0x74, 0x68, 0x6F, 0x6E, 0x2F, 0x30, 0x2E, 0x36, 0x2E, 0x30, 0x22, 0x3A, 0x20, 0x7B, 0x0A, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x31, 0x2E, 0x31, 0x2E, 0x31, 0x22, 0x3A, 0x20, 0x7B, 0x0A },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69 },
-                new byte[] { 0x6F, 0x72, 0x22, 0x3A, 0x20, 0x22, 0x4F, 0x4B, 0x22, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x22, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6F, 0x72, 0x43, 0x6C, 0x6F },
-                new byte[] { 0x73, 0x65, 0x22, 0x3A, 0x20, 0x22, 0x4F, 0x4B, 0x22, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x22, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x22, 0x3A, 0x20 },
-                new byte[] { 0x32, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x72, 0x65, 0x6D },
-                new byte[] { 0x6F, 0x74, 0x65, 0x43, 0x6C, 0x6F, 0x73, 0x65, 0x43, 0x6F, 0x64, 0x65, 0x22, 0x3A, 0x20, 0x31 },
-                new byte[] { 0x30, 0x30, 0x30, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x72 },
-                new byte[] { 0x65, 0x70, 0x6F, 0x72, 0x74, 0x66, 0x69, 0x6C, 0x65, 0x22, 0x3A, 0x20, 0x22, 0x61, 0x75, 0x74 },
-                new byte[] { 0x6F, 0x62, 0x61, 0x68, 0x6E, 0x70, 0x79, 0x74, 0x68, 0x6F, 0x6E, 0x5F, 0x30, 0x5F, 0x36, 0x5F },
-                new byte[] { 0x30, 0x5F, 0x63, 0x61, 0x73, 0x65, 0x5F, 0x31, 0x5F, 0x31, 0x5F, 0x31, 0x2E, 0x6A, 0x73, 0x6F },
-                new byte[] { 0x6E, 0x22, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x7D, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x22, 0x31, 0x2E, 0x31, 0x2E, 0x32, 0x22, 0x3A, 0x20, 0x7B, 0x0A, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6F, 0x72, 0x22 },
-                new byte[] { 0x3A, 0x20, 0x22, 0x4F, 0x4B, 0x22, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x22, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6F, 0x72, 0x43, 0x6C, 0x6F, 0x73, 0x65, 0x22 },
-                new byte[] { 0x3A, 0x20, 0x22, 0x4F, 0x4B, 0x22, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x22, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x22, 0x3A, 0x20, 0x32, 0x2C, 0x0A },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x72, 0x65, 0x6D, 0x6F, 0x74, 0x65 },
-                new byte[] { 0x43, 0x6C, 0x6F, 0x73, 0x65, 0x43, 0x6F, 0x64, 0x65, 0x22, 0x3A, 0x20, 0x31, 0x30, 0x30, 0x30 },
-                new byte[] { 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x72, 0x65, 0x70, 0x6F },
-                new byte[] { 0x72, 0x74, 0x66, 0x69, 0x6C, 0x65, 0x22, 0x3A, 0x20, 0x22, 0x61, 0x75, 0x74, 0x6F, 0x62, 0x61 },
-                new byte[] { 0x68, 0x6E, 0x70, 0x79, 0x74, 0x68, 0x6F, 0x6E, 0x5F, 0x30, 0x5F, 0x36, 0x5F, 0x30, 0x5F, 0x63 },
-                new byte[] { 0x61, 0x73, 0x65, 0x5F, 0x31, 0x5F, 0x31, 0x5F, 0x32, 0x2E, 0x6A, 0x73, 0x6F, 0x6E, 0x22, 0x0A },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x7D, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22 },
-                new byte[] { 0x31, 0x2E, 0x31, 0x2E, 0x33, 0x22, 0x3A, 0x20, 0x7B, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x22, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6F, 0x72, 0x22, 0x3A, 0x20, 0x22 },
-                new byte[] { 0x4F, 0x4B, 0x22, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x62 },
-                new byte[] { 0x65, 0x68, 0x61, 0x76, 0x69, 0x6F, 0x72, 0x43, 0x6C, 0x6F, 0x73, 0x65, 0x22, 0x3A, 0x20, 0x22 },
-                new byte[] { 0x4F, 0x4B, 0x22, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x64 },
-                new byte[] { 0x75, 0x72, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x22, 0x3A, 0x20, 0x32, 0x2C, 0x0A, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x72, 0x65, 0x6D, 0x6F, 0x74, 0x65, 0x43, 0x6C, 0x6F },
-                new byte[] { 0x73, 0x65, 0x43, 0x6F, 0x64, 0x65, 0x22, 0x3A, 0x20, 0x31, 0x30, 0x30, 0x30, 0x2C, 0x0A, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x72, 0x65, 0x70, 0x6F, 0x72, 0x74, 0x66 },
-                new byte[] { 0x69, 0x6C, 0x65, 0x22, 0x3A, 0x20, 0x22, 0x61, 0x75, 0x74, 0x6F, 0x62, 0x61, 0x68, 0x6E, 0x70 },
-                new byte[] { 0x79, 0x74, 0x68, 0x6F, 0x6E, 0x5F, 0x30, 0x5F, 0x36, 0x5F, 0x30, 0x5F, 0x63, 0x61, 0x73, 0x65 },
-                new byte[] { 0x5F, 0x31, 0x5F, 0x31, 0x5F, 0x33, 0x2E, 0x6A, 0x73, 0x6F, 0x6E, 0x22, 0x0A, 0x20, 0x20, 0x20 },
-                new byte[] { 0x20, 0x20, 0x20, 0x7D, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x31, 0x2E, 0x31 },
-                new byte[] { 0x2E, 0x34, 0x22, 0x3A, 0x20, 0x7B, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 },
-                new byte[] { 0x22, 0x62, 0x65, 0x68, 0x61, 0x76, 0x69, 0x6F, 0x72, 0x22, 0x3A, 0x20, 0x22, 0x4F, 0x4B, 0x22 },
-                new byte[] { 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x62, 0x65, 0x68, 0x61 },
-                new byte[] { 0x76, 0x69, 0x6F, 0x72, 0x43, 0x6C, 0x6F, 0x73, 0x65, 0x22, 0x3A, 0x20, 0x22, 0x4F, 0x4B, 0x22 },
-                new byte[] { 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x22, 0x64, 0x75, 0x72, 0x61 },
-                new byte[] { 0x74, 0x69, 0x6F, 0x6E, 0x22, 0x3A, 0x20, 0x32, 0x2C, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 }
+                new byte[]
+                {
+                    0x7B,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x41,
+                    0x75,
+                    0x74,
+                    0x6F,
+                    0x62,
+                    0x61,
+                    0x68,
+                    0x6E,
+                    0x50,
+                    0x79,
+                },
+                new byte[]
+                {
+                    0x74,
+                    0x68,
+                    0x6F,
+                    0x6E,
+                    0x2F,
+                    0x30,
+                    0x2E,
+                    0x36,
+                    0x2E,
+                    0x30,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x7B,
+                    0x0A,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x31,
+                    0x2E,
+                    0x31,
+                    0x2E,
+                    0x31,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x7B,
+                    0x0A,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                },
+                new byte[]
+                {
+                    0x6F,
+                    0x72,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x4F,
+                    0x4B,
+                    0x22,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x43,
+                    0x6C,
+                    0x6F,
+                },
+                new byte[]
+                {
+                    0x73,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x4F,
+                    0x4B,
+                    0x22,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x64,
+                    0x75,
+                    0x72,
+                    0x61,
+                    0x74,
+                    0x69,
+                    0x6F,
+                    0x6E,
+                    0x22,
+                    0x3A,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x32,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x72,
+                    0x65,
+                    0x6D,
+                },
+                new byte[]
+                {
+                    0x6F,
+                    0x74,
+                    0x65,
+                    0x43,
+                    0x6C,
+                    0x6F,
+                    0x73,
+                    0x65,
+                    0x43,
+                    0x6F,
+                    0x64,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x31,
+                },
+                new byte[]
+                {
+                    0x30,
+                    0x30,
+                    0x30,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x72,
+                },
+                new byte[]
+                {
+                    0x65,
+                    0x70,
+                    0x6F,
+                    0x72,
+                    0x74,
+                    0x66,
+                    0x69,
+                    0x6C,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x61,
+                    0x75,
+                    0x74,
+                },
+                new byte[]
+                {
+                    0x6F,
+                    0x62,
+                    0x61,
+                    0x68,
+                    0x6E,
+                    0x70,
+                    0x79,
+                    0x74,
+                    0x68,
+                    0x6F,
+                    0x6E,
+                    0x5F,
+                    0x30,
+                    0x5F,
+                    0x36,
+                    0x5F,
+                },
+                new byte[]
+                {
+                    0x30,
+                    0x5F,
+                    0x63,
+                    0x61,
+                    0x73,
+                    0x65,
+                    0x5F,
+                    0x31,
+                    0x5F,
+                    0x31,
+                    0x5F,
+                    0x31,
+                    0x2E,
+                    0x6A,
+                    0x73,
+                    0x6F,
+                },
+                new byte[]
+                {
+                    0x6E,
+                    0x22,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x7D,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x31,
+                    0x2E,
+                    0x31,
+                    0x2E,
+                    0x32,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x7B,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x4F,
+                    0x4B,
+                    0x22,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x43,
+                    0x6C,
+                    0x6F,
+                    0x73,
+                    0x65,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x4F,
+                    0x4B,
+                    0x22,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x22,
+                    0x64,
+                    0x75,
+                    0x72,
+                    0x61,
+                    0x74,
+                    0x69,
+                    0x6F,
+                    0x6E,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x32,
+                    0x2C,
+                    0x0A,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x72,
+                    0x65,
+                    0x6D,
+                    0x6F,
+                    0x74,
+                    0x65,
+                },
+                new byte[]
+                {
+                    0x43,
+                    0x6C,
+                    0x6F,
+                    0x73,
+                    0x65,
+                    0x43,
+                    0x6F,
+                    0x64,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x31,
+                    0x30,
+                    0x30,
+                    0x30,
+                },
+                new byte[]
+                {
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x72,
+                    0x65,
+                    0x70,
+                    0x6F,
+                },
+                new byte[]
+                {
+                    0x72,
+                    0x74,
+                    0x66,
+                    0x69,
+                    0x6C,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x61,
+                    0x75,
+                    0x74,
+                    0x6F,
+                    0x62,
+                    0x61,
+                },
+                new byte[]
+                {
+                    0x68,
+                    0x6E,
+                    0x70,
+                    0x79,
+                    0x74,
+                    0x68,
+                    0x6F,
+                    0x6E,
+                    0x5F,
+                    0x30,
+                    0x5F,
+                    0x36,
+                    0x5F,
+                    0x30,
+                    0x5F,
+                    0x63,
+                },
+                new byte[]
+                {
+                    0x61,
+                    0x73,
+                    0x65,
+                    0x5F,
+                    0x31,
+                    0x5F,
+                    0x31,
+                    0x5F,
+                    0x32,
+                    0x2E,
+                    0x6A,
+                    0x73,
+                    0x6F,
+                    0x6E,
+                    0x22,
+                    0x0A,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x7D,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x31,
+                    0x2E,
+                    0x31,
+                    0x2E,
+                    0x33,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x7B,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x4F,
+                    0x4B,
+                    0x22,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x62,
+                },
+                new byte[]
+                {
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x43,
+                    0x6C,
+                    0x6F,
+                    0x73,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x4F,
+                    0x4B,
+                    0x22,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x64,
+                },
+                new byte[]
+                {
+                    0x75,
+                    0x72,
+                    0x61,
+                    0x74,
+                    0x69,
+                    0x6F,
+                    0x6E,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x32,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x72,
+                    0x65,
+                    0x6D,
+                    0x6F,
+                    0x74,
+                    0x65,
+                    0x43,
+                    0x6C,
+                    0x6F,
+                },
+                new byte[]
+                {
+                    0x73,
+                    0x65,
+                    0x43,
+                    0x6F,
+                    0x64,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x31,
+                    0x30,
+                    0x30,
+                    0x30,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x72,
+                    0x65,
+                    0x70,
+                    0x6F,
+                    0x72,
+                    0x74,
+                    0x66,
+                },
+                new byte[]
+                {
+                    0x69,
+                    0x6C,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x61,
+                    0x75,
+                    0x74,
+                    0x6F,
+                    0x62,
+                    0x61,
+                    0x68,
+                    0x6E,
+                    0x70,
+                },
+                new byte[]
+                {
+                    0x79,
+                    0x74,
+                    0x68,
+                    0x6F,
+                    0x6E,
+                    0x5F,
+                    0x30,
+                    0x5F,
+                    0x36,
+                    0x5F,
+                    0x30,
+                    0x5F,
+                    0x63,
+                    0x61,
+                    0x73,
+                    0x65,
+                },
+                new byte[]
+                {
+                    0x5F,
+                    0x31,
+                    0x5F,
+                    0x31,
+                    0x5F,
+                    0x33,
+                    0x2E,
+                    0x6A,
+                    0x73,
+                    0x6F,
+                    0x6E,
+                    0x22,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x7D,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x31,
+                    0x2E,
+                    0x31,
+                },
+                new byte[]
+                {
+                    0x2E,
+                    0x34,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x7B,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
+                new byte[]
+                {
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x4F,
+                    0x4B,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x62,
+                    0x65,
+                    0x68,
+                    0x61,
+                },
+                new byte[]
+                {
+                    0x76,
+                    0x69,
+                    0x6F,
+                    0x72,
+                    0x43,
+                    0x6C,
+                    0x6F,
+                    0x73,
+                    0x65,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x22,
+                    0x4F,
+                    0x4B,
+                    0x22,
+                },
+                new byte[]
+                {
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x22,
+                    0x64,
+                    0x75,
+                    0x72,
+                    0x61,
+                },
+                new byte[]
+                {
+                    0x74,
+                    0x69,
+                    0x6F,
+                    0x6E,
+                    0x22,
+                    0x3A,
+                    0x20,
+                    0x32,
+                    0x2C,
+                    0x0A,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                    0x20,
+                },
             };
 
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                KeepAliveInterval = TimeSpan.Zero,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
                 {
-                    ClientMaxWindowBits = 9,
-                    ServerMaxWindowBits = 9
+                    IsServer = true,
+                    KeepAliveInterval = TimeSpan.Zero,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientMaxWindowBits = 9,
+                        ServerMaxWindowBits = 9,
+                    },
                 }
-            });
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                KeepAliveInterval = TimeSpan.Zero,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
+            );
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
                 {
-                    ClientMaxWindowBits = 9,
-                    ServerMaxWindowBits = 9
+                    KeepAliveInterval = TimeSpan.Zero,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    {
+                        ClientMaxWindowBits = 9,
+                        ServerMaxWindowBits = 9,
+                    },
                 }
-            });
+            );
 
             foreach (var message in messages)
             {
@@ -593,7 +1581,10 @@ namespace System.Net.WebSockets.Tests
 
             for (int i = 0; i < messages.Length; ++i)
             {
-                ValueWebSocketReceiveResult result = await client.ReceiveAsync(buffer, CancellationToken);
+                ValueWebSocketReceiveResult result = await client.ReceiveAsync(
+                    buffer,
+                    CancellationToken
+                );
 
                 Assert.True(result.EndOfMessage);
                 Assert.Equal(messages[i].Length, result.Count);
@@ -605,12 +1596,15 @@ namespace System.Net.WebSockets.Tests
         public async Task CompressedMessageWithEmptyLastFrame()
         {
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                KeepAliveInterval = TimeSpan.Zero,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
+                {
+                    IsServer = true,
+                    KeepAliveInterval = TimeSpan.Zero,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             byte[] frame1 = new byte[1024];
             byte[] frame2 = new byte[2048];
@@ -622,19 +1616,25 @@ namespace System.Net.WebSockets.Tests
             // produce empty segments.
             stream.Remote.Enqueue(0x80, 0x00);
 
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                IsServer = false,
-                KeepAliveInterval = TimeSpan.Zero,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
+                {
+                    IsServer = false,
+                    KeepAliveInterval = TimeSpan.Zero,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             int messageSize = 0;
             byte[] buffer = new byte[128];
 
             while (true)
             {
-                WebSocketReceiveResult result = await client.ReceiveAsync(buffer, CancellationToken);
+                WebSocketReceiveResult result = await client.ReceiveAsync(
+                    buffer,
+                    CancellationToken
+                );
                 messageSize += result.Count;
 
                 if (result.EndOfMessage)
@@ -650,18 +1650,24 @@ namespace System.Net.WebSockets.Tests
         public async Task DisposeShouldNotCorruptStateWhileReceiving()
         {
             WebSocketTestStream stream = new();
-            using WebSocket server = WebSocket.CreateFromStream(stream, new WebSocketCreationOptions
-            {
-                IsServer = true,
-                KeepAliveInterval = TimeSpan.Zero,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
-            using WebSocket client = WebSocket.CreateFromStream(stream.Remote, new WebSocketCreationOptions
-            {
-                IsServer = false,
-                KeepAliveInterval = TimeSpan.Zero,
-                DangerousDeflateOptions = new WebSocketDeflateOptions()
-            });
+            using WebSocket server = WebSocket.CreateFromStream(
+                stream,
+                new WebSocketCreationOptions
+                {
+                    IsServer = true,
+                    KeepAliveInterval = TimeSpan.Zero,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
+            using WebSocket client = WebSocket.CreateFromStream(
+                stream.Remote,
+                new WebSocketCreationOptions
+                {
+                    IsServer = false,
+                    KeepAliveInterval = TimeSpan.Zero,
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
+                }
+            );
 
             byte[] buffer = new byte[64];
 
@@ -674,14 +1680,21 @@ namespace System.Net.WebSockets.Tests
             stream.IgnoreCancellationToken = true;
             await SendTextAsync("Hello Worlds", client);
 
-            Task<WebSocketReceiveResult> receiveTask = server.ReceiveAsync(buffer, CancellationToken.None);
+            Task<WebSocketReceiveResult> receiveTask = server.ReceiveAsync(
+                buffer,
+                CancellationToken.None
+            );
             server.Dispose();
 
             var result = await receiveTask;
             Assert.Equal("Hello Worlds", Encoding.UTF8.GetString(buffer.AsSpan(0, result.Count)));
         }
 
-        private ValueTask SendTextAsync(string text, WebSocket websocket, bool disableCompression = false)
+        private ValueTask SendTextAsync(
+            string text,
+            WebSocket websocket,
+            bool disableCompression = false
+        )
         {
             WebSocketMessageFlags flags = WebSocketMessageFlags.EndOfMessage;
             if (disableCompression)
@@ -689,13 +1702,21 @@ namespace System.Net.WebSockets.Tests
                 flags |= WebSocketMessageFlags.DisableCompression;
             }
             byte[] bytes = Encoding.UTF8.GetBytes(text);
-            return websocket.SendAsync(bytes.AsMemory(), WebSocketMessageType.Text, flags, CancellationToken);
+            return websocket.SendAsync(
+                bytes.AsMemory(),
+                WebSocketMessageType.Text,
+                flags,
+                CancellationToken
+            );
         }
 
         private async Task<string> ReceiveTextAsync(WebSocket websocket)
         {
             using IMemoryOwner<byte> buffer = MemoryPool<byte>.Shared.Rent(1024 * 32);
-            ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(buffer.Memory, CancellationToken);
+            ValueWebSocketReceiveResult result = await websocket.ReceiveAsync(
+                buffer.Memory,
+                CancellationToken
+            );
 
             Assert.True(result.EndOfMessage);
             Assert.Equal(WebSocketMessageType.Text, result.MessageType);

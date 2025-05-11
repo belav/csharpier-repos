@@ -14,7 +14,10 @@ public readonly struct PersistingComponentStateSubscription : IDisposable
     private readonly List<PersistComponentStateRegistration>? _callbacks;
     private readonly PersistComponentStateRegistration? _callback;
 
-    internal PersistingComponentStateSubscription(List<PersistComponentStateRegistration> callbacks, PersistComponentStateRegistration callback)
+    internal PersistingComponentStateSubscription(
+        List<PersistComponentStateRegistration> callbacks,
+        PersistComponentStateRegistration callback
+    )
     {
         _callbacks = callbacks;
         _callback = callback;

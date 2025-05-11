@@ -15,8 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 /// </summary>
 public class EntityFinderSource : IEntityFinderSource
 {
-    private readonly ConcurrentDictionary<Type, Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>> _cache
-        = new();
+    private readonly ConcurrentDictionary<
+        Type,
+        Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>
+    > _cache = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,15 +30,28 @@ public class EntityFinderSource : IEntityFinderSource
         IStateManager stateManager,
         IDbSetSource setSource,
         IDbSetCache setCache,
-        IEntityType type)
-        => _cache.GetOrAdd(
+        IEntityType type
+    ) =>
+        _cache.GetOrAdd(
             type.ClrType,
-            t => (Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>)
-                typeof(EntityFinderSource).GetMethod(nameof(CreateConstructor), BindingFlags.NonPublic | BindingFlags.Static)!
-                    .MakeGenericMethod(t).Invoke(null, null)!)(stateManager, setSource, setCache, type);
+            t =>
+                (Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>)
+                    typeof(EntityFinderSource)
+                        .GetMethod(
+                            nameof(CreateConstructor),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )!
+                        .MakeGenericMethod(t)
+                        .Invoke(null, null)!
+        )(stateManager, setSource, setCache, type);
 
     [UsedImplicitly]
-    private static Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder> CreateConstructor<TEntity>()
-        where TEntity : class
-        => (s, src, c, t) => new EntityFinder<TEntity>(s, src, c, t);
+    private static Func<
+        IStateManager,
+        IDbSetSource,
+        IDbSetCache,
+        IEntityType,
+        IEntityFinder
+    > CreateConstructor<TEntity>()
+        where TEntity : class => (s, src, c, t) => new EntityFinder<TEntity>(s, src, c, t);
 }

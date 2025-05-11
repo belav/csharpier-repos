@@ -41,9 +41,21 @@
       <Type Name="Extensions" Kind="Class" />
       <Type Name="Func`2" DisplayName="Func&lt;TArg,TRet&gt;" Kind="Delegate" />
       <Type Name="GenericBase`1" DisplayName="GenericBase&lt;U&gt;" Kind="Class" />
-      <Type Name="GenericBase`1+FooEventArgs" DisplayName="GenericBase&lt;U&gt;+FooEventArgs" Kind="Class" />
-      <Type Name="GenericBase`1+NestedCollection" DisplayName="GenericBase&lt;U&gt;+NestedCollection" Kind="Class" />
-      <Type Name="GenericBase`1+NestedCollection+Enumerator" DisplayName="GenericBase&lt;U&gt;+NestedCollection+Enumerator" Kind="Structure" />
+      <Type
+        Name="GenericBase`1+FooEventArgs"
+        DisplayName="GenericBase&lt;U&gt;+FooEventArgs"
+        Kind="Class"
+      />
+      <Type
+        Name="GenericBase`1+NestedCollection"
+        DisplayName="GenericBase&lt;U&gt;+NestedCollection"
+        Kind="Class"
+      />
+      <Type
+        Name="GenericBase`1+NestedCollection+Enumerator"
+        DisplayName="GenericBase&lt;U&gt;+NestedCollection+Enumerator"
+        Kind="Structure"
+      />
       <Type Name="IFoo`1" DisplayName="IFoo&lt;T&gt;" Kind="Interface" />
       <Type Name="MyList`1" DisplayName="MyList&lt;T&gt;" Kind="Class" />
       <Type Name="MyList`1+Helper`2" DisplayName="MyList&lt;T&gt;+Helper&lt;U,V&gt;" Kind="Class" />
@@ -64,8 +76,14 @@
         <Target Type="T:Mono.DocTest.Generic.IFoo`1" />
       </Targets>
       <Member MemberName="Bar&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static void Bar&lt;T&gt; (this Mono.DocTest.Generic.IFoo&lt;T&gt; self, string s);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Bar&lt;T&gt;(class Mono.DocTest.Generic.IFoo`1&lt;!!T&gt; self, string s) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Bar&lt;T&gt; (this Mono.DocTest.Generic.IFoo&lt;T&gt; self, string s);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Bar&lt;T&gt;(class Mono.DocTest.Generic.IFoo`1&lt;!!T&gt; self, string s) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -82,9 +100,17 @@
           <param name="self">To be added.</param>
           <param name="s">To be added.</param>
           <summary>
-            <see cref="T:Mono.DocTest.Generic.IFoo`1" /> extension method</summary>
+            <see cref="T:Mono.DocTest.Generic.IFoo`1" />
+
+            
+
+             extension method</summary
+          >
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.Bar``1(Mono.DocTest.Generic.IFoo{``0},System.String)" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.Bar``1(Mono.DocTest.Generic.IFoo{``0},System.String)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -92,8 +118,14 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="ForEach&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static void ForEach&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; self, Action&lt;T&gt; a);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ForEach&lt;T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; self, class System.Action`1&lt;!!T&gt; a) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void ForEach&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; self, Action&lt;T&gt; a);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void ForEach&lt;T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; self, class System.Action`1&lt;!!T&gt; a) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -102,7 +134,11 @@
           <TypeParameter Name="T" />
         </TypeParameters>
         <Parameters>
-          <Parameter Name="self" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="self"
+            Type="System.Collections.Generic.IEnumerable&lt;T&gt;"
+            RefType="this"
+          />
           <Parameter Name="a" Type="System.Action&lt;T&gt;" />
         </Parameters>
         <Docs>
@@ -110,9 +146,17 @@
           <param name="self">To be added.</param>
           <param name="a">To be added.</param>
           <summary>
-            <see cref="T:System.Collections.Generic.IEnumerable`1" /> extension method</summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
+
+             extension method</summary
+          >
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -120,23 +164,41 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="ToDouble">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;double&gt; ToDouble (this System.Collections.Generic.IEnumerable&lt;int&gt; list);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;float64&gt; ToDouble(class System.Collections.Generic.IEnumerable`1&lt;int32&gt; list) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable&lt;double&gt; ToDouble (this System.Collections.Generic.IEnumerable&lt;int&gt; list);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;float64&gt; ToDouble(class System.Collections.Generic.IEnumerable`1&lt;int32&gt; list) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Double&gt;</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="list" Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;" RefType="this" />
+          <Parameter
+            Name="list"
+            Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="list">To be added.</param>
           <summary>
-            <see cref="T:System.Collections.Generic.IEnumerable{System.Int32}" /> 
+            <see cref="T:System.Collections.Generic.IEnumerable{System.Int32}" />
+
+            
+
+             
               extension method.
-            </summary>
+            </summary
+          >
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ToDouble(System.Collections.Generic.IEnumerable{System.Int32})" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ToDouble(System.Collections.Generic.IEnumerable{System.Int32})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -144,8 +206,14 @@
         <Target Type="T:Mono.DocTest.Generic.IFoo`1" />
       </Targets>
       <Member MemberName="ToDouble&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static double ToDouble&lt;T&gt; (this T val) where T : Mono.DocTest.Generic.IFoo&lt;T&gt;;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig float64 ToDouble&lt;(class Mono.DocTest.Generic.IFoo`1&lt;!!T&gt;) T&gt;(!!T val) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static double ToDouble&lt;T&gt; (this T val) where T : Mono.DocTest.Generic.IFoo&lt;T&gt;;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig float64 ToDouble&lt;(class Mono.DocTest.Generic.IFoo`1&lt;!!T&gt;) T&gt;(!!T val) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Double</ReturnType>
@@ -164,10 +232,18 @@
           <typeparam name="T">To be added.</typeparam>
           <param name="val">To be added.</param>
           <summary>
-            <see cref="T:Mono.DocTest.Generic.IFoo`1" /> extension method.
-            </summary>
+            <see cref="T:Mono.DocTest.Generic.IFoo`1" />
+
+            
+
+             extension method.
+            </summary
+          >
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ToDouble``1(``0)" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ToDouble``1(``0)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -175,8 +251,14 @@
         <Target Type="System.Object" />
       </Targets>
       <Member MemberName="ToEnumerable&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;T&gt; ToEnumerable&lt;T&gt; (this T self);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; ToEnumerable&lt;T&gt;(!!T self) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable&lt;T&gt; ToEnumerable&lt;T&gt; (this T self);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; ToEnumerable&lt;T&gt;(!!T self) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Collections.Generic.IEnumerable&lt;T&gt;</ReturnType>
@@ -191,9 +273,17 @@
           <typeparam name="T">To be added.</typeparam>
           <param name="self">To be added.</param>
           <summary>
-            <c>System.Object</c> extension method</summary>
+            <c>System.Object</c>
+
+            
+
+             extension method</summary
+          >
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ToEnumerable``1(``0)" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ToEnumerable``1(``0)"
+        />
       </Member>
     </ExtensionMethod>
   </ExtensionMethods>

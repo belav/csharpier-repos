@@ -7,6 +7,6 @@ namespace Microsoft.TestCommon.Types
     {
         FirstShort,
         SecondShort,
-        ThirdShort
+        ThirdShort,
     }
 }

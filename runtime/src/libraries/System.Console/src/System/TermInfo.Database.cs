@@ -15,21 +15,28 @@ internal static partial class TermInfo
     {
         /// <summary>The name of the terminfo file.</summary>
         private readonly string _term;
+
         /// <summary>Raw data of the database instance.</summary>
         private readonly byte[] _data;
 
         /// <summary>The number of bytes in the names section of the database.</summary>
         private readonly int _nameSectionNumBytes;
+
         /// <summary>The number of bytes in the Booleans section of the database.</summary>
         private readonly int _boolSectionNumBytes;
+
         /// <summary>The number of integers in the numbers section of the database.</summary>
         private readonly int _numberSectionNumInts;
+
         /// <summary>The number of offsets in the strings section of the database.</summary>
         private readonly int _stringSectionNumOffsets;
+
         /// <summary>The number of bytes in the strings table of the database.</summary>
         private readonly int _stringTableNumBytes;
+
         /// <summary>Whether or not to read the number section as 32-bit integers.</summary>
         private readonly bool _readAs32Bit;
+
         /// <summary>The size of the integers on the number section.</summary>
         private readonly int _sizeOfInt;
 
@@ -48,9 +55,11 @@ internal static partial class TermInfo
             const int Magic32BitNumber = 0x21E; // magic number octal 01036 for new ncruses terminfo
             short magic = ReadInt16(data, 0);
             _readAs32Bit =
-                magic == MagicLegacyNumber ? false :
-                magic == Magic32BitNumber ? true :
-                throw new InvalidOperationException(SR.Format(SR.IO_TermInfoInvalidMagicNumber, "O" + Convert.ToString(magic, 8))); // magic number was not recognized. Printing the magic number in octal.
+                magic == MagicLegacyNumber ? false
+                : magic == Magic32BitNumber ? true
+                : throw new InvalidOperationException(
+                    SR.Format(SR.IO_TermInfoInvalidMagicNumber, "O" + Convert.ToString(magic, 8))
+                ); // magic number was not recognized. Printing the magic number in octal.
             _sizeOfInt = (_readAs32Bit) ? 4 : 2;
 
             _nameSectionNumBytes = ReadInt16(data, 2);
@@ -58,11 +67,13 @@ internal static partial class TermInfo
             _numberSectionNumInts = ReadInt16(data, 6);
             _stringSectionNumOffsets = ReadInt16(data, 8);
             _stringTableNumBytes = ReadInt16(data, 10);
-            if (_nameSectionNumBytes < 0 ||
-                _boolSectionNumBytes < 0 ||
-                _numberSectionNumInts < 0 ||
-                _stringSectionNumOffsets < 0 ||
-                _stringTableNumBytes < 0)
+            if (
+                _nameSectionNumBytes < 0
+                || _boolSectionNumBytes < 0
+                || _numberSectionNumInts < 0
+                || _stringSectionNumOffsets < 0
+                || _stringTableNumBytes < 0
+            )
             {
                 throw new InvalidOperationException(SR.IO_TermInfoInvalid);
             }
@@ -79,7 +90,10 @@ internal static partial class TermInfo
         }
 
         /// <summary>The name of the associated terminfo, if any.</summary>
-        public string Term { get { return _term; } }
+        public string Term
+        {
+            get { return _term; }
+        }
 
         internal bool HasExtendedStrings => _extendedStrings is not null;
 
@@ -87,19 +101,31 @@ internal static partial class TermInfo
         private const int NamesOffset = 12; // comes right after the header, which is always 12 bytes
 
         /// <summary>The offset into data where the Booleans section begins.</summary>
-        private int BooleansOffset { get { return NamesOffset + _nameSectionNumBytes; } } // after the names section
+        private int BooleansOffset
+        {
+            get { return NamesOffset + _nameSectionNumBytes; }
+        } // after the names section
 
         /// <summary>The offset into data where the numbers section begins.</summary>
-        private int NumbersOffset { get { return RoundUpToEven(BooleansOffset + _boolSectionNumBytes); } } // after the Booleans section, at an even position
+        private int NumbersOffset
+        {
+            get { return RoundUpToEven(BooleansOffset + _boolSectionNumBytes); }
+        } // after the Booleans section, at an even position
 
         /// <summary>
         /// The offset into data where the string offsets section begins.  We index into this section
         /// to find the location within the strings table where a string value exists.
         /// </summary>
-        private int StringOffsetsOffset { get { return NumbersOffset + (_numberSectionNumInts * _sizeOfInt); } }
+        private int StringOffsetsOffset
+        {
+            get { return NumbersOffset + (_numberSectionNumInts * _sizeOfInt); }
+        }
 
         /// <summary>The offset into data where the string table exists.</summary>
-        private int StringsTableOffset { get { return StringOffsetsOffset + (_stringSectionNumOffsets * 2); } }
+        private int StringsTableOffset
+        {
+            get { return StringOffsetsOffset + (_stringSectionNumOffsets * 2); }
+        }
 
         /// <summary>Gets a string from the strings section by the string's well-known index.</summary>
         /// <param name="stringTableIndex">The index of the string to find.</param>
@@ -135,7 +161,9 @@ internal static partial class TermInfo
             Debug.Assert(name != null);
 
             string? value;
-            return _extendedStrings is not null && _extendedStrings.TryGetValue(name, out value) ? value : null;
+            return _extendedStrings is not null && _extendedStrings.TryGetValue(name, out value)
+                ? value
+                : null;
         }
 
         /// <summary>Gets a number from the numbers section by the number's well-known index.</summary>
@@ -162,7 +190,11 @@ internal static partial class TermInfo
         /// defined as the earlier portions, and may not even exist, the parsing is more lenient about
         /// errors, returning an empty collection rather than throwing.
         /// </returns>
-        private static Dictionary<string, string>? ParseExtendedStrings(byte[] data, int extendedBeginning, bool readAs32Bit)
+        private static Dictionary<string, string>? ParseExtendedStrings(
+            byte[] data,
+            int extendedBeginning,
+            bool readAs32Bit
+        )
         {
             const int ExtendedHeaderSize = 10;
             int sizeOfIntValuesInBytes = (readAs32Bit) ? 4 : 2;
@@ -178,11 +210,13 @@ internal static partial class TermInfo
             int extendedStringCount = ReadInt16(data, extendedBeginning + (2 * 2));
             int extendedStringNumOffsets = ReadInt16(data, extendedBeginning + (2 * 3));
             int extendedStringTableByteSize = ReadInt16(data, extendedBeginning + (2 * 4));
-            if (extendedBoolCount < 0 ||
-                extendedNumberCount < 0 ||
-                extendedStringCount < 0 ||
-                extendedStringNumOffsets < 0 ||
-                extendedStringTableByteSize < 0)
+            if (
+                extendedBoolCount < 0
+                || extendedNumberCount < 0
+                || extendedStringCount < 0
+                || extendedStringNumOffsets < 0
+                || extendedStringTableByteSize < 0
+            )
             {
                 // The extended header contained invalid data.  Bail.
                 return null;
@@ -194,22 +228,24 @@ internal static partial class TermInfo
             // Get the location where the extended string offsets begin.  These point into
             // the extended string table.
             int extendedOffsetsStart =
-                extendedBeginning + // go past the normal data
-                ExtendedHeaderSize + // and past the extended header
-                RoundUpToEven(extendedBoolCount) + // and past all of the extended Booleans
+                extendedBeginning
+                + // go past the normal data
+                ExtendedHeaderSize
+                + // and past the extended header
+                RoundUpToEven(extendedBoolCount)
+                + // and past all of the extended Booleans
                 (extendedNumberCount * sizeOfIntValuesInBytes); // and past all of the extended numbers
 
             // Get the location where the extended string table begins.  This area contains
             // null-terminated strings.
             int extendedStringTableStart =
-                extendedOffsetsStart +
-                (extendedStringCount * 2) + // and past all of the string offsets
+                extendedOffsetsStart
+                + (extendedStringCount * 2)
+                + // and past all of the string offsets
                 ((extendedBoolCount + extendedNumberCount + extendedStringCount) * 2); // and past all of the name offsets
 
             // Get the location where the extended string table ends.  We shouldn't read past this.
-            int extendedStringTableEnd =
-                extendedStringTableStart +
-                extendedStringTableByteSize;
+            int extendedStringTableEnd = extendedStringTableStart + extendedStringTableByteSize;
 
             if (extendedStringTableEnd > data.Length)
             {
@@ -225,7 +261,8 @@ internal static partial class TermInfo
             int lastEnd = 0;
             for (int i = 0; i < extendedStringCount; i++)
             {
-                int offset = extendedStringTableStart + ReadInt16(data, extendedOffsetsStart + (i * 2));
+                int offset =
+                    extendedStringTableStart + ReadInt16(data, extendedOffsetsStart + (i * 2));
                 if (offset < 0 || offset >= data.Length)
                 {
                     // If the offset is invalid, bail.
@@ -241,7 +278,9 @@ internal static partial class TermInfo
             }
 
             // Now parse all of the names.
-            var names = new List<string>(extendedBoolCount + extendedNumberCount + extendedStringCount);
+            var names = new List<string>(
+                extendedBoolCount + extendedNumberCount + extendedStringCount
+            );
             for (int pos = lastEnd + 1; pos < extendedStringTableEnd; pos++)
             {
                 int end = FindNullTerminator(data, pos);
@@ -252,9 +291,11 @@ internal static partial class TermInfo
             // The names are in order for the Booleans, then the numbers, and then the strings.
             // Skip over the bools and numbers, and associate the names with the values.
             var extendedStrings = new Dictionary<string, string>(extendedStringCount);
-            for (int iName = extendedBoolCount + extendedNumberCount, iValue = 0;
-                 iName < names.Count && iValue < values.Count;
-                 iName++, iValue++)
+            for (
+                int iName = extendedBoolCount + extendedNumberCount, iValue = 0;
+                iName < names.Count && iValue < values.Count;
+                iName++, iValue++
+            )
             {
                 extendedStrings.Add(names[iName], values[iValue]);
             }
@@ -262,7 +303,10 @@ internal static partial class TermInfo
             return extendedStrings;
         }
 
-        private static int RoundUpToEven(int i) { return i % 2 == 1 ? i + 1 : i; }
+        private static int RoundUpToEven(int i)
+        {
+            return i % 2 == 1 ? i + 1 : i;
+        }
 
         /// <summary>Read a 16-bit or 32-bit value from the buffer starting at the specified position.</summary>
         /// <param name="buffer">The buffer from which to read.</param>
@@ -278,17 +322,15 @@ internal static partial class TermInfo
         /// <returns>The 16-bit value read.</returns>
         private static short ReadInt16(byte[] buffer, int pos)
         {
-            return unchecked((short)
-                ((((int)buffer[pos + 1]) << 8) |
-                 ((int)buffer[pos] & 0xff)));
+            return unchecked((short)((((int)buffer[pos + 1]) << 8) | ((int)buffer[pos] & 0xff)));
         }
 
         /// <summary>Read a 32-bit value from the buffer starting at the specified position.</summary>
         /// <param name="buffer">The buffer from which to read.</param>
         /// <param name="pos">The position at which to read.</param>
         /// <returns>The 32-bit value read.</returns>
-        private static int ReadInt32(byte[] buffer, int pos)
-            => BinaryPrimitives.ReadInt32LittleEndian(buffer.AsSpan(pos));
+        private static int ReadInt32(byte[] buffer, int pos) =>
+            BinaryPrimitives.ReadInt32LittleEndian(buffer.AsSpan(pos));
 
         /// <summary>Reads a string from the buffer starting at the specified position.</summary>
         /// <param name="buffer">The buffer from which to read.</param>

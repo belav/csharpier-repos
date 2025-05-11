@@ -10,7 +10,8 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer, HtmlSymbol, HtmlSymbolType>
+    public partial class HtmlMarkupParser
+        : TokenizerBackedParser<HtmlTokenizer, HtmlSymbol, HtmlSymbolType>
     {
         //From http://dev.w3.org/html5/spec/Overview.html#elements-0
         private ISet<string> _voidElements = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
@@ -30,7 +31,7 @@ namespace System.Web.Razor.Parser
             "param",
             "source",
             "track",
-            "wbr"
+            "wbr",
         };
 
         public ISet<string> VoidElements
@@ -43,7 +44,11 @@ namespace System.Web.Razor.Parser
             get { return Context.CodeParser; }
         }
 
-        protected override LanguageCharacteristics<HtmlTokenizer, HtmlSymbol, HtmlSymbolType> Language
+        protected override LanguageCharacteristics<
+            HtmlTokenizer,
+            HtmlSymbol,
+            HtmlSymbolType
+        > Language
         {
             get { return HtmlLanguageCharacteristics.Instance; }
         }
@@ -113,7 +118,11 @@ namespace System.Web.Razor.Parser
                     // Handle whitespace rewriting
                     if (last != null)
                     {
-                        if (!Context.DesignTimeMode && last.Type == HtmlSymbolType.WhiteSpace && startOfLine)
+                        if (
+                            !Context.DesignTimeMode
+                            && last.Type == HtmlSymbolType.WhiteSpace
+                            && startOfLine
+                        )
                         {
                             // Put the whitespace back too
                             startOfLine = false;
@@ -167,7 +176,9 @@ namespace System.Web.Razor.Parser
 
         protected static Func<HtmlSymbol, bool> IsSpacingToken(bool includeNewLines)
         {
-            return sym => sym.Type == HtmlSymbolType.WhiteSpace || (includeNewLines && sym.Type == HtmlSymbolType.NewLine);
+            return sym =>
+                sym.Type == HtmlSymbolType.WhiteSpace
+                || (includeNewLines && sym.Type == HtmlSymbolType.NewLine);
         }
 
         private void OtherParserBlock()

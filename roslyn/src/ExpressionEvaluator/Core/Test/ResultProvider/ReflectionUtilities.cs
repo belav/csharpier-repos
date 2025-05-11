@@ -4,11 +4,11 @@
 
 #nullable disable
 
-using Microsoft.VisualStudio.Debugger.Clr;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
+using Microsoft.VisualStudio.Debugger.Clr;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
@@ -23,10 +23,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             return Activator.CreateInstance(
                 type,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.CreateInstance,
                 binder: null,
                 args: args,
-                culture: null);
+                culture: null
+            );
         }
 
         internal static AssemblyLoadContext Load(this DkmClrRuntimeInstance runtime)

@@ -32,7 +32,7 @@ public class EventTests
                     Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
                     Assert.False(context.Response.Headers.ContainsKey(HeaderNames.WWWAuthenticate));
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -56,7 +56,7 @@ public class EventTests
                     context.Response.Headers.WWWAuthenticate = "Teapot";
                     context.HandleResponse();
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -80,13 +80,14 @@ public class EventTests
                     Assert.IsType<InvalidOperationException>(context.Exception);
                     Assert.Equal("InvalidBlob", context.Exception.Message);
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob"));
+            SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob")
+        );
         Assert.Equal("InvalidBlob", ex.Message);
         Assert.Equal(1, eventInvoked);
     }
@@ -104,7 +105,7 @@ public class EventTests
                     context.Response.Headers.WWWAuthenticate = "Teapot";
                     context.HandleResponse();
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -128,13 +129,14 @@ public class EventTests
                     Assert.IsType<Exception>(context.Exception);
                     Assert.Equal("A test other error occurred", context.Exception.Message);
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
         var ex = await Assert.ThrowsAsync<Exception>(() =>
-            SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError"));
+            SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError")
+        );
         Assert.Equal("A test other error occurred", ex.Message);
         Assert.Equal(1, eventInvoked);
     }
@@ -154,7 +156,7 @@ public class EventTests
                     context.Response.Headers.WWWAuthenticate = "Teapot";
                     context.HandleResponse();
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -179,12 +181,17 @@ public class EventTests
                     Assert.IsType<Exception>(context.Exception);
                     Assert.Equal("A test credential error occurred", context.Exception.Message);
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
-        var response = await SendAsync(server, "/418", new TestConnection(), "Negotiate CredentialError");
+        var response = await SendAsync(
+            server,
+            "/418",
+            new TestConnection(),
+            "Negotiate CredentialError"
+        );
         Assert.Equal(StatusCodes.Status418ImATeapot, response.Response.StatusCode);
         Assert.Equal(1, eventInvoked);
     }
@@ -204,12 +211,17 @@ public class EventTests
                     context.Response.Headers.WWWAuthenticate = "Teapot";
                     context.HandleResponse();
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
-        var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate CredentialError");
+        var result = await SendAsync(
+            server,
+            "/404",
+            new TestConnection(),
+            "Negotiate CredentialError"
+        );
         Assert.Equal(StatusCodes.Status418ImATeapot, result.Response.StatusCode);
         Assert.Equal("Teapot", result.Response.Headers.WWWAuthenticate);
         Assert.Equal(1, eventInvoked);
@@ -229,12 +241,17 @@ public class EventTests
                     Assert.IsType<Exception>(context.Exception);
                     Assert.Equal("A test client error occurred", context.Exception.Message);
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
-        var response = await SendAsync(server, "/404", new TestConnection(), "Negotiate ClientError");
+        var response = await SendAsync(
+            server,
+            "/404",
+            new TestConnection(),
+            "Negotiate ClientError"
+        );
         Assert.Equal(StatusCodes.Status400BadRequest, response.Response.StatusCode);
         Assert.Equal(1, eventInvoked);
     }
@@ -254,7 +271,7 @@ public class EventTests
                     context.Response.Headers.WWWAuthenticate = "Teapot";
                     context.HandleResponse();
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -282,7 +299,7 @@ public class EventTests
                     Assert.Equal("Kerberos", identity.AuthenticationType);
                     callCount++;
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -308,7 +325,7 @@ public class EventTests
                     context.Success();
                     callCount++;
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -330,12 +347,17 @@ public class EventTests
                     context.NoResult();
                     callCount++;
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
-        var result = await SendAsync(server, "/Authenticate", new TestConnection(), "Negotiate ClientKerberosBlob");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            new TestConnection(),
+            "Negotiate ClientKerberosBlob"
+        );
         Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
         Assert.Equal("Negotiate", result.Response.Headers.WWWAuthenticate);
         Assert.Equal(1, callCount);
@@ -354,12 +376,17 @@ public class EventTests
                     callCount++;
                     context.Fail("Event error.");
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
 
-        var result = await SendAsync(server, "/Authenticate", new TestConnection(), "Negotiate ClientKerberosBlob");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            new TestConnection(),
+            "Negotiate ClientKerberosBlob"
+        );
         Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
         Assert.Equal("Negotiate", result.Response.Headers.WWWAuthenticate);
         Assert.Equal(1, callCount);
@@ -377,7 +404,7 @@ public class EventTests
                 {
                     callCount++;
                     return Task.CompletedTask;
-                }
+                },
             };
         });
         var server = host.GetTestServer();
@@ -386,7 +413,10 @@ public class EventTests
         Assert.Equal(0, callCount);
     }
 
-    private static async Task KerberosStage1And2Auth(TestServer server, TestConnection testConnection)
+    private static async Task KerberosStage1And2Auth(
+        TestServer server,
+        TestConnection testConnection
+    )
     {
         await KerberosStage1Auth(server, testConnection);
         await KerberosStage2Auth(server, testConnection);
@@ -394,29 +424,43 @@ public class EventTests
 
     private static async Task KerberosStage1Auth(TestServer server, TestConnection testConnection)
     {
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob1");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientKerberosBlob1"
+        );
         Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerKerberosBlob1", result.Response.Headers.WWWAuthenticate);
     }
 
     private static async Task KerberosStage2Auth(TestServer server, TestConnection testConnection)
     {
-        var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob2");
+        var result = await SendAsync(
+            server,
+            "/Authenticate",
+            testConnection,
+            "Negotiate ClientKerberosBlob2"
+        );
         Assert.Equal(StatusCodes.Status200OK, result.Response.StatusCode);
         Assert.Equal("Negotiate ServerKerberosBlob2", result.Response.Headers.WWWAuthenticate);
     }
 
-    private static async Task<IHost> CreateHostAsync(Action<NegotiateOptions> configureOptions = null)
+    private static async Task<IHost> CreateHostAsync(
+        Action<NegotiateOptions> configureOptions = null
+    )
     {
         var builder = new HostBuilder()
-            .ConfigureServices(services => services
-                .AddRouting()
-                .AddAuthentication()
-                .AddNegotiate(options =>
-                {
-                    options.StateFactory = new TestNegotiateStateFactory();
-                    configureOptions?.Invoke(options);
-                }))
+            .ConfigureServices(services =>
+                services
+                    .AddRouting()
+                    .AddAuthentication()
+                    .AddNegotiate(options =>
+                    {
+                        options.StateFactory = new TestNegotiateStateFactory();
+                        configureOptions?.Invoke(options);
+                    })
+            )
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder.UseTestServer();
@@ -433,28 +477,39 @@ public class EventTests
 
     private static void ConfigureEndpoints(IEndpointRouteBuilder builder)
     {
-        builder.Map("/Authenticate", async context =>
-        {
-            if (!context.User.Identity.IsAuthenticated)
+        builder.Map(
+            "/Authenticate",
+            async context =>
             {
-                await context.ChallengeAsync();
-                return;
+                if (!context.User.Identity.IsAuthenticated)
+                {
+                    await context.ChallengeAsync();
+                    return;
+                }
+
+                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+                var name = context.User.Identity.Name;
+                Assert.False(string.IsNullOrEmpty(name), "name");
+                await context.Response.WriteAsync(name);
             }
+        );
 
-            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-            var name = context.User.Identity.Name;
-            Assert.False(string.IsNullOrEmpty(name), "name");
-            await context.Response.WriteAsync(name);
-        });
-
-        builder.Map("/418", context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-            return Task.CompletedTask;
-        });
+        builder.Map(
+            "/418",
+            context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                return Task.CompletedTask;
+            }
+        );
     }
 
-    private static Task<HttpContext> SendAsync(TestServer server, string path, TestConnection connection, string authorizationHeader = null)
+    private static Task<HttpContext> SendAsync(
+        TestServer server,
+        string path,
+        TestConnection connection,
+        string authorizationHeader = null
+    )
     {
         return server.SendAsync(context =>
         {
@@ -475,9 +530,7 @@ public class EventTests
     {
         public IDictionary<object, object> Items { get; set; } = new ConnectionItems();
 
-        public void OnCompleted(Func<object, Task> callback, object state)
-        {
-        }
+        public void OnCompleted(Func<object, Task> callback, object state) { }
     }
 
     private class TestNegotiateStateFactory : INegotiateStateFactory
@@ -526,7 +579,11 @@ public class EventTests
             return new GenericIdentity("name", _protocol);
         }
 
-        public string GetOutgoingBlob(string incomingBlob, out BlobErrorType errorType, out Exception ex)
+        public string GetOutgoingBlob(
+            string incomingBlob,
+            out BlobErrorType errorType,
+            out Exception ex
+        )
         {
             if (IsDisposed)
             {

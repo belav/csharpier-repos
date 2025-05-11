@@ -29,29 +29,37 @@ using System.Collections;
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
-	[TestFixture]
-	public class ProjectStartedEventArgsTest {
-		[Test]
-		public void AssignmentTest ()
-		{
-			ProjectStartedEventArgs psea;
-			string message = "message";
-			string helpKeyword = "helpKeyword";
-			string projectFile = "projectFile";
-			string targetNames = "targetNames";
-			string [] properties = new string [2] { "a", "b" };
-			string [] items = new string [2] { "c", "d" };
+namespace MonoTests.Microsoft.Build.Framework
+{
+    [TestFixture]
+    public class ProjectStartedEventArgsTest
+    {
+        [Test]
+        public void AssignmentTest()
+        {
+            ProjectStartedEventArgs psea;
+            string message = "message";
+            string helpKeyword = "helpKeyword";
+            string projectFile = "projectFile";
+            string targetNames = "targetNames";
+            string[] properties = new string[2] { "a", "b" };
+            string[] items = new string[2] { "c", "d" };
 
-			
-			psea = new ProjectStartedEventArgs (message, helpKeyword, projectFile, targetNames, properties, items);
-			
-			Assert.AreEqual (message, psea.Message, "A1");
-			Assert.AreEqual (helpKeyword, psea.HelpKeyword, "A2");
-			Assert.AreEqual (projectFile, psea.ProjectFile, "A3");
-			Assert.AreEqual (targetNames, psea.TargetNames, "A4");
-			Assert.AreEqual (properties, psea.Properties, "A5");
-			Assert.AreEqual (items, psea.Items, "A6");
-		}
-	}
+            psea = new ProjectStartedEventArgs(
+                message,
+                helpKeyword,
+                projectFile,
+                targetNames,
+                properties,
+                items
+            );
+
+            Assert.AreEqual(message, psea.Message, "A1");
+            Assert.AreEqual(helpKeyword, psea.HelpKeyword, "A2");
+            Assert.AreEqual(projectFile, psea.ProjectFile, "A3");
+            Assert.AreEqual(targetNames, psea.TargetNames, "A4");
+            Assert.AreEqual(properties, psea.Properties, "A5");
+            Assert.AreEqual(items, psea.Items, "A6");
+        }
+    }
 }

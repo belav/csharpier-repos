@@ -28,32 +28,27 @@ namespace System.Data.Tests
             DataRow row = table2.Rows.Add(1);
 
             // Basic
-            yield return new object[]
-            {
-                row,
-                row,
-                true
-            };
+            yield return new object[] { row, row, true };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 2, null),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 3, null),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 2, "abc"),
-                false
+                false,
             };
 
             // DBNull
@@ -61,14 +56,14 @@ namespace System.Data.Tests
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 2, DBNull.Value),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, DBNull.Value),
                 table1.Rows.Add(1, 2, "abc"),
-                false
+                false,
             };
 
             // Array
@@ -79,203 +74,168 @@ namespace System.Data.Tests
             DataRow ArrayRow(object array) => arrayTable.Rows.Add(array);
 
             int[] sameArray = new int[] { 1, 2, 3 };
-            yield return new object[]
-            {
-                ArrayRow(sameArray),
-                ArrayRow(sameArray),
-                true
-            };
+            yield return new object[] { ArrayRow(sameArray), ArrayRow(sameArray), true };
 
             yield return new object[]
             {
                 ArrayRow(new byte[] { 1, 2, 3 }),
                 ArrayRow(new byte[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new byte[] { 1, 2, 3 }),
                 ArrayRow(new byte[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new short[] { 1, 2, 3 }),
                 ArrayRow(new short[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new short[] { 1, 2, 3 }),
                 ArrayRow(new short[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new string[] { "a", "b" }),
                 ArrayRow(new string[] { "a", "b" }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new string[] { "a", "b" }),
                 ArrayRow(new string[] { "a", "c" }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 1, "a", null }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 1, "a", DBNull.Value }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 2, "a", null }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 1, "a", "b" }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new ushort[] { 1, 2, 3 }),
                 ArrayRow(new ushort[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new ushort[] { 1, 2, 3 }),
                 ArrayRow(new ushort[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new uint[] { 1, 2, 3 }),
                 ArrayRow(new uint[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new uint[] { 1, 2, 3 }),
                 ArrayRow(new uint[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new long[] { 1, 2, 3 }),
                 ArrayRow(new long[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new long[] { 1, 2, 3 }),
                 ArrayRow(new long[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new long[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2, 3 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
-                ArrayRow(new int[2,2]),
-                false
+                ArrayRow(new int[2, 2]),
+                false,
             };
 
-            yield return new object[]
-            {
-                ArrayRow(new int[2,2]),
-                ArrayRow(new int[2,2]),
-                false
-            };
+            yield return new object[] { ArrayRow(new int[2, 2]), ArrayRow(new int[2, 2]), false };
 
-            yield return new object[]
-            {
-                ArrayRow(new int[2]),
-                ArrayRow(null),
-                false
-            };
+            yield return new object[] { ArrayRow(new int[2]), ArrayRow(null), false };
 
             // Different count.
-            yield return new object[]
-            {
-                table1.Rows.Add(1, 2, null),
-                table2.Rows.Add(1),
-                false
-            };
+            yield return new object[] { table1.Rows.Add(1, 2, null), table2.Rows.Add(1), false };
 
             // Null argument.
-            yield return new object[]
-            {
-                table1.Rows.Add(1, 2, null),
-                null,
-                false
-            };
+            yield return new object[] { table1.Rows.Add(1, 2, null), null, false };
 
-            yield return new object[]
-            {
-                null,
-                table1.Rows.Add(1, 2, null),
-                false
-            };
+            yield return new object[] { null, table1.Rows.Add(1, 2, null), false };
 
-            yield return new object[]
-            {
-                null,
-                null,
-                true
-            };
+            yield return new object[] { null, null, true };
         }
 
         [Theory]
@@ -319,8 +279,12 @@ namespace System.Data.Tests
             table.AcceptChanges();
             row1.Delete();
 
-            Assert.Throws<InvalidOperationException>(() => DataRowComparer<DataRow>.Default.Equals(row1, row2));
-            Assert.Throws<InvalidOperationException>(() => DataRowComparer<DataRow>.Default.Equals(row2, row1));
+            Assert.Throws<InvalidOperationException>(() =>
+                DataRowComparer<DataRow>.Default.Equals(row1, row2)
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                DataRowComparer<DataRow>.Default.Equals(row2, row1)
+            );
         }
 
         public static IEnumerable<object[]> GetHashCode_TestData()
@@ -333,13 +297,25 @@ namespace System.Data.Tests
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
-                Array nonZeroBoundArray = Array.CreateInstance(typeof(int), new int[] { 2 }, new int[] { 2 });
+                Array nonZeroBoundArray = Array.CreateInstance(
+                    typeof(int),
+                    new int[] { 2 },
+                    new int[] { 2 }
+                );
                 nonZeroBoundArray.SetValue(10, 2);
                 yield return new object[] { nonZeroBoundArray, 10 };
             }
 
-            Array multidimensionalArray = new int[,] { { 1, 2 }, { 3, 4 } };
-            yield return new object[] { multidimensionalArray, multidimensionalArray.GetHashCode() };
+            Array multidimensionalArray = new int[,]
+            {
+                { 1, 2 },
+                { 3, 4 },
+            };
+            yield return new object[]
+            {
+                multidimensionalArray,
+                multidimensionalArray.GetHashCode(),
+            };
         }
 
         [Theory]
@@ -376,7 +352,10 @@ namespace System.Data.Tests
         [Fact]
         public void GetHashCode_NullRow_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowComparer<DataRow>.Default.GetHashCode(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowComparer<DataRow>.Default.GetHashCode(null)
+            );
         }
 
         [Fact]
@@ -389,8 +368,9 @@ namespace System.Data.Tests
             table.AcceptChanges();
             row.Delete();
 
-            Assert.Throws<InvalidOperationException>(() => DataRowComparer<DataRow>.Default.GetHashCode(row));
+            Assert.Throws<InvalidOperationException>(() =>
+                DataRowComparer<DataRow>.Default.GetHashCode(row)
+            );
         }
-
     }
 }

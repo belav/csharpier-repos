@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,92 +30,109 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    [Serializable]
+    public sealed class ConfigurationPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
+        public ConfigurationPermission(PermissionState state)
+        {
+            unrestricted = (state == PermissionState.Unrestricted);
+        }
 
-	[Serializable]
-	public sealed class ConfigurationPermission : CodeAccessPermission, IUnrestrictedPermission
-	{
-		public ConfigurationPermission (PermissionState state)
-		{
-                        unrestricted = (state == PermissionState.Unrestricted);
-		}
+        public override IPermission Copy()
+        {
+            return new ConfigurationPermission(
+                unrestricted ? PermissionState.Unrestricted : PermissionState.None
+            );
+        }
 
-		public override IPermission Copy ()
-		{
-			return new ConfigurationPermission (unrestricted ? PermissionState.Unrestricted : PermissionState.None);
-		}
+        public override void FromXml(SecurityElement securityElement)
+        {
+            if (securityElement == null)
+                throw new ArgumentNullException("securityElement");
 
-		public override void FromXml (SecurityElement securityElement)
-		{
-			if (securityElement == null)
-				throw new ArgumentNullException ("securityElement");
+            // LAMESPEC: it says to throw an ArgumentNullException in this case
+            if (securityElement.Tag != "IPermission")
+                throw new ArgumentException("securityElement");
 
-                        // LAMESPEC: it says to throw an ArgumentNullException in this case
-                        if (securityElement.Tag != "IPermission")
-                                throw new ArgumentException ("securityElement");
+            string unrestricted = securityElement.Attribute("Unrestricted");
+            if (unrestricted != null)
+            {
+                this.unrestricted = (
+                    String.Compare(
+                        unrestricted,
+                        "true",
+                        StringComparison.InvariantCultureIgnoreCase
+                    ) == 0
+                );
+            }
+        }
 
-                        string unrestricted = securityElement.Attribute ("Unrestricted");
-                        if (unrestricted != null) {
-                                this.unrestricted = (String.Compare (unrestricted, "true", StringComparison.InvariantCultureIgnoreCase) == 0);
-                        }
-		}
+        public override IPermission Intersect(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		public override IPermission Intersect (IPermission target)
-		{
-			if (target == null)
-				return null;
+            ConfigurationPermission p = target as ConfigurationPermission;
+            if (p == null)
+                throw new ArgumentException("target");
 
-			ConfigurationPermission p = target as ConfigurationPermission;
-			if (p == null)
-				throw new ArgumentException ("target");
+            return new ConfigurationPermission(
+                unrestricted && p.IsUnrestricted()
+                    ? PermissionState.Unrestricted
+                    : PermissionState.None
+            );
+        }
 
-			return new ConfigurationPermission (unrestricted && p.IsUnrestricted() ? PermissionState.Unrestricted : PermissionState.None);
-		}
+        public override IPermission Union(IPermission target)
+        {
+            if (target == null)
+                return Copy();
 
-		public override IPermission Union (IPermission target)
-		{
-			if (target == null)
-				return Copy ();
+            ConfigurationPermission p = target as ConfigurationPermission;
+            if (p == null)
+                throw new ArgumentException("target");
 
-			ConfigurationPermission p = target as ConfigurationPermission;
-			if (p == null)
-				throw new ArgumentException ("target");
+            return new ConfigurationPermission(
+                unrestricted || p.IsUnrestricted()
+                    ? PermissionState.Unrestricted
+                    : PermissionState.None
+            );
+        }
 
-			return new ConfigurationPermission (unrestricted || p.IsUnrestricted() ? PermissionState.Unrestricted : PermissionState.None);
-		}
+        public override bool IsSubsetOf(IPermission target)
+        {
+            if (target == null)
+                return !unrestricted;
 
-		public override bool IsSubsetOf (IPermission target)
-		{
-			if (target == null)
-				return !unrestricted;
+            ConfigurationPermission p = target as ConfigurationPermission;
+            if (p == null)
+                throw new ArgumentException("target");
 
-			ConfigurationPermission p = target as ConfigurationPermission;
-			if (p == null)
-				throw new ArgumentException ("target");
+            if (unrestricted)
+                return p.IsUnrestricted();
+            else
+                return true;
+        }
 
-			if (unrestricted)
-				return p.IsUnrestricted();
-			else
-				return true;
-		}
+        public bool IsUnrestricted()
+        {
+            return unrestricted;
+        }
 
-		public bool IsUnrestricted ()
-		{
-			return unrestricted;
-		}
+        public override SecurityElement ToXml()
+        {
+            SecurityElement root = new SecurityElement("IPermission");
+            root.AddAttribute("class", this.GetType().AssemblyQualifiedName);
+            root.AddAttribute("version", "1");
+            if (unrestricted)
+            {
+                root.AddAttribute("Unrestricted", "true");
+            }
+            return root;
+        }
 
-		public override SecurityElement ToXml ()
-		{
-			SecurityElement root = new SecurityElement ("IPermission");
-			root.AddAttribute ("class", this.GetType().AssemblyQualifiedName);
-			root.AddAttribute ("version", "1");
-			if (unrestricted) {
-				root.AddAttribute ("Unrestricted", "true");
-			}
-			return root;
-		}
-
-		bool unrestricted;
-	}
-
+        bool unrestricted;
+    }
 }

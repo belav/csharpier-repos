@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -39,10 +39,17 @@ namespace DbLinq.Data.Linq.Implementation
     /// </summary>
     internal class MemberModificationHandler : IMemberModificationHandler
     {
-        private readonly IDictionary<object, IDictionary<string, object>> rawDataEntities = new Dictionary<object, IDictionary<string, object>>(new ReferenceEqualityComparer<object>());
-        private readonly IDictionary<object, IDictionary<string, MemberInfo>> modifiedProperties = new Dictionary<object, IDictionary<string, MemberInfo>>(new ReferenceEqualityComparer<object>());
+        private readonly IDictionary<object, IDictionary<string, object>> rawDataEntities =
+            new Dictionary<object, IDictionary<string, object>>(
+                new ReferenceEqualityComparer<object>()
+            );
+        private readonly IDictionary<object, IDictionary<string, MemberInfo>> modifiedProperties =
+            new Dictionary<object, IDictionary<string, MemberInfo>>(
+                new ReferenceEqualityComparer<object>()
+            );
 
-        private static readonly IDictionary<string, MemberInfo> propertyChangingSentinal = new Dictionary<string, MemberInfo>();
+        private static readonly IDictionary<string, MemberInfo> propertyChangingSentinal =
+            new Dictionary<string, MemberInfo>();
 
         /// <summary>
         /// Gets the column members.
@@ -50,7 +57,10 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="entityType">Type of the entity.</param>
         /// <param name="metaModel">The meta model.</param>
         /// <returns></returns>
-        protected virtual IEnumerable<MemberInfo> GetColumnMembers(Type entityType, MetaModel metaModel)
+        protected virtual IEnumerable<MemberInfo> GetColumnMembers(
+            Type entityType,
+            MetaModel metaModel
+        )
         {
             foreach (var dataMember in metaModel.GetTable(entityType).RowType.PersistentDataMembers)
             {
@@ -82,7 +92,12 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="rawData"></param>
         /// <param name="prefix"></param>
         /// <param name="metaModel"></param>
-        protected void AddRawData(object entity, IDictionary<string, object> rawData, string prefix, MetaModel metaModel)
+        protected void AddRawData(
+            object entity,
+            IDictionary<string, object> rawData,
+            string prefix,
+            MetaModel metaModel
+        )
         {
             if (entity == null)
                 return;
@@ -99,7 +114,7 @@ namespace DbLinq.Data.Linq.Implementation
                 {
                     if (propertyValue != null)
                     {
-                        var arrayValue = (Array) propertyValue;
+                        var arrayValue = (Array)propertyValue;
                         for (int arrayIndex = 0; arrayIndex < arrayValue.Length; arrayIndex++)
                         {
                             rawData[string.Format("{0}[{1}]", memberInfo.Name, arrayIndex)] =
@@ -134,8 +149,7 @@ namespace DbLinq.Data.Linq.Implementation
         /// <returns></returns>
         private static bool IsNotifying(object entity)
         {
-            return entity is INotifyPropertyChanged
-                   || entity is INotifyPropertyChanging;
+            return entity is INotifyPropertyChanged || entity is INotifyPropertyChanging;
         }
 
         /// <summary>
@@ -170,7 +184,11 @@ namespace DbLinq.Data.Linq.Implementation
             }
         }
 
-        private void RegisterNotification(object entity, object entityOriginalState, MetaModel metaModel)
+        private void RegisterNotification(
+            object entity,
+            object entityOriginalState,
+            MetaModel metaModel
+        )
         {
             if (modifiedProperties.ContainsKey(entity))
                 return;
@@ -191,12 +209,20 @@ namespace DbLinq.Data.Linq.Implementation
             // then check all properties, and note them as changed if they already did
             if (!ReferenceEquals(entity, entityOriginalState)) // only if we specified another original entity
             {
-                foreach (var dataMember in metaModel.GetTable(entity.GetType()).RowType.PersistentDataMembers)
+                foreach (
+                    var dataMember in metaModel
+                        .GetTable(entity.GetType())
+                        .RowType.PersistentDataMembers
+                )
                 {
                     var memberInfo = dataMember.Member;
-                    if (entityOriginalState == null ||
-                        IsPropertyModified(memberInfo.GetMemberValue(entity),
-                                           memberInfo.GetMemberValue(entityOriginalState)))
+                    if (
+                        entityOriginalState == null
+                        || IsPropertyModified(
+                            memberInfo.GetMemberValue(entity),
+                            memberInfo.GetMemberValue(entityOriginalState)
+                        )
+                    )
                     {
                         SetPropertyChanged(entity, memberInfo.Name);
                     }
@@ -236,21 +262,21 @@ namespace DbLinq.Data.Linq.Implementation
             }
         }
 
-		/// <summary>
-		/// Unregisters an entity.
-		/// This is useful when the DataContext has been disposed
-		/// </summary>
-		/// <param name="entity"></param>
-		public void UnregisterAll()
-		{
-			//Duplicate the list to not modify modifiedEntities
-			var modifiedEntities = new List<object>(modifiedProperties.Keys);
-			foreach (var entity in modifiedEntities)
-			{
-				if (IsNotifying(entity))
-					UnregisterNotification(entity);
-			}
-		}
+        /// <summary>
+        /// Unregisters an entity.
+        /// This is useful when the DataContext has been disposed
+        /// </summary>
+        /// <param name="entity"></param>
+        public void UnregisterAll()
+        {
+            //Duplicate the list to not modify modifiedEntities
+            var modifiedEntities = new List<object>(modifiedProperties.Keys);
+            foreach (var entity in modifiedEntities)
+            {
+                if (IsNotifying(entity))
+                    UnregisterNotification(entity);
+            }
+        }
 
         private void UnregisterNotification(object entity)
         {
@@ -281,8 +307,10 @@ namespace DbLinq.Data.Linq.Implementation
             if (pi == null)
                 throw new ArgumentException("Incorrect property changed");
 
-            if (modifiedProperties[entity] == null || 
-                    ReferenceEquals(propertyChangingSentinal, modifiedProperties[entity]))
+            if (
+                modifiedProperties[entity] == null
+                || ReferenceEquals(propertyChangingSentinal, modifiedProperties[entity])
+            )
             {
                 modifiedProperties[entity] = new Dictionary<string, MemberInfo>();
             }
@@ -316,8 +344,8 @@ namespace DbLinq.Data.Linq.Implementation
         {
             if (!modifiedProperties.ContainsKey(entity) || modifiedProperties[entity] == null)
                 return false;
-            return ReferenceEquals(propertyChangingSentinal, modifiedProperties[entity]) ||
-                modifiedProperties[entity].Count > 0;
+            return ReferenceEquals(propertyChangingSentinal, modifiedProperties[entity])
+                || modifiedProperties[entity].Count > 0;
         }
 
         /// <summary>
@@ -395,7 +423,10 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="entity">The entity.</param>
         /// <param name="metaModel">The meta model.</param>
         /// <returns></returns>
-        protected IList<MemberInfo> GetSelfDeclaringModifiedProperties(object entity, MetaModel metaModel)
+        protected IList<MemberInfo> GetSelfDeclaringModifiedProperties(
+            object entity,
+            MetaModel metaModel
+        )
         {
             return GetAllColumnProperties(entity, metaModel);
         }
@@ -406,12 +437,17 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="entity">The entity.</param>
         /// <param name="metaModel">The meta model.</param>
         /// <returns></returns>
-        protected IList<MemberInfo> GetNotifyingModifiedProperties(object entity, MetaModel metaModel)
+        protected IList<MemberInfo> GetNotifyingModifiedProperties(
+            object entity,
+            MetaModel metaModel
+        )
         {
             IDictionary<string, MemberInfo> properties;
             // if we don't have it, it is fully dirty
-            if (!modifiedProperties.TryGetValue(entity, out properties) || 
-                    ReferenceEquals(propertyChangingSentinal, modifiedProperties[entity]))
+            if (
+                !modifiedProperties.TryGetValue(entity, out properties)
+                || ReferenceEquals(propertyChangingSentinal, modifiedProperties[entity])
+            )
                 return GetAllColumnProperties(entity, metaModel);
             return new List<MemberInfo>(properties.Values);
         }

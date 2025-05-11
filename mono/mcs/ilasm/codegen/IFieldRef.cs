@@ -7,19 +7,14 @@
 // (C) 2003 Jackson Harper, All rights reserved
 //
 
-
 using System;
 
-namespace Mono.ILASM {
+namespace Mono.ILASM
+{
+    public interface IFieldRef
+    {
+        PEAPI.Field PeapiField { get; }
 
-        public interface IFieldRef {
-
-                PEAPI.Field PeapiField {
-                        get;
-                }
-
-                void Resolve (CodeGen code_gen);
-        }
+        void Resolve(CodeGen code_gen);
+    }
 }
-
-

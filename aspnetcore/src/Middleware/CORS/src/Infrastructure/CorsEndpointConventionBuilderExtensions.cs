@@ -16,7 +16,8 @@ public static class CorsEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireCors<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireCors<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -33,7 +34,8 @@ public static class CorsEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="policyName">The CORS policy name.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireCors<TBuilder>(this TBuilder builder, string policyName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireCors<TBuilder>(this TBuilder builder, string policyName)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -50,7 +52,11 @@ public static class CorsEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="configurePolicy">A delegate which can use a policy builder to build a policy.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireCors<TBuilder>(this TBuilder builder, Action<CorsPolicyBuilder> configurePolicy) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireCors<TBuilder>(
+        this TBuilder builder,
+        Action<CorsPolicyBuilder> configurePolicy
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(configurePolicy);

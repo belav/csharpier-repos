@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,38 +26,37 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
 using System;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace MonoTests.System.Globalization
 {
-	[TestFixture]
-	public class NumberFormatInfoTest
-	{
-		[Test]
-		public void CurrencyDecimalDigits ()
-		{
-			CultureInfo c;
-			
-			c = CultureInfo.GetCultureInfo ("id-ID");
-			Assert.AreEqual (0, c.NumberFormat.CurrencyDecimalDigits, "#1");
+    [TestFixture]
+    public class NumberFormatInfoTest
+    {
+        [Test]
+        public void CurrencyDecimalDigits()
+        {
+            CultureInfo c;
 
-			c = CultureInfo.GetCultureInfo ("is-IS");
-			Assert.AreEqual (0, c.NumberFormat.CurrencyDecimalDigits, "#2");
+            c = CultureInfo.GetCultureInfo("id-ID");
+            Assert.AreEqual(0, c.NumberFormat.CurrencyDecimalDigits, "#1");
 
-			c = CultureInfo.InvariantCulture;
-			Assert.AreEqual (2, c.NumberFormat.CurrencyDecimalDigits, "#3");
-		}
+            c = CultureInfo.GetCultureInfo("is-IS");
+            Assert.AreEqual(0, c.NumberFormat.CurrencyDecimalDigits, "#2");
 
-		[Test]
-		public void AllCulturesCanParseNegativeNumber ()
-		{
-			foreach (var c in CultureInfo.GetCultures (CultureTypes.AllCultures))
-			{
-				int.Parse ("-1", c);
-			}
-		}
-	}
+            c = CultureInfo.InvariantCulture;
+            Assert.AreEqual(2, c.NumberFormat.CurrencyDecimalDigits, "#3");
+        }
+
+        [Test]
+        public void AllCulturesCanParseNegativeNumber()
+        {
+            foreach (var c in CultureInfo.GetCultures(CultureTypes.AllCultures))
+            {
+                int.Parse("-1", c);
+            }
+        }
+    }
 }

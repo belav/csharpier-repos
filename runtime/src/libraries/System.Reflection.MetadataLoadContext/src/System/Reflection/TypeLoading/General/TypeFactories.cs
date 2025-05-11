@@ -8,10 +8,24 @@ namespace System.Reflection.TypeLoading
     //
     internal static class TypeFactories
     {
-        public static RoArrayType GetUniqueArrayType(this RoType elementType) => elementType.GetRoModule().GetUniqueArrayType(elementType);
-        public static RoArrayType GetUniqueArrayType(this RoType elementType, int rank) => elementType.GetRoModule().GetUniqueArrayType(elementType, rank);
-        public static RoByRefType GetUniqueByRefType(this RoType elementType) => elementType.GetRoModule().GetUniqueByRefType(elementType);
-        public static RoPointerType GetUniquePointerType(this RoType elementType) => elementType.GetRoModule().GetUniquePointerType(elementType);
-        public static RoConstructedGenericType GetUniqueConstructedGenericType(this RoDefinitionType genericTypeDefinition, RoType[] genericTypeArguments) => genericTypeDefinition.GetRoModule().GetUniqueConstructedGenericType(genericTypeDefinition, genericTypeArguments);
+        public static RoArrayType GetUniqueArrayType(this RoType elementType) =>
+            elementType.GetRoModule().GetUniqueArrayType(elementType);
+
+        public static RoArrayType GetUniqueArrayType(this RoType elementType, int rank) =>
+            elementType.GetRoModule().GetUniqueArrayType(elementType, rank);
+
+        public static RoByRefType GetUniqueByRefType(this RoType elementType) =>
+            elementType.GetRoModule().GetUniqueByRefType(elementType);
+
+        public static RoPointerType GetUniquePointerType(this RoType elementType) =>
+            elementType.GetRoModule().GetUniquePointerType(elementType);
+
+        public static RoConstructedGenericType GetUniqueConstructedGenericType(
+            this RoDefinitionType genericTypeDefinition,
+            RoType[] genericTypeArguments
+        ) =>
+            genericTypeDefinition
+                .GetRoModule()
+                .GetUniqueConstructedGenericType(genericTypeDefinition, genericTypeArguments);
     }
 }

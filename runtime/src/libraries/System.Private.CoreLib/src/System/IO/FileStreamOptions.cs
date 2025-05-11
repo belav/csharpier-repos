@@ -62,7 +62,10 @@ namespace System.IO
             {
                 // don't include inheritable in our bounds check for share
                 FileShare tempshare = value & ~FileShare.Inheritable;
-                if (tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete))
+                if (
+                    tempshare < FileShare.None
+                    || tempshare > (FileShare.ReadWrite | FileShare.Delete)
+                )
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }
@@ -81,7 +84,21 @@ namespace System.IO
             set
             {
                 // NOTE: any change to FileOptions enum needs to be matched here in the error validation
-                if (value != FileOptions.None && (value & ~(FileOptions.WriteThrough | FileOptions.Asynchronous | FileOptions.RandomAccess | FileOptions.DeleteOnClose | FileOptions.SequentialScan | FileOptions.Encrypted | (FileOptions)0x20000000 /* NoBuffering */)) != 0)
+                if (
+                    value != FileOptions.None
+                    && (
+                        value
+                        & ~(
+                            FileOptions.WriteThrough
+                            | FileOptions.Asynchronous
+                            | FileOptions.RandomAccess
+                            | FileOptions.DeleteOnClose
+                            | FileOptions.SequentialScan
+                            | FileOptions.Encrypted
+                            | (FileOptions)0x20000000 /* NoBuffering */
+                        )
+                    ) != 0
+                )
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }
@@ -127,10 +144,7 @@ namespace System.IO
         /// <exception cref="T:System.ArgumentException">When <paramref name="value" /> is an invalid file mode.</exception>
         public UnixFileMode? UnixCreateMode
         {
-            get
-            {
-                return _unixCreateMode;
-            }
+            get { return _unixCreateMode; }
             [UnsupportedOSPlatform("windows")]
             set
             {

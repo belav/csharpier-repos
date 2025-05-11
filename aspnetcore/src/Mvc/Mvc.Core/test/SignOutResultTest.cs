@@ -20,8 +20,7 @@ public class SignOutResultTest
         // Arrange
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, null, null))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, null, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -31,7 +30,8 @@ public class SignOutResultTest
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -46,8 +46,7 @@ public class SignOutResultTest
         // Arrange
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, "", null))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, "", null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -57,7 +56,8 @@ public class SignOutResultTest
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -73,12 +73,10 @@ public class SignOutResultTest
         var authProperties = new AuthenticationProperties();
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, "Scheme1", authProperties))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, "Scheme1", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, "Scheme2", authProperties))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, "Scheme2", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -88,7 +86,8 @@ public class SignOutResultTest
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -103,8 +102,7 @@ public class SignOutResultTest
         // Arrange
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, null, null))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, null, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -123,8 +121,7 @@ public class SignOutResultTest
         // Arrange
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, "", null))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, "", null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -144,12 +141,10 @@ public class SignOutResultTest
         var authProperties = new AuthenticationProperties();
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, "Scheme1", authProperties))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, "Scheme1", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
-        auth
-            .Setup(c => c.SignOutAsync(httpContext.Object, "Scheme2", authProperties))
+        auth.Setup(c => c.SignOutAsync(httpContext.Object, "Scheme2", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));

@@ -5,7 +5,6 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Security.Tests
@@ -18,7 +17,18 @@ namespace System.Net.Security.Tests
         public async Task DisposeAsync_NotConnected_ClosesStream()
         {
             bool disposed = false;
-            var stream = new SslStream(new DelegateStream(disposeFunc: _ => disposed = true, canReadFunc: () => true, canWriteFunc: () => true), false, delegate { return true; });
+            var stream = new SslStream(
+                new DelegateStream(
+                    disposeFunc: _ => disposed = true,
+                    canReadFunc: () => true,
+                    canWriteFunc: () => true
+                ),
+                false,
+                delegate
+                {
+                    return true;
+                }
+            );
 
             Assert.False(disposed);
             await stream.DisposeAsync();
@@ -32,14 +42,31 @@ namespace System.Net.Security.Tests
             var trackingStream1 = new CallTrackingStream(stream1);
             var trackingStream2 = new CallTrackingStream(stream2);
 
-            var clientStream = new SslStream(trackingStream1, false, delegate { return true; });
-            var serverStream = new SslStream(trackingStream2, false, delegate { return true; });
+            var clientStream = new SslStream(
+                trackingStream1,
+                false,
+                delegate
+                {
+                    return true;
+                }
+            );
+            var serverStream = new SslStream(
+                trackingStream2,
+                false,
+                delegate
+                {
+                    return true;
+                }
+            );
 
             using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
             {
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    clientStream.AuthenticateAsClientAsync(certificate.GetNameInfo(X509NameType.SimpleName, false)),
-                    serverStream.AuthenticateAsServerAsync(certificate));
+                    clientStream.AuthenticateAsClientAsync(
+                        certificate.GetNameInfo(X509NameType.SimpleName, false)
+                    ),
+                    serverStream.AuthenticateAsServerAsync(certificate)
+                );
             }
 
             Assert.Equal(0, trackingStream1.TimesCalled(nameof(Stream.DisposeAsync)));
@@ -59,17 +86,30 @@ namespace System.Net.Security.Tests
             using CancellationTokenSource cts = new CancellationTokenSource();
             cts.CancelAfter(TestConfiguration.PassingTestTimeout);
 
-            (SslStream client, SslStream server) = TestHelper.GetConnectedSslStreams(leaveInnerStreamOpen: true);
+            (SslStream client, SslStream server) = TestHelper.GetConnectedSslStreams(
+                leaveInnerStreamOpen: true
+            );
             using (client)
             using (server)
-            using (X509Certificate2 serverCertificate = Configuration.Certificates.GetServerCertificate())
-            using (X509Certificate2 clientCertificate = Configuration.Certificates.GetClientCertificate())
+            using (
+                X509Certificate2 serverCertificate =
+                    Configuration.Certificates.GetServerCertificate()
+            )
+            using (
+                X509Certificate2 clientCertificate =
+                    Configuration.Certificates.GetClientCertificate()
+            )
             {
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()
                 {
                     TargetHost = Guid.NewGuid().ToString("N"),
                 };
-                clientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+                clientOptions.RemoteCertificateValidationCallback = (
+                    sender,
+                    certificate,
+                    chain,
+                    sslPolicyErrors
+                ) => true;
 
                 SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions()
                 {
@@ -77,8 +117,9 @@ namespace System.Net.Security.Tests
                 };
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                                client.AuthenticateAsClientAsync(clientOptions, default),
-                                server.AuthenticateAsServerAsync(serverOptions, default));
+                    client.AuthenticateAsClientAsync(clientOptions, default),
+                    server.AuthenticateAsServerAsync(serverOptions, default)
+                );
 
                 await TestHelper.PingPong(client, server, cts.Token);
 
@@ -99,7 +140,9 @@ namespace System.Net.Security.Tests
                     client.Dispose();
                 }
 
-                await Assert.ThrowsAnyAsync<ObjectDisposedException>(() => client.ReadAsync(readBuffer, cts.Token).AsTask());
+                await Assert.ThrowsAnyAsync<ObjectDisposedException>(() =>
+                    client.ReadAsync(readBuffer, cts.Token).AsTask()
+                );
             }
         }
     }

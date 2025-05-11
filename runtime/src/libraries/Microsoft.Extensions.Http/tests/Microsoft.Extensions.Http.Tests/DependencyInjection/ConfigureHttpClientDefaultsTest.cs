@@ -18,7 +18,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com/"));
+            serviceCollection.AddHttpClient(
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com/")
+            );
             serviceCollection.ConfigureHttpClientDefaults(builder =>
             {
                 builder.ConfigureHttpClient(c => c.BaseAddress = new Uri("http://default.com/"));
@@ -102,7 +105,10 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             // Assert
-            Assert.Equal("AddTypedClient isn't supported with ConfigureHttpClientDefaults.", ex.Message);
+            Assert.Equal(
+                "AddTypedClient isn't supported with ConfigureHttpClientDefaults.",
+                ex.Message
+            );
         }
     }
 }
